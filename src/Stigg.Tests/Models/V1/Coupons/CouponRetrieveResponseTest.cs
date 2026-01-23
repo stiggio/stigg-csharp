@@ -193,6 +193,41 @@ public class CouponRetrieveResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CouponRetrieveResponse
+        {
+            Data = new()
+            {
+                ID = "id",
+                AmountsOff =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        Currency = CouponRetrieveResponseDataAmountsOffCurrency.Usd,
+                    },
+                ],
+                BillingID = "billingId",
+                BillingLinkUrl = "billingLinkUrl",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Description = "description",
+                DurationInMonths = 0,
+                Name = "name",
+                PercentOff = 0,
+                Source = CouponRetrieveResponseDataSource.Stigg,
+                Status = CouponRetrieveResponseDataStatus.Active,
+                Type = CouponRetrieveResponseDataType.Fixed,
+                UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            },
+        };
+
+        CouponRetrieveResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class CouponRetrieveResponseDataTest : TestBase
@@ -387,6 +422,34 @@ public class CouponRetrieveResponseDataTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CouponRetrieveResponseData
+        {
+            ID = "id",
+            AmountsOff =
+            [
+                new() { Amount = 0, Currency = CouponRetrieveResponseDataAmountsOffCurrency.Usd },
+            ],
+            BillingID = "billingId",
+            BillingLinkUrl = "billingLinkUrl",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            DurationInMonths = 0,
+            Name = "name",
+            PercentOff = 0,
+            Source = CouponRetrieveResponseDataSource.Stigg,
+            Status = CouponRetrieveResponseDataStatus.Active,
+            Type = CouponRetrieveResponseDataType.Fixed,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        CouponRetrieveResponseData copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class CouponRetrieveResponseDataAmountsOffTest : TestBase
@@ -460,6 +523,20 @@ public class CouponRetrieveResponseDataAmountsOffTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CouponRetrieveResponseDataAmountsOff
+        {
+            Amount = 0,
+            Currency = CouponRetrieveResponseDataAmountsOffCurrency.Usd,
+        };
+
+        CouponRetrieveResponseDataAmountsOff copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 

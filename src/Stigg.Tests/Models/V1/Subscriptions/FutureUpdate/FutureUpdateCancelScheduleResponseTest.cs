@@ -54,6 +54,16 @@ public class FutureUpdateCancelScheduleResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new FutureUpdateCancelScheduleResponse { Data = new("id") };
+
+        FutureUpdateCancelScheduleResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class FutureUpdateCancelScheduleResponseDataTest : TestBase
@@ -105,5 +115,15 @@ public class FutureUpdateCancelScheduleResponseDataTest : TestBase
         var model = new FutureUpdateCancelScheduleResponseData { ID = "id" };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new FutureUpdateCancelScheduleResponseData { ID = "id" };
+
+        FutureUpdateCancelScheduleResponseData copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }

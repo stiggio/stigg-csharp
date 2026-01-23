@@ -31,8 +31,11 @@ public sealed record class CouponRetrieveResponse : JsonModel
 
     public CouponRetrieveResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CouponRetrieveResponse(CouponRetrieveResponse couponRetrieveResponse)
         : base(couponRetrieveResponse) { }
+#pragma warning restore CS8618
 
     public CouponRetrieveResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -282,8 +285,11 @@ public sealed record class CouponRetrieveResponseData : JsonModel
 
     public CouponRetrieveResponseData() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CouponRetrieveResponseData(CouponRetrieveResponseData couponRetrieveResponseData)
         : base(couponRetrieveResponseData) { }
+#pragma warning restore CS8618
 
     public CouponRetrieveResponseData(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -360,10 +366,13 @@ public sealed record class CouponRetrieveResponseDataAmountsOff : JsonModel
 
     public CouponRetrieveResponseDataAmountsOff() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CouponRetrieveResponseDataAmountsOff(
         CouponRetrieveResponseDataAmountsOff couponRetrieveResponseDataAmountsOff
     )
         : base(couponRetrieveResponseDataAmountsOff) { }
+#pragma warning restore CS8618
 
     public CouponRetrieveResponseDataAmountsOff(IReadOnlyDictionary<string, JsonElement> rawData)
     {

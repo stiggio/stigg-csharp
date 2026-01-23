@@ -596,6 +596,107 @@ public class SubscriptionPreviewResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionPreviewResponse
+        {
+            Data = new()
+            {
+                ImmediateInvoice = new()
+                {
+                    SubTotal = 0,
+                    Total = 0,
+                    BillingPeriodRange = new()
+                    {
+                        End = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Start = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    },
+                    Currency = "currency",
+                    Discount = 0,
+                    DiscountDetails = new()
+                    {
+                        Code = "code",
+                        FixedAmount = 0,
+                        Percentage = 0,
+                    },
+                    Discounts =
+                    [
+                        new()
+                        {
+                            Amount = 0,
+                            Currency = "currency",
+                            Description = "description",
+                        },
+                    ],
+                    Lines =
+                    [
+                        new()
+                        {
+                            Currency = "currency",
+                            Description = "description",
+                            SubTotal = 0,
+                            UnitPrice = 0,
+                            Quantity = 0,
+                        },
+                    ],
+                    Tax = 0,
+                },
+                BillingPeriodRange = new()
+                {
+                    End = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Start = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                },
+                FreeItems = [new() { AddonID = "addonId", Quantity = 0 }],
+                HasScheduledUpdates = true,
+                IsPlanDowngrade = true,
+                RecurringInvoice = new()
+                {
+                    SubTotal = 0,
+                    Total = 0,
+                    BillingPeriodRange = new()
+                    {
+                        End = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Start = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    },
+                    Currency = "currency",
+                    Discount = 0,
+                    DiscountDetails = new()
+                    {
+                        Code = "code",
+                        FixedAmount = 0,
+                        Percentage = 0,
+                    },
+                    Discounts =
+                    [
+                        new()
+                        {
+                            Amount = 0,
+                            Currency = "currency",
+                            Description = "description",
+                        },
+                    ],
+                    Lines =
+                    [
+                        new()
+                        {
+                            Currency = "currency",
+                            Description = "description",
+                            SubTotal = 0,
+                            UnitPrice = 0,
+                            Quantity = 0,
+                        },
+                    ],
+                    Tax = 0,
+                },
+            },
+        };
+
+        SubscriptionPreviewResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class SubscriptionPreviewResponseDataTest : TestBase
@@ -1418,6 +1519,104 @@ public class SubscriptionPreviewResponseDataTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionPreviewResponseData
+        {
+            ImmediateInvoice = new()
+            {
+                SubTotal = 0,
+                Total = 0,
+                BillingPeriodRange = new()
+                {
+                    End = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Start = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                },
+                Currency = "currency",
+                Discount = 0,
+                DiscountDetails = new()
+                {
+                    Code = "code",
+                    FixedAmount = 0,
+                    Percentage = 0,
+                },
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        Currency = "currency",
+                        Description = "description",
+                    },
+                ],
+                Lines =
+                [
+                    new()
+                    {
+                        Currency = "currency",
+                        Description = "description",
+                        SubTotal = 0,
+                        UnitPrice = 0,
+                        Quantity = 0,
+                    },
+                ],
+                Tax = 0,
+            },
+            BillingPeriodRange = new()
+            {
+                End = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Start = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            },
+            FreeItems = [new() { AddonID = "addonId", Quantity = 0 }],
+            HasScheduledUpdates = true,
+            IsPlanDowngrade = true,
+            RecurringInvoice = new()
+            {
+                SubTotal = 0,
+                Total = 0,
+                BillingPeriodRange = new()
+                {
+                    End = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Start = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                },
+                Currency = "currency",
+                Discount = 0,
+                DiscountDetails = new()
+                {
+                    Code = "code",
+                    FixedAmount = 0,
+                    Percentage = 0,
+                },
+                Discounts =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        Currency = "currency",
+                        Description = "description",
+                    },
+                ],
+                Lines =
+                [
+                    new()
+                    {
+                        Currency = "currency",
+                        Description = "description",
+                        SubTotal = 0,
+                        UnitPrice = 0,
+                        Quantity = 0,
+                    },
+                ],
+                Tax = 0,
+            },
+        };
+
+        SubscriptionPreviewResponseData copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class ImmediateInvoiceTest : TestBase
@@ -2004,6 +2203,54 @@ public class ImmediateInvoiceTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new ImmediateInvoice
+        {
+            SubTotal = 0,
+            Total = 0,
+            BillingPeriodRange = new()
+            {
+                End = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Start = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            },
+            Currency = "currency",
+            Discount = 0,
+            DiscountDetails = new()
+            {
+                Code = "code",
+                FixedAmount = 0,
+                Percentage = 0,
+            },
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    Currency = "currency",
+                    Description = "description",
+                },
+            ],
+            Lines =
+            [
+                new()
+                {
+                    Currency = "currency",
+                    Description = "description",
+                    SubTotal = 0,
+                    UnitPrice = 0,
+                    Quantity = 0,
+                },
+            ],
+            Tax = 0,
+        };
+
+        ImmediateInvoice copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class BillingPeriodRangeTest : TestBase
@@ -2075,6 +2322,20 @@ public class BillingPeriodRangeTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new BillingPeriodRange
+        {
+            End = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Start = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        BillingPeriodRange copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -2210,6 +2471,21 @@ public class DiscountDetailsTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new DiscountDetails
+        {
+            Code = "code",
+            FixedAmount = 0,
+            Percentage = 0,
+        };
+
+        DiscountDetails copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class ImmediateInvoiceDiscountTest : TestBase
@@ -2289,6 +2565,21 @@ public class ImmediateInvoiceDiscountTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new ImmediateInvoiceDiscount
+        {
+            Amount = 0,
+            Currency = "currency",
+            Description = "description",
+        };
+
+        ImmediateInvoiceDiscount copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -2444,6 +2735,23 @@ public class LineTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Line
+        {
+            Currency = "currency",
+            Description = "description",
+            SubTotal = 0,
+            UnitPrice = 0,
+            Quantity = 0,
+        };
+
+        Line copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class SubscriptionPreviewResponseDataBillingPeriodRangeTest : TestBase
@@ -2566,6 +2874,20 @@ public class SubscriptionPreviewResponseDataBillingPeriodRangeTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionPreviewResponseDataBillingPeriodRange
+        {
+            End = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Start = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        SubscriptionPreviewResponseDataBillingPeriodRange copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class FreeItemTest : TestBase
@@ -2618,6 +2940,16 @@ public class FreeItemTest : TestBase
         var model = new FreeItem { AddonID = "addonId", Quantity = 0 };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new FreeItem { AddonID = "addonId", Quantity = 0 };
+
+        FreeItem copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -3205,6 +3537,54 @@ public class RecurringInvoiceTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new RecurringInvoice
+        {
+            SubTotal = 0,
+            Total = 0,
+            BillingPeriodRange = new()
+            {
+                End = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Start = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            },
+            Currency = "currency",
+            Discount = 0,
+            DiscountDetails = new()
+            {
+                Code = "code",
+                FixedAmount = 0,
+                Percentage = 0,
+            },
+            Discounts =
+            [
+                new()
+                {
+                    Amount = 0,
+                    Currency = "currency",
+                    Description = "description",
+                },
+            ],
+            Lines =
+            [
+                new()
+                {
+                    Currency = "currency",
+                    Description = "description",
+                    SubTotal = 0,
+                    UnitPrice = 0,
+                    Quantity = 0,
+                },
+            ],
+            Tax = 0,
+        };
+
+        RecurringInvoice copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class RecurringInvoiceBillingPeriodRangeTest : TestBase
@@ -3276,6 +3656,20 @@ public class RecurringInvoiceBillingPeriodRangeTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new RecurringInvoiceBillingPeriodRange
+        {
+            End = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Start = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        RecurringInvoiceBillingPeriodRange copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -3411,6 +3805,21 @@ public class RecurringInvoiceDiscountDetailsTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new RecurringInvoiceDiscountDetails
+        {
+            Code = "code",
+            FixedAmount = 0,
+            Percentage = 0,
+        };
+
+        RecurringInvoiceDiscountDetails copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class RecurringInvoiceDiscountTest : TestBase
@@ -3490,6 +3899,21 @@ public class RecurringInvoiceDiscountTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new RecurringInvoiceDiscount
+        {
+            Amount = 0,
+            Currency = "currency",
+            Description = "description",
+        };
+
+        RecurringInvoiceDiscount copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -3650,5 +4074,22 @@ public class RecurringInvoiceLineTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new RecurringInvoiceLine
+        {
+            Currency = "currency",
+            Description = "description",
+            SubTotal = 0,
+            UnitPrice = 0,
+            Quantity = 0,
+        };
+
+        RecurringInvoiceLine copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }

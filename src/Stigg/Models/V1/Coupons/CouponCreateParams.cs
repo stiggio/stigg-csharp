@@ -274,8 +274,11 @@ public sealed record class AmountsOff : JsonModel
 
     public AmountsOff() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public AmountsOff(AmountsOff amountsOff)
         : base(amountsOff) { }
+#pragma warning restore CS8618
 
     public AmountsOff(IReadOnlyDictionary<string, JsonElement> rawData)
     {

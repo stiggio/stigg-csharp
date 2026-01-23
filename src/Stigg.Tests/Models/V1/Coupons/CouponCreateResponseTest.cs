@@ -159,6 +159,34 @@ public class CouponCreateResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Coupons::CouponCreateResponse
+        {
+            Data = new()
+            {
+                ID = "id",
+                AmountsOff = [new() { Amount = 0, Currency = Coupons::DataAmountsOffCurrency.Usd }],
+                BillingID = "billingId",
+                BillingLinkUrl = "billingLinkUrl",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Description = "description",
+                DurationInMonths = 0,
+                Name = "name",
+                PercentOff = 0,
+                Source = Coupons::Source.Stigg,
+                Status = Coupons::Status.Active,
+                Type = Coupons::Type.Fixed,
+                UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            },
+        };
+
+        Coupons::CouponCreateResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class DataTest : TestBase
@@ -335,6 +363,31 @@ public class DataTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Coupons::Data
+        {
+            ID = "id",
+            AmountsOff = [new() { Amount = 0, Currency = Coupons::DataAmountsOffCurrency.Usd }],
+            BillingID = "billingId",
+            BillingLinkUrl = "billingLinkUrl",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            DurationInMonths = 0,
+            Name = "name",
+            PercentOff = 0,
+            Source = Coupons::Source.Stigg,
+            Status = Coupons::Status.Active,
+            Type = Coupons::Type.Fixed,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        Coupons::Data copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class DataAmountsOffTest : TestBase
@@ -408,6 +461,20 @@ public class DataAmountsOffTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Coupons::DataAmountsOff
+        {
+            Amount = 0,
+            Currency = Coupons::DataAmountsOffCurrency.Usd,
+        };
+
+        Coupons::DataAmountsOff copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 

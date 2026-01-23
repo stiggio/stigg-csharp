@@ -225,6 +225,45 @@ public class UsageRetrieveResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Usage::UsageRetrieveResponse
+        {
+            Data = new()
+            {
+                Markers =
+                [
+                    new()
+                    {
+                        Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        Type = Usage::Type.PeriodicReset,
+                    },
+                ],
+                Series =
+                [
+                    new()
+                    {
+                        Points =
+                        [
+                            new()
+                            {
+                                IsResetPoint = true,
+                                Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                                Value = 0,
+                            },
+                        ],
+                        Tags = [new() { Key = "key", Value = "value" }],
+                    },
+                ],
+            },
+        };
+
+        Usage::UsageRetrieveResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class DataTest : TestBase
@@ -445,6 +484,42 @@ public class DataTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Usage::Data
+        {
+            Markers =
+            [
+                new()
+                {
+                    Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Type = Usage::Type.PeriodicReset,
+                },
+            ],
+            Series =
+            [
+                new()
+                {
+                    Points =
+                    [
+                        new()
+                        {
+                            IsResetPoint = true,
+                            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                            Value = 0,
+                        },
+                    ],
+                    Tags = [new() { Key = "key", Value = "value" }],
+                },
+            ],
+        };
+
+        Usage::Data copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class MarkerTest : TestBase
@@ -516,6 +591,20 @@ public class MarkerTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Usage::Marker
+        {
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Type = Usage::Type.PeriodicReset,
+        };
+
+        Usage::Marker copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -711,6 +800,28 @@ public class SeriesTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Usage::Series
+        {
+            Points =
+            [
+                new()
+                {
+                    IsResetPoint = true,
+                    Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Value = 0,
+                },
+            ],
+            Tags = [new() { Key = "key", Value = "value" }],
+        };
+
+        Usage::Series copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class PointTest : TestBase
@@ -791,6 +902,21 @@ public class PointTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Usage::Point
+        {
+            IsResetPoint = true,
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Value = 0,
+        };
+
+        Usage::Point copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class TagTest : TestBase
@@ -846,5 +972,15 @@ public class TagTest : TestBase
         var model = new Usage::Tag { Key = "key", Value = "value" };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Usage::Tag { Key = "key", Value = "value" };
+
+        Usage::Tag copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }

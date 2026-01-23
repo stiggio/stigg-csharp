@@ -207,6 +207,42 @@ public class SubscriptionDelegateResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionDelegateResponse
+        {
+            Data = new()
+            {
+                ID = "id",
+                BillingID = "billingId",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CustomerID = "customerId",
+                PaymentCollection = SubscriptionDelegateResponseDataPaymentCollection.NotRequired,
+                PlanID = "planId",
+                PricingType = SubscriptionDelegateResponseDataPricingType.Free,
+                StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Status = SubscriptionDelegateResponseDataStatus.PaymentPending,
+                CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CancelReason = SubscriptionDelegateResponseDataCancelReason.UpgradeOrDowngrade,
+                CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                PayingCustomerID = "payingCustomerId",
+                PaymentCollectionMethod =
+                    SubscriptionDelegateResponseDataPaymentCollectionMethod.Charge,
+                ResourceID = "resourceId",
+                TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            },
+        };
+
+        SubscriptionDelegateResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class SubscriptionDelegateResponseDataTest : TestBase
@@ -736,6 +772,39 @@ public class SubscriptionDelegateResponseDataTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionDelegateResponseData
+        {
+            ID = "id",
+            BillingID = "billingId",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomerID = "customerId",
+            PaymentCollection = SubscriptionDelegateResponseDataPaymentCollection.NotRequired,
+            PlanID = "planId",
+            PricingType = SubscriptionDelegateResponseDataPricingType.Free,
+            StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Status = SubscriptionDelegateResponseDataStatus.PaymentPending,
+            CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CancelReason = SubscriptionDelegateResponseDataCancelReason.UpgradeOrDowngrade,
+            CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            PayingCustomerID = "payingCustomerId",
+            PaymentCollectionMethod =
+                SubscriptionDelegateResponseDataPaymentCollectionMethod.Charge,
+            ResourceID = "resourceId",
+            TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        SubscriptionDelegateResponseData copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 

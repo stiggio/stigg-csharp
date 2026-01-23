@@ -456,8 +456,11 @@ public sealed record class Addon : JsonModel
 
     public Addon() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Addon(Addon addon)
         : base(addon) { }
+#pragma warning restore CS8618
 
     public Addon(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -598,8 +601,11 @@ public sealed record class AppliedCoupon : JsonModel
 
     public AppliedCoupon() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public AppliedCoupon(AppliedCoupon appliedCoupon)
         : base(appliedCoupon) { }
+#pragma warning restore CS8618
 
     public AppliedCoupon(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -660,8 +666,11 @@ public sealed record class Configuration : JsonModel
 
     public Configuration() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Configuration(Configuration configuration)
         : base(configuration) { }
+#pragma warning restore CS8618
 
     public Configuration(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -796,8 +805,11 @@ public sealed record class Discount : JsonModel
 
     public Discount() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Discount(Discount discount)
         : base(discount) { }
+#pragma warning restore CS8618
 
     public Discount(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -866,8 +878,11 @@ public sealed record class AmountsOff : JsonModel
 
     public AmountsOff() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public AmountsOff(AmountsOff amountsOff)
         : base(amountsOff) { }
+#pragma warning restore CS8618
 
     public AmountsOff(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -1320,8 +1335,11 @@ public sealed record class BillableFeature : JsonModel
 
     public BillableFeature() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public BillableFeature(BillableFeature billableFeature)
         : base(billableFeature) { }
+#pragma warning restore CS8618
 
     public BillableFeature(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -1580,8 +1598,11 @@ public sealed record class BillingInformation : JsonModel
 
     public BillingInformation() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public BillingInformation(BillingInformation billingInformation)
         : base(billingInformation) { }
+#pragma warning restore CS8618
 
     public BillingInformation(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -1736,8 +1757,11 @@ public sealed record class BillingAddress : JsonModel
 
     public BillingAddress() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public BillingAddress(BillingAddress billingAddress)
         : base(billingAddress) { }
+#pragma warning restore CS8618
 
     public BillingAddress(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -1845,8 +1869,11 @@ public sealed record class TaxID : JsonModel
 
     public TaxID() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public TaxID(TaxID taxID)
         : base(taxID) { }
+#pragma warning restore CS8618
 
     public TaxID(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -1968,8 +1995,11 @@ public sealed record class Charge : JsonModel
 
     public Charge() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Charge(Charge charge)
         : base(charge) { }
+#pragma warning restore CS8618
 
     public Charge(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -2161,10 +2191,13 @@ public sealed record class SubscriptionPreviewParamsTrialOverrideConfiguration :
 
     public SubscriptionPreviewParamsTrialOverrideConfiguration() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public SubscriptionPreviewParamsTrialOverrideConfiguration(
         SubscriptionPreviewParamsTrialOverrideConfiguration subscriptionPreviewParamsTrialOverrideConfiguration
     )
         : base(subscriptionPreviewParamsTrialOverrideConfiguration) { }
+#pragma warning restore CS8618
 
     public SubscriptionPreviewParamsTrialOverrideConfiguration(
         IReadOnlyDictionary<string, JsonElement> rawData

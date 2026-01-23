@@ -484,8 +484,11 @@ public sealed record class CheckoutOptions : JsonModel
 
     public CheckoutOptions() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CheckoutOptions(CheckoutOptions checkoutOptions)
         : base(checkoutOptions) { }
+#pragma warning restore CS8618
 
     public CheckoutOptions(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -586,8 +589,11 @@ public sealed record class TrialOverrideConfiguration : JsonModel
 
     public TrialOverrideConfiguration() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public TrialOverrideConfiguration(TrialOverrideConfiguration trialOverrideConfiguration)
         : base(trialOverrideConfiguration) { }
+#pragma warning restore CS8618
 
     public TrialOverrideConfiguration(IReadOnlyDictionary<string, JsonElement> rawData)
     {

@@ -32,8 +32,11 @@ public sealed record class SubscriptionCreateResponse : JsonModel
 
     public SubscriptionCreateResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public SubscriptionCreateResponse(SubscriptionCreateResponse subscriptionCreateResponse)
         : base(subscriptionCreateResponse) { }
+#pragma warning restore CS8618
 
     public SubscriptionCreateResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -179,8 +182,11 @@ public sealed record class Data : JsonModel
 
     public Data() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Data(Data data)
         : base(data) { }
+#pragma warning restore CS8618
 
     public Data(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -558,8 +564,11 @@ public sealed record class Subscription : JsonModel
 
     public Subscription() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Subscription(Subscription subscription)
         : base(subscription) { }
+#pragma warning restore CS8618
 
     public Subscription(IReadOnlyDictionary<string, JsonElement> rawData)
     {

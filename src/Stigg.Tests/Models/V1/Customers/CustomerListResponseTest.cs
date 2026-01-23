@@ -263,6 +263,50 @@ public class CustomerListResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CustomerListResponse
+        {
+            Data =
+            [
+                new()
+                {
+                    ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    Email = "dev@stainless.com",
+                    ExternalID = "externalId",
+                    Name = "name",
+                    UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DefaultPaymentMethod = new()
+                    {
+                        BillingID = "billingId",
+                        CardExpiryMonth = 0,
+                        CardExpiryYear = 0,
+                        CardLast4Digits = "cardLast4Digits",
+                        Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
+                    },
+                    Integrations =
+                    [
+                        new()
+                        {
+                            ID = "id",
+                            SyncedEntityID = "syncedEntityId",
+                            VendorIdentifier =
+                                CustomerListResponseDataIntegrationVendorIdentifier.Auth0,
+                        },
+                    ],
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                },
+            ],
+        };
+
+        CustomerListResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class CustomerListResponseDataTest : TestBase
@@ -741,6 +785,43 @@ public class CustomerListResponseDataTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CustomerListResponseData
+        {
+            ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            Email = "dev@stainless.com",
+            ExternalID = "externalId",
+            Name = "name",
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DefaultPaymentMethod = new()
+            {
+                BillingID = "billingId",
+                CardExpiryMonth = 0,
+                CardExpiryYear = 0,
+                CardLast4Digits = "cardLast4Digits",
+                Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
+            },
+            Integrations =
+            [
+                new()
+                {
+                    ID = "id",
+                    SyncedEntityID = "syncedEntityId",
+                    VendorIdentifier = CustomerListResponseDataIntegrationVendorIdentifier.Auth0,
+                },
+            ],
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+        };
+
+        CustomerListResponseData copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class CustomerListResponseDataDefaultPaymentMethodTest : TestBase
@@ -838,6 +919,23 @@ public class CustomerListResponseDataDefaultPaymentMethodTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CustomerListResponseDataDefaultPaymentMethod
+        {
+            BillingID = "billingId",
+            CardExpiryMonth = 0,
+            CardExpiryYear = 0,
+            CardLast4Digits = "cardLast4Digits",
+            Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
+        };
+
+        CustomerListResponseDataDefaultPaymentMethod copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -982,6 +1080,21 @@ public class CustomerListResponseDataIntegrationTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CustomerListResponseDataIntegration
+        {
+            ID = "id",
+            SyncedEntityID = "syncedEntityId",
+            VendorIdentifier = CustomerListResponseDataIntegrationVendorIdentifier.Auth0,
+        };
+
+        CustomerListResponseDataIntegration copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 

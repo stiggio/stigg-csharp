@@ -31,8 +31,11 @@ public sealed record class CouponCreateResponse : JsonModel
 
     public CouponCreateResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CouponCreateResponse(CouponCreateResponse couponCreateResponse)
         : base(couponCreateResponse) { }
+#pragma warning restore CS8618
 
     public CouponCreateResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -274,8 +277,11 @@ public sealed record class Data : JsonModel
 
     public Data() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Data(Data data)
         : base(data) { }
+#pragma warning restore CS8618
 
     public Data(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -344,8 +350,11 @@ public sealed record class DataAmountsOff : JsonModel
 
     public DataAmountsOff() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public DataAmountsOff(DataAmountsOff dataAmountsOff)
         : base(dataAmountsOff) { }
+#pragma warning restore CS8618
 
     public DataAmountsOff(IReadOnlyDictionary<string, JsonElement> rawData)
     {

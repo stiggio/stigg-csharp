@@ -31,8 +31,11 @@ public sealed record class UsageRetrieveResponse : JsonModel
 
     public UsageRetrieveResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public UsageRetrieveResponse(UsageRetrieveResponse usageRetrieveResponse)
         : base(usageRetrieveResponse) { }
+#pragma warning restore CS8618
 
     public UsageRetrieveResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -127,8 +130,11 @@ public sealed record class Data : JsonModel
 
     public Data() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Data(Data data)
         : base(data) { }
+#pragma warning restore CS8618
 
     public Data(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -197,8 +203,11 @@ public sealed record class Marker : JsonModel
 
     public Marker() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Marker(Marker marker)
         : base(marker) { }
+#pragma warning restore CS8618
 
     public Marker(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -334,8 +343,11 @@ public sealed record class Series : JsonModel
 
     public Series() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Series(Series series)
         : base(series) { }
+#pragma warning restore CS8618
 
     public Series(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -416,8 +428,11 @@ public sealed record class Point : JsonModel
 
     public Point() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Point(Point point)
         : base(point) { }
+#pragma warning restore CS8618
 
     public Point(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -484,8 +499,11 @@ public sealed record class Tag : JsonModel
 
     public Tag() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Tag(Tag tag)
         : base(tag) { }
+#pragma warning restore CS8618
 
     public Tag(IReadOnlyDictionary<string, JsonElement> rawData)
     {

@@ -278,10 +278,13 @@ public sealed record class CustomerUpdateParamsIntegration : JsonModel
 
     public CustomerUpdateParamsIntegration() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CustomerUpdateParamsIntegration(
         CustomerUpdateParamsIntegration customerUpdateParamsIntegration
     )
         : base(customerUpdateParamsIntegration) { }
+#pragma warning restore CS8618
 
     public CustomerUpdateParamsIntegration(IReadOnlyDictionary<string, JsonElement> rawData)
     {

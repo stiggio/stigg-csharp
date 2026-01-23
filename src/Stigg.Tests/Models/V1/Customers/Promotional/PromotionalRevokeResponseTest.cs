@@ -207,6 +207,42 @@ public class PromotionalRevokeResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new PromotionalRevokeResponse
+        {
+            Data = new()
+            {
+                ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Description = "description",
+                EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                EnumValues = ["string"],
+                EnvironmentID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                FeatureGroupIds = ["string"],
+                FeatureID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                HasSoftLimit = true,
+                HasUnlimitedUsage = true,
+                IsVisible = true,
+                Period = PromotionalRevokeResponseDataPeriod.V1Week,
+                ResetPeriod = PromotionalRevokeResponseDataResetPeriod.Year,
+                ResetPeriodConfiguration =
+                    new PromotionalRevokeResponseDataResetPeriodConfigurationAccordingTo(
+                        PromotionalRevokeResponseDataResetPeriodConfigurationAccordingToAccordingTo.SubscriptionStart
+                    ),
+                StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Status = PromotionalRevokeResponseDataStatus.Active,
+                UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                UsageLimit = 0,
+            },
+        };
+
+        PromotionalRevokeResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class PromotionalRevokeResponseDataTest : TestBase
@@ -450,6 +486,39 @@ public class PromotionalRevokeResponseDataTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new PromotionalRevokeResponseData
+        {
+            ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            EnumValues = ["string"],
+            EnvironmentID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            FeatureGroupIds = ["string"],
+            FeatureID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            HasSoftLimit = true,
+            HasUnlimitedUsage = true,
+            IsVisible = true,
+            Period = PromotionalRevokeResponseDataPeriod.V1Week,
+            ResetPeriod = PromotionalRevokeResponseDataResetPeriod.Year,
+            ResetPeriodConfiguration =
+                new PromotionalRevokeResponseDataResetPeriodConfigurationAccordingTo(
+                    PromotionalRevokeResponseDataResetPeriodConfigurationAccordingToAccordingTo.SubscriptionStart
+                ),
+            StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Status = PromotionalRevokeResponseDataStatus.Active,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsageLimit = 0,
+        };
+
+        PromotionalRevokeResponseData copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -731,6 +800,20 @@ public class PromotionalRevokeResponseDataResetPeriodConfigurationAccordingToTes
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new PromotionalRevokeResponseDataResetPeriodConfigurationAccordingTo
+        {
+            AccordingTo =
+                PromotionalRevokeResponseDataResetPeriodConfigurationAccordingToAccordingTo.SubscriptionStart,
+        };
+
+        PromotionalRevokeResponseDataResetPeriodConfigurationAccordingTo copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class PromotionalRevokeResponseDataResetPeriodConfigurationAccordingToAccordingToTest
@@ -864,6 +947,16 @@ public class AccordingTo2Test : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new AccordingTo2 { AccordingTo = AccordingTo2AccordingTo.SubscriptionStart };
+
+        AccordingTo2 copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class AccordingTo2AccordingToTest : TestBase
@@ -975,6 +1068,16 @@ public class AccordingTo3Test : TestBase
         var model = new AccordingTo3 { AccordingTo = AccordingTo3AccordingTo.SubscriptionStart };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new AccordingTo3 { AccordingTo = AccordingTo3AccordingTo.SubscriptionStart };
+
+        AccordingTo3 copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 

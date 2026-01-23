@@ -225,6 +225,45 @@ public class CustomerResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CustomerResponse
+        {
+            Data = new()
+            {
+                ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Email = "dev@stainless.com",
+                ExternalID = "externalId",
+                Name = "name",
+                UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DefaultPaymentMethod = new()
+                {
+                    BillingID = "billingId",
+                    CardExpiryMonth = 0,
+                    CardExpiryYear = 0,
+                    CardLast4Digits = "cardLast4Digits",
+                    Type = DataDefaultPaymentMethodType.Card,
+                },
+                Integrations =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        SyncedEntityID = "syncedEntityId",
+                        VendorIdentifier = DataIntegrationVendorIdentifier.Auth0,
+                    },
+                ],
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            },
+        };
+
+        CustomerResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class DataTest : TestBase
@@ -681,6 +720,42 @@ public class DataTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Data
+        {
+            ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Email = "dev@stainless.com",
+            ExternalID = "externalId",
+            Name = "name",
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DefaultPaymentMethod = new()
+            {
+                BillingID = "billingId",
+                CardExpiryMonth = 0,
+                CardExpiryYear = 0,
+                CardLast4Digits = "cardLast4Digits",
+                Type = DataDefaultPaymentMethodType.Card,
+            },
+            Integrations =
+            [
+                new()
+                {
+                    ID = "id",
+                    SyncedEntityID = "syncedEntityId",
+                    VendorIdentifier = DataIntegrationVendorIdentifier.Auth0,
+                },
+            ],
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+        };
+
+        Data copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class DataDefaultPaymentMethodTest : TestBase
@@ -778,6 +853,23 @@ public class DataDefaultPaymentMethodTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new DataDefaultPaymentMethod
+        {
+            BillingID = "billingId",
+            CardExpiryMonth = 0,
+            CardExpiryYear = 0,
+            CardLast4Digits = "cardLast4Digits",
+            Type = DataDefaultPaymentMethodType.Card,
+        };
+
+        DataDefaultPaymentMethod copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -918,6 +1010,21 @@ public class DataIntegrationTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new DataIntegration
+        {
+            ID = "id",
+            SyncedEntityID = "syncedEntityId",
+            VendorIdentifier = DataIntegrationVendorIdentifier.Auth0,
+        };
+
+        DataIntegration copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 

@@ -342,6 +342,24 @@ public class EventTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Event
+        {
+            CustomerID = "customerId",
+            EventName = "x",
+            IdempotencyKey = "x",
+            Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+            ResourceID = "resourceId",
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        Event copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class DimensionTest : TestBase

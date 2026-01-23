@@ -36,8 +36,11 @@ public sealed record class V1CreateUsageResponse : JsonModel
 
     public V1CreateUsageResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public V1CreateUsageResponse(V1CreateUsageResponse v1CreateUsageResponse)
         : base(v1CreateUsageResponse) { }
+#pragma warning restore CS8618
 
     public V1CreateUsageResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -242,8 +245,11 @@ public sealed record class Data : JsonModel
 
     public Data() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Data(Data data)
         : base(data) { }
+#pragma warning restore CS8618
 
     public Data(IReadOnlyDictionary<string, JsonElement> rawData)
     {

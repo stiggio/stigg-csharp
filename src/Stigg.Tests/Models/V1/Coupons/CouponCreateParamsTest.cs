@@ -177,6 +177,16 @@ public class AmountsOffTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new AmountsOff { Amount = 0, Currency = Currency.Usd };
+
+        AmountsOff copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class CurrencyTest : TestBase

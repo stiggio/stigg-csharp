@@ -44,8 +44,11 @@ public sealed record class SubscriptionListResponse : JsonModel
 
     public SubscriptionListResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public SubscriptionListResponse(SubscriptionListResponse subscriptionListResponse)
         : base(subscriptionListResponse) { }
+#pragma warning restore CS8618
 
     public SubscriptionListResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -415,8 +418,11 @@ public sealed record class SubscriptionListResponseData : JsonModel
 
     public SubscriptionListResponseData() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public SubscriptionListResponseData(SubscriptionListResponseData subscriptionListResponseData)
         : base(subscriptionListResponseData) { }
+#pragma warning restore CS8618
 
     public SubscriptionListResponseData(IReadOnlyDictionary<string, JsonElement> rawData)
     {
