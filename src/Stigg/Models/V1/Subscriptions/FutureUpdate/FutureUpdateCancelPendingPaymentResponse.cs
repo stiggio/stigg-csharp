@@ -33,10 +33,13 @@ public sealed record class FutureUpdateCancelPendingPaymentResponse : JsonModel
 
     public FutureUpdateCancelPendingPaymentResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public FutureUpdateCancelPendingPaymentResponse(
         FutureUpdateCancelPendingPaymentResponse futureUpdateCancelPendingPaymentResponse
     )
         : base(futureUpdateCancelPendingPaymentResponse) { }
+#pragma warning restore CS8618
 
     public FutureUpdateCancelPendingPaymentResponse(
         IReadOnlyDictionary<string, JsonElement> rawData
@@ -102,8 +105,11 @@ public sealed record class Data : JsonModel
 
     public Data() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Data(Data data)
         : base(data) { }
+#pragma warning restore CS8618
 
     public Data(IReadOnlyDictionary<string, JsonElement> rawData)
     {

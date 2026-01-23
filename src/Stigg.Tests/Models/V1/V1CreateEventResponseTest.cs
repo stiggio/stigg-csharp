@@ -66,4 +66,17 @@ public class V1CreateEventResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new V1CreateEventResponse
+        {
+            Data = JsonSerializer.Deserialize<JsonElement>("{}"),
+        };
+
+        V1CreateEventResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }

@@ -39,8 +39,11 @@ public sealed record class PromotionalCreateResponse : JsonModel
 
     public PromotionalCreateResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public PromotionalCreateResponse(PromotionalCreateResponse promotionalCreateResponse)
         : base(promotionalCreateResponse) { }
+#pragma warning restore CS8618
 
     public PromotionalCreateResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -355,8 +358,11 @@ public sealed record class Data : JsonModel
 
     public Data() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Data(Data data)
         : base(data) { }
+#pragma warning restore CS8618
 
     public Data(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -841,10 +847,13 @@ public sealed record class ResetPeriodConfigurationAccordingTo : JsonModel
 
     public ResetPeriodConfigurationAccordingTo() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public ResetPeriodConfigurationAccordingTo(
         ResetPeriodConfigurationAccordingTo resetPeriodConfigurationAccordingTo
     )
         : base(resetPeriodConfigurationAccordingTo) { }
+#pragma warning restore CS8618
 
     public ResetPeriodConfigurationAccordingTo(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -957,8 +966,11 @@ public sealed record class AccordingToModel : JsonModel
 
     public AccordingToModel() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public AccordingToModel(AccordingToModel accordingToModel)
         : base(accordingToModel) { }
+#pragma warning restore CS8618
 
     public AccordingToModel(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -1069,8 +1081,11 @@ public sealed record class AccordingTo1 : JsonModel
 
     public AccordingTo1() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public AccordingTo1(AccordingTo1 accordingTo1)
         : base(accordingTo1) { }
+#pragma warning restore CS8618
 
     public AccordingTo1(IReadOnlyDictionary<string, JsonElement> rawData)
     {

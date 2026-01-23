@@ -32,8 +32,11 @@ public sealed record class SubscriptionPreviewResponse : JsonModel
 
     public SubscriptionPreviewResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public SubscriptionPreviewResponse(SubscriptionPreviewResponse subscriptionPreviewResponse)
         : base(subscriptionPreviewResponse) { }
+#pragma warning restore CS8618
 
     public SubscriptionPreviewResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -201,10 +204,13 @@ public sealed record class SubscriptionPreviewResponseData : JsonModel
 
     public SubscriptionPreviewResponseData() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public SubscriptionPreviewResponseData(
         SubscriptionPreviewResponseData subscriptionPreviewResponseData
     )
         : base(subscriptionPreviewResponseData) { }
+#pragma warning restore CS8618
 
     public SubscriptionPreviewResponseData(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -414,8 +420,11 @@ public sealed record class ImmediateInvoice : JsonModel
 
     public ImmediateInvoice() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public ImmediateInvoice(ImmediateInvoice immediateInvoice)
         : base(immediateInvoice) { }
+#pragma warning restore CS8618
 
     public ImmediateInvoice(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -484,8 +493,11 @@ public sealed record class BillingPeriodRange : JsonModel
 
     public BillingPeriodRange() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public BillingPeriodRange(BillingPeriodRange billingPeriodRange)
         : base(billingPeriodRange) { }
+#pragma warning restore CS8618
 
     public BillingPeriodRange(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -583,8 +595,11 @@ public sealed record class DiscountDetails : JsonModel
 
     public DiscountDetails() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public DiscountDetails(DiscountDetails discountDetails)
         : base(discountDetails) { }
+#pragma warning restore CS8618
 
     public DiscountDetails(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -658,8 +673,11 @@ public sealed record class ImmediateInvoiceDiscount : JsonModel
 
     public ImmediateInvoiceDiscount() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public ImmediateInvoiceDiscount(ImmediateInvoiceDiscount immediateInvoiceDiscount)
         : base(immediateInvoiceDiscount) { }
+#pragma warning restore CS8618
 
     public ImmediateInvoiceDiscount(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -764,8 +782,11 @@ public sealed record class Line : JsonModel
 
     public Line() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Line(Line line)
         : base(line) { }
+#pragma warning restore CS8618
 
     public Line(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -853,10 +874,13 @@ public sealed record class SubscriptionPreviewResponseDataBillingPeriodRange : J
 
     public SubscriptionPreviewResponseDataBillingPeriodRange() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public SubscriptionPreviewResponseDataBillingPeriodRange(
         SubscriptionPreviewResponseDataBillingPeriodRange subscriptionPreviewResponseDataBillingPeriodRange
     )
         : base(subscriptionPreviewResponseDataBillingPeriodRange) { }
+#pragma warning restore CS8618
 
     public SubscriptionPreviewResponseDataBillingPeriodRange(
         IReadOnlyDictionary<string, JsonElement> rawData
@@ -923,8 +947,11 @@ public sealed record class FreeItem : JsonModel
 
     public FreeItem() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public FreeItem(FreeItem freeItem)
         : base(freeItem) { }
+#pragma warning restore CS8618
 
     public FreeItem(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -1128,8 +1155,11 @@ public sealed record class RecurringInvoice : JsonModel
 
     public RecurringInvoice() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public RecurringInvoice(RecurringInvoice recurringInvoice)
         : base(recurringInvoice) { }
+#pragma warning restore CS8618
 
     public RecurringInvoice(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -1203,10 +1233,13 @@ public sealed record class RecurringInvoiceBillingPeriodRange : JsonModel
 
     public RecurringInvoiceBillingPeriodRange() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public RecurringInvoiceBillingPeriodRange(
         RecurringInvoiceBillingPeriodRange recurringInvoiceBillingPeriodRange
     )
         : base(recurringInvoiceBillingPeriodRange) { }
+#pragma warning restore CS8618
 
     public RecurringInvoiceBillingPeriodRange(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -1310,10 +1343,13 @@ public sealed record class RecurringInvoiceDiscountDetails : JsonModel
 
     public RecurringInvoiceDiscountDetails() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public RecurringInvoiceDiscountDetails(
         RecurringInvoiceDiscountDetails recurringInvoiceDiscountDetails
     )
         : base(recurringInvoiceDiscountDetails) { }
+#pragma warning restore CS8618
 
     public RecurringInvoiceDiscountDetails(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -1390,8 +1426,11 @@ public sealed record class RecurringInvoiceDiscount : JsonModel
 
     public RecurringInvoiceDiscount() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public RecurringInvoiceDiscount(RecurringInvoiceDiscount recurringInvoiceDiscount)
         : base(recurringInvoiceDiscount) { }
+#pragma warning restore CS8618
 
     public RecurringInvoiceDiscount(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -1496,8 +1535,11 @@ public sealed record class RecurringInvoiceLine : JsonModel
 
     public RecurringInvoiceLine() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public RecurringInvoiceLine(RecurringInvoiceLine recurringInvoiceLine)
         : base(recurringInvoiceLine) { }
+#pragma warning restore CS8618
 
     public RecurringInvoiceLine(IReadOnlyDictionary<string, JsonElement> rawData)
     {

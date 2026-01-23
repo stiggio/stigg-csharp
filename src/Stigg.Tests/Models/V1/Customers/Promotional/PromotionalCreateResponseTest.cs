@@ -227,6 +227,44 @@ public class PromotionalCreateResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new PromotionalCreateResponse
+        {
+            Data =
+            [
+                new()
+                {
+                    ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Description = "description",
+                    EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    EnumValues = ["string"],
+                    EnvironmentID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    FeatureGroupIds = ["string"],
+                    FeatureID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    HasSoftLimit = true,
+                    HasUnlimitedUsage = true,
+                    IsVisible = true,
+                    Period = DataPeriod.V1Week,
+                    ResetPeriod = DataResetPeriod.Year,
+                    ResetPeriodConfiguration = new ResetPeriodConfigurationAccordingTo(
+                        ResetPeriodConfigurationAccordingToAccordingTo.SubscriptionStart
+                    ),
+                    StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Status = Status.Active,
+                    UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    UsageLimit = 0,
+                },
+            ],
+        };
+
+        PromotionalCreateResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class DataTest : TestBase
@@ -454,6 +492,38 @@ public class DataTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Data
+        {
+            ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            EnumValues = ["string"],
+            EnvironmentID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            FeatureGroupIds = ["string"],
+            FeatureID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            HasSoftLimit = true,
+            HasUnlimitedUsage = true,
+            IsVisible = true,
+            Period = DataPeriod.V1Week,
+            ResetPeriod = DataResetPeriod.Year,
+            ResetPeriodConfiguration = new ResetPeriodConfigurationAccordingTo(
+                ResetPeriodConfigurationAccordingToAccordingTo.SubscriptionStart
+            ),
+            StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Status = Status.Active,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsageLimit = 0,
+        };
+
+        Data copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -726,6 +796,19 @@ public class ResetPeriodConfigurationAccordingToTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new ResetPeriodConfigurationAccordingTo
+        {
+            AccordingTo = ResetPeriodConfigurationAccordingToAccordingTo.SubscriptionStart,
+        };
+
+        ResetPeriodConfigurationAccordingTo copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class ResetPeriodConfigurationAccordingToAccordingToTest : TestBase
@@ -846,6 +929,19 @@ public class AccordingToModelTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new AccordingToModel
+        {
+            AccordingTo = AccordingToModelAccordingTo.SubscriptionStart,
+        };
+
+        AccordingToModel copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class AccordingToModelAccordingToTest : TestBase
@@ -957,6 +1053,16 @@ public class AccordingTo1Test : TestBase
         var model = new AccordingTo1 { AccordingTo = AccordingTo1AccordingTo.SubscriptionStart };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new AccordingTo1 { AccordingTo = AccordingTo1AccordingTo.SubscriptionStart };
+
+        AccordingTo1 copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 

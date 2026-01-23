@@ -33,8 +33,11 @@ public sealed record class PromotionalRevokeResponse : JsonModel
 
     public PromotionalRevokeResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public PromotionalRevokeResponse(PromotionalRevokeResponse promotionalRevokeResponse)
         : base(promotionalRevokeResponse) { }
+#pragma warning restore CS8618
 
     public PromotionalRevokeResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -357,10 +360,13 @@ public sealed record class PromotionalRevokeResponseData : JsonModel
 
     public PromotionalRevokeResponseData() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public PromotionalRevokeResponseData(
         PromotionalRevokeResponseData promotionalRevokeResponseData
     )
         : base(promotionalRevokeResponseData) { }
+#pragma warning restore CS8618
 
     public PromotionalRevokeResponseData(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -875,10 +881,13 @@ public sealed record class PromotionalRevokeResponseDataResetPeriodConfiguration
 
     public PromotionalRevokeResponseDataResetPeriodConfigurationAccordingTo() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public PromotionalRevokeResponseDataResetPeriodConfigurationAccordingTo(
         PromotionalRevokeResponseDataResetPeriodConfigurationAccordingTo promotionalRevokeResponseDataResetPeriodConfigurationAccordingTo
     )
         : base(promotionalRevokeResponseDataResetPeriodConfigurationAccordingTo) { }
+#pragma warning restore CS8618
 
     public PromotionalRevokeResponseDataResetPeriodConfigurationAccordingTo(
         IReadOnlyDictionary<string, JsonElement> rawData
@@ -1002,8 +1011,11 @@ public sealed record class AccordingTo2 : JsonModel
 
     public AccordingTo2() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public AccordingTo2(AccordingTo2 accordingTo2)
         : base(accordingTo2) { }
+#pragma warning restore CS8618
 
     public AccordingTo2(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -1112,8 +1124,11 @@ public sealed record class AccordingTo3 : JsonModel
 
     public AccordingTo3() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public AccordingTo3(AccordingTo3 accordingTo3)
         : base(accordingTo3) { }
+#pragma warning restore CS8618
 
     public AccordingTo3(IReadOnlyDictionary<string, JsonElement> rawData)
     {

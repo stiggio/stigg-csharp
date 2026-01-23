@@ -316,8 +316,11 @@ public sealed record class DefaultPaymentMethod : JsonModel
 
     public DefaultPaymentMethod() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public DefaultPaymentMethod(DefaultPaymentMethod defaultPaymentMethod)
         : base(defaultPaymentMethod) { }
+#pragma warning restore CS8618
 
     public DefaultPaymentMethod(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -453,8 +456,11 @@ public sealed record class Integration : JsonModel
 
     public Integration() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Integration(Integration integration)
         : base(integration) { }
+#pragma warning restore CS8618
 
     public Integration(IReadOnlyDictionary<string, JsonElement> rawData)
     {

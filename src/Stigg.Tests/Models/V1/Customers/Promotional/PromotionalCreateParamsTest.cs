@@ -348,6 +348,34 @@ public class PromotionalEntitlementTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new PromotionalEntitlement
+        {
+            CustomEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            EnumValues = ["string"],
+            FeatureID = "featureId",
+            HasSoftLimit = true,
+            HasUnlimitedUsage = true,
+            IsVisible = true,
+            MonthlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),
+            Period = Period.V1Week,
+            ResetPeriod = ResetPeriod.Year,
+            UsageLimit = -9007199254740991,
+            WeeklyResetPeriodConfiguration = new(
+                WeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+            YearlyResetPeriodConfiguration = new(
+                YearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+        };
+
+        PromotionalEntitlement copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class MonthlyResetPeriodConfigurationTest : TestBase
@@ -411,6 +439,19 @@ public class MonthlyResetPeriodConfigurationTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new MonthlyResetPeriodConfiguration
+        {
+            AccordingTo = AccordingTo.SubscriptionStart,
+        };
+
+        MonthlyResetPeriodConfiguration copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -666,6 +707,19 @@ public class WeeklyResetPeriodConfigurationTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new WeeklyResetPeriodConfiguration
+        {
+            AccordingTo = WeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart,
+        };
+
+        WeeklyResetPeriodConfiguration copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class WeeklyResetPeriodConfigurationAccordingToTest : TestBase
@@ -797,6 +851,19 @@ public class YearlyResetPeriodConfigurationTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new YearlyResetPeriodConfiguration
+        {
+            AccordingTo = YearlyResetPeriodConfigurationAccordingTo.SubscriptionStart,
+        };
+
+        YearlyResetPeriodConfiguration copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 

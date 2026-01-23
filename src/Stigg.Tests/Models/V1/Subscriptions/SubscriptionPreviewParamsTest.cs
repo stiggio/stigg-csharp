@@ -471,6 +471,16 @@ public class AddonTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Subscriptions::Addon { AddonID = "addonId", Quantity = 1 };
+
+        Subscriptions::Addon copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class AppliedCouponTest : TestBase
@@ -681,6 +691,30 @@ public class AppliedCouponTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Subscriptions::AppliedCoupon
+        {
+            BillingCouponID = "billingCouponId",
+            Configuration = new() { StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z") },
+            CouponID = "couponId",
+            Discount = new()
+            {
+                AmountsOff = [new() { Amount = 0, Currency = Subscriptions::Currency.Usd }],
+                Description = "description",
+                DurationInMonths = 1,
+                Name = "name",
+                PercentOff = 1,
+            },
+            PromotionCode = "promotionCode",
+        };
+
+        Subscriptions::AppliedCoupon copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class ConfigurationTest : TestBase
@@ -786,6 +820,19 @@ public class ConfigurationTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Subscriptions::Configuration
+        {
+            StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        Subscriptions::Configuration copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -1031,6 +1078,23 @@ public class DiscountTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Subscriptions::Discount
+        {
+            AmountsOff = [new() { Amount = 0, Currency = Subscriptions::Currency.Usd }],
+            Description = "description",
+            DurationInMonths = 1,
+            Name = "name",
+            PercentOff = 1,
+        };
+
+        Subscriptions::Discount copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class AmountsOffTest : TestBase
@@ -1148,6 +1212,20 @@ public class AmountsOffTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Subscriptions::AmountsOff
+        {
+            Amount = 0,
+            Currency = Subscriptions::Currency.Usd,
+        };
+
+        Subscriptions::AmountsOff copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -1491,6 +1569,16 @@ public class BillableFeatureTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Subscriptions::BillableFeature { FeatureID = "featureId", Quantity = 1 };
+
+        Subscriptions::BillableFeature copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class BillingInformationTest : TestBase
@@ -1809,6 +1897,37 @@ public class BillingInformationTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Subscriptions::BillingInformation
+        {
+            BillingAddress = new()
+            {
+                City = "city",
+                Country = "country",
+                Line1 = "line1",
+                Line2 = "line2",
+                PostalCode = "postalCode",
+                State = "state",
+            },
+            ChargeOnBehalfOfAccount = "chargeOnBehalfOfAccount",
+            IntegrationID = "integrationId",
+            InvoiceDaysUntilDue = 0,
+            IsBackdated = true,
+            IsInvoicePaid = true,
+            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            ProrationBehavior = Subscriptions::ProrationBehavior.InvoiceImmediately,
+            TaxIds = [new() { Type = "type", Value = "value" }],
+            TaxPercentage = 0,
+            TaxRateIds = ["string"],
+        };
+
+        Subscriptions::BillingInformation copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class BillingAddressTest : TestBase
@@ -1985,6 +2104,24 @@ public class BillingAddressTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Subscriptions::BillingAddress
+        {
+            City = "city",
+            Country = "country",
+            Line1 = "line1",
+            Line2 = "line2",
+            PostalCode = "postalCode",
+            State = "state",
+        };
+
+        Subscriptions::BillingAddress copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class ProrationBehaviorTest : TestBase
@@ -2098,6 +2235,16 @@ public class TaxIDTest : TestBase
         var model = new Subscriptions::TaxID { Type = "type", Value = "value" };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Subscriptions::TaxID { Type = "type", Value = "value" };
+
+        Subscriptions::TaxID copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -2234,6 +2381,21 @@ public class ChargeTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Subscriptions::Charge
+        {
+            ID = "id",
+            Quantity = 1,
+            Type = Subscriptions::Type.Feature,
+        };
+
+        Subscriptions::Charge copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -2502,6 +2664,22 @@ public class SubscriptionPreviewParamsTrialOverrideConfigurationTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Subscriptions::SubscriptionPreviewParamsTrialOverrideConfiguration
+        {
+            IsTrial = true,
+            TrialEndBehavior =
+                Subscriptions::SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
+            TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        Subscriptions::SubscriptionPreviewParamsTrialOverrideConfiguration copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 

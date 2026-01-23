@@ -324,6 +324,23 @@ public class DefaultPaymentMethodTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Customers::DefaultPaymentMethod
+        {
+            BillingID = "billingId",
+            CardExpiryMonth = 0,
+            CardExpiryYear = 0,
+            CardLast4Digits = "cardLast4Digits",
+            Type = Customers::Type.Card,
+        };
+
+        Customers::DefaultPaymentMethod copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class TypeTest : TestBase
@@ -465,6 +482,21 @@ public class IntegrationTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Customers::Integration
+        {
+            ID = "id",
+            SyncedEntityID = "syncedEntityId",
+            VendorIdentifier = Customers::VendorIdentifier.Auth0,
+        };
+
+        Customers::Integration copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 

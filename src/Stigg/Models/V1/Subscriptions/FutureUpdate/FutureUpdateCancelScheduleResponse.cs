@@ -33,10 +33,13 @@ public sealed record class FutureUpdateCancelScheduleResponse : JsonModel
 
     public FutureUpdateCancelScheduleResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public FutureUpdateCancelScheduleResponse(
         FutureUpdateCancelScheduleResponse futureUpdateCancelScheduleResponse
     )
         : base(futureUpdateCancelScheduleResponse) { }
+#pragma warning restore CS8618
 
     public FutureUpdateCancelScheduleResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -104,10 +107,13 @@ public sealed record class FutureUpdateCancelScheduleResponseData : JsonModel
 
     public FutureUpdateCancelScheduleResponseData() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public FutureUpdateCancelScheduleResponseData(
         FutureUpdateCancelScheduleResponseData futureUpdateCancelScheduleResponseData
     )
         : base(futureUpdateCancelScheduleResponseData) { }
+#pragma warning restore CS8618
 
     public FutureUpdateCancelScheduleResponseData(IReadOnlyDictionary<string, JsonElement> rawData)
     {

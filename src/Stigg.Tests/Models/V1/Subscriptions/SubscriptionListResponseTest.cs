@@ -239,6 +239,46 @@ public class SubscriptionListResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionListResponse
+        {
+            Data =
+            [
+                new()
+                {
+                    ID = "id",
+                    BillingID = "billingId",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                    CustomerID = "customerId",
+                    PaymentCollection = SubscriptionListResponseDataPaymentCollection.NotRequired,
+                    PlanID = "planId",
+                    PricingType = SubscriptionListResponseDataPricingType.Free,
+                    StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Status = SubscriptionListResponseDataStatus.PaymentPending,
+                    CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    CancelReason = SubscriptionListResponseDataCancelReason.UpgradeOrDowngrade,
+                    CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    PayingCustomerID = "payingCustomerId",
+                    PaymentCollectionMethod =
+                        SubscriptionListResponseDataPaymentCollectionMethod.Charge,
+                    ResourceID = "resourceId",
+                    TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                },
+            ],
+        };
+
+        SubscriptionListResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class SubscriptionListResponseDataTest : TestBase
@@ -772,6 +812,39 @@ public class SubscriptionListResponseDataTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionListResponseData
+        {
+            ID = "id",
+            BillingID = "billingId",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            CustomerID = "customerId",
+            PaymentCollection = SubscriptionListResponseDataPaymentCollection.NotRequired,
+            PlanID = "planId",
+            PricingType = SubscriptionListResponseDataPricingType.Free,
+            StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Status = SubscriptionListResponseDataStatus.PaymentPending,
+            CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CancelReason = SubscriptionListResponseDataCancelReason.UpgradeOrDowngrade,
+            CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            PayingCustomerID = "payingCustomerId",
+            PaymentCollectionMethod = SubscriptionListResponseDataPaymentCollectionMethod.Charge,
+            ResourceID = "resourceId",
+            TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        SubscriptionListResponseData copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 

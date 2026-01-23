@@ -354,8 +354,11 @@ public sealed record class PromotionalEntitlement : JsonModel
 
     public PromotionalEntitlement() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public PromotionalEntitlement(PromotionalEntitlement promotionalEntitlement)
         : base(promotionalEntitlement) { }
+#pragma warning restore CS8618
 
     public PromotionalEntitlement(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -420,10 +423,13 @@ public sealed record class MonthlyResetPeriodConfiguration : JsonModel
 
     public MonthlyResetPeriodConfiguration() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public MonthlyResetPeriodConfiguration(
         MonthlyResetPeriodConfiguration monthlyResetPeriodConfiguration
     )
         : base(monthlyResetPeriodConfiguration) { }
+#pragma warning restore CS8618
 
     public MonthlyResetPeriodConfiguration(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -655,10 +661,13 @@ public sealed record class WeeklyResetPeriodConfiguration : JsonModel
 
     public WeeklyResetPeriodConfiguration() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public WeeklyResetPeriodConfiguration(
         WeeklyResetPeriodConfiguration weeklyResetPeriodConfiguration
     )
         : base(weeklyResetPeriodConfiguration) { }
+#pragma warning restore CS8618
 
     public WeeklyResetPeriodConfiguration(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -800,10 +809,13 @@ public sealed record class YearlyResetPeriodConfiguration : JsonModel
 
     public YearlyResetPeriodConfiguration() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public YearlyResetPeriodConfiguration(
         YearlyResetPeriodConfiguration yearlyResetPeriodConfiguration
     )
         : base(yearlyResetPeriodConfiguration) { }
+#pragma warning restore CS8618
 
     public YearlyResetPeriodConfiguration(IReadOnlyDictionary<string, JsonElement> rawData)
     {

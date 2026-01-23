@@ -54,6 +54,16 @@ public class FutureUpdateCancelPendingPaymentResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new FutureUpdateCancelPendingPaymentResponse { Data = new("id") };
+
+        FutureUpdateCancelPendingPaymentResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class DataTest : TestBase
@@ -99,5 +109,15 @@ public class DataTest : TestBase
         var model = new Data { ID = "id" };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Data { ID = "id" };
+
+        Data copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }

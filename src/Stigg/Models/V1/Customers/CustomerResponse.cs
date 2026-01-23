@@ -31,8 +31,11 @@ public sealed record class CustomerResponse : JsonModel
 
     public CustomerResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public CustomerResponse(CustomerResponse customerResponse)
         : base(customerResponse) { }
+#pragma warning restore CS8618
 
     public CustomerResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -231,8 +234,11 @@ public sealed record class Data : JsonModel
 
     public Data() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public Data(Data data)
         : base(data) { }
+#pragma warning restore CS8618
 
     public Data(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -348,8 +354,11 @@ public sealed record class DataDefaultPaymentMethod : JsonModel
 
     public DataDefaultPaymentMethod() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public DataDefaultPaymentMethod(DataDefaultPaymentMethod dataDefaultPaymentMethod)
         : base(dataDefaultPaymentMethod) { }
+#pragma warning restore CS8618
 
     public DataDefaultPaymentMethod(IReadOnlyDictionary<string, JsonElement> rawData)
     {
@@ -485,8 +494,11 @@ public sealed record class DataIntegration : JsonModel
 
     public DataIntegration() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public DataIntegration(DataIntegration dataIntegration)
         : base(dataIntegration) { }
+#pragma warning restore CS8618
 
     public DataIntegration(IReadOnlyDictionary<string, JsonElement> rawData)
     {

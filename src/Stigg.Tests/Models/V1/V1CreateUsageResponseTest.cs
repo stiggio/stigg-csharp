@@ -172,6 +172,35 @@ public class V1CreateUsageResponseTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new V1CreateUsageResponse
+        {
+            Data =
+            [
+                new()
+                {
+                    ID = "id",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    CustomerID = "customerId",
+                    FeatureID = "featureId",
+                    Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Value = 0,
+                    CurrentUsage = 0,
+                    NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ResourceID = "resourceId",
+                    UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                },
+            ],
+        };
+
+        V1CreateUsageResponse copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class DataTest : TestBase
@@ -403,5 +432,28 @@ public class DataTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Data
+        {
+            ID = "id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CustomerID = "customerId",
+            FeatureID = "featureId",
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Value = 0,
+            CurrentUsage = 0,
+            NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ResourceID = "resourceId",
+            UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        Data copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }

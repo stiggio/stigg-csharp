@@ -582,6 +582,25 @@ public class CheckoutOptionsTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CheckoutOptions
+        {
+            CancelUrl = "https://example.com",
+            SuccessUrl = "https://example.com",
+            AllowPromoCodes = true,
+            AllowTaxIDCollection = true,
+            CollectBillingAddress = true,
+            CollectPhoneNumber = true,
+            ReferenceID = "referenceId",
+        };
+
+        CheckoutOptions copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class TrialOverrideConfigurationTest : TestBase
@@ -713,6 +732,21 @@ public class TrialOverrideConfigurationTest : TestBase
         };
 
         model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new TrialOverrideConfiguration
+        {
+            IsTrial = true,
+            TrialEndBehavior = TrialEndBehavior.ConvertToPaid,
+            TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        TrialOverrideConfiguration copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 

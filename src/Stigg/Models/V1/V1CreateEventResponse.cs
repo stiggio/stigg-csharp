@@ -28,8 +28,11 @@ public sealed record class V1CreateEventResponse : JsonModel
 
     public V1CreateEventResponse() { }
 
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
     public V1CreateEventResponse(V1CreateEventResponse v1CreateEventResponse)
         : base(v1CreateEventResponse) { }
+#pragma warning restore CS8618
 
     public V1CreateEventResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {

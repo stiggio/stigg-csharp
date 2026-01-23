@@ -265,6 +265,21 @@ public class CustomerUpdateParamsIntegrationTest : TestBase
 
         model.Validate();
     }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CustomerUpdateParamsIntegration
+        {
+            ID = "id",
+            SyncedEntityID = "syncedEntityId",
+            VendorIdentifier = CustomerUpdateParamsIntegrationVendorIdentifier.Auth0,
+        };
+
+        CustomerUpdateParamsIntegration copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
 }
 
 public class CustomerUpdateParamsIntegrationVendorIdentifierTest : TestBase
