@@ -85,7 +85,7 @@ class FutureUpdateCancelPendingPaymentResponseFromRaw
 public sealed record class Data : JsonModel
 {
     /// <summary>
-    /// external id of the canceled future update subscription
+    /// Subscription ID
     /// </summary>
     public required string ID
     {

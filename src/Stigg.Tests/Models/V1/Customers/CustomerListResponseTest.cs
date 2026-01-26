@@ -18,12 +18,10 @@ public class CustomerListResponseTest : TestBase
             [
                 new()
                 {
+                    ID = "id",
                     ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    Email = "dev@stainless.com",
-                    ExternalID = "externalId",
-                    Name = "name",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DefaultPaymentMethod = new()
                     {
@@ -33,6 +31,7 @@ public class CustomerListResponseTest : TestBase
                         CardLast4Digits = "cardLast4Digits",
                         Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
                     },
+                    Email = "dev@stainless.com",
                     Integrations =
                     [
                         new()
@@ -44,6 +43,7 @@ public class CustomerListResponseTest : TestBase
                         },
                     ],
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Name = "name",
                 },
             ],
         };
@@ -52,12 +52,10 @@ public class CustomerListResponseTest : TestBase
         [
             new()
             {
+                ID = "id",
                 ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                Email = "dev@stainless.com",
-                ExternalID = "externalId",
-                Name = "name",
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 DefaultPaymentMethod = new()
                 {
@@ -67,6 +65,7 @@ public class CustomerListResponseTest : TestBase
                     CardLast4Digits = "cardLast4Digits",
                     Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
                 },
+                Email = "dev@stainless.com",
                 Integrations =
                 [
                     new()
@@ -78,6 +77,7 @@ public class CustomerListResponseTest : TestBase
                     },
                 ],
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Name = "name",
             },
         ];
 
@@ -97,12 +97,10 @@ public class CustomerListResponseTest : TestBase
             [
                 new()
                 {
+                    ID = "id",
                     ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    Email = "dev@stainless.com",
-                    ExternalID = "externalId",
-                    Name = "name",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DefaultPaymentMethod = new()
                     {
@@ -112,6 +110,7 @@ public class CustomerListResponseTest : TestBase
                         CardLast4Digits = "cardLast4Digits",
                         Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
                     },
+                    Email = "dev@stainless.com",
                     Integrations =
                     [
                         new()
@@ -123,6 +122,7 @@ public class CustomerListResponseTest : TestBase
                         },
                     ],
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Name = "name",
                 },
             ],
         };
@@ -145,12 +145,10 @@ public class CustomerListResponseTest : TestBase
             [
                 new()
                 {
+                    ID = "id",
                     ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    Email = "dev@stainless.com",
-                    ExternalID = "externalId",
-                    Name = "name",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DefaultPaymentMethod = new()
                     {
@@ -160,6 +158,7 @@ public class CustomerListResponseTest : TestBase
                         CardLast4Digits = "cardLast4Digits",
                         Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
                     },
+                    Email = "dev@stainless.com",
                     Integrations =
                     [
                         new()
@@ -171,6 +170,7 @@ public class CustomerListResponseTest : TestBase
                         },
                     ],
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Name = "name",
                 },
             ],
         };
@@ -186,12 +186,10 @@ public class CustomerListResponseTest : TestBase
         [
             new()
             {
+                ID = "id",
                 ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                Email = "dev@stainless.com",
-                ExternalID = "externalId",
-                Name = "name",
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 DefaultPaymentMethod = new()
                 {
@@ -201,6 +199,7 @@ public class CustomerListResponseTest : TestBase
                     CardLast4Digits = "cardLast4Digits",
                     Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
                 },
+                Email = "dev@stainless.com",
                 Integrations =
                 [
                     new()
@@ -212,6 +211,7 @@ public class CustomerListResponseTest : TestBase
                     },
                 ],
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Name = "name",
             },
         ];
 
@@ -231,12 +231,10 @@ public class CustomerListResponseTest : TestBase
             [
                 new()
                 {
+                    ID = "id",
                     ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    Email = "dev@stainless.com",
-                    ExternalID = "externalId",
-                    Name = "name",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DefaultPaymentMethod = new()
                     {
@@ -246,6 +244,7 @@ public class CustomerListResponseTest : TestBase
                         CardLast4Digits = "cardLast4Digits",
                         Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
                     },
+                    Email = "dev@stainless.com",
                     Integrations =
                     [
                         new()
@@ -257,6 +256,7 @@ public class CustomerListResponseTest : TestBase
                         },
                     ],
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Name = "name",
                 },
             ],
         };
@@ -273,12 +273,10 @@ public class CustomerListResponseTest : TestBase
             [
                 new()
                 {
+                    ID = "id",
                     ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    Email = "dev@stainless.com",
-                    ExternalID = "externalId",
-                    Name = "name",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     DefaultPaymentMethod = new()
                     {
@@ -288,6 +286,7 @@ public class CustomerListResponseTest : TestBase
                         CardLast4Digits = "cardLast4Digits",
                         Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
                     },
+                    Email = "dev@stainless.com",
                     Integrations =
                     [
                         new()
@@ -299,6 +298,7 @@ public class CustomerListResponseTest : TestBase
                         },
                     ],
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Name = "name",
                 },
             ],
         };
@@ -316,12 +316,10 @@ public class CustomerListResponseDataTest : TestBase
     {
         var model = new CustomerListResponseData
         {
+            ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Email = "dev@stainless.com",
-            ExternalID = "externalId",
-            Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DefaultPaymentMethod = new()
             {
@@ -331,6 +329,7 @@ public class CustomerListResponseDataTest : TestBase
                 CardLast4Digits = "cardLast4Digits",
                 Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
             },
+            Email = "dev@stainless.com",
             Integrations =
             [
                 new()
@@ -341,14 +340,13 @@ public class CustomerListResponseDataTest : TestBase
                 },
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Name = "name",
         };
 
+        string expectedID = "id";
         DateTimeOffset expectedArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
-        string expectedEmail = "dev@stainless.com";
-        string expectedExternalID = "externalId";
-        string expectedName = "name";
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         CustomerListResponseDataDefaultPaymentMethod expectedDefaultPaymentMethod = new()
         {
@@ -358,6 +356,7 @@ public class CustomerListResponseDataTest : TestBase
             CardLast4Digits = "cardLast4Digits",
             Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
         };
+        string expectedEmail = "dev@stainless.com";
         List<CustomerListResponseDataIntegration> expectedIntegrations =
         [
             new()
@@ -368,15 +367,15 @@ public class CustomerListResponseDataTest : TestBase
             },
         ];
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        string expectedName = "name";
 
+        Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedArchivedAt, model.ArchivedAt);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedCursorID, model.CursorID);
-        Assert.Equal(expectedEmail, model.Email);
-        Assert.Equal(expectedExternalID, model.ExternalID);
-        Assert.Equal(expectedName, model.Name);
         Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
         Assert.Equal(expectedDefaultPaymentMethod, model.DefaultPaymentMethod);
+        Assert.Equal(expectedEmail, model.Email);
         Assert.NotNull(model.Integrations);
         Assert.Equal(expectedIntegrations.Count, model.Integrations.Count);
         for (int i = 0; i < expectedIntegrations.Count; i++)
@@ -391,6 +390,7 @@ public class CustomerListResponseDataTest : TestBase
 
             Assert.Equal(value, model.Metadata[item.Key]);
         }
+        Assert.Equal(expectedName, model.Name);
     }
 
     [Fact]
@@ -398,12 +398,10 @@ public class CustomerListResponseDataTest : TestBase
     {
         var model = new CustomerListResponseData
         {
+            ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Email = "dev@stainless.com",
-            ExternalID = "externalId",
-            Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DefaultPaymentMethod = new()
             {
@@ -413,6 +411,7 @@ public class CustomerListResponseDataTest : TestBase
                 CardLast4Digits = "cardLast4Digits",
                 Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
             },
+            Email = "dev@stainless.com",
             Integrations =
             [
                 new()
@@ -423,6 +422,7 @@ public class CustomerListResponseDataTest : TestBase
                 },
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Name = "name",
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -439,12 +439,10 @@ public class CustomerListResponseDataTest : TestBase
     {
         var model = new CustomerListResponseData
         {
+            ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Email = "dev@stainless.com",
-            ExternalID = "externalId",
-            Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DefaultPaymentMethod = new()
             {
@@ -454,6 +452,7 @@ public class CustomerListResponseDataTest : TestBase
                 CardLast4Digits = "cardLast4Digits",
                 Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
             },
+            Email = "dev@stainless.com",
             Integrations =
             [
                 new()
@@ -464,6 +463,7 @@ public class CustomerListResponseDataTest : TestBase
                 },
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Name = "name",
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -473,12 +473,10 @@ public class CustomerListResponseDataTest : TestBase
         );
         Assert.NotNull(deserialized);
 
+        string expectedID = "id";
         DateTimeOffset expectedArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
-        string expectedEmail = "dev@stainless.com";
-        string expectedExternalID = "externalId";
-        string expectedName = "name";
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         CustomerListResponseDataDefaultPaymentMethod expectedDefaultPaymentMethod = new()
         {
@@ -488,6 +486,7 @@ public class CustomerListResponseDataTest : TestBase
             CardLast4Digits = "cardLast4Digits",
             Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
         };
+        string expectedEmail = "dev@stainless.com";
         List<CustomerListResponseDataIntegration> expectedIntegrations =
         [
             new()
@@ -498,15 +497,15 @@ public class CustomerListResponseDataTest : TestBase
             },
         ];
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        string expectedName = "name";
 
+        Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedArchivedAt, deserialized.ArchivedAt);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedCursorID, deserialized.CursorID);
-        Assert.Equal(expectedEmail, deserialized.Email);
-        Assert.Equal(expectedExternalID, deserialized.ExternalID);
-        Assert.Equal(expectedName, deserialized.Name);
         Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
         Assert.Equal(expectedDefaultPaymentMethod, deserialized.DefaultPaymentMethod);
+        Assert.Equal(expectedEmail, deserialized.Email);
         Assert.NotNull(deserialized.Integrations);
         Assert.Equal(expectedIntegrations.Count, deserialized.Integrations.Count);
         for (int i = 0; i < expectedIntegrations.Count; i++)
@@ -521,6 +520,7 @@ public class CustomerListResponseDataTest : TestBase
 
             Assert.Equal(value, deserialized.Metadata[item.Key]);
         }
+        Assert.Equal(expectedName, deserialized.Name);
     }
 
     [Fact]
@@ -528,12 +528,10 @@ public class CustomerListResponseDataTest : TestBase
     {
         var model = new CustomerListResponseData
         {
+            ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Email = "dev@stainless.com",
-            ExternalID = "externalId",
-            Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DefaultPaymentMethod = new()
             {
@@ -543,6 +541,7 @@ public class CustomerListResponseDataTest : TestBase
                 CardLast4Digits = "cardLast4Digits",
                 Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
             },
+            Email = "dev@stainless.com",
             Integrations =
             [
                 new()
@@ -553,6 +552,7 @@ public class CustomerListResponseDataTest : TestBase
                 },
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Name = "name",
         };
 
         model.Validate();
@@ -563,12 +563,10 @@ public class CustomerListResponseDataTest : TestBase
     {
         var model = new CustomerListResponseData
         {
+            ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Email = "dev@stainless.com",
-            ExternalID = "externalId",
-            Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DefaultPaymentMethod = new()
             {
@@ -578,6 +576,8 @@ public class CustomerListResponseDataTest : TestBase
                 CardLast4Digits = "cardLast4Digits",
                 Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
             },
+            Email = "dev@stainless.com",
+            Name = "name",
         };
 
         Assert.Null(model.Integrations);
@@ -591,12 +591,10 @@ public class CustomerListResponseDataTest : TestBase
     {
         var model = new CustomerListResponseData
         {
+            ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Email = "dev@stainless.com",
-            ExternalID = "externalId",
-            Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DefaultPaymentMethod = new()
             {
@@ -606,6 +604,8 @@ public class CustomerListResponseDataTest : TestBase
                 CardLast4Digits = "cardLast4Digits",
                 Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
             },
+            Email = "dev@stainless.com",
+            Name = "name",
         };
 
         model.Validate();
@@ -616,12 +616,10 @@ public class CustomerListResponseDataTest : TestBase
     {
         var model = new CustomerListResponseData
         {
+            ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Email = "dev@stainless.com",
-            ExternalID = "externalId",
-            Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DefaultPaymentMethod = new()
             {
@@ -631,6 +629,8 @@ public class CustomerListResponseDataTest : TestBase
                 CardLast4Digits = "cardLast4Digits",
                 Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
             },
+            Email = "dev@stainless.com",
+            Name = "name",
 
             // Null should be interpreted as omitted for these properties
             Integrations = null,
@@ -648,12 +648,10 @@ public class CustomerListResponseDataTest : TestBase
     {
         var model = new CustomerListResponseData
         {
+            ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Email = "dev@stainless.com",
-            ExternalID = "externalId",
-            Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DefaultPaymentMethod = new()
             {
@@ -663,6 +661,8 @@ public class CustomerListResponseDataTest : TestBase
                 CardLast4Digits = "cardLast4Digits",
                 Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
             },
+            Email = "dev@stainless.com",
+            Name = "name",
 
             // Null should be interpreted as omitted for these properties
             Integrations = null,
@@ -677,12 +677,10 @@ public class CustomerListResponseDataTest : TestBase
     {
         var model = new CustomerListResponseData
         {
+            ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Email = "dev@stainless.com",
-            ExternalID = "externalId",
-            Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Integrations =
             [
@@ -698,6 +696,10 @@ public class CustomerListResponseDataTest : TestBase
 
         Assert.Null(model.DefaultPaymentMethod);
         Assert.False(model.RawData.ContainsKey("defaultPaymentMethod"));
+        Assert.Null(model.Email);
+        Assert.False(model.RawData.ContainsKey("email"));
+        Assert.Null(model.Name);
+        Assert.False(model.RawData.ContainsKey("name"));
     }
 
     [Fact]
@@ -705,12 +707,10 @@ public class CustomerListResponseDataTest : TestBase
     {
         var model = new CustomerListResponseData
         {
+            ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Email = "dev@stainless.com",
-            ExternalID = "externalId",
-            Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Integrations =
             [
@@ -732,12 +732,10 @@ public class CustomerListResponseDataTest : TestBase
     {
         var model = new CustomerListResponseData
         {
+            ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Email = "dev@stainless.com",
-            ExternalID = "externalId",
-            Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Integrations =
             [
@@ -751,10 +749,16 @@ public class CustomerListResponseDataTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
 
             DefaultPaymentMethod = null,
+            Email = null,
+            Name = null,
         };
 
         Assert.Null(model.DefaultPaymentMethod);
         Assert.True(model.RawData.ContainsKey("defaultPaymentMethod"));
+        Assert.Null(model.Email);
+        Assert.True(model.RawData.ContainsKey("email"));
+        Assert.Null(model.Name);
+        Assert.True(model.RawData.ContainsKey("name"));
     }
 
     [Fact]
@@ -762,12 +766,10 @@ public class CustomerListResponseDataTest : TestBase
     {
         var model = new CustomerListResponseData
         {
+            ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Email = "dev@stainless.com",
-            ExternalID = "externalId",
-            Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Integrations =
             [
@@ -781,6 +783,8 @@ public class CustomerListResponseDataTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
 
             DefaultPaymentMethod = null,
+            Email = null,
+            Name = null,
         };
 
         model.Validate();
@@ -791,12 +795,10 @@ public class CustomerListResponseDataTest : TestBase
     {
         var model = new CustomerListResponseData
         {
+            ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Email = "dev@stainless.com",
-            ExternalID = "externalId",
-            Name = "name",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             DefaultPaymentMethod = new()
             {
@@ -806,6 +808,7 @@ public class CustomerListResponseDataTest : TestBase
                 CardLast4Digits = "cardLast4Digits",
                 Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
             },
+            Email = "dev@stainless.com",
             Integrations =
             [
                 new()
@@ -816,6 +819,7 @@ public class CustomerListResponseDataTest : TestBase
                 },
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Name = "name",
         };
 
         CustomerListResponseData copied = new(model);

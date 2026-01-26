@@ -83,6 +83,9 @@ class SubscriptionMigrateResponseFromRaw : IFromRawJson<SubscriptionMigrateRespo
 )]
 public sealed record class SubscriptionMigrateResponseData : JsonModel
 {
+    /// <summary>
+    /// Subscription ID
+    /// </summary>
     public required string ID
     {
         get

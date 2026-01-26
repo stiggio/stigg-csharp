@@ -28,42 +28,16 @@ public record class CustomerCreateParams : ParamsBase
     }
 
     /// <summary>
-    /// The email of the customer
-    /// </summary>
-    public required string? Email
-    {
-        get
-        {
-            this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableClass<string>("email");
-        }
-        init { this._rawBodyData.Set("email", value); }
-    }
-
-    /// <summary>
     /// Customer slug
     /// </summary>
-    public required string ExternalID
+    public required string ID
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNotNullClass<string>("externalId");
+            return this._rawBodyData.GetNotNullClass<string>("id");
         }
-        init { this._rawBodyData.Set("externalId", value); }
-    }
-
-    /// <summary>
-    /// The name of the customer
-    /// </summary>
-    public required string? Name
-    {
-        get
-        {
-            this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableClass<string>("name");
-        }
-        init { this._rawBodyData.Set("name", value); }
+        init { this._rawBodyData.Set("id", value); }
     }
 
     /// <summary>
@@ -77,6 +51,19 @@ public record class CustomerCreateParams : ParamsBase
             return this._rawBodyData.GetNullableClass<DefaultPaymentMethod>("defaultPaymentMethod");
         }
         init { this._rawBodyData.Set("defaultPaymentMethod", value); }
+    }
+
+    /// <summary>
+    /// The email of the customer
+    /// </summary>
+    public string? Email
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("email");
+        }
+        init { this._rawBodyData.Set("email", value); }
     }
 
     /// <summary>
@@ -125,6 +112,19 @@ public record class CustomerCreateParams : ParamsBase
                 value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
             );
         }
+    }
+
+    /// <summary>
+    /// The name of the customer
+    /// </summary>
+    public string? Name
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("name");
+        }
+        init { this._rawBodyData.Set("name", value); }
     }
 
     public CustomerCreateParams() { }

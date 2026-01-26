@@ -14,9 +14,7 @@ public class CustomerCreateParamsTest : TestBase
     {
         var parameters = new Customers::CustomerCreateParams
         {
-            Email = "dev@stainless.com",
-            ExternalID = "externalId",
-            Name = "name",
+            ID = "id",
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
@@ -25,6 +23,7 @@ public class CustomerCreateParamsTest : TestBase
                 CardLast4Digits = "cardLast4Digits",
                 Type = Customers::Type.Card,
             },
+            Email = "dev@stainless.com",
             Integrations =
             [
                 new()
@@ -35,11 +34,10 @@ public class CustomerCreateParamsTest : TestBase
                 },
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Name = "name",
         };
 
-        string expectedEmail = "dev@stainless.com";
-        string expectedExternalID = "externalId";
-        string expectedName = "name";
+        string expectedID = "id";
         Customers::DefaultPaymentMethod expectedDefaultPaymentMethod = new()
         {
             BillingID = "billingId",
@@ -48,6 +46,7 @@ public class CustomerCreateParamsTest : TestBase
             CardLast4Digits = "cardLast4Digits",
             Type = Customers::Type.Card,
         };
+        string expectedEmail = "dev@stainless.com";
         List<Customers::Integration> expectedIntegrations =
         [
             new()
@@ -58,11 +57,11 @@ public class CustomerCreateParamsTest : TestBase
             },
         ];
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        string expectedName = "name";
 
-        Assert.Equal(expectedEmail, parameters.Email);
-        Assert.Equal(expectedExternalID, parameters.ExternalID);
-        Assert.Equal(expectedName, parameters.Name);
+        Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedDefaultPaymentMethod, parameters.DefaultPaymentMethod);
+        Assert.Equal(expectedEmail, parameters.Email);
         Assert.NotNull(parameters.Integrations);
         Assert.Equal(expectedIntegrations.Count, parameters.Integrations.Count);
         for (int i = 0; i < expectedIntegrations.Count; i++)
@@ -77,6 +76,7 @@ public class CustomerCreateParamsTest : TestBase
 
             Assert.Equal(value, parameters.Metadata[item.Key]);
         }
+        Assert.Equal(expectedName, parameters.Name);
     }
 
     [Fact]
@@ -84,9 +84,7 @@ public class CustomerCreateParamsTest : TestBase
     {
         var parameters = new Customers::CustomerCreateParams
         {
-            Email = "dev@stainless.com",
-            ExternalID = "externalId",
-            Name = "name",
+            ID = "id",
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
@@ -95,6 +93,8 @@ public class CustomerCreateParamsTest : TestBase
                 CardLast4Digits = "cardLast4Digits",
                 Type = Customers::Type.Card,
             },
+            Email = "dev@stainless.com",
+            Name = "name",
         };
 
         Assert.Null(parameters.Integrations);
@@ -108,9 +108,7 @@ public class CustomerCreateParamsTest : TestBase
     {
         var parameters = new Customers::CustomerCreateParams
         {
-            Email = "dev@stainless.com",
-            ExternalID = "externalId",
-            Name = "name",
+            ID = "id",
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
@@ -119,6 +117,8 @@ public class CustomerCreateParamsTest : TestBase
                 CardLast4Digits = "cardLast4Digits",
                 Type = Customers::Type.Card,
             },
+            Email = "dev@stainless.com",
+            Name = "name",
 
             // Null should be interpreted as omitted for these properties
             Integrations = null,
@@ -136,9 +136,7 @@ public class CustomerCreateParamsTest : TestBase
     {
         var parameters = new Customers::CustomerCreateParams
         {
-            Email = "dev@stainless.com",
-            ExternalID = "externalId",
-            Name = "name",
+            ID = "id",
             Integrations =
             [
                 new()
@@ -153,6 +151,10 @@ public class CustomerCreateParamsTest : TestBase
 
         Assert.Null(parameters.DefaultPaymentMethod);
         Assert.False(parameters.RawBodyData.ContainsKey("defaultPaymentMethod"));
+        Assert.Null(parameters.Email);
+        Assert.False(parameters.RawBodyData.ContainsKey("email"));
+        Assert.Null(parameters.Name);
+        Assert.False(parameters.RawBodyData.ContainsKey("name"));
     }
 
     [Fact]
@@ -160,9 +162,7 @@ public class CustomerCreateParamsTest : TestBase
     {
         var parameters = new Customers::CustomerCreateParams
         {
-            Email = "dev@stainless.com",
-            ExternalID = "externalId",
-            Name = "name",
+            ID = "id",
             Integrations =
             [
                 new()
@@ -175,21 +175,22 @@ public class CustomerCreateParamsTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
 
             DefaultPaymentMethod = null,
+            Email = null,
+            Name = null,
         };
 
         Assert.Null(parameters.DefaultPaymentMethod);
         Assert.True(parameters.RawBodyData.ContainsKey("defaultPaymentMethod"));
+        Assert.Null(parameters.Email);
+        Assert.True(parameters.RawBodyData.ContainsKey("email"));
+        Assert.Null(parameters.Name);
+        Assert.True(parameters.RawBodyData.ContainsKey("name"));
     }
 
     [Fact]
     public void Url_Works()
     {
-        Customers::CustomerCreateParams parameters = new()
-        {
-            Email = "dev@stainless.com",
-            ExternalID = "externalId",
-            Name = "name",
-        };
+        Customers::CustomerCreateParams parameters = new() { ID = "id" };
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
@@ -201,9 +202,7 @@ public class CustomerCreateParamsTest : TestBase
     {
         var parameters = new Customers::CustomerCreateParams
         {
-            Email = "dev@stainless.com",
-            ExternalID = "externalId",
-            Name = "name",
+            ID = "id",
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
@@ -212,6 +211,7 @@ public class CustomerCreateParamsTest : TestBase
                 CardLast4Digits = "cardLast4Digits",
                 Type = Customers::Type.Card,
             },
+            Email = "dev@stainless.com",
             Integrations =
             [
                 new()
@@ -222,6 +222,7 @@ public class CustomerCreateParamsTest : TestBase
                 },
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Name = "name",
         };
 
         Customers::CustomerCreateParams copied = new(parameters);
