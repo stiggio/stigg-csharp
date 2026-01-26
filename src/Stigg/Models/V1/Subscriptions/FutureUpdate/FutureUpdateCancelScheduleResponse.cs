@@ -87,7 +87,7 @@ class FutureUpdateCancelScheduleResponseFromRaw : IFromRawJson<FutureUpdateCance
 public sealed record class FutureUpdateCancelScheduleResponseData : JsonModel
 {
     /// <summary>
-    /// external id of the canceled future update subscription
+    /// Subscription ID
     /// </summary>
     public required string ID
     {
