@@ -83,6 +83,9 @@ class SubscriptionRetrieveResponseFromRaw : IFromRawJson<SubscriptionRetrieveRes
 )]
 public sealed record class SubscriptionRetrieveResponseData : JsonModel
 {
+    /// <summary>
+    /// Subscription ID
+    /// </summary>
     public required string ID
     {
         get

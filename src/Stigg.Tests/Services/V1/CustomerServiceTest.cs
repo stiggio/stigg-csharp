@@ -8,12 +8,7 @@ public class CustomerServiceTest : TestBase
     public async Task Create_Works()
     {
         var customerResponse = await this.client.V1.Customers.Create(
-            new()
-            {
-                Email = "dev@stainless.com",
-                ExternalID = "externalId",
-                Name = "name",
-            },
+            new() { ID = "id" },
             TestContext.Current.CancellationToken
         );
         customerResponse.Validate();

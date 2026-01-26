@@ -261,6 +261,9 @@ sealed class StatusConverter : JsonConverter<Status>
 [JsonConverter(typeof(JsonModelConverter<Subscription, SubscriptionFromRaw>))]
 public sealed record class Subscription : JsonModel
 {
+    /// <summary>
+    /// Subscription ID
+    /// </summary>
     public required string ID
     {
         get

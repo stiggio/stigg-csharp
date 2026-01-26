@@ -89,6 +89,19 @@ class CustomerListResponseFromRaw : IFromRawJson<CustomerListResponse>
 public sealed record class CustomerListResponseData : JsonModel
 {
     /// <summary>
+    /// Customer slug
+    /// </summary>
+    public required string ID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
+        init { this._rawData.Set("id", value); }
+    }
+
+    /// <summary>
     /// Timestamp of when the record was deleted
     /// </summary>
     public required System::DateTimeOffset? ArchivedAt
@@ -128,45 +141,6 @@ public sealed record class CustomerListResponseData : JsonModel
     }
 
     /// <summary>
-    /// The email of the customer
-    /// </summary>
-    public required string? Email
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("email");
-        }
-        init { this._rawData.Set("email", value); }
-    }
-
-    /// <summary>
-    /// Customer slug
-    /// </summary>
-    public required string ExternalID
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("externalId");
-        }
-        init { this._rawData.Set("externalId", value); }
-    }
-
-    /// <summary>
-    /// The name of the customer
-    /// </summary>
-    public required string? Name
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("name");
-        }
-        init { this._rawData.Set("name", value); }
-    }
-
-    /// <summary>
     /// Timestamp of when the record was last updated
     /// </summary>
     public required System::DateTimeOffset UpdatedAt
@@ -192,6 +166,19 @@ public sealed record class CustomerListResponseData : JsonModel
             );
         }
         init { this._rawData.Set("defaultPaymentMethod", value); }
+    }
+
+    /// <summary>
+    /// The email of the customer
+    /// </summary>
+    public string? Email
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("email");
+        }
+        init { this._rawData.Set("email", value); }
     }
 
     /// <summary>
@@ -244,22 +231,35 @@ public sealed record class CustomerListResponseData : JsonModel
         }
     }
 
+    /// <summary>
+    /// The name of the customer
+    /// </summary>
+    public string? Name
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("name");
+        }
+        init { this._rawData.Set("name", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
+        _ = this.ID;
         _ = this.ArchivedAt;
         _ = this.CreatedAt;
         _ = this.CursorID;
-        _ = this.Email;
-        _ = this.ExternalID;
-        _ = this.Name;
         _ = this.UpdatedAt;
         this.DefaultPaymentMethod?.Validate();
+        _ = this.Email;
         foreach (var item in this.Integrations ?? [])
         {
             item.Validate();
         }
         _ = this.Metadata;
+        _ = this.Name;
     }
 
     public CustomerListResponseData() { }
