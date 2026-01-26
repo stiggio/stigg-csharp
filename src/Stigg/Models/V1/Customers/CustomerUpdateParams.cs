@@ -30,6 +30,19 @@ public record class CustomerUpdateParams : ParamsBase
     public string? ID { get; init; }
 
     /// <summary>
+    /// Customer level coupon
+    /// </summary>
+    public string? CouponID
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("couponId");
+        }
+        init { this._rawBodyData.Set("couponId", value); }
+    }
+
+    /// <summary>
     /// The email of the customer
     /// </summary>
     public string? Email
