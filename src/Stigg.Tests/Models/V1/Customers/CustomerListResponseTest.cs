@@ -23,6 +23,7 @@ public class CustomerListResponseTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    CouponID = "couponId",
                     DefaultPaymentMethod = new()
                     {
                         BillingID = "billingId",
@@ -57,6 +58,7 @@ public class CustomerListResponseTest : TestBase
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CouponID = "couponId",
                 DefaultPaymentMethod = new()
                 {
                     BillingID = "billingId",
@@ -102,6 +104,7 @@ public class CustomerListResponseTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    CouponID = "couponId",
                     DefaultPaymentMethod = new()
                     {
                         BillingID = "billingId",
@@ -150,6 +153,7 @@ public class CustomerListResponseTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    CouponID = "couponId",
                     DefaultPaymentMethod = new()
                     {
                         BillingID = "billingId",
@@ -191,6 +195,7 @@ public class CustomerListResponseTest : TestBase
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                CouponID = "couponId",
                 DefaultPaymentMethod = new()
                 {
                     BillingID = "billingId",
@@ -236,6 +241,7 @@ public class CustomerListResponseTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    CouponID = "couponId",
                     DefaultPaymentMethod = new()
                     {
                         BillingID = "billingId",
@@ -278,6 +284,7 @@ public class CustomerListResponseTest : TestBase
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    CouponID = "couponId",
                     DefaultPaymentMethod = new()
                     {
                         BillingID = "billingId",
@@ -321,6 +328,7 @@ public class CustomerListResponseDataTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CouponID = "couponId",
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
@@ -348,6 +356,7 @@ public class CustomerListResponseDataTest : TestBase
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedCouponID = "couponId";
         CustomerListResponseDataDefaultPaymentMethod expectedDefaultPaymentMethod = new()
         {
             BillingID = "billingId",
@@ -374,6 +383,7 @@ public class CustomerListResponseDataTest : TestBase
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedCursorID, model.CursorID);
         Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
+        Assert.Equal(expectedCouponID, model.CouponID);
         Assert.Equal(expectedDefaultPaymentMethod, model.DefaultPaymentMethod);
         Assert.Equal(expectedEmail, model.Email);
         Assert.NotNull(model.Integrations);
@@ -403,6 +413,7 @@ public class CustomerListResponseDataTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CouponID = "couponId",
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
@@ -444,6 +455,7 @@ public class CustomerListResponseDataTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CouponID = "couponId",
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
@@ -478,6 +490,7 @@ public class CustomerListResponseDataTest : TestBase
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedCouponID = "couponId";
         CustomerListResponseDataDefaultPaymentMethod expectedDefaultPaymentMethod = new()
         {
             BillingID = "billingId",
@@ -504,6 +517,7 @@ public class CustomerListResponseDataTest : TestBase
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedCursorID, deserialized.CursorID);
         Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
+        Assert.Equal(expectedCouponID, deserialized.CouponID);
         Assert.Equal(expectedDefaultPaymentMethod, deserialized.DefaultPaymentMethod);
         Assert.Equal(expectedEmail, deserialized.Email);
         Assert.NotNull(deserialized.Integrations);
@@ -533,6 +547,7 @@ public class CustomerListResponseDataTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CouponID = "couponId",
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
@@ -568,6 +583,7 @@ public class CustomerListResponseDataTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CouponID = "couponId",
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
@@ -596,6 +612,7 @@ public class CustomerListResponseDataTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CouponID = "couponId",
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
@@ -621,6 +638,7 @@ public class CustomerListResponseDataTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CouponID = "couponId",
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
@@ -653,6 +671,7 @@ public class CustomerListResponseDataTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CouponID = "couponId",
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
@@ -694,6 +713,8 @@ public class CustomerListResponseDataTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
         };
 
+        Assert.Null(model.CouponID);
+        Assert.False(model.RawData.ContainsKey("couponId"));
         Assert.Null(model.DefaultPaymentMethod);
         Assert.False(model.RawData.ContainsKey("defaultPaymentMethod"));
         Assert.Null(model.Email);
@@ -748,11 +769,14 @@ public class CustomerListResponseDataTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
 
+            CouponID = null,
             DefaultPaymentMethod = null,
             Email = null,
             Name = null,
         };
 
+        Assert.Null(model.CouponID);
+        Assert.True(model.RawData.ContainsKey("couponId"));
         Assert.Null(model.DefaultPaymentMethod);
         Assert.True(model.RawData.ContainsKey("defaultPaymentMethod"));
         Assert.Null(model.Email);
@@ -782,6 +806,7 @@ public class CustomerListResponseDataTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
 
+            CouponID = null,
             DefaultPaymentMethod = null,
             Email = null,
             Name = null,
@@ -800,6 +825,7 @@ public class CustomerListResponseDataTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CursorID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            CouponID = "couponId",
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
