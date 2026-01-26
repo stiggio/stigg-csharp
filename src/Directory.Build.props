@@ -5,8 +5,8 @@
     <PackageTags>sdk;api;http;library</PackageTags>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <Copyright>Copyright 2026 Stigg</Copyright>
-    <PackageProjectUrl>https://www.github.com/stainless-sdks/stigg-csharp</PackageProjectUrl>
-    <RepositoryUrl>https://www.github.com/stainless-sdks/stigg-csharp</RepositoryUrl>
+    <PackageProjectUrl>https://www.github.com/stiggio/stigg-csharp</PackageProjectUrl>
+    <RepositoryUrl>https://www.github.com/stiggio/stigg-csharp</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
 
     <!-- Documentation-->
