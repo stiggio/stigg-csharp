@@ -15,6 +15,7 @@ public class CustomerUpdateParamsTest : TestBase
         var parameters = new CustomerUpdateParams
         {
             ID = "x",
+            CouponID = "couponId",
             Email = "dev@stainless.com",
             Integrations =
             [
@@ -30,6 +31,7 @@ public class CustomerUpdateParamsTest : TestBase
         };
 
         string expectedID = "x";
+        string expectedCouponID = "couponId";
         string expectedEmail = "dev@stainless.com";
         List<CustomerUpdateParamsIntegration> expectedIntegrations =
         [
@@ -44,6 +46,7 @@ public class CustomerUpdateParamsTest : TestBase
         string expectedName = "name";
 
         Assert.Equal(expectedID, parameters.ID);
+        Assert.Equal(expectedCouponID, parameters.CouponID);
         Assert.Equal(expectedEmail, parameters.Email);
         Assert.NotNull(parameters.Integrations);
         Assert.Equal(expectedIntegrations.Count, parameters.Integrations.Count);
@@ -68,6 +71,7 @@ public class CustomerUpdateParamsTest : TestBase
         var parameters = new CustomerUpdateParams
         {
             ID = "x",
+            CouponID = "couponId",
             Email = "dev@stainless.com",
             Name = "name",
         };
@@ -84,6 +88,7 @@ public class CustomerUpdateParamsTest : TestBase
         var parameters = new CustomerUpdateParams
         {
             ID = "x",
+            CouponID = "couponId",
             Email = "dev@stainless.com",
             Name = "name",
 
@@ -116,6 +121,8 @@ public class CustomerUpdateParamsTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
         };
 
+        Assert.Null(parameters.CouponID);
+        Assert.False(parameters.RawBodyData.ContainsKey("couponId"));
         Assert.Null(parameters.Email);
         Assert.False(parameters.RawBodyData.ContainsKey("email"));
         Assert.Null(parameters.Name);
@@ -139,10 +146,13 @@ public class CustomerUpdateParamsTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
 
+            CouponID = null,
             Email = null,
             Name = null,
         };
 
+        Assert.Null(parameters.CouponID);
+        Assert.True(parameters.RawBodyData.ContainsKey("couponId"));
         Assert.Null(parameters.Email);
         Assert.True(parameters.RawBodyData.ContainsKey("email"));
         Assert.Null(parameters.Name);
@@ -165,6 +175,7 @@ public class CustomerUpdateParamsTest : TestBase
         var parameters = new CustomerUpdateParams
         {
             ID = "x",
+            CouponID = "couponId",
             Email = "dev@stainless.com",
             Integrations =
             [

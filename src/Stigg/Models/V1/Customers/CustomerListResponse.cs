@@ -154,6 +154,19 @@ public sealed record class CustomerListResponseData : JsonModel
     }
 
     /// <summary>
+    /// Customer level coupon
+    /// </summary>
+    public string? CouponID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("couponId");
+        }
+        init { this._rawData.Set("couponId", value); }
+    }
+
+    /// <summary>
     /// The default payment method details
     /// </summary>
     public CustomerListResponseDataDefaultPaymentMethod? DefaultPaymentMethod
@@ -252,6 +265,7 @@ public sealed record class CustomerListResponseData : JsonModel
         _ = this.CreatedAt;
         _ = this.CursorID;
         _ = this.UpdatedAt;
+        _ = this.CouponID;
         this.DefaultPaymentMethod?.Validate();
         _ = this.Email;
         foreach (var item in this.Integrations ?? [])
