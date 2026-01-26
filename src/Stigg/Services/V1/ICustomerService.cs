@@ -31,8 +31,6 @@ public interface ICustomerService
 
     IUsageService Usage { get; }
 
-    IPromotionalService Promotional { get; }
-
     /// <summary>
     /// Create a new Customer
     /// </summary>
@@ -126,8 +124,6 @@ public interface ICustomerServiceWithRawResponse
     IPaymentMethodServiceWithRawResponse PaymentMethod { get; }
 
     IUsageServiceWithRawResponse Usage { get; }
-
-    IPromotionalServiceWithRawResponse Promotional { get; }
 
     /// <summary>
     /// Returns a raw HTTP response for `post /api/v1/customers`, but is otherwise the
