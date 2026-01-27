@@ -39,11 +39,11 @@ public class CustomerServiceTest : TestBase
     [Fact(Skip = "Prism tests are disabled")]
     public async Task List_Works()
     {
-        var customers = await this.client.V1.Customers.List(
+        var page = await this.client.V1.Customers.List(
             new(),
             TestContext.Current.CancellationToken
         );
-        customers.Validate();
+        page.Validate();
     }
 
     [Fact(Skip = "Prism tests are disabled")]

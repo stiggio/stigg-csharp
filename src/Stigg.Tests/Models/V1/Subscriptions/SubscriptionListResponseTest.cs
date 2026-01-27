@@ -14,328 +14,24 @@ public class SubscriptionListResponseTest : TestBase
     {
         var model = new SubscriptionListResponse
         {
-            Data =
-            [
-                new()
-                {
-                    ID = "id",
-                    BillingID = "billingId",
-                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CustomerID = "customerId",
-                    PaymentCollection = SubscriptionListResponseDataPaymentCollection.NotRequired,
-                    PlanID = "planId",
-                    PricingType = SubscriptionListResponseDataPricingType.Free,
-                    StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Status = SubscriptionListResponseDataStatus.PaymentPending,
-                    CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CancelReason = SubscriptionListResponseDataCancelReason.UpgradeOrDowngrade,
-                    CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-                    PayingCustomerID = "payingCustomerId",
-                    PaymentCollectionMethod =
-                        SubscriptionListResponseDataPaymentCollectionMethod.Charge,
-                    ResourceID = "resourceId",
-                    TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                },
-            ],
-            Pagination = new()
-            {
-                Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            },
-        };
-
-        List<SubscriptionListResponseData> expectedData =
-        [
-            new()
-            {
-                ID = "id",
-                BillingID = "billingId",
-                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                CustomerID = "customerId",
-                PaymentCollection = SubscriptionListResponseDataPaymentCollection.NotRequired,
-                PlanID = "planId",
-                PricingType = SubscriptionListResponseDataPricingType.Free,
-                StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Status = SubscriptionListResponseDataStatus.PaymentPending,
-                CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                CancelReason = SubscriptionListResponseDataCancelReason.UpgradeOrDowngrade,
-                CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-                PayingCustomerID = "payingCustomerId",
-                PaymentCollectionMethod =
-                    SubscriptionListResponseDataPaymentCollectionMethod.Charge,
-                ResourceID = "resourceId",
-                TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            },
-        ];
-        Pagination expectedPagination = new()
-        {
-            Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        };
-
-        Assert.Equal(expectedData.Count, model.Data.Count);
-        for (int i = 0; i < expectedData.Count; i++)
-        {
-            Assert.Equal(expectedData[i], model.Data[i]);
-        }
-        Assert.Equal(expectedPagination, model.Pagination);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new SubscriptionListResponse
-        {
-            Data =
-            [
-                new()
-                {
-                    ID = "id",
-                    BillingID = "billingId",
-                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CustomerID = "customerId",
-                    PaymentCollection = SubscriptionListResponseDataPaymentCollection.NotRequired,
-                    PlanID = "planId",
-                    PricingType = SubscriptionListResponseDataPricingType.Free,
-                    StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Status = SubscriptionListResponseDataStatus.PaymentPending,
-                    CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CancelReason = SubscriptionListResponseDataCancelReason.UpgradeOrDowngrade,
-                    CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-                    PayingCustomerID = "payingCustomerId",
-                    PaymentCollectionMethod =
-                        SubscriptionListResponseDataPaymentCollectionMethod.Charge,
-                    ResourceID = "resourceId",
-                    TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                },
-            ],
-            Pagination = new()
-            {
-                Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            },
-        };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionListResponse>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new SubscriptionListResponse
-        {
-            Data =
-            [
-                new()
-                {
-                    ID = "id",
-                    BillingID = "billingId",
-                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CustomerID = "customerId",
-                    PaymentCollection = SubscriptionListResponseDataPaymentCollection.NotRequired,
-                    PlanID = "planId",
-                    PricingType = SubscriptionListResponseDataPricingType.Free,
-                    StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Status = SubscriptionListResponseDataStatus.PaymentPending,
-                    CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CancelReason = SubscriptionListResponseDataCancelReason.UpgradeOrDowngrade,
-                    CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-                    PayingCustomerID = "payingCustomerId",
-                    PaymentCollectionMethod =
-                        SubscriptionListResponseDataPaymentCollectionMethod.Charge,
-                    ResourceID = "resourceId",
-                    TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                },
-            ],
-            Pagination = new()
-            {
-                Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            },
-        };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionListResponse>(
-            element,
-            ModelBase.SerializerOptions
-        );
-        Assert.NotNull(deserialized);
-
-        List<SubscriptionListResponseData> expectedData =
-        [
-            new()
-            {
-                ID = "id",
-                BillingID = "billingId",
-                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                CustomerID = "customerId",
-                PaymentCollection = SubscriptionListResponseDataPaymentCollection.NotRequired,
-                PlanID = "planId",
-                PricingType = SubscriptionListResponseDataPricingType.Free,
-                StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Status = SubscriptionListResponseDataStatus.PaymentPending,
-                CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                CancelReason = SubscriptionListResponseDataCancelReason.UpgradeOrDowngrade,
-                CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-                PayingCustomerID = "payingCustomerId",
-                PaymentCollectionMethod =
-                    SubscriptionListResponseDataPaymentCollectionMethod.Charge,
-                ResourceID = "resourceId",
-                TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            },
-        ];
-        Pagination expectedPagination = new()
-        {
-            Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        };
-
-        Assert.Equal(expectedData.Count, deserialized.Data.Count);
-        for (int i = 0; i < expectedData.Count; i++)
-        {
-            Assert.Equal(expectedData[i], deserialized.Data[i]);
-        }
-        Assert.Equal(expectedPagination, deserialized.Pagination);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new SubscriptionListResponse
-        {
-            Data =
-            [
-                new()
-                {
-                    ID = "id",
-                    BillingID = "billingId",
-                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CustomerID = "customerId",
-                    PaymentCollection = SubscriptionListResponseDataPaymentCollection.NotRequired,
-                    PlanID = "planId",
-                    PricingType = SubscriptionListResponseDataPricingType.Free,
-                    StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Status = SubscriptionListResponseDataStatus.PaymentPending,
-                    CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CancelReason = SubscriptionListResponseDataCancelReason.UpgradeOrDowngrade,
-                    CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-                    PayingCustomerID = "payingCustomerId",
-                    PaymentCollectionMethod =
-                        SubscriptionListResponseDataPaymentCollectionMethod.Charge,
-                    ResourceID = "resourceId",
-                    TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                },
-            ],
-            Pagination = new()
-            {
-                Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            },
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new SubscriptionListResponse
-        {
-            Data =
-            [
-                new()
-                {
-                    ID = "id",
-                    BillingID = "billingId",
-                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CustomerID = "customerId",
-                    PaymentCollection = SubscriptionListResponseDataPaymentCollection.NotRequired,
-                    PlanID = "planId",
-                    PricingType = SubscriptionListResponseDataPricingType.Free,
-                    StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Status = SubscriptionListResponseDataStatus.PaymentPending,
-                    CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CancelReason = SubscriptionListResponseDataCancelReason.UpgradeOrDowngrade,
-                    CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-                    PayingCustomerID = "payingCustomerId",
-                    PaymentCollectionMethod =
-                        SubscriptionListResponseDataPaymentCollectionMethod.Charge,
-                    ResourceID = "resourceId",
-                    TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                },
-            ],
-            Pagination = new()
-            {
-                Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            },
-        };
-
-        SubscriptionListResponse copied = new(model);
-
-        Assert.Equal(model, copied);
-    }
-}
-
-public class SubscriptionListResponseDataTest : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new SubscriptionListResponseData
-        {
             ID = "id",
             BillingID = "billingId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customerId",
-            PaymentCollection = SubscriptionListResponseDataPaymentCollection.NotRequired,
+            PaymentCollection = SubscriptionListResponsePaymentCollection.NotRequired,
             PlanID = "planId",
-            PricingType = SubscriptionListResponseDataPricingType.Free,
+            PricingType = SubscriptionListResponsePricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = SubscriptionListResponseDataStatus.PaymentPending,
+            Status = SubscriptionListResponseStatus.PaymentPending,
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            CancelReason = SubscriptionListResponseDataCancelReason.UpgradeOrDowngrade,
+            CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
             CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PayingCustomerID = "payingCustomerId",
-            PaymentCollectionMethod = SubscriptionListResponseDataPaymentCollectionMethod.Charge,
+            PaymentCollectionMethod = SubscriptionListResponsePaymentCollectionMethod.Charge,
             ResourceID = "resourceId",
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -344,17 +40,17 @@ public class SubscriptionListResponseDataTest : TestBase
         string expectedBillingID = "billingId";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCustomerID = "customerId";
-        ApiEnum<string, SubscriptionListResponseDataPaymentCollection> expectedPaymentCollection =
-            SubscriptionListResponseDataPaymentCollection.NotRequired;
+        ApiEnum<string, SubscriptionListResponsePaymentCollection> expectedPaymentCollection =
+            SubscriptionListResponsePaymentCollection.NotRequired;
         string expectedPlanID = "planId";
-        ApiEnum<string, SubscriptionListResponseDataPricingType> expectedPricingType =
-            SubscriptionListResponseDataPricingType.Free;
+        ApiEnum<string, SubscriptionListResponsePricingType> expectedPricingType =
+            SubscriptionListResponsePricingType.Free;
         DateTimeOffset expectedStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, SubscriptionListResponseDataStatus> expectedStatus =
-            SubscriptionListResponseDataStatus.PaymentPending;
+        ApiEnum<string, SubscriptionListResponseStatus> expectedStatus =
+            SubscriptionListResponseStatus.PaymentPending;
         DateTimeOffset expectedCancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, SubscriptionListResponseDataCancelReason> expectedCancelReason =
-            SubscriptionListResponseDataCancelReason.UpgradeOrDowngrade;
+        ApiEnum<string, SubscriptionListResponseCancelReason> expectedCancelReason =
+            SubscriptionListResponseCancelReason.UpgradeOrDowngrade;
         DateTimeOffset expectedCurrentBillingPeriodEnd = DateTimeOffset.Parse(
             "2019-12-27T18:11:19.117Z"
         );
@@ -367,9 +63,8 @@ public class SubscriptionListResponseDataTest : TestBase
         string expectedPayingCustomerID = "payingCustomerId";
         ApiEnum<
             string,
-            SubscriptionListResponseDataPaymentCollectionMethod
-        > expectedPaymentCollectionMethod =
-            SubscriptionListResponseDataPaymentCollectionMethod.Charge;
+            SubscriptionListResponsePaymentCollectionMethod
+        > expectedPaymentCollectionMethod = SubscriptionListResponsePaymentCollectionMethod.Charge;
         string expectedResourceID = "resourceId";
         DateTimeOffset expectedTrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
@@ -405,32 +100,32 @@ public class SubscriptionListResponseDataTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new SubscriptionListResponseData
+        var model = new SubscriptionListResponse
         {
             ID = "id",
             BillingID = "billingId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customerId",
-            PaymentCollection = SubscriptionListResponseDataPaymentCollection.NotRequired,
+            PaymentCollection = SubscriptionListResponsePaymentCollection.NotRequired,
             PlanID = "planId",
-            PricingType = SubscriptionListResponseDataPricingType.Free,
+            PricingType = SubscriptionListResponsePricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = SubscriptionListResponseDataStatus.PaymentPending,
+            Status = SubscriptionListResponseStatus.PaymentPending,
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            CancelReason = SubscriptionListResponseDataCancelReason.UpgradeOrDowngrade,
+            CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
             CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PayingCustomerID = "payingCustomerId",
-            PaymentCollectionMethod = SubscriptionListResponseDataPaymentCollectionMethod.Charge,
+            PaymentCollectionMethod = SubscriptionListResponsePaymentCollectionMethod.Charge,
             ResourceID = "resourceId",
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionListResponseData>(
+        var deserialized = JsonSerializer.Deserialize<SubscriptionListResponse>(
             json,
             ModelBase.SerializerOptions
         );
@@ -441,32 +136,32 @@ public class SubscriptionListResponseDataTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new SubscriptionListResponseData
+        var model = new SubscriptionListResponse
         {
             ID = "id",
             BillingID = "billingId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customerId",
-            PaymentCollection = SubscriptionListResponseDataPaymentCollection.NotRequired,
+            PaymentCollection = SubscriptionListResponsePaymentCollection.NotRequired,
             PlanID = "planId",
-            PricingType = SubscriptionListResponseDataPricingType.Free,
+            PricingType = SubscriptionListResponsePricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = SubscriptionListResponseDataStatus.PaymentPending,
+            Status = SubscriptionListResponseStatus.PaymentPending,
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            CancelReason = SubscriptionListResponseDataCancelReason.UpgradeOrDowngrade,
+            CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
             CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PayingCustomerID = "payingCustomerId",
-            PaymentCollectionMethod = SubscriptionListResponseDataPaymentCollectionMethod.Charge,
+            PaymentCollectionMethod = SubscriptionListResponsePaymentCollectionMethod.Charge,
             ResourceID = "resourceId",
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionListResponseData>(
+        var deserialized = JsonSerializer.Deserialize<SubscriptionListResponse>(
             element,
             ModelBase.SerializerOptions
         );
@@ -476,17 +171,17 @@ public class SubscriptionListResponseDataTest : TestBase
         string expectedBillingID = "billingId";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCustomerID = "customerId";
-        ApiEnum<string, SubscriptionListResponseDataPaymentCollection> expectedPaymentCollection =
-            SubscriptionListResponseDataPaymentCollection.NotRequired;
+        ApiEnum<string, SubscriptionListResponsePaymentCollection> expectedPaymentCollection =
+            SubscriptionListResponsePaymentCollection.NotRequired;
         string expectedPlanID = "planId";
-        ApiEnum<string, SubscriptionListResponseDataPricingType> expectedPricingType =
-            SubscriptionListResponseDataPricingType.Free;
+        ApiEnum<string, SubscriptionListResponsePricingType> expectedPricingType =
+            SubscriptionListResponsePricingType.Free;
         DateTimeOffset expectedStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, SubscriptionListResponseDataStatus> expectedStatus =
-            SubscriptionListResponseDataStatus.PaymentPending;
+        ApiEnum<string, SubscriptionListResponseStatus> expectedStatus =
+            SubscriptionListResponseStatus.PaymentPending;
         DateTimeOffset expectedCancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, SubscriptionListResponseDataCancelReason> expectedCancelReason =
-            SubscriptionListResponseDataCancelReason.UpgradeOrDowngrade;
+        ApiEnum<string, SubscriptionListResponseCancelReason> expectedCancelReason =
+            SubscriptionListResponseCancelReason.UpgradeOrDowngrade;
         DateTimeOffset expectedCurrentBillingPeriodEnd = DateTimeOffset.Parse(
             "2019-12-27T18:11:19.117Z"
         );
@@ -499,9 +194,8 @@ public class SubscriptionListResponseDataTest : TestBase
         string expectedPayingCustomerID = "payingCustomerId";
         ApiEnum<
             string,
-            SubscriptionListResponseDataPaymentCollectionMethod
-        > expectedPaymentCollectionMethod =
-            SubscriptionListResponseDataPaymentCollectionMethod.Charge;
+            SubscriptionListResponsePaymentCollectionMethod
+        > expectedPaymentCollectionMethod = SubscriptionListResponsePaymentCollectionMethod.Charge;
         string expectedResourceID = "resourceId";
         DateTimeOffset expectedTrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
@@ -537,26 +231,26 @@ public class SubscriptionListResponseDataTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new SubscriptionListResponseData
+        var model = new SubscriptionListResponse
         {
             ID = "id",
             BillingID = "billingId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customerId",
-            PaymentCollection = SubscriptionListResponseDataPaymentCollection.NotRequired,
+            PaymentCollection = SubscriptionListResponsePaymentCollection.NotRequired,
             PlanID = "planId",
-            PricingType = SubscriptionListResponseDataPricingType.Free,
+            PricingType = SubscriptionListResponsePricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = SubscriptionListResponseDataStatus.PaymentPending,
+            Status = SubscriptionListResponseStatus.PaymentPending,
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            CancelReason = SubscriptionListResponseDataCancelReason.UpgradeOrDowngrade,
+            CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
             CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PayingCustomerID = "payingCustomerId",
-            PaymentCollectionMethod = SubscriptionListResponseDataPaymentCollectionMethod.Charge,
+            PaymentCollectionMethod = SubscriptionListResponsePaymentCollectionMethod.Charge,
             ResourceID = "resourceId",
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -567,25 +261,25 @@ public class SubscriptionListResponseDataTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new SubscriptionListResponseData
+        var model = new SubscriptionListResponse
         {
             ID = "id",
             BillingID = "billingId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customerId",
-            PaymentCollection = SubscriptionListResponseDataPaymentCollection.NotRequired,
+            PaymentCollection = SubscriptionListResponsePaymentCollection.NotRequired,
             PlanID = "planId",
-            PricingType = SubscriptionListResponseDataPricingType.Free,
+            PricingType = SubscriptionListResponsePricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = SubscriptionListResponseDataStatus.PaymentPending,
+            Status = SubscriptionListResponseStatus.PaymentPending,
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            CancelReason = SubscriptionListResponseDataCancelReason.UpgradeOrDowngrade,
+            CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
             CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PayingCustomerID = "payingCustomerId",
-            PaymentCollectionMethod = SubscriptionListResponseDataPaymentCollectionMethod.Charge,
+            PaymentCollectionMethod = SubscriptionListResponsePaymentCollectionMethod.Charge,
             ResourceID = "resourceId",
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -597,25 +291,25 @@ public class SubscriptionListResponseDataTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new SubscriptionListResponseData
+        var model = new SubscriptionListResponse
         {
             ID = "id",
             BillingID = "billingId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customerId",
-            PaymentCollection = SubscriptionListResponseDataPaymentCollection.NotRequired,
+            PaymentCollection = SubscriptionListResponsePaymentCollection.NotRequired,
             PlanID = "planId",
-            PricingType = SubscriptionListResponseDataPricingType.Free,
+            PricingType = SubscriptionListResponsePricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = SubscriptionListResponseDataStatus.PaymentPending,
+            Status = SubscriptionListResponseStatus.PaymentPending,
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            CancelReason = SubscriptionListResponseDataCancelReason.UpgradeOrDowngrade,
+            CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
             CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PayingCustomerID = "payingCustomerId",
-            PaymentCollectionMethod = SubscriptionListResponseDataPaymentCollectionMethod.Charge,
+            PaymentCollectionMethod = SubscriptionListResponsePaymentCollectionMethod.Charge,
             ResourceID = "resourceId",
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -626,25 +320,25 @@ public class SubscriptionListResponseDataTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new SubscriptionListResponseData
+        var model = new SubscriptionListResponse
         {
             ID = "id",
             BillingID = "billingId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customerId",
-            PaymentCollection = SubscriptionListResponseDataPaymentCollection.NotRequired,
+            PaymentCollection = SubscriptionListResponsePaymentCollection.NotRequired,
             PlanID = "planId",
-            PricingType = SubscriptionListResponseDataPricingType.Free,
+            PricingType = SubscriptionListResponsePricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = SubscriptionListResponseDataStatus.PaymentPending,
+            Status = SubscriptionListResponseStatus.PaymentPending,
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            CancelReason = SubscriptionListResponseDataCancelReason.UpgradeOrDowngrade,
+            CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
             CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PayingCustomerID = "payingCustomerId",
-            PaymentCollectionMethod = SubscriptionListResponseDataPaymentCollectionMethod.Charge,
+            PaymentCollectionMethod = SubscriptionListResponsePaymentCollectionMethod.Charge,
             ResourceID = "resourceId",
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
@@ -659,25 +353,25 @@ public class SubscriptionListResponseDataTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new SubscriptionListResponseData
+        var model = new SubscriptionListResponse
         {
             ID = "id",
             BillingID = "billingId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customerId",
-            PaymentCollection = SubscriptionListResponseDataPaymentCollection.NotRequired,
+            PaymentCollection = SubscriptionListResponsePaymentCollection.NotRequired,
             PlanID = "planId",
-            PricingType = SubscriptionListResponseDataPricingType.Free,
+            PricingType = SubscriptionListResponsePricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = SubscriptionListResponseDataStatus.PaymentPending,
+            Status = SubscriptionListResponseStatus.PaymentPending,
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            CancelReason = SubscriptionListResponseDataCancelReason.UpgradeOrDowngrade,
+            CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
             CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PayingCustomerID = "payingCustomerId",
-            PaymentCollectionMethod = SubscriptionListResponseDataPaymentCollectionMethod.Charge,
+            PaymentCollectionMethod = SubscriptionListResponsePaymentCollectionMethod.Charge,
             ResourceID = "resourceId",
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
@@ -691,17 +385,17 @@ public class SubscriptionListResponseDataTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new SubscriptionListResponseData
+        var model = new SubscriptionListResponse
         {
             ID = "id",
             BillingID = "billingId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customerId",
-            PaymentCollection = SubscriptionListResponseDataPaymentCollection.NotRequired,
+            PaymentCollection = SubscriptionListResponsePaymentCollection.NotRequired,
             PlanID = "planId",
-            PricingType = SubscriptionListResponseDataPricingType.Free,
+            PricingType = SubscriptionListResponsePricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = SubscriptionListResponseDataStatus.PaymentPending,
+            Status = SubscriptionListResponseStatus.PaymentPending,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
         };
 
@@ -730,17 +424,17 @@ public class SubscriptionListResponseDataTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new SubscriptionListResponseData
+        var model = new SubscriptionListResponse
         {
             ID = "id",
             BillingID = "billingId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customerId",
-            PaymentCollection = SubscriptionListResponseDataPaymentCollection.NotRequired,
+            PaymentCollection = SubscriptionListResponsePaymentCollection.NotRequired,
             PlanID = "planId",
-            PricingType = SubscriptionListResponseDataPricingType.Free,
+            PricingType = SubscriptionListResponsePricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = SubscriptionListResponseDataStatus.PaymentPending,
+            Status = SubscriptionListResponseStatus.PaymentPending,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
         };
 
@@ -750,17 +444,17 @@ public class SubscriptionListResponseDataTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new SubscriptionListResponseData
+        var model = new SubscriptionListResponse
         {
             ID = "id",
             BillingID = "billingId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customerId",
-            PaymentCollection = SubscriptionListResponseDataPaymentCollection.NotRequired,
+            PaymentCollection = SubscriptionListResponsePaymentCollection.NotRequired,
             PlanID = "planId",
-            PricingType = SubscriptionListResponseDataPricingType.Free,
+            PricingType = SubscriptionListResponsePricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = SubscriptionListResponseDataStatus.PaymentPending,
+            Status = SubscriptionListResponseStatus.PaymentPending,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
 
             CancellationDate = null,
@@ -800,17 +494,17 @@ public class SubscriptionListResponseDataTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new SubscriptionListResponseData
+        var model = new SubscriptionListResponse
         {
             ID = "id",
             BillingID = "billingId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customerId",
-            PaymentCollection = SubscriptionListResponseDataPaymentCollection.NotRequired,
+            PaymentCollection = SubscriptionListResponsePaymentCollection.NotRequired,
             PlanID = "planId",
-            PricingType = SubscriptionListResponseDataPricingType.Free,
+            PricingType = SubscriptionListResponsePricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = SubscriptionListResponseDataStatus.PaymentPending,
+            Status = SubscriptionListResponseStatus.PaymentPending,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
 
             CancellationDate = null,
@@ -831,47 +525,47 @@ public class SubscriptionListResponseDataTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new SubscriptionListResponseData
+        var model = new SubscriptionListResponse
         {
             ID = "id",
             BillingID = "billingId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerID = "customerId",
-            PaymentCollection = SubscriptionListResponseDataPaymentCollection.NotRequired,
+            PaymentCollection = SubscriptionListResponsePaymentCollection.NotRequired,
             PlanID = "planId",
-            PricingType = SubscriptionListResponseDataPricingType.Free,
+            PricingType = SubscriptionListResponsePricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = SubscriptionListResponseDataStatus.PaymentPending,
+            Status = SubscriptionListResponseStatus.PaymentPending,
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            CancelReason = SubscriptionListResponseDataCancelReason.UpgradeOrDowngrade,
+            CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
             CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PayingCustomerID = "payingCustomerId",
-            PaymentCollectionMethod = SubscriptionListResponseDataPaymentCollectionMethod.Charge,
+            PaymentCollectionMethod = SubscriptionListResponsePaymentCollectionMethod.Charge,
             ResourceID = "resourceId",
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
-        SubscriptionListResponseData copied = new(model);
+        SubscriptionListResponse copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class SubscriptionListResponseDataPaymentCollectionTest : TestBase
+public class SubscriptionListResponsePaymentCollectionTest : TestBase
 {
     [Theory]
-    [InlineData(SubscriptionListResponseDataPaymentCollection.NotRequired)]
-    [InlineData(SubscriptionListResponseDataPaymentCollection.Processing)]
-    [InlineData(SubscriptionListResponseDataPaymentCollection.Failed)]
-    [InlineData(SubscriptionListResponseDataPaymentCollection.ActionRequired)]
-    public void Validation_Works(SubscriptionListResponseDataPaymentCollection rawValue)
+    [InlineData(SubscriptionListResponsePaymentCollection.NotRequired)]
+    [InlineData(SubscriptionListResponsePaymentCollection.Processing)]
+    [InlineData(SubscriptionListResponsePaymentCollection.Failed)]
+    [InlineData(SubscriptionListResponsePaymentCollection.ActionRequired)]
+    public void Validation_Works(SubscriptionListResponsePaymentCollection rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionListResponseDataPaymentCollection> value = rawValue;
+        ApiEnum<string, SubscriptionListResponsePaymentCollection> value = rawValue;
         value.Validate();
     }
 
@@ -879,7 +573,7 @@ public class SubscriptionListResponseDataPaymentCollectionTest : TestBase
     public void InvalidEnumValidationThrows_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionListResponseDataPaymentCollection>
+            ApiEnum<string, SubscriptionListResponsePaymentCollection>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
@@ -887,18 +581,18 @@ public class SubscriptionListResponseDataPaymentCollectionTest : TestBase
     }
 
     [Theory]
-    [InlineData(SubscriptionListResponseDataPaymentCollection.NotRequired)]
-    [InlineData(SubscriptionListResponseDataPaymentCollection.Processing)]
-    [InlineData(SubscriptionListResponseDataPaymentCollection.Failed)]
-    [InlineData(SubscriptionListResponseDataPaymentCollection.ActionRequired)]
-    public void SerializationRoundtrip_Works(SubscriptionListResponseDataPaymentCollection rawValue)
+    [InlineData(SubscriptionListResponsePaymentCollection.NotRequired)]
+    [InlineData(SubscriptionListResponsePaymentCollection.Processing)]
+    [InlineData(SubscriptionListResponsePaymentCollection.Failed)]
+    [InlineData(SubscriptionListResponsePaymentCollection.ActionRequired)]
+    public void SerializationRoundtrip_Works(SubscriptionListResponsePaymentCollection rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionListResponseDataPaymentCollection> value = rawValue;
+        ApiEnum<string, SubscriptionListResponsePaymentCollection> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionListResponseDataPaymentCollection>
+            ApiEnum<string, SubscriptionListResponsePaymentCollection>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -908,27 +602,27 @@ public class SubscriptionListResponseDataPaymentCollectionTest : TestBase
     public void InvalidEnumSerializationRoundtrip_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionListResponseDataPaymentCollection>
+            ApiEnum<string, SubscriptionListResponsePaymentCollection>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionListResponseDataPaymentCollection>
+            ApiEnum<string, SubscriptionListResponsePaymentCollection>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
 }
 
-public class SubscriptionListResponseDataPricingTypeTest : TestBase
+public class SubscriptionListResponsePricingTypeTest : TestBase
 {
     [Theory]
-    [InlineData(SubscriptionListResponseDataPricingType.Free)]
-    [InlineData(SubscriptionListResponseDataPricingType.Paid)]
-    [InlineData(SubscriptionListResponseDataPricingType.Custom)]
-    public void Validation_Works(SubscriptionListResponseDataPricingType rawValue)
+    [InlineData(SubscriptionListResponsePricingType.Free)]
+    [InlineData(SubscriptionListResponsePricingType.Paid)]
+    [InlineData(SubscriptionListResponsePricingType.Custom)]
+    public void Validation_Works(SubscriptionListResponsePricingType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionListResponseDataPricingType> value = rawValue;
+        ApiEnum<string, SubscriptionListResponsePricingType> value = rawValue;
         value.Validate();
     }
 
@@ -936,7 +630,7 @@ public class SubscriptionListResponseDataPricingTypeTest : TestBase
     public void InvalidEnumValidationThrows_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionListResponseDataPricingType>
+            ApiEnum<string, SubscriptionListResponsePricingType>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
@@ -944,17 +638,17 @@ public class SubscriptionListResponseDataPricingTypeTest : TestBase
     }
 
     [Theory]
-    [InlineData(SubscriptionListResponseDataPricingType.Free)]
-    [InlineData(SubscriptionListResponseDataPricingType.Paid)]
-    [InlineData(SubscriptionListResponseDataPricingType.Custom)]
-    public void SerializationRoundtrip_Works(SubscriptionListResponseDataPricingType rawValue)
+    [InlineData(SubscriptionListResponsePricingType.Free)]
+    [InlineData(SubscriptionListResponsePricingType.Paid)]
+    [InlineData(SubscriptionListResponsePricingType.Custom)]
+    public void SerializationRoundtrip_Works(SubscriptionListResponsePricingType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionListResponseDataPricingType> value = rawValue;
+        ApiEnum<string, SubscriptionListResponsePricingType> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionListResponseDataPricingType>
+            ApiEnum<string, SubscriptionListResponsePricingType>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -964,37 +658,37 @@ public class SubscriptionListResponseDataPricingTypeTest : TestBase
     public void InvalidEnumSerializationRoundtrip_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionListResponseDataPricingType>
+            ApiEnum<string, SubscriptionListResponsePricingType>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionListResponseDataPricingType>
+            ApiEnum<string, SubscriptionListResponsePricingType>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
 }
 
-public class SubscriptionListResponseDataStatusTest : TestBase
+public class SubscriptionListResponseStatusTest : TestBase
 {
     [Theory]
-    [InlineData(SubscriptionListResponseDataStatus.PaymentPending)]
-    [InlineData(SubscriptionListResponseDataStatus.Active)]
-    [InlineData(SubscriptionListResponseDataStatus.Expired)]
-    [InlineData(SubscriptionListResponseDataStatus.InTrial)]
-    [InlineData(SubscriptionListResponseDataStatus.Canceled)]
-    [InlineData(SubscriptionListResponseDataStatus.NotStarted)]
-    public void Validation_Works(SubscriptionListResponseDataStatus rawValue)
+    [InlineData(SubscriptionListResponseStatus.PaymentPending)]
+    [InlineData(SubscriptionListResponseStatus.Active)]
+    [InlineData(SubscriptionListResponseStatus.Expired)]
+    [InlineData(SubscriptionListResponseStatus.InTrial)]
+    [InlineData(SubscriptionListResponseStatus.Canceled)]
+    [InlineData(SubscriptionListResponseStatus.NotStarted)]
+    public void Validation_Works(SubscriptionListResponseStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionListResponseDataStatus> value = rawValue;
+        ApiEnum<string, SubscriptionListResponseStatus> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionListResponseDataStatus>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionListResponseStatus>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -1004,20 +698,20 @@ public class SubscriptionListResponseDataStatusTest : TestBase
     }
 
     [Theory]
-    [InlineData(SubscriptionListResponseDataStatus.PaymentPending)]
-    [InlineData(SubscriptionListResponseDataStatus.Active)]
-    [InlineData(SubscriptionListResponseDataStatus.Expired)]
-    [InlineData(SubscriptionListResponseDataStatus.InTrial)]
-    [InlineData(SubscriptionListResponseDataStatus.Canceled)]
-    [InlineData(SubscriptionListResponseDataStatus.NotStarted)]
-    public void SerializationRoundtrip_Works(SubscriptionListResponseDataStatus rawValue)
+    [InlineData(SubscriptionListResponseStatus.PaymentPending)]
+    [InlineData(SubscriptionListResponseStatus.Active)]
+    [InlineData(SubscriptionListResponseStatus.Expired)]
+    [InlineData(SubscriptionListResponseStatus.InTrial)]
+    [InlineData(SubscriptionListResponseStatus.Canceled)]
+    [InlineData(SubscriptionListResponseStatus.NotStarted)]
+    public void SerializationRoundtrip_Works(SubscriptionListResponseStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionListResponseDataStatus> value = rawValue;
+        ApiEnum<string, SubscriptionListResponseStatus> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionListResponseDataStatus>
+            ApiEnum<string, SubscriptionListResponseStatus>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -1026,37 +720,37 @@ public class SubscriptionListResponseDataStatusTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionListResponseDataStatus>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionListResponseStatus>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionListResponseDataStatus>
+            ApiEnum<string, SubscriptionListResponseStatus>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
 }
 
-public class SubscriptionListResponseDataCancelReasonTest : TestBase
+public class SubscriptionListResponseCancelReasonTest : TestBase
 {
     [Theory]
-    [InlineData(SubscriptionListResponseDataCancelReason.UpgradeOrDowngrade)]
-    [InlineData(SubscriptionListResponseDataCancelReason.CancelledByBilling)]
-    [InlineData(SubscriptionListResponseDataCancelReason.Expired)]
-    [InlineData(SubscriptionListResponseDataCancelReason.DetachBilling)]
-    [InlineData(SubscriptionListResponseDataCancelReason.TrialEnded)]
-    [InlineData(SubscriptionListResponseDataCancelReason.Immediate)]
-    [InlineData(SubscriptionListResponseDataCancelReason.TrialConverted)]
-    [InlineData(SubscriptionListResponseDataCancelReason.PendingPaymentExpired)]
-    [InlineData(SubscriptionListResponseDataCancelReason.ScheduledCancellation)]
-    [InlineData(SubscriptionListResponseDataCancelReason.CustomerArchived)]
-    [InlineData(SubscriptionListResponseDataCancelReason.AutoCancellationRule)]
-    public void Validation_Works(SubscriptionListResponseDataCancelReason rawValue)
+    [InlineData(SubscriptionListResponseCancelReason.UpgradeOrDowngrade)]
+    [InlineData(SubscriptionListResponseCancelReason.CancelledByBilling)]
+    [InlineData(SubscriptionListResponseCancelReason.Expired)]
+    [InlineData(SubscriptionListResponseCancelReason.DetachBilling)]
+    [InlineData(SubscriptionListResponseCancelReason.TrialEnded)]
+    [InlineData(SubscriptionListResponseCancelReason.Immediate)]
+    [InlineData(SubscriptionListResponseCancelReason.TrialConverted)]
+    [InlineData(SubscriptionListResponseCancelReason.PendingPaymentExpired)]
+    [InlineData(SubscriptionListResponseCancelReason.ScheduledCancellation)]
+    [InlineData(SubscriptionListResponseCancelReason.CustomerArchived)]
+    [InlineData(SubscriptionListResponseCancelReason.AutoCancellationRule)]
+    public void Validation_Works(SubscriptionListResponseCancelReason rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionListResponseDataCancelReason> value = rawValue;
+        ApiEnum<string, SubscriptionListResponseCancelReason> value = rawValue;
         value.Validate();
     }
 
@@ -1064,7 +758,7 @@ public class SubscriptionListResponseDataCancelReasonTest : TestBase
     public void InvalidEnumValidationThrows_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionListResponseDataCancelReason>
+            ApiEnum<string, SubscriptionListResponseCancelReason>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
@@ -1072,25 +766,25 @@ public class SubscriptionListResponseDataCancelReasonTest : TestBase
     }
 
     [Theory]
-    [InlineData(SubscriptionListResponseDataCancelReason.UpgradeOrDowngrade)]
-    [InlineData(SubscriptionListResponseDataCancelReason.CancelledByBilling)]
-    [InlineData(SubscriptionListResponseDataCancelReason.Expired)]
-    [InlineData(SubscriptionListResponseDataCancelReason.DetachBilling)]
-    [InlineData(SubscriptionListResponseDataCancelReason.TrialEnded)]
-    [InlineData(SubscriptionListResponseDataCancelReason.Immediate)]
-    [InlineData(SubscriptionListResponseDataCancelReason.TrialConverted)]
-    [InlineData(SubscriptionListResponseDataCancelReason.PendingPaymentExpired)]
-    [InlineData(SubscriptionListResponseDataCancelReason.ScheduledCancellation)]
-    [InlineData(SubscriptionListResponseDataCancelReason.CustomerArchived)]
-    [InlineData(SubscriptionListResponseDataCancelReason.AutoCancellationRule)]
-    public void SerializationRoundtrip_Works(SubscriptionListResponseDataCancelReason rawValue)
+    [InlineData(SubscriptionListResponseCancelReason.UpgradeOrDowngrade)]
+    [InlineData(SubscriptionListResponseCancelReason.CancelledByBilling)]
+    [InlineData(SubscriptionListResponseCancelReason.Expired)]
+    [InlineData(SubscriptionListResponseCancelReason.DetachBilling)]
+    [InlineData(SubscriptionListResponseCancelReason.TrialEnded)]
+    [InlineData(SubscriptionListResponseCancelReason.Immediate)]
+    [InlineData(SubscriptionListResponseCancelReason.TrialConverted)]
+    [InlineData(SubscriptionListResponseCancelReason.PendingPaymentExpired)]
+    [InlineData(SubscriptionListResponseCancelReason.ScheduledCancellation)]
+    [InlineData(SubscriptionListResponseCancelReason.CustomerArchived)]
+    [InlineData(SubscriptionListResponseCancelReason.AutoCancellationRule)]
+    public void SerializationRoundtrip_Works(SubscriptionListResponseCancelReason rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionListResponseDataCancelReason> value = rawValue;
+        ApiEnum<string, SubscriptionListResponseCancelReason> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionListResponseDataCancelReason>
+            ApiEnum<string, SubscriptionListResponseCancelReason>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -1100,27 +794,27 @@ public class SubscriptionListResponseDataCancelReasonTest : TestBase
     public void InvalidEnumSerializationRoundtrip_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionListResponseDataCancelReason>
+            ApiEnum<string, SubscriptionListResponseCancelReason>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionListResponseDataCancelReason>
+            ApiEnum<string, SubscriptionListResponseCancelReason>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
 }
 
-public class SubscriptionListResponseDataPaymentCollectionMethodTest : TestBase
+public class SubscriptionListResponsePaymentCollectionMethodTest : TestBase
 {
     [Theory]
-    [InlineData(SubscriptionListResponseDataPaymentCollectionMethod.Charge)]
-    [InlineData(SubscriptionListResponseDataPaymentCollectionMethod.Invoice)]
-    [InlineData(SubscriptionListResponseDataPaymentCollectionMethod.None)]
-    public void Validation_Works(SubscriptionListResponseDataPaymentCollectionMethod rawValue)
+    [InlineData(SubscriptionListResponsePaymentCollectionMethod.Charge)]
+    [InlineData(SubscriptionListResponsePaymentCollectionMethod.Invoice)]
+    [InlineData(SubscriptionListResponsePaymentCollectionMethod.None)]
+    public void Validation_Works(SubscriptionListResponsePaymentCollectionMethod rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionListResponseDataPaymentCollectionMethod> value = rawValue;
+        ApiEnum<string, SubscriptionListResponsePaymentCollectionMethod> value = rawValue;
         value.Validate();
     }
 
@@ -1128,7 +822,7 @@ public class SubscriptionListResponseDataPaymentCollectionMethodTest : TestBase
     public void InvalidEnumValidationThrows_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionListResponseDataPaymentCollectionMethod>
+            ApiEnum<string, SubscriptionListResponsePaymentCollectionMethod>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
@@ -1136,19 +830,19 @@ public class SubscriptionListResponseDataPaymentCollectionMethodTest : TestBase
     }
 
     [Theory]
-    [InlineData(SubscriptionListResponseDataPaymentCollectionMethod.Charge)]
-    [InlineData(SubscriptionListResponseDataPaymentCollectionMethod.Invoice)]
-    [InlineData(SubscriptionListResponseDataPaymentCollectionMethod.None)]
+    [InlineData(SubscriptionListResponsePaymentCollectionMethod.Charge)]
+    [InlineData(SubscriptionListResponsePaymentCollectionMethod.Invoice)]
+    [InlineData(SubscriptionListResponsePaymentCollectionMethod.None)]
     public void SerializationRoundtrip_Works(
-        SubscriptionListResponseDataPaymentCollectionMethod rawValue
+        SubscriptionListResponsePaymentCollectionMethod rawValue
     )
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionListResponseDataPaymentCollectionMethod> value = rawValue;
+        ApiEnum<string, SubscriptionListResponsePaymentCollectionMethod> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionListResponseDataPaymentCollectionMethod>
+            ApiEnum<string, SubscriptionListResponsePaymentCollectionMethod>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -1158,99 +852,13 @@ public class SubscriptionListResponseDataPaymentCollectionMethodTest : TestBase
     public void InvalidEnumSerializationRoundtrip_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionListResponseDataPaymentCollectionMethod>
+            ApiEnum<string, SubscriptionListResponsePaymentCollectionMethod>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionListResponseDataPaymentCollectionMethod>
+            ApiEnum<string, SubscriptionListResponsePaymentCollectionMethod>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
-    }
-}
-
-public class PaginationTest : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new Pagination
-        {
-            Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        };
-
-        string expectedNext = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
-        string expectedPrev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
-
-        Assert.Equal(expectedNext, model.Next);
-        Assert.Equal(expectedPrev, model.Prev);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new Pagination
-        {
-            Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Pagination>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new Pagination
-        {
-            Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Pagination>(
-            element,
-            ModelBase.SerializerOptions
-        );
-        Assert.NotNull(deserialized);
-
-        string expectedNext = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
-        string expectedPrev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
-
-        Assert.Equal(expectedNext, deserialized.Next);
-        Assert.Equal(expectedPrev, deserialized.Prev);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new Pagination
-        {
-            Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new Pagination
-        {
-            Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        };
-
-        Pagination copied = new(model);
-
-        Assert.Equal(model, copied);
     }
 }

@@ -28,11 +28,11 @@ public class SubscriptionServiceTest : TestBase
     [Fact(Skip = "Prism tests are disabled")]
     public async Task List_Works()
     {
-        var subscriptions = await this.client.V1.Subscriptions.List(
+        var page = await this.client.V1.Subscriptions.List(
             new(),
             TestContext.Current.CancellationToken
         );
-        subscriptions.Validate();
+        page.Validate();
     }
 
     [Fact(Skip = "Prism tests are disabled")]

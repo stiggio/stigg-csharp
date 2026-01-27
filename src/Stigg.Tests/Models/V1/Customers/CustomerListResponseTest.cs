@@ -14,345 +14,6 @@ public class CustomerListResponseTest : TestBase
     {
         var model = new CustomerListResponse
         {
-            Data =
-            [
-                new()
-                {
-                    ID = "id",
-                    ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CouponID = "couponId",
-                    DefaultPaymentMethod = new()
-                    {
-                        BillingID = "billingId",
-                        CardExpiryMonth = 0,
-                        CardExpiryYear = 0,
-                        CardLast4Digits = "cardLast4Digits",
-                        Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
-                    },
-                    Email = "dev@stainless.com",
-                    Integrations =
-                    [
-                        new()
-                        {
-                            ID = "id",
-                            SyncedEntityID = "syncedEntityId",
-                            VendorIdentifier =
-                                CustomerListResponseDataIntegrationVendorIdentifier.Auth0,
-                        },
-                    ],
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-                    Name = "name",
-                },
-            ],
-            Pagination = new()
-            {
-                Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            },
-        };
-
-        List<CustomerListResponseData> expectedData =
-        [
-            new()
-            {
-                ID = "id",
-                ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                CouponID = "couponId",
-                DefaultPaymentMethod = new()
-                {
-                    BillingID = "billingId",
-                    CardExpiryMonth = 0,
-                    CardExpiryYear = 0,
-                    CardLast4Digits = "cardLast4Digits",
-                    Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
-                },
-                Email = "dev@stainless.com",
-                Integrations =
-                [
-                    new()
-                    {
-                        ID = "id",
-                        SyncedEntityID = "syncedEntityId",
-                        VendorIdentifier =
-                            CustomerListResponseDataIntegrationVendorIdentifier.Auth0,
-                    },
-                ],
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-                Name = "name",
-            },
-        ];
-        Pagination expectedPagination = new()
-        {
-            Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        };
-
-        Assert.Equal(expectedData.Count, model.Data.Count);
-        for (int i = 0; i < expectedData.Count; i++)
-        {
-            Assert.Equal(expectedData[i], model.Data[i]);
-        }
-        Assert.Equal(expectedPagination, model.Pagination);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new CustomerListResponse
-        {
-            Data =
-            [
-                new()
-                {
-                    ID = "id",
-                    ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CouponID = "couponId",
-                    DefaultPaymentMethod = new()
-                    {
-                        BillingID = "billingId",
-                        CardExpiryMonth = 0,
-                        CardExpiryYear = 0,
-                        CardLast4Digits = "cardLast4Digits",
-                        Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
-                    },
-                    Email = "dev@stainless.com",
-                    Integrations =
-                    [
-                        new()
-                        {
-                            ID = "id",
-                            SyncedEntityID = "syncedEntityId",
-                            VendorIdentifier =
-                                CustomerListResponseDataIntegrationVendorIdentifier.Auth0,
-                        },
-                    ],
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-                    Name = "name",
-                },
-            ],
-            Pagination = new()
-            {
-                Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            },
-        };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<CustomerListResponse>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new CustomerListResponse
-        {
-            Data =
-            [
-                new()
-                {
-                    ID = "id",
-                    ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CouponID = "couponId",
-                    DefaultPaymentMethod = new()
-                    {
-                        BillingID = "billingId",
-                        CardExpiryMonth = 0,
-                        CardExpiryYear = 0,
-                        CardLast4Digits = "cardLast4Digits",
-                        Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
-                    },
-                    Email = "dev@stainless.com",
-                    Integrations =
-                    [
-                        new()
-                        {
-                            ID = "id",
-                            SyncedEntityID = "syncedEntityId",
-                            VendorIdentifier =
-                                CustomerListResponseDataIntegrationVendorIdentifier.Auth0,
-                        },
-                    ],
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-                    Name = "name",
-                },
-            ],
-            Pagination = new()
-            {
-                Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            },
-        };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<CustomerListResponse>(
-            element,
-            ModelBase.SerializerOptions
-        );
-        Assert.NotNull(deserialized);
-
-        List<CustomerListResponseData> expectedData =
-        [
-            new()
-            {
-                ID = "id",
-                ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                CouponID = "couponId",
-                DefaultPaymentMethod = new()
-                {
-                    BillingID = "billingId",
-                    CardExpiryMonth = 0,
-                    CardExpiryYear = 0,
-                    CardLast4Digits = "cardLast4Digits",
-                    Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
-                },
-                Email = "dev@stainless.com",
-                Integrations =
-                [
-                    new()
-                    {
-                        ID = "id",
-                        SyncedEntityID = "syncedEntityId",
-                        VendorIdentifier =
-                            CustomerListResponseDataIntegrationVendorIdentifier.Auth0,
-                    },
-                ],
-                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-                Name = "name",
-            },
-        ];
-        Pagination expectedPagination = new()
-        {
-            Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        };
-
-        Assert.Equal(expectedData.Count, deserialized.Data.Count);
-        for (int i = 0; i < expectedData.Count; i++)
-        {
-            Assert.Equal(expectedData[i], deserialized.Data[i]);
-        }
-        Assert.Equal(expectedPagination, deserialized.Pagination);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new CustomerListResponse
-        {
-            Data =
-            [
-                new()
-                {
-                    ID = "id",
-                    ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CouponID = "couponId",
-                    DefaultPaymentMethod = new()
-                    {
-                        BillingID = "billingId",
-                        CardExpiryMonth = 0,
-                        CardExpiryYear = 0,
-                        CardLast4Digits = "cardLast4Digits",
-                        Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
-                    },
-                    Email = "dev@stainless.com",
-                    Integrations =
-                    [
-                        new()
-                        {
-                            ID = "id",
-                            SyncedEntityID = "syncedEntityId",
-                            VendorIdentifier =
-                                CustomerListResponseDataIntegrationVendorIdentifier.Auth0,
-                        },
-                    ],
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-                    Name = "name",
-                },
-            ],
-            Pagination = new()
-            {
-                Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            },
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new CustomerListResponse
-        {
-            Data =
-            [
-                new()
-                {
-                    ID = "id",
-                    ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CouponID = "couponId",
-                    DefaultPaymentMethod = new()
-                    {
-                        BillingID = "billingId",
-                        CardExpiryMonth = 0,
-                        CardExpiryYear = 0,
-                        CardLast4Digits = "cardLast4Digits",
-                        Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
-                    },
-                    Email = "dev@stainless.com",
-                    Integrations =
-                    [
-                        new()
-                        {
-                            ID = "id",
-                            SyncedEntityID = "syncedEntityId",
-                            VendorIdentifier =
-                                CustomerListResponseDataIntegrationVendorIdentifier.Auth0,
-                        },
-                    ],
-                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-                    Name = "name",
-                },
-            ],
-            Pagination = new()
-            {
-                Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            },
-        };
-
-        CustomerListResponse copied = new(model);
-
-        Assert.Equal(model, copied);
-    }
-}
-
-public class CustomerListResponseDataTest : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new CustomerListResponseData
-        {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -364,7 +25,7 @@ public class CustomerListResponseDataTest : TestBase
                 CardExpiryMonth = 0,
                 CardExpiryYear = 0,
                 CardLast4Digits = "cardLast4Digits",
-                Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
+                Type = CustomerListResponseDefaultPaymentMethodType.Card,
             },
             Email = "dev@stainless.com",
             Integrations =
@@ -373,7 +34,7 @@ public class CustomerListResponseDataTest : TestBase
                 {
                     ID = "id",
                     SyncedEntityID = "syncedEntityId",
-                    VendorIdentifier = CustomerListResponseDataIntegrationVendorIdentifier.Auth0,
+                    VendorIdentifier = CustomerListResponseIntegrationVendorIdentifier.Auth0,
                 },
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
@@ -385,22 +46,22 @@ public class CustomerListResponseDataTest : TestBase
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCouponID = "couponId";
-        CustomerListResponseDataDefaultPaymentMethod expectedDefaultPaymentMethod = new()
+        CustomerListResponseDefaultPaymentMethod expectedDefaultPaymentMethod = new()
         {
             BillingID = "billingId",
             CardExpiryMonth = 0,
             CardExpiryYear = 0,
             CardLast4Digits = "cardLast4Digits",
-            Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
+            Type = CustomerListResponseDefaultPaymentMethodType.Card,
         };
         string expectedEmail = "dev@stainless.com";
-        List<CustomerListResponseDataIntegration> expectedIntegrations =
+        List<CustomerListResponseIntegration> expectedIntegrations =
         [
             new()
             {
                 ID = "id",
                 SyncedEntityID = "syncedEntityId",
-                VendorIdentifier = CustomerListResponseDataIntegrationVendorIdentifier.Auth0,
+                VendorIdentifier = CustomerListResponseIntegrationVendorIdentifier.Auth0,
             },
         ];
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
@@ -433,7 +94,7 @@ public class CustomerListResponseDataTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new CustomerListResponseData
+        var model = new CustomerListResponse
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -446,7 +107,7 @@ public class CustomerListResponseDataTest : TestBase
                 CardExpiryMonth = 0,
                 CardExpiryYear = 0,
                 CardLast4Digits = "cardLast4Digits",
-                Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
+                Type = CustomerListResponseDefaultPaymentMethodType.Card,
             },
             Email = "dev@stainless.com",
             Integrations =
@@ -455,7 +116,7 @@ public class CustomerListResponseDataTest : TestBase
                 {
                     ID = "id",
                     SyncedEntityID = "syncedEntityId",
-                    VendorIdentifier = CustomerListResponseDataIntegrationVendorIdentifier.Auth0,
+                    VendorIdentifier = CustomerListResponseIntegrationVendorIdentifier.Auth0,
                 },
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
@@ -463,7 +124,7 @@ public class CustomerListResponseDataTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<CustomerListResponseData>(
+        var deserialized = JsonSerializer.Deserialize<CustomerListResponse>(
             json,
             ModelBase.SerializerOptions
         );
@@ -474,7 +135,7 @@ public class CustomerListResponseDataTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new CustomerListResponseData
+        var model = new CustomerListResponse
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -487,7 +148,7 @@ public class CustomerListResponseDataTest : TestBase
                 CardExpiryMonth = 0,
                 CardExpiryYear = 0,
                 CardLast4Digits = "cardLast4Digits",
-                Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
+                Type = CustomerListResponseDefaultPaymentMethodType.Card,
             },
             Email = "dev@stainless.com",
             Integrations =
@@ -496,7 +157,7 @@ public class CustomerListResponseDataTest : TestBase
                 {
                     ID = "id",
                     SyncedEntityID = "syncedEntityId",
-                    VendorIdentifier = CustomerListResponseDataIntegrationVendorIdentifier.Auth0,
+                    VendorIdentifier = CustomerListResponseIntegrationVendorIdentifier.Auth0,
                 },
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
@@ -504,7 +165,7 @@ public class CustomerListResponseDataTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<CustomerListResponseData>(
+        var deserialized = JsonSerializer.Deserialize<CustomerListResponse>(
             element,
             ModelBase.SerializerOptions
         );
@@ -515,22 +176,22 @@ public class CustomerListResponseDataTest : TestBase
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCouponID = "couponId";
-        CustomerListResponseDataDefaultPaymentMethod expectedDefaultPaymentMethod = new()
+        CustomerListResponseDefaultPaymentMethod expectedDefaultPaymentMethod = new()
         {
             BillingID = "billingId",
             CardExpiryMonth = 0,
             CardExpiryYear = 0,
             CardLast4Digits = "cardLast4Digits",
-            Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
+            Type = CustomerListResponseDefaultPaymentMethodType.Card,
         };
         string expectedEmail = "dev@stainless.com";
-        List<CustomerListResponseDataIntegration> expectedIntegrations =
+        List<CustomerListResponseIntegration> expectedIntegrations =
         [
             new()
             {
                 ID = "id",
                 SyncedEntityID = "syncedEntityId",
-                VendorIdentifier = CustomerListResponseDataIntegrationVendorIdentifier.Auth0,
+                VendorIdentifier = CustomerListResponseIntegrationVendorIdentifier.Auth0,
             },
         ];
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
@@ -563,7 +224,7 @@ public class CustomerListResponseDataTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new CustomerListResponseData
+        var model = new CustomerListResponse
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -576,7 +237,7 @@ public class CustomerListResponseDataTest : TestBase
                 CardExpiryMonth = 0,
                 CardExpiryYear = 0,
                 CardLast4Digits = "cardLast4Digits",
-                Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
+                Type = CustomerListResponseDefaultPaymentMethodType.Card,
             },
             Email = "dev@stainless.com",
             Integrations =
@@ -585,7 +246,7 @@ public class CustomerListResponseDataTest : TestBase
                 {
                     ID = "id",
                     SyncedEntityID = "syncedEntityId",
-                    VendorIdentifier = CustomerListResponseDataIntegrationVendorIdentifier.Auth0,
+                    VendorIdentifier = CustomerListResponseIntegrationVendorIdentifier.Auth0,
                 },
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
@@ -598,7 +259,7 @@ public class CustomerListResponseDataTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new CustomerListResponseData
+        var model = new CustomerListResponse
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -611,7 +272,7 @@ public class CustomerListResponseDataTest : TestBase
                 CardExpiryMonth = 0,
                 CardExpiryYear = 0,
                 CardLast4Digits = "cardLast4Digits",
-                Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
+                Type = CustomerListResponseDefaultPaymentMethodType.Card,
             },
             Email = "dev@stainless.com",
             Name = "name",
@@ -626,7 +287,7 @@ public class CustomerListResponseDataTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new CustomerListResponseData
+        var model = new CustomerListResponse
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -639,7 +300,7 @@ public class CustomerListResponseDataTest : TestBase
                 CardExpiryMonth = 0,
                 CardExpiryYear = 0,
                 CardLast4Digits = "cardLast4Digits",
-                Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
+                Type = CustomerListResponseDefaultPaymentMethodType.Card,
             },
             Email = "dev@stainless.com",
             Name = "name",
@@ -651,7 +312,7 @@ public class CustomerListResponseDataTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new CustomerListResponseData
+        var model = new CustomerListResponse
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -664,7 +325,7 @@ public class CustomerListResponseDataTest : TestBase
                 CardExpiryMonth = 0,
                 CardExpiryYear = 0,
                 CardLast4Digits = "cardLast4Digits",
-                Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
+                Type = CustomerListResponseDefaultPaymentMethodType.Card,
             },
             Email = "dev@stainless.com",
             Name = "name",
@@ -683,7 +344,7 @@ public class CustomerListResponseDataTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new CustomerListResponseData
+        var model = new CustomerListResponse
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -696,7 +357,7 @@ public class CustomerListResponseDataTest : TestBase
                 CardExpiryMonth = 0,
                 CardExpiryYear = 0,
                 CardLast4Digits = "cardLast4Digits",
-                Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
+                Type = CustomerListResponseDefaultPaymentMethodType.Card,
             },
             Email = "dev@stainless.com",
             Name = "name",
@@ -712,7 +373,7 @@ public class CustomerListResponseDataTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new CustomerListResponseData
+        var model = new CustomerListResponse
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -724,7 +385,7 @@ public class CustomerListResponseDataTest : TestBase
                 {
                     ID = "id",
                     SyncedEntityID = "syncedEntityId",
-                    VendorIdentifier = CustomerListResponseDataIntegrationVendorIdentifier.Auth0,
+                    VendorIdentifier = CustomerListResponseIntegrationVendorIdentifier.Auth0,
                 },
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
@@ -743,7 +404,7 @@ public class CustomerListResponseDataTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new CustomerListResponseData
+        var model = new CustomerListResponse
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -755,7 +416,7 @@ public class CustomerListResponseDataTest : TestBase
                 {
                     ID = "id",
                     SyncedEntityID = "syncedEntityId",
-                    VendorIdentifier = CustomerListResponseDataIntegrationVendorIdentifier.Auth0,
+                    VendorIdentifier = CustomerListResponseIntegrationVendorIdentifier.Auth0,
                 },
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
@@ -767,7 +428,7 @@ public class CustomerListResponseDataTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new CustomerListResponseData
+        var model = new CustomerListResponse
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -779,7 +440,7 @@ public class CustomerListResponseDataTest : TestBase
                 {
                     ID = "id",
                     SyncedEntityID = "syncedEntityId",
-                    VendorIdentifier = CustomerListResponseDataIntegrationVendorIdentifier.Auth0,
+                    VendorIdentifier = CustomerListResponseIntegrationVendorIdentifier.Auth0,
                 },
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
@@ -803,7 +464,7 @@ public class CustomerListResponseDataTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new CustomerListResponseData
+        var model = new CustomerListResponse
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -815,7 +476,7 @@ public class CustomerListResponseDataTest : TestBase
                 {
                     ID = "id",
                     SyncedEntityID = "syncedEntityId",
-                    VendorIdentifier = CustomerListResponseDataIntegrationVendorIdentifier.Auth0,
+                    VendorIdentifier = CustomerListResponseIntegrationVendorIdentifier.Auth0,
                 },
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
@@ -832,7 +493,7 @@ public class CustomerListResponseDataTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new CustomerListResponseData
+        var model = new CustomerListResponse
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -845,7 +506,7 @@ public class CustomerListResponseDataTest : TestBase
                 CardExpiryMonth = 0,
                 CardExpiryYear = 0,
                 CardLast4Digits = "cardLast4Digits",
-                Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
+                Type = CustomerListResponseDefaultPaymentMethodType.Card,
             },
             Email = "dev@stainless.com",
             Integrations =
@@ -854,39 +515,39 @@ public class CustomerListResponseDataTest : TestBase
                 {
                     ID = "id",
                     SyncedEntityID = "syncedEntityId",
-                    VendorIdentifier = CustomerListResponseDataIntegrationVendorIdentifier.Auth0,
+                    VendorIdentifier = CustomerListResponseIntegrationVendorIdentifier.Auth0,
                 },
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
         };
 
-        CustomerListResponseData copied = new(model);
+        CustomerListResponse copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class CustomerListResponseDataDefaultPaymentMethodTest : TestBase
+public class CustomerListResponseDefaultPaymentMethodTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new CustomerListResponseDataDefaultPaymentMethod
+        var model = new CustomerListResponseDefaultPaymentMethod
         {
             BillingID = "billingId",
             CardExpiryMonth = 0,
             CardExpiryYear = 0,
             CardLast4Digits = "cardLast4Digits",
-            Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
+            Type = CustomerListResponseDefaultPaymentMethodType.Card,
         };
 
         string expectedBillingID = "billingId";
         double expectedCardExpiryMonth = 0;
         double expectedCardExpiryYear = 0;
         string expectedCardLast4Digits = "cardLast4Digits";
-        ApiEnum<string, CustomerListResponseDataDefaultPaymentMethodType> expectedType =
-            CustomerListResponseDataDefaultPaymentMethodType.Card;
+        ApiEnum<string, CustomerListResponseDefaultPaymentMethodType> expectedType =
+            CustomerListResponseDefaultPaymentMethodType.Card;
 
         Assert.Equal(expectedBillingID, model.BillingID);
         Assert.Equal(expectedCardExpiryMonth, model.CardExpiryMonth);
@@ -898,17 +559,17 @@ public class CustomerListResponseDataDefaultPaymentMethodTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new CustomerListResponseDataDefaultPaymentMethod
+        var model = new CustomerListResponseDefaultPaymentMethod
         {
             BillingID = "billingId",
             CardExpiryMonth = 0,
             CardExpiryYear = 0,
             CardLast4Digits = "cardLast4Digits",
-            Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
+            Type = CustomerListResponseDefaultPaymentMethodType.Card,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<CustomerListResponseDataDefaultPaymentMethod>(
+        var deserialized = JsonSerializer.Deserialize<CustomerListResponseDefaultPaymentMethod>(
             json,
             ModelBase.SerializerOptions
         );
@@ -919,17 +580,17 @@ public class CustomerListResponseDataDefaultPaymentMethodTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new CustomerListResponseDataDefaultPaymentMethod
+        var model = new CustomerListResponseDefaultPaymentMethod
         {
             BillingID = "billingId",
             CardExpiryMonth = 0,
             CardExpiryYear = 0,
             CardLast4Digits = "cardLast4Digits",
-            Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
+            Type = CustomerListResponseDefaultPaymentMethodType.Card,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<CustomerListResponseDataDefaultPaymentMethod>(
+        var deserialized = JsonSerializer.Deserialize<CustomerListResponseDefaultPaymentMethod>(
             element,
             ModelBase.SerializerOptions
         );
@@ -939,8 +600,8 @@ public class CustomerListResponseDataDefaultPaymentMethodTest : TestBase
         double expectedCardExpiryMonth = 0;
         double expectedCardExpiryYear = 0;
         string expectedCardLast4Digits = "cardLast4Digits";
-        ApiEnum<string, CustomerListResponseDataDefaultPaymentMethodType> expectedType =
-            CustomerListResponseDataDefaultPaymentMethodType.Card;
+        ApiEnum<string, CustomerListResponseDefaultPaymentMethodType> expectedType =
+            CustomerListResponseDefaultPaymentMethodType.Card;
 
         Assert.Equal(expectedBillingID, deserialized.BillingID);
         Assert.Equal(expectedCardExpiryMonth, deserialized.CardExpiryMonth);
@@ -952,13 +613,13 @@ public class CustomerListResponseDataDefaultPaymentMethodTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new CustomerListResponseDataDefaultPaymentMethod
+        var model = new CustomerListResponseDefaultPaymentMethod
         {
             BillingID = "billingId",
             CardExpiryMonth = 0,
             CardExpiryYear = 0,
             CardLast4Digits = "cardLast4Digits",
-            Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
+            Type = CustomerListResponseDefaultPaymentMethodType.Card,
         };
 
         model.Validate();
@@ -967,31 +628,31 @@ public class CustomerListResponseDataDefaultPaymentMethodTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new CustomerListResponseDataDefaultPaymentMethod
+        var model = new CustomerListResponseDefaultPaymentMethod
         {
             BillingID = "billingId",
             CardExpiryMonth = 0,
             CardExpiryYear = 0,
             CardLast4Digits = "cardLast4Digits",
-            Type = CustomerListResponseDataDefaultPaymentMethodType.Card,
+            Type = CustomerListResponseDefaultPaymentMethodType.Card,
         };
 
-        CustomerListResponseDataDefaultPaymentMethod copied = new(model);
+        CustomerListResponseDefaultPaymentMethod copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class CustomerListResponseDataDefaultPaymentMethodTypeTest : TestBase
+public class CustomerListResponseDefaultPaymentMethodTypeTest : TestBase
 {
     [Theory]
-    [InlineData(CustomerListResponseDataDefaultPaymentMethodType.Card)]
-    [InlineData(CustomerListResponseDataDefaultPaymentMethodType.Bank)]
-    [InlineData(CustomerListResponseDataDefaultPaymentMethodType.CashApp)]
-    public void Validation_Works(CustomerListResponseDataDefaultPaymentMethodType rawValue)
+    [InlineData(CustomerListResponseDefaultPaymentMethodType.Card)]
+    [InlineData(CustomerListResponseDefaultPaymentMethodType.Bank)]
+    [InlineData(CustomerListResponseDefaultPaymentMethodType.CashApp)]
+    public void Validation_Works(CustomerListResponseDefaultPaymentMethodType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, CustomerListResponseDataDefaultPaymentMethodType> value = rawValue;
+        ApiEnum<string, CustomerListResponseDefaultPaymentMethodType> value = rawValue;
         value.Validate();
     }
 
@@ -999,7 +660,7 @@ public class CustomerListResponseDataDefaultPaymentMethodTypeTest : TestBase
     public void InvalidEnumValidationThrows_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, CustomerListResponseDataDefaultPaymentMethodType>
+            ApiEnum<string, CustomerListResponseDefaultPaymentMethodType>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
@@ -1007,19 +668,17 @@ public class CustomerListResponseDataDefaultPaymentMethodTypeTest : TestBase
     }
 
     [Theory]
-    [InlineData(CustomerListResponseDataDefaultPaymentMethodType.Card)]
-    [InlineData(CustomerListResponseDataDefaultPaymentMethodType.Bank)]
-    [InlineData(CustomerListResponseDataDefaultPaymentMethodType.CashApp)]
-    public void SerializationRoundtrip_Works(
-        CustomerListResponseDataDefaultPaymentMethodType rawValue
-    )
+    [InlineData(CustomerListResponseDefaultPaymentMethodType.Card)]
+    [InlineData(CustomerListResponseDefaultPaymentMethodType.Bank)]
+    [InlineData(CustomerListResponseDefaultPaymentMethodType.CashApp)]
+    public void SerializationRoundtrip_Works(CustomerListResponseDefaultPaymentMethodType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, CustomerListResponseDataDefaultPaymentMethodType> value = rawValue;
+        ApiEnum<string, CustomerListResponseDefaultPaymentMethodType> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, CustomerListResponseDataDefaultPaymentMethodType>
+            ApiEnum<string, CustomerListResponseDefaultPaymentMethodType>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -1029,35 +688,33 @@ public class CustomerListResponseDataDefaultPaymentMethodTypeTest : TestBase
     public void InvalidEnumSerializationRoundtrip_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, CustomerListResponseDataDefaultPaymentMethodType>
+            ApiEnum<string, CustomerListResponseDefaultPaymentMethodType>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, CustomerListResponseDataDefaultPaymentMethodType>
+            ApiEnum<string, CustomerListResponseDefaultPaymentMethodType>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
 }
 
-public class CustomerListResponseDataIntegrationTest : TestBase
+public class CustomerListResponseIntegrationTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new CustomerListResponseDataIntegration
+        var model = new CustomerListResponseIntegration
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = CustomerListResponseDataIntegrationVendorIdentifier.Auth0,
+            VendorIdentifier = CustomerListResponseIntegrationVendorIdentifier.Auth0,
         };
 
         string expectedID = "id";
         string expectedSyncedEntityID = "syncedEntityId";
-        ApiEnum<
-            string,
-            CustomerListResponseDataIntegrationVendorIdentifier
-        > expectedVendorIdentifier = CustomerListResponseDataIntegrationVendorIdentifier.Auth0;
+        ApiEnum<string, CustomerListResponseIntegrationVendorIdentifier> expectedVendorIdentifier =
+            CustomerListResponseIntegrationVendorIdentifier.Auth0;
 
         Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedSyncedEntityID, model.SyncedEntityID);
@@ -1067,15 +724,15 @@ public class CustomerListResponseDataIntegrationTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new CustomerListResponseDataIntegration
+        var model = new CustomerListResponseIntegration
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = CustomerListResponseDataIntegrationVendorIdentifier.Auth0,
+            VendorIdentifier = CustomerListResponseIntegrationVendorIdentifier.Auth0,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<CustomerListResponseDataIntegration>(
+        var deserialized = JsonSerializer.Deserialize<CustomerListResponseIntegration>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1086,15 +743,15 @@ public class CustomerListResponseDataIntegrationTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new CustomerListResponseDataIntegration
+        var model = new CustomerListResponseIntegration
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = CustomerListResponseDataIntegrationVendorIdentifier.Auth0,
+            VendorIdentifier = CustomerListResponseIntegrationVendorIdentifier.Auth0,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<CustomerListResponseDataIntegration>(
+        var deserialized = JsonSerializer.Deserialize<CustomerListResponseIntegration>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1102,10 +759,8 @@ public class CustomerListResponseDataIntegrationTest : TestBase
 
         string expectedID = "id";
         string expectedSyncedEntityID = "syncedEntityId";
-        ApiEnum<
-            string,
-            CustomerListResponseDataIntegrationVendorIdentifier
-        > expectedVendorIdentifier = CustomerListResponseDataIntegrationVendorIdentifier.Auth0;
+        ApiEnum<string, CustomerListResponseIntegrationVendorIdentifier> expectedVendorIdentifier =
+            CustomerListResponseIntegrationVendorIdentifier.Auth0;
 
         Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedSyncedEntityID, deserialized.SyncedEntityID);
@@ -1115,11 +770,11 @@ public class CustomerListResponseDataIntegrationTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new CustomerListResponseDataIntegration
+        var model = new CustomerListResponseIntegration
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = CustomerListResponseDataIntegrationVendorIdentifier.Auth0,
+            VendorIdentifier = CustomerListResponseIntegrationVendorIdentifier.Auth0,
         };
 
         model.Validate();
@@ -1128,36 +783,36 @@ public class CustomerListResponseDataIntegrationTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new CustomerListResponseDataIntegration
+        var model = new CustomerListResponseIntegration
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = CustomerListResponseDataIntegrationVendorIdentifier.Auth0,
+            VendorIdentifier = CustomerListResponseIntegrationVendorIdentifier.Auth0,
         };
 
-        CustomerListResponseDataIntegration copied = new(model);
+        CustomerListResponseIntegration copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class CustomerListResponseDataIntegrationVendorIdentifierTest : TestBase
+public class CustomerListResponseIntegrationVendorIdentifierTest : TestBase
 {
     [Theory]
-    [InlineData(CustomerListResponseDataIntegrationVendorIdentifier.Auth0)]
-    [InlineData(CustomerListResponseDataIntegrationVendorIdentifier.Zuora)]
-    [InlineData(CustomerListResponseDataIntegrationVendorIdentifier.Stripe)]
-    [InlineData(CustomerListResponseDataIntegrationVendorIdentifier.Hubspot)]
-    [InlineData(CustomerListResponseDataIntegrationVendorIdentifier.AwsMarketplace)]
-    [InlineData(CustomerListResponseDataIntegrationVendorIdentifier.Snowflake)]
-    [InlineData(CustomerListResponseDataIntegrationVendorIdentifier.Salesforce)]
-    [InlineData(CustomerListResponseDataIntegrationVendorIdentifier.BigQuery)]
-    [InlineData(CustomerListResponseDataIntegrationVendorIdentifier.OpenFga)]
-    [InlineData(CustomerListResponseDataIntegrationVendorIdentifier.AppStore)]
-    public void Validation_Works(CustomerListResponseDataIntegrationVendorIdentifier rawValue)
+    [InlineData(CustomerListResponseIntegrationVendorIdentifier.Auth0)]
+    [InlineData(CustomerListResponseIntegrationVendorIdentifier.Zuora)]
+    [InlineData(CustomerListResponseIntegrationVendorIdentifier.Stripe)]
+    [InlineData(CustomerListResponseIntegrationVendorIdentifier.Hubspot)]
+    [InlineData(CustomerListResponseIntegrationVendorIdentifier.AwsMarketplace)]
+    [InlineData(CustomerListResponseIntegrationVendorIdentifier.Snowflake)]
+    [InlineData(CustomerListResponseIntegrationVendorIdentifier.Salesforce)]
+    [InlineData(CustomerListResponseIntegrationVendorIdentifier.BigQuery)]
+    [InlineData(CustomerListResponseIntegrationVendorIdentifier.OpenFga)]
+    [InlineData(CustomerListResponseIntegrationVendorIdentifier.AppStore)]
+    public void Validation_Works(CustomerListResponseIntegrationVendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, CustomerListResponseDataIntegrationVendorIdentifier> value = rawValue;
+        ApiEnum<string, CustomerListResponseIntegrationVendorIdentifier> value = rawValue;
         value.Validate();
     }
 
@@ -1165,7 +820,7 @@ public class CustomerListResponseDataIntegrationVendorIdentifierTest : TestBase
     public void InvalidEnumValidationThrows_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, CustomerListResponseDataIntegrationVendorIdentifier>
+            ApiEnum<string, CustomerListResponseIntegrationVendorIdentifier>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
@@ -1173,26 +828,26 @@ public class CustomerListResponseDataIntegrationVendorIdentifierTest : TestBase
     }
 
     [Theory]
-    [InlineData(CustomerListResponseDataIntegrationVendorIdentifier.Auth0)]
-    [InlineData(CustomerListResponseDataIntegrationVendorIdentifier.Zuora)]
-    [InlineData(CustomerListResponseDataIntegrationVendorIdentifier.Stripe)]
-    [InlineData(CustomerListResponseDataIntegrationVendorIdentifier.Hubspot)]
-    [InlineData(CustomerListResponseDataIntegrationVendorIdentifier.AwsMarketplace)]
-    [InlineData(CustomerListResponseDataIntegrationVendorIdentifier.Snowflake)]
-    [InlineData(CustomerListResponseDataIntegrationVendorIdentifier.Salesforce)]
-    [InlineData(CustomerListResponseDataIntegrationVendorIdentifier.BigQuery)]
-    [InlineData(CustomerListResponseDataIntegrationVendorIdentifier.OpenFga)]
-    [InlineData(CustomerListResponseDataIntegrationVendorIdentifier.AppStore)]
+    [InlineData(CustomerListResponseIntegrationVendorIdentifier.Auth0)]
+    [InlineData(CustomerListResponseIntegrationVendorIdentifier.Zuora)]
+    [InlineData(CustomerListResponseIntegrationVendorIdentifier.Stripe)]
+    [InlineData(CustomerListResponseIntegrationVendorIdentifier.Hubspot)]
+    [InlineData(CustomerListResponseIntegrationVendorIdentifier.AwsMarketplace)]
+    [InlineData(CustomerListResponseIntegrationVendorIdentifier.Snowflake)]
+    [InlineData(CustomerListResponseIntegrationVendorIdentifier.Salesforce)]
+    [InlineData(CustomerListResponseIntegrationVendorIdentifier.BigQuery)]
+    [InlineData(CustomerListResponseIntegrationVendorIdentifier.OpenFga)]
+    [InlineData(CustomerListResponseIntegrationVendorIdentifier.AppStore)]
     public void SerializationRoundtrip_Works(
-        CustomerListResponseDataIntegrationVendorIdentifier rawValue
+        CustomerListResponseIntegrationVendorIdentifier rawValue
     )
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, CustomerListResponseDataIntegrationVendorIdentifier> value = rawValue;
+        ApiEnum<string, CustomerListResponseIntegrationVendorIdentifier> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, CustomerListResponseDataIntegrationVendorIdentifier>
+            ApiEnum<string, CustomerListResponseIntegrationVendorIdentifier>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -1202,99 +857,13 @@ public class CustomerListResponseDataIntegrationVendorIdentifierTest : TestBase
     public void InvalidEnumSerializationRoundtrip_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, CustomerListResponseDataIntegrationVendorIdentifier>
+            ApiEnum<string, CustomerListResponseIntegrationVendorIdentifier>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, CustomerListResponseDataIntegrationVendorIdentifier>
+            ApiEnum<string, CustomerListResponseIntegrationVendorIdentifier>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
-    }
-}
-
-public class PaginationTest : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new Pagination
-        {
-            Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        };
-
-        string expectedNext = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
-        string expectedPrev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
-
-        Assert.Equal(expectedNext, model.Next);
-        Assert.Equal(expectedPrev, model.Prev);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new Pagination
-        {
-            Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Pagination>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new Pagination
-        {
-            Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Pagination>(
-            element,
-            ModelBase.SerializerOptions
-        );
-        Assert.NotNull(deserialized);
-
-        string expectedNext = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
-        string expectedPrev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
-
-        Assert.Equal(expectedNext, deserialized.Next);
-        Assert.Equal(expectedPrev, deserialized.Prev);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new Pagination
-        {
-            Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new Pagination
-        {
-            Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        };
-
-        Pagination copied = new(model);
-
-        Assert.Equal(model, copied);
     }
 }

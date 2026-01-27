@@ -37,10 +37,7 @@ public class CouponServiceTest : TestBase
     [Fact(Skip = "Prism tests are disabled")]
     public async Task List_Works()
     {
-        var coupons = await this.client.V1.Coupons.List(
-            new(),
-            TestContext.Current.CancellationToken
-        );
-        coupons.Validate();
+        var page = await this.client.V1.Coupons.List(new(), TestContext.Current.CancellationToken);
+        page.Validate();
     }
 }

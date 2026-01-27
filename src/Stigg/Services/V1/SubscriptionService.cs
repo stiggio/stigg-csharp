@@ -81,7 +81,7 @@ public sealed class SubscriptionService : ISubscriptionService
     }
 
     /// <inheritdoc/>
-    public async Task<SubscriptionListResponse> List(
+    public async Task<SubscriptionListPage> List(
         SubscriptionListParams? parameters = null,
         CancellationToken cancellationToken = default
     )
@@ -273,7 +273,7 @@ public sealed class SubscriptionServiceWithRawResponse : ISubscriptionServiceWit
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<SubscriptionListResponse>> List(
+    public async Task<HttpResponse<SubscriptionListPage>> List(
         SubscriptionListParams? parameters = null,
         CancellationToken cancellationToken = default
     )
@@ -290,14 +290,14 @@ public sealed class SubscriptionServiceWithRawResponse : ISubscriptionServiceWit
             response,
             async (token) =>
             {
-                var subscriptions = await response
-                    .Deserialize<SubscriptionListResponse>(token)
+                var page = await response
+                    .Deserialize<SubscriptionListPageResponse>(token)
                     .ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    subscriptions.Validate();
+                    page.Validate();
                 }
-                return subscriptions;
+                return new SubscriptionListPage(this, parameters, page);
             }
         );
     }

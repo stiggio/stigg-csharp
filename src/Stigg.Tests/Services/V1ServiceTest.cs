@@ -45,7 +45,10 @@ public class V1ServiceTest : TestBase
                         FeatureID = "featureId",
                         Value = -9007199254740991,
                         CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                        Dimensions = new Dictionary<string, string>() { { "foo", "string" } },
+                        Dimensions = new Dictionary<string, UsageDimension>()
+                        {
+                            { "foo", "string" },
+                        },
                         ResourceID = "resourceId",
                         UpdateBehavior = UpdateBehavior.Delta,
                     },

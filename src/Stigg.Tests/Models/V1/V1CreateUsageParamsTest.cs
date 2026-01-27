@@ -22,7 +22,7 @@ public class V1CreateUsageParamsTest : TestBase
                     FeatureID = "featureId",
                     Value = -9007199254740991,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Dimensions = new Dictionary<string, string>() { { "foo", "string" } },
+                    Dimensions = new Dictionary<string, UsageDimension>() { { "foo", "string" } },
                     ResourceID = "resourceId",
                     UpdateBehavior = UpdateBehavior.Delta,
                 },
@@ -37,7 +37,7 @@ public class V1CreateUsageParamsTest : TestBase
                 FeatureID = "featureId",
                 Value = -9007199254740991,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Dimensions = new Dictionary<string, string>() { { "foo", "string" } },
+                Dimensions = new Dictionary<string, UsageDimension>() { { "foo", "string" } },
                 ResourceID = "resourceId",
                 UpdateBehavior = UpdateBehavior.Delta,
             },
@@ -63,7 +63,7 @@ public class V1CreateUsageParamsTest : TestBase
                     FeatureID = "featureId",
                     Value = -9007199254740991,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Dimensions = new Dictionary<string, string>() { { "foo", "string" } },
+                    Dimensions = new Dictionary<string, UsageDimension>() { { "foo", "string" } },
                     ResourceID = "resourceId",
                     UpdateBehavior = UpdateBehavior.Delta,
                 },
@@ -88,7 +88,7 @@ public class V1CreateUsageParamsTest : TestBase
                     FeatureID = "featureId",
                     Value = -9007199254740991,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Dimensions = new Dictionary<string, string>() { { "foo", "string" } },
+                    Dimensions = new Dictionary<string, UsageDimension>() { { "foo", "string" } },
                     ResourceID = "resourceId",
                     UpdateBehavior = UpdateBehavior.Delta,
                 },
@@ -112,7 +112,7 @@ public class UsageTest : TestBase
             FeatureID = "featureId",
             Value = -9007199254740991,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Dimensions = new Dictionary<string, string>() { { "foo", "string" } },
+            Dimensions = new Dictionary<string, UsageDimension>() { { "foo", "string" } },
             ResourceID = "resourceId",
             UpdateBehavior = UpdateBehavior.Delta,
         };
@@ -121,7 +121,7 @@ public class UsageTest : TestBase
         string expectedFeatureID = "featureId";
         long expectedValue = -9007199254740991;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        Dictionary<string, string> expectedDimensions = new() { { "foo", "string" } };
+        Dictionary<string, UsageDimension> expectedDimensions = new() { { "foo", "string" } };
         string expectedResourceID = "resourceId";
         ApiEnum<string, UpdateBehavior> expectedUpdateBehavior = UpdateBehavior.Delta;
 
@@ -150,7 +150,7 @@ public class UsageTest : TestBase
             FeatureID = "featureId",
             Value = -9007199254740991,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Dimensions = new Dictionary<string, string>() { { "foo", "string" } },
+            Dimensions = new Dictionary<string, UsageDimension>() { { "foo", "string" } },
             ResourceID = "resourceId",
             UpdateBehavior = UpdateBehavior.Delta,
         };
@@ -170,7 +170,7 @@ public class UsageTest : TestBase
             FeatureID = "featureId",
             Value = -9007199254740991,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Dimensions = new Dictionary<string, string>() { { "foo", "string" } },
+            Dimensions = new Dictionary<string, UsageDimension>() { { "foo", "string" } },
             ResourceID = "resourceId",
             UpdateBehavior = UpdateBehavior.Delta,
         };
@@ -183,7 +183,7 @@ public class UsageTest : TestBase
         string expectedFeatureID = "featureId";
         long expectedValue = -9007199254740991;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        Dictionary<string, string> expectedDimensions = new() { { "foo", "string" } };
+        Dictionary<string, UsageDimension> expectedDimensions = new() { { "foo", "string" } };
         string expectedResourceID = "resourceId";
         ApiEnum<string, UpdateBehavior> expectedUpdateBehavior = UpdateBehavior.Delta;
 
@@ -212,7 +212,7 @@ public class UsageTest : TestBase
             FeatureID = "featureId",
             Value = -9007199254740991,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Dimensions = new Dictionary<string, string>() { { "foo", "string" } },
+            Dimensions = new Dictionary<string, UsageDimension>() { { "foo", "string" } },
             ResourceID = "resourceId",
             UpdateBehavior = UpdateBehavior.Delta,
         };
@@ -305,7 +305,7 @@ public class UsageTest : TestBase
             FeatureID = "featureId",
             Value = -9007199254740991,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Dimensions = new Dictionary<string, string>() { { "foo", "string" } },
+            Dimensions = new Dictionary<string, UsageDimension>() { { "foo", "string" } },
             UpdateBehavior = UpdateBehavior.Delta,
         };
 
@@ -322,7 +322,7 @@ public class UsageTest : TestBase
             FeatureID = "featureId",
             Value = -9007199254740991,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Dimensions = new Dictionary<string, string>() { { "foo", "string" } },
+            Dimensions = new Dictionary<string, UsageDimension>() { { "foo", "string" } },
             UpdateBehavior = UpdateBehavior.Delta,
         };
 
@@ -338,7 +338,7 @@ public class UsageTest : TestBase
             FeatureID = "featureId",
             Value = -9007199254740991,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Dimensions = new Dictionary<string, string>() { { "foo", "string" } },
+            Dimensions = new Dictionary<string, UsageDimension>() { { "foo", "string" } },
             UpdateBehavior = UpdateBehavior.Delta,
 
             ResourceID = null,
@@ -357,7 +357,7 @@ public class UsageTest : TestBase
             FeatureID = "featureId",
             Value = -9007199254740991,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Dimensions = new Dictionary<string, string>() { { "foo", "string" } },
+            Dimensions = new Dictionary<string, UsageDimension>() { { "foo", "string" } },
             UpdateBehavior = UpdateBehavior.Delta,
 
             ResourceID = null,
@@ -375,7 +375,7 @@ public class UsageTest : TestBase
             FeatureID = "featureId",
             Value = -9007199254740991,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Dimensions = new Dictionary<string, string>() { { "foo", "string" } },
+            Dimensions = new Dictionary<string, UsageDimension>() { { "foo", "string" } },
             ResourceID = "resourceId",
             UpdateBehavior = UpdateBehavior.Delta,
         };
@@ -383,6 +383,69 @@ public class UsageTest : TestBase
         Usage copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class UsageDimensionTest : TestBase
+{
+    [Fact]
+    public void StringValidationWorks()
+    {
+        UsageDimension value = "string";
+        value.Validate();
+    }
+
+    [Fact]
+    public void DoubleValidationWorks()
+    {
+        UsageDimension value = 0;
+        value.Validate();
+    }
+
+    [Fact]
+    public void BoolValidationWorks()
+    {
+        UsageDimension value = true;
+        value.Validate();
+    }
+
+    [Fact]
+    public void StringSerializationRoundtripWorks()
+    {
+        UsageDimension value = "string";
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<UsageDimension>(
+            element,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void DoubleSerializationRoundtripWorks()
+    {
+        UsageDimension value = 0;
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<UsageDimension>(
+            element,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void BoolSerializationRoundtripWorks()
+    {
+        UsageDimension value = true;
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<UsageDimension>(
+            element,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }
 
