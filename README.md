@@ -6,9 +6,10 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ## Installation
 
+Install the package from [NuGet](https://www.nuget.org/packages/Stigg.Client):
+
 ```bash
-git clone git@github.com:stiggio/stigg-csharp.git
-dotnet add reference stigg-csharp/src/Stigg
+dotnet add package Stigg.Client
 ```
 
 ## Requirements
@@ -21,8 +22,8 @@ See the [`examples`](examples) directory for complete and runnable examples.
 
 ```csharp
 using System;
-using Stigg;
-using Stigg.Models.V1.Customers;
+using Stigg.Client;
+using Stigg.Client.Models.V1.Customers;
 
 StiggClient client = new();
 
@@ -38,7 +39,7 @@ Console.WriteLine(customerResponse);
 Configure the client using environment variables:
 
 ```csharp
-using Stigg;
+using Stigg.Client;
 
 // Configured using the STIGG_API_KEY and STIGG_BASE_URL environment variables
 StiggClient client = new();
@@ -47,7 +48,7 @@ StiggClient client = new();
 Or manually:
 
 ```csharp
-using Stigg;
+using Stigg.Client;
 
 StiggClient client = new() { ApiKey = "My API Key" };
 ```
@@ -109,7 +110,7 @@ For non-streaming responses, you can deserialize the response into an instance o
 
 ```csharp
 using System;
-using Stigg.Models.V1.Customers;
+using Stigg.Client.Models.V1.Customers;
 
 var response = await client.WithRawResponse.V1.Customers.Retrieve(parameters);
 CustomerResponse deserialized = await response.Deserialize();
@@ -202,7 +203,7 @@ The API may also explicitly instruct the SDK to retry or not retry a request.
 To set a custom number of retries, configure the client using the `MaxRetries` method:
 
 ```csharp
-using Stigg;
+using Stigg.Client;
 
 StiggClient client = new() { MaxRetries = 3 };
 ```
@@ -229,7 +230,7 @@ To set a custom timeout, configure the client using the `Timeout` option:
 
 ```csharp
 using System;
-using Stigg;
+using Stigg.Client;
 
 StiggClient client = new() { Timeout = TimeSpan.FromSeconds(42) };
 ```
@@ -268,7 +269,7 @@ customerResponse.Validate();
 Or configure the client using the `ResponseValidation` option:
 
 ```csharp
-using Stigg;
+using Stigg.Client;
 
 StiggClient client = new() { ResponseValidation = true };
 ```
