@@ -10,23 +10,23 @@ public class SubscriptionListParamsTest : TestBase
     {
         var parameters = new SubscriptionListParams
         {
+            After = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            Before = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             CustomerID = "customerId",
-            EndingBefore = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Limit = 1,
-            StartingAfter = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Status = "status",
         };
 
+        string expectedAfter = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
+        string expectedBefore = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
         string expectedCustomerID = "customerId";
-        string expectedEndingBefore = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
         long expectedLimit = 1;
-        string expectedStartingAfter = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
         string expectedStatus = "status";
 
+        Assert.Equal(expectedAfter, parameters.After);
+        Assert.Equal(expectedBefore, parameters.Before);
         Assert.Equal(expectedCustomerID, parameters.CustomerID);
-        Assert.Equal(expectedEndingBefore, parameters.EndingBefore);
         Assert.Equal(expectedLimit, parameters.Limit);
-        Assert.Equal(expectedStartingAfter, parameters.StartingAfter);
         Assert.Equal(expectedStatus, parameters.Status);
     }
 
@@ -35,14 +35,14 @@ public class SubscriptionListParamsTest : TestBase
     {
         var parameters = new SubscriptionListParams { };
 
+        Assert.Null(parameters.After);
+        Assert.False(parameters.RawQueryData.ContainsKey("after"));
+        Assert.Null(parameters.Before);
+        Assert.False(parameters.RawQueryData.ContainsKey("before"));
         Assert.Null(parameters.CustomerID);
         Assert.False(parameters.RawQueryData.ContainsKey("customerId"));
-        Assert.Null(parameters.EndingBefore);
-        Assert.False(parameters.RawQueryData.ContainsKey("endingBefore"));
         Assert.Null(parameters.Limit);
         Assert.False(parameters.RawQueryData.ContainsKey("limit"));
-        Assert.Null(parameters.StartingAfter);
-        Assert.False(parameters.RawQueryData.ContainsKey("startingAfter"));
         Assert.Null(parameters.Status);
         Assert.False(parameters.RawQueryData.ContainsKey("status"));
     }
@@ -53,21 +53,21 @@ public class SubscriptionListParamsTest : TestBase
         var parameters = new SubscriptionListParams
         {
             // Null should be interpreted as omitted for these properties
+            After = null,
+            Before = null,
             CustomerID = null,
-            EndingBefore = null,
             Limit = null,
-            StartingAfter = null,
             Status = null,
         };
 
+        Assert.Null(parameters.After);
+        Assert.False(parameters.RawQueryData.ContainsKey("after"));
+        Assert.Null(parameters.Before);
+        Assert.False(parameters.RawQueryData.ContainsKey("before"));
         Assert.Null(parameters.CustomerID);
         Assert.False(parameters.RawQueryData.ContainsKey("customerId"));
-        Assert.Null(parameters.EndingBefore);
-        Assert.False(parameters.RawQueryData.ContainsKey("endingBefore"));
         Assert.Null(parameters.Limit);
         Assert.False(parameters.RawQueryData.ContainsKey("limit"));
-        Assert.Null(parameters.StartingAfter);
-        Assert.False(parameters.RawQueryData.ContainsKey("startingAfter"));
         Assert.Null(parameters.Status);
         Assert.False(parameters.RawQueryData.ContainsKey("status"));
     }
@@ -77,10 +77,10 @@ public class SubscriptionListParamsTest : TestBase
     {
         SubscriptionListParams parameters = new()
         {
+            After = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            Before = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             CustomerID = "customerId",
-            EndingBefore = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Limit = 1,
-            StartingAfter = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Status = "status",
         };
 
@@ -88,7 +88,7 @@ public class SubscriptionListParamsTest : TestBase
 
         Assert.Equal(
             new Uri(
-                "https://api.example.com/api/v1/subscriptions?customerId=customerId&endingBefore=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&limit=1&startingAfter=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&status=status"
+                "https://api.example.com/api/v1/subscriptions?after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&customerId=customerId&limit=1&status=status"
             ),
             url
         );
@@ -99,10 +99,10 @@ public class SubscriptionListParamsTest : TestBase
     {
         var parameters = new SubscriptionListParams
         {
+            After = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            Before = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             CustomerID = "customerId",
-            EndingBefore = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Limit = 1,
-            StartingAfter = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Status = "status",
         };
 

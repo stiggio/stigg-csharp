@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.0 (2026-01-27)
+
+Full Changelog: [v0.1.0...v0.2.0](https://github.com/stiggio/stigg-csharp/compare/v0.1.0...v0.2.0)
+
+### Features
+
+* **api:** api update ([51eb94c](https://github.com/stiggio/stigg-csharp/commit/51eb94ca8743547f248c86c825dddb54838d22a6))
+* **api:** comment out promotional endpoints ([00e0690](https://github.com/stiggio/stigg-csharp/commit/00e06901a45c28aea2901eb9384481f6c594a6ef))
+
 ## 0.1.0 (2026-01-26)
 
 Full Changelog: [v0.0.1...v0.1.0](https://github.com/stiggio/stigg-csharp/compare/v0.0.1...v0.1.0)

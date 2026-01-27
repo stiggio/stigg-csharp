@@ -2,7 +2,6 @@ using System.Text.Json;
 using Stigg.Exceptions;
 using Stigg.Models.V1;
 using Stigg.Models.V1.Customers;
-using Stigg.Models.V1.Customers.Promotional;
 using Coupons = Stigg.Models.V1.Coupons;
 using CustomersUsage = Stigg.Models.V1.Customers.Usage;
 using PaymentMethod = Stigg.Models.V1.Customers.PaymentMethod;
@@ -38,26 +37,6 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, PaymentMethod::VendorIdentifier>(),
             new ApiEnumConverter<string, PaymentMethod::BillingCurrency>(),
             new ApiEnumConverter<string, CustomersUsage::Type>(),
-            new ApiEnumConverter<string, DataPeriod>(),
-            new ApiEnumConverter<string, DataResetPeriod>(),
-            new ApiEnumConverter<string, ResetPeriodConfigurationAccordingToAccordingTo>(),
-            new ApiEnumConverter<string, AccordingToModelAccordingTo>(),
-            new ApiEnumConverter<string, AccordingTo1AccordingTo>(),
-            new ApiEnumConverter<string, Status>(),
-            new ApiEnumConverter<string, PromotionalRevokeResponseDataPeriod>(),
-            new ApiEnumConverter<string, PromotionalRevokeResponseDataResetPeriod>(),
-            new ApiEnumConverter<
-                string,
-                PromotionalRevokeResponseDataResetPeriodConfigurationAccordingToAccordingTo
-            >(),
-            new ApiEnumConverter<string, AccordingTo2AccordingTo>(),
-            new ApiEnumConverter<string, AccordingTo3AccordingTo>(),
-            new ApiEnumConverter<string, PromotionalRevokeResponseDataStatus>(),
-            new ApiEnumConverter<string, AccordingTo>(),
-            new ApiEnumConverter<string, Period>(),
-            new ApiEnumConverter<string, ResetPeriod>(),
-            new ApiEnumConverter<string, WeeklyResetPeriodConfigurationAccordingTo>(),
-            new ApiEnumConverter<string, YearlyResetPeriodConfigurationAccordingTo>(),
             new ApiEnumConverter<string, Subscriptions::Status>(),
             new ApiEnumConverter<string, Subscriptions::PaymentCollection>(),
             new ApiEnumConverter<string, Subscriptions::PricingType>(),

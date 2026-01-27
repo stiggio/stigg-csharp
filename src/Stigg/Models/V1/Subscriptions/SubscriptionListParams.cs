@@ -18,6 +18,48 @@ namespace Stigg.Models.V1.Subscriptions;
 public record class SubscriptionListParams : ParamsBase
 {
     /// <summary>
+    /// Starting after this UUID for pagination
+    /// </summary>
+    public string? After
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("after");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("after", value);
+        }
+    }
+
+    /// <summary>
+    /// Ending before this UUID for pagination
+    /// </summary>
+    public string? Before
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("before");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("before", value);
+        }
+    }
+
+    /// <summary>
     /// Filter by customer ID
     /// </summary>
     public string? CustomerID
@@ -39,27 +81,6 @@ public record class SubscriptionListParams : ParamsBase
     }
 
     /// <summary>
-    /// Ending before this UUID for pagination
-    /// </summary>
-    public string? EndingBefore
-    {
-        get
-        {
-            this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableClass<string>("endingBefore");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawQueryData.Set("endingBefore", value);
-        }
-    }
-
-    /// <summary>
     /// Items per page
     /// </summary>
     public long? Limit
@@ -77,27 +98,6 @@ public record class SubscriptionListParams : ParamsBase
             }
 
             this._rawQueryData.Set("limit", value);
-        }
-    }
-
-    /// <summary>
-    /// Starting after this UUID for pagination
-    /// </summary>
-    public string? StartingAfter
-    {
-        get
-        {
-            this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableClass<string>("startingAfter");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawQueryData.Set("startingAfter", value);
         }
     }
 

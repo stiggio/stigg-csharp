@@ -35,7 +35,6 @@ public sealed class CustomerService : ICustomerService
         _withRawResponse = new(() => new CustomerServiceWithRawResponse(client.WithRawResponse));
         _paymentMethod = new(() => new PaymentMethodService(client));
         _usage = new(() => new UsageService(client));
-        _promotional = new(() => new PromotionalService(client));
     }
 
     readonly Lazy<IPaymentMethodService> _paymentMethod;
@@ -48,12 +47,6 @@ public sealed class CustomerService : ICustomerService
     public IUsageService Usage
     {
         get { return _usage.Value; }
-    }
-
-    readonly Lazy<IPromotionalService> _promotional;
-    public IPromotionalService Promotional
-    {
-        get { return _promotional.Value; }
     }
 
     /// <inheritdoc/>
@@ -194,7 +187,6 @@ public sealed class CustomerServiceWithRawResponse : ICustomerServiceWithRawResp
 
         _paymentMethod = new(() => new PaymentMethodServiceWithRawResponse(client));
         _usage = new(() => new UsageServiceWithRawResponse(client));
-        _promotional = new(() => new PromotionalServiceWithRawResponse(client));
     }
 
     readonly Lazy<IPaymentMethodServiceWithRawResponse> _paymentMethod;
@@ -207,12 +199,6 @@ public sealed class CustomerServiceWithRawResponse : ICustomerServiceWithRawResp
     public IUsageServiceWithRawResponse Usage
     {
         get { return _usage.Value; }
-    }
-
-    readonly Lazy<IPromotionalServiceWithRawResponse> _promotional;
-    public IPromotionalServiceWithRawResponse Promotional
-    {
-        get { return _promotional.Value; }
     }
 
     /// <inheritdoc/>
