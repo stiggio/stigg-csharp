@@ -10,18 +10,18 @@ public class CustomerListParamsTest : TestBase
     {
         var parameters = new CustomerListParams
         {
-            EndingBefore = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            After = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            Before = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Limit = 1,
-            StartingAfter = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         };
 
-        string expectedEndingBefore = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
+        string expectedAfter = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
+        string expectedBefore = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
         long expectedLimit = 1;
-        string expectedStartingAfter = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
 
-        Assert.Equal(expectedEndingBefore, parameters.EndingBefore);
+        Assert.Equal(expectedAfter, parameters.After);
+        Assert.Equal(expectedBefore, parameters.Before);
         Assert.Equal(expectedLimit, parameters.Limit);
-        Assert.Equal(expectedStartingAfter, parameters.StartingAfter);
     }
 
     [Fact]
@@ -29,12 +29,12 @@ public class CustomerListParamsTest : TestBase
     {
         var parameters = new CustomerListParams { };
 
-        Assert.Null(parameters.EndingBefore);
-        Assert.False(parameters.RawQueryData.ContainsKey("endingBefore"));
+        Assert.Null(parameters.After);
+        Assert.False(parameters.RawQueryData.ContainsKey("after"));
+        Assert.Null(parameters.Before);
+        Assert.False(parameters.RawQueryData.ContainsKey("before"));
         Assert.Null(parameters.Limit);
         Assert.False(parameters.RawQueryData.ContainsKey("limit"));
-        Assert.Null(parameters.StartingAfter);
-        Assert.False(parameters.RawQueryData.ContainsKey("startingAfter"));
     }
 
     [Fact]
@@ -43,17 +43,17 @@ public class CustomerListParamsTest : TestBase
         var parameters = new CustomerListParams
         {
             // Null should be interpreted as omitted for these properties
-            EndingBefore = null,
+            After = null,
+            Before = null,
             Limit = null,
-            StartingAfter = null,
         };
 
-        Assert.Null(parameters.EndingBefore);
-        Assert.False(parameters.RawQueryData.ContainsKey("endingBefore"));
+        Assert.Null(parameters.After);
+        Assert.False(parameters.RawQueryData.ContainsKey("after"));
+        Assert.Null(parameters.Before);
+        Assert.False(parameters.RawQueryData.ContainsKey("before"));
         Assert.Null(parameters.Limit);
         Assert.False(parameters.RawQueryData.ContainsKey("limit"));
-        Assert.Null(parameters.StartingAfter);
-        Assert.False(parameters.RawQueryData.ContainsKey("startingAfter"));
     }
 
     [Fact]
@@ -61,16 +61,16 @@ public class CustomerListParamsTest : TestBase
     {
         CustomerListParams parameters = new()
         {
-            EndingBefore = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            After = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            Before = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Limit = 1,
-            StartingAfter = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         };
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
         Assert.Equal(
             new Uri(
-                "https://api.example.com/api/v1/customers?endingBefore=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&limit=1&startingAfter=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"
+                "https://api.example.com/api/v1/customers?after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&limit=1"
             ),
             url
         );
@@ -81,9 +81,9 @@ public class CustomerListParamsTest : TestBase
     {
         var parameters = new CustomerListParams
         {
-            EndingBefore = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            After = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            Before = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Limit = 1,
-            StartingAfter = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         };
 
         CustomerListParams copied = new(parameters);

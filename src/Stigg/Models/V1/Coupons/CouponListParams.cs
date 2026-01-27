@@ -18,14 +18,14 @@ namespace Stigg.Models.V1.Coupons;
 public record class CouponListParams : ParamsBase
 {
     /// <summary>
-    /// Ending before this UUID for pagination
+    /// Starting after this UUID for pagination
     /// </summary>
-    public string? EndingBefore
+    public string? After
     {
         get
         {
             this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableClass<string>("endingBefore");
+            return this._rawQueryData.GetNullableClass<string>("after");
         }
         init
         {
@@ -34,7 +34,28 @@ public record class CouponListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData.Set("endingBefore", value);
+            this._rawQueryData.Set("after", value);
+        }
+    }
+
+    /// <summary>
+    /// Ending before this UUID for pagination
+    /// </summary>
+    public string? Before
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("before");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("before", value);
         }
     }
 
@@ -56,27 +77,6 @@ public record class CouponListParams : ParamsBase
             }
 
             this._rawQueryData.Set("limit", value);
-        }
-    }
-
-    /// <summary>
-    /// Starting after this UUID for pagination
-    /// </summary>
-    public string? StartingAfter
-    {
-        get
-        {
-            this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableClass<string>("startingAfter");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawQueryData.Set("startingAfter", value);
         }
     }
 
