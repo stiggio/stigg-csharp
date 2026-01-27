@@ -3,7 +3,7 @@
     <!-- Metadata -->
     <AssemblyTitle>Stigg C#</AssemblyTitle>
     <AssemblyName>Stigg</AssemblyName>
-    <VersionPrefix>0.2.0</VersionPrefix>
+    <VersionPrefix>0.3.0</VersionPrefix>
     <Description>The official .NET library for the Stigg API.</Description>
     <OutputType>Library</OutputType>
     <PackageReadmeFile>README.md</PackageReadmeFile>
