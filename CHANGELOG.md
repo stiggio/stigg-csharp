@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.1 (2026-01-27)
+
+Full Changelog: [v0.3.0...v0.3.1](https://github.com/stiggio/stigg-csharp/compare/v0.3.0...v0.3.1)
+
+### Chores
+
+* remove custom code ([b5de96f](https://github.com/stiggio/stigg-csharp/commit/b5de96fd33edc895eb0945b1a42bde5c8a79131b))
+
 ## 0.3.0 (2026-01-27)
 
 Full Changelog: [v0.2.0...v0.3.0](https://github.com/stiggio/stigg-csharp/compare/v0.2.0...v0.3.0)
