@@ -71,7 +71,7 @@ public sealed class CouponService : ICouponService
     }
 
     /// <inheritdoc/>
-    public async Task<CouponListResponse> List(
+    public async Task<CouponListPage> List(
         CouponListParams? parameters = null,
         CancellationToken cancellationToken = default
     )
@@ -173,7 +173,7 @@ public sealed class CouponServiceWithRawResponse : ICouponServiceWithRawResponse
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<CouponListResponse>> List(
+    public async Task<HttpResponse<CouponListPage>> List(
         CouponListParams? parameters = null,
         CancellationToken cancellationToken = default
     )
@@ -190,14 +190,14 @@ public sealed class CouponServiceWithRawResponse : ICouponServiceWithRawResponse
             response,
             async (token) =>
             {
-                var coupons = await response
-                    .Deserialize<CouponListResponse>(token)
+                var page = await response
+                    .Deserialize<CouponListPageResponse>(token)
                     .ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    coupons.Validate();
+                    page.Validate();
                 }
-                return coupons;
+                return new CouponListPage(this, parameters, page);
             }
         );
     }

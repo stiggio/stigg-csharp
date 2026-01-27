@@ -110,7 +110,7 @@ public sealed class CustomerService : ICustomerService
     }
 
     /// <inheritdoc/>
-    public async Task<CustomerListResponse> List(
+    public async Task<CustomerListPage> List(
         CustomerListParams? parameters = null,
         CancellationToken cancellationToken = default
     )
@@ -320,7 +320,7 @@ public sealed class CustomerServiceWithRawResponse : ICustomerServiceWithRawResp
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<CustomerListResponse>> List(
+    public async Task<HttpResponse<CustomerListPage>> List(
         CustomerListParams? parameters = null,
         CancellationToken cancellationToken = default
     )
@@ -337,14 +337,14 @@ public sealed class CustomerServiceWithRawResponse : ICustomerServiceWithRawResp
             response,
             async (token) =>
             {
-                var customers = await response
-                    .Deserialize<CustomerListResponse>(token)
+                var page = await response
+                    .Deserialize<CustomerListPageResponse>(token)
                     .ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    customers.Validate();
+                    page.Validate();
                 }
-                return customers;
+                return new CustomerListPage(this, parameters, page);
             }
         );
     }

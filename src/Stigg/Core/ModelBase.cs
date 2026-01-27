@@ -29,8 +29,8 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, UpdateBehavior>(),
             new ApiEnumConverter<string, DataDefaultPaymentMethodType>(),
             new ApiEnumConverter<string, DataIntegrationVendorIdentifier>(),
-            new ApiEnumConverter<string, CustomerListResponseDataDefaultPaymentMethodType>(),
-            new ApiEnumConverter<string, CustomerListResponseDataIntegrationVendorIdentifier>(),
+            new ApiEnumConverter<string, CustomerListResponseDefaultPaymentMethodType>(),
+            new ApiEnumConverter<string, CustomerListResponseIntegrationVendorIdentifier>(),
             new ApiEnumConverter<string, Type>(),
             new ApiEnumConverter<string, VendorIdentifier>(),
             new ApiEnumConverter<string, CustomerUpdateParamsIntegrationVendorIdentifier>(),
@@ -62,14 +62,14 @@ public abstract record class ModelBase
             >(),
             new ApiEnumConverter<
                 string,
-                Subscriptions::SubscriptionListResponseDataPaymentCollection
+                Subscriptions::SubscriptionListResponsePaymentCollection
             >(),
-            new ApiEnumConverter<string, Subscriptions::SubscriptionListResponseDataPricingType>(),
-            new ApiEnumConverter<string, Subscriptions::SubscriptionListResponseDataStatus>(),
-            new ApiEnumConverter<string, Subscriptions::SubscriptionListResponseDataCancelReason>(),
+            new ApiEnumConverter<string, Subscriptions::SubscriptionListResponsePricingType>(),
+            new ApiEnumConverter<string, Subscriptions::SubscriptionListResponseStatus>(),
+            new ApiEnumConverter<string, Subscriptions::SubscriptionListResponseCancelReason>(),
             new ApiEnumConverter<
                 string,
-                Subscriptions::SubscriptionListResponseDataPaymentCollectionMethod
+                Subscriptions::SubscriptionListResponsePaymentCollectionMethod
             >(),
             new ApiEnumConverter<
                 string,
@@ -142,10 +142,10 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Coupons::CouponRetrieveResponseDataSource>(),
             new ApiEnumConverter<string, Coupons::CouponRetrieveResponseDataStatus>(),
             new ApiEnumConverter<string, Coupons::CouponRetrieveResponseDataType>(),
-            new ApiEnumConverter<string, Coupons::CouponListResponseDataAmountsOffCurrency>(),
-            new ApiEnumConverter<string, Coupons::CouponListResponseDataSource>(),
-            new ApiEnumConverter<string, Coupons::CouponListResponseDataStatus>(),
-            new ApiEnumConverter<string, Coupons::CouponListResponseDataType>(),
+            new ApiEnumConverter<string, Coupons::CouponListResponseAmountsOffCurrency>(),
+            new ApiEnumConverter<string, Coupons::CouponListResponseSource>(),
+            new ApiEnumConverter<string, Coupons::CouponListResponseStatus>(),
+            new ApiEnumConverter<string, Coupons::CouponListResponseType>(),
             new ApiEnumConverter<string, Coupons::Currency>(),
         },
     };

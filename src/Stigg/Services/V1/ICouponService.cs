@@ -52,7 +52,7 @@ public interface ICouponService
     /// <summary>
     /// Get a list of Coupons
     /// </summary>
-    Task<CouponListResponse> List(
+    Task<CouponListPage> List(
         CouponListParams? parameters = null,
         CancellationToken cancellationToken = default
     );
@@ -100,7 +100,7 @@ public interface ICouponServiceWithRawResponse
     /// Returns a raw HTTP response for `get /api/v1/coupons`, but is otherwise the
     /// same as <see cref="ICouponService.List(CouponListParams?, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<CouponListResponse>> List(
+    Task<HttpResponse<CouponListPage>> List(
         CouponListParams? parameters = null,
         CancellationToken cancellationToken = default
     );

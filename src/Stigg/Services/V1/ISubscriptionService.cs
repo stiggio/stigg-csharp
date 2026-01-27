@@ -55,7 +55,7 @@ public interface ISubscriptionService
     /// <summary>
     /// Get a list of Subscriptions
     /// </summary>
-    Task<SubscriptionListResponse> List(
+    Task<SubscriptionListPage> List(
         SubscriptionListParams? parameters = null,
         CancellationToken cancellationToken = default
     );
@@ -158,7 +158,7 @@ public interface ISubscriptionServiceWithRawResponse
     /// Returns a raw HTTP response for `get /api/v1/subscriptions`, but is otherwise the
     /// same as <see cref="ISubscriptionService.List(SubscriptionListParams?, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<SubscriptionListResponse>> List(
+    Task<HttpResponse<SubscriptionListPage>> List(
         SubscriptionListParams? parameters = null,
         CancellationToken cancellationToken = default
     );

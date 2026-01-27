@@ -14,299 +14,10 @@ public class CouponListResponseTest : TestBase
     {
         var model = new CouponListResponse
         {
-            Data =
-            [
-                new()
-                {
-                    ID = "id",
-                    AmountsOff =
-                    [
-                        new()
-                        {
-                            Amount = 0,
-                            Currency = CouponListResponseDataAmountsOffCurrency.Usd,
-                        },
-                    ],
-                    BillingID = "billingId",
-                    BillingLinkUrl = "billingLinkUrl",
-                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Description = "description",
-                    DurationInMonths = 0,
-                    Name = "name",
-                    PercentOff = 0,
-                    Source = CouponListResponseDataSource.Stigg,
-                    Status = CouponListResponseDataStatus.Active,
-                    Type = CouponListResponseDataType.Fixed,
-                    UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                },
-            ],
-            Pagination = new()
-            {
-                Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            },
-        };
-
-        List<CouponListResponseData> expectedData =
-        [
-            new()
-            {
-                ID = "id",
-                AmountsOff =
-                [
-                    new() { Amount = 0, Currency = CouponListResponseDataAmountsOffCurrency.Usd },
-                ],
-                BillingID = "billingId",
-                BillingLinkUrl = "billingLinkUrl",
-                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Description = "description",
-                DurationInMonths = 0,
-                Name = "name",
-                PercentOff = 0,
-                Source = CouponListResponseDataSource.Stigg,
-                Status = CouponListResponseDataStatus.Active,
-                Type = CouponListResponseDataType.Fixed,
-                UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            },
-        ];
-        Pagination expectedPagination = new()
-        {
-            Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        };
-
-        Assert.Equal(expectedData.Count, model.Data.Count);
-        for (int i = 0; i < expectedData.Count; i++)
-        {
-            Assert.Equal(expectedData[i], model.Data[i]);
-        }
-        Assert.Equal(expectedPagination, model.Pagination);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new CouponListResponse
-        {
-            Data =
-            [
-                new()
-                {
-                    ID = "id",
-                    AmountsOff =
-                    [
-                        new()
-                        {
-                            Amount = 0,
-                            Currency = CouponListResponseDataAmountsOffCurrency.Usd,
-                        },
-                    ],
-                    BillingID = "billingId",
-                    BillingLinkUrl = "billingLinkUrl",
-                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Description = "description",
-                    DurationInMonths = 0,
-                    Name = "name",
-                    PercentOff = 0,
-                    Source = CouponListResponseDataSource.Stigg,
-                    Status = CouponListResponseDataStatus.Active,
-                    Type = CouponListResponseDataType.Fixed,
-                    UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                },
-            ],
-            Pagination = new()
-            {
-                Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            },
-        };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<CouponListResponse>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new CouponListResponse
-        {
-            Data =
-            [
-                new()
-                {
-                    ID = "id",
-                    AmountsOff =
-                    [
-                        new()
-                        {
-                            Amount = 0,
-                            Currency = CouponListResponseDataAmountsOffCurrency.Usd,
-                        },
-                    ],
-                    BillingID = "billingId",
-                    BillingLinkUrl = "billingLinkUrl",
-                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Description = "description",
-                    DurationInMonths = 0,
-                    Name = "name",
-                    PercentOff = 0,
-                    Source = CouponListResponseDataSource.Stigg,
-                    Status = CouponListResponseDataStatus.Active,
-                    Type = CouponListResponseDataType.Fixed,
-                    UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                },
-            ],
-            Pagination = new()
-            {
-                Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            },
-        };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<CouponListResponse>(
-            element,
-            ModelBase.SerializerOptions
-        );
-        Assert.NotNull(deserialized);
-
-        List<CouponListResponseData> expectedData =
-        [
-            new()
-            {
-                ID = "id",
-                AmountsOff =
-                [
-                    new() { Amount = 0, Currency = CouponListResponseDataAmountsOffCurrency.Usd },
-                ],
-                BillingID = "billingId",
-                BillingLinkUrl = "billingLinkUrl",
-                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Description = "description",
-                DurationInMonths = 0,
-                Name = "name",
-                PercentOff = 0,
-                Source = CouponListResponseDataSource.Stigg,
-                Status = CouponListResponseDataStatus.Active,
-                Type = CouponListResponseDataType.Fixed,
-                UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            },
-        ];
-        Pagination expectedPagination = new()
-        {
-            Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        };
-
-        Assert.Equal(expectedData.Count, deserialized.Data.Count);
-        for (int i = 0; i < expectedData.Count; i++)
-        {
-            Assert.Equal(expectedData[i], deserialized.Data[i]);
-        }
-        Assert.Equal(expectedPagination, deserialized.Pagination);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new CouponListResponse
-        {
-            Data =
-            [
-                new()
-                {
-                    ID = "id",
-                    AmountsOff =
-                    [
-                        new()
-                        {
-                            Amount = 0,
-                            Currency = CouponListResponseDataAmountsOffCurrency.Usd,
-                        },
-                    ],
-                    BillingID = "billingId",
-                    BillingLinkUrl = "billingLinkUrl",
-                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Description = "description",
-                    DurationInMonths = 0,
-                    Name = "name",
-                    PercentOff = 0,
-                    Source = CouponListResponseDataSource.Stigg,
-                    Status = CouponListResponseDataStatus.Active,
-                    Type = CouponListResponseDataType.Fixed,
-                    UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                },
-            ],
-            Pagination = new()
-            {
-                Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            },
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new CouponListResponse
-        {
-            Data =
-            [
-                new()
-                {
-                    ID = "id",
-                    AmountsOff =
-                    [
-                        new()
-                        {
-                            Amount = 0,
-                            Currency = CouponListResponseDataAmountsOffCurrency.Usd,
-                        },
-                    ],
-                    BillingID = "billingId",
-                    BillingLinkUrl = "billingLinkUrl",
-                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Description = "description",
-                    DurationInMonths = 0,
-                    Name = "name",
-                    PercentOff = 0,
-                    Source = CouponListResponseDataSource.Stigg,
-                    Status = CouponListResponseDataStatus.Active,
-                    Type = CouponListResponseDataType.Fixed,
-                    UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                },
-            ],
-            Pagination = new()
-            {
-                Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            },
-        };
-
-        CouponListResponse copied = new(model);
-
-        Assert.Equal(model, copied);
-    }
-}
-
-public class CouponListResponseDataTest : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new CouponListResponseData
-        {
             ID = "id",
             AmountsOff =
             [
-                new() { Amount = 0, Currency = CouponListResponseDataAmountsOffCurrency.Usd },
+                new() { Amount = 0, Currency = CouponListResponseAmountsOffCurrency.Usd },
             ],
             BillingID = "billingId",
             BillingLinkUrl = "billingLinkUrl",
@@ -315,16 +26,16 @@ public class CouponListResponseDataTest : TestBase
             DurationInMonths = 0,
             Name = "name",
             PercentOff = 0,
-            Source = CouponListResponseDataSource.Stigg,
-            Status = CouponListResponseDataStatus.Active,
-            Type = CouponListResponseDataType.Fixed,
+            Source = CouponListResponseSource.Stigg,
+            Status = CouponListResponseStatus.Active,
+            Type = CouponListResponseType.Fixed,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         string expectedID = "id";
-        List<CouponListResponseDataAmountsOff> expectedAmountsOff =
+        List<CouponListResponseAmountsOff> expectedAmountsOff =
         [
-            new() { Amount = 0, Currency = CouponListResponseDataAmountsOffCurrency.Usd },
+            new() { Amount = 0, Currency = CouponListResponseAmountsOffCurrency.Usd },
         ];
         string expectedBillingID = "billingId";
         string expectedBillingLinkUrl = "billingLinkUrl";
@@ -333,11 +44,9 @@ public class CouponListResponseDataTest : TestBase
         double expectedDurationInMonths = 0;
         string expectedName = "name";
         double expectedPercentOff = 0;
-        ApiEnum<string, CouponListResponseDataSource> expectedSource =
-            CouponListResponseDataSource.Stigg;
-        ApiEnum<string, CouponListResponseDataStatus> expectedStatus =
-            CouponListResponseDataStatus.Active;
-        ApiEnum<string, CouponListResponseDataType> expectedType = CouponListResponseDataType.Fixed;
+        ApiEnum<string, CouponListResponseSource> expectedSource = CouponListResponseSource.Stigg;
+        ApiEnum<string, CouponListResponseStatus> expectedStatus = CouponListResponseStatus.Active;
+        ApiEnum<string, CouponListResponseType> expectedType = CouponListResponseType.Fixed;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedID, model.ID);
@@ -363,12 +72,12 @@ public class CouponListResponseDataTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new CouponListResponseData
+        var model = new CouponListResponse
         {
             ID = "id",
             AmountsOff =
             [
-                new() { Amount = 0, Currency = CouponListResponseDataAmountsOffCurrency.Usd },
+                new() { Amount = 0, Currency = CouponListResponseAmountsOffCurrency.Usd },
             ],
             BillingID = "billingId",
             BillingLinkUrl = "billingLinkUrl",
@@ -377,14 +86,14 @@ public class CouponListResponseDataTest : TestBase
             DurationInMonths = 0,
             Name = "name",
             PercentOff = 0,
-            Source = CouponListResponseDataSource.Stigg,
-            Status = CouponListResponseDataStatus.Active,
-            Type = CouponListResponseDataType.Fixed,
+            Source = CouponListResponseSource.Stigg,
+            Status = CouponListResponseStatus.Active,
+            Type = CouponListResponseType.Fixed,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<CouponListResponseData>(
+        var deserialized = JsonSerializer.Deserialize<CouponListResponse>(
             json,
             ModelBase.SerializerOptions
         );
@@ -395,12 +104,12 @@ public class CouponListResponseDataTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new CouponListResponseData
+        var model = new CouponListResponse
         {
             ID = "id",
             AmountsOff =
             [
-                new() { Amount = 0, Currency = CouponListResponseDataAmountsOffCurrency.Usd },
+                new() { Amount = 0, Currency = CouponListResponseAmountsOffCurrency.Usd },
             ],
             BillingID = "billingId",
             BillingLinkUrl = "billingLinkUrl",
@@ -409,23 +118,23 @@ public class CouponListResponseDataTest : TestBase
             DurationInMonths = 0,
             Name = "name",
             PercentOff = 0,
-            Source = CouponListResponseDataSource.Stigg,
-            Status = CouponListResponseDataStatus.Active,
-            Type = CouponListResponseDataType.Fixed,
+            Source = CouponListResponseSource.Stigg,
+            Status = CouponListResponseStatus.Active,
+            Type = CouponListResponseType.Fixed,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<CouponListResponseData>(
+        var deserialized = JsonSerializer.Deserialize<CouponListResponse>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
-        List<CouponListResponseDataAmountsOff> expectedAmountsOff =
+        List<CouponListResponseAmountsOff> expectedAmountsOff =
         [
-            new() { Amount = 0, Currency = CouponListResponseDataAmountsOffCurrency.Usd },
+            new() { Amount = 0, Currency = CouponListResponseAmountsOffCurrency.Usd },
         ];
         string expectedBillingID = "billingId";
         string expectedBillingLinkUrl = "billingLinkUrl";
@@ -434,11 +143,9 @@ public class CouponListResponseDataTest : TestBase
         double expectedDurationInMonths = 0;
         string expectedName = "name";
         double expectedPercentOff = 0;
-        ApiEnum<string, CouponListResponseDataSource> expectedSource =
-            CouponListResponseDataSource.Stigg;
-        ApiEnum<string, CouponListResponseDataStatus> expectedStatus =
-            CouponListResponseDataStatus.Active;
-        ApiEnum<string, CouponListResponseDataType> expectedType = CouponListResponseDataType.Fixed;
+        ApiEnum<string, CouponListResponseSource> expectedSource = CouponListResponseSource.Stigg;
+        ApiEnum<string, CouponListResponseStatus> expectedStatus = CouponListResponseStatus.Active;
+        ApiEnum<string, CouponListResponseType> expectedType = CouponListResponseType.Fixed;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedID, deserialized.ID);
@@ -464,12 +171,12 @@ public class CouponListResponseDataTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new CouponListResponseData
+        var model = new CouponListResponse
         {
             ID = "id",
             AmountsOff =
             [
-                new() { Amount = 0, Currency = CouponListResponseDataAmountsOffCurrency.Usd },
+                new() { Amount = 0, Currency = CouponListResponseAmountsOffCurrency.Usd },
             ],
             BillingID = "billingId",
             BillingLinkUrl = "billingLinkUrl",
@@ -478,9 +185,9 @@ public class CouponListResponseDataTest : TestBase
             DurationInMonths = 0,
             Name = "name",
             PercentOff = 0,
-            Source = CouponListResponseDataSource.Stigg,
-            Status = CouponListResponseDataStatus.Active,
-            Type = CouponListResponseDataType.Fixed,
+            Source = CouponListResponseSource.Stigg,
+            Status = CouponListResponseStatus.Active,
+            Type = CouponListResponseType.Fixed,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -490,12 +197,12 @@ public class CouponListResponseDataTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new CouponListResponseData
+        var model = new CouponListResponse
         {
             ID = "id",
             AmountsOff =
             [
-                new() { Amount = 0, Currency = CouponListResponseDataAmountsOffCurrency.Usd },
+                new() { Amount = 0, Currency = CouponListResponseAmountsOffCurrency.Usd },
             ],
             BillingID = "billingId",
             BillingLinkUrl = "billingLinkUrl",
@@ -504,32 +211,32 @@ public class CouponListResponseDataTest : TestBase
             DurationInMonths = 0,
             Name = "name",
             PercentOff = 0,
-            Source = CouponListResponseDataSource.Stigg,
-            Status = CouponListResponseDataStatus.Active,
-            Type = CouponListResponseDataType.Fixed,
+            Source = CouponListResponseSource.Stigg,
+            Status = CouponListResponseStatus.Active,
+            Type = CouponListResponseType.Fixed,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
-        CouponListResponseData copied = new(model);
+        CouponListResponse copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class CouponListResponseDataAmountsOffTest : TestBase
+public class CouponListResponseAmountsOffTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new CouponListResponseDataAmountsOff
+        var model = new CouponListResponseAmountsOff
         {
             Amount = 0,
-            Currency = CouponListResponseDataAmountsOffCurrency.Usd,
+            Currency = CouponListResponseAmountsOffCurrency.Usd,
         };
 
         double expectedAmount = 0;
-        ApiEnum<string, CouponListResponseDataAmountsOffCurrency> expectedCurrency =
-            CouponListResponseDataAmountsOffCurrency.Usd;
+        ApiEnum<string, CouponListResponseAmountsOffCurrency> expectedCurrency =
+            CouponListResponseAmountsOffCurrency.Usd;
 
         Assert.Equal(expectedAmount, model.Amount);
         Assert.Equal(expectedCurrency, model.Currency);
@@ -538,14 +245,14 @@ public class CouponListResponseDataAmountsOffTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new CouponListResponseDataAmountsOff
+        var model = new CouponListResponseAmountsOff
         {
             Amount = 0,
-            Currency = CouponListResponseDataAmountsOffCurrency.Usd,
+            Currency = CouponListResponseAmountsOffCurrency.Usd,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<CouponListResponseDataAmountsOff>(
+        var deserialized = JsonSerializer.Deserialize<CouponListResponseAmountsOff>(
             json,
             ModelBase.SerializerOptions
         );
@@ -556,22 +263,22 @@ public class CouponListResponseDataAmountsOffTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new CouponListResponseDataAmountsOff
+        var model = new CouponListResponseAmountsOff
         {
             Amount = 0,
-            Currency = CouponListResponseDataAmountsOffCurrency.Usd,
+            Currency = CouponListResponseAmountsOffCurrency.Usd,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<CouponListResponseDataAmountsOff>(
+        var deserialized = JsonSerializer.Deserialize<CouponListResponseAmountsOff>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
         double expectedAmount = 0;
-        ApiEnum<string, CouponListResponseDataAmountsOffCurrency> expectedCurrency =
-            CouponListResponseDataAmountsOffCurrency.Usd;
+        ApiEnum<string, CouponListResponseAmountsOffCurrency> expectedCurrency =
+            CouponListResponseAmountsOffCurrency.Usd;
 
         Assert.Equal(expectedAmount, deserialized.Amount);
         Assert.Equal(expectedCurrency, deserialized.Currency);
@@ -580,10 +287,10 @@ public class CouponListResponseDataAmountsOffTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new CouponListResponseDataAmountsOff
+        var model = new CouponListResponseAmountsOff
         {
             Amount = 0,
-            Currency = CouponListResponseDataAmountsOffCurrency.Usd,
+            Currency = CouponListResponseAmountsOffCurrency.Usd,
         };
 
         model.Validate();
@@ -592,141 +299,141 @@ public class CouponListResponseDataAmountsOffTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new CouponListResponseDataAmountsOff
+        var model = new CouponListResponseAmountsOff
         {
             Amount = 0,
-            Currency = CouponListResponseDataAmountsOffCurrency.Usd,
+            Currency = CouponListResponseAmountsOffCurrency.Usd,
         };
 
-        CouponListResponseDataAmountsOff copied = new(model);
+        CouponListResponseAmountsOff copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class CouponListResponseDataAmountsOffCurrencyTest : TestBase
+public class CouponListResponseAmountsOffCurrencyTest : TestBase
 {
     [Theory]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Usd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Aed)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.All)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Amd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Ang)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Aud)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Awg)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Azn)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Bam)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Bbd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Bdt)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Bgn)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Bif)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Bmd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Bnd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Bsd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Bwp)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Byn)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Bzd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Brl)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Cad)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Cdf)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Chf)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Cny)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Czk)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Dkk)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Dop)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Dzd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Egp)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Etb)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Eur)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Fjd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Gbp)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Gel)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Gip)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Gmd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Gyd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Hkd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Hrk)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Htg)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Idr)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Ils)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Inr)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Isk)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Jmd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Jpy)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Kes)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Kgs)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Khr)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Kmf)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Krw)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Kyd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Kzt)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Lbp)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Lkr)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Lrd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Lsl)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Mad)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Mdl)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Mga)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Mkd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Mmk)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Mnt)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Mop)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Mro)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Mvr)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Mwk)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Mxn)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Myr)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Mzn)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Nad)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Ngn)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Nok)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Npr)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Nzd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Pgk)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Php)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Pkr)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Pln)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Qar)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Ron)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Rsd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Rub)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Rwf)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Sar)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Sbd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Scr)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Sek)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Sgd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Sle)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Sll)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Sos)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Szl)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Thb)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Tjs)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Top)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Try)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Ttd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Tzs)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Uah)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Uzs)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Vnd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Vuv)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Wst)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Xaf)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Xcd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Yer)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Zar)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Zmw)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Clp)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Djf)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Gnf)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Ugx)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Pyg)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Xof)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Xpf)]
-    public void Validation_Works(CouponListResponseDataAmountsOffCurrency rawValue)
+    [InlineData(CouponListResponseAmountsOffCurrency.Usd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Aed)]
+    [InlineData(CouponListResponseAmountsOffCurrency.All)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Amd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Ang)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Aud)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Awg)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Azn)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Bam)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Bbd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Bdt)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Bgn)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Bif)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Bmd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Bnd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Bsd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Bwp)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Byn)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Bzd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Brl)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Cad)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Cdf)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Chf)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Cny)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Czk)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Dkk)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Dop)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Dzd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Egp)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Etb)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Eur)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Fjd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Gbp)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Gel)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Gip)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Gmd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Gyd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Hkd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Hrk)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Htg)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Idr)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Ils)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Inr)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Isk)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Jmd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Jpy)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Kes)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Kgs)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Khr)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Kmf)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Krw)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Kyd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Kzt)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Lbp)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Lkr)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Lrd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Lsl)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Mad)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Mdl)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Mga)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Mkd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Mmk)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Mnt)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Mop)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Mro)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Mvr)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Mwk)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Mxn)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Myr)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Mzn)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Nad)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Ngn)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Nok)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Npr)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Nzd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Pgk)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Php)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Pkr)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Pln)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Qar)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Ron)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Rsd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Rub)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Rwf)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Sar)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Sbd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Scr)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Sek)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Sgd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Sle)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Sll)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Sos)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Szl)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Thb)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Tjs)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Top)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Try)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Ttd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Tzs)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Uah)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Uzs)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Vnd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Vuv)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Wst)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Xaf)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Xcd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Yer)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Zar)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Zmw)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Clp)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Djf)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Gnf)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Ugx)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Pyg)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Xof)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Xpf)]
+    public void Validation_Works(CouponListResponseAmountsOffCurrency rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, CouponListResponseDataAmountsOffCurrency> value = rawValue;
+        ApiEnum<string, CouponListResponseAmountsOffCurrency> value = rawValue;
         value.Validate();
     }
 
@@ -734,7 +441,7 @@ public class CouponListResponseDataAmountsOffCurrencyTest : TestBase
     public void InvalidEnumValidationThrows_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, CouponListResponseDataAmountsOffCurrency>
+            ApiEnum<string, CouponListResponseAmountsOffCurrency>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
@@ -742,130 +449,130 @@ public class CouponListResponseDataAmountsOffCurrencyTest : TestBase
     }
 
     [Theory]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Usd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Aed)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.All)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Amd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Ang)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Aud)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Awg)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Azn)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Bam)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Bbd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Bdt)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Bgn)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Bif)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Bmd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Bnd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Bsd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Bwp)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Byn)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Bzd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Brl)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Cad)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Cdf)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Chf)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Cny)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Czk)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Dkk)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Dop)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Dzd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Egp)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Etb)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Eur)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Fjd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Gbp)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Gel)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Gip)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Gmd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Gyd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Hkd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Hrk)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Htg)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Idr)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Ils)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Inr)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Isk)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Jmd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Jpy)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Kes)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Kgs)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Khr)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Kmf)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Krw)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Kyd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Kzt)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Lbp)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Lkr)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Lrd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Lsl)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Mad)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Mdl)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Mga)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Mkd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Mmk)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Mnt)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Mop)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Mro)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Mvr)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Mwk)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Mxn)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Myr)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Mzn)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Nad)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Ngn)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Nok)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Npr)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Nzd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Pgk)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Php)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Pkr)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Pln)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Qar)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Ron)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Rsd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Rub)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Rwf)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Sar)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Sbd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Scr)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Sek)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Sgd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Sle)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Sll)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Sos)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Szl)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Thb)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Tjs)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Top)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Try)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Ttd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Tzs)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Uah)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Uzs)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Vnd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Vuv)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Wst)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Xaf)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Xcd)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Yer)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Zar)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Zmw)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Clp)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Djf)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Gnf)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Ugx)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Pyg)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Xof)]
-    [InlineData(CouponListResponseDataAmountsOffCurrency.Xpf)]
-    public void SerializationRoundtrip_Works(CouponListResponseDataAmountsOffCurrency rawValue)
+    [InlineData(CouponListResponseAmountsOffCurrency.Usd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Aed)]
+    [InlineData(CouponListResponseAmountsOffCurrency.All)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Amd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Ang)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Aud)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Awg)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Azn)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Bam)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Bbd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Bdt)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Bgn)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Bif)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Bmd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Bnd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Bsd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Bwp)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Byn)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Bzd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Brl)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Cad)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Cdf)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Chf)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Cny)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Czk)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Dkk)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Dop)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Dzd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Egp)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Etb)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Eur)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Fjd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Gbp)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Gel)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Gip)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Gmd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Gyd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Hkd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Hrk)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Htg)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Idr)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Ils)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Inr)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Isk)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Jmd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Jpy)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Kes)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Kgs)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Khr)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Kmf)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Krw)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Kyd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Kzt)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Lbp)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Lkr)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Lrd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Lsl)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Mad)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Mdl)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Mga)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Mkd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Mmk)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Mnt)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Mop)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Mro)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Mvr)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Mwk)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Mxn)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Myr)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Mzn)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Nad)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Ngn)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Nok)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Npr)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Nzd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Pgk)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Php)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Pkr)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Pln)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Qar)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Ron)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Rsd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Rub)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Rwf)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Sar)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Sbd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Scr)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Sek)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Sgd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Sle)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Sll)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Sos)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Szl)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Thb)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Tjs)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Top)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Try)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Ttd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Tzs)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Uah)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Uzs)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Vnd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Vuv)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Wst)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Xaf)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Xcd)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Yer)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Zar)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Zmw)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Clp)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Djf)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Gnf)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Ugx)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Pyg)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Xof)]
+    [InlineData(CouponListResponseAmountsOffCurrency.Xpf)]
+    public void SerializationRoundtrip_Works(CouponListResponseAmountsOffCurrency rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, CouponListResponseDataAmountsOffCurrency> value = rawValue;
+        ApiEnum<string, CouponListResponseAmountsOffCurrency> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, CouponListResponseDataAmountsOffCurrency>
+            ApiEnum<string, CouponListResponseAmountsOffCurrency>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -875,34 +582,34 @@ public class CouponListResponseDataAmountsOffCurrencyTest : TestBase
     public void InvalidEnumSerializationRoundtrip_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, CouponListResponseDataAmountsOffCurrency>
+            ApiEnum<string, CouponListResponseAmountsOffCurrency>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, CouponListResponseDataAmountsOffCurrency>
+            ApiEnum<string, CouponListResponseAmountsOffCurrency>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
 }
 
-public class CouponListResponseDataSourceTest : TestBase
+public class CouponListResponseSourceTest : TestBase
 {
     [Theory]
-    [InlineData(CouponListResponseDataSource.Stigg)]
-    [InlineData(CouponListResponseDataSource.StiggAdhoc)]
-    [InlineData(CouponListResponseDataSource.Stripe)]
-    public void Validation_Works(CouponListResponseDataSource rawValue)
+    [InlineData(CouponListResponseSource.Stigg)]
+    [InlineData(CouponListResponseSource.StiggAdhoc)]
+    [InlineData(CouponListResponseSource.Stripe)]
+    public void Validation_Works(CouponListResponseSource rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, CouponListResponseDataSource> value = rawValue;
+        ApiEnum<string, CouponListResponseSource> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, CouponListResponseDataSource>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, CouponListResponseSource>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -912,128 +619,16 @@ public class CouponListResponseDataSourceTest : TestBase
     }
 
     [Theory]
-    [InlineData(CouponListResponseDataSource.Stigg)]
-    [InlineData(CouponListResponseDataSource.StiggAdhoc)]
-    [InlineData(CouponListResponseDataSource.Stripe)]
-    public void SerializationRoundtrip_Works(CouponListResponseDataSource rawValue)
+    [InlineData(CouponListResponseSource.Stigg)]
+    [InlineData(CouponListResponseSource.StiggAdhoc)]
+    [InlineData(CouponListResponseSource.Stripe)]
+    public void SerializationRoundtrip_Works(CouponListResponseSource rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, CouponListResponseDataSource> value = rawValue;
+        ApiEnum<string, CouponListResponseSource> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, CouponListResponseDataSource>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, CouponListResponseDataSource>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, CouponListResponseDataSource>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-}
-
-public class CouponListResponseDataStatusTest : TestBase
-{
-    [Theory]
-    [InlineData(CouponListResponseDataStatus.Active)]
-    [InlineData(CouponListResponseDataStatus.Archived)]
-    public void Validation_Works(CouponListResponseDataStatus rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, CouponListResponseDataStatus> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, CouponListResponseDataStatus>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(CouponListResponseDataStatus.Active)]
-    [InlineData(CouponListResponseDataStatus.Archived)]
-    public void SerializationRoundtrip_Works(CouponListResponseDataStatus rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, CouponListResponseDataStatus> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, CouponListResponseDataStatus>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, CouponListResponseDataStatus>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, CouponListResponseDataStatus>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-}
-
-public class CouponListResponseDataTypeTest : TestBase
-{
-    [Theory]
-    [InlineData(CouponListResponseDataType.Fixed)]
-    [InlineData(CouponListResponseDataType.Percentage)]
-    public void Validation_Works(CouponListResponseDataType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, CouponListResponseDataType> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, CouponListResponseDataType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(CouponListResponseDataType.Fixed)]
-    [InlineData(CouponListResponseDataType.Percentage)]
-    public void SerializationRoundtrip_Works(CouponListResponseDataType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, CouponListResponseDataType> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, CouponListResponseDataType>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, CouponListResponseSource>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1044,12 +639,12 @@ public class CouponListResponseDataTypeTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, CouponListResponseDataType>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, CouponListResponseSource>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, CouponListResponseDataType>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, CouponListResponseSource>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1058,88 +653,118 @@ public class CouponListResponseDataTypeTest : TestBase
     }
 }
 
-public class PaginationTest : TestBase
+public class CouponListResponseStatusTest : TestBase
 {
-    [Fact]
-    public void FieldRoundtrip_Works()
+    [Theory]
+    [InlineData(CouponListResponseStatus.Active)]
+    [InlineData(CouponListResponseStatus.Archived)]
+    public void Validation_Works(CouponListResponseStatus rawValue)
     {
-        var model = new Pagination
-        {
-            Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        };
-
-        string expectedNext = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
-        string expectedPrev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
-
-        Assert.Equal(expectedNext, model.Next);
-        Assert.Equal(expectedPrev, model.Prev);
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, CouponListResponseStatus> value = rawValue;
+        value.Validate();
     }
 
     [Fact]
-    public void SerializationRoundtrip_Works()
+    public void InvalidEnumValidationThrows_Works()
     {
-        var model = new Pagination
-        {
-            Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        };
+        var value = JsonSerializer.Deserialize<ApiEnum<string, CouponListResponseStatus>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
 
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Pagination>(
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(CouponListResponseStatus.Active)]
+    [InlineData(CouponListResponseStatus.Archived)]
+    public void SerializationRoundtrip_Works(CouponListResponseStatus rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, CouponListResponseStatus> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, CouponListResponseStatus>>(
             json,
             ModelBase.SerializerOptions
         );
 
-        Assert.Equal(model, deserialized);
+        Assert.Equal(value, deserialized);
     }
 
     [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
+    public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var model = new Pagination
-        {
-            Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Pagination>(
-            element,
+        var value = JsonSerializer.Deserialize<ApiEnum<string, CouponListResponseStatus>>(
+            JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
-        Assert.NotNull(deserialized);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, CouponListResponseStatus>>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
-        string expectedNext = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
-        string expectedPrev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
+        Assert.Equal(value, deserialized);
+    }
+}
 
-        Assert.Equal(expectedNext, deserialized.Next);
-        Assert.Equal(expectedPrev, deserialized.Prev);
+public class CouponListResponseTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(CouponListResponseType.Fixed)]
+    [InlineData(CouponListResponseType.Percentage)]
+    public void Validation_Works(CouponListResponseType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, CouponListResponseType> value = rawValue;
+        value.Validate();
     }
 
     [Fact]
-    public void Validation_Works()
+    public void InvalidEnumValidationThrows_Works()
     {
-        var model = new Pagination
-        {
-            Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        };
+        var value = JsonSerializer.Deserialize<ApiEnum<string, CouponListResponseType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
 
-        model.Validate();
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(CouponListResponseType.Fixed)]
+    [InlineData(CouponListResponseType.Percentage)]
+    public void SerializationRoundtrip_Works(CouponListResponseType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, CouponListResponseType> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, CouponListResponseType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 
     [Fact]
-    public void CopyConstructor_Works()
+    public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var model = new Pagination
-        {
-            Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-        };
+        var value = JsonSerializer.Deserialize<ApiEnum<string, CouponListResponseType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, CouponListResponseType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
-        Pagination copied = new(model);
-
-        Assert.Equal(model, copied);
+        Assert.Equal(value, deserialized);
     }
 }

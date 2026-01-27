@@ -1,6 +1,5 @@
 using System.Collections.Frozen;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -14,90 +13,6 @@ namespace Stigg.Models.V1.Subscriptions;
     typeof(JsonModelConverter<SubscriptionListResponse, SubscriptionListResponseFromRaw>)
 )]
 public sealed record class SubscriptionListResponse : JsonModel
-{
-    public required IReadOnlyList<SubscriptionListResponseData> Data
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<ImmutableArray<SubscriptionListResponseData>>(
-                "data"
-            );
-        }
-        init
-        {
-            this._rawData.Set<ImmutableArray<SubscriptionListResponseData>>(
-                "data",
-                ImmutableArray.ToImmutableArray(value)
-            );
-        }
-    }
-
-    /// <summary>
-    /// Pagination information including cursors for navigation
-    /// </summary>
-    public required Pagination Pagination
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<Pagination>("pagination");
-        }
-        init { this._rawData.Set("pagination", value); }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        foreach (var item in this.Data)
-        {
-            item.Validate();
-        }
-        this.Pagination.Validate();
-    }
-
-    public SubscriptionListResponse() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public SubscriptionListResponse(SubscriptionListResponse subscriptionListResponse)
-        : base(subscriptionListResponse) { }
-#pragma warning restore CS8618
-
-    public SubscriptionListResponse(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    SubscriptionListResponse(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="SubscriptionListResponseFromRaw.FromRawUnchecked"/>
-    public static SubscriptionListResponse FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-}
-
-class SubscriptionListResponseFromRaw : IFromRawJson<SubscriptionListResponse>
-{
-    /// <inheritdoc/>
-    public SubscriptionListResponse FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => SubscriptionListResponse.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(
-    typeof(JsonModelConverter<SubscriptionListResponseData, SubscriptionListResponseDataFromRaw>)
-)]
-public sealed record class SubscriptionListResponseData : JsonModel
 {
     /// <summary>
     /// Subscription ID
@@ -154,13 +69,13 @@ public sealed record class SubscriptionListResponseData : JsonModel
     /// <summary>
     /// Payment collection
     /// </summary>
-    public required ApiEnum<string, SubscriptionListResponseDataPaymentCollection> PaymentCollection
+    public required ApiEnum<string, SubscriptionListResponsePaymentCollection> PaymentCollection
     {
         get
         {
             this._rawData.Freeze();
             return this._rawData.GetNotNullClass<
-                ApiEnum<string, SubscriptionListResponseDataPaymentCollection>
+                ApiEnum<string, SubscriptionListResponsePaymentCollection>
             >("paymentCollection");
         }
         init { this._rawData.Set("paymentCollection", value); }
@@ -182,13 +97,13 @@ public sealed record class SubscriptionListResponseData : JsonModel
     /// <summary>
     /// Pricing type
     /// </summary>
-    public required ApiEnum<string, SubscriptionListResponseDataPricingType> PricingType
+    public required ApiEnum<string, SubscriptionListResponsePricingType> PricingType
     {
         get
         {
             this._rawData.Freeze();
             return this._rawData.GetNotNullClass<
-                ApiEnum<string, SubscriptionListResponseDataPricingType>
+                ApiEnum<string, SubscriptionListResponsePricingType>
             >("pricingType");
         }
         init { this._rawData.Set("pricingType", value); }
@@ -210,14 +125,14 @@ public sealed record class SubscriptionListResponseData : JsonModel
     /// <summary>
     /// Subscription status
     /// </summary>
-    public required ApiEnum<string, SubscriptionListResponseDataStatus> Status
+    public required ApiEnum<string, SubscriptionListResponseStatus> Status
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, SubscriptionListResponseDataStatus>
-            >("status");
+            return this._rawData.GetNotNullClass<ApiEnum<string, SubscriptionListResponseStatus>>(
+                "status"
+            );
         }
         init { this._rawData.Set("status", value); }
     }
@@ -238,13 +153,13 @@ public sealed record class SubscriptionListResponseData : JsonModel
     /// <summary>
     /// Subscription cancel reason
     /// </summary>
-    public ApiEnum<string, SubscriptionListResponseDataCancelReason>? CancelReason
+    public ApiEnum<string, SubscriptionListResponseCancelReason>? CancelReason
     {
         get
         {
             this._rawData.Freeze();
             return this._rawData.GetNullableClass<
-                ApiEnum<string, SubscriptionListResponseDataCancelReason>
+                ApiEnum<string, SubscriptionListResponseCancelReason>
             >("cancelReason");
         }
         init { this._rawData.Set("cancelReason", value); }
@@ -346,16 +261,13 @@ public sealed record class SubscriptionListResponseData : JsonModel
     /// <summary>
     /// The method used to collect payments for a subscription
     /// </summary>
-    public ApiEnum<
-        string,
-        SubscriptionListResponseDataPaymentCollectionMethod
-    >? PaymentCollectionMethod
+    public ApiEnum<string, SubscriptionListResponsePaymentCollectionMethod>? PaymentCollectionMethod
     {
         get
         {
             this._rawData.Freeze();
             return this._rawData.GetNullableClass<
-                ApiEnum<string, SubscriptionListResponseDataPaymentCollectionMethod>
+                ApiEnum<string, SubscriptionListResponsePaymentCollectionMethod>
             >("paymentCollectionMethod");
         }
         init { this._rawData.Set("paymentCollectionMethod", value); }
@@ -412,29 +324,29 @@ public sealed record class SubscriptionListResponseData : JsonModel
         _ = this.TrialEndDate;
     }
 
-    public SubscriptionListResponseData() { }
+    public SubscriptionListResponse() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public SubscriptionListResponseData(SubscriptionListResponseData subscriptionListResponseData)
-        : base(subscriptionListResponseData) { }
+    public SubscriptionListResponse(SubscriptionListResponse subscriptionListResponse)
+        : base(subscriptionListResponse) { }
 #pragma warning restore CS8618
 
-    public SubscriptionListResponseData(IReadOnlyDictionary<string, JsonElement> rawData)
+    public SubscriptionListResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    SubscriptionListResponseData(FrozenDictionary<string, JsonElement> rawData)
+    SubscriptionListResponse(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="SubscriptionListResponseDataFromRaw.FromRawUnchecked"/>
-    public static SubscriptionListResponseData FromRawUnchecked(
+    /// <inheritdoc cref="SubscriptionListResponseFromRaw.FromRawUnchecked"/>
+    public static SubscriptionListResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -442,19 +354,19 @@ public sealed record class SubscriptionListResponseData : JsonModel
     }
 }
 
-class SubscriptionListResponseDataFromRaw : IFromRawJson<SubscriptionListResponseData>
+class SubscriptionListResponseFromRaw : IFromRawJson<SubscriptionListResponse>
 {
     /// <inheritdoc/>
-    public SubscriptionListResponseData FromRawUnchecked(
+    public SubscriptionListResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => SubscriptionListResponseData.FromRawUnchecked(rawData);
+    ) => SubscriptionListResponse.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// Payment collection
 /// </summary>
-[JsonConverter(typeof(SubscriptionListResponseDataPaymentCollectionConverter))]
-public enum SubscriptionListResponseDataPaymentCollection
+[JsonConverter(typeof(SubscriptionListResponsePaymentCollectionConverter))]
+public enum SubscriptionListResponsePaymentCollection
 {
     NotRequired,
     Processing,
@@ -462,10 +374,10 @@ public enum SubscriptionListResponseDataPaymentCollection
     ActionRequired,
 }
 
-sealed class SubscriptionListResponseDataPaymentCollectionConverter
-    : JsonConverter<SubscriptionListResponseDataPaymentCollection>
+sealed class SubscriptionListResponsePaymentCollectionConverter
+    : JsonConverter<SubscriptionListResponsePaymentCollection>
 {
-    public override SubscriptionListResponseDataPaymentCollection Read(
+    public override SubscriptionListResponsePaymentCollection Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -473,17 +385,17 @@ sealed class SubscriptionListResponseDataPaymentCollectionConverter
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "NOT_REQUIRED" => SubscriptionListResponseDataPaymentCollection.NotRequired,
-            "PROCESSING" => SubscriptionListResponseDataPaymentCollection.Processing,
-            "FAILED" => SubscriptionListResponseDataPaymentCollection.Failed,
-            "ACTION_REQUIRED" => SubscriptionListResponseDataPaymentCollection.ActionRequired,
-            _ => (SubscriptionListResponseDataPaymentCollection)(-1),
+            "NOT_REQUIRED" => SubscriptionListResponsePaymentCollection.NotRequired,
+            "PROCESSING" => SubscriptionListResponsePaymentCollection.Processing,
+            "FAILED" => SubscriptionListResponsePaymentCollection.Failed,
+            "ACTION_REQUIRED" => SubscriptionListResponsePaymentCollection.ActionRequired,
+            _ => (SubscriptionListResponsePaymentCollection)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        SubscriptionListResponseDataPaymentCollection value,
+        SubscriptionListResponsePaymentCollection value,
         JsonSerializerOptions options
     )
     {
@@ -491,10 +403,10 @@ sealed class SubscriptionListResponseDataPaymentCollectionConverter
             writer,
             value switch
             {
-                SubscriptionListResponseDataPaymentCollection.NotRequired => "NOT_REQUIRED",
-                SubscriptionListResponseDataPaymentCollection.Processing => "PROCESSING",
-                SubscriptionListResponseDataPaymentCollection.Failed => "FAILED",
-                SubscriptionListResponseDataPaymentCollection.ActionRequired => "ACTION_REQUIRED",
+                SubscriptionListResponsePaymentCollection.NotRequired => "NOT_REQUIRED",
+                SubscriptionListResponsePaymentCollection.Processing => "PROCESSING",
+                SubscriptionListResponsePaymentCollection.Failed => "FAILED",
+                SubscriptionListResponsePaymentCollection.ActionRequired => "ACTION_REQUIRED",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -507,18 +419,18 @@ sealed class SubscriptionListResponseDataPaymentCollectionConverter
 /// <summary>
 /// Pricing type
 /// </summary>
-[JsonConverter(typeof(SubscriptionListResponseDataPricingTypeConverter))]
-public enum SubscriptionListResponseDataPricingType
+[JsonConverter(typeof(SubscriptionListResponsePricingTypeConverter))]
+public enum SubscriptionListResponsePricingType
 {
     Free,
     Paid,
     Custom,
 }
 
-sealed class SubscriptionListResponseDataPricingTypeConverter
-    : JsonConverter<SubscriptionListResponseDataPricingType>
+sealed class SubscriptionListResponsePricingTypeConverter
+    : JsonConverter<SubscriptionListResponsePricingType>
 {
-    public override SubscriptionListResponseDataPricingType Read(
+    public override SubscriptionListResponsePricingType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -526,16 +438,16 @@ sealed class SubscriptionListResponseDataPricingTypeConverter
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "FREE" => SubscriptionListResponseDataPricingType.Free,
-            "PAID" => SubscriptionListResponseDataPricingType.Paid,
-            "CUSTOM" => SubscriptionListResponseDataPricingType.Custom,
-            _ => (SubscriptionListResponseDataPricingType)(-1),
+            "FREE" => SubscriptionListResponsePricingType.Free,
+            "PAID" => SubscriptionListResponsePricingType.Paid,
+            "CUSTOM" => SubscriptionListResponsePricingType.Custom,
+            _ => (SubscriptionListResponsePricingType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        SubscriptionListResponseDataPricingType value,
+        SubscriptionListResponsePricingType value,
         JsonSerializerOptions options
     )
     {
@@ -543,9 +455,9 @@ sealed class SubscriptionListResponseDataPricingTypeConverter
             writer,
             value switch
             {
-                SubscriptionListResponseDataPricingType.Free => "FREE",
-                SubscriptionListResponseDataPricingType.Paid => "PAID",
-                SubscriptionListResponseDataPricingType.Custom => "CUSTOM",
+                SubscriptionListResponsePricingType.Free => "FREE",
+                SubscriptionListResponsePricingType.Paid => "PAID",
+                SubscriptionListResponsePricingType.Custom => "CUSTOM",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -558,8 +470,8 @@ sealed class SubscriptionListResponseDataPricingTypeConverter
 /// <summary>
 /// Subscription status
 /// </summary>
-[JsonConverter(typeof(SubscriptionListResponseDataStatusConverter))]
-public enum SubscriptionListResponseDataStatus
+[JsonConverter(typeof(SubscriptionListResponseStatusConverter))]
+public enum SubscriptionListResponseStatus
 {
     PaymentPending,
     Active,
@@ -569,10 +481,9 @@ public enum SubscriptionListResponseDataStatus
     NotStarted,
 }
 
-sealed class SubscriptionListResponseDataStatusConverter
-    : JsonConverter<SubscriptionListResponseDataStatus>
+sealed class SubscriptionListResponseStatusConverter : JsonConverter<SubscriptionListResponseStatus>
 {
-    public override SubscriptionListResponseDataStatus Read(
+    public override SubscriptionListResponseStatus Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -580,19 +491,19 @@ sealed class SubscriptionListResponseDataStatusConverter
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "PAYMENT_PENDING" => SubscriptionListResponseDataStatus.PaymentPending,
-            "ACTIVE" => SubscriptionListResponseDataStatus.Active,
-            "EXPIRED" => SubscriptionListResponseDataStatus.Expired,
-            "IN_TRIAL" => SubscriptionListResponseDataStatus.InTrial,
-            "CANCELED" => SubscriptionListResponseDataStatus.Canceled,
-            "NOT_STARTED" => SubscriptionListResponseDataStatus.NotStarted,
-            _ => (SubscriptionListResponseDataStatus)(-1),
+            "PAYMENT_PENDING" => SubscriptionListResponseStatus.PaymentPending,
+            "ACTIVE" => SubscriptionListResponseStatus.Active,
+            "EXPIRED" => SubscriptionListResponseStatus.Expired,
+            "IN_TRIAL" => SubscriptionListResponseStatus.InTrial,
+            "CANCELED" => SubscriptionListResponseStatus.Canceled,
+            "NOT_STARTED" => SubscriptionListResponseStatus.NotStarted,
+            _ => (SubscriptionListResponseStatus)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        SubscriptionListResponseDataStatus value,
+        SubscriptionListResponseStatus value,
         JsonSerializerOptions options
     )
     {
@@ -600,12 +511,12 @@ sealed class SubscriptionListResponseDataStatusConverter
             writer,
             value switch
             {
-                SubscriptionListResponseDataStatus.PaymentPending => "PAYMENT_PENDING",
-                SubscriptionListResponseDataStatus.Active => "ACTIVE",
-                SubscriptionListResponseDataStatus.Expired => "EXPIRED",
-                SubscriptionListResponseDataStatus.InTrial => "IN_TRIAL",
-                SubscriptionListResponseDataStatus.Canceled => "CANCELED",
-                SubscriptionListResponseDataStatus.NotStarted => "NOT_STARTED",
+                SubscriptionListResponseStatus.PaymentPending => "PAYMENT_PENDING",
+                SubscriptionListResponseStatus.Active => "ACTIVE",
+                SubscriptionListResponseStatus.Expired => "EXPIRED",
+                SubscriptionListResponseStatus.InTrial => "IN_TRIAL",
+                SubscriptionListResponseStatus.Canceled => "CANCELED",
+                SubscriptionListResponseStatus.NotStarted => "NOT_STARTED",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -618,8 +529,8 @@ sealed class SubscriptionListResponseDataStatusConverter
 /// <summary>
 /// Subscription cancel reason
 /// </summary>
-[JsonConverter(typeof(SubscriptionListResponseDataCancelReasonConverter))]
-public enum SubscriptionListResponseDataCancelReason
+[JsonConverter(typeof(SubscriptionListResponseCancelReasonConverter))]
+public enum SubscriptionListResponseCancelReason
 {
     UpgradeOrDowngrade,
     CancelledByBilling,
@@ -634,10 +545,10 @@ public enum SubscriptionListResponseDataCancelReason
     AutoCancellationRule,
 }
 
-sealed class SubscriptionListResponseDataCancelReasonConverter
-    : JsonConverter<SubscriptionListResponseDataCancelReason>
+sealed class SubscriptionListResponseCancelReasonConverter
+    : JsonConverter<SubscriptionListResponseCancelReason>
 {
-    public override SubscriptionListResponseDataCancelReason Read(
+    public override SubscriptionListResponseCancelReason Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -645,26 +556,24 @@ sealed class SubscriptionListResponseDataCancelReasonConverter
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "UPGRADE_OR_DOWNGRADE" => SubscriptionListResponseDataCancelReason.UpgradeOrDowngrade,
-            "CANCELLED_BY_BILLING" => SubscriptionListResponseDataCancelReason.CancelledByBilling,
-            "EXPIRED" => SubscriptionListResponseDataCancelReason.Expired,
-            "DETACH_BILLING" => SubscriptionListResponseDataCancelReason.DetachBilling,
-            "TRIAL_ENDED" => SubscriptionListResponseDataCancelReason.TrialEnded,
-            "Immediate" => SubscriptionListResponseDataCancelReason.Immediate,
-            "TRIAL_CONVERTED" => SubscriptionListResponseDataCancelReason.TrialConverted,
-            "PENDING_PAYMENT_EXPIRED" =>
-                SubscriptionListResponseDataCancelReason.PendingPaymentExpired,
-            "ScheduledCancellation" =>
-                SubscriptionListResponseDataCancelReason.ScheduledCancellation,
-            "CustomerArchived" => SubscriptionListResponseDataCancelReason.CustomerArchived,
-            "AutoCancellationRule" => SubscriptionListResponseDataCancelReason.AutoCancellationRule,
-            _ => (SubscriptionListResponseDataCancelReason)(-1),
+            "UPGRADE_OR_DOWNGRADE" => SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
+            "CANCELLED_BY_BILLING" => SubscriptionListResponseCancelReason.CancelledByBilling,
+            "EXPIRED" => SubscriptionListResponseCancelReason.Expired,
+            "DETACH_BILLING" => SubscriptionListResponseCancelReason.DetachBilling,
+            "TRIAL_ENDED" => SubscriptionListResponseCancelReason.TrialEnded,
+            "Immediate" => SubscriptionListResponseCancelReason.Immediate,
+            "TRIAL_CONVERTED" => SubscriptionListResponseCancelReason.TrialConverted,
+            "PENDING_PAYMENT_EXPIRED" => SubscriptionListResponseCancelReason.PendingPaymentExpired,
+            "ScheduledCancellation" => SubscriptionListResponseCancelReason.ScheduledCancellation,
+            "CustomerArchived" => SubscriptionListResponseCancelReason.CustomerArchived,
+            "AutoCancellationRule" => SubscriptionListResponseCancelReason.AutoCancellationRule,
+            _ => (SubscriptionListResponseCancelReason)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        SubscriptionListResponseDataCancelReason value,
+        SubscriptionListResponseCancelReason value,
         JsonSerializerOptions options
     )
     {
@@ -672,22 +581,19 @@ sealed class SubscriptionListResponseDataCancelReasonConverter
             writer,
             value switch
             {
-                SubscriptionListResponseDataCancelReason.UpgradeOrDowngrade =>
-                    "UPGRADE_OR_DOWNGRADE",
-                SubscriptionListResponseDataCancelReason.CancelledByBilling =>
-                    "CANCELLED_BY_BILLING",
-                SubscriptionListResponseDataCancelReason.Expired => "EXPIRED",
-                SubscriptionListResponseDataCancelReason.DetachBilling => "DETACH_BILLING",
-                SubscriptionListResponseDataCancelReason.TrialEnded => "TRIAL_ENDED",
-                SubscriptionListResponseDataCancelReason.Immediate => "Immediate",
-                SubscriptionListResponseDataCancelReason.TrialConverted => "TRIAL_CONVERTED",
-                SubscriptionListResponseDataCancelReason.PendingPaymentExpired =>
+                SubscriptionListResponseCancelReason.UpgradeOrDowngrade => "UPGRADE_OR_DOWNGRADE",
+                SubscriptionListResponseCancelReason.CancelledByBilling => "CANCELLED_BY_BILLING",
+                SubscriptionListResponseCancelReason.Expired => "EXPIRED",
+                SubscriptionListResponseCancelReason.DetachBilling => "DETACH_BILLING",
+                SubscriptionListResponseCancelReason.TrialEnded => "TRIAL_ENDED",
+                SubscriptionListResponseCancelReason.Immediate => "Immediate",
+                SubscriptionListResponseCancelReason.TrialConverted => "TRIAL_CONVERTED",
+                SubscriptionListResponseCancelReason.PendingPaymentExpired =>
                     "PENDING_PAYMENT_EXPIRED",
-                SubscriptionListResponseDataCancelReason.ScheduledCancellation =>
+                SubscriptionListResponseCancelReason.ScheduledCancellation =>
                     "ScheduledCancellation",
-                SubscriptionListResponseDataCancelReason.CustomerArchived => "CustomerArchived",
-                SubscriptionListResponseDataCancelReason.AutoCancellationRule =>
-                    "AutoCancellationRule",
+                SubscriptionListResponseCancelReason.CustomerArchived => "CustomerArchived",
+                SubscriptionListResponseCancelReason.AutoCancellationRule => "AutoCancellationRule",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -700,18 +606,18 @@ sealed class SubscriptionListResponseDataCancelReasonConverter
 /// <summary>
 /// The method used to collect payments for a subscription
 /// </summary>
-[JsonConverter(typeof(SubscriptionListResponseDataPaymentCollectionMethodConverter))]
-public enum SubscriptionListResponseDataPaymentCollectionMethod
+[JsonConverter(typeof(SubscriptionListResponsePaymentCollectionMethodConverter))]
+public enum SubscriptionListResponsePaymentCollectionMethod
 {
     Charge,
     Invoice,
     None,
 }
 
-sealed class SubscriptionListResponseDataPaymentCollectionMethodConverter
-    : JsonConverter<SubscriptionListResponseDataPaymentCollectionMethod>
+sealed class SubscriptionListResponsePaymentCollectionMethodConverter
+    : JsonConverter<SubscriptionListResponsePaymentCollectionMethod>
 {
-    public override SubscriptionListResponseDataPaymentCollectionMethod Read(
+    public override SubscriptionListResponsePaymentCollectionMethod Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -719,16 +625,16 @@ sealed class SubscriptionListResponseDataPaymentCollectionMethodConverter
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "CHARGE" => SubscriptionListResponseDataPaymentCollectionMethod.Charge,
-            "INVOICE" => SubscriptionListResponseDataPaymentCollectionMethod.Invoice,
-            "NONE" => SubscriptionListResponseDataPaymentCollectionMethod.None,
-            _ => (SubscriptionListResponseDataPaymentCollectionMethod)(-1),
+            "CHARGE" => SubscriptionListResponsePaymentCollectionMethod.Charge,
+            "INVOICE" => SubscriptionListResponsePaymentCollectionMethod.Invoice,
+            "NONE" => SubscriptionListResponsePaymentCollectionMethod.None,
+            _ => (SubscriptionListResponsePaymentCollectionMethod)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        SubscriptionListResponseDataPaymentCollectionMethod value,
+        SubscriptionListResponsePaymentCollectionMethod value,
         JsonSerializerOptions options
     )
     {
@@ -736,9 +642,9 @@ sealed class SubscriptionListResponseDataPaymentCollectionMethodConverter
             writer,
             value switch
             {
-                SubscriptionListResponseDataPaymentCollectionMethod.Charge => "CHARGE",
-                SubscriptionListResponseDataPaymentCollectionMethod.Invoice => "INVOICE",
-                SubscriptionListResponseDataPaymentCollectionMethod.None => "NONE",
+                SubscriptionListResponsePaymentCollectionMethod.Charge => "CHARGE",
+                SubscriptionListResponsePaymentCollectionMethod.Invoice => "INVOICE",
+                SubscriptionListResponsePaymentCollectionMethod.None => "NONE",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -746,79 +652,4 @@ sealed class SubscriptionListResponseDataPaymentCollectionMethodConverter
             options
         );
     }
-}
-
-/// <summary>
-/// Pagination information including cursors for navigation
-/// </summary>
-[JsonConverter(typeof(JsonModelConverter<Pagination, PaginationFromRaw>))]
-public sealed record class Pagination : JsonModel
-{
-    /// <summary>
-    /// Cursor to fetch the next page (use with after parameter), null if no more pages
-    /// </summary>
-    public required string? Next
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("next");
-        }
-        init { this._rawData.Set("next", value); }
-    }
-
-    /// <summary>
-    /// Cursor to fetch the previous page (use with before parameter), null if no
-    /// previous pages
-    /// </summary>
-    public required string? Prev
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("prev");
-        }
-        init { this._rawData.Set("prev", value); }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        _ = this.Next;
-        _ = this.Prev;
-    }
-
-    public Pagination() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public Pagination(Pagination pagination)
-        : base(pagination) { }
-#pragma warning restore CS8618
-
-    public Pagination(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    Pagination(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="PaginationFromRaw.FromRawUnchecked"/>
-    public static Pagination FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-}
-
-class PaginationFromRaw : IFromRawJson<Pagination>
-{
-    /// <inheritdoc/>
-    public Pagination FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        Pagination.FromRawUnchecked(rawData);
 }
