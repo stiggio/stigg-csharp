@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.0 (2026-01-27)
+
+Full Changelog: [v0.2.0...v0.3.0](https://github.com/stiggio/stigg-csharp/compare/v0.2.0...v0.3.0)
+
+### Features
+
+* **api:** api update ([40dc9b7](https://github.com/stiggio/stigg-csharp/commit/40dc9b72e62791808562c7ad203124bbbce67c6c))
+* **api:** api update ([4b0be39](https://github.com/stiggio/stigg-csharp/commit/4b0be39c8f34f896de3f29b34751db9050209a37))
+* **api:** improved cursor pagination ([66b0de9](https://github.com/stiggio/stigg-csharp/commit/66b0de9926a3976f701972a46d59adf5a0684ab9))
+
 ## 0.2.0 (2026-01-27)
 
 Full Changelog: [v0.1.0...v0.2.0](https://github.com/stiggio/stigg-csharp/compare/v0.1.0...v0.2.0)
