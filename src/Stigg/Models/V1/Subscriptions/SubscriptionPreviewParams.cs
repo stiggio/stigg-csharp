@@ -841,9 +841,6 @@ class DiscountFromRaw : IFromRawJson<Discount>
 [JsonConverter(typeof(JsonModelConverter<AmountsOff, AmountsOffFromRaw>))]
 public sealed record class AmountsOff : JsonModel
 {
-    /// <summary>
-    /// The price amount
-    /// </summary>
     public required double Amount
     {
         get
@@ -854,24 +851,29 @@ public sealed record class AmountsOff : JsonModel
         init { this._rawData.Set("amount", value); }
     }
 
-    /// <summary>
-    /// The price currency
-    /// </summary>
-    public required ApiEnum<string, Currency> Currency
+    public ApiEnum<string, Currency>? Currency
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency");
+            return this._rawData.GetNullableClass<ApiEnum<string, Currency>>("currency");
         }
-        init { this._rawData.Set("currency", value); }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("currency", value);
+        }
     }
 
     /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Amount;
-        this.Currency.Validate();
+        this.Currency?.Validate();
     }
 
     public AmountsOff() { }
@@ -900,6 +902,13 @@ public sealed record class AmountsOff : JsonModel
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+
+    [SetsRequiredMembers]
+    public AmountsOff(double amount)
+        : this()
+    {
+        this.Amount = amount;
+    }
 }
 
 class AmountsOffFromRaw : IFromRawJson<AmountsOff>
@@ -909,9 +918,6 @@ class AmountsOffFromRaw : IFromRawJson<AmountsOff>
         AmountsOff.FromRawUnchecked(rawData);
 }
 
-/// <summary>
-/// The price currency
-/// </summary>
 [JsonConverter(typeof(CurrencyConverter))]
 public enum Currency
 {

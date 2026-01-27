@@ -72,7 +72,7 @@ public interface ICustomerService
     /// <summary>
     /// Get a list of Customers
     /// </summary>
-    Task<CustomerListResponse> List(
+    Task<CustomerListPage> List(
         CustomerListParams? parameters = null,
         CancellationToken cancellationToken = default
     );
@@ -170,7 +170,7 @@ public interface ICustomerServiceWithRawResponse
     /// Returns a raw HTTP response for `get /api/v1/customers`, but is otherwise the
     /// same as <see cref="ICustomerService.List(CustomerListParams?, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<CustomerListResponse>> List(
+    Task<HttpResponse<CustomerListPage>> List(
         CustomerListParams? parameters = null,
         CancellationToken cancellationToken = default
     );

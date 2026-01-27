@@ -13,88 +13,6 @@ namespace Stigg.Models.V1.Customers;
 [JsonConverter(typeof(JsonModelConverter<CustomerListResponse, CustomerListResponseFromRaw>))]
 public sealed record class CustomerListResponse : JsonModel
 {
-    public required IReadOnlyList<CustomerListResponseData> Data
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<ImmutableArray<CustomerListResponseData>>("data");
-        }
-        init
-        {
-            this._rawData.Set<ImmutableArray<CustomerListResponseData>>(
-                "data",
-                ImmutableArray.ToImmutableArray(value)
-            );
-        }
-    }
-
-    /// <summary>
-    /// Pagination information including cursors for navigation
-    /// </summary>
-    public required Pagination Pagination
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<Pagination>("pagination");
-        }
-        init { this._rawData.Set("pagination", value); }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        foreach (var item in this.Data)
-        {
-            item.Validate();
-        }
-        this.Pagination.Validate();
-    }
-
-    public CustomerListResponse() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public CustomerListResponse(CustomerListResponse customerListResponse)
-        : base(customerListResponse) { }
-#pragma warning restore CS8618
-
-    public CustomerListResponse(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    CustomerListResponse(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="CustomerListResponseFromRaw.FromRawUnchecked"/>
-    public static CustomerListResponse FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-}
-
-class CustomerListResponseFromRaw : IFromRawJson<CustomerListResponse>
-{
-    /// <inheritdoc/>
-    public CustomerListResponse FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => CustomerListResponse.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(
-    typeof(JsonModelConverter<CustomerListResponseData, CustomerListResponseDataFromRaw>)
-)]
-public sealed record class CustomerListResponseData : JsonModel
-{
     /// <summary>
     /// Customer slug
     /// </summary>
@@ -163,12 +81,12 @@ public sealed record class CustomerListResponseData : JsonModel
     /// <summary>
     /// The default payment method details
     /// </summary>
-    public CustomerListResponseDataDefaultPaymentMethod? DefaultPaymentMethod
+    public CustomerListResponseDefaultPaymentMethod? DefaultPaymentMethod
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<CustomerListResponseDataDefaultPaymentMethod>(
+            return this._rawData.GetNullableClass<CustomerListResponseDefaultPaymentMethod>(
                 "defaultPaymentMethod"
             );
         }
@@ -191,14 +109,14 @@ public sealed record class CustomerListResponseData : JsonModel
     /// <summary>
     /// List of integrations
     /// </summary>
-    public IReadOnlyList<CustomerListResponseDataIntegration>? Integrations
+    public IReadOnlyList<CustomerListResponseIntegration>? Integrations
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<
-                ImmutableArray<CustomerListResponseDataIntegration>
-            >("integrations");
+            return this._rawData.GetNullableStruct<ImmutableArray<CustomerListResponseIntegration>>(
+                "integrations"
+            );
         }
         init
         {
@@ -207,7 +125,7 @@ public sealed record class CustomerListResponseData : JsonModel
                 return;
             }
 
-            this._rawData.Set<ImmutableArray<CustomerListResponseDataIntegration>?>(
+            this._rawData.Set<ImmutableArray<CustomerListResponseIntegration>?>(
                 "integrations",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
@@ -269,29 +187,29 @@ public sealed record class CustomerListResponseData : JsonModel
         _ = this.Name;
     }
 
-    public CustomerListResponseData() { }
+    public CustomerListResponse() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public CustomerListResponseData(CustomerListResponseData customerListResponseData)
-        : base(customerListResponseData) { }
+    public CustomerListResponse(CustomerListResponse customerListResponse)
+        : base(customerListResponse) { }
 #pragma warning restore CS8618
 
-    public CustomerListResponseData(IReadOnlyDictionary<string, JsonElement> rawData)
+    public CustomerListResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    CustomerListResponseData(FrozenDictionary<string, JsonElement> rawData)
+    CustomerListResponse(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="CustomerListResponseDataFromRaw.FromRawUnchecked"/>
-    public static CustomerListResponseData FromRawUnchecked(
+    /// <inheritdoc cref="CustomerListResponseFromRaw.FromRawUnchecked"/>
+    public static CustomerListResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -299,12 +217,12 @@ public sealed record class CustomerListResponseData : JsonModel
     }
 }
 
-class CustomerListResponseDataFromRaw : IFromRawJson<CustomerListResponseData>
+class CustomerListResponseFromRaw : IFromRawJson<CustomerListResponse>
 {
     /// <inheritdoc/>
-    public CustomerListResponseData FromRawUnchecked(
+    public CustomerListResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => CustomerListResponseData.FromRawUnchecked(rawData);
+    ) => CustomerListResponse.FromRawUnchecked(rawData);
 }
 
 /// <summary>
@@ -312,11 +230,11 @@ class CustomerListResponseDataFromRaw : IFromRawJson<CustomerListResponseData>
 /// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
-        CustomerListResponseDataDefaultPaymentMethod,
-        CustomerListResponseDataDefaultPaymentMethodFromRaw
+        CustomerListResponseDefaultPaymentMethod,
+        CustomerListResponseDefaultPaymentMethodFromRaw
     >)
 )]
-public sealed record class CustomerListResponseDataDefaultPaymentMethod : JsonModel
+public sealed record class CustomerListResponseDefaultPaymentMethod : JsonModel
 {
     /// <summary>
     /// The default payment method id
@@ -373,13 +291,13 @@ public sealed record class CustomerListResponseDataDefaultPaymentMethod : JsonMo
     /// <summary>
     /// The default payment method type
     /// </summary>
-    public required ApiEnum<string, CustomerListResponseDataDefaultPaymentMethodType> Type
+    public required ApiEnum<string, CustomerListResponseDefaultPaymentMethodType> Type
     {
         get
         {
             this._rawData.Freeze();
             return this._rawData.GetNotNullClass<
-                ApiEnum<string, CustomerListResponseDataDefaultPaymentMethodType>
+                ApiEnum<string, CustomerListResponseDefaultPaymentMethodType>
             >("type");
         }
         init { this._rawData.Set("type", value); }
@@ -395,17 +313,17 @@ public sealed record class CustomerListResponseDataDefaultPaymentMethod : JsonMo
         this.Type.Validate();
     }
 
-    public CustomerListResponseDataDefaultPaymentMethod() { }
+    public CustomerListResponseDefaultPaymentMethod() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public CustomerListResponseDataDefaultPaymentMethod(
-        CustomerListResponseDataDefaultPaymentMethod customerListResponseDataDefaultPaymentMethod
+    public CustomerListResponseDefaultPaymentMethod(
+        CustomerListResponseDefaultPaymentMethod customerListResponseDefaultPaymentMethod
     )
-        : base(customerListResponseDataDefaultPaymentMethod) { }
+        : base(customerListResponseDefaultPaymentMethod) { }
 #pragma warning restore CS8618
 
-    public CustomerListResponseDataDefaultPaymentMethod(
+    public CustomerListResponseDefaultPaymentMethod(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -414,14 +332,14 @@ public sealed record class CustomerListResponseDataDefaultPaymentMethod : JsonMo
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    CustomerListResponseDataDefaultPaymentMethod(FrozenDictionary<string, JsonElement> rawData)
+    CustomerListResponseDefaultPaymentMethod(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="CustomerListResponseDataDefaultPaymentMethodFromRaw.FromRawUnchecked"/>
-    public static CustomerListResponseDataDefaultPaymentMethod FromRawUnchecked(
+    /// <inheritdoc cref="CustomerListResponseDefaultPaymentMethodFromRaw.FromRawUnchecked"/>
+    public static CustomerListResponseDefaultPaymentMethod FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -429,30 +347,30 @@ public sealed record class CustomerListResponseDataDefaultPaymentMethod : JsonMo
     }
 }
 
-class CustomerListResponseDataDefaultPaymentMethodFromRaw
-    : IFromRawJson<CustomerListResponseDataDefaultPaymentMethod>
+class CustomerListResponseDefaultPaymentMethodFromRaw
+    : IFromRawJson<CustomerListResponseDefaultPaymentMethod>
 {
     /// <inheritdoc/>
-    public CustomerListResponseDataDefaultPaymentMethod FromRawUnchecked(
+    public CustomerListResponseDefaultPaymentMethod FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => CustomerListResponseDataDefaultPaymentMethod.FromRawUnchecked(rawData);
+    ) => CustomerListResponseDefaultPaymentMethod.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// The default payment method type
 /// </summary>
-[JsonConverter(typeof(CustomerListResponseDataDefaultPaymentMethodTypeConverter))]
-public enum CustomerListResponseDataDefaultPaymentMethodType
+[JsonConverter(typeof(CustomerListResponseDefaultPaymentMethodTypeConverter))]
+public enum CustomerListResponseDefaultPaymentMethodType
 {
     Card,
     Bank,
     CashApp,
 }
 
-sealed class CustomerListResponseDataDefaultPaymentMethodTypeConverter
-    : JsonConverter<CustomerListResponseDataDefaultPaymentMethodType>
+sealed class CustomerListResponseDefaultPaymentMethodTypeConverter
+    : JsonConverter<CustomerListResponseDefaultPaymentMethodType>
 {
-    public override CustomerListResponseDataDefaultPaymentMethodType Read(
+    public override CustomerListResponseDefaultPaymentMethodType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -460,16 +378,16 @@ sealed class CustomerListResponseDataDefaultPaymentMethodTypeConverter
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "CARD" => CustomerListResponseDataDefaultPaymentMethodType.Card,
-            "BANK" => CustomerListResponseDataDefaultPaymentMethodType.Bank,
-            "CASH_APP" => CustomerListResponseDataDefaultPaymentMethodType.CashApp,
-            _ => (CustomerListResponseDataDefaultPaymentMethodType)(-1),
+            "CARD" => CustomerListResponseDefaultPaymentMethodType.Card,
+            "BANK" => CustomerListResponseDefaultPaymentMethodType.Bank,
+            "CASH_APP" => CustomerListResponseDefaultPaymentMethodType.CashApp,
+            _ => (CustomerListResponseDefaultPaymentMethodType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        CustomerListResponseDataDefaultPaymentMethodType value,
+        CustomerListResponseDefaultPaymentMethodType value,
         JsonSerializerOptions options
     )
     {
@@ -477,9 +395,9 @@ sealed class CustomerListResponseDataDefaultPaymentMethodTypeConverter
             writer,
             value switch
             {
-                CustomerListResponseDataDefaultPaymentMethodType.Card => "CARD",
-                CustomerListResponseDataDefaultPaymentMethodType.Bank => "BANK",
-                CustomerListResponseDataDefaultPaymentMethodType.CashApp => "CASH_APP",
+                CustomerListResponseDefaultPaymentMethodType.Card => "CARD",
+                CustomerListResponseDefaultPaymentMethodType.Bank => "BANK",
+                CustomerListResponseDefaultPaymentMethodType.CashApp => "CASH_APP",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -491,11 +409,11 @@ sealed class CustomerListResponseDataDefaultPaymentMethodTypeConverter
 
 [JsonConverter(
     typeof(JsonModelConverter<
-        CustomerListResponseDataIntegration,
-        CustomerListResponseDataIntegrationFromRaw
+        CustomerListResponseIntegration,
+        CustomerListResponseIntegrationFromRaw
     >)
 )]
-public sealed record class CustomerListResponseDataIntegration : JsonModel
+public sealed record class CustomerListResponseIntegration : JsonModel
 {
     /// <summary>
     /// Integration details
@@ -528,14 +446,14 @@ public sealed record class CustomerListResponseDataIntegration : JsonModel
     /// </summary>
     public required ApiEnum<
         string,
-        CustomerListResponseDataIntegrationVendorIdentifier
+        CustomerListResponseIntegrationVendorIdentifier
     > VendorIdentifier
     {
         get
         {
             this._rawData.Freeze();
             return this._rawData.GetNotNullClass<
-                ApiEnum<string, CustomerListResponseDataIntegrationVendorIdentifier>
+                ApiEnum<string, CustomerListResponseIntegrationVendorIdentifier>
             >("vendorIdentifier");
         }
         init { this._rawData.Set("vendorIdentifier", value); }
@@ -549,31 +467,31 @@ public sealed record class CustomerListResponseDataIntegration : JsonModel
         this.VendorIdentifier.Validate();
     }
 
-    public CustomerListResponseDataIntegration() { }
+    public CustomerListResponseIntegration() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public CustomerListResponseDataIntegration(
-        CustomerListResponseDataIntegration customerListResponseDataIntegration
+    public CustomerListResponseIntegration(
+        CustomerListResponseIntegration customerListResponseIntegration
     )
-        : base(customerListResponseDataIntegration) { }
+        : base(customerListResponseIntegration) { }
 #pragma warning restore CS8618
 
-    public CustomerListResponseDataIntegration(IReadOnlyDictionary<string, JsonElement> rawData)
+    public CustomerListResponseIntegration(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    CustomerListResponseDataIntegration(FrozenDictionary<string, JsonElement> rawData)
+    CustomerListResponseIntegration(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="CustomerListResponseDataIntegrationFromRaw.FromRawUnchecked"/>
-    public static CustomerListResponseDataIntegration FromRawUnchecked(
+    /// <inheritdoc cref="CustomerListResponseIntegrationFromRaw.FromRawUnchecked"/>
+    public static CustomerListResponseIntegration FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -581,19 +499,19 @@ public sealed record class CustomerListResponseDataIntegration : JsonModel
     }
 }
 
-class CustomerListResponseDataIntegrationFromRaw : IFromRawJson<CustomerListResponseDataIntegration>
+class CustomerListResponseIntegrationFromRaw : IFromRawJson<CustomerListResponseIntegration>
 {
     /// <inheritdoc/>
-    public CustomerListResponseDataIntegration FromRawUnchecked(
+    public CustomerListResponseIntegration FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => CustomerListResponseDataIntegration.FromRawUnchecked(rawData);
+    ) => CustomerListResponseIntegration.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// The vendor identifier of integration
 /// </summary>
-[JsonConverter(typeof(CustomerListResponseDataIntegrationVendorIdentifierConverter))]
-public enum CustomerListResponseDataIntegrationVendorIdentifier
+[JsonConverter(typeof(CustomerListResponseIntegrationVendorIdentifierConverter))]
+public enum CustomerListResponseIntegrationVendorIdentifier
 {
     Auth0,
     Zuora,
@@ -607,10 +525,10 @@ public enum CustomerListResponseDataIntegrationVendorIdentifier
     AppStore,
 }
 
-sealed class CustomerListResponseDataIntegrationVendorIdentifierConverter
-    : JsonConverter<CustomerListResponseDataIntegrationVendorIdentifier>
+sealed class CustomerListResponseIntegrationVendorIdentifierConverter
+    : JsonConverter<CustomerListResponseIntegrationVendorIdentifier>
 {
-    public override CustomerListResponseDataIntegrationVendorIdentifier Read(
+    public override CustomerListResponseIntegrationVendorIdentifier Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -618,23 +536,23 @@ sealed class CustomerListResponseDataIntegrationVendorIdentifierConverter
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "AUTH0" => CustomerListResponseDataIntegrationVendorIdentifier.Auth0,
-            "ZUORA" => CustomerListResponseDataIntegrationVendorIdentifier.Zuora,
-            "STRIPE" => CustomerListResponseDataIntegrationVendorIdentifier.Stripe,
-            "HUBSPOT" => CustomerListResponseDataIntegrationVendorIdentifier.Hubspot,
-            "AWS_MARKETPLACE" => CustomerListResponseDataIntegrationVendorIdentifier.AwsMarketplace,
-            "SNOWFLAKE" => CustomerListResponseDataIntegrationVendorIdentifier.Snowflake,
-            "SALESFORCE" => CustomerListResponseDataIntegrationVendorIdentifier.Salesforce,
-            "BIG_QUERY" => CustomerListResponseDataIntegrationVendorIdentifier.BigQuery,
-            "OPEN_FGA" => CustomerListResponseDataIntegrationVendorIdentifier.OpenFga,
-            "APP_STORE" => CustomerListResponseDataIntegrationVendorIdentifier.AppStore,
-            _ => (CustomerListResponseDataIntegrationVendorIdentifier)(-1),
+            "AUTH0" => CustomerListResponseIntegrationVendorIdentifier.Auth0,
+            "ZUORA" => CustomerListResponseIntegrationVendorIdentifier.Zuora,
+            "STRIPE" => CustomerListResponseIntegrationVendorIdentifier.Stripe,
+            "HUBSPOT" => CustomerListResponseIntegrationVendorIdentifier.Hubspot,
+            "AWS_MARKETPLACE" => CustomerListResponseIntegrationVendorIdentifier.AwsMarketplace,
+            "SNOWFLAKE" => CustomerListResponseIntegrationVendorIdentifier.Snowflake,
+            "SALESFORCE" => CustomerListResponseIntegrationVendorIdentifier.Salesforce,
+            "BIG_QUERY" => CustomerListResponseIntegrationVendorIdentifier.BigQuery,
+            "OPEN_FGA" => CustomerListResponseIntegrationVendorIdentifier.OpenFga,
+            "APP_STORE" => CustomerListResponseIntegrationVendorIdentifier.AppStore,
+            _ => (CustomerListResponseIntegrationVendorIdentifier)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        CustomerListResponseDataIntegrationVendorIdentifier value,
+        CustomerListResponseIntegrationVendorIdentifier value,
         JsonSerializerOptions options
     )
     {
@@ -642,17 +560,16 @@ sealed class CustomerListResponseDataIntegrationVendorIdentifierConverter
             writer,
             value switch
             {
-                CustomerListResponseDataIntegrationVendorIdentifier.Auth0 => "AUTH0",
-                CustomerListResponseDataIntegrationVendorIdentifier.Zuora => "ZUORA",
-                CustomerListResponseDataIntegrationVendorIdentifier.Stripe => "STRIPE",
-                CustomerListResponseDataIntegrationVendorIdentifier.Hubspot => "HUBSPOT",
-                CustomerListResponseDataIntegrationVendorIdentifier.AwsMarketplace =>
-                    "AWS_MARKETPLACE",
-                CustomerListResponseDataIntegrationVendorIdentifier.Snowflake => "SNOWFLAKE",
-                CustomerListResponseDataIntegrationVendorIdentifier.Salesforce => "SALESFORCE",
-                CustomerListResponseDataIntegrationVendorIdentifier.BigQuery => "BIG_QUERY",
-                CustomerListResponseDataIntegrationVendorIdentifier.OpenFga => "OPEN_FGA",
-                CustomerListResponseDataIntegrationVendorIdentifier.AppStore => "APP_STORE",
+                CustomerListResponseIntegrationVendorIdentifier.Auth0 => "AUTH0",
+                CustomerListResponseIntegrationVendorIdentifier.Zuora => "ZUORA",
+                CustomerListResponseIntegrationVendorIdentifier.Stripe => "STRIPE",
+                CustomerListResponseIntegrationVendorIdentifier.Hubspot => "HUBSPOT",
+                CustomerListResponseIntegrationVendorIdentifier.AwsMarketplace => "AWS_MARKETPLACE",
+                CustomerListResponseIntegrationVendorIdentifier.Snowflake => "SNOWFLAKE",
+                CustomerListResponseIntegrationVendorIdentifier.Salesforce => "SALESFORCE",
+                CustomerListResponseIntegrationVendorIdentifier.BigQuery => "BIG_QUERY",
+                CustomerListResponseIntegrationVendorIdentifier.OpenFga => "OPEN_FGA",
+                CustomerListResponseIntegrationVendorIdentifier.AppStore => "APP_STORE",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -660,79 +577,4 @@ sealed class CustomerListResponseDataIntegrationVendorIdentifierConverter
             options
         );
     }
-}
-
-/// <summary>
-/// Pagination information including cursors for navigation
-/// </summary>
-[JsonConverter(typeof(JsonModelConverter<Pagination, PaginationFromRaw>))]
-public sealed record class Pagination : JsonModel
-{
-    /// <summary>
-    /// Cursor to fetch the next page (use with after parameter), null if no more pages
-    /// </summary>
-    public required string? Next
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("next");
-        }
-        init { this._rawData.Set("next", value); }
-    }
-
-    /// <summary>
-    /// Cursor to fetch the previous page (use with before parameter), null if no
-    /// previous pages
-    /// </summary>
-    public required string? Prev
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("prev");
-        }
-        init { this._rawData.Set("prev", value); }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        _ = this.Next;
-        _ = this.Prev;
-    }
-
-    public Pagination() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public Pagination(Pagination pagination)
-        : base(pagination) { }
-#pragma warning restore CS8618
-
-    public Pagination(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    Pagination(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="PaginationFromRaw.FromRawUnchecked"/>
-    public static Pagination FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-}
-
-class PaginationFromRaw : IFromRawJson<Pagination>
-{
-    /// <inheritdoc/>
-    public Pagination FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        Pagination.FromRawUnchecked(rawData);
 }
