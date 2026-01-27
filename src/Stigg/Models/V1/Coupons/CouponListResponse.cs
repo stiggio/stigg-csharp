@@ -273,12 +273,12 @@ public sealed record class CouponListResponseAmountsOff : JsonModel
     /// <summary>
     /// The price currency
     /// </summary>
-    public required ApiEnum<string, CouponListResponseAmountsOffCurrency>? Currency
+    public required ApiEnum<string, CouponListResponseAmountsOffCurrency> Currency
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<
+            return this._rawData.GetNotNullClass<
                 ApiEnum<string, CouponListResponseAmountsOffCurrency>
             >("currency");
         }
@@ -289,7 +289,7 @@ public sealed record class CouponListResponseAmountsOff : JsonModel
     public override void Validate()
     {
         _ = this.Amount;
-        this.Currency?.Validate();
+        this.Currency.Validate();
     }
 
     public CouponListResponseAmountsOff() { }
