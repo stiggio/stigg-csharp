@@ -35,8 +35,18 @@ public class SubscriptionDelegateResponseTest : TestBase
                 PayingCustomerID = "payingCustomerId",
                 PaymentCollectionMethod =
                     SubscriptionDelegateResponseDataPaymentCollectionMethod.Charge,
+                Prices =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        CreatedAt = "createdAt",
+                        UpdatedAt = "updatedAt",
+                    },
+                ],
                 ResourceID = "resourceId",
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                UnitQuantity = 1,
             },
         };
 
@@ -61,8 +71,18 @@ public class SubscriptionDelegateResponseTest : TestBase
             PayingCustomerID = "payingCustomerId",
             PaymentCollectionMethod =
                 SubscriptionDelegateResponseDataPaymentCollectionMethod.Charge,
+            Prices =
+            [
+                new()
+                {
+                    ID = "id",
+                    CreatedAt = "createdAt",
+                    UpdatedAt = "updatedAt",
+                },
+            ],
             ResourceID = "resourceId",
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UnitQuantity = 1,
         };
 
         Assert.Equal(expectedData, model.Data);
@@ -94,8 +114,18 @@ public class SubscriptionDelegateResponseTest : TestBase
                 PayingCustomerID = "payingCustomerId",
                 PaymentCollectionMethod =
                     SubscriptionDelegateResponseDataPaymentCollectionMethod.Charge,
+                Prices =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        CreatedAt = "createdAt",
+                        UpdatedAt = "updatedAt",
+                    },
+                ],
                 ResourceID = "resourceId",
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                UnitQuantity = 1,
             },
         };
 
@@ -134,8 +164,18 @@ public class SubscriptionDelegateResponseTest : TestBase
                 PayingCustomerID = "payingCustomerId",
                 PaymentCollectionMethod =
                     SubscriptionDelegateResponseDataPaymentCollectionMethod.Charge,
+                Prices =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        CreatedAt = "createdAt",
+                        UpdatedAt = "updatedAt",
+                    },
+                ],
                 ResourceID = "resourceId",
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                UnitQuantity = 1,
             },
         };
 
@@ -167,8 +207,18 @@ public class SubscriptionDelegateResponseTest : TestBase
             PayingCustomerID = "payingCustomerId",
             PaymentCollectionMethod =
                 SubscriptionDelegateResponseDataPaymentCollectionMethod.Charge,
+            Prices =
+            [
+                new()
+                {
+                    ID = "id",
+                    CreatedAt = "createdAt",
+                    UpdatedAt = "updatedAt",
+                },
+            ],
             ResourceID = "resourceId",
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UnitQuantity = 1,
         };
 
         Assert.Equal(expectedData, deserialized.Data);
@@ -200,8 +250,18 @@ public class SubscriptionDelegateResponseTest : TestBase
                 PayingCustomerID = "payingCustomerId",
                 PaymentCollectionMethod =
                     SubscriptionDelegateResponseDataPaymentCollectionMethod.Charge,
+                Prices =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        CreatedAt = "createdAt",
+                        UpdatedAt = "updatedAt",
+                    },
+                ],
                 ResourceID = "resourceId",
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                UnitQuantity = 1,
             },
         };
 
@@ -234,8 +294,18 @@ public class SubscriptionDelegateResponseTest : TestBase
                 PayingCustomerID = "payingCustomerId",
                 PaymentCollectionMethod =
                     SubscriptionDelegateResponseDataPaymentCollectionMethod.Charge,
+                Prices =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        CreatedAt = "createdAt",
+                        UpdatedAt = "updatedAt",
+                    },
+                ],
                 ResourceID = "resourceId",
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                UnitQuantity = 1,
             },
         };
 
@@ -271,8 +341,18 @@ public class SubscriptionDelegateResponseDataTest : TestBase
             PayingCustomerID = "payingCustomerId",
             PaymentCollectionMethod =
                 SubscriptionDelegateResponseDataPaymentCollectionMethod.Charge,
+            Prices =
+            [
+                new()
+                {
+                    ID = "id",
+                    CreatedAt = "createdAt",
+                    UpdatedAt = "updatedAt",
+                },
+            ],
             ResourceID = "resourceId",
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UnitQuantity = 1,
         };
 
         string expectedID = "id";
@@ -307,8 +387,18 @@ public class SubscriptionDelegateResponseDataTest : TestBase
             SubscriptionDelegateResponseDataPaymentCollectionMethod
         > expectedPaymentCollectionMethod =
             SubscriptionDelegateResponseDataPaymentCollectionMethod.Charge;
+        List<SubscriptionDelegateResponseDataPrice> expectedPrices =
+        [
+            new()
+            {
+                ID = "id",
+                CreatedAt = "createdAt",
+                UpdatedAt = "updatedAt",
+            },
+        ];
         string expectedResourceID = "resourceId";
         DateTimeOffset expectedTrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        double expectedUnitQuantity = 1;
 
         Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedBillingID, model.BillingID);
@@ -335,8 +425,15 @@ public class SubscriptionDelegateResponseDataTest : TestBase
         }
         Assert.Equal(expectedPayingCustomerID, model.PayingCustomerID);
         Assert.Equal(expectedPaymentCollectionMethod, model.PaymentCollectionMethod);
+        Assert.NotNull(model.Prices);
+        Assert.Equal(expectedPrices.Count, model.Prices.Count);
+        for (int i = 0; i < expectedPrices.Count; i++)
+        {
+            Assert.Equal(expectedPrices[i], model.Prices[i]);
+        }
         Assert.Equal(expectedResourceID, model.ResourceID);
         Assert.Equal(expectedTrialEndDate, model.TrialEndDate);
+        Assert.Equal(expectedUnitQuantity, model.UnitQuantity);
     }
 
     [Fact]
@@ -363,8 +460,18 @@ public class SubscriptionDelegateResponseDataTest : TestBase
             PayingCustomerID = "payingCustomerId",
             PaymentCollectionMethod =
                 SubscriptionDelegateResponseDataPaymentCollectionMethod.Charge,
+            Prices =
+            [
+                new()
+                {
+                    ID = "id",
+                    CreatedAt = "createdAt",
+                    UpdatedAt = "updatedAt",
+                },
+            ],
             ResourceID = "resourceId",
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UnitQuantity = 1,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -400,8 +507,18 @@ public class SubscriptionDelegateResponseDataTest : TestBase
             PayingCustomerID = "payingCustomerId",
             PaymentCollectionMethod =
                 SubscriptionDelegateResponseDataPaymentCollectionMethod.Charge,
+            Prices =
+            [
+                new()
+                {
+                    ID = "id",
+                    CreatedAt = "createdAt",
+                    UpdatedAt = "updatedAt",
+                },
+            ],
             ResourceID = "resourceId",
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UnitQuantity = 1,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -443,8 +560,18 @@ public class SubscriptionDelegateResponseDataTest : TestBase
             SubscriptionDelegateResponseDataPaymentCollectionMethod
         > expectedPaymentCollectionMethod =
             SubscriptionDelegateResponseDataPaymentCollectionMethod.Charge;
+        List<SubscriptionDelegateResponseDataPrice> expectedPrices =
+        [
+            new()
+            {
+                ID = "id",
+                CreatedAt = "createdAt",
+                UpdatedAt = "updatedAt",
+            },
+        ];
         string expectedResourceID = "resourceId";
         DateTimeOffset expectedTrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        double expectedUnitQuantity = 1;
 
         Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedBillingID, deserialized.BillingID);
@@ -471,8 +598,15 @@ public class SubscriptionDelegateResponseDataTest : TestBase
         }
         Assert.Equal(expectedPayingCustomerID, deserialized.PayingCustomerID);
         Assert.Equal(expectedPaymentCollectionMethod, deserialized.PaymentCollectionMethod);
+        Assert.NotNull(deserialized.Prices);
+        Assert.Equal(expectedPrices.Count, deserialized.Prices.Count);
+        for (int i = 0; i < expectedPrices.Count; i++)
+        {
+            Assert.Equal(expectedPrices[i], deserialized.Prices[i]);
+        }
         Assert.Equal(expectedResourceID, deserialized.ResourceID);
         Assert.Equal(expectedTrialEndDate, deserialized.TrialEndDate);
+        Assert.Equal(expectedUnitQuantity, deserialized.UnitQuantity);
     }
 
     [Fact]
@@ -499,8 +633,18 @@ public class SubscriptionDelegateResponseDataTest : TestBase
             PayingCustomerID = "payingCustomerId",
             PaymentCollectionMethod =
                 SubscriptionDelegateResponseDataPaymentCollectionMethod.Charge,
+            Prices =
+            [
+                new()
+                {
+                    ID = "id",
+                    CreatedAt = "createdAt",
+                    UpdatedAt = "updatedAt",
+                },
+            ],
             ResourceID = "resourceId",
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UnitQuantity = 1,
         };
 
         model.Validate();
@@ -535,6 +679,10 @@ public class SubscriptionDelegateResponseDataTest : TestBase
 
         Assert.Null(model.Metadata);
         Assert.False(model.RawData.ContainsKey("metadata"));
+        Assert.Null(model.Prices);
+        Assert.False(model.RawData.ContainsKey("prices"));
+        Assert.Null(model.UnitQuantity);
+        Assert.False(model.RawData.ContainsKey("unitQuantity"));
     }
 
     [Fact]
@@ -595,10 +743,16 @@ public class SubscriptionDelegateResponseDataTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             Metadata = null,
+            Prices = null,
+            UnitQuantity = null,
         };
 
         Assert.Null(model.Metadata);
         Assert.False(model.RawData.ContainsKey("metadata"));
+        Assert.Null(model.Prices);
+        Assert.False(model.RawData.ContainsKey("prices"));
+        Assert.Null(model.UnitQuantity);
+        Assert.False(model.RawData.ContainsKey("unitQuantity"));
     }
 
     [Fact]
@@ -629,6 +783,8 @@ public class SubscriptionDelegateResponseDataTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             Metadata = null,
+            Prices = null,
+            UnitQuantity = null,
         };
 
         model.Validate();
@@ -649,6 +805,16 @@ public class SubscriptionDelegateResponseDataTest : TestBase
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionDelegateResponseDataStatus.PaymentPending,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Prices =
+            [
+                new()
+                {
+                    ID = "id",
+                    CreatedAt = "createdAt",
+                    UpdatedAt = "updatedAt",
+                },
+            ],
+            UnitQuantity = 1,
         };
 
         Assert.Null(model.CancellationDate);
@@ -688,6 +854,16 @@ public class SubscriptionDelegateResponseDataTest : TestBase
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionDelegateResponseDataStatus.PaymentPending,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Prices =
+            [
+                new()
+                {
+                    ID = "id",
+                    CreatedAt = "createdAt",
+                    UpdatedAt = "updatedAt",
+                },
+            ],
+            UnitQuantity = 1,
         };
 
         model.Validate();
@@ -708,6 +884,16 @@ public class SubscriptionDelegateResponseDataTest : TestBase
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionDelegateResponseDataStatus.PaymentPending,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Prices =
+            [
+                new()
+                {
+                    ID = "id",
+                    CreatedAt = "createdAt",
+                    UpdatedAt = "updatedAt",
+                },
+            ],
+            UnitQuantity = 1,
 
             CancellationDate = null,
             CancelReason = null,
@@ -758,6 +944,16 @@ public class SubscriptionDelegateResponseDataTest : TestBase
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionDelegateResponseDataStatus.PaymentPending,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Prices =
+            [
+                new()
+                {
+                    ID = "id",
+                    CreatedAt = "createdAt",
+                    UpdatedAt = "updatedAt",
+                },
+            ],
+            UnitQuantity = 1,
 
             CancellationDate = null,
             CancelReason = null,
@@ -798,8 +994,18 @@ public class SubscriptionDelegateResponseDataTest : TestBase
             PayingCustomerID = "payingCustomerId",
             PaymentCollectionMethod =
                 SubscriptionDelegateResponseDataPaymentCollectionMethod.Charge,
+            Prices =
+            [
+                new()
+                {
+                    ID = "id",
+                    CreatedAt = "createdAt",
+                    UpdatedAt = "updatedAt",
+                },
+            ],
             ResourceID = "resourceId",
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UnitQuantity = 1,
         };
 
         SubscriptionDelegateResponseData copied = new(model);
@@ -1113,5 +1319,100 @@ public class SubscriptionDelegateResponseDataPaymentCollectionMethodTest : TestB
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
+    }
+}
+
+public class SubscriptionDelegateResponseDataPriceTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new SubscriptionDelegateResponseDataPrice
+        {
+            ID = "id",
+            CreatedAt = "createdAt",
+            UpdatedAt = "updatedAt",
+        };
+
+        string expectedID = "id";
+        string expectedCreatedAt = "createdAt";
+        string expectedUpdatedAt = "updatedAt";
+
+        Assert.Equal(expectedID, model.ID);
+        Assert.Equal(expectedCreatedAt, model.CreatedAt);
+        Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new SubscriptionDelegateResponseDataPrice
+        {
+            ID = "id",
+            CreatedAt = "createdAt",
+            UpdatedAt = "updatedAt",
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<SubscriptionDelegateResponseDataPrice>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new SubscriptionDelegateResponseDataPrice
+        {
+            ID = "id",
+            CreatedAt = "createdAt",
+            UpdatedAt = "updatedAt",
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<SubscriptionDelegateResponseDataPrice>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        string expectedID = "id";
+        string expectedCreatedAt = "createdAt";
+        string expectedUpdatedAt = "updatedAt";
+
+        Assert.Equal(expectedID, deserialized.ID);
+        Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
+        Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new SubscriptionDelegateResponseDataPrice
+        {
+            ID = "id",
+            CreatedAt = "createdAt",
+            UpdatedAt = "updatedAt",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionDelegateResponseDataPrice
+        {
+            ID = "id",
+            CreatedAt = "createdAt",
+            UpdatedAt = "updatedAt",
+        };
+
+        SubscriptionDelegateResponseDataPrice copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }

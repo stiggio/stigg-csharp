@@ -53,12 +53,14 @@ public record class SubscriptionPreviewParams : ParamsBase
         init { this._rawBodyData.Set("planId", value); }
     }
 
-    public IReadOnlyList<Addon>? Addons
+    public IReadOnlyList<SubscriptionPreviewParamsAddon>? Addons
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableStruct<ImmutableArray<Addon>>("addons");
+            return this._rawBodyData.GetNullableStruct<
+                ImmutableArray<SubscriptionPreviewParamsAddon>
+            >("addons");
         }
         init
         {
@@ -67,19 +69,21 @@ public record class SubscriptionPreviewParams : ParamsBase
                 return;
             }
 
-            this._rawBodyData.Set<ImmutableArray<Addon>?>(
+            this._rawBodyData.Set<ImmutableArray<SubscriptionPreviewParamsAddon>?>(
                 "addons",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
         }
     }
 
-    public AppliedCoupon? AppliedCoupon
+    public SubscriptionPreviewParamsAppliedCoupon? AppliedCoupon
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableClass<AppliedCoupon>("appliedCoupon");
+            return this._rawBodyData.GetNullableClass<SubscriptionPreviewParamsAppliedCoupon>(
+                "appliedCoupon"
+            );
         }
         init
         {
@@ -133,12 +137,14 @@ public record class SubscriptionPreviewParams : ParamsBase
         }
     }
 
-    public BillingInformation? BillingInformation
+    public SubscriptionPreviewParamsBillingInformation? BillingInformation
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableClass<BillingInformation>("billingInformation");
+            return this._rawBodyData.GetNullableClass<SubscriptionPreviewParamsBillingInformation>(
+                "billingInformation"
+            );
         }
         init
         {
@@ -171,12 +177,14 @@ public record class SubscriptionPreviewParams : ParamsBase
         }
     }
 
-    public IReadOnlyList<Charge>? Charges
+    public IReadOnlyList<SubscriptionPreviewParamsCharge>? Charges
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableStruct<ImmutableArray<Charge>>("charges");
+            return this._rawBodyData.GetNullableStruct<
+                ImmutableArray<SubscriptionPreviewParamsCharge>
+            >("charges");
         }
         init
         {
@@ -185,7 +193,7 @@ public record class SubscriptionPreviewParams : ParamsBase
                 return;
             }
 
-            this._rawBodyData.Set<ImmutableArray<Charge>?>(
+            this._rawBodyData.Set<ImmutableArray<SubscriptionPreviewParamsCharge>?>(
                 "charges",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
@@ -228,14 +236,14 @@ public record class SubscriptionPreviewParams : ParamsBase
         }
     }
 
-    public ApiEnum<string, ScheduleStrategy>? ScheduleStrategy
+    public ApiEnum<string, SubscriptionPreviewParamsScheduleStrategy>? ScheduleStrategy
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableClass<ApiEnum<string, ScheduleStrategy>>(
-                "scheduleStrategy"
-            );
+            return this._rawBodyData.GetNullableClass<
+                ApiEnum<string, SubscriptionPreviewParamsScheduleStrategy>
+            >("scheduleStrategy");
         }
         init
         {
@@ -413,8 +421,13 @@ public record class SubscriptionPreviewParams : ParamsBase
     }
 }
 
-[JsonConverter(typeof(JsonModelConverter<Addon, AddonFromRaw>))]
-public sealed record class Addon : JsonModel
+[JsonConverter(
+    typeof(JsonModelConverter<
+        SubscriptionPreviewParamsAddon,
+        SubscriptionPreviewParamsAddonFromRaw
+    >)
+)]
+public sealed record class SubscriptionPreviewParamsAddon : JsonModel
 {
     /// <summary>
     /// Addon ID
@@ -454,50 +467,60 @@ public sealed record class Addon : JsonModel
         _ = this.Quantity;
     }
 
-    public Addon() { }
+    public SubscriptionPreviewParamsAddon() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public Addon(Addon addon)
-        : base(addon) { }
+    public SubscriptionPreviewParamsAddon(
+        SubscriptionPreviewParamsAddon subscriptionPreviewParamsAddon
+    )
+        : base(subscriptionPreviewParamsAddon) { }
 #pragma warning restore CS8618
 
-    public Addon(IReadOnlyDictionary<string, JsonElement> rawData)
+    public SubscriptionPreviewParamsAddon(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Addon(FrozenDictionary<string, JsonElement> rawData)
+    SubscriptionPreviewParamsAddon(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="AddonFromRaw.FromRawUnchecked"/>
-    public static Addon FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="SubscriptionPreviewParamsAddonFromRaw.FromRawUnchecked"/>
+    public static SubscriptionPreviewParamsAddon FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 
     [SetsRequiredMembers]
-    public Addon(string addonID)
+    public SubscriptionPreviewParamsAddon(string addonID)
         : this()
     {
         this.AddonID = addonID;
     }
 }
 
-class AddonFromRaw : IFromRawJson<Addon>
+class SubscriptionPreviewParamsAddonFromRaw : IFromRawJson<SubscriptionPreviewParamsAddon>
 {
     /// <inheritdoc/>
-    public Addon FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        Addon.FromRawUnchecked(rawData);
+    public SubscriptionPreviewParamsAddon FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionPreviewParamsAddon.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(JsonModelConverter<AppliedCoupon, AppliedCouponFromRaw>))]
-public sealed record class AppliedCoupon : JsonModel
+[JsonConverter(
+    typeof(JsonModelConverter<
+        SubscriptionPreviewParamsAppliedCoupon,
+        SubscriptionPreviewParamsAppliedCouponFromRaw
+    >)
+)]
+public sealed record class SubscriptionPreviewParamsAppliedCoupon : JsonModel
 {
     public string? BillingCouponID
     {
@@ -517,12 +540,14 @@ public sealed record class AppliedCoupon : JsonModel
         }
     }
 
-    public Configuration? Configuration
+    public SubscriptionPreviewParamsAppliedCouponConfiguration? Configuration
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<Configuration>("configuration");
+            return this._rawData.GetNullableClass<SubscriptionPreviewParamsAppliedCouponConfiguration>(
+                "configuration"
+            );
         }
         init
         {
@@ -553,12 +578,14 @@ public sealed record class AppliedCoupon : JsonModel
         }
     }
 
-    public Discount? Discount
+    public SubscriptionPreviewParamsAppliedCouponDiscount? Discount
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<Discount>("discount");
+            return this._rawData.GetNullableClass<SubscriptionPreviewParamsAppliedCouponDiscount>(
+                "discount"
+            );
         }
         init
         {
@@ -599,43 +626,54 @@ public sealed record class AppliedCoupon : JsonModel
         _ = this.PromotionCode;
     }
 
-    public AppliedCoupon() { }
+    public SubscriptionPreviewParamsAppliedCoupon() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public AppliedCoupon(AppliedCoupon appliedCoupon)
-        : base(appliedCoupon) { }
+    public SubscriptionPreviewParamsAppliedCoupon(
+        SubscriptionPreviewParamsAppliedCoupon subscriptionPreviewParamsAppliedCoupon
+    )
+        : base(subscriptionPreviewParamsAppliedCoupon) { }
 #pragma warning restore CS8618
 
-    public AppliedCoupon(IReadOnlyDictionary<string, JsonElement> rawData)
+    public SubscriptionPreviewParamsAppliedCoupon(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    AppliedCoupon(FrozenDictionary<string, JsonElement> rawData)
+    SubscriptionPreviewParamsAppliedCoupon(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="AppliedCouponFromRaw.FromRawUnchecked"/>
-    public static AppliedCoupon FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="SubscriptionPreviewParamsAppliedCouponFromRaw.FromRawUnchecked"/>
+    public static SubscriptionPreviewParamsAppliedCoupon FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class AppliedCouponFromRaw : IFromRawJson<AppliedCoupon>
+class SubscriptionPreviewParamsAppliedCouponFromRaw
+    : IFromRawJson<SubscriptionPreviewParamsAppliedCoupon>
 {
     /// <inheritdoc/>
-    public AppliedCoupon FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        AppliedCoupon.FromRawUnchecked(rawData);
+    public SubscriptionPreviewParamsAppliedCoupon FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionPreviewParamsAppliedCoupon.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(JsonModelConverter<Configuration, ConfigurationFromRaw>))]
-public sealed record class Configuration : JsonModel
+[JsonConverter(
+    typeof(JsonModelConverter<
+        SubscriptionPreviewParamsAppliedCouponConfiguration,
+        SubscriptionPreviewParamsAppliedCouponConfigurationFromRaw
+    >)
+)]
+public sealed record class SubscriptionPreviewParamsAppliedCouponConfiguration : JsonModel
 {
     /// <summary>
     /// Coupon start date
@@ -664,54 +702,71 @@ public sealed record class Configuration : JsonModel
         _ = this.StartDate;
     }
 
-    public Configuration() { }
+    public SubscriptionPreviewParamsAppliedCouponConfiguration() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public Configuration(Configuration configuration)
-        : base(configuration) { }
+    public SubscriptionPreviewParamsAppliedCouponConfiguration(
+        SubscriptionPreviewParamsAppliedCouponConfiguration subscriptionPreviewParamsAppliedCouponConfiguration
+    )
+        : base(subscriptionPreviewParamsAppliedCouponConfiguration) { }
 #pragma warning restore CS8618
 
-    public Configuration(IReadOnlyDictionary<string, JsonElement> rawData)
+    public SubscriptionPreviewParamsAppliedCouponConfiguration(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Configuration(FrozenDictionary<string, JsonElement> rawData)
+    SubscriptionPreviewParamsAppliedCouponConfiguration(
+        FrozenDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="ConfigurationFromRaw.FromRawUnchecked"/>
-    public static Configuration FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="SubscriptionPreviewParamsAppliedCouponConfigurationFromRaw.FromRawUnchecked"/>
+    public static SubscriptionPreviewParamsAppliedCouponConfiguration FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class ConfigurationFromRaw : IFromRawJson<Configuration>
+class SubscriptionPreviewParamsAppliedCouponConfigurationFromRaw
+    : IFromRawJson<SubscriptionPreviewParamsAppliedCouponConfiguration>
 {
     /// <inheritdoc/>
-    public Configuration FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        Configuration.FromRawUnchecked(rawData);
+    public SubscriptionPreviewParamsAppliedCouponConfiguration FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionPreviewParamsAppliedCouponConfiguration.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(JsonModelConverter<Discount, DiscountFromRaw>))]
-public sealed record class Discount : JsonModel
+[JsonConverter(
+    typeof(JsonModelConverter<
+        SubscriptionPreviewParamsAppliedCouponDiscount,
+        SubscriptionPreviewParamsAppliedCouponDiscountFromRaw
+    >)
+)]
+public sealed record class SubscriptionPreviewParamsAppliedCouponDiscount : JsonModel
 {
-    public IReadOnlyList<AmountsOff>? AmountsOff
+    public IReadOnlyList<SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff>? AmountsOff
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<ImmutableArray<AmountsOff>>("amountsOff");
+            return this._rawData.GetNullableStruct<
+                ImmutableArray<SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff>
+            >("amountsOff");
         }
         init
         {
-            this._rawData.Set<ImmutableArray<AmountsOff>?>(
+            this._rawData.Set<ImmutableArray<SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff>?>(
                 "amountsOff",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
@@ -803,47 +858,57 @@ public sealed record class Discount : JsonModel
         _ = this.PercentOff;
     }
 
-    public Discount() { }
+    public SubscriptionPreviewParamsAppliedCouponDiscount() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public Discount(Discount discount)
-        : base(discount) { }
+    public SubscriptionPreviewParamsAppliedCouponDiscount(
+        SubscriptionPreviewParamsAppliedCouponDiscount subscriptionPreviewParamsAppliedCouponDiscount
+    )
+        : base(subscriptionPreviewParamsAppliedCouponDiscount) { }
 #pragma warning restore CS8618
 
-    public Discount(IReadOnlyDictionary<string, JsonElement> rawData)
+    public SubscriptionPreviewParamsAppliedCouponDiscount(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Discount(FrozenDictionary<string, JsonElement> rawData)
+    SubscriptionPreviewParamsAppliedCouponDiscount(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="DiscountFromRaw.FromRawUnchecked"/>
-    public static Discount FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="SubscriptionPreviewParamsAppliedCouponDiscountFromRaw.FromRawUnchecked"/>
+    public static SubscriptionPreviewParamsAppliedCouponDiscount FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class DiscountFromRaw : IFromRawJson<Discount>
+class SubscriptionPreviewParamsAppliedCouponDiscountFromRaw
+    : IFromRawJson<SubscriptionPreviewParamsAppliedCouponDiscount>
 {
     /// <inheritdoc/>
-    public Discount FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        Discount.FromRawUnchecked(rawData);
+    public SubscriptionPreviewParamsAppliedCouponDiscount FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionPreviewParamsAppliedCouponDiscount.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(JsonModelConverter<AmountsOff, AmountsOffFromRaw>))]
-public sealed record class AmountsOff : JsonModel
+[JsonConverter(
+    typeof(JsonModelConverter<
+        SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff,
+        SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffFromRaw
+    >)
+)]
+public sealed record class SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff : JsonModel
 {
-    /// <summary>
-    /// The price amount
-    /// </summary>
     public required double Amount
     {
         get
@@ -854,66 +919,90 @@ public sealed record class AmountsOff : JsonModel
         init { this._rawData.Set("amount", value); }
     }
 
-    /// <summary>
-    /// The price currency
-    /// </summary>
-    public required ApiEnum<string, Currency> Currency
+    public ApiEnum<
+        string,
+        SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency
+    >? Currency
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency");
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency>
+            >("currency");
         }
-        init { this._rawData.Set("currency", value); }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("currency", value);
+        }
     }
 
     /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Amount;
-        this.Currency.Validate();
+        this.Currency?.Validate();
     }
 
-    public AmountsOff() { }
+    public SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public AmountsOff(AmountsOff amountsOff)
-        : base(amountsOff) { }
+    public SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff(
+        SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff subscriptionPreviewParamsAppliedCouponDiscountAmountsOff
+    )
+        : base(subscriptionPreviewParamsAppliedCouponDiscountAmountsOff) { }
 #pragma warning restore CS8618
 
-    public AmountsOff(IReadOnlyDictionary<string, JsonElement> rawData)
+    public SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    AmountsOff(FrozenDictionary<string, JsonElement> rawData)
+    SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff(
+        FrozenDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="AmountsOffFromRaw.FromRawUnchecked"/>
-    public static AmountsOff FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffFromRaw.FromRawUnchecked"/>
+    public static SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+
+    [SetsRequiredMembers]
+    public SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff(double amount)
+        : this()
+    {
+        this.Amount = amount;
+    }
 }
 
-class AmountsOffFromRaw : IFromRawJson<AmountsOff>
+class SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffFromRaw
+    : IFromRawJson<SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff>
 {
     /// <inheritdoc/>
-    public AmountsOff FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        AmountsOff.FromRawUnchecked(rawData);
+    public SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff.FromRawUnchecked(rawData);
 }
 
-/// <summary>
-/// The price currency
-/// </summary>
-[JsonConverter(typeof(CurrencyConverter))]
-public enum Currency
+[JsonConverter(typeof(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrencyConverter))]
+public enum SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency
 {
     Usd,
     Aed,
@@ -1033,9 +1122,10 @@ public enum Currency
     Xpf,
 }
 
-sealed class CurrencyConverter : JsonConverter<Currency>
+sealed class SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrencyConverter
+    : JsonConverter<SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency>
 {
-    public override Currency Read(
+    public override SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1043,248 +1133,252 @@ sealed class CurrencyConverter : JsonConverter<Currency>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "usd" => Currency.Usd,
-            "aed" => Currency.Aed,
-            "all" => Currency.All,
-            "amd" => Currency.Amd,
-            "ang" => Currency.Ang,
-            "aud" => Currency.Aud,
-            "awg" => Currency.Awg,
-            "azn" => Currency.Azn,
-            "bam" => Currency.Bam,
-            "bbd" => Currency.Bbd,
-            "bdt" => Currency.Bdt,
-            "bgn" => Currency.Bgn,
-            "bif" => Currency.Bif,
-            "bmd" => Currency.Bmd,
-            "bnd" => Currency.Bnd,
-            "bsd" => Currency.Bsd,
-            "bwp" => Currency.Bwp,
-            "byn" => Currency.Byn,
-            "bzd" => Currency.Bzd,
-            "brl" => Currency.Brl,
-            "cad" => Currency.Cad,
-            "cdf" => Currency.Cdf,
-            "chf" => Currency.Chf,
-            "cny" => Currency.Cny,
-            "czk" => Currency.Czk,
-            "dkk" => Currency.Dkk,
-            "dop" => Currency.Dop,
-            "dzd" => Currency.Dzd,
-            "egp" => Currency.Egp,
-            "etb" => Currency.Etb,
-            "eur" => Currency.Eur,
-            "fjd" => Currency.Fjd,
-            "gbp" => Currency.Gbp,
-            "gel" => Currency.Gel,
-            "gip" => Currency.Gip,
-            "gmd" => Currency.Gmd,
-            "gyd" => Currency.Gyd,
-            "hkd" => Currency.Hkd,
-            "hrk" => Currency.Hrk,
-            "htg" => Currency.Htg,
-            "idr" => Currency.Idr,
-            "ils" => Currency.Ils,
-            "inr" => Currency.Inr,
-            "isk" => Currency.Isk,
-            "jmd" => Currency.Jmd,
-            "jpy" => Currency.Jpy,
-            "kes" => Currency.Kes,
-            "kgs" => Currency.Kgs,
-            "khr" => Currency.Khr,
-            "kmf" => Currency.Kmf,
-            "krw" => Currency.Krw,
-            "kyd" => Currency.Kyd,
-            "kzt" => Currency.Kzt,
-            "lbp" => Currency.Lbp,
-            "lkr" => Currency.Lkr,
-            "lrd" => Currency.Lrd,
-            "lsl" => Currency.Lsl,
-            "mad" => Currency.Mad,
-            "mdl" => Currency.Mdl,
-            "mga" => Currency.Mga,
-            "mkd" => Currency.Mkd,
-            "mmk" => Currency.Mmk,
-            "mnt" => Currency.Mnt,
-            "mop" => Currency.Mop,
-            "mro" => Currency.Mro,
-            "mvr" => Currency.Mvr,
-            "mwk" => Currency.Mwk,
-            "mxn" => Currency.Mxn,
-            "myr" => Currency.Myr,
-            "mzn" => Currency.Mzn,
-            "nad" => Currency.Nad,
-            "ngn" => Currency.Ngn,
-            "nok" => Currency.Nok,
-            "npr" => Currency.Npr,
-            "nzd" => Currency.Nzd,
-            "pgk" => Currency.Pgk,
-            "php" => Currency.Php,
-            "pkr" => Currency.Pkr,
-            "pln" => Currency.Pln,
-            "qar" => Currency.Qar,
-            "ron" => Currency.Ron,
-            "rsd" => Currency.Rsd,
-            "rub" => Currency.Rub,
-            "rwf" => Currency.Rwf,
-            "sar" => Currency.Sar,
-            "sbd" => Currency.Sbd,
-            "scr" => Currency.Scr,
-            "sek" => Currency.Sek,
-            "sgd" => Currency.Sgd,
-            "sle" => Currency.Sle,
-            "sll" => Currency.Sll,
-            "sos" => Currency.Sos,
-            "szl" => Currency.Szl,
-            "thb" => Currency.Thb,
-            "tjs" => Currency.Tjs,
-            "top" => Currency.Top,
-            "try" => Currency.Try,
-            "ttd" => Currency.Ttd,
-            "tzs" => Currency.Tzs,
-            "uah" => Currency.Uah,
-            "uzs" => Currency.Uzs,
-            "vnd" => Currency.Vnd,
-            "vuv" => Currency.Vuv,
-            "wst" => Currency.Wst,
-            "xaf" => Currency.Xaf,
-            "xcd" => Currency.Xcd,
-            "yer" => Currency.Yer,
-            "zar" => Currency.Zar,
-            "zmw" => Currency.Zmw,
-            "clp" => Currency.Clp,
-            "djf" => Currency.Djf,
-            "gnf" => Currency.Gnf,
-            "ugx" => Currency.Ugx,
-            "pyg" => Currency.Pyg,
-            "xof" => Currency.Xof,
-            "xpf" => Currency.Xpf,
-            _ => (Currency)(-1),
+            "usd" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd,
+            "aed" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Aed,
+            "all" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.All,
+            "amd" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Amd,
+            "ang" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Ang,
+            "aud" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Aud,
+            "awg" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Awg,
+            "azn" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Azn,
+            "bam" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bam,
+            "bbd" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bbd,
+            "bdt" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bdt,
+            "bgn" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bgn,
+            "bif" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bif,
+            "bmd" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bmd,
+            "bnd" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bnd,
+            "bsd" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bsd,
+            "bwp" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bwp,
+            "byn" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Byn,
+            "bzd" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bzd,
+            "brl" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Brl,
+            "cad" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Cad,
+            "cdf" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Cdf,
+            "chf" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Chf,
+            "cny" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Cny,
+            "czk" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Czk,
+            "dkk" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Dkk,
+            "dop" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Dop,
+            "dzd" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Dzd,
+            "egp" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Egp,
+            "etb" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Etb,
+            "eur" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Eur,
+            "fjd" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Fjd,
+            "gbp" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Gbp,
+            "gel" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Gel,
+            "gip" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Gip,
+            "gmd" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Gmd,
+            "gyd" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Gyd,
+            "hkd" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Hkd,
+            "hrk" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Hrk,
+            "htg" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Htg,
+            "idr" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Idr,
+            "ils" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Ils,
+            "inr" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Inr,
+            "isk" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Isk,
+            "jmd" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Jmd,
+            "jpy" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Jpy,
+            "kes" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Kes,
+            "kgs" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Kgs,
+            "khr" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Khr,
+            "kmf" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Kmf,
+            "krw" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Krw,
+            "kyd" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Kyd,
+            "kzt" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Kzt,
+            "lbp" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Lbp,
+            "lkr" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Lkr,
+            "lrd" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Lrd,
+            "lsl" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Lsl,
+            "mad" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mad,
+            "mdl" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mdl,
+            "mga" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mga,
+            "mkd" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mkd,
+            "mmk" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mmk,
+            "mnt" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mnt,
+            "mop" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mop,
+            "mro" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mro,
+            "mvr" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mvr,
+            "mwk" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mwk,
+            "mxn" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mxn,
+            "myr" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Myr,
+            "mzn" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mzn,
+            "nad" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Nad,
+            "ngn" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Ngn,
+            "nok" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Nok,
+            "npr" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Npr,
+            "nzd" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Nzd,
+            "pgk" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Pgk,
+            "php" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Php,
+            "pkr" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Pkr,
+            "pln" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Pln,
+            "qar" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Qar,
+            "ron" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Ron,
+            "rsd" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Rsd,
+            "rub" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Rub,
+            "rwf" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Rwf,
+            "sar" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Sar,
+            "sbd" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Sbd,
+            "scr" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Scr,
+            "sek" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Sek,
+            "sgd" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Sgd,
+            "sle" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Sle,
+            "sll" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Sll,
+            "sos" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Sos,
+            "szl" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Szl,
+            "thb" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Thb,
+            "tjs" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Tjs,
+            "top" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Top,
+            "try" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Try,
+            "ttd" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Ttd,
+            "tzs" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Tzs,
+            "uah" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Uah,
+            "uzs" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Uzs,
+            "vnd" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Vnd,
+            "vuv" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Vuv,
+            "wst" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Wst,
+            "xaf" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Xaf,
+            "xcd" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Xcd,
+            "yer" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Yer,
+            "zar" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Zar,
+            "zmw" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Zmw,
+            "clp" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Clp,
+            "djf" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Djf,
+            "gnf" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Gnf,
+            "ugx" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Ugx,
+            "pyg" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Pyg,
+            "xof" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Xof,
+            "xpf" => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Xpf,
+            _ => (SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency)(-1),
         };
     }
 
-    public override void Write(Utf8JsonWriter writer, Currency value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency value,
+        JsonSerializerOptions options
+    )
     {
         JsonSerializer.Serialize(
             writer,
             value switch
             {
-                Currency.Usd => "usd",
-                Currency.Aed => "aed",
-                Currency.All => "all",
-                Currency.Amd => "amd",
-                Currency.Ang => "ang",
-                Currency.Aud => "aud",
-                Currency.Awg => "awg",
-                Currency.Azn => "azn",
-                Currency.Bam => "bam",
-                Currency.Bbd => "bbd",
-                Currency.Bdt => "bdt",
-                Currency.Bgn => "bgn",
-                Currency.Bif => "bif",
-                Currency.Bmd => "bmd",
-                Currency.Bnd => "bnd",
-                Currency.Bsd => "bsd",
-                Currency.Bwp => "bwp",
-                Currency.Byn => "byn",
-                Currency.Bzd => "bzd",
-                Currency.Brl => "brl",
-                Currency.Cad => "cad",
-                Currency.Cdf => "cdf",
-                Currency.Chf => "chf",
-                Currency.Cny => "cny",
-                Currency.Czk => "czk",
-                Currency.Dkk => "dkk",
-                Currency.Dop => "dop",
-                Currency.Dzd => "dzd",
-                Currency.Egp => "egp",
-                Currency.Etb => "etb",
-                Currency.Eur => "eur",
-                Currency.Fjd => "fjd",
-                Currency.Gbp => "gbp",
-                Currency.Gel => "gel",
-                Currency.Gip => "gip",
-                Currency.Gmd => "gmd",
-                Currency.Gyd => "gyd",
-                Currency.Hkd => "hkd",
-                Currency.Hrk => "hrk",
-                Currency.Htg => "htg",
-                Currency.Idr => "idr",
-                Currency.Ils => "ils",
-                Currency.Inr => "inr",
-                Currency.Isk => "isk",
-                Currency.Jmd => "jmd",
-                Currency.Jpy => "jpy",
-                Currency.Kes => "kes",
-                Currency.Kgs => "kgs",
-                Currency.Khr => "khr",
-                Currency.Kmf => "kmf",
-                Currency.Krw => "krw",
-                Currency.Kyd => "kyd",
-                Currency.Kzt => "kzt",
-                Currency.Lbp => "lbp",
-                Currency.Lkr => "lkr",
-                Currency.Lrd => "lrd",
-                Currency.Lsl => "lsl",
-                Currency.Mad => "mad",
-                Currency.Mdl => "mdl",
-                Currency.Mga => "mga",
-                Currency.Mkd => "mkd",
-                Currency.Mmk => "mmk",
-                Currency.Mnt => "mnt",
-                Currency.Mop => "mop",
-                Currency.Mro => "mro",
-                Currency.Mvr => "mvr",
-                Currency.Mwk => "mwk",
-                Currency.Mxn => "mxn",
-                Currency.Myr => "myr",
-                Currency.Mzn => "mzn",
-                Currency.Nad => "nad",
-                Currency.Ngn => "ngn",
-                Currency.Nok => "nok",
-                Currency.Npr => "npr",
-                Currency.Nzd => "nzd",
-                Currency.Pgk => "pgk",
-                Currency.Php => "php",
-                Currency.Pkr => "pkr",
-                Currency.Pln => "pln",
-                Currency.Qar => "qar",
-                Currency.Ron => "ron",
-                Currency.Rsd => "rsd",
-                Currency.Rub => "rub",
-                Currency.Rwf => "rwf",
-                Currency.Sar => "sar",
-                Currency.Sbd => "sbd",
-                Currency.Scr => "scr",
-                Currency.Sek => "sek",
-                Currency.Sgd => "sgd",
-                Currency.Sle => "sle",
-                Currency.Sll => "sll",
-                Currency.Sos => "sos",
-                Currency.Szl => "szl",
-                Currency.Thb => "thb",
-                Currency.Tjs => "tjs",
-                Currency.Top => "top",
-                Currency.Try => "try",
-                Currency.Ttd => "ttd",
-                Currency.Tzs => "tzs",
-                Currency.Uah => "uah",
-                Currency.Uzs => "uzs",
-                Currency.Vnd => "vnd",
-                Currency.Vuv => "vuv",
-                Currency.Wst => "wst",
-                Currency.Xaf => "xaf",
-                Currency.Xcd => "xcd",
-                Currency.Yer => "yer",
-                Currency.Zar => "zar",
-                Currency.Zmw => "zmw",
-                Currency.Clp => "clp",
-                Currency.Djf => "djf",
-                Currency.Gnf => "gnf",
-                Currency.Ugx => "ugx",
-                Currency.Pyg => "pyg",
-                Currency.Xof => "xof",
-                Currency.Xpf => "xpf",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd => "usd",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Aed => "aed",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.All => "all",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Amd => "amd",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Ang => "ang",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Aud => "aud",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Awg => "awg",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Azn => "azn",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bam => "bam",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bbd => "bbd",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bdt => "bdt",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bgn => "bgn",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bif => "bif",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bmd => "bmd",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bnd => "bnd",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bsd => "bsd",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bwp => "bwp",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Byn => "byn",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bzd => "bzd",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Brl => "brl",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Cad => "cad",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Cdf => "cdf",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Chf => "chf",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Cny => "cny",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Czk => "czk",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Dkk => "dkk",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Dop => "dop",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Dzd => "dzd",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Egp => "egp",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Etb => "etb",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Eur => "eur",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Fjd => "fjd",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Gbp => "gbp",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Gel => "gel",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Gip => "gip",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Gmd => "gmd",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Gyd => "gyd",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Hkd => "hkd",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Hrk => "hrk",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Htg => "htg",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Idr => "idr",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Ils => "ils",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Inr => "inr",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Isk => "isk",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Jmd => "jmd",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Jpy => "jpy",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Kes => "kes",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Kgs => "kgs",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Khr => "khr",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Kmf => "kmf",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Krw => "krw",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Kyd => "kyd",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Kzt => "kzt",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Lbp => "lbp",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Lkr => "lkr",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Lrd => "lrd",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Lsl => "lsl",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mad => "mad",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mdl => "mdl",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mga => "mga",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mkd => "mkd",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mmk => "mmk",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mnt => "mnt",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mop => "mop",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mro => "mro",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mvr => "mvr",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mwk => "mwk",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mxn => "mxn",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Myr => "myr",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mzn => "mzn",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Nad => "nad",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Ngn => "ngn",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Nok => "nok",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Npr => "npr",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Nzd => "nzd",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Pgk => "pgk",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Php => "php",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Pkr => "pkr",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Pln => "pln",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Qar => "qar",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Ron => "ron",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Rsd => "rsd",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Rub => "rub",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Rwf => "rwf",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Sar => "sar",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Sbd => "sbd",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Scr => "scr",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Sek => "sek",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Sgd => "sgd",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Sle => "sle",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Sll => "sll",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Sos => "sos",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Szl => "szl",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Thb => "thb",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Tjs => "tjs",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Top => "top",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Try => "try",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Ttd => "ttd",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Tzs => "tzs",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Uah => "uah",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Uzs => "uzs",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Vnd => "vnd",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Vuv => "vuv",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Wst => "wst",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Xaf => "xaf",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Xcd => "xcd",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Yer => "yer",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Zar => "zar",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Zmw => "zmw",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Clp => "clp",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Djf => "djf",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Gnf => "gnf",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Ugx => "ugx",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Pyg => "pyg",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Xof => "xof",
+                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Xpf => "xpf",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -1362,15 +1456,22 @@ class BillableFeatureFromRaw : IFromRawJson<BillableFeature>
         BillableFeature.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(JsonModelConverter<BillingInformation, BillingInformationFromRaw>))]
-public sealed record class BillingInformation : JsonModel
+[JsonConverter(
+    typeof(JsonModelConverter<
+        SubscriptionPreviewParamsBillingInformation,
+        SubscriptionPreviewParamsBillingInformationFromRaw
+    >)
+)]
+public sealed record class SubscriptionPreviewParamsBillingInformation : JsonModel
 {
-    public BillingAddress? BillingAddress
+    public SubscriptionPreviewParamsBillingInformationBillingAddress? BillingAddress
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<BillingAddress>("billingAddress");
+            return this._rawData.GetNullableClass<SubscriptionPreviewParamsBillingInformationBillingAddress>(
+                "billingAddress"
+            );
         }
         init
         {
@@ -1491,14 +1592,17 @@ public sealed record class BillingInformation : JsonModel
         }
     }
 
-    public ApiEnum<string, ProrationBehavior>? ProrationBehavior
+    public ApiEnum<
+        string,
+        SubscriptionPreviewParamsBillingInformationProrationBehavior
+    >? ProrationBehavior
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ApiEnum<string, ProrationBehavior>>(
-                "prorationBehavior"
-            );
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, SubscriptionPreviewParamsBillingInformationProrationBehavior>
+            >("prorationBehavior");
         }
         init
         {
@@ -1511,12 +1615,14 @@ public sealed record class BillingInformation : JsonModel
         }
     }
 
-    public IReadOnlyList<TaxID>? TaxIds
+    public IReadOnlyList<SubscriptionPreviewParamsBillingInformationTaxID>? TaxIds
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<ImmutableArray<TaxID>>("taxIds");
+            return this._rawData.GetNullableStruct<
+                ImmutableArray<SubscriptionPreviewParamsBillingInformationTaxID>
+            >("taxIds");
         }
         init
         {
@@ -1525,7 +1631,7 @@ public sealed record class BillingInformation : JsonModel
                 return;
             }
 
-            this._rawData.Set<ImmutableArray<TaxID>?>(
+            this._rawData.Set<ImmutableArray<SubscriptionPreviewParamsBillingInformationTaxID>?>(
                 "taxIds",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
@@ -1590,29 +1696,33 @@ public sealed record class BillingInformation : JsonModel
         _ = this.TaxRateIds;
     }
 
-    public BillingInformation() { }
+    public SubscriptionPreviewParamsBillingInformation() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public BillingInformation(BillingInformation billingInformation)
-        : base(billingInformation) { }
+    public SubscriptionPreviewParamsBillingInformation(
+        SubscriptionPreviewParamsBillingInformation subscriptionPreviewParamsBillingInformation
+    )
+        : base(subscriptionPreviewParamsBillingInformation) { }
 #pragma warning restore CS8618
 
-    public BillingInformation(IReadOnlyDictionary<string, JsonElement> rawData)
+    public SubscriptionPreviewParamsBillingInformation(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    BillingInformation(FrozenDictionary<string, JsonElement> rawData)
+    SubscriptionPreviewParamsBillingInformation(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="BillingInformationFromRaw.FromRawUnchecked"/>
-    public static BillingInformation FromRawUnchecked(
+    /// <inheritdoc cref="SubscriptionPreviewParamsBillingInformationFromRaw.FromRawUnchecked"/>
+    public static SubscriptionPreviewParamsBillingInformation FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -1620,15 +1730,22 @@ public sealed record class BillingInformation : JsonModel
     }
 }
 
-class BillingInformationFromRaw : IFromRawJson<BillingInformation>
+class SubscriptionPreviewParamsBillingInformationFromRaw
+    : IFromRawJson<SubscriptionPreviewParamsBillingInformation>
 {
     /// <inheritdoc/>
-    public BillingInformation FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        BillingInformation.FromRawUnchecked(rawData);
+    public SubscriptionPreviewParamsBillingInformation FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionPreviewParamsBillingInformation.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(JsonModelConverter<BillingAddress, BillingAddressFromRaw>))]
-public sealed record class BillingAddress : JsonModel
+[JsonConverter(
+    typeof(JsonModelConverter<
+        SubscriptionPreviewParamsBillingInformationBillingAddress,
+        SubscriptionPreviewParamsBillingInformationBillingAddressFromRaw
+    >)
+)]
+public sealed record class SubscriptionPreviewParamsBillingInformationBillingAddress : JsonModel
 {
     public string? City
     {
@@ -1749,52 +1866,63 @@ public sealed record class BillingAddress : JsonModel
         _ = this.State;
     }
 
-    public BillingAddress() { }
+    public SubscriptionPreviewParamsBillingInformationBillingAddress() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public BillingAddress(BillingAddress billingAddress)
-        : base(billingAddress) { }
+    public SubscriptionPreviewParamsBillingInformationBillingAddress(
+        SubscriptionPreviewParamsBillingInformationBillingAddress subscriptionPreviewParamsBillingInformationBillingAddress
+    )
+        : base(subscriptionPreviewParamsBillingInformationBillingAddress) { }
 #pragma warning restore CS8618
 
-    public BillingAddress(IReadOnlyDictionary<string, JsonElement> rawData)
+    public SubscriptionPreviewParamsBillingInformationBillingAddress(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    BillingAddress(FrozenDictionary<string, JsonElement> rawData)
+    SubscriptionPreviewParamsBillingInformationBillingAddress(
+        FrozenDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="BillingAddressFromRaw.FromRawUnchecked"/>
-    public static BillingAddress FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="SubscriptionPreviewParamsBillingInformationBillingAddressFromRaw.FromRawUnchecked"/>
+    public static SubscriptionPreviewParamsBillingInformationBillingAddress FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class BillingAddressFromRaw : IFromRawJson<BillingAddress>
+class SubscriptionPreviewParamsBillingInformationBillingAddressFromRaw
+    : IFromRawJson<SubscriptionPreviewParamsBillingInformationBillingAddress>
 {
     /// <inheritdoc/>
-    public BillingAddress FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        BillingAddress.FromRawUnchecked(rawData);
+    public SubscriptionPreviewParamsBillingInformationBillingAddress FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionPreviewParamsBillingInformationBillingAddress.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(ProrationBehaviorConverter))]
-public enum ProrationBehavior
+[JsonConverter(typeof(SubscriptionPreviewParamsBillingInformationProrationBehaviorConverter))]
+public enum SubscriptionPreviewParamsBillingInformationProrationBehavior
 {
     InvoiceImmediately,
     CreateProrations,
     None,
 }
 
-sealed class ProrationBehaviorConverter : JsonConverter<ProrationBehavior>
+sealed class SubscriptionPreviewParamsBillingInformationProrationBehaviorConverter
+    : JsonConverter<SubscriptionPreviewParamsBillingInformationProrationBehavior>
 {
-    public override ProrationBehavior Read(
+    public override SubscriptionPreviewParamsBillingInformationProrationBehavior Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1802,16 +1930,18 @@ sealed class ProrationBehaviorConverter : JsonConverter<ProrationBehavior>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "INVOICE_IMMEDIATELY" => ProrationBehavior.InvoiceImmediately,
-            "CREATE_PRORATIONS" => ProrationBehavior.CreateProrations,
-            "NONE" => ProrationBehavior.None,
-            _ => (ProrationBehavior)(-1),
+            "INVOICE_IMMEDIATELY" =>
+                SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately,
+            "CREATE_PRORATIONS" =>
+                SubscriptionPreviewParamsBillingInformationProrationBehavior.CreateProrations,
+            "NONE" => SubscriptionPreviewParamsBillingInformationProrationBehavior.None,
+            _ => (SubscriptionPreviewParamsBillingInformationProrationBehavior)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        ProrationBehavior value,
+        SubscriptionPreviewParamsBillingInformationProrationBehavior value,
         JsonSerializerOptions options
     )
     {
@@ -1819,9 +1949,11 @@ sealed class ProrationBehaviorConverter : JsonConverter<ProrationBehavior>
             writer,
             value switch
             {
-                ProrationBehavior.InvoiceImmediately => "INVOICE_IMMEDIATELY",
-                ProrationBehavior.CreateProrations => "CREATE_PRORATIONS",
-                ProrationBehavior.None => "NONE",
+                SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately =>
+                    "INVOICE_IMMEDIATELY",
+                SubscriptionPreviewParamsBillingInformationProrationBehavior.CreateProrations =>
+                    "CREATE_PRORATIONS",
+                SubscriptionPreviewParamsBillingInformationProrationBehavior.None => "NONE",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -1831,8 +1963,13 @@ sealed class ProrationBehaviorConverter : JsonConverter<ProrationBehavior>
     }
 }
 
-[JsonConverter(typeof(JsonModelConverter<TaxID, TaxIDFromRaw>))]
-public sealed record class TaxID : JsonModel
+[JsonConverter(
+    typeof(JsonModelConverter<
+        SubscriptionPreviewParamsBillingInformationTaxID,
+        SubscriptionPreviewParamsBillingInformationTaxIDFromRaw
+    >)
+)]
+public sealed record class SubscriptionPreviewParamsBillingInformationTaxID : JsonModel
 {
     public required string Type
     {
@@ -1861,39 +1998,47 @@ public sealed record class TaxID : JsonModel
         _ = this.Value;
     }
 
-    public TaxID() { }
+    public SubscriptionPreviewParamsBillingInformationTaxID() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public TaxID(TaxID taxID)
-        : base(taxID) { }
+    public SubscriptionPreviewParamsBillingInformationTaxID(
+        SubscriptionPreviewParamsBillingInformationTaxID subscriptionPreviewParamsBillingInformationTaxID
+    )
+        : base(subscriptionPreviewParamsBillingInformationTaxID) { }
 #pragma warning restore CS8618
 
-    public TaxID(IReadOnlyDictionary<string, JsonElement> rawData)
+    public SubscriptionPreviewParamsBillingInformationTaxID(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    TaxID(FrozenDictionary<string, JsonElement> rawData)
+    SubscriptionPreviewParamsBillingInformationTaxID(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="TaxIDFromRaw.FromRawUnchecked"/>
-    public static TaxID FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="SubscriptionPreviewParamsBillingInformationTaxIDFromRaw.FromRawUnchecked"/>
+    public static SubscriptionPreviewParamsBillingInformationTaxID FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class TaxIDFromRaw : IFromRawJson<TaxID>
+class SubscriptionPreviewParamsBillingInformationTaxIDFromRaw
+    : IFromRawJson<SubscriptionPreviewParamsBillingInformationTaxID>
 {
     /// <inheritdoc/>
-    public TaxID FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        TaxID.FromRawUnchecked(rawData);
+    public SubscriptionPreviewParamsBillingInformationTaxID FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionPreviewParamsBillingInformationTaxID.FromRawUnchecked(rawData);
 }
 
 [JsonConverter(typeof(SubscriptionPreviewParamsBillingPeriodConverter))]
@@ -1941,8 +2086,13 @@ sealed class SubscriptionPreviewParamsBillingPeriodConverter
     }
 }
 
-[JsonConverter(typeof(JsonModelConverter<Charge, ChargeFromRaw>))]
-public sealed record class Charge : JsonModel
+[JsonConverter(
+    typeof(JsonModelConverter<
+        SubscriptionPreviewParamsCharge,
+        SubscriptionPreviewParamsChargeFromRaw
+    >)
+)]
+public sealed record class SubscriptionPreviewParamsCharge : JsonModel
 {
     /// <summary>
     /// Charge ID
@@ -1957,6 +2107,9 @@ public sealed record class Charge : JsonModel
         init { this._rawData.Set("id", value); }
     }
 
+    /// <summary>
+    /// Charge quantity
+    /// </summary>
     public required double Quantity
     {
         get
@@ -1967,13 +2120,16 @@ public sealed record class Charge : JsonModel
         init { this._rawData.Set("quantity", value); }
     }
 
-    public required ApiEnum<string, global::Stigg.Client.Models.V1.Subscriptions.Type> Type
+    /// <summary>
+    /// Charge type
+    /// </summary>
+    public required ApiEnum<string, SubscriptionPreviewParamsChargeType> Type
     {
         get
         {
             this._rawData.Freeze();
             return this._rawData.GetNotNullClass<
-                ApiEnum<string, global::Stigg.Client.Models.V1.Subscriptions.Type>
+                ApiEnum<string, SubscriptionPreviewParamsChargeType>
             >("type");
         }
         init { this._rawData.Set("type", value); }
@@ -1987,51 +2143,60 @@ public sealed record class Charge : JsonModel
         this.Type.Validate();
     }
 
-    public Charge() { }
+    public SubscriptionPreviewParamsCharge() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public Charge(Charge charge)
-        : base(charge) { }
+    public SubscriptionPreviewParamsCharge(
+        SubscriptionPreviewParamsCharge subscriptionPreviewParamsCharge
+    )
+        : base(subscriptionPreviewParamsCharge) { }
 #pragma warning restore CS8618
 
-    public Charge(IReadOnlyDictionary<string, JsonElement> rawData)
+    public SubscriptionPreviewParamsCharge(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Charge(FrozenDictionary<string, JsonElement> rawData)
+    SubscriptionPreviewParamsCharge(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="ChargeFromRaw.FromRawUnchecked"/>
-    public static Charge FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="SubscriptionPreviewParamsChargeFromRaw.FromRawUnchecked"/>
+    public static SubscriptionPreviewParamsCharge FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class ChargeFromRaw : IFromRawJson<Charge>
+class SubscriptionPreviewParamsChargeFromRaw : IFromRawJson<SubscriptionPreviewParamsCharge>
 {
     /// <inheritdoc/>
-    public Charge FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        Charge.FromRawUnchecked(rawData);
+    public SubscriptionPreviewParamsCharge FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionPreviewParamsCharge.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(TypeConverter))]
-public enum Type
+/// <summary>
+/// Charge type
+/// </summary>
+[JsonConverter(typeof(SubscriptionPreviewParamsChargeTypeConverter))]
+public enum SubscriptionPreviewParamsChargeType
 {
     Feature,
     Credit,
 }
 
-sealed class TypeConverter : JsonConverter<global::Stigg.Client.Models.V1.Subscriptions.Type>
+sealed class SubscriptionPreviewParamsChargeTypeConverter
+    : JsonConverter<SubscriptionPreviewParamsChargeType>
 {
-    public override global::Stigg.Client.Models.V1.Subscriptions.Type Read(
+    public override SubscriptionPreviewParamsChargeType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -2039,15 +2204,15 @@ sealed class TypeConverter : JsonConverter<global::Stigg.Client.Models.V1.Subscr
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "FEATURE" => global::Stigg.Client.Models.V1.Subscriptions.Type.Feature,
-            "CREDIT" => global::Stigg.Client.Models.V1.Subscriptions.Type.Credit,
-            _ => (global::Stigg.Client.Models.V1.Subscriptions.Type)(-1),
+            "FEATURE" => SubscriptionPreviewParamsChargeType.Feature,
+            "CREDIT" => SubscriptionPreviewParamsChargeType.Credit,
+            _ => (SubscriptionPreviewParamsChargeType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        global::Stigg.Client.Models.V1.Subscriptions.Type value,
+        SubscriptionPreviewParamsChargeType value,
         JsonSerializerOptions options
     )
     {
@@ -2055,8 +2220,8 @@ sealed class TypeConverter : JsonConverter<global::Stigg.Client.Models.V1.Subscr
             writer,
             value switch
             {
-                global::Stigg.Client.Models.V1.Subscriptions.Type.Feature => "FEATURE",
-                global::Stigg.Client.Models.V1.Subscriptions.Type.Credit => "CREDIT",
+                SubscriptionPreviewParamsChargeType.Feature => "FEATURE",
+                SubscriptionPreviewParamsChargeType.Credit => "CREDIT",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -2066,17 +2231,18 @@ sealed class TypeConverter : JsonConverter<global::Stigg.Client.Models.V1.Subscr
     }
 }
 
-[JsonConverter(typeof(ScheduleStrategyConverter))]
-public enum ScheduleStrategy
+[JsonConverter(typeof(SubscriptionPreviewParamsScheduleStrategyConverter))]
+public enum SubscriptionPreviewParamsScheduleStrategy
 {
     EndOfBillingPeriod,
     EndOfBillingMonth,
     Immediate,
 }
 
-sealed class ScheduleStrategyConverter : JsonConverter<ScheduleStrategy>
+sealed class SubscriptionPreviewParamsScheduleStrategyConverter
+    : JsonConverter<SubscriptionPreviewParamsScheduleStrategy>
 {
-    public override ScheduleStrategy Read(
+    public override SubscriptionPreviewParamsScheduleStrategy Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -2084,16 +2250,16 @@ sealed class ScheduleStrategyConverter : JsonConverter<ScheduleStrategy>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "END_OF_BILLING_PERIOD" => ScheduleStrategy.EndOfBillingPeriod,
-            "END_OF_BILLING_MONTH" => ScheduleStrategy.EndOfBillingMonth,
-            "IMMEDIATE" => ScheduleStrategy.Immediate,
-            _ => (ScheduleStrategy)(-1),
+            "END_OF_BILLING_PERIOD" => SubscriptionPreviewParamsScheduleStrategy.EndOfBillingPeriod,
+            "END_OF_BILLING_MONTH" => SubscriptionPreviewParamsScheduleStrategy.EndOfBillingMonth,
+            "IMMEDIATE" => SubscriptionPreviewParamsScheduleStrategy.Immediate,
+            _ => (SubscriptionPreviewParamsScheduleStrategy)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        ScheduleStrategy value,
+        SubscriptionPreviewParamsScheduleStrategy value,
         JsonSerializerOptions options
     )
     {
@@ -2101,9 +2267,11 @@ sealed class ScheduleStrategyConverter : JsonConverter<ScheduleStrategy>
             writer,
             value switch
             {
-                ScheduleStrategy.EndOfBillingPeriod => "END_OF_BILLING_PERIOD",
-                ScheduleStrategy.EndOfBillingMonth => "END_OF_BILLING_MONTH",
-                ScheduleStrategy.Immediate => "IMMEDIATE",
+                SubscriptionPreviewParamsScheduleStrategy.EndOfBillingPeriod =>
+                    "END_OF_BILLING_PERIOD",
+                SubscriptionPreviewParamsScheduleStrategy.EndOfBillingMonth =>
+                    "END_OF_BILLING_MONTH",
+                SubscriptionPreviewParamsScheduleStrategy.Immediate => "IMMEDIATE",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

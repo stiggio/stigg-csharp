@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
-using Subscriptions = Stigg.Client.Models.V1.Subscriptions;
+using Stigg.Client.Models.V1.Subscriptions;
 
 namespace Stigg.Client.Tests.Models.V1.Subscriptions;
 
@@ -12,7 +12,7 @@ public class SubscriptionPreviewParamsTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var parameters = new Subscriptions::SubscriptionPreviewParams
+        var parameters = new SubscriptionPreviewParams
         {
             CustomerID = "customerId",
             PlanID = "planId",
@@ -27,7 +27,15 @@ public class SubscriptionPreviewParamsTest : TestBase
                 CouponID = "couponId",
                 Discount = new()
                 {
-                    AmountsOff = [new() { Amount = 0, Currency = Subscriptions::Currency.Usd }],
+                    AmountsOff =
+                    [
+                        new()
+                        {
+                            Amount = 0,
+                            Currency =
+                                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd,
+                        },
+                    ],
                     Description = "description",
                     DurationInMonths = 1,
                     Name = "name",
@@ -54,30 +62,31 @@ public class SubscriptionPreviewParamsTest : TestBase
                 IsBackdated = true,
                 IsInvoicePaid = true,
                 Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
-                ProrationBehavior = Subscriptions::ProrationBehavior.InvoiceImmediately,
+                ProrationBehavior =
+                    SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately,
                 TaxIds = [new() { Type = "type", Value = "value" }],
                 TaxPercentage = 0,
                 TaxRateIds = ["string"],
             },
-            BillingPeriod = Subscriptions::SubscriptionPreviewParamsBillingPeriod.Monthly,
+            BillingPeriod = SubscriptionPreviewParamsBillingPeriod.Monthly,
             Charges =
             [
                 new()
                 {
                     ID = "id",
                     Quantity = 1,
-                    Type = Subscriptions::Type.Feature,
+                    Type = SubscriptionPreviewParamsChargeType.Feature,
                 },
             ],
             PayingCustomerID = "payingCustomerId",
             ResourceID = "resourceId",
-            ScheduleStrategy = Subscriptions::ScheduleStrategy.EndOfBillingPeriod,
+            ScheduleStrategy = SubscriptionPreviewParamsScheduleStrategy.EndOfBillingPeriod,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             TrialOverrideConfiguration = new()
             {
                 IsTrial = true,
                 TrialEndBehavior =
-                    Subscriptions::SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
+                    SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             UnitQuantity = 1,
@@ -85,15 +94,26 @@ public class SubscriptionPreviewParamsTest : TestBase
 
         string expectedCustomerID = "customerId";
         string expectedPlanID = "planId";
-        List<Subscriptions::Addon> expectedAddons = [new() { AddonID = "addonId", Quantity = 1 }];
-        Subscriptions::AppliedCoupon expectedAppliedCoupon = new()
+        List<SubscriptionPreviewParamsAddon> expectedAddons =
+        [
+            new() { AddonID = "addonId", Quantity = 1 },
+        ];
+        SubscriptionPreviewParamsAppliedCoupon expectedAppliedCoupon = new()
         {
             BillingCouponID = "billingCouponId",
             Configuration = new() { StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z") },
             CouponID = "couponId",
             Discount = new()
             {
-                AmountsOff = [new() { Amount = 0, Currency = Subscriptions::Currency.Usd }],
+                AmountsOff =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        Currency =
+                            SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd,
+                    },
+                ],
                 Description = "description",
                 DurationInMonths = 1,
                 Name = "name",
@@ -101,12 +121,12 @@ public class SubscriptionPreviewParamsTest : TestBase
             },
             PromotionCode = "promotionCode",
         };
-        List<Subscriptions::BillableFeature> expectedBillableFeatures =
+        List<BillableFeature> expectedBillableFeatures =
         [
             new() { FeatureID = "featureId", Quantity = 1 },
         ];
         string expectedBillingCountryCode = "billingCountryCode";
-        Subscriptions::BillingInformation expectedBillingInformation = new()
+        SubscriptionPreviewParamsBillingInformation expectedBillingInformation = new()
         {
             BillingAddress = new()
             {
@@ -123,35 +143,34 @@ public class SubscriptionPreviewParamsTest : TestBase
             IsBackdated = true,
             IsInvoicePaid = true,
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
-            ProrationBehavior = Subscriptions::ProrationBehavior.InvoiceImmediately,
+            ProrationBehavior =
+                SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately,
             TaxIds = [new() { Type = "type", Value = "value" }],
             TaxPercentage = 0,
             TaxRateIds = ["string"],
         };
-        ApiEnum<
-            string,
-            Subscriptions::SubscriptionPreviewParamsBillingPeriod
-        > expectedBillingPeriod = Subscriptions::SubscriptionPreviewParamsBillingPeriod.Monthly;
-        List<Subscriptions::Charge> expectedCharges =
+        ApiEnum<string, SubscriptionPreviewParamsBillingPeriod> expectedBillingPeriod =
+            SubscriptionPreviewParamsBillingPeriod.Monthly;
+        List<SubscriptionPreviewParamsCharge> expectedCharges =
         [
             new()
             {
                 ID = "id",
                 Quantity = 1,
-                Type = Subscriptions::Type.Feature,
+                Type = SubscriptionPreviewParamsChargeType.Feature,
             },
         ];
         string expectedPayingCustomerID = "payingCustomerId";
         string expectedResourceID = "resourceId";
-        ApiEnum<string, Subscriptions::ScheduleStrategy> expectedScheduleStrategy =
-            Subscriptions::ScheduleStrategy.EndOfBillingPeriod;
+        ApiEnum<string, SubscriptionPreviewParamsScheduleStrategy> expectedScheduleStrategy =
+            SubscriptionPreviewParamsScheduleStrategy.EndOfBillingPeriod;
         DateTimeOffset expectedStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        Subscriptions::SubscriptionPreviewParamsTrialOverrideConfiguration expectedTrialOverrideConfiguration =
+        SubscriptionPreviewParamsTrialOverrideConfiguration expectedTrialOverrideConfiguration =
             new()
             {
                 IsTrial = true,
                 TrialEndBehavior =
-                    Subscriptions::SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
+                    SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             };
         double expectedUnitQuantity = 1;
@@ -191,7 +210,7 @@ public class SubscriptionPreviewParamsTest : TestBase
     [Fact]
     public void OptionalNonNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new Subscriptions::SubscriptionPreviewParams
+        var parameters = new SubscriptionPreviewParams
         {
             CustomerID = "customerId",
             PlanID = "planId",
@@ -228,7 +247,7 @@ public class SubscriptionPreviewParamsTest : TestBase
     [Fact]
     public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
     {
-        var parameters = new Subscriptions::SubscriptionPreviewParams
+        var parameters = new SubscriptionPreviewParams
         {
             CustomerID = "customerId",
             PlanID = "planId",
@@ -280,7 +299,7 @@ public class SubscriptionPreviewParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        Subscriptions::SubscriptionPreviewParams parameters = new()
+        SubscriptionPreviewParams parameters = new()
         {
             CustomerID = "customerId",
             PlanID = "planId",
@@ -294,7 +313,7 @@ public class SubscriptionPreviewParamsTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var parameters = new Subscriptions::SubscriptionPreviewParams
+        var parameters = new SubscriptionPreviewParams
         {
             CustomerID = "customerId",
             PlanID = "planId",
@@ -309,7 +328,15 @@ public class SubscriptionPreviewParamsTest : TestBase
                 CouponID = "couponId",
                 Discount = new()
                 {
-                    AmountsOff = [new() { Amount = 0, Currency = Subscriptions::Currency.Usd }],
+                    AmountsOff =
+                    [
+                        new()
+                        {
+                            Amount = 0,
+                            Currency =
+                                SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd,
+                        },
+                    ],
                     Description = "description",
                     DurationInMonths = 1,
                     Name = "name",
@@ -336,47 +363,48 @@ public class SubscriptionPreviewParamsTest : TestBase
                 IsBackdated = true,
                 IsInvoicePaid = true,
                 Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
-                ProrationBehavior = Subscriptions::ProrationBehavior.InvoiceImmediately,
+                ProrationBehavior =
+                    SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately,
                 TaxIds = [new() { Type = "type", Value = "value" }],
                 TaxPercentage = 0,
                 TaxRateIds = ["string"],
             },
-            BillingPeriod = Subscriptions::SubscriptionPreviewParamsBillingPeriod.Monthly,
+            BillingPeriod = SubscriptionPreviewParamsBillingPeriod.Monthly,
             Charges =
             [
                 new()
                 {
                     ID = "id",
                     Quantity = 1,
-                    Type = Subscriptions::Type.Feature,
+                    Type = SubscriptionPreviewParamsChargeType.Feature,
                 },
             ],
             PayingCustomerID = "payingCustomerId",
             ResourceID = "resourceId",
-            ScheduleStrategy = Subscriptions::ScheduleStrategy.EndOfBillingPeriod,
+            ScheduleStrategy = SubscriptionPreviewParamsScheduleStrategy.EndOfBillingPeriod,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             TrialOverrideConfiguration = new()
             {
                 IsTrial = true,
                 TrialEndBehavior =
-                    Subscriptions::SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
+                    SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             UnitQuantity = 1,
         };
 
-        Subscriptions::SubscriptionPreviewParams copied = new(parameters);
+        SubscriptionPreviewParams copied = new(parameters);
 
         Assert.Equal(parameters, copied);
     }
 }
 
-public class AddonTest : TestBase
+public class SubscriptionPreviewParamsAddonTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Subscriptions::Addon { AddonID = "addonId", Quantity = 1 };
+        var model = new SubscriptionPreviewParamsAddon { AddonID = "addonId", Quantity = 1 };
 
         string expectedAddonID = "addonId";
         long expectedQuantity = 1;
@@ -388,10 +416,10 @@ public class AddonTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Subscriptions::Addon { AddonID = "addonId", Quantity = 1 };
+        var model = new SubscriptionPreviewParamsAddon { AddonID = "addonId", Quantity = 1 };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::Addon>(
+        var deserialized = JsonSerializer.Deserialize<SubscriptionPreviewParamsAddon>(
             json,
             ModelBase.SerializerOptions
         );
@@ -402,10 +430,10 @@ public class AddonTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Subscriptions::Addon { AddonID = "addonId", Quantity = 1 };
+        var model = new SubscriptionPreviewParamsAddon { AddonID = "addonId", Quantity = 1 };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::Addon>(
+        var deserialized = JsonSerializer.Deserialize<SubscriptionPreviewParamsAddon>(
             element,
             ModelBase.SerializerOptions
         );
@@ -421,7 +449,7 @@ public class AddonTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Subscriptions::Addon { AddonID = "addonId", Quantity = 1 };
+        var model = new SubscriptionPreviewParamsAddon { AddonID = "addonId", Quantity = 1 };
 
         model.Validate();
     }
@@ -429,7 +457,7 @@ public class AddonTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Subscriptions::Addon { AddonID = "addonId" };
+        var model = new SubscriptionPreviewParamsAddon { AddonID = "addonId" };
 
         Assert.Null(model.Quantity);
         Assert.False(model.RawData.ContainsKey("quantity"));
@@ -438,7 +466,7 @@ public class AddonTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Subscriptions::Addon { AddonID = "addonId" };
+        var model = new SubscriptionPreviewParamsAddon { AddonID = "addonId" };
 
         model.Validate();
     }
@@ -446,7 +474,7 @@ public class AddonTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new Subscriptions::Addon
+        var model = new SubscriptionPreviewParamsAddon
         {
             AddonID = "addonId",
 
@@ -461,7 +489,7 @@ public class AddonTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Subscriptions::Addon
+        var model = new SubscriptionPreviewParamsAddon
         {
             AddonID = "addonId",
 
@@ -475,27 +503,35 @@ public class AddonTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Subscriptions::Addon { AddonID = "addonId", Quantity = 1 };
+        var model = new SubscriptionPreviewParamsAddon { AddonID = "addonId", Quantity = 1 };
 
-        Subscriptions::Addon copied = new(model);
+        SubscriptionPreviewParamsAddon copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class AppliedCouponTest : TestBase
+public class SubscriptionPreviewParamsAppliedCouponTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Subscriptions::AppliedCoupon
+        var model = new SubscriptionPreviewParamsAppliedCoupon
         {
             BillingCouponID = "billingCouponId",
             Configuration = new() { StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z") },
             CouponID = "couponId",
             Discount = new()
             {
-                AmountsOff = [new() { Amount = 0, Currency = Subscriptions::Currency.Usd }],
+                AmountsOff =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        Currency =
+                            SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd,
+                    },
+                ],
                 Description = "description",
                 DurationInMonths = 1,
                 Name = "name",
@@ -505,14 +541,21 @@ public class AppliedCouponTest : TestBase
         };
 
         string expectedBillingCouponID = "billingCouponId";
-        Subscriptions::Configuration expectedConfiguration = new()
+        SubscriptionPreviewParamsAppliedCouponConfiguration expectedConfiguration = new()
         {
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
         string expectedCouponID = "couponId";
-        Subscriptions::Discount expectedDiscount = new()
+        SubscriptionPreviewParamsAppliedCouponDiscount expectedDiscount = new()
         {
-            AmountsOff = [new() { Amount = 0, Currency = Subscriptions::Currency.Usd }],
+            AmountsOff =
+            [
+                new()
+                {
+                    Amount = 0,
+                    Currency = SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd,
+                },
+            ],
             Description = "description",
             DurationInMonths = 1,
             Name = "name",
@@ -530,14 +573,22 @@ public class AppliedCouponTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Subscriptions::AppliedCoupon
+        var model = new SubscriptionPreviewParamsAppliedCoupon
         {
             BillingCouponID = "billingCouponId",
             Configuration = new() { StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z") },
             CouponID = "couponId",
             Discount = new()
             {
-                AmountsOff = [new() { Amount = 0, Currency = Subscriptions::Currency.Usd }],
+                AmountsOff =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        Currency =
+                            SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd,
+                    },
+                ],
                 Description = "description",
                 DurationInMonths = 1,
                 Name = "name",
@@ -547,7 +598,7 @@ public class AppliedCouponTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::AppliedCoupon>(
+        var deserialized = JsonSerializer.Deserialize<SubscriptionPreviewParamsAppliedCoupon>(
             json,
             ModelBase.SerializerOptions
         );
@@ -558,14 +609,22 @@ public class AppliedCouponTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Subscriptions::AppliedCoupon
+        var model = new SubscriptionPreviewParamsAppliedCoupon
         {
             BillingCouponID = "billingCouponId",
             Configuration = new() { StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z") },
             CouponID = "couponId",
             Discount = new()
             {
-                AmountsOff = [new() { Amount = 0, Currency = Subscriptions::Currency.Usd }],
+                AmountsOff =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        Currency =
+                            SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd,
+                    },
+                ],
                 Description = "description",
                 DurationInMonths = 1,
                 Name = "name",
@@ -575,21 +634,28 @@ public class AppliedCouponTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::AppliedCoupon>(
+        var deserialized = JsonSerializer.Deserialize<SubscriptionPreviewParamsAppliedCoupon>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
         string expectedBillingCouponID = "billingCouponId";
-        Subscriptions::Configuration expectedConfiguration = new()
+        SubscriptionPreviewParamsAppliedCouponConfiguration expectedConfiguration = new()
         {
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
         string expectedCouponID = "couponId";
-        Subscriptions::Discount expectedDiscount = new()
+        SubscriptionPreviewParamsAppliedCouponDiscount expectedDiscount = new()
         {
-            AmountsOff = [new() { Amount = 0, Currency = Subscriptions::Currency.Usd }],
+            AmountsOff =
+            [
+                new()
+                {
+                    Amount = 0,
+                    Currency = SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd,
+                },
+            ],
             Description = "description",
             DurationInMonths = 1,
             Name = "name",
@@ -607,14 +673,22 @@ public class AppliedCouponTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Subscriptions::AppliedCoupon
+        var model = new SubscriptionPreviewParamsAppliedCoupon
         {
             BillingCouponID = "billingCouponId",
             Configuration = new() { StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z") },
             CouponID = "couponId",
             Discount = new()
             {
-                AmountsOff = [new() { Amount = 0, Currency = Subscriptions::Currency.Usd }],
+                AmountsOff =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        Currency =
+                            SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd,
+                    },
+                ],
                 Description = "description",
                 DurationInMonths = 1,
                 Name = "name",
@@ -629,7 +703,7 @@ public class AppliedCouponTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Subscriptions::AppliedCoupon { };
+        var model = new SubscriptionPreviewParamsAppliedCoupon { };
 
         Assert.Null(model.BillingCouponID);
         Assert.False(model.RawData.ContainsKey("billingCouponId"));
@@ -646,7 +720,7 @@ public class AppliedCouponTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Subscriptions::AppliedCoupon { };
+        var model = new SubscriptionPreviewParamsAppliedCoupon { };
 
         model.Validate();
     }
@@ -654,7 +728,7 @@ public class AppliedCouponTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new Subscriptions::AppliedCoupon
+        var model = new SubscriptionPreviewParamsAppliedCoupon
         {
             // Null should be interpreted as omitted for these properties
             BillingCouponID = null,
@@ -679,7 +753,7 @@ public class AppliedCouponTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Subscriptions::AppliedCoupon
+        var model = new SubscriptionPreviewParamsAppliedCoupon
         {
             // Null should be interpreted as omitted for these properties
             BillingCouponID = null,
@@ -695,14 +769,22 @@ public class AppliedCouponTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Subscriptions::AppliedCoupon
+        var model = new SubscriptionPreviewParamsAppliedCoupon
         {
             BillingCouponID = "billingCouponId",
             Configuration = new() { StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z") },
             CouponID = "couponId",
             Discount = new()
             {
-                AmountsOff = [new() { Amount = 0, Currency = Subscriptions::Currency.Usd }],
+                AmountsOff =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        Currency =
+                            SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd,
+                    },
+                ],
                 Description = "description",
                 DurationInMonths = 1,
                 Name = "name",
@@ -711,18 +793,18 @@ public class AppliedCouponTest : TestBase
             PromotionCode = "promotionCode",
         };
 
-        Subscriptions::AppliedCoupon copied = new(model);
+        SubscriptionPreviewParamsAppliedCoupon copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class ConfigurationTest : TestBase
+public class SubscriptionPreviewParamsAppliedCouponConfigurationTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Subscriptions::Configuration
+        var model = new SubscriptionPreviewParamsAppliedCouponConfiguration
         {
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -735,16 +817,17 @@ public class ConfigurationTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Subscriptions::Configuration
+        var model = new SubscriptionPreviewParamsAppliedCouponConfiguration
         {
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::Configuration>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionPreviewParamsAppliedCouponConfiguration>(
+                json,
+                ModelBase.SerializerOptions
+            );
 
         Assert.Equal(model, deserialized);
     }
@@ -752,16 +835,17 @@ public class ConfigurationTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Subscriptions::Configuration
+        var model = new SubscriptionPreviewParamsAppliedCouponConfiguration
         {
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::Configuration>(
-            element,
-            ModelBase.SerializerOptions
-        );
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionPreviewParamsAppliedCouponConfiguration>(
+                element,
+                ModelBase.SerializerOptions
+            );
         Assert.NotNull(deserialized);
 
         DateTimeOffset expectedStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -772,7 +856,7 @@ public class ConfigurationTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Subscriptions::Configuration
+        var model = new SubscriptionPreviewParamsAppliedCouponConfiguration
         {
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -783,7 +867,7 @@ public class ConfigurationTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Subscriptions::Configuration { };
+        var model = new SubscriptionPreviewParamsAppliedCouponConfiguration { };
 
         Assert.Null(model.StartDate);
         Assert.False(model.RawData.ContainsKey("startDate"));
@@ -792,7 +876,7 @@ public class ConfigurationTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Subscriptions::Configuration { };
+        var model = new SubscriptionPreviewParamsAppliedCouponConfiguration { };
 
         model.Validate();
     }
@@ -800,7 +884,7 @@ public class ConfigurationTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new Subscriptions::Configuration
+        var model = new SubscriptionPreviewParamsAppliedCouponConfiguration
         {
             // Null should be interpreted as omitted for these properties
             StartDate = null,
@@ -813,7 +897,7 @@ public class ConfigurationTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Subscriptions::Configuration
+        var model = new SubscriptionPreviewParamsAppliedCouponConfiguration
         {
             // Null should be interpreted as omitted for these properties
             StartDate = null,
@@ -825,34 +909,45 @@ public class ConfigurationTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Subscriptions::Configuration
+        var model = new SubscriptionPreviewParamsAppliedCouponConfiguration
         {
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
-        Subscriptions::Configuration copied = new(model);
+        SubscriptionPreviewParamsAppliedCouponConfiguration copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class DiscountTest : TestBase
+public class SubscriptionPreviewParamsAppliedCouponDiscountTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Subscriptions::Discount
+        var model = new SubscriptionPreviewParamsAppliedCouponDiscount
         {
-            AmountsOff = [new() { Amount = 0, Currency = Subscriptions::Currency.Usd }],
+            AmountsOff =
+            [
+                new()
+                {
+                    Amount = 0,
+                    Currency = SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd,
+                },
+            ],
             Description = "description",
             DurationInMonths = 1,
             Name = "name",
             PercentOff = 1,
         };
 
-        List<Subscriptions::AmountsOff> expectedAmountsOff =
+        List<SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff> expectedAmountsOff =
         [
-            new() { Amount = 0, Currency = Subscriptions::Currency.Usd },
+            new()
+            {
+                Amount = 0,
+                Currency = SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd,
+            },
         ];
         string expectedDescription = "description";
         double expectedDurationInMonths = 1;
@@ -874,9 +969,16 @@ public class DiscountTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Subscriptions::Discount
+        var model = new SubscriptionPreviewParamsAppliedCouponDiscount
         {
-            AmountsOff = [new() { Amount = 0, Currency = Subscriptions::Currency.Usd }],
+            AmountsOff =
+            [
+                new()
+                {
+                    Amount = 0,
+                    Currency = SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd,
+                },
+            ],
             Description = "description",
             DurationInMonths = 1,
             Name = "name",
@@ -884,10 +986,11 @@ public class DiscountTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::Discount>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionPreviewParamsAppliedCouponDiscount>(
+                json,
+                ModelBase.SerializerOptions
+            );
 
         Assert.Equal(model, deserialized);
     }
@@ -895,9 +998,16 @@ public class DiscountTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Subscriptions::Discount
+        var model = new SubscriptionPreviewParamsAppliedCouponDiscount
         {
-            AmountsOff = [new() { Amount = 0, Currency = Subscriptions::Currency.Usd }],
+            AmountsOff =
+            [
+                new()
+                {
+                    Amount = 0,
+                    Currency = SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd,
+                },
+            ],
             Description = "description",
             DurationInMonths = 1,
             Name = "name",
@@ -905,15 +1015,20 @@ public class DiscountTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::Discount>(
-            element,
-            ModelBase.SerializerOptions
-        );
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionPreviewParamsAppliedCouponDiscount>(
+                element,
+                ModelBase.SerializerOptions
+            );
         Assert.NotNull(deserialized);
 
-        List<Subscriptions::AmountsOff> expectedAmountsOff =
+        List<SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff> expectedAmountsOff =
         [
-            new() { Amount = 0, Currency = Subscriptions::Currency.Usd },
+            new()
+            {
+                Amount = 0,
+                Currency = SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd,
+            },
         ];
         string expectedDescription = "description";
         double expectedDurationInMonths = 1;
@@ -935,9 +1050,16 @@ public class DiscountTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Subscriptions::Discount
+        var model = new SubscriptionPreviewParamsAppliedCouponDiscount
         {
-            AmountsOff = [new() { Amount = 0, Currency = Subscriptions::Currency.Usd }],
+            AmountsOff =
+            [
+                new()
+                {
+                    Amount = 0,
+                    Currency = SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd,
+                },
+            ],
             Description = "description",
             DurationInMonths = 1,
             Name = "name",
@@ -950,9 +1072,16 @@ public class DiscountTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Subscriptions::Discount
+        var model = new SubscriptionPreviewParamsAppliedCouponDiscount
         {
-            AmountsOff = [new() { Amount = 0, Currency = Subscriptions::Currency.Usd }],
+            AmountsOff =
+            [
+                new()
+                {
+                    Amount = 0,
+                    Currency = SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd,
+                },
+            ],
         };
 
         Assert.Null(model.Description);
@@ -968,9 +1097,16 @@ public class DiscountTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Subscriptions::Discount
+        var model = new SubscriptionPreviewParamsAppliedCouponDiscount
         {
-            AmountsOff = [new() { Amount = 0, Currency = Subscriptions::Currency.Usd }],
+            AmountsOff =
+            [
+                new()
+                {
+                    Amount = 0,
+                    Currency = SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd,
+                },
+            ],
         };
 
         model.Validate();
@@ -979,9 +1115,16 @@ public class DiscountTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new Subscriptions::Discount
+        var model = new SubscriptionPreviewParamsAppliedCouponDiscount
         {
-            AmountsOff = [new() { Amount = 0, Currency = Subscriptions::Currency.Usd }],
+            AmountsOff =
+            [
+                new()
+                {
+                    Amount = 0,
+                    Currency = SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd,
+                },
+            ],
 
             // Null should be interpreted as omitted for these properties
             Description = null,
@@ -1003,9 +1146,16 @@ public class DiscountTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Subscriptions::Discount
+        var model = new SubscriptionPreviewParamsAppliedCouponDiscount
         {
-            AmountsOff = [new() { Amount = 0, Currency = Subscriptions::Currency.Usd }],
+            AmountsOff =
+            [
+                new()
+                {
+                    Amount = 0,
+                    Currency = SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd,
+                },
+            ],
 
             // Null should be interpreted as omitted for these properties
             Description = null,
@@ -1020,7 +1170,7 @@ public class DiscountTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Subscriptions::Discount
+        var model = new SubscriptionPreviewParamsAppliedCouponDiscount
         {
             Description = "description",
             DurationInMonths = 1,
@@ -1035,7 +1185,7 @@ public class DiscountTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Subscriptions::Discount
+        var model = new SubscriptionPreviewParamsAppliedCouponDiscount
         {
             Description = "description",
             DurationInMonths = 1,
@@ -1049,7 +1199,7 @@ public class DiscountTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new Subscriptions::Discount
+        var model = new SubscriptionPreviewParamsAppliedCouponDiscount
         {
             Description = "description",
             DurationInMonths = 1,
@@ -1066,7 +1216,7 @@ public class DiscountTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Subscriptions::Discount
+        var model = new SubscriptionPreviewParamsAppliedCouponDiscount
         {
             Description = "description",
             DurationInMonths = 1,
@@ -1082,34 +1232,44 @@ public class DiscountTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Subscriptions::Discount
+        var model = new SubscriptionPreviewParamsAppliedCouponDiscount
         {
-            AmountsOff = [new() { Amount = 0, Currency = Subscriptions::Currency.Usd }],
+            AmountsOff =
+            [
+                new()
+                {
+                    Amount = 0,
+                    Currency = SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd,
+                },
+            ],
             Description = "description",
             DurationInMonths = 1,
             Name = "name",
             PercentOff = 1,
         };
 
-        Subscriptions::Discount copied = new(model);
+        SubscriptionPreviewParamsAppliedCouponDiscount copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class AmountsOffTest : TestBase
+public class SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Subscriptions::AmountsOff
+        var model = new SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff
         {
             Amount = 0,
-            Currency = Subscriptions::Currency.Usd,
+            Currency = SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd,
         };
 
         double expectedAmount = 0;
-        ApiEnum<string, Subscriptions::Currency> expectedCurrency = Subscriptions::Currency.Usd;
+        ApiEnum<
+            string,
+            SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency
+        > expectedCurrency = SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd;
 
         Assert.Equal(expectedAmount, model.Amount);
         Assert.Equal(expectedCurrency, model.Currency);
@@ -1118,17 +1278,18 @@ public class AmountsOffTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Subscriptions::AmountsOff
+        var model = new SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff
         {
             Amount = 0,
-            Currency = Subscriptions::Currency.Usd,
+            Currency = SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::AmountsOff>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff>(
+                json,
+                ModelBase.SerializerOptions
+            );
 
         Assert.Equal(model, deserialized);
     }
@@ -1136,21 +1297,25 @@ public class AmountsOffTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Subscriptions::AmountsOff
+        var model = new SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff
         {
             Amount = 0,
-            Currency = Subscriptions::Currency.Usd,
+            Currency = SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::AmountsOff>(
-            element,
-            ModelBase.SerializerOptions
-        );
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff>(
+                element,
+                ModelBase.SerializerOptions
+            );
         Assert.NotNull(deserialized);
 
         double expectedAmount = 0;
-        ApiEnum<string, Subscriptions::Currency> expectedCurrency = Subscriptions::Currency.Usd;
+        ApiEnum<
+            string,
+            SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency
+        > expectedCurrency = SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd;
 
         Assert.Equal(expectedAmount, deserialized.Amount);
         Assert.Equal(expectedCurrency, deserialized.Currency);
@@ -1159,10 +1324,56 @@ public class AmountsOffTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Subscriptions::AmountsOff
+        var model = new SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff
         {
             Amount = 0,
-            Currency = Subscriptions::Currency.Usd,
+            Currency = SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff { Amount = 0 };
+
+        Assert.Null(model.Currency);
+        Assert.False(model.RawData.ContainsKey("currency"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff { Amount = 0 };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
+    {
+        var model = new SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff
+        {
+            Amount = 0,
+
+            // Null should be interpreted as omitted for these properties
+            Currency = null,
+        };
+
+        Assert.Null(model.Currency);
+        Assert.False(model.RawData.ContainsKey("currency"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff
+        {
+            Amount = 0,
+
+            // Null should be interpreted as omitted for these properties
+            Currency = null,
         };
 
         model.Validate();
@@ -1171,283 +1382,287 @@ public class AmountsOffTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Subscriptions::AmountsOff
+        var model = new SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff
         {
             Amount = 0,
-            Currency = Subscriptions::Currency.Usd,
+            Currency = SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd,
         };
 
-        Subscriptions::AmountsOff copied = new(model);
+        SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class CurrencyTest : TestBase
+public class SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrencyTest : TestBase
 {
     [Theory]
-    [InlineData(Subscriptions::Currency.Usd)]
-    [InlineData(Subscriptions::Currency.Aed)]
-    [InlineData(Subscriptions::Currency.All)]
-    [InlineData(Subscriptions::Currency.Amd)]
-    [InlineData(Subscriptions::Currency.Ang)]
-    [InlineData(Subscriptions::Currency.Aud)]
-    [InlineData(Subscriptions::Currency.Awg)]
-    [InlineData(Subscriptions::Currency.Azn)]
-    [InlineData(Subscriptions::Currency.Bam)]
-    [InlineData(Subscriptions::Currency.Bbd)]
-    [InlineData(Subscriptions::Currency.Bdt)]
-    [InlineData(Subscriptions::Currency.Bgn)]
-    [InlineData(Subscriptions::Currency.Bif)]
-    [InlineData(Subscriptions::Currency.Bmd)]
-    [InlineData(Subscriptions::Currency.Bnd)]
-    [InlineData(Subscriptions::Currency.Bsd)]
-    [InlineData(Subscriptions::Currency.Bwp)]
-    [InlineData(Subscriptions::Currency.Byn)]
-    [InlineData(Subscriptions::Currency.Bzd)]
-    [InlineData(Subscriptions::Currency.Brl)]
-    [InlineData(Subscriptions::Currency.Cad)]
-    [InlineData(Subscriptions::Currency.Cdf)]
-    [InlineData(Subscriptions::Currency.Chf)]
-    [InlineData(Subscriptions::Currency.Cny)]
-    [InlineData(Subscriptions::Currency.Czk)]
-    [InlineData(Subscriptions::Currency.Dkk)]
-    [InlineData(Subscriptions::Currency.Dop)]
-    [InlineData(Subscriptions::Currency.Dzd)]
-    [InlineData(Subscriptions::Currency.Egp)]
-    [InlineData(Subscriptions::Currency.Etb)]
-    [InlineData(Subscriptions::Currency.Eur)]
-    [InlineData(Subscriptions::Currency.Fjd)]
-    [InlineData(Subscriptions::Currency.Gbp)]
-    [InlineData(Subscriptions::Currency.Gel)]
-    [InlineData(Subscriptions::Currency.Gip)]
-    [InlineData(Subscriptions::Currency.Gmd)]
-    [InlineData(Subscriptions::Currency.Gyd)]
-    [InlineData(Subscriptions::Currency.Hkd)]
-    [InlineData(Subscriptions::Currency.Hrk)]
-    [InlineData(Subscriptions::Currency.Htg)]
-    [InlineData(Subscriptions::Currency.Idr)]
-    [InlineData(Subscriptions::Currency.Ils)]
-    [InlineData(Subscriptions::Currency.Inr)]
-    [InlineData(Subscriptions::Currency.Isk)]
-    [InlineData(Subscriptions::Currency.Jmd)]
-    [InlineData(Subscriptions::Currency.Jpy)]
-    [InlineData(Subscriptions::Currency.Kes)]
-    [InlineData(Subscriptions::Currency.Kgs)]
-    [InlineData(Subscriptions::Currency.Khr)]
-    [InlineData(Subscriptions::Currency.Kmf)]
-    [InlineData(Subscriptions::Currency.Krw)]
-    [InlineData(Subscriptions::Currency.Kyd)]
-    [InlineData(Subscriptions::Currency.Kzt)]
-    [InlineData(Subscriptions::Currency.Lbp)]
-    [InlineData(Subscriptions::Currency.Lkr)]
-    [InlineData(Subscriptions::Currency.Lrd)]
-    [InlineData(Subscriptions::Currency.Lsl)]
-    [InlineData(Subscriptions::Currency.Mad)]
-    [InlineData(Subscriptions::Currency.Mdl)]
-    [InlineData(Subscriptions::Currency.Mga)]
-    [InlineData(Subscriptions::Currency.Mkd)]
-    [InlineData(Subscriptions::Currency.Mmk)]
-    [InlineData(Subscriptions::Currency.Mnt)]
-    [InlineData(Subscriptions::Currency.Mop)]
-    [InlineData(Subscriptions::Currency.Mro)]
-    [InlineData(Subscriptions::Currency.Mvr)]
-    [InlineData(Subscriptions::Currency.Mwk)]
-    [InlineData(Subscriptions::Currency.Mxn)]
-    [InlineData(Subscriptions::Currency.Myr)]
-    [InlineData(Subscriptions::Currency.Mzn)]
-    [InlineData(Subscriptions::Currency.Nad)]
-    [InlineData(Subscriptions::Currency.Ngn)]
-    [InlineData(Subscriptions::Currency.Nok)]
-    [InlineData(Subscriptions::Currency.Npr)]
-    [InlineData(Subscriptions::Currency.Nzd)]
-    [InlineData(Subscriptions::Currency.Pgk)]
-    [InlineData(Subscriptions::Currency.Php)]
-    [InlineData(Subscriptions::Currency.Pkr)]
-    [InlineData(Subscriptions::Currency.Pln)]
-    [InlineData(Subscriptions::Currency.Qar)]
-    [InlineData(Subscriptions::Currency.Ron)]
-    [InlineData(Subscriptions::Currency.Rsd)]
-    [InlineData(Subscriptions::Currency.Rub)]
-    [InlineData(Subscriptions::Currency.Rwf)]
-    [InlineData(Subscriptions::Currency.Sar)]
-    [InlineData(Subscriptions::Currency.Sbd)]
-    [InlineData(Subscriptions::Currency.Scr)]
-    [InlineData(Subscriptions::Currency.Sek)]
-    [InlineData(Subscriptions::Currency.Sgd)]
-    [InlineData(Subscriptions::Currency.Sle)]
-    [InlineData(Subscriptions::Currency.Sll)]
-    [InlineData(Subscriptions::Currency.Sos)]
-    [InlineData(Subscriptions::Currency.Szl)]
-    [InlineData(Subscriptions::Currency.Thb)]
-    [InlineData(Subscriptions::Currency.Tjs)]
-    [InlineData(Subscriptions::Currency.Top)]
-    [InlineData(Subscriptions::Currency.Try)]
-    [InlineData(Subscriptions::Currency.Ttd)]
-    [InlineData(Subscriptions::Currency.Tzs)]
-    [InlineData(Subscriptions::Currency.Uah)]
-    [InlineData(Subscriptions::Currency.Uzs)]
-    [InlineData(Subscriptions::Currency.Vnd)]
-    [InlineData(Subscriptions::Currency.Vuv)]
-    [InlineData(Subscriptions::Currency.Wst)]
-    [InlineData(Subscriptions::Currency.Xaf)]
-    [InlineData(Subscriptions::Currency.Xcd)]
-    [InlineData(Subscriptions::Currency.Yer)]
-    [InlineData(Subscriptions::Currency.Zar)]
-    [InlineData(Subscriptions::Currency.Zmw)]
-    [InlineData(Subscriptions::Currency.Clp)]
-    [InlineData(Subscriptions::Currency.Djf)]
-    [InlineData(Subscriptions::Currency.Gnf)]
-    [InlineData(Subscriptions::Currency.Ugx)]
-    [InlineData(Subscriptions::Currency.Pyg)]
-    [InlineData(Subscriptions::Currency.Xof)]
-    [InlineData(Subscriptions::Currency.Xpf)]
-    public void Validation_Works(Subscriptions::Currency rawValue)
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Aed)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.All)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Amd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Ang)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Aud)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Awg)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Azn)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bam)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bbd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bdt)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bgn)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bif)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bmd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bnd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bsd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bwp)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Byn)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bzd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Brl)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Cad)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Cdf)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Chf)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Cny)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Czk)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Dkk)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Dop)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Dzd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Egp)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Etb)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Eur)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Fjd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Gbp)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Gel)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Gip)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Gmd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Gyd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Hkd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Hrk)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Htg)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Idr)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Ils)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Inr)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Isk)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Jmd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Jpy)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Kes)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Kgs)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Khr)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Kmf)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Krw)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Kyd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Kzt)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Lbp)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Lkr)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Lrd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Lsl)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mad)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mdl)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mga)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mkd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mmk)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mnt)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mop)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mro)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mvr)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mwk)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mxn)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Myr)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mzn)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Nad)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Ngn)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Nok)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Npr)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Nzd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Pgk)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Php)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Pkr)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Pln)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Qar)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Ron)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Rsd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Rub)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Rwf)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Sar)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Sbd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Scr)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Sek)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Sgd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Sle)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Sll)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Sos)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Szl)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Thb)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Tjs)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Top)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Try)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Ttd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Tzs)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Uah)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Uzs)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Vnd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Vuv)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Wst)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Xaf)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Xcd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Yer)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Zar)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Zmw)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Clp)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Djf)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Gnf)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Ugx)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Pyg)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Xof)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Xpf)]
+    public void Validation_Works(
+        SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency rawValue
+    )
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Subscriptions::Currency> value = rawValue;
+        ApiEnum<string, SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency> value =
+            rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::Currency>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
         Assert.Throws<StiggInvalidDataException>(() => value.Validate());
     }
 
     [Theory]
-    [InlineData(Subscriptions::Currency.Usd)]
-    [InlineData(Subscriptions::Currency.Aed)]
-    [InlineData(Subscriptions::Currency.All)]
-    [InlineData(Subscriptions::Currency.Amd)]
-    [InlineData(Subscriptions::Currency.Ang)]
-    [InlineData(Subscriptions::Currency.Aud)]
-    [InlineData(Subscriptions::Currency.Awg)]
-    [InlineData(Subscriptions::Currency.Azn)]
-    [InlineData(Subscriptions::Currency.Bam)]
-    [InlineData(Subscriptions::Currency.Bbd)]
-    [InlineData(Subscriptions::Currency.Bdt)]
-    [InlineData(Subscriptions::Currency.Bgn)]
-    [InlineData(Subscriptions::Currency.Bif)]
-    [InlineData(Subscriptions::Currency.Bmd)]
-    [InlineData(Subscriptions::Currency.Bnd)]
-    [InlineData(Subscriptions::Currency.Bsd)]
-    [InlineData(Subscriptions::Currency.Bwp)]
-    [InlineData(Subscriptions::Currency.Byn)]
-    [InlineData(Subscriptions::Currency.Bzd)]
-    [InlineData(Subscriptions::Currency.Brl)]
-    [InlineData(Subscriptions::Currency.Cad)]
-    [InlineData(Subscriptions::Currency.Cdf)]
-    [InlineData(Subscriptions::Currency.Chf)]
-    [InlineData(Subscriptions::Currency.Cny)]
-    [InlineData(Subscriptions::Currency.Czk)]
-    [InlineData(Subscriptions::Currency.Dkk)]
-    [InlineData(Subscriptions::Currency.Dop)]
-    [InlineData(Subscriptions::Currency.Dzd)]
-    [InlineData(Subscriptions::Currency.Egp)]
-    [InlineData(Subscriptions::Currency.Etb)]
-    [InlineData(Subscriptions::Currency.Eur)]
-    [InlineData(Subscriptions::Currency.Fjd)]
-    [InlineData(Subscriptions::Currency.Gbp)]
-    [InlineData(Subscriptions::Currency.Gel)]
-    [InlineData(Subscriptions::Currency.Gip)]
-    [InlineData(Subscriptions::Currency.Gmd)]
-    [InlineData(Subscriptions::Currency.Gyd)]
-    [InlineData(Subscriptions::Currency.Hkd)]
-    [InlineData(Subscriptions::Currency.Hrk)]
-    [InlineData(Subscriptions::Currency.Htg)]
-    [InlineData(Subscriptions::Currency.Idr)]
-    [InlineData(Subscriptions::Currency.Ils)]
-    [InlineData(Subscriptions::Currency.Inr)]
-    [InlineData(Subscriptions::Currency.Isk)]
-    [InlineData(Subscriptions::Currency.Jmd)]
-    [InlineData(Subscriptions::Currency.Jpy)]
-    [InlineData(Subscriptions::Currency.Kes)]
-    [InlineData(Subscriptions::Currency.Kgs)]
-    [InlineData(Subscriptions::Currency.Khr)]
-    [InlineData(Subscriptions::Currency.Kmf)]
-    [InlineData(Subscriptions::Currency.Krw)]
-    [InlineData(Subscriptions::Currency.Kyd)]
-    [InlineData(Subscriptions::Currency.Kzt)]
-    [InlineData(Subscriptions::Currency.Lbp)]
-    [InlineData(Subscriptions::Currency.Lkr)]
-    [InlineData(Subscriptions::Currency.Lrd)]
-    [InlineData(Subscriptions::Currency.Lsl)]
-    [InlineData(Subscriptions::Currency.Mad)]
-    [InlineData(Subscriptions::Currency.Mdl)]
-    [InlineData(Subscriptions::Currency.Mga)]
-    [InlineData(Subscriptions::Currency.Mkd)]
-    [InlineData(Subscriptions::Currency.Mmk)]
-    [InlineData(Subscriptions::Currency.Mnt)]
-    [InlineData(Subscriptions::Currency.Mop)]
-    [InlineData(Subscriptions::Currency.Mro)]
-    [InlineData(Subscriptions::Currency.Mvr)]
-    [InlineData(Subscriptions::Currency.Mwk)]
-    [InlineData(Subscriptions::Currency.Mxn)]
-    [InlineData(Subscriptions::Currency.Myr)]
-    [InlineData(Subscriptions::Currency.Mzn)]
-    [InlineData(Subscriptions::Currency.Nad)]
-    [InlineData(Subscriptions::Currency.Ngn)]
-    [InlineData(Subscriptions::Currency.Nok)]
-    [InlineData(Subscriptions::Currency.Npr)]
-    [InlineData(Subscriptions::Currency.Nzd)]
-    [InlineData(Subscriptions::Currency.Pgk)]
-    [InlineData(Subscriptions::Currency.Php)]
-    [InlineData(Subscriptions::Currency.Pkr)]
-    [InlineData(Subscriptions::Currency.Pln)]
-    [InlineData(Subscriptions::Currency.Qar)]
-    [InlineData(Subscriptions::Currency.Ron)]
-    [InlineData(Subscriptions::Currency.Rsd)]
-    [InlineData(Subscriptions::Currency.Rub)]
-    [InlineData(Subscriptions::Currency.Rwf)]
-    [InlineData(Subscriptions::Currency.Sar)]
-    [InlineData(Subscriptions::Currency.Sbd)]
-    [InlineData(Subscriptions::Currency.Scr)]
-    [InlineData(Subscriptions::Currency.Sek)]
-    [InlineData(Subscriptions::Currency.Sgd)]
-    [InlineData(Subscriptions::Currency.Sle)]
-    [InlineData(Subscriptions::Currency.Sll)]
-    [InlineData(Subscriptions::Currency.Sos)]
-    [InlineData(Subscriptions::Currency.Szl)]
-    [InlineData(Subscriptions::Currency.Thb)]
-    [InlineData(Subscriptions::Currency.Tjs)]
-    [InlineData(Subscriptions::Currency.Top)]
-    [InlineData(Subscriptions::Currency.Try)]
-    [InlineData(Subscriptions::Currency.Ttd)]
-    [InlineData(Subscriptions::Currency.Tzs)]
-    [InlineData(Subscriptions::Currency.Uah)]
-    [InlineData(Subscriptions::Currency.Uzs)]
-    [InlineData(Subscriptions::Currency.Vnd)]
-    [InlineData(Subscriptions::Currency.Vuv)]
-    [InlineData(Subscriptions::Currency.Wst)]
-    [InlineData(Subscriptions::Currency.Xaf)]
-    [InlineData(Subscriptions::Currency.Xcd)]
-    [InlineData(Subscriptions::Currency.Yer)]
-    [InlineData(Subscriptions::Currency.Zar)]
-    [InlineData(Subscriptions::Currency.Zmw)]
-    [InlineData(Subscriptions::Currency.Clp)]
-    [InlineData(Subscriptions::Currency.Djf)]
-    [InlineData(Subscriptions::Currency.Gnf)]
-    [InlineData(Subscriptions::Currency.Ugx)]
-    [InlineData(Subscriptions::Currency.Pyg)]
-    [InlineData(Subscriptions::Currency.Xof)]
-    [InlineData(Subscriptions::Currency.Xpf)]
-    public void SerializationRoundtrip_Works(Subscriptions::Currency rawValue)
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Usd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Aed)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.All)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Amd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Ang)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Aud)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Awg)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Azn)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bam)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bbd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bdt)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bgn)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bif)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bmd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bnd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bsd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bwp)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Byn)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Bzd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Brl)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Cad)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Cdf)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Chf)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Cny)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Czk)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Dkk)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Dop)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Dzd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Egp)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Etb)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Eur)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Fjd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Gbp)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Gel)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Gip)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Gmd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Gyd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Hkd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Hrk)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Htg)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Idr)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Ils)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Inr)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Isk)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Jmd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Jpy)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Kes)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Kgs)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Khr)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Kmf)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Krw)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Kyd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Kzt)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Lbp)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Lkr)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Lrd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Lsl)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mad)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mdl)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mga)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mkd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mmk)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mnt)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mop)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mro)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mvr)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mwk)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mxn)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Myr)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Mzn)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Nad)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Ngn)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Nok)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Npr)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Nzd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Pgk)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Php)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Pkr)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Pln)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Qar)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Ron)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Rsd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Rub)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Rwf)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Sar)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Sbd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Scr)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Sek)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Sgd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Sle)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Sll)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Sos)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Szl)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Thb)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Tjs)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Top)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Try)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Ttd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Tzs)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Uah)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Uzs)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Vnd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Vuv)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Wst)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Xaf)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Xcd)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Yer)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Zar)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Zmw)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Clp)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Djf)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Gnf)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Ugx)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Pyg)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Xof)]
+    [InlineData(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency.Xpf)]
+    public void SerializationRoundtrip_Works(
+        SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency rawValue
+    )
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Subscriptions::Currency> value = rawValue;
+        ApiEnum<string, SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency> value =
+            rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::Currency>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
@@ -1455,15 +1670,13 @@ public class CurrencyTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::Currency>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::Currency>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
@@ -1474,7 +1687,7 @@ public class BillableFeatureTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Subscriptions::BillableFeature { FeatureID = "featureId", Quantity = 1 };
+        var model = new BillableFeature { FeatureID = "featureId", Quantity = 1 };
 
         string expectedFeatureID = "featureId";
         double expectedQuantity = 1;
@@ -1486,10 +1699,10 @@ public class BillableFeatureTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Subscriptions::BillableFeature { FeatureID = "featureId", Quantity = 1 };
+        var model = new BillableFeature { FeatureID = "featureId", Quantity = 1 };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::BillableFeature>(
+        var deserialized = JsonSerializer.Deserialize<BillableFeature>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1500,10 +1713,10 @@ public class BillableFeatureTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Subscriptions::BillableFeature { FeatureID = "featureId", Quantity = 1 };
+        var model = new BillableFeature { FeatureID = "featureId", Quantity = 1 };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::BillableFeature>(
+        var deserialized = JsonSerializer.Deserialize<BillableFeature>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1519,7 +1732,7 @@ public class BillableFeatureTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Subscriptions::BillableFeature { FeatureID = "featureId", Quantity = 1 };
+        var model = new BillableFeature { FeatureID = "featureId", Quantity = 1 };
 
         model.Validate();
     }
@@ -1527,20 +1740,20 @@ public class BillableFeatureTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Subscriptions::BillableFeature { FeatureID = "featureId", Quantity = 1 };
+        var model = new BillableFeature { FeatureID = "featureId", Quantity = 1 };
 
-        Subscriptions::BillableFeature copied = new(model);
+        BillableFeature copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class BillingInformationTest : TestBase
+public class SubscriptionPreviewParamsBillingInformationTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Subscriptions::BillingInformation
+        var model = new SubscriptionPreviewParamsBillingInformation
         {
             BillingAddress = new()
             {
@@ -1557,13 +1770,14 @@ public class BillingInformationTest : TestBase
             IsBackdated = true,
             IsInvoicePaid = true,
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
-            ProrationBehavior = Subscriptions::ProrationBehavior.InvoiceImmediately,
+            ProrationBehavior =
+                SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately,
             TaxIds = [new() { Type = "type", Value = "value" }],
             TaxPercentage = 0,
             TaxRateIds = ["string"],
         };
 
-        Subscriptions::BillingAddress expectedBillingAddress = new()
+        SubscriptionPreviewParamsBillingInformationBillingAddress expectedBillingAddress = new()
         {
             City = "city",
             Country = "country",
@@ -1578,9 +1792,15 @@ public class BillingInformationTest : TestBase
         bool expectedIsBackdated = true;
         bool expectedIsInvoicePaid = true;
         JsonElement expectedMetadata = JsonSerializer.Deserialize<JsonElement>("{}");
-        ApiEnum<string, Subscriptions::ProrationBehavior> expectedProrationBehavior =
-            Subscriptions::ProrationBehavior.InvoiceImmediately;
-        List<Subscriptions::TaxID> expectedTaxIds = [new() { Type = "type", Value = "value" }];
+        ApiEnum<
+            string,
+            SubscriptionPreviewParamsBillingInformationProrationBehavior
+        > expectedProrationBehavior =
+            SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately;
+        List<SubscriptionPreviewParamsBillingInformationTaxID> expectedTaxIds =
+        [
+            new() { Type = "type", Value = "value" },
+        ];
         double expectedTaxPercentage = 0;
         List<string> expectedTaxRateIds = ["string"];
 
@@ -1611,7 +1831,7 @@ public class BillingInformationTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Subscriptions::BillingInformation
+        var model = new SubscriptionPreviewParamsBillingInformation
         {
             BillingAddress = new()
             {
@@ -1628,14 +1848,15 @@ public class BillingInformationTest : TestBase
             IsBackdated = true,
             IsInvoicePaid = true,
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
-            ProrationBehavior = Subscriptions::ProrationBehavior.InvoiceImmediately,
+            ProrationBehavior =
+                SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately,
             TaxIds = [new() { Type = "type", Value = "value" }],
             TaxPercentage = 0,
             TaxRateIds = ["string"],
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::BillingInformation>(
+        var deserialized = JsonSerializer.Deserialize<SubscriptionPreviewParamsBillingInformation>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1646,7 +1867,7 @@ public class BillingInformationTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Subscriptions::BillingInformation
+        var model = new SubscriptionPreviewParamsBillingInformation
         {
             BillingAddress = new()
             {
@@ -1663,20 +1884,21 @@ public class BillingInformationTest : TestBase
             IsBackdated = true,
             IsInvoicePaid = true,
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
-            ProrationBehavior = Subscriptions::ProrationBehavior.InvoiceImmediately,
+            ProrationBehavior =
+                SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately,
             TaxIds = [new() { Type = "type", Value = "value" }],
             TaxPercentage = 0,
             TaxRateIds = ["string"],
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::BillingInformation>(
+        var deserialized = JsonSerializer.Deserialize<SubscriptionPreviewParamsBillingInformation>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
-        Subscriptions::BillingAddress expectedBillingAddress = new()
+        SubscriptionPreviewParamsBillingInformationBillingAddress expectedBillingAddress = new()
         {
             City = "city",
             Country = "country",
@@ -1691,9 +1913,15 @@ public class BillingInformationTest : TestBase
         bool expectedIsBackdated = true;
         bool expectedIsInvoicePaid = true;
         JsonElement expectedMetadata = JsonSerializer.Deserialize<JsonElement>("{}");
-        ApiEnum<string, Subscriptions::ProrationBehavior> expectedProrationBehavior =
-            Subscriptions::ProrationBehavior.InvoiceImmediately;
-        List<Subscriptions::TaxID> expectedTaxIds = [new() { Type = "type", Value = "value" }];
+        ApiEnum<
+            string,
+            SubscriptionPreviewParamsBillingInformationProrationBehavior
+        > expectedProrationBehavior =
+            SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately;
+        List<SubscriptionPreviewParamsBillingInformationTaxID> expectedTaxIds =
+        [
+            new() { Type = "type", Value = "value" },
+        ];
         double expectedTaxPercentage = 0;
         List<string> expectedTaxRateIds = ["string"];
 
@@ -1724,7 +1952,7 @@ public class BillingInformationTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Subscriptions::BillingInformation
+        var model = new SubscriptionPreviewParamsBillingInformation
         {
             BillingAddress = new()
             {
@@ -1741,7 +1969,8 @@ public class BillingInformationTest : TestBase
             IsBackdated = true,
             IsInvoicePaid = true,
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
-            ProrationBehavior = Subscriptions::ProrationBehavior.InvoiceImmediately,
+            ProrationBehavior =
+                SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately,
             TaxIds = [new() { Type = "type", Value = "value" }],
             TaxPercentage = 0,
             TaxRateIds = ["string"],
@@ -1753,7 +1982,7 @@ public class BillingInformationTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Subscriptions::BillingInformation { };
+        var model = new SubscriptionPreviewParamsBillingInformation { };
 
         Assert.Null(model.BillingAddress);
         Assert.False(model.RawData.ContainsKey("billingAddress"));
@@ -1782,7 +2011,7 @@ public class BillingInformationTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Subscriptions::BillingInformation { };
+        var model = new SubscriptionPreviewParamsBillingInformation { };
 
         model.Validate();
     }
@@ -1790,7 +2019,7 @@ public class BillingInformationTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new Subscriptions::BillingInformation
+        var model = new SubscriptionPreviewParamsBillingInformation
         {
             // Null should be interpreted as omitted for these properties
             BillingAddress = null,
@@ -1833,7 +2062,7 @@ public class BillingInformationTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Subscriptions::BillingInformation
+        var model = new SubscriptionPreviewParamsBillingInformation
         {
             // Null should be interpreted as omitted for these properties
             BillingAddress = null,
@@ -1855,7 +2084,7 @@ public class BillingInformationTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Subscriptions::BillingInformation
+        var model = new SubscriptionPreviewParamsBillingInformation
         {
             BillingAddress = new()
             {
@@ -1872,24 +2101,25 @@ public class BillingInformationTest : TestBase
             IsBackdated = true,
             IsInvoicePaid = true,
             Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
-            ProrationBehavior = Subscriptions::ProrationBehavior.InvoiceImmediately,
+            ProrationBehavior =
+                SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately,
             TaxIds = [new() { Type = "type", Value = "value" }],
             TaxPercentage = 0,
             TaxRateIds = ["string"],
         };
 
-        Subscriptions::BillingInformation copied = new(model);
+        SubscriptionPreviewParamsBillingInformation copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class BillingAddressTest : TestBase
+public class SubscriptionPreviewParamsBillingInformationBillingAddressTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Subscriptions::BillingAddress
+        var model = new SubscriptionPreviewParamsBillingInformationBillingAddress
         {
             City = "city",
             Country = "country",
@@ -1917,7 +2147,7 @@ public class BillingAddressTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Subscriptions::BillingAddress
+        var model = new SubscriptionPreviewParamsBillingInformationBillingAddress
         {
             City = "city",
             Country = "country",
@@ -1928,10 +2158,11 @@ public class BillingAddressTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::BillingAddress>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionPreviewParamsBillingInformationBillingAddress>(
+                json,
+                ModelBase.SerializerOptions
+            );
 
         Assert.Equal(model, deserialized);
     }
@@ -1939,7 +2170,7 @@ public class BillingAddressTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Subscriptions::BillingAddress
+        var model = new SubscriptionPreviewParamsBillingInformationBillingAddress
         {
             City = "city",
             Country = "country",
@@ -1950,10 +2181,11 @@ public class BillingAddressTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::BillingAddress>(
-            element,
-            ModelBase.SerializerOptions
-        );
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionPreviewParamsBillingInformationBillingAddress>(
+                element,
+                ModelBase.SerializerOptions
+            );
         Assert.NotNull(deserialized);
 
         string expectedCity = "city";
@@ -1974,7 +2206,7 @@ public class BillingAddressTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Subscriptions::BillingAddress
+        var model = new SubscriptionPreviewParamsBillingInformationBillingAddress
         {
             City = "city",
             Country = "country",
@@ -1990,7 +2222,7 @@ public class BillingAddressTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Subscriptions::BillingAddress { };
+        var model = new SubscriptionPreviewParamsBillingInformationBillingAddress { };
 
         Assert.Null(model.City);
         Assert.False(model.RawData.ContainsKey("city"));
@@ -2009,7 +2241,7 @@ public class BillingAddressTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Subscriptions::BillingAddress { };
+        var model = new SubscriptionPreviewParamsBillingInformationBillingAddress { };
 
         model.Validate();
     }
@@ -2017,7 +2249,7 @@ public class BillingAddressTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new Subscriptions::BillingAddress
+        var model = new SubscriptionPreviewParamsBillingInformationBillingAddress
         {
             // Null should be interpreted as omitted for these properties
             City = null,
@@ -2045,7 +2277,7 @@ public class BillingAddressTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Subscriptions::BillingAddress
+        var model = new SubscriptionPreviewParamsBillingInformationBillingAddress
         {
             // Null should be interpreted as omitted for these properties
             City = null,
@@ -2062,7 +2294,7 @@ public class BillingAddressTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Subscriptions::BillingAddress
+        var model = new SubscriptionPreviewParamsBillingInformationBillingAddress
         {
             City = "city",
             Country = "country",
@@ -2072,49 +2304,54 @@ public class BillingAddressTest : TestBase
             State = "state",
         };
 
-        Subscriptions::BillingAddress copied = new(model);
+        SubscriptionPreviewParamsBillingInformationBillingAddress copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class ProrationBehaviorTest : TestBase
+public class SubscriptionPreviewParamsBillingInformationProrationBehaviorTest : TestBase
 {
     [Theory]
-    [InlineData(Subscriptions::ProrationBehavior.InvoiceImmediately)]
-    [InlineData(Subscriptions::ProrationBehavior.CreateProrations)]
-    [InlineData(Subscriptions::ProrationBehavior.None)]
-    public void Validation_Works(Subscriptions::ProrationBehavior rawValue)
+    [InlineData(SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately)]
+    [InlineData(SubscriptionPreviewParamsBillingInformationProrationBehavior.CreateProrations)]
+    [InlineData(SubscriptionPreviewParamsBillingInformationProrationBehavior.None)]
+    public void Validation_Works(
+        SubscriptionPreviewParamsBillingInformationProrationBehavior rawValue
+    )
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Subscriptions::ProrationBehavior> value = rawValue;
+        ApiEnum<string, SubscriptionPreviewParamsBillingInformationProrationBehavior> value =
+            rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::ProrationBehavior>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionPreviewParamsBillingInformationProrationBehavior>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
         Assert.Throws<StiggInvalidDataException>(() => value.Validate());
     }
 
     [Theory]
-    [InlineData(Subscriptions::ProrationBehavior.InvoiceImmediately)]
-    [InlineData(Subscriptions::ProrationBehavior.CreateProrations)]
-    [InlineData(Subscriptions::ProrationBehavior.None)]
-    public void SerializationRoundtrip_Works(Subscriptions::ProrationBehavior rawValue)
+    [InlineData(SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately)]
+    [InlineData(SubscriptionPreviewParamsBillingInformationProrationBehavior.CreateProrations)]
+    [InlineData(SubscriptionPreviewParamsBillingInformationProrationBehavior.None)]
+    public void SerializationRoundtrip_Works(
+        SubscriptionPreviewParamsBillingInformationProrationBehavior rawValue
+    )
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Subscriptions::ProrationBehavior> value = rawValue;
+        ApiEnum<string, SubscriptionPreviewParamsBillingInformationProrationBehavior> value =
+            rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, Subscriptions::ProrationBehavior>
+            ApiEnum<string, SubscriptionPreviewParamsBillingInformationProrationBehavior>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -2123,25 +2360,28 @@ public class ProrationBehaviorTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::ProrationBehavior>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionPreviewParamsBillingInformationProrationBehavior>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, Subscriptions::ProrationBehavior>
+            ApiEnum<string, SubscriptionPreviewParamsBillingInformationProrationBehavior>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
 }
 
-public class TaxIDTest : TestBase
+public class SubscriptionPreviewParamsBillingInformationTaxIDTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Subscriptions::TaxID { Type = "type", Value = "value" };
+        var model = new SubscriptionPreviewParamsBillingInformationTaxID
+        {
+            Type = "type",
+            Value = "value",
+        };
 
         string expectedType = "type";
         string expectedValue = "value";
@@ -2153,13 +2393,18 @@ public class TaxIDTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Subscriptions::TaxID { Type = "type", Value = "value" };
+        var model = new SubscriptionPreviewParamsBillingInformationTaxID
+        {
+            Type = "type",
+            Value = "value",
+        };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::TaxID>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionPreviewParamsBillingInformationTaxID>(
+                json,
+                ModelBase.SerializerOptions
+            );
 
         Assert.Equal(model, deserialized);
     }
@@ -2167,13 +2412,18 @@ public class TaxIDTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Subscriptions::TaxID { Type = "type", Value = "value" };
+        var model = new SubscriptionPreviewParamsBillingInformationTaxID
+        {
+            Type = "type",
+            Value = "value",
+        };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::TaxID>(
-            element,
-            ModelBase.SerializerOptions
-        );
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionPreviewParamsBillingInformationTaxID>(
+                element,
+                ModelBase.SerializerOptions
+            );
         Assert.NotNull(deserialized);
 
         string expectedType = "type";
@@ -2186,7 +2436,11 @@ public class TaxIDTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Subscriptions::TaxID { Type = "type", Value = "value" };
+        var model = new SubscriptionPreviewParamsBillingInformationTaxID
+        {
+            Type = "type",
+            Value = "value",
+        };
 
         model.Validate();
     }
@@ -2194,9 +2448,13 @@ public class TaxIDTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Subscriptions::TaxID { Type = "type", Value = "value" };
+        var model = new SubscriptionPreviewParamsBillingInformationTaxID
+        {
+            Type = "type",
+            Value = "value",
+        };
 
-        Subscriptions::TaxID copied = new(model);
+        SubscriptionPreviewParamsBillingInformationTaxID copied = new(model);
 
         Assert.Equal(model, copied);
     }
@@ -2205,12 +2463,12 @@ public class TaxIDTest : TestBase
 public class SubscriptionPreviewParamsBillingPeriodTest : TestBase
 {
     [Theory]
-    [InlineData(Subscriptions::SubscriptionPreviewParamsBillingPeriod.Monthly)]
-    [InlineData(Subscriptions::SubscriptionPreviewParamsBillingPeriod.Annually)]
-    public void Validation_Works(Subscriptions::SubscriptionPreviewParamsBillingPeriod rawValue)
+    [InlineData(SubscriptionPreviewParamsBillingPeriod.Monthly)]
+    [InlineData(SubscriptionPreviewParamsBillingPeriod.Annually)]
+    public void Validation_Works(SubscriptionPreviewParamsBillingPeriod rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Subscriptions::SubscriptionPreviewParamsBillingPeriod> value = rawValue;
+        ApiEnum<string, SubscriptionPreviewParamsBillingPeriod> value = rawValue;
         value.Validate();
     }
 
@@ -2218,7 +2476,7 @@ public class SubscriptionPreviewParamsBillingPeriodTest : TestBase
     public void InvalidEnumValidationThrows_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, Subscriptions::SubscriptionPreviewParamsBillingPeriod>
+            ApiEnum<string, SubscriptionPreviewParamsBillingPeriod>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
@@ -2226,18 +2484,16 @@ public class SubscriptionPreviewParamsBillingPeriodTest : TestBase
     }
 
     [Theory]
-    [InlineData(Subscriptions::SubscriptionPreviewParamsBillingPeriod.Monthly)]
-    [InlineData(Subscriptions::SubscriptionPreviewParamsBillingPeriod.Annually)]
-    public void SerializationRoundtrip_Works(
-        Subscriptions::SubscriptionPreviewParamsBillingPeriod rawValue
-    )
+    [InlineData(SubscriptionPreviewParamsBillingPeriod.Monthly)]
+    [InlineData(SubscriptionPreviewParamsBillingPeriod.Annually)]
+    public void SerializationRoundtrip_Works(SubscriptionPreviewParamsBillingPeriod rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Subscriptions::SubscriptionPreviewParamsBillingPeriod> value = rawValue;
+        ApiEnum<string, SubscriptionPreviewParamsBillingPeriod> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, Subscriptions::SubscriptionPreviewParamsBillingPeriod>
+            ApiEnum<string, SubscriptionPreviewParamsBillingPeriod>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -2247,32 +2503,33 @@ public class SubscriptionPreviewParamsBillingPeriodTest : TestBase
     public void InvalidEnumSerializationRoundtrip_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, Subscriptions::SubscriptionPreviewParamsBillingPeriod>
+            ApiEnum<string, SubscriptionPreviewParamsBillingPeriod>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, Subscriptions::SubscriptionPreviewParamsBillingPeriod>
+            ApiEnum<string, SubscriptionPreviewParamsBillingPeriod>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
 }
 
-public class ChargeTest : TestBase
+public class SubscriptionPreviewParamsChargeTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Subscriptions::Charge
+        var model = new SubscriptionPreviewParamsCharge
         {
             ID = "id",
             Quantity = 1,
-            Type = Subscriptions::Type.Feature,
+            Type = SubscriptionPreviewParamsChargeType.Feature,
         };
 
         string expectedID = "id";
         double expectedQuantity = 1;
-        ApiEnum<string, Subscriptions::Type> expectedType = Subscriptions::Type.Feature;
+        ApiEnum<string, SubscriptionPreviewParamsChargeType> expectedType =
+            SubscriptionPreviewParamsChargeType.Feature;
 
         Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedQuantity, model.Quantity);
@@ -2282,15 +2539,15 @@ public class ChargeTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Subscriptions::Charge
+        var model = new SubscriptionPreviewParamsCharge
         {
             ID = "id",
             Quantity = 1,
-            Type = Subscriptions::Type.Feature,
+            Type = SubscriptionPreviewParamsChargeType.Feature,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::Charge>(
+        var deserialized = JsonSerializer.Deserialize<SubscriptionPreviewParamsCharge>(
             json,
             ModelBase.SerializerOptions
         );
@@ -2301,15 +2558,15 @@ public class ChargeTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Subscriptions::Charge
+        var model = new SubscriptionPreviewParamsCharge
         {
             ID = "id",
             Quantity = 1,
-            Type = Subscriptions::Type.Feature,
+            Type = SubscriptionPreviewParamsChargeType.Feature,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::Charge>(
+        var deserialized = JsonSerializer.Deserialize<SubscriptionPreviewParamsCharge>(
             element,
             ModelBase.SerializerOptions
         );
@@ -2317,7 +2574,8 @@ public class ChargeTest : TestBase
 
         string expectedID = "id";
         double expectedQuantity = 1;
-        ApiEnum<string, Subscriptions::Type> expectedType = Subscriptions::Type.Feature;
+        ApiEnum<string, SubscriptionPreviewParamsChargeType> expectedType =
+            SubscriptionPreviewParamsChargeType.Feature;
 
         Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedQuantity, deserialized.Quantity);
@@ -2327,11 +2585,11 @@ public class ChargeTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Subscriptions::Charge
+        var model = new SubscriptionPreviewParamsCharge
         {
             ID = "id",
             Quantity = 1,
-            Type = Subscriptions::Type.Feature,
+            Type = SubscriptionPreviewParamsChargeType.Feature,
         };
 
         model.Validate();
@@ -2340,114 +2598,53 @@ public class ChargeTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Subscriptions::Charge
+        var model = new SubscriptionPreviewParamsCharge
         {
             ID = "id",
             Quantity = 1,
-            Type = Subscriptions::Type.Feature,
+            Type = SubscriptionPreviewParamsChargeType.Feature,
         };
 
-        Subscriptions::Charge copied = new(model);
+        SubscriptionPreviewParamsCharge copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class TypeTest : TestBase
+public class SubscriptionPreviewParamsChargeTypeTest : TestBase
 {
     [Theory]
-    [InlineData(Subscriptions::Type.Feature)]
-    [InlineData(Subscriptions::Type.Credit)]
-    public void Validation_Works(Subscriptions::Type rawValue)
+    [InlineData(SubscriptionPreviewParamsChargeType.Feature)]
+    [InlineData(SubscriptionPreviewParamsChargeType.Credit)]
+    public void Validation_Works(SubscriptionPreviewParamsChargeType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Subscriptions::Type> value = rawValue;
+        ApiEnum<string, SubscriptionPreviewParamsChargeType> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::Type>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionPreviewParamsChargeType>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
         Assert.Throws<StiggInvalidDataException>(() => value.Validate());
     }
 
     [Theory]
-    [InlineData(Subscriptions::Type.Feature)]
-    [InlineData(Subscriptions::Type.Credit)]
-    public void SerializationRoundtrip_Works(Subscriptions::Type rawValue)
+    [InlineData(SubscriptionPreviewParamsChargeType.Feature)]
+    [InlineData(SubscriptionPreviewParamsChargeType.Credit)]
+    public void SerializationRoundtrip_Works(SubscriptionPreviewParamsChargeType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Subscriptions::Type> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::Type>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::Type>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::Type>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-}
-
-public class ScheduleStrategyTest : TestBase
-{
-    [Theory]
-    [InlineData(Subscriptions::ScheduleStrategy.EndOfBillingPeriod)]
-    [InlineData(Subscriptions::ScheduleStrategy.EndOfBillingMonth)]
-    [InlineData(Subscriptions::ScheduleStrategy.Immediate)]
-    public void Validation_Works(Subscriptions::ScheduleStrategy rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Subscriptions::ScheduleStrategy> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::ScheduleStrategy>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(Subscriptions::ScheduleStrategy.EndOfBillingPeriod)]
-    [InlineData(Subscriptions::ScheduleStrategy.EndOfBillingMonth)]
-    [InlineData(Subscriptions::ScheduleStrategy.Immediate)]
-    public void SerializationRoundtrip_Works(Subscriptions::ScheduleStrategy rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Subscriptions::ScheduleStrategy> value = rawValue;
+        ApiEnum<string, SubscriptionPreviewParamsChargeType> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, Subscriptions::ScheduleStrategy>
+            ApiEnum<string, SubscriptionPreviewParamsChargeType>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -2456,13 +2653,68 @@ public class ScheduleStrategyTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::ScheduleStrategy>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionPreviewParamsChargeType>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, Subscriptions::ScheduleStrategy>
+            ApiEnum<string, SubscriptionPreviewParamsChargeType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class SubscriptionPreviewParamsScheduleStrategyTest : TestBase
+{
+    [Theory]
+    [InlineData(SubscriptionPreviewParamsScheduleStrategy.EndOfBillingPeriod)]
+    [InlineData(SubscriptionPreviewParamsScheduleStrategy.EndOfBillingMonth)]
+    [InlineData(SubscriptionPreviewParamsScheduleStrategy.Immediate)]
+    public void Validation_Works(SubscriptionPreviewParamsScheduleStrategy rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionPreviewParamsScheduleStrategy> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionPreviewParamsScheduleStrategy>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(SubscriptionPreviewParamsScheduleStrategy.EndOfBillingPeriod)]
+    [InlineData(SubscriptionPreviewParamsScheduleStrategy.EndOfBillingMonth)]
+    [InlineData(SubscriptionPreviewParamsScheduleStrategy.Immediate)]
+    public void SerializationRoundtrip_Works(SubscriptionPreviewParamsScheduleStrategy rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionPreviewParamsScheduleStrategy> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionPreviewParamsScheduleStrategy>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionPreviewParamsScheduleStrategy>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionPreviewParamsScheduleStrategy>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -2474,20 +2726,20 @@ public class SubscriptionPreviewParamsTrialOverrideConfigurationTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Subscriptions::SubscriptionPreviewParamsTrialOverrideConfiguration
+        var model = new SubscriptionPreviewParamsTrialOverrideConfiguration
         {
             IsTrial = true,
             TrialEndBehavior =
-                Subscriptions::SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
+                SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         bool expectedIsTrial = true;
         ApiEnum<
             string,
-            Subscriptions::SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior
+            SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior
         > expectedTrialEndBehavior =
-            Subscriptions::SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid;
+            SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid;
         DateTimeOffset expectedTrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedIsTrial, model.IsTrial);
@@ -2498,17 +2750,17 @@ public class SubscriptionPreviewParamsTrialOverrideConfigurationTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Subscriptions::SubscriptionPreviewParamsTrialOverrideConfiguration
+        var model = new SubscriptionPreviewParamsTrialOverrideConfiguration
         {
             IsTrial = true,
             TrialEndBehavior =
-                Subscriptions::SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
+                SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized =
-            JsonSerializer.Deserialize<Subscriptions::SubscriptionPreviewParamsTrialOverrideConfiguration>(
+            JsonSerializer.Deserialize<SubscriptionPreviewParamsTrialOverrideConfiguration>(
                 json,
                 ModelBase.SerializerOptions
             );
@@ -2519,17 +2771,17 @@ public class SubscriptionPreviewParamsTrialOverrideConfigurationTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Subscriptions::SubscriptionPreviewParamsTrialOverrideConfiguration
+        var model = new SubscriptionPreviewParamsTrialOverrideConfiguration
         {
             IsTrial = true,
             TrialEndBehavior =
-                Subscriptions::SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
+                SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized =
-            JsonSerializer.Deserialize<Subscriptions::SubscriptionPreviewParamsTrialOverrideConfiguration>(
+            JsonSerializer.Deserialize<SubscriptionPreviewParamsTrialOverrideConfiguration>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -2538,9 +2790,9 @@ public class SubscriptionPreviewParamsTrialOverrideConfigurationTest : TestBase
         bool expectedIsTrial = true;
         ApiEnum<
             string,
-            Subscriptions::SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior
+            SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior
         > expectedTrialEndBehavior =
-            Subscriptions::SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid;
+            SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid;
         DateTimeOffset expectedTrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedIsTrial, deserialized.IsTrial);
@@ -2551,11 +2803,11 @@ public class SubscriptionPreviewParamsTrialOverrideConfigurationTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Subscriptions::SubscriptionPreviewParamsTrialOverrideConfiguration
+        var model = new SubscriptionPreviewParamsTrialOverrideConfiguration
         {
             IsTrial = true,
             TrialEndBehavior =
-                Subscriptions::SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
+                SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -2565,10 +2817,7 @@ public class SubscriptionPreviewParamsTrialOverrideConfigurationTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Subscriptions::SubscriptionPreviewParamsTrialOverrideConfiguration
-        {
-            IsTrial = true,
-        };
+        var model = new SubscriptionPreviewParamsTrialOverrideConfiguration { IsTrial = true };
 
         Assert.Null(model.TrialEndBehavior);
         Assert.False(model.RawData.ContainsKey("trialEndBehavior"));
@@ -2579,10 +2828,7 @@ public class SubscriptionPreviewParamsTrialOverrideConfigurationTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Subscriptions::SubscriptionPreviewParamsTrialOverrideConfiguration
-        {
-            IsTrial = true,
-        };
+        var model = new SubscriptionPreviewParamsTrialOverrideConfiguration { IsTrial = true };
 
         model.Validate();
     }
@@ -2590,7 +2836,7 @@ public class SubscriptionPreviewParamsTrialOverrideConfigurationTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new Subscriptions::SubscriptionPreviewParamsTrialOverrideConfiguration
+        var model = new SubscriptionPreviewParamsTrialOverrideConfiguration
         {
             IsTrial = true,
 
@@ -2608,7 +2854,7 @@ public class SubscriptionPreviewParamsTrialOverrideConfigurationTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Subscriptions::SubscriptionPreviewParamsTrialOverrideConfiguration
+        var model = new SubscriptionPreviewParamsTrialOverrideConfiguration
         {
             IsTrial = true,
 
@@ -2623,15 +2869,15 @@ public class SubscriptionPreviewParamsTrialOverrideConfigurationTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Subscriptions::SubscriptionPreviewParamsTrialOverrideConfiguration
+        var model = new SubscriptionPreviewParamsTrialOverrideConfiguration
         {
             IsTrial = true,
             TrialEndBehavior =
-                Subscriptions::SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
+                SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
-        Subscriptions::SubscriptionPreviewParamsTrialOverrideConfiguration copied = new(model);
+        SubscriptionPreviewParamsTrialOverrideConfiguration copied = new(model);
 
         Assert.Equal(model, copied);
     }
@@ -2640,21 +2886,17 @@ public class SubscriptionPreviewParamsTrialOverrideConfigurationTest : TestBase
 public class SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehaviorTest : TestBase
 {
     [Theory]
+    [InlineData(SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid)]
     [InlineData(
-        Subscriptions::SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid
-    )]
-    [InlineData(
-        Subscriptions::SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.CancelSubscription
+        SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.CancelSubscription
     )]
     public void Validation_Works(
-        Subscriptions::SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior rawValue
+        SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior rawValue
     )
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<
-            string,
-            Subscriptions::SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior
-        > value = rawValue;
+        ApiEnum<string, SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior> value =
+            rawValue;
         value.Validate();
     }
 
@@ -2662,10 +2904,7 @@ public class SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior
     public void InvalidEnumValidationThrows_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<
-                string,
-                Subscriptions::SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior
-            >
+            ApiEnum<string, SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
@@ -2673,28 +2912,21 @@ public class SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior
     }
 
     [Theory]
+    [InlineData(SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid)]
     [InlineData(
-        Subscriptions::SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid
-    )]
-    [InlineData(
-        Subscriptions::SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.CancelSubscription
+        SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.CancelSubscription
     )]
     public void SerializationRoundtrip_Works(
-        Subscriptions::SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior rawValue
+        SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior rawValue
     )
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<
-            string,
-            Subscriptions::SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior
-        > value = rawValue;
+        ApiEnum<string, SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior> value =
+            rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<
-                string,
-                Subscriptions::SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior
-            >
+            ApiEnum<string, SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -2704,17 +2936,11 @@ public class SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior
     public void InvalidEnumSerializationRoundtrip_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<
-                string,
-                Subscriptions::SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior
-            >
+            ApiEnum<string, SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<
-                string,
-                Subscriptions::SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior
-            >
+            ApiEnum<string, SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);

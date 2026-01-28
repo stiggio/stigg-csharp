@@ -1,5 +1,6 @@
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -348,6 +349,29 @@ public sealed record class SubscriptionMigrateResponseData : JsonModel
         init { this._rawData.Set("paymentCollectionMethod", value); }
     }
 
+    public IReadOnlyList<SubscriptionMigrateResponseDataPrice>? Prices
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<
+                ImmutableArray<SubscriptionMigrateResponseDataPrice>
+            >("prices");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set<ImmutableArray<SubscriptionMigrateResponseDataPrice>?>(
+                "prices",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
     /// <summary>
     /// Resource ID
     /// </summary>
@@ -374,6 +398,24 @@ public sealed record class SubscriptionMigrateResponseData : JsonModel
         init { this._rawData.Set("trialEndDate", value); }
     }
 
+    public double? UnitQuantity
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<double>("unitQuantity");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("unitQuantity", value);
+        }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -395,8 +437,13 @@ public sealed record class SubscriptionMigrateResponseData : JsonModel
         _ = this.Metadata;
         _ = this.PayingCustomerID;
         this.PaymentCollectionMethod?.Validate();
+        foreach (var item in this.Prices ?? [])
+        {
+            item.Validate();
+        }
         _ = this.ResourceID;
         _ = this.TrialEndDate;
+        _ = this.UnitQuantity;
     }
 
     public SubscriptionMigrateResponseData() { }
@@ -739,4 +786,100 @@ sealed class SubscriptionMigrateResponseDataPaymentCollectionMethodConverter
             options
         );
     }
+}
+
+[JsonConverter(
+    typeof(JsonModelConverter<
+        SubscriptionMigrateResponseDataPrice,
+        SubscriptionMigrateResponseDataPriceFromRaw
+    >)
+)]
+public sealed record class SubscriptionMigrateResponseDataPrice : JsonModel
+{
+    /// <summary>
+    /// Price ID
+    /// </summary>
+    public required string ID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
+        init { this._rawData.Set("id", value); }
+    }
+
+    /// <summary>
+    /// Creation timestamp
+    /// </summary>
+    public required string CreatedAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("createdAt");
+        }
+        init { this._rawData.Set("createdAt", value); }
+    }
+
+    /// <summary>
+    /// Last update timestamp
+    /// </summary>
+    public required string UpdatedAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("updatedAt");
+        }
+        init { this._rawData.Set("updatedAt", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.ID;
+        _ = this.CreatedAt;
+        _ = this.UpdatedAt;
+    }
+
+    public SubscriptionMigrateResponseDataPrice() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public SubscriptionMigrateResponseDataPrice(
+        SubscriptionMigrateResponseDataPrice subscriptionMigrateResponseDataPrice
+    )
+        : base(subscriptionMigrateResponseDataPrice) { }
+#pragma warning restore CS8618
+
+    public SubscriptionMigrateResponseDataPrice(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    SubscriptionMigrateResponseDataPrice(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="SubscriptionMigrateResponseDataPriceFromRaw.FromRawUnchecked"/>
+    public static SubscriptionMigrateResponseDataPrice FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class SubscriptionMigrateResponseDataPriceFromRaw
+    : IFromRawJson<SubscriptionMigrateResponseDataPrice>
+{
+    /// <inheritdoc/>
+    public SubscriptionMigrateResponseDataPrice FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionMigrateResponseDataPrice.FromRawUnchecked(rawData);
 }
