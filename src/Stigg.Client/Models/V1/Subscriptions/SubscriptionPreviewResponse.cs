@@ -9,11 +9,17 @@ using Stigg.Client.Core;
 
 namespace Stigg.Client.Models.V1.Subscriptions;
 
+/// <summary>
+/// Response object
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<SubscriptionPreviewResponse, SubscriptionPreviewResponseFromRaw>)
 )]
 public sealed record class SubscriptionPreviewResponse : JsonModel
 {
+    /// <summary>
+    /// Pricing preview with invoices
+    /// </summary>
     public required SubscriptionPreviewResponseData Data
     {
         get
@@ -75,6 +81,9 @@ class SubscriptionPreviewResponseFromRaw : IFromRawJson<SubscriptionPreviewRespo
     ) => SubscriptionPreviewResponse.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Pricing preview with invoices
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
         SubscriptionPreviewResponseData,
@@ -83,6 +92,9 @@ class SubscriptionPreviewResponseFromRaw : IFromRawJson<SubscriptionPreviewRespo
 )]
 public sealed record class SubscriptionPreviewResponseData : JsonModel
 {
+    /// <summary>
+    /// Invoice due immediately
+    /// </summary>
     public required ImmediateInvoice ImmediateInvoice
     {
         get
@@ -93,6 +105,9 @@ public sealed record class SubscriptionPreviewResponseData : JsonModel
         init { this._rawData.Set("immediateInvoice", value); }
     }
 
+    /// <summary>
+    /// Billing period range
+    /// </summary>
     public SubscriptionPreviewResponseDataBillingPeriodRange? BillingPeriodRange
     {
         get
@@ -113,6 +128,9 @@ public sealed record class SubscriptionPreviewResponseData : JsonModel
         }
     }
 
+    /// <summary>
+    /// Free items included
+    /// </summary>
     public IReadOnlyList<FreeItem>? FreeItems
     {
         get
@@ -134,6 +152,9 @@ public sealed record class SubscriptionPreviewResponseData : JsonModel
         }
     }
 
+    /// <summary>
+    /// Whether updates are scheduled
+    /// </summary>
     public bool? HasScheduledUpdates
     {
         get
@@ -152,6 +173,9 @@ public sealed record class SubscriptionPreviewResponseData : JsonModel
         }
     }
 
+    /// <summary>
+    /// Whether this is a downgrade
+    /// </summary>
     public bool? IsPlanDowngrade
     {
         get
@@ -170,6 +194,9 @@ public sealed record class SubscriptionPreviewResponseData : JsonModel
         }
     }
 
+    /// <summary>
+    /// Recurring invoice preview
+    /// </summary>
     public RecurringInvoice? RecurringInvoice
     {
         get
@@ -249,9 +276,15 @@ class SubscriptionPreviewResponseDataFromRaw : IFromRawJson<SubscriptionPreviewR
     ) => SubscriptionPreviewResponseData.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Invoice due immediately
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<ImmediateInvoice, ImmediateInvoiceFromRaw>))]
 public sealed record class ImmediateInvoice : JsonModel
 {
+    /// <summary>
+    /// Subtotal before discounts
+    /// </summary>
     public required double SubTotal
     {
         get
@@ -262,6 +295,9 @@ public sealed record class ImmediateInvoice : JsonModel
         init { this._rawData.Set("subTotal", value); }
     }
 
+    /// <summary>
+    /// Invoice total
+    /// </summary>
     public required double Total
     {
         get
@@ -272,6 +308,9 @@ public sealed record class ImmediateInvoice : JsonModel
         init { this._rawData.Set("total", value); }
     }
 
+    /// <summary>
+    /// Billing period covered
+    /// </summary>
     public BillingPeriodRange? BillingPeriodRange
     {
         get
@@ -290,6 +329,9 @@ public sealed record class ImmediateInvoice : JsonModel
         }
     }
 
+    /// <summary>
+    /// Currency code
+    /// </summary>
     public string? Currency
     {
         get
@@ -300,6 +342,9 @@ public sealed record class ImmediateInvoice : JsonModel
         init { this._rawData.Set("currency", value); }
     }
 
+    /// <summary>
+    /// Total discount amount
+    /// </summary>
     public double? Discount
     {
         get
@@ -318,6 +363,9 @@ public sealed record class ImmediateInvoice : JsonModel
         }
     }
 
+    /// <summary>
+    /// Discount breakdown
+    /// </summary>
     public DiscountDetails? DiscountDetails
     {
         get
@@ -336,6 +384,9 @@ public sealed record class ImmediateInvoice : JsonModel
         }
     }
 
+    /// <summary>
+    /// Applied discounts
+    /// </summary>
     public IReadOnlyList<ImmediateInvoiceDiscount>? Discounts
     {
         get
@@ -359,6 +410,9 @@ public sealed record class ImmediateInvoice : JsonModel
         }
     }
 
+    /// <summary>
+    /// Line items
+    /// </summary>
     public IReadOnlyList<Line>? Lines
     {
         get
@@ -380,6 +434,9 @@ public sealed record class ImmediateInvoice : JsonModel
         }
     }
 
+    /// <summary>
+    /// Tax amount
+    /// </summary>
     public double? Tax
     {
         get
@@ -455,6 +512,9 @@ class ImmediateInvoiceFromRaw : IFromRawJson<ImmediateInvoice>
         ImmediateInvoice.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Billing period covered
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<BillingPeriodRange, BillingPeriodRangeFromRaw>))]
 public sealed record class BillingPeriodRange : JsonModel
 {
@@ -528,9 +588,15 @@ class BillingPeriodRangeFromRaw : IFromRawJson<BillingPeriodRange>
         BillingPeriodRange.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Discount breakdown
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<DiscountDetails, DiscountDetailsFromRaw>))]
 public sealed record class DiscountDetails : JsonModel
 {
+    /// <summary>
+    /// Promo code used
+    /// </summary>
     public string? Code
     {
         get
@@ -549,6 +615,9 @@ public sealed record class DiscountDetails : JsonModel
         }
     }
 
+    /// <summary>
+    /// Fixed discount amount
+    /// </summary>
     public double? FixedAmount
     {
         get
@@ -567,6 +636,9 @@ public sealed record class DiscountDetails : JsonModel
         }
     }
 
+    /// <summary>
+    /// Percentage discount
+    /// </summary>
     public double? Percentage
     {
         get
@@ -628,11 +700,17 @@ class DiscountDetailsFromRaw : IFromRawJson<DiscountDetails>
         DiscountDetails.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Applied discount amount
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<ImmediateInvoiceDiscount, ImmediateInvoiceDiscountFromRaw>)
 )]
 public sealed record class ImmediateInvoiceDiscount : JsonModel
 {
+    /// <summary>
+    /// Discount amount
+    /// </summary>
     public required double Amount
     {
         get
@@ -643,6 +721,9 @@ public sealed record class ImmediateInvoiceDiscount : JsonModel
         init { this._rawData.Set("amount", value); }
     }
 
+    /// <summary>
+    /// Currency code
+    /// </summary>
     public required string Currency
     {
         get
@@ -653,6 +734,9 @@ public sealed record class ImmediateInvoiceDiscount : JsonModel
         init { this._rawData.Set("currency", value); }
     }
 
+    /// <summary>
+    /// Discount description
+    /// </summary>
     public required string Description
     {
         get
@@ -709,9 +793,15 @@ class ImmediateInvoiceDiscountFromRaw : IFromRawJson<ImmediateInvoiceDiscount>
     ) => ImmediateInvoiceDiscount.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Invoice line item
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<Line, LineFromRaw>))]
 public sealed record class Line : JsonModel
 {
+    /// <summary>
+    /// Currency code
+    /// </summary>
     public required string Currency
     {
         get
@@ -722,6 +812,9 @@ public sealed record class Line : JsonModel
         init { this._rawData.Set("currency", value); }
     }
 
+    /// <summary>
+    /// Line item description
+    /// </summary>
     public required string Description
     {
         get
@@ -732,6 +825,9 @@ public sealed record class Line : JsonModel
         init { this._rawData.Set("description", value); }
     }
 
+    /// <summary>
+    /// Line subtotal
+    /// </summary>
     public required double SubTotal
     {
         get
@@ -742,6 +838,9 @@ public sealed record class Line : JsonModel
         init { this._rawData.Set("subTotal", value); }
     }
 
+    /// <summary>
+    /// Price per unit
+    /// </summary>
     public required double UnitPrice
     {
         get
@@ -752,6 +851,9 @@ public sealed record class Line : JsonModel
         init { this._rawData.Set("unitPrice", value); }
     }
 
+    /// <summary>
+    /// Quantity
+    /// </summary>
     public double? Quantity
     {
         get
@@ -815,6 +917,9 @@ class LineFromRaw : IFromRawJson<Line>
         Line.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Billing period range
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
         SubscriptionPreviewResponseDataBillingPeriodRange,
@@ -915,9 +1020,15 @@ class SubscriptionPreviewResponseDataBillingPeriodRangeFromRaw
     ) => SubscriptionPreviewResponseDataBillingPeriodRange.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Free item in subscription
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<FreeItem, FreeItemFromRaw>))]
 public sealed record class FreeItem : JsonModel
 {
+    /// <summary>
+    /// Addon ID
+    /// </summary>
     public required string AddonID
     {
         get
@@ -928,6 +1039,9 @@ public sealed record class FreeItem : JsonModel
         init { this._rawData.Set("addonId", value); }
     }
 
+    /// <summary>
+    /// Quantity
+    /// </summary>
     public required double Quantity
     {
         get
@@ -980,9 +1094,15 @@ class FreeItemFromRaw : IFromRawJson<FreeItem>
         FreeItem.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Recurring invoice preview
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<RecurringInvoice, RecurringInvoiceFromRaw>))]
 public sealed record class RecurringInvoice : JsonModel
 {
+    /// <summary>
+    /// Subtotal before discounts
+    /// </summary>
     public required double SubTotal
     {
         get
@@ -993,6 +1113,9 @@ public sealed record class RecurringInvoice : JsonModel
         init { this._rawData.Set("subTotal", value); }
     }
 
+    /// <summary>
+    /// Invoice total
+    /// </summary>
     public required double Total
     {
         get
@@ -1003,6 +1126,9 @@ public sealed record class RecurringInvoice : JsonModel
         init { this._rawData.Set("total", value); }
     }
 
+    /// <summary>
+    /// Billing period covered
+    /// </summary>
     public RecurringInvoiceBillingPeriodRange? BillingPeriodRange
     {
         get
@@ -1023,6 +1149,9 @@ public sealed record class RecurringInvoice : JsonModel
         }
     }
 
+    /// <summary>
+    /// Currency code
+    /// </summary>
     public string? Currency
     {
         get
@@ -1033,6 +1162,9 @@ public sealed record class RecurringInvoice : JsonModel
         init { this._rawData.Set("currency", value); }
     }
 
+    /// <summary>
+    /// Total discount amount
+    /// </summary>
     public double? Discount
     {
         get
@@ -1051,6 +1183,9 @@ public sealed record class RecurringInvoice : JsonModel
         }
     }
 
+    /// <summary>
+    /// Discount breakdown
+    /// </summary>
     public RecurringInvoiceDiscountDetails? DiscountDetails
     {
         get
@@ -1071,6 +1206,9 @@ public sealed record class RecurringInvoice : JsonModel
         }
     }
 
+    /// <summary>
+    /// Applied discounts
+    /// </summary>
     public IReadOnlyList<RecurringInvoiceDiscount>? Discounts
     {
         get
@@ -1094,6 +1232,9 @@ public sealed record class RecurringInvoice : JsonModel
         }
     }
 
+    /// <summary>
+    /// Line items
+    /// </summary>
     public IReadOnlyList<RecurringInvoiceLine>? Lines
     {
         get
@@ -1115,6 +1256,9 @@ public sealed record class RecurringInvoice : JsonModel
         }
     }
 
+    /// <summary>
+    /// Tax amount
+    /// </summary>
     public double? Tax
     {
         get
@@ -1190,6 +1334,9 @@ class RecurringInvoiceFromRaw : IFromRawJson<RecurringInvoice>
         RecurringInvoice.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Billing period covered
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
         RecurringInvoiceBillingPeriodRange,
@@ -1271,6 +1418,9 @@ class RecurringInvoiceBillingPeriodRangeFromRaw : IFromRawJson<RecurringInvoiceB
     ) => RecurringInvoiceBillingPeriodRange.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Discount breakdown
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
         RecurringInvoiceDiscountDetails,
@@ -1279,6 +1429,9 @@ class RecurringInvoiceBillingPeriodRangeFromRaw : IFromRawJson<RecurringInvoiceB
 )]
 public sealed record class RecurringInvoiceDiscountDetails : JsonModel
 {
+    /// <summary>
+    /// Promo code used
+    /// </summary>
     public string? Code
     {
         get
@@ -1297,6 +1450,9 @@ public sealed record class RecurringInvoiceDiscountDetails : JsonModel
         }
     }
 
+    /// <summary>
+    /// Fixed discount amount
+    /// </summary>
     public double? FixedAmount
     {
         get
@@ -1315,6 +1471,9 @@ public sealed record class RecurringInvoiceDiscountDetails : JsonModel
         }
     }
 
+    /// <summary>
+    /// Percentage discount
+    /// </summary>
     public double? Percentage
     {
         get
@@ -1381,11 +1540,17 @@ class RecurringInvoiceDiscountDetailsFromRaw : IFromRawJson<RecurringInvoiceDisc
     ) => RecurringInvoiceDiscountDetails.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Applied discount amount
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<RecurringInvoiceDiscount, RecurringInvoiceDiscountFromRaw>)
 )]
 public sealed record class RecurringInvoiceDiscount : JsonModel
 {
+    /// <summary>
+    /// Discount amount
+    /// </summary>
     public required double Amount
     {
         get
@@ -1396,6 +1561,9 @@ public sealed record class RecurringInvoiceDiscount : JsonModel
         init { this._rawData.Set("amount", value); }
     }
 
+    /// <summary>
+    /// Currency code
+    /// </summary>
     public required string Currency
     {
         get
@@ -1406,6 +1574,9 @@ public sealed record class RecurringInvoiceDiscount : JsonModel
         init { this._rawData.Set("currency", value); }
     }
 
+    /// <summary>
+    /// Discount description
+    /// </summary>
     public required string Description
     {
         get
@@ -1462,9 +1633,15 @@ class RecurringInvoiceDiscountFromRaw : IFromRawJson<RecurringInvoiceDiscount>
     ) => RecurringInvoiceDiscount.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Invoice line item
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<RecurringInvoiceLine, RecurringInvoiceLineFromRaw>))]
 public sealed record class RecurringInvoiceLine : JsonModel
 {
+    /// <summary>
+    /// Currency code
+    /// </summary>
     public required string Currency
     {
         get
@@ -1475,6 +1652,9 @@ public sealed record class RecurringInvoiceLine : JsonModel
         init { this._rawData.Set("currency", value); }
     }
 
+    /// <summary>
+    /// Line item description
+    /// </summary>
     public required string Description
     {
         get
@@ -1485,6 +1665,9 @@ public sealed record class RecurringInvoiceLine : JsonModel
         init { this._rawData.Set("description", value); }
     }
 
+    /// <summary>
+    /// Line subtotal
+    /// </summary>
     public required double SubTotal
     {
         get
@@ -1495,6 +1678,9 @@ public sealed record class RecurringInvoiceLine : JsonModel
         init { this._rawData.Set("subTotal", value); }
     }
 
+    /// <summary>
+    /// Price per unit
+    /// </summary>
     public required double UnitPrice
     {
         get
@@ -1505,6 +1691,9 @@ public sealed record class RecurringInvoiceLine : JsonModel
         init { this._rawData.Set("unitPrice", value); }
     }
 
+    /// <summary>
+    /// Quantity
+    /// </summary>
     public double? Quantity
     {
         get

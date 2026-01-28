@@ -47,7 +47,6 @@ public class SubscriptionListPageResponseTest : TestBase
                     ],
                     ResourceID = "resourceId",
                     TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    UnitQuantity = 1,
                 },
             ],
             Pagination = new()
@@ -90,7 +89,6 @@ public class SubscriptionListPageResponseTest : TestBase
                 ],
                 ResourceID = "resourceId",
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                UnitQuantity = 1,
             },
         ];
         Pagination expectedPagination = new()
@@ -146,7 +144,6 @@ public class SubscriptionListPageResponseTest : TestBase
                     ],
                     ResourceID = "resourceId",
                     TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    UnitQuantity = 1,
                 },
             ],
             Pagination = new()
@@ -204,7 +201,6 @@ public class SubscriptionListPageResponseTest : TestBase
                     ],
                     ResourceID = "resourceId",
                     TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    UnitQuantity = 1,
                 },
             ],
             Pagination = new()
@@ -254,7 +250,6 @@ public class SubscriptionListPageResponseTest : TestBase
                 ],
                 ResourceID = "resourceId",
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                UnitQuantity = 1,
             },
         ];
         Pagination expectedPagination = new()
@@ -310,7 +305,6 @@ public class SubscriptionListPageResponseTest : TestBase
                     ],
                     ResourceID = "resourceId",
                     TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    UnitQuantity = 1,
                 },
             ],
             Pagination = new()
@@ -362,7 +356,6 @@ public class SubscriptionListPageResponseTest : TestBase
                     ],
                     ResourceID = "resourceId",
                     TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    UnitQuantity = 1,
                 },
             ],
             Pagination = new()

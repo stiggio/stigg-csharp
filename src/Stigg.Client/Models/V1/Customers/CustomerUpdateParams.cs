@@ -13,7 +13,7 @@ using System = System;
 namespace Stigg.Client.Models.V1.Customers;
 
 /// <summary>
-/// Update an existing Customer
+/// Update a customer
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
@@ -229,6 +229,9 @@ public record class CustomerUpdateParams : ParamsBase
     }
 }
 
+/// <summary>
+/// External billing or CRM integration link
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
         CustomerUpdateParamsIntegration,

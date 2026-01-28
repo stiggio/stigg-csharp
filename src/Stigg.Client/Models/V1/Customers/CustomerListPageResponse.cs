@@ -8,6 +8,9 @@ using Stigg.Client.Core;
 
 namespace Stigg.Client.Models.V1.Customers;
 
+/// <summary>
+/// Response list object
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<CustomerListPageResponse, CustomerListPageResponseFromRaw>)
 )]
@@ -30,7 +33,7 @@ public sealed record class CustomerListPageResponse : JsonModel
     }
 
     /// <summary>
-    /// Pagination information including cursors for navigation
+    /// Pagination metadata including cursors for navigating through results
     /// </summary>
     public required Pagination Pagination
     {
@@ -91,13 +94,13 @@ class CustomerListPageResponseFromRaw : IFromRawJson<CustomerListPageResponse>
 }
 
 /// <summary>
-/// Pagination information including cursors for navigation
+/// Pagination metadata including cursors for navigating through results
 /// </summary>
 [JsonConverter(typeof(JsonModelConverter<Pagination, PaginationFromRaw>))]
 public sealed record class Pagination : JsonModel
 {
     /// <summary>
-    /// Cursor to fetch the next page (use with after parameter), null if no more pages
+    /// Cursor for fetching the next page of results, or null if no additional pages exist
     /// </summary>
     public required string? Next
     {
@@ -110,8 +113,7 @@ public sealed record class Pagination : JsonModel
     }
 
     /// <summary>
-    /// Cursor to fetch the previous page (use with before parameter), null if no
-    /// previous pages
+    /// Cursor for fetching the previous page of results, or null if at the beginning
     /// </summary>
     public required string? Prev
     {

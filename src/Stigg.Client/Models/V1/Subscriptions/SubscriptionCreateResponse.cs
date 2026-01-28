@@ -10,11 +10,17 @@ using System = System;
 
 namespace Stigg.Client.Models.V1.Subscriptions;
 
+/// <summary>
+/// Response object
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<SubscriptionCreateResponse, SubscriptionCreateResponseFromRaw>)
 )]
 public sealed record class SubscriptionCreateResponse : JsonModel
 {
+    /// <summary>
+    /// Provisioning result with status and subscription or checkout URL.
+    /// </summary>
     public required Data Data
     {
         get
@@ -76,6 +82,9 @@ class SubscriptionCreateResponseFromRaw : IFromRawJson<SubscriptionCreateRespons
     ) => SubscriptionCreateResponse.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Provisioning result with status and subscription or checkout URL.
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<Data, DataFromRaw>))]
 public sealed record class Data : JsonModel
 {
@@ -168,6 +177,9 @@ public sealed record class Data : JsonModel
         }
     }
 
+    /// <summary>
+    /// Created subscription (when status is SUCCESS)
+    /// </summary>
     public Subscription? Subscription
     {
         get
@@ -431,6 +443,9 @@ class EntitlementFromRaw : IFromRawJson<Entitlement>
 [JsonConverter(typeof(JsonModelConverter<Feature, FeatureFromRaw>))]
 public sealed record class Feature : JsonModel
 {
+    /// <summary>
+    /// Feature ID
+    /// </summary>
     public required string RefID
     {
         get
@@ -585,6 +600,9 @@ sealed class StatusConverter : JsonConverter<Status>
     }
 }
 
+/// <summary>
+/// Created subscription (when status is SUCCESS)
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<Subscription, SubscriptionFromRaw>))]
 public sealed record class Subscription : JsonModel
 {
@@ -888,24 +906,6 @@ public sealed record class Subscription : JsonModel
         init { this._rawData.Set("trialEndDate", value); }
     }
 
-    public double? UnitQuantity
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<double>("unitQuantity");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("unitQuantity", value);
-        }
-    }
-
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -933,7 +933,6 @@ public sealed record class Subscription : JsonModel
         }
         _ = this.ResourceID;
         _ = this.TrialEndDate;
-        _ = this.UnitQuantity;
     }
 
     public Subscription() { }

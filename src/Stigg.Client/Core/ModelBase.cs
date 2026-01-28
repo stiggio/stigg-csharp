@@ -3,7 +3,6 @@ using Stigg.Client.Exceptions;
 using Stigg.Client.Models.V1;
 using Stigg.Client.Models.V1.Customers;
 using Coupons = Stigg.Client.Models.V1.Coupons;
-using CustomersUsage = Stigg.Client.Models.V1.Customers.Usage;
 using PaymentMethod = Stigg.Client.Models.V1.Customers.PaymentMethod;
 using Subscriptions = Stigg.Client.Models.V1.Subscriptions;
 
@@ -36,7 +35,6 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, CustomerUpdateParamsIntegrationVendorIdentifier>(),
             new ApiEnumConverter<string, PaymentMethod::VendorIdentifier>(),
             new ApiEnumConverter<string, PaymentMethod::BillingCurrency>(),
-            new ApiEnumConverter<string, CustomersUsage::Type>(),
             new ApiEnumConverter<string, Subscriptions::ResetPeriod>(),
             new ApiEnumConverter<string, Subscriptions::Status>(),
             new ApiEnumConverter<string, Subscriptions::PaymentCollection>(),

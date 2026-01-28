@@ -1,8 +1,5 @@
 using System;
-using System.Threading;
-using System.Threading.Tasks;
 using Stigg.Client.Core;
-using Stigg.Client.Models.V1.Customers.Usage;
 
 namespace Stigg.Client.Services.V1.Customers;
 
@@ -25,21 +22,6 @@ public interface IUsageService
     /// <para>The original service is not modified.</para>
     /// </summary>
     IUsageService WithOptions(Func<ClientOptions, ClientOptions> modifier);
-
-    /// <summary>
-    /// Perform retrieval on a Usage history
-    /// </summary>
-    Task<UsageRetrieveResponse> Retrieve(
-        UsageRetrieveParams parameters,
-        CancellationToken cancellationToken = default
-    );
-
-    /// <inheritdoc cref="Retrieve(UsageRetrieveParams, CancellationToken)"/>
-    Task<UsageRetrieveResponse> Retrieve(
-        string featureID,
-        UsageRetrieveParams parameters,
-        CancellationToken cancellationToken = default
-    );
 }
 
 /// <summary>
@@ -54,20 +36,4 @@ public interface IUsageServiceWithRawResponse
     /// <para>The original service is not modified.</para>
     /// </summary>
     IUsageServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
-
-    /// <summary>
-    /// Returns a raw HTTP response for `get /api/v1/customers/{customerId}/usage/features/{featureId}`, but is otherwise the
-    /// same as <see cref="IUsageService.Retrieve(UsageRetrieveParams, CancellationToken)"/>.
-    /// </summary>
-    Task<HttpResponse<UsageRetrieveResponse>> Retrieve(
-        UsageRetrieveParams parameters,
-        CancellationToken cancellationToken = default
-    );
-
-    /// <inheritdoc cref="Retrieve(UsageRetrieveParams, CancellationToken)"/>
-    Task<HttpResponse<UsageRetrieveResponse>> Retrieve(
-        string featureID,
-        UsageRetrieveParams parameters,
-        CancellationToken cancellationToken = default
-    );
 }

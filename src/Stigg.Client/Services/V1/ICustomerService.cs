@@ -32,7 +32,7 @@ public interface ICustomerService
     IUsageService Usage { get; }
 
     /// <summary>
-    /// Create a new Customer
+    /// Provision customer
     /// </summary>
     Task<CustomerResponse> Create(
         CustomerCreateParams parameters,
@@ -40,7 +40,7 @@ public interface ICustomerService
     );
 
     /// <summary>
-    /// Get a single Customer by id
+    /// Get a single customer by ID
     /// </summary>
     Task<CustomerResponse> Retrieve(
         CustomerRetrieveParams parameters,
@@ -55,7 +55,7 @@ public interface ICustomerService
     );
 
     /// <summary>
-    /// Update an existing Customer
+    /// Update a customer
     /// </summary>
     Task<CustomerResponse> Update(
         CustomerUpdateParams parameters,
@@ -70,7 +70,7 @@ public interface ICustomerService
     );
 
     /// <summary>
-    /// Get a list of Customers
+    /// Get a list of customers
     /// </summary>
     Task<CustomerListPage> List(
         CustomerListParams? parameters = null,
@@ -78,7 +78,7 @@ public interface ICustomerService
     );
 
     /// <summary>
-    /// Perform archive on a Customer
+    /// Archive customer
     /// </summary>
     Task<CustomerResponse> Archive(
         CustomerArchiveParams parameters,
@@ -93,7 +93,7 @@ public interface ICustomerService
     );
 
     /// <summary>
-    /// Perform unarchive on a Customer
+    /// Unarchive customer
     /// </summary>
     Task<CustomerResponse> Unarchive(
         CustomerUnarchiveParams parameters,

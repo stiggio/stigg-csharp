@@ -10,6 +10,9 @@ using System = System;
 
 namespace Stigg.Client.Models.V1.Subscriptions;
 
+/// <summary>
+/// Customer subscription to a plan
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<SubscriptionListResponse, SubscriptionListResponseFromRaw>)
 )]
@@ -323,24 +326,6 @@ public sealed record class SubscriptionListResponse : JsonModel
         init { this._rawData.Set("trialEndDate", value); }
     }
 
-    public double? UnitQuantity
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<double>("unitQuantity");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("unitQuantity", value);
-        }
-    }
-
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -368,7 +353,6 @@ public sealed record class SubscriptionListResponse : JsonModel
         }
         _ = this.ResourceID;
         _ = this.TrialEndDate;
-        _ = this.UnitQuantity;
     }
 
     public SubscriptionListResponse() { }

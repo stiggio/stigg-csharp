@@ -7,6 +7,9 @@ using Stigg.Client.Core;
 
 namespace Stigg.Client.Models.V1.Subscriptions.FutureUpdate;
 
+/// <summary>
+/// Response object
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
         FutureUpdateCancelScheduleResponse,

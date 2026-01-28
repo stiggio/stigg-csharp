@@ -10,9 +10,15 @@ using System = System;
 
 namespace Stigg.Client.Models.V1.Coupons;
 
+/// <summary>
+/// Response object
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<CouponRetrieveResponse, CouponRetrieveResponseFromRaw>))]
 public sealed record class CouponRetrieveResponse : JsonModel
 {
+    /// <summary>
+    /// Discount instrument with percentage or fixed amount
+    /// </summary>
     public required CouponRetrieveResponseData Data
     {
         get
@@ -74,6 +80,9 @@ class CouponRetrieveResponseFromRaw : IFromRawJson<CouponRetrieveResponse>
     ) => CouponRetrieveResponse.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Discount instrument with percentage or fixed amount
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<CouponRetrieveResponseData, CouponRetrieveResponseDataFromRaw>)
 )]
@@ -321,6 +330,9 @@ class CouponRetrieveResponseDataFromRaw : IFromRawJson<CouponRetrieveResponseDat
     ) => CouponRetrieveResponseData.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Monetary amount with currency
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
         CouponRetrieveResponseDataAmountsOff,
