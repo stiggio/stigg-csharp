@@ -10,6 +10,9 @@ using System = System;
 
 namespace Stigg.Client.Models.V1.Customers;
 
+/// <summary>
+/// A customer can be either an organization or an individual
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<CustomerListResponse, CustomerListResponseFromRaw>))]
 public sealed record class CustomerListResponse : JsonModel
 {
@@ -407,6 +410,9 @@ sealed class CustomerListResponseDefaultPaymentMethodTypeConverter
     }
 }
 
+/// <summary>
+/// External billing or CRM integration link
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
         CustomerListResponseIntegration,

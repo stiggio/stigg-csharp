@@ -10,7 +10,7 @@ using Stigg.Client.Core;
 namespace Stigg.Client.Models.V1.Subscriptions;
 
 /// <summary>
-/// Perform delegate on a Subscription
+/// Delegate subscription payment to customer
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
@@ -27,7 +27,9 @@ public record class SubscriptionDelegateParams : ParamsBase
     public string? ID { get; init; }
 
     /// <summary>
-    /// The customer ID to delegate the subscription to
+    /// The unique identifier of the customer who will assume payment responsibility
+    /// for this subscription. This customer must already exist in your Stigg account
+    /// and have a valid payment method if the subscription requires payment.
     /// </summary>
     public required string TargetCustomerID
     {

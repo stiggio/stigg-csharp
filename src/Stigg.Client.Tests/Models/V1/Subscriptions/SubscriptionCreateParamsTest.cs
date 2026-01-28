@@ -368,7 +368,6 @@ public class SubscriptionCreateParamsTest : TestBase
         {
             CustomerID = "customerId",
             PlanID = "planId",
-            ID = "id",
             BillingCountryCode = "billingCountryCode",
             BillingID = "billingId",
             Budget = new() { HasSoftLimit = true, Limit = 0 },
@@ -386,6 +385,8 @@ public class SubscriptionCreateParamsTest : TestBase
             SalesforceID = "salesforceId",
         };
 
+        Assert.Null(parameters.ID);
+        Assert.False(parameters.RawBodyData.ContainsKey("id"));
         Assert.Null(parameters.Addons);
         Assert.False(parameters.RawBodyData.ContainsKey("addons"));
         Assert.Null(parameters.AppliedCoupon);
@@ -425,7 +426,6 @@ public class SubscriptionCreateParamsTest : TestBase
         {
             CustomerID = "customerId",
             PlanID = "planId",
-            ID = "id",
             BillingCountryCode = "billingCountryCode",
             BillingID = "billingId",
             Budget = new() { HasSoftLimit = true, Limit = 0 },
@@ -443,6 +443,7 @@ public class SubscriptionCreateParamsTest : TestBase
             SalesforceID = "salesforceId",
 
             // Null should be interpreted as omitted for these properties
+            ID = null,
             Addons = null,
             AppliedCoupon = null,
             AwaitPaymentConfirmation = null,
@@ -460,6 +461,8 @@ public class SubscriptionCreateParamsTest : TestBase
             UnitQuantity = null,
         };
 
+        Assert.Null(parameters.ID);
+        Assert.False(parameters.RawBodyData.ContainsKey("id"));
         Assert.Null(parameters.Addons);
         Assert.False(parameters.RawBodyData.ContainsKey("addons"));
         Assert.Null(parameters.AppliedCoupon);
@@ -499,6 +502,7 @@ public class SubscriptionCreateParamsTest : TestBase
         {
             CustomerID = "customerId",
             PlanID = "planId",
+            ID = "id",
             Addons = [new() { AddonID = "addonId", Quantity = 1 }],
             AppliedCoupon = new()
             {
@@ -625,8 +629,6 @@ public class SubscriptionCreateParamsTest : TestBase
             UnitQuantity = 1,
         };
 
-        Assert.Null(parameters.ID);
-        Assert.False(parameters.RawBodyData.ContainsKey("id"));
         Assert.Null(parameters.BillingCountryCode);
         Assert.False(parameters.RawBodyData.ContainsKey("billingCountryCode"));
         Assert.Null(parameters.BillingID);
@@ -650,6 +652,7 @@ public class SubscriptionCreateParamsTest : TestBase
         {
             CustomerID = "customerId",
             PlanID = "planId",
+            ID = "id",
             Addons = [new() { AddonID = "addonId", Quantity = 1 }],
             AppliedCoupon = new()
             {
@@ -775,7 +778,6 @@ public class SubscriptionCreateParamsTest : TestBase
             },
             UnitQuantity = 1,
 
-            ID = null,
             BillingCountryCode = null,
             BillingID = null,
             Budget = null,
@@ -785,8 +787,6 @@ public class SubscriptionCreateParamsTest : TestBase
             SalesforceID = null,
         };
 
-        Assert.Null(parameters.ID);
-        Assert.True(parameters.RawBodyData.ContainsKey("id"));
         Assert.Null(parameters.BillingCountryCode);
         Assert.True(parameters.RawBodyData.ContainsKey("billingCountryCode"));
         Assert.Null(parameters.BillingID);
@@ -1764,52 +1764,6 @@ public class AmountsOffTest : TestBase
         {
             Amount = 0,
             Currency = Subscriptions::Currency.Usd,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
-    {
-        var model = new Subscriptions::AmountsOff { Amount = 0 };
-
-        Assert.Null(model.Currency);
-        Assert.False(model.RawData.ContainsKey("currency"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new Subscriptions::AmountsOff { Amount = 0 };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
-    {
-        var model = new Subscriptions::AmountsOff
-        {
-            Amount = 0,
-
-            // Null should be interpreted as omitted for these properties
-            Currency = null,
-        };
-
-        Assert.Null(model.Currency);
-        Assert.False(model.RawData.ContainsKey("currency"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new Subscriptions::AmountsOff
-        {
-            Amount = 0,
-
-            // Null should be interpreted as omitted for these properties
-            Currency = null,
         };
 
         model.Validate();

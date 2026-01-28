@@ -12,7 +12,7 @@ using System = System;
 namespace Stigg.Client.Models.V1.Customers.PaymentMethod;
 
 /// <summary>
-/// Perform payment-method attachment on a Customer
+/// Attach payment method
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
@@ -69,6 +69,9 @@ public record class PaymentMethodAttachParams : ParamsBase
         init { this._rawBodyData.Set("vendorIdentifier", value); }
     }
 
+    /// <summary>
+    /// Customers selected currency
+    /// </summary>
     public ApiEnum<string, BillingCurrency>? BillingCurrency
     {
         get
@@ -263,6 +266,9 @@ sealed class VendorIdentifierConverter : JsonConverter<VendorIdentifier>
     }
 }
 
+/// <summary>
+/// Customers selected currency
+/// </summary>
 [JsonConverter(typeof(BillingCurrencyConverter))]
 public enum BillingCurrency
 {

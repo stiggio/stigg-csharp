@@ -13,7 +13,7 @@ using System = System;
 namespace Stigg.Client.Models.V1.Customers;
 
 /// <summary>
-/// Create a new Customer
+/// Provision customer
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
@@ -415,6 +415,9 @@ sealed class TypeConverter : JsonConverter<global::Stigg.Client.Models.V1.Custom
     }
 }
 
+/// <summary>
+/// External billing or CRM integration link
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<Integration, IntegrationFromRaw>))]
 public sealed record class Integration : JsonModel
 {

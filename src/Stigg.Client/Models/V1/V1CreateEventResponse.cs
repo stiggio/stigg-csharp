@@ -7,9 +7,16 @@ using Stigg.Client.Core;
 
 namespace Stigg.Client.Models.V1;
 
+/// <summary>
+/// Response object
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<V1CreateEventResponse, V1CreateEventResponseFromRaw>))]
 public sealed record class V1CreateEventResponse : JsonModel
 {
+    /// <summary>
+    /// Empty success response confirming that events were successfully ingested and
+    /// queued for processing by Stigg's metering system.
+    /// </summary>
     public required JsonElement Data
     {
         get

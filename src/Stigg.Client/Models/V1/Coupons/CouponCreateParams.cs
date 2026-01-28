@@ -13,7 +13,7 @@ using System = System;
 namespace Stigg.Client.Models.V1.Coupons;
 
 /// <summary>
-/// Create a new Coupon
+/// Create coupon
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
@@ -236,6 +236,9 @@ public record class CouponCreateParams : ParamsBase
     }
 }
 
+/// <summary>
+/// Monetary amount with currency
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<AmountsOff, AmountsOffFromRaw>))]
 public sealed record class AmountsOff : JsonModel
 {

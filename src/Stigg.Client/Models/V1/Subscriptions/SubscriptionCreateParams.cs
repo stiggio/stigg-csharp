@@ -13,7 +13,7 @@ using System = System;
 namespace Stigg.Client.Models.V1.Subscriptions;
 
 /// <summary>
-/// Create a new Subscription
+/// Provision subscription
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
@@ -63,7 +63,15 @@ public record class SubscriptionCreateParams : ParamsBase
             this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableClass<string>("id");
         }
-        init { this._rawBodyData.Set("id", value); }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawBodyData.Set("id", value);
+        }
     }
 
     public IReadOnlyList<Addon>? Addons
@@ -87,6 +95,9 @@ public record class SubscriptionCreateParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// Coupon configuration
+    /// </summary>
     public AppliedCoupon? AppliedCoupon
     {
         get
@@ -170,6 +181,9 @@ public record class SubscriptionCreateParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// Billing period (MONTHLY or ANNUALLY)
+    /// </summary>
     public ApiEnum<string, BillingPeriod>? BillingPeriod
     {
         get
@@ -221,6 +235,9 @@ public record class SubscriptionCreateParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// Checkout page configuration for payment collection
+    /// </summary>
     public CheckoutOptions? CheckoutOptions
     {
         get
@@ -425,6 +442,9 @@ public record class SubscriptionCreateParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// Trial period override settings
+    /// </summary>
     public TrialOverrideConfiguration? TrialOverrideConfiguration
     {
         get
@@ -655,9 +675,15 @@ class AddonFromRaw : IFromRawJson<Addon>
         Addon.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Coupon configuration
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<AppliedCoupon, AppliedCouponFromRaw>))]
 public sealed record class AppliedCoupon : JsonModel
 {
+    /// <summary>
+    /// Billing provider coupon ID
+    /// </summary>
     public string? BillingCouponID
     {
         get
@@ -676,6 +702,9 @@ public sealed record class AppliedCoupon : JsonModel
         }
     }
 
+    /// <summary>
+    /// Coupon timing configuration
+    /// </summary>
     public Configuration? Configuration
     {
         get
@@ -694,6 +723,9 @@ public sealed record class AppliedCoupon : JsonModel
         }
     }
 
+    /// <summary>
+    /// Stigg coupon ID
+    /// </summary>
     public string? CouponID
     {
         get
@@ -712,6 +744,9 @@ public sealed record class AppliedCoupon : JsonModel
         }
     }
 
+    /// <summary>
+    /// Ad-hoc discount configuration
+    /// </summary>
     public Discount? Discount
     {
         get
@@ -730,6 +765,9 @@ public sealed record class AppliedCoupon : JsonModel
         }
     }
 
+    /// <summary>
+    /// Promotion code to apply
+    /// </summary>
     public string? PromotionCode
     {
         get
@@ -793,6 +831,9 @@ class AppliedCouponFromRaw : IFromRawJson<AppliedCoupon>
         AppliedCoupon.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Coupon timing configuration
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<Configuration, ConfigurationFromRaw>))]
 public sealed record class Configuration : JsonModel
 {
@@ -858,9 +899,15 @@ class ConfigurationFromRaw : IFromRawJson<Configuration>
         Configuration.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Ad-hoc discount configuration
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<Discount, DiscountFromRaw>))]
 public sealed record class Discount : JsonModel
 {
+    /// <summary>
+    /// Fixed amounts off by currency
+    /// </summary>
     public IReadOnlyList<AmountsOff>? AmountsOff
     {
         get
@@ -877,6 +924,9 @@ public sealed record class Discount : JsonModel
         }
     }
 
+    /// <summary>
+    /// Ad-hoc discount
+    /// </summary>
     public string? Description
     {
         get
@@ -895,6 +945,9 @@ public sealed record class Discount : JsonModel
         }
     }
 
+    /// <summary>
+    /// Duration in months
+    /// </summary>
     public double? DurationInMonths
     {
         get
@@ -913,6 +966,9 @@ public sealed record class Discount : JsonModel
         }
     }
 
+    /// <summary>
+    /// Discount name
+    /// </summary>
     public string? Name
     {
         get
@@ -931,6 +987,9 @@ public sealed record class Discount : JsonModel
         }
     }
 
+    /// <summary>
+    /// Percentage discount
+    /// </summary>
     public double? PercentOff
     {
         get
@@ -1000,6 +1059,9 @@ class DiscountFromRaw : IFromRawJson<Discount>
 [JsonConverter(typeof(JsonModelConverter<AmountsOff, AmountsOffFromRaw>))]
 public sealed record class AmountsOff : JsonModel
 {
+    /// <summary>
+    /// The price amount
+    /// </summary>
     public required double Amount
     {
         get
@@ -1010,29 +1072,24 @@ public sealed record class AmountsOff : JsonModel
         init { this._rawData.Set("amount", value); }
     }
 
-    public ApiEnum<string, Currency>? Currency
+    /// <summary>
+    /// The price currency
+    /// </summary>
+    public required ApiEnum<string, Currency> Currency
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ApiEnum<string, Currency>>("currency");
+            return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency");
         }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("currency", value);
-        }
+        init { this._rawData.Set("currency", value); }
     }
 
     /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Amount;
-        this.Currency?.Validate();
+        this.Currency.Validate();
     }
 
     public AmountsOff() { }
@@ -1061,13 +1118,6 @@ public sealed record class AmountsOff : JsonModel
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
-
-    [SetsRequiredMembers]
-    public AmountsOff(double amount)
-        : this()
-    {
-        this.Amount = amount;
-    }
 }
 
 class AmountsOffFromRaw : IFromRawJson<AmountsOff>
@@ -1077,6 +1127,9 @@ class AmountsOffFromRaw : IFromRawJson<AmountsOff>
         AmountsOff.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// The price currency
+/// </summary>
 [JsonConverter(typeof(CurrencyConverter))]
 public enum Currency
 {
@@ -2025,6 +2078,9 @@ class TaxIDFromRaw : IFromRawJson<TaxID>
         TaxID.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Billing period (MONTHLY or ANNUALLY)
+/// </summary>
 [JsonConverter(typeof(BillingPeriodConverter))]
 public enum BillingPeriod
 {
@@ -2140,6 +2196,9 @@ class BudgetFromRaw : IFromRawJson<Budget>
         Budget.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Charge item
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<Charge, ChargeFromRaw>))]
 public sealed record class Charge : JsonModel
 {
@@ -2274,6 +2333,9 @@ sealed class TypeConverter : JsonConverter<global::Stigg.Client.Models.V1.Subscr
     }
 }
 
+/// <summary>
+/// Checkout page configuration for payment collection
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<CheckoutOptions, CheckoutOptionsFromRaw>))]
 public sealed record class CheckoutOptions : JsonModel
 {
@@ -5022,6 +5084,9 @@ sealed class ScheduleStrategyConverter : JsonConverter<ScheduleStrategy>
 [JsonConverter(typeof(JsonModelConverter<SubscriptionEntitlement, SubscriptionEntitlementFromRaw>))]
 public sealed record class SubscriptionEntitlement : JsonModel
 {
+    /// <summary>
+    /// Feature ID
+    /// </summary>
     public required string FeatureID
     {
         get
@@ -5106,6 +5171,9 @@ class SubscriptionEntitlementFromRaw : IFromRawJson<SubscriptionEntitlement>
     ) => SubscriptionEntitlement.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Trial period override settings
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<TrialOverrideConfiguration, TrialOverrideConfigurationFromRaw>)
 )]

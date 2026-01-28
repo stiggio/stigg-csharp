@@ -34,7 +34,7 @@ public interface IV1Service
     ICouponService Coupons { get; }
 
     /// <summary>
-    /// Create events
+    /// Report usage events
     /// </summary>
     Task<V1CreateEventResponse> CreateEvent(
         V1CreateEventParams parameters,
@@ -42,7 +42,7 @@ public interface IV1Service
     );
 
     /// <summary>
-    /// Create a new Usage
+    /// Report usage measurements
     /// </summary>
     Task<V1CreateUsageResponse> CreateUsage(
         V1CreateUsageParams parameters,

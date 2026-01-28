@@ -10,9 +10,15 @@ using System = System;
 
 namespace Stigg.Client.Models.V1.Customers;
 
+/// <summary>
+/// Response object
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<CustomerResponse, CustomerResponseFromRaw>))]
 public sealed record class CustomerResponse : JsonModel
 {
+    /// <summary>
+    /// A customer can be either an organization or an individual
+    /// </summary>
     public required Data Data
     {
         get
@@ -73,6 +79,9 @@ class CustomerResponseFromRaw : IFromRawJson<CustomerResponse>
         CustomerResponse.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// A customer can be either an organization or an individual
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<Data, DataFromRaw>))]
 public sealed record class Data : JsonModel
 {
@@ -454,6 +463,9 @@ sealed class DataDefaultPaymentMethodTypeConverter : JsonConverter<DataDefaultPa
     }
 }
 
+/// <summary>
+/// External billing or CRM integration link
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<DataIntegration, DataIntegrationFromRaw>))]
 public sealed record class DataIntegration : JsonModel
 {

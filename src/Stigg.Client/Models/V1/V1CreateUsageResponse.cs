@@ -9,9 +9,16 @@ using Stigg.Client.Core;
 
 namespace Stigg.Client.Models.V1;
 
+/// <summary>
+/// Response containing reported usage measurements with current usage values, period
+/// information, and reset dates for each measurement.
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<V1CreateUsageResponse, V1CreateUsageResponseFromRaw>))]
 public sealed record class V1CreateUsageResponse : JsonModel
 {
+    /// <summary>
+    /// Array of usage measurements with current values and period info
+    /// </summary>
     public required IReadOnlyList<Data> Data
     {
         get
@@ -79,6 +86,9 @@ class V1CreateUsageResponseFromRaw : IFromRawJson<V1CreateUsageResponse>
     ) => V1CreateUsageResponse.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Recorded usage with period info
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<Data, DataFromRaw>))]
 public sealed record class Data : JsonModel
 {

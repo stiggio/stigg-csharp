@@ -46,7 +46,6 @@ public class SubscriptionMigrateResponseTest : TestBase
                 ],
                 ResourceID = "resourceId",
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                UnitQuantity = 1,
             },
         };
 
@@ -81,7 +80,6 @@ public class SubscriptionMigrateResponseTest : TestBase
             ],
             ResourceID = "resourceId",
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            UnitQuantity = 1,
         };
 
         Assert.Equal(expectedData, model.Data);
@@ -124,7 +122,6 @@ public class SubscriptionMigrateResponseTest : TestBase
                 ],
                 ResourceID = "resourceId",
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                UnitQuantity = 1,
             },
         };
 
@@ -174,7 +171,6 @@ public class SubscriptionMigrateResponseTest : TestBase
                 ],
                 ResourceID = "resourceId",
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                UnitQuantity = 1,
             },
         };
 
@@ -216,7 +212,6 @@ public class SubscriptionMigrateResponseTest : TestBase
             ],
             ResourceID = "resourceId",
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            UnitQuantity = 1,
         };
 
         Assert.Equal(expectedData, deserialized.Data);
@@ -259,7 +254,6 @@ public class SubscriptionMigrateResponseTest : TestBase
                 ],
                 ResourceID = "resourceId",
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                UnitQuantity = 1,
             },
         };
 
@@ -303,7 +297,6 @@ public class SubscriptionMigrateResponseTest : TestBase
                 ],
                 ResourceID = "resourceId",
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                UnitQuantity = 1,
             },
         };
 
@@ -349,7 +342,6 @@ public class SubscriptionMigrateResponseDataTest : TestBase
             ],
             ResourceID = "resourceId",
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            UnitQuantity = 1,
         };
 
         string expectedID = "id";
@@ -395,7 +387,6 @@ public class SubscriptionMigrateResponseDataTest : TestBase
         ];
         string expectedResourceID = "resourceId";
         DateTimeOffset expectedTrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        double expectedUnitQuantity = 1;
 
         Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedBillingID, model.BillingID);
@@ -430,7 +421,6 @@ public class SubscriptionMigrateResponseDataTest : TestBase
         }
         Assert.Equal(expectedResourceID, model.ResourceID);
         Assert.Equal(expectedTrialEndDate, model.TrialEndDate);
-        Assert.Equal(expectedUnitQuantity, model.UnitQuantity);
     }
 
     [Fact]
@@ -467,7 +457,6 @@ public class SubscriptionMigrateResponseDataTest : TestBase
             ],
             ResourceID = "resourceId",
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            UnitQuantity = 1,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -513,7 +502,6 @@ public class SubscriptionMigrateResponseDataTest : TestBase
             ],
             ResourceID = "resourceId",
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            UnitQuantity = 1,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -566,7 +554,6 @@ public class SubscriptionMigrateResponseDataTest : TestBase
         ];
         string expectedResourceID = "resourceId";
         DateTimeOffset expectedTrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        double expectedUnitQuantity = 1;
 
         Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedBillingID, deserialized.BillingID);
@@ -601,7 +588,6 @@ public class SubscriptionMigrateResponseDataTest : TestBase
         }
         Assert.Equal(expectedResourceID, deserialized.ResourceID);
         Assert.Equal(expectedTrialEndDate, deserialized.TrialEndDate);
-        Assert.Equal(expectedUnitQuantity, deserialized.UnitQuantity);
     }
 
     [Fact]
@@ -638,7 +624,6 @@ public class SubscriptionMigrateResponseDataTest : TestBase
             ],
             ResourceID = "resourceId",
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            UnitQuantity = 1,
         };
 
         model.Validate();
@@ -674,8 +659,6 @@ public class SubscriptionMigrateResponseDataTest : TestBase
         Assert.False(model.RawData.ContainsKey("metadata"));
         Assert.Null(model.Prices);
         Assert.False(model.RawData.ContainsKey("prices"));
-        Assert.Null(model.UnitQuantity);
-        Assert.False(model.RawData.ContainsKey("unitQuantity"));
     }
 
     [Fact]
@@ -735,15 +718,12 @@ public class SubscriptionMigrateResponseDataTest : TestBase
             // Null should be interpreted as omitted for these properties
             Metadata = null,
             Prices = null,
-            UnitQuantity = null,
         };
 
         Assert.Null(model.Metadata);
         Assert.False(model.RawData.ContainsKey("metadata"));
         Assert.Null(model.Prices);
         Assert.False(model.RawData.ContainsKey("prices"));
-        Assert.Null(model.UnitQuantity);
-        Assert.False(model.RawData.ContainsKey("unitQuantity"));
     }
 
     [Fact]
@@ -774,7 +754,6 @@ public class SubscriptionMigrateResponseDataTest : TestBase
             // Null should be interpreted as omitted for these properties
             Metadata = null,
             Prices = null,
-            UnitQuantity = null,
         };
 
         model.Validate();
@@ -804,7 +783,6 @@ public class SubscriptionMigrateResponseDataTest : TestBase
                     UpdatedAt = "updatedAt",
                 },
             ],
-            UnitQuantity = 1,
         };
 
         Assert.Null(model.CancellationDate);
@@ -853,7 +831,6 @@ public class SubscriptionMigrateResponseDataTest : TestBase
                     UpdatedAt = "updatedAt",
                 },
             ],
-            UnitQuantity = 1,
         };
 
         model.Validate();
@@ -883,7 +860,6 @@ public class SubscriptionMigrateResponseDataTest : TestBase
                     UpdatedAt = "updatedAt",
                 },
             ],
-            UnitQuantity = 1,
 
             CancellationDate = null,
             CancelReason = null,
@@ -943,7 +919,6 @@ public class SubscriptionMigrateResponseDataTest : TestBase
                     UpdatedAt = "updatedAt",
                 },
             ],
-            UnitQuantity = 1,
 
             CancellationDate = null,
             CancelReason = null,
@@ -994,7 +969,6 @@ public class SubscriptionMigrateResponseDataTest : TestBase
             ],
             ResourceID = "resourceId",
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            UnitQuantity = 1,
         };
 
         SubscriptionMigrateResponseData copied = new(model);

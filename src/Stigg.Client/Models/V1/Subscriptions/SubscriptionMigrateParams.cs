@@ -12,7 +12,7 @@ using System = System;
 namespace Stigg.Client.Models.V1.Subscriptions;
 
 /// <summary>
-/// Perform migrate to latest plan version on a Subscription
+/// Migrate subscription to latest plan version
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
@@ -29,7 +29,7 @@ public record class SubscriptionMigrateParams : ParamsBase
     public string? ID { get; init; }
 
     /// <summary>
-    /// When to migrate the subscription: IMMEDIATE or END_OF_BILLING_PERIOD
+    /// When to migrate (immediate or period end)
     /// </summary>
     public ApiEnum<string, SubscriptionMigrationTime>? SubscriptionMigrationTime
     {
@@ -163,7 +163,7 @@ public record class SubscriptionMigrateParams : ParamsBase
 }
 
 /// <summary>
-/// When to migrate the subscription: IMMEDIATE or END_OF_BILLING_PERIOD
+/// When to migrate (immediate or period end)
 /// </summary>
 [JsonConverter(typeof(SubscriptionMigrationTimeConverter))]
 public enum SubscriptionMigrationTime
