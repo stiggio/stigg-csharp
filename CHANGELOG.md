@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.4.0 (2026-01-28)
+
+Full Changelog: [v0.3.1...v0.4.0](https://github.com/stiggio/stigg-csharp/compare/v0.3.1...v0.4.0)
+
+### Features
+
+* **api:** api update ([6f5ec3e](https://github.com/stiggio/stigg-csharp/commit/6f5ec3e8ffe7915affcd3d8a2592d8c3ddb66694))
+* **api:** api update ([60eef92](https://github.com/stiggio/stigg-csharp/commit/60eef9248a3c70c1bc07d300deba7036248af344))
+
+
+### Bug Fixes
+
+* **client:** handle unions containing unknown types properly ([f49471b](https://github.com/stiggio/stigg-csharp/commit/f49471b9d3a1609109b5baf4e4a9cd0024f328e8))
+
+
+### Chores
+
+* **internal:** improve HttpResponse qualification ([2f99574](https://github.com/stiggio/stigg-csharp/commit/2f9957426c6db9c6027a7dad8c21598b93c51cdb))
+
 ## 0.3.1 (2026-01-27)
 
 Full Changelog: [v0.3.0...v0.3.1](https://github.com/stiggio/stigg-csharp/compare/v0.3.0...v0.3.1)
