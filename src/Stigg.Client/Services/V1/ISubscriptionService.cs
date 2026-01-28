@@ -30,7 +30,7 @@ public interface ISubscriptionService
     IFutureUpdateService FutureUpdate { get; }
 
     /// <summary>
-    /// Create a new Subscription
+    /// Provision subscription
     /// </summary>
     Task<SubscriptionCreateResponse> Create(
         SubscriptionCreateParams parameters,
@@ -38,7 +38,7 @@ public interface ISubscriptionService
     );
 
     /// <summary>
-    /// Get a single Subscription by id
+    /// Get a single subscription by ID
     /// </summary>
     Task<SubscriptionRetrieveResponse> Retrieve(
         SubscriptionRetrieveParams parameters,
@@ -53,7 +53,7 @@ public interface ISubscriptionService
     );
 
     /// <summary>
-    /// Get a list of Subscriptions
+    /// Get a list of subscriptions
     /// </summary>
     Task<SubscriptionListPage> List(
         SubscriptionListParams? parameters = null,
@@ -61,7 +61,7 @@ public interface ISubscriptionService
     );
 
     /// <summary>
-    /// Perform delegate on a Subscription
+    /// Delegate subscription payment to customer
     /// </summary>
     Task<SubscriptionDelegateResponse> Delegate(
         SubscriptionDelegateParams parameters,
@@ -76,7 +76,7 @@ public interface ISubscriptionService
     );
 
     /// <summary>
-    /// Perform migrate to latest plan version on a Subscription
+    /// Migrate subscription to latest plan version
     /// </summary>
     Task<SubscriptionMigrateResponse> Migrate(
         SubscriptionMigrateParams parameters,
@@ -91,7 +91,7 @@ public interface ISubscriptionService
     );
 
     /// <summary>
-    /// Create a new Subscription Preview
+    /// Preview subscription
     /// </summary>
     Task<SubscriptionPreviewResponse> Preview(
         SubscriptionPreviewParams parameters,
@@ -99,7 +99,7 @@ public interface ISubscriptionService
     );
 
     /// <summary>
-    /// Perform transfer to resource on a Subscription
+    /// Transfer subscription to resource
     /// </summary>
     Task<SubscriptionTransferResponse> Transfer(
         SubscriptionTransferParams parameters,

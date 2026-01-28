@@ -13,7 +13,7 @@ using System = System;
 namespace Stigg.Client.Models.V1.Subscriptions;
 
 /// <summary>
-/// Create a new Subscription Preview
+/// Preview subscription
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
@@ -53,6 +53,9 @@ public record class SubscriptionPreviewParams : ParamsBase
         init { this._rawBodyData.Set("planId", value); }
     }
 
+    /// <summary>
+    /// Addons to include
+    /// </summary>
     public IReadOnlyList<SubscriptionPreviewParamsAddon>? Addons
     {
         get
@@ -76,6 +79,9 @@ public record class SubscriptionPreviewParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// Coupon or discount to apply
+    /// </summary>
     public SubscriptionPreviewParamsAppliedCoupon? AppliedCoupon
     {
         get
@@ -96,6 +102,9 @@ public record class SubscriptionPreviewParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// Billable features with quantities
+    /// </summary>
     public IReadOnlyList<BillableFeature>? BillableFeatures
     {
         get
@@ -119,6 +128,9 @@ public record class SubscriptionPreviewParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// ISO 3166-1 country code for localization
+    /// </summary>
     public string? BillingCountryCode
     {
         get
@@ -137,6 +149,9 @@ public record class SubscriptionPreviewParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// Billing and tax configuration
+    /// </summary>
     public SubscriptionPreviewParamsBillingInformation? BillingInformation
     {
         get
@@ -157,6 +172,9 @@ public record class SubscriptionPreviewParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// Billing period (MONTHLY or ANNUALLY)
+    /// </summary>
     public ApiEnum<string, SubscriptionPreviewParamsBillingPeriod>? BillingPeriod
     {
         get
@@ -177,6 +195,9 @@ public record class SubscriptionPreviewParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// One-time or recurring charges
+    /// </summary>
     public IReadOnlyList<SubscriptionPreviewParamsCharge>? Charges
     {
         get
@@ -200,6 +221,9 @@ public record class SubscriptionPreviewParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// Paying customer ID for delegated billing
+    /// </summary>
     public string? PayingCustomerID
     {
         get
@@ -218,6 +242,9 @@ public record class SubscriptionPreviewParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// Resource ID for multi-instance subscriptions
+    /// </summary>
     public string? ResourceID
     {
         get
@@ -236,6 +263,9 @@ public record class SubscriptionPreviewParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// When to apply subscription changes
+    /// </summary>
     public ApiEnum<string, SubscriptionPreviewParamsScheduleStrategy>? ScheduleStrategy
     {
         get
@@ -277,6 +307,9 @@ public record class SubscriptionPreviewParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// Trial period override settings
+    /// </summary>
     public SubscriptionPreviewParamsTrialOverrideConfiguration? TrialOverrideConfiguration
     {
         get
@@ -297,6 +330,9 @@ public record class SubscriptionPreviewParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// Unit quantity for per-unit pricing
+    /// </summary>
     public double? UnitQuantity
     {
         get
@@ -421,6 +457,9 @@ public record class SubscriptionPreviewParams : ParamsBase
     }
 }
 
+/// <summary>
+/// Addon configuration
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
         SubscriptionPreviewParamsAddon,
@@ -442,6 +481,9 @@ public sealed record class SubscriptionPreviewParamsAddon : JsonModel
         init { this._rawData.Set("addonId", value); }
     }
 
+    /// <summary>
+    /// Number of addon instances
+    /// </summary>
     public long? Quantity
     {
         get
@@ -514,6 +556,9 @@ class SubscriptionPreviewParamsAddonFromRaw : IFromRawJson<SubscriptionPreviewPa
     ) => SubscriptionPreviewParamsAddon.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Coupon or discount to apply
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
         SubscriptionPreviewParamsAppliedCoupon,
@@ -522,6 +567,9 @@ class SubscriptionPreviewParamsAddonFromRaw : IFromRawJson<SubscriptionPreviewPa
 )]
 public sealed record class SubscriptionPreviewParamsAppliedCoupon : JsonModel
 {
+    /// <summary>
+    /// Billing provider coupon ID
+    /// </summary>
     public string? BillingCouponID
     {
         get
@@ -540,6 +588,9 @@ public sealed record class SubscriptionPreviewParamsAppliedCoupon : JsonModel
         }
     }
 
+    /// <summary>
+    /// Coupon timing configuration
+    /// </summary>
     public SubscriptionPreviewParamsAppliedCouponConfiguration? Configuration
     {
         get
@@ -560,6 +611,9 @@ public sealed record class SubscriptionPreviewParamsAppliedCoupon : JsonModel
         }
     }
 
+    /// <summary>
+    /// Stigg coupon ID
+    /// </summary>
     public string? CouponID
     {
         get
@@ -578,6 +632,9 @@ public sealed record class SubscriptionPreviewParamsAppliedCoupon : JsonModel
         }
     }
 
+    /// <summary>
+    /// Ad-hoc discount configuration
+    /// </summary>
     public SubscriptionPreviewParamsAppliedCouponDiscount? Discount
     {
         get
@@ -598,6 +655,9 @@ public sealed record class SubscriptionPreviewParamsAppliedCoupon : JsonModel
         }
     }
 
+    /// <summary>
+    /// Promotion code to apply
+    /// </summary>
     public string? PromotionCode
     {
         get
@@ -667,6 +727,9 @@ class SubscriptionPreviewParamsAppliedCouponFromRaw
     ) => SubscriptionPreviewParamsAppliedCoupon.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Coupon timing configuration
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
         SubscriptionPreviewParamsAppliedCouponConfiguration,
@@ -747,6 +810,9 @@ class SubscriptionPreviewParamsAppliedCouponConfigurationFromRaw
     ) => SubscriptionPreviewParamsAppliedCouponConfiguration.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Ad-hoc discount configuration
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
         SubscriptionPreviewParamsAppliedCouponDiscount,
@@ -755,6 +821,9 @@ class SubscriptionPreviewParamsAppliedCouponConfigurationFromRaw
 )]
 public sealed record class SubscriptionPreviewParamsAppliedCouponDiscount : JsonModel
 {
+    /// <summary>
+    /// Fixed amounts off by currency
+    /// </summary>
     public IReadOnlyList<SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff>? AmountsOff
     {
         get
@@ -773,6 +842,9 @@ public sealed record class SubscriptionPreviewParamsAppliedCouponDiscount : Json
         }
     }
 
+    /// <summary>
+    /// Ad-hoc discount
+    /// </summary>
     public string? Description
     {
         get
@@ -791,6 +863,9 @@ public sealed record class SubscriptionPreviewParamsAppliedCouponDiscount : Json
         }
     }
 
+    /// <summary>
+    /// Duration in months
+    /// </summary>
     public double? DurationInMonths
     {
         get
@@ -809,6 +884,9 @@ public sealed record class SubscriptionPreviewParamsAppliedCouponDiscount : Json
         }
     }
 
+    /// <summary>
+    /// Discount name
+    /// </summary>
     public string? Name
     {
         get
@@ -827,6 +905,9 @@ public sealed record class SubscriptionPreviewParamsAppliedCouponDiscount : Json
         }
     }
 
+    /// <summary>
+    /// Percentage discount
+    /// </summary>
     public double? PercentOff
     {
         get
@@ -909,6 +990,9 @@ class SubscriptionPreviewParamsAppliedCouponDiscountFromRaw
 )]
 public sealed record class SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff : JsonModel
 {
+    /// <summary>
+    /// The price amount
+    /// </summary>
     public required double Amount
     {
         get
@@ -919,34 +1003,29 @@ public sealed record class SubscriptionPreviewParamsAppliedCouponDiscountAmounts
         init { this._rawData.Set("amount", value); }
     }
 
-    public ApiEnum<
+    /// <summary>
+    /// The price currency
+    /// </summary>
+    public required ApiEnum<
         string,
         SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency
-    >? Currency
+    > Currency
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<
+            return this._rawData.GetNotNullClass<
                 ApiEnum<string, SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency>
             >("currency");
         }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("currency", value);
-        }
+        init { this._rawData.Set("currency", value); }
     }
 
     /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Amount;
-        this.Currency?.Validate();
+        this.Currency.Validate();
     }
 
     public SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff() { }
@@ -983,13 +1062,6 @@ public sealed record class SubscriptionPreviewParamsAppliedCouponDiscountAmounts
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
-
-    [SetsRequiredMembers]
-    public SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff(double amount)
-        : this()
-    {
-        this.Amount = amount;
-    }
 }
 
 class SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffFromRaw
@@ -1001,6 +1073,9 @@ class SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffFromRaw
     ) => SubscriptionPreviewParamsAppliedCouponDiscountAmountsOff.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// The price currency
+/// </summary>
 [JsonConverter(typeof(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrencyConverter))]
 public enum SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency
 {
@@ -1388,6 +1463,9 @@ sealed class SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrencyCon
     }
 }
 
+/// <summary>
+/// Feature with quantity
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<BillableFeature, BillableFeatureFromRaw>))]
 public sealed record class BillableFeature : JsonModel
 {
@@ -1404,6 +1482,9 @@ public sealed record class BillableFeature : JsonModel
         init { this._rawData.Set("featureId", value); }
     }
 
+    /// <summary>
+    /// Quantity of feature units
+    /// </summary>
     public required double Quantity
     {
         get
@@ -1456,6 +1537,9 @@ class BillableFeatureFromRaw : IFromRawJson<BillableFeature>
         BillableFeature.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Billing and tax configuration
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
         SubscriptionPreviewParamsBillingInformation,
@@ -1464,6 +1548,9 @@ class BillableFeatureFromRaw : IFromRawJson<BillableFeature>
 )]
 public sealed record class SubscriptionPreviewParamsBillingInformation : JsonModel
 {
+    /// <summary>
+    /// Billing address
+    /// </summary>
     public SubscriptionPreviewParamsBillingInformationBillingAddress? BillingAddress
     {
         get
@@ -1484,6 +1571,9 @@ public sealed record class SubscriptionPreviewParamsBillingInformation : JsonMod
         }
     }
 
+    /// <summary>
+    /// Connected account ID for platform billing
+    /// </summary>
     public string? ChargeOnBehalfOfAccount
     {
         get
@@ -1502,6 +1592,9 @@ public sealed record class SubscriptionPreviewParamsBillingInformation : JsonMod
         }
     }
 
+    /// <summary>
+    /// Billing integration ID
+    /// </summary>
     public string? IntegrationID
     {
         get
@@ -1520,6 +1613,9 @@ public sealed record class SubscriptionPreviewParamsBillingInformation : JsonMod
         }
     }
 
+    /// <summary>
+    /// Days until invoice is due
+    /// </summary>
     public double? InvoiceDaysUntilDue
     {
         get
@@ -1538,6 +1634,9 @@ public sealed record class SubscriptionPreviewParamsBillingInformation : JsonMod
         }
     }
 
+    /// <summary>
+    /// Whether subscription is backdated
+    /// </summary>
     public bool? IsBackdated
     {
         get
@@ -1556,6 +1655,9 @@ public sealed record class SubscriptionPreviewParamsBillingInformation : JsonMod
         }
     }
 
+    /// <summary>
+    /// Whether invoice is already paid
+    /// </summary>
     public bool? IsInvoicePaid
     {
         get
@@ -1574,6 +1676,9 @@ public sealed record class SubscriptionPreviewParamsBillingInformation : JsonMod
         }
     }
 
+    /// <summary>
+    /// Additional billing metadata
+    /// </summary>
     public JsonElement? Metadata
     {
         get
@@ -1592,6 +1697,9 @@ public sealed record class SubscriptionPreviewParamsBillingInformation : JsonMod
         }
     }
 
+    /// <summary>
+    /// Proration behavior
+    /// </summary>
     public ApiEnum<
         string,
         SubscriptionPreviewParamsBillingInformationProrationBehavior
@@ -1615,6 +1723,9 @@ public sealed record class SubscriptionPreviewParamsBillingInformation : JsonMod
         }
     }
 
+    /// <summary>
+    /// Customer tax IDs
+    /// </summary>
     public IReadOnlyList<SubscriptionPreviewParamsBillingInformationTaxID>? TaxIds
     {
         get
@@ -1638,6 +1749,9 @@ public sealed record class SubscriptionPreviewParamsBillingInformation : JsonMod
         }
     }
 
+    /// <summary>
+    /// Tax percentage to apply
+    /// </summary>
     public double? TaxPercentage
     {
         get
@@ -1656,6 +1770,9 @@ public sealed record class SubscriptionPreviewParamsBillingInformation : JsonMod
         }
     }
 
+    /// <summary>
+    /// Tax rate IDs from billing provider
+    /// </summary>
     public IReadOnlyList<string>? TaxRateIds
     {
         get
@@ -1739,6 +1856,9 @@ class SubscriptionPreviewParamsBillingInformationFromRaw
     ) => SubscriptionPreviewParamsBillingInformation.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Billing address
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
         SubscriptionPreviewParamsBillingInformationBillingAddress,
@@ -1911,6 +2031,9 @@ class SubscriptionPreviewParamsBillingInformationBillingAddressFromRaw
     ) => SubscriptionPreviewParamsBillingInformationBillingAddress.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Proration behavior
+/// </summary>
 [JsonConverter(typeof(SubscriptionPreviewParamsBillingInformationProrationBehaviorConverter))]
 public enum SubscriptionPreviewParamsBillingInformationProrationBehavior
 {
@@ -1963,6 +2086,9 @@ sealed class SubscriptionPreviewParamsBillingInformationProrationBehaviorConvert
     }
 }
 
+/// <summary>
+/// Tax exemption identifier
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
         SubscriptionPreviewParamsBillingInformationTaxID,
@@ -1971,6 +2097,9 @@ sealed class SubscriptionPreviewParamsBillingInformationProrationBehaviorConvert
 )]
 public sealed record class SubscriptionPreviewParamsBillingInformationTaxID : JsonModel
 {
+    /// <summary>
+    /// Tax exemption type (e.g., vat, gst)
+    /// </summary>
     public required string Type
     {
         get
@@ -1981,6 +2110,9 @@ public sealed record class SubscriptionPreviewParamsBillingInformationTaxID : Js
         init { this._rawData.Set("type", value); }
     }
 
+    /// <summary>
+    /// Tax exemption identifier value
+    /// </summary>
     public required string Value
     {
         get
@@ -2041,6 +2173,9 @@ class SubscriptionPreviewParamsBillingInformationTaxIDFromRaw
     ) => SubscriptionPreviewParamsBillingInformationTaxID.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Billing period (MONTHLY or ANNUALLY)
+/// </summary>
 [JsonConverter(typeof(SubscriptionPreviewParamsBillingPeriodConverter))]
 public enum SubscriptionPreviewParamsBillingPeriod
 {
@@ -2086,6 +2221,9 @@ sealed class SubscriptionPreviewParamsBillingPeriodConverter
     }
 }
 
+/// <summary>
+/// Charge item
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
         SubscriptionPreviewParamsCharge,
@@ -2231,6 +2369,9 @@ sealed class SubscriptionPreviewParamsChargeTypeConverter
     }
 }
 
+/// <summary>
+/// When to apply subscription changes
+/// </summary>
 [JsonConverter(typeof(SubscriptionPreviewParamsScheduleStrategyConverter))]
 public enum SubscriptionPreviewParamsScheduleStrategy
 {
@@ -2281,6 +2422,9 @@ sealed class SubscriptionPreviewParamsScheduleStrategyConverter
     }
 }
 
+/// <summary>
+/// Trial period override settings
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
         SubscriptionPreviewParamsTrialOverrideConfiguration,
@@ -2289,6 +2433,9 @@ sealed class SubscriptionPreviewParamsScheduleStrategyConverter
 )]
 public sealed record class SubscriptionPreviewParamsTrialOverrideConfiguration : JsonModel
 {
+    /// <summary>
+    /// Whether to start as trial
+    /// </summary>
     public required bool IsTrial
     {
         get
@@ -2299,6 +2446,9 @@ public sealed record class SubscriptionPreviewParamsTrialOverrideConfiguration :
         init { this._rawData.Set("isTrial", value); }
     }
 
+    /// <summary>
+    /// Behavior when trial ends
+    /// </summary>
     public ApiEnum<
         string,
         SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior
@@ -2403,6 +2553,9 @@ class SubscriptionPreviewParamsTrialOverrideConfigurationFromRaw
     ) => SubscriptionPreviewParamsTrialOverrideConfiguration.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Behavior when trial ends
+/// </summary>
 [JsonConverter(
     typeof(SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehaviorConverter)
 )]

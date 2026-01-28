@@ -10,11 +10,17 @@ using System = System;
 
 namespace Stigg.Client.Models.V1.Subscriptions;
 
+/// <summary>
+/// Response object
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<SubscriptionMigrateResponse, SubscriptionMigrateResponseFromRaw>)
 )]
 public sealed record class SubscriptionMigrateResponse : JsonModel
 {
+    /// <summary>
+    /// Customer subscription to a plan
+    /// </summary>
     public required SubscriptionMigrateResponseData Data
     {
         get
@@ -76,6 +82,9 @@ class SubscriptionMigrateResponseFromRaw : IFromRawJson<SubscriptionMigrateRespo
     ) => SubscriptionMigrateResponse.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Customer subscription to a plan
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
         SubscriptionMigrateResponseData,
@@ -398,24 +407,6 @@ public sealed record class SubscriptionMigrateResponseData : JsonModel
         init { this._rawData.Set("trialEndDate", value); }
     }
 
-    public double? UnitQuantity
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<double>("unitQuantity");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("unitQuantity", value);
-        }
-    }
-
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -443,7 +434,6 @@ public sealed record class SubscriptionMigrateResponseData : JsonModel
         }
         _ = this.ResourceID;
         _ = this.TrialEndDate;
-        _ = this.UnitQuantity;
     }
 
     public SubscriptionMigrateResponseData() { }

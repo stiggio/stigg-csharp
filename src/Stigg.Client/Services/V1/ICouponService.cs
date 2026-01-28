@@ -27,7 +27,7 @@ public interface ICouponService
     ICouponService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Create a new Coupon
+    /// Create coupon
     /// </summary>
     Task<CouponCreateResponse> Create(
         CouponCreateParams parameters,
@@ -35,7 +35,7 @@ public interface ICouponService
     );
 
     /// <summary>
-    /// Get a single Coupon by id
+    /// Get a single coupon by ID
     /// </summary>
     Task<CouponRetrieveResponse> Retrieve(
         CouponRetrieveParams parameters,
@@ -50,7 +50,7 @@ public interface ICouponService
     );
 
     /// <summary>
-    /// Get a list of Coupons
+    /// Get a list of coupons
     /// </summary>
     Task<CouponListPage> List(
         CouponListParams? parameters = null,

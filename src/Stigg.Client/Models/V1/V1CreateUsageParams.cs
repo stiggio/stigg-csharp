@@ -13,7 +13,7 @@ using Stigg.Client.Exceptions;
 namespace Stigg.Client.Models.V1;
 
 /// <summary>
-/// Create a new Usage
+/// Report usage measurements
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
@@ -150,6 +150,9 @@ public record class V1CreateUsageParams : ParamsBase
     }
 }
 
+/// <summary>
+/// Single usage measurement
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<Usage, UsageFromRaw>))]
 public sealed record class Usage : JsonModel
 {

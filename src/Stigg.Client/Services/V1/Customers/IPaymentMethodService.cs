@@ -28,7 +28,7 @@ public interface IPaymentMethodService
     IPaymentMethodService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Perform payment-method attachment on a Customer
+    /// Attach payment method
     /// </summary>
     Task<CustomerResponse> Attach(
         PaymentMethodAttachParams parameters,
@@ -43,7 +43,7 @@ public interface IPaymentMethodService
     );
 
     /// <summary>
-    /// Perform payment-method detachment on a Customer
+    /// Detach payment method
     /// </summary>
     Task<CustomerResponse> Detach(
         PaymentMethodDetachParams parameters,

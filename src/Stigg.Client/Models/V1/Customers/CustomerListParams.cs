@@ -9,7 +9,7 @@ using Stigg.Client.Core;
 namespace Stigg.Client.Models.V1.Customers;
 
 /// <summary>
-/// Get a list of Customers
+/// Get a list of customers
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
@@ -18,7 +18,7 @@ namespace Stigg.Client.Models.V1.Customers;
 public record class CustomerListParams : ParamsBase
 {
     /// <summary>
-    /// Starting after this UUID for pagination
+    /// Return items that come after this cursor
     /// </summary>
     public string? After
     {
@@ -39,7 +39,7 @@ public record class CustomerListParams : ParamsBase
     }
 
     /// <summary>
-    /// Ending before this UUID for pagination
+    /// Return items that come before this cursor
     /// </summary>
     public string? Before
     {
@@ -60,7 +60,7 @@ public record class CustomerListParams : ParamsBase
     }
 
     /// <summary>
-    /// Items per page
+    /// Maximum number of items to return
     /// </summary>
     public long? Limit
     {

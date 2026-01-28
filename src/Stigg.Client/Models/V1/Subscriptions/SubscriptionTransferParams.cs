@@ -10,7 +10,7 @@ using Stigg.Client.Core;
 namespace Stigg.Client.Models.V1.Subscriptions;
 
 /// <summary>
-/// Perform transfer to resource on a Subscription
+/// Transfer subscription to resource
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
@@ -27,8 +27,7 @@ public record class SubscriptionTransferParams : ParamsBase
     public string? ID { get; init; }
 
     /// <summary>
-    /// The resource ID to transfer the subscription to. The destination resource
-    /// must belong to the same customer.
+    /// Resource ID to transfer the subscription to
     /// </summary>
     public required string DestinationResourceID
     {
