@@ -37,12 +37,16 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, PaymentMethod::VendorIdentifier>(),
             new ApiEnumConverter<string, PaymentMethod::BillingCurrency>(),
             new ApiEnumConverter<string, CustomersUsage::Type>(),
+            new ApiEnumConverter<string, Subscriptions::ResetPeriod>(),
             new ApiEnumConverter<string, Subscriptions::Status>(),
             new ApiEnumConverter<string, Subscriptions::PaymentCollection>(),
             new ApiEnumConverter<string, Subscriptions::PricingType>(),
             new ApiEnumConverter<string, Subscriptions::SubscriptionStatus>(),
             new ApiEnumConverter<string, Subscriptions::CancelReason>(),
-            new ApiEnumConverter<string, Subscriptions::PaymentCollectionMethod>(),
+            new ApiEnumConverter<string, Subscriptions::SubscriptionPaymentCollectionMethod>(),
+            new ApiEnumConverter<string, Subscriptions::SubscriptionPricePriceCurrency>(),
+            new ApiEnumConverter<string, Subscriptions::SubscriptionPriceTierFlatPriceCurrency>(),
+            new ApiEnumConverter<string, Subscriptions::SubscriptionPriceTierUnitPriceCurrency>(),
             new ApiEnumConverter<
                 string,
                 Subscriptions::SubscriptionRetrieveResponseDataPaymentCollection
@@ -122,14 +126,33 @@ public abstract record class ModelBase
                 string,
                 Subscriptions::SubscriptionTransferResponseDataPaymentCollectionMethod
             >(),
-            new ApiEnumConverter<string, Subscriptions::BillingPeriod>(),
-            new ApiEnumConverter<string, Subscriptions::TrialEndBehavior>(),
-            new ApiEnumConverter<string, Subscriptions::SubscriptionMigrationTime>(),
             new ApiEnumConverter<string, Subscriptions::Currency>(),
             new ApiEnumConverter<string, Subscriptions::ProrationBehavior>(),
-            new ApiEnumConverter<string, Subscriptions::SubscriptionPreviewParamsBillingPeriod>(),
+            new ApiEnumConverter<string, Subscriptions::BillingPeriod>(),
             new ApiEnumConverter<string, Subscriptions::Type>(),
+            new ApiEnumConverter<string, Subscriptions::MinimumCurrency>(),
+            new ApiEnumConverter<string, Subscriptions::PaymentCollectionMethod>(),
+            new ApiEnumConverter<string, Subscriptions::CreditGrantCadence>(),
+            new ApiEnumConverter<string, Subscriptions::PriceCurrency>(),
+            new ApiEnumConverter<string, Subscriptions::FlatPriceCurrency>(),
+            new ApiEnumConverter<string, Subscriptions::UnitPriceCurrency>(),
             new ApiEnumConverter<string, Subscriptions::ScheduleStrategy>(),
+            new ApiEnumConverter<string, Subscriptions::TrialEndBehavior>(),
+            new ApiEnumConverter<string, Subscriptions::SubscriptionMigrationTime>(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency
+            >(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionPreviewParamsBillingInformationProrationBehavior
+            >(),
+            new ApiEnumConverter<string, Subscriptions::SubscriptionPreviewParamsBillingPeriod>(),
+            new ApiEnumConverter<string, Subscriptions::SubscriptionPreviewParamsChargeType>(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionPreviewParamsScheduleStrategy
+            >(),
             new ApiEnumConverter<
                 string,
                 Subscriptions::SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior
