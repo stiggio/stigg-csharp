@@ -85,8 +85,7 @@ public class SubscriptionPreviewParamsTest : TestBase
             TrialOverrideConfiguration = new()
             {
                 IsTrial = true,
-                TrialEndBehavior =
-                    SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
+                TrialEndBehavior = TrialEndBehavior.ConvertToPaid,
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             UnitQuantity = 1,
@@ -165,14 +164,12 @@ public class SubscriptionPreviewParamsTest : TestBase
         ApiEnum<string, SubscriptionPreviewParamsScheduleStrategy> expectedScheduleStrategy =
             SubscriptionPreviewParamsScheduleStrategy.EndOfBillingPeriod;
         DateTimeOffset expectedStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        SubscriptionPreviewParamsTrialOverrideConfiguration expectedTrialOverrideConfiguration =
-            new()
-            {
-                IsTrial = true,
-                TrialEndBehavior =
-                    SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
-                TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            };
+        TrialOverrideConfiguration expectedTrialOverrideConfiguration = new()
+        {
+            IsTrial = true,
+            TrialEndBehavior = TrialEndBehavior.ConvertToPaid,
+            TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
         double expectedUnitQuantity = 1;
 
         Assert.Equal(expectedCustomerID, parameters.CustomerID);
@@ -386,8 +383,7 @@ public class SubscriptionPreviewParamsTest : TestBase
             TrialOverrideConfiguration = new()
             {
                 IsTrial = true,
-                TrialEndBehavior =
-                    SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
+                TrialEndBehavior = TrialEndBehavior.ConvertToPaid,
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             UnitQuantity = 1,
@@ -2675,25 +2671,20 @@ public class SubscriptionPreviewParamsScheduleStrategyTest : TestBase
     }
 }
 
-public class SubscriptionPreviewParamsTrialOverrideConfigurationTest : TestBase
+public class TrialOverrideConfigurationTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new SubscriptionPreviewParamsTrialOverrideConfiguration
+        var model = new TrialOverrideConfiguration
         {
             IsTrial = true,
-            TrialEndBehavior =
-                SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
+            TrialEndBehavior = TrialEndBehavior.ConvertToPaid,
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         bool expectedIsTrial = true;
-        ApiEnum<
-            string,
-            SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior
-        > expectedTrialEndBehavior =
-            SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid;
+        ApiEnum<string, TrialEndBehavior> expectedTrialEndBehavior = TrialEndBehavior.ConvertToPaid;
         DateTimeOffset expectedTrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedIsTrial, model.IsTrial);
@@ -2704,20 +2695,18 @@ public class SubscriptionPreviewParamsTrialOverrideConfigurationTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new SubscriptionPreviewParamsTrialOverrideConfiguration
+        var model = new TrialOverrideConfiguration
         {
             IsTrial = true,
-            TrialEndBehavior =
-                SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
+            TrialEndBehavior = TrialEndBehavior.ConvertToPaid,
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized =
-            JsonSerializer.Deserialize<SubscriptionPreviewParamsTrialOverrideConfiguration>(
-                json,
-                ModelBase.SerializerOptions
-            );
+        var deserialized = JsonSerializer.Deserialize<TrialOverrideConfiguration>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -2725,28 +2714,22 @@ public class SubscriptionPreviewParamsTrialOverrideConfigurationTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new SubscriptionPreviewParamsTrialOverrideConfiguration
+        var model = new TrialOverrideConfiguration
         {
             IsTrial = true,
-            TrialEndBehavior =
-                SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
+            TrialEndBehavior = TrialEndBehavior.ConvertToPaid,
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized =
-            JsonSerializer.Deserialize<SubscriptionPreviewParamsTrialOverrideConfiguration>(
-                element,
-                ModelBase.SerializerOptions
-            );
+        var deserialized = JsonSerializer.Deserialize<TrialOverrideConfiguration>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         bool expectedIsTrial = true;
-        ApiEnum<
-            string,
-            SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior
-        > expectedTrialEndBehavior =
-            SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid;
+        ApiEnum<string, TrialEndBehavior> expectedTrialEndBehavior = TrialEndBehavior.ConvertToPaid;
         DateTimeOffset expectedTrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedIsTrial, deserialized.IsTrial);
@@ -2757,11 +2740,10 @@ public class SubscriptionPreviewParamsTrialOverrideConfigurationTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new SubscriptionPreviewParamsTrialOverrideConfiguration
+        var model = new TrialOverrideConfiguration
         {
             IsTrial = true,
-            TrialEndBehavior =
-                SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
+            TrialEndBehavior = TrialEndBehavior.ConvertToPaid,
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -2771,7 +2753,7 @@ public class SubscriptionPreviewParamsTrialOverrideConfigurationTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new SubscriptionPreviewParamsTrialOverrideConfiguration { IsTrial = true };
+        var model = new TrialOverrideConfiguration { IsTrial = true };
 
         Assert.Null(model.TrialEndBehavior);
         Assert.False(model.RawData.ContainsKey("trialEndBehavior"));
@@ -2782,7 +2764,7 @@ public class SubscriptionPreviewParamsTrialOverrideConfigurationTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new SubscriptionPreviewParamsTrialOverrideConfiguration { IsTrial = true };
+        var model = new TrialOverrideConfiguration { IsTrial = true };
 
         model.Validate();
     }
@@ -2790,7 +2772,7 @@ public class SubscriptionPreviewParamsTrialOverrideConfigurationTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new SubscriptionPreviewParamsTrialOverrideConfiguration
+        var model = new TrialOverrideConfiguration
         {
             IsTrial = true,
 
@@ -2808,7 +2790,7 @@ public class SubscriptionPreviewParamsTrialOverrideConfigurationTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new SubscriptionPreviewParamsTrialOverrideConfiguration
+        var model = new TrialOverrideConfiguration
         {
             IsTrial = true,
 
@@ -2823,65 +2805,56 @@ public class SubscriptionPreviewParamsTrialOverrideConfigurationTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new SubscriptionPreviewParamsTrialOverrideConfiguration
+        var model = new TrialOverrideConfiguration
         {
             IsTrial = true,
-            TrialEndBehavior =
-                SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
+            TrialEndBehavior = TrialEndBehavior.ConvertToPaid,
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
-        SubscriptionPreviewParamsTrialOverrideConfiguration copied = new(model);
+        TrialOverrideConfiguration copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehaviorTest : TestBase
+public class TrialEndBehaviorTest : TestBase
 {
     [Theory]
-    [InlineData(SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid)]
-    [InlineData(
-        SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.CancelSubscription
-    )]
-    public void Validation_Works(
-        SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior rawValue
-    )
+    [InlineData(TrialEndBehavior.ConvertToPaid)]
+    [InlineData(TrialEndBehavior.CancelSubscription)]
+    public void Validation_Works(TrialEndBehavior rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior> value =
-            rawValue;
+        ApiEnum<string, TrialEndBehavior> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        var value = JsonSerializer.Deserialize<ApiEnum<string, TrialEndBehavior>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
 
         Assert.NotNull(value);
         Assert.Throws<StiggInvalidDataException>(() => value.Validate());
     }
 
     [Theory]
-    [InlineData(SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid)]
-    [InlineData(
-        SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.CancelSubscription
-    )]
-    public void SerializationRoundtrip_Works(
-        SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior rawValue
-    )
+    [InlineData(TrialEndBehavior.ConvertToPaid)]
+    [InlineData(TrialEndBehavior.CancelSubscription)]
+    public void SerializationRoundtrip_Works(TrialEndBehavior rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior> value =
-            rawValue;
+        ApiEnum<string, TrialEndBehavior> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior>
-        >(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, TrialEndBehavior>>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(value, deserialized);
     }
@@ -2889,13 +2862,15 @@ public class SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        var value = JsonSerializer.Deserialize<ApiEnum<string, TrialEndBehavior>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior>
-        >(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, TrialEndBehavior>>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(value, deserialized);
     }

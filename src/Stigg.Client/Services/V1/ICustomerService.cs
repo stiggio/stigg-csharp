@@ -29,15 +29,7 @@ public interface ICustomerService
 
     IPaymentMethodService PaymentMethod { get; }
 
-    IUsageService Usage { get; }
-
-    /// <summary>
-    /// Provision customer
-    /// </summary>
-    Task<CustomerResponse> Create(
-        CustomerCreateParams parameters,
-        CancellationToken cancellationToken = default
-    );
+    IPromotionalEntitlementService PromotionalEntitlements { get; }
 
     /// <summary>
     /// Get a single customer by ID
@@ -93,6 +85,22 @@ public interface ICustomerService
     );
 
     /// <summary>
+    /// Bulk import customers
+    /// </summary>
+    Task<CustomerImportResponse> Import(
+        CustomerImportParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Provision customer
+    /// </summary>
+    Task<CustomerResponse> Provision(
+        CustomerProvisionParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Unarchive customer
     /// </summary>
     Task<CustomerResponse> Unarchive(
@@ -123,16 +131,7 @@ public interface ICustomerServiceWithRawResponse
 
     IPaymentMethodServiceWithRawResponse PaymentMethod { get; }
 
-    IUsageServiceWithRawResponse Usage { get; }
-
-    /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/customers`, but is otherwise the
-    /// same as <see cref="ICustomerService.Create(CustomerCreateParams, CancellationToken)"/>.
-    /// </summary>
-    Task<HttpResponse<CustomerResponse>> Create(
-        CustomerCreateParams parameters,
-        CancellationToken cancellationToken = default
-    );
+    IPromotionalEntitlementServiceWithRawResponse PromotionalEntitlements { get; }
 
     /// <summary>
     /// Returns a raw HTTP response for `get /api/v1/customers/{id}`, but is otherwise the
@@ -188,6 +187,24 @@ public interface ICustomerServiceWithRawResponse
     Task<HttpResponse<CustomerResponse>> Archive(
         string id,
         CustomerArchiveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `post /api/v1/customers/import`, but is otherwise the
+    /// same as <see cref="ICustomerService.Import(CustomerImportParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<CustomerImportResponse>> Import(
+        CustomerImportParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `post /api/v1/customers`, but is otherwise the
+    /// same as <see cref="ICustomerService.Provision(CustomerProvisionParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<CustomerResponse>> Provision(
+        CustomerProvisionParams parameters,
         CancellationToken cancellationToken = default
     );
 

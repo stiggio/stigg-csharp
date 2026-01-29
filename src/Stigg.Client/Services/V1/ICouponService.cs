@@ -29,7 +29,7 @@ public interface ICouponService
     /// <summary>
     /// Create coupon
     /// </summary>
-    Task<CouponCreateResponse> Create(
+    Task<Coupon> Create(
         CouponCreateParams parameters,
         CancellationToken cancellationToken = default
     );
@@ -37,13 +37,13 @@ public interface ICouponService
     /// <summary>
     /// Get a single coupon by ID
     /// </summary>
-    Task<CouponRetrieveResponse> Retrieve(
+    Task<Coupon> Retrieve(
         CouponRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Retrieve(CouponRetrieveParams, CancellationToken)"/>
-    Task<CouponRetrieveResponse> Retrieve(
+    Task<Coupon> Retrieve(
         string id,
         CouponRetrieveParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -75,7 +75,7 @@ public interface ICouponServiceWithRawResponse
     /// Returns a raw HTTP response for `post /api/v1/coupons`, but is otherwise the
     /// same as <see cref="ICouponService.Create(CouponCreateParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<CouponCreateResponse>> Create(
+    Task<HttpResponse<Coupon>> Create(
         CouponCreateParams parameters,
         CancellationToken cancellationToken = default
     );
@@ -84,13 +84,13 @@ public interface ICouponServiceWithRawResponse
     /// Returns a raw HTTP response for `get /api/v1/coupons/{id}`, but is otherwise the
     /// same as <see cref="ICouponService.Retrieve(CouponRetrieveParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<CouponRetrieveResponse>> Retrieve(
+    Task<HttpResponse<Coupon>> Retrieve(
         CouponRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Retrieve(CouponRetrieveParams, CancellationToken)"/>
-    Task<HttpResponse<CouponRetrieveResponse>> Retrieve(
+    Task<HttpResponse<Coupon>> Retrieve(
         string id,
         CouponRetrieveParams? parameters = null,
         CancellationToken cancellationToken = default

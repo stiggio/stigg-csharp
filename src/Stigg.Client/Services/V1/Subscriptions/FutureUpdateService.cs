@@ -37,7 +37,7 @@ public sealed class FutureUpdateService : IFutureUpdateService
     }
 
     /// <inheritdoc/>
-    public async Task<FutureUpdateCancelPendingPaymentResponse> CancelPendingPayment(
+    public async Task<CancelSubscription> CancelPendingPayment(
         FutureUpdateCancelPendingPaymentParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -49,7 +49,7 @@ public sealed class FutureUpdateService : IFutureUpdateService
     }
 
     /// <inheritdoc/>
-    public Task<FutureUpdateCancelPendingPaymentResponse> CancelPendingPayment(
+    public Task<CancelSubscription> CancelPendingPayment(
         string id,
         FutureUpdateCancelPendingPaymentParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -61,7 +61,7 @@ public sealed class FutureUpdateService : IFutureUpdateService
     }
 
     /// <inheritdoc/>
-    public async Task<FutureUpdateCancelScheduleResponse> CancelSchedule(
+    public async Task<CancelSubscription> CancelSchedule(
         FutureUpdateCancelScheduleParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -73,7 +73,7 @@ public sealed class FutureUpdateService : IFutureUpdateService
     }
 
     /// <inheritdoc/>
-    public Task<FutureUpdateCancelScheduleResponse> CancelSchedule(
+    public Task<CancelSubscription> CancelSchedule(
         string id,
         FutureUpdateCancelScheduleParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -104,7 +104,7 @@ public sealed class FutureUpdateServiceWithRawResponse : IFutureUpdateServiceWit
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<FutureUpdateCancelPendingPaymentResponse>> CancelPendingPayment(
+    public async Task<HttpResponse<CancelSubscription>> CancelPendingPayment(
         FutureUpdateCancelPendingPaymentParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -124,20 +124,20 @@ public sealed class FutureUpdateServiceWithRawResponse : IFutureUpdateServiceWit
             response,
             async (token) =>
             {
-                var deserializedResponse = await response
-                    .Deserialize<FutureUpdateCancelPendingPaymentResponse>(token)
+                var cancelSubscription = await response
+                    .Deserialize<CancelSubscription>(token)
                     .ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    deserializedResponse.Validate();
+                    cancelSubscription.Validate();
                 }
-                return deserializedResponse;
+                return cancelSubscription;
             }
         );
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<FutureUpdateCancelPendingPaymentResponse>> CancelPendingPayment(
+    public Task<HttpResponse<CancelSubscription>> CancelPendingPayment(
         string id,
         FutureUpdateCancelPendingPaymentParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -149,7 +149,7 @@ public sealed class FutureUpdateServiceWithRawResponse : IFutureUpdateServiceWit
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<FutureUpdateCancelScheduleResponse>> CancelSchedule(
+    public async Task<HttpResponse<CancelSubscription>> CancelSchedule(
         FutureUpdateCancelScheduleParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -169,20 +169,20 @@ public sealed class FutureUpdateServiceWithRawResponse : IFutureUpdateServiceWit
             response,
             async (token) =>
             {
-                var deserializedResponse = await response
-                    .Deserialize<FutureUpdateCancelScheduleResponse>(token)
+                var cancelSubscription = await response
+                    .Deserialize<CancelSubscription>(token)
                     .ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    deserializedResponse.Validate();
+                    cancelSubscription.Validate();
                 }
-                return deserializedResponse;
+                return cancelSubscription;
             }
         );
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<FutureUpdateCancelScheduleResponse>> CancelSchedule(
+    public Task<HttpResponse<CancelSubscription>> CancelSchedule(
         string id,
         FutureUpdateCancelScheduleParams? parameters = null,
         CancellationToken cancellationToken = default

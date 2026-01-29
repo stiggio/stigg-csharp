@@ -35,7 +35,7 @@ public sealed class CouponService : ICouponService
     }
 
     /// <inheritdoc/>
-    public async Task<CouponCreateResponse> Create(
+    public async Task<Coupon> Create(
         CouponCreateParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -47,7 +47,7 @@ public sealed class CouponService : ICouponService
     }
 
     /// <inheritdoc/>
-    public async Task<CouponRetrieveResponse> Retrieve(
+    public async Task<Coupon> Retrieve(
         CouponRetrieveParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -59,7 +59,7 @@ public sealed class CouponService : ICouponService
     }
 
     /// <inheritdoc/>
-    public Task<CouponRetrieveResponse> Retrieve(
+    public Task<Coupon> Retrieve(
         string id,
         CouponRetrieveParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -100,7 +100,7 @@ public sealed class CouponServiceWithRawResponse : ICouponServiceWithRawResponse
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<CouponCreateResponse>> Create(
+    public async Task<HttpResponse<Coupon>> Create(
         CouponCreateParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -115,9 +115,7 @@ public sealed class CouponServiceWithRawResponse : ICouponServiceWithRawResponse
             response,
             async (token) =>
             {
-                var coupon = await response
-                    .Deserialize<CouponCreateResponse>(token)
-                    .ConfigureAwait(false);
+                var coupon = await response.Deserialize<Coupon>(token).ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
                     coupon.Validate();
@@ -128,7 +126,7 @@ public sealed class CouponServiceWithRawResponse : ICouponServiceWithRawResponse
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<CouponRetrieveResponse>> Retrieve(
+    public async Task<HttpResponse<Coupon>> Retrieve(
         CouponRetrieveParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -148,9 +146,7 @@ public sealed class CouponServiceWithRawResponse : ICouponServiceWithRawResponse
             response,
             async (token) =>
             {
-                var coupon = await response
-                    .Deserialize<CouponRetrieveResponse>(token)
-                    .ConfigureAwait(false);
+                var coupon = await response.Deserialize<Coupon>(token).ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
                     coupon.Validate();
@@ -161,7 +157,7 @@ public sealed class CouponServiceWithRawResponse : ICouponServiceWithRawResponse
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<CouponRetrieveResponse>> Retrieve(
+    public Task<HttpResponse<Coupon>> Retrieve(
         string id,
         CouponRetrieveParams? parameters = null,
         CancellationToken cancellationToken = default

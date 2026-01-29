@@ -58,14 +58,12 @@ public record class CustomerUpdateParams : ParamsBase
     /// <summary>
     /// List of integrations
     /// </summary>
-    public IReadOnlyList<CustomerUpdateParamsIntegration>? Integrations
+    public IReadOnlyList<Integration>? Integrations
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableStruct<
-                ImmutableArray<CustomerUpdateParamsIntegration>
-            >("integrations");
+            return this._rawBodyData.GetNullableStruct<ImmutableArray<Integration>>("integrations");
         }
         init
         {
@@ -74,7 +72,7 @@ public record class CustomerUpdateParams : ParamsBase
                 return;
             }
 
-            this._rawBodyData.Set<ImmutableArray<CustomerUpdateParamsIntegration>?>(
+            this._rawBodyData.Set<ImmutableArray<Integration>?>(
                 "integrations",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
@@ -232,13 +230,8 @@ public record class CustomerUpdateParams : ParamsBase
 /// <summary>
 /// External billing or CRM integration link
 /// </summary>
-[JsonConverter(
-    typeof(JsonModelConverter<
-        CustomerUpdateParamsIntegration,
-        CustomerUpdateParamsIntegrationFromRaw
-    >)
-)]
-public sealed record class CustomerUpdateParamsIntegration : JsonModel
+[JsonConverter(typeof(JsonModelConverter<Integration, IntegrationFromRaw>))]
+public sealed record class Integration : JsonModel
 {
     /// <summary>
     /// Integration details
@@ -269,17 +262,14 @@ public sealed record class CustomerUpdateParamsIntegration : JsonModel
     /// <summary>
     /// The vendor identifier of integration
     /// </summary>
-    public required ApiEnum<
-        string,
-        CustomerUpdateParamsIntegrationVendorIdentifier
-    > VendorIdentifier
+    public required ApiEnum<string, VendorIdentifier> VendorIdentifier
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, CustomerUpdateParamsIntegrationVendorIdentifier>
-            >("vendorIdentifier");
+            return this._rawData.GetNotNullClass<ApiEnum<string, VendorIdentifier>>(
+                "vendorIdentifier"
+            );
         }
         init { this._rawData.Set("vendorIdentifier", value); }
     }
@@ -292,51 +282,46 @@ public sealed record class CustomerUpdateParamsIntegration : JsonModel
         this.VendorIdentifier.Validate();
     }
 
-    public CustomerUpdateParamsIntegration() { }
+    public Integration() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public CustomerUpdateParamsIntegration(
-        CustomerUpdateParamsIntegration customerUpdateParamsIntegration
-    )
-        : base(customerUpdateParamsIntegration) { }
+    public Integration(Integration integration)
+        : base(integration) { }
 #pragma warning restore CS8618
 
-    public CustomerUpdateParamsIntegration(IReadOnlyDictionary<string, JsonElement> rawData)
+    public Integration(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    CustomerUpdateParamsIntegration(FrozenDictionary<string, JsonElement> rawData)
+    Integration(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="CustomerUpdateParamsIntegrationFromRaw.FromRawUnchecked"/>
-    public static CustomerUpdateParamsIntegration FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
+    /// <inheritdoc cref="IntegrationFromRaw.FromRawUnchecked"/>
+    public static Integration FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class CustomerUpdateParamsIntegrationFromRaw : IFromRawJson<CustomerUpdateParamsIntegration>
+class IntegrationFromRaw : IFromRawJson<Integration>
 {
     /// <inheritdoc/>
-    public CustomerUpdateParamsIntegration FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => CustomerUpdateParamsIntegration.FromRawUnchecked(rawData);
+    public Integration FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Integration.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// The vendor identifier of integration
 /// </summary>
-[JsonConverter(typeof(CustomerUpdateParamsIntegrationVendorIdentifierConverter))]
-public enum CustomerUpdateParamsIntegrationVendorIdentifier
+[JsonConverter(typeof(VendorIdentifierConverter))]
+public enum VendorIdentifier
 {
     Auth0,
     Zuora,
@@ -350,10 +335,9 @@ public enum CustomerUpdateParamsIntegrationVendorIdentifier
     AppStore,
 }
 
-sealed class CustomerUpdateParamsIntegrationVendorIdentifierConverter
-    : JsonConverter<CustomerUpdateParamsIntegrationVendorIdentifier>
+sealed class VendorIdentifierConverter : JsonConverter<VendorIdentifier>
 {
-    public override CustomerUpdateParamsIntegrationVendorIdentifier Read(
+    public override VendorIdentifier Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -361,23 +345,23 @@ sealed class CustomerUpdateParamsIntegrationVendorIdentifierConverter
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "AUTH0" => CustomerUpdateParamsIntegrationVendorIdentifier.Auth0,
-            "ZUORA" => CustomerUpdateParamsIntegrationVendorIdentifier.Zuora,
-            "STRIPE" => CustomerUpdateParamsIntegrationVendorIdentifier.Stripe,
-            "HUBSPOT" => CustomerUpdateParamsIntegrationVendorIdentifier.Hubspot,
-            "AWS_MARKETPLACE" => CustomerUpdateParamsIntegrationVendorIdentifier.AwsMarketplace,
-            "SNOWFLAKE" => CustomerUpdateParamsIntegrationVendorIdentifier.Snowflake,
-            "SALESFORCE" => CustomerUpdateParamsIntegrationVendorIdentifier.Salesforce,
-            "BIG_QUERY" => CustomerUpdateParamsIntegrationVendorIdentifier.BigQuery,
-            "OPEN_FGA" => CustomerUpdateParamsIntegrationVendorIdentifier.OpenFga,
-            "APP_STORE" => CustomerUpdateParamsIntegrationVendorIdentifier.AppStore,
-            _ => (CustomerUpdateParamsIntegrationVendorIdentifier)(-1),
+            "AUTH0" => VendorIdentifier.Auth0,
+            "ZUORA" => VendorIdentifier.Zuora,
+            "STRIPE" => VendorIdentifier.Stripe,
+            "HUBSPOT" => VendorIdentifier.Hubspot,
+            "AWS_MARKETPLACE" => VendorIdentifier.AwsMarketplace,
+            "SNOWFLAKE" => VendorIdentifier.Snowflake,
+            "SALESFORCE" => VendorIdentifier.Salesforce,
+            "BIG_QUERY" => VendorIdentifier.BigQuery,
+            "OPEN_FGA" => VendorIdentifier.OpenFga,
+            "APP_STORE" => VendorIdentifier.AppStore,
+            _ => (VendorIdentifier)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        CustomerUpdateParamsIntegrationVendorIdentifier value,
+        VendorIdentifier value,
         JsonSerializerOptions options
     )
     {
@@ -385,16 +369,16 @@ sealed class CustomerUpdateParamsIntegrationVendorIdentifierConverter
             writer,
             value switch
             {
-                CustomerUpdateParamsIntegrationVendorIdentifier.Auth0 => "AUTH0",
-                CustomerUpdateParamsIntegrationVendorIdentifier.Zuora => "ZUORA",
-                CustomerUpdateParamsIntegrationVendorIdentifier.Stripe => "STRIPE",
-                CustomerUpdateParamsIntegrationVendorIdentifier.Hubspot => "HUBSPOT",
-                CustomerUpdateParamsIntegrationVendorIdentifier.AwsMarketplace => "AWS_MARKETPLACE",
-                CustomerUpdateParamsIntegrationVendorIdentifier.Snowflake => "SNOWFLAKE",
-                CustomerUpdateParamsIntegrationVendorIdentifier.Salesforce => "SALESFORCE",
-                CustomerUpdateParamsIntegrationVendorIdentifier.BigQuery => "BIG_QUERY",
-                CustomerUpdateParamsIntegrationVendorIdentifier.OpenFga => "OPEN_FGA",
-                CustomerUpdateParamsIntegrationVendorIdentifier.AppStore => "APP_STORE",
+                VendorIdentifier.Auth0 => "AUTH0",
+                VendorIdentifier.Zuora => "ZUORA",
+                VendorIdentifier.Stripe => "STRIPE",
+                VendorIdentifier.Hubspot => "HUBSPOT",
+                VendorIdentifier.AwsMarketplace => "AWS_MARKETPLACE",
+                VendorIdentifier.Snowflake => "SNOWFLAKE",
+                VendorIdentifier.Salesforce => "SALESFORCE",
+                VendorIdentifier.BigQuery => "BIG_QUERY",
+                VendorIdentifier.OpenFga => "OPEN_FGA",
+                VendorIdentifier.AppStore => "APP_STORE",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
