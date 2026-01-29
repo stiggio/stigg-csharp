@@ -29,13 +29,13 @@ public interface IFutureUpdateService
     /// <summary>
     /// Cancel pending payment update
     /// </summary>
-    Task<FutureUpdateCancelPendingPaymentResponse> CancelPendingPayment(
+    Task<CancelSubscription> CancelPendingPayment(
         FutureUpdateCancelPendingPaymentParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="CancelPendingPayment(FutureUpdateCancelPendingPaymentParams, CancellationToken)"/>
-    Task<FutureUpdateCancelPendingPaymentResponse> CancelPendingPayment(
+    Task<CancelSubscription> CancelPendingPayment(
         string id,
         FutureUpdateCancelPendingPaymentParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -44,13 +44,13 @@ public interface IFutureUpdateService
     /// <summary>
     /// Cancel scheduled update
     /// </summary>
-    Task<FutureUpdateCancelScheduleResponse> CancelSchedule(
+    Task<CancelSubscription> CancelSchedule(
         FutureUpdateCancelScheduleParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="CancelSchedule(FutureUpdateCancelScheduleParams, CancellationToken)"/>
-    Task<FutureUpdateCancelScheduleResponse> CancelSchedule(
+    Task<CancelSubscription> CancelSchedule(
         string id,
         FutureUpdateCancelScheduleParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -74,13 +74,13 @@ public interface IFutureUpdateServiceWithRawResponse
     /// Returns a raw HTTP response for `delete /api/v1/subscriptions/{id}/future-update/pending-payment`, but is otherwise the
     /// same as <see cref="IFutureUpdateService.CancelPendingPayment(FutureUpdateCancelPendingPaymentParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<FutureUpdateCancelPendingPaymentResponse>> CancelPendingPayment(
+    Task<HttpResponse<CancelSubscription>> CancelPendingPayment(
         FutureUpdateCancelPendingPaymentParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="CancelPendingPayment(FutureUpdateCancelPendingPaymentParams, CancellationToken)"/>
-    Task<HttpResponse<FutureUpdateCancelPendingPaymentResponse>> CancelPendingPayment(
+    Task<HttpResponse<CancelSubscription>> CancelPendingPayment(
         string id,
         FutureUpdateCancelPendingPaymentParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -90,13 +90,13 @@ public interface IFutureUpdateServiceWithRawResponse
     /// Returns a raw HTTP response for `delete /api/v1/subscriptions/{id}/future-update/schedule`, but is otherwise the
     /// same as <see cref="IFutureUpdateService.CancelSchedule(FutureUpdateCancelScheduleParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<FutureUpdateCancelScheduleResponse>> CancelSchedule(
+    Task<HttpResponse<CancelSubscription>> CancelSchedule(
         FutureUpdateCancelScheduleParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="CancelSchedule(FutureUpdateCancelScheduleParams, CancellationToken)"/>
-    Task<HttpResponse<FutureUpdateCancelScheduleResponse>> CancelSchedule(
+    Task<HttpResponse<CancelSubscription>> CancelSchedule(
         string id,
         FutureUpdateCancelScheduleParams? parameters = null,
         CancellationToken cancellationToken = default

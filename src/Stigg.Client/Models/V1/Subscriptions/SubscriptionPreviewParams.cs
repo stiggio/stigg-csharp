@@ -310,12 +310,12 @@ public record class SubscriptionPreviewParams : ParamsBase
     /// <summary>
     /// Trial period override settings
     /// </summary>
-    public SubscriptionPreviewParamsTrialOverrideConfiguration? TrialOverrideConfiguration
+    public TrialOverrideConfiguration? TrialOverrideConfiguration
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableClass<SubscriptionPreviewParamsTrialOverrideConfiguration>(
+            return this._rawBodyData.GetNullableClass<TrialOverrideConfiguration>(
                 "trialOverrideConfiguration"
             );
         }
@@ -2426,12 +2426,9 @@ sealed class SubscriptionPreviewParamsScheduleStrategyConverter
 /// Trial period override settings
 /// </summary>
 [JsonConverter(
-    typeof(JsonModelConverter<
-        SubscriptionPreviewParamsTrialOverrideConfiguration,
-        SubscriptionPreviewParamsTrialOverrideConfigurationFromRaw
-    >)
+    typeof(JsonModelConverter<TrialOverrideConfiguration, TrialOverrideConfigurationFromRaw>)
 )]
-public sealed record class SubscriptionPreviewParamsTrialOverrideConfiguration : JsonModel
+public sealed record class TrialOverrideConfiguration : JsonModel
 {
     /// <summary>
     /// Whether to start as trial
@@ -2449,17 +2446,14 @@ public sealed record class SubscriptionPreviewParamsTrialOverrideConfiguration :
     /// <summary>
     /// Behavior when trial ends
     /// </summary>
-    public ApiEnum<
-        string,
-        SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior
-    >? TrialEndBehavior
+    public ApiEnum<string, TrialEndBehavior>? TrialEndBehavior
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<
-                ApiEnum<string, SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior>
-            >("trialEndBehavior");
+            return this._rawData.GetNullableClass<ApiEnum<string, TrialEndBehavior>>(
+                "trialEndBehavior"
+            );
         }
         init
         {
@@ -2501,35 +2495,29 @@ public sealed record class SubscriptionPreviewParamsTrialOverrideConfiguration :
         _ = this.TrialEndDate;
     }
 
-    public SubscriptionPreviewParamsTrialOverrideConfiguration() { }
+    public TrialOverrideConfiguration() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public SubscriptionPreviewParamsTrialOverrideConfiguration(
-        SubscriptionPreviewParamsTrialOverrideConfiguration subscriptionPreviewParamsTrialOverrideConfiguration
-    )
-        : base(subscriptionPreviewParamsTrialOverrideConfiguration) { }
+    public TrialOverrideConfiguration(TrialOverrideConfiguration trialOverrideConfiguration)
+        : base(trialOverrideConfiguration) { }
 #pragma warning restore CS8618
 
-    public SubscriptionPreviewParamsTrialOverrideConfiguration(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
+    public TrialOverrideConfiguration(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    SubscriptionPreviewParamsTrialOverrideConfiguration(
-        FrozenDictionary<string, JsonElement> rawData
-    )
+    TrialOverrideConfiguration(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="SubscriptionPreviewParamsTrialOverrideConfigurationFromRaw.FromRawUnchecked"/>
-    public static SubscriptionPreviewParamsTrialOverrideConfiguration FromRawUnchecked(
+    /// <inheritdoc cref="TrialOverrideConfigurationFromRaw.FromRawUnchecked"/>
+    public static TrialOverrideConfiguration FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -2537,38 +2525,34 @@ public sealed record class SubscriptionPreviewParamsTrialOverrideConfiguration :
     }
 
     [SetsRequiredMembers]
-    public SubscriptionPreviewParamsTrialOverrideConfiguration(bool isTrial)
+    public TrialOverrideConfiguration(bool isTrial)
         : this()
     {
         this.IsTrial = isTrial;
     }
 }
 
-class SubscriptionPreviewParamsTrialOverrideConfigurationFromRaw
-    : IFromRawJson<SubscriptionPreviewParamsTrialOverrideConfiguration>
+class TrialOverrideConfigurationFromRaw : IFromRawJson<TrialOverrideConfiguration>
 {
     /// <inheritdoc/>
-    public SubscriptionPreviewParamsTrialOverrideConfiguration FromRawUnchecked(
+    public TrialOverrideConfiguration FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => SubscriptionPreviewParamsTrialOverrideConfiguration.FromRawUnchecked(rawData);
+    ) => TrialOverrideConfiguration.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// Behavior when trial ends
 /// </summary>
-[JsonConverter(
-    typeof(SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehaviorConverter)
-)]
-public enum SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior
+[JsonConverter(typeof(TrialEndBehaviorConverter))]
+public enum TrialEndBehavior
 {
     ConvertToPaid,
     CancelSubscription,
 }
 
-sealed class SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehaviorConverter
-    : JsonConverter<SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior>
+sealed class TrialEndBehaviorConverter : JsonConverter<TrialEndBehavior>
 {
-    public override SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior Read(
+    public override TrialEndBehavior Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -2576,17 +2560,15 @@ sealed class SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "CONVERT_TO_PAID" =>
-                SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
-            "CANCEL_SUBSCRIPTION" =>
-                SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.CancelSubscription,
-            _ => (SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior)(-1),
+            "CONVERT_TO_PAID" => TrialEndBehavior.ConvertToPaid,
+            "CANCEL_SUBSCRIPTION" => TrialEndBehavior.CancelSubscription,
+            _ => (TrialEndBehavior)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior value,
+        TrialEndBehavior value,
         JsonSerializerOptions options
     )
     {
@@ -2594,10 +2576,8 @@ sealed class SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior
             writer,
             value switch
             {
-                SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid =>
-                    "CONVERT_TO_PAID",
-                SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior.CancelSubscription =>
-                    "CANCEL_SUBSCRIPTION",
+                TrialEndBehavior.ConvertToPaid => "CONVERT_TO_PAID",
+                TrialEndBehavior.CancelSubscription => "CANCEL_SUBSCRIPTION",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

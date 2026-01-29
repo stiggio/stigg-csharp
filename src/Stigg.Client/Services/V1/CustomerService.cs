@@ -34,7 +34,7 @@ public sealed class CustomerService : ICustomerService
 
         _withRawResponse = new(() => new CustomerServiceWithRawResponse(client.WithRawResponse));
         _paymentMethod = new(() => new PaymentMethodService(client));
-        _usage = new(() => new UsageService(client));
+        _promotionalEntitlements = new(() => new PromotionalEntitlementService(client));
     }
 
     readonly Lazy<IPaymentMethodService> _paymentMethod;
@@ -43,22 +43,10 @@ public sealed class CustomerService : ICustomerService
         get { return _paymentMethod.Value; }
     }
 
-    readonly Lazy<IUsageService> _usage;
-    public IUsageService Usage
+    readonly Lazy<IPromotionalEntitlementService> _promotionalEntitlements;
+    public IPromotionalEntitlementService PromotionalEntitlements
     {
-        get { return _usage.Value; }
-    }
-
-    /// <inheritdoc/>
-    public async Task<CustomerResponse> Create(
-        CustomerCreateParams parameters,
-        CancellationToken cancellationToken = default
-    )
-    {
-        using var response = await this
-            .WithRawResponse.Create(parameters, cancellationToken)
-            .ConfigureAwait(false);
-        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+        get { return _promotionalEntitlements.Value; }
     }
 
     /// <inheritdoc/>
@@ -146,6 +134,30 @@ public sealed class CustomerService : ICustomerService
     }
 
     /// <inheritdoc/>
+    public async Task<CustomerImportResponse> Import(
+        CustomerImportParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.Import(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public async Task<CustomerResponse> Provision(
+        CustomerProvisionParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.Provision(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
     public async Task<CustomerResponse> Unarchive(
         CustomerUnarchiveParams parameters,
         CancellationToken cancellationToken = default
@@ -186,7 +198,9 @@ public sealed class CustomerServiceWithRawResponse : ICustomerServiceWithRawResp
         _client = client;
 
         _paymentMethod = new(() => new PaymentMethodServiceWithRawResponse(client));
-        _usage = new(() => new UsageServiceWithRawResponse(client));
+        _promotionalEntitlements = new(() =>
+            new PromotionalEntitlementServiceWithRawResponse(client)
+        );
     }
 
     readonly Lazy<IPaymentMethodServiceWithRawResponse> _paymentMethod;
@@ -195,38 +209,10 @@ public sealed class CustomerServiceWithRawResponse : ICustomerServiceWithRawResp
         get { return _paymentMethod.Value; }
     }
 
-    readonly Lazy<IUsageServiceWithRawResponse> _usage;
-    public IUsageServiceWithRawResponse Usage
+    readonly Lazy<IPromotionalEntitlementServiceWithRawResponse> _promotionalEntitlements;
+    public IPromotionalEntitlementServiceWithRawResponse PromotionalEntitlements
     {
-        get { return _usage.Value; }
-    }
-
-    /// <inheritdoc/>
-    public async Task<HttpResponse<CustomerResponse>> Create(
-        CustomerCreateParams parameters,
-        CancellationToken cancellationToken = default
-    )
-    {
-        HttpRequest<CustomerCreateParams> request = new()
-        {
-            Method = HttpMethod.Post,
-            Params = parameters,
-        };
-        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
-        return new(
-            response,
-            async (token) =>
-            {
-                var customerResponse = await response
-                    .Deserialize<CustomerResponse>(token)
-                    .ConfigureAwait(false);
-                if (this._client.ResponseValidation)
-                {
-                    customerResponse.Validate();
-                }
-                return customerResponse;
-            }
-        );
+        get { return _promotionalEntitlements.Value; }
     }
 
     /// <inheritdoc/>
@@ -392,6 +378,62 @@ public sealed class CustomerServiceWithRawResponse : ICustomerServiceWithRawResp
         parameters ??= new();
 
         return this.Archive(parameters with { ID = id }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<CustomerImportResponse>> Import(
+        CustomerImportParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        HttpRequest<CustomerImportParams> request = new()
+        {
+            Method = HttpMethod.Post,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var deserializedResponse = await response
+                    .Deserialize<CustomerImportResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    deserializedResponse.Validate();
+                }
+                return deserializedResponse;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<CustomerResponse>> Provision(
+        CustomerProvisionParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        HttpRequest<CustomerProvisionParams> request = new()
+        {
+            Method = HttpMethod.Post,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var customerResponse = await response
+                    .Deserialize<CustomerResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    customerResponse.Validate();
+                }
+                return customerResponse;
+            }
+        );
     }
 
     /// <inheritdoc/>
