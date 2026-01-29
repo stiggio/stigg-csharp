@@ -1,9 +1,5 @@
 using System;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
 using Stigg.Client.Core;
-using Stigg.Client.Models.V1;
 using Stigg.Client.Services.V1;
 
 namespace Stigg.Client.Services;
@@ -35,6 +31,8 @@ public sealed class V1Service : IV1Service
         _customers = new(() => new CustomerService(client));
         _subscriptions = new(() => new SubscriptionService(client));
         _coupons = new(() => new CouponService(client));
+        _events = new(() => new EventService(client));
+        _usage = new(() => new UsageService(client));
     }
 
     readonly Lazy<ICustomerService> _customers;
@@ -55,28 +53,16 @@ public sealed class V1Service : IV1Service
         get { return _coupons.Value; }
     }
 
-    /// <inheritdoc/>
-    public async Task<V1CreateEventResponse> CreateEvent(
-        V1CreateEventParams parameters,
-        CancellationToken cancellationToken = default
-    )
+    readonly Lazy<IEventService> _events;
+    public IEventService Events
     {
-        using var response = await this
-            .WithRawResponse.CreateEvent(parameters, cancellationToken)
-            .ConfigureAwait(false);
-        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+        get { return _events.Value; }
     }
 
-    /// <inheritdoc/>
-    public async Task<V1CreateUsageResponse> CreateUsage(
-        V1CreateUsageParams parameters,
-        CancellationToken cancellationToken = default
-    )
+    readonly Lazy<IUsageService> _usage;
+    public IUsageService Usage
     {
-        using var response = await this
-            .WithRawResponse.CreateUsage(parameters, cancellationToken)
-            .ConfigureAwait(false);
-        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+        get { return _usage.Value; }
     }
 }
 
@@ -98,6 +84,8 @@ public sealed class V1ServiceWithRawResponse : IV1ServiceWithRawResponse
         _customers = new(() => new CustomerServiceWithRawResponse(client));
         _subscriptions = new(() => new SubscriptionServiceWithRawResponse(client));
         _coupons = new(() => new CouponServiceWithRawResponse(client));
+        _events = new(() => new EventServiceWithRawResponse(client));
+        _usage = new(() => new UsageServiceWithRawResponse(client));
     }
 
     readonly Lazy<ICustomerServiceWithRawResponse> _customers;
@@ -118,59 +106,15 @@ public sealed class V1ServiceWithRawResponse : IV1ServiceWithRawResponse
         get { return _coupons.Value; }
     }
 
-    /// <inheritdoc/>
-    public async Task<HttpResponse<V1CreateEventResponse>> CreateEvent(
-        V1CreateEventParams parameters,
-        CancellationToken cancellationToken = default
-    )
+    readonly Lazy<IEventServiceWithRawResponse> _events;
+    public IEventServiceWithRawResponse Events
     {
-        HttpRequest<V1CreateEventParams> request = new()
-        {
-            Method = HttpMethod.Post,
-            Params = parameters,
-        };
-        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
-        return new(
-            response,
-            async (token) =>
-            {
-                var deserializedResponse = await response
-                    .Deserialize<V1CreateEventResponse>(token)
-                    .ConfigureAwait(false);
-                if (this._client.ResponseValidation)
-                {
-                    deserializedResponse.Validate();
-                }
-                return deserializedResponse;
-            }
-        );
+        get { return _events.Value; }
     }
 
-    /// <inheritdoc/>
-    public async Task<HttpResponse<V1CreateUsageResponse>> CreateUsage(
-        V1CreateUsageParams parameters,
-        CancellationToken cancellationToken = default
-    )
+    readonly Lazy<IUsageServiceWithRawResponse> _usage;
+    public IUsageServiceWithRawResponse Usage
     {
-        HttpRequest<V1CreateUsageParams> request = new()
-        {
-            Method = HttpMethod.Post,
-            Params = parameters,
-        };
-        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
-        return new(
-            response,
-            async (token) =>
-            {
-                var deserializedResponse = await response
-                    .Deserialize<V1CreateUsageResponse>(token)
-                    .ConfigureAwait(false);
-                if (this._client.ResponseValidation)
-                {
-                    deserializedResponse.Validate();
-                }
-                return deserializedResponse;
-            }
-        );
+        get { return _usage.Value; }
     }
 }

@@ -23,7 +23,7 @@ public class CustomerUpdateParamsTest : TestBase
                 {
                     ID = "id",
                     SyncedEntityID = "syncedEntityId",
-                    VendorIdentifier = CustomerUpdateParamsIntegrationVendorIdentifier.Auth0,
+                    VendorIdentifier = VendorIdentifier.Auth0,
                 },
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
@@ -33,13 +33,13 @@ public class CustomerUpdateParamsTest : TestBase
         string expectedID = "x";
         string expectedCouponID = "couponId";
         string expectedEmail = "dev@stainless.com";
-        List<CustomerUpdateParamsIntegration> expectedIntegrations =
+        List<Integration> expectedIntegrations =
         [
             new()
             {
                 ID = "id",
                 SyncedEntityID = "syncedEntityId",
-                VendorIdentifier = CustomerUpdateParamsIntegrationVendorIdentifier.Auth0,
+                VendorIdentifier = VendorIdentifier.Auth0,
             },
         ];
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
@@ -115,7 +115,7 @@ public class CustomerUpdateParamsTest : TestBase
                 {
                     ID = "id",
                     SyncedEntityID = "syncedEntityId",
-                    VendorIdentifier = CustomerUpdateParamsIntegrationVendorIdentifier.Auth0,
+                    VendorIdentifier = VendorIdentifier.Auth0,
                 },
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
@@ -141,7 +141,7 @@ public class CustomerUpdateParamsTest : TestBase
                 {
                     ID = "id",
                     SyncedEntityID = "syncedEntityId",
-                    VendorIdentifier = CustomerUpdateParamsIntegrationVendorIdentifier.Auth0,
+                    VendorIdentifier = VendorIdentifier.Auth0,
                 },
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
@@ -183,7 +183,7 @@ public class CustomerUpdateParamsTest : TestBase
                 {
                     ID = "id",
                     SyncedEntityID = "syncedEntityId",
-                    VendorIdentifier = CustomerUpdateParamsIntegrationVendorIdentifier.Auth0,
+                    VendorIdentifier = VendorIdentifier.Auth0,
                 },
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
@@ -196,22 +196,21 @@ public class CustomerUpdateParamsTest : TestBase
     }
 }
 
-public class CustomerUpdateParamsIntegrationTest : TestBase
+public class IntegrationTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new CustomerUpdateParamsIntegration
+        var model = new Integration
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = CustomerUpdateParamsIntegrationVendorIdentifier.Auth0,
+            VendorIdentifier = VendorIdentifier.Auth0,
         };
 
         string expectedID = "id";
         string expectedSyncedEntityID = "syncedEntityId";
-        ApiEnum<string, CustomerUpdateParamsIntegrationVendorIdentifier> expectedVendorIdentifier =
-            CustomerUpdateParamsIntegrationVendorIdentifier.Auth0;
+        ApiEnum<string, VendorIdentifier> expectedVendorIdentifier = VendorIdentifier.Auth0;
 
         Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedSyncedEntityID, model.SyncedEntityID);
@@ -221,15 +220,15 @@ public class CustomerUpdateParamsIntegrationTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new CustomerUpdateParamsIntegration
+        var model = new Integration
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = CustomerUpdateParamsIntegrationVendorIdentifier.Auth0,
+            VendorIdentifier = VendorIdentifier.Auth0,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<CustomerUpdateParamsIntegration>(
+        var deserialized = JsonSerializer.Deserialize<Integration>(
             json,
             ModelBase.SerializerOptions
         );
@@ -240,15 +239,15 @@ public class CustomerUpdateParamsIntegrationTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new CustomerUpdateParamsIntegration
+        var model = new Integration
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = CustomerUpdateParamsIntegrationVendorIdentifier.Auth0,
+            VendorIdentifier = VendorIdentifier.Auth0,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<CustomerUpdateParamsIntegration>(
+        var deserialized = JsonSerializer.Deserialize<Integration>(
             element,
             ModelBase.SerializerOptions
         );
@@ -256,8 +255,7 @@ public class CustomerUpdateParamsIntegrationTest : TestBase
 
         string expectedID = "id";
         string expectedSyncedEntityID = "syncedEntityId";
-        ApiEnum<string, CustomerUpdateParamsIntegrationVendorIdentifier> expectedVendorIdentifier =
-            CustomerUpdateParamsIntegrationVendorIdentifier.Auth0;
+        ApiEnum<string, VendorIdentifier> expectedVendorIdentifier = VendorIdentifier.Auth0;
 
         Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedSyncedEntityID, deserialized.SyncedEntityID);
@@ -267,11 +265,11 @@ public class CustomerUpdateParamsIntegrationTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new CustomerUpdateParamsIntegration
+        var model = new Integration
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = CustomerUpdateParamsIntegrationVendorIdentifier.Auth0,
+            VendorIdentifier = VendorIdentifier.Auth0,
         };
 
         model.Validate();
@@ -280,72 +278,72 @@ public class CustomerUpdateParamsIntegrationTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new CustomerUpdateParamsIntegration
+        var model = new Integration
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = CustomerUpdateParamsIntegrationVendorIdentifier.Auth0,
+            VendorIdentifier = VendorIdentifier.Auth0,
         };
 
-        CustomerUpdateParamsIntegration copied = new(model);
+        Integration copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class CustomerUpdateParamsIntegrationVendorIdentifierTest : TestBase
+public class VendorIdentifierTest : TestBase
 {
     [Theory]
-    [InlineData(CustomerUpdateParamsIntegrationVendorIdentifier.Auth0)]
-    [InlineData(CustomerUpdateParamsIntegrationVendorIdentifier.Zuora)]
-    [InlineData(CustomerUpdateParamsIntegrationVendorIdentifier.Stripe)]
-    [InlineData(CustomerUpdateParamsIntegrationVendorIdentifier.Hubspot)]
-    [InlineData(CustomerUpdateParamsIntegrationVendorIdentifier.AwsMarketplace)]
-    [InlineData(CustomerUpdateParamsIntegrationVendorIdentifier.Snowflake)]
-    [InlineData(CustomerUpdateParamsIntegrationVendorIdentifier.Salesforce)]
-    [InlineData(CustomerUpdateParamsIntegrationVendorIdentifier.BigQuery)]
-    [InlineData(CustomerUpdateParamsIntegrationVendorIdentifier.OpenFga)]
-    [InlineData(CustomerUpdateParamsIntegrationVendorIdentifier.AppStore)]
-    public void Validation_Works(CustomerUpdateParamsIntegrationVendorIdentifier rawValue)
+    [InlineData(VendorIdentifier.Auth0)]
+    [InlineData(VendorIdentifier.Zuora)]
+    [InlineData(VendorIdentifier.Stripe)]
+    [InlineData(VendorIdentifier.Hubspot)]
+    [InlineData(VendorIdentifier.AwsMarketplace)]
+    [InlineData(VendorIdentifier.Snowflake)]
+    [InlineData(VendorIdentifier.Salesforce)]
+    [InlineData(VendorIdentifier.BigQuery)]
+    [InlineData(VendorIdentifier.OpenFga)]
+    [InlineData(VendorIdentifier.AppStore)]
+    public void Validation_Works(VendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, CustomerUpdateParamsIntegrationVendorIdentifier> value = rawValue;
+        ApiEnum<string, VendorIdentifier> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, CustomerUpdateParamsIntegrationVendorIdentifier>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        var value = JsonSerializer.Deserialize<ApiEnum<string, VendorIdentifier>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
 
         Assert.NotNull(value);
         Assert.Throws<StiggInvalidDataException>(() => value.Validate());
     }
 
     [Theory]
-    [InlineData(CustomerUpdateParamsIntegrationVendorIdentifier.Auth0)]
-    [InlineData(CustomerUpdateParamsIntegrationVendorIdentifier.Zuora)]
-    [InlineData(CustomerUpdateParamsIntegrationVendorIdentifier.Stripe)]
-    [InlineData(CustomerUpdateParamsIntegrationVendorIdentifier.Hubspot)]
-    [InlineData(CustomerUpdateParamsIntegrationVendorIdentifier.AwsMarketplace)]
-    [InlineData(CustomerUpdateParamsIntegrationVendorIdentifier.Snowflake)]
-    [InlineData(CustomerUpdateParamsIntegrationVendorIdentifier.Salesforce)]
-    [InlineData(CustomerUpdateParamsIntegrationVendorIdentifier.BigQuery)]
-    [InlineData(CustomerUpdateParamsIntegrationVendorIdentifier.OpenFga)]
-    [InlineData(CustomerUpdateParamsIntegrationVendorIdentifier.AppStore)]
-    public void SerializationRoundtrip_Works(
-        CustomerUpdateParamsIntegrationVendorIdentifier rawValue
-    )
+    [InlineData(VendorIdentifier.Auth0)]
+    [InlineData(VendorIdentifier.Zuora)]
+    [InlineData(VendorIdentifier.Stripe)]
+    [InlineData(VendorIdentifier.Hubspot)]
+    [InlineData(VendorIdentifier.AwsMarketplace)]
+    [InlineData(VendorIdentifier.Snowflake)]
+    [InlineData(VendorIdentifier.Salesforce)]
+    [InlineData(VendorIdentifier.BigQuery)]
+    [InlineData(VendorIdentifier.OpenFga)]
+    [InlineData(VendorIdentifier.AppStore)]
+    public void SerializationRoundtrip_Works(VendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, CustomerUpdateParamsIntegrationVendorIdentifier> value = rawValue;
+        ApiEnum<string, VendorIdentifier> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, CustomerUpdateParamsIntegrationVendorIdentifier>
-        >(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, VendorIdentifier>>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(value, deserialized);
     }
@@ -353,13 +351,15 @@ public class CustomerUpdateParamsIntegrationVendorIdentifierTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, CustomerUpdateParamsIntegrationVendorIdentifier>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        var value = JsonSerializer.Deserialize<ApiEnum<string, VendorIdentifier>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, CustomerUpdateParamsIntegrationVendorIdentifier>
-        >(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, VendorIdentifier>>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(value, deserialized);
     }

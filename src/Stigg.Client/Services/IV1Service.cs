@@ -1,8 +1,5 @@
 using System;
-using System.Threading;
-using System.Threading.Tasks;
 using Stigg.Client.Core;
-using Stigg.Client.Models.V1;
 using Stigg.Client.Services.V1;
 
 namespace Stigg.Client.Services;
@@ -33,21 +30,9 @@ public interface IV1Service
 
     ICouponService Coupons { get; }
 
-    /// <summary>
-    /// Report usage events
-    /// </summary>
-    Task<V1CreateEventResponse> CreateEvent(
-        V1CreateEventParams parameters,
-        CancellationToken cancellationToken = default
-    );
+    IEventService Events { get; }
 
-    /// <summary>
-    /// Report usage measurements
-    /// </summary>
-    Task<V1CreateUsageResponse> CreateUsage(
-        V1CreateUsageParams parameters,
-        CancellationToken cancellationToken = default
-    );
+    IUsageService Usage { get; }
 }
 
 /// <summary>
@@ -69,21 +54,7 @@ public interface IV1ServiceWithRawResponse
 
     ICouponServiceWithRawResponse Coupons { get; }
 
-    /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/events`, but is otherwise the
-    /// same as <see cref="IV1Service.CreateEvent(V1CreateEventParams, CancellationToken)"/>.
-    /// </summary>
-    Task<HttpResponse<V1CreateEventResponse>> CreateEvent(
-        V1CreateEventParams parameters,
-        CancellationToken cancellationToken = default
-    );
+    IEventServiceWithRawResponse Events { get; }
 
-    /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/usage`, but is otherwise the
-    /// same as <see cref="IV1Service.CreateUsage(V1CreateUsageParams, CancellationToken)"/>.
-    /// </summary>
-    Task<HttpResponse<V1CreateUsageResponse>> CreateUsage(
-        V1CreateUsageParams parameters,
-        CancellationToken cancellationToken = default
-    );
+    IUsageServiceWithRawResponse Usage { get; }
 }

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.0 (2026-01-29)
+
+Full Changelog: [v0.4.0...v0.5.0](https://github.com/stiggio/stigg-csharp/compare/v0.4.0...v0.5.0)
+
+### Features
+
+* **api:** update stainless config ([14fedc3](https://github.com/stiggio/stigg-csharp/commit/14fedc33b86c72e21c0822bc60585d8273cf30e8))
+
 ## 0.4.0 (2026-01-28)
 
 Full Changelog: [v0.3.1...v0.4.0](https://github.com/stiggio/stigg-csharp/compare/v0.3.1...v0.4.0)

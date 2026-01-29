@@ -1,10 +1,11 @@
 using System.Text.Json;
 using Stigg.Client.Exceptions;
-using Stigg.Client.Models.V1;
 using Stigg.Client.Models.V1.Customers;
+using Stigg.Client.Models.V1.Customers.PromotionalEntitlements;
 using Coupons = Stigg.Client.Models.V1.Coupons;
 using PaymentMethod = Stigg.Client.Models.V1.Customers.PaymentMethod;
 using Subscriptions = Stigg.Client.Models.V1.Subscriptions;
+using Usage = Stigg.Client.Models.V1.Usage;
 
 namespace Stigg.Client.Core;
 
@@ -25,43 +26,46 @@ public abstract record class ModelBase
         Converters =
         {
             new FrozenDictionaryConverterFactory(),
-            new ApiEnumConverter<string, UpdateBehavior>(),
             new ApiEnumConverter<string, DataDefaultPaymentMethodType>(),
             new ApiEnumConverter<string, DataIntegrationVendorIdentifier>(),
             new ApiEnumConverter<string, CustomerListResponseDefaultPaymentMethodType>(),
             new ApiEnumConverter<string, CustomerListResponseIntegrationVendorIdentifier>(),
-            new ApiEnumConverter<string, Type>(),
             new ApiEnumConverter<string, VendorIdentifier>(),
-            new ApiEnumConverter<string, CustomerUpdateParamsIntegrationVendorIdentifier>(),
+            new ApiEnumConverter<string, Type>(),
+            new ApiEnumConverter<string, CustomerProvisionParamsIntegrationVendorIdentifier>(),
             new ApiEnumConverter<string, PaymentMethod::VendorIdentifier>(),
             new ApiEnumConverter<string, PaymentMethod::BillingCurrency>(),
-            new ApiEnumConverter<string, Subscriptions::ResetPeriod>(),
-            new ApiEnumConverter<string, Subscriptions::Status>(),
+            new ApiEnumConverter<string, DataPeriod>(),
+            new ApiEnumConverter<string, DataResetPeriod>(),
+            new ApiEnumConverter<string, YearlyResetPeriodConfigAccordingTo>(),
+            new ApiEnumConverter<string, MonthlyResetPeriodConfigAccordingTo>(),
+            new ApiEnumConverter<string, WeeklyResetPeriodConfigAccordingTo>(),
+            new ApiEnumConverter<string, Status>(),
+            new ApiEnumConverter<string, PromotionalEntitlementRevokeResponseDataPeriod>(),
+            new ApiEnumConverter<string, PromotionalEntitlementRevokeResponseDataResetPeriod>(),
+            new ApiEnumConverter<
+                string,
+                PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
+            >(),
+            new ApiEnumConverter<
+                string,
+                PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
+            >(),
+            new ApiEnumConverter<
+                string,
+                PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
+            >(),
+            new ApiEnumConverter<string, PromotionalEntitlementRevokeResponseDataStatus>(),
+            new ApiEnumConverter<string, AccordingTo>(),
+            new ApiEnumConverter<string, Period>(),
+            new ApiEnumConverter<string, ResetPeriod>(),
+            new ApiEnumConverter<string, WeeklyResetPeriodConfigurationAccordingTo>(),
+            new ApiEnumConverter<string, YearlyResetPeriodConfigurationAccordingTo>(),
             new ApiEnumConverter<string, Subscriptions::PaymentCollection>(),
             new ApiEnumConverter<string, Subscriptions::PricingType>(),
-            new ApiEnumConverter<string, Subscriptions::SubscriptionStatus>(),
+            new ApiEnumConverter<string, Subscriptions::Status>(),
             new ApiEnumConverter<string, Subscriptions::CancelReason>(),
-            new ApiEnumConverter<string, Subscriptions::SubscriptionPaymentCollectionMethod>(),
-            new ApiEnumConverter<string, Subscriptions::SubscriptionPricePriceCurrency>(),
-            new ApiEnumConverter<string, Subscriptions::SubscriptionPriceTierFlatPriceCurrency>(),
-            new ApiEnumConverter<string, Subscriptions::SubscriptionPriceTierUnitPriceCurrency>(),
-            new ApiEnumConverter<
-                string,
-                Subscriptions::SubscriptionRetrieveResponseDataPaymentCollection
-            >(),
-            new ApiEnumConverter<
-                string,
-                Subscriptions::SubscriptionRetrieveResponseDataPricingType
-            >(),
-            new ApiEnumConverter<string, Subscriptions::SubscriptionRetrieveResponseDataStatus>(),
-            new ApiEnumConverter<
-                string,
-                Subscriptions::SubscriptionRetrieveResponseDataCancelReason
-            >(),
-            new ApiEnumConverter<
-                string,
-                Subscriptions::SubscriptionRetrieveResponseDataPaymentCollectionMethod
-            >(),
+            new ApiEnumConverter<string, Subscriptions::DataPaymentCollectionMethod>(),
             new ApiEnumConverter<
                 string,
                 Subscriptions::SubscriptionListResponsePaymentCollection
@@ -73,69 +77,59 @@ public abstract record class ModelBase
                 string,
                 Subscriptions::SubscriptionListResponsePaymentCollectionMethod
             >(),
+            new ApiEnumConverter<string, Subscriptions::EntitlementResetPeriod>(),
+            new ApiEnumConverter<string, Subscriptions::SubscriptionProvisionResponseDataStatus>(),
             new ApiEnumConverter<
                 string,
-                Subscriptions::SubscriptionDelegateResponseDataPaymentCollection
+                Subscriptions::SubscriptionProvisionResponseDataSubscriptionPaymentCollection
             >(),
             new ApiEnumConverter<
                 string,
-                Subscriptions::SubscriptionDelegateResponseDataPricingType
-            >(),
-            new ApiEnumConverter<string, Subscriptions::SubscriptionDelegateResponseDataStatus>(),
-            new ApiEnumConverter<
-                string,
-                Subscriptions::SubscriptionDelegateResponseDataCancelReason
+                Subscriptions::SubscriptionProvisionResponseDataSubscriptionPricingType
             >(),
             new ApiEnumConverter<
                 string,
-                Subscriptions::SubscriptionDelegateResponseDataPaymentCollectionMethod
+                Subscriptions::SubscriptionProvisionResponseDataSubscriptionStatus
             >(),
             new ApiEnumConverter<
                 string,
-                Subscriptions::SubscriptionMigrateResponseDataPaymentCollection
+                Subscriptions::SubscriptionProvisionResponseDataSubscriptionCancelReason
             >(),
             new ApiEnumConverter<
                 string,
-                Subscriptions::SubscriptionMigrateResponseDataPricingType
-            >(),
-            new ApiEnumConverter<string, Subscriptions::SubscriptionMigrateResponseDataStatus>(),
-            new ApiEnumConverter<
-                string,
-                Subscriptions::SubscriptionMigrateResponseDataCancelReason
+                Subscriptions::SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod
             >(),
             new ApiEnumConverter<
                 string,
-                Subscriptions::SubscriptionMigrateResponseDataPaymentCollectionMethod
+                Subscriptions::SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency
             >(),
             new ApiEnumConverter<
                 string,
-                Subscriptions::SubscriptionTransferResponseDataPaymentCollection
+                Subscriptions::SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency
             >(),
             new ApiEnumConverter<
                 string,
-                Subscriptions::SubscriptionTransferResponseDataPricingType
-            >(),
-            new ApiEnumConverter<string, Subscriptions::SubscriptionTransferResponseDataStatus>(),
-            new ApiEnumConverter<
-                string,
-                Subscriptions::SubscriptionTransferResponseDataCancelReason
-            >(),
-            new ApiEnumConverter<
-                string,
-                Subscriptions::SubscriptionTransferResponseDataPaymentCollectionMethod
+                Subscriptions::SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency
             >(),
             new ApiEnumConverter<string, Subscriptions::Currency>(),
             new ApiEnumConverter<string, Subscriptions::ProrationBehavior>(),
             new ApiEnumConverter<string, Subscriptions::BillingPeriod>(),
             new ApiEnumConverter<string, Subscriptions::Type>(),
             new ApiEnumConverter<string, Subscriptions::MinimumCurrency>(),
-            new ApiEnumConverter<string, Subscriptions::PaymentCollectionMethod>(),
-            new ApiEnumConverter<string, Subscriptions::CreditGrantCadence>(),
             new ApiEnumConverter<string, Subscriptions::PriceCurrency>(),
-            new ApiEnumConverter<string, Subscriptions::FlatPriceCurrency>(),
-            new ApiEnumConverter<string, Subscriptions::UnitPriceCurrency>(),
             new ApiEnumConverter<string, Subscriptions::ScheduleStrategy>(),
-            new ApiEnumConverter<string, Subscriptions::TrialEndBehavior>(),
+            new ApiEnumConverter<string, Subscriptions::AccordingTo>(),
+            new ApiEnumConverter<string, Subscriptions::ResetPeriod>(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::WeeklyResetPeriodConfigurationAccordingTo
+            >(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::YearlyResetPeriodConfigurationAccordingTo
+            >(),
+            new ApiEnumConverter<string, Subscriptions::CancellationAction>(),
+            new ApiEnumConverter<string, Subscriptions::CancellationTime>(),
             new ApiEnumConverter<string, Subscriptions::SubscriptionMigrationTime>(),
             new ApiEnumConverter<
                 string,
@@ -151,23 +145,48 @@ public abstract record class ModelBase
                 string,
                 Subscriptions::SubscriptionPreviewParamsScheduleStrategy
             >(),
+            new ApiEnumConverter<string, Subscriptions::TrialEndBehavior>(),
             new ApiEnumConverter<
                 string,
-                Subscriptions::SubscriptionPreviewParamsTrialOverrideConfigurationTrialEndBehavior
+                Subscriptions::SubscriptionProvisionParamsAppliedCouponDiscountAmountsOffCurrency
+            >(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionProvisionParamsBillingInformationProrationBehavior
+            >(),
+            new ApiEnumConverter<string, Subscriptions::SubscriptionProvisionParamsBillingPeriod>(),
+            new ApiEnumConverter<string, Subscriptions::SubscriptionProvisionParamsChargeType>(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionProvisionParamsMinimumSpendMinimumCurrency
+            >(),
+            new ApiEnumConverter<string, Subscriptions::PaymentCollectionMethod>(),
+            new ApiEnumConverter<string, Subscriptions::CreditGrantCadence>(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionProvisionParamsPriceOverridePriceCurrency
+            >(),
+            new ApiEnumConverter<string, Subscriptions::FlatPriceCurrency>(),
+            new ApiEnumConverter<string, Subscriptions::UnitPriceCurrency>(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionProvisionParamsScheduleStrategy
+            >(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionProvisionParamsTrialOverrideConfigurationTrialEndBehavior
             >(),
             new ApiEnumConverter<string, Coupons::DataAmountsOffCurrency>(),
             new ApiEnumConverter<string, Coupons::Source>(),
             new ApiEnumConverter<string, Coupons::Status>(),
             new ApiEnumConverter<string, Coupons::Type>(),
-            new ApiEnumConverter<string, Coupons::CouponRetrieveResponseDataAmountsOffCurrency>(),
-            new ApiEnumConverter<string, Coupons::CouponRetrieveResponseDataSource>(),
-            new ApiEnumConverter<string, Coupons::CouponRetrieveResponseDataStatus>(),
-            new ApiEnumConverter<string, Coupons::CouponRetrieveResponseDataType>(),
             new ApiEnumConverter<string, Coupons::CouponListResponseAmountsOffCurrency>(),
             new ApiEnumConverter<string, Coupons::CouponListResponseSource>(),
             new ApiEnumConverter<string, Coupons::CouponListResponseStatus>(),
             new ApiEnumConverter<string, Coupons::CouponListResponseType>(),
             new ApiEnumConverter<string, Coupons::Currency>(),
+            new ApiEnumConverter<string, Usage::Type>(),
+            new ApiEnumConverter<string, Usage::UpdateBehavior>(),
         },
     };
 

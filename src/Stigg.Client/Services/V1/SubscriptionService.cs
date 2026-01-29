@@ -45,19 +45,7 @@ public sealed class SubscriptionService : ISubscriptionService
     }
 
     /// <inheritdoc/>
-    public async Task<SubscriptionCreateResponse> Create(
-        SubscriptionCreateParams parameters,
-        CancellationToken cancellationToken = default
-    )
-    {
-        using var response = await this
-            .WithRawResponse.Create(parameters, cancellationToken)
-            .ConfigureAwait(false);
-        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
-    }
-
-    /// <inheritdoc/>
-    public async Task<SubscriptionRetrieveResponse> Retrieve(
+    public async Task<SubscriptionSubscription> Retrieve(
         SubscriptionRetrieveParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -69,7 +57,7 @@ public sealed class SubscriptionService : ISubscriptionService
     }
 
     /// <inheritdoc/>
-    public Task<SubscriptionRetrieveResponse> Retrieve(
+    public Task<SubscriptionSubscription> Retrieve(
         string id,
         SubscriptionRetrieveParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -78,6 +66,30 @@ public sealed class SubscriptionService : ISubscriptionService
         parameters ??= new();
 
         return this.Retrieve(parameters with { ID = id }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<SubscriptionSubscription> Update(
+        SubscriptionUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.Update(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<SubscriptionSubscription> Update(
+        string id,
+        SubscriptionUpdateParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.Update(parameters with { ID = id }, cancellationToken);
     }
 
     /// <inheritdoc/>
@@ -93,7 +105,31 @@ public sealed class SubscriptionService : ISubscriptionService
     }
 
     /// <inheritdoc/>
-    public async Task<SubscriptionDelegateResponse> Delegate(
+    public async Task<SubscriptionSubscription> Cancel(
+        SubscriptionCancelParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.Cancel(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<SubscriptionSubscription> Cancel(
+        string id,
+        SubscriptionCancelParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.Cancel(parameters with { ID = id }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<SubscriptionSubscription> Delegate(
         SubscriptionDelegateParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -105,7 +141,7 @@ public sealed class SubscriptionService : ISubscriptionService
     }
 
     /// <inheritdoc/>
-    public Task<SubscriptionDelegateResponse> Delegate(
+    public Task<SubscriptionSubscription> Delegate(
         string id,
         SubscriptionDelegateParams parameters,
         CancellationToken cancellationToken = default
@@ -115,7 +151,19 @@ public sealed class SubscriptionService : ISubscriptionService
     }
 
     /// <inheritdoc/>
-    public async Task<SubscriptionMigrateResponse> Migrate(
+    public async Task<SubscriptionImportResponse> Import(
+        SubscriptionImportParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.Import(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public async Task<SubscriptionSubscription> Migrate(
         SubscriptionMigrateParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -127,7 +175,7 @@ public sealed class SubscriptionService : ISubscriptionService
     }
 
     /// <inheritdoc/>
-    public Task<SubscriptionMigrateResponse> Migrate(
+    public Task<SubscriptionSubscription> Migrate(
         string id,
         SubscriptionMigrateParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -151,7 +199,19 @@ public sealed class SubscriptionService : ISubscriptionService
     }
 
     /// <inheritdoc/>
-    public async Task<SubscriptionTransferResponse> Transfer(
+    public async Task<SubscriptionProvisionResponse> Provision(
+        SubscriptionProvisionParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.Provision(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public async Task<SubscriptionSubscription> Transfer(
         SubscriptionTransferParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -163,7 +223,7 @@ public sealed class SubscriptionService : ISubscriptionService
     }
 
     /// <inheritdoc/>
-    public Task<SubscriptionTransferResponse> Transfer(
+    public Task<SubscriptionSubscription> Transfer(
         string id,
         SubscriptionTransferParams parameters,
         CancellationToken cancellationToken = default
@@ -200,35 +260,7 @@ public sealed class SubscriptionServiceWithRawResponse : ISubscriptionServiceWit
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<SubscriptionCreateResponse>> Create(
-        SubscriptionCreateParams parameters,
-        CancellationToken cancellationToken = default
-    )
-    {
-        HttpRequest<SubscriptionCreateParams> request = new()
-        {
-            Method = HttpMethod.Post,
-            Params = parameters,
-        };
-        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
-        return new(
-            response,
-            async (token) =>
-            {
-                var subscription = await response
-                    .Deserialize<SubscriptionCreateResponse>(token)
-                    .ConfigureAwait(false);
-                if (this._client.ResponseValidation)
-                {
-                    subscription.Validate();
-                }
-                return subscription;
-            }
-        );
-    }
-
-    /// <inheritdoc/>
-    public async Task<HttpResponse<SubscriptionRetrieveResponse>> Retrieve(
+    public async Task<HttpResponse<SubscriptionSubscription>> Retrieve(
         SubscriptionRetrieveParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -249,7 +281,7 @@ public sealed class SubscriptionServiceWithRawResponse : ISubscriptionServiceWit
             async (token) =>
             {
                 var subscription = await response
-                    .Deserialize<SubscriptionRetrieveResponse>(token)
+                    .Deserialize<SubscriptionSubscription>(token)
                     .ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
@@ -261,7 +293,7 @@ public sealed class SubscriptionServiceWithRawResponse : ISubscriptionServiceWit
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<SubscriptionRetrieveResponse>> Retrieve(
+    public Task<HttpResponse<SubscriptionSubscription>> Retrieve(
         string id,
         SubscriptionRetrieveParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -270,6 +302,51 @@ public sealed class SubscriptionServiceWithRawResponse : ISubscriptionServiceWit
         parameters ??= new();
 
         return this.Retrieve(parameters with { ID = id }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<SubscriptionSubscription>> Update(
+        SubscriptionUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.ID == null)
+        {
+            throw new StiggInvalidDataException("'parameters.ID' cannot be null");
+        }
+
+        HttpRequest<SubscriptionUpdateParams> request = new()
+        {
+            Method = StiggClientWithRawResponse.PatchMethod,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var subscription = await response
+                    .Deserialize<SubscriptionSubscription>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    subscription.Validate();
+                }
+                return subscription;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<SubscriptionSubscription>> Update(
+        string id,
+        SubscriptionUpdateParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.Update(parameters with { ID = id }, cancellationToken);
     }
 
     /// <inheritdoc/>
@@ -303,7 +380,52 @@ public sealed class SubscriptionServiceWithRawResponse : ISubscriptionServiceWit
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<SubscriptionDelegateResponse>> Delegate(
+    public async Task<HttpResponse<SubscriptionSubscription>> Cancel(
+        SubscriptionCancelParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.ID == null)
+        {
+            throw new StiggInvalidDataException("'parameters.ID' cannot be null");
+        }
+
+        HttpRequest<SubscriptionCancelParams> request = new()
+        {
+            Method = HttpMethod.Post,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var subscription = await response
+                    .Deserialize<SubscriptionSubscription>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    subscription.Validate();
+                }
+                return subscription;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<SubscriptionSubscription>> Cancel(
+        string id,
+        SubscriptionCancelParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.Cancel(parameters with { ID = id }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<SubscriptionSubscription>> Delegate(
         SubscriptionDelegateParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -323,8 +445,46 @@ public sealed class SubscriptionServiceWithRawResponse : ISubscriptionServiceWit
             response,
             async (token) =>
             {
+                var subscription = await response
+                    .Deserialize<SubscriptionSubscription>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    subscription.Validate();
+                }
+                return subscription;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<SubscriptionSubscription>> Delegate(
+        string id,
+        SubscriptionDelegateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return this.Delegate(parameters with { ID = id }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<SubscriptionImportResponse>> Import(
+        SubscriptionImportParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        HttpRequest<SubscriptionImportParams> request = new()
+        {
+            Method = HttpMethod.Post,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
                 var deserializedResponse = await response
-                    .Deserialize<SubscriptionDelegateResponse>(token)
+                    .Deserialize<SubscriptionImportResponse>(token)
                     .ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
@@ -336,17 +496,7 @@ public sealed class SubscriptionServiceWithRawResponse : ISubscriptionServiceWit
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<SubscriptionDelegateResponse>> Delegate(
-        string id,
-        SubscriptionDelegateParams parameters,
-        CancellationToken cancellationToken = default
-    )
-    {
-        return this.Delegate(parameters with { ID = id }, cancellationToken);
-    }
-
-    /// <inheritdoc/>
-    public async Task<HttpResponse<SubscriptionMigrateResponse>> Migrate(
+    public async Task<HttpResponse<SubscriptionSubscription>> Migrate(
         SubscriptionMigrateParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -366,20 +516,20 @@ public sealed class SubscriptionServiceWithRawResponse : ISubscriptionServiceWit
             response,
             async (token) =>
             {
-                var deserializedResponse = await response
-                    .Deserialize<SubscriptionMigrateResponse>(token)
+                var subscription = await response
+                    .Deserialize<SubscriptionSubscription>(token)
                     .ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    deserializedResponse.Validate();
+                    subscription.Validate();
                 }
-                return deserializedResponse;
+                return subscription;
             }
         );
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<SubscriptionMigrateResponse>> Migrate(
+    public Task<HttpResponse<SubscriptionSubscription>> Migrate(
         string id,
         SubscriptionMigrateParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -419,7 +569,35 @@ public sealed class SubscriptionServiceWithRawResponse : ISubscriptionServiceWit
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<SubscriptionTransferResponse>> Transfer(
+    public async Task<HttpResponse<SubscriptionProvisionResponse>> Provision(
+        SubscriptionProvisionParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        HttpRequest<SubscriptionProvisionParams> request = new()
+        {
+            Method = HttpMethod.Post,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var deserializedResponse = await response
+                    .Deserialize<SubscriptionProvisionResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    deserializedResponse.Validate();
+                }
+                return deserializedResponse;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<SubscriptionSubscription>> Transfer(
         SubscriptionTransferParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -439,20 +617,20 @@ public sealed class SubscriptionServiceWithRawResponse : ISubscriptionServiceWit
             response,
             async (token) =>
             {
-                var deserializedResponse = await response
-                    .Deserialize<SubscriptionTransferResponse>(token)
+                var subscription = await response
+                    .Deserialize<SubscriptionSubscription>(token)
                     .ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    deserializedResponse.Validate();
+                    subscription.Validate();
                 }
-                return deserializedResponse;
+                return subscription;
             }
         );
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<SubscriptionTransferResponse>> Transfer(
+    public Task<HttpResponse<SubscriptionSubscription>> Transfer(
         string id,
         SubscriptionTransferParams parameters,
         CancellationToken cancellationToken = default

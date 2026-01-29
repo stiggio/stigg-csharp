@@ -1,19 +1,11 @@
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Stigg.Client.Tests.Services.V1;
 
 public class CustomerServiceTest : TestBase
 {
-    [Fact(Skip = "Prism tests are disabled")]
-    public async Task Create_Works()
-    {
-        var customerResponse = await this.client.V1.Customers.Create(
-            new() { ID = "id" },
-            TestContext.Current.CancellationToken
-        );
-        customerResponse.Validate();
-    }
-
     [Fact(Skip = "Prism tests are disabled")]
     public async Task Retrieve_Works()
     {
@@ -52,6 +44,40 @@ public class CustomerServiceTest : TestBase
         var customerResponse = await this.client.V1.Customers.Archive(
             "x",
             new(),
+            TestContext.Current.CancellationToken
+        );
+        customerResponse.Validate();
+    }
+
+    [Fact(Skip = "Prism tests are disabled")]
+    public async Task Import_Works()
+    {
+        var response = await this.client.V1.Customers.Import(
+            new()
+            {
+                Customers =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        Email = "dev@stainless.com",
+                        Name = "name",
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        PaymentMethodID = "paymentMethodId",
+                        UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    },
+                ],
+            },
+            TestContext.Current.CancellationToken
+        );
+        response.Validate();
+    }
+
+    [Fact(Skip = "Prism tests are disabled")]
+    public async Task Provision_Works()
+    {
+        var customerResponse = await this.client.V1.Customers.Provision(
+            new() { ID = "id" },
             TestContext.Current.CancellationToken
         );
         customerResponse.Validate();

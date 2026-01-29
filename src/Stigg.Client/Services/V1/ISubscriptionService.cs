@@ -30,25 +30,32 @@ public interface ISubscriptionService
     IFutureUpdateService FutureUpdate { get; }
 
     /// <summary>
-    /// Provision subscription
-    /// </summary>
-    Task<SubscriptionCreateResponse> Create(
-        SubscriptionCreateParams parameters,
-        CancellationToken cancellationToken = default
-    );
-
-    /// <summary>
     /// Get a single subscription by ID
     /// </summary>
-    Task<SubscriptionRetrieveResponse> Retrieve(
+    Task<SubscriptionSubscription> Retrieve(
         SubscriptionRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Retrieve(SubscriptionRetrieveParams, CancellationToken)"/>
-    Task<SubscriptionRetrieveResponse> Retrieve(
+    Task<SubscriptionSubscription> Retrieve(
         string id,
         SubscriptionRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Update a subscription
+    /// </summary>
+    Task<SubscriptionSubscription> Update(
+        SubscriptionUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Update(SubscriptionUpdateParams, CancellationToken)"/>
+    Task<SubscriptionSubscription> Update(
+        string id,
+        SubscriptionUpdateParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 
@@ -61,30 +68,53 @@ public interface ISubscriptionService
     );
 
     /// <summary>
+    /// Cancel subscription
+    /// </summary>
+    Task<SubscriptionSubscription> Cancel(
+        SubscriptionCancelParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Cancel(SubscriptionCancelParams, CancellationToken)"/>
+    Task<SubscriptionSubscription> Cancel(
+        string id,
+        SubscriptionCancelParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Delegate subscription payment to customer
     /// </summary>
-    Task<SubscriptionDelegateResponse> Delegate(
+    Task<SubscriptionSubscription> Delegate(
         SubscriptionDelegateParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Delegate(SubscriptionDelegateParams, CancellationToken)"/>
-    Task<SubscriptionDelegateResponse> Delegate(
+    Task<SubscriptionSubscription> Delegate(
         string id,
         SubscriptionDelegateParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <summary>
+    /// Bulk import subscriptions
+    /// </summary>
+    Task<SubscriptionImportResponse> Import(
+        SubscriptionImportParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Migrate subscription to latest plan version
     /// </summary>
-    Task<SubscriptionMigrateResponse> Migrate(
+    Task<SubscriptionSubscription> Migrate(
         SubscriptionMigrateParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Migrate(SubscriptionMigrateParams, CancellationToken)"/>
-    Task<SubscriptionMigrateResponse> Migrate(
+    Task<SubscriptionSubscription> Migrate(
         string id,
         SubscriptionMigrateParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -99,15 +129,23 @@ public interface ISubscriptionService
     );
 
     /// <summary>
+    /// Provision subscription
+    /// </summary>
+    Task<SubscriptionProvisionResponse> Provision(
+        SubscriptionProvisionParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Transfer subscription to resource
     /// </summary>
-    Task<SubscriptionTransferResponse> Transfer(
+    Task<SubscriptionSubscription> Transfer(
         SubscriptionTransferParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Transfer(SubscriptionTransferParams, CancellationToken)"/>
-    Task<SubscriptionTransferResponse> Transfer(
+    Task<SubscriptionSubscription> Transfer(
         string id,
         SubscriptionTransferParams parameters,
         CancellationToken cancellationToken = default
@@ -130,27 +168,34 @@ public interface ISubscriptionServiceWithRawResponse
     IFutureUpdateServiceWithRawResponse FutureUpdate { get; }
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/subscriptions`, but is otherwise the
-    /// same as <see cref="ISubscriptionService.Create(SubscriptionCreateParams, CancellationToken)"/>.
-    /// </summary>
-    Task<HttpResponse<SubscriptionCreateResponse>> Create(
-        SubscriptionCreateParams parameters,
-        CancellationToken cancellationToken = default
-    );
-
-    /// <summary>
     /// Returns a raw HTTP response for `get /api/v1/subscriptions/{id}`, but is otherwise the
     /// same as <see cref="ISubscriptionService.Retrieve(SubscriptionRetrieveParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<SubscriptionRetrieveResponse>> Retrieve(
+    Task<HttpResponse<SubscriptionSubscription>> Retrieve(
         SubscriptionRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Retrieve(SubscriptionRetrieveParams, CancellationToken)"/>
-    Task<HttpResponse<SubscriptionRetrieveResponse>> Retrieve(
+    Task<HttpResponse<SubscriptionSubscription>> Retrieve(
         string id,
         SubscriptionRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `patch /api/v1/subscriptions/{id}`, but is otherwise the
+    /// same as <see cref="ISubscriptionService.Update(SubscriptionUpdateParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<SubscriptionSubscription>> Update(
+        SubscriptionUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Update(SubscriptionUpdateParams, CancellationToken)"/>
+    Task<HttpResponse<SubscriptionSubscription>> Update(
+        string id,
+        SubscriptionUpdateParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 
@@ -164,18 +209,43 @@ public interface ISubscriptionServiceWithRawResponse
     );
 
     /// <summary>
+    /// Returns a raw HTTP response for `post /api/v1/subscriptions/{id}/cancel`, but is otherwise the
+    /// same as <see cref="ISubscriptionService.Cancel(SubscriptionCancelParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<SubscriptionSubscription>> Cancel(
+        SubscriptionCancelParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Cancel(SubscriptionCancelParams, CancellationToken)"/>
+    Task<HttpResponse<SubscriptionSubscription>> Cancel(
+        string id,
+        SubscriptionCancelParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Returns a raw HTTP response for `post /api/v1/subscriptions/{id}/delegate`, but is otherwise the
     /// same as <see cref="ISubscriptionService.Delegate(SubscriptionDelegateParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<SubscriptionDelegateResponse>> Delegate(
+    Task<HttpResponse<SubscriptionSubscription>> Delegate(
         SubscriptionDelegateParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Delegate(SubscriptionDelegateParams, CancellationToken)"/>
-    Task<HttpResponse<SubscriptionDelegateResponse>> Delegate(
+    Task<HttpResponse<SubscriptionSubscription>> Delegate(
         string id,
         SubscriptionDelegateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `post /api/v1/subscriptions/import`, but is otherwise the
+    /// same as <see cref="ISubscriptionService.Import(SubscriptionImportParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<SubscriptionImportResponse>> Import(
+        SubscriptionImportParams parameters,
         CancellationToken cancellationToken = default
     );
 
@@ -183,13 +253,13 @@ public interface ISubscriptionServiceWithRawResponse
     /// Returns a raw HTTP response for `post /api/v1/subscriptions/{id}/migrate`, but is otherwise the
     /// same as <see cref="ISubscriptionService.Migrate(SubscriptionMigrateParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<SubscriptionMigrateResponse>> Migrate(
+    Task<HttpResponse<SubscriptionSubscription>> Migrate(
         SubscriptionMigrateParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Migrate(SubscriptionMigrateParams, CancellationToken)"/>
-    Task<HttpResponse<SubscriptionMigrateResponse>> Migrate(
+    Task<HttpResponse<SubscriptionSubscription>> Migrate(
         string id,
         SubscriptionMigrateParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -205,16 +275,25 @@ public interface ISubscriptionServiceWithRawResponse
     );
 
     /// <summary>
+    /// Returns a raw HTTP response for `post /api/v1/subscriptions`, but is otherwise the
+    /// same as <see cref="ISubscriptionService.Provision(SubscriptionProvisionParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<SubscriptionProvisionResponse>> Provision(
+        SubscriptionProvisionParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Returns a raw HTTP response for `post /api/v1/subscriptions/{id}/transfer`, but is otherwise the
     /// same as <see cref="ISubscriptionService.Transfer(SubscriptionTransferParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<SubscriptionTransferResponse>> Transfer(
+    Task<HttpResponse<SubscriptionSubscription>> Transfer(
         SubscriptionTransferParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Transfer(SubscriptionTransferParams, CancellationToken)"/>
-    Task<HttpResponse<SubscriptionTransferResponse>> Transfer(
+    Task<HttpResponse<SubscriptionSubscription>> Transfer(
         string id,
         SubscriptionTransferParams parameters,
         CancellationToken cancellationToken = default

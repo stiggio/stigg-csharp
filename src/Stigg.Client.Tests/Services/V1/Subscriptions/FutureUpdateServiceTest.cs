@@ -7,22 +7,23 @@ public class FutureUpdateServiceTest : TestBase
     [Fact(Skip = "Prism tests are disabled")]
     public async Task CancelPendingPayment_Works()
     {
-        var response = await this.client.V1.Subscriptions.FutureUpdate.CancelPendingPayment(
-            "x",
-            new(),
-            TestContext.Current.CancellationToken
-        );
-        response.Validate();
+        var cancelSubscription =
+            await this.client.V1.Subscriptions.FutureUpdate.CancelPendingPayment(
+                "x",
+                new(),
+                TestContext.Current.CancellationToken
+            );
+        cancelSubscription.Validate();
     }
 
     [Fact(Skip = "Prism tests are disabled")]
     public async Task CancelSchedule_Works()
     {
-        var response = await this.client.V1.Subscriptions.FutureUpdate.CancelSchedule(
+        var cancelSubscription = await this.client.V1.Subscriptions.FutureUpdate.CancelSchedule(
             "x",
             new(),
             TestContext.Current.CancellationToken
         );
-        response.Validate();
+        cancelSubscription.Validate();
     }
 }
