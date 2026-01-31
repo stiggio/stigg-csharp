@@ -805,10 +805,10 @@ public record class PromotionalEntitlementRevokeResponseDataResetPeriodConfigura
 
     public virtual bool Equals(
         PromotionalEntitlementRevokeResponseDataResetPeriodConfiguration? other
-    )
-    {
-        return other != null && JsonElement.DeepEquals(this.Json, other.Json);
-    }
+    ) =>
+        other != null
+        && this.VariantIndex() == other.VariantIndex()
+        && JsonElement.DeepEquals(this.Json, other.Json);
 
     public override int GetHashCode()
     {
@@ -817,6 +817,20 @@ public record class PromotionalEntitlementRevokeResponseDataResetPeriodConfigura
 
     public override string ToString() =>
         JsonSerializer.Serialize(this._element, ModelBase.ToStringSerializerOptions);
+
+    int VariantIndex()
+    {
+        return this.Value switch
+        {
+            PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationYearlyResetPeriodConfig _ =>
+                0,
+            PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationMonthlyResetPeriodConfig _ =>
+                1,
+            PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationWeeklyResetPeriodConfig _ =>
+                2,
+            _ => -1,
+        };
+    }
 }
 
 sealed class PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationConverter
