@@ -32,7 +32,8 @@ public interface ICustomerService
     IPromotionalEntitlementService PromotionalEntitlements { get; }
 
     /// <summary>
-    /// Get a single customer by ID
+    /// Retrieves a customer by their unique identifier, including billing information
+    /// and subscription status.
     /// </summary>
     Task<CustomerResponse> Retrieve(
         CustomerRetrieveParams parameters,
@@ -47,7 +48,7 @@ public interface ICustomerService
     );
 
     /// <summary>
-    /// Update a customer
+    /// Updates an existing customer's properties such as name, email, and billing information.
     /// </summary>
     Task<CustomerResponse> Update(
         CustomerUpdateParams parameters,
@@ -62,7 +63,7 @@ public interface ICustomerService
     );
 
     /// <summary>
-    /// Get a list of customers
+    /// Retrieves a paginated list of customers in the environment.
     /// </summary>
     Task<CustomerListPage> List(
         CustomerListParams? parameters = null,
@@ -70,7 +71,7 @@ public interface ICustomerService
     );
 
     /// <summary>
-    /// Archive customer
+    /// Archives a customer, preventing new subscriptions. Optionally cancels existing subscriptions.
     /// </summary>
     Task<CustomerResponse> Archive(
         CustomerArchiveParams parameters,
@@ -85,7 +86,8 @@ public interface ICustomerService
     );
 
     /// <summary>
-    /// Bulk import customers
+    /// Imports multiple customers in bulk. Used for migrating customer data from
+    /// external systems.
     /// </summary>
     Task<CustomerImportResponse> Import(
         CustomerImportParams parameters,
@@ -93,7 +95,8 @@ public interface ICustomerService
     );
 
     /// <summary>
-    /// Provision customer
+    /// Creates a new customer and optionally provisions an initial subscription
+    /// in a single operation.
     /// </summary>
     Task<CustomerResponse> Provision(
         CustomerProvisionParams parameters,
@@ -101,7 +104,7 @@ public interface ICustomerService
     );
 
     /// <summary>
-    /// Unarchive customer
+    /// Restores an archived customer, allowing them to create new subscriptions again.
     /// </summary>
     Task<CustomerResponse> Unarchive(
         CustomerUnarchiveParams parameters,

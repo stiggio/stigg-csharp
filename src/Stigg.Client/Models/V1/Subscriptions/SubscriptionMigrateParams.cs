@@ -12,7 +12,8 @@ using System = System;
 namespace Stigg.Client.Models.V1.Subscriptions;
 
 /// <summary>
-/// Migrate subscription to latest plan version
+/// Migrates a subscription to the latest published version of its plan or add-ons.
+/// Handles prorated charges or credits automatically.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that

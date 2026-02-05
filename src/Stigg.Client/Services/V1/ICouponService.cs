@@ -27,7 +27,8 @@ public interface ICouponService
     ICouponService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Create coupon
+    /// Creates a new discount coupon with percentage or fixed amount off, applicable
+    /// to customer subscriptions.
     /// </summary>
     Task<Coupon> Create(
         CouponCreateParams parameters,
@@ -35,7 +36,7 @@ public interface ICouponService
     );
 
     /// <summary>
-    /// Get a single coupon by ID
+    /// Retrieves a coupon by its unique identifier.
     /// </summary>
     Task<Coupon> Retrieve(
         CouponRetrieveParams parameters,
@@ -50,7 +51,7 @@ public interface ICouponService
     );
 
     /// <summary>
-    /// Get a list of coupons
+    /// Retrieves a paginated list of coupons in the environment.
     /// </summary>
     Task<CouponListPage> List(
         CouponListParams? parameters = null,

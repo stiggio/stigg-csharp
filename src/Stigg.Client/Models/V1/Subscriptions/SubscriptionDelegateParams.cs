@@ -10,7 +10,8 @@ using Stigg.Client.Core;
 namespace Stigg.Client.Models.V1.Subscriptions;
 
 /// <summary>
-/// Delegate subscription payment to customer
+/// Delegates the payment responsibility of a subscription to a different customer.
+/// The delegated customer will be billed for this subscription.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that

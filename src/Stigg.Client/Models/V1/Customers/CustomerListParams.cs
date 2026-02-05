@@ -9,7 +9,7 @@ using Stigg.Client.Core;
 namespace Stigg.Client.Models.V1.Customers;
 
 /// <summary>
-/// Get a list of customers
+/// Retrieves a paginated list of customers in the environment.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
