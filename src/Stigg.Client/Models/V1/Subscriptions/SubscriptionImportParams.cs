@@ -47,6 +47,19 @@ public record class SubscriptionImportParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// Integration ID to use for importing subscriptions
+    /// </summary>
+    public string? IntegrationID
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("integrationId");
+        }
+        init { this._rawBodyData.Set("integrationId", value); }
+    }
+
     public SubscriptionImportParams() { }
 
 #pragma warning disable CS8618

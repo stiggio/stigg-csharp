@@ -27,6 +27,7 @@ public class SubscriptionImportParamsTest : TestBase
                     StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
+            IntegrationID = "integrationId",
         };
 
         List<Subscription> expectedSubscriptions =
@@ -43,12 +44,66 @@ public class SubscriptionImportParamsTest : TestBase
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
         ];
+        string expectedIntegrationID = "integrationId";
 
         Assert.Equal(expectedSubscriptions.Count, parameters.Subscriptions.Count);
         for (int i = 0; i < expectedSubscriptions.Count; i++)
         {
             Assert.Equal(expectedSubscriptions[i], parameters.Subscriptions[i]);
         }
+        Assert.Equal(expectedIntegrationID, parameters.IntegrationID);
+    }
+
+    [Fact]
+    public void OptionalNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new SubscriptionImportParams
+        {
+            Subscriptions =
+            [
+                new()
+                {
+                    ID = "id",
+                    CustomerID = "customerId",
+                    PlanID = "planId",
+                    BillingID = "billingId",
+                    EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    ResourceID = "resourceId",
+                    StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                },
+            ],
+        };
+
+        Assert.Null(parameters.IntegrationID);
+        Assert.False(parameters.RawBodyData.ContainsKey("integrationId"));
+    }
+
+    [Fact]
+    public void OptionalNullableParamsSetToNullAreSetToNull_Works()
+    {
+        var parameters = new SubscriptionImportParams
+        {
+            Subscriptions =
+            [
+                new()
+                {
+                    ID = "id",
+                    CustomerID = "customerId",
+                    PlanID = "planId",
+                    BillingID = "billingId",
+                    EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    ResourceID = "resourceId",
+                    StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                },
+            ],
+
+            IntegrationID = null,
+        };
+
+        Assert.Null(parameters.IntegrationID);
+        Assert.True(parameters.RawBodyData.ContainsKey("integrationId"));
     }
 
     [Fact]
@@ -96,6 +151,7 @@ public class SubscriptionImportParamsTest : TestBase
                     StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
+            IntegrationID = "integrationId",
         };
 
         SubscriptionImportParams copied = new(parameters);
