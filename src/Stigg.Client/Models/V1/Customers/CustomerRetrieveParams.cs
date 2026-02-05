@@ -9,7 +9,8 @@ using Stigg.Client.Core;
 namespace Stigg.Client.Models.V1.Customers;
 
 /// <summary>
-/// Get a single customer by ID
+/// Retrieves a customer by their unique identifier, including billing information
+/// and subscription status.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that

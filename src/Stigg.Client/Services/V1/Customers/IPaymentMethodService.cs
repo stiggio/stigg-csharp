@@ -28,7 +28,8 @@ public interface IPaymentMethodService
     IPaymentMethodService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Attach payment method
+    /// Attaches a payment method to a customer for billing. Required for paid subscriptions
+    /// when integrated with a billing provider.
     /// </summary>
     Task<CustomerResponse> Attach(
         PaymentMethodAttachParams parameters,
@@ -43,7 +44,8 @@ public interface IPaymentMethodService
     );
 
     /// <summary>
-    /// Detach payment method
+    /// Removes the payment method from a customer. Ensure active paid subscriptions
+    /// have an alternative payment method.
     /// </summary>
     Task<CustomerResponse> Detach(
         PaymentMethodDetachParams parameters,

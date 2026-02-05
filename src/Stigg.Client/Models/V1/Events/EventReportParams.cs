@@ -13,7 +13,8 @@ using Stigg.Client.Exceptions;
 namespace Stigg.Client.Models.V1.Events;
 
 /// <summary>
-/// Report usage events
+/// Reports raw usage events for event-based metering. Events are ingested asynchronously
+/// and aggregated into usage totals.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that

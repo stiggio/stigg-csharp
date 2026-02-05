@@ -27,7 +27,8 @@ public interface IEventService
     IEventService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Report usage events
+    /// Reports raw usage events for event-based metering. Events are ingested asynchronously
+    /// and aggregated into usage totals.
     /// </summary>
     Task<EventReportResponse> Report(
         EventReportParams parameters,

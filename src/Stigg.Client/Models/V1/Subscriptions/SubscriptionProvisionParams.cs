@@ -13,7 +13,8 @@ using System = System;
 namespace Stigg.Client.Models.V1.Subscriptions;
 
 /// <summary>
-/// Provision subscription
+/// Creates a new subscription for an existing customer. When payment is required
+/// and no payment method exists, returns a checkout URL.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that

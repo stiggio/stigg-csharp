@@ -9,7 +9,8 @@ using Stigg.Client.Core;
 namespace Stigg.Client.Models.V1.Subscriptions;
 
 /// <summary>
-/// Get a list of subscriptions
+/// Retrieves a paginated list of subscriptions, with optional filters for customer,
+/// status, and plan.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that

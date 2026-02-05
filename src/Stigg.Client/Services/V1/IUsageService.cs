@@ -27,7 +27,7 @@ public interface IUsageService
     IUsageService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Get usage history
+    /// Retrieves historical usage data for a customer's metered feature over time.
     /// </summary>
     Task<UsageHistoryResponse> History(
         UsageHistoryParams parameters,
@@ -42,7 +42,8 @@ public interface IUsageService
     );
 
     /// <summary>
-    /// Report usage measurements
+    /// Reports usage measurements for metered features. The reported usage is used
+    /// to track, limit, and bill customer consumption.
     /// </summary>
     Task<UsageReportResponse> Report(
         UsageReportParams parameters,

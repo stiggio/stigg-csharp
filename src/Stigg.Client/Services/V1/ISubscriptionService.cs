@@ -30,7 +30,8 @@ public interface ISubscriptionService
     IFutureUpdateService FutureUpdate { get; }
 
     /// <summary>
-    /// Get a single subscription by ID
+    /// Retrieves a subscription by its unique identifier, including plan details,
+    /// billing period, status, and add-ons.
     /// </summary>
     Task<SubscriptionSubscription> Retrieve(
         SubscriptionRetrieveParams parameters,
@@ -45,7 +46,8 @@ public interface ISubscriptionService
     );
 
     /// <summary>
-    /// Update a subscription
+    /// Updates an active subscription's properties including billing period, add-ons,
+    /// unit quantities, and discounts.
     /// </summary>
     Task<SubscriptionSubscription> Update(
         SubscriptionUpdateParams parameters,
@@ -60,7 +62,8 @@ public interface ISubscriptionService
     );
 
     /// <summary>
-    /// Get a list of subscriptions
+    /// Retrieves a paginated list of subscriptions, with optional filters for customer,
+    /// status, and plan.
     /// </summary>
     Task<SubscriptionListPage> List(
         SubscriptionListParams? parameters = null,
@@ -68,7 +71,8 @@ public interface ISubscriptionService
     );
 
     /// <summary>
-    /// Cancel subscription
+    /// Cancels an active subscription, either immediately or at a specified time
+    /// such as end of billing period.
     /// </summary>
     Task<SubscriptionSubscription> Cancel(
         SubscriptionCancelParams parameters,
@@ -83,7 +87,8 @@ public interface ISubscriptionService
     );
 
     /// <summary>
-    /// Delegate subscription payment to customer
+    /// Delegates the payment responsibility of a subscription to a different customer.
+    /// The delegated customer will be billed for this subscription.
     /// </summary>
     Task<SubscriptionSubscription> Delegate(
         SubscriptionDelegateParams parameters,
@@ -98,7 +103,8 @@ public interface ISubscriptionService
     );
 
     /// <summary>
-    /// Bulk import subscriptions
+    /// Imports multiple subscriptions in bulk. Used for migrating subscription data
+    /// from external systems.
     /// </summary>
     Task<SubscriptionImportResponse> Import(
         SubscriptionImportParams parameters,
@@ -106,7 +112,8 @@ public interface ISubscriptionService
     );
 
     /// <summary>
-    /// Migrate subscription to latest plan version
+    /// Migrates a subscription to the latest published version of its plan or add-ons.
+    /// Handles prorated charges or credits automatically.
     /// </summary>
     Task<SubscriptionSubscription> Migrate(
         SubscriptionMigrateParams parameters,
@@ -121,7 +128,8 @@ public interface ISubscriptionService
     );
 
     /// <summary>
-    /// Preview subscription
+    /// Previews the pricing impact of creating or updating a subscription without
+    /// making changes. Returns estimated costs, taxes, and proration details.
     /// </summary>
     Task<SubscriptionPreviewResponse> Preview(
         SubscriptionPreviewParams parameters,
@@ -129,7 +137,8 @@ public interface ISubscriptionService
     );
 
     /// <summary>
-    /// Provision subscription
+    /// Creates a new subscription for an existing customer. When payment is required
+    /// and no payment method exists, returns a checkout URL.
     /// </summary>
     Task<SubscriptionProvisionResponse> Provision(
         SubscriptionProvisionParams parameters,
@@ -137,7 +146,8 @@ public interface ISubscriptionService
     );
 
     /// <summary>
-    /// Transfer subscription to resource
+    /// Transfers a subscription to a different resource ID. Used for multi-resource
+    /// products where subscriptions apply to specific entities like websites or apps.
     /// </summary>
     Task<SubscriptionSubscription> Transfer(
         SubscriptionTransferParams parameters,
