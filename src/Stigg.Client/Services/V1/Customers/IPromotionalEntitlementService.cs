@@ -27,7 +27,8 @@ public interface IPromotionalEntitlementService
     IPromotionalEntitlementService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Create a promotional entitlements
+    /// Grants promotional entitlements to a customer, providing feature access outside
+    /// their subscription. Entitlements can be time-limited or permanent.
     /// </summary>
     Task<PromotionalEntitlementGrantResponse> Grant(
         PromotionalEntitlementGrantParams parameters,
@@ -42,7 +43,8 @@ public interface IPromotionalEntitlementService
     );
 
     /// <summary>
-    /// Revoke promotional entitlement
+    /// Revokes a previously granted promotional entitlement from a customer for
+    /// a specific feature.
     /// </summary>
     Task<PromotionalEntitlementRevokeResponse> Revoke(
         PromotionalEntitlementRevokeParams parameters,

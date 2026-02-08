@@ -74,6 +74,17 @@ public class CustomerServiceTest : TestBase
     }
 
     [Fact(Skip = "Prism tests are disabled")]
+    public async Task ListResources_Works()
+    {
+        var page = await this.client.V1.Customers.ListResources(
+            "x",
+            new(),
+            TestContext.Current.CancellationToken
+        );
+        page.Validate();
+    }
+
+    [Fact(Skip = "Prism tests are disabled")]
     public async Task Provision_Works()
     {
         var customerResponse = await this.client.V1.Customers.Provision(

@@ -13,7 +13,8 @@ using System = System;
 namespace Stigg.Client.Models.V1.Subscriptions;
 
 /// <summary>
-/// Update a subscription
+/// Updates an active subscription's properties including billing period, add-ons,
+/// unit quantities, and discounts.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that

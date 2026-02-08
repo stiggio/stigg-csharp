@@ -748,10 +748,10 @@ public record class ResetPeriodConfiguration : ModelBase
         );
     }
 
-    public virtual bool Equals(ResetPeriodConfiguration? other)
-    {
-        return other != null && JsonElement.DeepEquals(this.Json, other.Json);
-    }
+    public virtual bool Equals(ResetPeriodConfiguration? other) =>
+        other != null
+        && this.VariantIndex() == other.VariantIndex()
+        && JsonElement.DeepEquals(this.Json, other.Json);
 
     public override int GetHashCode()
     {
@@ -760,6 +760,17 @@ public record class ResetPeriodConfiguration : ModelBase
 
     public override string ToString() =>
         JsonSerializer.Serialize(this._element, ModelBase.ToStringSerializerOptions);
+
+    int VariantIndex()
+    {
+        return this.Value switch
+        {
+            YearlyResetPeriodConfig _ => 0,
+            MonthlyResetPeriodConfig _ => 1,
+            WeeklyResetPeriodConfig _ => 2,
+            _ => -1,
+        };
+    }
 }
 
 sealed class ResetPeriodConfigurationConverter : JsonConverter<ResetPeriodConfiguration?>

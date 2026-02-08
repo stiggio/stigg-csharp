@@ -9,7 +9,7 @@ using Stigg.Client.Core;
 namespace Stigg.Client.Models.V1.Subscriptions.FutureUpdate;
 
 /// <summary>
-/// Cancel scheduled update
+/// Cancels a scheduled subscription update, such as a future downgrade or plan change.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that

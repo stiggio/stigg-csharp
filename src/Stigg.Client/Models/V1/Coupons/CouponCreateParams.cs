@@ -13,7 +13,8 @@ using System = System;
 namespace Stigg.Client.Models.V1.Coupons;
 
 /// <summary>
-/// Create coupon
+/// Creates a new discount coupon with percentage or fixed amount off, applicable
+/// to customer subscriptions.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that

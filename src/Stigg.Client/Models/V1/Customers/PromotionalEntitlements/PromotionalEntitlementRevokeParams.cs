@@ -9,7 +9,7 @@ using Stigg.Client.Core;
 namespace Stigg.Client.Models.V1.Customers.PromotionalEntitlements;
 
 /// <summary>
-/// Revoke promotional entitlement
+/// Revokes a previously granted promotional entitlement from a customer for a specific feature.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that

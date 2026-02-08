@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Stigg.Client.Core;
-using Stigg.Client.Models.V1.Events;
+using Stigg.Client.Models.V1.Products;
 
 namespace Stigg.Client.Services.V1;
 
@@ -11,50 +11,49 @@ namespace Stigg.Client.Services.V1;
 /// changes in non-major versions. We may add new methods in the future that cause
 /// existing derived classes to break.
 /// </summary>
-public interface IEventService
+public interface IProductService
 {
     /// <summary>
     /// Returns a view of this service that provides access to raw HTTP responses
     /// for each method.
     /// </summary>
-    IEventServiceWithRawResponse WithRawResponse { get; }
+    IProductServiceWithRawResponse WithRawResponse { get; }
 
     /// <summary>
     /// Returns a view of this service with the given option modifications applied.
     ///
     /// <para>The original service is not modified.</para>
     /// </summary>
-    IEventService WithOptions(Func<ClientOptions, ClientOptions> modifier);
+    IProductService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Reports raw usage events for event-based metering. Events are ingested asynchronously
-    /// and aggregated into usage totals.
+    /// Retrieves a paginated list of products in the environment.
     /// </summary>
-    Task<EventReportResponse> Report(
-        EventReportParams parameters,
+    Task<ProductListProductsPage> ListProducts(
+        ProductListProductsParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 }
 
 /// <summary>
-/// A view of <see cref="IEventService"/> that provides access to raw
+/// A view of <see cref="IProductService"/> that provides access to raw
 /// HTTP responses for each method.
 /// </summary>
-public interface IEventServiceWithRawResponse
+public interface IProductServiceWithRawResponse
 {
     /// <summary>
     /// Returns a view of this service with the given option modifications applied.
     ///
     /// <para>The original service is not modified.</para>
     /// </summary>
-    IEventServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
+    IProductServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/events`, but is otherwise the
-    /// same as <see cref="IEventService.Report(EventReportParams, CancellationToken)"/>.
+    /// Returns a raw HTTP response for `get /api/v1/products`, but is otherwise the
+    /// same as <see cref="IProductService.ListProducts(ProductListProductsParams?, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<EventReportResponse>> Report(
-        EventReportParams parameters,
+    Task<HttpResponse<ProductListProductsPage>> ListProducts(
+        ProductListProductsParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 }

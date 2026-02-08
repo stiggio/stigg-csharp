@@ -12,7 +12,8 @@ using Stigg.Client.Core;
 namespace Stigg.Client.Models.V1.Subscriptions;
 
 /// <summary>
-/// Bulk import subscriptions
+/// Imports multiple subscriptions in bulk. Used for migrating subscription data
+/// from external systems.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
@@ -45,6 +46,19 @@ public record class SubscriptionImportParams : ParamsBase
                 ImmutableArray.ToImmutableArray(value)
             );
         }
+    }
+
+    /// <summary>
+    /// Integration ID to use for importing subscriptions
+    /// </summary>
+    public string? IntegrationID
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("integrationId");
+        }
+        init { this._rawBodyData.Set("integrationId", value); }
     }
 
     public SubscriptionImportParams() { }

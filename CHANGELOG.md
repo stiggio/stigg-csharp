@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.6.0 (2026-02-08)
+
+Full Changelog: [v0.5.0...v0.6.0](https://github.com/stiggio/stigg-csharp/compare/v0.5.0...v0.6.0)
+
+### Features
+
+* **api:** api update ([3affd0d](https://github.com/stiggio/stigg-csharp/commit/3affd0d92f7a04e5646f3b6d823af875f4ffc688))
+* **api:** api update ([f692738](https://github.com/stiggio/stigg-csharp/commit/f692738b43d3df8fce685e6beece5bd3307ae48f))
+* **api:** api update ([c0f0c9c](https://github.com/stiggio/stigg-csharp/commit/c0f0c9c4c48de24d1b865beb50aeead53d6f42f8))
+* **api:** manual updates ([2460363](https://github.com/stiggio/stigg-csharp/commit/246036366bf229a022dc96aef873dc053522b0b3))
+* **api:** manual updates ([1d26608](https://github.com/stiggio/stigg-csharp/commit/1d26608aad9f924bce10f1414d3542ed3fda72ab))
+
+
+### Bug Fixes
+
+* **client:** improve union equality method ([96ddcc2](https://github.com/stiggio/stigg-csharp/commit/96ddcc20ade60c858cea6f2bb113ad79b194c5e9))
+
+
+### Chores
+
+* **internal:** ignore stainless-internal artifacts ([cf88d00](https://github.com/stiggio/stigg-csharp/commit/cf88d00eadb439a972843537c266eb7126aa2bc6))
+
 ## 0.5.0 (2026-01-29)
 
 Full Changelog: [v0.4.0...v0.5.0](https://github.com/stiggio/stigg-csharp/compare/v0.4.0...v0.5.0)

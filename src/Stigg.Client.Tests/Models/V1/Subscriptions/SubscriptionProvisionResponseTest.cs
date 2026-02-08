@@ -19,25 +19,30 @@ public class SubscriptionProvisionResponseTest : TestBase
                 ID = "id",
                 Entitlements =
                 [
-                    new()
+                    new SubscriptionFeatureEntitlement()
                     {
-                        AccessDeniedReason = "accessDeniedReason",
+                        AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+                        IsGranted = true,
+                        Type = SubscriptionFeatureEntitlementType.Feature,
                         CurrentUsage = 0,
                         EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                        Feature = new("refId"),
+                        Feature = new()
+                        {
+                            DisplayName = "displayName",
+                            FeatureStatus = FeatureStatus.New,
+                            FeatureType = FeatureType.Boolean,
+                            RefID = "refId",
+                        },
                         HasUnlimitedUsage = true,
-                        IsGranted = true,
-                        ResetPeriod = EntitlementResetPeriod.Year,
+                        ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
                         UsageLimit = 0,
                         UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     },
                 ],
                 Status = SubscriptionProvisionResponseDataStatus.Success,
-                CheckoutBillingID = "checkoutBillingId",
-                CheckoutUrl = "checkoutUrl",
-                IsScheduled = true,
                 Subscription = new()
                 {
                     ID = "id",
@@ -102,6 +107,9 @@ public class SubscriptionProvisionResponseTest : TestBase
                     ResourceID = "resourceId",
                     TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
+                CheckoutBillingID = "checkoutBillingId",
+                CheckoutUrl = "checkoutUrl",
+                IsScheduled = true,
             },
         };
 
@@ -110,25 +118,30 @@ public class SubscriptionProvisionResponseTest : TestBase
             ID = "id",
             Entitlements =
             [
-                new()
+                new SubscriptionFeatureEntitlement()
                 {
-                    AccessDeniedReason = "accessDeniedReason",
+                    AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+                    IsGranted = true,
+                    Type = SubscriptionFeatureEntitlementType.Feature,
                     CurrentUsage = 0,
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Feature = new("refId"),
+                    Feature = new()
+                    {
+                        DisplayName = "displayName",
+                        FeatureStatus = FeatureStatus.New,
+                        FeatureType = FeatureType.Boolean,
+                        RefID = "refId",
+                    },
                     HasUnlimitedUsage = true,
-                    IsGranted = true,
-                    ResetPeriod = EntitlementResetPeriod.Year,
+                    ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
                     UsageLimit = 0,
                     UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
             Status = SubscriptionProvisionResponseDataStatus.Success,
-            CheckoutBillingID = "checkoutBillingId",
-            CheckoutUrl = "checkoutUrl",
-            IsScheduled = true,
             Subscription = new()
             {
                 ID = "id",
@@ -193,6 +206,9 @@ public class SubscriptionProvisionResponseTest : TestBase
                 ResourceID = "resourceId",
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
+            CheckoutBillingID = "checkoutBillingId",
+            CheckoutUrl = "checkoutUrl",
+            IsScheduled = true,
         };
 
         Assert.Equal(expectedData, model.Data);
@@ -208,25 +224,30 @@ public class SubscriptionProvisionResponseTest : TestBase
                 ID = "id",
                 Entitlements =
                 [
-                    new()
+                    new SubscriptionFeatureEntitlement()
                     {
-                        AccessDeniedReason = "accessDeniedReason",
+                        AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+                        IsGranted = true,
+                        Type = SubscriptionFeatureEntitlementType.Feature,
                         CurrentUsage = 0,
                         EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                        Feature = new("refId"),
+                        Feature = new()
+                        {
+                            DisplayName = "displayName",
+                            FeatureStatus = FeatureStatus.New,
+                            FeatureType = FeatureType.Boolean,
+                            RefID = "refId",
+                        },
                         HasUnlimitedUsage = true,
-                        IsGranted = true,
-                        ResetPeriod = EntitlementResetPeriod.Year,
+                        ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
                         UsageLimit = 0,
                         UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     },
                 ],
                 Status = SubscriptionProvisionResponseDataStatus.Success,
-                CheckoutBillingID = "checkoutBillingId",
-                CheckoutUrl = "checkoutUrl",
-                IsScheduled = true,
                 Subscription = new()
                 {
                     ID = "id",
@@ -291,6 +312,9 @@ public class SubscriptionProvisionResponseTest : TestBase
                     ResourceID = "resourceId",
                     TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
+                CheckoutBillingID = "checkoutBillingId",
+                CheckoutUrl = "checkoutUrl",
+                IsScheduled = true,
             },
         };
 
@@ -313,25 +337,30 @@ public class SubscriptionProvisionResponseTest : TestBase
                 ID = "id",
                 Entitlements =
                 [
-                    new()
+                    new SubscriptionFeatureEntitlement()
                     {
-                        AccessDeniedReason = "accessDeniedReason",
+                        AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+                        IsGranted = true,
+                        Type = SubscriptionFeatureEntitlementType.Feature,
                         CurrentUsage = 0,
                         EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                        Feature = new("refId"),
+                        Feature = new()
+                        {
+                            DisplayName = "displayName",
+                            FeatureStatus = FeatureStatus.New,
+                            FeatureType = FeatureType.Boolean,
+                            RefID = "refId",
+                        },
                         HasUnlimitedUsage = true,
-                        IsGranted = true,
-                        ResetPeriod = EntitlementResetPeriod.Year,
+                        ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
                         UsageLimit = 0,
                         UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     },
                 ],
                 Status = SubscriptionProvisionResponseDataStatus.Success,
-                CheckoutBillingID = "checkoutBillingId",
-                CheckoutUrl = "checkoutUrl",
-                IsScheduled = true,
                 Subscription = new()
                 {
                     ID = "id",
@@ -396,6 +425,9 @@ public class SubscriptionProvisionResponseTest : TestBase
                     ResourceID = "resourceId",
                     TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
+                CheckoutBillingID = "checkoutBillingId",
+                CheckoutUrl = "checkoutUrl",
+                IsScheduled = true,
             },
         };
 
@@ -411,25 +443,30 @@ public class SubscriptionProvisionResponseTest : TestBase
             ID = "id",
             Entitlements =
             [
-                new()
+                new SubscriptionFeatureEntitlement()
                 {
-                    AccessDeniedReason = "accessDeniedReason",
+                    AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+                    IsGranted = true,
+                    Type = SubscriptionFeatureEntitlementType.Feature,
                     CurrentUsage = 0,
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Feature = new("refId"),
+                    Feature = new()
+                    {
+                        DisplayName = "displayName",
+                        FeatureStatus = FeatureStatus.New,
+                        FeatureType = FeatureType.Boolean,
+                        RefID = "refId",
+                    },
                     HasUnlimitedUsage = true,
-                    IsGranted = true,
-                    ResetPeriod = EntitlementResetPeriod.Year,
+                    ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
                     UsageLimit = 0,
                     UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
             Status = SubscriptionProvisionResponseDataStatus.Success,
-            CheckoutBillingID = "checkoutBillingId",
-            CheckoutUrl = "checkoutUrl",
-            IsScheduled = true,
             Subscription = new()
             {
                 ID = "id",
@@ -494,6 +531,9 @@ public class SubscriptionProvisionResponseTest : TestBase
                 ResourceID = "resourceId",
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
+            CheckoutBillingID = "checkoutBillingId",
+            CheckoutUrl = "checkoutUrl",
+            IsScheduled = true,
         };
 
         Assert.Equal(expectedData, deserialized.Data);
@@ -509,25 +549,30 @@ public class SubscriptionProvisionResponseTest : TestBase
                 ID = "id",
                 Entitlements =
                 [
-                    new()
+                    new SubscriptionFeatureEntitlement()
                     {
-                        AccessDeniedReason = "accessDeniedReason",
+                        AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+                        IsGranted = true,
+                        Type = SubscriptionFeatureEntitlementType.Feature,
                         CurrentUsage = 0,
                         EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                        Feature = new("refId"),
+                        Feature = new()
+                        {
+                            DisplayName = "displayName",
+                            FeatureStatus = FeatureStatus.New,
+                            FeatureType = FeatureType.Boolean,
+                            RefID = "refId",
+                        },
                         HasUnlimitedUsage = true,
-                        IsGranted = true,
-                        ResetPeriod = EntitlementResetPeriod.Year,
+                        ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
                         UsageLimit = 0,
                         UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     },
                 ],
                 Status = SubscriptionProvisionResponseDataStatus.Success,
-                CheckoutBillingID = "checkoutBillingId",
-                CheckoutUrl = "checkoutUrl",
-                IsScheduled = true,
                 Subscription = new()
                 {
                     ID = "id",
@@ -592,6 +637,9 @@ public class SubscriptionProvisionResponseTest : TestBase
                     ResourceID = "resourceId",
                     TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
+                CheckoutBillingID = "checkoutBillingId",
+                CheckoutUrl = "checkoutUrl",
+                IsScheduled = true,
             },
         };
 
@@ -608,25 +656,30 @@ public class SubscriptionProvisionResponseTest : TestBase
                 ID = "id",
                 Entitlements =
                 [
-                    new()
+                    new SubscriptionFeatureEntitlement()
                     {
-                        AccessDeniedReason = "accessDeniedReason",
+                        AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+                        IsGranted = true,
+                        Type = SubscriptionFeatureEntitlementType.Feature,
                         CurrentUsage = 0,
                         EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                        Feature = new("refId"),
+                        Feature = new()
+                        {
+                            DisplayName = "displayName",
+                            FeatureStatus = FeatureStatus.New,
+                            FeatureType = FeatureType.Boolean,
+                            RefID = "refId",
+                        },
                         HasUnlimitedUsage = true,
-                        IsGranted = true,
-                        ResetPeriod = EntitlementResetPeriod.Year,
+                        ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
                         UsageLimit = 0,
                         UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     },
                 ],
                 Status = SubscriptionProvisionResponseDataStatus.Success,
-                CheckoutBillingID = "checkoutBillingId",
-                CheckoutUrl = "checkoutUrl",
-                IsScheduled = true,
                 Subscription = new()
                 {
                     ID = "id",
@@ -691,6 +744,9 @@ public class SubscriptionProvisionResponseTest : TestBase
                     ResourceID = "resourceId",
                     TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
+                CheckoutBillingID = "checkoutBillingId",
+                CheckoutUrl = "checkoutUrl",
+                IsScheduled = true,
             },
         };
 
@@ -710,25 +766,30 @@ public class SubscriptionProvisionResponseDataTest : TestBase
             ID = "id",
             Entitlements =
             [
-                new()
+                new SubscriptionFeatureEntitlement()
                 {
-                    AccessDeniedReason = "accessDeniedReason",
+                    AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+                    IsGranted = true,
+                    Type = SubscriptionFeatureEntitlementType.Feature,
                     CurrentUsage = 0,
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Feature = new("refId"),
+                    Feature = new()
+                    {
+                        DisplayName = "displayName",
+                        FeatureStatus = FeatureStatus.New,
+                        FeatureType = FeatureType.Boolean,
+                        RefID = "refId",
+                    },
                     HasUnlimitedUsage = true,
-                    IsGranted = true,
-                    ResetPeriod = EntitlementResetPeriod.Year,
+                    ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
                     UsageLimit = 0,
                     UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
             Status = SubscriptionProvisionResponseDataStatus.Success,
-            CheckoutBillingID = "checkoutBillingId",
-            CheckoutUrl = "checkoutUrl",
-            IsScheduled = true,
             Subscription = new()
             {
                 ID = "id",
@@ -793,31 +854,39 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 ResourceID = "resourceId",
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
+            CheckoutBillingID = "checkoutBillingId",
+            CheckoutUrl = "checkoutUrl",
+            IsScheduled = true,
         };
 
         string expectedID = "id";
         List<Entitlement> expectedEntitlements =
         [
-            new()
+            new SubscriptionFeatureEntitlement()
             {
-                AccessDeniedReason = "accessDeniedReason",
+                AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+                IsGranted = true,
+                Type = SubscriptionFeatureEntitlementType.Feature,
                 CurrentUsage = 0,
                 EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Feature = new("refId"),
+                Feature = new()
+                {
+                    DisplayName = "displayName",
+                    FeatureStatus = FeatureStatus.New,
+                    FeatureType = FeatureType.Boolean,
+                    RefID = "refId",
+                },
                 HasUnlimitedUsage = true,
-                IsGranted = true,
-                ResetPeriod = EntitlementResetPeriod.Year,
+                ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
                 UsageLimit = 0,
                 UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
         ];
         ApiEnum<string, SubscriptionProvisionResponseDataStatus> expectedStatus =
             SubscriptionProvisionResponseDataStatus.Success;
-        string expectedCheckoutBillingID = "checkoutBillingId";
-        string expectedCheckoutUrl = "checkoutUrl";
-        bool expectedIsScheduled = true;
         SubscriptionProvisionResponseDataSubscription expectedSubscription = new()
         {
             ID = "id",
@@ -882,18 +951,22 @@ public class SubscriptionProvisionResponseDataTest : TestBase
             ResourceID = "resourceId",
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
+        string expectedCheckoutBillingID = "checkoutBillingId";
+        string expectedCheckoutUrl = "checkoutUrl";
+        bool expectedIsScheduled = true;
 
         Assert.Equal(expectedID, model.ID);
+        Assert.NotNull(model.Entitlements);
         Assert.Equal(expectedEntitlements.Count, model.Entitlements.Count);
         for (int i = 0; i < expectedEntitlements.Count; i++)
         {
             Assert.Equal(expectedEntitlements[i], model.Entitlements[i]);
         }
         Assert.Equal(expectedStatus, model.Status);
+        Assert.Equal(expectedSubscription, model.Subscription);
         Assert.Equal(expectedCheckoutBillingID, model.CheckoutBillingID);
         Assert.Equal(expectedCheckoutUrl, model.CheckoutUrl);
         Assert.Equal(expectedIsScheduled, model.IsScheduled);
-        Assert.Equal(expectedSubscription, model.Subscription);
     }
 
     [Fact]
@@ -904,25 +977,30 @@ public class SubscriptionProvisionResponseDataTest : TestBase
             ID = "id",
             Entitlements =
             [
-                new()
+                new SubscriptionFeatureEntitlement()
                 {
-                    AccessDeniedReason = "accessDeniedReason",
+                    AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+                    IsGranted = true,
+                    Type = SubscriptionFeatureEntitlementType.Feature,
                     CurrentUsage = 0,
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Feature = new("refId"),
+                    Feature = new()
+                    {
+                        DisplayName = "displayName",
+                        FeatureStatus = FeatureStatus.New,
+                        FeatureType = FeatureType.Boolean,
+                        RefID = "refId",
+                    },
                     HasUnlimitedUsage = true,
-                    IsGranted = true,
-                    ResetPeriod = EntitlementResetPeriod.Year,
+                    ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
                     UsageLimit = 0,
                     UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
             Status = SubscriptionProvisionResponseDataStatus.Success,
-            CheckoutBillingID = "checkoutBillingId",
-            CheckoutUrl = "checkoutUrl",
-            IsScheduled = true,
             Subscription = new()
             {
                 ID = "id",
@@ -987,6 +1065,9 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 ResourceID = "resourceId",
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
+            CheckoutBillingID = "checkoutBillingId",
+            CheckoutUrl = "checkoutUrl",
+            IsScheduled = true,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -1006,25 +1087,30 @@ public class SubscriptionProvisionResponseDataTest : TestBase
             ID = "id",
             Entitlements =
             [
-                new()
+                new SubscriptionFeatureEntitlement()
                 {
-                    AccessDeniedReason = "accessDeniedReason",
+                    AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+                    IsGranted = true,
+                    Type = SubscriptionFeatureEntitlementType.Feature,
                     CurrentUsage = 0,
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Feature = new("refId"),
+                    Feature = new()
+                    {
+                        DisplayName = "displayName",
+                        FeatureStatus = FeatureStatus.New,
+                        FeatureType = FeatureType.Boolean,
+                        RefID = "refId",
+                    },
                     HasUnlimitedUsage = true,
-                    IsGranted = true,
-                    ResetPeriod = EntitlementResetPeriod.Year,
+                    ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
                     UsageLimit = 0,
                     UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
             Status = SubscriptionProvisionResponseDataStatus.Success,
-            CheckoutBillingID = "checkoutBillingId",
-            CheckoutUrl = "checkoutUrl",
-            IsScheduled = true,
             Subscription = new()
             {
                 ID = "id",
@@ -1089,6 +1175,9 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 ResourceID = "resourceId",
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
+            CheckoutBillingID = "checkoutBillingId",
+            CheckoutUrl = "checkoutUrl",
+            IsScheduled = true,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -1101,26 +1190,31 @@ public class SubscriptionProvisionResponseDataTest : TestBase
         string expectedID = "id";
         List<Entitlement> expectedEntitlements =
         [
-            new()
+            new SubscriptionFeatureEntitlement()
             {
-                AccessDeniedReason = "accessDeniedReason",
+                AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+                IsGranted = true,
+                Type = SubscriptionFeatureEntitlementType.Feature,
                 CurrentUsage = 0,
                 EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Feature = new("refId"),
+                Feature = new()
+                {
+                    DisplayName = "displayName",
+                    FeatureStatus = FeatureStatus.New,
+                    FeatureType = FeatureType.Boolean,
+                    RefID = "refId",
+                },
                 HasUnlimitedUsage = true,
-                IsGranted = true,
-                ResetPeriod = EntitlementResetPeriod.Year,
+                ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
                 UsageLimit = 0,
                 UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
         ];
         ApiEnum<string, SubscriptionProvisionResponseDataStatus> expectedStatus =
             SubscriptionProvisionResponseDataStatus.Success;
-        string expectedCheckoutBillingID = "checkoutBillingId";
-        string expectedCheckoutUrl = "checkoutUrl";
-        bool expectedIsScheduled = true;
         SubscriptionProvisionResponseDataSubscription expectedSubscription = new()
         {
             ID = "id",
@@ -1185,18 +1279,22 @@ public class SubscriptionProvisionResponseDataTest : TestBase
             ResourceID = "resourceId",
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
+        string expectedCheckoutBillingID = "checkoutBillingId";
+        string expectedCheckoutUrl = "checkoutUrl";
+        bool expectedIsScheduled = true;
 
         Assert.Equal(expectedID, deserialized.ID);
+        Assert.NotNull(deserialized.Entitlements);
         Assert.Equal(expectedEntitlements.Count, deserialized.Entitlements.Count);
         for (int i = 0; i < expectedEntitlements.Count; i++)
         {
             Assert.Equal(expectedEntitlements[i], deserialized.Entitlements[i]);
         }
         Assert.Equal(expectedStatus, deserialized.Status);
+        Assert.Equal(expectedSubscription, deserialized.Subscription);
         Assert.Equal(expectedCheckoutBillingID, deserialized.CheckoutBillingID);
         Assert.Equal(expectedCheckoutUrl, deserialized.CheckoutUrl);
         Assert.Equal(expectedIsScheduled, deserialized.IsScheduled);
-        Assert.Equal(expectedSubscription, deserialized.Subscription);
     }
 
     [Fact]
@@ -1207,25 +1305,30 @@ public class SubscriptionProvisionResponseDataTest : TestBase
             ID = "id",
             Entitlements =
             [
-                new()
+                new SubscriptionFeatureEntitlement()
                 {
-                    AccessDeniedReason = "accessDeniedReason",
+                    AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+                    IsGranted = true,
+                    Type = SubscriptionFeatureEntitlementType.Feature,
                     CurrentUsage = 0,
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Feature = new("refId"),
+                    Feature = new()
+                    {
+                        DisplayName = "displayName",
+                        FeatureStatus = FeatureStatus.New,
+                        FeatureType = FeatureType.Boolean,
+                        RefID = "refId",
+                    },
                     HasUnlimitedUsage = true,
-                    IsGranted = true,
-                    ResetPeriod = EntitlementResetPeriod.Year,
+                    ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
                     UsageLimit = 0,
                     UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
             Status = SubscriptionProvisionResponseDataStatus.Success,
-            CheckoutBillingID = "checkoutBillingId",
-            CheckoutUrl = "checkoutUrl",
-            IsScheduled = true,
             Subscription = new()
             {
                 ID = "id",
@@ -1290,6 +1393,9 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 ResourceID = "resourceId",
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
+            CheckoutBillingID = "checkoutBillingId",
+            CheckoutUrl = "checkoutUrl",
+            IsScheduled = true,
         };
 
         model.Validate();
@@ -1303,161 +1409,30 @@ public class SubscriptionProvisionResponseDataTest : TestBase
             ID = "id",
             Entitlements =
             [
-                new()
+                new SubscriptionFeatureEntitlement()
                 {
-                    AccessDeniedReason = "accessDeniedReason",
+                    AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+                    IsGranted = true,
+                    Type = SubscriptionFeatureEntitlementType.Feature,
                     CurrentUsage = 0,
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Feature = new("refId"),
+                    Feature = new()
+                    {
+                        DisplayName = "displayName",
+                        FeatureStatus = FeatureStatus.New,
+                        FeatureType = FeatureType.Boolean,
+                        RefID = "refId",
+                    },
                     HasUnlimitedUsage = true,
-                    IsGranted = true,
-                    ResetPeriod = EntitlementResetPeriod.Year,
+                    ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
                     UsageLimit = 0,
                     UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
             Status = SubscriptionProvisionResponseDataStatus.Success,
-            CheckoutBillingID = "checkoutBillingId",
-            CheckoutUrl = "checkoutUrl",
-        };
-
-        Assert.Null(model.IsScheduled);
-        Assert.False(model.RawData.ContainsKey("isScheduled"));
-        Assert.Null(model.Subscription);
-        Assert.False(model.RawData.ContainsKey("subscription"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new SubscriptionProvisionResponseData
-        {
-            ID = "id",
-            Entitlements =
-            [
-                new()
-                {
-                    AccessDeniedReason = "accessDeniedReason",
-                    CurrentUsage = 0,
-                    EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Feature = new("refId"),
-                    HasUnlimitedUsage = true,
-                    IsGranted = true,
-                    ResetPeriod = EntitlementResetPeriod.Year,
-                    UsageLimit = 0,
-                    UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                },
-            ],
-            Status = SubscriptionProvisionResponseDataStatus.Success,
-            CheckoutBillingID = "checkoutBillingId",
-            CheckoutUrl = "checkoutUrl",
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
-    {
-        var model = new SubscriptionProvisionResponseData
-        {
-            ID = "id",
-            Entitlements =
-            [
-                new()
-                {
-                    AccessDeniedReason = "accessDeniedReason",
-                    CurrentUsage = 0,
-                    EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Feature = new("refId"),
-                    HasUnlimitedUsage = true,
-                    IsGranted = true,
-                    ResetPeriod = EntitlementResetPeriod.Year,
-                    UsageLimit = 0,
-                    UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                },
-            ],
-            Status = SubscriptionProvisionResponseDataStatus.Success,
-            CheckoutBillingID = "checkoutBillingId",
-            CheckoutUrl = "checkoutUrl",
-
-            // Null should be interpreted as omitted for these properties
-            IsScheduled = null,
-            Subscription = null,
-        };
-
-        Assert.Null(model.IsScheduled);
-        Assert.False(model.RawData.ContainsKey("isScheduled"));
-        Assert.Null(model.Subscription);
-        Assert.False(model.RawData.ContainsKey("subscription"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new SubscriptionProvisionResponseData
-        {
-            ID = "id",
-            Entitlements =
-            [
-                new()
-                {
-                    AccessDeniedReason = "accessDeniedReason",
-                    CurrentUsage = 0,
-                    EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Feature = new("refId"),
-                    HasUnlimitedUsage = true,
-                    IsGranted = true,
-                    ResetPeriod = EntitlementResetPeriod.Year,
-                    UsageLimit = 0,
-                    UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                },
-            ],
-            Status = SubscriptionProvisionResponseDataStatus.Success,
-            CheckoutBillingID = "checkoutBillingId",
-            CheckoutUrl = "checkoutUrl",
-
-            // Null should be interpreted as omitted for these properties
-            IsScheduled = null,
-            Subscription = null,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
-    {
-        var model = new SubscriptionProvisionResponseData
-        {
-            ID = "id",
-            Entitlements =
-            [
-                new()
-                {
-                    AccessDeniedReason = "accessDeniedReason",
-                    CurrentUsage = 0,
-                    EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Feature = new("refId"),
-                    HasUnlimitedUsage = true,
-                    IsGranted = true,
-                    ResetPeriod = EntitlementResetPeriod.Year,
-                    UsageLimit = 0,
-                    UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                },
-            ],
-            Status = SubscriptionProvisionResponseDataStatus.Success,
-            IsScheduled = true,
             Subscription = new()
             {
                 ID = "id",
@@ -1528,33 +1503,42 @@ public class SubscriptionProvisionResponseDataTest : TestBase
         Assert.False(model.RawData.ContainsKey("checkoutBillingId"));
         Assert.Null(model.CheckoutUrl);
         Assert.False(model.RawData.ContainsKey("checkoutUrl"));
+        Assert.Null(model.IsScheduled);
+        Assert.False(model.RawData.ContainsKey("isScheduled"));
     }
 
     [Fact]
-    public void OptionalNullablePropertiesUnsetValidation_Works()
+    public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
         var model = new SubscriptionProvisionResponseData
         {
             ID = "id",
             Entitlements =
             [
-                new()
+                new SubscriptionFeatureEntitlement()
                 {
-                    AccessDeniedReason = "accessDeniedReason",
+                    AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+                    IsGranted = true,
+                    Type = SubscriptionFeatureEntitlementType.Feature,
                     CurrentUsage = 0,
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Feature = new("refId"),
+                    Feature = new()
+                    {
+                        DisplayName = "displayName",
+                        FeatureStatus = FeatureStatus.New,
+                        FeatureType = FeatureType.Boolean,
+                        RefID = "refId",
+                    },
                     HasUnlimitedUsage = true,
-                    IsGranted = true,
-                    ResetPeriod = EntitlementResetPeriod.Year,
+                    ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
                     UsageLimit = 0,
                     UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
             Status = SubscriptionProvisionResponseDataStatus.Success,
-            IsScheduled = true,
             Subscription = new()
             {
                 ID = "id",
@@ -1625,30 +1609,37 @@ public class SubscriptionProvisionResponseDataTest : TestBase
     }
 
     [Fact]
-    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
         var model = new SubscriptionProvisionResponseData
         {
             ID = "id",
             Entitlements =
             [
-                new()
+                new SubscriptionFeatureEntitlement()
                 {
-                    AccessDeniedReason = "accessDeniedReason",
+                    AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+                    IsGranted = true,
+                    Type = SubscriptionFeatureEntitlementType.Feature,
                     CurrentUsage = 0,
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Feature = new("refId"),
+                    Feature = new()
+                    {
+                        DisplayName = "displayName",
+                        FeatureStatus = FeatureStatus.New,
+                        FeatureType = FeatureType.Boolean,
+                        RefID = "refId",
+                    },
                     HasUnlimitedUsage = true,
-                    IsGranted = true,
-                    ResetPeriod = EntitlementResetPeriod.Year,
+                    ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
                     UsageLimit = 0,
                     UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
             Status = SubscriptionProvisionResponseDataStatus.Success,
-            IsScheduled = true,
             Subscription = new()
             {
                 ID = "id",
@@ -1714,41 +1705,52 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
 
+            // Null should be interpreted as omitted for these properties
             CheckoutBillingID = null,
             CheckoutUrl = null,
+            IsScheduled = null,
         };
 
         Assert.Null(model.CheckoutBillingID);
-        Assert.True(model.RawData.ContainsKey("checkoutBillingId"));
+        Assert.False(model.RawData.ContainsKey("checkoutBillingId"));
         Assert.Null(model.CheckoutUrl);
-        Assert.True(model.RawData.ContainsKey("checkoutUrl"));
+        Assert.False(model.RawData.ContainsKey("checkoutUrl"));
+        Assert.Null(model.IsScheduled);
+        Assert.False(model.RawData.ContainsKey("isScheduled"));
     }
 
     [Fact]
-    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
         var model = new SubscriptionProvisionResponseData
         {
             ID = "id",
             Entitlements =
             [
-                new()
+                new SubscriptionFeatureEntitlement()
                 {
-                    AccessDeniedReason = "accessDeniedReason",
+                    AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+                    IsGranted = true,
+                    Type = SubscriptionFeatureEntitlementType.Feature,
                     CurrentUsage = 0,
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Feature = new("refId"),
+                    Feature = new()
+                    {
+                        DisplayName = "displayName",
+                        FeatureStatus = FeatureStatus.New,
+                        FeatureType = FeatureType.Boolean,
+                        RefID = "refId",
+                    },
                     HasUnlimitedUsage = true,
-                    IsGranted = true,
-                    ResetPeriod = EntitlementResetPeriod.Year,
+                    ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
                     UsageLimit = 0,
                     UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
             Status = SubscriptionProvisionResponseDataStatus.Success,
-            IsScheduled = true,
             Subscription = new()
             {
                 ID = "id",
@@ -1814,8 +1816,10 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
 
+            // Null should be interpreted as omitted for these properties
             CheckoutBillingID = null,
             CheckoutUrl = null,
+            IsScheduled = null,
         };
 
         model.Validate();
@@ -1829,25 +1833,30 @@ public class SubscriptionProvisionResponseDataTest : TestBase
             ID = "id",
             Entitlements =
             [
-                new()
+                new SubscriptionFeatureEntitlement()
                 {
-                    AccessDeniedReason = "accessDeniedReason",
+                    AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+                    IsGranted = true,
+                    Type = SubscriptionFeatureEntitlementType.Feature,
                     CurrentUsage = 0,
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Feature = new("refId"),
+                    Feature = new()
+                    {
+                        DisplayName = "displayName",
+                        FeatureStatus = FeatureStatus.New,
+                        FeatureType = FeatureType.Boolean,
+                        RefID = "refId",
+                    },
                     HasUnlimitedUsage = true,
-                    IsGranted = true,
-                    ResetPeriod = EntitlementResetPeriod.Year,
+                    ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
                     UsageLimit = 0,
                     UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
             Status = SubscriptionProvisionResponseDataStatus.Success,
-            CheckoutBillingID = "checkoutBillingId",
-            CheckoutUrl = "checkoutUrl",
-            IsScheduled = true,
             Subscription = new()
             {
                 ID = "id",
@@ -1912,6 +1921,9 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 ResourceID = "resourceId",
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
+            CheckoutBillingID = "checkoutBillingId",
+            CheckoutUrl = "checkoutUrl",
+            IsScheduled = true,
         };
 
         SubscriptionProvisionResponseData copied = new(model);
@@ -1923,70 +1935,206 @@ public class SubscriptionProvisionResponseDataTest : TestBase
 public class EntitlementTest : TestBase
 {
     [Fact]
-    public void FieldRoundtrip_Works()
+    public void SubscriptionFeatureValidationWorks()
     {
-        var model = new Entitlement
+        Entitlement value = new SubscriptionFeatureEntitlement()
         {
-            AccessDeniedReason = "accessDeniedReason",
+            AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+            IsGranted = true,
+            Type = SubscriptionFeatureEntitlementType.Feature,
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Feature = new("refId"),
+            Feature = new()
+            {
+                DisplayName = "displayName",
+                FeatureStatus = FeatureStatus.New,
+                FeatureType = FeatureType.Boolean,
+                RefID = "refId",
+            },
             HasUnlimitedUsage = true,
-            IsGranted = true,
-            ResetPeriod = EntitlementResetPeriod.Year,
+            ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
             UsageLimit = 0,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+        value.Validate();
+    }
+
+    [Fact]
+    public void SubscriptionCreditValidationWorks()
+    {
+        Entitlement value = new SubscriptionCreditEntitlement()
+        {
+            AccessDeniedReason = SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound,
+            Currency = new("currencyId"),
+            CurrentUsage = 0,
+            IsGranted = true,
+            Type = SubscriptionCreditEntitlementType.Credit,
+            UsageLimit = 0,
+            UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+        value.Validate();
+    }
+
+    [Fact]
+    public void SubscriptionFeatureSerializationRoundtripWorks()
+    {
+        Entitlement value = new SubscriptionFeatureEntitlement()
+        {
+            AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+            IsGranted = true,
+            Type = SubscriptionFeatureEntitlementType.Feature,
+            CurrentUsage = 0,
+            EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Feature = new()
+            {
+                DisplayName = "displayName",
+                FeatureStatus = FeatureStatus.New,
+                FeatureType = FeatureType.Boolean,
+                RefID = "refId",
+            },
+            HasUnlimitedUsage = true,
+            ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+            UsageLimit = 0,
+            UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Entitlement>(
+            element,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void SubscriptionCreditSerializationRoundtripWorks()
+    {
+        Entitlement value = new SubscriptionCreditEntitlement()
+        {
+            AccessDeniedReason = SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound,
+            Currency = new("currencyId"),
+            CurrentUsage = 0,
+            IsGranted = true,
+            Type = SubscriptionCreditEntitlementType.Credit,
+            UsageLimit = 0,
+            UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Entitlement>(
+            element,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class SubscriptionFeatureEntitlementTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new SubscriptionFeatureEntitlement
+        {
+            AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+            IsGranted = true,
+            Type = SubscriptionFeatureEntitlementType.Feature,
+            CurrentUsage = 0,
+            EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Feature = new()
+            {
+                DisplayName = "displayName",
+                FeatureStatus = FeatureStatus.New,
+                FeatureType = FeatureType.Boolean,
+                RefID = "refId",
+            },
+            HasUnlimitedUsage = true,
+            ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+            UsageLimit = 0,
+            UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
-        string expectedAccessDeniedReason = "accessDeniedReason";
+        ApiEnum<string, AccessDeniedReason> expectedAccessDeniedReason =
+            AccessDeniedReason.FeatureNotFound;
+        bool expectedIsGranted = true;
+        ApiEnum<string, SubscriptionFeatureEntitlementType> expectedType =
+            SubscriptionFeatureEntitlementType.Feature;
         double expectedCurrentUsage = 0;
         DateTimeOffset expectedEntitlementUpdatedAt = DateTimeOffset.Parse(
             "2019-12-27T18:11:19.117Z"
         );
-        Feature expectedFeature = new("refId");
+        Feature expectedFeature = new()
+        {
+            DisplayName = "displayName",
+            FeatureStatus = FeatureStatus.New,
+            FeatureType = FeatureType.Boolean,
+            RefID = "refId",
+        };
         bool expectedHasUnlimitedUsage = true;
-        bool expectedIsGranted = true;
-        ApiEnum<string, EntitlementResetPeriod> expectedResetPeriod = EntitlementResetPeriod.Year;
+        ApiEnum<string, SubscriptionFeatureEntitlementResetPeriod> expectedResetPeriod =
+            SubscriptionFeatureEntitlementResetPeriod.Year;
         double expectedUsageLimit = 0;
         DateTimeOffset expectedUsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedUsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedUsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        DateTimeOffset expectedValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedAccessDeniedReason, model.AccessDeniedReason);
+        Assert.Equal(expectedIsGranted, model.IsGranted);
+        Assert.Equal(expectedType, model.Type);
         Assert.Equal(expectedCurrentUsage, model.CurrentUsage);
         Assert.Equal(expectedEntitlementUpdatedAt, model.EntitlementUpdatedAt);
         Assert.Equal(expectedFeature, model.Feature);
         Assert.Equal(expectedHasUnlimitedUsage, model.HasUnlimitedUsage);
-        Assert.Equal(expectedIsGranted, model.IsGranted);
         Assert.Equal(expectedResetPeriod, model.ResetPeriod);
         Assert.Equal(expectedUsageLimit, model.UsageLimit);
         Assert.Equal(expectedUsagePeriodAnchor, model.UsagePeriodAnchor);
         Assert.Equal(expectedUsagePeriodEnd, model.UsagePeriodEnd);
         Assert.Equal(expectedUsagePeriodStart, model.UsagePeriodStart);
+        Assert.Equal(expectedValidUntil, model.ValidUntil);
     }
 
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Entitlement
+        var model = new SubscriptionFeatureEntitlement
         {
-            AccessDeniedReason = "accessDeniedReason",
+            AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+            IsGranted = true,
+            Type = SubscriptionFeatureEntitlementType.Feature,
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Feature = new("refId"),
+            Feature = new()
+            {
+                DisplayName = "displayName",
+                FeatureStatus = FeatureStatus.New,
+                FeatureType = FeatureType.Boolean,
+                RefID = "refId",
+            },
             HasUnlimitedUsage = true,
-            IsGranted = true,
-            ResetPeriod = EntitlementResetPeriod.Year,
+            ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
             UsageLimit = 0,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Entitlement>(
+        var deserialized = JsonSerializer.Deserialize<SubscriptionFeatureEntitlement>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1997,71 +2145,100 @@ public class EntitlementTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Entitlement
+        var model = new SubscriptionFeatureEntitlement
         {
-            AccessDeniedReason = "accessDeniedReason",
+            AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+            IsGranted = true,
+            Type = SubscriptionFeatureEntitlementType.Feature,
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Feature = new("refId"),
+            Feature = new()
+            {
+                DisplayName = "displayName",
+                FeatureStatus = FeatureStatus.New,
+                FeatureType = FeatureType.Boolean,
+                RefID = "refId",
+            },
             HasUnlimitedUsage = true,
-            IsGranted = true,
-            ResetPeriod = EntitlementResetPeriod.Year,
+            ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
             UsageLimit = 0,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Entitlement>(
+        var deserialized = JsonSerializer.Deserialize<SubscriptionFeatureEntitlement>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
-        string expectedAccessDeniedReason = "accessDeniedReason";
+        ApiEnum<string, AccessDeniedReason> expectedAccessDeniedReason =
+            AccessDeniedReason.FeatureNotFound;
+        bool expectedIsGranted = true;
+        ApiEnum<string, SubscriptionFeatureEntitlementType> expectedType =
+            SubscriptionFeatureEntitlementType.Feature;
         double expectedCurrentUsage = 0;
         DateTimeOffset expectedEntitlementUpdatedAt = DateTimeOffset.Parse(
             "2019-12-27T18:11:19.117Z"
         );
-        Feature expectedFeature = new("refId");
+        Feature expectedFeature = new()
+        {
+            DisplayName = "displayName",
+            FeatureStatus = FeatureStatus.New,
+            FeatureType = FeatureType.Boolean,
+            RefID = "refId",
+        };
         bool expectedHasUnlimitedUsage = true;
-        bool expectedIsGranted = true;
-        ApiEnum<string, EntitlementResetPeriod> expectedResetPeriod = EntitlementResetPeriod.Year;
+        ApiEnum<string, SubscriptionFeatureEntitlementResetPeriod> expectedResetPeriod =
+            SubscriptionFeatureEntitlementResetPeriod.Year;
         double expectedUsageLimit = 0;
         DateTimeOffset expectedUsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedUsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedUsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        DateTimeOffset expectedValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedAccessDeniedReason, deserialized.AccessDeniedReason);
+        Assert.Equal(expectedIsGranted, deserialized.IsGranted);
+        Assert.Equal(expectedType, deserialized.Type);
         Assert.Equal(expectedCurrentUsage, deserialized.CurrentUsage);
         Assert.Equal(expectedEntitlementUpdatedAt, deserialized.EntitlementUpdatedAt);
         Assert.Equal(expectedFeature, deserialized.Feature);
         Assert.Equal(expectedHasUnlimitedUsage, deserialized.HasUnlimitedUsage);
-        Assert.Equal(expectedIsGranted, deserialized.IsGranted);
         Assert.Equal(expectedResetPeriod, deserialized.ResetPeriod);
         Assert.Equal(expectedUsageLimit, deserialized.UsageLimit);
         Assert.Equal(expectedUsagePeriodAnchor, deserialized.UsagePeriodAnchor);
         Assert.Equal(expectedUsagePeriodEnd, deserialized.UsagePeriodEnd);
         Assert.Equal(expectedUsagePeriodStart, deserialized.UsagePeriodStart);
+        Assert.Equal(expectedValidUntil, deserialized.ValidUntil);
     }
 
     [Fact]
     public void Validation_Works()
     {
-        var model = new Entitlement
+        var model = new SubscriptionFeatureEntitlement
         {
-            AccessDeniedReason = "accessDeniedReason",
+            AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+            IsGranted = true,
+            Type = SubscriptionFeatureEntitlementType.Feature,
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Feature = new("refId"),
+            Feature = new()
+            {
+                DisplayName = "displayName",
+                FeatureStatus = FeatureStatus.New,
+                FeatureType = FeatureType.Boolean,
+                RefID = "refId",
+            },
             HasUnlimitedUsage = true,
-            IsGranted = true,
-            ResetPeriod = EntitlementResetPeriod.Year,
+            ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
             UsageLimit = 0,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         model.Validate();
@@ -2070,39 +2247,43 @@ public class EntitlementTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Entitlement
+        var model = new SubscriptionFeatureEntitlement
         {
-            AccessDeniedReason = "accessDeniedReason",
-            EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Feature = new("refId"),
-            HasUnlimitedUsage = true,
-            ResetPeriod = EntitlementResetPeriod.Year,
+            AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+            IsGranted = true,
+            Type = SubscriptionFeatureEntitlementType.Feature,
+            ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
             UsageLimit = 0,
-            UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         Assert.Null(model.CurrentUsage);
         Assert.False(model.RawData.ContainsKey("currentUsage"));
-        Assert.Null(model.IsGranted);
-        Assert.False(model.RawData.ContainsKey("isGranted"));
+        Assert.Null(model.EntitlementUpdatedAt);
+        Assert.False(model.RawData.ContainsKey("entitlementUpdatedAt"));
+        Assert.Null(model.Feature);
+        Assert.False(model.RawData.ContainsKey("feature"));
+        Assert.Null(model.HasUnlimitedUsage);
+        Assert.False(model.RawData.ContainsKey("hasUnlimitedUsage"));
+        Assert.Null(model.UsagePeriodAnchor);
+        Assert.False(model.RawData.ContainsKey("usagePeriodAnchor"));
+        Assert.Null(model.UsagePeriodEnd);
+        Assert.False(model.RawData.ContainsKey("usagePeriodEnd"));
+        Assert.Null(model.UsagePeriodStart);
+        Assert.False(model.RawData.ContainsKey("usagePeriodStart"));
+        Assert.Null(model.ValidUntil);
+        Assert.False(model.RawData.ContainsKey("validUntil"));
     }
 
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Entitlement
+        var model = new SubscriptionFeatureEntitlement
         {
-            AccessDeniedReason = "accessDeniedReason",
-            EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Feature = new("refId"),
-            HasUnlimitedUsage = true,
-            ResetPeriod = EntitlementResetPeriod.Year,
+            AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+            IsGranted = true,
+            Type = SubscriptionFeatureEntitlementType.Feature,
+            ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
             UsageLimit = 0,
-            UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         model.Validate();
@@ -2111,47 +2292,63 @@ public class EntitlementTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new Entitlement
+        var model = new SubscriptionFeatureEntitlement
         {
-            AccessDeniedReason = "accessDeniedReason",
-            EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Feature = new("refId"),
-            HasUnlimitedUsage = true,
-            ResetPeriod = EntitlementResetPeriod.Year,
+            AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+            IsGranted = true,
+            Type = SubscriptionFeatureEntitlementType.Feature,
+            ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
             UsageLimit = 0,
-            UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
             // Null should be interpreted as omitted for these properties
             CurrentUsage = null,
-            IsGranted = null,
+            EntitlementUpdatedAt = null,
+            Feature = null,
+            HasUnlimitedUsage = null,
+            UsagePeriodAnchor = null,
+            UsagePeriodEnd = null,
+            UsagePeriodStart = null,
+            ValidUntil = null,
         };
 
         Assert.Null(model.CurrentUsage);
         Assert.False(model.RawData.ContainsKey("currentUsage"));
-        Assert.Null(model.IsGranted);
-        Assert.False(model.RawData.ContainsKey("isGranted"));
+        Assert.Null(model.EntitlementUpdatedAt);
+        Assert.False(model.RawData.ContainsKey("entitlementUpdatedAt"));
+        Assert.Null(model.Feature);
+        Assert.False(model.RawData.ContainsKey("feature"));
+        Assert.Null(model.HasUnlimitedUsage);
+        Assert.False(model.RawData.ContainsKey("hasUnlimitedUsage"));
+        Assert.Null(model.UsagePeriodAnchor);
+        Assert.False(model.RawData.ContainsKey("usagePeriodAnchor"));
+        Assert.Null(model.UsagePeriodEnd);
+        Assert.False(model.RawData.ContainsKey("usagePeriodEnd"));
+        Assert.Null(model.UsagePeriodStart);
+        Assert.False(model.RawData.ContainsKey("usagePeriodStart"));
+        Assert.Null(model.ValidUntil);
+        Assert.False(model.RawData.ContainsKey("validUntil"));
     }
 
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Entitlement
+        var model = new SubscriptionFeatureEntitlement
         {
-            AccessDeniedReason = "accessDeniedReason",
-            EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Feature = new("refId"),
-            HasUnlimitedUsage = true,
-            ResetPeriod = EntitlementResetPeriod.Year,
+            AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+            IsGranted = true,
+            Type = SubscriptionFeatureEntitlementType.Feature,
+            ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
             UsageLimit = 0,
-            UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
             // Null should be interpreted as omitted for these properties
             CurrentUsage = null,
-            IsGranted = null,
+            EntitlementUpdatedAt = null,
+            Feature = null,
+            HasUnlimitedUsage = null,
+            UsagePeriodAnchor = null,
+            UsagePeriodEnd = null,
+            UsagePeriodStart = null,
+            ValidUntil = null,
         };
 
         model.Validate();
@@ -2160,32 +2357,56 @@ public class EntitlementTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Entitlement { CurrentUsage = 0, IsGranted = true };
+        var model = new SubscriptionFeatureEntitlement
+        {
+            AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+            IsGranted = true,
+            Type = SubscriptionFeatureEntitlementType.Feature,
+            CurrentUsage = 0,
+            EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Feature = new()
+            {
+                DisplayName = "displayName",
+                FeatureStatus = FeatureStatus.New,
+                FeatureType = FeatureType.Boolean,
+                RefID = "refId",
+            },
+            HasUnlimitedUsage = true,
+            UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
 
-        Assert.Null(model.AccessDeniedReason);
-        Assert.False(model.RawData.ContainsKey("accessDeniedReason"));
-        Assert.Null(model.EntitlementUpdatedAt);
-        Assert.False(model.RawData.ContainsKey("entitlementUpdatedAt"));
-        Assert.Null(model.Feature);
-        Assert.False(model.RawData.ContainsKey("feature"));
-        Assert.Null(model.HasUnlimitedUsage);
-        Assert.False(model.RawData.ContainsKey("hasUnlimitedUsage"));
         Assert.Null(model.ResetPeriod);
         Assert.False(model.RawData.ContainsKey("resetPeriod"));
         Assert.Null(model.UsageLimit);
         Assert.False(model.RawData.ContainsKey("usageLimit"));
-        Assert.Null(model.UsagePeriodAnchor);
-        Assert.False(model.RawData.ContainsKey("usagePeriodAnchor"));
-        Assert.Null(model.UsagePeriodEnd);
-        Assert.False(model.RawData.ContainsKey("usagePeriodEnd"));
-        Assert.Null(model.UsagePeriodStart);
-        Assert.False(model.RawData.ContainsKey("usagePeriodStart"));
     }
 
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Entitlement { CurrentUsage = 0, IsGranted = true };
+        var model = new SubscriptionFeatureEntitlement
+        {
+            AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+            IsGranted = true,
+            Type = SubscriptionFeatureEntitlementType.Feature,
+            CurrentUsage = 0,
+            EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Feature = new()
+            {
+                DisplayName = "displayName",
+                FeatureStatus = FeatureStatus.New,
+                FeatureType = FeatureType.Boolean,
+                RefID = "refId",
+            },
+            HasUnlimitedUsage = true,
+            UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
 
         model.Validate();
     }
@@ -2193,59 +2414,61 @@ public class EntitlementTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new Entitlement
+        var model = new SubscriptionFeatureEntitlement
         {
-            CurrentUsage = 0,
+            AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
+            Type = SubscriptionFeatureEntitlementType.Feature,
+            CurrentUsage = 0,
+            EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Feature = new()
+            {
+                DisplayName = "displayName",
+                FeatureStatus = FeatureStatus.New,
+                FeatureType = FeatureType.Boolean,
+                RefID = "refId",
+            },
+            HasUnlimitedUsage = true,
+            UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
-            AccessDeniedReason = null,
-            EntitlementUpdatedAt = null,
-            Feature = null,
-            HasUnlimitedUsage = null,
             ResetPeriod = null,
             UsageLimit = null,
-            UsagePeriodAnchor = null,
-            UsagePeriodEnd = null,
-            UsagePeriodStart = null,
         };
 
-        Assert.Null(model.AccessDeniedReason);
-        Assert.True(model.RawData.ContainsKey("accessDeniedReason"));
-        Assert.Null(model.EntitlementUpdatedAt);
-        Assert.True(model.RawData.ContainsKey("entitlementUpdatedAt"));
-        Assert.Null(model.Feature);
-        Assert.True(model.RawData.ContainsKey("feature"));
-        Assert.Null(model.HasUnlimitedUsage);
-        Assert.True(model.RawData.ContainsKey("hasUnlimitedUsage"));
         Assert.Null(model.ResetPeriod);
         Assert.True(model.RawData.ContainsKey("resetPeriod"));
         Assert.Null(model.UsageLimit);
         Assert.True(model.RawData.ContainsKey("usageLimit"));
-        Assert.Null(model.UsagePeriodAnchor);
-        Assert.True(model.RawData.ContainsKey("usagePeriodAnchor"));
-        Assert.Null(model.UsagePeriodEnd);
-        Assert.True(model.RawData.ContainsKey("usagePeriodEnd"));
-        Assert.Null(model.UsagePeriodStart);
-        Assert.True(model.RawData.ContainsKey("usagePeriodStart"));
     }
 
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Entitlement
+        var model = new SubscriptionFeatureEntitlement
         {
-            CurrentUsage = 0,
+            AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
+            Type = SubscriptionFeatureEntitlementType.Feature,
+            CurrentUsage = 0,
+            EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Feature = new()
+            {
+                DisplayName = "displayName",
+                FeatureStatus = FeatureStatus.New,
+                FeatureType = FeatureType.Boolean,
+                RefID = "refId",
+            },
+            HasUnlimitedUsage = true,
+            UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
-            AccessDeniedReason = null,
-            EntitlementUpdatedAt = null,
-            Feature = null,
-            HasUnlimitedUsage = null,
             ResetPeriod = null,
             UsageLimit = null,
-            UsagePeriodAnchor = null,
-            UsagePeriodEnd = null,
-            UsagePeriodStart = null,
         };
 
         model.Validate();
@@ -2254,105 +2477,63 @@ public class EntitlementTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Entitlement
+        var model = new SubscriptionFeatureEntitlement
         {
-            AccessDeniedReason = "accessDeniedReason",
+            AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
+            IsGranted = true,
+            Type = SubscriptionFeatureEntitlementType.Feature,
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Feature = new("refId"),
+            Feature = new()
+            {
+                DisplayName = "displayName",
+                FeatureStatus = FeatureStatus.New,
+                FeatureType = FeatureType.Boolean,
+                RefID = "refId",
+            },
             HasUnlimitedUsage = true,
-            IsGranted = true,
-            ResetPeriod = EntitlementResetPeriod.Year,
+            ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
             UsageLimit = 0,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsagePeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
-        Entitlement copied = new(model);
+        SubscriptionFeatureEntitlement copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class FeatureTest : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new Feature { RefID = "refId" };
-
-        string expectedRefID = "refId";
-
-        Assert.Equal(expectedRefID, model.RefID);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new Feature { RefID = "refId" };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Feature>(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new Feature { RefID = "refId" };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Feature>(
-            element,
-            ModelBase.SerializerOptions
-        );
-        Assert.NotNull(deserialized);
-
-        string expectedRefID = "refId";
-
-        Assert.Equal(expectedRefID, deserialized.RefID);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new Feature { RefID = "refId" };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new Feature { RefID = "refId" };
-
-        Feature copied = new(model);
-
-        Assert.Equal(model, copied);
-    }
-}
-
-public class EntitlementResetPeriodTest : TestBase
+public class AccessDeniedReasonTest : TestBase
 {
     [Theory]
-    [InlineData(EntitlementResetPeriod.Year)]
-    [InlineData(EntitlementResetPeriod.Month)]
-    [InlineData(EntitlementResetPeriod.Week)]
-    [InlineData(EntitlementResetPeriod.Day)]
-    [InlineData(EntitlementResetPeriod.Hour)]
-    public void Validation_Works(EntitlementResetPeriod rawValue)
+    [InlineData(AccessDeniedReason.FeatureNotFound)]
+    [InlineData(AccessDeniedReason.CustomerNotFound)]
+    [InlineData(AccessDeniedReason.CustomerIsArchived)]
+    [InlineData(AccessDeniedReason.CustomerResourceNotFound)]
+    [InlineData(AccessDeniedReason.NoActiveSubscription)]
+    [InlineData(AccessDeniedReason.NoFeatureEntitlementInSubscription)]
+    [InlineData(AccessDeniedReason.RequestedUsageExceedingLimit)]
+    [InlineData(AccessDeniedReason.RequestedValuesMismatch)]
+    [InlineData(AccessDeniedReason.BudgetExceeded)]
+    [InlineData(AccessDeniedReason.Unknown)]
+    [InlineData(AccessDeniedReason.FeatureTypeMismatch)]
+    [InlineData(AccessDeniedReason.Revoked)]
+    [InlineData(AccessDeniedReason.InsufficientCredits)]
+    [InlineData(AccessDeniedReason.EntitlementNotFound)]
+    public void Validation_Works(AccessDeniedReason rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, EntitlementResetPeriod> value = rawValue;
+        ApiEnum<string, AccessDeniedReason> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, EntitlementResetPeriod>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, AccessDeniedReason>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -2362,18 +2543,27 @@ public class EntitlementResetPeriodTest : TestBase
     }
 
     [Theory]
-    [InlineData(EntitlementResetPeriod.Year)]
-    [InlineData(EntitlementResetPeriod.Month)]
-    [InlineData(EntitlementResetPeriod.Week)]
-    [InlineData(EntitlementResetPeriod.Day)]
-    [InlineData(EntitlementResetPeriod.Hour)]
-    public void SerializationRoundtrip_Works(EntitlementResetPeriod rawValue)
+    [InlineData(AccessDeniedReason.FeatureNotFound)]
+    [InlineData(AccessDeniedReason.CustomerNotFound)]
+    [InlineData(AccessDeniedReason.CustomerIsArchived)]
+    [InlineData(AccessDeniedReason.CustomerResourceNotFound)]
+    [InlineData(AccessDeniedReason.NoActiveSubscription)]
+    [InlineData(AccessDeniedReason.NoFeatureEntitlementInSubscription)]
+    [InlineData(AccessDeniedReason.RequestedUsageExceedingLimit)]
+    [InlineData(AccessDeniedReason.RequestedValuesMismatch)]
+    [InlineData(AccessDeniedReason.BudgetExceeded)]
+    [InlineData(AccessDeniedReason.Unknown)]
+    [InlineData(AccessDeniedReason.FeatureTypeMismatch)]
+    [InlineData(AccessDeniedReason.Revoked)]
+    [InlineData(AccessDeniedReason.InsufficientCredits)]
+    [InlineData(AccessDeniedReason.EntitlementNotFound)]
+    public void SerializationRoundtrip_Works(AccessDeniedReason rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, EntitlementResetPeriod> value = rawValue;
+        ApiEnum<string, AccessDeniedReason> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, EntitlementResetPeriod>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, AccessDeniedReason>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -2384,15 +2574,791 @@ public class EntitlementResetPeriodTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, EntitlementResetPeriod>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, AccessDeniedReason>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, EntitlementResetPeriod>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, AccessDeniedReason>>(
             json,
             ModelBase.SerializerOptions
         );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class SubscriptionFeatureEntitlementTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(SubscriptionFeatureEntitlementType.Feature)]
+    public void Validation_Works(SubscriptionFeatureEntitlementType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionFeatureEntitlementType> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionFeatureEntitlementType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(SubscriptionFeatureEntitlementType.Feature)]
+    public void SerializationRoundtrip_Works(SubscriptionFeatureEntitlementType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionFeatureEntitlementType> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionFeatureEntitlementType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionFeatureEntitlementType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionFeatureEntitlementType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class FeatureTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new Feature
+        {
+            DisplayName = "displayName",
+            FeatureStatus = FeatureStatus.New,
+            FeatureType = FeatureType.Boolean,
+            RefID = "refId",
+        };
+
+        string expectedDisplayName = "displayName";
+        ApiEnum<string, FeatureStatus> expectedFeatureStatus = FeatureStatus.New;
+        ApiEnum<string, FeatureType> expectedFeatureType = FeatureType.Boolean;
+        string expectedRefID = "refId";
+
+        Assert.Equal(expectedDisplayName, model.DisplayName);
+        Assert.Equal(expectedFeatureStatus, model.FeatureStatus);
+        Assert.Equal(expectedFeatureType, model.FeatureType);
+        Assert.Equal(expectedRefID, model.RefID);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new Feature
+        {
+            DisplayName = "displayName",
+            FeatureStatus = FeatureStatus.New,
+            FeatureType = FeatureType.Boolean,
+            RefID = "refId",
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Feature>(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new Feature
+        {
+            DisplayName = "displayName",
+            FeatureStatus = FeatureStatus.New,
+            FeatureType = FeatureType.Boolean,
+            RefID = "refId",
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Feature>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        string expectedDisplayName = "displayName";
+        ApiEnum<string, FeatureStatus> expectedFeatureStatus = FeatureStatus.New;
+        ApiEnum<string, FeatureType> expectedFeatureType = FeatureType.Boolean;
+        string expectedRefID = "refId";
+
+        Assert.Equal(expectedDisplayName, deserialized.DisplayName);
+        Assert.Equal(expectedFeatureStatus, deserialized.FeatureStatus);
+        Assert.Equal(expectedFeatureType, deserialized.FeatureType);
+        Assert.Equal(expectedRefID, deserialized.RefID);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new Feature
+        {
+            DisplayName = "displayName",
+            FeatureStatus = FeatureStatus.New,
+            FeatureType = FeatureType.Boolean,
+            RefID = "refId",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Feature
+        {
+            DisplayName = "displayName",
+            FeatureStatus = FeatureStatus.New,
+            FeatureType = FeatureType.Boolean,
+            RefID = "refId",
+        };
+
+        Feature copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class FeatureStatusTest : TestBase
+{
+    [Theory]
+    [InlineData(FeatureStatus.New)]
+    [InlineData(FeatureStatus.Suspended)]
+    [InlineData(FeatureStatus.Active)]
+    public void Validation_Works(FeatureStatus rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, FeatureStatus> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, FeatureStatus>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(FeatureStatus.New)]
+    [InlineData(FeatureStatus.Suspended)]
+    [InlineData(FeatureStatus.Active)]
+    public void SerializationRoundtrip_Works(FeatureStatus rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, FeatureStatus> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, FeatureStatus>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, FeatureStatus>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, FeatureStatus>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class FeatureTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(FeatureType.Boolean)]
+    [InlineData(FeatureType.Number)]
+    [InlineData(FeatureType.Enum)]
+    public void Validation_Works(FeatureType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, FeatureType> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, FeatureType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(FeatureType.Boolean)]
+    [InlineData(FeatureType.Number)]
+    [InlineData(FeatureType.Enum)]
+    public void SerializationRoundtrip_Works(FeatureType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, FeatureType> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, FeatureType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, FeatureType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, FeatureType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class SubscriptionFeatureEntitlementResetPeriodTest : TestBase
+{
+    [Theory]
+    [InlineData(SubscriptionFeatureEntitlementResetPeriod.Year)]
+    [InlineData(SubscriptionFeatureEntitlementResetPeriod.Month)]
+    [InlineData(SubscriptionFeatureEntitlementResetPeriod.Week)]
+    [InlineData(SubscriptionFeatureEntitlementResetPeriod.Day)]
+    [InlineData(SubscriptionFeatureEntitlementResetPeriod.Hour)]
+    public void Validation_Works(SubscriptionFeatureEntitlementResetPeriod rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionFeatureEntitlementResetPeriod> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionFeatureEntitlementResetPeriod>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(SubscriptionFeatureEntitlementResetPeriod.Year)]
+    [InlineData(SubscriptionFeatureEntitlementResetPeriod.Month)]
+    [InlineData(SubscriptionFeatureEntitlementResetPeriod.Week)]
+    [InlineData(SubscriptionFeatureEntitlementResetPeriod.Day)]
+    [InlineData(SubscriptionFeatureEntitlementResetPeriod.Hour)]
+    public void SerializationRoundtrip_Works(SubscriptionFeatureEntitlementResetPeriod rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionFeatureEntitlementResetPeriod> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionFeatureEntitlementResetPeriod>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionFeatureEntitlementResetPeriod>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionFeatureEntitlementResetPeriod>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class SubscriptionCreditEntitlementTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new SubscriptionCreditEntitlement
+        {
+            AccessDeniedReason = SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound,
+            Currency = new("currencyId"),
+            CurrentUsage = 0,
+            IsGranted = true,
+            Type = SubscriptionCreditEntitlementType.Credit,
+            UsageLimit = 0,
+            UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        ApiEnum<
+            string,
+            SubscriptionCreditEntitlementAccessDeniedReason
+        > expectedAccessDeniedReason =
+            SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound;
+        SubscriptionCreditEntitlementCurrency expectedCurrency = new("currencyId");
+        double expectedCurrentUsage = 0;
+        bool expectedIsGranted = true;
+        ApiEnum<string, SubscriptionCreditEntitlementType> expectedType =
+            SubscriptionCreditEntitlementType.Credit;
+        double expectedUsageLimit = 0;
+        DateTimeOffset expectedUsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        DateTimeOffset expectedEntitlementUpdatedAt = DateTimeOffset.Parse(
+            "2019-12-27T18:11:19.117Z"
+        );
+        DateTimeOffset expectedValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+
+        Assert.Equal(expectedAccessDeniedReason, model.AccessDeniedReason);
+        Assert.Equal(expectedCurrency, model.Currency);
+        Assert.Equal(expectedCurrentUsage, model.CurrentUsage);
+        Assert.Equal(expectedIsGranted, model.IsGranted);
+        Assert.Equal(expectedType, model.Type);
+        Assert.Equal(expectedUsageLimit, model.UsageLimit);
+        Assert.Equal(expectedUsageUpdatedAt, model.UsageUpdatedAt);
+        Assert.Equal(expectedEntitlementUpdatedAt, model.EntitlementUpdatedAt);
+        Assert.Equal(expectedValidUntil, model.ValidUntil);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new SubscriptionCreditEntitlement
+        {
+            AccessDeniedReason = SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound,
+            Currency = new("currencyId"),
+            CurrentUsage = 0,
+            IsGranted = true,
+            Type = SubscriptionCreditEntitlementType.Credit,
+            UsageLimit = 0,
+            UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<SubscriptionCreditEntitlement>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new SubscriptionCreditEntitlement
+        {
+            AccessDeniedReason = SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound,
+            Currency = new("currencyId"),
+            CurrentUsage = 0,
+            IsGranted = true,
+            Type = SubscriptionCreditEntitlementType.Credit,
+            UsageLimit = 0,
+            UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<SubscriptionCreditEntitlement>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        ApiEnum<
+            string,
+            SubscriptionCreditEntitlementAccessDeniedReason
+        > expectedAccessDeniedReason =
+            SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound;
+        SubscriptionCreditEntitlementCurrency expectedCurrency = new("currencyId");
+        double expectedCurrentUsage = 0;
+        bool expectedIsGranted = true;
+        ApiEnum<string, SubscriptionCreditEntitlementType> expectedType =
+            SubscriptionCreditEntitlementType.Credit;
+        double expectedUsageLimit = 0;
+        DateTimeOffset expectedUsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        DateTimeOffset expectedEntitlementUpdatedAt = DateTimeOffset.Parse(
+            "2019-12-27T18:11:19.117Z"
+        );
+        DateTimeOffset expectedValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+
+        Assert.Equal(expectedAccessDeniedReason, deserialized.AccessDeniedReason);
+        Assert.Equal(expectedCurrency, deserialized.Currency);
+        Assert.Equal(expectedCurrentUsage, deserialized.CurrentUsage);
+        Assert.Equal(expectedIsGranted, deserialized.IsGranted);
+        Assert.Equal(expectedType, deserialized.Type);
+        Assert.Equal(expectedUsageLimit, deserialized.UsageLimit);
+        Assert.Equal(expectedUsageUpdatedAt, deserialized.UsageUpdatedAt);
+        Assert.Equal(expectedEntitlementUpdatedAt, deserialized.EntitlementUpdatedAt);
+        Assert.Equal(expectedValidUntil, deserialized.ValidUntil);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new SubscriptionCreditEntitlement
+        {
+            AccessDeniedReason = SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound,
+            Currency = new("currencyId"),
+            CurrentUsage = 0,
+            IsGranted = true,
+            Type = SubscriptionCreditEntitlementType.Credit,
+            UsageLimit = 0,
+            UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new SubscriptionCreditEntitlement
+        {
+            AccessDeniedReason = SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound,
+            Currency = new("currencyId"),
+            CurrentUsage = 0,
+            IsGranted = true,
+            Type = SubscriptionCreditEntitlementType.Credit,
+            UsageLimit = 0,
+            UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        Assert.Null(model.EntitlementUpdatedAt);
+        Assert.False(model.RawData.ContainsKey("entitlementUpdatedAt"));
+        Assert.Null(model.ValidUntil);
+        Assert.False(model.RawData.ContainsKey("validUntil"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new SubscriptionCreditEntitlement
+        {
+            AccessDeniedReason = SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound,
+            Currency = new("currencyId"),
+            CurrentUsage = 0,
+            IsGranted = true,
+            Type = SubscriptionCreditEntitlementType.Credit,
+            UsageLimit = 0,
+            UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
+    {
+        var model = new SubscriptionCreditEntitlement
+        {
+            AccessDeniedReason = SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound,
+            Currency = new("currencyId"),
+            CurrentUsage = 0,
+            IsGranted = true,
+            Type = SubscriptionCreditEntitlementType.Credit,
+            UsageLimit = 0,
+            UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+
+            // Null should be interpreted as omitted for these properties
+            EntitlementUpdatedAt = null,
+            ValidUntil = null,
+        };
+
+        Assert.Null(model.EntitlementUpdatedAt);
+        Assert.False(model.RawData.ContainsKey("entitlementUpdatedAt"));
+        Assert.Null(model.ValidUntil);
+        Assert.False(model.RawData.ContainsKey("validUntil"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new SubscriptionCreditEntitlement
+        {
+            AccessDeniedReason = SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound,
+            Currency = new("currencyId"),
+            CurrentUsage = 0,
+            IsGranted = true,
+            Type = SubscriptionCreditEntitlementType.Credit,
+            UsageLimit = 0,
+            UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+
+            // Null should be interpreted as omitted for these properties
+            EntitlementUpdatedAt = null,
+            ValidUntil = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionCreditEntitlement
+        {
+            AccessDeniedReason = SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound,
+            Currency = new("currencyId"),
+            CurrentUsage = 0,
+            IsGranted = true,
+            Type = SubscriptionCreditEntitlementType.Credit,
+            UsageLimit = 0,
+            UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        SubscriptionCreditEntitlement copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class SubscriptionCreditEntitlementAccessDeniedReasonTest : TestBase
+{
+    [Theory]
+    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound)]
+    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.CustomerNotFound)]
+    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.CustomerIsArchived)]
+    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.CustomerResourceNotFound)]
+    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.NoActiveSubscription)]
+    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.NoFeatureEntitlementInSubscription)]
+    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.RequestedUsageExceedingLimit)]
+    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.RequestedValuesMismatch)]
+    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.BudgetExceeded)]
+    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.Unknown)]
+    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.FeatureTypeMismatch)]
+    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.Revoked)]
+    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.InsufficientCredits)]
+    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.EntitlementNotFound)]
+    public void Validation_Works(SubscriptionCreditEntitlementAccessDeniedReason rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionCreditEntitlementAccessDeniedReason> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionCreditEntitlementAccessDeniedReason>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound)]
+    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.CustomerNotFound)]
+    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.CustomerIsArchived)]
+    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.CustomerResourceNotFound)]
+    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.NoActiveSubscription)]
+    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.NoFeatureEntitlementInSubscription)]
+    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.RequestedUsageExceedingLimit)]
+    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.RequestedValuesMismatch)]
+    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.BudgetExceeded)]
+    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.Unknown)]
+    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.FeatureTypeMismatch)]
+    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.Revoked)]
+    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.InsufficientCredits)]
+    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.EntitlementNotFound)]
+    public void SerializationRoundtrip_Works(
+        SubscriptionCreditEntitlementAccessDeniedReason rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionCreditEntitlementAccessDeniedReason> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionCreditEntitlementAccessDeniedReason>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionCreditEntitlementAccessDeniedReason>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionCreditEntitlementAccessDeniedReason>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class SubscriptionCreditEntitlementCurrencyTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new SubscriptionCreditEntitlementCurrency { CurrencyID = "currencyId" };
+
+        string expectedCurrencyID = "currencyId";
+
+        Assert.Equal(expectedCurrencyID, model.CurrencyID);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new SubscriptionCreditEntitlementCurrency { CurrencyID = "currencyId" };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<SubscriptionCreditEntitlementCurrency>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new SubscriptionCreditEntitlementCurrency { CurrencyID = "currencyId" };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<SubscriptionCreditEntitlementCurrency>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        string expectedCurrencyID = "currencyId";
+
+        Assert.Equal(expectedCurrencyID, deserialized.CurrencyID);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new SubscriptionCreditEntitlementCurrency { CurrencyID = "currencyId" };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionCreditEntitlementCurrency { CurrencyID = "currencyId" };
+
+        SubscriptionCreditEntitlementCurrency copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class SubscriptionCreditEntitlementTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(SubscriptionCreditEntitlementType.Credit)]
+    public void Validation_Works(SubscriptionCreditEntitlementType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionCreditEntitlementType> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionCreditEntitlementType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(SubscriptionCreditEntitlementType.Credit)]
+    public void SerializationRoundtrip_Works(SubscriptionCreditEntitlementType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionCreditEntitlementType> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionCreditEntitlementType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionCreditEntitlementType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionCreditEntitlementType>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }

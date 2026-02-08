@@ -27,7 +27,7 @@ public interface IFutureUpdateService
     IFutureUpdateService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Cancel pending payment update
+    /// Cancels a subscription update that is pending payment completion.
     /// </summary>
     Task<CancelSubscription> CancelPendingPayment(
         FutureUpdateCancelPendingPaymentParams parameters,
@@ -42,7 +42,7 @@ public interface IFutureUpdateService
     );
 
     /// <summary>
-    /// Cancel scheduled update
+    /// Cancels a scheduled subscription update, such as a future downgrade or plan change.
     /// </summary>
     Task<CancelSubscription> CancelSchedule(
         FutureUpdateCancelScheduleParams parameters,
