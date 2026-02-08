@@ -19,11 +19,11 @@ public class SubscriptionProvisionResponseTest : TestBase
                 ID = "id",
                 Entitlements =
                 [
-                    new SubscriptionFeatureEntitlement()
+                    new UnionMember0()
                     {
                         AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
                         IsGranted = true,
-                        Type = SubscriptionFeatureEntitlementType.Feature,
+                        Type = UnionMember0Type.Feature,
                         CurrentUsage = 0,
                         EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         Feature = new()
@@ -34,7 +34,7 @@ public class SubscriptionProvisionResponseTest : TestBase
                             RefID = "refId",
                         },
                         HasUnlimitedUsage = true,
-                        ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+                        ResetPeriod = UnionMember0ResetPeriod.Year,
                         UsageLimit = 0,
                         UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -118,11 +118,11 @@ public class SubscriptionProvisionResponseTest : TestBase
             ID = "id",
             Entitlements =
             [
-                new SubscriptionFeatureEntitlement()
+                new UnionMember0()
                 {
                     AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
                     IsGranted = true,
-                    Type = SubscriptionFeatureEntitlementType.Feature,
+                    Type = UnionMember0Type.Feature,
                     CurrentUsage = 0,
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Feature = new()
@@ -133,7 +133,7 @@ public class SubscriptionProvisionResponseTest : TestBase
                         RefID = "refId",
                     },
                     HasUnlimitedUsage = true,
-                    ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+                    ResetPeriod = UnionMember0ResetPeriod.Year,
                     UsageLimit = 0,
                     UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -224,11 +224,11 @@ public class SubscriptionProvisionResponseTest : TestBase
                 ID = "id",
                 Entitlements =
                 [
-                    new SubscriptionFeatureEntitlement()
+                    new UnionMember0()
                     {
                         AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
                         IsGranted = true,
-                        Type = SubscriptionFeatureEntitlementType.Feature,
+                        Type = UnionMember0Type.Feature,
                         CurrentUsage = 0,
                         EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         Feature = new()
@@ -239,7 +239,7 @@ public class SubscriptionProvisionResponseTest : TestBase
                             RefID = "refId",
                         },
                         HasUnlimitedUsage = true,
-                        ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+                        ResetPeriod = UnionMember0ResetPeriod.Year,
                         UsageLimit = 0,
                         UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -337,11 +337,11 @@ public class SubscriptionProvisionResponseTest : TestBase
                 ID = "id",
                 Entitlements =
                 [
-                    new SubscriptionFeatureEntitlement()
+                    new UnionMember0()
                     {
                         AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
                         IsGranted = true,
-                        Type = SubscriptionFeatureEntitlementType.Feature,
+                        Type = UnionMember0Type.Feature,
                         CurrentUsage = 0,
                         EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         Feature = new()
@@ -352,7 +352,7 @@ public class SubscriptionProvisionResponseTest : TestBase
                             RefID = "refId",
                         },
                         HasUnlimitedUsage = true,
-                        ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+                        ResetPeriod = UnionMember0ResetPeriod.Year,
                         UsageLimit = 0,
                         UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -443,11 +443,11 @@ public class SubscriptionProvisionResponseTest : TestBase
             ID = "id",
             Entitlements =
             [
-                new SubscriptionFeatureEntitlement()
+                new UnionMember0()
                 {
                     AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
                     IsGranted = true,
-                    Type = SubscriptionFeatureEntitlementType.Feature,
+                    Type = UnionMember0Type.Feature,
                     CurrentUsage = 0,
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Feature = new()
@@ -458,7 +458,7 @@ public class SubscriptionProvisionResponseTest : TestBase
                         RefID = "refId",
                     },
                     HasUnlimitedUsage = true,
-                    ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+                    ResetPeriod = UnionMember0ResetPeriod.Year,
                     UsageLimit = 0,
                     UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -549,11 +549,11 @@ public class SubscriptionProvisionResponseTest : TestBase
                 ID = "id",
                 Entitlements =
                 [
-                    new SubscriptionFeatureEntitlement()
+                    new UnionMember0()
                     {
                         AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
                         IsGranted = true,
-                        Type = SubscriptionFeatureEntitlementType.Feature,
+                        Type = UnionMember0Type.Feature,
                         CurrentUsage = 0,
                         EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         Feature = new()
@@ -564,7 +564,7 @@ public class SubscriptionProvisionResponseTest : TestBase
                             RefID = "refId",
                         },
                         HasUnlimitedUsage = true,
-                        ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+                        ResetPeriod = UnionMember0ResetPeriod.Year,
                         UsageLimit = 0,
                         UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -656,11 +656,11 @@ public class SubscriptionProvisionResponseTest : TestBase
                 ID = "id",
                 Entitlements =
                 [
-                    new SubscriptionFeatureEntitlement()
+                    new UnionMember0()
                     {
                         AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
                         IsGranted = true,
-                        Type = SubscriptionFeatureEntitlementType.Feature,
+                        Type = UnionMember0Type.Feature,
                         CurrentUsage = 0,
                         EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         Feature = new()
@@ -671,7 +671,7 @@ public class SubscriptionProvisionResponseTest : TestBase
                             RefID = "refId",
                         },
                         HasUnlimitedUsage = true,
-                        ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+                        ResetPeriod = UnionMember0ResetPeriod.Year,
                         UsageLimit = 0,
                         UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -766,11 +766,11 @@ public class SubscriptionProvisionResponseDataTest : TestBase
             ID = "id",
             Entitlements =
             [
-                new SubscriptionFeatureEntitlement()
+                new UnionMember0()
                 {
                     AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
                     IsGranted = true,
-                    Type = SubscriptionFeatureEntitlementType.Feature,
+                    Type = UnionMember0Type.Feature,
                     CurrentUsage = 0,
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Feature = new()
@@ -781,7 +781,7 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                         RefID = "refId",
                     },
                     HasUnlimitedUsage = true,
-                    ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+                    ResetPeriod = UnionMember0ResetPeriod.Year,
                     UsageLimit = 0,
                     UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -862,11 +862,11 @@ public class SubscriptionProvisionResponseDataTest : TestBase
         string expectedID = "id";
         List<Entitlement> expectedEntitlements =
         [
-            new SubscriptionFeatureEntitlement()
+            new UnionMember0()
             {
                 AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
                 IsGranted = true,
-                Type = SubscriptionFeatureEntitlementType.Feature,
+                Type = UnionMember0Type.Feature,
                 CurrentUsage = 0,
                 EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Feature = new()
@@ -877,7 +877,7 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                     RefID = "refId",
                 },
                 HasUnlimitedUsage = true,
-                ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+                ResetPeriod = UnionMember0ResetPeriod.Year,
                 UsageLimit = 0,
                 UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -977,11 +977,11 @@ public class SubscriptionProvisionResponseDataTest : TestBase
             ID = "id",
             Entitlements =
             [
-                new SubscriptionFeatureEntitlement()
+                new UnionMember0()
                 {
                     AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
                     IsGranted = true,
-                    Type = SubscriptionFeatureEntitlementType.Feature,
+                    Type = UnionMember0Type.Feature,
                     CurrentUsage = 0,
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Feature = new()
@@ -992,7 +992,7 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                         RefID = "refId",
                     },
                     HasUnlimitedUsage = true,
-                    ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+                    ResetPeriod = UnionMember0ResetPeriod.Year,
                     UsageLimit = 0,
                     UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1087,11 +1087,11 @@ public class SubscriptionProvisionResponseDataTest : TestBase
             ID = "id",
             Entitlements =
             [
-                new SubscriptionFeatureEntitlement()
+                new UnionMember0()
                 {
                     AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
                     IsGranted = true,
-                    Type = SubscriptionFeatureEntitlementType.Feature,
+                    Type = UnionMember0Type.Feature,
                     CurrentUsage = 0,
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Feature = new()
@@ -1102,7 +1102,7 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                         RefID = "refId",
                     },
                     HasUnlimitedUsage = true,
-                    ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+                    ResetPeriod = UnionMember0ResetPeriod.Year,
                     UsageLimit = 0,
                     UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1190,11 +1190,11 @@ public class SubscriptionProvisionResponseDataTest : TestBase
         string expectedID = "id";
         List<Entitlement> expectedEntitlements =
         [
-            new SubscriptionFeatureEntitlement()
+            new UnionMember0()
             {
                 AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
                 IsGranted = true,
-                Type = SubscriptionFeatureEntitlementType.Feature,
+                Type = UnionMember0Type.Feature,
                 CurrentUsage = 0,
                 EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Feature = new()
@@ -1205,7 +1205,7 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                     RefID = "refId",
                 },
                 HasUnlimitedUsage = true,
-                ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+                ResetPeriod = UnionMember0ResetPeriod.Year,
                 UsageLimit = 0,
                 UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1305,11 +1305,11 @@ public class SubscriptionProvisionResponseDataTest : TestBase
             ID = "id",
             Entitlements =
             [
-                new SubscriptionFeatureEntitlement()
+                new UnionMember0()
                 {
                     AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
                     IsGranted = true,
-                    Type = SubscriptionFeatureEntitlementType.Feature,
+                    Type = UnionMember0Type.Feature,
                     CurrentUsage = 0,
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Feature = new()
@@ -1320,7 +1320,7 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                         RefID = "refId",
                     },
                     HasUnlimitedUsage = true,
-                    ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+                    ResetPeriod = UnionMember0ResetPeriod.Year,
                     UsageLimit = 0,
                     UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1409,11 +1409,11 @@ public class SubscriptionProvisionResponseDataTest : TestBase
             ID = "id",
             Entitlements =
             [
-                new SubscriptionFeatureEntitlement()
+                new UnionMember0()
                 {
                     AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
                     IsGranted = true,
-                    Type = SubscriptionFeatureEntitlementType.Feature,
+                    Type = UnionMember0Type.Feature,
                     CurrentUsage = 0,
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Feature = new()
@@ -1424,7 +1424,7 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                         RefID = "refId",
                     },
                     HasUnlimitedUsage = true,
-                    ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+                    ResetPeriod = UnionMember0ResetPeriod.Year,
                     UsageLimit = 0,
                     UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1515,11 +1515,11 @@ public class SubscriptionProvisionResponseDataTest : TestBase
             ID = "id",
             Entitlements =
             [
-                new SubscriptionFeatureEntitlement()
+                new UnionMember0()
                 {
                     AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
                     IsGranted = true,
-                    Type = SubscriptionFeatureEntitlementType.Feature,
+                    Type = UnionMember0Type.Feature,
                     CurrentUsage = 0,
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Feature = new()
@@ -1530,7 +1530,7 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                         RefID = "refId",
                     },
                     HasUnlimitedUsage = true,
-                    ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+                    ResetPeriod = UnionMember0ResetPeriod.Year,
                     UsageLimit = 0,
                     UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1616,11 +1616,11 @@ public class SubscriptionProvisionResponseDataTest : TestBase
             ID = "id",
             Entitlements =
             [
-                new SubscriptionFeatureEntitlement()
+                new UnionMember0()
                 {
                     AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
                     IsGranted = true,
-                    Type = SubscriptionFeatureEntitlementType.Feature,
+                    Type = UnionMember0Type.Feature,
                     CurrentUsage = 0,
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Feature = new()
@@ -1631,7 +1631,7 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                         RefID = "refId",
                     },
                     HasUnlimitedUsage = true,
-                    ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+                    ResetPeriod = UnionMember0ResetPeriod.Year,
                     UsageLimit = 0,
                     UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1727,11 +1727,11 @@ public class SubscriptionProvisionResponseDataTest : TestBase
             ID = "id",
             Entitlements =
             [
-                new SubscriptionFeatureEntitlement()
+                new UnionMember0()
                 {
                     AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
                     IsGranted = true,
-                    Type = SubscriptionFeatureEntitlementType.Feature,
+                    Type = UnionMember0Type.Feature,
                     CurrentUsage = 0,
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Feature = new()
@@ -1742,7 +1742,7 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                         RefID = "refId",
                     },
                     HasUnlimitedUsage = true,
-                    ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+                    ResetPeriod = UnionMember0ResetPeriod.Year,
                     UsageLimit = 0,
                     UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1833,11 +1833,11 @@ public class SubscriptionProvisionResponseDataTest : TestBase
             ID = "id",
             Entitlements =
             [
-                new SubscriptionFeatureEntitlement()
+                new UnionMember0()
                 {
                     AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
                     IsGranted = true,
-                    Type = SubscriptionFeatureEntitlementType.Feature,
+                    Type = UnionMember0Type.Feature,
                     CurrentUsage = 0,
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Feature = new()
@@ -1848,7 +1848,7 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                         RefID = "refId",
                     },
                     HasUnlimitedUsage = true,
-                    ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+                    ResetPeriod = UnionMember0ResetPeriod.Year,
                     UsageLimit = 0,
                     UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1935,13 +1935,13 @@ public class SubscriptionProvisionResponseDataTest : TestBase
 public class EntitlementTest : TestBase
 {
     [Fact]
-    public void SubscriptionFeatureValidationWorks()
+    public void UnionMember0ValidationWorks()
     {
-        Entitlement value = new SubscriptionFeatureEntitlement()
+        Entitlement value = new UnionMember0()
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
-            Type = SubscriptionFeatureEntitlementType.Feature,
+            Type = UnionMember0Type.Feature,
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Feature = new()
@@ -1952,7 +1952,7 @@ public class EntitlementTest : TestBase
                 RefID = "refId",
             },
             HasUnlimitedUsage = true,
-            ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+            ResetPeriod = UnionMember0ResetPeriod.Year,
             UsageLimit = 0,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1963,15 +1963,15 @@ public class EntitlementTest : TestBase
     }
 
     [Fact]
-    public void SubscriptionCreditValidationWorks()
+    public void UnionMember1ValidationWorks()
     {
-        Entitlement value = new SubscriptionCreditEntitlement()
+        Entitlement value = new UnionMember1()
         {
-            AccessDeniedReason = SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = UnionMember1AccessDeniedReason.FeatureNotFound,
             Currency = new("currencyId"),
             CurrentUsage = 0,
             IsGranted = true,
-            Type = SubscriptionCreditEntitlementType.Credit,
+            Type = UnionMember1Type.Credit,
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1981,13 +1981,13 @@ public class EntitlementTest : TestBase
     }
 
     [Fact]
-    public void SubscriptionFeatureSerializationRoundtripWorks()
+    public void UnionMember0SerializationRoundtripWorks()
     {
-        Entitlement value = new SubscriptionFeatureEntitlement()
+        Entitlement value = new UnionMember0()
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
-            Type = SubscriptionFeatureEntitlementType.Feature,
+            Type = UnionMember0Type.Feature,
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Feature = new()
@@ -1998,7 +1998,7 @@ public class EntitlementTest : TestBase
                 RefID = "refId",
             },
             HasUnlimitedUsage = true,
-            ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+            ResetPeriod = UnionMember0ResetPeriod.Year,
             UsageLimit = 0,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2015,15 +2015,15 @@ public class EntitlementTest : TestBase
     }
 
     [Fact]
-    public void SubscriptionCreditSerializationRoundtripWorks()
+    public void UnionMember1SerializationRoundtripWorks()
     {
-        Entitlement value = new SubscriptionCreditEntitlement()
+        Entitlement value = new UnionMember1()
         {
-            AccessDeniedReason = SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = UnionMember1AccessDeniedReason.FeatureNotFound,
             Currency = new("currencyId"),
             CurrentUsage = 0,
             IsGranted = true,
-            Type = SubscriptionCreditEntitlementType.Credit,
+            Type = UnionMember1Type.Credit,
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2039,16 +2039,16 @@ public class EntitlementTest : TestBase
     }
 }
 
-public class SubscriptionFeatureEntitlementTest : TestBase
+public class UnionMember0Test : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new SubscriptionFeatureEntitlement
+        var model = new UnionMember0
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
-            Type = SubscriptionFeatureEntitlementType.Feature,
+            Type = UnionMember0Type.Feature,
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Feature = new()
@@ -2059,7 +2059,7 @@ public class SubscriptionFeatureEntitlementTest : TestBase
                 RefID = "refId",
             },
             HasUnlimitedUsage = true,
-            ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+            ResetPeriod = UnionMember0ResetPeriod.Year,
             UsageLimit = 0,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2070,8 +2070,7 @@ public class SubscriptionFeatureEntitlementTest : TestBase
         ApiEnum<string, AccessDeniedReason> expectedAccessDeniedReason =
             AccessDeniedReason.FeatureNotFound;
         bool expectedIsGranted = true;
-        ApiEnum<string, SubscriptionFeatureEntitlementType> expectedType =
-            SubscriptionFeatureEntitlementType.Feature;
+        ApiEnum<string, UnionMember0Type> expectedType = UnionMember0Type.Feature;
         double expectedCurrentUsage = 0;
         DateTimeOffset expectedEntitlementUpdatedAt = DateTimeOffset.Parse(
             "2019-12-27T18:11:19.117Z"
@@ -2084,8 +2083,7 @@ public class SubscriptionFeatureEntitlementTest : TestBase
             RefID = "refId",
         };
         bool expectedHasUnlimitedUsage = true;
-        ApiEnum<string, SubscriptionFeatureEntitlementResetPeriod> expectedResetPeriod =
-            SubscriptionFeatureEntitlementResetPeriod.Year;
+        ApiEnum<string, UnionMember0ResetPeriod> expectedResetPeriod = UnionMember0ResetPeriod.Year;
         double expectedUsageLimit = 0;
         DateTimeOffset expectedUsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedUsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -2110,11 +2108,11 @@ public class SubscriptionFeatureEntitlementTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new SubscriptionFeatureEntitlement
+        var model = new UnionMember0
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
-            Type = SubscriptionFeatureEntitlementType.Feature,
+            Type = UnionMember0Type.Feature,
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Feature = new()
@@ -2125,7 +2123,7 @@ public class SubscriptionFeatureEntitlementTest : TestBase
                 RefID = "refId",
             },
             HasUnlimitedUsage = true,
-            ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+            ResetPeriod = UnionMember0ResetPeriod.Year,
             UsageLimit = 0,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2134,7 +2132,7 @@ public class SubscriptionFeatureEntitlementTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionFeatureEntitlement>(
+        var deserialized = JsonSerializer.Deserialize<UnionMember0>(
             json,
             ModelBase.SerializerOptions
         );
@@ -2145,11 +2143,11 @@ public class SubscriptionFeatureEntitlementTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new SubscriptionFeatureEntitlement
+        var model = new UnionMember0
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
-            Type = SubscriptionFeatureEntitlementType.Feature,
+            Type = UnionMember0Type.Feature,
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Feature = new()
@@ -2160,7 +2158,7 @@ public class SubscriptionFeatureEntitlementTest : TestBase
                 RefID = "refId",
             },
             HasUnlimitedUsage = true,
-            ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+            ResetPeriod = UnionMember0ResetPeriod.Year,
             UsageLimit = 0,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2169,7 +2167,7 @@ public class SubscriptionFeatureEntitlementTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionFeatureEntitlement>(
+        var deserialized = JsonSerializer.Deserialize<UnionMember0>(
             element,
             ModelBase.SerializerOptions
         );
@@ -2178,8 +2176,7 @@ public class SubscriptionFeatureEntitlementTest : TestBase
         ApiEnum<string, AccessDeniedReason> expectedAccessDeniedReason =
             AccessDeniedReason.FeatureNotFound;
         bool expectedIsGranted = true;
-        ApiEnum<string, SubscriptionFeatureEntitlementType> expectedType =
-            SubscriptionFeatureEntitlementType.Feature;
+        ApiEnum<string, UnionMember0Type> expectedType = UnionMember0Type.Feature;
         double expectedCurrentUsage = 0;
         DateTimeOffset expectedEntitlementUpdatedAt = DateTimeOffset.Parse(
             "2019-12-27T18:11:19.117Z"
@@ -2192,8 +2189,7 @@ public class SubscriptionFeatureEntitlementTest : TestBase
             RefID = "refId",
         };
         bool expectedHasUnlimitedUsage = true;
-        ApiEnum<string, SubscriptionFeatureEntitlementResetPeriod> expectedResetPeriod =
-            SubscriptionFeatureEntitlementResetPeriod.Year;
+        ApiEnum<string, UnionMember0ResetPeriod> expectedResetPeriod = UnionMember0ResetPeriod.Year;
         double expectedUsageLimit = 0;
         DateTimeOffset expectedUsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedUsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -2218,11 +2214,11 @@ public class SubscriptionFeatureEntitlementTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new SubscriptionFeatureEntitlement
+        var model = new UnionMember0
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
-            Type = SubscriptionFeatureEntitlementType.Feature,
+            Type = UnionMember0Type.Feature,
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Feature = new()
@@ -2233,7 +2229,7 @@ public class SubscriptionFeatureEntitlementTest : TestBase
                 RefID = "refId",
             },
             HasUnlimitedUsage = true,
-            ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+            ResetPeriod = UnionMember0ResetPeriod.Year,
             UsageLimit = 0,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2247,12 +2243,12 @@ public class SubscriptionFeatureEntitlementTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new SubscriptionFeatureEntitlement
+        var model = new UnionMember0
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
-            Type = SubscriptionFeatureEntitlementType.Feature,
-            ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+            Type = UnionMember0Type.Feature,
+            ResetPeriod = UnionMember0ResetPeriod.Year,
             UsageLimit = 0,
         };
 
@@ -2277,12 +2273,12 @@ public class SubscriptionFeatureEntitlementTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new SubscriptionFeatureEntitlement
+        var model = new UnionMember0
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
-            Type = SubscriptionFeatureEntitlementType.Feature,
-            ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+            Type = UnionMember0Type.Feature,
+            ResetPeriod = UnionMember0ResetPeriod.Year,
             UsageLimit = 0,
         };
 
@@ -2292,12 +2288,12 @@ public class SubscriptionFeatureEntitlementTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new SubscriptionFeatureEntitlement
+        var model = new UnionMember0
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
-            Type = SubscriptionFeatureEntitlementType.Feature,
-            ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+            Type = UnionMember0Type.Feature,
+            ResetPeriod = UnionMember0ResetPeriod.Year,
             UsageLimit = 0,
 
             // Null should be interpreted as omitted for these properties
@@ -2332,12 +2328,12 @@ public class SubscriptionFeatureEntitlementTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new SubscriptionFeatureEntitlement
+        var model = new UnionMember0
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
-            Type = SubscriptionFeatureEntitlementType.Feature,
-            ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+            Type = UnionMember0Type.Feature,
+            ResetPeriod = UnionMember0ResetPeriod.Year,
             UsageLimit = 0,
 
             // Null should be interpreted as omitted for these properties
@@ -2357,11 +2353,11 @@ public class SubscriptionFeatureEntitlementTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new SubscriptionFeatureEntitlement
+        var model = new UnionMember0
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
-            Type = SubscriptionFeatureEntitlementType.Feature,
+            Type = UnionMember0Type.Feature,
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Feature = new()
@@ -2387,11 +2383,11 @@ public class SubscriptionFeatureEntitlementTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new SubscriptionFeatureEntitlement
+        var model = new UnionMember0
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
-            Type = SubscriptionFeatureEntitlementType.Feature,
+            Type = UnionMember0Type.Feature,
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Feature = new()
@@ -2414,11 +2410,11 @@ public class SubscriptionFeatureEntitlementTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new SubscriptionFeatureEntitlement
+        var model = new UnionMember0
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
-            Type = SubscriptionFeatureEntitlementType.Feature,
+            Type = UnionMember0Type.Feature,
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Feature = new()
@@ -2447,11 +2443,11 @@ public class SubscriptionFeatureEntitlementTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new SubscriptionFeatureEntitlement
+        var model = new UnionMember0
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
-            Type = SubscriptionFeatureEntitlementType.Feature,
+            Type = UnionMember0Type.Feature,
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Feature = new()
@@ -2477,11 +2473,11 @@ public class SubscriptionFeatureEntitlementTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new SubscriptionFeatureEntitlement
+        var model = new UnionMember0
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
-            Type = SubscriptionFeatureEntitlementType.Feature,
+            Type = UnionMember0Type.Feature,
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Feature = new()
@@ -2492,7 +2488,7 @@ public class SubscriptionFeatureEntitlementTest : TestBase
                 RefID = "refId",
             },
             HasUnlimitedUsage = true,
-            ResetPeriod = SubscriptionFeatureEntitlementResetPeriod.Year,
+            ResetPeriod = UnionMember0ResetPeriod.Year,
             UsageLimit = 0,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2500,7 +2496,7 @@ public class SubscriptionFeatureEntitlementTest : TestBase
             ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
-        SubscriptionFeatureEntitlement copied = new(model);
+        UnionMember0 copied = new(model);
 
         Assert.Equal(model, copied);
     }
@@ -2588,21 +2584,21 @@ public class AccessDeniedReasonTest : TestBase
     }
 }
 
-public class SubscriptionFeatureEntitlementTypeTest : TestBase
+public class UnionMember0TypeTest : TestBase
 {
     [Theory]
-    [InlineData(SubscriptionFeatureEntitlementType.Feature)]
-    public void Validation_Works(SubscriptionFeatureEntitlementType rawValue)
+    [InlineData(UnionMember0Type.Feature)]
+    public void Validation_Works(UnionMember0Type rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionFeatureEntitlementType> value = rawValue;
+        ApiEnum<string, UnionMember0Type> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionFeatureEntitlementType>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, UnionMember0Type>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -2612,16 +2608,17 @@ public class SubscriptionFeatureEntitlementTypeTest : TestBase
     }
 
     [Theory]
-    [InlineData(SubscriptionFeatureEntitlementType.Feature)]
-    public void SerializationRoundtrip_Works(SubscriptionFeatureEntitlementType rawValue)
+    [InlineData(UnionMember0Type.Feature)]
+    public void SerializationRoundtrip_Works(UnionMember0Type rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionFeatureEntitlementType> value = rawValue;
+        ApiEnum<string, UnionMember0Type> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionFeatureEntitlementType>
-        >(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, UnionMember0Type>>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(value, deserialized);
     }
@@ -2629,14 +2626,15 @@ public class SubscriptionFeatureEntitlementTypeTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionFeatureEntitlementType>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, UnionMember0Type>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionFeatureEntitlementType>
-        >(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, UnionMember0Type>>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(value, deserialized);
     }
@@ -2863,47 +2861,49 @@ public class FeatureTypeTest : TestBase
     }
 }
 
-public class SubscriptionFeatureEntitlementResetPeriodTest : TestBase
+public class UnionMember0ResetPeriodTest : TestBase
 {
     [Theory]
-    [InlineData(SubscriptionFeatureEntitlementResetPeriod.Year)]
-    [InlineData(SubscriptionFeatureEntitlementResetPeriod.Month)]
-    [InlineData(SubscriptionFeatureEntitlementResetPeriod.Week)]
-    [InlineData(SubscriptionFeatureEntitlementResetPeriod.Day)]
-    [InlineData(SubscriptionFeatureEntitlementResetPeriod.Hour)]
-    public void Validation_Works(SubscriptionFeatureEntitlementResetPeriod rawValue)
+    [InlineData(UnionMember0ResetPeriod.Year)]
+    [InlineData(UnionMember0ResetPeriod.Month)]
+    [InlineData(UnionMember0ResetPeriod.Week)]
+    [InlineData(UnionMember0ResetPeriod.Day)]
+    [InlineData(UnionMember0ResetPeriod.Hour)]
+    public void Validation_Works(UnionMember0ResetPeriod rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionFeatureEntitlementResetPeriod> value = rawValue;
+        ApiEnum<string, UnionMember0ResetPeriod> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionFeatureEntitlementResetPeriod>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        var value = JsonSerializer.Deserialize<ApiEnum<string, UnionMember0ResetPeriod>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
 
         Assert.NotNull(value);
         Assert.Throws<StiggInvalidDataException>(() => value.Validate());
     }
 
     [Theory]
-    [InlineData(SubscriptionFeatureEntitlementResetPeriod.Year)]
-    [InlineData(SubscriptionFeatureEntitlementResetPeriod.Month)]
-    [InlineData(SubscriptionFeatureEntitlementResetPeriod.Week)]
-    [InlineData(SubscriptionFeatureEntitlementResetPeriod.Day)]
-    [InlineData(SubscriptionFeatureEntitlementResetPeriod.Hour)]
-    public void SerializationRoundtrip_Works(SubscriptionFeatureEntitlementResetPeriod rawValue)
+    [InlineData(UnionMember0ResetPeriod.Year)]
+    [InlineData(UnionMember0ResetPeriod.Month)]
+    [InlineData(UnionMember0ResetPeriod.Week)]
+    [InlineData(UnionMember0ResetPeriod.Day)]
+    [InlineData(UnionMember0ResetPeriod.Hour)]
+    public void SerializationRoundtrip_Works(UnionMember0ResetPeriod rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionFeatureEntitlementResetPeriod> value = rawValue;
+        ApiEnum<string, UnionMember0ResetPeriod> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionFeatureEntitlementResetPeriod>
-        >(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, UnionMember0ResetPeriod>>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(value, deserialized);
     }
@@ -2911,46 +2911,44 @@ public class SubscriptionFeatureEntitlementResetPeriodTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionFeatureEntitlementResetPeriod>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        var value = JsonSerializer.Deserialize<ApiEnum<string, UnionMember0ResetPeriod>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionFeatureEntitlementResetPeriod>
-        >(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, UnionMember0ResetPeriod>>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(value, deserialized);
     }
 }
 
-public class SubscriptionCreditEntitlementTest : TestBase
+public class UnionMember1Test : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new SubscriptionCreditEntitlement
+        var model = new UnionMember1
         {
-            AccessDeniedReason = SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = UnionMember1AccessDeniedReason.FeatureNotFound,
             Currency = new("currencyId"),
             CurrentUsage = 0,
             IsGranted = true,
-            Type = SubscriptionCreditEntitlementType.Credit,
+            Type = UnionMember1Type.Credit,
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
-        ApiEnum<
-            string,
-            SubscriptionCreditEntitlementAccessDeniedReason
-        > expectedAccessDeniedReason =
-            SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound;
-        SubscriptionCreditEntitlementCurrency expectedCurrency = new("currencyId");
+        ApiEnum<string, UnionMember1AccessDeniedReason> expectedAccessDeniedReason =
+            UnionMember1AccessDeniedReason.FeatureNotFound;
+        UnionMember1Currency expectedCurrency = new("currencyId");
         double expectedCurrentUsage = 0;
         bool expectedIsGranted = true;
-        ApiEnum<string, SubscriptionCreditEntitlementType> expectedType =
-            SubscriptionCreditEntitlementType.Credit;
+        ApiEnum<string, UnionMember1Type> expectedType = UnionMember1Type.Credit;
         double expectedUsageLimit = 0;
         DateTimeOffset expectedUsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedEntitlementUpdatedAt = DateTimeOffset.Parse(
@@ -2972,13 +2970,13 @@ public class SubscriptionCreditEntitlementTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new SubscriptionCreditEntitlement
+        var model = new UnionMember1
         {
-            AccessDeniedReason = SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = UnionMember1AccessDeniedReason.FeatureNotFound,
             Currency = new("currencyId"),
             CurrentUsage = 0,
             IsGranted = true,
-            Type = SubscriptionCreditEntitlementType.Credit,
+            Type = UnionMember1Type.Credit,
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -2986,7 +2984,7 @@ public class SubscriptionCreditEntitlementTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionCreditEntitlement>(
+        var deserialized = JsonSerializer.Deserialize<UnionMember1>(
             json,
             ModelBase.SerializerOptions
         );
@@ -2997,13 +2995,13 @@ public class SubscriptionCreditEntitlementTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new SubscriptionCreditEntitlement
+        var model = new UnionMember1
         {
-            AccessDeniedReason = SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = UnionMember1AccessDeniedReason.FeatureNotFound,
             Currency = new("currencyId"),
             CurrentUsage = 0,
             IsGranted = true,
-            Type = SubscriptionCreditEntitlementType.Credit,
+            Type = UnionMember1Type.Credit,
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -3011,22 +3009,18 @@ public class SubscriptionCreditEntitlementTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionCreditEntitlement>(
+        var deserialized = JsonSerializer.Deserialize<UnionMember1>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
-        ApiEnum<
-            string,
-            SubscriptionCreditEntitlementAccessDeniedReason
-        > expectedAccessDeniedReason =
-            SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound;
-        SubscriptionCreditEntitlementCurrency expectedCurrency = new("currencyId");
+        ApiEnum<string, UnionMember1AccessDeniedReason> expectedAccessDeniedReason =
+            UnionMember1AccessDeniedReason.FeatureNotFound;
+        UnionMember1Currency expectedCurrency = new("currencyId");
         double expectedCurrentUsage = 0;
         bool expectedIsGranted = true;
-        ApiEnum<string, SubscriptionCreditEntitlementType> expectedType =
-            SubscriptionCreditEntitlementType.Credit;
+        ApiEnum<string, UnionMember1Type> expectedType = UnionMember1Type.Credit;
         double expectedUsageLimit = 0;
         DateTimeOffset expectedUsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedEntitlementUpdatedAt = DateTimeOffset.Parse(
@@ -3048,13 +3042,13 @@ public class SubscriptionCreditEntitlementTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new SubscriptionCreditEntitlement
+        var model = new UnionMember1
         {
-            AccessDeniedReason = SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = UnionMember1AccessDeniedReason.FeatureNotFound,
             Currency = new("currencyId"),
             CurrentUsage = 0,
             IsGranted = true,
-            Type = SubscriptionCreditEntitlementType.Credit,
+            Type = UnionMember1Type.Credit,
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -3067,13 +3061,13 @@ public class SubscriptionCreditEntitlementTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new SubscriptionCreditEntitlement
+        var model = new UnionMember1
         {
-            AccessDeniedReason = SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = UnionMember1AccessDeniedReason.FeatureNotFound,
             Currency = new("currencyId"),
             CurrentUsage = 0,
             IsGranted = true,
-            Type = SubscriptionCreditEntitlementType.Credit,
+            Type = UnionMember1Type.Credit,
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -3087,13 +3081,13 @@ public class SubscriptionCreditEntitlementTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new SubscriptionCreditEntitlement
+        var model = new UnionMember1
         {
-            AccessDeniedReason = SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = UnionMember1AccessDeniedReason.FeatureNotFound,
             Currency = new("currencyId"),
             CurrentUsage = 0,
             IsGranted = true,
-            Type = SubscriptionCreditEntitlementType.Credit,
+            Type = UnionMember1Type.Credit,
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -3104,13 +3098,13 @@ public class SubscriptionCreditEntitlementTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new SubscriptionCreditEntitlement
+        var model = new UnionMember1
         {
-            AccessDeniedReason = SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = UnionMember1AccessDeniedReason.FeatureNotFound,
             Currency = new("currencyId"),
             CurrentUsage = 0,
             IsGranted = true,
-            Type = SubscriptionCreditEntitlementType.Credit,
+            Type = UnionMember1Type.Credit,
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
@@ -3128,13 +3122,13 @@ public class SubscriptionCreditEntitlementTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new SubscriptionCreditEntitlement
+        var model = new UnionMember1
         {
-            AccessDeniedReason = SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = UnionMember1AccessDeniedReason.FeatureNotFound,
             Currency = new("currencyId"),
             CurrentUsage = 0,
             IsGranted = true,
-            Type = SubscriptionCreditEntitlementType.Credit,
+            Type = UnionMember1Type.Credit,
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
@@ -3149,85 +3143,84 @@ public class SubscriptionCreditEntitlementTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new SubscriptionCreditEntitlement
+        var model = new UnionMember1
         {
-            AccessDeniedReason = SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = UnionMember1AccessDeniedReason.FeatureNotFound,
             Currency = new("currencyId"),
             CurrentUsage = 0,
             IsGranted = true,
-            Type = SubscriptionCreditEntitlementType.Credit,
+            Type = UnionMember1Type.Credit,
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
-        SubscriptionCreditEntitlement copied = new(model);
+        UnionMember1 copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class SubscriptionCreditEntitlementAccessDeniedReasonTest : TestBase
+public class UnionMember1AccessDeniedReasonTest : TestBase
 {
     [Theory]
-    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound)]
-    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.CustomerNotFound)]
-    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.CustomerIsArchived)]
-    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.CustomerResourceNotFound)]
-    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.NoActiveSubscription)]
-    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.NoFeatureEntitlementInSubscription)]
-    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.RequestedUsageExceedingLimit)]
-    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.RequestedValuesMismatch)]
-    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.BudgetExceeded)]
-    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.Unknown)]
-    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.FeatureTypeMismatch)]
-    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.Revoked)]
-    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.InsufficientCredits)]
-    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.EntitlementNotFound)]
-    public void Validation_Works(SubscriptionCreditEntitlementAccessDeniedReason rawValue)
+    [InlineData(UnionMember1AccessDeniedReason.FeatureNotFound)]
+    [InlineData(UnionMember1AccessDeniedReason.CustomerNotFound)]
+    [InlineData(UnionMember1AccessDeniedReason.CustomerIsArchived)]
+    [InlineData(UnionMember1AccessDeniedReason.CustomerResourceNotFound)]
+    [InlineData(UnionMember1AccessDeniedReason.NoActiveSubscription)]
+    [InlineData(UnionMember1AccessDeniedReason.NoFeatureEntitlementInSubscription)]
+    [InlineData(UnionMember1AccessDeniedReason.RequestedUsageExceedingLimit)]
+    [InlineData(UnionMember1AccessDeniedReason.RequestedValuesMismatch)]
+    [InlineData(UnionMember1AccessDeniedReason.BudgetExceeded)]
+    [InlineData(UnionMember1AccessDeniedReason.Unknown)]
+    [InlineData(UnionMember1AccessDeniedReason.FeatureTypeMismatch)]
+    [InlineData(UnionMember1AccessDeniedReason.Revoked)]
+    [InlineData(UnionMember1AccessDeniedReason.InsufficientCredits)]
+    [InlineData(UnionMember1AccessDeniedReason.EntitlementNotFound)]
+    public void Validation_Works(UnionMember1AccessDeniedReason rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionCreditEntitlementAccessDeniedReason> value = rawValue;
+        ApiEnum<string, UnionMember1AccessDeniedReason> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionCreditEntitlementAccessDeniedReason>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        var value = JsonSerializer.Deserialize<ApiEnum<string, UnionMember1AccessDeniedReason>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
 
         Assert.NotNull(value);
         Assert.Throws<StiggInvalidDataException>(() => value.Validate());
     }
 
     [Theory]
-    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound)]
-    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.CustomerNotFound)]
-    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.CustomerIsArchived)]
-    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.CustomerResourceNotFound)]
-    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.NoActiveSubscription)]
-    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.NoFeatureEntitlementInSubscription)]
-    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.RequestedUsageExceedingLimit)]
-    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.RequestedValuesMismatch)]
-    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.BudgetExceeded)]
-    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.Unknown)]
-    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.FeatureTypeMismatch)]
-    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.Revoked)]
-    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.InsufficientCredits)]
-    [InlineData(SubscriptionCreditEntitlementAccessDeniedReason.EntitlementNotFound)]
-    public void SerializationRoundtrip_Works(
-        SubscriptionCreditEntitlementAccessDeniedReason rawValue
-    )
+    [InlineData(UnionMember1AccessDeniedReason.FeatureNotFound)]
+    [InlineData(UnionMember1AccessDeniedReason.CustomerNotFound)]
+    [InlineData(UnionMember1AccessDeniedReason.CustomerIsArchived)]
+    [InlineData(UnionMember1AccessDeniedReason.CustomerResourceNotFound)]
+    [InlineData(UnionMember1AccessDeniedReason.NoActiveSubscription)]
+    [InlineData(UnionMember1AccessDeniedReason.NoFeatureEntitlementInSubscription)]
+    [InlineData(UnionMember1AccessDeniedReason.RequestedUsageExceedingLimit)]
+    [InlineData(UnionMember1AccessDeniedReason.RequestedValuesMismatch)]
+    [InlineData(UnionMember1AccessDeniedReason.BudgetExceeded)]
+    [InlineData(UnionMember1AccessDeniedReason.Unknown)]
+    [InlineData(UnionMember1AccessDeniedReason.FeatureTypeMismatch)]
+    [InlineData(UnionMember1AccessDeniedReason.Revoked)]
+    [InlineData(UnionMember1AccessDeniedReason.InsufficientCredits)]
+    [InlineData(UnionMember1AccessDeniedReason.EntitlementNotFound)]
+    public void SerializationRoundtrip_Works(UnionMember1AccessDeniedReason rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionCreditEntitlementAccessDeniedReason> value = rawValue;
+        ApiEnum<string, UnionMember1AccessDeniedReason> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionCreditEntitlementAccessDeniedReason>
+            ApiEnum<string, UnionMember1AccessDeniedReason>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -3236,24 +3229,25 @@ public class SubscriptionCreditEntitlementAccessDeniedReasonTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionCreditEntitlementAccessDeniedReason>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        var value = JsonSerializer.Deserialize<ApiEnum<string, UnionMember1AccessDeniedReason>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionCreditEntitlementAccessDeniedReason>
+            ApiEnum<string, UnionMember1AccessDeniedReason>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
 }
 
-public class SubscriptionCreditEntitlementCurrencyTest : TestBase
+public class UnionMember1CurrencyTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new SubscriptionCreditEntitlementCurrency { CurrencyID = "currencyId" };
+        var model = new UnionMember1Currency { CurrencyID = "currencyId" };
 
         string expectedCurrencyID = "currencyId";
 
@@ -3263,10 +3257,10 @@ public class SubscriptionCreditEntitlementCurrencyTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new SubscriptionCreditEntitlementCurrency { CurrencyID = "currencyId" };
+        var model = new UnionMember1Currency { CurrencyID = "currencyId" };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionCreditEntitlementCurrency>(
+        var deserialized = JsonSerializer.Deserialize<UnionMember1Currency>(
             json,
             ModelBase.SerializerOptions
         );
@@ -3277,10 +3271,10 @@ public class SubscriptionCreditEntitlementCurrencyTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new SubscriptionCreditEntitlementCurrency { CurrencyID = "currencyId" };
+        var model = new UnionMember1Currency { CurrencyID = "currencyId" };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<SubscriptionCreditEntitlementCurrency>(
+        var deserialized = JsonSerializer.Deserialize<UnionMember1Currency>(
             element,
             ModelBase.SerializerOptions
         );
@@ -3294,7 +3288,7 @@ public class SubscriptionCreditEntitlementCurrencyTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new SubscriptionCreditEntitlementCurrency { CurrencyID = "currencyId" };
+        var model = new UnionMember1Currency { CurrencyID = "currencyId" };
 
         model.Validate();
     }
@@ -3302,29 +3296,29 @@ public class SubscriptionCreditEntitlementCurrencyTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new SubscriptionCreditEntitlementCurrency { CurrencyID = "currencyId" };
+        var model = new UnionMember1Currency { CurrencyID = "currencyId" };
 
-        SubscriptionCreditEntitlementCurrency copied = new(model);
+        UnionMember1Currency copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class SubscriptionCreditEntitlementTypeTest : TestBase
+public class UnionMember1TypeTest : TestBase
 {
     [Theory]
-    [InlineData(SubscriptionCreditEntitlementType.Credit)]
-    public void Validation_Works(SubscriptionCreditEntitlementType rawValue)
+    [InlineData(UnionMember1Type.Credit)]
+    public void Validation_Works(UnionMember1Type rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionCreditEntitlementType> value = rawValue;
+        ApiEnum<string, UnionMember1Type> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionCreditEntitlementType>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, UnionMember1Type>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -3334,16 +3328,17 @@ public class SubscriptionCreditEntitlementTypeTest : TestBase
     }
 
     [Theory]
-    [InlineData(SubscriptionCreditEntitlementType.Credit)]
-    public void SerializationRoundtrip_Works(SubscriptionCreditEntitlementType rawValue)
+    [InlineData(UnionMember1Type.Credit)]
+    public void SerializationRoundtrip_Works(UnionMember1Type rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionCreditEntitlementType> value = rawValue;
+        ApiEnum<string, UnionMember1Type> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionCreditEntitlementType>
-        >(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, UnionMember1Type>>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(value, deserialized);
     }
@@ -3351,14 +3346,15 @@ public class SubscriptionCreditEntitlementTypeTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionCreditEntitlementType>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, UnionMember1Type>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionCreditEntitlementType>
-        >(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, UnionMember1Type>>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(value, deserialized);
     }
