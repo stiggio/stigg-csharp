@@ -292,7 +292,13 @@ public record class Entitlement : ModelBase
 
     public bool IsGranted
     {
-        get { return Match(unionMember0: (x) => x.IsGranted, unionMember1: (x) => x.IsGranted); }
+        get
+        {
+            return Match(
+                subscriptionFeature: (x) => x.IsGranted,
+                subscriptionCredit: (x) => x.IsGranted
+            );
+        }
     }
 
     public double? CurrentUsage
@@ -300,8 +306,8 @@ public record class Entitlement : ModelBase
         get
         {
             return Match<double?>(
-                unionMember0: (x) => x.CurrentUsage,
-                unionMember1: (x) => x.CurrentUsage
+                subscriptionFeature: (x) => x.CurrentUsage,
+                subscriptionCredit: (x) => x.CurrentUsage
             );
         }
     }
@@ -311,8 +317,8 @@ public record class Entitlement : ModelBase
         get
         {
             return Match<System::DateTimeOffset?>(
-                unionMember0: (x) => x.EntitlementUpdatedAt,
-                unionMember1: (x) => x.EntitlementUpdatedAt
+                subscriptionFeature: (x) => x.EntitlementUpdatedAt,
+                subscriptionCredit: (x) => x.EntitlementUpdatedAt
             );
         }
     }
@@ -322,8 +328,8 @@ public record class Entitlement : ModelBase
         get
         {
             return Match<double?>(
-                unionMember0: (x) => x.UsageLimit,
-                unionMember1: (x) => x.UsageLimit
+                subscriptionFeature: (x) => x.UsageLimit,
+                subscriptionCredit: (x) => x.UsageLimit
             );
         }
     }
@@ -333,19 +339,19 @@ public record class Entitlement : ModelBase
         get
         {
             return Match<System::DateTimeOffset?>(
-                unionMember0: (x) => x.ValidUntil,
-                unionMember1: (x) => x.ValidUntil
+                subscriptionFeature: (x) => x.ValidUntil,
+                subscriptionCredit: (x) => x.ValidUntil
             );
         }
     }
 
-    public Entitlement(UnionMember0 value, JsonElement? element = null)
+    public Entitlement(SubscriptionFeatureEntitlement value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
     }
 
-    public Entitlement(UnionMember1 value, JsonElement? element = null)
+    public Entitlement(SubscriptionCreditEntitlement value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
@@ -358,43 +364,47 @@ public record class Entitlement : ModelBase
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="UnionMember0"/>.
+    /// type <see cref="SubscriptionFeatureEntitlement"/>.
     ///
     /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
-    /// if (instance.TryPickUnionMember0(out var value)) {
-    ///     // `value` is of type `UnionMember0`
+    /// if (instance.TryPickSubscriptionFeature(out var value)) {
+    ///     // `value` is of type `SubscriptionFeatureEntitlement`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
     /// </example>
     /// </summary>
-    public bool TryPickUnionMember0([NotNullWhen(true)] out UnionMember0? value)
+    public bool TryPickSubscriptionFeature(
+        [NotNullWhen(true)] out SubscriptionFeatureEntitlement? value
+    )
     {
-        value = this.Value as UnionMember0;
+        value = this.Value as SubscriptionFeatureEntitlement;
         return value != null;
     }
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="UnionMember1"/>.
+    /// type <see cref="SubscriptionCreditEntitlement"/>.
     ///
     /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
-    /// if (instance.TryPickUnionMember1(out var value)) {
-    ///     // `value` is of type `UnionMember1`
+    /// if (instance.TryPickSubscriptionCredit(out var value)) {
+    ///     // `value` is of type `SubscriptionCreditEntitlement`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
     /// </example>
     /// </summary>
-    public bool TryPickUnionMember1([NotNullWhen(true)] out UnionMember1? value)
+    public bool TryPickSubscriptionCredit(
+        [NotNullWhen(true)] out SubscriptionCreditEntitlement? value
+    )
     {
-        value = this.Value as UnionMember1;
+        value = this.Value as SubscriptionCreditEntitlement;
         return value != null;
     }
 
@@ -412,24 +422,24 @@ public record class Entitlement : ModelBase
     /// <example>
     /// <code>
     /// instance.Switch(
-    ///     (UnionMember0 value) => {...},
-    ///     (UnionMember1 value) => {...}
+    ///     (SubscriptionFeatureEntitlement value) => {...},
+    ///     (SubscriptionCreditEntitlement value) => {...}
     /// );
     /// </code>
     /// </example>
     /// </summary>
     public void Switch(
-        System::Action<UnionMember0> unionMember0,
-        System::Action<UnionMember1> unionMember1
+        System::Action<SubscriptionFeatureEntitlement> subscriptionFeature,
+        System::Action<SubscriptionCreditEntitlement> subscriptionCredit
     )
     {
         switch (this.Value)
         {
-            case UnionMember0 value:
-                unionMember0(value);
+            case SubscriptionFeatureEntitlement value:
+                subscriptionFeature(value);
                 break;
-            case UnionMember1 value:
-                unionMember1(value);
+            case SubscriptionCreditEntitlement value:
+                subscriptionCredit(value);
                 break;
             default:
                 throw new StiggInvalidDataException(
@@ -453,30 +463,30 @@ public record class Entitlement : ModelBase
     /// <example>
     /// <code>
     /// var result = instance.Match(
-    ///     (UnionMember0 value) => {...},
-    ///     (UnionMember1 value) => {...}
+    ///     (SubscriptionFeatureEntitlement value) => {...},
+    ///     (SubscriptionCreditEntitlement value) => {...}
     /// );
     /// </code>
     /// </example>
     /// </summary>
     public T Match<T>(
-        System::Func<UnionMember0, T> unionMember0,
-        System::Func<UnionMember1, T> unionMember1
+        System::Func<SubscriptionFeatureEntitlement, T> subscriptionFeature,
+        System::Func<SubscriptionCreditEntitlement, T> subscriptionCredit
     )
     {
         return this.Value switch
         {
-            UnionMember0 value => unionMember0(value),
-            UnionMember1 value => unionMember1(value),
+            SubscriptionFeatureEntitlement value => subscriptionFeature(value),
+            SubscriptionCreditEntitlement value => subscriptionCredit(value),
             _ => throw new StiggInvalidDataException(
                 "Data did not match any variant of Entitlement"
             ),
         };
     }
 
-    public static implicit operator Entitlement(UnionMember0 value) => new(value);
+    public static implicit operator Entitlement(SubscriptionFeatureEntitlement value) => new(value);
 
-    public static implicit operator Entitlement(UnionMember1 value) => new(value);
+    public static implicit operator Entitlement(SubscriptionCreditEntitlement value) => new(value);
 
     /// <summary>
     /// Validates that the instance was constructed with a known variant and that this variant is valid
@@ -495,8 +505,8 @@ public record class Entitlement : ModelBase
             throw new StiggInvalidDataException("Data did not match any variant of Entitlement");
         }
         this.Switch(
-            (unionMember0) => unionMember0.Validate(),
-            (unionMember1) => unionMember1.Validate()
+            (subscriptionFeature) => subscriptionFeature.Validate(),
+            (subscriptionCredit) => subscriptionCredit.Validate()
         );
     }
 
@@ -517,8 +527,8 @@ public record class Entitlement : ModelBase
     {
         return this.Value switch
         {
-            UnionMember0 _ => 0,
-            UnionMember1 _ => 1,
+            SubscriptionFeatureEntitlement _ => 0,
+            SubscriptionCreditEntitlement _ => 1,
             _ => -1,
         };
     }
@@ -535,7 +545,10 @@ sealed class EntitlementConverter : JsonConverter<Entitlement>
         var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
-            var deserialized = JsonSerializer.Deserialize<UnionMember0>(element, options);
+            var deserialized = JsonSerializer.Deserialize<SubscriptionFeatureEntitlement>(
+                element,
+                options
+            );
             if (deserialized != null)
             {
                 deserialized.Validate();
@@ -549,7 +562,10 @@ sealed class EntitlementConverter : JsonConverter<Entitlement>
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<UnionMember1>(element, options);
+            var deserialized = JsonSerializer.Deserialize<SubscriptionCreditEntitlement>(
+                element,
+                options
+            );
             if (deserialized != null)
             {
                 deserialized.Validate();
@@ -574,8 +590,13 @@ sealed class EntitlementConverter : JsonConverter<Entitlement>
     }
 }
 
-[JsonConverter(typeof(JsonModelConverter<UnionMember0, UnionMember0FromRaw>))]
-public sealed record class UnionMember0 : JsonModel
+[JsonConverter(
+    typeof(JsonModelConverter<
+        SubscriptionFeatureEntitlement,
+        SubscriptionFeatureEntitlementFromRaw
+    >)
+)]
+public sealed record class SubscriptionFeatureEntitlement : JsonModel
 {
     public required ApiEnum<string, AccessDeniedReason>? AccessDeniedReason
     {
@@ -599,12 +620,14 @@ public sealed record class UnionMember0 : JsonModel
         init { this._rawData.Set("isGranted", value); }
     }
 
-    public required ApiEnum<string, UnionMember0Type> Type
+    public required ApiEnum<string, SubscriptionFeatureEntitlementType> Type
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, UnionMember0Type>>("type");
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, SubscriptionFeatureEntitlementType>
+            >("type");
         }
         init { this._rawData.Set("type", value); }
     }
@@ -684,14 +707,14 @@ public sealed record class UnionMember0 : JsonModel
         }
     }
 
-    public ApiEnum<string, UnionMember0ResetPeriod>? ResetPeriod
+    public ApiEnum<string, SubscriptionFeatureEntitlementResetPeriod>? ResetPeriod
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ApiEnum<string, UnionMember0ResetPeriod>>(
-                "resetPeriod"
-            );
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, SubscriptionFeatureEntitlementResetPeriod>
+            >("resetPeriod");
         }
         init { this._rawData.Set("resetPeriod", value); }
     }
@@ -809,39 +832,44 @@ public sealed record class UnionMember0 : JsonModel
         _ = this.ValidUntil;
     }
 
-    public UnionMember0() { }
+    public SubscriptionFeatureEntitlement() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public UnionMember0(UnionMember0 unionMember0)
-        : base(unionMember0) { }
+    public SubscriptionFeatureEntitlement(
+        SubscriptionFeatureEntitlement subscriptionFeatureEntitlement
+    )
+        : base(subscriptionFeatureEntitlement) { }
 #pragma warning restore CS8618
 
-    public UnionMember0(IReadOnlyDictionary<string, JsonElement> rawData)
+    public SubscriptionFeatureEntitlement(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    UnionMember0(FrozenDictionary<string, JsonElement> rawData)
+    SubscriptionFeatureEntitlement(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="UnionMember0FromRaw.FromRawUnchecked"/>
-    public static UnionMember0 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="SubscriptionFeatureEntitlementFromRaw.FromRawUnchecked"/>
+    public static SubscriptionFeatureEntitlement FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class UnionMember0FromRaw : IFromRawJson<UnionMember0>
+class SubscriptionFeatureEntitlementFromRaw : IFromRawJson<SubscriptionFeatureEntitlement>
 {
     /// <inheritdoc/>
-    public UnionMember0 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        UnionMember0.FromRawUnchecked(rawData);
+    public SubscriptionFeatureEntitlement FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionFeatureEntitlement.FromRawUnchecked(rawData);
 }
 
 [JsonConverter(typeof(AccessDeniedReasonConverter))]
@@ -926,15 +954,16 @@ sealed class AccessDeniedReasonConverter : JsonConverter<AccessDeniedReason>
     }
 }
 
-[JsonConverter(typeof(UnionMember0TypeConverter))]
-public enum UnionMember0Type
+[JsonConverter(typeof(SubscriptionFeatureEntitlementTypeConverter))]
+public enum SubscriptionFeatureEntitlementType
 {
     Feature,
 }
 
-sealed class UnionMember0TypeConverter : JsonConverter<UnionMember0Type>
+sealed class SubscriptionFeatureEntitlementTypeConverter
+    : JsonConverter<SubscriptionFeatureEntitlementType>
 {
-    public override UnionMember0Type Read(
+    public override SubscriptionFeatureEntitlementType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -942,14 +971,14 @@ sealed class UnionMember0TypeConverter : JsonConverter<UnionMember0Type>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "FEATURE" => UnionMember0Type.Feature,
-            _ => (UnionMember0Type)(-1),
+            "FEATURE" => SubscriptionFeatureEntitlementType.Feature,
+            _ => (SubscriptionFeatureEntitlementType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        UnionMember0Type value,
+        SubscriptionFeatureEntitlementType value,
         JsonSerializerOptions options
     )
     {
@@ -957,7 +986,7 @@ sealed class UnionMember0TypeConverter : JsonConverter<UnionMember0Type>
             writer,
             value switch
             {
-                UnionMember0Type.Feature => "FEATURE",
+                SubscriptionFeatureEntitlementType.Feature => "FEATURE",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -1166,8 +1195,8 @@ sealed class FeatureTypeConverter : JsonConverter<FeatureType>
     }
 }
 
-[JsonConverter(typeof(UnionMember0ResetPeriodConverter))]
-public enum UnionMember0ResetPeriod
+[JsonConverter(typeof(SubscriptionFeatureEntitlementResetPeriodConverter))]
+public enum SubscriptionFeatureEntitlementResetPeriod
 {
     Year,
     Month,
@@ -1176,9 +1205,10 @@ public enum UnionMember0ResetPeriod
     Hour,
 }
 
-sealed class UnionMember0ResetPeriodConverter : JsonConverter<UnionMember0ResetPeriod>
+sealed class SubscriptionFeatureEntitlementResetPeriodConverter
+    : JsonConverter<SubscriptionFeatureEntitlementResetPeriod>
 {
-    public override UnionMember0ResetPeriod Read(
+    public override SubscriptionFeatureEntitlementResetPeriod Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1186,18 +1216,18 @@ sealed class UnionMember0ResetPeriodConverter : JsonConverter<UnionMember0ResetP
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "YEAR" => UnionMember0ResetPeriod.Year,
-            "MONTH" => UnionMember0ResetPeriod.Month,
-            "WEEK" => UnionMember0ResetPeriod.Week,
-            "DAY" => UnionMember0ResetPeriod.Day,
-            "HOUR" => UnionMember0ResetPeriod.Hour,
-            _ => (UnionMember0ResetPeriod)(-1),
+            "YEAR" => SubscriptionFeatureEntitlementResetPeriod.Year,
+            "MONTH" => SubscriptionFeatureEntitlementResetPeriod.Month,
+            "WEEK" => SubscriptionFeatureEntitlementResetPeriod.Week,
+            "DAY" => SubscriptionFeatureEntitlementResetPeriod.Day,
+            "HOUR" => SubscriptionFeatureEntitlementResetPeriod.Hour,
+            _ => (SubscriptionFeatureEntitlementResetPeriod)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        UnionMember0ResetPeriod value,
+        SubscriptionFeatureEntitlementResetPeriod value,
         JsonSerializerOptions options
     )
     {
@@ -1205,11 +1235,11 @@ sealed class UnionMember0ResetPeriodConverter : JsonConverter<UnionMember0ResetP
             writer,
             value switch
             {
-                UnionMember0ResetPeriod.Year => "YEAR",
-                UnionMember0ResetPeriod.Month => "MONTH",
-                UnionMember0ResetPeriod.Week => "WEEK",
-                UnionMember0ResetPeriod.Day => "DAY",
-                UnionMember0ResetPeriod.Hour => "HOUR",
+                SubscriptionFeatureEntitlementResetPeriod.Year => "YEAR",
+                SubscriptionFeatureEntitlementResetPeriod.Month => "MONTH",
+                SubscriptionFeatureEntitlementResetPeriod.Week => "WEEK",
+                SubscriptionFeatureEntitlementResetPeriod.Day => "DAY",
+                SubscriptionFeatureEntitlementResetPeriod.Hour => "HOUR",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -1219,17 +1249,22 @@ sealed class UnionMember0ResetPeriodConverter : JsonConverter<UnionMember0ResetP
     }
 }
 
-[JsonConverter(typeof(JsonModelConverter<UnionMember1, UnionMember1FromRaw>))]
-public sealed record class UnionMember1 : JsonModel
+[JsonConverter(
+    typeof(JsonModelConverter<SubscriptionCreditEntitlement, SubscriptionCreditEntitlementFromRaw>)
+)]
+public sealed record class SubscriptionCreditEntitlement : JsonModel
 {
-    public required ApiEnum<string, UnionMember1AccessDeniedReason>? AccessDeniedReason
+    public required ApiEnum<
+        string,
+        SubscriptionCreditEntitlementAccessDeniedReason
+    >? AccessDeniedReason
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ApiEnum<string, UnionMember1AccessDeniedReason>>(
-                "accessDeniedReason"
-            );
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, SubscriptionCreditEntitlementAccessDeniedReason>
+            >("accessDeniedReason");
         }
         init { this._rawData.Set("accessDeniedReason", value); }
     }
@@ -1237,12 +1272,12 @@ public sealed record class UnionMember1 : JsonModel
     /// <summary>
     /// The currency associated with a credit entitlement.
     /// </summary>
-    public required UnionMember1Currency Currency
+    public required SubscriptionCreditEntitlementCurrency Currency
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<UnionMember1Currency>("currency");
+            return this._rawData.GetNotNullClass<SubscriptionCreditEntitlementCurrency>("currency");
         }
         init { this._rawData.Set("currency", value); }
     }
@@ -1267,12 +1302,14 @@ public sealed record class UnionMember1 : JsonModel
         init { this._rawData.Set("isGranted", value); }
     }
 
-    public required ApiEnum<string, UnionMember1Type> Type
+    public required ApiEnum<string, SubscriptionCreditEntitlementType> Type
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, UnionMember1Type>>("type");
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, SubscriptionCreditEntitlementType>
+            >("type");
         }
         init { this._rawData.Set("type", value); }
     }
@@ -1356,43 +1393,48 @@ public sealed record class UnionMember1 : JsonModel
         _ = this.ValidUntil;
     }
 
-    public UnionMember1() { }
+    public SubscriptionCreditEntitlement() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public UnionMember1(UnionMember1 unionMember1)
-        : base(unionMember1) { }
+    public SubscriptionCreditEntitlement(
+        SubscriptionCreditEntitlement subscriptionCreditEntitlement
+    )
+        : base(subscriptionCreditEntitlement) { }
 #pragma warning restore CS8618
 
-    public UnionMember1(IReadOnlyDictionary<string, JsonElement> rawData)
+    public SubscriptionCreditEntitlement(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    UnionMember1(FrozenDictionary<string, JsonElement> rawData)
+    SubscriptionCreditEntitlement(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="UnionMember1FromRaw.FromRawUnchecked"/>
-    public static UnionMember1 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="SubscriptionCreditEntitlementFromRaw.FromRawUnchecked"/>
+    public static SubscriptionCreditEntitlement FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class UnionMember1FromRaw : IFromRawJson<UnionMember1>
+class SubscriptionCreditEntitlementFromRaw : IFromRawJson<SubscriptionCreditEntitlement>
 {
     /// <inheritdoc/>
-    public UnionMember1 FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        UnionMember1.FromRawUnchecked(rawData);
+    public SubscriptionCreditEntitlement FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionCreditEntitlement.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(UnionMember1AccessDeniedReasonConverter))]
-public enum UnionMember1AccessDeniedReason
+[JsonConverter(typeof(SubscriptionCreditEntitlementAccessDeniedReasonConverter))]
+public enum SubscriptionCreditEntitlementAccessDeniedReason
 {
     FeatureNotFound,
     CustomerNotFound,
@@ -1410,9 +1452,10 @@ public enum UnionMember1AccessDeniedReason
     EntitlementNotFound,
 }
 
-sealed class UnionMember1AccessDeniedReasonConverter : JsonConverter<UnionMember1AccessDeniedReason>
+sealed class SubscriptionCreditEntitlementAccessDeniedReasonConverter
+    : JsonConverter<SubscriptionCreditEntitlementAccessDeniedReason>
 {
-    public override UnionMember1AccessDeniedReason Read(
+    public override SubscriptionCreditEntitlementAccessDeniedReason Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1420,29 +1463,36 @@ sealed class UnionMember1AccessDeniedReasonConverter : JsonConverter<UnionMember
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "FeatureNotFound" => UnionMember1AccessDeniedReason.FeatureNotFound,
-            "CustomerNotFound" => UnionMember1AccessDeniedReason.CustomerNotFound,
-            "CustomerIsArchived" => UnionMember1AccessDeniedReason.CustomerIsArchived,
-            "CustomerResourceNotFound" => UnionMember1AccessDeniedReason.CustomerResourceNotFound,
-            "NoActiveSubscription" => UnionMember1AccessDeniedReason.NoActiveSubscription,
+            "FeatureNotFound" => SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound,
+            "CustomerNotFound" => SubscriptionCreditEntitlementAccessDeniedReason.CustomerNotFound,
+            "CustomerIsArchived" =>
+                SubscriptionCreditEntitlementAccessDeniedReason.CustomerIsArchived,
+            "CustomerResourceNotFound" =>
+                SubscriptionCreditEntitlementAccessDeniedReason.CustomerResourceNotFound,
+            "NoActiveSubscription" =>
+                SubscriptionCreditEntitlementAccessDeniedReason.NoActiveSubscription,
             "NoFeatureEntitlementInSubscription" =>
-                UnionMember1AccessDeniedReason.NoFeatureEntitlementInSubscription,
+                SubscriptionCreditEntitlementAccessDeniedReason.NoFeatureEntitlementInSubscription,
             "RequestedUsageExceedingLimit" =>
-                UnionMember1AccessDeniedReason.RequestedUsageExceedingLimit,
-            "RequestedValuesMismatch" => UnionMember1AccessDeniedReason.RequestedValuesMismatch,
-            "BudgetExceeded" => UnionMember1AccessDeniedReason.BudgetExceeded,
-            "Unknown" => UnionMember1AccessDeniedReason.Unknown,
-            "FeatureTypeMismatch" => UnionMember1AccessDeniedReason.FeatureTypeMismatch,
-            "Revoked" => UnionMember1AccessDeniedReason.Revoked,
-            "InsufficientCredits" => UnionMember1AccessDeniedReason.InsufficientCredits,
-            "EntitlementNotFound" => UnionMember1AccessDeniedReason.EntitlementNotFound,
-            _ => (UnionMember1AccessDeniedReason)(-1),
+                SubscriptionCreditEntitlementAccessDeniedReason.RequestedUsageExceedingLimit,
+            "RequestedValuesMismatch" =>
+                SubscriptionCreditEntitlementAccessDeniedReason.RequestedValuesMismatch,
+            "BudgetExceeded" => SubscriptionCreditEntitlementAccessDeniedReason.BudgetExceeded,
+            "Unknown" => SubscriptionCreditEntitlementAccessDeniedReason.Unknown,
+            "FeatureTypeMismatch" =>
+                SubscriptionCreditEntitlementAccessDeniedReason.FeatureTypeMismatch,
+            "Revoked" => SubscriptionCreditEntitlementAccessDeniedReason.Revoked,
+            "InsufficientCredits" =>
+                SubscriptionCreditEntitlementAccessDeniedReason.InsufficientCredits,
+            "EntitlementNotFound" =>
+                SubscriptionCreditEntitlementAccessDeniedReason.EntitlementNotFound,
+            _ => (SubscriptionCreditEntitlementAccessDeniedReason)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        UnionMember1AccessDeniedReason value,
+        SubscriptionCreditEntitlementAccessDeniedReason value,
         JsonSerializerOptions options
     )
     {
@@ -1450,23 +1500,31 @@ sealed class UnionMember1AccessDeniedReasonConverter : JsonConverter<UnionMember
             writer,
             value switch
             {
-                UnionMember1AccessDeniedReason.FeatureNotFound => "FeatureNotFound",
-                UnionMember1AccessDeniedReason.CustomerNotFound => "CustomerNotFound",
-                UnionMember1AccessDeniedReason.CustomerIsArchived => "CustomerIsArchived",
-                UnionMember1AccessDeniedReason.CustomerResourceNotFound =>
+                SubscriptionCreditEntitlementAccessDeniedReason.FeatureNotFound =>
+                    "FeatureNotFound",
+                SubscriptionCreditEntitlementAccessDeniedReason.CustomerNotFound =>
+                    "CustomerNotFound",
+                SubscriptionCreditEntitlementAccessDeniedReason.CustomerIsArchived =>
+                    "CustomerIsArchived",
+                SubscriptionCreditEntitlementAccessDeniedReason.CustomerResourceNotFound =>
                     "CustomerResourceNotFound",
-                UnionMember1AccessDeniedReason.NoActiveSubscription => "NoActiveSubscription",
-                UnionMember1AccessDeniedReason.NoFeatureEntitlementInSubscription =>
+                SubscriptionCreditEntitlementAccessDeniedReason.NoActiveSubscription =>
+                    "NoActiveSubscription",
+                SubscriptionCreditEntitlementAccessDeniedReason.NoFeatureEntitlementInSubscription =>
                     "NoFeatureEntitlementInSubscription",
-                UnionMember1AccessDeniedReason.RequestedUsageExceedingLimit =>
+                SubscriptionCreditEntitlementAccessDeniedReason.RequestedUsageExceedingLimit =>
                     "RequestedUsageExceedingLimit",
-                UnionMember1AccessDeniedReason.RequestedValuesMismatch => "RequestedValuesMismatch",
-                UnionMember1AccessDeniedReason.BudgetExceeded => "BudgetExceeded",
-                UnionMember1AccessDeniedReason.Unknown => "Unknown",
-                UnionMember1AccessDeniedReason.FeatureTypeMismatch => "FeatureTypeMismatch",
-                UnionMember1AccessDeniedReason.Revoked => "Revoked",
-                UnionMember1AccessDeniedReason.InsufficientCredits => "InsufficientCredits",
-                UnionMember1AccessDeniedReason.EntitlementNotFound => "EntitlementNotFound",
+                SubscriptionCreditEntitlementAccessDeniedReason.RequestedValuesMismatch =>
+                    "RequestedValuesMismatch",
+                SubscriptionCreditEntitlementAccessDeniedReason.BudgetExceeded => "BudgetExceeded",
+                SubscriptionCreditEntitlementAccessDeniedReason.Unknown => "Unknown",
+                SubscriptionCreditEntitlementAccessDeniedReason.FeatureTypeMismatch =>
+                    "FeatureTypeMismatch",
+                SubscriptionCreditEntitlementAccessDeniedReason.Revoked => "Revoked",
+                SubscriptionCreditEntitlementAccessDeniedReason.InsufficientCredits =>
+                    "InsufficientCredits",
+                SubscriptionCreditEntitlementAccessDeniedReason.EntitlementNotFound =>
+                    "EntitlementNotFound",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -1479,8 +1537,13 @@ sealed class UnionMember1AccessDeniedReasonConverter : JsonConverter<UnionMember
 /// <summary>
 /// The currency associated with a credit entitlement.
 /// </summary>
-[JsonConverter(typeof(JsonModelConverter<UnionMember1Currency, UnionMember1CurrencyFromRaw>))]
-public sealed record class UnionMember1Currency : JsonModel
+[JsonConverter(
+    typeof(JsonModelConverter<
+        SubscriptionCreditEntitlementCurrency,
+        SubscriptionCreditEntitlementCurrencyFromRaw
+    >)
+)]
+public sealed record class SubscriptionCreditEntitlementCurrency : JsonModel
 {
     /// <summary>
     /// The unique identifier of the custom currency.
@@ -1501,29 +1564,31 @@ public sealed record class UnionMember1Currency : JsonModel
         _ = this.CurrencyID;
     }
 
-    public UnionMember1Currency() { }
+    public SubscriptionCreditEntitlementCurrency() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public UnionMember1Currency(UnionMember1Currency unionMember1Currency)
-        : base(unionMember1Currency) { }
+    public SubscriptionCreditEntitlementCurrency(
+        SubscriptionCreditEntitlementCurrency subscriptionCreditEntitlementCurrency
+    )
+        : base(subscriptionCreditEntitlementCurrency) { }
 #pragma warning restore CS8618
 
-    public UnionMember1Currency(IReadOnlyDictionary<string, JsonElement> rawData)
+    public SubscriptionCreditEntitlementCurrency(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    UnionMember1Currency(FrozenDictionary<string, JsonElement> rawData)
+    SubscriptionCreditEntitlementCurrency(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="UnionMember1CurrencyFromRaw.FromRawUnchecked"/>
-    public static UnionMember1Currency FromRawUnchecked(
+    /// <inheritdoc cref="SubscriptionCreditEntitlementCurrencyFromRaw.FromRawUnchecked"/>
+    public static SubscriptionCreditEntitlementCurrency FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -1531,30 +1596,32 @@ public sealed record class UnionMember1Currency : JsonModel
     }
 
     [SetsRequiredMembers]
-    public UnionMember1Currency(string currencyID)
+    public SubscriptionCreditEntitlementCurrency(string currencyID)
         : this()
     {
         this.CurrencyID = currencyID;
     }
 }
 
-class UnionMember1CurrencyFromRaw : IFromRawJson<UnionMember1Currency>
+class SubscriptionCreditEntitlementCurrencyFromRaw
+    : IFromRawJson<SubscriptionCreditEntitlementCurrency>
 {
     /// <inheritdoc/>
-    public UnionMember1Currency FromRawUnchecked(
+    public SubscriptionCreditEntitlementCurrency FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => UnionMember1Currency.FromRawUnchecked(rawData);
+    ) => SubscriptionCreditEntitlementCurrency.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(UnionMember1TypeConverter))]
-public enum UnionMember1Type
+[JsonConverter(typeof(SubscriptionCreditEntitlementTypeConverter))]
+public enum SubscriptionCreditEntitlementType
 {
     Credit,
 }
 
-sealed class UnionMember1TypeConverter : JsonConverter<UnionMember1Type>
+sealed class SubscriptionCreditEntitlementTypeConverter
+    : JsonConverter<SubscriptionCreditEntitlementType>
 {
-    public override UnionMember1Type Read(
+    public override SubscriptionCreditEntitlementType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1562,14 +1629,14 @@ sealed class UnionMember1TypeConverter : JsonConverter<UnionMember1Type>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "CREDIT" => UnionMember1Type.Credit,
-            _ => (UnionMember1Type)(-1),
+            "CREDIT" => SubscriptionCreditEntitlementType.Credit,
+            _ => (SubscriptionCreditEntitlementType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        UnionMember1Type value,
+        SubscriptionCreditEntitlementType value,
         JsonSerializerOptions options
     )
     {
@@ -1577,7 +1644,7 @@ sealed class UnionMember1TypeConverter : JsonConverter<UnionMember1Type>
             writer,
             value switch
             {
-                UnionMember1Type.Credit => "CREDIT",
+                SubscriptionCreditEntitlementType.Credit => "CREDIT",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
