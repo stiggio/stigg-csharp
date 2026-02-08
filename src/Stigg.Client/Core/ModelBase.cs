@@ -4,6 +4,7 @@ using Stigg.Client.Models.V1.Customers;
 using Stigg.Client.Models.V1.Customers.PromotionalEntitlements;
 using Coupons = Stigg.Client.Models.V1.Coupons;
 using PaymentMethod = Stigg.Client.Models.V1.Customers.PaymentMethod;
+using Products = Stigg.Client.Models.V1.Products;
 using Subscriptions = Stigg.Client.Models.V1.Subscriptions;
 using Usage = Stigg.Client.Models.V1.Usage;
 
@@ -193,6 +194,7 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Coupons::Currency>(),
             new ApiEnumConverter<string, Usage::Type>(),
             new ApiEnumConverter<string, Usage::UpdateBehavior>(),
+            new ApiEnumConverter<string, Products::Status>(),
         },
     };
 

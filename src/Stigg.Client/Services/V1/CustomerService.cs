@@ -146,6 +146,30 @@ public sealed class CustomerService : ICustomerService
     }
 
     /// <inheritdoc/>
+    public async Task<CustomerListResourcesPage> ListResources(
+        CustomerListResourcesParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.ListResources(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<CustomerListResourcesPage> ListResources(
+        string id,
+        CustomerListResourcesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.ListResources(parameters with { ID = id }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
     public async Task<CustomerResponse> Provision(
         CustomerProvisionParams parameters,
         CancellationToken cancellationToken = default
@@ -406,6 +430,51 @@ public sealed class CustomerServiceWithRawResponse : ICustomerServiceWithRawResp
                 return deserializedResponse;
             }
         );
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<CustomerListResourcesPage>> ListResources(
+        CustomerListResourcesParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.ID == null)
+        {
+            throw new StiggInvalidDataException("'parameters.ID' cannot be null");
+        }
+
+        HttpRequest<CustomerListResourcesParams> request = new()
+        {
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var page = await response
+                    .Deserialize<CustomerListResourcesPageResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    page.Validate();
+                }
+                return new CustomerListResourcesPage(this, parameters, page);
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<CustomerListResourcesPage>> ListResources(
+        string id,
+        CustomerListResourcesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.ListResources(parameters with { ID = id }, cancellationToken);
     }
 
     /// <inheritdoc/>
