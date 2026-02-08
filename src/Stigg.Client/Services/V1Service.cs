@@ -33,6 +33,7 @@ public sealed class V1Service : IV1Service
         _coupons = new(() => new CouponService(client));
         _events = new(() => new EventService(client));
         _usage = new(() => new UsageService(client));
+        _products = new(() => new ProductService(client));
     }
 
     readonly Lazy<ICustomerService> _customers;
@@ -64,6 +65,12 @@ public sealed class V1Service : IV1Service
     {
         get { return _usage.Value; }
     }
+
+    readonly Lazy<IProductService> _products;
+    public IProductService Products
+    {
+        get { return _products.Value; }
+    }
 }
 
 /// <inheritdoc/>
@@ -86,6 +93,7 @@ public sealed class V1ServiceWithRawResponse : IV1ServiceWithRawResponse
         _coupons = new(() => new CouponServiceWithRawResponse(client));
         _events = new(() => new EventServiceWithRawResponse(client));
         _usage = new(() => new UsageServiceWithRawResponse(client));
+        _products = new(() => new ProductServiceWithRawResponse(client));
     }
 
     readonly Lazy<ICustomerServiceWithRawResponse> _customers;
@@ -116,5 +124,11 @@ public sealed class V1ServiceWithRawResponse : IV1ServiceWithRawResponse
     public IUsageServiceWithRawResponse Usage
     {
         get { return _usage.Value; }
+    }
+
+    readonly Lazy<IProductServiceWithRawResponse> _products;
+    public IProductServiceWithRawResponse Products
+    {
+        get { return _products.Value; }
     }
 }

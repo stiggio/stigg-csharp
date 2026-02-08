@@ -95,6 +95,21 @@ public interface ICustomerService
     );
 
     /// <summary>
+    /// Get a list of customerresources
+    /// </summary>
+    Task<CustomerListResourcesPage> ListResources(
+        CustomerListResourcesParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="ListResources(CustomerListResourcesParams, CancellationToken)"/>
+    Task<CustomerListResourcesPage> ListResources(
+        string id,
+        CustomerListResourcesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Creates a new customer and optionally provisions an initial subscription
     /// in a single operation.
     /// </summary>
@@ -199,6 +214,22 @@ public interface ICustomerServiceWithRawResponse
     /// </summary>
     Task<HttpResponse<CustomerImportResponse>> Import(
         CustomerImportParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `get /api/v1/customers/{id}/resources`, but is otherwise the
+    /// same as <see cref="ICustomerService.ListResources(CustomerListResourcesParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<CustomerListResourcesPage>> ListResources(
+        CustomerListResourcesParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="ListResources(CustomerListResourcesParams, CancellationToken)"/>
+    Task<HttpResponse<CustomerListResourcesPage>> ListResources(
+        string id,
+        CustomerListResourcesParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 

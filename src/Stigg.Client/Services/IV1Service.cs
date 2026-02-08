@@ -33,6 +33,8 @@ public interface IV1Service
     IEventService Events { get; }
 
     IUsageService Usage { get; }
+
+    IProductService Products { get; }
 }
 
 /// <summary>
@@ -57,4 +59,6 @@ public interface IV1ServiceWithRawResponse
     IEventServiceWithRawResponse Events { get; }
 
     IUsageServiceWithRawResponse Usage { get; }
+
+    IProductServiceWithRawResponse Products { get; }
 }
