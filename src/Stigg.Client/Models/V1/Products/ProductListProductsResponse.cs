@@ -127,6 +127,27 @@ public sealed record class ProductListProductsResponse : JsonModel
         init { this._rawData.Set("updatedAt", value); }
     }
 
+    /// <summary>
+    /// Product behavior settings for subscription lifecycle management.
+    /// </summary>
+    public ProductSettings? ProductSettings
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ProductSettings>("productSettings");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("productSettings", value);
+        }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -138,6 +159,7 @@ public sealed record class ProductListProductsResponse : JsonModel
         _ = this.MultipleSubscriptions;
         this.Status.Validate();
         _ = this.UpdatedAt;
+        this.ProductSettings?.Validate();
     }
 
     public ProductListProductsResponse() { }
@@ -212,6 +234,289 @@ sealed class StatusConverter : JsonConverter<Status>
             {
                 Status.Published => "PUBLISHED",
                 Status.Archived => "ARCHIVED",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Product behavior settings for subscription lifecycle management.
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<ProductSettings, ProductSettingsFromRaw>))]
+public sealed record class ProductSettings : JsonModel
+{
+    /// <summary>
+    /// Time when the subscription will be cancelled
+    /// </summary>
+    public required ApiEnum<string, SubscriptionCancellationTime> SubscriptionCancellationTime
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, SubscriptionCancellationTime>>(
+                "subscriptionCancellationTime"
+            );
+        }
+        init { this._rawData.Set("subscriptionCancellationTime", value); }
+    }
+
+    /// <summary>
+    /// Setup for the end of the subscription
+    /// </summary>
+    public required ApiEnum<string, SubscriptionEndSetup> SubscriptionEndSetup
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, SubscriptionEndSetup>>(
+                "subscriptionEndSetup"
+            );
+        }
+        init { this._rawData.Set("subscriptionEndSetup", value); }
+    }
+
+    /// <summary>
+    /// Setup for the start of the subscription
+    /// </summary>
+    public required ApiEnum<string, SubscriptionStartSetup> SubscriptionStartSetup
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, SubscriptionStartSetup>>(
+                "subscriptionStartSetup"
+            );
+        }
+        init { this._rawData.Set("subscriptionStartSetup", value); }
+    }
+
+    /// <summary>
+    /// ID of the plan to downgrade to at the end of the billing period
+    /// </summary>
+    public string? DowngradePlanID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("downgradePlanId");
+        }
+        init { this._rawData.Set("downgradePlanId", value); }
+    }
+
+    /// <summary>
+    /// Indicates if the subscription should be prorated at the end of the billing period
+    /// </summary>
+    public bool? ProrateAtEndOfBillingPeriod
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("prorateAtEndOfBillingPeriod");
+        }
+        init { this._rawData.Set("prorateAtEndOfBillingPeriod", value); }
+    }
+
+    /// <summary>
+    /// ID of the plan to start the subscription with
+    /// </summary>
+    public string? SubscriptionStartPlanID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("subscriptionStartPlanId");
+        }
+        init { this._rawData.Set("subscriptionStartPlanId", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        this.SubscriptionCancellationTime.Validate();
+        this.SubscriptionEndSetup.Validate();
+        this.SubscriptionStartSetup.Validate();
+        _ = this.DowngradePlanID;
+        _ = this.ProrateAtEndOfBillingPeriod;
+        _ = this.SubscriptionStartPlanID;
+    }
+
+    public ProductSettings() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public ProductSettings(ProductSettings productSettings)
+        : base(productSettings) { }
+#pragma warning restore CS8618
+
+    public ProductSettings(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    ProductSettings(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="ProductSettingsFromRaw.FromRawUnchecked"/>
+    public static ProductSettings FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class ProductSettingsFromRaw : IFromRawJson<ProductSettings>
+{
+    /// <inheritdoc/>
+    public ProductSettings FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        ProductSettings.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Time when the subscription will be cancelled
+/// </summary>
+[JsonConverter(typeof(SubscriptionCancellationTimeConverter))]
+public enum SubscriptionCancellationTime
+{
+    EndOfBillingPeriod,
+    Immediate,
+    SpecificDate,
+}
+
+sealed class SubscriptionCancellationTimeConverter : JsonConverter<SubscriptionCancellationTime>
+{
+    public override SubscriptionCancellationTime Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "END_OF_BILLING_PERIOD" => SubscriptionCancellationTime.EndOfBillingPeriod,
+            "IMMEDIATE" => SubscriptionCancellationTime.Immediate,
+            "SPECIFIC_DATE" => SubscriptionCancellationTime.SpecificDate,
+            _ => (SubscriptionCancellationTime)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        SubscriptionCancellationTime value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                SubscriptionCancellationTime.EndOfBillingPeriod => "END_OF_BILLING_PERIOD",
+                SubscriptionCancellationTime.Immediate => "IMMEDIATE",
+                SubscriptionCancellationTime.SpecificDate => "SPECIFIC_DATE",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Setup for the end of the subscription
+/// </summary>
+[JsonConverter(typeof(SubscriptionEndSetupConverter))]
+public enum SubscriptionEndSetup
+{
+    DowngradeToFree,
+    CancelSubscription,
+}
+
+sealed class SubscriptionEndSetupConverter : JsonConverter<SubscriptionEndSetup>
+{
+    public override SubscriptionEndSetup Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "DOWNGRADE_TO_FREE" => SubscriptionEndSetup.DowngradeToFree,
+            "CANCEL_SUBSCRIPTION" => SubscriptionEndSetup.CancelSubscription,
+            _ => (SubscriptionEndSetup)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        SubscriptionEndSetup value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                SubscriptionEndSetup.DowngradeToFree => "DOWNGRADE_TO_FREE",
+                SubscriptionEndSetup.CancelSubscription => "CANCEL_SUBSCRIPTION",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Setup for the start of the subscription
+/// </summary>
+[JsonConverter(typeof(SubscriptionStartSetupConverter))]
+public enum SubscriptionStartSetup
+{
+    PlanSelection,
+    TrialPeriod,
+    FreePlan,
+}
+
+sealed class SubscriptionStartSetupConverter : JsonConverter<SubscriptionStartSetup>
+{
+    public override SubscriptionStartSetup Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "PLAN_SELECTION" => SubscriptionStartSetup.PlanSelection,
+            "TRIAL_PERIOD" => SubscriptionStartSetup.TrialPeriod,
+            "FREE_PLAN" => SubscriptionStartSetup.FreePlan,
+            _ => (SubscriptionStartSetup)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        SubscriptionStartSetup value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                SubscriptionStartSetup.PlanSelection => "PLAN_SELECTION",
+                SubscriptionStartSetup.TrialPeriod => "TRIAL_PERIOD",
+                SubscriptionStartSetup.FreePlan => "FREE_PLAN",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

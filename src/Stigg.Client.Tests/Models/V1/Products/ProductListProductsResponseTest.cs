@@ -22,6 +22,15 @@ public class ProductListProductsResponseTest : TestBase
             MultipleSubscriptions = true,
             Status = Status.Published,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProductSettings = new()
+            {
+                SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
+                SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
+                SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+                DowngradePlanID = "downgradePlanId",
+                ProrateAtEndOfBillingPeriod = true,
+                SubscriptionStartPlanID = "subscriptionStartPlanId",
+            },
         };
 
         string expectedID = "id";
@@ -32,6 +41,15 @@ public class ProductListProductsResponseTest : TestBase
         bool expectedMultipleSubscriptions = true;
         ApiEnum<string, Status> expectedStatus = Status.Published;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        ProductSettings expectedProductSettings = new()
+        {
+            SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
+            SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
+            SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+            DowngradePlanID = "downgradePlanId",
+            ProrateAtEndOfBillingPeriod = true,
+            SubscriptionStartPlanID = "subscriptionStartPlanId",
+        };
 
         Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
@@ -47,6 +65,7 @@ public class ProductListProductsResponseTest : TestBase
         Assert.Equal(expectedMultipleSubscriptions, model.MultipleSubscriptions);
         Assert.Equal(expectedStatus, model.Status);
         Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
+        Assert.Equal(expectedProductSettings, model.ProductSettings);
     }
 
     [Fact]
@@ -62,6 +81,15 @@ public class ProductListProductsResponseTest : TestBase
             MultipleSubscriptions = true,
             Status = Status.Published,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProductSettings = new()
+            {
+                SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
+                SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
+                SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+                DowngradePlanID = "downgradePlanId",
+                ProrateAtEndOfBillingPeriod = true,
+                SubscriptionStartPlanID = "subscriptionStartPlanId",
+            },
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -86,6 +114,15 @@ public class ProductListProductsResponseTest : TestBase
             MultipleSubscriptions = true,
             Status = Status.Published,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProductSettings = new()
+            {
+                SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
+                SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
+                SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+                DowngradePlanID = "downgradePlanId",
+                ProrateAtEndOfBillingPeriod = true,
+                SubscriptionStartPlanID = "subscriptionStartPlanId",
+            },
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -103,6 +140,15 @@ public class ProductListProductsResponseTest : TestBase
         bool expectedMultipleSubscriptions = true;
         ApiEnum<string, Status> expectedStatus = Status.Published;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        ProductSettings expectedProductSettings = new()
+        {
+            SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
+            SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
+            SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+            DowngradePlanID = "downgradePlanId",
+            ProrateAtEndOfBillingPeriod = true,
+            SubscriptionStartPlanID = "subscriptionStartPlanId",
+        };
 
         Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
@@ -118,6 +164,7 @@ public class ProductListProductsResponseTest : TestBase
         Assert.Equal(expectedMultipleSubscriptions, deserialized.MultipleSubscriptions);
         Assert.Equal(expectedStatus, deserialized.Status);
         Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
+        Assert.Equal(expectedProductSettings, deserialized.ProductSettings);
     }
 
     [Fact]
@@ -133,6 +180,95 @@ public class ProductListProductsResponseTest : TestBase
             MultipleSubscriptions = true,
             Status = Status.Published,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProductSettings = new()
+            {
+                SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
+                SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
+                SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+                DowngradePlanID = "downgradePlanId",
+                ProrateAtEndOfBillingPeriod = true,
+                SubscriptionStartPlanID = "subscriptionStartPlanId",
+            },
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new ProductListProductsResponse
+        {
+            ID = "id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            DisplayName = "displayName",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MultipleSubscriptions = true,
+            Status = Status.Published,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        Assert.Null(model.ProductSettings);
+        Assert.False(model.RawData.ContainsKey("productSettings"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new ProductListProductsResponse
+        {
+            ID = "id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            DisplayName = "displayName",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MultipleSubscriptions = true,
+            Status = Status.Published,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
+    {
+        var model = new ProductListProductsResponse
+        {
+            ID = "id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            DisplayName = "displayName",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MultipleSubscriptions = true,
+            Status = Status.Published,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+
+            // Null should be interpreted as omitted for these properties
+            ProductSettings = null,
+        };
+
+        Assert.Null(model.ProductSettings);
+        Assert.False(model.RawData.ContainsKey("productSettings"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new ProductListProductsResponse
+        {
+            ID = "id",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            DisplayName = "displayName",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MultipleSubscriptions = true,
+            Status = Status.Published,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+
+            // Null should be interpreted as omitted for these properties
+            ProductSettings = null,
         };
 
         model.Validate();
@@ -151,6 +287,15 @@ public class ProductListProductsResponseTest : TestBase
             MultipleSubscriptions = true,
             Status = Status.Published,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ProductSettings = new()
+            {
+                SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
+                SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
+                SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+                DowngradePlanID = "downgradePlanId",
+                ProrateAtEndOfBillingPeriod = true,
+                SubscriptionStartPlanID = "subscriptionStartPlanId",
+            },
         };
 
         ProductListProductsResponse copied = new(model);
@@ -209,6 +354,383 @@ public class StatusTest : TestBase
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class ProductSettingsTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new ProductSettings
+        {
+            SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
+            SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
+            SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+            DowngradePlanID = "downgradePlanId",
+            ProrateAtEndOfBillingPeriod = true,
+            SubscriptionStartPlanID = "subscriptionStartPlanId",
+        };
+
+        ApiEnum<string, SubscriptionCancellationTime> expectedSubscriptionCancellationTime =
+            SubscriptionCancellationTime.EndOfBillingPeriod;
+        ApiEnum<string, SubscriptionEndSetup> expectedSubscriptionEndSetup =
+            SubscriptionEndSetup.DowngradeToFree;
+        ApiEnum<string, SubscriptionStartSetup> expectedSubscriptionStartSetup =
+            SubscriptionStartSetup.PlanSelection;
+        string expectedDowngradePlanID = "downgradePlanId";
+        bool expectedProrateAtEndOfBillingPeriod = true;
+        string expectedSubscriptionStartPlanID = "subscriptionStartPlanId";
+
+        Assert.Equal(expectedSubscriptionCancellationTime, model.SubscriptionCancellationTime);
+        Assert.Equal(expectedSubscriptionEndSetup, model.SubscriptionEndSetup);
+        Assert.Equal(expectedSubscriptionStartSetup, model.SubscriptionStartSetup);
+        Assert.Equal(expectedDowngradePlanID, model.DowngradePlanID);
+        Assert.Equal(expectedProrateAtEndOfBillingPeriod, model.ProrateAtEndOfBillingPeriod);
+        Assert.Equal(expectedSubscriptionStartPlanID, model.SubscriptionStartPlanID);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new ProductSettings
+        {
+            SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
+            SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
+            SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+            DowngradePlanID = "downgradePlanId",
+            ProrateAtEndOfBillingPeriod = true,
+            SubscriptionStartPlanID = "subscriptionStartPlanId",
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ProductSettings>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new ProductSettings
+        {
+            SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
+            SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
+            SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+            DowngradePlanID = "downgradePlanId",
+            ProrateAtEndOfBillingPeriod = true,
+            SubscriptionStartPlanID = "subscriptionStartPlanId",
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ProductSettings>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        ApiEnum<string, SubscriptionCancellationTime> expectedSubscriptionCancellationTime =
+            SubscriptionCancellationTime.EndOfBillingPeriod;
+        ApiEnum<string, SubscriptionEndSetup> expectedSubscriptionEndSetup =
+            SubscriptionEndSetup.DowngradeToFree;
+        ApiEnum<string, SubscriptionStartSetup> expectedSubscriptionStartSetup =
+            SubscriptionStartSetup.PlanSelection;
+        string expectedDowngradePlanID = "downgradePlanId";
+        bool expectedProrateAtEndOfBillingPeriod = true;
+        string expectedSubscriptionStartPlanID = "subscriptionStartPlanId";
+
+        Assert.Equal(
+            expectedSubscriptionCancellationTime,
+            deserialized.SubscriptionCancellationTime
+        );
+        Assert.Equal(expectedSubscriptionEndSetup, deserialized.SubscriptionEndSetup);
+        Assert.Equal(expectedSubscriptionStartSetup, deserialized.SubscriptionStartSetup);
+        Assert.Equal(expectedDowngradePlanID, deserialized.DowngradePlanID);
+        Assert.Equal(expectedProrateAtEndOfBillingPeriod, deserialized.ProrateAtEndOfBillingPeriod);
+        Assert.Equal(expectedSubscriptionStartPlanID, deserialized.SubscriptionStartPlanID);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new ProductSettings
+        {
+            SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
+            SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
+            SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+            DowngradePlanID = "downgradePlanId",
+            ProrateAtEndOfBillingPeriod = true,
+            SubscriptionStartPlanID = "subscriptionStartPlanId",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new ProductSettings
+        {
+            SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
+            SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
+            SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+        };
+
+        Assert.Null(model.DowngradePlanID);
+        Assert.False(model.RawData.ContainsKey("downgradePlanId"));
+        Assert.Null(model.ProrateAtEndOfBillingPeriod);
+        Assert.False(model.RawData.ContainsKey("prorateAtEndOfBillingPeriod"));
+        Assert.Null(model.SubscriptionStartPlanID);
+        Assert.False(model.RawData.ContainsKey("subscriptionStartPlanId"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new ProductSettings
+        {
+            SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
+            SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
+            SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new ProductSettings
+        {
+            SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
+            SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
+            SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+
+            DowngradePlanID = null,
+            ProrateAtEndOfBillingPeriod = null,
+            SubscriptionStartPlanID = null,
+        };
+
+        Assert.Null(model.DowngradePlanID);
+        Assert.True(model.RawData.ContainsKey("downgradePlanId"));
+        Assert.Null(model.ProrateAtEndOfBillingPeriod);
+        Assert.True(model.RawData.ContainsKey("prorateAtEndOfBillingPeriod"));
+        Assert.Null(model.SubscriptionStartPlanID);
+        Assert.True(model.RawData.ContainsKey("subscriptionStartPlanId"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new ProductSettings
+        {
+            SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
+            SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
+            SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+
+            DowngradePlanID = null,
+            ProrateAtEndOfBillingPeriod = null,
+            SubscriptionStartPlanID = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new ProductSettings
+        {
+            SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
+            SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
+            SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+            DowngradePlanID = "downgradePlanId",
+            ProrateAtEndOfBillingPeriod = true,
+            SubscriptionStartPlanID = "subscriptionStartPlanId",
+        };
+
+        ProductSettings copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class SubscriptionCancellationTimeTest : TestBase
+{
+    [Theory]
+    [InlineData(SubscriptionCancellationTime.EndOfBillingPeriod)]
+    [InlineData(SubscriptionCancellationTime.Immediate)]
+    [InlineData(SubscriptionCancellationTime.SpecificDate)]
+    public void Validation_Works(SubscriptionCancellationTime rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionCancellationTime> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionCancellationTime>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(SubscriptionCancellationTime.EndOfBillingPeriod)]
+    [InlineData(SubscriptionCancellationTime.Immediate)]
+    [InlineData(SubscriptionCancellationTime.SpecificDate)]
+    public void SerializationRoundtrip_Works(SubscriptionCancellationTime rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionCancellationTime> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionCancellationTime>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionCancellationTime>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionCancellationTime>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class SubscriptionEndSetupTest : TestBase
+{
+    [Theory]
+    [InlineData(SubscriptionEndSetup.DowngradeToFree)]
+    [InlineData(SubscriptionEndSetup.CancelSubscription)]
+    public void Validation_Works(SubscriptionEndSetup rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionEndSetup> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionEndSetup>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(SubscriptionEndSetup.DowngradeToFree)]
+    [InlineData(SubscriptionEndSetup.CancelSubscription)]
+    public void SerializationRoundtrip_Works(SubscriptionEndSetup rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionEndSetup> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionEndSetup>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionEndSetup>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionEndSetup>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class SubscriptionStartSetupTest : TestBase
+{
+    [Theory]
+    [InlineData(SubscriptionStartSetup.PlanSelection)]
+    [InlineData(SubscriptionStartSetup.TrialPeriod)]
+    [InlineData(SubscriptionStartSetup.FreePlan)]
+    public void Validation_Works(SubscriptionStartSetup rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionStartSetup> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionStartSetup>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(SubscriptionStartSetup.PlanSelection)]
+    [InlineData(SubscriptionStartSetup.TrialPeriod)]
+    [InlineData(SubscriptionStartSetup.FreePlan)]
+    public void SerializationRoundtrip_Works(SubscriptionStartSetup rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionStartSetup> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionStartSetup>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionStartSetup>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionStartSetup>>(
             json,
             ModelBase.SerializerOptions
         );

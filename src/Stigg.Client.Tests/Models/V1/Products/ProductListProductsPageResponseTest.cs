@@ -25,6 +25,16 @@ public class ProductListProductsPageResponseTest : TestBase
                     MultipleSubscriptions = true,
                     Status = Status.Published,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProductSettings = new()
+                    {
+                        SubscriptionCancellationTime =
+                            SubscriptionCancellationTime.EndOfBillingPeriod,
+                        SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
+                        SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+                        DowngradePlanID = "downgradePlanId",
+                        ProrateAtEndOfBillingPeriod = true,
+                        SubscriptionStartPlanID = "subscriptionStartPlanId",
+                    },
                 },
             ],
             Pagination = new()
@@ -46,6 +56,15 @@ public class ProductListProductsPageResponseTest : TestBase
                 MultipleSubscriptions = true,
                 Status = Status.Published,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductSettings = new()
+                {
+                    SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
+                    SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
+                    SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+                    DowngradePlanID = "downgradePlanId",
+                    ProrateAtEndOfBillingPeriod = true,
+                    SubscriptionStartPlanID = "subscriptionStartPlanId",
+                },
             },
         ];
         Pagination expectedPagination = new()
@@ -79,6 +98,16 @@ public class ProductListProductsPageResponseTest : TestBase
                     MultipleSubscriptions = true,
                     Status = Status.Published,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProductSettings = new()
+                    {
+                        SubscriptionCancellationTime =
+                            SubscriptionCancellationTime.EndOfBillingPeriod,
+                        SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
+                        SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+                        DowngradePlanID = "downgradePlanId",
+                        ProrateAtEndOfBillingPeriod = true,
+                        SubscriptionStartPlanID = "subscriptionStartPlanId",
+                    },
                 },
             ],
             Pagination = new()
@@ -114,6 +143,16 @@ public class ProductListProductsPageResponseTest : TestBase
                     MultipleSubscriptions = true,
                     Status = Status.Published,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProductSettings = new()
+                    {
+                        SubscriptionCancellationTime =
+                            SubscriptionCancellationTime.EndOfBillingPeriod,
+                        SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
+                        SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+                        DowngradePlanID = "downgradePlanId",
+                        ProrateAtEndOfBillingPeriod = true,
+                        SubscriptionStartPlanID = "subscriptionStartPlanId",
+                    },
                 },
             ],
             Pagination = new()
@@ -142,6 +181,15 @@ public class ProductListProductsPageResponseTest : TestBase
                 MultipleSubscriptions = true,
                 Status = Status.Published,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductSettings = new()
+                {
+                    SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
+                    SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
+                    SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+                    DowngradePlanID = "downgradePlanId",
+                    ProrateAtEndOfBillingPeriod = true,
+                    SubscriptionStartPlanID = "subscriptionStartPlanId",
+                },
             },
         ];
         Pagination expectedPagination = new()
@@ -175,6 +223,16 @@ public class ProductListProductsPageResponseTest : TestBase
                     MultipleSubscriptions = true,
                     Status = Status.Published,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProductSettings = new()
+                    {
+                        SubscriptionCancellationTime =
+                            SubscriptionCancellationTime.EndOfBillingPeriod,
+                        SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
+                        SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+                        DowngradePlanID = "downgradePlanId",
+                        ProrateAtEndOfBillingPeriod = true,
+                        SubscriptionStartPlanID = "subscriptionStartPlanId",
+                    },
                 },
             ],
             Pagination = new()
@@ -204,6 +262,16 @@ public class ProductListProductsPageResponseTest : TestBase
                     MultipleSubscriptions = true,
                     Status = Status.Published,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProductSettings = new()
+                    {
+                        SubscriptionCancellationTime =
+                            SubscriptionCancellationTime.EndOfBillingPeriod,
+                        SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
+                        SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+                        DowngradePlanID = "downgradePlanId",
+                        ProrateAtEndOfBillingPeriod = true,
+                        SubscriptionStartPlanID = "subscriptionStartPlanId",
+                    },
                 },
             ],
             Pagination = new()

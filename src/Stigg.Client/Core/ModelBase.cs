@@ -195,6 +195,9 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Usage::Type>(),
             new ApiEnumConverter<string, Usage::UpdateBehavior>(),
             new ApiEnumConverter<string, Products::Status>(),
+            new ApiEnumConverter<string, Products::SubscriptionCancellationTime>(),
+            new ApiEnumConverter<string, Products::SubscriptionEndSetup>(),
+            new ApiEnumConverter<string, Products::SubscriptionStartSetup>(),
         },
     };
 
