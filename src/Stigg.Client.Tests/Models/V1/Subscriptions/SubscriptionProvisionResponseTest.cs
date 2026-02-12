@@ -1975,6 +1975,7 @@ public class EntitlementTest : TestBase
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
         value.Validate();
@@ -2027,6 +2028,7 @@ public class EntitlementTest : TestBase
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
@@ -2940,6 +2942,7 @@ public class UnionMember1Test : TestBase
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -2954,6 +2957,7 @@ public class UnionMember1Test : TestBase
         DateTimeOffset expectedEntitlementUpdatedAt = DateTimeOffset.Parse(
             "2019-12-27T18:11:19.117Z"
         );
+        DateTimeOffset expectedUsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedAccessDeniedReason, model.AccessDeniedReason);
@@ -2964,6 +2968,7 @@ public class UnionMember1Test : TestBase
         Assert.Equal(expectedUsageLimit, model.UsageLimit);
         Assert.Equal(expectedUsageUpdatedAt, model.UsageUpdatedAt);
         Assert.Equal(expectedEntitlementUpdatedAt, model.EntitlementUpdatedAt);
+        Assert.Equal(expectedUsagePeriodEnd, model.UsagePeriodEnd);
         Assert.Equal(expectedValidUntil, model.ValidUntil);
     }
 
@@ -2980,6 +2985,7 @@ public class UnionMember1Test : TestBase
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -3005,6 +3011,7 @@ public class UnionMember1Test : TestBase
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -3026,6 +3033,7 @@ public class UnionMember1Test : TestBase
         DateTimeOffset expectedEntitlementUpdatedAt = DateTimeOffset.Parse(
             "2019-12-27T18:11:19.117Z"
         );
+        DateTimeOffset expectedUsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedAccessDeniedReason, deserialized.AccessDeniedReason);
@@ -3036,6 +3044,7 @@ public class UnionMember1Test : TestBase
         Assert.Equal(expectedUsageLimit, deserialized.UsageLimit);
         Assert.Equal(expectedUsageUpdatedAt, deserialized.UsageUpdatedAt);
         Assert.Equal(expectedEntitlementUpdatedAt, deserialized.EntitlementUpdatedAt);
+        Assert.Equal(expectedUsagePeriodEnd, deserialized.UsagePeriodEnd);
         Assert.Equal(expectedValidUntil, deserialized.ValidUntil);
     }
 
@@ -3052,6 +3061,7 @@ public class UnionMember1Test : TestBase
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -3074,6 +3084,8 @@ public class UnionMember1Test : TestBase
 
         Assert.Null(model.EntitlementUpdatedAt);
         Assert.False(model.RawData.ContainsKey("entitlementUpdatedAt"));
+        Assert.Null(model.UsagePeriodEnd);
+        Assert.False(model.RawData.ContainsKey("usagePeriodEnd"));
         Assert.Null(model.ValidUntil);
         Assert.False(model.RawData.ContainsKey("validUntil"));
     }
@@ -3110,11 +3122,14 @@ public class UnionMember1Test : TestBase
 
             // Null should be interpreted as omitted for these properties
             EntitlementUpdatedAt = null,
+            UsagePeriodEnd = null,
             ValidUntil = null,
         };
 
         Assert.Null(model.EntitlementUpdatedAt);
         Assert.False(model.RawData.ContainsKey("entitlementUpdatedAt"));
+        Assert.Null(model.UsagePeriodEnd);
+        Assert.False(model.RawData.ContainsKey("usagePeriodEnd"));
         Assert.Null(model.ValidUntil);
         Assert.False(model.RawData.ContainsKey("validUntil"));
     }
@@ -3134,6 +3149,7 @@ public class UnionMember1Test : TestBase
 
             // Null should be interpreted as omitted for these properties
             EntitlementUpdatedAt = null,
+            UsagePeriodEnd = null,
             ValidUntil = null,
         };
 
@@ -3153,6 +3169,7 @@ public class UnionMember1Test : TestBase
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
