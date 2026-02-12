@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Stigg.Client.Core;
 
 namespace Stigg.Client.Models.V1.Customers;
@@ -60,6 +61,48 @@ public record class CustomerListParams : ParamsBase
     }
 
     /// <summary>
+    /// Filter by creation date using range operators: gt, gte, lt, lte
+    /// </summary>
+    public CreatedAt? CreatedAt
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<CreatedAt>("createdAt");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("createdAt", value);
+        }
+    }
+
+    /// <summary>
+    /// Filter by exact customer email address
+    /// </summary>
+    public string? Email
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("email");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("email", value);
+        }
+    }
+
+    /// <summary>
     /// Maximum number of items to return
     /// </summary>
     public long? Limit
@@ -77,6 +120,27 @@ public record class CustomerListParams : ParamsBase
             }
 
             this._rawQueryData.Set("limit", value);
+        }
+    }
+
+    /// <summary>
+    /// Filter by exact customer name
+    /// </summary>
+    public string? Name
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("name");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("name", value);
         }
     }
 
@@ -162,4 +226,138 @@ public record class CustomerListParams : ParamsBase
     {
         return 0;
     }
+}
+
+/// <summary>
+/// Filter by creation date using range operators: gt, gte, lt, lte
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<CreatedAt, CreatedAtFromRaw>))]
+public sealed record class CreatedAt : JsonModel
+{
+    /// <summary>
+    /// Greater than the specified createdAt value
+    /// </summary>
+    public DateTimeOffset? Gt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("gt");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("gt", value);
+        }
+    }
+
+    /// <summary>
+    /// Greater than or equal to the specified createdAt value
+    /// </summary>
+    public DateTimeOffset? Gte
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("gte");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("gte", value);
+        }
+    }
+
+    /// <summary>
+    /// Less than the specified createdAt value
+    /// </summary>
+    public DateTimeOffset? Lt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("lt");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("lt", value);
+        }
+    }
+
+    /// <summary>
+    /// Less than or equal to the specified createdAt value
+    /// </summary>
+    public DateTimeOffset? Lte
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("lte");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("lte", value);
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.Gt;
+        _ = this.Gte;
+        _ = this.Lt;
+        _ = this.Lte;
+    }
+
+    public CreatedAt() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public CreatedAt(CreatedAt createdAt)
+        : base(createdAt) { }
+#pragma warning restore CS8618
+
+    public CreatedAt(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    CreatedAt(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="CreatedAtFromRaw.FromRawUnchecked"/>
+    public static CreatedAt FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class CreatedAtFromRaw : IFromRawJson<CreatedAt>
+{
+    /// <inheritdoc/>
+    public CreatedAt FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        CreatedAt.FromRawUnchecked(rawData);
 }

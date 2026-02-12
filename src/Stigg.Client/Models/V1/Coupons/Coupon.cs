@@ -235,14 +235,12 @@ public sealed record class Data : JsonModel
     /// <summary>
     /// Type of the coupon (percentage or fixed amount)
     /// </summary>
-    public required ApiEnum<string, global::Stigg.Client.Models.V1.Coupons.Type> Type
+    public required ApiEnum<string, DataType> Type
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, global::Stigg.Client.Models.V1.Coupons.Type>
-            >("type");
+            return this._rawData.GetNotNullClass<ApiEnum<string, DataType>>("type");
         }
         init { this._rawData.Set("type", value); }
     }
@@ -873,16 +871,16 @@ sealed class StatusConverter : JsonConverter<Status>
 /// <summary>
 /// Type of the coupon (percentage or fixed amount)
 /// </summary>
-[JsonConverter(typeof(TypeConverter))]
-public enum Type
+[JsonConverter(typeof(DataTypeConverter))]
+public enum DataType
 {
     Fixed,
     Percentage,
 }
 
-sealed class TypeConverter : JsonConverter<global::Stigg.Client.Models.V1.Coupons.Type>
+sealed class DataTypeConverter : JsonConverter<DataType>
 {
-    public override global::Stigg.Client.Models.V1.Coupons.Type Read(
+    public override DataType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -890,24 +888,20 @@ sealed class TypeConverter : JsonConverter<global::Stigg.Client.Models.V1.Coupon
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "FIXED" => global::Stigg.Client.Models.V1.Coupons.Type.Fixed,
-            "PERCENTAGE" => global::Stigg.Client.Models.V1.Coupons.Type.Percentage,
-            _ => (global::Stigg.Client.Models.V1.Coupons.Type)(-1),
+            "FIXED" => DataType.Fixed,
+            "PERCENTAGE" => DataType.Percentage,
+            _ => (DataType)(-1),
         };
     }
 
-    public override void Write(
-        Utf8JsonWriter writer,
-        global::Stigg.Client.Models.V1.Coupons.Type value,
-        JsonSerializerOptions options
-    )
+    public override void Write(Utf8JsonWriter writer, DataType value, JsonSerializerOptions options)
     {
         JsonSerializer.Serialize(
             writer,
             value switch
             {
-                global::Stigg.Client.Models.V1.Coupons.Type.Fixed => "FIXED",
-                global::Stigg.Client.Models.V1.Coupons.Type.Percentage => "PERCENTAGE",
+                DataType.Fixed => "FIXED",
+                DataType.Percentage => "PERCENTAGE",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

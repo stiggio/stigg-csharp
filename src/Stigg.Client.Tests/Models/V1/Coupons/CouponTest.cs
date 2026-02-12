@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
-using Coupons = Stigg.Client.Models.V1.Coupons;
+using Stigg.Client.Models.V1.Coupons;
 
 namespace Stigg.Client.Tests.Models.V1.Coupons;
 
@@ -12,12 +12,12 @@ public class CouponTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Coupons::Coupon
+        var model = new Coupon
         {
             Data = new()
             {
                 ID = "id",
-                AmountsOff = [new() { Amount = 0, Currency = Coupons::DataAmountsOffCurrency.Usd }],
+                AmountsOff = [new() { Amount = 0, Currency = DataAmountsOffCurrency.Usd }],
                 BillingID = "billingId",
                 BillingLinkUrl = "billingLinkUrl",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -25,17 +25,17 @@ public class CouponTest : TestBase
                 DurationInMonths = 0,
                 Name = "name",
                 PercentOff = 0,
-                Source = Coupons::Source.Stigg,
-                Status = Coupons::Status.Active,
-                Type = Coupons::Type.Fixed,
+                Source = Source.Stigg,
+                Status = Status.Active,
+                Type = DataType.Fixed,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
         };
 
-        Coupons::Data expectedData = new()
+        Data expectedData = new()
         {
             ID = "id",
-            AmountsOff = [new() { Amount = 0, Currency = Coupons::DataAmountsOffCurrency.Usd }],
+            AmountsOff = [new() { Amount = 0, Currency = DataAmountsOffCurrency.Usd }],
             BillingID = "billingId",
             BillingLinkUrl = "billingLinkUrl",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -43,9 +43,9 @@ public class CouponTest : TestBase
             DurationInMonths = 0,
             Name = "name",
             PercentOff = 0,
-            Source = Coupons::Source.Stigg,
-            Status = Coupons::Status.Active,
-            Type = Coupons::Type.Fixed,
+            Source = Source.Stigg,
+            Status = Status.Active,
+            Type = DataType.Fixed,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -55,12 +55,12 @@ public class CouponTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Coupons::Coupon
+        var model = new Coupon
         {
             Data = new()
             {
                 ID = "id",
-                AmountsOff = [new() { Amount = 0, Currency = Coupons::DataAmountsOffCurrency.Usd }],
+                AmountsOff = [new() { Amount = 0, Currency = DataAmountsOffCurrency.Usd }],
                 BillingID = "billingId",
                 BillingLinkUrl = "billingLinkUrl",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -68,18 +68,15 @@ public class CouponTest : TestBase
                 DurationInMonths = 0,
                 Name = "name",
                 PercentOff = 0,
-                Source = Coupons::Source.Stigg,
-                Status = Coupons::Status.Active,
-                Type = Coupons::Type.Fixed,
+                Source = Source.Stigg,
+                Status = Status.Active,
+                Type = DataType.Fixed,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Coupons::Coupon>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Coupon>(json, ModelBase.SerializerOptions);
 
         Assert.Equal(model, deserialized);
     }
@@ -87,12 +84,12 @@ public class CouponTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Coupons::Coupon
+        var model = new Coupon
         {
             Data = new()
             {
                 ID = "id",
-                AmountsOff = [new() { Amount = 0, Currency = Coupons::DataAmountsOffCurrency.Usd }],
+                AmountsOff = [new() { Amount = 0, Currency = DataAmountsOffCurrency.Usd }],
                 BillingID = "billingId",
                 BillingLinkUrl = "billingLinkUrl",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -100,24 +97,21 @@ public class CouponTest : TestBase
                 DurationInMonths = 0,
                 Name = "name",
                 PercentOff = 0,
-                Source = Coupons::Source.Stigg,
-                Status = Coupons::Status.Active,
-                Type = Coupons::Type.Fixed,
+                Source = Source.Stigg,
+                Status = Status.Active,
+                Type = DataType.Fixed,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Coupons::Coupon>(
-            element,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Coupon>(element, ModelBase.SerializerOptions);
         Assert.NotNull(deserialized);
 
-        Coupons::Data expectedData = new()
+        Data expectedData = new()
         {
             ID = "id",
-            AmountsOff = [new() { Amount = 0, Currency = Coupons::DataAmountsOffCurrency.Usd }],
+            AmountsOff = [new() { Amount = 0, Currency = DataAmountsOffCurrency.Usd }],
             BillingID = "billingId",
             BillingLinkUrl = "billingLinkUrl",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -125,9 +119,9 @@ public class CouponTest : TestBase
             DurationInMonths = 0,
             Name = "name",
             PercentOff = 0,
-            Source = Coupons::Source.Stigg,
-            Status = Coupons::Status.Active,
-            Type = Coupons::Type.Fixed,
+            Source = Source.Stigg,
+            Status = Status.Active,
+            Type = DataType.Fixed,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -137,12 +131,12 @@ public class CouponTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Coupons::Coupon
+        var model = new Coupon
         {
             Data = new()
             {
                 ID = "id",
-                AmountsOff = [new() { Amount = 0, Currency = Coupons::DataAmountsOffCurrency.Usd }],
+                AmountsOff = [new() { Amount = 0, Currency = DataAmountsOffCurrency.Usd }],
                 BillingID = "billingId",
                 BillingLinkUrl = "billingLinkUrl",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -150,9 +144,9 @@ public class CouponTest : TestBase
                 DurationInMonths = 0,
                 Name = "name",
                 PercentOff = 0,
-                Source = Coupons::Source.Stigg,
-                Status = Coupons::Status.Active,
-                Type = Coupons::Type.Fixed,
+                Source = Source.Stigg,
+                Status = Status.Active,
+                Type = DataType.Fixed,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
         };
@@ -163,12 +157,12 @@ public class CouponTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Coupons::Coupon
+        var model = new Coupon
         {
             Data = new()
             {
                 ID = "id",
-                AmountsOff = [new() { Amount = 0, Currency = Coupons::DataAmountsOffCurrency.Usd }],
+                AmountsOff = [new() { Amount = 0, Currency = DataAmountsOffCurrency.Usd }],
                 BillingID = "billingId",
                 BillingLinkUrl = "billingLinkUrl",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -176,14 +170,14 @@ public class CouponTest : TestBase
                 DurationInMonths = 0,
                 Name = "name",
                 PercentOff = 0,
-                Source = Coupons::Source.Stigg,
-                Status = Coupons::Status.Active,
-                Type = Coupons::Type.Fixed,
+                Source = Source.Stigg,
+                Status = Status.Active,
+                Type = DataType.Fixed,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
         };
 
-        Coupons::Coupon copied = new(model);
+        Coupon copied = new(model);
 
         Assert.Equal(model, copied);
     }
@@ -194,10 +188,10 @@ public class DataTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Coupons::Data
+        var model = new Data
         {
             ID = "id",
-            AmountsOff = [new() { Amount = 0, Currency = Coupons::DataAmountsOffCurrency.Usd }],
+            AmountsOff = [new() { Amount = 0, Currency = DataAmountsOffCurrency.Usd }],
             BillingID = "billingId",
             BillingLinkUrl = "billingLinkUrl",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -205,16 +199,16 @@ public class DataTest : TestBase
             DurationInMonths = 0,
             Name = "name",
             PercentOff = 0,
-            Source = Coupons::Source.Stigg,
-            Status = Coupons::Status.Active,
-            Type = Coupons::Type.Fixed,
+            Source = Source.Stigg,
+            Status = Status.Active,
+            Type = DataType.Fixed,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         string expectedID = "id";
-        List<Coupons::DataAmountsOff> expectedAmountsOff =
+        List<DataAmountsOff> expectedAmountsOff =
         [
-            new() { Amount = 0, Currency = Coupons::DataAmountsOffCurrency.Usd },
+            new() { Amount = 0, Currency = DataAmountsOffCurrency.Usd },
         ];
         string expectedBillingID = "billingId";
         string expectedBillingLinkUrl = "billingLinkUrl";
@@ -223,9 +217,9 @@ public class DataTest : TestBase
         double expectedDurationInMonths = 0;
         string expectedName = "name";
         double expectedPercentOff = 0;
-        ApiEnum<string, Coupons::Source> expectedSource = Coupons::Source.Stigg;
-        ApiEnum<string, Coupons::Status> expectedStatus = Coupons::Status.Active;
-        ApiEnum<string, Coupons::Type> expectedType = Coupons::Type.Fixed;
+        ApiEnum<string, Source> expectedSource = Source.Stigg;
+        ApiEnum<string, Status> expectedStatus = Status.Active;
+        ApiEnum<string, DataType> expectedType = DataType.Fixed;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedID, model.ID);
@@ -251,10 +245,10 @@ public class DataTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Coupons::Data
+        var model = new Data
         {
             ID = "id",
-            AmountsOff = [new() { Amount = 0, Currency = Coupons::DataAmountsOffCurrency.Usd }],
+            AmountsOff = [new() { Amount = 0, Currency = DataAmountsOffCurrency.Usd }],
             BillingID = "billingId",
             BillingLinkUrl = "billingLinkUrl",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -262,17 +256,14 @@ public class DataTest : TestBase
             DurationInMonths = 0,
             Name = "name",
             PercentOff = 0,
-            Source = Coupons::Source.Stigg,
-            Status = Coupons::Status.Active,
-            Type = Coupons::Type.Fixed,
+            Source = Source.Stigg,
+            Status = Status.Active,
+            Type = DataType.Fixed,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Coupons::Data>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Data>(json, ModelBase.SerializerOptions);
 
         Assert.Equal(model, deserialized);
     }
@@ -280,10 +271,10 @@ public class DataTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Coupons::Data
+        var model = new Data
         {
             ID = "id",
-            AmountsOff = [new() { Amount = 0, Currency = Coupons::DataAmountsOffCurrency.Usd }],
+            AmountsOff = [new() { Amount = 0, Currency = DataAmountsOffCurrency.Usd }],
             BillingID = "billingId",
             BillingLinkUrl = "billingLinkUrl",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -291,23 +282,20 @@ public class DataTest : TestBase
             DurationInMonths = 0,
             Name = "name",
             PercentOff = 0,
-            Source = Coupons::Source.Stigg,
-            Status = Coupons::Status.Active,
-            Type = Coupons::Type.Fixed,
+            Source = Source.Stigg,
+            Status = Status.Active,
+            Type = DataType.Fixed,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Coupons::Data>(
-            element,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
-        List<Coupons::DataAmountsOff> expectedAmountsOff =
+        List<DataAmountsOff> expectedAmountsOff =
         [
-            new() { Amount = 0, Currency = Coupons::DataAmountsOffCurrency.Usd },
+            new() { Amount = 0, Currency = DataAmountsOffCurrency.Usd },
         ];
         string expectedBillingID = "billingId";
         string expectedBillingLinkUrl = "billingLinkUrl";
@@ -316,9 +304,9 @@ public class DataTest : TestBase
         double expectedDurationInMonths = 0;
         string expectedName = "name";
         double expectedPercentOff = 0;
-        ApiEnum<string, Coupons::Source> expectedSource = Coupons::Source.Stigg;
-        ApiEnum<string, Coupons::Status> expectedStatus = Coupons::Status.Active;
-        ApiEnum<string, Coupons::Type> expectedType = Coupons::Type.Fixed;
+        ApiEnum<string, Source> expectedSource = Source.Stigg;
+        ApiEnum<string, Status> expectedStatus = Status.Active;
+        ApiEnum<string, DataType> expectedType = DataType.Fixed;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedID, deserialized.ID);
@@ -344,10 +332,10 @@ public class DataTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Coupons::Data
+        var model = new Data
         {
             ID = "id",
-            AmountsOff = [new() { Amount = 0, Currency = Coupons::DataAmountsOffCurrency.Usd }],
+            AmountsOff = [new() { Amount = 0, Currency = DataAmountsOffCurrency.Usd }],
             BillingID = "billingId",
             BillingLinkUrl = "billingLinkUrl",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -355,9 +343,9 @@ public class DataTest : TestBase
             DurationInMonths = 0,
             Name = "name",
             PercentOff = 0,
-            Source = Coupons::Source.Stigg,
-            Status = Coupons::Status.Active,
-            Type = Coupons::Type.Fixed,
+            Source = Source.Stigg,
+            Status = Status.Active,
+            Type = DataType.Fixed,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -367,10 +355,10 @@ public class DataTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Coupons::Data
+        var model = new Data
         {
             ID = "id",
-            AmountsOff = [new() { Amount = 0, Currency = Coupons::DataAmountsOffCurrency.Usd }],
+            AmountsOff = [new() { Amount = 0, Currency = DataAmountsOffCurrency.Usd }],
             BillingID = "billingId",
             BillingLinkUrl = "billingLinkUrl",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -378,13 +366,13 @@ public class DataTest : TestBase
             DurationInMonths = 0,
             Name = "name",
             PercentOff = 0,
-            Source = Coupons::Source.Stigg,
-            Status = Coupons::Status.Active,
-            Type = Coupons::Type.Fixed,
+            Source = Source.Stigg,
+            Status = Status.Active,
+            Type = DataType.Fixed,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
-        Coupons::Data copied = new(model);
+        Data copied = new(model);
 
         Assert.Equal(model, copied);
     }
@@ -395,15 +383,10 @@ public class DataAmountsOffTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Coupons::DataAmountsOff
-        {
-            Amount = 0,
-            Currency = Coupons::DataAmountsOffCurrency.Usd,
-        };
+        var model = new DataAmountsOff { Amount = 0, Currency = DataAmountsOffCurrency.Usd };
 
         double expectedAmount = 0;
-        ApiEnum<string, Coupons::DataAmountsOffCurrency> expectedCurrency =
-            Coupons::DataAmountsOffCurrency.Usd;
+        ApiEnum<string, DataAmountsOffCurrency> expectedCurrency = DataAmountsOffCurrency.Usd;
 
         Assert.Equal(expectedAmount, model.Amount);
         Assert.Equal(expectedCurrency, model.Currency);
@@ -412,14 +395,10 @@ public class DataAmountsOffTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Coupons::DataAmountsOff
-        {
-            Amount = 0,
-            Currency = Coupons::DataAmountsOffCurrency.Usd,
-        };
+        var model = new DataAmountsOff { Amount = 0, Currency = DataAmountsOffCurrency.Usd };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Coupons::DataAmountsOff>(
+        var deserialized = JsonSerializer.Deserialize<DataAmountsOff>(
             json,
             ModelBase.SerializerOptions
         );
@@ -430,22 +409,17 @@ public class DataAmountsOffTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Coupons::DataAmountsOff
-        {
-            Amount = 0,
-            Currency = Coupons::DataAmountsOffCurrency.Usd,
-        };
+        var model = new DataAmountsOff { Amount = 0, Currency = DataAmountsOffCurrency.Usd };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Coupons::DataAmountsOff>(
+        var deserialized = JsonSerializer.Deserialize<DataAmountsOff>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
         double expectedAmount = 0;
-        ApiEnum<string, Coupons::DataAmountsOffCurrency> expectedCurrency =
-            Coupons::DataAmountsOffCurrency.Usd;
+        ApiEnum<string, DataAmountsOffCurrency> expectedCurrency = DataAmountsOffCurrency.Usd;
 
         Assert.Equal(expectedAmount, deserialized.Amount);
         Assert.Equal(expectedCurrency, deserialized.Currency);
@@ -454,11 +428,7 @@ public class DataAmountsOffTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Coupons::DataAmountsOff
-        {
-            Amount = 0,
-            Currency = Coupons::DataAmountsOffCurrency.Usd,
-        };
+        var model = new DataAmountsOff { Amount = 0, Currency = DataAmountsOffCurrency.Usd };
 
         model.Validate();
     }
@@ -466,13 +436,9 @@ public class DataAmountsOffTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Coupons::DataAmountsOff
-        {
-            Amount = 0,
-            Currency = Coupons::DataAmountsOffCurrency.Usd,
-        };
+        var model = new DataAmountsOff { Amount = 0, Currency = DataAmountsOffCurrency.Usd };
 
-        Coupons::DataAmountsOff copied = new(model);
+        DataAmountsOff copied = new(model);
 
         Assert.Equal(model, copied);
     }
@@ -481,133 +447,133 @@ public class DataAmountsOffTest : TestBase
 public class DataAmountsOffCurrencyTest : TestBase
 {
     [Theory]
-    [InlineData(Coupons::DataAmountsOffCurrency.Usd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Aed)]
-    [InlineData(Coupons::DataAmountsOffCurrency.All)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Amd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Ang)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Aud)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Awg)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Azn)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Bam)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Bbd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Bdt)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Bgn)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Bif)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Bmd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Bnd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Bsd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Bwp)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Byn)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Bzd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Brl)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Cad)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Cdf)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Chf)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Cny)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Czk)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Dkk)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Dop)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Dzd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Egp)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Etb)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Eur)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Fjd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Gbp)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Gel)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Gip)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Gmd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Gyd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Hkd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Hrk)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Htg)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Idr)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Ils)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Inr)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Isk)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Jmd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Jpy)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Kes)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Kgs)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Khr)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Kmf)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Krw)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Kyd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Kzt)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Lbp)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Lkr)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Lrd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Lsl)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Mad)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Mdl)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Mga)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Mkd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Mmk)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Mnt)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Mop)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Mro)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Mvr)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Mwk)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Mxn)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Myr)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Mzn)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Nad)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Ngn)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Nok)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Npr)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Nzd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Pgk)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Php)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Pkr)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Pln)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Qar)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Ron)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Rsd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Rub)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Rwf)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Sar)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Sbd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Scr)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Sek)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Sgd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Sle)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Sll)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Sos)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Szl)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Thb)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Tjs)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Top)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Try)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Ttd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Tzs)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Uah)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Uzs)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Vnd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Vuv)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Wst)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Xaf)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Xcd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Yer)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Zar)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Zmw)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Clp)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Djf)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Gnf)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Ugx)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Pyg)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Xof)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Xpf)]
-    public void Validation_Works(Coupons::DataAmountsOffCurrency rawValue)
+    [InlineData(DataAmountsOffCurrency.Usd)]
+    [InlineData(DataAmountsOffCurrency.Aed)]
+    [InlineData(DataAmountsOffCurrency.All)]
+    [InlineData(DataAmountsOffCurrency.Amd)]
+    [InlineData(DataAmountsOffCurrency.Ang)]
+    [InlineData(DataAmountsOffCurrency.Aud)]
+    [InlineData(DataAmountsOffCurrency.Awg)]
+    [InlineData(DataAmountsOffCurrency.Azn)]
+    [InlineData(DataAmountsOffCurrency.Bam)]
+    [InlineData(DataAmountsOffCurrency.Bbd)]
+    [InlineData(DataAmountsOffCurrency.Bdt)]
+    [InlineData(DataAmountsOffCurrency.Bgn)]
+    [InlineData(DataAmountsOffCurrency.Bif)]
+    [InlineData(DataAmountsOffCurrency.Bmd)]
+    [InlineData(DataAmountsOffCurrency.Bnd)]
+    [InlineData(DataAmountsOffCurrency.Bsd)]
+    [InlineData(DataAmountsOffCurrency.Bwp)]
+    [InlineData(DataAmountsOffCurrency.Byn)]
+    [InlineData(DataAmountsOffCurrency.Bzd)]
+    [InlineData(DataAmountsOffCurrency.Brl)]
+    [InlineData(DataAmountsOffCurrency.Cad)]
+    [InlineData(DataAmountsOffCurrency.Cdf)]
+    [InlineData(DataAmountsOffCurrency.Chf)]
+    [InlineData(DataAmountsOffCurrency.Cny)]
+    [InlineData(DataAmountsOffCurrency.Czk)]
+    [InlineData(DataAmountsOffCurrency.Dkk)]
+    [InlineData(DataAmountsOffCurrency.Dop)]
+    [InlineData(DataAmountsOffCurrency.Dzd)]
+    [InlineData(DataAmountsOffCurrency.Egp)]
+    [InlineData(DataAmountsOffCurrency.Etb)]
+    [InlineData(DataAmountsOffCurrency.Eur)]
+    [InlineData(DataAmountsOffCurrency.Fjd)]
+    [InlineData(DataAmountsOffCurrency.Gbp)]
+    [InlineData(DataAmountsOffCurrency.Gel)]
+    [InlineData(DataAmountsOffCurrency.Gip)]
+    [InlineData(DataAmountsOffCurrency.Gmd)]
+    [InlineData(DataAmountsOffCurrency.Gyd)]
+    [InlineData(DataAmountsOffCurrency.Hkd)]
+    [InlineData(DataAmountsOffCurrency.Hrk)]
+    [InlineData(DataAmountsOffCurrency.Htg)]
+    [InlineData(DataAmountsOffCurrency.Idr)]
+    [InlineData(DataAmountsOffCurrency.Ils)]
+    [InlineData(DataAmountsOffCurrency.Inr)]
+    [InlineData(DataAmountsOffCurrency.Isk)]
+    [InlineData(DataAmountsOffCurrency.Jmd)]
+    [InlineData(DataAmountsOffCurrency.Jpy)]
+    [InlineData(DataAmountsOffCurrency.Kes)]
+    [InlineData(DataAmountsOffCurrency.Kgs)]
+    [InlineData(DataAmountsOffCurrency.Khr)]
+    [InlineData(DataAmountsOffCurrency.Kmf)]
+    [InlineData(DataAmountsOffCurrency.Krw)]
+    [InlineData(DataAmountsOffCurrency.Kyd)]
+    [InlineData(DataAmountsOffCurrency.Kzt)]
+    [InlineData(DataAmountsOffCurrency.Lbp)]
+    [InlineData(DataAmountsOffCurrency.Lkr)]
+    [InlineData(DataAmountsOffCurrency.Lrd)]
+    [InlineData(DataAmountsOffCurrency.Lsl)]
+    [InlineData(DataAmountsOffCurrency.Mad)]
+    [InlineData(DataAmountsOffCurrency.Mdl)]
+    [InlineData(DataAmountsOffCurrency.Mga)]
+    [InlineData(DataAmountsOffCurrency.Mkd)]
+    [InlineData(DataAmountsOffCurrency.Mmk)]
+    [InlineData(DataAmountsOffCurrency.Mnt)]
+    [InlineData(DataAmountsOffCurrency.Mop)]
+    [InlineData(DataAmountsOffCurrency.Mro)]
+    [InlineData(DataAmountsOffCurrency.Mvr)]
+    [InlineData(DataAmountsOffCurrency.Mwk)]
+    [InlineData(DataAmountsOffCurrency.Mxn)]
+    [InlineData(DataAmountsOffCurrency.Myr)]
+    [InlineData(DataAmountsOffCurrency.Mzn)]
+    [InlineData(DataAmountsOffCurrency.Nad)]
+    [InlineData(DataAmountsOffCurrency.Ngn)]
+    [InlineData(DataAmountsOffCurrency.Nok)]
+    [InlineData(DataAmountsOffCurrency.Npr)]
+    [InlineData(DataAmountsOffCurrency.Nzd)]
+    [InlineData(DataAmountsOffCurrency.Pgk)]
+    [InlineData(DataAmountsOffCurrency.Php)]
+    [InlineData(DataAmountsOffCurrency.Pkr)]
+    [InlineData(DataAmountsOffCurrency.Pln)]
+    [InlineData(DataAmountsOffCurrency.Qar)]
+    [InlineData(DataAmountsOffCurrency.Ron)]
+    [InlineData(DataAmountsOffCurrency.Rsd)]
+    [InlineData(DataAmountsOffCurrency.Rub)]
+    [InlineData(DataAmountsOffCurrency.Rwf)]
+    [InlineData(DataAmountsOffCurrency.Sar)]
+    [InlineData(DataAmountsOffCurrency.Sbd)]
+    [InlineData(DataAmountsOffCurrency.Scr)]
+    [InlineData(DataAmountsOffCurrency.Sek)]
+    [InlineData(DataAmountsOffCurrency.Sgd)]
+    [InlineData(DataAmountsOffCurrency.Sle)]
+    [InlineData(DataAmountsOffCurrency.Sll)]
+    [InlineData(DataAmountsOffCurrency.Sos)]
+    [InlineData(DataAmountsOffCurrency.Szl)]
+    [InlineData(DataAmountsOffCurrency.Thb)]
+    [InlineData(DataAmountsOffCurrency.Tjs)]
+    [InlineData(DataAmountsOffCurrency.Top)]
+    [InlineData(DataAmountsOffCurrency.Try)]
+    [InlineData(DataAmountsOffCurrency.Ttd)]
+    [InlineData(DataAmountsOffCurrency.Tzs)]
+    [InlineData(DataAmountsOffCurrency.Uah)]
+    [InlineData(DataAmountsOffCurrency.Uzs)]
+    [InlineData(DataAmountsOffCurrency.Vnd)]
+    [InlineData(DataAmountsOffCurrency.Vuv)]
+    [InlineData(DataAmountsOffCurrency.Wst)]
+    [InlineData(DataAmountsOffCurrency.Xaf)]
+    [InlineData(DataAmountsOffCurrency.Xcd)]
+    [InlineData(DataAmountsOffCurrency.Yer)]
+    [InlineData(DataAmountsOffCurrency.Zar)]
+    [InlineData(DataAmountsOffCurrency.Zmw)]
+    [InlineData(DataAmountsOffCurrency.Clp)]
+    [InlineData(DataAmountsOffCurrency.Djf)]
+    [InlineData(DataAmountsOffCurrency.Gnf)]
+    [InlineData(DataAmountsOffCurrency.Ugx)]
+    [InlineData(DataAmountsOffCurrency.Pyg)]
+    [InlineData(DataAmountsOffCurrency.Xof)]
+    [InlineData(DataAmountsOffCurrency.Xpf)]
+    public void Validation_Works(DataAmountsOffCurrency rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Coupons::DataAmountsOffCurrency> value = rawValue;
+        ApiEnum<string, DataAmountsOffCurrency> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Coupons::DataAmountsOffCurrency>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataAmountsOffCurrency>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -617,187 +583,129 @@ public class DataAmountsOffCurrencyTest : TestBase
     }
 
     [Theory]
-    [InlineData(Coupons::DataAmountsOffCurrency.Usd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Aed)]
-    [InlineData(Coupons::DataAmountsOffCurrency.All)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Amd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Ang)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Aud)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Awg)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Azn)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Bam)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Bbd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Bdt)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Bgn)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Bif)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Bmd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Bnd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Bsd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Bwp)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Byn)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Bzd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Brl)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Cad)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Cdf)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Chf)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Cny)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Czk)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Dkk)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Dop)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Dzd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Egp)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Etb)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Eur)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Fjd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Gbp)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Gel)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Gip)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Gmd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Gyd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Hkd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Hrk)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Htg)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Idr)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Ils)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Inr)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Isk)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Jmd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Jpy)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Kes)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Kgs)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Khr)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Kmf)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Krw)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Kyd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Kzt)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Lbp)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Lkr)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Lrd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Lsl)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Mad)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Mdl)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Mga)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Mkd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Mmk)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Mnt)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Mop)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Mro)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Mvr)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Mwk)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Mxn)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Myr)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Mzn)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Nad)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Ngn)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Nok)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Npr)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Nzd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Pgk)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Php)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Pkr)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Pln)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Qar)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Ron)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Rsd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Rub)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Rwf)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Sar)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Sbd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Scr)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Sek)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Sgd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Sle)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Sll)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Sos)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Szl)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Thb)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Tjs)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Top)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Try)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Ttd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Tzs)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Uah)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Uzs)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Vnd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Vuv)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Wst)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Xaf)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Xcd)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Yer)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Zar)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Zmw)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Clp)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Djf)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Gnf)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Ugx)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Pyg)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Xof)]
-    [InlineData(Coupons::DataAmountsOffCurrency.Xpf)]
-    public void SerializationRoundtrip_Works(Coupons::DataAmountsOffCurrency rawValue)
+    [InlineData(DataAmountsOffCurrency.Usd)]
+    [InlineData(DataAmountsOffCurrency.Aed)]
+    [InlineData(DataAmountsOffCurrency.All)]
+    [InlineData(DataAmountsOffCurrency.Amd)]
+    [InlineData(DataAmountsOffCurrency.Ang)]
+    [InlineData(DataAmountsOffCurrency.Aud)]
+    [InlineData(DataAmountsOffCurrency.Awg)]
+    [InlineData(DataAmountsOffCurrency.Azn)]
+    [InlineData(DataAmountsOffCurrency.Bam)]
+    [InlineData(DataAmountsOffCurrency.Bbd)]
+    [InlineData(DataAmountsOffCurrency.Bdt)]
+    [InlineData(DataAmountsOffCurrency.Bgn)]
+    [InlineData(DataAmountsOffCurrency.Bif)]
+    [InlineData(DataAmountsOffCurrency.Bmd)]
+    [InlineData(DataAmountsOffCurrency.Bnd)]
+    [InlineData(DataAmountsOffCurrency.Bsd)]
+    [InlineData(DataAmountsOffCurrency.Bwp)]
+    [InlineData(DataAmountsOffCurrency.Byn)]
+    [InlineData(DataAmountsOffCurrency.Bzd)]
+    [InlineData(DataAmountsOffCurrency.Brl)]
+    [InlineData(DataAmountsOffCurrency.Cad)]
+    [InlineData(DataAmountsOffCurrency.Cdf)]
+    [InlineData(DataAmountsOffCurrency.Chf)]
+    [InlineData(DataAmountsOffCurrency.Cny)]
+    [InlineData(DataAmountsOffCurrency.Czk)]
+    [InlineData(DataAmountsOffCurrency.Dkk)]
+    [InlineData(DataAmountsOffCurrency.Dop)]
+    [InlineData(DataAmountsOffCurrency.Dzd)]
+    [InlineData(DataAmountsOffCurrency.Egp)]
+    [InlineData(DataAmountsOffCurrency.Etb)]
+    [InlineData(DataAmountsOffCurrency.Eur)]
+    [InlineData(DataAmountsOffCurrency.Fjd)]
+    [InlineData(DataAmountsOffCurrency.Gbp)]
+    [InlineData(DataAmountsOffCurrency.Gel)]
+    [InlineData(DataAmountsOffCurrency.Gip)]
+    [InlineData(DataAmountsOffCurrency.Gmd)]
+    [InlineData(DataAmountsOffCurrency.Gyd)]
+    [InlineData(DataAmountsOffCurrency.Hkd)]
+    [InlineData(DataAmountsOffCurrency.Hrk)]
+    [InlineData(DataAmountsOffCurrency.Htg)]
+    [InlineData(DataAmountsOffCurrency.Idr)]
+    [InlineData(DataAmountsOffCurrency.Ils)]
+    [InlineData(DataAmountsOffCurrency.Inr)]
+    [InlineData(DataAmountsOffCurrency.Isk)]
+    [InlineData(DataAmountsOffCurrency.Jmd)]
+    [InlineData(DataAmountsOffCurrency.Jpy)]
+    [InlineData(DataAmountsOffCurrency.Kes)]
+    [InlineData(DataAmountsOffCurrency.Kgs)]
+    [InlineData(DataAmountsOffCurrency.Khr)]
+    [InlineData(DataAmountsOffCurrency.Kmf)]
+    [InlineData(DataAmountsOffCurrency.Krw)]
+    [InlineData(DataAmountsOffCurrency.Kyd)]
+    [InlineData(DataAmountsOffCurrency.Kzt)]
+    [InlineData(DataAmountsOffCurrency.Lbp)]
+    [InlineData(DataAmountsOffCurrency.Lkr)]
+    [InlineData(DataAmountsOffCurrency.Lrd)]
+    [InlineData(DataAmountsOffCurrency.Lsl)]
+    [InlineData(DataAmountsOffCurrency.Mad)]
+    [InlineData(DataAmountsOffCurrency.Mdl)]
+    [InlineData(DataAmountsOffCurrency.Mga)]
+    [InlineData(DataAmountsOffCurrency.Mkd)]
+    [InlineData(DataAmountsOffCurrency.Mmk)]
+    [InlineData(DataAmountsOffCurrency.Mnt)]
+    [InlineData(DataAmountsOffCurrency.Mop)]
+    [InlineData(DataAmountsOffCurrency.Mro)]
+    [InlineData(DataAmountsOffCurrency.Mvr)]
+    [InlineData(DataAmountsOffCurrency.Mwk)]
+    [InlineData(DataAmountsOffCurrency.Mxn)]
+    [InlineData(DataAmountsOffCurrency.Myr)]
+    [InlineData(DataAmountsOffCurrency.Mzn)]
+    [InlineData(DataAmountsOffCurrency.Nad)]
+    [InlineData(DataAmountsOffCurrency.Ngn)]
+    [InlineData(DataAmountsOffCurrency.Nok)]
+    [InlineData(DataAmountsOffCurrency.Npr)]
+    [InlineData(DataAmountsOffCurrency.Nzd)]
+    [InlineData(DataAmountsOffCurrency.Pgk)]
+    [InlineData(DataAmountsOffCurrency.Php)]
+    [InlineData(DataAmountsOffCurrency.Pkr)]
+    [InlineData(DataAmountsOffCurrency.Pln)]
+    [InlineData(DataAmountsOffCurrency.Qar)]
+    [InlineData(DataAmountsOffCurrency.Ron)]
+    [InlineData(DataAmountsOffCurrency.Rsd)]
+    [InlineData(DataAmountsOffCurrency.Rub)]
+    [InlineData(DataAmountsOffCurrency.Rwf)]
+    [InlineData(DataAmountsOffCurrency.Sar)]
+    [InlineData(DataAmountsOffCurrency.Sbd)]
+    [InlineData(DataAmountsOffCurrency.Scr)]
+    [InlineData(DataAmountsOffCurrency.Sek)]
+    [InlineData(DataAmountsOffCurrency.Sgd)]
+    [InlineData(DataAmountsOffCurrency.Sle)]
+    [InlineData(DataAmountsOffCurrency.Sll)]
+    [InlineData(DataAmountsOffCurrency.Sos)]
+    [InlineData(DataAmountsOffCurrency.Szl)]
+    [InlineData(DataAmountsOffCurrency.Thb)]
+    [InlineData(DataAmountsOffCurrency.Tjs)]
+    [InlineData(DataAmountsOffCurrency.Top)]
+    [InlineData(DataAmountsOffCurrency.Try)]
+    [InlineData(DataAmountsOffCurrency.Ttd)]
+    [InlineData(DataAmountsOffCurrency.Tzs)]
+    [InlineData(DataAmountsOffCurrency.Uah)]
+    [InlineData(DataAmountsOffCurrency.Uzs)]
+    [InlineData(DataAmountsOffCurrency.Vnd)]
+    [InlineData(DataAmountsOffCurrency.Vuv)]
+    [InlineData(DataAmountsOffCurrency.Wst)]
+    [InlineData(DataAmountsOffCurrency.Xaf)]
+    [InlineData(DataAmountsOffCurrency.Xcd)]
+    [InlineData(DataAmountsOffCurrency.Yer)]
+    [InlineData(DataAmountsOffCurrency.Zar)]
+    [InlineData(DataAmountsOffCurrency.Zmw)]
+    [InlineData(DataAmountsOffCurrency.Clp)]
+    [InlineData(DataAmountsOffCurrency.Djf)]
+    [InlineData(DataAmountsOffCurrency.Gnf)]
+    [InlineData(DataAmountsOffCurrency.Ugx)]
+    [InlineData(DataAmountsOffCurrency.Pyg)]
+    [InlineData(DataAmountsOffCurrency.Xof)]
+    [InlineData(DataAmountsOffCurrency.Xpf)]
+    public void SerializationRoundtrip_Works(DataAmountsOffCurrency rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Coupons::DataAmountsOffCurrency> value = rawValue;
+        ApiEnum<string, DataAmountsOffCurrency> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, Coupons::DataAmountsOffCurrency>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Coupons::DataAmountsOffCurrency>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, Coupons::DataAmountsOffCurrency>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-}
-
-public class SourceTest : TestBase
-{
-    [Theory]
-    [InlineData(Coupons::Source.Stigg)]
-    [InlineData(Coupons::Source.StiggAdhoc)]
-    [InlineData(Coupons::Source.Stripe)]
-    public void Validation_Works(Coupons::Source rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Coupons::Source> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Coupons::Source>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(Coupons::Source.Stigg)]
-    [InlineData(Coupons::Source.StiggAdhoc)]
-    [InlineData(Coupons::Source.Stripe)]
-    public void SerializationRoundtrip_Works(Coupons::Source rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Coupons::Source> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Coupons::Source>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataAmountsOffCurrency>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -808,12 +716,72 @@ public class SourceTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Coupons::Source>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataAmountsOffCurrency>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Coupons::Source>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataAmountsOffCurrency>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class SourceTest : TestBase
+{
+    [Theory]
+    [InlineData(Source.Stigg)]
+    [InlineData(Source.StiggAdhoc)]
+    [InlineData(Source.Stripe)]
+    public void Validation_Works(Source rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Source> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Source>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(Source.Stigg)]
+    [InlineData(Source.StiggAdhoc)]
+    [InlineData(Source.Stripe)]
+    public void SerializationRoundtrip_Works(Source rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Source> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Source>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Source>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Source>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -825,19 +793,19 @@ public class SourceTest : TestBase
 public class StatusTest : TestBase
 {
     [Theory]
-    [InlineData(Coupons::Status.Active)]
-    [InlineData(Coupons::Status.Archived)]
-    public void Validation_Works(Coupons::Status rawValue)
+    [InlineData(Status.Active)]
+    [InlineData(Status.Archived)]
+    public void Validation_Works(Status rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Coupons::Status> value = rawValue;
+        ApiEnum<string, Status> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Coupons::Status>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -847,15 +815,15 @@ public class StatusTest : TestBase
     }
 
     [Theory]
-    [InlineData(Coupons::Status.Active)]
-    [InlineData(Coupons::Status.Archived)]
-    public void SerializationRoundtrip_Works(Coupons::Status rawValue)
+    [InlineData(Status.Active)]
+    [InlineData(Status.Archived)]
+    public void SerializationRoundtrip_Works(Status rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Coupons::Status> value = rawValue;
+        ApiEnum<string, Status> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Coupons::Status>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -866,12 +834,12 @@ public class StatusTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Coupons::Status>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Coupons::Status>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -880,22 +848,22 @@ public class StatusTest : TestBase
     }
 }
 
-public class TypeTest : TestBase
+public class DataTypeTest : TestBase
 {
     [Theory]
-    [InlineData(Coupons::Type.Fixed)]
-    [InlineData(Coupons::Type.Percentage)]
-    public void Validation_Works(Coupons::Type rawValue)
+    [InlineData(DataType.Fixed)]
+    [InlineData(DataType.Percentage)]
+    public void Validation_Works(DataType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Coupons::Type> value = rawValue;
+        ApiEnum<string, DataType> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Coupons::Type>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataType>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -905,15 +873,15 @@ public class TypeTest : TestBase
     }
 
     [Theory]
-    [InlineData(Coupons::Type.Fixed)]
-    [InlineData(Coupons::Type.Percentage)]
-    public void SerializationRoundtrip_Works(Coupons::Type rawValue)
+    [InlineData(DataType.Fixed)]
+    [InlineData(DataType.Percentage)]
+    public void SerializationRoundtrip_Works(DataType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Coupons::Type> value = rawValue;
+        ApiEnum<string, DataType> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Coupons::Type>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataType>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -924,12 +892,12 @@ public class TypeTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Coupons::Type>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataType>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Coupons::Type>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataType>>(
             json,
             ModelBase.SerializerOptions
         );
