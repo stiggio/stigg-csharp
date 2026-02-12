@@ -328,6 +328,17 @@ public record class Entitlement : ModelBase
         }
     }
 
+    public System::DateTimeOffset? UsagePeriodEnd
+    {
+        get
+        {
+            return Match<System::DateTimeOffset?>(
+                unionMember0: (x) => x.UsagePeriodEnd,
+                unionMember1: (x) => x.UsagePeriodEnd
+            );
+        }
+    }
+
     public System::DateTimeOffset? ValidUntil
     {
         get
@@ -1322,6 +1333,27 @@ public sealed record class UnionMember1 : JsonModel
     }
 
     /// <summary>
+    /// The end date of the current billing period for recurring credit grants.
+    /// </summary>
+    public System::DateTimeOffset? UsagePeriodEnd
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<System::DateTimeOffset>("usagePeriodEnd");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("usagePeriodEnd", value);
+        }
+    }
+
+    /// <summary>
     /// The next time the entitlement should be recalculated
     /// </summary>
     public System::DateTimeOffset? ValidUntil
@@ -1353,6 +1385,7 @@ public sealed record class UnionMember1 : JsonModel
         _ = this.UsageLimit;
         _ = this.UsageUpdatedAt;
         _ = this.EntitlementUpdatedAt;
+        _ = this.UsagePeriodEnd;
         _ = this.ValidUntil;
     }
 
