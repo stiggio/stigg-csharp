@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Stigg.Client.Models.V1.Coupons;
 
@@ -15,6 +16,7 @@ public class CouponServiceTest : TestBase
                 AmountsOff = [new() { Amount = 0, Currency = Currency.Usd }],
                 Description = "description",
                 DurationInMonths = 1,
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 Name = "name",
                 PercentOff = 1,
             },

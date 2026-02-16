@@ -87,6 +87,25 @@ public record class CouponCreateParams : ParamsBase
     }
 
     /// <summary>
+    /// Metadata associated with the entity
+    /// </summary>
+    public required IReadOnlyDictionary<string, string>? Metadata
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
+        }
+        init
+        {
+            this._rawBodyData.Set<FrozenDictionary<string, string>?>(
+                "metadata",
+                value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
+            );
+        }
+    }
+
+    /// <summary>
     /// Name of the coupon
     /// </summary>
     public required string Name
@@ -110,27 +129,6 @@ public record class CouponCreateParams : ParamsBase
             return this._rawBodyData.GetNullableStruct<double>("percentOff");
         }
         init { this._rawBodyData.Set("percentOff", value); }
-    }
-
-    /// <summary>
-    /// Metadata associated with the entity
-    /// </summary>
-    public JsonElement? AdditionalMetaData
-    {
-        get
-        {
-            this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableStruct<JsonElement>("additionalMetaData");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawBodyData.Set("additionalMetaData", value);
-        }
     }
 
     public CouponCreateParams() { }
