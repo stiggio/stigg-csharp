@@ -57,10 +57,10 @@ Or using a combination of the two approaches.
 
 See this table for the available options:
 
-| Property  | Environment variable | Required | Default value               |
-| --------- | -------------------- | -------- | --------------------------- |
-| `ApiKey`  | `STIGG_API_KEY`      | true     | -                           |
-| `BaseUrl` | `STIGG_BASE_URL`     | true     | `"https://api.example.com"` |
+| Property  | Environment variable | Required | Default value            |
+| --------- | -------------------- | -------- | ------------------------ |
+| `ApiKey`  | `STIGG_API_KEY`      | true     | -                        |
+| `BaseUrl` | `STIGG_BASE_URL`     | true     | `"https://api.stigg.io"` |
 
 ### Modifying configuration
 

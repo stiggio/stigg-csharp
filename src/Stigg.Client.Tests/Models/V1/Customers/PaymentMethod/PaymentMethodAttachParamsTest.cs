@@ -78,7 +78,7 @@ public class PaymentMethodAttachParamsTest : TestBase
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
-        Assert.Equal(new Uri("https://api.example.com/api/v1/customers/x/payment-method"), url);
+        Assert.Equal(new Uri("https://api.stigg.io/api/v1/customers/x/payment-method"), url);
     }
 
     [Fact]
