@@ -127,7 +127,7 @@ public class CouponListParamsTest : TestBase
 
         Assert.Equal(
             new Uri(
-                "https://api.example.com/api/v1/coupons?id=id&after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&createdAt%5bgt%5d=2019-12-27T18%3a11%3a19.117Z&createdAt%5bgte%5d=2019-12-27T18%3a11%3a19.117Z&createdAt%5blt%5d=2019-12-27T18%3a11%3a19.117Z&createdAt%5blte%5d=2019-12-27T18%3a11%3a19.117Z&limit=1&status=status&type=FIXED"
+                "https://api.stigg.io/api/v1/coupons?id=id&after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&createdAt%5bgt%5d=2019-12-27T18%3a11%3a19.117Z&createdAt%5bgte%5d=2019-12-27T18%3a11%3a19.117Z&createdAt%5blt%5d=2019-12-27T18%3a11%3a19.117Z&createdAt%5blte%5d=2019-12-27T18%3a11%3a19.117Z&limit=1&status=status&type=FIXED"
             ),
             url
         );
