@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Stigg.Client.Core;
 using Stigg.Client.Models.V1.Subscriptions;
-using Stigg.Client.Services.V1.Subscriptions;
+using Subscriptions = Stigg.Client.Services.V1.Subscriptions;
 
 namespace Stigg.Client.Services.V1;
 
@@ -27,7 +27,11 @@ public interface ISubscriptionService
     /// </summary>
     ISubscriptionService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
-    IFutureUpdateService FutureUpdate { get; }
+    Subscriptions::IFutureUpdateService FutureUpdate { get; }
+
+    Subscriptions::IUsageService Usage { get; }
+
+    Subscriptions::IInvoiceService Invoice { get; }
 
     /// <summary>
     /// Retrieves a subscription by its unique identifier, including plan details,
@@ -175,7 +179,11 @@ public interface ISubscriptionServiceWithRawResponse
     /// </summary>
     ISubscriptionServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
-    IFutureUpdateServiceWithRawResponse FutureUpdate { get; }
+    Subscriptions::IFutureUpdateServiceWithRawResponse FutureUpdate { get; }
+
+    Subscriptions::IUsageServiceWithRawResponse Usage { get; }
+
+    Subscriptions::IInvoiceServiceWithRawResponse Invoice { get; }
 
     /// <summary>
     /// Returns a raw HTTP response for `get /api/v1/subscriptions/{id}`, but is otherwise the

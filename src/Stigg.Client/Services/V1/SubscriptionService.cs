@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
 using Stigg.Client.Models.V1.Subscriptions;
-using Stigg.Client.Services.V1.Subscriptions;
+using Subscriptions = Stigg.Client.Services.V1.Subscriptions;
 
 namespace Stigg.Client.Services.V1;
 
@@ -35,13 +35,27 @@ public sealed class SubscriptionService : ISubscriptionService
         _withRawResponse = new(() =>
             new SubscriptionServiceWithRawResponse(client.WithRawResponse)
         );
-        _futureUpdate = new(() => new FutureUpdateService(client));
+        _futureUpdate = new(() => new Subscriptions::FutureUpdateService(client));
+        _usage = new(() => new Subscriptions::UsageService(client));
+        _invoice = new(() => new Subscriptions::InvoiceService(client));
     }
 
-    readonly Lazy<IFutureUpdateService> _futureUpdate;
-    public IFutureUpdateService FutureUpdate
+    readonly Lazy<Subscriptions::IFutureUpdateService> _futureUpdate;
+    public Subscriptions::IFutureUpdateService FutureUpdate
     {
         get { return _futureUpdate.Value; }
+    }
+
+    readonly Lazy<Subscriptions::IUsageService> _usage;
+    public Subscriptions::IUsageService Usage
+    {
+        get { return _usage.Value; }
+    }
+
+    readonly Lazy<Subscriptions::IInvoiceService> _invoice;
+    public Subscriptions::IInvoiceService Invoice
+    {
+        get { return _invoice.Value; }
     }
 
     /// <inheritdoc/>
@@ -250,13 +264,27 @@ public sealed class SubscriptionServiceWithRawResponse : ISubscriptionServiceWit
     {
         _client = client;
 
-        _futureUpdate = new(() => new FutureUpdateServiceWithRawResponse(client));
+        _futureUpdate = new(() => new Subscriptions::FutureUpdateServiceWithRawResponse(client));
+        _usage = new(() => new Subscriptions::UsageServiceWithRawResponse(client));
+        _invoice = new(() => new Subscriptions::InvoiceServiceWithRawResponse(client));
     }
 
-    readonly Lazy<IFutureUpdateServiceWithRawResponse> _futureUpdate;
-    public IFutureUpdateServiceWithRawResponse FutureUpdate
+    readonly Lazy<Subscriptions::IFutureUpdateServiceWithRawResponse> _futureUpdate;
+    public Subscriptions::IFutureUpdateServiceWithRawResponse FutureUpdate
     {
         get { return _futureUpdate.Value; }
+    }
+
+    readonly Lazy<Subscriptions::IUsageServiceWithRawResponse> _usage;
+    public Subscriptions::IUsageServiceWithRawResponse Usage
+    {
+        get { return _usage.Value; }
+    }
+
+    readonly Lazy<Subscriptions::IInvoiceServiceWithRawResponse> _invoice;
+    public Subscriptions::IInvoiceServiceWithRawResponse Invoice
+    {
+        get { return _invoice.Value; }
     }
 
     /// <inheritdoc/>

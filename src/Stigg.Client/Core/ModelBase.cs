@@ -2,7 +2,10 @@ using System.Text.Json;
 using Stigg.Client.Exceptions;
 using Stigg.Client.Models.V1.Customers;
 using Stigg.Client.Models.V1.Customers.PromotionalEntitlements;
+using Stigg.Client.Models.V1.Events.Features;
+using Addons = Stigg.Client.Models.V1.Events.Addons;
 using Coupons = Stigg.Client.Models.V1.Coupons;
+using Draft = Stigg.Client.Models.V1.Events.Addons.Draft;
 using PaymentMethod = Stigg.Client.Models.V1.Customers.PaymentMethod;
 using Products = Stigg.Client.Models.V1.Products;
 using Subscriptions = Stigg.Client.Models.V1.Subscriptions;
@@ -193,12 +196,143 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Coupons::CouponListResponseType>(),
             new ApiEnumConverter<string, Coupons::Currency>(),
             new ApiEnumConverter<string, Coupons::Type>(),
+            new ApiEnumConverter<string, DataFeatureStatus>(),
+            new ApiEnumConverter<string, DataFeatureType>(),
+            new ApiEnumConverter<string, DataMeterType>(),
+            new ApiEnumConverter<string, DataUnitTransformationRound>(),
+            new ApiEnumConverter<string, FeatureCreateFeatureResponseDataFeatureStatus>(),
+            new ApiEnumConverter<string, FeatureCreateFeatureResponseDataFeatureType>(),
+            new ApiEnumConverter<string, FeatureCreateFeatureResponseDataMeterType>(),
+            new ApiEnumConverter<string, FeatureCreateFeatureResponseDataUnitTransformationRound>(),
+            new ApiEnumConverter<string, FeatureListFeaturesResponseFeatureStatus>(),
+            new ApiEnumConverter<string, FeatureListFeaturesResponseFeatureType>(),
+            new ApiEnumConverter<string, FeatureListFeaturesResponseMeterType>(),
+            new ApiEnumConverter<string, FeatureListFeaturesResponseUnitTransformationRound>(),
+            new ApiEnumConverter<string, FeatureRetrieveFeatureResponseDataFeatureStatus>(),
+            new ApiEnumConverter<string, FeatureRetrieveFeatureResponseDataFeatureType>(),
+            new ApiEnumConverter<string, FeatureRetrieveFeatureResponseDataMeterType>(),
+            new ApiEnumConverter<
+                string,
+                FeatureRetrieveFeatureResponseDataUnitTransformationRound
+            >(),
+            new ApiEnumConverter<string, FeatureUnarchiveFeatureResponseDataFeatureStatus>(),
+            new ApiEnumConverter<string, FeatureUnarchiveFeatureResponseDataFeatureType>(),
+            new ApiEnumConverter<string, FeatureUnarchiveFeatureResponseDataMeterType>(),
+            new ApiEnumConverter<
+                string,
+                FeatureUnarchiveFeatureResponseDataUnitTransformationRound
+            >(),
+            new ApiEnumConverter<string, FeatureUpdateFeatureResponseDataFeatureStatus>(),
+            new ApiEnumConverter<string, FeatureUpdateFeatureResponseDataFeatureType>(),
+            new ApiEnumConverter<string, FeatureUpdateFeatureResponseDataMeterType>(),
+            new ApiEnumConverter<string, FeatureUpdateFeatureResponseDataUnitTransformationRound>(),
+            new ApiEnumConverter<string, FeatureType>(),
+            new ApiEnumConverter<string, FeatureStatus>(),
+            new ApiEnumConverter<string, MeterType>(),
+            new ApiEnumConverter<string, Round>(),
+            new ApiEnumConverter<string, Function>(),
+            new ApiEnumConverter<string, Operation>(),
+            new ApiEnumConverter<string, FeatureUpdateFeatureParamsUnitTransformationRound>(),
+            new ApiEnumConverter<string, Addons::Type>(),
+            new ApiEnumConverter<string, Addons::DataPricingType>(),
+            new ApiEnumConverter<string, Addons::DataStatus>(),
+            new ApiEnumConverter<string, Addons::AddonCreateAddonResponseDataEntitlementType>(),
+            new ApiEnumConverter<string, Addons::AddonCreateAddonResponseDataPricingType>(),
+            new ApiEnumConverter<string, Addons::AddonCreateAddonResponseDataStatus>(),
+            new ApiEnumConverter<string, Addons::AddonListAddonsResponseEntitlementType>(),
+            new ApiEnumConverter<string, Addons::AddonListAddonsResponsePricingType>(),
+            new ApiEnumConverter<string, Addons::AddonListAddonsResponseStatus>(),
+            new ApiEnumConverter<string, Addons::AddonRetrieveAddonResponseDataEntitlementType>(),
+            new ApiEnumConverter<string, Addons::AddonRetrieveAddonResponseDataPricingType>(),
+            new ApiEnumConverter<string, Addons::AddonRetrieveAddonResponseDataStatus>(),
+            new ApiEnumConverter<string, Addons::AddonUpdateAddonResponseDataEntitlementType>(),
+            new ApiEnumConverter<string, Addons::AddonUpdateAddonResponseDataPricingType>(),
+            new ApiEnumConverter<string, Addons::AddonUpdateAddonResponseDataStatus>(),
+            new ApiEnumConverter<string, Addons::PricingType>(),
+            new ApiEnumConverter<string, Addons::Status>(),
+            new ApiEnumConverter<string, Addons::AddonListAddonsParamsStatus>(),
+            new ApiEnumConverter<string, Addons::MigrationType>(),
+            new ApiEnumConverter<string, Draft::Type>(),
+            new ApiEnumConverter<string, Draft::PricingType>(),
+            new ApiEnumConverter<string, Draft::Status>(),
             new ApiEnumConverter<string, Usage::Type>(),
             new ApiEnumConverter<string, Usage::UpdateBehavior>(),
             new ApiEnumConverter<string, Products::Status>(),
+            new ApiEnumConverter<
+                string,
+                Products::DataProductSettingsSubscriptionCancellationTime
+            >(),
+            new ApiEnumConverter<string, Products::DataProductSettingsSubscriptionEndSetup>(),
+            new ApiEnumConverter<string, Products::DataProductSettingsSubscriptionStartSetup>(),
+            new ApiEnumConverter<string, Products::ProductCreateProductResponseDataStatus>(),
+            new ApiEnumConverter<
+                string,
+                Products::ProductCreateProductResponseDataProductSettingsSubscriptionCancellationTime
+            >(),
+            new ApiEnumConverter<
+                string,
+                Products::ProductCreateProductResponseDataProductSettingsSubscriptionEndSetup
+            >(),
+            new ApiEnumConverter<
+                string,
+                Products::ProductCreateProductResponseDataProductSettingsSubscriptionStartSetup
+            >(),
+            new ApiEnumConverter<string, Products::ProductDuplicateProductResponseDataStatus>(),
+            new ApiEnumConverter<
+                string,
+                Products::ProductDuplicateProductResponseDataProductSettingsSubscriptionCancellationTime
+            >(),
+            new ApiEnumConverter<
+                string,
+                Products::ProductDuplicateProductResponseDataProductSettingsSubscriptionEndSetup
+            >(),
+            new ApiEnumConverter<
+                string,
+                Products::ProductDuplicateProductResponseDataProductSettingsSubscriptionStartSetup
+            >(),
+            new ApiEnumConverter<string, Products::ProductListProductsResponseStatus>(),
+            new ApiEnumConverter<
+                string,
+                Products::ProductListProductsResponseProductSettingsSubscriptionCancellationTime
+            >(),
+            new ApiEnumConverter<
+                string,
+                Products::ProductListProductsResponseProductSettingsSubscriptionEndSetup
+            >(),
+            new ApiEnumConverter<
+                string,
+                Products::ProductListProductsResponseProductSettingsSubscriptionStartSetup
+            >(),
+            new ApiEnumConverter<string, Products::ProductUnarchiveProductResponseDataStatus>(),
+            new ApiEnumConverter<
+                string,
+                Products::ProductUnarchiveProductResponseDataProductSettingsSubscriptionCancellationTime
+            >(),
+            new ApiEnumConverter<
+                string,
+                Products::ProductUnarchiveProductResponseDataProductSettingsSubscriptionEndSetup
+            >(),
+            new ApiEnumConverter<
+                string,
+                Products::ProductUnarchiveProductResponseDataProductSettingsSubscriptionStartSetup
+            >(),
+            new ApiEnumConverter<string, Products::ProductUpdateProductResponseDataStatus>(),
+            new ApiEnumConverter<
+                string,
+                Products::ProductUpdateProductResponseDataProductSettingsSubscriptionCancellationTime
+            >(),
+            new ApiEnumConverter<
+                string,
+                Products::ProductUpdateProductResponseDataProductSettingsSubscriptionEndSetup
+            >(),
+            new ApiEnumConverter<
+                string,
+                Products::ProductUpdateProductResponseDataProductSettingsSubscriptionStartSetup
+            >(),
             new ApiEnumConverter<string, Products::SubscriptionCancellationTime>(),
             new ApiEnumConverter<string, Products::SubscriptionEndSetup>(),
             new ApiEnumConverter<string, Products::SubscriptionStartSetup>(),
+            new ApiEnumConverter<string, Products::Behavior>(),
         },
     };
 

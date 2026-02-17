@@ -20,13 +20,16 @@ public class ProductListProductsResponseTest : TestBase
             DisplayName = "displayName",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MultipleSubscriptions = true,
-            Status = Status.Published,
+            Status = ProductListProductsResponseStatus.Published,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ProductSettings = new()
             {
-                SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
-                SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
-                SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+                SubscriptionCancellationTime =
+                    ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+                SubscriptionEndSetup =
+                    ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+                SubscriptionStartSetup =
+                    ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
                 DowngradePlanID = "downgradePlanId",
                 ProrateAtEndOfBillingPeriod = true,
                 SubscriptionStartPlanID = "subscriptionStartPlanId",
@@ -39,13 +42,17 @@ public class ProductListProductsResponseTest : TestBase
         string expectedDisplayName = "displayName";
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         bool expectedMultipleSubscriptions = true;
-        ApiEnum<string, Status> expectedStatus = Status.Published;
+        ApiEnum<string, ProductListProductsResponseStatus> expectedStatus =
+            ProductListProductsResponseStatus.Published;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ProductSettings expectedProductSettings = new()
+        ProductListProductsResponseProductSettings expectedProductSettings = new()
         {
-            SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
-            SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
-            SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+            SubscriptionCancellationTime =
+                ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+            SubscriptionEndSetup =
+                ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+            SubscriptionStartSetup =
+                ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
             DowngradePlanID = "downgradePlanId",
             ProrateAtEndOfBillingPeriod = true,
             SubscriptionStartPlanID = "subscriptionStartPlanId",
@@ -79,13 +86,16 @@ public class ProductListProductsResponseTest : TestBase
             DisplayName = "displayName",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MultipleSubscriptions = true,
-            Status = Status.Published,
+            Status = ProductListProductsResponseStatus.Published,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ProductSettings = new()
             {
-                SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
-                SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
-                SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+                SubscriptionCancellationTime =
+                    ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+                SubscriptionEndSetup =
+                    ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+                SubscriptionStartSetup =
+                    ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
                 DowngradePlanID = "downgradePlanId",
                 ProrateAtEndOfBillingPeriod = true,
                 SubscriptionStartPlanID = "subscriptionStartPlanId",
@@ -112,13 +122,16 @@ public class ProductListProductsResponseTest : TestBase
             DisplayName = "displayName",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MultipleSubscriptions = true,
-            Status = Status.Published,
+            Status = ProductListProductsResponseStatus.Published,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ProductSettings = new()
             {
-                SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
-                SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
-                SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+                SubscriptionCancellationTime =
+                    ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+                SubscriptionEndSetup =
+                    ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+                SubscriptionStartSetup =
+                    ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
                 DowngradePlanID = "downgradePlanId",
                 ProrateAtEndOfBillingPeriod = true,
                 SubscriptionStartPlanID = "subscriptionStartPlanId",
@@ -138,13 +151,17 @@ public class ProductListProductsResponseTest : TestBase
         string expectedDisplayName = "displayName";
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         bool expectedMultipleSubscriptions = true;
-        ApiEnum<string, Status> expectedStatus = Status.Published;
+        ApiEnum<string, ProductListProductsResponseStatus> expectedStatus =
+            ProductListProductsResponseStatus.Published;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ProductSettings expectedProductSettings = new()
+        ProductListProductsResponseProductSettings expectedProductSettings = new()
         {
-            SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
-            SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
-            SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+            SubscriptionCancellationTime =
+                ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+            SubscriptionEndSetup =
+                ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+            SubscriptionStartSetup =
+                ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
             DowngradePlanID = "downgradePlanId",
             ProrateAtEndOfBillingPeriod = true,
             SubscriptionStartPlanID = "subscriptionStartPlanId",
@@ -178,13 +195,16 @@ public class ProductListProductsResponseTest : TestBase
             DisplayName = "displayName",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MultipleSubscriptions = true,
-            Status = Status.Published,
+            Status = ProductListProductsResponseStatus.Published,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ProductSettings = new()
             {
-                SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
-                SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
-                SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+                SubscriptionCancellationTime =
+                    ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+                SubscriptionEndSetup =
+                    ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+                SubscriptionStartSetup =
+                    ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
                 DowngradePlanID = "downgradePlanId",
                 ProrateAtEndOfBillingPeriod = true,
                 SubscriptionStartPlanID = "subscriptionStartPlanId",
@@ -205,7 +225,7 @@ public class ProductListProductsResponseTest : TestBase
             DisplayName = "displayName",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MultipleSubscriptions = true,
-            Status = Status.Published,
+            Status = ProductListProductsResponseStatus.Published,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -224,7 +244,7 @@ public class ProductListProductsResponseTest : TestBase
             DisplayName = "displayName",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MultipleSubscriptions = true,
-            Status = Status.Published,
+            Status = ProductListProductsResponseStatus.Published,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -242,7 +262,7 @@ public class ProductListProductsResponseTest : TestBase
             DisplayName = "displayName",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MultipleSubscriptions = true,
-            Status = Status.Published,
+            Status = ProductListProductsResponseStatus.Published,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
             // Null should be interpreted as omitted for these properties
@@ -264,7 +284,7 @@ public class ProductListProductsResponseTest : TestBase
             DisplayName = "displayName",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MultipleSubscriptions = true,
-            Status = Status.Published,
+            Status = ProductListProductsResponseStatus.Published,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
             // Null should be interpreted as omitted for these properties
@@ -285,13 +305,16 @@ public class ProductListProductsResponseTest : TestBase
             DisplayName = "displayName",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MultipleSubscriptions = true,
-            Status = Status.Published,
+            Status = ProductListProductsResponseStatus.Published,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ProductSettings = new()
             {
-                SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
-                SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
-                SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+                SubscriptionCancellationTime =
+                    ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+                SubscriptionEndSetup =
+                    ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+                SubscriptionStartSetup =
+                    ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
                 DowngradePlanID = "downgradePlanId",
                 ProrateAtEndOfBillingPeriod = true,
                 SubscriptionStartPlanID = "subscriptionStartPlanId",
@@ -304,22 +327,22 @@ public class ProductListProductsResponseTest : TestBase
     }
 }
 
-public class StatusTest : TestBase
+public class ProductListProductsResponseStatusTest : TestBase
 {
     [Theory]
-    [InlineData(Status.Published)]
-    [InlineData(Status.Archived)]
-    public void Validation_Works(Status rawValue)
+    [InlineData(ProductListProductsResponseStatus.Published)]
+    [InlineData(ProductListProductsResponseStatus.Archived)]
+    public void Validation_Works(ProductListProductsResponseStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Status> value = rawValue;
+        ApiEnum<string, ProductListProductsResponseStatus> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, ProductListProductsResponseStatus>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -329,18 +352,17 @@ public class StatusTest : TestBase
     }
 
     [Theory]
-    [InlineData(Status.Published)]
-    [InlineData(Status.Archived)]
-    public void SerializationRoundtrip_Works(Status rawValue)
+    [InlineData(ProductListProductsResponseStatus.Published)]
+    [InlineData(ProductListProductsResponseStatus.Archived)]
+    public void SerializationRoundtrip_Works(ProductListProductsResponseStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Status> value = rawValue;
+        ApiEnum<string, ProductListProductsResponseStatus> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, ProductListProductsResponseStatus>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
@@ -348,41 +370,52 @@ public class StatusTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, ProductListProductsResponseStatus>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, ProductListProductsResponseStatus>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
 }
 
-public class ProductSettingsTest : TestBase
+public class ProductListProductsResponseProductSettingsTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new ProductSettings
+        var model = new ProductListProductsResponseProductSettings
         {
-            SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
-            SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
-            SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+            SubscriptionCancellationTime =
+                ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+            SubscriptionEndSetup =
+                ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+            SubscriptionStartSetup =
+                ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
             DowngradePlanID = "downgradePlanId",
             ProrateAtEndOfBillingPeriod = true,
             SubscriptionStartPlanID = "subscriptionStartPlanId",
         };
 
-        ApiEnum<string, SubscriptionCancellationTime> expectedSubscriptionCancellationTime =
-            SubscriptionCancellationTime.EndOfBillingPeriod;
-        ApiEnum<string, SubscriptionEndSetup> expectedSubscriptionEndSetup =
-            SubscriptionEndSetup.DowngradeToFree;
-        ApiEnum<string, SubscriptionStartSetup> expectedSubscriptionStartSetup =
-            SubscriptionStartSetup.PlanSelection;
+        ApiEnum<
+            string,
+            ProductListProductsResponseProductSettingsSubscriptionCancellationTime
+        > expectedSubscriptionCancellationTime =
+            ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod;
+        ApiEnum<
+            string,
+            ProductListProductsResponseProductSettingsSubscriptionEndSetup
+        > expectedSubscriptionEndSetup =
+            ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree;
+        ApiEnum<
+            string,
+            ProductListProductsResponseProductSettingsSubscriptionStartSetup
+        > expectedSubscriptionStartSetup =
+            ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection;
         string expectedDowngradePlanID = "downgradePlanId";
         bool expectedProrateAtEndOfBillingPeriod = true;
         string expectedSubscriptionStartPlanID = "subscriptionStartPlanId";
@@ -398,18 +431,21 @@ public class ProductSettingsTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new ProductSettings
+        var model = new ProductListProductsResponseProductSettings
         {
-            SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
-            SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
-            SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+            SubscriptionCancellationTime =
+                ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+            SubscriptionEndSetup =
+                ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+            SubscriptionStartSetup =
+                ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
             DowngradePlanID = "downgradePlanId",
             ProrateAtEndOfBillingPeriod = true,
             SubscriptionStartPlanID = "subscriptionStartPlanId",
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ProductSettings>(
+        var deserialized = JsonSerializer.Deserialize<ProductListProductsResponseProductSettings>(
             json,
             ModelBase.SerializerOptions
         );
@@ -420,29 +456,41 @@ public class ProductSettingsTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new ProductSettings
+        var model = new ProductListProductsResponseProductSettings
         {
-            SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
-            SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
-            SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+            SubscriptionCancellationTime =
+                ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+            SubscriptionEndSetup =
+                ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+            SubscriptionStartSetup =
+                ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
             DowngradePlanID = "downgradePlanId",
             ProrateAtEndOfBillingPeriod = true,
             SubscriptionStartPlanID = "subscriptionStartPlanId",
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ProductSettings>(
+        var deserialized = JsonSerializer.Deserialize<ProductListProductsResponseProductSettings>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
-        ApiEnum<string, SubscriptionCancellationTime> expectedSubscriptionCancellationTime =
-            SubscriptionCancellationTime.EndOfBillingPeriod;
-        ApiEnum<string, SubscriptionEndSetup> expectedSubscriptionEndSetup =
-            SubscriptionEndSetup.DowngradeToFree;
-        ApiEnum<string, SubscriptionStartSetup> expectedSubscriptionStartSetup =
-            SubscriptionStartSetup.PlanSelection;
+        ApiEnum<
+            string,
+            ProductListProductsResponseProductSettingsSubscriptionCancellationTime
+        > expectedSubscriptionCancellationTime =
+            ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod;
+        ApiEnum<
+            string,
+            ProductListProductsResponseProductSettingsSubscriptionEndSetup
+        > expectedSubscriptionEndSetup =
+            ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree;
+        ApiEnum<
+            string,
+            ProductListProductsResponseProductSettingsSubscriptionStartSetup
+        > expectedSubscriptionStartSetup =
+            ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection;
         string expectedDowngradePlanID = "downgradePlanId";
         bool expectedProrateAtEndOfBillingPeriod = true;
         string expectedSubscriptionStartPlanID = "subscriptionStartPlanId";
@@ -461,11 +509,14 @@ public class ProductSettingsTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new ProductSettings
+        var model = new ProductListProductsResponseProductSettings
         {
-            SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
-            SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
-            SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+            SubscriptionCancellationTime =
+                ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+            SubscriptionEndSetup =
+                ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+            SubscriptionStartSetup =
+                ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
             DowngradePlanID = "downgradePlanId",
             ProrateAtEndOfBillingPeriod = true,
             SubscriptionStartPlanID = "subscriptionStartPlanId",
@@ -477,11 +528,14 @@ public class ProductSettingsTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new ProductSettings
+        var model = new ProductListProductsResponseProductSettings
         {
-            SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
-            SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
-            SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+            SubscriptionCancellationTime =
+                ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+            SubscriptionEndSetup =
+                ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+            SubscriptionStartSetup =
+                ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
         };
 
         Assert.Null(model.DowngradePlanID);
@@ -495,11 +549,14 @@ public class ProductSettingsTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new ProductSettings
+        var model = new ProductListProductsResponseProductSettings
         {
-            SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
-            SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
-            SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+            SubscriptionCancellationTime =
+                ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+            SubscriptionEndSetup =
+                ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+            SubscriptionStartSetup =
+                ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
         };
 
         model.Validate();
@@ -508,11 +565,14 @@ public class ProductSettingsTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new ProductSettings
+        var model = new ProductListProductsResponseProductSettings
         {
-            SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
-            SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
-            SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+            SubscriptionCancellationTime =
+                ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+            SubscriptionEndSetup =
+                ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+            SubscriptionStartSetup =
+                ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
 
             DowngradePlanID = null,
             ProrateAtEndOfBillingPeriod = null,
@@ -530,11 +590,14 @@ public class ProductSettingsTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new ProductSettings
+        var model = new ProductListProductsResponseProductSettings
         {
-            SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
-            SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
-            SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+            SubscriptionCancellationTime =
+                ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+            SubscriptionEndSetup =
+                ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+            SubscriptionStartSetup =
+                ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
 
             DowngradePlanID = null,
             ProrateAtEndOfBillingPeriod = null,
@@ -547,59 +610,79 @@ public class ProductSettingsTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new ProductSettings
+        var model = new ProductListProductsResponseProductSettings
         {
-            SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
-            SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
-            SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+            SubscriptionCancellationTime =
+                ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+            SubscriptionEndSetup =
+                ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+            SubscriptionStartSetup =
+                ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
             DowngradePlanID = "downgradePlanId",
             ProrateAtEndOfBillingPeriod = true,
             SubscriptionStartPlanID = "subscriptionStartPlanId",
         };
 
-        ProductSettings copied = new(model);
+        ProductListProductsResponseProductSettings copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class SubscriptionCancellationTimeTest : TestBase
+public class ProductListProductsResponseProductSettingsSubscriptionCancellationTimeTest : TestBase
 {
     [Theory]
-    [InlineData(SubscriptionCancellationTime.EndOfBillingPeriod)]
-    [InlineData(SubscriptionCancellationTime.Immediate)]
-    [InlineData(SubscriptionCancellationTime.SpecificDate)]
-    public void Validation_Works(SubscriptionCancellationTime rawValue)
+    [InlineData(
+        ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod
+    )]
+    [InlineData(ProductListProductsResponseProductSettingsSubscriptionCancellationTime.Immediate)]
+    [InlineData(
+        ProductListProductsResponseProductSettingsSubscriptionCancellationTime.SpecificDate
+    )]
+    public void Validation_Works(
+        ProductListProductsResponseProductSettingsSubscriptionCancellationTime rawValue
+    )
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionCancellationTime> value = rawValue;
+        ApiEnum<
+            string,
+            ProductListProductsResponseProductSettingsSubscriptionCancellationTime
+        > value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionCancellationTime>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, ProductListProductsResponseProductSettingsSubscriptionCancellationTime>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
         Assert.Throws<StiggInvalidDataException>(() => value.Validate());
     }
 
     [Theory]
-    [InlineData(SubscriptionCancellationTime.EndOfBillingPeriod)]
-    [InlineData(SubscriptionCancellationTime.Immediate)]
-    [InlineData(SubscriptionCancellationTime.SpecificDate)]
-    public void SerializationRoundtrip_Works(SubscriptionCancellationTime rawValue)
+    [InlineData(
+        ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod
+    )]
+    [InlineData(ProductListProductsResponseProductSettingsSubscriptionCancellationTime.Immediate)]
+    [InlineData(
+        ProductListProductsResponseProductSettingsSubscriptionCancellationTime.SpecificDate
+    )]
+    public void SerializationRoundtrip_Works(
+        ProductListProductsResponseProductSettingsSubscriptionCancellationTime rawValue
+    )
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionCancellationTime> value = rawValue;
+        ApiEnum<
+            string,
+            ProductListProductsResponseProductSettingsSubscriptionCancellationTime
+        > value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionCancellationTime>
+            ApiEnum<string, ProductListProductsResponseProductSettingsSubscriptionCancellationTime>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -608,56 +691,59 @@ public class SubscriptionCancellationTimeTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionCancellationTime>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, ProductListProductsResponseProductSettingsSubscriptionCancellationTime>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionCancellationTime>
+            ApiEnum<string, ProductListProductsResponseProductSettingsSubscriptionCancellationTime>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
 }
 
-public class SubscriptionEndSetupTest : TestBase
+public class ProductListProductsResponseProductSettingsSubscriptionEndSetupTest : TestBase
 {
     [Theory]
-    [InlineData(SubscriptionEndSetup.DowngradeToFree)]
-    [InlineData(SubscriptionEndSetup.CancelSubscription)]
-    public void Validation_Works(SubscriptionEndSetup rawValue)
+    [InlineData(ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree)]
+    [InlineData(ProductListProductsResponseProductSettingsSubscriptionEndSetup.CancelSubscription)]
+    public void Validation_Works(
+        ProductListProductsResponseProductSettingsSubscriptionEndSetup rawValue
+    )
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionEndSetup> value = rawValue;
+        ApiEnum<string, ProductListProductsResponseProductSettingsSubscriptionEndSetup> value =
+            rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionEndSetup>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, ProductListProductsResponseProductSettingsSubscriptionEndSetup>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
         Assert.Throws<StiggInvalidDataException>(() => value.Validate());
     }
 
     [Theory]
-    [InlineData(SubscriptionEndSetup.DowngradeToFree)]
-    [InlineData(SubscriptionEndSetup.CancelSubscription)]
-    public void SerializationRoundtrip_Works(SubscriptionEndSetup rawValue)
+    [InlineData(ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree)]
+    [InlineData(ProductListProductsResponseProductSettingsSubscriptionEndSetup.CancelSubscription)]
+    public void SerializationRoundtrip_Works(
+        ProductListProductsResponseProductSettingsSubscriptionEndSetup rawValue
+    )
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionEndSetup> value = rawValue;
+        ApiEnum<string, ProductListProductsResponseProductSettingsSubscriptionEndSetup> value =
+            rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionEndSetup>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, ProductListProductsResponseProductSettingsSubscriptionEndSetup>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
@@ -665,59 +751,61 @@ public class SubscriptionEndSetupTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionEndSetup>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, ProductListProductsResponseProductSettingsSubscriptionEndSetup>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionEndSetup>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, ProductListProductsResponseProductSettingsSubscriptionEndSetup>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
 }
 
-public class SubscriptionStartSetupTest : TestBase
+public class ProductListProductsResponseProductSettingsSubscriptionStartSetupTest : TestBase
 {
     [Theory]
-    [InlineData(SubscriptionStartSetup.PlanSelection)]
-    [InlineData(SubscriptionStartSetup.TrialPeriod)]
-    [InlineData(SubscriptionStartSetup.FreePlan)]
-    public void Validation_Works(SubscriptionStartSetup rawValue)
+    [InlineData(ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection)]
+    [InlineData(ProductListProductsResponseProductSettingsSubscriptionStartSetup.TrialPeriod)]
+    [InlineData(ProductListProductsResponseProductSettingsSubscriptionStartSetup.FreePlan)]
+    public void Validation_Works(
+        ProductListProductsResponseProductSettingsSubscriptionStartSetup rawValue
+    )
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionStartSetup> value = rawValue;
+        ApiEnum<string, ProductListProductsResponseProductSettingsSubscriptionStartSetup> value =
+            rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionStartSetup>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, ProductListProductsResponseProductSettingsSubscriptionStartSetup>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
         Assert.Throws<StiggInvalidDataException>(() => value.Validate());
     }
 
     [Theory]
-    [InlineData(SubscriptionStartSetup.PlanSelection)]
-    [InlineData(SubscriptionStartSetup.TrialPeriod)]
-    [InlineData(SubscriptionStartSetup.FreePlan)]
-    public void SerializationRoundtrip_Works(SubscriptionStartSetup rawValue)
+    [InlineData(ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection)]
+    [InlineData(ProductListProductsResponseProductSettingsSubscriptionStartSetup.TrialPeriod)]
+    [InlineData(ProductListProductsResponseProductSettingsSubscriptionStartSetup.FreePlan)]
+    public void SerializationRoundtrip_Works(
+        ProductListProductsResponseProductSettingsSubscriptionStartSetup rawValue
+    )
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionStartSetup> value = rawValue;
+        ApiEnum<string, ProductListProductsResponseProductSettingsSubscriptionStartSetup> value =
+            rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionStartSetup>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, ProductListProductsResponseProductSettingsSubscriptionStartSetup>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
@@ -725,15 +813,13 @@ public class SubscriptionStartSetupTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionStartSetup>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, ProductListProductsResponseProductSettingsSubscriptionStartSetup>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionStartSetup>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, ProductListProductsResponseProductSettingsSubscriptionStartSetup>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
