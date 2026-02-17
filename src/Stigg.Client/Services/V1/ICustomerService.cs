@@ -29,6 +29,8 @@ public interface ICustomerService
 
     IPaymentMethodService PaymentMethod { get; }
 
+    IPromotionalEntitlementService PromotionalEntitlements { get; }
+
     /// <summary>
     /// Retrieves a customer by their unique identifier, including billing information
     /// and subscription status.
@@ -146,6 +148,8 @@ public interface ICustomerServiceWithRawResponse
     ICustomerServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     IPaymentMethodServiceWithRawResponse PaymentMethod { get; }
+
+    IPromotionalEntitlementServiceWithRawResponse PromotionalEntitlements { get; }
 
     /// <summary>
     /// Returns a raw HTTP response for `get /api/v1/customers/{id}`, but is otherwise the
