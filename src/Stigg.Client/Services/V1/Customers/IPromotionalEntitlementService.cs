@@ -1,8 +1,5 @@
 using System;
-using System.Threading;
-using System.Threading.Tasks;
 using Stigg.Client.Core;
-using Stigg.Client.Models.V1.Customers.PromotionalEntitlements;
 
 namespace Stigg.Client.Services.V1.Customers;
 
@@ -25,38 +22,6 @@ public interface IPromotionalEntitlementService
     /// <para>The original service is not modified.</para>
     /// </summary>
     IPromotionalEntitlementService WithOptions(Func<ClientOptions, ClientOptions> modifier);
-
-    /// <summary>
-    /// Grants promotional entitlements to a customer, providing feature access outside
-    /// their subscription. Entitlements can be time-limited or permanent.
-    /// </summary>
-    Task<PromotionalEntitlementGrantResponse> Grant(
-        PromotionalEntitlementGrantParams parameters,
-        CancellationToken cancellationToken = default
-    );
-
-    /// <inheritdoc cref="Grant(PromotionalEntitlementGrantParams, CancellationToken)"/>
-    Task<PromotionalEntitlementGrantResponse> Grant(
-        string customerID,
-        PromotionalEntitlementGrantParams parameters,
-        CancellationToken cancellationToken = default
-    );
-
-    /// <summary>
-    /// Revokes a previously granted promotional entitlement from a customer for
-    /// a specific feature.
-    /// </summary>
-    Task<PromotionalEntitlementRevokeResponse> Revoke(
-        PromotionalEntitlementRevokeParams parameters,
-        CancellationToken cancellationToken = default
-    );
-
-    /// <inheritdoc cref="Revoke(PromotionalEntitlementRevokeParams, CancellationToken)"/>
-    Task<PromotionalEntitlementRevokeResponse> Revoke(
-        string featureID,
-        PromotionalEntitlementRevokeParams parameters,
-        CancellationToken cancellationToken = default
-    );
 }
 
 /// <summary>
@@ -72,37 +37,5 @@ public interface IPromotionalEntitlementServiceWithRawResponse
     /// </summary>
     IPromotionalEntitlementServiceWithRawResponse WithOptions(
         Func<ClientOptions, ClientOptions> modifier
-    );
-
-    /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/customers/{customerId}/promotional`, but is otherwise the
-    /// same as <see cref="IPromotionalEntitlementService.Grant(PromotionalEntitlementGrantParams, CancellationToken)"/>.
-    /// </summary>
-    Task<HttpResponse<PromotionalEntitlementGrantResponse>> Grant(
-        PromotionalEntitlementGrantParams parameters,
-        CancellationToken cancellationToken = default
-    );
-
-    /// <inheritdoc cref="Grant(PromotionalEntitlementGrantParams, CancellationToken)"/>
-    Task<HttpResponse<PromotionalEntitlementGrantResponse>> Grant(
-        string customerID,
-        PromotionalEntitlementGrantParams parameters,
-        CancellationToken cancellationToken = default
-    );
-
-    /// <summary>
-    /// Returns a raw HTTP response for `delete /api/v1/customers/{customerId}/promotional/{featureId}`, but is otherwise the
-    /// same as <see cref="IPromotionalEntitlementService.Revoke(PromotionalEntitlementRevokeParams, CancellationToken)"/>.
-    /// </summary>
-    Task<HttpResponse<PromotionalEntitlementRevokeResponse>> Revoke(
-        PromotionalEntitlementRevokeParams parameters,
-        CancellationToken cancellationToken = default
-    );
-
-    /// <inheritdoc cref="Revoke(PromotionalEntitlementRevokeParams, CancellationToken)"/>
-    Task<HttpResponse<PromotionalEntitlementRevokeResponse>> Revoke(
-        string featureID,
-        PromotionalEntitlementRevokeParams parameters,
-        CancellationToken cancellationToken = default
     );
 }
