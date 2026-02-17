@@ -1,7 +1,6 @@
 using System;
 using System.Text.Json;
 using Stigg.Client.Core;
-using Stigg.Client.Exceptions;
 using Stigg.Client.Models.V1.Events.Addons;
 
 namespace Stigg.Client.Tests.Models.V1.Events.Addons;
@@ -24,7 +23,7 @@ public class AddonListAddonsParamsTest : TestBase
             },
             Limit = 1,
             ProductID = "productId",
-            Status = AddonListAddonsParamsStatus.Draft,
+            Status = "status",
         };
 
         string expectedAfter = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
@@ -38,8 +37,7 @@ public class AddonListAddonsParamsTest : TestBase
         };
         long expectedLimit = 1;
         string expectedProductID = "productId";
-        ApiEnum<string, AddonListAddonsParamsStatus> expectedStatus =
-            AddonListAddonsParamsStatus.Draft;
+        string expectedStatus = "status";
 
         Assert.Equal(expectedAfter, parameters.After);
         Assert.Equal(expectedBefore, parameters.Before);
@@ -112,14 +110,14 @@ public class AddonListAddonsParamsTest : TestBase
             },
             Limit = 1,
             ProductID = "productId",
-            Status = AddonListAddonsParamsStatus.Draft,
+            Status = "status",
         };
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
         Assert.Equal(
             new Uri(
-                "https://api.stigg.io/api/v1/addons?after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&createdAt%5bgt%5d=2019-12-27T18%3a11%3a19.117Z&createdAt%5bgte%5d=2019-12-27T18%3a11%3a19.117Z&createdAt%5blt%5d=2019-12-27T18%3a11%3a19.117Z&createdAt%5blte%5d=2019-12-27T18%3a11%3a19.117Z&limit=1&productId=productId&status=DRAFT"
+                "https://api.stigg.io/api/v1/addons?after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&createdAt%5bgt%5d=2019-12-27T18%3a11%3a19.117Z&createdAt%5bgte%5d=2019-12-27T18%3a11%3a19.117Z&createdAt%5blt%5d=2019-12-27T18%3a11%3a19.117Z&createdAt%5blte%5d=2019-12-27T18%3a11%3a19.117Z&limit=1&productId=productId&status=status"
             ),
             url
         );
@@ -141,7 +139,7 @@ public class AddonListAddonsParamsTest : TestBase
             },
             Limit = 1,
             ProductID = "productId",
-            Status = AddonListAddonsParamsStatus.Draft,
+            Status = "status",
         };
 
         AddonListAddonsParams copied = new(parameters);
@@ -308,65 +306,5 @@ public class CreatedAtTest : TestBase
         CreatedAt copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class AddonListAddonsParamsStatusTest : TestBase
-{
-    [Theory]
-    [InlineData(AddonListAddonsParamsStatus.Draft)]
-    [InlineData(AddonListAddonsParamsStatus.Published)]
-    [InlineData(AddonListAddonsParamsStatus.Archived)]
-    public void Validation_Works(AddonListAddonsParamsStatus rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, AddonListAddonsParamsStatus> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, AddonListAddonsParamsStatus>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(AddonListAddonsParamsStatus.Draft)]
-    [InlineData(AddonListAddonsParamsStatus.Published)]
-    [InlineData(AddonListAddonsParamsStatus.Archived)]
-    public void SerializationRoundtrip_Works(AddonListAddonsParamsStatus rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, AddonListAddonsParamsStatus> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, AddonListAddonsParamsStatus>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, AddonListAddonsParamsStatus>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, AddonListAddonsParamsStatus>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
     }
 }

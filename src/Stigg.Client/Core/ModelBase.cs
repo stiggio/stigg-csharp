@@ -1,13 +1,12 @@
 using System.Text.Json;
 using Stigg.Client.Exceptions;
 using Stigg.Client.Models.V1.Customers;
-using Stigg.Client.Models.V1.Customers.PromotionalEntitlements;
 using Stigg.Client.Models.V1.Events.Features;
+using Stigg.Client.Models.V1.Products;
 using Addons = Stigg.Client.Models.V1.Events.Addons;
 using Coupons = Stigg.Client.Models.V1.Coupons;
 using Draft = Stigg.Client.Models.V1.Events.Addons.Draft;
 using PaymentMethod = Stigg.Client.Models.V1.Customers.PaymentMethod;
-using Products = Stigg.Client.Models.V1.Products;
 using Subscriptions = Stigg.Client.Models.V1.Subscriptions;
 using Usage = Stigg.Client.Models.V1.Usage;
 
@@ -39,32 +38,6 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, CustomerProvisionParamsIntegrationVendorIdentifier>(),
             new ApiEnumConverter<string, PaymentMethod::VendorIdentifier>(),
             new ApiEnumConverter<string, PaymentMethod::BillingCurrency>(),
-            new ApiEnumConverter<string, DataPeriod>(),
-            new ApiEnumConverter<string, DataResetPeriod>(),
-            new ApiEnumConverter<string, YearlyResetPeriodConfigAccordingTo>(),
-            new ApiEnumConverter<string, MonthlyResetPeriodConfigAccordingTo>(),
-            new ApiEnumConverter<string, WeeklyResetPeriodConfigAccordingTo>(),
-            new ApiEnumConverter<string, Status>(),
-            new ApiEnumConverter<string, PromotionalEntitlementRevokeResponseDataPeriod>(),
-            new ApiEnumConverter<string, PromotionalEntitlementRevokeResponseDataResetPeriod>(),
-            new ApiEnumConverter<
-                string,
-                PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
-            >(),
-            new ApiEnumConverter<
-                string,
-                PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
-            >(),
-            new ApiEnumConverter<
-                string,
-                PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
-            >(),
-            new ApiEnumConverter<string, PromotionalEntitlementRevokeResponseDataStatus>(),
-            new ApiEnumConverter<string, AccordingTo>(),
-            new ApiEnumConverter<string, Period>(),
-            new ApiEnumConverter<string, ResetPeriod>(),
-            new ApiEnumConverter<string, WeeklyResetPeriodConfigurationAccordingTo>(),
-            new ApiEnumConverter<string, YearlyResetPeriodConfigurationAccordingTo>(),
             new ApiEnumConverter<string, Subscriptions::PaymentCollection>(),
             new ApiEnumConverter<string, Subscriptions::PricingType>(),
             new ApiEnumConverter<string, Subscriptions::Status>(),
@@ -250,89 +223,85 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Addons::AddonUpdateAddonResponseDataStatus>(),
             new ApiEnumConverter<string, Addons::PricingType>(),
             new ApiEnumConverter<string, Addons::Status>(),
-            new ApiEnumConverter<string, Addons::AddonListAddonsParamsStatus>(),
             new ApiEnumConverter<string, Addons::MigrationType>(),
             new ApiEnumConverter<string, Draft::Type>(),
             new ApiEnumConverter<string, Draft::PricingType>(),
             new ApiEnumConverter<string, Draft::Status>(),
             new ApiEnumConverter<string, Usage::Type>(),
             new ApiEnumConverter<string, Usage::UpdateBehavior>(),
-            new ApiEnumConverter<string, Products::Status>(),
+            new ApiEnumConverter<string, Status>(),
+            new ApiEnumConverter<string, DataProductSettingsSubscriptionCancellationTime>(),
+            new ApiEnumConverter<string, DataProductSettingsSubscriptionEndSetup>(),
+            new ApiEnumConverter<string, DataProductSettingsSubscriptionStartSetup>(),
+            new ApiEnumConverter<string, ProductCreateProductResponseDataStatus>(),
             new ApiEnumConverter<
                 string,
-                Products::DataProductSettingsSubscriptionCancellationTime
-            >(),
-            new ApiEnumConverter<string, Products::DataProductSettingsSubscriptionEndSetup>(),
-            new ApiEnumConverter<string, Products::DataProductSettingsSubscriptionStartSetup>(),
-            new ApiEnumConverter<string, Products::ProductCreateProductResponseDataStatus>(),
-            new ApiEnumConverter<
-                string,
-                Products::ProductCreateProductResponseDataProductSettingsSubscriptionCancellationTime
+                ProductCreateProductResponseDataProductSettingsSubscriptionCancellationTime
             >(),
             new ApiEnumConverter<
                 string,
-                Products::ProductCreateProductResponseDataProductSettingsSubscriptionEndSetup
+                ProductCreateProductResponseDataProductSettingsSubscriptionEndSetup
             >(),
             new ApiEnumConverter<
                 string,
-                Products::ProductCreateProductResponseDataProductSettingsSubscriptionStartSetup
+                ProductCreateProductResponseDataProductSettingsSubscriptionStartSetup
             >(),
-            new ApiEnumConverter<string, Products::ProductDuplicateProductResponseDataStatus>(),
+            new ApiEnumConverter<string, ProductDuplicateProductResponseDataStatus>(),
             new ApiEnumConverter<
                 string,
-                Products::ProductDuplicateProductResponseDataProductSettingsSubscriptionCancellationTime
-            >(),
-            new ApiEnumConverter<
-                string,
-                Products::ProductDuplicateProductResponseDataProductSettingsSubscriptionEndSetup
+                ProductDuplicateProductResponseDataProductSettingsSubscriptionCancellationTime
             >(),
             new ApiEnumConverter<
                 string,
-                Products::ProductDuplicateProductResponseDataProductSettingsSubscriptionStartSetup
-            >(),
-            new ApiEnumConverter<string, Products::ProductListProductsResponseStatus>(),
-            new ApiEnumConverter<
-                string,
-                Products::ProductListProductsResponseProductSettingsSubscriptionCancellationTime
+                ProductDuplicateProductResponseDataProductSettingsSubscriptionEndSetup
             >(),
             new ApiEnumConverter<
                 string,
-                Products::ProductListProductsResponseProductSettingsSubscriptionEndSetup
+                ProductDuplicateProductResponseDataProductSettingsSubscriptionStartSetup
+            >(),
+            new ApiEnumConverter<string, ProductListProductsResponseStatus>(),
+            new ApiEnumConverter<
+                string,
+                ProductListProductsResponseProductSettingsSubscriptionCancellationTime
             >(),
             new ApiEnumConverter<
                 string,
-                Products::ProductListProductsResponseProductSettingsSubscriptionStartSetup
-            >(),
-            new ApiEnumConverter<string, Products::ProductUnarchiveProductResponseDataStatus>(),
-            new ApiEnumConverter<
-                string,
-                Products::ProductUnarchiveProductResponseDataProductSettingsSubscriptionCancellationTime
+                ProductListProductsResponseProductSettingsSubscriptionEndSetup
             >(),
             new ApiEnumConverter<
                 string,
-                Products::ProductUnarchiveProductResponseDataProductSettingsSubscriptionEndSetup
+                ProductListProductsResponseProductSettingsSubscriptionStartSetup
+            >(),
+            new ApiEnumConverter<string, ProductUnarchiveProductResponseDataStatus>(),
+            new ApiEnumConverter<
+                string,
+                ProductUnarchiveProductResponseDataProductSettingsSubscriptionCancellationTime
             >(),
             new ApiEnumConverter<
                 string,
-                Products::ProductUnarchiveProductResponseDataProductSettingsSubscriptionStartSetup
-            >(),
-            new ApiEnumConverter<string, Products::ProductUpdateProductResponseDataStatus>(),
-            new ApiEnumConverter<
-                string,
-                Products::ProductUpdateProductResponseDataProductSettingsSubscriptionCancellationTime
+                ProductUnarchiveProductResponseDataProductSettingsSubscriptionEndSetup
             >(),
             new ApiEnumConverter<
                 string,
-                Products::ProductUpdateProductResponseDataProductSettingsSubscriptionEndSetup
+                ProductUnarchiveProductResponseDataProductSettingsSubscriptionStartSetup
+            >(),
+            new ApiEnumConverter<string, ProductUpdateProductResponseDataStatus>(),
+            new ApiEnumConverter<
+                string,
+                ProductUpdateProductResponseDataProductSettingsSubscriptionCancellationTime
             >(),
             new ApiEnumConverter<
                 string,
-                Products::ProductUpdateProductResponseDataProductSettingsSubscriptionStartSetup
+                ProductUpdateProductResponseDataProductSettingsSubscriptionEndSetup
             >(),
-            new ApiEnumConverter<string, Products::SubscriptionCancellationTime>(),
-            new ApiEnumConverter<string, Products::SubscriptionEndSetup>(),
-            new ApiEnumConverter<string, Products::SubscriptionStartSetup>(),
-            new ApiEnumConverter<string, Products::Behavior>(),
+            new ApiEnumConverter<
+                string,
+                ProductUpdateProductResponseDataProductSettingsSubscriptionStartSetup
+            >(),
+            new ApiEnumConverter<string, SubscriptionCancellationTime>(),
+            new ApiEnumConverter<string, SubscriptionEndSetup>(),
+            new ApiEnumConverter<string, SubscriptionStartSetup>(),
+            new ApiEnumConverter<string, Behavior>(),
         },
     };
 

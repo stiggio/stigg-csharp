@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -5,8 +6,6 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Stigg.Client.Core;
-using Stigg.Client.Exceptions;
-using System = System;
 
 namespace Stigg.Client.Models.V1.Events.Addons;
 
@@ -127,14 +126,12 @@ public record class AddonListAddonsParams : ParamsBase
     /// <summary>
     /// Filter by addon status. Supports comma-separated values for multiple statuses
     /// </summary>
-    public ApiEnum<string, AddonListAddonsParamsStatus>? Status
+    public string? Status
     {
         get
         {
             this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableClass<
-                ApiEnum<string, AddonListAddonsParamsStatus>
-            >("status");
+            return this._rawQueryData.GetNullableClass<string>("status");
         }
         init
         {
@@ -214,9 +211,9 @@ public record class AddonListAddonsParams : ParamsBase
             && this._rawQueryData.Equals(other._rawQueryData);
     }
 
-    public override System::Uri Url(ClientOptions options)
+    public override Uri Url(ClientOptions options)
     {
-        return new System::UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/api/v1/addons")
+        return new UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/api/v1/addons")
         {
             Query = this.QueryString(options),
         }.Uri;
@@ -246,12 +243,12 @@ public sealed record class CreatedAt : JsonModel
     /// <summary>
     /// Greater than the specified createdAt value
     /// </summary>
-    public System::DateTimeOffset? Gt
+    public DateTimeOffset? Gt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<System::DateTimeOffset>("gt");
+            return this._rawData.GetNullableStruct<DateTimeOffset>("gt");
         }
         init
         {
@@ -267,12 +264,12 @@ public sealed record class CreatedAt : JsonModel
     /// <summary>
     /// Greater than or equal to the specified createdAt value
     /// </summary>
-    public System::DateTimeOffset? Gte
+    public DateTimeOffset? Gte
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<System::DateTimeOffset>("gte");
+            return this._rawData.GetNullableStruct<DateTimeOffset>("gte");
         }
         init
         {
@@ -288,12 +285,12 @@ public sealed record class CreatedAt : JsonModel
     /// <summary>
     /// Less than the specified createdAt value
     /// </summary>
-    public System::DateTimeOffset? Lt
+    public DateTimeOffset? Lt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<System::DateTimeOffset>("lt");
+            return this._rawData.GetNullableStruct<DateTimeOffset>("lt");
         }
         init
         {
@@ -309,12 +306,12 @@ public sealed record class CreatedAt : JsonModel
     /// <summary>
     /// Less than or equal to the specified createdAt value
     /// </summary>
-    public System::DateTimeOffset? Lte
+    public DateTimeOffset? Lte
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<System::DateTimeOffset>("lte");
+            return this._rawData.GetNullableStruct<DateTimeOffset>("lte");
         }
         init
         {
@@ -369,54 +366,4 @@ class CreatedAtFromRaw : IFromRawJson<CreatedAt>
     /// <inheritdoc/>
     public CreatedAt FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         CreatedAt.FromRawUnchecked(rawData);
-}
-
-/// <summary>
-/// Filter by addon status. Supports comma-separated values for multiple statuses
-/// </summary>
-[JsonConverter(typeof(AddonListAddonsParamsStatusConverter))]
-public enum AddonListAddonsParamsStatus
-{
-    Draft,
-    Published,
-    Archived,
-}
-
-sealed class AddonListAddonsParamsStatusConverter : JsonConverter<AddonListAddonsParamsStatus>
-{
-    public override AddonListAddonsParamsStatus Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "DRAFT" => AddonListAddonsParamsStatus.Draft,
-            "PUBLISHED" => AddonListAddonsParamsStatus.Published,
-            "ARCHIVED" => AddonListAddonsParamsStatus.Archived,
-            _ => (AddonListAddonsParamsStatus)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        AddonListAddonsParamsStatus value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                AddonListAddonsParamsStatus.Draft => "DRAFT",
-                AddonListAddonsParamsStatus.Published => "PUBLISHED",
-                AddonListAddonsParamsStatus.Archived => "ARCHIVED",
-                _ => throw new StiggInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }
