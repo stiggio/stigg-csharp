@@ -23,14 +23,16 @@ public class ProductListProductsPageResponseTest : TestBase
                     DisplayName = "displayName",
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     MultipleSubscriptions = true,
-                    Status = Status.Published,
+                    Status = ProductListProductsResponseStatus.Published,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     ProductSettings = new()
                     {
                         SubscriptionCancellationTime =
-                            SubscriptionCancellationTime.EndOfBillingPeriod,
-                        SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
-                        SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+                            ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+                        SubscriptionEndSetup =
+                            ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+                        SubscriptionStartSetup =
+                            ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
                         DowngradePlanID = "downgradePlanId",
                         ProrateAtEndOfBillingPeriod = true,
                         SubscriptionStartPlanID = "subscriptionStartPlanId",
@@ -54,13 +56,16 @@ public class ProductListProductsPageResponseTest : TestBase
                 DisplayName = "displayName",
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 MultipleSubscriptions = true,
-                Status = Status.Published,
+                Status = ProductListProductsResponseStatus.Published,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 ProductSettings = new()
                 {
-                    SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
-                    SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
-                    SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+                    SubscriptionCancellationTime =
+                        ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+                    SubscriptionEndSetup =
+                        ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+                    SubscriptionStartSetup =
+                        ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
                     DowngradePlanID = "downgradePlanId",
                     ProrateAtEndOfBillingPeriod = true,
                     SubscriptionStartPlanID = "subscriptionStartPlanId",
@@ -96,14 +101,16 @@ public class ProductListProductsPageResponseTest : TestBase
                     DisplayName = "displayName",
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     MultipleSubscriptions = true,
-                    Status = Status.Published,
+                    Status = ProductListProductsResponseStatus.Published,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     ProductSettings = new()
                     {
                         SubscriptionCancellationTime =
-                            SubscriptionCancellationTime.EndOfBillingPeriod,
-                        SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
-                        SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+                            ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+                        SubscriptionEndSetup =
+                            ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+                        SubscriptionStartSetup =
+                            ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
                         DowngradePlanID = "downgradePlanId",
                         ProrateAtEndOfBillingPeriod = true,
                         SubscriptionStartPlanID = "subscriptionStartPlanId",
@@ -141,14 +148,16 @@ public class ProductListProductsPageResponseTest : TestBase
                     DisplayName = "displayName",
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     MultipleSubscriptions = true,
-                    Status = Status.Published,
+                    Status = ProductListProductsResponseStatus.Published,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     ProductSettings = new()
                     {
                         SubscriptionCancellationTime =
-                            SubscriptionCancellationTime.EndOfBillingPeriod,
-                        SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
-                        SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+                            ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+                        SubscriptionEndSetup =
+                            ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+                        SubscriptionStartSetup =
+                            ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
                         DowngradePlanID = "downgradePlanId",
                         ProrateAtEndOfBillingPeriod = true,
                         SubscriptionStartPlanID = "subscriptionStartPlanId",
@@ -179,13 +188,16 @@ public class ProductListProductsPageResponseTest : TestBase
                 DisplayName = "displayName",
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 MultipleSubscriptions = true,
-                Status = Status.Published,
+                Status = ProductListProductsResponseStatus.Published,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 ProductSettings = new()
                 {
-                    SubscriptionCancellationTime = SubscriptionCancellationTime.EndOfBillingPeriod,
-                    SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
-                    SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+                    SubscriptionCancellationTime =
+                        ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+                    SubscriptionEndSetup =
+                        ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+                    SubscriptionStartSetup =
+                        ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
                     DowngradePlanID = "downgradePlanId",
                     ProrateAtEndOfBillingPeriod = true,
                     SubscriptionStartPlanID = "subscriptionStartPlanId",
@@ -221,14 +233,16 @@ public class ProductListProductsPageResponseTest : TestBase
                     DisplayName = "displayName",
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     MultipleSubscriptions = true,
-                    Status = Status.Published,
+                    Status = ProductListProductsResponseStatus.Published,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     ProductSettings = new()
                     {
                         SubscriptionCancellationTime =
-                            SubscriptionCancellationTime.EndOfBillingPeriod,
-                        SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
-                        SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+                            ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+                        SubscriptionEndSetup =
+                            ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+                        SubscriptionStartSetup =
+                            ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
                         DowngradePlanID = "downgradePlanId",
                         ProrateAtEndOfBillingPeriod = true,
                         SubscriptionStartPlanID = "subscriptionStartPlanId",
@@ -260,14 +274,16 @@ public class ProductListProductsPageResponseTest : TestBase
                     DisplayName = "displayName",
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     MultipleSubscriptions = true,
-                    Status = Status.Published,
+                    Status = ProductListProductsResponseStatus.Published,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     ProductSettings = new()
                     {
                         SubscriptionCancellationTime =
-                            SubscriptionCancellationTime.EndOfBillingPeriod,
-                        SubscriptionEndSetup = SubscriptionEndSetup.DowngradeToFree,
-                        SubscriptionStartSetup = SubscriptionStartSetup.PlanSelection,
+                            ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+                        SubscriptionEndSetup =
+                            ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+                        SubscriptionStartSetup =
+                            ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
                         DowngradePlanID = "downgradePlanId",
                         ProrateAtEndOfBillingPeriod = true,
                         SubscriptionStartPlanID = "subscriptionStartPlanId",

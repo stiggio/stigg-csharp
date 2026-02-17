@@ -1,0 +1,112 @@
+using System;
+using System.Text.Json;
+using Stigg.Client.Core;
+using Stigg.Client.Exceptions;
+using Stigg.Client.Models.V1.Events.Addons;
+
+namespace Stigg.Client.Tests.Models.V1.Events.Addons;
+
+public class AddonPublishAddonParamsTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var parameters = new AddonPublishAddonParams
+        {
+            ID = "x",
+            MigrationType = MigrationType.NewCustomers,
+        };
+
+        string expectedID = "x";
+        ApiEnum<string, MigrationType> expectedMigrationType = MigrationType.NewCustomers;
+
+        Assert.Equal(expectedID, parameters.ID);
+        Assert.Equal(expectedMigrationType, parameters.MigrationType);
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        AddonPublishAddonParams parameters = new()
+        {
+            ID = "x",
+            MigrationType = MigrationType.NewCustomers,
+        };
+
+        var url = parameters.Url(new() { ApiKey = "My API Key" });
+
+        Assert.Equal(new Uri("https://api.stigg.io/api/v1/addons/x/publish"), url);
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new AddonPublishAddonParams
+        {
+            ID = "x",
+            MigrationType = MigrationType.NewCustomers,
+        };
+
+        AddonPublishAddonParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
+}
+
+public class MigrationTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(MigrationType.NewCustomers)]
+    [InlineData(MigrationType.AllCustomers)]
+    public void Validation_Works(MigrationType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, MigrationType> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, MigrationType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(MigrationType.NewCustomers)]
+    [InlineData(MigrationType.AllCustomers)]
+    public void SerializationRoundtrip_Works(MigrationType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, MigrationType> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, MigrationType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, MigrationType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, MigrationType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}

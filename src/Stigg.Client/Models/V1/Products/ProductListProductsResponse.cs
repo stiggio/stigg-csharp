@@ -104,12 +104,14 @@ public sealed record class ProductListProductsResponse : JsonModel
     /// <summary>
     /// The status of the product
     /// </summary>
-    public required ApiEnum<string, Status> Status
+    public required ApiEnum<string, ProductListProductsResponseStatus> Status
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, Status>>("status");
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, ProductListProductsResponseStatus>
+            >("status");
         }
         init { this._rawData.Set("status", value); }
     }
@@ -130,12 +132,14 @@ public sealed record class ProductListProductsResponse : JsonModel
     /// <summary>
     /// Product behavior settings for subscription lifecycle management.
     /// </summary>
-    public ProductSettings? ProductSettings
+    public ProductListProductsResponseProductSettings? ProductSettings
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ProductSettings>("productSettings");
+            return this._rawData.GetNullableClass<ProductListProductsResponseProductSettings>(
+                "productSettings"
+            );
         }
         init
         {
@@ -203,16 +207,17 @@ class ProductListProductsResponseFromRaw : IFromRawJson<ProductListProductsRespo
 /// <summary>
 /// The status of the product
 /// </summary>
-[JsonConverter(typeof(StatusConverter))]
-public enum Status
+[JsonConverter(typeof(ProductListProductsResponseStatusConverter))]
+public enum ProductListProductsResponseStatus
 {
     Published,
     Archived,
 }
 
-sealed class StatusConverter : JsonConverter<Status>
+sealed class ProductListProductsResponseStatusConverter
+    : JsonConverter<ProductListProductsResponseStatus>
 {
-    public override Status Read(
+    public override ProductListProductsResponseStatus Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -220,20 +225,24 @@ sealed class StatusConverter : JsonConverter<Status>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "PUBLISHED" => Status.Published,
-            "ARCHIVED" => Status.Archived,
-            _ => (Status)(-1),
+            "PUBLISHED" => ProductListProductsResponseStatus.Published,
+            "ARCHIVED" => ProductListProductsResponseStatus.Archived,
+            _ => (ProductListProductsResponseStatus)(-1),
         };
     }
 
-    public override void Write(Utf8JsonWriter writer, Status value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        ProductListProductsResponseStatus value,
+        JsonSerializerOptions options
+    )
     {
         JsonSerializer.Serialize(
             writer,
             value switch
             {
-                Status.Published => "PUBLISHED",
-                Status.Archived => "ARCHIVED",
+                ProductListProductsResponseStatus.Published => "PUBLISHED",
+                ProductListProductsResponseStatus.Archived => "ARCHIVED",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -246,20 +255,31 @@ sealed class StatusConverter : JsonConverter<Status>
 /// <summary>
 /// Product behavior settings for subscription lifecycle management.
 /// </summary>
-[JsonConverter(typeof(JsonModelConverter<ProductSettings, ProductSettingsFromRaw>))]
-public sealed record class ProductSettings : JsonModel
+[JsonConverter(
+    typeof(JsonModelConverter<
+        ProductListProductsResponseProductSettings,
+        ProductListProductsResponseProductSettingsFromRaw
+    >)
+)]
+public sealed record class ProductListProductsResponseProductSettings : JsonModel
 {
     /// <summary>
     /// Time when the subscription will be cancelled
     /// </summary>
-    public required ApiEnum<string, SubscriptionCancellationTime> SubscriptionCancellationTime
+    public required ApiEnum<
+        string,
+        ProductListProductsResponseProductSettingsSubscriptionCancellationTime
+    > SubscriptionCancellationTime
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, SubscriptionCancellationTime>>(
-                "subscriptionCancellationTime"
-            );
+            return this._rawData.GetNotNullClass<
+                ApiEnum<
+                    string,
+                    ProductListProductsResponseProductSettingsSubscriptionCancellationTime
+                >
+            >("subscriptionCancellationTime");
         }
         init { this._rawData.Set("subscriptionCancellationTime", value); }
     }
@@ -267,14 +287,17 @@ public sealed record class ProductSettings : JsonModel
     /// <summary>
     /// Setup for the end of the subscription
     /// </summary>
-    public required ApiEnum<string, SubscriptionEndSetup> SubscriptionEndSetup
+    public required ApiEnum<
+        string,
+        ProductListProductsResponseProductSettingsSubscriptionEndSetup
+    > SubscriptionEndSetup
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, SubscriptionEndSetup>>(
-                "subscriptionEndSetup"
-            );
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, ProductListProductsResponseProductSettingsSubscriptionEndSetup>
+            >("subscriptionEndSetup");
         }
         init { this._rawData.Set("subscriptionEndSetup", value); }
     }
@@ -282,14 +305,17 @@ public sealed record class ProductSettings : JsonModel
     /// <summary>
     /// Setup for the start of the subscription
     /// </summary>
-    public required ApiEnum<string, SubscriptionStartSetup> SubscriptionStartSetup
+    public required ApiEnum<
+        string,
+        ProductListProductsResponseProductSettingsSubscriptionStartSetup
+    > SubscriptionStartSetup
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, SubscriptionStartSetup>>(
-                "subscriptionStartSetup"
-            );
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, ProductListProductsResponseProductSettingsSubscriptionStartSetup>
+            >("subscriptionStartSetup");
         }
         init { this._rawData.Set("subscriptionStartSetup", value); }
     }
@@ -344,55 +370,66 @@ public sealed record class ProductSettings : JsonModel
         _ = this.SubscriptionStartPlanID;
     }
 
-    public ProductSettings() { }
+    public ProductListProductsResponseProductSettings() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public ProductSettings(ProductSettings productSettings)
-        : base(productSettings) { }
+    public ProductListProductsResponseProductSettings(
+        ProductListProductsResponseProductSettings productListProductsResponseProductSettings
+    )
+        : base(productListProductsResponseProductSettings) { }
 #pragma warning restore CS8618
 
-    public ProductSettings(IReadOnlyDictionary<string, JsonElement> rawData)
+    public ProductListProductsResponseProductSettings(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    ProductSettings(FrozenDictionary<string, JsonElement> rawData)
+    ProductListProductsResponseProductSettings(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="ProductSettingsFromRaw.FromRawUnchecked"/>
-    public static ProductSettings FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="ProductListProductsResponseProductSettingsFromRaw.FromRawUnchecked"/>
+    public static ProductListProductsResponseProductSettings FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class ProductSettingsFromRaw : IFromRawJson<ProductSettings>
+class ProductListProductsResponseProductSettingsFromRaw
+    : IFromRawJson<ProductListProductsResponseProductSettings>
 {
     /// <inheritdoc/>
-    public ProductSettings FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        ProductSettings.FromRawUnchecked(rawData);
+    public ProductListProductsResponseProductSettings FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => ProductListProductsResponseProductSettings.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// Time when the subscription will be cancelled
 /// </summary>
-[JsonConverter(typeof(SubscriptionCancellationTimeConverter))]
-public enum SubscriptionCancellationTime
+[JsonConverter(
+    typeof(ProductListProductsResponseProductSettingsSubscriptionCancellationTimeConverter)
+)]
+public enum ProductListProductsResponseProductSettingsSubscriptionCancellationTime
 {
     EndOfBillingPeriod,
     Immediate,
     SpecificDate,
 }
 
-sealed class SubscriptionCancellationTimeConverter : JsonConverter<SubscriptionCancellationTime>
+sealed class ProductListProductsResponseProductSettingsSubscriptionCancellationTimeConverter
+    : JsonConverter<ProductListProductsResponseProductSettingsSubscriptionCancellationTime>
 {
-    public override SubscriptionCancellationTime Read(
+    public override ProductListProductsResponseProductSettingsSubscriptionCancellationTime Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -400,16 +437,19 @@ sealed class SubscriptionCancellationTimeConverter : JsonConverter<SubscriptionC
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "END_OF_BILLING_PERIOD" => SubscriptionCancellationTime.EndOfBillingPeriod,
-            "IMMEDIATE" => SubscriptionCancellationTime.Immediate,
-            "SPECIFIC_DATE" => SubscriptionCancellationTime.SpecificDate,
-            _ => (SubscriptionCancellationTime)(-1),
+            "END_OF_BILLING_PERIOD" =>
+                ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+            "IMMEDIATE" =>
+                ProductListProductsResponseProductSettingsSubscriptionCancellationTime.Immediate,
+            "SPECIFIC_DATE" =>
+                ProductListProductsResponseProductSettingsSubscriptionCancellationTime.SpecificDate,
+            _ => (ProductListProductsResponseProductSettingsSubscriptionCancellationTime)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        SubscriptionCancellationTime value,
+        ProductListProductsResponseProductSettingsSubscriptionCancellationTime value,
         JsonSerializerOptions options
     )
     {
@@ -417,9 +457,12 @@ sealed class SubscriptionCancellationTimeConverter : JsonConverter<SubscriptionC
             writer,
             value switch
             {
-                SubscriptionCancellationTime.EndOfBillingPeriod => "END_OF_BILLING_PERIOD",
-                SubscriptionCancellationTime.Immediate => "IMMEDIATE",
-                SubscriptionCancellationTime.SpecificDate => "SPECIFIC_DATE",
+                ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod =>
+                    "END_OF_BILLING_PERIOD",
+                ProductListProductsResponseProductSettingsSubscriptionCancellationTime.Immediate =>
+                    "IMMEDIATE",
+                ProductListProductsResponseProductSettingsSubscriptionCancellationTime.SpecificDate =>
+                    "SPECIFIC_DATE",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -432,16 +475,17 @@ sealed class SubscriptionCancellationTimeConverter : JsonConverter<SubscriptionC
 /// <summary>
 /// Setup for the end of the subscription
 /// </summary>
-[JsonConverter(typeof(SubscriptionEndSetupConverter))]
-public enum SubscriptionEndSetup
+[JsonConverter(typeof(ProductListProductsResponseProductSettingsSubscriptionEndSetupConverter))]
+public enum ProductListProductsResponseProductSettingsSubscriptionEndSetup
 {
     DowngradeToFree,
     CancelSubscription,
 }
 
-sealed class SubscriptionEndSetupConverter : JsonConverter<SubscriptionEndSetup>
+sealed class ProductListProductsResponseProductSettingsSubscriptionEndSetupConverter
+    : JsonConverter<ProductListProductsResponseProductSettingsSubscriptionEndSetup>
 {
-    public override SubscriptionEndSetup Read(
+    public override ProductListProductsResponseProductSettingsSubscriptionEndSetup Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -449,15 +493,17 @@ sealed class SubscriptionEndSetupConverter : JsonConverter<SubscriptionEndSetup>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "DOWNGRADE_TO_FREE" => SubscriptionEndSetup.DowngradeToFree,
-            "CANCEL_SUBSCRIPTION" => SubscriptionEndSetup.CancelSubscription,
-            _ => (SubscriptionEndSetup)(-1),
+            "DOWNGRADE_TO_FREE" =>
+                ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+            "CANCEL_SUBSCRIPTION" =>
+                ProductListProductsResponseProductSettingsSubscriptionEndSetup.CancelSubscription,
+            _ => (ProductListProductsResponseProductSettingsSubscriptionEndSetup)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        SubscriptionEndSetup value,
+        ProductListProductsResponseProductSettingsSubscriptionEndSetup value,
         JsonSerializerOptions options
     )
     {
@@ -465,8 +511,10 @@ sealed class SubscriptionEndSetupConverter : JsonConverter<SubscriptionEndSetup>
             writer,
             value switch
             {
-                SubscriptionEndSetup.DowngradeToFree => "DOWNGRADE_TO_FREE",
-                SubscriptionEndSetup.CancelSubscription => "CANCEL_SUBSCRIPTION",
+                ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree =>
+                    "DOWNGRADE_TO_FREE",
+                ProductListProductsResponseProductSettingsSubscriptionEndSetup.CancelSubscription =>
+                    "CANCEL_SUBSCRIPTION",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -479,17 +527,18 @@ sealed class SubscriptionEndSetupConverter : JsonConverter<SubscriptionEndSetup>
 /// <summary>
 /// Setup for the start of the subscription
 /// </summary>
-[JsonConverter(typeof(SubscriptionStartSetupConverter))]
-public enum SubscriptionStartSetup
+[JsonConverter(typeof(ProductListProductsResponseProductSettingsSubscriptionStartSetupConverter))]
+public enum ProductListProductsResponseProductSettingsSubscriptionStartSetup
 {
     PlanSelection,
     TrialPeriod,
     FreePlan,
 }
 
-sealed class SubscriptionStartSetupConverter : JsonConverter<SubscriptionStartSetup>
+sealed class ProductListProductsResponseProductSettingsSubscriptionStartSetupConverter
+    : JsonConverter<ProductListProductsResponseProductSettingsSubscriptionStartSetup>
 {
-    public override SubscriptionStartSetup Read(
+    public override ProductListProductsResponseProductSettingsSubscriptionStartSetup Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -497,16 +546,19 @@ sealed class SubscriptionStartSetupConverter : JsonConverter<SubscriptionStartSe
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "PLAN_SELECTION" => SubscriptionStartSetup.PlanSelection,
-            "TRIAL_PERIOD" => SubscriptionStartSetup.TrialPeriod,
-            "FREE_PLAN" => SubscriptionStartSetup.FreePlan,
-            _ => (SubscriptionStartSetup)(-1),
+            "PLAN_SELECTION" =>
+                ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
+            "TRIAL_PERIOD" =>
+                ProductListProductsResponseProductSettingsSubscriptionStartSetup.TrialPeriod,
+            "FREE_PLAN" =>
+                ProductListProductsResponseProductSettingsSubscriptionStartSetup.FreePlan,
+            _ => (ProductListProductsResponseProductSettingsSubscriptionStartSetup)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        SubscriptionStartSetup value,
+        ProductListProductsResponseProductSettingsSubscriptionStartSetup value,
         JsonSerializerOptions options
     )
     {
@@ -514,9 +566,12 @@ sealed class SubscriptionStartSetupConverter : JsonConverter<SubscriptionStartSe
             writer,
             value switch
             {
-                SubscriptionStartSetup.PlanSelection => "PLAN_SELECTION",
-                SubscriptionStartSetup.TrialPeriod => "TRIAL_PERIOD",
-                SubscriptionStartSetup.FreePlan => "FREE_PLAN",
+                ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection =>
+                    "PLAN_SELECTION",
+                ProductListProductsResponseProductSettingsSubscriptionStartSetup.TrialPeriod =>
+                    "TRIAL_PERIOD",
+                ProductListProductsResponseProductSettingsSubscriptionStartSetup.FreePlan =>
+                    "FREE_PLAN",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
