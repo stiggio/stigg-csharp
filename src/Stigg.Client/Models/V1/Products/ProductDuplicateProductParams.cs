@@ -27,19 +27,6 @@ public record class ProductDuplicateProductParams : ParamsBase
     public string? ID { get; init; }
 
     /// <summary>
-    /// The unique identifier for the entity
-    /// </summary>
-    public required string IDValue
-    {
-        get
-        {
-            this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNotNullClass<string>("id");
-        }
-        init { this._rawBodyData.Set("id", value); }
-    }
-
-    /// <summary>
     /// Description of the product
     /// </summary>
     public string? Description

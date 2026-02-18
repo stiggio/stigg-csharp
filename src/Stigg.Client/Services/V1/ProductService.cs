@@ -85,10 +85,12 @@ public sealed class ProductService : IProductService
     /// <inheritdoc/>
     public Task<ProductDuplicateProductResponse> DuplicateProduct(
         string id,
-        ProductDuplicateProductParams parameters,
+        ProductDuplicateProductParams? parameters = null,
         CancellationToken cancellationToken = default
     )
     {
+        parameters ??= new();
+
         return this.DuplicateProduct(parameters with { ID = id }, cancellationToken);
     }
 
@@ -278,10 +280,12 @@ public sealed class ProductServiceWithRawResponse : IProductServiceWithRawRespon
     /// <inheritdoc/>
     public Task<HttpResponse<ProductDuplicateProductResponse>> DuplicateProduct(
         string id,
-        ProductDuplicateProductParams parameters,
+        ProductDuplicateProductParams? parameters = null,
         CancellationToken cancellationToken = default
     )
     {
+        parameters ??= new();
+
         return this.DuplicateProduct(parameters with { ID = id }, cancellationToken);
     }
 

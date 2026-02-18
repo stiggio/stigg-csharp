@@ -98,12 +98,12 @@ public abstract record class ModelBase
                 Subscriptions::SubscriptionListResponsePaymentCollectionMethod
             >(),
             new ApiEnumConverter<string, Subscriptions::AccessDeniedReason>(),
-            new ApiEnumConverter<string, Subscriptions::UnionMember0Type>(),
+            new ApiEnumConverter<string, Subscriptions::UnionObjectVariant0Type>(),
             new ApiEnumConverter<string, Subscriptions::FeatureStatus>(),
             new ApiEnumConverter<string, Subscriptions::FeatureType>(),
-            new ApiEnumConverter<string, Subscriptions::UnionMember0ResetPeriod>(),
-            new ApiEnumConverter<string, Subscriptions::UnionMember1AccessDeniedReason>(),
-            new ApiEnumConverter<string, Subscriptions::UnionMember1Type>(),
+            new ApiEnumConverter<string, Subscriptions::UnionObjectVariant0ResetPeriod>(),
+            new ApiEnumConverter<string, Subscriptions::UnionObjectVariant1AccessDeniedReason>(),
+            new ApiEnumConverter<string, Subscriptions::UnionObjectVariant1Type>(),
             new ApiEnumConverter<string, Subscriptions::SubscriptionProvisionResponseDataStatus>(),
             new ApiEnumConverter<
                 string,
