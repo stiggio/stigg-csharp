@@ -41,22 +41,6 @@ public interface IUsageService
         UsageChargeUsageParams? parameters = null,
         CancellationToken cancellationToken = default
     );
-
-    /// <summary>
-    /// Triggers a usage sync for a subscription, reporting current usage to the
-    /// billing provider.
-    /// </summary>
-    Task<UsageSyncUsageResponse> SyncUsage(
-        UsageSyncUsageParams parameters,
-        CancellationToken cancellationToken = default
-    );
-
-    /// <inheritdoc cref="SyncUsage(UsageSyncUsageParams, CancellationToken)"/>
-    Task<UsageSyncUsageResponse> SyncUsage(
-        string id,
-        UsageSyncUsageParams? parameters = null,
-        CancellationToken cancellationToken = default
-    );
 }
 
 /// <summary>
@@ -85,22 +69,6 @@ public interface IUsageServiceWithRawResponse
     Task<HttpResponse<UsageChargeUsageResponse>> ChargeUsage(
         string id,
         UsageChargeUsageParams? parameters = null,
-        CancellationToken cancellationToken = default
-    );
-
-    /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/subscriptions/{id}/usage/sync`, but is otherwise the
-    /// same as <see cref="IUsageService.SyncUsage(UsageSyncUsageParams, CancellationToken)"/>.
-    /// </summary>
-    Task<HttpResponse<UsageSyncUsageResponse>> SyncUsage(
-        UsageSyncUsageParams parameters,
-        CancellationToken cancellationToken = default
-    );
-
-    /// <inheritdoc cref="SyncUsage(UsageSyncUsageParams, CancellationToken)"/>
-    Task<HttpResponse<UsageSyncUsageResponse>> SyncUsage(
-        string id,
-        UsageSyncUsageParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 }
