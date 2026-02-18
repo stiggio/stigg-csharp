@@ -11,15 +11,18 @@ public class ProductDuplicateProductParamsTest : TestBase
         var parameters = new ProductDuplicateProductParams
         {
             ID = "x",
+            IDValue = "id",
             Description = "description",
             DisplayName = "displayName",
         };
 
         string expectedID = "x";
+        string expectedIDValue = "id";
         string expectedDescription = "description";
         string expectedDisplayName = "displayName";
 
         Assert.Equal(expectedID, parameters.ID);
+        Assert.Equal(expectedIDValue, parameters.IDValue);
         Assert.Equal(expectedDescription, parameters.Description);
         Assert.Equal(expectedDisplayName, parameters.DisplayName);
     }
@@ -30,6 +33,7 @@ public class ProductDuplicateProductParamsTest : TestBase
         var parameters = new ProductDuplicateProductParams
         {
             ID = "x",
+            IDValue = "id",
             Description = "description",
         };
 
@@ -43,6 +47,7 @@ public class ProductDuplicateProductParamsTest : TestBase
         var parameters = new ProductDuplicateProductParams
         {
             ID = "x",
+            IDValue = "id",
             Description = "description",
 
             // Null should be interpreted as omitted for these properties
@@ -59,6 +64,7 @@ public class ProductDuplicateProductParamsTest : TestBase
         var parameters = new ProductDuplicateProductParams
         {
             ID = "x",
+            IDValue = "id",
             DisplayName = "displayName",
         };
 
@@ -72,6 +78,7 @@ public class ProductDuplicateProductParamsTest : TestBase
         var parameters = new ProductDuplicateProductParams
         {
             ID = "x",
+            IDValue = "id",
             DisplayName = "displayName",
 
             Description = null,
@@ -84,7 +91,7 @@ public class ProductDuplicateProductParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        ProductDuplicateProductParams parameters = new() { ID = "x" };
+        ProductDuplicateProductParams parameters = new() { ID = "x", IDValue = "id" };
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
@@ -97,6 +104,7 @@ public class ProductDuplicateProductParamsTest : TestBase
         var parameters = new ProductDuplicateProductParams
         {
             ID = "x",
+            IDValue = "id",
             Description = "description",
             DisplayName = "displayName",
         };
