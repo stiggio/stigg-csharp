@@ -30,6 +30,7 @@ public class AddonCreateAddonResponseTest : TestBase
                 MaxQuantity = 0,
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PricingType = AddonCreateAddonResponseDataPricingType.Free,
+                ProductID = "productId",
                 Status = AddonCreateAddonResponseDataStatus.Draft,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 VersionNumber = 0,
@@ -52,6 +53,7 @@ public class AddonCreateAddonResponseTest : TestBase
             MaxQuantity = 0,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PricingType = AddonCreateAddonResponseDataPricingType.Free,
+            ProductID = "productId",
             Status = AddonCreateAddonResponseDataStatus.Draft,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             VersionNumber = 0,
@@ -81,6 +83,7 @@ public class AddonCreateAddonResponseTest : TestBase
                 MaxQuantity = 0,
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PricingType = AddonCreateAddonResponseDataPricingType.Free,
+                ProductID = "productId",
                 Status = AddonCreateAddonResponseDataStatus.Draft,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 VersionNumber = 0,
@@ -117,6 +120,7 @@ public class AddonCreateAddonResponseTest : TestBase
                 MaxQuantity = 0,
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PricingType = AddonCreateAddonResponseDataPricingType.Free,
+                ProductID = "productId",
                 Status = AddonCreateAddonResponseDataStatus.Draft,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 VersionNumber = 0,
@@ -146,6 +150,7 @@ public class AddonCreateAddonResponseTest : TestBase
             MaxQuantity = 0,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PricingType = AddonCreateAddonResponseDataPricingType.Free,
+            ProductID = "productId",
             Status = AddonCreateAddonResponseDataStatus.Draft,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             VersionNumber = 0,
@@ -175,6 +180,7 @@ public class AddonCreateAddonResponseTest : TestBase
                 MaxQuantity = 0,
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PricingType = AddonCreateAddonResponseDataPricingType.Free,
+                ProductID = "productId",
                 Status = AddonCreateAddonResponseDataStatus.Draft,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 VersionNumber = 0,
@@ -205,6 +211,7 @@ public class AddonCreateAddonResponseTest : TestBase
                 MaxQuantity = 0,
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PricingType = AddonCreateAddonResponseDataPricingType.Free,
+                ProductID = "productId",
                 Status = AddonCreateAddonResponseDataStatus.Draft,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 VersionNumber = 0,
@@ -238,6 +245,7 @@ public class AddonCreateAddonResponseDataTest : TestBase
             MaxQuantity = 0,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PricingType = AddonCreateAddonResponseDataPricingType.Free,
+            ProductID = "productId",
             Status = AddonCreateAddonResponseDataStatus.Draft,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             VersionNumber = 0,
@@ -258,6 +266,7 @@ public class AddonCreateAddonResponseDataTest : TestBase
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, AddonCreateAddonResponseDataPricingType> expectedPricingType =
             AddonCreateAddonResponseDataPricingType.Free;
+        string expectedProductID = "productId";
         ApiEnum<string, AddonCreateAddonResponseDataStatus> expectedStatus =
             AddonCreateAddonResponseDataStatus.Draft;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -289,6 +298,7 @@ public class AddonCreateAddonResponseDataTest : TestBase
             Assert.Equal(value, model.Metadata[item.Key]);
         }
         Assert.Equal(expectedPricingType, model.PricingType);
+        Assert.Equal(expectedProductID, model.ProductID);
         Assert.Equal(expectedStatus, model.Status);
         Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
         Assert.Equal(expectedVersionNumber, model.VersionNumber);
@@ -313,6 +323,7 @@ public class AddonCreateAddonResponseDataTest : TestBase
             MaxQuantity = 0,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PricingType = AddonCreateAddonResponseDataPricingType.Free,
+            ProductID = "productId",
             Status = AddonCreateAddonResponseDataStatus.Draft,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             VersionNumber = 0,
@@ -346,6 +357,7 @@ public class AddonCreateAddonResponseDataTest : TestBase
             MaxQuantity = 0,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PricingType = AddonCreateAddonResponseDataPricingType.Free,
+            ProductID = "productId",
             Status = AddonCreateAddonResponseDataStatus.Draft,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             VersionNumber = 0,
@@ -373,6 +385,7 @@ public class AddonCreateAddonResponseDataTest : TestBase
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, AddonCreateAddonResponseDataPricingType> expectedPricingType =
             AddonCreateAddonResponseDataPricingType.Free;
+        string expectedProductID = "productId";
         ApiEnum<string, AddonCreateAddonResponseDataStatus> expectedStatus =
             AddonCreateAddonResponseDataStatus.Draft;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -404,6 +417,7 @@ public class AddonCreateAddonResponseDataTest : TestBase
             Assert.Equal(value, deserialized.Metadata[item.Key]);
         }
         Assert.Equal(expectedPricingType, deserialized.PricingType);
+        Assert.Equal(expectedProductID, deserialized.ProductID);
         Assert.Equal(expectedStatus, deserialized.Status);
         Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
         Assert.Equal(expectedVersionNumber, deserialized.VersionNumber);
@@ -428,6 +442,7 @@ public class AddonCreateAddonResponseDataTest : TestBase
             MaxQuantity = 0,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PricingType = AddonCreateAddonResponseDataPricingType.Free,
+            ProductID = "productId",
             Status = AddonCreateAddonResponseDataStatus.Draft,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             VersionNumber = 0,
@@ -455,6 +470,7 @@ public class AddonCreateAddonResponseDataTest : TestBase
             MaxQuantity = 0,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PricingType = AddonCreateAddonResponseDataPricingType.Free,
+            ProductID = "productId",
             Status = AddonCreateAddonResponseDataStatus.Draft,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             VersionNumber = 0,

@@ -19,7 +19,7 @@ public class AddonCreateAddonParamsTest : TestBase
             ProductID = "productId",
             BillingID = "billingId",
             Description = "description",
-            MaxQuantity = 1,
+            MaxQuantity = 0,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PricingType = PricingType.Free,
             Status = Status.Draft,
@@ -30,7 +30,7 @@ public class AddonCreateAddonParamsTest : TestBase
         string expectedProductID = "productId";
         string expectedBillingID = "billingId";
         string expectedDescription = "description";
-        long expectedMaxQuantity = 1;
+        long expectedMaxQuantity = 0;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, PricingType> expectedPricingType = PricingType.Free;
         ApiEnum<string, Status> expectedStatus = Status.Draft;
@@ -61,18 +61,14 @@ public class AddonCreateAddonParamsTest : TestBase
             ID = "id",
             DisplayName = "displayName",
             ProductID = "productId",
+            BillingID = "billingId",
+            Description = "description",
+            MaxQuantity = 0,
+            PricingType = PricingType.Free,
         };
 
-        Assert.Null(parameters.BillingID);
-        Assert.False(parameters.RawBodyData.ContainsKey("billingId"));
-        Assert.Null(parameters.Description);
-        Assert.False(parameters.RawBodyData.ContainsKey("description"));
-        Assert.Null(parameters.MaxQuantity);
-        Assert.False(parameters.RawBodyData.ContainsKey("maxQuantity"));
         Assert.Null(parameters.Metadata);
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
-        Assert.Null(parameters.PricingType);
-        Assert.False(parameters.RawBodyData.ContainsKey("pricingType"));
         Assert.Null(parameters.Status);
         Assert.False(parameters.RawBodyData.ContainsKey("status"));
     }
@@ -85,14 +81,32 @@ public class AddonCreateAddonParamsTest : TestBase
             ID = "id",
             DisplayName = "displayName",
             ProductID = "productId",
+            BillingID = "billingId",
+            Description = "description",
+            MaxQuantity = 0,
+            PricingType = PricingType.Free,
 
             // Null should be interpreted as omitted for these properties
-            BillingID = null,
-            Description = null,
-            MaxQuantity = null,
             Metadata = null,
-            PricingType = null,
             Status = null,
+        };
+
+        Assert.Null(parameters.Metadata);
+        Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
+        Assert.Null(parameters.Status);
+        Assert.False(parameters.RawBodyData.ContainsKey("status"));
+    }
+
+    [Fact]
+    public void OptionalNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new AddonCreateAddonParams
+        {
+            ID = "id",
+            DisplayName = "displayName",
+            ProductID = "productId",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Status = Status.Draft,
         };
 
         Assert.Null(parameters.BillingID);
@@ -101,12 +115,35 @@ public class AddonCreateAddonParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("description"));
         Assert.Null(parameters.MaxQuantity);
         Assert.False(parameters.RawBodyData.ContainsKey("maxQuantity"));
-        Assert.Null(parameters.Metadata);
-        Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.PricingType);
         Assert.False(parameters.RawBodyData.ContainsKey("pricingType"));
-        Assert.Null(parameters.Status);
-        Assert.False(parameters.RawBodyData.ContainsKey("status"));
+    }
+
+    [Fact]
+    public void OptionalNullableParamsSetToNullAreSetToNull_Works()
+    {
+        var parameters = new AddonCreateAddonParams
+        {
+            ID = "id",
+            DisplayName = "displayName",
+            ProductID = "productId",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Status = Status.Draft,
+
+            BillingID = null,
+            Description = null,
+            MaxQuantity = null,
+            PricingType = null,
+        };
+
+        Assert.Null(parameters.BillingID);
+        Assert.True(parameters.RawBodyData.ContainsKey("billingId"));
+        Assert.Null(parameters.Description);
+        Assert.True(parameters.RawBodyData.ContainsKey("description"));
+        Assert.Null(parameters.MaxQuantity);
+        Assert.True(parameters.RawBodyData.ContainsKey("maxQuantity"));
+        Assert.Null(parameters.PricingType);
+        Assert.True(parameters.RawBodyData.ContainsKey("pricingType"));
     }
 
     [Fact]
@@ -134,7 +171,7 @@ public class AddonCreateAddonParamsTest : TestBase
             ProductID = "productId",
             BillingID = "billingId",
             Description = "description",
-            MaxQuantity = 1,
+            MaxQuantity = 0,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PricingType = PricingType.Free,
             Status = Status.Draft,

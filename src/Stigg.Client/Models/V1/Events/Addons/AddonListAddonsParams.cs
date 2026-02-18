@@ -124,7 +124,7 @@ public record class AddonListAddonsParams : ParamsBase
     }
 
     /// <summary>
-    /// Filter by addon status. Supports comma-separated values for multiple statuses
+    /// Filter by status. Supports comma-separated values for multiple statuses
     /// </summary>
     public string? Status
     {

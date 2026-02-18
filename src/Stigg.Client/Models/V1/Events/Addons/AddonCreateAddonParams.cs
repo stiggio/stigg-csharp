@@ -53,7 +53,7 @@ public record class AddonCreateAddonParams : ParamsBase
     }
 
     /// <summary>
-    /// The product ID to associate the addon with
+    /// The product id of the package
     /// </summary>
     public required string ProductID
     {
@@ -75,15 +75,7 @@ public record class AddonCreateAddonParams : ParamsBase
             this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableClass<string>("billingId");
         }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawBodyData.Set("billingId", value);
-        }
+        init { this._rawBodyData.Set("billingId", value); }
     }
 
     /// <summary>
@@ -96,15 +88,7 @@ public record class AddonCreateAddonParams : ParamsBase
             this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableClass<string>("description");
         }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawBodyData.Set("description", value);
-        }
+        init { this._rawBodyData.Set("description", value); }
     }
 
     /// <summary>
@@ -117,15 +101,7 @@ public record class AddonCreateAddonParams : ParamsBase
             this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableStruct<long>("maxQuantity");
         }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawBodyData.Set("maxQuantity", value);
-        }
+        init { this._rawBodyData.Set("maxQuantity", value); }
     }
 
     /// <summary>
@@ -162,15 +138,7 @@ public record class AddonCreateAddonParams : ParamsBase
             this._rawBodyData.Freeze();
             return this._rawBodyData.GetNullableClass<ApiEnum<string, PricingType>>("pricingType");
         }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawBodyData.Set("pricingType", value);
-        }
+        init { this._rawBodyData.Set("pricingType", value); }
     }
 
     /// <summary>

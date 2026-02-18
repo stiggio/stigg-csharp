@@ -101,7 +101,7 @@ public sealed record class AddonListAddonsResponse : JsonModel
     }
 
     /// <summary>
-    /// List of entitlements for the addon
+    /// List of entitlements of the package
     /// </summary>
     public required IReadOnlyList<AddonListAddonsResponseEntitlement> Entitlements
     {
@@ -182,6 +182,19 @@ public sealed record class AddonListAddonsResponse : JsonModel
     }
 
     /// <summary>
+    /// The product id of the package
+    /// </summary>
+    public required string ProductID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("productId");
+        }
+        init { this._rawData.Set("productId", value); }
+    }
+
+    /// <summary>
     /// The status of the package
     /// </summary>
     public required ApiEnum<string, AddonListAddonsResponseStatus> Status
@@ -239,6 +252,7 @@ public sealed record class AddonListAddonsResponse : JsonModel
         _ = this.MaxQuantity;
         _ = this.Metadata;
         this.PricingType?.Validate();
+        _ = this.ProductID;
         this.Status.Validate();
         _ = this.UpdatedAt;
         _ = this.VersionNumber;
