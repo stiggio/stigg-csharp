@@ -60,7 +60,7 @@ public interface IProductService
     /// <inheritdoc cref="DuplicateProduct(ProductDuplicateProductParams, CancellationToken)"/>
     Task<ProductDuplicateProductResponse> DuplicateProduct(
         string id,
-        ProductDuplicateProductParams? parameters = null,
+        ProductDuplicateProductParams parameters,
         CancellationToken cancellationToken = default
     );
 
@@ -154,7 +154,7 @@ public interface IProductServiceWithRawResponse
     /// <inheritdoc cref="DuplicateProduct(ProductDuplicateProductParams, CancellationToken)"/>
     Task<HttpResponse<ProductDuplicateProductResponse>> DuplicateProduct(
         string id,
-        ProductDuplicateProductParams? parameters = null,
+        ProductDuplicateProductParams parameters,
         CancellationToken cancellationToken = default
     );
 
