@@ -31,6 +31,8 @@ public interface IEventService
 
     IAddonService Addons { get; }
 
+    IPlanService Plans { get; }
+
     /// <summary>
     /// Reports raw usage events for event-based metering. Events are ingested asynchronously
     /// and aggregated into usage totals.
@@ -57,6 +59,8 @@ public interface IEventServiceWithRawResponse
     IFeatureServiceWithRawResponse Features { get; }
 
     IAddonServiceWithRawResponse Addons { get; }
+
+    IPlanServiceWithRawResponse Plans { get; }
 
     /// <summary>
     /// Returns a raw HTTP response for `post /api/v1/events`, but is otherwise the

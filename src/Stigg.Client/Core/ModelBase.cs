@@ -7,6 +7,7 @@ using Addons = Stigg.Client.Models.V1.Events.Addons;
 using Coupons = Stigg.Client.Models.V1.Coupons;
 using Draft = Stigg.Client.Models.V1.Events.Addons.Draft;
 using PaymentMethod = Stigg.Client.Models.V1.Customers.PaymentMethod;
+using Plans = Stigg.Client.Models.V1.Events.Plans;
 using Products = Stigg.Client.Models.V1.Products;
 using Subscriptions = Stigg.Client.Models.V1.Subscriptions;
 using Usage = Stigg.Client.Models.V1.Usage;
@@ -269,6 +270,17 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Draft::Type>(),
             new ApiEnumConverter<string, Draft::PricingType>(),
             new ApiEnumConverter<string, Draft::Status>(),
+            new ApiEnumConverter<string, Plans::Type>(),
+            new ApiEnumConverter<string, Plans::DataPricingType>(),
+            new ApiEnumConverter<string, Plans::DataStatus>(),
+            new ApiEnumConverter<string, Plans::PlanRetrieveResponseDataEntitlementType>(),
+            new ApiEnumConverter<string, Plans::PlanRetrieveResponseDataPricingType>(),
+            new ApiEnumConverter<string, Plans::PlanRetrieveResponseDataStatus>(),
+            new ApiEnumConverter<string, Plans::PlanListResponseEntitlementType>(),
+            new ApiEnumConverter<string, Plans::PlanListResponsePricingType>(),
+            new ApiEnumConverter<string, Plans::PlanListResponseStatus>(),
+            new ApiEnumConverter<string, Plans::PricingType>(),
+            new ApiEnumConverter<string, Plans::Status>(),
             new ApiEnumConverter<string, Usage::Type>(),
             new ApiEnumConverter<string, Usage::UpdateBehavior>(),
             new ApiEnumConverter<string, Products::Status>(),
