@@ -4,7 +4,7 @@ namespace Stigg.Client.Tests.Services.V1.Subscriptions;
 
 public class FutureUpdateServiceTest : TestBase
 {
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task CancelPendingPayment_Works()
     {
         var cancelSubscription =
@@ -16,7 +16,7 @@ public class FutureUpdateServiceTest : TestBase
         cancelSubscription.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task CancelSchedule_Works()
     {
         var cancelSubscription = await this.client.V1.Subscriptions.FutureUpdate.CancelSchedule(

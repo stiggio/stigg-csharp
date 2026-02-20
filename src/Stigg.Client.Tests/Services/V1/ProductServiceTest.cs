@@ -4,7 +4,7 @@ namespace Stigg.Client.Tests.Services.V1;
 
 public class ProductServiceTest : TestBase
 {
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task ArchiveProduct_Works()
     {
         var response = await this.client.V1.Products.ArchiveProduct(
@@ -15,7 +15,7 @@ public class ProductServiceTest : TestBase
         response.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task CreateProduct_Works()
     {
         var response = await this.client.V1.Products.CreateProduct(
@@ -25,7 +25,7 @@ public class ProductServiceTest : TestBase
         response.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task DuplicateProduct_Works()
     {
         var response = await this.client.V1.Products.DuplicateProduct(
@@ -36,7 +36,7 @@ public class ProductServiceTest : TestBase
         response.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task ListProducts_Works()
     {
         var page = await this.client.V1.Products.ListProducts(
@@ -46,7 +46,7 @@ public class ProductServiceTest : TestBase
         page.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task UnarchiveProduct_Works()
     {
         var response = await this.client.V1.Products.UnarchiveProduct(
@@ -57,7 +57,7 @@ public class ProductServiceTest : TestBase
         response.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task UpdateProduct_Works()
     {
         var response = await this.client.V1.Products.UpdateProduct(

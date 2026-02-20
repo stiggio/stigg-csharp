@@ -5,7 +5,7 @@ namespace Stigg.Client.Tests.Services.V1.Events;
 
 public class AddonServiceTest : TestBase
 {
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task ArchiveAddon_Works()
     {
         var response = await this.client.V1.Events.Addons.ArchiveAddon(
@@ -16,7 +16,7 @@ public class AddonServiceTest : TestBase
         response.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task CreateAddon_Works()
     {
         var response = await this.client.V1.Events.Addons.CreateAddon(
@@ -31,7 +31,7 @@ public class AddonServiceTest : TestBase
         response.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task ListAddons_Works()
     {
         var page = await this.client.V1.Events.Addons.ListAddons(
@@ -41,7 +41,7 @@ public class AddonServiceTest : TestBase
         page.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task PublishAddon_Works()
     {
         var response = await this.client.V1.Events.Addons.PublishAddon(
@@ -52,7 +52,7 @@ public class AddonServiceTest : TestBase
         response.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task RetrieveAddon_Works()
     {
         var response = await this.client.V1.Events.Addons.RetrieveAddon(
@@ -63,7 +63,7 @@ public class AddonServiceTest : TestBase
         response.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task UpdateAddon_Works()
     {
         var response = await this.client.V1.Events.Addons.UpdateAddon(

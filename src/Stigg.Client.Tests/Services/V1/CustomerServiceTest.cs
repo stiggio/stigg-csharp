@@ -6,7 +6,7 @@ namespace Stigg.Client.Tests.Services.V1;
 
 public class CustomerServiceTest : TestBase
 {
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Retrieve_Works()
     {
         var customerResponse = await this.client.V1.Customers.Retrieve(
@@ -17,7 +17,7 @@ public class CustomerServiceTest : TestBase
         customerResponse.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Update_Works()
     {
         var customerResponse = await this.client.V1.Customers.Update(
@@ -28,7 +28,7 @@ public class CustomerServiceTest : TestBase
         customerResponse.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task List_Works()
     {
         var page = await this.client.V1.Customers.List(
@@ -38,7 +38,7 @@ public class CustomerServiceTest : TestBase
         page.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Archive_Works()
     {
         var customerResponse = await this.client.V1.Customers.Archive(
@@ -49,7 +49,7 @@ public class CustomerServiceTest : TestBase
         customerResponse.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Import_Works()
     {
         var response = await this.client.V1.Customers.Import(
@@ -73,7 +73,7 @@ public class CustomerServiceTest : TestBase
         response.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task ListResources_Works()
     {
         var page = await this.client.V1.Customers.ListResources(
@@ -84,7 +84,7 @@ public class CustomerServiceTest : TestBase
         page.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Provision_Works()
     {
         var customerResponse = await this.client.V1.Customers.Provision(
@@ -94,7 +94,7 @@ public class CustomerServiceTest : TestBase
         customerResponse.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Unarchive_Works()
     {
         var customerResponse = await this.client.V1.Customers.Unarchive(

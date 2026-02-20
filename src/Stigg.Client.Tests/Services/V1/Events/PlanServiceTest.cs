@@ -4,7 +4,7 @@ namespace Stigg.Client.Tests.Services.V1.Events;
 
 public class PlanServiceTest : TestBase
 {
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Create_Works()
     {
         var plan = await this.client.V1.Events.Plans.Create(
@@ -19,7 +19,7 @@ public class PlanServiceTest : TestBase
         plan.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Retrieve_Works()
     {
         var plan = await this.client.V1.Events.Plans.Retrieve(
@@ -30,7 +30,7 @@ public class PlanServiceTest : TestBase
         plan.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task List_Works()
     {
         var page = await this.client.V1.Events.Plans.List(
