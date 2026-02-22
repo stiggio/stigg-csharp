@@ -95,7 +95,7 @@ public interface ICustomerService
     );
 
     /// <summary>
-    /// Get a list of customerresources
+    /// Retrieves a paginated list of resources within the same customer.
     /// </summary>
     Task<CustomerListResourcesPage> ListResources(
         CustomerListResourcesParams parameters,
