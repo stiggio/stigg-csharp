@@ -4,7 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Stigg.Client.Core;
 using Stigg.Client.Models.V1.Events;
-using Stigg.Client.Services.V1.Events;
 
 namespace Stigg.Client.Services.V1;
 
@@ -32,27 +31,6 @@ public sealed class EventService : IEventService
         _client = client;
 
         _withRawResponse = new(() => new EventServiceWithRawResponse(client.WithRawResponse));
-        _features = new(() => new FeatureService(client));
-        _addons = new(() => new AddonService(client));
-        _plans = new(() => new PlanService(client));
-    }
-
-    readonly Lazy<IFeatureService> _features;
-    public IFeatureService Features
-    {
-        get { return _features.Value; }
-    }
-
-    readonly Lazy<IAddonService> _addons;
-    public IAddonService Addons
-    {
-        get { return _addons.Value; }
-    }
-
-    readonly Lazy<IPlanService> _plans;
-    public IPlanService Plans
-    {
-        get { return _plans.Value; }
     }
 
     /// <inheritdoc/>
@@ -82,28 +60,6 @@ public sealed class EventServiceWithRawResponse : IEventServiceWithRawResponse
     public EventServiceWithRawResponse(IStiggClientWithRawResponse client)
     {
         _client = client;
-
-        _features = new(() => new FeatureServiceWithRawResponse(client));
-        _addons = new(() => new AddonServiceWithRawResponse(client));
-        _plans = new(() => new PlanServiceWithRawResponse(client));
-    }
-
-    readonly Lazy<IFeatureServiceWithRawResponse> _features;
-    public IFeatureServiceWithRawResponse Features
-    {
-        get { return _features.Value; }
-    }
-
-    readonly Lazy<IAddonServiceWithRawResponse> _addons;
-    public IAddonServiceWithRawResponse Addons
-    {
-        get { return _addons.Value; }
-    }
-
-    readonly Lazy<IPlanServiceWithRawResponse> _plans;
-    public IPlanServiceWithRawResponse Plans
-    {
-        get { return _plans.Value; }
     }
 
     /// <inheritdoc/>

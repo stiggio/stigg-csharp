@@ -2,13 +2,13 @@ using System.Text.Json;
 using Stigg.Client.Exceptions;
 using Stigg.Client.Models.V1.Customers;
 using Stigg.Client.Models.V1.Customers.PromotionalEntitlements;
-using Stigg.Client.Models.V1.Events.Features;
-using Addons = Stigg.Client.Models.V1.Events.Addons;
+using Stigg.Client.Models.V1.Features;
+using Addons = Stigg.Client.Models.V1.Addons;
 using Coupons = Stigg.Client.Models.V1.Coupons;
-using Entitlements = Stigg.Client.Models.V1.Events.Addons.Entitlements;
+using Entitlements = Stigg.Client.Models.V1.Addons.Entitlements;
 using PaymentMethod = Stigg.Client.Models.V1.Customers.PaymentMethod;
-using Plans = Stigg.Client.Models.V1.Events.Plans;
-using PlansEntitlements = Stigg.Client.Models.V1.Events.Plans.Entitlements;
+using Plans = Stigg.Client.Models.V1.Plans;
+using PlansEntitlements = Stigg.Client.Models.V1.Plans.Entitlements;
 using Products = Stigg.Client.Models.V1.Products;
 using Subscriptions = Stigg.Client.Models.V1.Subscriptions;
 using Usage = Stigg.Client.Models.V1.Usage;
@@ -316,9 +316,9 @@ public abstract record class ModelBase
                 Addons::SetPackagePricingPricingModelYearlyResetPeriodConfigurationAccordingTo
             >(),
             new ApiEnumConverter<string, Addons::SetPackagePricingResponseDataPricingType>(),
-            new ApiEnumConverter<string, Addons::AddonListAddonsResponseEntitlementType>(),
-            new ApiEnumConverter<string, Addons::AddonListAddonsResponsePricingType>(),
-            new ApiEnumConverter<string, Addons::AddonListAddonsResponseStatus>(),
+            new ApiEnumConverter<string, Addons::AddonListResponseEntitlementType>(),
+            new ApiEnumConverter<string, Addons::AddonListResponsePricingType>(),
+            new ApiEnumConverter<string, Addons::AddonListResponseStatus>(),
             new ApiEnumConverter<string, Addons::PricingType>(),
             new ApiEnumConverter<string, Addons::Status>(),
             new ApiEnumConverter<string, Addons::MigrationType>(),

@@ -32,6 +32,9 @@ public sealed class V1Service : IV1Service
         _subscriptions = new(() => new SubscriptionService(client));
         _coupons = new(() => new CouponService(client));
         _events = new(() => new EventService(client));
+        _features = new(() => new FeatureService(client));
+        _addons = new(() => new AddonService(client));
+        _plans = new(() => new PlanService(client));
         _usage = new(() => new UsageService(client));
         _products = new(() => new ProductService(client));
     }
@@ -58,6 +61,24 @@ public sealed class V1Service : IV1Service
     public IEventService Events
     {
         get { return _events.Value; }
+    }
+
+    readonly Lazy<IFeatureService> _features;
+    public IFeatureService Features
+    {
+        get { return _features.Value; }
+    }
+
+    readonly Lazy<IAddonService> _addons;
+    public IAddonService Addons
+    {
+        get { return _addons.Value; }
+    }
+
+    readonly Lazy<IPlanService> _plans;
+    public IPlanService Plans
+    {
+        get { return _plans.Value; }
     }
 
     readonly Lazy<IUsageService> _usage;
@@ -92,6 +113,9 @@ public sealed class V1ServiceWithRawResponse : IV1ServiceWithRawResponse
         _subscriptions = new(() => new SubscriptionServiceWithRawResponse(client));
         _coupons = new(() => new CouponServiceWithRawResponse(client));
         _events = new(() => new EventServiceWithRawResponse(client));
+        _features = new(() => new FeatureServiceWithRawResponse(client));
+        _addons = new(() => new AddonServiceWithRawResponse(client));
+        _plans = new(() => new PlanServiceWithRawResponse(client));
         _usage = new(() => new UsageServiceWithRawResponse(client));
         _products = new(() => new ProductServiceWithRawResponse(client));
     }
@@ -118,6 +142,24 @@ public sealed class V1ServiceWithRawResponse : IV1ServiceWithRawResponse
     public IEventServiceWithRawResponse Events
     {
         get { return _events.Value; }
+    }
+
+    readonly Lazy<IFeatureServiceWithRawResponse> _features;
+    public IFeatureServiceWithRawResponse Features
+    {
+        get { return _features.Value; }
+    }
+
+    readonly Lazy<IAddonServiceWithRawResponse> _addons;
+    public IAddonServiceWithRawResponse Addons
+    {
+        get { return _addons.Value; }
+    }
+
+    readonly Lazy<IPlanServiceWithRawResponse> _plans;
+    public IPlanServiceWithRawResponse Plans
+    {
+        get { return _plans.Value; }
     }
 
     readonly Lazy<IUsageServiceWithRawResponse> _usage;
