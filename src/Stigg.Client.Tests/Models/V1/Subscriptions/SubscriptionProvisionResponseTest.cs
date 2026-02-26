@@ -1968,7 +1968,15 @@ public class EntitlementTest : TestBase
         Entitlement value = new UnionObjectVariant1()
         {
             AccessDeniedReason = UnionObjectVariant1AccessDeniedReason.FeatureNotFound,
-            Currency = new("currencyId"),
+            Currency = new()
+            {
+                CurrencyID = "currencyId",
+                DisplayName = "displayName",
+                AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
+                Description = "description",
+                UnitPlural = "unitPlural",
+                UnitSingular = "unitSingular",
+            },
             CurrentUsage = 0,
             IsGranted = true,
             Type = UnionObjectVariant1Type.Credit,
@@ -2021,7 +2029,15 @@ public class EntitlementTest : TestBase
         Entitlement value = new UnionObjectVariant1()
         {
             AccessDeniedReason = UnionObjectVariant1AccessDeniedReason.FeatureNotFound,
-            Currency = new("currencyId"),
+            Currency = new()
+            {
+                CurrencyID = "currencyId",
+                DisplayName = "displayName",
+                AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
+                Description = "description",
+                UnitPlural = "unitPlural",
+                UnitSingular = "unitSingular",
+            },
             CurrentUsage = 0,
             IsGranted = true,
             Type = UnionObjectVariant1Type.Credit,
@@ -2935,7 +2951,15 @@ public class UnionObjectVariant1Test : TestBase
         var model = new UnionObjectVariant1
         {
             AccessDeniedReason = UnionObjectVariant1AccessDeniedReason.FeatureNotFound,
-            Currency = new("currencyId"),
+            Currency = new()
+            {
+                CurrencyID = "currencyId",
+                DisplayName = "displayName",
+                AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
+                Description = "description",
+                UnitPlural = "unitPlural",
+                UnitSingular = "unitSingular",
+            },
             CurrentUsage = 0,
             IsGranted = true,
             Type = UnionObjectVariant1Type.Credit,
@@ -2948,7 +2972,15 @@ public class UnionObjectVariant1Test : TestBase
 
         ApiEnum<string, UnionObjectVariant1AccessDeniedReason> expectedAccessDeniedReason =
             UnionObjectVariant1AccessDeniedReason.FeatureNotFound;
-        UnionObjectVariant1Currency expectedCurrency = new("currencyId");
+        UnionObjectVariant1Currency expectedCurrency = new()
+        {
+            CurrencyID = "currencyId",
+            DisplayName = "displayName",
+            AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
+            Description = "description",
+            UnitPlural = "unitPlural",
+            UnitSingular = "unitSingular",
+        };
         double expectedCurrentUsage = 0;
         bool expectedIsGranted = true;
         ApiEnum<string, UnionObjectVariant1Type> expectedType = UnionObjectVariant1Type.Credit;
@@ -2978,7 +3010,15 @@ public class UnionObjectVariant1Test : TestBase
         var model = new UnionObjectVariant1
         {
             AccessDeniedReason = UnionObjectVariant1AccessDeniedReason.FeatureNotFound,
-            Currency = new("currencyId"),
+            Currency = new()
+            {
+                CurrencyID = "currencyId",
+                DisplayName = "displayName",
+                AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
+                Description = "description",
+                UnitPlural = "unitPlural",
+                UnitSingular = "unitSingular",
+            },
             CurrentUsage = 0,
             IsGranted = true,
             Type = UnionObjectVariant1Type.Credit,
@@ -3004,7 +3044,15 @@ public class UnionObjectVariant1Test : TestBase
         var model = new UnionObjectVariant1
         {
             AccessDeniedReason = UnionObjectVariant1AccessDeniedReason.FeatureNotFound,
-            Currency = new("currencyId"),
+            Currency = new()
+            {
+                CurrencyID = "currencyId",
+                DisplayName = "displayName",
+                AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
+                Description = "description",
+                UnitPlural = "unitPlural",
+                UnitSingular = "unitSingular",
+            },
             CurrentUsage = 0,
             IsGranted = true,
             Type = UnionObjectVariant1Type.Credit,
@@ -3024,7 +3072,15 @@ public class UnionObjectVariant1Test : TestBase
 
         ApiEnum<string, UnionObjectVariant1AccessDeniedReason> expectedAccessDeniedReason =
             UnionObjectVariant1AccessDeniedReason.FeatureNotFound;
-        UnionObjectVariant1Currency expectedCurrency = new("currencyId");
+        UnionObjectVariant1Currency expectedCurrency = new()
+        {
+            CurrencyID = "currencyId",
+            DisplayName = "displayName",
+            AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
+            Description = "description",
+            UnitPlural = "unitPlural",
+            UnitSingular = "unitSingular",
+        };
         double expectedCurrentUsage = 0;
         bool expectedIsGranted = true;
         ApiEnum<string, UnionObjectVariant1Type> expectedType = UnionObjectVariant1Type.Credit;
@@ -3054,7 +3110,15 @@ public class UnionObjectVariant1Test : TestBase
         var model = new UnionObjectVariant1
         {
             AccessDeniedReason = UnionObjectVariant1AccessDeniedReason.FeatureNotFound,
-            Currency = new("currencyId"),
+            Currency = new()
+            {
+                CurrencyID = "currencyId",
+                DisplayName = "displayName",
+                AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
+                Description = "description",
+                UnitPlural = "unitPlural",
+                UnitSingular = "unitSingular",
+            },
             CurrentUsage = 0,
             IsGranted = true,
             Type = UnionObjectVariant1Type.Credit,
@@ -3074,7 +3138,15 @@ public class UnionObjectVariant1Test : TestBase
         var model = new UnionObjectVariant1
         {
             AccessDeniedReason = UnionObjectVariant1AccessDeniedReason.FeatureNotFound,
-            Currency = new("currencyId"),
+            Currency = new()
+            {
+                CurrencyID = "currencyId",
+                DisplayName = "displayName",
+                AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
+                Description = "description",
+                UnitPlural = "unitPlural",
+                UnitSingular = "unitSingular",
+            },
             CurrentUsage = 0,
             IsGranted = true,
             Type = UnionObjectVariant1Type.Credit,
@@ -3096,7 +3168,15 @@ public class UnionObjectVariant1Test : TestBase
         var model = new UnionObjectVariant1
         {
             AccessDeniedReason = UnionObjectVariant1AccessDeniedReason.FeatureNotFound,
-            Currency = new("currencyId"),
+            Currency = new()
+            {
+                CurrencyID = "currencyId",
+                DisplayName = "displayName",
+                AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
+                Description = "description",
+                UnitPlural = "unitPlural",
+                UnitSingular = "unitSingular",
+            },
             CurrentUsage = 0,
             IsGranted = true,
             Type = UnionObjectVariant1Type.Credit,
@@ -3113,7 +3193,15 @@ public class UnionObjectVariant1Test : TestBase
         var model = new UnionObjectVariant1
         {
             AccessDeniedReason = UnionObjectVariant1AccessDeniedReason.FeatureNotFound,
-            Currency = new("currencyId"),
+            Currency = new()
+            {
+                CurrencyID = "currencyId",
+                DisplayName = "displayName",
+                AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
+                Description = "description",
+                UnitPlural = "unitPlural",
+                UnitSingular = "unitSingular",
+            },
             CurrentUsage = 0,
             IsGranted = true,
             Type = UnionObjectVariant1Type.Credit,
@@ -3140,7 +3228,15 @@ public class UnionObjectVariant1Test : TestBase
         var model = new UnionObjectVariant1
         {
             AccessDeniedReason = UnionObjectVariant1AccessDeniedReason.FeatureNotFound,
-            Currency = new("currencyId"),
+            Currency = new()
+            {
+                CurrencyID = "currencyId",
+                DisplayName = "displayName",
+                AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
+                Description = "description",
+                UnitPlural = "unitPlural",
+                UnitSingular = "unitSingular",
+            },
             CurrentUsage = 0,
             IsGranted = true,
             Type = UnionObjectVariant1Type.Credit,
@@ -3162,7 +3258,15 @@ public class UnionObjectVariant1Test : TestBase
         var model = new UnionObjectVariant1
         {
             AccessDeniedReason = UnionObjectVariant1AccessDeniedReason.FeatureNotFound,
-            Currency = new("currencyId"),
+            Currency = new()
+            {
+                CurrencyID = "currencyId",
+                DisplayName = "displayName",
+                AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
+                Description = "description",
+                UnitPlural = "unitPlural",
+                UnitSingular = "unitSingular",
+            },
             CurrentUsage = 0,
             IsGranted = true,
             Type = UnionObjectVariant1Type.Credit,
@@ -3262,17 +3366,46 @@ public class UnionObjectVariant1CurrencyTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new UnionObjectVariant1Currency { CurrencyID = "currencyId" };
+        var model = new UnionObjectVariant1Currency
+        {
+            CurrencyID = "currencyId",
+            DisplayName = "displayName",
+            AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
+            Description = "description",
+            UnitPlural = "unitPlural",
+            UnitSingular = "unitSingular",
+        };
 
         string expectedCurrencyID = "currencyId";
+        string expectedDisplayName = "displayName";
+        JsonElement expectedAdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}");
+        string expectedDescription = "description";
+        string expectedUnitPlural = "unitPlural";
+        string expectedUnitSingular = "unitSingular";
 
         Assert.Equal(expectedCurrencyID, model.CurrencyID);
+        Assert.Equal(expectedDisplayName, model.DisplayName);
+        Assert.NotNull(model.AdditionalMetaData);
+        Assert.True(
+            JsonElement.DeepEquals(expectedAdditionalMetaData, model.AdditionalMetaData.Value)
+        );
+        Assert.Equal(expectedDescription, model.Description);
+        Assert.Equal(expectedUnitPlural, model.UnitPlural);
+        Assert.Equal(expectedUnitSingular, model.UnitSingular);
     }
 
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new UnionObjectVariant1Currency { CurrencyID = "currencyId" };
+        var model = new UnionObjectVariant1Currency
+        {
+            CurrencyID = "currencyId",
+            DisplayName = "displayName",
+            AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
+            Description = "description",
+            UnitPlural = "unitPlural",
+            UnitSingular = "unitSingular",
+        };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnionObjectVariant1Currency>(
@@ -3286,7 +3419,15 @@ public class UnionObjectVariant1CurrencyTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new UnionObjectVariant1Currency { CurrencyID = "currencyId" };
+        var model = new UnionObjectVariant1Currency
+        {
+            CurrencyID = "currencyId",
+            DisplayName = "displayName",
+            AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
+            Description = "description",
+            UnitPlural = "unitPlural",
+            UnitSingular = "unitSingular",
+        };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnionObjectVariant1Currency>(
@@ -3296,14 +3437,176 @@ public class UnionObjectVariant1CurrencyTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedCurrencyID = "currencyId";
+        string expectedDisplayName = "displayName";
+        JsonElement expectedAdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}");
+        string expectedDescription = "description";
+        string expectedUnitPlural = "unitPlural";
+        string expectedUnitSingular = "unitSingular";
 
         Assert.Equal(expectedCurrencyID, deserialized.CurrencyID);
+        Assert.Equal(expectedDisplayName, deserialized.DisplayName);
+        Assert.NotNull(deserialized.AdditionalMetaData);
+        Assert.True(
+            JsonElement.DeepEquals(
+                expectedAdditionalMetaData,
+                deserialized.AdditionalMetaData.Value
+            )
+        );
+        Assert.Equal(expectedDescription, deserialized.Description);
+        Assert.Equal(expectedUnitPlural, deserialized.UnitPlural);
+        Assert.Equal(expectedUnitSingular, deserialized.UnitSingular);
     }
 
     [Fact]
     public void Validation_Works()
     {
-        var model = new UnionObjectVariant1Currency { CurrencyID = "currencyId" };
+        var model = new UnionObjectVariant1Currency
+        {
+            CurrencyID = "currencyId",
+            DisplayName = "displayName",
+            AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
+            Description = "description",
+            UnitPlural = "unitPlural",
+            UnitSingular = "unitSingular",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new UnionObjectVariant1Currency
+        {
+            CurrencyID = "currencyId",
+            DisplayName = "displayName",
+            Description = "description",
+            UnitPlural = "unitPlural",
+            UnitSingular = "unitSingular",
+        };
+
+        Assert.Null(model.AdditionalMetaData);
+        Assert.False(model.RawData.ContainsKey("additionalMetaData"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new UnionObjectVariant1Currency
+        {
+            CurrencyID = "currencyId",
+            DisplayName = "displayName",
+            Description = "description",
+            UnitPlural = "unitPlural",
+            UnitSingular = "unitSingular",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
+    {
+        var model = new UnionObjectVariant1Currency
+        {
+            CurrencyID = "currencyId",
+            DisplayName = "displayName",
+            Description = "description",
+            UnitPlural = "unitPlural",
+            UnitSingular = "unitSingular",
+
+            // Null should be interpreted as omitted for these properties
+            AdditionalMetaData = null,
+        };
+
+        Assert.Null(model.AdditionalMetaData);
+        Assert.False(model.RawData.ContainsKey("additionalMetaData"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new UnionObjectVariant1Currency
+        {
+            CurrencyID = "currencyId",
+            DisplayName = "displayName",
+            Description = "description",
+            UnitPlural = "unitPlural",
+            UnitSingular = "unitSingular",
+
+            // Null should be interpreted as omitted for these properties
+            AdditionalMetaData = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new UnionObjectVariant1Currency
+        {
+            CurrencyID = "currencyId",
+            DisplayName = "displayName",
+            AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
+        };
+
+        Assert.Null(model.Description);
+        Assert.False(model.RawData.ContainsKey("description"));
+        Assert.Null(model.UnitPlural);
+        Assert.False(model.RawData.ContainsKey("unitPlural"));
+        Assert.Null(model.UnitSingular);
+        Assert.False(model.RawData.ContainsKey("unitSingular"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new UnionObjectVariant1Currency
+        {
+            CurrencyID = "currencyId",
+            DisplayName = "displayName",
+            AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new UnionObjectVariant1Currency
+        {
+            CurrencyID = "currencyId",
+            DisplayName = "displayName",
+            AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
+
+            Description = null,
+            UnitPlural = null,
+            UnitSingular = null,
+        };
+
+        Assert.Null(model.Description);
+        Assert.True(model.RawData.ContainsKey("description"));
+        Assert.Null(model.UnitPlural);
+        Assert.True(model.RawData.ContainsKey("unitPlural"));
+        Assert.Null(model.UnitSingular);
+        Assert.True(model.RawData.ContainsKey("unitSingular"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new UnionObjectVariant1Currency
+        {
+            CurrencyID = "currencyId",
+            DisplayName = "displayName",
+            AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
+
+            Description = null,
+            UnitPlural = null,
+            UnitSingular = null,
+        };
 
         model.Validate();
     }
@@ -3311,7 +3614,15 @@ public class UnionObjectVariant1CurrencyTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new UnionObjectVariant1Currency { CurrencyID = "currencyId" };
+        var model = new UnionObjectVariant1Currency
+        {
+            CurrencyID = "currencyId",
+            DisplayName = "displayName",
+            AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
+            Description = "description",
+            UnitPlural = "unitPlural",
+            UnitSingular = "unitSingular",
+        };
 
         UnionObjectVariant1Currency copied = new(model);
 

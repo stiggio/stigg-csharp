@@ -111,6 +111,22 @@ public sealed record class Data : JsonModel
         init { this._rawData.Set("billingId", value); }
     }
 
+    public required IReadOnlyList<string>? CompatibleAddonIds
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<string>>("compatibleAddonIds");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<string>?>(
+                "compatibleAddonIds",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
     /// <summary>
     /// Timestamp of when the record was created
     /// </summary>
@@ -122,6 +138,19 @@ public sealed record class Data : JsonModel
             return this._rawData.GetNotNullStruct<System::DateTimeOffset>("createdAt");
         }
         init { this._rawData.Set("createdAt", value); }
+    }
+
+    /// <summary>
+    /// Default trial configuration for the plan
+    /// </summary>
+    public required DataDefaultTrialConfig? DefaultTrialConfig
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<DataDefaultTrialConfig>("defaultTrialConfig");
+        }
+        init { this._rawData.Set("defaultTrialConfig", value); }
     }
 
     /// <summary>
@@ -284,7 +313,9 @@ public sealed record class Data : JsonModel
     {
         _ = this.ID;
         _ = this.BillingID;
+        _ = this.CompatibleAddonIds;
         _ = this.CreatedAt;
+        this.DefaultTrialConfig?.Validate();
         _ = this.Description;
         _ = this.DisplayName;
         foreach (var item in this.Entitlements)
@@ -334,6 +365,289 @@ class DataFromRaw : IFromRawJson<Data>
     /// <inheritdoc/>
     public Data FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Data.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Default trial configuration for the plan
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<DataDefaultTrialConfig, DataDefaultTrialConfigFromRaw>))]
+public sealed record class DataDefaultTrialConfig : JsonModel
+{
+    /// <summary>
+    /// The duration of the trial in the specified units
+    /// </summary>
+    public required double Duration
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<double>("duration");
+        }
+        init { this._rawData.Set("duration", value); }
+    }
+
+    /// <summary>
+    /// The time unit for the trial duration (DAY or MONTH)
+    /// </summary>
+    public required ApiEnum<string, DataDefaultTrialConfigUnits> Units
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, DataDefaultTrialConfigUnits>>(
+                "units"
+            );
+        }
+        init { this._rawData.Set("units", value); }
+    }
+
+    /// <summary>
+    /// Budget configuration for the trial
+    /// </summary>
+    public DataDefaultTrialConfigBudget? Budget
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<DataDefaultTrialConfigBudget>("budget");
+        }
+        init { this._rawData.Set("budget", value); }
+    }
+
+    /// <summary>
+    /// Behavior when the trial ends (CONVERT_TO_PAID or CANCEL_SUBSCRIPTION)
+    /// </summary>
+    public ApiEnum<string, DataDefaultTrialConfigTrialEndBehavior>? TrialEndBehavior
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, DataDefaultTrialConfigTrialEndBehavior>
+            >("trialEndBehavior");
+        }
+        init { this._rawData.Set("trialEndBehavior", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.Duration;
+        this.Units.Validate();
+        this.Budget?.Validate();
+        this.TrialEndBehavior?.Validate();
+    }
+
+    public DataDefaultTrialConfig() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public DataDefaultTrialConfig(DataDefaultTrialConfig dataDefaultTrialConfig)
+        : base(dataDefaultTrialConfig) { }
+#pragma warning restore CS8618
+
+    public DataDefaultTrialConfig(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    DataDefaultTrialConfig(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="DataDefaultTrialConfigFromRaw.FromRawUnchecked"/>
+    public static DataDefaultTrialConfig FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class DataDefaultTrialConfigFromRaw : IFromRawJson<DataDefaultTrialConfig>
+{
+    /// <inheritdoc/>
+    public DataDefaultTrialConfig FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => DataDefaultTrialConfig.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// The time unit for the trial duration (DAY or MONTH)
+/// </summary>
+[JsonConverter(typeof(DataDefaultTrialConfigUnitsConverter))]
+public enum DataDefaultTrialConfigUnits
+{
+    Day,
+    Month,
+}
+
+sealed class DataDefaultTrialConfigUnitsConverter : JsonConverter<DataDefaultTrialConfigUnits>
+{
+    public override DataDefaultTrialConfigUnits Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "DAY" => DataDefaultTrialConfigUnits.Day,
+            "MONTH" => DataDefaultTrialConfigUnits.Month,
+            _ => (DataDefaultTrialConfigUnits)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        DataDefaultTrialConfigUnits value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                DataDefaultTrialConfigUnits.Day => "DAY",
+                DataDefaultTrialConfigUnits.Month => "MONTH",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Budget configuration for the trial
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<DataDefaultTrialConfigBudget, DataDefaultTrialConfigBudgetFromRaw>)
+)]
+public sealed record class DataDefaultTrialConfigBudget : JsonModel
+{
+    /// <summary>
+    /// Whether the budget limit is a soft limit (allows overage) or hard limit
+    /// </summary>
+    public required bool HasSoftLimit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("hasSoftLimit");
+        }
+        init { this._rawData.Set("hasSoftLimit", value); }
+    }
+
+    /// <summary>
+    /// The budget limit amount
+    /// </summary>
+    public required double Limit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<double>("limit");
+        }
+        init { this._rawData.Set("limit", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.HasSoftLimit;
+        _ = this.Limit;
+    }
+
+    public DataDefaultTrialConfigBudget() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public DataDefaultTrialConfigBudget(DataDefaultTrialConfigBudget dataDefaultTrialConfigBudget)
+        : base(dataDefaultTrialConfigBudget) { }
+#pragma warning restore CS8618
+
+    public DataDefaultTrialConfigBudget(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    DataDefaultTrialConfigBudget(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="DataDefaultTrialConfigBudgetFromRaw.FromRawUnchecked"/>
+    public static DataDefaultTrialConfigBudget FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class DataDefaultTrialConfigBudgetFromRaw : IFromRawJson<DataDefaultTrialConfigBudget>
+{
+    /// <inheritdoc/>
+    public DataDefaultTrialConfigBudget FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => DataDefaultTrialConfigBudget.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Behavior when the trial ends (CONVERT_TO_PAID or CANCEL_SUBSCRIPTION)
+/// </summary>
+[JsonConverter(typeof(DataDefaultTrialConfigTrialEndBehaviorConverter))]
+public enum DataDefaultTrialConfigTrialEndBehavior
+{
+    ConvertToPaid,
+    CancelSubscription,
+}
+
+sealed class DataDefaultTrialConfigTrialEndBehaviorConverter
+    : JsonConverter<DataDefaultTrialConfigTrialEndBehavior>
+{
+    public override DataDefaultTrialConfigTrialEndBehavior Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "CONVERT_TO_PAID" => DataDefaultTrialConfigTrialEndBehavior.ConvertToPaid,
+            "CANCEL_SUBSCRIPTION" => DataDefaultTrialConfigTrialEndBehavior.CancelSubscription,
+            _ => (DataDefaultTrialConfigTrialEndBehavior)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        DataDefaultTrialConfigTrialEndBehavior value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                DataDefaultTrialConfigTrialEndBehavior.ConvertToPaid => "CONVERT_TO_PAID",
+                DataDefaultTrialConfigTrialEndBehavior.CancelSubscription => "CANCEL_SUBSCRIPTION",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }
 
 /// <summary>

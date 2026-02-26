@@ -114,6 +114,22 @@ public sealed record class PlanRetrieveResponseData : JsonModel
         init { this._rawData.Set("billingId", value); }
     }
 
+    public required IReadOnlyList<string>? CompatibleAddonIds
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<string>>("compatibleAddonIds");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<string>?>(
+                "compatibleAddonIds",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
     /// <summary>
     /// Timestamp of when the record was created
     /// </summary>
@@ -125,6 +141,21 @@ public sealed record class PlanRetrieveResponseData : JsonModel
             return this._rawData.GetNotNullStruct<System::DateTimeOffset>("createdAt");
         }
         init { this._rawData.Set("createdAt", value); }
+    }
+
+    /// <summary>
+    /// Default trial configuration for the plan
+    /// </summary>
+    public required PlanRetrieveResponseDataDefaultTrialConfig? DefaultTrialConfig
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<PlanRetrieveResponseDataDefaultTrialConfig>(
+                "defaultTrialConfig"
+            );
+        }
+        init { this._rawData.Set("defaultTrialConfig", value); }
     }
 
     /// <summary>
@@ -293,7 +324,9 @@ public sealed record class PlanRetrieveResponseData : JsonModel
     {
         _ = this.ID;
         _ = this.BillingID;
+        _ = this.CompatibleAddonIds;
         _ = this.CreatedAt;
+        this.DefaultTrialConfig?.Validate();
         _ = this.Description;
         _ = this.DisplayName;
         foreach (var item in this.Entitlements)
@@ -346,6 +379,317 @@ class PlanRetrieveResponseDataFromRaw : IFromRawJson<PlanRetrieveResponseData>
     public PlanRetrieveResponseData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => PlanRetrieveResponseData.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Default trial configuration for the plan
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        PlanRetrieveResponseDataDefaultTrialConfig,
+        PlanRetrieveResponseDataDefaultTrialConfigFromRaw
+    >)
+)]
+public sealed record class PlanRetrieveResponseDataDefaultTrialConfig : JsonModel
+{
+    /// <summary>
+    /// The duration of the trial in the specified units
+    /// </summary>
+    public required double Duration
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<double>("duration");
+        }
+        init { this._rawData.Set("duration", value); }
+    }
+
+    /// <summary>
+    /// The time unit for the trial duration (DAY or MONTH)
+    /// </summary>
+    public required ApiEnum<string, PlanRetrieveResponseDataDefaultTrialConfigUnits> Units
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, PlanRetrieveResponseDataDefaultTrialConfigUnits>
+            >("units");
+        }
+        init { this._rawData.Set("units", value); }
+    }
+
+    /// <summary>
+    /// Budget configuration for the trial
+    /// </summary>
+    public PlanRetrieveResponseDataDefaultTrialConfigBudget? Budget
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<PlanRetrieveResponseDataDefaultTrialConfigBudget>(
+                "budget"
+            );
+        }
+        init { this._rawData.Set("budget", value); }
+    }
+
+    /// <summary>
+    /// Behavior when the trial ends (CONVERT_TO_PAID or CANCEL_SUBSCRIPTION)
+    /// </summary>
+    public ApiEnum<
+        string,
+        PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior
+    >? TrialEndBehavior
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior>
+            >("trialEndBehavior");
+        }
+        init { this._rawData.Set("trialEndBehavior", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.Duration;
+        this.Units.Validate();
+        this.Budget?.Validate();
+        this.TrialEndBehavior?.Validate();
+    }
+
+    public PlanRetrieveResponseDataDefaultTrialConfig() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public PlanRetrieveResponseDataDefaultTrialConfig(
+        PlanRetrieveResponseDataDefaultTrialConfig planRetrieveResponseDataDefaultTrialConfig
+    )
+        : base(planRetrieveResponseDataDefaultTrialConfig) { }
+#pragma warning restore CS8618
+
+    public PlanRetrieveResponseDataDefaultTrialConfig(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    PlanRetrieveResponseDataDefaultTrialConfig(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="PlanRetrieveResponseDataDefaultTrialConfigFromRaw.FromRawUnchecked"/>
+    public static PlanRetrieveResponseDataDefaultTrialConfig FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class PlanRetrieveResponseDataDefaultTrialConfigFromRaw
+    : IFromRawJson<PlanRetrieveResponseDataDefaultTrialConfig>
+{
+    /// <inheritdoc/>
+    public PlanRetrieveResponseDataDefaultTrialConfig FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => PlanRetrieveResponseDataDefaultTrialConfig.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// The time unit for the trial duration (DAY or MONTH)
+/// </summary>
+[JsonConverter(typeof(PlanRetrieveResponseDataDefaultTrialConfigUnitsConverter))]
+public enum PlanRetrieveResponseDataDefaultTrialConfigUnits
+{
+    Day,
+    Month,
+}
+
+sealed class PlanRetrieveResponseDataDefaultTrialConfigUnitsConverter
+    : JsonConverter<PlanRetrieveResponseDataDefaultTrialConfigUnits>
+{
+    public override PlanRetrieveResponseDataDefaultTrialConfigUnits Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "DAY" => PlanRetrieveResponseDataDefaultTrialConfigUnits.Day,
+            "MONTH" => PlanRetrieveResponseDataDefaultTrialConfigUnits.Month,
+            _ => (PlanRetrieveResponseDataDefaultTrialConfigUnits)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        PlanRetrieveResponseDataDefaultTrialConfigUnits value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                PlanRetrieveResponseDataDefaultTrialConfigUnits.Day => "DAY",
+                PlanRetrieveResponseDataDefaultTrialConfigUnits.Month => "MONTH",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Budget configuration for the trial
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        PlanRetrieveResponseDataDefaultTrialConfigBudget,
+        PlanRetrieveResponseDataDefaultTrialConfigBudgetFromRaw
+    >)
+)]
+public sealed record class PlanRetrieveResponseDataDefaultTrialConfigBudget : JsonModel
+{
+    /// <summary>
+    /// Whether the budget limit is a soft limit (allows overage) or hard limit
+    /// </summary>
+    public required bool HasSoftLimit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("hasSoftLimit");
+        }
+        init { this._rawData.Set("hasSoftLimit", value); }
+    }
+
+    /// <summary>
+    /// The budget limit amount
+    /// </summary>
+    public required double Limit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<double>("limit");
+        }
+        init { this._rawData.Set("limit", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.HasSoftLimit;
+        _ = this.Limit;
+    }
+
+    public PlanRetrieveResponseDataDefaultTrialConfigBudget() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public PlanRetrieveResponseDataDefaultTrialConfigBudget(
+        PlanRetrieveResponseDataDefaultTrialConfigBudget planRetrieveResponseDataDefaultTrialConfigBudget
+    )
+        : base(planRetrieveResponseDataDefaultTrialConfigBudget) { }
+#pragma warning restore CS8618
+
+    public PlanRetrieveResponseDataDefaultTrialConfigBudget(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    PlanRetrieveResponseDataDefaultTrialConfigBudget(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="PlanRetrieveResponseDataDefaultTrialConfigBudgetFromRaw.FromRawUnchecked"/>
+    public static PlanRetrieveResponseDataDefaultTrialConfigBudget FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class PlanRetrieveResponseDataDefaultTrialConfigBudgetFromRaw
+    : IFromRawJson<PlanRetrieveResponseDataDefaultTrialConfigBudget>
+{
+    /// <inheritdoc/>
+    public PlanRetrieveResponseDataDefaultTrialConfigBudget FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => PlanRetrieveResponseDataDefaultTrialConfigBudget.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Behavior when the trial ends (CONVERT_TO_PAID or CANCEL_SUBSCRIPTION)
+/// </summary>
+[JsonConverter(typeof(PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehaviorConverter))]
+public enum PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior
+{
+    ConvertToPaid,
+    CancelSubscription,
+}
+
+sealed class PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehaviorConverter
+    : JsonConverter<PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior>
+{
+    public override PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "CONVERT_TO_PAID" =>
+                PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior.ConvertToPaid,
+            "CANCEL_SUBSCRIPTION" =>
+                PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior.CancelSubscription,
+            _ => (PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior.ConvertToPaid =>
+                    "CONVERT_TO_PAID",
+                PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior.CancelSubscription =>
+                    "CANCEL_SUBSCRIPTION",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }
 
 /// <summary>

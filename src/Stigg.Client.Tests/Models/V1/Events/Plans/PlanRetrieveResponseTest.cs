@@ -18,7 +18,16 @@ public class PlanRetrieveResponseTest : TestBase
             {
                 ID = "id",
                 BillingID = "billingId",
+                CompatibleAddonIds = ["string"],
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DefaultTrialConfig = new()
+                {
+                    Duration = 0,
+                    Units = PlanRetrieveResponseDataDefaultTrialConfigUnits.Day,
+                    Budget = new() { HasSoftLimit = true, Limit = 0 },
+                    TrialEndBehavior =
+                        PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior.ConvertToPaid,
+                },
                 Description = "description",
                 DisplayName = "displayName",
                 Entitlements =
@@ -40,7 +49,16 @@ public class PlanRetrieveResponseTest : TestBase
         {
             ID = "id",
             BillingID = "billingId",
+            CompatibleAddonIds = ["string"],
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DefaultTrialConfig = new()
+            {
+                Duration = 0,
+                Units = PlanRetrieveResponseDataDefaultTrialConfigUnits.Day,
+                Budget = new() { HasSoftLimit = true, Limit = 0 },
+                TrialEndBehavior =
+                    PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior.ConvertToPaid,
+            },
             Description = "description",
             DisplayName = "displayName",
             Entitlements =
@@ -69,7 +87,16 @@ public class PlanRetrieveResponseTest : TestBase
             {
                 ID = "id",
                 BillingID = "billingId",
+                CompatibleAddonIds = ["string"],
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DefaultTrialConfig = new()
+                {
+                    Duration = 0,
+                    Units = PlanRetrieveResponseDataDefaultTrialConfigUnits.Day,
+                    Budget = new() { HasSoftLimit = true, Limit = 0 },
+                    TrialEndBehavior =
+                        PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior.ConvertToPaid,
+                },
                 Description = "description",
                 DisplayName = "displayName",
                 Entitlements =
@@ -105,7 +132,16 @@ public class PlanRetrieveResponseTest : TestBase
             {
                 ID = "id",
                 BillingID = "billingId",
+                CompatibleAddonIds = ["string"],
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DefaultTrialConfig = new()
+                {
+                    Duration = 0,
+                    Units = PlanRetrieveResponseDataDefaultTrialConfigUnits.Day,
+                    Budget = new() { HasSoftLimit = true, Limit = 0 },
+                    TrialEndBehavior =
+                        PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior.ConvertToPaid,
+                },
                 Description = "description",
                 DisplayName = "displayName",
                 Entitlements =
@@ -134,7 +170,16 @@ public class PlanRetrieveResponseTest : TestBase
         {
             ID = "id",
             BillingID = "billingId",
+            CompatibleAddonIds = ["string"],
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DefaultTrialConfig = new()
+            {
+                Duration = 0,
+                Units = PlanRetrieveResponseDataDefaultTrialConfigUnits.Day,
+                Budget = new() { HasSoftLimit = true, Limit = 0 },
+                TrialEndBehavior =
+                    PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior.ConvertToPaid,
+            },
             Description = "description",
             DisplayName = "displayName",
             Entitlements =
@@ -163,7 +208,16 @@ public class PlanRetrieveResponseTest : TestBase
             {
                 ID = "id",
                 BillingID = "billingId",
+                CompatibleAddonIds = ["string"],
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DefaultTrialConfig = new()
+                {
+                    Duration = 0,
+                    Units = PlanRetrieveResponseDataDefaultTrialConfigUnits.Day,
+                    Budget = new() { HasSoftLimit = true, Limit = 0 },
+                    TrialEndBehavior =
+                        PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior.ConvertToPaid,
+                },
                 Description = "description",
                 DisplayName = "displayName",
                 Entitlements =
@@ -193,7 +247,16 @@ public class PlanRetrieveResponseTest : TestBase
             {
                 ID = "id",
                 BillingID = "billingId",
+                CompatibleAddonIds = ["string"],
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DefaultTrialConfig = new()
+                {
+                    Duration = 0,
+                    Units = PlanRetrieveResponseDataDefaultTrialConfigUnits.Day,
+                    Budget = new() { HasSoftLimit = true, Limit = 0 },
+                    TrialEndBehavior =
+                        PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior.ConvertToPaid,
+                },
                 Description = "description",
                 DisplayName = "displayName",
                 Entitlements =
@@ -226,7 +289,16 @@ public class PlanRetrieveResponseDataTest : TestBase
         {
             ID = "id",
             BillingID = "billingId",
+            CompatibleAddonIds = ["string"],
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DefaultTrialConfig = new()
+            {
+                Duration = 0,
+                Units = PlanRetrieveResponseDataDefaultTrialConfigUnits.Day,
+                Budget = new() { HasSoftLimit = true, Limit = 0 },
+                TrialEndBehavior =
+                    PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior.ConvertToPaid,
+            },
             Description = "description",
             DisplayName = "displayName",
             Entitlements =
@@ -245,7 +317,16 @@ public class PlanRetrieveResponseDataTest : TestBase
 
         string expectedID = "id";
         string expectedBillingID = "billingId";
+        List<string> expectedCompatibleAddonIds = ["string"];
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        PlanRetrieveResponseDataDefaultTrialConfig expectedDefaultTrialConfig = new()
+        {
+            Duration = 0,
+            Units = PlanRetrieveResponseDataDefaultTrialConfigUnits.Day,
+            Budget = new() { HasSoftLimit = true, Limit = 0 },
+            TrialEndBehavior =
+                PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior.ConvertToPaid,
+        };
         string expectedDescription = "description";
         string expectedDisplayName = "displayName";
         List<PlanRetrieveResponseDataEntitlement> expectedEntitlements =
@@ -265,7 +346,14 @@ public class PlanRetrieveResponseDataTest : TestBase
 
         Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedBillingID, model.BillingID);
+        Assert.NotNull(model.CompatibleAddonIds);
+        Assert.Equal(expectedCompatibleAddonIds.Count, model.CompatibleAddonIds.Count);
+        for (int i = 0; i < expectedCompatibleAddonIds.Count; i++)
+        {
+            Assert.Equal(expectedCompatibleAddonIds[i], model.CompatibleAddonIds[i]);
+        }
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
+        Assert.Equal(expectedDefaultTrialConfig, model.DefaultTrialConfig);
         Assert.Equal(expectedDescription, model.Description);
         Assert.Equal(expectedDisplayName, model.DisplayName);
         Assert.Equal(expectedEntitlements.Count, model.Entitlements.Count);
@@ -296,7 +384,16 @@ public class PlanRetrieveResponseDataTest : TestBase
         {
             ID = "id",
             BillingID = "billingId",
+            CompatibleAddonIds = ["string"],
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DefaultTrialConfig = new()
+            {
+                Duration = 0,
+                Units = PlanRetrieveResponseDataDefaultTrialConfigUnits.Day,
+                Budget = new() { HasSoftLimit = true, Limit = 0 },
+                TrialEndBehavior =
+                    PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior.ConvertToPaid,
+            },
             Description = "description",
             DisplayName = "displayName",
             Entitlements =
@@ -329,7 +426,16 @@ public class PlanRetrieveResponseDataTest : TestBase
         {
             ID = "id",
             BillingID = "billingId",
+            CompatibleAddonIds = ["string"],
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DefaultTrialConfig = new()
+            {
+                Duration = 0,
+                Units = PlanRetrieveResponseDataDefaultTrialConfigUnits.Day,
+                Budget = new() { HasSoftLimit = true, Limit = 0 },
+                TrialEndBehavior =
+                    PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior.ConvertToPaid,
+            },
             Description = "description",
             DisplayName = "displayName",
             Entitlements =
@@ -355,7 +461,16 @@ public class PlanRetrieveResponseDataTest : TestBase
 
         string expectedID = "id";
         string expectedBillingID = "billingId";
+        List<string> expectedCompatibleAddonIds = ["string"];
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        PlanRetrieveResponseDataDefaultTrialConfig expectedDefaultTrialConfig = new()
+        {
+            Duration = 0,
+            Units = PlanRetrieveResponseDataDefaultTrialConfigUnits.Day,
+            Budget = new() { HasSoftLimit = true, Limit = 0 },
+            TrialEndBehavior =
+                PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior.ConvertToPaid,
+        };
         string expectedDescription = "description";
         string expectedDisplayName = "displayName";
         List<PlanRetrieveResponseDataEntitlement> expectedEntitlements =
@@ -375,7 +490,14 @@ public class PlanRetrieveResponseDataTest : TestBase
 
         Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedBillingID, deserialized.BillingID);
+        Assert.NotNull(deserialized.CompatibleAddonIds);
+        Assert.Equal(expectedCompatibleAddonIds.Count, deserialized.CompatibleAddonIds.Count);
+        for (int i = 0; i < expectedCompatibleAddonIds.Count; i++)
+        {
+            Assert.Equal(expectedCompatibleAddonIds[i], deserialized.CompatibleAddonIds[i]);
+        }
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
+        Assert.Equal(expectedDefaultTrialConfig, deserialized.DefaultTrialConfig);
         Assert.Equal(expectedDescription, deserialized.Description);
         Assert.Equal(expectedDisplayName, deserialized.DisplayName);
         Assert.Equal(expectedEntitlements.Count, deserialized.Entitlements.Count);
@@ -406,7 +528,16 @@ public class PlanRetrieveResponseDataTest : TestBase
         {
             ID = "id",
             BillingID = "billingId",
+            CompatibleAddonIds = ["string"],
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DefaultTrialConfig = new()
+            {
+                Duration = 0,
+                Units = PlanRetrieveResponseDataDefaultTrialConfigUnits.Day,
+                Budget = new() { HasSoftLimit = true, Limit = 0 },
+                TrialEndBehavior =
+                    PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior.ConvertToPaid,
+            },
             Description = "description",
             DisplayName = "displayName",
             Entitlements =
@@ -433,7 +564,16 @@ public class PlanRetrieveResponseDataTest : TestBase
         {
             ID = "id",
             BillingID = "billingId",
+            CompatibleAddonIds = ["string"],
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DefaultTrialConfig = new()
+            {
+                Duration = 0,
+                Units = PlanRetrieveResponseDataDefaultTrialConfigUnits.Day,
+                Budget = new() { HasSoftLimit = true, Limit = 0 },
+                TrialEndBehavior =
+                    PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior.ConvertToPaid,
+            },
             Description = "description",
             DisplayName = "displayName",
             Entitlements =
@@ -453,6 +593,397 @@ public class PlanRetrieveResponseDataTest : TestBase
         PlanRetrieveResponseData copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class PlanRetrieveResponseDataDefaultTrialConfigTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new PlanRetrieveResponseDataDefaultTrialConfig
+        {
+            Duration = 0,
+            Units = PlanRetrieveResponseDataDefaultTrialConfigUnits.Day,
+            Budget = new() { HasSoftLimit = true, Limit = 0 },
+            TrialEndBehavior =
+                PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior.ConvertToPaid,
+        };
+
+        double expectedDuration = 0;
+        ApiEnum<string, PlanRetrieveResponseDataDefaultTrialConfigUnits> expectedUnits =
+            PlanRetrieveResponseDataDefaultTrialConfigUnits.Day;
+        PlanRetrieveResponseDataDefaultTrialConfigBudget expectedBudget = new()
+        {
+            HasSoftLimit = true,
+            Limit = 0,
+        };
+        ApiEnum<
+            string,
+            PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior
+        > expectedTrialEndBehavior =
+            PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior.ConvertToPaid;
+
+        Assert.Equal(expectedDuration, model.Duration);
+        Assert.Equal(expectedUnits, model.Units);
+        Assert.Equal(expectedBudget, model.Budget);
+        Assert.Equal(expectedTrialEndBehavior, model.TrialEndBehavior);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new PlanRetrieveResponseDataDefaultTrialConfig
+        {
+            Duration = 0,
+            Units = PlanRetrieveResponseDataDefaultTrialConfigUnits.Day,
+            Budget = new() { HasSoftLimit = true, Limit = 0 },
+            TrialEndBehavior =
+                PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior.ConvertToPaid,
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<PlanRetrieveResponseDataDefaultTrialConfig>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new PlanRetrieveResponseDataDefaultTrialConfig
+        {
+            Duration = 0,
+            Units = PlanRetrieveResponseDataDefaultTrialConfigUnits.Day,
+            Budget = new() { HasSoftLimit = true, Limit = 0 },
+            TrialEndBehavior =
+                PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior.ConvertToPaid,
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<PlanRetrieveResponseDataDefaultTrialConfig>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        double expectedDuration = 0;
+        ApiEnum<string, PlanRetrieveResponseDataDefaultTrialConfigUnits> expectedUnits =
+            PlanRetrieveResponseDataDefaultTrialConfigUnits.Day;
+        PlanRetrieveResponseDataDefaultTrialConfigBudget expectedBudget = new()
+        {
+            HasSoftLimit = true,
+            Limit = 0,
+        };
+        ApiEnum<
+            string,
+            PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior
+        > expectedTrialEndBehavior =
+            PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior.ConvertToPaid;
+
+        Assert.Equal(expectedDuration, deserialized.Duration);
+        Assert.Equal(expectedUnits, deserialized.Units);
+        Assert.Equal(expectedBudget, deserialized.Budget);
+        Assert.Equal(expectedTrialEndBehavior, deserialized.TrialEndBehavior);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new PlanRetrieveResponseDataDefaultTrialConfig
+        {
+            Duration = 0,
+            Units = PlanRetrieveResponseDataDefaultTrialConfigUnits.Day,
+            Budget = new() { HasSoftLimit = true, Limit = 0 },
+            TrialEndBehavior =
+                PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior.ConvertToPaid,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new PlanRetrieveResponseDataDefaultTrialConfig
+        {
+            Duration = 0,
+            Units = PlanRetrieveResponseDataDefaultTrialConfigUnits.Day,
+        };
+
+        Assert.Null(model.Budget);
+        Assert.False(model.RawData.ContainsKey("budget"));
+        Assert.Null(model.TrialEndBehavior);
+        Assert.False(model.RawData.ContainsKey("trialEndBehavior"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new PlanRetrieveResponseDataDefaultTrialConfig
+        {
+            Duration = 0,
+            Units = PlanRetrieveResponseDataDefaultTrialConfigUnits.Day,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new PlanRetrieveResponseDataDefaultTrialConfig
+        {
+            Duration = 0,
+            Units = PlanRetrieveResponseDataDefaultTrialConfigUnits.Day,
+
+            Budget = null,
+            TrialEndBehavior = null,
+        };
+
+        Assert.Null(model.Budget);
+        Assert.True(model.RawData.ContainsKey("budget"));
+        Assert.Null(model.TrialEndBehavior);
+        Assert.True(model.RawData.ContainsKey("trialEndBehavior"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new PlanRetrieveResponseDataDefaultTrialConfig
+        {
+            Duration = 0,
+            Units = PlanRetrieveResponseDataDefaultTrialConfigUnits.Day,
+
+            Budget = null,
+            TrialEndBehavior = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new PlanRetrieveResponseDataDefaultTrialConfig
+        {
+            Duration = 0,
+            Units = PlanRetrieveResponseDataDefaultTrialConfigUnits.Day,
+            Budget = new() { HasSoftLimit = true, Limit = 0 },
+            TrialEndBehavior =
+                PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior.ConvertToPaid,
+        };
+
+        PlanRetrieveResponseDataDefaultTrialConfig copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class PlanRetrieveResponseDataDefaultTrialConfigUnitsTest : TestBase
+{
+    [Theory]
+    [InlineData(PlanRetrieveResponseDataDefaultTrialConfigUnits.Day)]
+    [InlineData(PlanRetrieveResponseDataDefaultTrialConfigUnits.Month)]
+    public void Validation_Works(PlanRetrieveResponseDataDefaultTrialConfigUnits rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, PlanRetrieveResponseDataDefaultTrialConfigUnits> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, PlanRetrieveResponseDataDefaultTrialConfigUnits>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(PlanRetrieveResponseDataDefaultTrialConfigUnits.Day)]
+    [InlineData(PlanRetrieveResponseDataDefaultTrialConfigUnits.Month)]
+    public void SerializationRoundtrip_Works(
+        PlanRetrieveResponseDataDefaultTrialConfigUnits rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, PlanRetrieveResponseDataDefaultTrialConfigUnits> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, PlanRetrieveResponseDataDefaultTrialConfigUnits>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, PlanRetrieveResponseDataDefaultTrialConfigUnits>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, PlanRetrieveResponseDataDefaultTrialConfigUnits>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class PlanRetrieveResponseDataDefaultTrialConfigBudgetTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new PlanRetrieveResponseDataDefaultTrialConfigBudget
+        {
+            HasSoftLimit = true,
+            Limit = 0,
+        };
+
+        bool expectedHasSoftLimit = true;
+        double expectedLimit = 0;
+
+        Assert.Equal(expectedHasSoftLimit, model.HasSoftLimit);
+        Assert.Equal(expectedLimit, model.Limit);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new PlanRetrieveResponseDataDefaultTrialConfigBudget
+        {
+            HasSoftLimit = true,
+            Limit = 0,
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<PlanRetrieveResponseDataDefaultTrialConfigBudget>(
+                json,
+                ModelBase.SerializerOptions
+            );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new PlanRetrieveResponseDataDefaultTrialConfigBudget
+        {
+            HasSoftLimit = true,
+            Limit = 0,
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<PlanRetrieveResponseDataDefaultTrialConfigBudget>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        Assert.NotNull(deserialized);
+
+        bool expectedHasSoftLimit = true;
+        double expectedLimit = 0;
+
+        Assert.Equal(expectedHasSoftLimit, deserialized.HasSoftLimit);
+        Assert.Equal(expectedLimit, deserialized.Limit);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new PlanRetrieveResponseDataDefaultTrialConfigBudget
+        {
+            HasSoftLimit = true,
+            Limit = 0,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new PlanRetrieveResponseDataDefaultTrialConfigBudget
+        {
+            HasSoftLimit = true,
+            Limit = 0,
+        };
+
+        PlanRetrieveResponseDataDefaultTrialConfigBudget copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehaviorTest : TestBase
+{
+    [Theory]
+    [InlineData(PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior.ConvertToPaid)]
+    [InlineData(PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior.CancelSubscription)]
+    public void Validation_Works(
+        PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior> value =
+            rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior.ConvertToPaid)]
+    [InlineData(PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior.CancelSubscription)]
+    public void SerializationRoundtrip_Works(
+        PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior> value =
+            rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, PlanRetrieveResponseDataDefaultTrialConfigTrialEndBehavior>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
     }
 }
 

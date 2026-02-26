@@ -79,6 +79,19 @@ public record class PlanCreateParams : ParamsBase
     }
 
     /// <summary>
+    /// Default trial configuration for the plan
+    /// </summary>
+    public DefaultTrialConfig? DefaultTrialConfig
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<DefaultTrialConfig>("defaultTrialConfig");
+        }
+        init { this._rawBodyData.Set("defaultTrialConfig", value); }
+    }
+
+    /// <summary>
     /// The description of the package
     /// </summary>
     public string? Description
@@ -269,6 +282,276 @@ public record class PlanCreateParams : ParamsBase
     public override int GetHashCode()
     {
         return 0;
+    }
+}
+
+/// <summary>
+/// Default trial configuration for the plan
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<DefaultTrialConfig, DefaultTrialConfigFromRaw>))]
+public sealed record class DefaultTrialConfig : JsonModel
+{
+    /// <summary>
+    /// The duration of the trial in the specified units
+    /// </summary>
+    public required double Duration
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<double>("duration");
+        }
+        init { this._rawData.Set("duration", value); }
+    }
+
+    /// <summary>
+    /// The time unit for the trial duration (DAY or MONTH)
+    /// </summary>
+    public required ApiEnum<string, Units> Units
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Units>>("units");
+        }
+        init { this._rawData.Set("units", value); }
+    }
+
+    /// <summary>
+    /// Budget configuration for the trial
+    /// </summary>
+    public Budget? Budget
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<Budget>("budget");
+        }
+        init { this._rawData.Set("budget", value); }
+    }
+
+    /// <summary>
+    /// Behavior when the trial ends (CONVERT_TO_PAID or CANCEL_SUBSCRIPTION)
+    /// </summary>
+    public ApiEnum<string, TrialEndBehavior>? TrialEndBehavior
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, TrialEndBehavior>>(
+                "trialEndBehavior"
+            );
+        }
+        init { this._rawData.Set("trialEndBehavior", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.Duration;
+        this.Units.Validate();
+        this.Budget?.Validate();
+        this.TrialEndBehavior?.Validate();
+    }
+
+    public DefaultTrialConfig() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public DefaultTrialConfig(DefaultTrialConfig defaultTrialConfig)
+        : base(defaultTrialConfig) { }
+#pragma warning restore CS8618
+
+    public DefaultTrialConfig(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    DefaultTrialConfig(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="DefaultTrialConfigFromRaw.FromRawUnchecked"/>
+    public static DefaultTrialConfig FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class DefaultTrialConfigFromRaw : IFromRawJson<DefaultTrialConfig>
+{
+    /// <inheritdoc/>
+    public DefaultTrialConfig FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        DefaultTrialConfig.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// The time unit for the trial duration (DAY or MONTH)
+/// </summary>
+[JsonConverter(typeof(UnitsConverter))]
+public enum Units
+{
+    Day,
+    Month,
+}
+
+sealed class UnitsConverter : JsonConverter<Units>
+{
+    public override Units Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "DAY" => Units.Day,
+            "MONTH" => Units.Month,
+            _ => (Units)(-1),
+        };
+    }
+
+    public override void Write(Utf8JsonWriter writer, Units value, JsonSerializerOptions options)
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                Units.Day => "DAY",
+                Units.Month => "MONTH",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Budget configuration for the trial
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<Budget, BudgetFromRaw>))]
+public sealed record class Budget : JsonModel
+{
+    /// <summary>
+    /// Whether the budget limit is a soft limit (allows overage) or hard limit
+    /// </summary>
+    public required bool HasSoftLimit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("hasSoftLimit");
+        }
+        init { this._rawData.Set("hasSoftLimit", value); }
+    }
+
+    /// <summary>
+    /// The budget limit amount
+    /// </summary>
+    public required double Limit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<double>("limit");
+        }
+        init { this._rawData.Set("limit", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.HasSoftLimit;
+        _ = this.Limit;
+    }
+
+    public Budget() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public Budget(Budget budget)
+        : base(budget) { }
+#pragma warning restore CS8618
+
+    public Budget(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    Budget(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="BudgetFromRaw.FromRawUnchecked"/>
+    public static Budget FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class BudgetFromRaw : IFromRawJson<Budget>
+{
+    /// <inheritdoc/>
+    public Budget FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Budget.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Behavior when the trial ends (CONVERT_TO_PAID or CANCEL_SUBSCRIPTION)
+/// </summary>
+[JsonConverter(typeof(TrialEndBehaviorConverter))]
+public enum TrialEndBehavior
+{
+    ConvertToPaid,
+    CancelSubscription,
+}
+
+sealed class TrialEndBehaviorConverter : JsonConverter<TrialEndBehavior>
+{
+    public override TrialEndBehavior Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "CONVERT_TO_PAID" => TrialEndBehavior.ConvertToPaid,
+            "CANCEL_SUBSCRIPTION" => TrialEndBehavior.CancelSubscription,
+            _ => (TrialEndBehavior)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        TrialEndBehavior value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                TrialEndBehavior.ConvertToPaid => "CONVERT_TO_PAID",
+                TrialEndBehavior.CancelSubscription => "CANCEL_SUBSCRIPTION",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
     }
 }
 

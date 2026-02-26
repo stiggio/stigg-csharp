@@ -1548,10 +1548,88 @@ public sealed record class UnionObjectVariant1Currency : JsonModel
         init { this._rawData.Set("currencyId", value); }
     }
 
+    /// <summary>
+    /// The display name of the currency.
+    /// </summary>
+    public required string DisplayName
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("displayName");
+        }
+        init { this._rawData.Set("displayName", value); }
+    }
+
+    /// <summary>
+    /// Additional metadata associated with the currency.
+    /// </summary>
+    public JsonElement? AdditionalMetaData
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<JsonElement>("additionalMetaData");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("additionalMetaData", value);
+        }
+    }
+
+    /// <summary>
+    /// A description of the currency.
+    /// </summary>
+    public string? Description
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("description");
+        }
+        init { this._rawData.Set("description", value); }
+    }
+
+    /// <summary>
+    /// The plural form of the currency unit.
+    /// </summary>
+    public string? UnitPlural
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("unitPlural");
+        }
+        init { this._rawData.Set("unitPlural", value); }
+    }
+
+    /// <summary>
+    /// The singular form of the currency unit.
+    /// </summary>
+    public string? UnitSingular
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("unitSingular");
+        }
+        init { this._rawData.Set("unitSingular", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.CurrencyID;
+        _ = this.DisplayName;
+        _ = this.AdditionalMetaData;
+        _ = this.Description;
+        _ = this.UnitPlural;
+        _ = this.UnitSingular;
     }
 
     public UnionObjectVariant1Currency() { }
@@ -1581,13 +1659,6 @@ public sealed record class UnionObjectVariant1Currency : JsonModel
     )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-
-    [SetsRequiredMembers]
-    public UnionObjectVariant1Currency(string currencyID)
-        : this()
-    {
-        this.CurrencyID = currencyID;
     }
 }
 

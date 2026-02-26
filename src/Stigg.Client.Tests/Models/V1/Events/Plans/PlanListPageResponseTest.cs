@@ -19,7 +19,16 @@ public class PlanListPageResponseTest : TestBase
                 {
                     ID = "id",
                     BillingID = "billingId",
+                    CompatibleAddonIds = ["string"],
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DefaultTrialConfig = new()
+                    {
+                        Duration = 0,
+                        Units = PlanListResponseDefaultTrialConfigUnits.Day,
+                        Budget = new() { HasSoftLimit = true, Limit = 0 },
+                        TrialEndBehavior =
+                            PlanListResponseDefaultTrialConfigTrialEndBehavior.ConvertToPaid,
+                    },
                     Description = "description",
                     DisplayName = "displayName",
                     Entitlements =
@@ -49,7 +58,16 @@ public class PlanListPageResponseTest : TestBase
             {
                 ID = "id",
                 BillingID = "billingId",
+                CompatibleAddonIds = ["string"],
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DefaultTrialConfig = new()
+                {
+                    Duration = 0,
+                    Units = PlanListResponseDefaultTrialConfigUnits.Day,
+                    Budget = new() { HasSoftLimit = true, Limit = 0 },
+                    TrialEndBehavior =
+                        PlanListResponseDefaultTrialConfigTrialEndBehavior.ConvertToPaid,
+                },
                 Description = "description",
                 DisplayName = "displayName",
                 Entitlements =
@@ -91,7 +109,16 @@ public class PlanListPageResponseTest : TestBase
                 {
                     ID = "id",
                     BillingID = "billingId",
+                    CompatibleAddonIds = ["string"],
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DefaultTrialConfig = new()
+                    {
+                        Duration = 0,
+                        Units = PlanListResponseDefaultTrialConfigUnits.Day,
+                        Budget = new() { HasSoftLimit = true, Limit = 0 },
+                        TrialEndBehavior =
+                            PlanListResponseDefaultTrialConfigTrialEndBehavior.ConvertToPaid,
+                    },
                     Description = "description",
                     DisplayName = "displayName",
                     Entitlements =
@@ -135,7 +162,16 @@ public class PlanListPageResponseTest : TestBase
                 {
                     ID = "id",
                     BillingID = "billingId",
+                    CompatibleAddonIds = ["string"],
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DefaultTrialConfig = new()
+                    {
+                        Duration = 0,
+                        Units = PlanListResponseDefaultTrialConfigUnits.Day,
+                        Budget = new() { HasSoftLimit = true, Limit = 0 },
+                        TrialEndBehavior =
+                            PlanListResponseDefaultTrialConfigTrialEndBehavior.ConvertToPaid,
+                    },
                     Description = "description",
                     DisplayName = "displayName",
                     Entitlements =
@@ -172,7 +208,16 @@ public class PlanListPageResponseTest : TestBase
             {
                 ID = "id",
                 BillingID = "billingId",
+                CompatibleAddonIds = ["string"],
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DefaultTrialConfig = new()
+                {
+                    Duration = 0,
+                    Units = PlanListResponseDefaultTrialConfigUnits.Day,
+                    Budget = new() { HasSoftLimit = true, Limit = 0 },
+                    TrialEndBehavior =
+                        PlanListResponseDefaultTrialConfigTrialEndBehavior.ConvertToPaid,
+                },
                 Description = "description",
                 DisplayName = "displayName",
                 Entitlements =
@@ -214,7 +259,16 @@ public class PlanListPageResponseTest : TestBase
                 {
                     ID = "id",
                     BillingID = "billingId",
+                    CompatibleAddonIds = ["string"],
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DefaultTrialConfig = new()
+                    {
+                        Duration = 0,
+                        Units = PlanListResponseDefaultTrialConfigUnits.Day,
+                        Budget = new() { HasSoftLimit = true, Limit = 0 },
+                        TrialEndBehavior =
+                            PlanListResponseDefaultTrialConfigTrialEndBehavior.ConvertToPaid,
+                    },
                     Description = "description",
                     DisplayName = "displayName",
                     Entitlements =
@@ -252,7 +306,16 @@ public class PlanListPageResponseTest : TestBase
                 {
                     ID = "id",
                     BillingID = "billingId",
+                    CompatibleAddonIds = ["string"],
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DefaultTrialConfig = new()
+                    {
+                        Duration = 0,
+                        Units = PlanListResponseDefaultTrialConfigUnits.Day,
+                        Budget = new() { HasSoftLimit = true, Limit = 0 },
+                        TrialEndBehavior =
+                            PlanListResponseDefaultTrialConfigTrialEndBehavior.ConvertToPaid,
+                    },
                     Description = "description",
                     DisplayName = "displayName",
                     Entitlements =
