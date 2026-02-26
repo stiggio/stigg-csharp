@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
+using Stigg.Client.Models.V1.Events.Addons;
 using Stigg.Client.Models.V1.Events.Addons.Draft;
 
 namespace Stigg.Client.Services.V1.Events.Addons;
@@ -35,7 +36,7 @@ public sealed class DraftService : IDraftService
     }
 
     /// <inheritdoc/>
-    public async Task<DraftCreateAddonDraftResponse> CreateAddonDraft(
+    public async Task<Addon> CreateAddonDraft(
         DraftCreateAddonDraftParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -47,7 +48,7 @@ public sealed class DraftService : IDraftService
     }
 
     /// <inheritdoc/>
-    public Task<DraftCreateAddonDraftResponse> CreateAddonDraft(
+    public Task<Addon> CreateAddonDraft(
         string id,
         DraftCreateAddonDraftParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -100,7 +101,7 @@ public sealed class DraftServiceWithRawResponse : IDraftServiceWithRawResponse
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<DraftCreateAddonDraftResponse>> CreateAddonDraft(
+    public async Task<HttpResponse<Addon>> CreateAddonDraft(
         DraftCreateAddonDraftParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -120,20 +121,18 @@ public sealed class DraftServiceWithRawResponse : IDraftServiceWithRawResponse
             response,
             async (token) =>
             {
-                var deserializedResponse = await response
-                    .Deserialize<DraftCreateAddonDraftResponse>(token)
-                    .ConfigureAwait(false);
+                var addon = await response.Deserialize<Addon>(token).ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    deserializedResponse.Validate();
+                    addon.Validate();
                 }
-                return deserializedResponse;
+                return addon;
             }
         );
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<DraftCreateAddonDraftResponse>> CreateAddonDraft(
+    public Task<HttpResponse<Addon>> CreateAddonDraft(
         string id,
         DraftCreateAddonDraftParams? parameters = null,
         CancellationToken cancellationToken = default

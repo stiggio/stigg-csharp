@@ -8,18 +8,18 @@ public class FeatureServiceTest : TestBase
     [Fact(Skip = "Mock server tests are disabled")]
     public async Task ArchiveFeature_Works()
     {
-        var response = await this.client.V1.Events.Features.ArchiveFeature(
+        var feature = await this.client.V1.Events.Features.ArchiveFeature(
             "x",
             new(),
             TestContext.Current.CancellationToken
         );
-        response.Validate();
+        feature.Validate();
     }
 
     [Fact(Skip = "Mock server tests are disabled")]
     public async Task CreateFeature_Works()
     {
-        var response = await this.client.V1.Events.Features.CreateFeature(
+        var feature = await this.client.V1.Events.Features.CreateFeature(
             new()
             {
                 ID = "id",
@@ -28,7 +28,7 @@ public class FeatureServiceTest : TestBase
             },
             TestContext.Current.CancellationToken
         );
-        response.Validate();
+        feature.Validate();
     }
 
     [Fact(Skip = "Mock server tests are disabled")]
@@ -44,33 +44,33 @@ public class FeatureServiceTest : TestBase
     [Fact(Skip = "Mock server tests are disabled")]
     public async Task RetrieveFeature_Works()
     {
-        var response = await this.client.V1.Events.Features.RetrieveFeature(
+        var feature = await this.client.V1.Events.Features.RetrieveFeature(
             "x",
             new(),
             TestContext.Current.CancellationToken
         );
-        response.Validate();
+        feature.Validate();
     }
 
     [Fact(Skip = "Mock server tests are disabled")]
     public async Task UnarchiveFeature_Works()
     {
-        var response = await this.client.V1.Events.Features.UnarchiveFeature(
+        var feature = await this.client.V1.Events.Features.UnarchiveFeature(
             "x",
             new(),
             TestContext.Current.CancellationToken
         );
-        response.Validate();
+        feature.Validate();
     }
 
     [Fact(Skip = "Mock server tests are disabled")]
     public async Task UpdateFeature_Works()
     {
-        var response = await this.client.V1.Events.Features.UpdateFeature(
+        var feature = await this.client.V1.Events.Features.UpdateFeature(
             "x",
             new(),
             TestContext.Current.CancellationToken
         );
-        response.Validate();
+        feature.Validate();
     }
 }

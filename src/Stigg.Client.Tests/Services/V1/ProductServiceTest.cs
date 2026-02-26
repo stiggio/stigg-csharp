@@ -7,33 +7,33 @@ public class ProductServiceTest : TestBase
     [Fact(Skip = "Mock server tests are disabled")]
     public async Task ArchiveProduct_Works()
     {
-        var response = await this.client.V1.Products.ArchiveProduct(
+        var product = await this.client.V1.Products.ArchiveProduct(
             "x",
             new(),
             TestContext.Current.CancellationToken
         );
-        response.Validate();
+        product.Validate();
     }
 
     [Fact(Skip = "Mock server tests are disabled")]
     public async Task CreateProduct_Works()
     {
-        var response = await this.client.V1.Products.CreateProduct(
+        var product = await this.client.V1.Products.CreateProduct(
             new() { ID = "id" },
             TestContext.Current.CancellationToken
         );
-        response.Validate();
+        product.Validate();
     }
 
     [Fact(Skip = "Mock server tests are disabled")]
     public async Task DuplicateProduct_Works()
     {
-        var response = await this.client.V1.Products.DuplicateProduct(
+        var product = await this.client.V1.Products.DuplicateProduct(
             "x",
             new() { IDValue = "id" },
             TestContext.Current.CancellationToken
         );
-        response.Validate();
+        product.Validate();
     }
 
     [Fact(Skip = "Mock server tests are disabled")]
@@ -49,22 +49,22 @@ public class ProductServiceTest : TestBase
     [Fact(Skip = "Mock server tests are disabled")]
     public async Task UnarchiveProduct_Works()
     {
-        var response = await this.client.V1.Products.UnarchiveProduct(
+        var product = await this.client.V1.Products.UnarchiveProduct(
             "x",
             new(),
             TestContext.Current.CancellationToken
         );
-        response.Validate();
+        product.Validate();
     }
 
     [Fact(Skip = "Mock server tests are disabled")]
     public async Task UpdateProduct_Works()
     {
-        var response = await this.client.V1.Products.UpdateProduct(
+        var product = await this.client.V1.Products.UpdateProduct(
             "x",
             new(),
             TestContext.Current.CancellationToken
         );
-        response.Validate();
+        product.Validate();
     }
 }

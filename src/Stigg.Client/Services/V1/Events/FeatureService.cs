@@ -35,7 +35,7 @@ public sealed class FeatureService : IFeatureService
     }
 
     /// <inheritdoc/>
-    public async Task<FeatureArchiveFeatureResponse> ArchiveFeature(
+    public async Task<Feature> ArchiveFeature(
         FeatureArchiveFeatureParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -47,7 +47,7 @@ public sealed class FeatureService : IFeatureService
     }
 
     /// <inheritdoc/>
-    public Task<FeatureArchiveFeatureResponse> ArchiveFeature(
+    public Task<Feature> ArchiveFeature(
         string id,
         FeatureArchiveFeatureParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -59,7 +59,7 @@ public sealed class FeatureService : IFeatureService
     }
 
     /// <inheritdoc/>
-    public async Task<FeatureCreateFeatureResponse> CreateFeature(
+    public async Task<Feature> CreateFeature(
         FeatureCreateFeatureParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -83,7 +83,7 @@ public sealed class FeatureService : IFeatureService
     }
 
     /// <inheritdoc/>
-    public async Task<FeatureRetrieveFeatureResponse> RetrieveFeature(
+    public async Task<Feature> RetrieveFeature(
         FeatureRetrieveFeatureParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -95,7 +95,7 @@ public sealed class FeatureService : IFeatureService
     }
 
     /// <inheritdoc/>
-    public Task<FeatureRetrieveFeatureResponse> RetrieveFeature(
+    public Task<Feature> RetrieveFeature(
         string id,
         FeatureRetrieveFeatureParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -107,7 +107,7 @@ public sealed class FeatureService : IFeatureService
     }
 
     /// <inheritdoc/>
-    public async Task<FeatureUnarchiveFeatureResponse> UnarchiveFeature(
+    public async Task<Feature> UnarchiveFeature(
         FeatureUnarchiveFeatureParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -119,7 +119,7 @@ public sealed class FeatureService : IFeatureService
     }
 
     /// <inheritdoc/>
-    public Task<FeatureUnarchiveFeatureResponse> UnarchiveFeature(
+    public Task<Feature> UnarchiveFeature(
         string id,
         FeatureUnarchiveFeatureParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -131,7 +131,7 @@ public sealed class FeatureService : IFeatureService
     }
 
     /// <inheritdoc/>
-    public async Task<FeatureUpdateFeatureResponse> UpdateFeature(
+    public async Task<Feature> UpdateFeature(
         FeatureUpdateFeatureParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -143,7 +143,7 @@ public sealed class FeatureService : IFeatureService
     }
 
     /// <inheritdoc/>
-    public Task<FeatureUpdateFeatureResponse> UpdateFeature(
+    public Task<Feature> UpdateFeature(
         string id,
         FeatureUpdateFeatureParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -172,7 +172,7 @@ public sealed class FeatureServiceWithRawResponse : IFeatureServiceWithRawRespon
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<FeatureArchiveFeatureResponse>> ArchiveFeature(
+    public async Task<HttpResponse<Feature>> ArchiveFeature(
         FeatureArchiveFeatureParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -192,20 +192,18 @@ public sealed class FeatureServiceWithRawResponse : IFeatureServiceWithRawRespon
             response,
             async (token) =>
             {
-                var deserializedResponse = await response
-                    .Deserialize<FeatureArchiveFeatureResponse>(token)
-                    .ConfigureAwait(false);
+                var feature = await response.Deserialize<Feature>(token).ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    deserializedResponse.Validate();
+                    feature.Validate();
                 }
-                return deserializedResponse;
+                return feature;
             }
         );
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<FeatureArchiveFeatureResponse>> ArchiveFeature(
+    public Task<HttpResponse<Feature>> ArchiveFeature(
         string id,
         FeatureArchiveFeatureParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -217,7 +215,7 @@ public sealed class FeatureServiceWithRawResponse : IFeatureServiceWithRawRespon
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<FeatureCreateFeatureResponse>> CreateFeature(
+    public async Task<HttpResponse<Feature>> CreateFeature(
         FeatureCreateFeatureParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -232,14 +230,12 @@ public sealed class FeatureServiceWithRawResponse : IFeatureServiceWithRawRespon
             response,
             async (token) =>
             {
-                var deserializedResponse = await response
-                    .Deserialize<FeatureCreateFeatureResponse>(token)
-                    .ConfigureAwait(false);
+                var feature = await response.Deserialize<Feature>(token).ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    deserializedResponse.Validate();
+                    feature.Validate();
                 }
-                return deserializedResponse;
+                return feature;
             }
         );
     }
@@ -275,7 +271,7 @@ public sealed class FeatureServiceWithRawResponse : IFeatureServiceWithRawRespon
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<FeatureRetrieveFeatureResponse>> RetrieveFeature(
+    public async Task<HttpResponse<Feature>> RetrieveFeature(
         FeatureRetrieveFeatureParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -295,20 +291,18 @@ public sealed class FeatureServiceWithRawResponse : IFeatureServiceWithRawRespon
             response,
             async (token) =>
             {
-                var deserializedResponse = await response
-                    .Deserialize<FeatureRetrieveFeatureResponse>(token)
-                    .ConfigureAwait(false);
+                var feature = await response.Deserialize<Feature>(token).ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    deserializedResponse.Validate();
+                    feature.Validate();
                 }
-                return deserializedResponse;
+                return feature;
             }
         );
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<FeatureRetrieveFeatureResponse>> RetrieveFeature(
+    public Task<HttpResponse<Feature>> RetrieveFeature(
         string id,
         FeatureRetrieveFeatureParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -320,7 +314,7 @@ public sealed class FeatureServiceWithRawResponse : IFeatureServiceWithRawRespon
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<FeatureUnarchiveFeatureResponse>> UnarchiveFeature(
+    public async Task<HttpResponse<Feature>> UnarchiveFeature(
         FeatureUnarchiveFeatureParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -340,20 +334,18 @@ public sealed class FeatureServiceWithRawResponse : IFeatureServiceWithRawRespon
             response,
             async (token) =>
             {
-                var deserializedResponse = await response
-                    .Deserialize<FeatureUnarchiveFeatureResponse>(token)
-                    .ConfigureAwait(false);
+                var feature = await response.Deserialize<Feature>(token).ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    deserializedResponse.Validate();
+                    feature.Validate();
                 }
-                return deserializedResponse;
+                return feature;
             }
         );
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<FeatureUnarchiveFeatureResponse>> UnarchiveFeature(
+    public Task<HttpResponse<Feature>> UnarchiveFeature(
         string id,
         FeatureUnarchiveFeatureParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -365,7 +357,7 @@ public sealed class FeatureServiceWithRawResponse : IFeatureServiceWithRawRespon
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<FeatureUpdateFeatureResponse>> UpdateFeature(
+    public async Task<HttpResponse<Feature>> UpdateFeature(
         FeatureUpdateFeatureParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -385,20 +377,18 @@ public sealed class FeatureServiceWithRawResponse : IFeatureServiceWithRawRespon
             response,
             async (token) =>
             {
-                var deserializedResponse = await response
-                    .Deserialize<FeatureUpdateFeatureResponse>(token)
-                    .ConfigureAwait(false);
+                var feature = await response.Deserialize<Feature>(token).ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    deserializedResponse.Validate();
+                    feature.Validate();
                 }
-                return deserializedResponse;
+                return feature;
             }
         );
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<FeatureUpdateFeatureResponse>> UpdateFeature(
+    public Task<HttpResponse<Feature>> UpdateFeature(
         string id,
         FeatureUpdateFeatureParams? parameters = null,
         CancellationToken cancellationToken = default

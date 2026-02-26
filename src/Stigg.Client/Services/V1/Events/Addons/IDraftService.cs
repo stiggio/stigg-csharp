@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Stigg.Client.Core;
+using Stigg.Client.Models.V1.Events.Addons;
 using Stigg.Client.Models.V1.Events.Addons.Draft;
 
 namespace Stigg.Client.Services.V1.Events.Addons;
@@ -29,13 +30,13 @@ public interface IDraftService
     /// <summary>
     /// Creates a draft version of an existing addon for modification before publishing.
     /// </summary>
-    Task<DraftCreateAddonDraftResponse> CreateAddonDraft(
+    Task<Addon> CreateAddonDraft(
         DraftCreateAddonDraftParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="CreateAddonDraft(DraftCreateAddonDraftParams, CancellationToken)"/>
-    Task<DraftCreateAddonDraftResponse> CreateAddonDraft(
+    Task<Addon> CreateAddonDraft(
         string id,
         DraftCreateAddonDraftParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -74,13 +75,13 @@ public interface IDraftServiceWithRawResponse
     /// Returns a raw HTTP response for `post /api/v1/addons/{id}/draft`, but is otherwise the
     /// same as <see cref="IDraftService.CreateAddonDraft(DraftCreateAddonDraftParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<DraftCreateAddonDraftResponse>> CreateAddonDraft(
+    Task<HttpResponse<Addon>> CreateAddonDraft(
         DraftCreateAddonDraftParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="CreateAddonDraft(DraftCreateAddonDraftParams, CancellationToken)"/>
-    Task<HttpResponse<DraftCreateAddonDraftResponse>> CreateAddonDraft(
+    Task<HttpResponse<Addon>> CreateAddonDraft(
         string id,
         DraftCreateAddonDraftParams? parameters = null,
         CancellationToken cancellationToken = default

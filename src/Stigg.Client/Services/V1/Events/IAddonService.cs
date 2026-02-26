@@ -29,16 +29,18 @@ public interface IAddonService
 
     IDraftService Draft { get; }
 
+    IEntitlementService Entitlements { get; }
+
     /// <summary>
     /// Archives an addon, preventing it from being used in new subscriptions.
     /// </summary>
-    Task<AddonArchiveAddonResponse> ArchiveAddon(
+    Task<Addon> ArchiveAddon(
         AddonArchiveAddonParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="ArchiveAddon(AddonArchiveAddonParams, CancellationToken)"/>
-    Task<AddonArchiveAddonResponse> ArchiveAddon(
+    Task<Addon> ArchiveAddon(
         string id,
         AddonArchiveAddonParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -47,7 +49,7 @@ public interface IAddonService
     /// <summary>
     /// Creates a new addon in draft status, associated with a specific product.
     /// </summary>
-    Task<AddonCreateAddonResponse> CreateAddon(
+    Task<Addon> CreateAddon(
         AddonCreateAddonParams parameters,
         CancellationToken cancellationToken = default
     );
@@ -78,15 +80,30 @@ public interface IAddonService
     /// <summary>
     /// Retrieves an addon by its unique identifier, including entitlements and pricing details.
     /// </summary>
-    Task<AddonRetrieveAddonResponse> RetrieveAddon(
+    Task<Addon> RetrieveAddon(
         AddonRetrieveAddonParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="RetrieveAddon(AddonRetrieveAddonParams, CancellationToken)"/>
-    Task<AddonRetrieveAddonResponse> RetrieveAddon(
+    Task<Addon> RetrieveAddon(
         string id,
         AddonRetrieveAddonParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Sets the pricing configuration for an addon.
+    /// </summary>
+    Task<SetPackagePricingResponse> SetPricing(
+        AddonSetPricingParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="SetPricing(AddonSetPricingParams, CancellationToken)"/>
+    Task<SetPackagePricingResponse> SetPricing(
+        string id,
+        AddonSetPricingParams parameters,
         CancellationToken cancellationToken = default
     );
 
@@ -94,13 +111,13 @@ public interface IAddonService
     /// Updates an existing addon's properties such as display name, description,
     /// and metadata.
     /// </summary>
-    Task<AddonUpdateAddonResponse> UpdateAddon(
+    Task<Addon> UpdateAddon(
         AddonUpdateAddonParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="UpdateAddon(AddonUpdateAddonParams, CancellationToken)"/>
-    Task<AddonUpdateAddonResponse> UpdateAddon(
+    Task<Addon> UpdateAddon(
         string id,
         AddonUpdateAddonParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -122,17 +139,19 @@ public interface IAddonServiceWithRawResponse
 
     IDraftServiceWithRawResponse Draft { get; }
 
+    IEntitlementServiceWithRawResponse Entitlements { get; }
+
     /// <summary>
     /// Returns a raw HTTP response for `post /api/v1/addons/{id}/archive`, but is otherwise the
     /// same as <see cref="IAddonService.ArchiveAddon(AddonArchiveAddonParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<AddonArchiveAddonResponse>> ArchiveAddon(
+    Task<HttpResponse<Addon>> ArchiveAddon(
         AddonArchiveAddonParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="ArchiveAddon(AddonArchiveAddonParams, CancellationToken)"/>
-    Task<HttpResponse<AddonArchiveAddonResponse>> ArchiveAddon(
+    Task<HttpResponse<Addon>> ArchiveAddon(
         string id,
         AddonArchiveAddonParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -142,7 +161,7 @@ public interface IAddonServiceWithRawResponse
     /// Returns a raw HTTP response for `post /api/v1/addons`, but is otherwise the
     /// same as <see cref="IAddonService.CreateAddon(AddonCreateAddonParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<AddonCreateAddonResponse>> CreateAddon(
+    Task<HttpResponse<Addon>> CreateAddon(
         AddonCreateAddonParams parameters,
         CancellationToken cancellationToken = default
     );
@@ -176,15 +195,31 @@ public interface IAddonServiceWithRawResponse
     /// Returns a raw HTTP response for `get /api/v1/addons/{id}`, but is otherwise the
     /// same as <see cref="IAddonService.RetrieveAddon(AddonRetrieveAddonParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<AddonRetrieveAddonResponse>> RetrieveAddon(
+    Task<HttpResponse<Addon>> RetrieveAddon(
         AddonRetrieveAddonParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="RetrieveAddon(AddonRetrieveAddonParams, CancellationToken)"/>
-    Task<HttpResponse<AddonRetrieveAddonResponse>> RetrieveAddon(
+    Task<HttpResponse<Addon>> RetrieveAddon(
         string id,
         AddonRetrieveAddonParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `put /api/v1/addons/{id}/charges`, but is otherwise the
+    /// same as <see cref="IAddonService.SetPricing(AddonSetPricingParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<SetPackagePricingResponse>> SetPricing(
+        AddonSetPricingParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="SetPricing(AddonSetPricingParams, CancellationToken)"/>
+    Task<HttpResponse<SetPackagePricingResponse>> SetPricing(
+        string id,
+        AddonSetPricingParams parameters,
         CancellationToken cancellationToken = default
     );
 
@@ -192,13 +227,13 @@ public interface IAddonServiceWithRawResponse
     /// Returns a raw HTTP response for `patch /api/v1/addons/{id}`, but is otherwise the
     /// same as <see cref="IAddonService.UpdateAddon(AddonUpdateAddonParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<AddonUpdateAddonResponse>> UpdateAddon(
+    Task<HttpResponse<Addon>> UpdateAddon(
         AddonUpdateAddonParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="UpdateAddon(AddonUpdateAddonParams, CancellationToken)"/>
-    Task<HttpResponse<AddonUpdateAddonResponse>> UpdateAddon(
+    Task<HttpResponse<Addon>> UpdateAddon(
         string id,
         AddonUpdateAddonParams? parameters = null,
         CancellationToken cancellationToken = default

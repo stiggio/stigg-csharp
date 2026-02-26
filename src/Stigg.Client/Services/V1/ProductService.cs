@@ -35,7 +35,7 @@ public sealed class ProductService : IProductService
     }
 
     /// <inheritdoc/>
-    public async Task<ProductArchiveProductResponse> ArchiveProduct(
+    public async Task<Product> ArchiveProduct(
         ProductArchiveProductParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -47,7 +47,7 @@ public sealed class ProductService : IProductService
     }
 
     /// <inheritdoc/>
-    public Task<ProductArchiveProductResponse> ArchiveProduct(
+    public Task<Product> ArchiveProduct(
         string id,
         ProductArchiveProductParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -59,7 +59,7 @@ public sealed class ProductService : IProductService
     }
 
     /// <inheritdoc/>
-    public async Task<ProductCreateProductResponse> CreateProduct(
+    public async Task<Product> CreateProduct(
         ProductCreateProductParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -71,7 +71,7 @@ public sealed class ProductService : IProductService
     }
 
     /// <inheritdoc/>
-    public async Task<ProductDuplicateProductResponse> DuplicateProduct(
+    public async Task<Product> DuplicateProduct(
         ProductDuplicateProductParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -83,7 +83,7 @@ public sealed class ProductService : IProductService
     }
 
     /// <inheritdoc/>
-    public Task<ProductDuplicateProductResponse> DuplicateProduct(
+    public Task<Product> DuplicateProduct(
         string id,
         ProductDuplicateProductParams parameters,
         CancellationToken cancellationToken = default
@@ -105,7 +105,7 @@ public sealed class ProductService : IProductService
     }
 
     /// <inheritdoc/>
-    public async Task<ProductUnarchiveProductResponse> UnarchiveProduct(
+    public async Task<Product> UnarchiveProduct(
         ProductUnarchiveProductParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -117,7 +117,7 @@ public sealed class ProductService : IProductService
     }
 
     /// <inheritdoc/>
-    public Task<ProductUnarchiveProductResponse> UnarchiveProduct(
+    public Task<Product> UnarchiveProduct(
         string id,
         ProductUnarchiveProductParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -129,7 +129,7 @@ public sealed class ProductService : IProductService
     }
 
     /// <inheritdoc/>
-    public async Task<ProductUpdateProductResponse> UpdateProduct(
+    public async Task<Product> UpdateProduct(
         ProductUpdateProductParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -141,7 +141,7 @@ public sealed class ProductService : IProductService
     }
 
     /// <inheritdoc/>
-    public Task<ProductUpdateProductResponse> UpdateProduct(
+    public Task<Product> UpdateProduct(
         string id,
         ProductUpdateProductParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -170,7 +170,7 @@ public sealed class ProductServiceWithRawResponse : IProductServiceWithRawRespon
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<ProductArchiveProductResponse>> ArchiveProduct(
+    public async Task<HttpResponse<Product>> ArchiveProduct(
         ProductArchiveProductParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -190,20 +190,18 @@ public sealed class ProductServiceWithRawResponse : IProductServiceWithRawRespon
             response,
             async (token) =>
             {
-                var deserializedResponse = await response
-                    .Deserialize<ProductArchiveProductResponse>(token)
-                    .ConfigureAwait(false);
+                var product = await response.Deserialize<Product>(token).ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    deserializedResponse.Validate();
+                    product.Validate();
                 }
-                return deserializedResponse;
+                return product;
             }
         );
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<ProductArchiveProductResponse>> ArchiveProduct(
+    public Task<HttpResponse<Product>> ArchiveProduct(
         string id,
         ProductArchiveProductParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -215,7 +213,7 @@ public sealed class ProductServiceWithRawResponse : IProductServiceWithRawRespon
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<ProductCreateProductResponse>> CreateProduct(
+    public async Task<HttpResponse<Product>> CreateProduct(
         ProductCreateProductParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -230,20 +228,18 @@ public sealed class ProductServiceWithRawResponse : IProductServiceWithRawRespon
             response,
             async (token) =>
             {
-                var deserializedResponse = await response
-                    .Deserialize<ProductCreateProductResponse>(token)
-                    .ConfigureAwait(false);
+                var product = await response.Deserialize<Product>(token).ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    deserializedResponse.Validate();
+                    product.Validate();
                 }
-                return deserializedResponse;
+                return product;
             }
         );
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<ProductDuplicateProductResponse>> DuplicateProduct(
+    public async Task<HttpResponse<Product>> DuplicateProduct(
         ProductDuplicateProductParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -263,20 +259,18 @@ public sealed class ProductServiceWithRawResponse : IProductServiceWithRawRespon
             response,
             async (token) =>
             {
-                var deserializedResponse = await response
-                    .Deserialize<ProductDuplicateProductResponse>(token)
-                    .ConfigureAwait(false);
+                var product = await response.Deserialize<Product>(token).ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    deserializedResponse.Validate();
+                    product.Validate();
                 }
-                return deserializedResponse;
+                return product;
             }
         );
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<ProductDuplicateProductResponse>> DuplicateProduct(
+    public Task<HttpResponse<Product>> DuplicateProduct(
         string id,
         ProductDuplicateProductParams parameters,
         CancellationToken cancellationToken = default
@@ -316,7 +310,7 @@ public sealed class ProductServiceWithRawResponse : IProductServiceWithRawRespon
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<ProductUnarchiveProductResponse>> UnarchiveProduct(
+    public async Task<HttpResponse<Product>> UnarchiveProduct(
         ProductUnarchiveProductParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -336,20 +330,18 @@ public sealed class ProductServiceWithRawResponse : IProductServiceWithRawRespon
             response,
             async (token) =>
             {
-                var deserializedResponse = await response
-                    .Deserialize<ProductUnarchiveProductResponse>(token)
-                    .ConfigureAwait(false);
+                var product = await response.Deserialize<Product>(token).ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    deserializedResponse.Validate();
+                    product.Validate();
                 }
-                return deserializedResponse;
+                return product;
             }
         );
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<ProductUnarchiveProductResponse>> UnarchiveProduct(
+    public Task<HttpResponse<Product>> UnarchiveProduct(
         string id,
         ProductUnarchiveProductParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -361,7 +353,7 @@ public sealed class ProductServiceWithRawResponse : IProductServiceWithRawRespon
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<ProductUpdateProductResponse>> UpdateProduct(
+    public async Task<HttpResponse<Product>> UpdateProduct(
         ProductUpdateProductParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -381,20 +373,18 @@ public sealed class ProductServiceWithRawResponse : IProductServiceWithRawRespon
             response,
             async (token) =>
             {
-                var deserializedResponse = await response
-                    .Deserialize<ProductUpdateProductResponse>(token)
-                    .ConfigureAwait(false);
+                var product = await response.Deserialize<Product>(token).ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    deserializedResponse.Validate();
+                    product.Validate();
                 }
-                return deserializedResponse;
+                return product;
             }
         );
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<ProductUpdateProductResponse>> UpdateProduct(
+    public Task<HttpResponse<Product>> UpdateProduct(
         string id,
         ProductUpdateProductParams? parameters = null,
         CancellationToken cancellationToken = default

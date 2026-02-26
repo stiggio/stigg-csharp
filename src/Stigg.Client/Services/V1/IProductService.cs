@@ -29,13 +29,13 @@ public interface IProductService
     /// <summary>
     /// Archives a product, preventing new subscriptions. All plans and addons are archived.
     /// </summary>
-    Task<ProductArchiveProductResponse> ArchiveProduct(
+    Task<Product> ArchiveProduct(
         ProductArchiveProductParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="ArchiveProduct(ProductArchiveProductParams, CancellationToken)"/>
-    Task<ProductArchiveProductResponse> ArchiveProduct(
+    Task<Product> ArchiveProduct(
         string id,
         ProductArchiveProductParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -44,7 +44,7 @@ public interface IProductService
     /// <summary>
     /// Creates a new product.
     /// </summary>
-    Task<ProductCreateProductResponse> CreateProduct(
+    Task<Product> CreateProduct(
         ProductCreateProductParams parameters,
         CancellationToken cancellationToken = default
     );
@@ -52,13 +52,13 @@ public interface IProductService
     /// <summary>
     /// Duplicates an existing product, including its plans, addons, and configuration.
     /// </summary>
-    Task<ProductDuplicateProductResponse> DuplicateProduct(
+    Task<Product> DuplicateProduct(
         ProductDuplicateProductParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="DuplicateProduct(ProductDuplicateProductParams, CancellationToken)"/>
-    Task<ProductDuplicateProductResponse> DuplicateProduct(
+    Task<Product> DuplicateProduct(
         string id,
         ProductDuplicateProductParams parameters,
         CancellationToken cancellationToken = default
@@ -75,13 +75,13 @@ public interface IProductService
     /// <summary>
     /// Restores an archived product, allowing new subscriptions to be created.
     /// </summary>
-    Task<ProductUnarchiveProductResponse> UnarchiveProduct(
+    Task<Product> UnarchiveProduct(
         ProductUnarchiveProductParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="UnarchiveProduct(ProductUnarchiveProductParams, CancellationToken)"/>
-    Task<ProductUnarchiveProductResponse> UnarchiveProduct(
+    Task<Product> UnarchiveProduct(
         string id,
         ProductUnarchiveProductParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -91,13 +91,13 @@ public interface IProductService
     /// Updates an existing product's properties such as display name, description,
     /// and metadata.
     /// </summary>
-    Task<ProductUpdateProductResponse> UpdateProduct(
+    Task<Product> UpdateProduct(
         ProductUpdateProductParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="UpdateProduct(ProductUpdateProductParams, CancellationToken)"/>
-    Task<ProductUpdateProductResponse> UpdateProduct(
+    Task<Product> UpdateProduct(
         string id,
         ProductUpdateProductParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -121,13 +121,13 @@ public interface IProductServiceWithRawResponse
     /// Returns a raw HTTP response for `post /api/v1/products/{id}/archive`, but is otherwise the
     /// same as <see cref="IProductService.ArchiveProduct(ProductArchiveProductParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<ProductArchiveProductResponse>> ArchiveProduct(
+    Task<HttpResponse<Product>> ArchiveProduct(
         ProductArchiveProductParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="ArchiveProduct(ProductArchiveProductParams, CancellationToken)"/>
-    Task<HttpResponse<ProductArchiveProductResponse>> ArchiveProduct(
+    Task<HttpResponse<Product>> ArchiveProduct(
         string id,
         ProductArchiveProductParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -137,7 +137,7 @@ public interface IProductServiceWithRawResponse
     /// Returns a raw HTTP response for `post /api/v1/products`, but is otherwise the
     /// same as <see cref="IProductService.CreateProduct(ProductCreateProductParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<ProductCreateProductResponse>> CreateProduct(
+    Task<HttpResponse<Product>> CreateProduct(
         ProductCreateProductParams parameters,
         CancellationToken cancellationToken = default
     );
@@ -146,13 +146,13 @@ public interface IProductServiceWithRawResponse
     /// Returns a raw HTTP response for `post /api/v1/products/{id}/duplicate`, but is otherwise the
     /// same as <see cref="IProductService.DuplicateProduct(ProductDuplicateProductParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<ProductDuplicateProductResponse>> DuplicateProduct(
+    Task<HttpResponse<Product>> DuplicateProduct(
         ProductDuplicateProductParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="DuplicateProduct(ProductDuplicateProductParams, CancellationToken)"/>
-    Task<HttpResponse<ProductDuplicateProductResponse>> DuplicateProduct(
+    Task<HttpResponse<Product>> DuplicateProduct(
         string id,
         ProductDuplicateProductParams parameters,
         CancellationToken cancellationToken = default
@@ -171,13 +171,13 @@ public interface IProductServiceWithRawResponse
     /// Returns a raw HTTP response for `post /api/v1/products/{id}/unarchive`, but is otherwise the
     /// same as <see cref="IProductService.UnarchiveProduct(ProductUnarchiveProductParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<ProductUnarchiveProductResponse>> UnarchiveProduct(
+    Task<HttpResponse<Product>> UnarchiveProduct(
         ProductUnarchiveProductParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="UnarchiveProduct(ProductUnarchiveProductParams, CancellationToken)"/>
-    Task<HttpResponse<ProductUnarchiveProductResponse>> UnarchiveProduct(
+    Task<HttpResponse<Product>> UnarchiveProduct(
         string id,
         ProductUnarchiveProductParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -187,13 +187,13 @@ public interface IProductServiceWithRawResponse
     /// Returns a raw HTTP response for `patch /api/v1/products/{id}`, but is otherwise the
     /// same as <see cref="IProductService.UpdateProduct(ProductUpdateProductParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<ProductUpdateProductResponse>> UpdateProduct(
+    Task<HttpResponse<Product>> UpdateProduct(
         ProductUpdateProductParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="UpdateProduct(ProductUpdateProductParams, CancellationToken)"/>
-    Task<HttpResponse<ProductUpdateProductResponse>> UpdateProduct(
+    Task<HttpResponse<Product>> UpdateProduct(
         string id,
         ProductUpdateProductParams? parameters = null,
         CancellationToken cancellationToken = default

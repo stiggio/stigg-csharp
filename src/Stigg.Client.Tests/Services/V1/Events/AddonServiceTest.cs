@@ -8,18 +8,18 @@ public class AddonServiceTest : TestBase
     [Fact(Skip = "Mock server tests are disabled")]
     public async Task ArchiveAddon_Works()
     {
-        var response = await this.client.V1.Events.Addons.ArchiveAddon(
+        var addon = await this.client.V1.Events.Addons.ArchiveAddon(
             "x",
             new(),
             TestContext.Current.CancellationToken
         );
-        response.Validate();
+        addon.Validate();
     }
 
     [Fact(Skip = "Mock server tests are disabled")]
     public async Task CreateAddon_Works()
     {
-        var response = await this.client.V1.Events.Addons.CreateAddon(
+        var addon = await this.client.V1.Events.Addons.CreateAddon(
             new()
             {
                 ID = "id",
@@ -28,7 +28,7 @@ public class AddonServiceTest : TestBase
             },
             TestContext.Current.CancellationToken
         );
-        response.Validate();
+        addon.Validate();
     }
 
     [Fact(Skip = "Mock server tests are disabled")]
@@ -55,22 +55,33 @@ public class AddonServiceTest : TestBase
     [Fact(Skip = "Mock server tests are disabled")]
     public async Task RetrieveAddon_Works()
     {
-        var response = await this.client.V1.Events.Addons.RetrieveAddon(
+        var addon = await this.client.V1.Events.Addons.RetrieveAddon(
             "x",
             new(),
             TestContext.Current.CancellationToken
         );
-        response.Validate();
+        addon.Validate();
+    }
+
+    [Fact(Skip = "Mock server tests are disabled")]
+    public async Task SetPricing_Works()
+    {
+        var setPackagePricingResponse = await this.client.V1.Events.Addons.SetPricing(
+            "x",
+            new() { PricingType = AddonSetPricingParamsPricingType.Free },
+            TestContext.Current.CancellationToken
+        );
+        setPackagePricingResponse.Validate();
     }
 
     [Fact(Skip = "Mock server tests are disabled")]
     public async Task UpdateAddon_Works()
     {
-        var response = await this.client.V1.Events.Addons.UpdateAddon(
+        var addon = await this.client.V1.Events.Addons.UpdateAddon(
             "x",
             new(),
             TestContext.Current.CancellationToken
         );
-        response.Validate();
+        addon.Validate();
     }
 }

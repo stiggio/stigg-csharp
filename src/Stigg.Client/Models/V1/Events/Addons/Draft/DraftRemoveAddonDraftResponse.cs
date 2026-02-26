@@ -15,12 +15,12 @@ namespace Stigg.Client.Models.V1.Events.Addons.Draft;
 )]
 public sealed record class DraftRemoveAddonDraftResponse : JsonModel
 {
-    public required DraftRemoveAddonDraftResponseData Data
+    public required Data Data
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<DraftRemoveAddonDraftResponseData>("data");
+            return this._rawData.GetNotNullClass<Data>("data");
         }
         init { this._rawData.Set("data", value); }
     }
@@ -63,7 +63,7 @@ public sealed record class DraftRemoveAddonDraftResponse : JsonModel
     }
 
     [SetsRequiredMembers]
-    public DraftRemoveAddonDraftResponse(DraftRemoveAddonDraftResponseData data)
+    public DraftRemoveAddonDraftResponse(Data data)
         : this()
     {
         this.Data = data;
@@ -78,13 +78,8 @@ class DraftRemoveAddonDraftResponseFromRaw : IFromRawJson<DraftRemoveAddonDraftR
     ) => DraftRemoveAddonDraftResponse.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(
-    typeof(JsonModelConverter<
-        DraftRemoveAddonDraftResponseData,
-        DraftRemoveAddonDraftResponseDataFromRaw
-    >)
-)]
-public sealed record class DraftRemoveAddonDraftResponseData : JsonModel
+[JsonConverter(typeof(JsonModelConverter<Data, DataFromRaw>))]
+public sealed record class Data : JsonModel
 {
     /// <summary>
     /// The unique identifier for the entity
@@ -105,49 +100,44 @@ public sealed record class DraftRemoveAddonDraftResponseData : JsonModel
         _ = this.ID;
     }
 
-    public DraftRemoveAddonDraftResponseData() { }
+    public Data() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public DraftRemoveAddonDraftResponseData(
-        DraftRemoveAddonDraftResponseData draftRemoveAddonDraftResponseData
-    )
-        : base(draftRemoveAddonDraftResponseData) { }
+    public Data(Data data)
+        : base(data) { }
 #pragma warning restore CS8618
 
-    public DraftRemoveAddonDraftResponseData(IReadOnlyDictionary<string, JsonElement> rawData)
+    public Data(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    DraftRemoveAddonDraftResponseData(FrozenDictionary<string, JsonElement> rawData)
+    Data(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="DraftRemoveAddonDraftResponseDataFromRaw.FromRawUnchecked"/>
-    public static DraftRemoveAddonDraftResponseData FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
+    /// <inheritdoc cref="DataFromRaw.FromRawUnchecked"/>
+    public static Data FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 
     [SetsRequiredMembers]
-    public DraftRemoveAddonDraftResponseData(string id)
+    public Data(string id)
         : this()
     {
         this.ID = id;
     }
 }
 
-class DraftRemoveAddonDraftResponseDataFromRaw : IFromRawJson<DraftRemoveAddonDraftResponseData>
+class DataFromRaw : IFromRawJson<Data>
 {
     /// <inheritdoc/>
-    public DraftRemoveAddonDraftResponseData FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => DraftRemoveAddonDraftResponseData.FromRawUnchecked(rawData);
+    public Data FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Data.FromRawUnchecked(rawData);
 }

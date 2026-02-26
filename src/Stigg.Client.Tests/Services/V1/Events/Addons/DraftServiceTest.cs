@@ -7,12 +7,12 @@ public class DraftServiceTest : TestBase
     [Fact(Skip = "Mock server tests are disabled")]
     public async Task CreateAddonDraft_Works()
     {
-        var response = await this.client.V1.Events.Addons.Draft.CreateAddonDraft(
+        var addon = await this.client.V1.Events.Addons.Draft.CreateAddonDraft(
             "x",
             new(),
             TestContext.Current.CancellationToken
         );
-        response.Validate();
+        addon.Validate();
     }
 
     [Fact(Skip = "Mock server tests are disabled")]

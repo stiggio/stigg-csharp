@@ -29,13 +29,13 @@ public interface IFeatureService
     /// <summary>
     /// Archives a feature, preventing it from being used in new entitlements.
     /// </summary>
-    Task<FeatureArchiveFeatureResponse> ArchiveFeature(
+    Task<Feature> ArchiveFeature(
         FeatureArchiveFeatureParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="ArchiveFeature(FeatureArchiveFeatureParams, CancellationToken)"/>
-    Task<FeatureArchiveFeatureResponse> ArchiveFeature(
+    Task<Feature> ArchiveFeature(
         string id,
         FeatureArchiveFeatureParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -44,7 +44,7 @@ public interface IFeatureService
     /// <summary>
     /// Creates a new feature with the specified type, metering, and configuration.
     /// </summary>
-    Task<FeatureCreateFeatureResponse> CreateFeature(
+    Task<Feature> CreateFeature(
         FeatureCreateFeatureParams parameters,
         CancellationToken cancellationToken = default
     );
@@ -60,13 +60,13 @@ public interface IFeatureService
     /// <summary>
     /// Retrieves a feature by its unique identifier.
     /// </summary>
-    Task<FeatureRetrieveFeatureResponse> RetrieveFeature(
+    Task<Feature> RetrieveFeature(
         FeatureRetrieveFeatureParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="RetrieveFeature(FeatureRetrieveFeatureParams, CancellationToken)"/>
-    Task<FeatureRetrieveFeatureResponse> RetrieveFeature(
+    Task<Feature> RetrieveFeature(
         string id,
         FeatureRetrieveFeatureParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -75,13 +75,13 @@ public interface IFeatureService
     /// <summary>
     /// Restores an archived feature, allowing it to be used in entitlements again.
     /// </summary>
-    Task<FeatureUnarchiveFeatureResponse> UnarchiveFeature(
+    Task<Feature> UnarchiveFeature(
         FeatureUnarchiveFeatureParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="UnarchiveFeature(FeatureUnarchiveFeatureParams, CancellationToken)"/>
-    Task<FeatureUnarchiveFeatureResponse> UnarchiveFeature(
+    Task<Feature> UnarchiveFeature(
         string id,
         FeatureUnarchiveFeatureParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -91,13 +91,13 @@ public interface IFeatureService
     /// Updates an existing feature's properties such as display name, description,
     /// and configuration.
     /// </summary>
-    Task<FeatureUpdateFeatureResponse> UpdateFeature(
+    Task<Feature> UpdateFeature(
         FeatureUpdateFeatureParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="UpdateFeature(FeatureUpdateFeatureParams, CancellationToken)"/>
-    Task<FeatureUpdateFeatureResponse> UpdateFeature(
+    Task<Feature> UpdateFeature(
         string id,
         FeatureUpdateFeatureParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -121,13 +121,13 @@ public interface IFeatureServiceWithRawResponse
     /// Returns a raw HTTP response for `post /api/v1/features/{id}/archive`, but is otherwise the
     /// same as <see cref="IFeatureService.ArchiveFeature(FeatureArchiveFeatureParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<FeatureArchiveFeatureResponse>> ArchiveFeature(
+    Task<HttpResponse<Feature>> ArchiveFeature(
         FeatureArchiveFeatureParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="ArchiveFeature(FeatureArchiveFeatureParams, CancellationToken)"/>
-    Task<HttpResponse<FeatureArchiveFeatureResponse>> ArchiveFeature(
+    Task<HttpResponse<Feature>> ArchiveFeature(
         string id,
         FeatureArchiveFeatureParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -137,7 +137,7 @@ public interface IFeatureServiceWithRawResponse
     /// Returns a raw HTTP response for `post /api/v1/features`, but is otherwise the
     /// same as <see cref="IFeatureService.CreateFeature(FeatureCreateFeatureParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<FeatureCreateFeatureResponse>> CreateFeature(
+    Task<HttpResponse<Feature>> CreateFeature(
         FeatureCreateFeatureParams parameters,
         CancellationToken cancellationToken = default
     );
@@ -155,13 +155,13 @@ public interface IFeatureServiceWithRawResponse
     /// Returns a raw HTTP response for `get /api/v1/features/{id}`, but is otherwise the
     /// same as <see cref="IFeatureService.RetrieveFeature(FeatureRetrieveFeatureParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<FeatureRetrieveFeatureResponse>> RetrieveFeature(
+    Task<HttpResponse<Feature>> RetrieveFeature(
         FeatureRetrieveFeatureParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="RetrieveFeature(FeatureRetrieveFeatureParams, CancellationToken)"/>
-    Task<HttpResponse<FeatureRetrieveFeatureResponse>> RetrieveFeature(
+    Task<HttpResponse<Feature>> RetrieveFeature(
         string id,
         FeatureRetrieveFeatureParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -171,13 +171,13 @@ public interface IFeatureServiceWithRawResponse
     /// Returns a raw HTTP response for `post /api/v1/features/{id}/unarchive`, but is otherwise the
     /// same as <see cref="IFeatureService.UnarchiveFeature(FeatureUnarchiveFeatureParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<FeatureUnarchiveFeatureResponse>> UnarchiveFeature(
+    Task<HttpResponse<Feature>> UnarchiveFeature(
         FeatureUnarchiveFeatureParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="UnarchiveFeature(FeatureUnarchiveFeatureParams, CancellationToken)"/>
-    Task<HttpResponse<FeatureUnarchiveFeatureResponse>> UnarchiveFeature(
+    Task<HttpResponse<Feature>> UnarchiveFeature(
         string id,
         FeatureUnarchiveFeatureParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -187,13 +187,13 @@ public interface IFeatureServiceWithRawResponse
     /// Returns a raw HTTP response for `patch /api/v1/features/{id}`, but is otherwise the
     /// same as <see cref="IFeatureService.UpdateFeature(FeatureUpdateFeatureParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<FeatureUpdateFeatureResponse>> UpdateFeature(
+    Task<HttpResponse<Feature>> UpdateFeature(
         FeatureUpdateFeatureParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="UpdateFeature(FeatureUpdateFeatureParams, CancellationToken)"/>
-    Task<HttpResponse<FeatureUpdateFeatureResponse>> UpdateFeature(
+    Task<HttpResponse<Feature>> UpdateFeature(
         string id,
         FeatureUpdateFeatureParams? parameters = null,
         CancellationToken cancellationToken = default

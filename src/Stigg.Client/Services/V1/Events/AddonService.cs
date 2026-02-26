@@ -34,6 +34,7 @@ public sealed class AddonService : IAddonService
 
         _withRawResponse = new(() => new AddonServiceWithRawResponse(client.WithRawResponse));
         _draft = new(() => new DraftService(client));
+        _entitlements = new(() => new EntitlementService(client));
     }
 
     readonly Lazy<IDraftService> _draft;
@@ -42,8 +43,14 @@ public sealed class AddonService : IAddonService
         get { return _draft.Value; }
     }
 
+    readonly Lazy<IEntitlementService> _entitlements;
+    public IEntitlementService Entitlements
+    {
+        get { return _entitlements.Value; }
+    }
+
     /// <inheritdoc/>
-    public async Task<AddonArchiveAddonResponse> ArchiveAddon(
+    public async Task<Addon> ArchiveAddon(
         AddonArchiveAddonParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -55,7 +62,7 @@ public sealed class AddonService : IAddonService
     }
 
     /// <inheritdoc/>
-    public Task<AddonArchiveAddonResponse> ArchiveAddon(
+    public Task<Addon> ArchiveAddon(
         string id,
         AddonArchiveAddonParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -67,7 +74,7 @@ public sealed class AddonService : IAddonService
     }
 
     /// <inheritdoc/>
-    public async Task<AddonCreateAddonResponse> CreateAddon(
+    public async Task<Addon> CreateAddon(
         AddonCreateAddonParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -113,7 +120,7 @@ public sealed class AddonService : IAddonService
     }
 
     /// <inheritdoc/>
-    public async Task<AddonRetrieveAddonResponse> RetrieveAddon(
+    public async Task<Addon> RetrieveAddon(
         AddonRetrieveAddonParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -125,7 +132,7 @@ public sealed class AddonService : IAddonService
     }
 
     /// <inheritdoc/>
-    public Task<AddonRetrieveAddonResponse> RetrieveAddon(
+    public Task<Addon> RetrieveAddon(
         string id,
         AddonRetrieveAddonParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -137,7 +144,29 @@ public sealed class AddonService : IAddonService
     }
 
     /// <inheritdoc/>
-    public async Task<AddonUpdateAddonResponse> UpdateAddon(
+    public async Task<SetPackagePricingResponse> SetPricing(
+        AddonSetPricingParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.SetPricing(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<SetPackagePricingResponse> SetPricing(
+        string id,
+        AddonSetPricingParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return this.SetPricing(parameters with { ID = id }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<Addon> UpdateAddon(
         AddonUpdateAddonParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -149,7 +178,7 @@ public sealed class AddonService : IAddonService
     }
 
     /// <inheritdoc/>
-    public Task<AddonUpdateAddonResponse> UpdateAddon(
+    public Task<Addon> UpdateAddon(
         string id,
         AddonUpdateAddonParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -177,6 +206,7 @@ public sealed class AddonServiceWithRawResponse : IAddonServiceWithRawResponse
         _client = client;
 
         _draft = new(() => new DraftServiceWithRawResponse(client));
+        _entitlements = new(() => new EntitlementServiceWithRawResponse(client));
     }
 
     readonly Lazy<IDraftServiceWithRawResponse> _draft;
@@ -185,8 +215,14 @@ public sealed class AddonServiceWithRawResponse : IAddonServiceWithRawResponse
         get { return _draft.Value; }
     }
 
+    readonly Lazy<IEntitlementServiceWithRawResponse> _entitlements;
+    public IEntitlementServiceWithRawResponse Entitlements
+    {
+        get { return _entitlements.Value; }
+    }
+
     /// <inheritdoc/>
-    public async Task<HttpResponse<AddonArchiveAddonResponse>> ArchiveAddon(
+    public async Task<HttpResponse<Addon>> ArchiveAddon(
         AddonArchiveAddonParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -206,20 +242,18 @@ public sealed class AddonServiceWithRawResponse : IAddonServiceWithRawResponse
             response,
             async (token) =>
             {
-                var deserializedResponse = await response
-                    .Deserialize<AddonArchiveAddonResponse>(token)
-                    .ConfigureAwait(false);
+                var addon = await response.Deserialize<Addon>(token).ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    deserializedResponse.Validate();
+                    addon.Validate();
                 }
-                return deserializedResponse;
+                return addon;
             }
         );
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<AddonArchiveAddonResponse>> ArchiveAddon(
+    public Task<HttpResponse<Addon>> ArchiveAddon(
         string id,
         AddonArchiveAddonParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -231,7 +265,7 @@ public sealed class AddonServiceWithRawResponse : IAddonServiceWithRawResponse
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<AddonCreateAddonResponse>> CreateAddon(
+    public async Task<HttpResponse<Addon>> CreateAddon(
         AddonCreateAddonParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -246,14 +280,12 @@ public sealed class AddonServiceWithRawResponse : IAddonServiceWithRawResponse
             response,
             async (token) =>
             {
-                var deserializedResponse = await response
-                    .Deserialize<AddonCreateAddonResponse>(token)
-                    .ConfigureAwait(false);
+                var addon = await response.Deserialize<Addon>(token).ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    deserializedResponse.Validate();
+                    addon.Validate();
                 }
-                return deserializedResponse;
+                return addon;
             }
         );
     }
@@ -332,7 +364,7 @@ public sealed class AddonServiceWithRawResponse : IAddonServiceWithRawResponse
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<AddonRetrieveAddonResponse>> RetrieveAddon(
+    public async Task<HttpResponse<Addon>> RetrieveAddon(
         AddonRetrieveAddonParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -352,20 +384,18 @@ public sealed class AddonServiceWithRawResponse : IAddonServiceWithRawResponse
             response,
             async (token) =>
             {
-                var deserializedResponse = await response
-                    .Deserialize<AddonRetrieveAddonResponse>(token)
-                    .ConfigureAwait(false);
+                var addon = await response.Deserialize<Addon>(token).ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    deserializedResponse.Validate();
+                    addon.Validate();
                 }
-                return deserializedResponse;
+                return addon;
             }
         );
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<AddonRetrieveAddonResponse>> RetrieveAddon(
+    public Task<HttpResponse<Addon>> RetrieveAddon(
         string id,
         AddonRetrieveAddonParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -377,7 +407,50 @@ public sealed class AddonServiceWithRawResponse : IAddonServiceWithRawResponse
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<AddonUpdateAddonResponse>> UpdateAddon(
+    public async Task<HttpResponse<SetPackagePricingResponse>> SetPricing(
+        AddonSetPricingParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.ID == null)
+        {
+            throw new StiggInvalidDataException("'parameters.ID' cannot be null");
+        }
+
+        HttpRequest<AddonSetPricingParams> request = new()
+        {
+            Method = HttpMethod.Put,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var setPackagePricingResponse = await response
+                    .Deserialize<SetPackagePricingResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    setPackagePricingResponse.Validate();
+                }
+                return setPackagePricingResponse;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<SetPackagePricingResponse>> SetPricing(
+        string id,
+        AddonSetPricingParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return this.SetPricing(parameters with { ID = id }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<Addon>> UpdateAddon(
         AddonUpdateAddonParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -397,20 +470,18 @@ public sealed class AddonServiceWithRawResponse : IAddonServiceWithRawResponse
             response,
             async (token) =>
             {
-                var deserializedResponse = await response
-                    .Deserialize<AddonUpdateAddonResponse>(token)
-                    .ConfigureAwait(false);
+                var addon = await response.Deserialize<Addon>(token).ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    deserializedResponse.Validate();
+                    addon.Validate();
                 }
-                return deserializedResponse;
+                return addon;
             }
         );
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<AddonUpdateAddonResponse>> UpdateAddon(
+    public Task<HttpResponse<Addon>> UpdateAddon(
         string id,
         AddonUpdateAddonParams? parameters = null,
         CancellationToken cancellationToken = default

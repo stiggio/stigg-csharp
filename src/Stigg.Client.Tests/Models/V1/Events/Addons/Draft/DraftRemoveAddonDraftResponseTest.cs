@@ -11,7 +11,7 @@ public class DraftRemoveAddonDraftResponseTest : TestBase
     {
         var model = new DraftRemoveAddonDraftResponse { Data = new("id") };
 
-        DraftRemoveAddonDraftResponseData expectedData = new("id");
+        Data expectedData = new("id");
 
         Assert.Equal(expectedData, model.Data);
     }
@@ -42,7 +42,7 @@ public class DraftRemoveAddonDraftResponseTest : TestBase
         );
         Assert.NotNull(deserialized);
 
-        DraftRemoveAddonDraftResponseData expectedData = new("id");
+        Data expectedData = new("id");
 
         Assert.Equal(expectedData, deserialized.Data);
     }
@@ -66,12 +66,12 @@ public class DraftRemoveAddonDraftResponseTest : TestBase
     }
 }
 
-public class DraftRemoveAddonDraftResponseDataTest : TestBase
+public class DataTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new DraftRemoveAddonDraftResponseData { ID = "id" };
+        var model = new Data { ID = "id" };
 
         string expectedID = "id";
 
@@ -81,13 +81,10 @@ public class DraftRemoveAddonDraftResponseDataTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new DraftRemoveAddonDraftResponseData { ID = "id" };
+        var model = new Data { ID = "id" };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DraftRemoveAddonDraftResponseData>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Data>(json, ModelBase.SerializerOptions);
 
         Assert.Equal(model, deserialized);
     }
@@ -95,13 +92,10 @@ public class DraftRemoveAddonDraftResponseDataTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new DraftRemoveAddonDraftResponseData { ID = "id" };
+        var model = new Data { ID = "id" };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DraftRemoveAddonDraftResponseData>(
-            element,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
@@ -112,7 +106,7 @@ public class DraftRemoveAddonDraftResponseDataTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new DraftRemoveAddonDraftResponseData { ID = "id" };
+        var model = new Data { ID = "id" };
 
         model.Validate();
     }
@@ -120,9 +114,9 @@ public class DraftRemoveAddonDraftResponseDataTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new DraftRemoveAddonDraftResponseData { ID = "id" };
+        var model = new Data { ID = "id" };
 
-        DraftRemoveAddonDraftResponseData copied = new(model);
+        Data copied = new(model);
 
         Assert.Equal(model, copied);
     }
