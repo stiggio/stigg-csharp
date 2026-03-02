@@ -412,28 +412,34 @@ public record class SubscriptionUpdateParams : ParamsBase
     }
 }
 
+/// <summary>
+/// Addon configuration
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<Addon, AddonFromRaw>))]
 public sealed record class Addon : JsonModel
 {
     /// <summary>
     /// Addon ID
     /// </summary>
-    public required string AddonID
+    public required string ID
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("addonId");
+            return this._rawData.GetNotNullClass<string>("id");
         }
-        init { this._rawData.Set("addonId", value); }
+        init { this._rawData.Set("id", value); }
     }
 
-    public required double Quantity
+    /// <summary>
+    /// Number of addon instances
+    /// </summary>
+    public required long Quantity
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<double>("quantity");
+            return this._rawData.GetNotNullStruct<long>("quantity");
         }
         init { this._rawData.Set("quantity", value); }
     }
@@ -441,7 +447,7 @@ public sealed record class Addon : JsonModel
     /// <inheritdoc/>
     public override void Validate()
     {
-        _ = this.AddonID;
+        _ = this.ID;
         _ = this.Quantity;
     }
 

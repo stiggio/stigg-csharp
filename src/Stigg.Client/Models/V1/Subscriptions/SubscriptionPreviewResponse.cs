@@ -1021,7 +1021,7 @@ class SubscriptionPreviewResponseDataBillingPeriodRangeFromRaw
 }
 
 /// <summary>
-/// Free item in subscription
+/// Addon configuration
 /// </summary>
 [JsonConverter(typeof(JsonModelConverter<FreeItem, FreeItemFromRaw>))]
 public sealed record class FreeItem : JsonModel
@@ -1029,25 +1029,25 @@ public sealed record class FreeItem : JsonModel
     /// <summary>
     /// Addon ID
     /// </summary>
-    public required string AddonID
+    public required string ID
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("addonId");
+            return this._rawData.GetNotNullClass<string>("id");
         }
-        init { this._rawData.Set("addonId", value); }
+        init { this._rawData.Set("id", value); }
     }
 
     /// <summary>
-    /// Quantity
+    /// Number of addon instances
     /// </summary>
-    public required double Quantity
+    public required long Quantity
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<double>("quantity");
+            return this._rawData.GetNotNullStruct<long>("quantity");
         }
         init { this._rawData.Set("quantity", value); }
     }
@@ -1055,7 +1055,7 @@ public sealed record class FreeItem : JsonModel
     /// <inheritdoc/>
     public override void Validate()
     {
-        _ = this.AddonID;
+        _ = this.ID;
         _ = this.Quantity;
     }
 

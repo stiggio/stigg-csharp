@@ -478,41 +478,33 @@ public sealed record class SubscriptionPreviewParamsAddon : JsonModel
     /// <summary>
     /// Addon ID
     /// </summary>
-    public required string AddonID
+    public required string ID
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("addonId");
+            return this._rawData.GetNotNullClass<string>("id");
         }
-        init { this._rawData.Set("addonId", value); }
+        init { this._rawData.Set("id", value); }
     }
 
     /// <summary>
     /// Number of addon instances
     /// </summary>
-    public long? Quantity
+    public required long Quantity
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<long>("quantity");
+            return this._rawData.GetNotNullStruct<long>("quantity");
         }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("quantity", value);
-        }
+        init { this._rawData.Set("quantity", value); }
     }
 
     /// <inheritdoc/>
     public override void Validate()
     {
-        _ = this.AddonID;
+        _ = this.ID;
         _ = this.Quantity;
     }
 
@@ -545,13 +537,6 @@ public sealed record class SubscriptionPreviewParamsAddon : JsonModel
     )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-
-    [SetsRequiredMembers]
-    public SubscriptionPreviewParamsAddon(string addonID)
-        : this()
-    {
-        this.AddonID = addonID;
     }
 }
 

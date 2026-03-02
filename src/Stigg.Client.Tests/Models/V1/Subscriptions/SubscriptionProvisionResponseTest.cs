@@ -55,6 +55,7 @@ public class SubscriptionProvisionResponseTest : TestBase
                     PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
                     StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+                    Addons = [new() { ID = "id", Quantity = 0 }],
                     CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CancelReason =
                         SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
@@ -154,6 +155,7 @@ public class SubscriptionProvisionResponseTest : TestBase
                 PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+                Addons = [new() { ID = "id", Quantity = 0 }],
                 CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CancelReason =
                     SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
@@ -260,6 +262,7 @@ public class SubscriptionProvisionResponseTest : TestBase
                     PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
                     StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+                    Addons = [new() { ID = "id", Quantity = 0 }],
                     CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CancelReason =
                         SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
@@ -373,6 +376,7 @@ public class SubscriptionProvisionResponseTest : TestBase
                     PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
                     StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+                    Addons = [new() { ID = "id", Quantity = 0 }],
                     CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CancelReason =
                         SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
@@ -479,6 +483,7 @@ public class SubscriptionProvisionResponseTest : TestBase
                 PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+                Addons = [new() { ID = "id", Quantity = 0 }],
                 CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CancelReason =
                     SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
@@ -585,6 +590,7 @@ public class SubscriptionProvisionResponseTest : TestBase
                     PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
                     StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+                    Addons = [new() { ID = "id", Quantity = 0 }],
                     CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CancelReason =
                         SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
@@ -692,6 +698,7 @@ public class SubscriptionProvisionResponseTest : TestBase
                     PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
                     StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+                    Addons = [new() { ID = "id", Quantity = 0 }],
                     CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CancelReason =
                         SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
@@ -802,6 +809,7 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+                Addons = [new() { ID = "id", Quantity = 0 }],
                 CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CancelReason =
                     SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
@@ -899,6 +907,7 @@ public class SubscriptionProvisionResponseDataTest : TestBase
             PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+            Addons = [new() { ID = "id", Quantity = 0 }],
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CancelReason =
                 SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
@@ -1013,6 +1022,7 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+                Addons = [new() { ID = "id", Quantity = 0 }],
                 CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CancelReason =
                     SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
@@ -1123,6 +1133,7 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+                Addons = [new() { ID = "id", Quantity = 0 }],
                 CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CancelReason =
                     SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
@@ -1227,6 +1238,7 @@ public class SubscriptionProvisionResponseDataTest : TestBase
             PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+            Addons = [new() { ID = "id", Quantity = 0 }],
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CancelReason =
                 SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
@@ -1341,6 +1353,7 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+                Addons = [new() { ID = "id", Quantity = 0 }],
                 CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CancelReason =
                     SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
@@ -1445,6 +1458,7 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+                Addons = [new() { ID = "id", Quantity = 0 }],
                 CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CancelReason =
                     SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
@@ -1551,6 +1565,7 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+                Addons = [new() { ID = "id", Quantity = 0 }],
                 CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CancelReason =
                     SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
@@ -1652,6 +1667,7 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+                Addons = [new() { ID = "id", Quantity = 0 }],
                 CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CancelReason =
                     SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
@@ -1763,6 +1779,7 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+                Addons = [new() { ID = "id", Quantity = 0 }],
                 CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CancelReason =
                     SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
@@ -1869,6 +1886,7 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+                Addons = [new() { ID = "id", Quantity = 0 }],
                 CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CancelReason =
                     SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
@@ -3757,6 +3775,7 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+            Addons = [new() { ID = "id", Quantity = 0 }],
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CancelReason =
                 SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
@@ -3827,6 +3846,10 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
         DateTimeOffset expectedStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionStatus> expectedStatus =
             SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending;
+        List<SubscriptionProvisionResponseDataSubscriptionAddon> expectedAddons =
+        [
+            new() { ID = "id", Quantity = 0 },
+        ];
         DateTimeOffset expectedCancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<
             string,
@@ -3897,6 +3920,12 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
         Assert.Equal(expectedPricingType, model.PricingType);
         Assert.Equal(expectedStartDate, model.StartDate);
         Assert.Equal(expectedStatus, model.Status);
+        Assert.NotNull(model.Addons);
+        Assert.Equal(expectedAddons.Count, model.Addons.Count);
+        for (int i = 0; i < expectedAddons.Count; i++)
+        {
+            Assert.Equal(expectedAddons[i], model.Addons[i]);
+        }
         Assert.Equal(expectedCancellationDate, model.CancellationDate);
         Assert.Equal(expectedCancelReason, model.CancelReason);
         Assert.Equal(expectedCurrentBillingPeriodEnd, model.CurrentBillingPeriodEnd);
@@ -3938,6 +3967,7 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+            Addons = [new() { ID = "id", Quantity = 0 }],
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CancelReason =
                 SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
@@ -4016,6 +4046,7 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+            Addons = [new() { ID = "id", Quantity = 0 }],
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CancelReason =
                 SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
@@ -4094,6 +4125,10 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
         DateTimeOffset expectedStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionStatus> expectedStatus =
             SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending;
+        List<SubscriptionProvisionResponseDataSubscriptionAddon> expectedAddons =
+        [
+            new() { ID = "id", Quantity = 0 },
+        ];
         DateTimeOffset expectedCancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<
             string,
@@ -4164,6 +4199,12 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
         Assert.Equal(expectedPricingType, deserialized.PricingType);
         Assert.Equal(expectedStartDate, deserialized.StartDate);
         Assert.Equal(expectedStatus, deserialized.Status);
+        Assert.NotNull(deserialized.Addons);
+        Assert.Equal(expectedAddons.Count, deserialized.Addons.Count);
+        for (int i = 0; i < expectedAddons.Count; i++)
+        {
+            Assert.Equal(expectedAddons[i], deserialized.Addons[i]);
+        }
         Assert.Equal(expectedCancellationDate, deserialized.CancellationDate);
         Assert.Equal(expectedCancelReason, deserialized.CancelReason);
         Assert.Equal(expectedCurrentBillingPeriodEnd, deserialized.CurrentBillingPeriodEnd);
@@ -4205,6 +4246,7 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+            Addons = [new() { ID = "id", Quantity = 0 }],
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CancelReason =
                 SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
@@ -4290,6 +4332,8 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
+        Assert.Null(model.Addons);
+        Assert.False(model.RawData.ContainsKey("addons"));
         Assert.Null(model.Metadata);
         Assert.False(model.RawData.ContainsKey("metadata"));
         Assert.Null(model.Prices);
@@ -4357,10 +4401,13 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
             // Null should be interpreted as omitted for these properties
+            Addons = null,
             Metadata = null,
             Prices = null,
         };
 
+        Assert.Null(model.Addons);
+        Assert.False(model.RawData.ContainsKey("addons"));
         Assert.Null(model.Metadata);
         Assert.False(model.RawData.ContainsKey("metadata"));
         Assert.Null(model.Prices);
@@ -4396,6 +4443,7 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
             // Null should be interpreted as omitted for these properties
+            Addons = null,
             Metadata = null,
             Prices = null,
         };
@@ -4418,6 +4466,7 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+            Addons = [new() { ID = "id", Quantity = 0 }],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Prices =
             [
@@ -4496,6 +4545,7 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+            Addons = [new() { ID = "id", Quantity = 0 }],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Prices =
             [
@@ -4555,6 +4605,7 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+            Addons = [new() { ID = "id", Quantity = 0 }],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Prices =
             [
@@ -4644,6 +4695,7 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+            Addons = [new() { ID = "id", Quantity = 0 }],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Prices =
             [
@@ -4714,6 +4766,7 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+            Addons = [new() { ID = "id", Quantity = 0 }],
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CancelReason =
                 SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
@@ -4956,6 +5009,94 @@ public class SubscriptionProvisionResponseDataSubscriptionStatusTest : TestBase
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
+    }
+}
+
+public class SubscriptionProvisionResponseDataSubscriptionAddonTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionAddon
+        {
+            ID = "id",
+            Quantity = 0,
+        };
+
+        string expectedID = "id";
+        long expectedQuantity = 0;
+
+        Assert.Equal(expectedID, model.ID);
+        Assert.Equal(expectedQuantity, model.Quantity);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionAddon
+        {
+            ID = "id",
+            Quantity = 0,
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionProvisionResponseDataSubscriptionAddon>(
+                json,
+                ModelBase.SerializerOptions
+            );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionAddon
+        {
+            ID = "id",
+            Quantity = 0,
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionProvisionResponseDataSubscriptionAddon>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        Assert.NotNull(deserialized);
+
+        string expectedID = "id";
+        long expectedQuantity = 0;
+
+        Assert.Equal(expectedID, deserialized.ID);
+        Assert.Equal(expectedQuantity, deserialized.Quantity);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionAddon
+        {
+            ID = "id",
+            Quantity = 0,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionAddon
+        {
+            ID = "id",
+            Quantity = 0,
+        };
+
+        SubscriptionProvisionResponseDataSubscriptionAddon copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 

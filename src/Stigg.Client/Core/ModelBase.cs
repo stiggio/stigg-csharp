@@ -157,6 +157,8 @@ public abstract record class ModelBase
             >(),
             new ApiEnumConverter<string, Subscriptions::CancellationAction>(),
             new ApiEnumConverter<string, Subscriptions::CancellationTime>(),
+            new ApiEnumConverter<string, Subscriptions::SubscriptionBillingPeriod>(),
+            new ApiEnumConverter<string, Subscriptions::SubscriptionChargeType>(),
             new ApiEnumConverter<string, Subscriptions::SubscriptionMigrationTime>(),
             new ApiEnumConverter<
                 string,

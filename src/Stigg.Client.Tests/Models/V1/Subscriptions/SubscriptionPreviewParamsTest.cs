@@ -16,7 +16,7 @@ public class SubscriptionPreviewParamsTest : TestBase
         {
             CustomerID = "customerId",
             PlanID = "planId",
-            Addons = [new() { AddonID = "addonId", Quantity = 1 }],
+            Addons = [new() { ID = "id", Quantity = 0 }],
             AppliedCoupon = new()
             {
                 BillingCouponID = "billingCouponId",
@@ -93,10 +93,7 @@ public class SubscriptionPreviewParamsTest : TestBase
 
         string expectedCustomerID = "customerId";
         string expectedPlanID = "planId";
-        List<SubscriptionPreviewParamsAddon> expectedAddons =
-        [
-            new() { AddonID = "addonId", Quantity = 1 },
-        ];
+        List<SubscriptionPreviewParamsAddon> expectedAddons = [new() { ID = "id", Quantity = 0 }];
         SubscriptionPreviewParamsAppliedCoupon expectedAppliedCoupon = new()
         {
             BillingCouponID = "billingCouponId",
@@ -314,7 +311,7 @@ public class SubscriptionPreviewParamsTest : TestBase
         {
             CustomerID = "customerId",
             PlanID = "planId",
-            Addons = [new() { AddonID = "addonId", Quantity = 1 }],
+            Addons = [new() { ID = "id", Quantity = 0 }],
             AppliedCoupon = new()
             {
                 BillingCouponID = "billingCouponId",
@@ -400,19 +397,19 @@ public class SubscriptionPreviewParamsAddonTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new SubscriptionPreviewParamsAddon { AddonID = "addonId", Quantity = 1 };
+        var model = new SubscriptionPreviewParamsAddon { ID = "id", Quantity = 0 };
 
-        string expectedAddonID = "addonId";
-        long expectedQuantity = 1;
+        string expectedID = "id";
+        long expectedQuantity = 0;
 
-        Assert.Equal(expectedAddonID, model.AddonID);
+        Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedQuantity, model.Quantity);
     }
 
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new SubscriptionPreviewParamsAddon { AddonID = "addonId", Quantity = 1 };
+        var model = new SubscriptionPreviewParamsAddon { ID = "id", Quantity = 0 };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<SubscriptionPreviewParamsAddon>(
@@ -426,7 +423,7 @@ public class SubscriptionPreviewParamsAddonTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new SubscriptionPreviewParamsAddon { AddonID = "addonId", Quantity = 1 };
+        var model = new SubscriptionPreviewParamsAddon { ID = "id", Quantity = 0 };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<SubscriptionPreviewParamsAddon>(
@@ -435,63 +432,17 @@ public class SubscriptionPreviewParamsAddonTest : TestBase
         );
         Assert.NotNull(deserialized);
 
-        string expectedAddonID = "addonId";
-        long expectedQuantity = 1;
+        string expectedID = "id";
+        long expectedQuantity = 0;
 
-        Assert.Equal(expectedAddonID, deserialized.AddonID);
+        Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedQuantity, deserialized.Quantity);
     }
 
     [Fact]
     public void Validation_Works()
     {
-        var model = new SubscriptionPreviewParamsAddon { AddonID = "addonId", Quantity = 1 };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
-    {
-        var model = new SubscriptionPreviewParamsAddon { AddonID = "addonId" };
-
-        Assert.Null(model.Quantity);
-        Assert.False(model.RawData.ContainsKey("quantity"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new SubscriptionPreviewParamsAddon { AddonID = "addonId" };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
-    {
-        var model = new SubscriptionPreviewParamsAddon
-        {
-            AddonID = "addonId",
-
-            // Null should be interpreted as omitted for these properties
-            Quantity = null,
-        };
-
-        Assert.Null(model.Quantity);
-        Assert.False(model.RawData.ContainsKey("quantity"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new SubscriptionPreviewParamsAddon
-        {
-            AddonID = "addonId",
-
-            // Null should be interpreted as omitted for these properties
-            Quantity = null,
-        };
+        var model = new SubscriptionPreviewParamsAddon { ID = "id", Quantity = 0 };
 
         model.Validate();
     }
@@ -499,7 +450,7 @@ public class SubscriptionPreviewParamsAddonTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new SubscriptionPreviewParamsAddon { AddonID = "addonId", Quantity = 1 };
+        var model = new SubscriptionPreviewParamsAddon { ID = "id", Quantity = 0 };
 
         SubscriptionPreviewParamsAddon copied = new(model);
 

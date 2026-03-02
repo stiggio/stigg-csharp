@@ -15,7 +15,7 @@ public class SubscriptionUpdateParamsTest : TestBase
         var parameters = new Subscriptions::SubscriptionUpdateParams
         {
             ID = "x",
-            Addons = [new() { AddonID = "addonId", Quantity = 0 }],
+            Addons = [new() { ID = "id", Quantity = 0 }],
             AppliedCoupon = new()
             {
                 BillingCouponID = "billingCouponId",
@@ -115,7 +115,7 @@ public class SubscriptionUpdateParamsTest : TestBase
         };
 
         string expectedID = "x";
-        List<Subscriptions::Addon> expectedAddons = [new() { AddonID = "addonId", Quantity = 0 }];
+        List<Subscriptions::Addon> expectedAddons = [new() { ID = "id", Quantity = 0 }];
         Subscriptions::AppliedCoupon expectedAppliedCoupon = new()
         {
             BillingCouponID = "billingCouponId",
@@ -358,7 +358,7 @@ public class SubscriptionUpdateParamsTest : TestBase
         var parameters = new Subscriptions::SubscriptionUpdateParams
         {
             ID = "x",
-            Addons = [new() { AddonID = "addonId", Quantity = 0 }],
+            Addons = [new() { ID = "id", Quantity = 0 }],
             AppliedCoupon = new()
             {
                 BillingCouponID = "billingCouponId",
@@ -464,7 +464,7 @@ public class SubscriptionUpdateParamsTest : TestBase
         var parameters = new Subscriptions::SubscriptionUpdateParams
         {
             ID = "x",
-            Addons = [new() { AddonID = "addonId", Quantity = 0 }],
+            Addons = [new() { ID = "id", Quantity = 0 }],
             AppliedCoupon = new()
             {
                 BillingCouponID = "billingCouponId",
@@ -583,7 +583,7 @@ public class SubscriptionUpdateParamsTest : TestBase
         var parameters = new Subscriptions::SubscriptionUpdateParams
         {
             ID = "x",
-            Addons = [new() { AddonID = "addonId", Quantity = 0 }],
+            Addons = [new() { ID = "id", Quantity = 0 }],
             AppliedCoupon = new()
             {
                 BillingCouponID = "billingCouponId",
@@ -693,19 +693,19 @@ public class AddonTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Subscriptions::Addon { AddonID = "addonId", Quantity = 0 };
+        var model = new Subscriptions::Addon { ID = "id", Quantity = 0 };
 
-        string expectedAddonID = "addonId";
-        double expectedQuantity = 0;
+        string expectedID = "id";
+        long expectedQuantity = 0;
 
-        Assert.Equal(expectedAddonID, model.AddonID);
+        Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedQuantity, model.Quantity);
     }
 
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Subscriptions::Addon { AddonID = "addonId", Quantity = 0 };
+        var model = new Subscriptions::Addon { ID = "id", Quantity = 0 };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<Subscriptions::Addon>(
@@ -719,7 +719,7 @@ public class AddonTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Subscriptions::Addon { AddonID = "addonId", Quantity = 0 };
+        var model = new Subscriptions::Addon { ID = "id", Quantity = 0 };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<Subscriptions::Addon>(
@@ -728,17 +728,17 @@ public class AddonTest : TestBase
         );
         Assert.NotNull(deserialized);
 
-        string expectedAddonID = "addonId";
-        double expectedQuantity = 0;
+        string expectedID = "id";
+        long expectedQuantity = 0;
 
-        Assert.Equal(expectedAddonID, deserialized.AddonID);
+        Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedQuantity, deserialized.Quantity);
     }
 
     [Fact]
     public void Validation_Works()
     {
-        var model = new Subscriptions::Addon { AddonID = "addonId", Quantity = 0 };
+        var model = new Subscriptions::Addon { ID = "id", Quantity = 0 };
 
         model.Validate();
     }
@@ -746,7 +746,7 @@ public class AddonTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Subscriptions::Addon { AddonID = "addonId", Quantity = 0 };
+        var model = new Subscriptions::Addon { ID = "id", Quantity = 0 };
 
         Subscriptions::Addon copied = new(model);
 

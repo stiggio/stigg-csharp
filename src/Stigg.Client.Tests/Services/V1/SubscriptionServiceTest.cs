@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Stigg.Client.Models.V1.Subscriptions;
 
 namespace Stigg.Client.Tests.Services.V1;
 
@@ -73,7 +74,18 @@ public class SubscriptionServiceTest : TestBase
                         ID = "id",
                         CustomerID = "customerId",
                         PlanID = "planId",
+                        Addons = [new() { ID = "id", Quantity = 0 }],
                         BillingID = "billingId",
+                        BillingPeriod = SubscriptionBillingPeriod.Monthly,
+                        Charges =
+                        [
+                            new()
+                            {
+                                ID = "id",
+                                Quantity = 1,
+                                Type = SubscriptionChargeType.Feature,
+                            },
+                        ],
                         EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                         ResourceID = "resourceId",

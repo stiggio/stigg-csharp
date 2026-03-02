@@ -207,6 +207,27 @@ public sealed record class Data : JsonModel
         init { this._rawData.Set("status", value); }
     }
 
+    public IReadOnlyList<DataAddon>? Addons
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<DataAddon>>("addons");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set<ImmutableArray<DataAddon>?>(
+                "addons",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
     /// <summary>
     /// Subscription cancellation date
     /// </summary>
@@ -400,6 +421,10 @@ public sealed record class Data : JsonModel
         this.PricingType.Validate();
         _ = this.StartDate;
         this.Status.Validate();
+        foreach (var item in this.Addons ?? [])
+        {
+            item.Validate();
+        }
         _ = this.CancellationDate;
         this.CancelReason?.Validate();
         _ = this.CurrentBillingPeriodEnd;
@@ -608,6 +633,80 @@ sealed class StatusConverter : JsonConverter<Status>
             options
         );
     }
+}
+
+/// <summary>
+/// Addon configuration
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<DataAddon, DataAddonFromRaw>))]
+public sealed record class DataAddon : JsonModel
+{
+    /// <summary>
+    /// Addon ID
+    /// </summary>
+    public required string ID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
+        init { this._rawData.Set("id", value); }
+    }
+
+    /// <summary>
+    /// Number of addon instances
+    /// </summary>
+    public required long Quantity
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<long>("quantity");
+        }
+        init { this._rawData.Set("quantity", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.ID;
+        _ = this.Quantity;
+    }
+
+    public DataAddon() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public DataAddon(DataAddon dataAddon)
+        : base(dataAddon) { }
+#pragma warning restore CS8618
+
+    public DataAddon(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    DataAddon(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="DataAddonFromRaw.FromRawUnchecked"/>
+    public static DataAddon FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class DataAddonFromRaw : IFromRawJson<DataAddon>
+{
+    /// <inheritdoc/>
+    public DataAddon FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        DataAddon.FromRawUnchecked(rawData);
 }
 
 /// <summary>

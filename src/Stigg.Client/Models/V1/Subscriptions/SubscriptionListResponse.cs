@@ -141,6 +141,29 @@ public sealed record class SubscriptionListResponse : JsonModel
         init { this._rawData.Set("status", value); }
     }
 
+    public IReadOnlyList<SubscriptionListResponseAddon>? Addons
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<SubscriptionListResponseAddon>>(
+                "addons"
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set<ImmutableArray<SubscriptionListResponseAddon>?>(
+                "addons",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
     /// <summary>
     /// Subscription cancellation date
     /// </summary>
@@ -338,6 +361,10 @@ public sealed record class SubscriptionListResponse : JsonModel
         this.PricingType.Validate();
         _ = this.StartDate;
         this.Status.Validate();
+        foreach (var item in this.Addons ?? [])
+        {
+            item.Validate();
+        }
         _ = this.CancellationDate;
         this.CancelReason?.Validate();
         _ = this.CurrentBillingPeriodEnd;
@@ -555,6 +582,87 @@ sealed class SubscriptionListResponseStatusConverter : JsonConverter<Subscriptio
             options
         );
     }
+}
+
+/// <summary>
+/// Addon configuration
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<SubscriptionListResponseAddon, SubscriptionListResponseAddonFromRaw>)
+)]
+public sealed record class SubscriptionListResponseAddon : JsonModel
+{
+    /// <summary>
+    /// Addon ID
+    /// </summary>
+    public required string ID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
+        init { this._rawData.Set("id", value); }
+    }
+
+    /// <summary>
+    /// Number of addon instances
+    /// </summary>
+    public required long Quantity
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<long>("quantity");
+        }
+        init { this._rawData.Set("quantity", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.ID;
+        _ = this.Quantity;
+    }
+
+    public SubscriptionListResponseAddon() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public SubscriptionListResponseAddon(
+        SubscriptionListResponseAddon subscriptionListResponseAddon
+    )
+        : base(subscriptionListResponseAddon) { }
+#pragma warning restore CS8618
+
+    public SubscriptionListResponseAddon(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    SubscriptionListResponseAddon(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="SubscriptionListResponseAddonFromRaw.FromRawUnchecked"/>
+    public static SubscriptionListResponseAddon FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class SubscriptionListResponseAddonFromRaw : IFromRawJson<SubscriptionListResponseAddon>
+{
+    /// <inheritdoc/>
+    public SubscriptionListResponseAddon FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionListResponseAddon.FromRawUnchecked(rawData);
 }
 
 /// <summary>
