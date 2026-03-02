@@ -139,6 +139,7 @@ public abstract record class ModelBase
                 Subscriptions::SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency
             >(),
             new ApiEnumConverter<string, Subscriptions::Currency>(),
+            new ApiEnumConverter<string, Subscriptions::BillingCycleAnchor>(),
             new ApiEnumConverter<string, Subscriptions::ProrationBehavior>(),
             new ApiEnumConverter<string, Subscriptions::BillingPeriod>(),
             new ApiEnumConverter<string, Subscriptions::Type>(),
@@ -166,6 +167,10 @@ public abstract record class ModelBase
             >(),
             new ApiEnumConverter<
                 string,
+                Subscriptions::SubscriptionPreviewParamsBillingCycleAnchor
+            >(),
+            new ApiEnumConverter<
+                string,
                 Subscriptions::SubscriptionPreviewParamsBillingInformationProrationBehavior
             >(),
             new ApiEnumConverter<string, Subscriptions::SubscriptionPreviewParamsBillingPeriod>(),
@@ -178,6 +183,10 @@ public abstract record class ModelBase
             new ApiEnumConverter<
                 string,
                 Subscriptions::SubscriptionProvisionParamsAppliedCouponDiscountAmountsOffCurrency
+            >(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionProvisionParamsBillingCycleAnchor
             >(),
             new ApiEnumConverter<
                 string,

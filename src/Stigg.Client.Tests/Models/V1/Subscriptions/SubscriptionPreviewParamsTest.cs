@@ -45,6 +45,7 @@ public class SubscriptionPreviewParamsTest : TestBase
             },
             BillableFeatures = [new() { FeatureID = "featureId", Quantity = 1 }],
             BillingCountryCode = "billingCountryCode",
+            BillingCycleAnchor = SubscriptionPreviewParamsBillingCycleAnchor.Unchanged,
             BillingInformation = new()
             {
                 BillingAddress = new()
@@ -122,6 +123,8 @@ public class SubscriptionPreviewParamsTest : TestBase
             new() { FeatureID = "featureId", Quantity = 1 },
         ];
         string expectedBillingCountryCode = "billingCountryCode";
+        ApiEnum<string, SubscriptionPreviewParamsBillingCycleAnchor> expectedBillingCycleAnchor =
+            SubscriptionPreviewParamsBillingCycleAnchor.Unchanged;
         SubscriptionPreviewParamsBillingInformation expectedBillingInformation = new()
         {
             BillingAddress = new()
@@ -185,6 +188,7 @@ public class SubscriptionPreviewParamsTest : TestBase
             Assert.Equal(expectedBillableFeatures[i], parameters.BillableFeatures[i]);
         }
         Assert.Equal(expectedBillingCountryCode, parameters.BillingCountryCode);
+        Assert.Equal(expectedBillingCycleAnchor, parameters.BillingCycleAnchor);
         Assert.Equal(expectedBillingInformation, parameters.BillingInformation);
         Assert.Equal(expectedBillingPeriod, parameters.BillingPeriod);
         Assert.NotNull(parameters.Charges);
@@ -218,6 +222,8 @@ public class SubscriptionPreviewParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("billableFeatures"));
         Assert.Null(parameters.BillingCountryCode);
         Assert.False(parameters.RawBodyData.ContainsKey("billingCountryCode"));
+        Assert.Null(parameters.BillingCycleAnchor);
+        Assert.False(parameters.RawBodyData.ContainsKey("billingCycleAnchor"));
         Assert.Null(parameters.BillingInformation);
         Assert.False(parameters.RawBodyData.ContainsKey("billingInformation"));
         Assert.Null(parameters.BillingPeriod);
@@ -251,6 +257,7 @@ public class SubscriptionPreviewParamsTest : TestBase
             AppliedCoupon = null,
             BillableFeatures = null,
             BillingCountryCode = null,
+            BillingCycleAnchor = null,
             BillingInformation = null,
             BillingPeriod = null,
             Charges = null,
@@ -270,6 +277,8 @@ public class SubscriptionPreviewParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("billableFeatures"));
         Assert.Null(parameters.BillingCountryCode);
         Assert.False(parameters.RawBodyData.ContainsKey("billingCountryCode"));
+        Assert.Null(parameters.BillingCycleAnchor);
+        Assert.False(parameters.RawBodyData.ContainsKey("billingCycleAnchor"));
         Assert.Null(parameters.BillingInformation);
         Assert.False(parameters.RawBodyData.ContainsKey("billingInformation"));
         Assert.Null(parameters.BillingPeriod);
@@ -340,6 +349,7 @@ public class SubscriptionPreviewParamsTest : TestBase
             },
             BillableFeatures = [new() { FeatureID = "featureId", Quantity = 1 }],
             BillingCountryCode = "billingCountryCode",
+            BillingCycleAnchor = SubscriptionPreviewParamsBillingCycleAnchor.Unchanged,
             BillingInformation = new()
             {
                 BillingAddress = new()
@@ -1646,6 +1656,60 @@ public class BillableFeatureTest : TestBase
         BillableFeature copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class SubscriptionPreviewParamsBillingCycleAnchorTest : TestBase
+{
+    [Theory]
+    [InlineData(SubscriptionPreviewParamsBillingCycleAnchor.Unchanged)]
+    [InlineData(SubscriptionPreviewParamsBillingCycleAnchor.Now)]
+    public void Validation_Works(SubscriptionPreviewParamsBillingCycleAnchor rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionPreviewParamsBillingCycleAnchor> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionPreviewParamsBillingCycleAnchor>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(SubscriptionPreviewParamsBillingCycleAnchor.Unchanged)]
+    [InlineData(SubscriptionPreviewParamsBillingCycleAnchor.Now)]
+    public void SerializationRoundtrip_Works(SubscriptionPreviewParamsBillingCycleAnchor rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionPreviewParamsBillingCycleAnchor> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionPreviewParamsBillingCycleAnchor>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionPreviewParamsBillingCycleAnchor>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionPreviewParamsBillingCycleAnchor>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
     }
 }
 

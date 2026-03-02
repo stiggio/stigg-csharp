@@ -35,6 +35,7 @@ public class SubscriptionUpdateParamsTest : TestBase
                 PromotionCode = "promotionCode",
             },
             AwaitPaymentConfirmation = true,
+            BillingCycleAnchor = Subscriptions::BillingCycleAnchor.Unchanged,
             BillingInformation = new()
             {
                 BillingAddress = new()
@@ -132,6 +133,8 @@ public class SubscriptionUpdateParamsTest : TestBase
             PromotionCode = "promotionCode",
         };
         bool expectedAwaitPaymentConfirmation = true;
+        ApiEnum<string, Subscriptions::BillingCycleAnchor> expectedBillingCycleAnchor =
+            Subscriptions::BillingCycleAnchor.Unchanged;
         Subscriptions::BillingInformation expectedBillingInformation = new()
         {
             BillingAddress = new()
@@ -219,6 +222,7 @@ public class SubscriptionUpdateParamsTest : TestBase
         }
         Assert.Equal(expectedAppliedCoupon, parameters.AppliedCoupon);
         Assert.Equal(expectedAwaitPaymentConfirmation, parameters.AwaitPaymentConfirmation);
+        Assert.Equal(expectedBillingCycleAnchor, parameters.BillingCycleAnchor);
         Assert.Equal(expectedBillingInformation, parameters.BillingInformation);
         Assert.Equal(expectedBillingPeriod, parameters.BillingPeriod);
         Assert.Equal(expectedBudget, parameters.Budget);
@@ -279,6 +283,8 @@ public class SubscriptionUpdateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("appliedCoupon"));
         Assert.Null(parameters.AwaitPaymentConfirmation);
         Assert.False(parameters.RawBodyData.ContainsKey("awaitPaymentConfirmation"));
+        Assert.Null(parameters.BillingCycleAnchor);
+        Assert.False(parameters.RawBodyData.ContainsKey("billingCycleAnchor"));
         Assert.Null(parameters.BillingInformation);
         Assert.False(parameters.RawBodyData.ContainsKey("billingInformation"));
         Assert.Null(parameters.BillingPeriod);
@@ -315,6 +321,7 @@ public class SubscriptionUpdateParamsTest : TestBase
             Addons = null,
             AppliedCoupon = null,
             AwaitPaymentConfirmation = null,
+            BillingCycleAnchor = null,
             BillingInformation = null,
             BillingPeriod = null,
             Charges = null,
@@ -332,6 +339,8 @@ public class SubscriptionUpdateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("appliedCoupon"));
         Assert.Null(parameters.AwaitPaymentConfirmation);
         Assert.False(parameters.RawBodyData.ContainsKey("awaitPaymentConfirmation"));
+        Assert.Null(parameters.BillingCycleAnchor);
+        Assert.False(parameters.RawBodyData.ContainsKey("billingCycleAnchor"));
         Assert.Null(parameters.BillingInformation);
         Assert.False(parameters.RawBodyData.ContainsKey("billingInformation"));
         Assert.Null(parameters.BillingPeriod);
@@ -378,6 +387,7 @@ public class SubscriptionUpdateParamsTest : TestBase
                 PromotionCode = "promotionCode",
             },
             AwaitPaymentConfirmation = true,
+            BillingCycleAnchor = Subscriptions::BillingCycleAnchor.Unchanged,
             BillingInformation = new()
             {
                 BillingAddress = new()
@@ -484,6 +494,7 @@ public class SubscriptionUpdateParamsTest : TestBase
                 PromotionCode = "promotionCode",
             },
             AwaitPaymentConfirmation = true,
+            BillingCycleAnchor = Subscriptions::BillingCycleAnchor.Unchanged,
             BillingInformation = new()
             {
                 BillingAddress = new()
@@ -603,6 +614,7 @@ public class SubscriptionUpdateParamsTest : TestBase
                 PromotionCode = "promotionCode",
             },
             AwaitPaymentConfirmation = true,
+            BillingCycleAnchor = Subscriptions::BillingCycleAnchor.Unchanged,
             BillingInformation = new()
             {
                 BillingAddress = new()
@@ -1869,6 +1881,62 @@ public class CurrencyTest : TestBase
             json,
             ModelBase.SerializerOptions
         );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class BillingCycleAnchorTest : TestBase
+{
+    [Theory]
+    [InlineData(Subscriptions::BillingCycleAnchor.Unchanged)]
+    [InlineData(Subscriptions::BillingCycleAnchor.Now)]
+    public void Validation_Works(Subscriptions::BillingCycleAnchor rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Subscriptions::BillingCycleAnchor> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::BillingCycleAnchor>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(Subscriptions::BillingCycleAnchor.Unchanged)]
+    [InlineData(Subscriptions::BillingCycleAnchor.Now)]
+    public void SerializationRoundtrip_Works(Subscriptions::BillingCycleAnchor rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Subscriptions::BillingCycleAnchor> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, Subscriptions::BillingCycleAnchor>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::BillingCycleAnchor>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, Subscriptions::BillingCycleAnchor>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }

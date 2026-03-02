@@ -87,6 +87,26 @@ public record class SubscriptionUpdateParams : ParamsBase
         }
     }
 
+    public ApiEnum<string, BillingCycleAnchor>? BillingCycleAnchor
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<ApiEnum<string, BillingCycleAnchor>>(
+                "billingCycleAnchor"
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawBodyData.Set("billingCycleAnchor", value);
+        }
+    }
+
     public BillingInformation? BillingInformation
     {
         get
@@ -1273,6 +1293,50 @@ sealed class CurrencyConverter : JsonConverter<Currency>
                 Currency.Pyg => "pyg",
                 Currency.Xof => "xof",
                 Currency.Xpf => "xpf",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+[JsonConverter(typeof(BillingCycleAnchorConverter))]
+public enum BillingCycleAnchor
+{
+    Unchanged,
+    Now,
+}
+
+sealed class BillingCycleAnchorConverter : JsonConverter<BillingCycleAnchor>
+{
+    public override BillingCycleAnchor Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "UNCHANGED" => BillingCycleAnchor.Unchanged,
+            "NOW" => BillingCycleAnchor.Now,
+            _ => (BillingCycleAnchor)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        BillingCycleAnchor value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                BillingCycleAnchor.Unchanged => "UNCHANGED",
+                BillingCycleAnchor.Now => "NOW",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

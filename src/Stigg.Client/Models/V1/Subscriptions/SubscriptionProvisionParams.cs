@@ -156,6 +156,29 @@ public record class SubscriptionProvisionParams : ParamsBase
     }
 
     /// <summary>
+    /// Billing cycle anchor behavior for the subscription
+    /// </summary>
+    public ApiEnum<string, SubscriptionProvisionParamsBillingCycleAnchor>? BillingCycleAnchor
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<
+                ApiEnum<string, SubscriptionProvisionParamsBillingCycleAnchor>
+            >("billingCycleAnchor");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawBodyData.Set("billingCycleAnchor", value);
+        }
+    }
+
+    /// <summary>
     /// External billing system identifier
     /// </summary>
     public string? BillingID
@@ -1590,6 +1613,54 @@ sealed class SubscriptionProvisionParamsAppliedCouponDiscountAmountsOffCurrencyC
                 SubscriptionProvisionParamsAppliedCouponDiscountAmountsOffCurrency.Pyg => "pyg",
                 SubscriptionProvisionParamsAppliedCouponDiscountAmountsOffCurrency.Xof => "xof",
                 SubscriptionProvisionParamsAppliedCouponDiscountAmountsOffCurrency.Xpf => "xpf",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Billing cycle anchor behavior for the subscription
+/// </summary>
+[JsonConverter(typeof(SubscriptionProvisionParamsBillingCycleAnchorConverter))]
+public enum SubscriptionProvisionParamsBillingCycleAnchor
+{
+    Unchanged,
+    Now,
+}
+
+sealed class SubscriptionProvisionParamsBillingCycleAnchorConverter
+    : JsonConverter<SubscriptionProvisionParamsBillingCycleAnchor>
+{
+    public override SubscriptionProvisionParamsBillingCycleAnchor Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "UNCHANGED" => SubscriptionProvisionParamsBillingCycleAnchor.Unchanged,
+            "NOW" => SubscriptionProvisionParamsBillingCycleAnchor.Now,
+            _ => (SubscriptionProvisionParamsBillingCycleAnchor)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        SubscriptionProvisionParamsBillingCycleAnchor value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                SubscriptionProvisionParamsBillingCycleAnchor.Unchanged => "UNCHANGED",
+                SubscriptionProvisionParamsBillingCycleAnchor.Now => "NOW",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

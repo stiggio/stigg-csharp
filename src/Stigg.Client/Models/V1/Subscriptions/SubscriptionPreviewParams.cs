@@ -151,6 +151,29 @@ public record class SubscriptionPreviewParams : ParamsBase
     }
 
     /// <summary>
+    /// Billing cycle anchor behavior for the subscription
+    /// </summary>
+    public ApiEnum<string, SubscriptionPreviewParamsBillingCycleAnchor>? BillingCycleAnchor
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<
+                ApiEnum<string, SubscriptionPreviewParamsBillingCycleAnchor>
+            >("billingCycleAnchor");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawBodyData.Set("billingCycleAnchor", value);
+        }
+    }
+
+    /// <summary>
     /// Billing and tax configuration
     /// </summary>
     public SubscriptionPreviewParamsBillingInformation? BillingInformation
@@ -1527,6 +1550,54 @@ class BillableFeatureFromRaw : IFromRawJson<BillableFeature>
     /// <inheritdoc/>
     public BillableFeature FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         BillableFeature.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Billing cycle anchor behavior for the subscription
+/// </summary>
+[JsonConverter(typeof(SubscriptionPreviewParamsBillingCycleAnchorConverter))]
+public enum SubscriptionPreviewParamsBillingCycleAnchor
+{
+    Unchanged,
+    Now,
+}
+
+sealed class SubscriptionPreviewParamsBillingCycleAnchorConverter
+    : JsonConverter<SubscriptionPreviewParamsBillingCycleAnchor>
+{
+    public override SubscriptionPreviewParamsBillingCycleAnchor Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "UNCHANGED" => SubscriptionPreviewParamsBillingCycleAnchor.Unchanged,
+            "NOW" => SubscriptionPreviewParamsBillingCycleAnchor.Now,
+            _ => (SubscriptionPreviewParamsBillingCycleAnchor)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        SubscriptionPreviewParamsBillingCycleAnchor value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                SubscriptionPreviewParamsBillingCycleAnchor.Unchanged => "UNCHANGED",
+                SubscriptionPreviewParamsBillingCycleAnchor.Now => "NOW",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }
 
 /// <summary>

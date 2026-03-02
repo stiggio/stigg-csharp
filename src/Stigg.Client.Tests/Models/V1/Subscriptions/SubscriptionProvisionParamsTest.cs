@@ -46,6 +46,7 @@ public class SubscriptionProvisionParamsTest : TestBase
             },
             AwaitPaymentConfirmation = true,
             BillingCountryCode = "billingCountryCode",
+            BillingCycleAnchor = SubscriptionProvisionParamsBillingCycleAnchor.Unchanged,
             BillingID = "billingId",
             BillingInformation = new()
             {
@@ -197,6 +198,8 @@ public class SubscriptionProvisionParamsTest : TestBase
         };
         bool expectedAwaitPaymentConfirmation = true;
         string expectedBillingCountryCode = "billingCountryCode";
+        ApiEnum<string, SubscriptionProvisionParamsBillingCycleAnchor> expectedBillingCycleAnchor =
+            SubscriptionProvisionParamsBillingCycleAnchor.Unchanged;
         string expectedBillingID = "billingId";
         SubscriptionProvisionParamsBillingInformation expectedBillingInformation = new()
         {
@@ -334,6 +337,7 @@ public class SubscriptionProvisionParamsTest : TestBase
         Assert.Equal(expectedAppliedCoupon, parameters.AppliedCoupon);
         Assert.Equal(expectedAwaitPaymentConfirmation, parameters.AwaitPaymentConfirmation);
         Assert.Equal(expectedBillingCountryCode, parameters.BillingCountryCode);
+        Assert.Equal(expectedBillingCycleAnchor, parameters.BillingCycleAnchor);
         Assert.Equal(expectedBillingID, parameters.BillingID);
         Assert.Equal(expectedBillingInformation, parameters.BillingInformation);
         Assert.Equal(expectedBillingPeriod, parameters.BillingPeriod);
@@ -414,6 +418,8 @@ public class SubscriptionProvisionParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("appliedCoupon"));
         Assert.Null(parameters.AwaitPaymentConfirmation);
         Assert.False(parameters.RawBodyData.ContainsKey("awaitPaymentConfirmation"));
+        Assert.Null(parameters.BillingCycleAnchor);
+        Assert.False(parameters.RawBodyData.ContainsKey("billingCycleAnchor"));
         Assert.Null(parameters.BillingInformation);
         Assert.False(parameters.RawBodyData.ContainsKey("billingInformation"));
         Assert.Null(parameters.BillingPeriod);
@@ -468,6 +474,7 @@ public class SubscriptionProvisionParamsTest : TestBase
             Addons = null,
             AppliedCoupon = null,
             AwaitPaymentConfirmation = null,
+            BillingCycleAnchor = null,
             BillingInformation = null,
             BillingPeriod = null,
             Charges = null,
@@ -490,6 +497,8 @@ public class SubscriptionProvisionParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("appliedCoupon"));
         Assert.Null(parameters.AwaitPaymentConfirmation);
         Assert.False(parameters.RawBodyData.ContainsKey("awaitPaymentConfirmation"));
+        Assert.Null(parameters.BillingCycleAnchor);
+        Assert.False(parameters.RawBodyData.ContainsKey("billingCycleAnchor"));
         Assert.Null(parameters.BillingInformation);
         Assert.False(parameters.RawBodyData.ContainsKey("billingInformation"));
         Assert.Null(parameters.BillingPeriod);
@@ -552,6 +561,7 @@ public class SubscriptionProvisionParamsTest : TestBase
                 PromotionCode = "promotionCode",
             },
             AwaitPaymentConfirmation = true,
+            BillingCycleAnchor = SubscriptionProvisionParamsBillingCycleAnchor.Unchanged,
             BillingInformation = new()
             {
                 BillingAddress = new()
@@ -712,6 +722,7 @@ public class SubscriptionProvisionParamsTest : TestBase
                 PromotionCode = "promotionCode",
             },
             AwaitPaymentConfirmation = true,
+            BillingCycleAnchor = SubscriptionProvisionParamsBillingCycleAnchor.Unchanged,
             BillingInformation = new()
             {
                 BillingAddress = new()
@@ -895,6 +906,7 @@ public class SubscriptionProvisionParamsTest : TestBase
             },
             AwaitPaymentConfirmation = true,
             BillingCountryCode = "billingCountryCode",
+            BillingCycleAnchor = SubscriptionProvisionParamsBillingCycleAnchor.Unchanged,
             BillingID = "billingId",
             BillingInformation = new()
             {
@@ -2219,6 +2231,60 @@ public class SubscriptionProvisionParamsAppliedCouponDiscountAmountsOffCurrencyT
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
             ApiEnum<string, SubscriptionProvisionParamsAppliedCouponDiscountAmountsOffCurrency>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class SubscriptionProvisionParamsBillingCycleAnchorTest : TestBase
+{
+    [Theory]
+    [InlineData(SubscriptionProvisionParamsBillingCycleAnchor.Unchanged)]
+    [InlineData(SubscriptionProvisionParamsBillingCycleAnchor.Now)]
+    public void Validation_Works(SubscriptionProvisionParamsBillingCycleAnchor rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionProvisionParamsBillingCycleAnchor> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionParamsBillingCycleAnchor>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(SubscriptionProvisionParamsBillingCycleAnchor.Unchanged)]
+    [InlineData(SubscriptionProvisionParamsBillingCycleAnchor.Now)]
+    public void SerializationRoundtrip_Works(SubscriptionProvisionParamsBillingCycleAnchor rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionProvisionParamsBillingCycleAnchor> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionParamsBillingCycleAnchor>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionParamsBillingCycleAnchor>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionParamsBillingCycleAnchor>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
