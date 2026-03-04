@@ -95,12 +95,8 @@ public class SubscriptionProvisionParamsTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MinimumSpend = new()
             {
-                Minimum = new()
-                {
-                    Amount = 0,
-                    BillingCountryCode = "billingCountryCode",
-                    Currency = SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Usd,
-                },
+                Amount = 0,
+                Currency = SubscriptionProvisionParamsMinimumSpendCurrency.Usd,
             },
             PayingCustomerID = "payingCustomerId",
             PaymentCollectionMethod = PaymentCollectionMethod.Charge,
@@ -109,7 +105,9 @@ public class SubscriptionProvisionParamsTest : TestBase
                 new()
                 {
                     AddonID = "addonId",
+                    Amount = 0,
                     BaseCharge = true,
+                    BillingCountryCode = "billingCountryCode",
                     BlockSize = 0,
                     CreditGrantCadence = CreditGrantCadence.BeginningOfBillingPeriod,
                     CreditRate = new()
@@ -118,29 +116,14 @@ public class SubscriptionProvisionParamsTest : TestBase
                         CurrencyID = "currencyId",
                         CostFormula = "costFormula",
                     },
+                    Currency = SubscriptionProvisionParamsPriceOverrideCurrency.Usd,
                     FeatureID = "featureId",
-                    Price = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency = SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd,
-                    },
                     Tiers =
                     [
                         new()
                         {
-                            FlatPrice = new()
-                            {
-                                Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
-                                Currency = FlatPriceCurrency.Usd,
-                            },
-                            UnitPrice = new()
-                            {
-                                Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
-                                Currency = UnitPriceCurrency.Usd,
-                            },
+                            FlatPrice = new() { Amount = 0, Currency = FlatPriceCurrency.Usd },
+                            UnitPrice = new() { Amount = 0, Currency = UnitPriceCurrency.Usd },
                             UpTo = 0,
                         },
                     ],
@@ -249,12 +232,8 @@ public class SubscriptionProvisionParamsTest : TestBase
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         SubscriptionProvisionParamsMinimumSpend expectedMinimumSpend = new()
         {
-            Minimum = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Usd,
-            },
+            Amount = 0,
+            Currency = SubscriptionProvisionParamsMinimumSpendCurrency.Usd,
         };
         string expectedPayingCustomerID = "payingCustomerId";
         ApiEnum<string, PaymentCollectionMethod> expectedPaymentCollectionMethod =
@@ -264,7 +243,9 @@ public class SubscriptionProvisionParamsTest : TestBase
             new()
             {
                 AddonID = "addonId",
+                Amount = 0,
                 BaseCharge = true,
+                BillingCountryCode = "billingCountryCode",
                 BlockSize = 0,
                 CreditGrantCadence = CreditGrantCadence.BeginningOfBillingPeriod,
                 CreditRate = new()
@@ -273,29 +254,14 @@ public class SubscriptionProvisionParamsTest : TestBase
                     CurrencyID = "currencyId",
                     CostFormula = "costFormula",
                 },
+                Currency = SubscriptionProvisionParamsPriceOverrideCurrency.Usd,
                 FeatureID = "featureId",
-                Price = new()
-                {
-                    Amount = 0,
-                    BillingCountryCode = "billingCountryCode",
-                    Currency = SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd,
-                },
                 Tiers =
                 [
                     new()
                     {
-                        FlatPrice = new()
-                        {
-                            Amount = 0,
-                            BillingCountryCode = "billingCountryCode",
-                            Currency = FlatPriceCurrency.Usd,
-                        },
-                        UnitPrice = new()
-                        {
-                            Amount = 0,
-                            BillingCountryCode = "billingCountryCode",
-                            Currency = UnitPriceCurrency.Usd,
-                        },
+                        FlatPrice = new() { Amount = 0, Currency = FlatPriceCurrency.Usd },
+                        UnitPrice = new() { Amount = 0, Currency = UnitPriceCurrency.Usd },
                         UpTo = 0,
                     },
                 ],
@@ -398,12 +364,8 @@ public class SubscriptionProvisionParamsTest : TestBase
             Budget = new() { HasSoftLimit = true, Limit = 0 },
             MinimumSpend = new()
             {
-                Minimum = new()
-                {
-                    Amount = 0,
-                    BillingCountryCode = "billingCountryCode",
-                    Currency = SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Usd,
-                },
+                Amount = 0,
+                Currency = SubscriptionProvisionParamsMinimumSpendCurrency.Usd,
             },
             PayingCustomerID = "payingCustomerId",
             ResourceID = "resourceId",
@@ -458,12 +420,8 @@ public class SubscriptionProvisionParamsTest : TestBase
             Budget = new() { HasSoftLimit = true, Limit = 0 },
             MinimumSpend = new()
             {
-                Minimum = new()
-                {
-                    Amount = 0,
-                    BillingCountryCode = "billingCountryCode",
-                    Currency = SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Usd,
-                },
+                Amount = 0,
+                Currency = SubscriptionProvisionParamsMinimumSpendCurrency.Usd,
             },
             PayingCustomerID = "payingCustomerId",
             ResourceID = "resourceId",
@@ -612,7 +570,9 @@ public class SubscriptionProvisionParamsTest : TestBase
                 new()
                 {
                     AddonID = "addonId",
+                    Amount = 0,
                     BaseCharge = true,
+                    BillingCountryCode = "billingCountryCode",
                     BlockSize = 0,
                     CreditGrantCadence = CreditGrantCadence.BeginningOfBillingPeriod,
                     CreditRate = new()
@@ -621,29 +581,14 @@ public class SubscriptionProvisionParamsTest : TestBase
                         CurrencyID = "currencyId",
                         CostFormula = "costFormula",
                     },
+                    Currency = SubscriptionProvisionParamsPriceOverrideCurrency.Usd,
                     FeatureID = "featureId",
-                    Price = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency = SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd,
-                    },
                     Tiers =
                     [
                         new()
                         {
-                            FlatPrice = new()
-                            {
-                                Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
-                                Currency = FlatPriceCurrency.Usd,
-                            },
-                            UnitPrice = new()
-                            {
-                                Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
-                                Currency = UnitPriceCurrency.Usd,
-                            },
+                            FlatPrice = new() { Amount = 0, Currency = FlatPriceCurrency.Usd },
+                            UnitPrice = new() { Amount = 0, Currency = UnitPriceCurrency.Usd },
                             UpTo = 0,
                         },
                     ],
@@ -773,7 +718,9 @@ public class SubscriptionProvisionParamsTest : TestBase
                 new()
                 {
                     AddonID = "addonId",
+                    Amount = 0,
                     BaseCharge = true,
+                    BillingCountryCode = "billingCountryCode",
                     BlockSize = 0,
                     CreditGrantCadence = CreditGrantCadence.BeginningOfBillingPeriod,
                     CreditRate = new()
@@ -782,29 +729,14 @@ public class SubscriptionProvisionParamsTest : TestBase
                         CurrencyID = "currencyId",
                         CostFormula = "costFormula",
                     },
+                    Currency = SubscriptionProvisionParamsPriceOverrideCurrency.Usd,
                     FeatureID = "featureId",
-                    Price = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency = SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd,
-                    },
                     Tiers =
                     [
                         new()
                         {
-                            FlatPrice = new()
-                            {
-                                Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
-                                Currency = FlatPriceCurrency.Usd,
-                            },
-                            UnitPrice = new()
-                            {
-                                Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
-                                Currency = UnitPriceCurrency.Usd,
-                            },
+                            FlatPrice = new() { Amount = 0, Currency = FlatPriceCurrency.Usd },
+                            UnitPrice = new() { Amount = 0, Currency = UnitPriceCurrency.Usd },
                             UpTo = 0,
                         },
                     ],
@@ -955,12 +887,8 @@ public class SubscriptionProvisionParamsTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MinimumSpend = new()
             {
-                Minimum = new()
-                {
-                    Amount = 0,
-                    BillingCountryCode = "billingCountryCode",
-                    Currency = SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Usd,
-                },
+                Amount = 0,
+                Currency = SubscriptionProvisionParamsMinimumSpendCurrency.Usd,
             },
             PayingCustomerID = "payingCustomerId",
             PaymentCollectionMethod = PaymentCollectionMethod.Charge,
@@ -969,7 +897,9 @@ public class SubscriptionProvisionParamsTest : TestBase
                 new()
                 {
                     AddonID = "addonId",
+                    Amount = 0,
                     BaseCharge = true,
+                    BillingCountryCode = "billingCountryCode",
                     BlockSize = 0,
                     CreditGrantCadence = CreditGrantCadence.BeginningOfBillingPeriod,
                     CreditRate = new()
@@ -978,29 +908,14 @@ public class SubscriptionProvisionParamsTest : TestBase
                         CurrencyID = "currencyId",
                         CostFormula = "costFormula",
                     },
+                    Currency = SubscriptionProvisionParamsPriceOverrideCurrency.Usd,
                     FeatureID = "featureId",
-                    Price = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency = SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd,
-                    },
                     Tiers =
                     [
                         new()
                         {
-                            FlatPrice = new()
-                            {
-                                Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
-                                Currency = FlatPriceCurrency.Usd,
-                            },
-                            UnitPrice = new()
-                            {
-                                Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
-                                Currency = UnitPriceCurrency.Usd,
-                            },
+                            FlatPrice = new() { Amount = 0, Currency = FlatPriceCurrency.Usd },
+                            UnitPrice = new() { Amount = 0, Currency = UnitPriceCurrency.Usd },
                             UpTo = 0,
                         },
                     ],
@@ -3700,22 +3615,16 @@ public class SubscriptionProvisionParamsMinimumSpendTest : TestBase
     {
         var model = new SubscriptionProvisionParamsMinimumSpend
         {
-            Minimum = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Usd,
-            },
-        };
-
-        SubscriptionProvisionParamsMinimumSpendMinimum expectedMinimum = new()
-        {
             Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Usd,
+            Currency = SubscriptionProvisionParamsMinimumSpendCurrency.Usd,
         };
 
-        Assert.Equal(expectedMinimum, model.Minimum);
+        double expectedAmount = 0;
+        ApiEnum<string, SubscriptionProvisionParamsMinimumSpendCurrency> expectedCurrency =
+            SubscriptionProvisionParamsMinimumSpendCurrency.Usd;
+
+        Assert.Equal(expectedAmount, model.Amount);
+        Assert.Equal(expectedCurrency, model.Currency);
     }
 
     [Fact]
@@ -3723,12 +3632,8 @@ public class SubscriptionProvisionParamsMinimumSpendTest : TestBase
     {
         var model = new SubscriptionProvisionParamsMinimumSpend
         {
-            Minimum = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Usd,
-            },
+            Amount = 0,
+            Currency = SubscriptionProvisionParamsMinimumSpendCurrency.Usd,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -3745,12 +3650,8 @@ public class SubscriptionProvisionParamsMinimumSpendTest : TestBase
     {
         var model = new SubscriptionProvisionParamsMinimumSpend
         {
-            Minimum = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Usd,
-            },
+            Amount = 0,
+            Currency = SubscriptionProvisionParamsMinimumSpendCurrency.Usd,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -3760,163 +3661,21 @@ public class SubscriptionProvisionParamsMinimumSpendTest : TestBase
         );
         Assert.NotNull(deserialized);
 
-        SubscriptionProvisionParamsMinimumSpendMinimum expectedMinimum = new()
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Usd,
-        };
-
-        Assert.Equal(expectedMinimum, deserialized.Minimum);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new SubscriptionProvisionParamsMinimumSpend
-        {
-            Minimum = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Usd,
-            },
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
-    {
-        var model = new SubscriptionProvisionParamsMinimumSpend { };
-
-        Assert.Null(model.Minimum);
-        Assert.False(model.RawData.ContainsKey("minimum"));
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new SubscriptionProvisionParamsMinimumSpend { };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
-    {
-        var model = new SubscriptionProvisionParamsMinimumSpend { Minimum = null };
-
-        Assert.Null(model.Minimum);
-        Assert.True(model.RawData.ContainsKey("minimum"));
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new SubscriptionProvisionParamsMinimumSpend { Minimum = null };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new SubscriptionProvisionParamsMinimumSpend
-        {
-            Minimum = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Usd,
-            },
-        };
-
-        SubscriptionProvisionParamsMinimumSpend copied = new(model);
-
-        Assert.Equal(model, copied);
-    }
-}
-
-public class SubscriptionProvisionParamsMinimumSpendMinimumTest : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new SubscriptionProvisionParamsMinimumSpendMinimum
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Usd,
-        };
-
         double expectedAmount = 0;
-        string expectedBillingCountryCode = "billingCountryCode";
-        ApiEnum<string, SubscriptionProvisionParamsMinimumSpendMinimumCurrency> expectedCurrency =
-            SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Usd;
-
-        Assert.Equal(expectedAmount, model.Amount);
-        Assert.Equal(expectedBillingCountryCode, model.BillingCountryCode);
-        Assert.Equal(expectedCurrency, model.Currency);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new SubscriptionProvisionParamsMinimumSpendMinimum
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Usd,
-        };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized =
-            JsonSerializer.Deserialize<SubscriptionProvisionParamsMinimumSpendMinimum>(
-                json,
-                ModelBase.SerializerOptions
-            );
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new SubscriptionProvisionParamsMinimumSpendMinimum
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Usd,
-        };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized =
-            JsonSerializer.Deserialize<SubscriptionProvisionParamsMinimumSpendMinimum>(
-                element,
-                ModelBase.SerializerOptions
-            );
-        Assert.NotNull(deserialized);
-
-        double expectedAmount = 0;
-        string expectedBillingCountryCode = "billingCountryCode";
-        ApiEnum<string, SubscriptionProvisionParamsMinimumSpendMinimumCurrency> expectedCurrency =
-            SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Usd;
+        ApiEnum<string, SubscriptionProvisionParamsMinimumSpendCurrency> expectedCurrency =
+            SubscriptionProvisionParamsMinimumSpendCurrency.Usd;
 
         Assert.Equal(expectedAmount, deserialized.Amount);
-        Assert.Equal(expectedBillingCountryCode, deserialized.BillingCountryCode);
         Assert.Equal(expectedCurrency, deserialized.Currency);
     }
 
     [Fact]
     public void Validation_Works()
     {
-        var model = new SubscriptionProvisionParamsMinimumSpendMinimum
+        var model = new SubscriptionProvisionParamsMinimumSpend
         {
             Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Usd,
+            Currency = SubscriptionProvisionParamsMinimumSpendCurrency.Usd,
         };
 
         model.Validate();
@@ -3925,10 +3684,7 @@ public class SubscriptionProvisionParamsMinimumSpendMinimumTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new SubscriptionProvisionParamsMinimumSpendMinimum
-        {
-            BillingCountryCode = "billingCountryCode",
-        };
+        var model = new SubscriptionProvisionParamsMinimumSpend { };
 
         Assert.Null(model.Amount);
         Assert.False(model.RawData.ContainsKey("amount"));
@@ -3939,10 +3695,7 @@ public class SubscriptionProvisionParamsMinimumSpendMinimumTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new SubscriptionProvisionParamsMinimumSpendMinimum
-        {
-            BillingCountryCode = "billingCountryCode",
-        };
+        var model = new SubscriptionProvisionParamsMinimumSpend { };
 
         model.Validate();
     }
@@ -3950,10 +3703,8 @@ public class SubscriptionProvisionParamsMinimumSpendMinimumTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new SubscriptionProvisionParamsMinimumSpendMinimum
+        var model = new SubscriptionProvisionParamsMinimumSpend
         {
-            BillingCountryCode = "billingCountryCode",
-
             // Null should be interpreted as omitted for these properties
             Amount = null,
             Currency = null,
@@ -3968,10 +3719,8 @@ public class SubscriptionProvisionParamsMinimumSpendMinimumTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new SubscriptionProvisionParamsMinimumSpendMinimum
+        var model = new SubscriptionProvisionParamsMinimumSpend
         {
-            BillingCountryCode = "billingCountryCode",
-
             // Null should be interpreted as omitted for these properties
             Amount = null,
             Currency = null,
@@ -3981,198 +3730,143 @@ public class SubscriptionProvisionParamsMinimumSpendMinimumTest : TestBase
     }
 
     [Fact]
-    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
-    {
-        var model = new SubscriptionProvisionParamsMinimumSpendMinimum
-        {
-            Amount = 0,
-            Currency = SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Usd,
-        };
-
-        Assert.Null(model.BillingCountryCode);
-        Assert.False(model.RawData.ContainsKey("billingCountryCode"));
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new SubscriptionProvisionParamsMinimumSpendMinimum
-        {
-            Amount = 0,
-            Currency = SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Usd,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
-    {
-        var model = new SubscriptionProvisionParamsMinimumSpendMinimum
-        {
-            Amount = 0,
-            Currency = SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Usd,
-
-            BillingCountryCode = null,
-        };
-
-        Assert.Null(model.BillingCountryCode);
-        Assert.True(model.RawData.ContainsKey("billingCountryCode"));
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new SubscriptionProvisionParamsMinimumSpendMinimum
-        {
-            Amount = 0,
-            Currency = SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Usd,
-
-            BillingCountryCode = null,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new SubscriptionProvisionParamsMinimumSpendMinimum
+        var model = new SubscriptionProvisionParamsMinimumSpend
         {
             Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Usd,
+            Currency = SubscriptionProvisionParamsMinimumSpendCurrency.Usd,
         };
 
-        SubscriptionProvisionParamsMinimumSpendMinimum copied = new(model);
+        SubscriptionProvisionParamsMinimumSpend copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class SubscriptionProvisionParamsMinimumSpendMinimumCurrencyTest : TestBase
+public class SubscriptionProvisionParamsMinimumSpendCurrencyTest : TestBase
 {
     [Theory]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Usd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Aed)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.All)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Amd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Ang)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Aud)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Awg)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Azn)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bam)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bbd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bdt)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bgn)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bif)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bmd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bnd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bsd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bwp)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Byn)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bzd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Brl)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Cad)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Cdf)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Chf)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Cny)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Czk)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Dkk)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Dop)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Dzd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Egp)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Etb)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Eur)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Fjd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Gbp)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Gel)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Gip)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Gmd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Gyd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Hkd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Hrk)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Htg)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Idr)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Ils)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Inr)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Isk)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Jmd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Jpy)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Kes)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Kgs)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Khr)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Kmf)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Krw)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Kyd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Kzt)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Lbp)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Lkr)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Lrd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Lsl)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mad)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mdl)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mga)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mkd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mmk)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mnt)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mop)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mro)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mvr)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mwk)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mxn)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Myr)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mzn)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Nad)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Ngn)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Nok)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Npr)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Nzd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Pgk)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Php)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Pkr)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Pln)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Qar)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Ron)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Rsd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Rub)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Rwf)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Sar)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Sbd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Scr)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Sek)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Sgd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Sle)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Sll)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Sos)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Szl)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Thb)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Tjs)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Top)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Try)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Ttd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Tzs)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Uah)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Uzs)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Vnd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Vuv)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Wst)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Xaf)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Xcd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Yer)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Zar)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Zmw)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Clp)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Djf)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Gnf)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Ugx)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Pyg)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Xof)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Xpf)]
-    public void Validation_Works(SubscriptionProvisionParamsMinimumSpendMinimumCurrency rawValue)
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Usd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Aed)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.All)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Amd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Ang)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Aud)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Awg)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Azn)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Bam)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Bbd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Bdt)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Bgn)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Bif)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Bmd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Bnd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Bsd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Bwp)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Byn)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Bzd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Brl)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Cad)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Cdf)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Chf)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Cny)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Czk)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Dkk)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Dop)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Dzd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Egp)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Etb)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Eur)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Fjd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Gbp)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Gel)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Gip)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Gmd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Gyd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Hkd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Hrk)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Htg)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Idr)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Ils)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Inr)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Isk)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Jmd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Jpy)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Kes)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Kgs)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Khr)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Kmf)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Krw)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Kyd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Kzt)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Lbp)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Lkr)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Lrd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Lsl)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Mad)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Mdl)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Mga)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Mkd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Mmk)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Mnt)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Mop)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Mro)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Mvr)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Mwk)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Mxn)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Myr)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Mzn)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Nad)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Ngn)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Nok)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Npr)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Nzd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Pgk)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Php)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Pkr)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Pln)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Qar)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Ron)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Rsd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Rub)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Rwf)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Sar)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Sbd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Scr)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Sek)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Sgd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Sle)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Sll)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Sos)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Szl)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Thb)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Tjs)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Top)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Try)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Ttd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Tzs)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Uah)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Uzs)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Vnd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Vuv)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Wst)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Xaf)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Xcd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Yer)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Zar)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Zmw)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Clp)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Djf)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Gnf)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Ugx)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Pyg)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Xof)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Xpf)]
+    public void Validation_Works(SubscriptionProvisionParamsMinimumSpendCurrency rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionProvisionParamsMinimumSpendMinimumCurrency> value = rawValue;
+        ApiEnum<string, SubscriptionProvisionParamsMinimumSpendCurrency> value = rawValue;
         value.Validate();
     }
 
@@ -4180,7 +3874,7 @@ public class SubscriptionProvisionParamsMinimumSpendMinimumCurrencyTest : TestBa
     public void InvalidEnumValidationThrows_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionProvisionParamsMinimumSpendMinimumCurrency>
+            ApiEnum<string, SubscriptionProvisionParamsMinimumSpendCurrency>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
@@ -4188,132 +3882,132 @@ public class SubscriptionProvisionParamsMinimumSpendMinimumCurrencyTest : TestBa
     }
 
     [Theory]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Usd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Aed)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.All)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Amd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Ang)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Aud)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Awg)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Azn)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bam)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bbd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bdt)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bgn)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bif)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bmd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bnd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bsd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bwp)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Byn)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bzd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Brl)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Cad)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Cdf)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Chf)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Cny)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Czk)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Dkk)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Dop)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Dzd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Egp)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Etb)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Eur)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Fjd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Gbp)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Gel)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Gip)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Gmd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Gyd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Hkd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Hrk)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Htg)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Idr)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Ils)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Inr)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Isk)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Jmd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Jpy)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Kes)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Kgs)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Khr)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Kmf)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Krw)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Kyd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Kzt)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Lbp)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Lkr)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Lrd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Lsl)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mad)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mdl)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mga)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mkd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mmk)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mnt)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mop)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mro)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mvr)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mwk)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mxn)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Myr)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mzn)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Nad)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Ngn)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Nok)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Npr)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Nzd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Pgk)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Php)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Pkr)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Pln)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Qar)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Ron)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Rsd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Rub)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Rwf)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Sar)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Sbd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Scr)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Sek)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Sgd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Sle)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Sll)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Sos)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Szl)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Thb)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Tjs)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Top)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Try)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Ttd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Tzs)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Uah)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Uzs)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Vnd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Vuv)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Wst)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Xaf)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Xcd)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Yer)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Zar)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Zmw)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Clp)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Djf)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Gnf)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Ugx)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Pyg)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Xof)]
-    [InlineData(SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Xpf)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Usd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Aed)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.All)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Amd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Ang)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Aud)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Awg)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Azn)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Bam)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Bbd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Bdt)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Bgn)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Bif)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Bmd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Bnd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Bsd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Bwp)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Byn)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Bzd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Brl)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Cad)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Cdf)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Chf)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Cny)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Czk)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Dkk)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Dop)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Dzd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Egp)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Etb)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Eur)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Fjd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Gbp)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Gel)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Gip)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Gmd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Gyd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Hkd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Hrk)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Htg)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Idr)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Ils)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Inr)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Isk)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Jmd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Jpy)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Kes)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Kgs)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Khr)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Kmf)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Krw)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Kyd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Kzt)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Lbp)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Lkr)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Lrd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Lsl)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Mad)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Mdl)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Mga)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Mkd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Mmk)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Mnt)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Mop)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Mro)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Mvr)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Mwk)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Mxn)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Myr)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Mzn)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Nad)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Ngn)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Nok)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Npr)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Nzd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Pgk)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Php)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Pkr)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Pln)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Qar)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Ron)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Rsd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Rub)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Rwf)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Sar)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Sbd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Scr)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Sek)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Sgd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Sle)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Sll)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Sos)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Szl)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Thb)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Tjs)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Top)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Try)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Ttd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Tzs)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Uah)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Uzs)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Vnd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Vuv)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Wst)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Xaf)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Xcd)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Yer)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Zar)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Zmw)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Clp)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Djf)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Gnf)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Ugx)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Pyg)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Xof)]
+    [InlineData(SubscriptionProvisionParamsMinimumSpendCurrency.Xpf)]
     public void SerializationRoundtrip_Works(
-        SubscriptionProvisionParamsMinimumSpendMinimumCurrency rawValue
+        SubscriptionProvisionParamsMinimumSpendCurrency rawValue
     )
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionProvisionParamsMinimumSpendMinimumCurrency> value = rawValue;
+        ApiEnum<string, SubscriptionProvisionParamsMinimumSpendCurrency> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionProvisionParamsMinimumSpendMinimumCurrency>
+            ApiEnum<string, SubscriptionProvisionParamsMinimumSpendCurrency>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -4323,11 +4017,11 @@ public class SubscriptionProvisionParamsMinimumSpendMinimumCurrencyTest : TestBa
     public void InvalidEnumSerializationRoundtrip_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionProvisionParamsMinimumSpendMinimumCurrency>
+            ApiEnum<string, SubscriptionProvisionParamsMinimumSpendCurrency>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionProvisionParamsMinimumSpendMinimumCurrency>
+            ApiEnum<string, SubscriptionProvisionParamsMinimumSpendCurrency>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -4402,7 +4096,9 @@ public class SubscriptionProvisionParamsPriceOverrideTest : TestBase
         var model = new SubscriptionProvisionParamsPriceOverride
         {
             AddonID = "addonId",
+            Amount = 0,
             BaseCharge = true,
+            BillingCountryCode = "billingCountryCode",
             BlockSize = 0,
             CreditGrantCadence = CreditGrantCadence.BeginningOfBillingPeriod,
             CreditRate = new()
@@ -4411,36 +4107,23 @@ public class SubscriptionProvisionParamsPriceOverrideTest : TestBase
                 CurrencyID = "currencyId",
                 CostFormula = "costFormula",
             },
+            Currency = SubscriptionProvisionParamsPriceOverrideCurrency.Usd,
             FeatureID = "featureId",
-            Price = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd,
-            },
             Tiers =
             [
                 new()
                 {
-                    FlatPrice = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency = FlatPriceCurrency.Usd,
-                    },
-                    UnitPrice = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency = UnitPriceCurrency.Usd,
-                    },
+                    FlatPrice = new() { Amount = 0, Currency = FlatPriceCurrency.Usd },
+                    UnitPrice = new() { Amount = 0, Currency = UnitPriceCurrency.Usd },
                     UpTo = 0,
                 },
             ],
         };
 
         string expectedAddonID = "addonId";
+        double expectedAmount = 0;
         bool expectedBaseCharge = true;
+        string expectedBillingCountryCode = "billingCountryCode";
         double expectedBlockSize = 0;
         ApiEnum<string, CreditGrantCadence> expectedCreditGrantCadence =
             CreditGrantCadence.BeginningOfBillingPeriod;
@@ -4450,40 +4133,28 @@ public class SubscriptionProvisionParamsPriceOverrideTest : TestBase
             CurrencyID = "currencyId",
             CostFormula = "costFormula",
         };
+        ApiEnum<string, SubscriptionProvisionParamsPriceOverrideCurrency> expectedCurrency =
+            SubscriptionProvisionParamsPriceOverrideCurrency.Usd;
         string expectedFeatureID = "featureId";
-        SubscriptionProvisionParamsPriceOverridePrice expectedPrice = new()
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd,
-        };
         List<Tier> expectedTiers =
         [
             new()
             {
-                FlatPrice = new()
-                {
-                    Amount = 0,
-                    BillingCountryCode = "billingCountryCode",
-                    Currency = FlatPriceCurrency.Usd,
-                },
-                UnitPrice = new()
-                {
-                    Amount = 0,
-                    BillingCountryCode = "billingCountryCode",
-                    Currency = UnitPriceCurrency.Usd,
-                },
+                FlatPrice = new() { Amount = 0, Currency = FlatPriceCurrency.Usd },
+                UnitPrice = new() { Amount = 0, Currency = UnitPriceCurrency.Usd },
                 UpTo = 0,
             },
         ];
 
         Assert.Equal(expectedAddonID, model.AddonID);
+        Assert.Equal(expectedAmount, model.Amount);
         Assert.Equal(expectedBaseCharge, model.BaseCharge);
+        Assert.Equal(expectedBillingCountryCode, model.BillingCountryCode);
         Assert.Equal(expectedBlockSize, model.BlockSize);
         Assert.Equal(expectedCreditGrantCadence, model.CreditGrantCadence);
         Assert.Equal(expectedCreditRate, model.CreditRate);
+        Assert.Equal(expectedCurrency, model.Currency);
         Assert.Equal(expectedFeatureID, model.FeatureID);
-        Assert.Equal(expectedPrice, model.Price);
         Assert.NotNull(model.Tiers);
         Assert.Equal(expectedTiers.Count, model.Tiers.Count);
         for (int i = 0; i < expectedTiers.Count; i++)
@@ -4498,7 +4169,9 @@ public class SubscriptionProvisionParamsPriceOverrideTest : TestBase
         var model = new SubscriptionProvisionParamsPriceOverride
         {
             AddonID = "addonId",
+            Amount = 0,
             BaseCharge = true,
+            BillingCountryCode = "billingCountryCode",
             BlockSize = 0,
             CreditGrantCadence = CreditGrantCadence.BeginningOfBillingPeriod,
             CreditRate = new()
@@ -4507,29 +4180,14 @@ public class SubscriptionProvisionParamsPriceOverrideTest : TestBase
                 CurrencyID = "currencyId",
                 CostFormula = "costFormula",
             },
+            Currency = SubscriptionProvisionParamsPriceOverrideCurrency.Usd,
             FeatureID = "featureId",
-            Price = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd,
-            },
             Tiers =
             [
                 new()
                 {
-                    FlatPrice = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency = FlatPriceCurrency.Usd,
-                    },
-                    UnitPrice = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency = UnitPriceCurrency.Usd,
-                    },
+                    FlatPrice = new() { Amount = 0, Currency = FlatPriceCurrency.Usd },
+                    UnitPrice = new() { Amount = 0, Currency = UnitPriceCurrency.Usd },
                     UpTo = 0,
                 },
             ],
@@ -4550,7 +4208,9 @@ public class SubscriptionProvisionParamsPriceOverrideTest : TestBase
         var model = new SubscriptionProvisionParamsPriceOverride
         {
             AddonID = "addonId",
+            Amount = 0,
             BaseCharge = true,
+            BillingCountryCode = "billingCountryCode",
             BlockSize = 0,
             CreditGrantCadence = CreditGrantCadence.BeginningOfBillingPeriod,
             CreditRate = new()
@@ -4559,29 +4219,14 @@ public class SubscriptionProvisionParamsPriceOverrideTest : TestBase
                 CurrencyID = "currencyId",
                 CostFormula = "costFormula",
             },
+            Currency = SubscriptionProvisionParamsPriceOverrideCurrency.Usd,
             FeatureID = "featureId",
-            Price = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd,
-            },
             Tiers =
             [
                 new()
                 {
-                    FlatPrice = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency = FlatPriceCurrency.Usd,
-                    },
-                    UnitPrice = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency = UnitPriceCurrency.Usd,
-                    },
+                    FlatPrice = new() { Amount = 0, Currency = FlatPriceCurrency.Usd },
+                    UnitPrice = new() { Amount = 0, Currency = UnitPriceCurrency.Usd },
                     UpTo = 0,
                 },
             ],
@@ -4595,7 +4240,9 @@ public class SubscriptionProvisionParamsPriceOverrideTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedAddonID = "addonId";
+        double expectedAmount = 0;
         bool expectedBaseCharge = true;
+        string expectedBillingCountryCode = "billingCountryCode";
         double expectedBlockSize = 0;
         ApiEnum<string, CreditGrantCadence> expectedCreditGrantCadence =
             CreditGrantCadence.BeginningOfBillingPeriod;
@@ -4605,40 +4252,28 @@ public class SubscriptionProvisionParamsPriceOverrideTest : TestBase
             CurrencyID = "currencyId",
             CostFormula = "costFormula",
         };
+        ApiEnum<string, SubscriptionProvisionParamsPriceOverrideCurrency> expectedCurrency =
+            SubscriptionProvisionParamsPriceOverrideCurrency.Usd;
         string expectedFeatureID = "featureId";
-        SubscriptionProvisionParamsPriceOverridePrice expectedPrice = new()
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd,
-        };
         List<Tier> expectedTiers =
         [
             new()
             {
-                FlatPrice = new()
-                {
-                    Amount = 0,
-                    BillingCountryCode = "billingCountryCode",
-                    Currency = FlatPriceCurrency.Usd,
-                },
-                UnitPrice = new()
-                {
-                    Amount = 0,
-                    BillingCountryCode = "billingCountryCode",
-                    Currency = UnitPriceCurrency.Usd,
-                },
+                FlatPrice = new() { Amount = 0, Currency = FlatPriceCurrency.Usd },
+                UnitPrice = new() { Amount = 0, Currency = UnitPriceCurrency.Usd },
                 UpTo = 0,
             },
         ];
 
         Assert.Equal(expectedAddonID, deserialized.AddonID);
+        Assert.Equal(expectedAmount, deserialized.Amount);
         Assert.Equal(expectedBaseCharge, deserialized.BaseCharge);
+        Assert.Equal(expectedBillingCountryCode, deserialized.BillingCountryCode);
         Assert.Equal(expectedBlockSize, deserialized.BlockSize);
         Assert.Equal(expectedCreditGrantCadence, deserialized.CreditGrantCadence);
         Assert.Equal(expectedCreditRate, deserialized.CreditRate);
+        Assert.Equal(expectedCurrency, deserialized.Currency);
         Assert.Equal(expectedFeatureID, deserialized.FeatureID);
-        Assert.Equal(expectedPrice, deserialized.Price);
         Assert.NotNull(deserialized.Tiers);
         Assert.Equal(expectedTiers.Count, deserialized.Tiers.Count);
         for (int i = 0; i < expectedTiers.Count; i++)
@@ -4653,7 +4288,9 @@ public class SubscriptionProvisionParamsPriceOverrideTest : TestBase
         var model = new SubscriptionProvisionParamsPriceOverride
         {
             AddonID = "addonId",
+            Amount = 0,
             BaseCharge = true,
+            BillingCountryCode = "billingCountryCode",
             BlockSize = 0,
             CreditGrantCadence = CreditGrantCadence.BeginningOfBillingPeriod,
             CreditRate = new()
@@ -4662,29 +4299,14 @@ public class SubscriptionProvisionParamsPriceOverrideTest : TestBase
                 CurrencyID = "currencyId",
                 CostFormula = "costFormula",
             },
+            Currency = SubscriptionProvisionParamsPriceOverrideCurrency.Usd,
             FeatureID = "featureId",
-            Price = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd,
-            },
             Tiers =
             [
                 new()
                 {
-                    FlatPrice = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency = FlatPriceCurrency.Usd,
-                    },
-                    UnitPrice = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency = UnitPriceCurrency.Usd,
-                    },
+                    FlatPrice = new() { Amount = 0, Currency = FlatPriceCurrency.Usd },
+                    UnitPrice = new() { Amount = 0, Currency = UnitPriceCurrency.Usd },
                     UpTo = 0,
                 },
             ],
@@ -4702,16 +4324,20 @@ public class SubscriptionProvisionParamsPriceOverrideTest : TestBase
             FeatureID = "featureId",
         };
 
+        Assert.Null(model.Amount);
+        Assert.False(model.RawData.ContainsKey("amount"));
         Assert.Null(model.BaseCharge);
         Assert.False(model.RawData.ContainsKey("baseCharge"));
+        Assert.Null(model.BillingCountryCode);
+        Assert.False(model.RawData.ContainsKey("billingCountryCode"));
         Assert.Null(model.BlockSize);
         Assert.False(model.RawData.ContainsKey("blockSize"));
         Assert.Null(model.CreditGrantCadence);
         Assert.False(model.RawData.ContainsKey("creditGrantCadence"));
         Assert.Null(model.CreditRate);
         Assert.False(model.RawData.ContainsKey("creditRate"));
-        Assert.Null(model.Price);
-        Assert.False(model.RawData.ContainsKey("price"));
+        Assert.Null(model.Currency);
+        Assert.False(model.RawData.ContainsKey("currency"));
         Assert.Null(model.Tiers);
         Assert.False(model.RawData.ContainsKey("tiers"));
     }
@@ -4737,24 +4363,30 @@ public class SubscriptionProvisionParamsPriceOverrideTest : TestBase
             FeatureID = "featureId",
 
             // Null should be interpreted as omitted for these properties
+            Amount = null,
             BaseCharge = null,
+            BillingCountryCode = null,
             BlockSize = null,
             CreditGrantCadence = null,
             CreditRate = null,
-            Price = null,
+            Currency = null,
             Tiers = null,
         };
 
+        Assert.Null(model.Amount);
+        Assert.False(model.RawData.ContainsKey("amount"));
         Assert.Null(model.BaseCharge);
         Assert.False(model.RawData.ContainsKey("baseCharge"));
+        Assert.Null(model.BillingCountryCode);
+        Assert.False(model.RawData.ContainsKey("billingCountryCode"));
         Assert.Null(model.BlockSize);
         Assert.False(model.RawData.ContainsKey("blockSize"));
         Assert.Null(model.CreditGrantCadence);
         Assert.False(model.RawData.ContainsKey("creditGrantCadence"));
         Assert.Null(model.CreditRate);
         Assert.False(model.RawData.ContainsKey("creditRate"));
-        Assert.Null(model.Price);
-        Assert.False(model.RawData.ContainsKey("price"));
+        Assert.Null(model.Currency);
+        Assert.False(model.RawData.ContainsKey("currency"));
         Assert.Null(model.Tiers);
         Assert.False(model.RawData.ContainsKey("tiers"));
     }
@@ -4768,11 +4400,13 @@ public class SubscriptionProvisionParamsPriceOverrideTest : TestBase
             FeatureID = "featureId",
 
             // Null should be interpreted as omitted for these properties
+            Amount = null,
             BaseCharge = null,
+            BillingCountryCode = null,
             BlockSize = null,
             CreditGrantCadence = null,
             CreditRate = null,
-            Price = null,
+            Currency = null,
             Tiers = null,
         };
 
@@ -4784,7 +4418,9 @@ public class SubscriptionProvisionParamsPriceOverrideTest : TestBase
     {
         var model = new SubscriptionProvisionParamsPriceOverride
         {
+            Amount = 0,
             BaseCharge = true,
+            BillingCountryCode = "billingCountryCode",
             BlockSize = 0,
             CreditGrantCadence = CreditGrantCadence.BeginningOfBillingPeriod,
             CreditRate = new()
@@ -4793,28 +4429,13 @@ public class SubscriptionProvisionParamsPriceOverrideTest : TestBase
                 CurrencyID = "currencyId",
                 CostFormula = "costFormula",
             },
-            Price = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd,
-            },
+            Currency = SubscriptionProvisionParamsPriceOverrideCurrency.Usd,
             Tiers =
             [
                 new()
                 {
-                    FlatPrice = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency = FlatPriceCurrency.Usd,
-                    },
-                    UnitPrice = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency = UnitPriceCurrency.Usd,
-                    },
+                    FlatPrice = new() { Amount = 0, Currency = FlatPriceCurrency.Usd },
+                    UnitPrice = new() { Amount = 0, Currency = UnitPriceCurrency.Usd },
                     UpTo = 0,
                 },
             ],
@@ -4831,7 +4452,9 @@ public class SubscriptionProvisionParamsPriceOverrideTest : TestBase
     {
         var model = new SubscriptionProvisionParamsPriceOverride
         {
+            Amount = 0,
             BaseCharge = true,
+            BillingCountryCode = "billingCountryCode",
             BlockSize = 0,
             CreditGrantCadence = CreditGrantCadence.BeginningOfBillingPeriod,
             CreditRate = new()
@@ -4840,28 +4463,13 @@ public class SubscriptionProvisionParamsPriceOverrideTest : TestBase
                 CurrencyID = "currencyId",
                 CostFormula = "costFormula",
             },
-            Price = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd,
-            },
+            Currency = SubscriptionProvisionParamsPriceOverrideCurrency.Usd,
             Tiers =
             [
                 new()
                 {
-                    FlatPrice = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency = FlatPriceCurrency.Usd,
-                    },
-                    UnitPrice = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency = UnitPriceCurrency.Usd,
-                    },
+                    FlatPrice = new() { Amount = 0, Currency = FlatPriceCurrency.Usd },
+                    UnitPrice = new() { Amount = 0, Currency = UnitPriceCurrency.Usd },
                     UpTo = 0,
                 },
             ],
@@ -4875,7 +4483,9 @@ public class SubscriptionProvisionParamsPriceOverrideTest : TestBase
     {
         var model = new SubscriptionProvisionParamsPriceOverride
         {
+            Amount = 0,
             BaseCharge = true,
+            BillingCountryCode = "billingCountryCode",
             BlockSize = 0,
             CreditGrantCadence = CreditGrantCadence.BeginningOfBillingPeriod,
             CreditRate = new()
@@ -4884,28 +4494,13 @@ public class SubscriptionProvisionParamsPriceOverrideTest : TestBase
                 CurrencyID = "currencyId",
                 CostFormula = "costFormula",
             },
-            Price = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd,
-            },
+            Currency = SubscriptionProvisionParamsPriceOverrideCurrency.Usd,
             Tiers =
             [
                 new()
                 {
-                    FlatPrice = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency = FlatPriceCurrency.Usd,
-                    },
-                    UnitPrice = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency = UnitPriceCurrency.Usd,
-                    },
+                    FlatPrice = new() { Amount = 0, Currency = FlatPriceCurrency.Usd },
+                    UnitPrice = new() { Amount = 0, Currency = UnitPriceCurrency.Usd },
                     UpTo = 0,
                 },
             ],
@@ -4925,7 +4520,9 @@ public class SubscriptionProvisionParamsPriceOverrideTest : TestBase
     {
         var model = new SubscriptionProvisionParamsPriceOverride
         {
+            Amount = 0,
             BaseCharge = true,
+            BillingCountryCode = "billingCountryCode",
             BlockSize = 0,
             CreditGrantCadence = CreditGrantCadence.BeginningOfBillingPeriod,
             CreditRate = new()
@@ -4934,28 +4531,13 @@ public class SubscriptionProvisionParamsPriceOverrideTest : TestBase
                 CurrencyID = "currencyId",
                 CostFormula = "costFormula",
             },
-            Price = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd,
-            },
+            Currency = SubscriptionProvisionParamsPriceOverrideCurrency.Usd,
             Tiers =
             [
                 new()
                 {
-                    FlatPrice = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency = FlatPriceCurrency.Usd,
-                    },
-                    UnitPrice = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency = UnitPriceCurrency.Usd,
-                    },
+                    FlatPrice = new() { Amount = 0, Currency = FlatPriceCurrency.Usd },
+                    UnitPrice = new() { Amount = 0, Currency = UnitPriceCurrency.Usd },
                     UpTo = 0,
                 },
             ],
@@ -4973,7 +4555,9 @@ public class SubscriptionProvisionParamsPriceOverrideTest : TestBase
         var model = new SubscriptionProvisionParamsPriceOverride
         {
             AddonID = "addonId",
+            Amount = 0,
             BaseCharge = true,
+            BillingCountryCode = "billingCountryCode",
             BlockSize = 0,
             CreditGrantCadence = CreditGrantCadence.BeginningOfBillingPeriod,
             CreditRate = new()
@@ -4982,29 +4566,14 @@ public class SubscriptionProvisionParamsPriceOverrideTest : TestBase
                 CurrencyID = "currencyId",
                 CostFormula = "costFormula",
             },
+            Currency = SubscriptionProvisionParamsPriceOverrideCurrency.Usd,
             FeatureID = "featureId",
-            Price = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd,
-            },
             Tiers =
             [
                 new()
                 {
-                    FlatPrice = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency = FlatPriceCurrency.Usd,
-                    },
-                    UnitPrice = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency = UnitPriceCurrency.Usd,
-                    },
+                    FlatPrice = new() { Amount = 0, Currency = FlatPriceCurrency.Usd },
+                    UnitPrice = new() { Amount = 0, Currency = UnitPriceCurrency.Usd },
                     UpTo = 0,
                 },
             ],
@@ -5215,340 +4784,129 @@ public class CreditRateTest : TestBase
     }
 }
 
-public class SubscriptionProvisionParamsPriceOverridePriceTest : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new SubscriptionProvisionParamsPriceOverridePrice
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd,
-        };
-
-        double expectedAmount = 0;
-        string expectedBillingCountryCode = "billingCountryCode";
-        ApiEnum<string, SubscriptionProvisionParamsPriceOverridePriceCurrency> expectedCurrency =
-            SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd;
-
-        Assert.Equal(expectedAmount, model.Amount);
-        Assert.Equal(expectedBillingCountryCode, model.BillingCountryCode);
-        Assert.Equal(expectedCurrency, model.Currency);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new SubscriptionProvisionParamsPriceOverridePrice
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd,
-        };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized =
-            JsonSerializer.Deserialize<SubscriptionProvisionParamsPriceOverridePrice>(
-                json,
-                ModelBase.SerializerOptions
-            );
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new SubscriptionProvisionParamsPriceOverridePrice
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd,
-        };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized =
-            JsonSerializer.Deserialize<SubscriptionProvisionParamsPriceOverridePrice>(
-                element,
-                ModelBase.SerializerOptions
-            );
-        Assert.NotNull(deserialized);
-
-        double expectedAmount = 0;
-        string expectedBillingCountryCode = "billingCountryCode";
-        ApiEnum<string, SubscriptionProvisionParamsPriceOverridePriceCurrency> expectedCurrency =
-            SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd;
-
-        Assert.Equal(expectedAmount, deserialized.Amount);
-        Assert.Equal(expectedBillingCountryCode, deserialized.BillingCountryCode);
-        Assert.Equal(expectedCurrency, deserialized.Currency);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new SubscriptionProvisionParamsPriceOverridePrice
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
-    {
-        var model = new SubscriptionProvisionParamsPriceOverridePrice
-        {
-            BillingCountryCode = "billingCountryCode",
-        };
-
-        Assert.Null(model.Amount);
-        Assert.False(model.RawData.ContainsKey("amount"));
-        Assert.Null(model.Currency);
-        Assert.False(model.RawData.ContainsKey("currency"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new SubscriptionProvisionParamsPriceOverridePrice
-        {
-            BillingCountryCode = "billingCountryCode",
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
-    {
-        var model = new SubscriptionProvisionParamsPriceOverridePrice
-        {
-            BillingCountryCode = "billingCountryCode",
-
-            // Null should be interpreted as omitted for these properties
-            Amount = null,
-            Currency = null,
-        };
-
-        Assert.Null(model.Amount);
-        Assert.False(model.RawData.ContainsKey("amount"));
-        Assert.Null(model.Currency);
-        Assert.False(model.RawData.ContainsKey("currency"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new SubscriptionProvisionParamsPriceOverridePrice
-        {
-            BillingCountryCode = "billingCountryCode",
-
-            // Null should be interpreted as omitted for these properties
-            Amount = null,
-            Currency = null,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
-    {
-        var model = new SubscriptionProvisionParamsPriceOverridePrice
-        {
-            Amount = 0,
-            Currency = SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd,
-        };
-
-        Assert.Null(model.BillingCountryCode);
-        Assert.False(model.RawData.ContainsKey("billingCountryCode"));
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new SubscriptionProvisionParamsPriceOverridePrice
-        {
-            Amount = 0,
-            Currency = SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
-    {
-        var model = new SubscriptionProvisionParamsPriceOverridePrice
-        {
-            Amount = 0,
-            Currency = SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd,
-
-            BillingCountryCode = null,
-        };
-
-        Assert.Null(model.BillingCountryCode);
-        Assert.True(model.RawData.ContainsKey("billingCountryCode"));
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new SubscriptionProvisionParamsPriceOverridePrice
-        {
-            Amount = 0,
-            Currency = SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd,
-
-            BillingCountryCode = null,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new SubscriptionProvisionParamsPriceOverridePrice
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd,
-        };
-
-        SubscriptionProvisionParamsPriceOverridePrice copied = new(model);
-
-        Assert.Equal(model, copied);
-    }
-}
-
-public class SubscriptionProvisionParamsPriceOverridePriceCurrencyTest : TestBase
+public class SubscriptionProvisionParamsPriceOverrideCurrencyTest : TestBase
 {
     [Theory]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Aed)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.All)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Amd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Ang)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Aud)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Awg)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Azn)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Bam)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Bbd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Bdt)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Bgn)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Bif)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Bmd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Bnd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Bsd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Bwp)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Byn)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Bzd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Brl)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Cad)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Cdf)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Chf)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Cny)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Czk)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Dkk)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Dop)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Dzd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Egp)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Etb)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Eur)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Fjd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Gbp)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Gel)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Gip)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Gmd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Gyd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Hkd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Hrk)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Htg)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Idr)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Ils)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Inr)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Isk)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Jmd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Jpy)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Kes)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Kgs)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Khr)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Kmf)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Krw)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Kyd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Kzt)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Lbp)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Lkr)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Lrd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Lsl)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Mad)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Mdl)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Mga)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Mkd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Mmk)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Mnt)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Mop)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Mro)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Mvr)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Mwk)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Mxn)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Myr)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Mzn)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Nad)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Ngn)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Nok)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Npr)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Nzd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Pgk)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Php)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Pkr)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Pln)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Qar)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Ron)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Rsd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Rub)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Rwf)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Sar)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Sbd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Scr)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Sek)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Sgd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Sle)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Sll)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Sos)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Szl)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Thb)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Tjs)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Top)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Try)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Ttd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Tzs)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Uah)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Uzs)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Vnd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Vuv)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Wst)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Xaf)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Xcd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Yer)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Zar)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Zmw)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Clp)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Djf)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Gnf)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Ugx)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Pyg)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Xof)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Xpf)]
-    public void Validation_Works(SubscriptionProvisionParamsPriceOverridePriceCurrency rawValue)
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Usd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Aed)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.All)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Amd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Ang)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Aud)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Awg)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Azn)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Bam)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Bbd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Bdt)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Bgn)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Bif)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Bmd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Bnd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Bsd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Bwp)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Byn)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Bzd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Brl)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Cad)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Cdf)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Chf)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Cny)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Czk)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Dkk)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Dop)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Dzd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Egp)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Etb)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Eur)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Fjd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Gbp)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Gel)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Gip)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Gmd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Gyd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Hkd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Hrk)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Htg)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Idr)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Ils)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Inr)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Isk)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Jmd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Jpy)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Kes)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Kgs)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Khr)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Kmf)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Krw)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Kyd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Kzt)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Lbp)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Lkr)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Lrd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Lsl)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Mad)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Mdl)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Mga)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Mkd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Mmk)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Mnt)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Mop)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Mro)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Mvr)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Mwk)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Mxn)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Myr)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Mzn)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Nad)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Ngn)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Nok)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Npr)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Nzd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Pgk)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Php)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Pkr)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Pln)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Qar)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Ron)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Rsd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Rub)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Rwf)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Sar)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Sbd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Scr)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Sek)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Sgd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Sle)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Sll)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Sos)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Szl)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Thb)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Tjs)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Top)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Try)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Ttd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Tzs)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Uah)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Uzs)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Vnd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Vuv)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Wst)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Xaf)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Xcd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Yer)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Zar)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Zmw)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Clp)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Djf)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Gnf)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Ugx)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Pyg)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Xof)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Xpf)]
+    public void Validation_Works(SubscriptionProvisionParamsPriceOverrideCurrency rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionProvisionParamsPriceOverridePriceCurrency> value = rawValue;
+        ApiEnum<string, SubscriptionProvisionParamsPriceOverrideCurrency> value = rawValue;
         value.Validate();
     }
 
@@ -5556,7 +4914,7 @@ public class SubscriptionProvisionParamsPriceOverridePriceCurrencyTest : TestBas
     public void InvalidEnumValidationThrows_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionProvisionParamsPriceOverridePriceCurrency>
+            ApiEnum<string, SubscriptionProvisionParamsPriceOverrideCurrency>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
@@ -5564,132 +4922,132 @@ public class SubscriptionProvisionParamsPriceOverridePriceCurrencyTest : TestBas
     }
 
     [Theory]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Aed)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.All)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Amd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Ang)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Aud)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Awg)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Azn)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Bam)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Bbd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Bdt)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Bgn)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Bif)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Bmd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Bnd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Bsd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Bwp)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Byn)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Bzd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Brl)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Cad)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Cdf)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Chf)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Cny)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Czk)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Dkk)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Dop)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Dzd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Egp)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Etb)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Eur)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Fjd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Gbp)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Gel)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Gip)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Gmd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Gyd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Hkd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Hrk)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Htg)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Idr)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Ils)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Inr)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Isk)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Jmd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Jpy)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Kes)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Kgs)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Khr)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Kmf)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Krw)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Kyd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Kzt)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Lbp)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Lkr)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Lrd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Lsl)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Mad)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Mdl)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Mga)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Mkd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Mmk)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Mnt)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Mop)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Mro)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Mvr)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Mwk)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Mxn)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Myr)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Mzn)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Nad)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Ngn)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Nok)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Npr)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Nzd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Pgk)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Php)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Pkr)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Pln)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Qar)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Ron)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Rsd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Rub)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Rwf)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Sar)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Sbd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Scr)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Sek)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Sgd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Sle)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Sll)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Sos)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Szl)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Thb)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Tjs)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Top)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Try)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Ttd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Tzs)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Uah)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Uzs)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Vnd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Vuv)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Wst)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Xaf)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Xcd)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Yer)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Zar)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Zmw)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Clp)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Djf)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Gnf)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Ugx)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Pyg)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Xof)]
-    [InlineData(SubscriptionProvisionParamsPriceOverridePriceCurrency.Xpf)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Usd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Aed)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.All)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Amd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Ang)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Aud)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Awg)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Azn)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Bam)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Bbd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Bdt)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Bgn)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Bif)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Bmd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Bnd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Bsd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Bwp)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Byn)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Bzd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Brl)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Cad)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Cdf)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Chf)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Cny)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Czk)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Dkk)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Dop)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Dzd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Egp)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Etb)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Eur)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Fjd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Gbp)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Gel)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Gip)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Gmd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Gyd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Hkd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Hrk)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Htg)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Idr)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Ils)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Inr)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Isk)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Jmd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Jpy)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Kes)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Kgs)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Khr)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Kmf)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Krw)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Kyd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Kzt)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Lbp)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Lkr)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Lrd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Lsl)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Mad)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Mdl)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Mga)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Mkd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Mmk)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Mnt)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Mop)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Mro)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Mvr)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Mwk)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Mxn)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Myr)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Mzn)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Nad)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Ngn)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Nok)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Npr)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Nzd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Pgk)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Php)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Pkr)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Pln)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Qar)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Ron)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Rsd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Rub)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Rwf)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Sar)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Sbd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Scr)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Sek)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Sgd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Sle)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Sll)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Sos)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Szl)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Thb)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Tjs)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Top)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Try)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Ttd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Tzs)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Uah)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Uzs)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Vnd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Vuv)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Wst)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Xaf)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Xcd)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Yer)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Zar)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Zmw)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Clp)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Djf)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Gnf)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Ugx)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Pyg)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Xof)]
+    [InlineData(SubscriptionProvisionParamsPriceOverrideCurrency.Xpf)]
     public void SerializationRoundtrip_Works(
-        SubscriptionProvisionParamsPriceOverridePriceCurrency rawValue
+        SubscriptionProvisionParamsPriceOverrideCurrency rawValue
     )
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionProvisionParamsPriceOverridePriceCurrency> value = rawValue;
+        ApiEnum<string, SubscriptionProvisionParamsPriceOverrideCurrency> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionProvisionParamsPriceOverridePriceCurrency>
+            ApiEnum<string, SubscriptionProvisionParamsPriceOverrideCurrency>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -5699,11 +5057,11 @@ public class SubscriptionProvisionParamsPriceOverridePriceCurrencyTest : TestBas
     public void InvalidEnumSerializationRoundtrip_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionProvisionParamsPriceOverridePriceCurrency>
+            ApiEnum<string, SubscriptionProvisionParamsPriceOverrideCurrency>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionProvisionParamsPriceOverridePriceCurrency>
+            ApiEnum<string, SubscriptionProvisionParamsPriceOverrideCurrency>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -5717,33 +5075,13 @@ public class TierTest : TestBase
     {
         var model = new Tier
         {
-            FlatPrice = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = FlatPriceCurrency.Usd,
-            },
-            UnitPrice = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = UnitPriceCurrency.Usd,
-            },
+            FlatPrice = new() { Amount = 0, Currency = FlatPriceCurrency.Usd },
+            UnitPrice = new() { Amount = 0, Currency = UnitPriceCurrency.Usd },
             UpTo = 0,
         };
 
-        FlatPrice expectedFlatPrice = new()
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = FlatPriceCurrency.Usd,
-        };
-        UnitPrice expectedUnitPrice = new()
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = UnitPriceCurrency.Usd,
-        };
+        FlatPrice expectedFlatPrice = new() { Amount = 0, Currency = FlatPriceCurrency.Usd };
+        UnitPrice expectedUnitPrice = new() { Amount = 0, Currency = UnitPriceCurrency.Usd };
         double expectedUpTo = 0;
 
         Assert.Equal(expectedFlatPrice, model.FlatPrice);
@@ -5756,18 +5094,8 @@ public class TierTest : TestBase
     {
         var model = new Tier
         {
-            FlatPrice = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = FlatPriceCurrency.Usd,
-            },
-            UnitPrice = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = UnitPriceCurrency.Usd,
-            },
+            FlatPrice = new() { Amount = 0, Currency = FlatPriceCurrency.Usd },
+            UnitPrice = new() { Amount = 0, Currency = UnitPriceCurrency.Usd },
             UpTo = 0,
         };
 
@@ -5782,18 +5110,8 @@ public class TierTest : TestBase
     {
         var model = new Tier
         {
-            FlatPrice = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = FlatPriceCurrency.Usd,
-            },
-            UnitPrice = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = UnitPriceCurrency.Usd,
-            },
+            FlatPrice = new() { Amount = 0, Currency = FlatPriceCurrency.Usd },
+            UnitPrice = new() { Amount = 0, Currency = UnitPriceCurrency.Usd },
             UpTo = 0,
         };
 
@@ -5801,18 +5119,8 @@ public class TierTest : TestBase
         var deserialized = JsonSerializer.Deserialize<Tier>(element, ModelBase.SerializerOptions);
         Assert.NotNull(deserialized);
 
-        FlatPrice expectedFlatPrice = new()
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = FlatPriceCurrency.Usd,
-        };
-        UnitPrice expectedUnitPrice = new()
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = UnitPriceCurrency.Usd,
-        };
+        FlatPrice expectedFlatPrice = new() { Amount = 0, Currency = FlatPriceCurrency.Usd };
+        UnitPrice expectedUnitPrice = new() { Amount = 0, Currency = UnitPriceCurrency.Usd };
         double expectedUpTo = 0;
 
         Assert.Equal(expectedFlatPrice, deserialized.FlatPrice);
@@ -5825,18 +5133,8 @@ public class TierTest : TestBase
     {
         var model = new Tier
         {
-            FlatPrice = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = FlatPriceCurrency.Usd,
-            },
-            UnitPrice = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = UnitPriceCurrency.Usd,
-            },
+            FlatPrice = new() { Amount = 0, Currency = FlatPriceCurrency.Usd },
+            UnitPrice = new() { Amount = 0, Currency = UnitPriceCurrency.Usd },
             UpTo = 0,
         };
 
@@ -5902,18 +5200,8 @@ public class TierTest : TestBase
     {
         var model = new Tier
         {
-            FlatPrice = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = FlatPriceCurrency.Usd,
-            },
-            UnitPrice = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = UnitPriceCurrency.Usd,
-            },
+            FlatPrice = new() { Amount = 0, Currency = FlatPriceCurrency.Usd },
+            UnitPrice = new() { Amount = 0, Currency = UnitPriceCurrency.Usd },
             UpTo = 0,
         };
 
@@ -5928,31 +5216,19 @@ public class FlatPriceTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new FlatPrice
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = FlatPriceCurrency.Usd,
-        };
+        var model = new FlatPrice { Amount = 0, Currency = FlatPriceCurrency.Usd };
 
         double expectedAmount = 0;
-        string expectedBillingCountryCode = "billingCountryCode";
         ApiEnum<string, FlatPriceCurrency> expectedCurrency = FlatPriceCurrency.Usd;
 
         Assert.Equal(expectedAmount, model.Amount);
-        Assert.Equal(expectedBillingCountryCode, model.BillingCountryCode);
         Assert.Equal(expectedCurrency, model.Currency);
     }
 
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new FlatPrice
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = FlatPriceCurrency.Usd,
-        };
+        var model = new FlatPrice { Amount = 0, Currency = FlatPriceCurrency.Usd };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<FlatPrice>(json, ModelBase.SerializerOptions);
@@ -5963,12 +5239,7 @@ public class FlatPriceTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new FlatPrice
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = FlatPriceCurrency.Usd,
-        };
+        var model = new FlatPrice { Amount = 0, Currency = FlatPriceCurrency.Usd };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<FlatPrice>(
@@ -5978,121 +5249,16 @@ public class FlatPriceTest : TestBase
         Assert.NotNull(deserialized);
 
         double expectedAmount = 0;
-        string expectedBillingCountryCode = "billingCountryCode";
         ApiEnum<string, FlatPriceCurrency> expectedCurrency = FlatPriceCurrency.Usd;
 
         Assert.Equal(expectedAmount, deserialized.Amount);
-        Assert.Equal(expectedBillingCountryCode, deserialized.BillingCountryCode);
         Assert.Equal(expectedCurrency, deserialized.Currency);
     }
 
     [Fact]
     public void Validation_Works()
     {
-        var model = new FlatPrice
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = FlatPriceCurrency.Usd,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
-    {
-        var model = new FlatPrice { BillingCountryCode = "billingCountryCode" };
-
-        Assert.Null(model.Amount);
-        Assert.False(model.RawData.ContainsKey("amount"));
-        Assert.Null(model.Currency);
-        Assert.False(model.RawData.ContainsKey("currency"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new FlatPrice { BillingCountryCode = "billingCountryCode" };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
-    {
-        var model = new FlatPrice
-        {
-            BillingCountryCode = "billingCountryCode",
-
-            // Null should be interpreted as omitted for these properties
-            Amount = null,
-            Currency = null,
-        };
-
-        Assert.Null(model.Amount);
-        Assert.False(model.RawData.ContainsKey("amount"));
-        Assert.Null(model.Currency);
-        Assert.False(model.RawData.ContainsKey("currency"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new FlatPrice
-        {
-            BillingCountryCode = "billingCountryCode",
-
-            // Null should be interpreted as omitted for these properties
-            Amount = null,
-            Currency = null,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
-    {
         var model = new FlatPrice { Amount = 0, Currency = FlatPriceCurrency.Usd };
-
-        Assert.Null(model.BillingCountryCode);
-        Assert.False(model.RawData.ContainsKey("billingCountryCode"));
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new FlatPrice { Amount = 0, Currency = FlatPriceCurrency.Usd };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
-    {
-        var model = new FlatPrice
-        {
-            Amount = 0,
-            Currency = FlatPriceCurrency.Usd,
-
-            BillingCountryCode = null,
-        };
-
-        Assert.Null(model.BillingCountryCode);
-        Assert.True(model.RawData.ContainsKey("billingCountryCode"));
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new FlatPrice
-        {
-            Amount = 0,
-            Currency = FlatPriceCurrency.Usd,
-
-            BillingCountryCode = null,
-        };
 
         model.Validate();
     }
@@ -6100,12 +5266,7 @@ public class FlatPriceTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new FlatPrice
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = FlatPriceCurrency.Usd,
-        };
+        var model = new FlatPrice { Amount = 0, Currency = FlatPriceCurrency.Usd };
 
         FlatPrice copied = new(model);
 
@@ -6404,31 +5565,19 @@ public class UnitPriceTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new UnitPrice
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = UnitPriceCurrency.Usd,
-        };
+        var model = new UnitPrice { Amount = 0, Currency = UnitPriceCurrency.Usd };
 
         double expectedAmount = 0;
-        string expectedBillingCountryCode = "billingCountryCode";
         ApiEnum<string, UnitPriceCurrency> expectedCurrency = UnitPriceCurrency.Usd;
 
         Assert.Equal(expectedAmount, model.Amount);
-        Assert.Equal(expectedBillingCountryCode, model.BillingCountryCode);
         Assert.Equal(expectedCurrency, model.Currency);
     }
 
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new UnitPrice
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = UnitPriceCurrency.Usd,
-        };
+        var model = new UnitPrice { Amount = 0, Currency = UnitPriceCurrency.Usd };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnitPrice>(json, ModelBase.SerializerOptions);
@@ -6439,12 +5588,7 @@ public class UnitPriceTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new UnitPrice
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = UnitPriceCurrency.Usd,
-        };
+        var model = new UnitPrice { Amount = 0, Currency = UnitPriceCurrency.Usd };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<UnitPrice>(
@@ -6454,121 +5598,16 @@ public class UnitPriceTest : TestBase
         Assert.NotNull(deserialized);
 
         double expectedAmount = 0;
-        string expectedBillingCountryCode = "billingCountryCode";
         ApiEnum<string, UnitPriceCurrency> expectedCurrency = UnitPriceCurrency.Usd;
 
         Assert.Equal(expectedAmount, deserialized.Amount);
-        Assert.Equal(expectedBillingCountryCode, deserialized.BillingCountryCode);
         Assert.Equal(expectedCurrency, deserialized.Currency);
     }
 
     [Fact]
     public void Validation_Works()
     {
-        var model = new UnitPrice
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = UnitPriceCurrency.Usd,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
-    {
-        var model = new UnitPrice { BillingCountryCode = "billingCountryCode" };
-
-        Assert.Null(model.Amount);
-        Assert.False(model.RawData.ContainsKey("amount"));
-        Assert.Null(model.Currency);
-        Assert.False(model.RawData.ContainsKey("currency"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new UnitPrice { BillingCountryCode = "billingCountryCode" };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
-    {
-        var model = new UnitPrice
-        {
-            BillingCountryCode = "billingCountryCode",
-
-            // Null should be interpreted as omitted for these properties
-            Amount = null,
-            Currency = null,
-        };
-
-        Assert.Null(model.Amount);
-        Assert.False(model.RawData.ContainsKey("amount"));
-        Assert.Null(model.Currency);
-        Assert.False(model.RawData.ContainsKey("currency"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new UnitPrice
-        {
-            BillingCountryCode = "billingCountryCode",
-
-            // Null should be interpreted as omitted for these properties
-            Amount = null,
-            Currency = null,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
-    {
         var model = new UnitPrice { Amount = 0, Currency = UnitPriceCurrency.Usd };
-
-        Assert.Null(model.BillingCountryCode);
-        Assert.False(model.RawData.ContainsKey("billingCountryCode"));
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new UnitPrice { Amount = 0, Currency = UnitPriceCurrency.Usd };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
-    {
-        var model = new UnitPrice
-        {
-            Amount = 0,
-            Currency = UnitPriceCurrency.Usd,
-
-            BillingCountryCode = null,
-        };
-
-        Assert.Null(model.BillingCountryCode);
-        Assert.True(model.RawData.ContainsKey("billingCountryCode"));
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new UnitPrice
-        {
-            Amount = 0,
-            Currency = UnitPriceCurrency.Usd,
-
-            BillingCountryCode = null,
-        };
 
         model.Validate();
     }
@@ -6576,12 +5615,7 @@ public class UnitPriceTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new UnitPrice
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = UnitPriceCurrency.Usd,
-        };
+        var model = new UnitPrice { Amount = 0, Currency = UnitPriceCurrency.Usd };
 
         UnitPrice copied = new(model);
 

@@ -86,7 +86,19 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Subscriptions::PricingType>(),
             new ApiEnumConverter<string, Subscriptions::Status>(),
             new ApiEnumConverter<string, Subscriptions::CancelReason>(),
+            new ApiEnumConverter<string, Subscriptions::CouponStatus>(),
+            new ApiEnumConverter<string, Subscriptions::CouponAmountsOffCurrency>(),
+            new ApiEnumConverter<string, Subscriptions::ScheduleStatus>(),
+            new ApiEnumConverter<string, Subscriptions::SubscriptionScheduleType>(),
+            new ApiEnumConverter<string, Subscriptions::LatestInvoiceStatus>(),
+            new ApiEnumConverter<string, Subscriptions::BillingReason>(),
+            new ApiEnumConverter<string, Subscriptions::DataMinimumSpendCurrency>(),
             new ApiEnumConverter<string, Subscriptions::DataPaymentCollectionMethod>(),
+            new ApiEnumConverter<string, Subscriptions::PriceCurrency>(),
+            new ApiEnumConverter<string, Subscriptions::PriceTierFlatPriceCurrency>(),
+            new ApiEnumConverter<string, Subscriptions::PriceTierUnitPriceCurrency>(),
+            new ApiEnumConverter<string, Subscriptions::DataSubscriptionEntitlementType>(),
+            new ApiEnumConverter<string, Subscriptions::TrialTrialEndBehavior>(),
             new ApiEnumConverter<
                 string,
                 Subscriptions::SubscriptionListResponsePaymentCollection
@@ -94,9 +106,51 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Subscriptions::SubscriptionListResponsePricingType>(),
             new ApiEnumConverter<string, Subscriptions::SubscriptionListResponseStatus>(),
             new ApiEnumConverter<string, Subscriptions::SubscriptionListResponseCancelReason>(),
+            new ApiEnumConverter<string, Subscriptions::SubscriptionListResponseCouponStatus>(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionListResponseCouponAmountsOffCurrency
+            >(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionListResponseFutureUpdateScheduleStatus
+            >(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionListResponseFutureUpdateSubscriptionScheduleType
+            >(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionListResponseLatestInvoiceStatus
+            >(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionListResponseLatestInvoiceBillingReason
+            >(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionListResponseMinimumSpendCurrency
+            >(),
             new ApiEnumConverter<
                 string,
                 Subscriptions::SubscriptionListResponsePaymentCollectionMethod
+            >(),
+            new ApiEnumConverter<string, Subscriptions::SubscriptionListResponsePriceCurrency>(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionListResponsePriceTierFlatPriceCurrency
+            >(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionListResponsePriceTierUnitPriceCurrency
+            >(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionListResponseSubscriptionEntitlementType
+            >(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionListResponseTrialTrialEndBehavior
             >(),
             new ApiEnumConverter<string, Subscriptions::AccessDeniedReason>(),
             new ApiEnumConverter<string, Subscriptions::UnionObjectVariant0Type>(),
@@ -124,11 +178,39 @@ public abstract record class ModelBase
             >(),
             new ApiEnumConverter<
                 string,
+                Subscriptions::SubscriptionProvisionResponseDataSubscriptionCouponStatus
+            >(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency
+            >(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus
+            >(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType
+            >(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus
+            >(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason
+            >(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency
+            >(),
+            new ApiEnumConverter<
+                string,
                 Subscriptions::SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod
             >(),
             new ApiEnumConverter<
                 string,
-                Subscriptions::SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency
+                Subscriptions::SubscriptionProvisionResponseDataSubscriptionPriceCurrency
             >(),
             new ApiEnumConverter<
                 string,
@@ -138,13 +220,21 @@ public abstract record class ModelBase
                 string,
                 Subscriptions::SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency
             >(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType
+            >(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior
+            >(),
             new ApiEnumConverter<string, Subscriptions::Currency>(),
             new ApiEnumConverter<string, Subscriptions::BillingCycleAnchor>(),
             new ApiEnumConverter<string, Subscriptions::ProrationBehavior>(),
             new ApiEnumConverter<string, Subscriptions::BillingPeriod>(),
             new ApiEnumConverter<string, Subscriptions::Type>(),
-            new ApiEnumConverter<string, Subscriptions::MinimumCurrency>(),
-            new ApiEnumConverter<string, Subscriptions::PriceCurrency>(),
+            new ApiEnumConverter<string, Subscriptions::MinimumSpendCurrency>(),
+            new ApiEnumConverter<string, Subscriptions::PriceOverrideCurrency>(),
             new ApiEnumConverter<string, Subscriptions::ScheduleStrategy>(),
             new ApiEnumConverter<string, Subscriptions::AccordingTo>(),
             new ApiEnumConverter<string, Subscriptions::ResetPeriod>(),
@@ -196,13 +286,13 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Subscriptions::SubscriptionProvisionParamsChargeType>(),
             new ApiEnumConverter<
                 string,
-                Subscriptions::SubscriptionProvisionParamsMinimumSpendMinimumCurrency
+                Subscriptions::SubscriptionProvisionParamsMinimumSpendCurrency
             >(),
             new ApiEnumConverter<string, Subscriptions::PaymentCollectionMethod>(),
             new ApiEnumConverter<string, Subscriptions::CreditGrantCadence>(),
             new ApiEnumConverter<
                 string,
-                Subscriptions::SubscriptionProvisionParamsPriceOverridePriceCurrency
+                Subscriptions::SubscriptionProvisionParamsPriceOverrideCurrency
             >(),
             new ApiEnumConverter<string, Subscriptions::FlatPriceCurrency>(),
             new ApiEnumConverter<string, Subscriptions::UnitPriceCurrency>(),

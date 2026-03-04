@@ -1923,6 +1923,34 @@ public sealed record class SubscriptionProvisionResponseDataSubscription : JsonM
     }
 
     /// <summary>
+    /// Billing cycle anchor date
+    /// </summary>
+    public System::DateTimeOffset? BillingCycleAnchor
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<System::DateTimeOffset>("billingCycleAnchor");
+        }
+        init { this._rawData.Set("billingCycleAnchor", value); }
+    }
+
+    /// <summary>
+    /// Budget configuration
+    /// </summary>
+    public SubscriptionProvisionResponseDataSubscriptionBudget? Budget
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<SubscriptionProvisionResponseDataSubscriptionBudget>(
+                "budget"
+            );
+        }
+        init { this._rawData.Set("budget", value); }
+    }
+
+    /// <summary>
     /// Subscription cancellation date
     /// </summary>
     public System::DateTimeOffset? CancellationDate
@@ -1948,6 +1976,32 @@ public sealed record class SubscriptionProvisionResponseDataSubscription : JsonM
             >("cancelReason");
         }
         init { this._rawData.Set("cancelReason", value); }
+    }
+
+    /// <summary>
+    /// Coupons applied to the subscription
+    /// </summary>
+    public IReadOnlyList<SubscriptionProvisionResponseDataSubscriptionCoupon>? Coupons
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<
+                ImmutableArray<SubscriptionProvisionResponseDataSubscriptionCoupon>
+            >("coupons");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set<ImmutableArray<SubscriptionProvisionResponseDataSubscriptionCoupon>?>(
+                "coupons",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
     }
 
     /// <summary>
@@ -2007,6 +2061,47 @@ public sealed record class SubscriptionProvisionResponseDataSubscription : JsonM
     }
 
     /// <summary>
+    /// Scheduled future updates for the subscription
+    /// </summary>
+    public IReadOnlyList<SubscriptionProvisionResponseDataSubscriptionFutureUpdate>? FutureUpdates
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<
+                ImmutableArray<SubscriptionProvisionResponseDataSubscriptionFutureUpdate>
+            >("futureUpdates");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set<ImmutableArray<SubscriptionProvisionResponseDataSubscriptionFutureUpdate>?>(
+                "futureUpdates",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
+    /// Latest invoice for the subscription
+    /// </summary>
+    public SubscriptionProvisionResponseDataSubscriptionLatestInvoice? LatestInvoice
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<SubscriptionProvisionResponseDataSubscriptionLatestInvoice>(
+                "latestInvoice"
+            );
+        }
+        init { this._rawData.Set("latestInvoice", value); }
+    }
+
+    /// <summary>
     /// Additional metadata for the subscription
     /// </summary>
     public IReadOnlyDictionary<string, string>? Metadata
@@ -2028,6 +2123,21 @@ public sealed record class SubscriptionProvisionResponseDataSubscription : JsonM
                 value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
             );
         }
+    }
+
+    /// <summary>
+    /// Minimum spend configuration
+    /// </summary>
+    public SubscriptionProvisionResponseDataSubscriptionMinimumSpend? MinimumSpend
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<SubscriptionProvisionResponseDataSubscriptionMinimumSpend>(
+                "minimumSpend"
+            );
+        }
+        init { this._rawData.Set("minimumSpend", value); }
     }
 
     /// <summary>
@@ -2101,6 +2211,47 @@ public sealed record class SubscriptionProvisionResponseDataSubscription : JsonM
     }
 
     /// <summary>
+    /// Entitlements associated with the subscription
+    /// </summary>
+    public IReadOnlyList<SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlement>? SubscriptionEntitlements
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<
+                ImmutableArray<SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlement>
+            >("subscriptionEntitlements");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set<ImmutableArray<SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlement>?>(
+                "subscriptionEntitlements",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
+    /// Trial configuration
+    /// </summary>
+    public SubscriptionProvisionResponseDataSubscriptionTrial? Trial
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<SubscriptionProvisionResponseDataSubscriptionTrial>(
+                "trial"
+            );
+        }
+        init { this._rawData.Set("trial", value); }
+    }
+
+    /// <summary>
     /// Subscription trial end date
     /// </summary>
     public System::DateTimeOffset? TrialEndDate
@@ -2129,13 +2280,25 @@ public sealed record class SubscriptionProvisionResponseDataSubscription : JsonM
         {
             item.Validate();
         }
+        _ = this.BillingCycleAnchor;
+        this.Budget?.Validate();
         _ = this.CancellationDate;
         this.CancelReason?.Validate();
+        foreach (var item in this.Coupons ?? [])
+        {
+            item.Validate();
+        }
         _ = this.CurrentBillingPeriodEnd;
         _ = this.CurrentBillingPeriodStart;
         _ = this.EffectiveEndDate;
         _ = this.EndDate;
+        foreach (var item in this.FutureUpdates ?? [])
+        {
+            item.Validate();
+        }
+        this.LatestInvoice?.Validate();
         _ = this.Metadata;
+        this.MinimumSpend?.Validate();
         _ = this.PayingCustomerID;
         this.PaymentCollectionMethod?.Validate();
         foreach (var item in this.Prices ?? [])
@@ -2143,6 +2306,11 @@ public sealed record class SubscriptionProvisionResponseDataSubscription : JsonM
             item.Validate();
         }
         _ = this.ResourceID;
+        foreach (var item in this.SubscriptionEntitlements ?? [])
+        {
+            item.Validate();
+        }
+        this.Trial?.Validate();
         _ = this.TrialEndDate;
     }
 
@@ -2451,6 +2619,95 @@ class SubscriptionProvisionResponseDataSubscriptionAddonFromRaw
 }
 
 /// <summary>
+/// Budget configuration
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        SubscriptionProvisionResponseDataSubscriptionBudget,
+        SubscriptionProvisionResponseDataSubscriptionBudgetFromRaw
+    >)
+)]
+public sealed record class SubscriptionProvisionResponseDataSubscriptionBudget : JsonModel
+{
+    /// <summary>
+    /// Whether the budget is a soft limit
+    /// </summary>
+    public required bool HasSoftLimit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("hasSoftLimit");
+        }
+        init { this._rawData.Set("hasSoftLimit", value); }
+    }
+
+    /// <summary>
+    /// Maximum spending limit
+    /// </summary>
+    public required double Limit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<double>("limit");
+        }
+        init { this._rawData.Set("limit", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.HasSoftLimit;
+        _ = this.Limit;
+    }
+
+    public SubscriptionProvisionResponseDataSubscriptionBudget() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public SubscriptionProvisionResponseDataSubscriptionBudget(
+        SubscriptionProvisionResponseDataSubscriptionBudget subscriptionProvisionResponseDataSubscriptionBudget
+    )
+        : base(subscriptionProvisionResponseDataSubscriptionBudget) { }
+#pragma warning restore CS8618
+
+    public SubscriptionProvisionResponseDataSubscriptionBudget(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    SubscriptionProvisionResponseDataSubscriptionBudget(
+        FrozenDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="SubscriptionProvisionResponseDataSubscriptionBudgetFromRaw.FromRawUnchecked"/>
+    public static SubscriptionProvisionResponseDataSubscriptionBudget FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class SubscriptionProvisionResponseDataSubscriptionBudgetFromRaw
+    : IFromRawJson<SubscriptionProvisionResponseDataSubscriptionBudget>
+{
+    /// <inheritdoc/>
+    public SubscriptionProvisionResponseDataSubscriptionBudget FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionProvisionResponseDataSubscriptionBudget.FromRawUnchecked(rawData);
+}
+
+/// <summary>
 /// Subscription cancel reason
 /// </summary>
 [JsonConverter(typeof(SubscriptionProvisionResponseDataSubscriptionCancelReasonConverter))]
@@ -2543,22 +2800,167 @@ sealed class SubscriptionProvisionResponseDataSubscriptionCancelReasonConverter
 }
 
 /// <summary>
-/// The method used to collect payments for a subscription
+/// Coupon applied to a subscription
 /// </summary>
 [JsonConverter(
-    typeof(SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethodConverter)
+    typeof(JsonModelConverter<
+        SubscriptionProvisionResponseDataSubscriptionCoupon,
+        SubscriptionProvisionResponseDataSubscriptionCouponFromRaw
+    >)
 )]
-public enum SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod
+public sealed record class SubscriptionProvisionResponseDataSubscriptionCoupon : JsonModel
 {
-    Charge,
-    Invoice,
-    None,
+    /// <summary>
+    /// Coupon ID
+    /// </summary>
+    public required string ID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
+        init { this._rawData.Set("id", value); }
+    }
+
+    /// <summary>
+    /// Coupon name
+    /// </summary>
+    public required string Name
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("name");
+        }
+        init { this._rawData.Set("name", value); }
+    }
+
+    /// <summary>
+    /// Coupon status
+    /// </summary>
+    public required ApiEnum<
+        string,
+        SubscriptionProvisionResponseDataSubscriptionCouponStatus
+    > Status
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionCouponStatus>
+            >("status");
+        }
+        init { this._rawData.Set("status", value); }
+    }
+
+    /// <summary>
+    /// Fixed amount discounts by currency
+    /// </summary>
+    public IReadOnlyList<SubscriptionProvisionResponseDataSubscriptionCouponAmountsOff>? AmountsOff
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<
+                ImmutableArray<SubscriptionProvisionResponseDataSubscriptionCouponAmountsOff>
+            >("amountsOff");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<SubscriptionProvisionResponseDataSubscriptionCouponAmountsOff>?>(
+                "amountsOff",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
+    /// Percentage discount
+    /// </summary>
+    public double? PercentOff
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<double>("percentOff");
+        }
+        init { this._rawData.Set("percentOff", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.ID;
+        _ = this.Name;
+        this.Status.Validate();
+        foreach (var item in this.AmountsOff ?? [])
+        {
+            item.Validate();
+        }
+        _ = this.PercentOff;
+    }
+
+    public SubscriptionProvisionResponseDataSubscriptionCoupon() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public SubscriptionProvisionResponseDataSubscriptionCoupon(
+        SubscriptionProvisionResponseDataSubscriptionCoupon subscriptionProvisionResponseDataSubscriptionCoupon
+    )
+        : base(subscriptionProvisionResponseDataSubscriptionCoupon) { }
+#pragma warning restore CS8618
+
+    public SubscriptionProvisionResponseDataSubscriptionCoupon(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    SubscriptionProvisionResponseDataSubscriptionCoupon(
+        FrozenDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="SubscriptionProvisionResponseDataSubscriptionCouponFromRaw.FromRawUnchecked"/>
+    public static SubscriptionProvisionResponseDataSubscriptionCoupon FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
 }
 
-sealed class SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethodConverter
-    : JsonConverter<SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod>
+class SubscriptionProvisionResponseDataSubscriptionCouponFromRaw
+    : IFromRawJson<SubscriptionProvisionResponseDataSubscriptionCoupon>
 {
-    public override SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod Read(
+    /// <inheritdoc/>
+    public SubscriptionProvisionResponseDataSubscriptionCoupon FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionProvisionResponseDataSubscriptionCoupon.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Coupon status
+/// </summary>
+[JsonConverter(typeof(SubscriptionProvisionResponseDataSubscriptionCouponStatusConverter))]
+public enum SubscriptionProvisionResponseDataSubscriptionCouponStatus
+{
+    Active,
+    Expired,
+    Removed,
+}
+
+sealed class SubscriptionProvisionResponseDataSubscriptionCouponStatusConverter
+    : JsonConverter<SubscriptionProvisionResponseDataSubscriptionCouponStatus>
+{
+    public override SubscriptionProvisionResponseDataSubscriptionCouponStatus Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -2566,17 +2968,16 @@ sealed class SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMetho
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "CHARGE" => SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge,
-            "INVOICE" =>
-                SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Invoice,
-            "NONE" => SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.None,
-            _ => (SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod)(-1),
+            "ACTIVE" => SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+            "EXPIRED" => SubscriptionProvisionResponseDataSubscriptionCouponStatus.Expired,
+            "REMOVED" => SubscriptionProvisionResponseDataSubscriptionCouponStatus.Removed,
+            _ => (SubscriptionProvisionResponseDataSubscriptionCouponStatus)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod value,
+        SubscriptionProvisionResponseDataSubscriptionCouponStatus value,
         JsonSerializerOptions options
     )
     {
@@ -2584,11 +2985,9 @@ sealed class SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMetho
             writer,
             value switch
             {
-                SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge =>
-                    "CHARGE",
-                SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Invoice =>
-                    "INVOICE",
-                SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.None => "NONE",
+                SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active => "ACTIVE",
+                SubscriptionProvisionResponseDataSubscriptionCouponStatus.Expired => "EXPIRED",
+                SubscriptionProvisionResponseDataSubscriptionCouponStatus.Removed => "REMOVED",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -2600,198 +2999,11 @@ sealed class SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMetho
 
 [JsonConverter(
     typeof(JsonModelConverter<
-        SubscriptionProvisionResponseDataSubscriptionPrice,
-        SubscriptionProvisionResponseDataSubscriptionPriceFromRaw
+        SubscriptionProvisionResponseDataSubscriptionCouponAmountsOff,
+        SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffFromRaw
     >)
 )]
-public sealed record class SubscriptionProvisionResponseDataSubscriptionPrice : JsonModel
-{
-    /// <summary>
-    /// Addon identifier for the price override
-    /// </summary>
-    public string? AddonID
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("addonId");
-        }
-        init { this._rawData.Set("addonId", value); }
-    }
-
-    /// <summary>
-    /// Whether this is a base charge override
-    /// </summary>
-    public bool? BaseCharge
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<bool>("baseCharge");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("baseCharge", value);
-        }
-    }
-
-    /// <summary>
-    /// Block size for pricing
-    /// </summary>
-    public double? BlockSize
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<double>("blockSize");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("blockSize", value);
-        }
-    }
-
-    /// <summary>
-    /// Feature identifier for the price override
-    /// </summary>
-    public string? FeatureID
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("featureId");
-        }
-        init { this._rawData.Set("featureId", value); }
-    }
-
-    /// <summary>
-    /// Override price amount
-    /// </summary>
-    public SubscriptionProvisionResponseDataSubscriptionPricePrice? Price
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<SubscriptionProvisionResponseDataSubscriptionPricePrice>(
-                "price"
-            );
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("price", value);
-        }
-    }
-
-    /// <summary>
-    /// Pricing tiers configuration
-    /// </summary>
-    public IReadOnlyList<SubscriptionProvisionResponseDataSubscriptionPriceTier>? Tiers
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<
-                ImmutableArray<SubscriptionProvisionResponseDataSubscriptionPriceTier>
-            >("tiers");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set<ImmutableArray<SubscriptionProvisionResponseDataSubscriptionPriceTier>?>(
-                "tiers",
-                value == null ? null : ImmutableArray.ToImmutableArray(value)
-            );
-        }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        _ = this.AddonID;
-        _ = this.BaseCharge;
-        _ = this.BlockSize;
-        _ = this.FeatureID;
-        this.Price?.Validate();
-        foreach (var item in this.Tiers ?? [])
-        {
-            item.Validate();
-        }
-    }
-
-    public SubscriptionProvisionResponseDataSubscriptionPrice() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public SubscriptionProvisionResponseDataSubscriptionPrice(
-        SubscriptionProvisionResponseDataSubscriptionPrice subscriptionProvisionResponseDataSubscriptionPrice
-    )
-        : base(subscriptionProvisionResponseDataSubscriptionPrice) { }
-#pragma warning restore CS8618
-
-    public SubscriptionProvisionResponseDataSubscriptionPrice(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    SubscriptionProvisionResponseDataSubscriptionPrice(
-        FrozenDictionary<string, JsonElement> rawData
-    )
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="SubscriptionProvisionResponseDataSubscriptionPriceFromRaw.FromRawUnchecked"/>
-    public static SubscriptionProvisionResponseDataSubscriptionPrice FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-}
-
-class SubscriptionProvisionResponseDataSubscriptionPriceFromRaw
-    : IFromRawJson<SubscriptionProvisionResponseDataSubscriptionPrice>
-{
-    /// <inheritdoc/>
-    public SubscriptionProvisionResponseDataSubscriptionPrice FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => SubscriptionProvisionResponseDataSubscriptionPrice.FromRawUnchecked(rawData);
-}
-
-/// <summary>
-/// Override price amount
-/// </summary>
-[JsonConverter(
-    typeof(JsonModelConverter<
-        SubscriptionProvisionResponseDataSubscriptionPricePrice,
-        SubscriptionProvisionResponseDataSubscriptionPricePriceFromRaw
-    >)
-)]
-public sealed record class SubscriptionProvisionResponseDataSubscriptionPricePrice : JsonModel
+public sealed record class SubscriptionProvisionResponseDataSubscriptionCouponAmountsOff : JsonModel
 {
     /// <summary>
     /// The price amount
@@ -2815,31 +3027,21 @@ public sealed record class SubscriptionProvisionResponseDataSubscriptionPricePri
     }
 
     /// <summary>
-    /// The billing country code of the price
-    /// </summary>
-    public string? BillingCountryCode
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("billingCountryCode");
-        }
-        init { this._rawData.Set("billingCountryCode", value); }
-    }
-
-    /// <summary>
     /// The price currency
     /// </summary>
     public ApiEnum<
         string,
-        SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency
+        SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency
     >? Currency
     {
         get
         {
             this._rawData.Freeze();
             return this._rawData.GetNullableClass<
-                ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency>
+                ApiEnum<
+                    string,
+                    SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency
+                >
             >("currency");
         }
         init
@@ -2857,21 +3059,20 @@ public sealed record class SubscriptionProvisionResponseDataSubscriptionPricePri
     public override void Validate()
     {
         _ = this.Amount;
-        _ = this.BillingCountryCode;
         this.Currency?.Validate();
     }
 
-    public SubscriptionProvisionResponseDataSubscriptionPricePrice() { }
+    public SubscriptionProvisionResponseDataSubscriptionCouponAmountsOff() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public SubscriptionProvisionResponseDataSubscriptionPricePrice(
-        SubscriptionProvisionResponseDataSubscriptionPricePrice subscriptionProvisionResponseDataSubscriptionPricePrice
+    public SubscriptionProvisionResponseDataSubscriptionCouponAmountsOff(
+        SubscriptionProvisionResponseDataSubscriptionCouponAmountsOff subscriptionProvisionResponseDataSubscriptionCouponAmountsOff
     )
-        : base(subscriptionProvisionResponseDataSubscriptionPricePrice) { }
+        : base(subscriptionProvisionResponseDataSubscriptionCouponAmountsOff) { }
 #pragma warning restore CS8618
 
-    public SubscriptionProvisionResponseDataSubscriptionPricePrice(
+    public SubscriptionProvisionResponseDataSubscriptionCouponAmountsOff(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -2880,7 +3081,7 @@ public sealed record class SubscriptionProvisionResponseDataSubscriptionPricePri
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    SubscriptionProvisionResponseDataSubscriptionPricePrice(
+    SubscriptionProvisionResponseDataSubscriptionCouponAmountsOff(
         FrozenDictionary<string, JsonElement> rawData
     )
     {
@@ -2888,8 +3089,8 @@ public sealed record class SubscriptionProvisionResponseDataSubscriptionPricePri
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="SubscriptionProvisionResponseDataSubscriptionPricePriceFromRaw.FromRawUnchecked"/>
-    public static SubscriptionProvisionResponseDataSubscriptionPricePrice FromRawUnchecked(
+    /// <inheritdoc cref="SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffFromRaw.FromRawUnchecked"/>
+    public static SubscriptionProvisionResponseDataSubscriptionCouponAmountsOff FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -2897,20 +3098,22 @@ public sealed record class SubscriptionProvisionResponseDataSubscriptionPricePri
     }
 }
 
-class SubscriptionProvisionResponseDataSubscriptionPricePriceFromRaw
-    : IFromRawJson<SubscriptionProvisionResponseDataSubscriptionPricePrice>
+class SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffFromRaw
+    : IFromRawJson<SubscriptionProvisionResponseDataSubscriptionCouponAmountsOff>
 {
     /// <inheritdoc/>
-    public SubscriptionProvisionResponseDataSubscriptionPricePrice FromRawUnchecked(
+    public SubscriptionProvisionResponseDataSubscriptionCouponAmountsOff FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => SubscriptionProvisionResponseDataSubscriptionPricePrice.FromRawUnchecked(rawData);
+    ) => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOff.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// The price currency
 /// </summary>
-[JsonConverter(typeof(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrencyConverter))]
-public enum SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency
+[JsonConverter(
+    typeof(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrencyConverter)
+)]
+public enum SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency
 {
     Usd,
     Aed,
@@ -3030,10 +3233,10 @@ public enum SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency
     Xpf,
 }
 
-sealed class SubscriptionProvisionResponseDataSubscriptionPricePriceCurrencyConverter
-    : JsonConverter<SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency>
+sealed class SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrencyConverter
+    : JsonConverter<SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency>
 {
-    public override SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency Read(
+    public override SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -3041,129 +3244,129 @@ sealed class SubscriptionProvisionResponseDataSubscriptionPricePriceCurrencyConv
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "usd" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-            "aed" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Aed,
-            "all" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.All,
-            "amd" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Amd,
-            "ang" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Ang,
-            "aud" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Aud,
-            "awg" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Awg,
-            "azn" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Azn,
-            "bam" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bam,
-            "bbd" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bbd,
-            "bdt" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bdt,
-            "bgn" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bgn,
-            "bif" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bif,
-            "bmd" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bmd,
-            "bnd" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bnd,
-            "bsd" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bsd,
-            "bwp" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bwp,
-            "byn" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Byn,
-            "bzd" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bzd,
-            "brl" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Brl,
-            "cad" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Cad,
-            "cdf" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Cdf,
-            "chf" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Chf,
-            "cny" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Cny,
-            "czk" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Czk,
-            "dkk" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Dkk,
-            "dop" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Dop,
-            "dzd" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Dzd,
-            "egp" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Egp,
-            "etb" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Etb,
-            "eur" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Eur,
-            "fjd" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Fjd,
-            "gbp" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Gbp,
-            "gel" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Gel,
-            "gip" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Gip,
-            "gmd" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Gmd,
-            "gyd" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Gyd,
-            "hkd" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Hkd,
-            "hrk" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Hrk,
-            "htg" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Htg,
-            "idr" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Idr,
-            "ils" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Ils,
-            "inr" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Inr,
-            "isk" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Isk,
-            "jmd" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Jmd,
-            "jpy" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Jpy,
-            "kes" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Kes,
-            "kgs" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Kgs,
-            "khr" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Khr,
-            "kmf" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Kmf,
-            "krw" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Krw,
-            "kyd" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Kyd,
-            "kzt" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Kzt,
-            "lbp" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Lbp,
-            "lkr" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Lkr,
-            "lrd" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Lrd,
-            "lsl" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Lsl,
-            "mad" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mad,
-            "mdl" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mdl,
-            "mga" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mga,
-            "mkd" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mkd,
-            "mmk" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mmk,
-            "mnt" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mnt,
-            "mop" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mop,
-            "mro" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mro,
-            "mvr" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mvr,
-            "mwk" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mwk,
-            "mxn" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mxn,
-            "myr" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Myr,
-            "mzn" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mzn,
-            "nad" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Nad,
-            "ngn" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Ngn,
-            "nok" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Nok,
-            "npr" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Npr,
-            "nzd" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Nzd,
-            "pgk" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Pgk,
-            "php" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Php,
-            "pkr" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Pkr,
-            "pln" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Pln,
-            "qar" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Qar,
-            "ron" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Ron,
-            "rsd" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Rsd,
-            "rub" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Rub,
-            "rwf" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Rwf,
-            "sar" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Sar,
-            "sbd" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Sbd,
-            "scr" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Scr,
-            "sek" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Sek,
-            "sgd" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Sgd,
-            "sle" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Sle,
-            "sll" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Sll,
-            "sos" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Sos,
-            "szl" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Szl,
-            "thb" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Thb,
-            "tjs" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Tjs,
-            "top" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Top,
-            "try" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Try,
-            "ttd" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Ttd,
-            "tzs" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Tzs,
-            "uah" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Uah,
-            "uzs" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Uzs,
-            "vnd" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Vnd,
-            "vuv" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Vuv,
-            "wst" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Wst,
-            "xaf" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Xaf,
-            "xcd" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Xcd,
-            "yer" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Yer,
-            "zar" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Zar,
-            "zmw" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Zmw,
-            "clp" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Clp,
-            "djf" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Djf,
-            "gnf" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Gnf,
-            "ugx" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Ugx,
-            "pyg" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Pyg,
-            "xof" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Xof,
-            "xpf" => SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Xpf,
-            _ => (SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency)(-1),
+            "usd" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+            "aed" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Aed,
+            "all" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.All,
+            "amd" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Amd,
+            "ang" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Ang,
+            "aud" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Aud,
+            "awg" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Awg,
+            "azn" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Azn,
+            "bam" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bam,
+            "bbd" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bbd,
+            "bdt" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bdt,
+            "bgn" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bgn,
+            "bif" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bif,
+            "bmd" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bmd,
+            "bnd" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bnd,
+            "bsd" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bsd,
+            "bwp" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bwp,
+            "byn" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Byn,
+            "bzd" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bzd,
+            "brl" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Brl,
+            "cad" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Cad,
+            "cdf" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Cdf,
+            "chf" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Chf,
+            "cny" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Cny,
+            "czk" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Czk,
+            "dkk" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Dkk,
+            "dop" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Dop,
+            "dzd" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Dzd,
+            "egp" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Egp,
+            "etb" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Etb,
+            "eur" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Eur,
+            "fjd" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Fjd,
+            "gbp" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Gbp,
+            "gel" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Gel,
+            "gip" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Gip,
+            "gmd" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Gmd,
+            "gyd" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Gyd,
+            "hkd" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Hkd,
+            "hrk" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Hrk,
+            "htg" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Htg,
+            "idr" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Idr,
+            "ils" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Ils,
+            "inr" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Inr,
+            "isk" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Isk,
+            "jmd" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Jmd,
+            "jpy" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Jpy,
+            "kes" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Kes,
+            "kgs" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Kgs,
+            "khr" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Khr,
+            "kmf" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Kmf,
+            "krw" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Krw,
+            "kyd" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Kyd,
+            "kzt" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Kzt,
+            "lbp" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Lbp,
+            "lkr" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Lkr,
+            "lrd" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Lrd,
+            "lsl" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Lsl,
+            "mad" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mad,
+            "mdl" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mdl,
+            "mga" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mga,
+            "mkd" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mkd,
+            "mmk" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mmk,
+            "mnt" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mnt,
+            "mop" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mop,
+            "mro" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mro,
+            "mvr" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mvr,
+            "mwk" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mwk,
+            "mxn" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mxn,
+            "myr" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Myr,
+            "mzn" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mzn,
+            "nad" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Nad,
+            "ngn" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Ngn,
+            "nok" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Nok,
+            "npr" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Npr,
+            "nzd" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Nzd,
+            "pgk" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Pgk,
+            "php" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Php,
+            "pkr" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Pkr,
+            "pln" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Pln,
+            "qar" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Qar,
+            "ron" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Ron,
+            "rsd" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Rsd,
+            "rub" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Rub,
+            "rwf" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Rwf,
+            "sar" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Sar,
+            "sbd" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Sbd,
+            "scr" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Scr,
+            "sek" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Sek,
+            "sgd" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Sgd,
+            "sle" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Sle,
+            "sll" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Sll,
+            "sos" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Sos,
+            "szl" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Szl,
+            "thb" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Thb,
+            "tjs" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Tjs,
+            "top" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Top,
+            "try" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Try,
+            "ttd" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Ttd,
+            "tzs" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Tzs,
+            "uah" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Uah,
+            "uzs" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Uzs,
+            "vnd" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Vnd,
+            "vuv" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Vuv,
+            "wst" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Wst,
+            "xaf" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Xaf,
+            "xcd" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Xcd,
+            "yer" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Yer,
+            "zar" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Zar,
+            "zmw" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Zmw,
+            "clp" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Clp,
+            "djf" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Djf,
+            "gnf" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Gnf,
+            "ugx" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Ugx,
+            "pyg" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Pyg,
+            "xof" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Xof,
+            "xpf" => SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Xpf,
+            _ => (SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency value,
+        SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency value,
         JsonSerializerOptions options
     )
     {
@@ -3171,122 +3374,2013 @@ sealed class SubscriptionProvisionResponseDataSubscriptionPricePriceCurrencyConv
             writer,
             value switch
             {
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd => "usd",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Aed => "aed",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.All => "all",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Amd => "amd",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Ang => "ang",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Aud => "aud",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Awg => "awg",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Azn => "azn",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bam => "bam",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bbd => "bbd",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bdt => "bdt",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bgn => "bgn",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bif => "bif",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bmd => "bmd",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bnd => "bnd",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bsd => "bsd",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bwp => "bwp",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Byn => "byn",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bzd => "bzd",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Brl => "brl",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Cad => "cad",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Cdf => "cdf",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Chf => "chf",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Cny => "cny",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Czk => "czk",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Dkk => "dkk",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Dop => "dop",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Dzd => "dzd",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Egp => "egp",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Etb => "etb",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Eur => "eur",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Fjd => "fjd",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Gbp => "gbp",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Gel => "gel",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Gip => "gip",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Gmd => "gmd",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Gyd => "gyd",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Hkd => "hkd",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Hrk => "hrk",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Htg => "htg",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Idr => "idr",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Ils => "ils",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Inr => "inr",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Isk => "isk",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Jmd => "jmd",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Jpy => "jpy",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Kes => "kes",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Kgs => "kgs",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Khr => "khr",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Kmf => "kmf",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Krw => "krw",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Kyd => "kyd",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Kzt => "kzt",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Lbp => "lbp",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Lkr => "lkr",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Lrd => "lrd",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Lsl => "lsl",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mad => "mad",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mdl => "mdl",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mga => "mga",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mkd => "mkd",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mmk => "mmk",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mnt => "mnt",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mop => "mop",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mro => "mro",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mvr => "mvr",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mwk => "mwk",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mxn => "mxn",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Myr => "myr",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mzn => "mzn",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Nad => "nad",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Ngn => "ngn",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Nok => "nok",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Npr => "npr",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Nzd => "nzd",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Pgk => "pgk",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Php => "php",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Pkr => "pkr",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Pln => "pln",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Qar => "qar",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Ron => "ron",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Rsd => "rsd",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Rub => "rub",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Rwf => "rwf",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Sar => "sar",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Sbd => "sbd",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Scr => "scr",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Sek => "sek",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Sgd => "sgd",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Sle => "sle",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Sll => "sll",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Sos => "sos",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Szl => "szl",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Thb => "thb",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Tjs => "tjs",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Top => "top",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Try => "try",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Ttd => "ttd",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Tzs => "tzs",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Uah => "uah",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Uzs => "uzs",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Vnd => "vnd",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Vuv => "vuv",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Wst => "wst",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Xaf => "xaf",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Xcd => "xcd",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Yer => "yer",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Zar => "zar",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Zmw => "zmw",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Clp => "clp",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Djf => "djf",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Gnf => "gnf",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Ugx => "ugx",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Pyg => "pyg",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Xof => "xof",
-                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Xpf => "xpf",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd => "usd",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Aed => "aed",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.All => "all",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Amd => "amd",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Ang => "ang",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Aud => "aud",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Awg => "awg",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Azn => "azn",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bam => "bam",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bbd => "bbd",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bdt => "bdt",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bgn => "bgn",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bif => "bif",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bmd => "bmd",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bnd => "bnd",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bsd => "bsd",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bwp => "bwp",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Byn => "byn",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bzd => "bzd",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Brl => "brl",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Cad => "cad",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Cdf => "cdf",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Chf => "chf",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Cny => "cny",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Czk => "czk",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Dkk => "dkk",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Dop => "dop",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Dzd => "dzd",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Egp => "egp",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Etb => "etb",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Eur => "eur",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Fjd => "fjd",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Gbp => "gbp",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Gel => "gel",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Gip => "gip",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Gmd => "gmd",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Gyd => "gyd",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Hkd => "hkd",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Hrk => "hrk",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Htg => "htg",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Idr => "idr",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Ils => "ils",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Inr => "inr",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Isk => "isk",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Jmd => "jmd",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Jpy => "jpy",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Kes => "kes",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Kgs => "kgs",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Khr => "khr",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Kmf => "kmf",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Krw => "krw",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Kyd => "kyd",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Kzt => "kzt",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Lbp => "lbp",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Lkr => "lkr",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Lrd => "lrd",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Lsl => "lsl",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mad => "mad",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mdl => "mdl",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mga => "mga",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mkd => "mkd",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mmk => "mmk",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mnt => "mnt",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mop => "mop",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mro => "mro",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mvr => "mvr",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mwk => "mwk",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mxn => "mxn",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Myr => "myr",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mzn => "mzn",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Nad => "nad",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Ngn => "ngn",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Nok => "nok",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Npr => "npr",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Nzd => "nzd",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Pgk => "pgk",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Php => "php",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Pkr => "pkr",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Pln => "pln",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Qar => "qar",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Ron => "ron",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Rsd => "rsd",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Rub => "rub",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Rwf => "rwf",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Sar => "sar",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Sbd => "sbd",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Scr => "scr",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Sek => "sek",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Sgd => "sgd",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Sle => "sle",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Sll => "sll",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Sos => "sos",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Szl => "szl",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Thb => "thb",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Tjs => "tjs",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Top => "top",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Try => "try",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Ttd => "ttd",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Tzs => "tzs",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Uah => "uah",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Uzs => "uzs",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Vnd => "vnd",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Vuv => "vuv",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Wst => "wst",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Xaf => "xaf",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Xcd => "xcd",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Yer => "yer",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Zar => "zar",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Zmw => "zmw",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Clp => "clp",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Djf => "djf",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Gnf => "gnf",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Ugx => "ugx",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Pyg => "pyg",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Xof => "xof",
+                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Xpf => "xpf",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Scheduled subscription update
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdate,
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateFromRaw
+    >)
+)]
+public sealed record class SubscriptionProvisionResponseDataSubscriptionFutureUpdate : JsonModel
+{
+    /// <summary>
+    /// Scheduled execution time
+    /// </summary>
+    public required System::DateTimeOffset ScheduledExecutionTime
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("scheduledExecutionTime");
+        }
+        init { this._rawData.Set("scheduledExecutionTime", value); }
+    }
+
+    /// <summary>
+    /// Status of the scheduled update
+    /// </summary>
+    public required ApiEnum<
+        string,
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus
+    > ScheduleStatus
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<
+                ApiEnum<
+                    string,
+                    SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus
+                >
+            >("scheduleStatus");
+        }
+        init { this._rawData.Set("scheduleStatus", value); }
+    }
+
+    /// <summary>
+    /// Type of scheduled change
+    /// </summary>
+    public required ApiEnum<
+        string,
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType
+    > SubscriptionScheduleType
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<
+                ApiEnum<
+                    string,
+                    SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType
+                >
+            >("subscriptionScheduleType");
+        }
+        init { this._rawData.Set("subscriptionScheduleType", value); }
+    }
+
+    /// <summary>
+    /// Target package for the update
+    /// </summary>
+    public SubscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackage? TargetPackage
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<SubscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackage>(
+                "targetPackage"
+            );
+        }
+        init { this._rawData.Set("targetPackage", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.ScheduledExecutionTime;
+        this.ScheduleStatus.Validate();
+        this.SubscriptionScheduleType.Validate();
+        this.TargetPackage?.Validate();
+    }
+
+    public SubscriptionProvisionResponseDataSubscriptionFutureUpdate() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public SubscriptionProvisionResponseDataSubscriptionFutureUpdate(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdate subscriptionProvisionResponseDataSubscriptionFutureUpdate
+    )
+        : base(subscriptionProvisionResponseDataSubscriptionFutureUpdate) { }
+#pragma warning restore CS8618
+
+    public SubscriptionProvisionResponseDataSubscriptionFutureUpdate(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    SubscriptionProvisionResponseDataSubscriptionFutureUpdate(
+        FrozenDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="SubscriptionProvisionResponseDataSubscriptionFutureUpdateFromRaw.FromRawUnchecked"/>
+    public static SubscriptionProvisionResponseDataSubscriptionFutureUpdate FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class SubscriptionProvisionResponseDataSubscriptionFutureUpdateFromRaw
+    : IFromRawJson<SubscriptionProvisionResponseDataSubscriptionFutureUpdate>
+{
+    /// <inheritdoc/>
+    public SubscriptionProvisionResponseDataSubscriptionFutureUpdate FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionProvisionResponseDataSubscriptionFutureUpdate.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Status of the scheduled update
+/// </summary>
+[JsonConverter(
+    typeof(SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatusConverter)
+)]
+public enum SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus
+{
+    PendingPayment,
+    Scheduled,
+    Canceled,
+    Done,
+    Failed,
+}
+
+sealed class SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatusConverter
+    : JsonConverter<SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus>
+{
+    public override SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "PENDING_PAYMENT" =>
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+            "SCHEDULED" =>
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.Scheduled,
+            "CANCELED" =>
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.Canceled,
+            "DONE" => SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.Done,
+            "FAILED" =>
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.Failed,
+            _ => (SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment =>
+                    "PENDING_PAYMENT",
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.Scheduled =>
+                    "SCHEDULED",
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.Canceled =>
+                    "CANCELED",
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.Done =>
+                    "DONE",
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.Failed =>
+                    "FAILED",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Type of scheduled change
+/// </summary>
+[JsonConverter(
+    typeof(SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleTypeConverter)
+)]
+public enum SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType
+{
+    Downgrade,
+    Plan,
+    BillingPeriod,
+    UnitAmount,
+    RecurringCredits,
+    PriceOverride,
+    Addon,
+    Coupon,
+    MigrateToLatest,
+    AdditionalMetaData,
+    BillingInfoMetadata,
+}
+
+sealed class SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleTypeConverter
+    : JsonConverter<SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType>
+{
+    public override SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "DOWNGRADE" =>
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+            "PLAN" =>
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Plan,
+            "BILLING_PERIOD" =>
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.BillingPeriod,
+            "UNIT_AMOUNT" =>
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.UnitAmount,
+            "RECURRING_CREDITS" =>
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.RecurringCredits,
+            "PRICE_OVERRIDE" =>
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.PriceOverride,
+            "ADDON" =>
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Addon,
+            "COUPON" =>
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Coupon,
+            "MIGRATE_TO_LATEST" =>
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.MigrateToLatest,
+            "ADDITIONAL_META_DATA" =>
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.AdditionalMetaData,
+            "BILLING_INFO_METADATA" =>
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.BillingInfoMetadata,
+            _ =>
+                (SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType)(
+                    -1
+                ),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade =>
+                    "DOWNGRADE",
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Plan =>
+                    "PLAN",
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.BillingPeriod =>
+                    "BILLING_PERIOD",
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.UnitAmount =>
+                    "UNIT_AMOUNT",
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.RecurringCredits =>
+                    "RECURRING_CREDITS",
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.PriceOverride =>
+                    "PRICE_OVERRIDE",
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Addon =>
+                    "ADDON",
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Coupon =>
+                    "COUPON",
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.MigrateToLatest =>
+                    "MIGRATE_TO_LATEST",
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.AdditionalMetaData =>
+                    "ADDITIONAL_META_DATA",
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.BillingInfoMetadata =>
+                    "BILLING_INFO_METADATA",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Target package for the update
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackage,
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackageFromRaw
+    >)
+)]
+public sealed record class SubscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackage
+    : JsonModel
+{
+    /// <summary>
+    /// Target package for the update
+    /// </summary>
+    public required string ID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
+        init { this._rawData.Set("id", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.ID;
+    }
+
+    public SubscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackage() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public SubscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackage(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackage subscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackage
+    )
+        : base(subscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackage) { }
+#pragma warning restore CS8618
+
+    public SubscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackage(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    SubscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackage(
+        FrozenDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="SubscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackageFromRaw.FromRawUnchecked"/>
+    public static SubscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackage FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+
+    [SetsRequiredMembers]
+    public SubscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackage(string id)
+        : this()
+    {
+        this.ID = id;
+    }
+}
+
+class SubscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackageFromRaw
+    : IFromRawJson<SubscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackage>
+{
+    /// <inheritdoc/>
+    public SubscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackage FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) =>
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackage.FromRawUnchecked(
+            rawData
+        );
+}
+
+/// <summary>
+/// Latest invoice for the subscription
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        SubscriptionProvisionResponseDataSubscriptionLatestInvoice,
+        SubscriptionProvisionResponseDataSubscriptionLatestInvoiceFromRaw
+    >)
+)]
+public sealed record class SubscriptionProvisionResponseDataSubscriptionLatestInvoice : JsonModel
+{
+    /// <summary>
+    /// Invoice billing ID
+    /// </summary>
+    public required string BillingID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("billingId");
+        }
+        init { this._rawData.Set("billingId", value); }
+    }
+
+    /// <summary>
+    /// Invoice creation date
+    /// </summary>
+    public required System::DateTimeOffset CreatedAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("createdAt");
+        }
+        init { this._rawData.Set("createdAt", value); }
+    }
+
+    /// <summary>
+    /// Whether payment requires action
+    /// </summary>
+    public required bool RequiresAction
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("requiresAction");
+        }
+        init { this._rawData.Set("requiresAction", value); }
+    }
+
+    /// <summary>
+    /// Invoice status
+    /// </summary>
+    public required ApiEnum<
+        string,
+        SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus
+    > Status
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus>
+            >("status");
+        }
+        init { this._rawData.Set("status", value); }
+    }
+
+    /// <summary>
+    /// Amount due
+    /// </summary>
+    public double? AmountDue
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<double>("amountDue");
+        }
+        init { this._rawData.Set("amountDue", value); }
+    }
+
+    /// <summary>
+    /// Billing reason
+    /// </summary>
+    public ApiEnum<
+        string,
+        SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason
+    >? BillingReason
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<
+                ApiEnum<
+                    string,
+                    SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason
+                >
+            >("billingReason");
+        }
+        init { this._rawData.Set("billingReason", value); }
+    }
+
+    /// <summary>
+    /// Invoice currency
+    /// </summary>
+    public string? Currency
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("currency");
+        }
+        init { this._rawData.Set("currency", value); }
+    }
+
+    /// <summary>
+    /// Invoice PDF URL
+    /// </summary>
+    public string? PdfUrl
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("pdfUrl");
+        }
+        init { this._rawData.Set("pdfUrl", value); }
+    }
+
+    /// <summary>
+    /// Total amount
+    /// </summary>
+    public double? Total
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<double>("total");
+        }
+        init { this._rawData.Set("total", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.BillingID;
+        _ = this.CreatedAt;
+        _ = this.RequiresAction;
+        this.Status.Validate();
+        _ = this.AmountDue;
+        this.BillingReason?.Validate();
+        _ = this.Currency;
+        _ = this.PdfUrl;
+        _ = this.Total;
+    }
+
+    public SubscriptionProvisionResponseDataSubscriptionLatestInvoice() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public SubscriptionProvisionResponseDataSubscriptionLatestInvoice(
+        SubscriptionProvisionResponseDataSubscriptionLatestInvoice subscriptionProvisionResponseDataSubscriptionLatestInvoice
+    )
+        : base(subscriptionProvisionResponseDataSubscriptionLatestInvoice) { }
+#pragma warning restore CS8618
+
+    public SubscriptionProvisionResponseDataSubscriptionLatestInvoice(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    SubscriptionProvisionResponseDataSubscriptionLatestInvoice(
+        FrozenDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="SubscriptionProvisionResponseDataSubscriptionLatestInvoiceFromRaw.FromRawUnchecked"/>
+    public static SubscriptionProvisionResponseDataSubscriptionLatestInvoice FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class SubscriptionProvisionResponseDataSubscriptionLatestInvoiceFromRaw
+    : IFromRawJson<SubscriptionProvisionResponseDataSubscriptionLatestInvoice>
+{
+    /// <inheritdoc/>
+    public SubscriptionProvisionResponseDataSubscriptionLatestInvoice FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionProvisionResponseDataSubscriptionLatestInvoice.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Invoice status
+/// </summary>
+[JsonConverter(typeof(SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatusConverter))]
+public enum SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus
+{
+    Open,
+    Canceled,
+    Paid,
+}
+
+sealed class SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatusConverter
+    : JsonConverter<SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus>
+{
+    public override SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "OPEN" => SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+            "CANCELED" => SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Canceled,
+            "PAID" => SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Paid,
+            _ => (SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open => "OPEN",
+                SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Canceled =>
+                    "CANCELED",
+                SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Paid => "PAID",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Billing reason
+/// </summary>
+[JsonConverter(
+    typeof(SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReasonConverter)
+)]
+public enum SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason
+{
+    BillingCycle,
+    SubscriptionCreation,
+    SubscriptionUpdate,
+    Manual,
+    MinimumInvoiceAmountExceeded,
+    Other,
+}
+
+sealed class SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReasonConverter
+    : JsonConverter<SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason>
+{
+    public override SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "BILLING_CYCLE" =>
+                SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+            "SUBSCRIPTION_CREATION" =>
+                SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.SubscriptionCreation,
+            "SUBSCRIPTION_UPDATE" =>
+                SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.SubscriptionUpdate,
+            "MANUAL" =>
+                SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.Manual,
+            "MINIMUM_INVOICE_AMOUNT_EXCEEDED" =>
+                SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.MinimumInvoiceAmountExceeded,
+            "OTHER" =>
+                SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.Other,
+            _ => (SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle =>
+                    "BILLING_CYCLE",
+                SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.SubscriptionCreation =>
+                    "SUBSCRIPTION_CREATION",
+                SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.SubscriptionUpdate =>
+                    "SUBSCRIPTION_UPDATE",
+                SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.Manual =>
+                    "MANUAL",
+                SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.MinimumInvoiceAmountExceeded =>
+                    "MINIMUM_INVOICE_AMOUNT_EXCEEDED",
+                SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.Other =>
+                    "OTHER",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Minimum spend configuration
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        SubscriptionProvisionResponseDataSubscriptionMinimumSpend,
+        SubscriptionProvisionResponseDataSubscriptionMinimumSpendFromRaw
+    >)
+)]
+public sealed record class SubscriptionProvisionResponseDataSubscriptionMinimumSpend : JsonModel
+{
+    /// <summary>
+    /// The price amount
+    /// </summary>
+    public double? Amount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<double>("amount");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("amount", value);
+        }
+    }
+
+    /// <summary>
+    /// The price currency
+    /// </summary>
+    public ApiEnum<
+        string,
+        SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency
+    >? Currency
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency>
+            >("currency");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("currency", value);
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.Amount;
+        this.Currency?.Validate();
+    }
+
+    public SubscriptionProvisionResponseDataSubscriptionMinimumSpend() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public SubscriptionProvisionResponseDataSubscriptionMinimumSpend(
+        SubscriptionProvisionResponseDataSubscriptionMinimumSpend subscriptionProvisionResponseDataSubscriptionMinimumSpend
+    )
+        : base(subscriptionProvisionResponseDataSubscriptionMinimumSpend) { }
+#pragma warning restore CS8618
+
+    public SubscriptionProvisionResponseDataSubscriptionMinimumSpend(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    SubscriptionProvisionResponseDataSubscriptionMinimumSpend(
+        FrozenDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="SubscriptionProvisionResponseDataSubscriptionMinimumSpendFromRaw.FromRawUnchecked"/>
+    public static SubscriptionProvisionResponseDataSubscriptionMinimumSpend FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class SubscriptionProvisionResponseDataSubscriptionMinimumSpendFromRaw
+    : IFromRawJson<SubscriptionProvisionResponseDataSubscriptionMinimumSpend>
+{
+    /// <inheritdoc/>
+    public SubscriptionProvisionResponseDataSubscriptionMinimumSpend FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionProvisionResponseDataSubscriptionMinimumSpend.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// The price currency
+/// </summary>
+[JsonConverter(typeof(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrencyConverter))]
+public enum SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency
+{
+    Usd,
+    Aed,
+    All,
+    Amd,
+    Ang,
+    Aud,
+    Awg,
+    Azn,
+    Bam,
+    Bbd,
+    Bdt,
+    Bgn,
+    Bif,
+    Bmd,
+    Bnd,
+    Bsd,
+    Bwp,
+    Byn,
+    Bzd,
+    Brl,
+    Cad,
+    Cdf,
+    Chf,
+    Cny,
+    Czk,
+    Dkk,
+    Dop,
+    Dzd,
+    Egp,
+    Etb,
+    Eur,
+    Fjd,
+    Gbp,
+    Gel,
+    Gip,
+    Gmd,
+    Gyd,
+    Hkd,
+    Hrk,
+    Htg,
+    Idr,
+    Ils,
+    Inr,
+    Isk,
+    Jmd,
+    Jpy,
+    Kes,
+    Kgs,
+    Khr,
+    Kmf,
+    Krw,
+    Kyd,
+    Kzt,
+    Lbp,
+    Lkr,
+    Lrd,
+    Lsl,
+    Mad,
+    Mdl,
+    Mga,
+    Mkd,
+    Mmk,
+    Mnt,
+    Mop,
+    Mro,
+    Mvr,
+    Mwk,
+    Mxn,
+    Myr,
+    Mzn,
+    Nad,
+    Ngn,
+    Nok,
+    Npr,
+    Nzd,
+    Pgk,
+    Php,
+    Pkr,
+    Pln,
+    Qar,
+    Ron,
+    Rsd,
+    Rub,
+    Rwf,
+    Sar,
+    Sbd,
+    Scr,
+    Sek,
+    Sgd,
+    Sle,
+    Sll,
+    Sos,
+    Szl,
+    Thb,
+    Tjs,
+    Top,
+    Try,
+    Ttd,
+    Tzs,
+    Uah,
+    Uzs,
+    Vnd,
+    Vuv,
+    Wst,
+    Xaf,
+    Xcd,
+    Yer,
+    Zar,
+    Zmw,
+    Clp,
+    Djf,
+    Gnf,
+    Ugx,
+    Pyg,
+    Xof,
+    Xpf,
+}
+
+sealed class SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrencyConverter
+    : JsonConverter<SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency>
+{
+    public override SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "usd" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+            "aed" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Aed,
+            "all" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.All,
+            "amd" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Amd,
+            "ang" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Ang,
+            "aud" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Aud,
+            "awg" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Awg,
+            "azn" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Azn,
+            "bam" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bam,
+            "bbd" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bbd,
+            "bdt" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bdt,
+            "bgn" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bgn,
+            "bif" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bif,
+            "bmd" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bmd,
+            "bnd" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bnd,
+            "bsd" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bsd,
+            "bwp" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bwp,
+            "byn" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Byn,
+            "bzd" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bzd,
+            "brl" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Brl,
+            "cad" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Cad,
+            "cdf" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Cdf,
+            "chf" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Chf,
+            "cny" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Cny,
+            "czk" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Czk,
+            "dkk" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Dkk,
+            "dop" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Dop,
+            "dzd" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Dzd,
+            "egp" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Egp,
+            "etb" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Etb,
+            "eur" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Eur,
+            "fjd" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Fjd,
+            "gbp" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Gbp,
+            "gel" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Gel,
+            "gip" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Gip,
+            "gmd" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Gmd,
+            "gyd" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Gyd,
+            "hkd" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Hkd,
+            "hrk" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Hrk,
+            "htg" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Htg,
+            "idr" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Idr,
+            "ils" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Ils,
+            "inr" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Inr,
+            "isk" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Isk,
+            "jmd" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Jmd,
+            "jpy" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Jpy,
+            "kes" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Kes,
+            "kgs" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Kgs,
+            "khr" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Khr,
+            "kmf" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Kmf,
+            "krw" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Krw,
+            "kyd" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Kyd,
+            "kzt" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Kzt,
+            "lbp" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Lbp,
+            "lkr" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Lkr,
+            "lrd" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Lrd,
+            "lsl" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Lsl,
+            "mad" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mad,
+            "mdl" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mdl,
+            "mga" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mga,
+            "mkd" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mkd,
+            "mmk" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mmk,
+            "mnt" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mnt,
+            "mop" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mop,
+            "mro" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mro,
+            "mvr" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mvr,
+            "mwk" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mwk,
+            "mxn" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mxn,
+            "myr" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Myr,
+            "mzn" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mzn,
+            "nad" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Nad,
+            "ngn" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Ngn,
+            "nok" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Nok,
+            "npr" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Npr,
+            "nzd" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Nzd,
+            "pgk" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Pgk,
+            "php" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Php,
+            "pkr" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Pkr,
+            "pln" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Pln,
+            "qar" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Qar,
+            "ron" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Ron,
+            "rsd" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Rsd,
+            "rub" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Rub,
+            "rwf" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Rwf,
+            "sar" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Sar,
+            "sbd" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Sbd,
+            "scr" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Scr,
+            "sek" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Sek,
+            "sgd" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Sgd,
+            "sle" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Sle,
+            "sll" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Sll,
+            "sos" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Sos,
+            "szl" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Szl,
+            "thb" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Thb,
+            "tjs" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Tjs,
+            "top" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Top,
+            "try" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Try,
+            "ttd" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Ttd,
+            "tzs" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Tzs,
+            "uah" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Uah,
+            "uzs" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Uzs,
+            "vnd" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Vnd,
+            "vuv" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Vuv,
+            "wst" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Wst,
+            "xaf" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Xaf,
+            "xcd" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Xcd,
+            "yer" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Yer,
+            "zar" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Zar,
+            "zmw" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Zmw,
+            "clp" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Clp,
+            "djf" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Djf,
+            "gnf" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Gnf,
+            "ugx" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Ugx,
+            "pyg" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Pyg,
+            "xof" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Xof,
+            "xpf" => SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Xpf,
+            _ => (SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd => "usd",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Aed => "aed",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.All => "all",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Amd => "amd",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Ang => "ang",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Aud => "aud",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Awg => "awg",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Azn => "azn",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bam => "bam",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bbd => "bbd",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bdt => "bdt",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bgn => "bgn",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bif => "bif",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bmd => "bmd",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bnd => "bnd",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bsd => "bsd",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bwp => "bwp",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Byn => "byn",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bzd => "bzd",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Brl => "brl",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Cad => "cad",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Cdf => "cdf",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Chf => "chf",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Cny => "cny",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Czk => "czk",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Dkk => "dkk",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Dop => "dop",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Dzd => "dzd",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Egp => "egp",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Etb => "etb",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Eur => "eur",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Fjd => "fjd",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Gbp => "gbp",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Gel => "gel",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Gip => "gip",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Gmd => "gmd",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Gyd => "gyd",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Hkd => "hkd",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Hrk => "hrk",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Htg => "htg",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Idr => "idr",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Ils => "ils",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Inr => "inr",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Isk => "isk",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Jmd => "jmd",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Jpy => "jpy",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Kes => "kes",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Kgs => "kgs",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Khr => "khr",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Kmf => "kmf",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Krw => "krw",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Kyd => "kyd",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Kzt => "kzt",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Lbp => "lbp",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Lkr => "lkr",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Lrd => "lrd",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Lsl => "lsl",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mad => "mad",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mdl => "mdl",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mga => "mga",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mkd => "mkd",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mmk => "mmk",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mnt => "mnt",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mop => "mop",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mro => "mro",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mvr => "mvr",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mwk => "mwk",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mxn => "mxn",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Myr => "myr",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mzn => "mzn",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Nad => "nad",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Ngn => "ngn",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Nok => "nok",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Npr => "npr",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Nzd => "nzd",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Pgk => "pgk",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Php => "php",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Pkr => "pkr",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Pln => "pln",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Qar => "qar",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Ron => "ron",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Rsd => "rsd",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Rub => "rub",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Rwf => "rwf",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Sar => "sar",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Sbd => "sbd",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Scr => "scr",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Sek => "sek",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Sgd => "sgd",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Sle => "sle",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Sll => "sll",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Sos => "sos",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Szl => "szl",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Thb => "thb",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Tjs => "tjs",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Top => "top",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Try => "try",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Ttd => "ttd",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Tzs => "tzs",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Uah => "uah",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Uzs => "uzs",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Vnd => "vnd",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Vuv => "vuv",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Wst => "wst",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Xaf => "xaf",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Xcd => "xcd",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Yer => "yer",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Zar => "zar",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Zmw => "zmw",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Clp => "clp",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Djf => "djf",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Gnf => "gnf",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Ugx => "ugx",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Pyg => "pyg",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Xof => "xof",
+                SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Xpf => "xpf",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// The method used to collect payments for a subscription
+/// </summary>
+[JsonConverter(
+    typeof(SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethodConverter)
+)]
+public enum SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod
+{
+    Charge,
+    Invoice,
+    None,
+}
+
+sealed class SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethodConverter
+    : JsonConverter<SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod>
+{
+    public override SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "CHARGE" => SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge,
+            "INVOICE" =>
+                SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Invoice,
+            "NONE" => SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.None,
+            _ => (SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge =>
+                    "CHARGE",
+                SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Invoice =>
+                    "INVOICE",
+                SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.None => "NONE",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+[JsonConverter(
+    typeof(JsonModelConverter<
+        SubscriptionProvisionResponseDataSubscriptionPrice,
+        SubscriptionProvisionResponseDataSubscriptionPriceFromRaw
+    >)
+)]
+public sealed record class SubscriptionProvisionResponseDataSubscriptionPrice : JsonModel
+{
+    /// <summary>
+    /// Addon identifier for the price override
+    /// </summary>
+    public string? AddonID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("addonId");
+        }
+        init { this._rawData.Set("addonId", value); }
+    }
+
+    /// <summary>
+    /// The price amount
+    /// </summary>
+    public double? Amount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<double>("amount");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("amount", value);
+        }
+    }
+
+    /// <summary>
+    /// Whether this is a base charge override
+    /// </summary>
+    public bool? BaseCharge
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("baseCharge");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("baseCharge", value);
+        }
+    }
+
+    /// <summary>
+    /// The billing country code of the price
+    /// </summary>
+    public string? BillingCountryCode
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("billingCountryCode");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("billingCountryCode", value);
+        }
+    }
+
+    /// <summary>
+    /// Block size for pricing
+    /// </summary>
+    public double? BlockSize
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<double>("blockSize");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("blockSize", value);
+        }
+    }
+
+    /// <summary>
+    /// The price currency
+    /// </summary>
+    public ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionPriceCurrency>? Currency
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionPriceCurrency>
+            >("currency");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("currency", value);
+        }
+    }
+
+    /// <summary>
+    /// Feature identifier for the price override
+    /// </summary>
+    public string? FeatureID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("featureId");
+        }
+        init { this._rawData.Set("featureId", value); }
+    }
+
+    /// <summary>
+    /// Pricing tiers configuration
+    /// </summary>
+    public IReadOnlyList<SubscriptionProvisionResponseDataSubscriptionPriceTier>? Tiers
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<
+                ImmutableArray<SubscriptionProvisionResponseDataSubscriptionPriceTier>
+            >("tiers");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set<ImmutableArray<SubscriptionProvisionResponseDataSubscriptionPriceTier>?>(
+                "tiers",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.AddonID;
+        _ = this.Amount;
+        _ = this.BaseCharge;
+        _ = this.BillingCountryCode;
+        _ = this.BlockSize;
+        this.Currency?.Validate();
+        _ = this.FeatureID;
+        foreach (var item in this.Tiers ?? [])
+        {
+            item.Validate();
+        }
+    }
+
+    public SubscriptionProvisionResponseDataSubscriptionPrice() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public SubscriptionProvisionResponseDataSubscriptionPrice(
+        SubscriptionProvisionResponseDataSubscriptionPrice subscriptionProvisionResponseDataSubscriptionPrice
+    )
+        : base(subscriptionProvisionResponseDataSubscriptionPrice) { }
+#pragma warning restore CS8618
+
+    public SubscriptionProvisionResponseDataSubscriptionPrice(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    SubscriptionProvisionResponseDataSubscriptionPrice(
+        FrozenDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="SubscriptionProvisionResponseDataSubscriptionPriceFromRaw.FromRawUnchecked"/>
+    public static SubscriptionProvisionResponseDataSubscriptionPrice FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class SubscriptionProvisionResponseDataSubscriptionPriceFromRaw
+    : IFromRawJson<SubscriptionProvisionResponseDataSubscriptionPrice>
+{
+    /// <inheritdoc/>
+    public SubscriptionProvisionResponseDataSubscriptionPrice FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionProvisionResponseDataSubscriptionPrice.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// The price currency
+/// </summary>
+[JsonConverter(typeof(SubscriptionProvisionResponseDataSubscriptionPriceCurrencyConverter))]
+public enum SubscriptionProvisionResponseDataSubscriptionPriceCurrency
+{
+    Usd,
+    Aed,
+    All,
+    Amd,
+    Ang,
+    Aud,
+    Awg,
+    Azn,
+    Bam,
+    Bbd,
+    Bdt,
+    Bgn,
+    Bif,
+    Bmd,
+    Bnd,
+    Bsd,
+    Bwp,
+    Byn,
+    Bzd,
+    Brl,
+    Cad,
+    Cdf,
+    Chf,
+    Cny,
+    Czk,
+    Dkk,
+    Dop,
+    Dzd,
+    Egp,
+    Etb,
+    Eur,
+    Fjd,
+    Gbp,
+    Gel,
+    Gip,
+    Gmd,
+    Gyd,
+    Hkd,
+    Hrk,
+    Htg,
+    Idr,
+    Ils,
+    Inr,
+    Isk,
+    Jmd,
+    Jpy,
+    Kes,
+    Kgs,
+    Khr,
+    Kmf,
+    Krw,
+    Kyd,
+    Kzt,
+    Lbp,
+    Lkr,
+    Lrd,
+    Lsl,
+    Mad,
+    Mdl,
+    Mga,
+    Mkd,
+    Mmk,
+    Mnt,
+    Mop,
+    Mro,
+    Mvr,
+    Mwk,
+    Mxn,
+    Myr,
+    Mzn,
+    Nad,
+    Ngn,
+    Nok,
+    Npr,
+    Nzd,
+    Pgk,
+    Php,
+    Pkr,
+    Pln,
+    Qar,
+    Ron,
+    Rsd,
+    Rub,
+    Rwf,
+    Sar,
+    Sbd,
+    Scr,
+    Sek,
+    Sgd,
+    Sle,
+    Sll,
+    Sos,
+    Szl,
+    Thb,
+    Tjs,
+    Top,
+    Try,
+    Ttd,
+    Tzs,
+    Uah,
+    Uzs,
+    Vnd,
+    Vuv,
+    Wst,
+    Xaf,
+    Xcd,
+    Yer,
+    Zar,
+    Zmw,
+    Clp,
+    Djf,
+    Gnf,
+    Ugx,
+    Pyg,
+    Xof,
+    Xpf,
+}
+
+sealed class SubscriptionProvisionResponseDataSubscriptionPriceCurrencyConverter
+    : JsonConverter<SubscriptionProvisionResponseDataSubscriptionPriceCurrency>
+{
+    public override SubscriptionProvisionResponseDataSubscriptionPriceCurrency Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "usd" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
+            "aed" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Aed,
+            "all" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.All,
+            "amd" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Amd,
+            "ang" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Ang,
+            "aud" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Aud,
+            "awg" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Awg,
+            "azn" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Azn,
+            "bam" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bam,
+            "bbd" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bbd,
+            "bdt" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bdt,
+            "bgn" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bgn,
+            "bif" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bif,
+            "bmd" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bmd,
+            "bnd" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bnd,
+            "bsd" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bsd,
+            "bwp" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bwp,
+            "byn" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Byn,
+            "bzd" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bzd,
+            "brl" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Brl,
+            "cad" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Cad,
+            "cdf" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Cdf,
+            "chf" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Chf,
+            "cny" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Cny,
+            "czk" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Czk,
+            "dkk" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Dkk,
+            "dop" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Dop,
+            "dzd" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Dzd,
+            "egp" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Egp,
+            "etb" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Etb,
+            "eur" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Eur,
+            "fjd" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Fjd,
+            "gbp" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Gbp,
+            "gel" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Gel,
+            "gip" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Gip,
+            "gmd" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Gmd,
+            "gyd" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Gyd,
+            "hkd" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Hkd,
+            "hrk" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Hrk,
+            "htg" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Htg,
+            "idr" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Idr,
+            "ils" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Ils,
+            "inr" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Inr,
+            "isk" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Isk,
+            "jmd" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Jmd,
+            "jpy" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Jpy,
+            "kes" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Kes,
+            "kgs" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Kgs,
+            "khr" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Khr,
+            "kmf" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Kmf,
+            "krw" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Krw,
+            "kyd" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Kyd,
+            "kzt" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Kzt,
+            "lbp" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Lbp,
+            "lkr" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Lkr,
+            "lrd" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Lrd,
+            "lsl" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Lsl,
+            "mad" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mad,
+            "mdl" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mdl,
+            "mga" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mga,
+            "mkd" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mkd,
+            "mmk" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mmk,
+            "mnt" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mnt,
+            "mop" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mop,
+            "mro" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mro,
+            "mvr" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mvr,
+            "mwk" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mwk,
+            "mxn" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mxn,
+            "myr" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Myr,
+            "mzn" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mzn,
+            "nad" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Nad,
+            "ngn" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Ngn,
+            "nok" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Nok,
+            "npr" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Npr,
+            "nzd" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Nzd,
+            "pgk" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Pgk,
+            "php" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Php,
+            "pkr" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Pkr,
+            "pln" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Pln,
+            "qar" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Qar,
+            "ron" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Ron,
+            "rsd" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Rsd,
+            "rub" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Rub,
+            "rwf" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Rwf,
+            "sar" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Sar,
+            "sbd" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Sbd,
+            "scr" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Scr,
+            "sek" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Sek,
+            "sgd" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Sgd,
+            "sle" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Sle,
+            "sll" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Sll,
+            "sos" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Sos,
+            "szl" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Szl,
+            "thb" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Thb,
+            "tjs" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Tjs,
+            "top" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Top,
+            "try" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Try,
+            "ttd" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Ttd,
+            "tzs" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Tzs,
+            "uah" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Uah,
+            "uzs" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Uzs,
+            "vnd" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Vnd,
+            "vuv" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Vuv,
+            "wst" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Wst,
+            "xaf" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Xaf,
+            "xcd" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Xcd,
+            "yer" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Yer,
+            "zar" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Zar,
+            "zmw" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Zmw,
+            "clp" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Clp,
+            "djf" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Djf,
+            "gnf" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Gnf,
+            "ugx" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Ugx,
+            "pyg" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Pyg,
+            "xof" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Xof,
+            "xpf" => SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Xpf,
+            _ => (SubscriptionProvisionResponseDataSubscriptionPriceCurrency)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        SubscriptionProvisionResponseDataSubscriptionPriceCurrency value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd => "usd",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Aed => "aed",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.All => "all",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Amd => "amd",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Ang => "ang",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Aud => "aud",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Awg => "awg",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Azn => "azn",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bam => "bam",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bbd => "bbd",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bdt => "bdt",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bgn => "bgn",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bif => "bif",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bmd => "bmd",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bnd => "bnd",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bsd => "bsd",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bwp => "bwp",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Byn => "byn",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bzd => "bzd",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Brl => "brl",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Cad => "cad",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Cdf => "cdf",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Chf => "chf",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Cny => "cny",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Czk => "czk",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Dkk => "dkk",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Dop => "dop",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Dzd => "dzd",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Egp => "egp",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Etb => "etb",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Eur => "eur",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Fjd => "fjd",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Gbp => "gbp",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Gel => "gel",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Gip => "gip",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Gmd => "gmd",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Gyd => "gyd",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Hkd => "hkd",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Hrk => "hrk",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Htg => "htg",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Idr => "idr",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Ils => "ils",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Inr => "inr",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Isk => "isk",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Jmd => "jmd",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Jpy => "jpy",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Kes => "kes",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Kgs => "kgs",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Khr => "khr",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Kmf => "kmf",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Krw => "krw",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Kyd => "kyd",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Kzt => "kzt",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Lbp => "lbp",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Lkr => "lkr",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Lrd => "lrd",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Lsl => "lsl",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mad => "mad",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mdl => "mdl",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mga => "mga",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mkd => "mkd",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mmk => "mmk",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mnt => "mnt",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mop => "mop",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mro => "mro",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mvr => "mvr",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mwk => "mwk",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mxn => "mxn",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Myr => "myr",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mzn => "mzn",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Nad => "nad",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Ngn => "ngn",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Nok => "nok",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Npr => "npr",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Nzd => "nzd",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Pgk => "pgk",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Php => "php",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Pkr => "pkr",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Pln => "pln",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Qar => "qar",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Ron => "ron",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Rsd => "rsd",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Rub => "rub",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Rwf => "rwf",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Sar => "sar",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Sbd => "sbd",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Scr => "scr",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Sek => "sek",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Sgd => "sgd",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Sle => "sle",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Sll => "sll",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Sos => "sos",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Szl => "szl",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Thb => "thb",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Tjs => "tjs",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Top => "top",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Try => "try",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Ttd => "ttd",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Tzs => "tzs",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Uah => "uah",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Uzs => "uzs",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Vnd => "vnd",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Vuv => "vuv",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Wst => "wst",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Xaf => "xaf",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Xcd => "xcd",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Yer => "yer",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Zar => "zar",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Zmw => "zmw",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Clp => "clp",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Djf => "djf",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Gnf => "gnf",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Ugx => "ugx",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Pyg => "pyg",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Xof => "xof",
+                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Xpf => "xpf",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -3439,72 +5533,42 @@ public sealed record class SubscriptionProvisionResponseDataSubscriptionPriceTie
     /// <summary>
     /// The price amount
     /// </summary>
-    public double? Amount
+    public required double Amount
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<double>("amount");
+            return this._rawData.GetNotNullStruct<double>("amount");
         }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("amount", value);
-        }
-    }
-
-    /// <summary>
-    /// The billing country code of the price
-    /// </summary>
-    public string? BillingCountryCode
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("billingCountryCode");
-        }
-        init { this._rawData.Set("billingCountryCode", value); }
+        init { this._rawData.Set("amount", value); }
     }
 
     /// <summary>
     /// The price currency
     /// </summary>
-    public ApiEnum<
+    public required ApiEnum<
         string,
         SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency
-    >? Currency
+    > Currency
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<
+            return this._rawData.GetNotNullClass<
                 ApiEnum<
                     string,
                     SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency
                 >
             >("currency");
         }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("currency", value);
-        }
+        init { this._rawData.Set("currency", value); }
     }
 
     /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Amount;
-        _ = this.BillingCountryCode;
-        this.Currency?.Validate();
+        this.Currency.Validate();
     }
 
     public SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPrice() { }
@@ -4075,72 +6139,42 @@ public sealed record class SubscriptionProvisionResponseDataSubscriptionPriceTie
     /// <summary>
     /// The price amount
     /// </summary>
-    public double? Amount
+    public required double Amount
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<double>("amount");
+            return this._rawData.GetNotNullStruct<double>("amount");
         }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("amount", value);
-        }
-    }
-
-    /// <summary>
-    /// The billing country code of the price
-    /// </summary>
-    public string? BillingCountryCode
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("billingCountryCode");
-        }
-        init { this._rawData.Set("billingCountryCode", value); }
+        init { this._rawData.Set("amount", value); }
     }
 
     /// <summary>
     /// The price currency
     /// </summary>
-    public ApiEnum<
+    public required ApiEnum<
         string,
         SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency
-    >? Currency
+    > Currency
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<
+            return this._rawData.GetNotNullClass<
                 ApiEnum<
                     string,
                     SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency
                 >
             >("currency");
         }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("currency", value);
-        }
+        init { this._rawData.Set("currency", value); }
     }
 
     /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Amount;
-        _ = this.BillingCountryCode;
-        this.Currency?.Validate();
+        this.Currency.Validate();
     }
 
     public SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPrice() { }
@@ -4687,6 +6721,305 @@ sealed class SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurr
                     "xof",
                 SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Xpf =>
                     "xpf",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Subscription entitlement reference
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlement,
+        SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementFromRaw
+    >)
+)]
+public sealed record class SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlement
+    : JsonModel
+{
+    /// <summary>
+    /// Feature ID or currency ID
+    /// </summary>
+    public required string ID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
+        init { this._rawData.Set("id", value); }
+    }
+
+    /// <summary>
+    /// Entitlement type (FEATURE or CREDIT)
+    /// </summary>
+    public required ApiEnum<
+        string,
+        SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType
+    > Type
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<
+                ApiEnum<
+                    string,
+                    SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType
+                >
+            >("type");
+        }
+        init { this._rawData.Set("type", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.ID;
+        this.Type.Validate();
+    }
+
+    public SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlement() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlement(
+        SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlement subscriptionProvisionResponseDataSubscriptionSubscriptionEntitlement
+    )
+        : base(subscriptionProvisionResponseDataSubscriptionSubscriptionEntitlement) { }
+#pragma warning restore CS8618
+
+    public SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlement(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlement(
+        FrozenDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementFromRaw.FromRawUnchecked"/>
+    public static SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlement FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementFromRaw
+    : IFromRawJson<SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlement>
+{
+    /// <inheritdoc/>
+    public SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlement FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) =>
+        SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlement.FromRawUnchecked(
+            rawData
+        );
+}
+
+/// <summary>
+/// Entitlement type (FEATURE or CREDIT)
+/// </summary>
+[JsonConverter(
+    typeof(SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementTypeConverter)
+)]
+public enum SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType
+{
+    Feature,
+    Credit,
+}
+
+sealed class SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementTypeConverter
+    : JsonConverter<SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType>
+{
+    public override SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "FEATURE" =>
+                SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+            "CREDIT" =>
+                SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Credit,
+            _ => (SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature =>
+                    "FEATURE",
+                SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Credit =>
+                    "CREDIT",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Trial configuration
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        SubscriptionProvisionResponseDataSubscriptionTrial,
+        SubscriptionProvisionResponseDataSubscriptionTrialFromRaw
+    >)
+)]
+public sealed record class SubscriptionProvisionResponseDataSubscriptionTrial : JsonModel
+{
+    /// <summary>
+    /// Behavior when the trial ends
+    /// </summary>
+    public required ApiEnum<
+        string,
+        SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior
+    > TrialEndBehavior
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior>
+            >("trialEndBehavior");
+        }
+        init { this._rawData.Set("trialEndBehavior", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        this.TrialEndBehavior.Validate();
+    }
+
+    public SubscriptionProvisionResponseDataSubscriptionTrial() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public SubscriptionProvisionResponseDataSubscriptionTrial(
+        SubscriptionProvisionResponseDataSubscriptionTrial subscriptionProvisionResponseDataSubscriptionTrial
+    )
+        : base(subscriptionProvisionResponseDataSubscriptionTrial) { }
+#pragma warning restore CS8618
+
+    public SubscriptionProvisionResponseDataSubscriptionTrial(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    SubscriptionProvisionResponseDataSubscriptionTrial(
+        FrozenDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="SubscriptionProvisionResponseDataSubscriptionTrialFromRaw.FromRawUnchecked"/>
+    public static SubscriptionProvisionResponseDataSubscriptionTrial FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+
+    [SetsRequiredMembers]
+    public SubscriptionProvisionResponseDataSubscriptionTrial(
+        ApiEnum<
+            string,
+            SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior
+        > trialEndBehavior
+    )
+        : this()
+    {
+        this.TrialEndBehavior = trialEndBehavior;
+    }
+}
+
+class SubscriptionProvisionResponseDataSubscriptionTrialFromRaw
+    : IFromRawJson<SubscriptionProvisionResponseDataSubscriptionTrial>
+{
+    /// <inheritdoc/>
+    public SubscriptionProvisionResponseDataSubscriptionTrial FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionProvisionResponseDataSubscriptionTrial.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Behavior when the trial ends
+/// </summary>
+[JsonConverter(typeof(SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehaviorConverter))]
+public enum SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior
+{
+    ConvertToPaid,
+    CancelSubscription,
+}
+
+sealed class SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehaviorConverter
+    : JsonConverter<SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior>
+{
+    public override SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "CONVERT_TO_PAID" =>
+                SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid,
+            "CANCEL_SUBSCRIPTION" =>
+                SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.CancelSubscription,
+            _ => (SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid =>
+                    "CONVERT_TO_PAID",
+                SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.CancelSubscription =>
+                    "CANCEL_SUBSCRIPTION",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

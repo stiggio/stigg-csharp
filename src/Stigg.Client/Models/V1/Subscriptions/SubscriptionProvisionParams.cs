@@ -312,6 +312,9 @@ public record class SubscriptionProvisionParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// Minimum spend amount
+    /// </summary>
     public SubscriptionProvisionParamsMinimumSpend? MinimumSpend
     {
         get
@@ -2742,6 +2745,9 @@ class CheckoutOptionsFromRaw : IFromRawJson<CheckoutOptions>
         CheckoutOptions.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Minimum spend amount
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
         SubscriptionProvisionParamsMinimumSpend,
@@ -2751,24 +2757,54 @@ class CheckoutOptionsFromRaw : IFromRawJson<CheckoutOptions>
 public sealed record class SubscriptionProvisionParamsMinimumSpend : JsonModel
 {
     /// <summary>
-    /// Minimum spend amount
+    /// The price amount
     /// </summary>
-    public SubscriptionProvisionParamsMinimumSpendMinimum? Minimum
+    public double? Amount
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<SubscriptionProvisionParamsMinimumSpendMinimum>(
-                "minimum"
-            );
+            return this._rawData.GetNullableStruct<double>("amount");
         }
-        init { this._rawData.Set("minimum", value); }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("amount", value);
+        }
+    }
+
+    /// <summary>
+    /// The price currency
+    /// </summary>
+    public ApiEnum<string, SubscriptionProvisionParamsMinimumSpendCurrency>? Currency
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, SubscriptionProvisionParamsMinimumSpendCurrency>
+            >("currency");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("currency", value);
+        }
     }
 
     /// <inheritdoc/>
     public override void Validate()
     {
-        this.Minimum?.Validate();
+        _ = this.Amount;
+        this.Currency?.Validate();
     }
 
     public SubscriptionProvisionParamsMinimumSpend() { }
@@ -2813,129 +2849,10 @@ class SubscriptionProvisionParamsMinimumSpendFromRaw
 }
 
 /// <summary>
-/// Minimum spend amount
-/// </summary>
-[JsonConverter(
-    typeof(JsonModelConverter<
-        SubscriptionProvisionParamsMinimumSpendMinimum,
-        SubscriptionProvisionParamsMinimumSpendMinimumFromRaw
-    >)
-)]
-public sealed record class SubscriptionProvisionParamsMinimumSpendMinimum : JsonModel
-{
-    /// <summary>
-    /// The price amount
-    /// </summary>
-    public double? Amount
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<double>("amount");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("amount", value);
-        }
-    }
-
-    /// <summary>
-    /// The billing country code of the price
-    /// </summary>
-    public string? BillingCountryCode
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("billingCountryCode");
-        }
-        init { this._rawData.Set("billingCountryCode", value); }
-    }
-
-    /// <summary>
-    /// The price currency
-    /// </summary>
-    public ApiEnum<string, SubscriptionProvisionParamsMinimumSpendMinimumCurrency>? Currency
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<
-                ApiEnum<string, SubscriptionProvisionParamsMinimumSpendMinimumCurrency>
-            >("currency");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("currency", value);
-        }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        _ = this.Amount;
-        _ = this.BillingCountryCode;
-        this.Currency?.Validate();
-    }
-
-    public SubscriptionProvisionParamsMinimumSpendMinimum() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public SubscriptionProvisionParamsMinimumSpendMinimum(
-        SubscriptionProvisionParamsMinimumSpendMinimum subscriptionProvisionParamsMinimumSpendMinimum
-    )
-        : base(subscriptionProvisionParamsMinimumSpendMinimum) { }
-#pragma warning restore CS8618
-
-    public SubscriptionProvisionParamsMinimumSpendMinimum(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    SubscriptionProvisionParamsMinimumSpendMinimum(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="SubscriptionProvisionParamsMinimumSpendMinimumFromRaw.FromRawUnchecked"/>
-    public static SubscriptionProvisionParamsMinimumSpendMinimum FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-}
-
-class SubscriptionProvisionParamsMinimumSpendMinimumFromRaw
-    : IFromRawJson<SubscriptionProvisionParamsMinimumSpendMinimum>
-{
-    /// <inheritdoc/>
-    public SubscriptionProvisionParamsMinimumSpendMinimum FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => SubscriptionProvisionParamsMinimumSpendMinimum.FromRawUnchecked(rawData);
-}
-
-/// <summary>
 /// The price currency
 /// </summary>
-[JsonConverter(typeof(SubscriptionProvisionParamsMinimumSpendMinimumCurrencyConverter))]
-public enum SubscriptionProvisionParamsMinimumSpendMinimumCurrency
+[JsonConverter(typeof(SubscriptionProvisionParamsMinimumSpendCurrencyConverter))]
+public enum SubscriptionProvisionParamsMinimumSpendCurrency
 {
     Usd,
     Aed,
@@ -3055,10 +2972,10 @@ public enum SubscriptionProvisionParamsMinimumSpendMinimumCurrency
     Xpf,
 }
 
-sealed class SubscriptionProvisionParamsMinimumSpendMinimumCurrencyConverter
-    : JsonConverter<SubscriptionProvisionParamsMinimumSpendMinimumCurrency>
+sealed class SubscriptionProvisionParamsMinimumSpendCurrencyConverter
+    : JsonConverter<SubscriptionProvisionParamsMinimumSpendCurrency>
 {
-    public override SubscriptionProvisionParamsMinimumSpendMinimumCurrency Read(
+    public override SubscriptionProvisionParamsMinimumSpendCurrency Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -3066,129 +2983,129 @@ sealed class SubscriptionProvisionParamsMinimumSpendMinimumCurrencyConverter
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "usd" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Usd,
-            "aed" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Aed,
-            "all" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.All,
-            "amd" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Amd,
-            "ang" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Ang,
-            "aud" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Aud,
-            "awg" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Awg,
-            "azn" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Azn,
-            "bam" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bam,
-            "bbd" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bbd,
-            "bdt" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bdt,
-            "bgn" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bgn,
-            "bif" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bif,
-            "bmd" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bmd,
-            "bnd" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bnd,
-            "bsd" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bsd,
-            "bwp" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bwp,
-            "byn" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Byn,
-            "bzd" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bzd,
-            "brl" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Brl,
-            "cad" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Cad,
-            "cdf" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Cdf,
-            "chf" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Chf,
-            "cny" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Cny,
-            "czk" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Czk,
-            "dkk" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Dkk,
-            "dop" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Dop,
-            "dzd" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Dzd,
-            "egp" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Egp,
-            "etb" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Etb,
-            "eur" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Eur,
-            "fjd" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Fjd,
-            "gbp" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Gbp,
-            "gel" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Gel,
-            "gip" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Gip,
-            "gmd" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Gmd,
-            "gyd" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Gyd,
-            "hkd" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Hkd,
-            "hrk" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Hrk,
-            "htg" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Htg,
-            "idr" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Idr,
-            "ils" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Ils,
-            "inr" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Inr,
-            "isk" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Isk,
-            "jmd" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Jmd,
-            "jpy" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Jpy,
-            "kes" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Kes,
-            "kgs" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Kgs,
-            "khr" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Khr,
-            "kmf" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Kmf,
-            "krw" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Krw,
-            "kyd" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Kyd,
-            "kzt" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Kzt,
-            "lbp" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Lbp,
-            "lkr" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Lkr,
-            "lrd" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Lrd,
-            "lsl" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Lsl,
-            "mad" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mad,
-            "mdl" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mdl,
-            "mga" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mga,
-            "mkd" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mkd,
-            "mmk" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mmk,
-            "mnt" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mnt,
-            "mop" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mop,
-            "mro" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mro,
-            "mvr" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mvr,
-            "mwk" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mwk,
-            "mxn" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mxn,
-            "myr" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Myr,
-            "mzn" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mzn,
-            "nad" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Nad,
-            "ngn" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Ngn,
-            "nok" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Nok,
-            "npr" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Npr,
-            "nzd" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Nzd,
-            "pgk" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Pgk,
-            "php" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Php,
-            "pkr" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Pkr,
-            "pln" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Pln,
-            "qar" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Qar,
-            "ron" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Ron,
-            "rsd" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Rsd,
-            "rub" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Rub,
-            "rwf" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Rwf,
-            "sar" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Sar,
-            "sbd" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Sbd,
-            "scr" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Scr,
-            "sek" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Sek,
-            "sgd" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Sgd,
-            "sle" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Sle,
-            "sll" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Sll,
-            "sos" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Sos,
-            "szl" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Szl,
-            "thb" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Thb,
-            "tjs" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Tjs,
-            "top" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Top,
-            "try" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Try,
-            "ttd" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Ttd,
-            "tzs" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Tzs,
-            "uah" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Uah,
-            "uzs" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Uzs,
-            "vnd" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Vnd,
-            "vuv" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Vuv,
-            "wst" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Wst,
-            "xaf" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Xaf,
-            "xcd" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Xcd,
-            "yer" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Yer,
-            "zar" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Zar,
-            "zmw" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Zmw,
-            "clp" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Clp,
-            "djf" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Djf,
-            "gnf" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Gnf,
-            "ugx" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Ugx,
-            "pyg" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Pyg,
-            "xof" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Xof,
-            "xpf" => SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Xpf,
-            _ => (SubscriptionProvisionParamsMinimumSpendMinimumCurrency)(-1),
+            "usd" => SubscriptionProvisionParamsMinimumSpendCurrency.Usd,
+            "aed" => SubscriptionProvisionParamsMinimumSpendCurrency.Aed,
+            "all" => SubscriptionProvisionParamsMinimumSpendCurrency.All,
+            "amd" => SubscriptionProvisionParamsMinimumSpendCurrency.Amd,
+            "ang" => SubscriptionProvisionParamsMinimumSpendCurrency.Ang,
+            "aud" => SubscriptionProvisionParamsMinimumSpendCurrency.Aud,
+            "awg" => SubscriptionProvisionParamsMinimumSpendCurrency.Awg,
+            "azn" => SubscriptionProvisionParamsMinimumSpendCurrency.Azn,
+            "bam" => SubscriptionProvisionParamsMinimumSpendCurrency.Bam,
+            "bbd" => SubscriptionProvisionParamsMinimumSpendCurrency.Bbd,
+            "bdt" => SubscriptionProvisionParamsMinimumSpendCurrency.Bdt,
+            "bgn" => SubscriptionProvisionParamsMinimumSpendCurrency.Bgn,
+            "bif" => SubscriptionProvisionParamsMinimumSpendCurrency.Bif,
+            "bmd" => SubscriptionProvisionParamsMinimumSpendCurrency.Bmd,
+            "bnd" => SubscriptionProvisionParamsMinimumSpendCurrency.Bnd,
+            "bsd" => SubscriptionProvisionParamsMinimumSpendCurrency.Bsd,
+            "bwp" => SubscriptionProvisionParamsMinimumSpendCurrency.Bwp,
+            "byn" => SubscriptionProvisionParamsMinimumSpendCurrency.Byn,
+            "bzd" => SubscriptionProvisionParamsMinimumSpendCurrency.Bzd,
+            "brl" => SubscriptionProvisionParamsMinimumSpendCurrency.Brl,
+            "cad" => SubscriptionProvisionParamsMinimumSpendCurrency.Cad,
+            "cdf" => SubscriptionProvisionParamsMinimumSpendCurrency.Cdf,
+            "chf" => SubscriptionProvisionParamsMinimumSpendCurrency.Chf,
+            "cny" => SubscriptionProvisionParamsMinimumSpendCurrency.Cny,
+            "czk" => SubscriptionProvisionParamsMinimumSpendCurrency.Czk,
+            "dkk" => SubscriptionProvisionParamsMinimumSpendCurrency.Dkk,
+            "dop" => SubscriptionProvisionParamsMinimumSpendCurrency.Dop,
+            "dzd" => SubscriptionProvisionParamsMinimumSpendCurrency.Dzd,
+            "egp" => SubscriptionProvisionParamsMinimumSpendCurrency.Egp,
+            "etb" => SubscriptionProvisionParamsMinimumSpendCurrency.Etb,
+            "eur" => SubscriptionProvisionParamsMinimumSpendCurrency.Eur,
+            "fjd" => SubscriptionProvisionParamsMinimumSpendCurrency.Fjd,
+            "gbp" => SubscriptionProvisionParamsMinimumSpendCurrency.Gbp,
+            "gel" => SubscriptionProvisionParamsMinimumSpendCurrency.Gel,
+            "gip" => SubscriptionProvisionParamsMinimumSpendCurrency.Gip,
+            "gmd" => SubscriptionProvisionParamsMinimumSpendCurrency.Gmd,
+            "gyd" => SubscriptionProvisionParamsMinimumSpendCurrency.Gyd,
+            "hkd" => SubscriptionProvisionParamsMinimumSpendCurrency.Hkd,
+            "hrk" => SubscriptionProvisionParamsMinimumSpendCurrency.Hrk,
+            "htg" => SubscriptionProvisionParamsMinimumSpendCurrency.Htg,
+            "idr" => SubscriptionProvisionParamsMinimumSpendCurrency.Idr,
+            "ils" => SubscriptionProvisionParamsMinimumSpendCurrency.Ils,
+            "inr" => SubscriptionProvisionParamsMinimumSpendCurrency.Inr,
+            "isk" => SubscriptionProvisionParamsMinimumSpendCurrency.Isk,
+            "jmd" => SubscriptionProvisionParamsMinimumSpendCurrency.Jmd,
+            "jpy" => SubscriptionProvisionParamsMinimumSpendCurrency.Jpy,
+            "kes" => SubscriptionProvisionParamsMinimumSpendCurrency.Kes,
+            "kgs" => SubscriptionProvisionParamsMinimumSpendCurrency.Kgs,
+            "khr" => SubscriptionProvisionParamsMinimumSpendCurrency.Khr,
+            "kmf" => SubscriptionProvisionParamsMinimumSpendCurrency.Kmf,
+            "krw" => SubscriptionProvisionParamsMinimumSpendCurrency.Krw,
+            "kyd" => SubscriptionProvisionParamsMinimumSpendCurrency.Kyd,
+            "kzt" => SubscriptionProvisionParamsMinimumSpendCurrency.Kzt,
+            "lbp" => SubscriptionProvisionParamsMinimumSpendCurrency.Lbp,
+            "lkr" => SubscriptionProvisionParamsMinimumSpendCurrency.Lkr,
+            "lrd" => SubscriptionProvisionParamsMinimumSpendCurrency.Lrd,
+            "lsl" => SubscriptionProvisionParamsMinimumSpendCurrency.Lsl,
+            "mad" => SubscriptionProvisionParamsMinimumSpendCurrency.Mad,
+            "mdl" => SubscriptionProvisionParamsMinimumSpendCurrency.Mdl,
+            "mga" => SubscriptionProvisionParamsMinimumSpendCurrency.Mga,
+            "mkd" => SubscriptionProvisionParamsMinimumSpendCurrency.Mkd,
+            "mmk" => SubscriptionProvisionParamsMinimumSpendCurrency.Mmk,
+            "mnt" => SubscriptionProvisionParamsMinimumSpendCurrency.Mnt,
+            "mop" => SubscriptionProvisionParamsMinimumSpendCurrency.Mop,
+            "mro" => SubscriptionProvisionParamsMinimumSpendCurrency.Mro,
+            "mvr" => SubscriptionProvisionParamsMinimumSpendCurrency.Mvr,
+            "mwk" => SubscriptionProvisionParamsMinimumSpendCurrency.Mwk,
+            "mxn" => SubscriptionProvisionParamsMinimumSpendCurrency.Mxn,
+            "myr" => SubscriptionProvisionParamsMinimumSpendCurrency.Myr,
+            "mzn" => SubscriptionProvisionParamsMinimumSpendCurrency.Mzn,
+            "nad" => SubscriptionProvisionParamsMinimumSpendCurrency.Nad,
+            "ngn" => SubscriptionProvisionParamsMinimumSpendCurrency.Ngn,
+            "nok" => SubscriptionProvisionParamsMinimumSpendCurrency.Nok,
+            "npr" => SubscriptionProvisionParamsMinimumSpendCurrency.Npr,
+            "nzd" => SubscriptionProvisionParamsMinimumSpendCurrency.Nzd,
+            "pgk" => SubscriptionProvisionParamsMinimumSpendCurrency.Pgk,
+            "php" => SubscriptionProvisionParamsMinimumSpendCurrency.Php,
+            "pkr" => SubscriptionProvisionParamsMinimumSpendCurrency.Pkr,
+            "pln" => SubscriptionProvisionParamsMinimumSpendCurrency.Pln,
+            "qar" => SubscriptionProvisionParamsMinimumSpendCurrency.Qar,
+            "ron" => SubscriptionProvisionParamsMinimumSpendCurrency.Ron,
+            "rsd" => SubscriptionProvisionParamsMinimumSpendCurrency.Rsd,
+            "rub" => SubscriptionProvisionParamsMinimumSpendCurrency.Rub,
+            "rwf" => SubscriptionProvisionParamsMinimumSpendCurrency.Rwf,
+            "sar" => SubscriptionProvisionParamsMinimumSpendCurrency.Sar,
+            "sbd" => SubscriptionProvisionParamsMinimumSpendCurrency.Sbd,
+            "scr" => SubscriptionProvisionParamsMinimumSpendCurrency.Scr,
+            "sek" => SubscriptionProvisionParamsMinimumSpendCurrency.Sek,
+            "sgd" => SubscriptionProvisionParamsMinimumSpendCurrency.Sgd,
+            "sle" => SubscriptionProvisionParamsMinimumSpendCurrency.Sle,
+            "sll" => SubscriptionProvisionParamsMinimumSpendCurrency.Sll,
+            "sos" => SubscriptionProvisionParamsMinimumSpendCurrency.Sos,
+            "szl" => SubscriptionProvisionParamsMinimumSpendCurrency.Szl,
+            "thb" => SubscriptionProvisionParamsMinimumSpendCurrency.Thb,
+            "tjs" => SubscriptionProvisionParamsMinimumSpendCurrency.Tjs,
+            "top" => SubscriptionProvisionParamsMinimumSpendCurrency.Top,
+            "try" => SubscriptionProvisionParamsMinimumSpendCurrency.Try,
+            "ttd" => SubscriptionProvisionParamsMinimumSpendCurrency.Ttd,
+            "tzs" => SubscriptionProvisionParamsMinimumSpendCurrency.Tzs,
+            "uah" => SubscriptionProvisionParamsMinimumSpendCurrency.Uah,
+            "uzs" => SubscriptionProvisionParamsMinimumSpendCurrency.Uzs,
+            "vnd" => SubscriptionProvisionParamsMinimumSpendCurrency.Vnd,
+            "vuv" => SubscriptionProvisionParamsMinimumSpendCurrency.Vuv,
+            "wst" => SubscriptionProvisionParamsMinimumSpendCurrency.Wst,
+            "xaf" => SubscriptionProvisionParamsMinimumSpendCurrency.Xaf,
+            "xcd" => SubscriptionProvisionParamsMinimumSpendCurrency.Xcd,
+            "yer" => SubscriptionProvisionParamsMinimumSpendCurrency.Yer,
+            "zar" => SubscriptionProvisionParamsMinimumSpendCurrency.Zar,
+            "zmw" => SubscriptionProvisionParamsMinimumSpendCurrency.Zmw,
+            "clp" => SubscriptionProvisionParamsMinimumSpendCurrency.Clp,
+            "djf" => SubscriptionProvisionParamsMinimumSpendCurrency.Djf,
+            "gnf" => SubscriptionProvisionParamsMinimumSpendCurrency.Gnf,
+            "ugx" => SubscriptionProvisionParamsMinimumSpendCurrency.Ugx,
+            "pyg" => SubscriptionProvisionParamsMinimumSpendCurrency.Pyg,
+            "xof" => SubscriptionProvisionParamsMinimumSpendCurrency.Xof,
+            "xpf" => SubscriptionProvisionParamsMinimumSpendCurrency.Xpf,
+            _ => (SubscriptionProvisionParamsMinimumSpendCurrency)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        SubscriptionProvisionParamsMinimumSpendMinimumCurrency value,
+        SubscriptionProvisionParamsMinimumSpendCurrency value,
         JsonSerializerOptions options
     )
     {
@@ -3196,122 +3113,122 @@ sealed class SubscriptionProvisionParamsMinimumSpendMinimumCurrencyConverter
             writer,
             value switch
             {
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Usd => "usd",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Aed => "aed",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.All => "all",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Amd => "amd",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Ang => "ang",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Aud => "aud",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Awg => "awg",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Azn => "azn",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bam => "bam",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bbd => "bbd",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bdt => "bdt",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bgn => "bgn",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bif => "bif",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bmd => "bmd",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bnd => "bnd",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bsd => "bsd",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bwp => "bwp",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Byn => "byn",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Bzd => "bzd",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Brl => "brl",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Cad => "cad",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Cdf => "cdf",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Chf => "chf",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Cny => "cny",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Czk => "czk",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Dkk => "dkk",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Dop => "dop",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Dzd => "dzd",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Egp => "egp",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Etb => "etb",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Eur => "eur",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Fjd => "fjd",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Gbp => "gbp",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Gel => "gel",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Gip => "gip",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Gmd => "gmd",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Gyd => "gyd",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Hkd => "hkd",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Hrk => "hrk",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Htg => "htg",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Idr => "idr",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Ils => "ils",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Inr => "inr",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Isk => "isk",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Jmd => "jmd",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Jpy => "jpy",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Kes => "kes",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Kgs => "kgs",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Khr => "khr",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Kmf => "kmf",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Krw => "krw",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Kyd => "kyd",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Kzt => "kzt",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Lbp => "lbp",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Lkr => "lkr",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Lrd => "lrd",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Lsl => "lsl",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mad => "mad",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mdl => "mdl",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mga => "mga",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mkd => "mkd",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mmk => "mmk",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mnt => "mnt",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mop => "mop",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mro => "mro",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mvr => "mvr",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mwk => "mwk",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mxn => "mxn",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Myr => "myr",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Mzn => "mzn",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Nad => "nad",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Ngn => "ngn",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Nok => "nok",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Npr => "npr",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Nzd => "nzd",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Pgk => "pgk",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Php => "php",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Pkr => "pkr",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Pln => "pln",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Qar => "qar",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Ron => "ron",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Rsd => "rsd",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Rub => "rub",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Rwf => "rwf",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Sar => "sar",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Sbd => "sbd",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Scr => "scr",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Sek => "sek",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Sgd => "sgd",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Sle => "sle",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Sll => "sll",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Sos => "sos",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Szl => "szl",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Thb => "thb",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Tjs => "tjs",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Top => "top",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Try => "try",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Ttd => "ttd",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Tzs => "tzs",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Uah => "uah",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Uzs => "uzs",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Vnd => "vnd",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Vuv => "vuv",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Wst => "wst",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Xaf => "xaf",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Xcd => "xcd",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Yer => "yer",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Zar => "zar",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Zmw => "zmw",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Clp => "clp",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Djf => "djf",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Gnf => "gnf",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Ugx => "ugx",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Pyg => "pyg",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Xof => "xof",
-                SubscriptionProvisionParamsMinimumSpendMinimumCurrency.Xpf => "xpf",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Usd => "usd",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Aed => "aed",
+                SubscriptionProvisionParamsMinimumSpendCurrency.All => "all",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Amd => "amd",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Ang => "ang",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Aud => "aud",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Awg => "awg",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Azn => "azn",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Bam => "bam",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Bbd => "bbd",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Bdt => "bdt",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Bgn => "bgn",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Bif => "bif",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Bmd => "bmd",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Bnd => "bnd",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Bsd => "bsd",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Bwp => "bwp",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Byn => "byn",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Bzd => "bzd",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Brl => "brl",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Cad => "cad",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Cdf => "cdf",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Chf => "chf",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Cny => "cny",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Czk => "czk",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Dkk => "dkk",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Dop => "dop",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Dzd => "dzd",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Egp => "egp",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Etb => "etb",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Eur => "eur",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Fjd => "fjd",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Gbp => "gbp",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Gel => "gel",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Gip => "gip",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Gmd => "gmd",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Gyd => "gyd",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Hkd => "hkd",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Hrk => "hrk",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Htg => "htg",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Idr => "idr",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Ils => "ils",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Inr => "inr",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Isk => "isk",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Jmd => "jmd",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Jpy => "jpy",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Kes => "kes",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Kgs => "kgs",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Khr => "khr",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Kmf => "kmf",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Krw => "krw",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Kyd => "kyd",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Kzt => "kzt",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Lbp => "lbp",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Lkr => "lkr",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Lrd => "lrd",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Lsl => "lsl",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Mad => "mad",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Mdl => "mdl",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Mga => "mga",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Mkd => "mkd",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Mmk => "mmk",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Mnt => "mnt",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Mop => "mop",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Mro => "mro",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Mvr => "mvr",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Mwk => "mwk",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Mxn => "mxn",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Myr => "myr",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Mzn => "mzn",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Nad => "nad",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Ngn => "ngn",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Nok => "nok",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Npr => "npr",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Nzd => "nzd",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Pgk => "pgk",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Php => "php",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Pkr => "pkr",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Pln => "pln",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Qar => "qar",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Ron => "ron",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Rsd => "rsd",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Rub => "rub",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Rwf => "rwf",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Sar => "sar",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Sbd => "sbd",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Scr => "scr",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Sek => "sek",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Sgd => "sgd",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Sle => "sle",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Sll => "sll",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Sos => "sos",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Szl => "szl",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Thb => "thb",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Tjs => "tjs",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Top => "top",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Try => "try",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Ttd => "ttd",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Tzs => "tzs",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Uah => "uah",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Uzs => "uzs",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Vnd => "vnd",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Vuv => "vuv",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Wst => "wst",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Xaf => "xaf",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Xcd => "xcd",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Yer => "yer",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Zar => "zar",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Zmw => "zmw",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Clp => "clp",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Djf => "djf",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Gnf => "gnf",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Ugx => "ugx",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Pyg => "pyg",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Xof => "xof",
+                SubscriptionProvisionParamsMinimumSpendCurrency.Xpf => "xpf",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -3393,6 +3310,27 @@ public sealed record class SubscriptionProvisionParamsPriceOverride : JsonModel
     }
 
     /// <summary>
+    /// The price amount
+    /// </summary>
+    public double? Amount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<double>("amount");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("amount", value);
+        }
+    }
+
+    /// <summary>
     /// Whether this is a base charge override
     /// </summary>
     public bool? BaseCharge
@@ -3410,6 +3348,27 @@ public sealed record class SubscriptionProvisionParamsPriceOverride : JsonModel
             }
 
             this._rawData.Set("baseCharge", value);
+        }
+    }
+
+    /// <summary>
+    /// The billing country code of the price
+    /// </summary>
+    public string? BillingCountryCode
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("billingCountryCode");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("billingCountryCode", value);
         }
     }
 
@@ -3473,6 +3432,29 @@ public sealed record class SubscriptionProvisionParamsPriceOverride : JsonModel
     }
 
     /// <summary>
+    /// The price currency
+    /// </summary>
+    public ApiEnum<string, SubscriptionProvisionParamsPriceOverrideCurrency>? Currency
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, SubscriptionProvisionParamsPriceOverrideCurrency>
+            >("currency");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("currency", value);
+        }
+    }
+
+    /// <summary>
     /// Feature identifier for the price override
     /// </summary>
     public string? FeatureID
@@ -3483,29 +3465,6 @@ public sealed record class SubscriptionProvisionParamsPriceOverride : JsonModel
             return this._rawData.GetNullableClass<string>("featureId");
         }
         init { this._rawData.Set("featureId", value); }
-    }
-
-    /// <summary>
-    /// Override price amount
-    /// </summary>
-    public SubscriptionProvisionParamsPriceOverridePrice? Price
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<SubscriptionProvisionParamsPriceOverridePrice>(
-                "price"
-            );
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("price", value);
-        }
     }
 
     /// <summary>
@@ -3536,12 +3495,14 @@ public sealed record class SubscriptionProvisionParamsPriceOverride : JsonModel
     public override void Validate()
     {
         _ = this.AddonID;
+        _ = this.Amount;
         _ = this.BaseCharge;
+        _ = this.BillingCountryCode;
         _ = this.BlockSize;
         this.CreditGrantCadence?.Validate();
         this.CreditRate?.Validate();
+        this.Currency?.Validate();
         _ = this.FeatureID;
-        this.Price?.Validate();
         foreach (var item in this.Tiers ?? [])
         {
             item.Validate();
@@ -3721,129 +3682,10 @@ class CreditRateFromRaw : IFromRawJson<CreditRate>
 }
 
 /// <summary>
-/// Override price amount
-/// </summary>
-[JsonConverter(
-    typeof(JsonModelConverter<
-        SubscriptionProvisionParamsPriceOverridePrice,
-        SubscriptionProvisionParamsPriceOverridePriceFromRaw
-    >)
-)]
-public sealed record class SubscriptionProvisionParamsPriceOverridePrice : JsonModel
-{
-    /// <summary>
-    /// The price amount
-    /// </summary>
-    public double? Amount
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<double>("amount");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("amount", value);
-        }
-    }
-
-    /// <summary>
-    /// The billing country code of the price
-    /// </summary>
-    public string? BillingCountryCode
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("billingCountryCode");
-        }
-        init { this._rawData.Set("billingCountryCode", value); }
-    }
-
-    /// <summary>
-    /// The price currency
-    /// </summary>
-    public ApiEnum<string, SubscriptionProvisionParamsPriceOverridePriceCurrency>? Currency
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<
-                ApiEnum<string, SubscriptionProvisionParamsPriceOverridePriceCurrency>
-            >("currency");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("currency", value);
-        }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        _ = this.Amount;
-        _ = this.BillingCountryCode;
-        this.Currency?.Validate();
-    }
-
-    public SubscriptionProvisionParamsPriceOverridePrice() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public SubscriptionProvisionParamsPriceOverridePrice(
-        SubscriptionProvisionParamsPriceOverridePrice subscriptionProvisionParamsPriceOverridePrice
-    )
-        : base(subscriptionProvisionParamsPriceOverridePrice) { }
-#pragma warning restore CS8618
-
-    public SubscriptionProvisionParamsPriceOverridePrice(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    SubscriptionProvisionParamsPriceOverridePrice(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="SubscriptionProvisionParamsPriceOverridePriceFromRaw.FromRawUnchecked"/>
-    public static SubscriptionProvisionParamsPriceOverridePrice FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-}
-
-class SubscriptionProvisionParamsPriceOverridePriceFromRaw
-    : IFromRawJson<SubscriptionProvisionParamsPriceOverridePrice>
-{
-    /// <inheritdoc/>
-    public SubscriptionProvisionParamsPriceOverridePrice FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => SubscriptionProvisionParamsPriceOverridePrice.FromRawUnchecked(rawData);
-}
-
-/// <summary>
 /// The price currency
 /// </summary>
-[JsonConverter(typeof(SubscriptionProvisionParamsPriceOverridePriceCurrencyConverter))]
-public enum SubscriptionProvisionParamsPriceOverridePriceCurrency
+[JsonConverter(typeof(SubscriptionProvisionParamsPriceOverrideCurrencyConverter))]
+public enum SubscriptionProvisionParamsPriceOverrideCurrency
 {
     Usd,
     Aed,
@@ -3963,10 +3805,10 @@ public enum SubscriptionProvisionParamsPriceOverridePriceCurrency
     Xpf,
 }
 
-sealed class SubscriptionProvisionParamsPriceOverridePriceCurrencyConverter
-    : JsonConverter<SubscriptionProvisionParamsPriceOverridePriceCurrency>
+sealed class SubscriptionProvisionParamsPriceOverrideCurrencyConverter
+    : JsonConverter<SubscriptionProvisionParamsPriceOverrideCurrency>
 {
-    public override SubscriptionProvisionParamsPriceOverridePriceCurrency Read(
+    public override SubscriptionProvisionParamsPriceOverrideCurrency Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -3974,129 +3816,129 @@ sealed class SubscriptionProvisionParamsPriceOverridePriceCurrencyConverter
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "usd" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd,
-            "aed" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Aed,
-            "all" => SubscriptionProvisionParamsPriceOverridePriceCurrency.All,
-            "amd" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Amd,
-            "ang" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Ang,
-            "aud" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Aud,
-            "awg" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Awg,
-            "azn" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Azn,
-            "bam" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Bam,
-            "bbd" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Bbd,
-            "bdt" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Bdt,
-            "bgn" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Bgn,
-            "bif" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Bif,
-            "bmd" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Bmd,
-            "bnd" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Bnd,
-            "bsd" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Bsd,
-            "bwp" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Bwp,
-            "byn" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Byn,
-            "bzd" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Bzd,
-            "brl" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Brl,
-            "cad" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Cad,
-            "cdf" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Cdf,
-            "chf" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Chf,
-            "cny" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Cny,
-            "czk" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Czk,
-            "dkk" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Dkk,
-            "dop" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Dop,
-            "dzd" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Dzd,
-            "egp" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Egp,
-            "etb" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Etb,
-            "eur" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Eur,
-            "fjd" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Fjd,
-            "gbp" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Gbp,
-            "gel" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Gel,
-            "gip" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Gip,
-            "gmd" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Gmd,
-            "gyd" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Gyd,
-            "hkd" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Hkd,
-            "hrk" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Hrk,
-            "htg" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Htg,
-            "idr" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Idr,
-            "ils" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Ils,
-            "inr" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Inr,
-            "isk" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Isk,
-            "jmd" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Jmd,
-            "jpy" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Jpy,
-            "kes" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Kes,
-            "kgs" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Kgs,
-            "khr" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Khr,
-            "kmf" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Kmf,
-            "krw" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Krw,
-            "kyd" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Kyd,
-            "kzt" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Kzt,
-            "lbp" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Lbp,
-            "lkr" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Lkr,
-            "lrd" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Lrd,
-            "lsl" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Lsl,
-            "mad" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Mad,
-            "mdl" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Mdl,
-            "mga" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Mga,
-            "mkd" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Mkd,
-            "mmk" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Mmk,
-            "mnt" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Mnt,
-            "mop" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Mop,
-            "mro" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Mro,
-            "mvr" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Mvr,
-            "mwk" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Mwk,
-            "mxn" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Mxn,
-            "myr" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Myr,
-            "mzn" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Mzn,
-            "nad" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Nad,
-            "ngn" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Ngn,
-            "nok" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Nok,
-            "npr" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Npr,
-            "nzd" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Nzd,
-            "pgk" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Pgk,
-            "php" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Php,
-            "pkr" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Pkr,
-            "pln" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Pln,
-            "qar" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Qar,
-            "ron" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Ron,
-            "rsd" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Rsd,
-            "rub" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Rub,
-            "rwf" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Rwf,
-            "sar" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Sar,
-            "sbd" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Sbd,
-            "scr" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Scr,
-            "sek" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Sek,
-            "sgd" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Sgd,
-            "sle" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Sle,
-            "sll" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Sll,
-            "sos" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Sos,
-            "szl" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Szl,
-            "thb" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Thb,
-            "tjs" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Tjs,
-            "top" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Top,
-            "try" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Try,
-            "ttd" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Ttd,
-            "tzs" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Tzs,
-            "uah" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Uah,
-            "uzs" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Uzs,
-            "vnd" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Vnd,
-            "vuv" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Vuv,
-            "wst" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Wst,
-            "xaf" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Xaf,
-            "xcd" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Xcd,
-            "yer" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Yer,
-            "zar" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Zar,
-            "zmw" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Zmw,
-            "clp" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Clp,
-            "djf" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Djf,
-            "gnf" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Gnf,
-            "ugx" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Ugx,
-            "pyg" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Pyg,
-            "xof" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Xof,
-            "xpf" => SubscriptionProvisionParamsPriceOverridePriceCurrency.Xpf,
-            _ => (SubscriptionProvisionParamsPriceOverridePriceCurrency)(-1),
+            "usd" => SubscriptionProvisionParamsPriceOverrideCurrency.Usd,
+            "aed" => SubscriptionProvisionParamsPriceOverrideCurrency.Aed,
+            "all" => SubscriptionProvisionParamsPriceOverrideCurrency.All,
+            "amd" => SubscriptionProvisionParamsPriceOverrideCurrency.Amd,
+            "ang" => SubscriptionProvisionParamsPriceOverrideCurrency.Ang,
+            "aud" => SubscriptionProvisionParamsPriceOverrideCurrency.Aud,
+            "awg" => SubscriptionProvisionParamsPriceOverrideCurrency.Awg,
+            "azn" => SubscriptionProvisionParamsPriceOverrideCurrency.Azn,
+            "bam" => SubscriptionProvisionParamsPriceOverrideCurrency.Bam,
+            "bbd" => SubscriptionProvisionParamsPriceOverrideCurrency.Bbd,
+            "bdt" => SubscriptionProvisionParamsPriceOverrideCurrency.Bdt,
+            "bgn" => SubscriptionProvisionParamsPriceOverrideCurrency.Bgn,
+            "bif" => SubscriptionProvisionParamsPriceOverrideCurrency.Bif,
+            "bmd" => SubscriptionProvisionParamsPriceOverrideCurrency.Bmd,
+            "bnd" => SubscriptionProvisionParamsPriceOverrideCurrency.Bnd,
+            "bsd" => SubscriptionProvisionParamsPriceOverrideCurrency.Bsd,
+            "bwp" => SubscriptionProvisionParamsPriceOverrideCurrency.Bwp,
+            "byn" => SubscriptionProvisionParamsPriceOverrideCurrency.Byn,
+            "bzd" => SubscriptionProvisionParamsPriceOverrideCurrency.Bzd,
+            "brl" => SubscriptionProvisionParamsPriceOverrideCurrency.Brl,
+            "cad" => SubscriptionProvisionParamsPriceOverrideCurrency.Cad,
+            "cdf" => SubscriptionProvisionParamsPriceOverrideCurrency.Cdf,
+            "chf" => SubscriptionProvisionParamsPriceOverrideCurrency.Chf,
+            "cny" => SubscriptionProvisionParamsPriceOverrideCurrency.Cny,
+            "czk" => SubscriptionProvisionParamsPriceOverrideCurrency.Czk,
+            "dkk" => SubscriptionProvisionParamsPriceOverrideCurrency.Dkk,
+            "dop" => SubscriptionProvisionParamsPriceOverrideCurrency.Dop,
+            "dzd" => SubscriptionProvisionParamsPriceOverrideCurrency.Dzd,
+            "egp" => SubscriptionProvisionParamsPriceOverrideCurrency.Egp,
+            "etb" => SubscriptionProvisionParamsPriceOverrideCurrency.Etb,
+            "eur" => SubscriptionProvisionParamsPriceOverrideCurrency.Eur,
+            "fjd" => SubscriptionProvisionParamsPriceOverrideCurrency.Fjd,
+            "gbp" => SubscriptionProvisionParamsPriceOverrideCurrency.Gbp,
+            "gel" => SubscriptionProvisionParamsPriceOverrideCurrency.Gel,
+            "gip" => SubscriptionProvisionParamsPriceOverrideCurrency.Gip,
+            "gmd" => SubscriptionProvisionParamsPriceOverrideCurrency.Gmd,
+            "gyd" => SubscriptionProvisionParamsPriceOverrideCurrency.Gyd,
+            "hkd" => SubscriptionProvisionParamsPriceOverrideCurrency.Hkd,
+            "hrk" => SubscriptionProvisionParamsPriceOverrideCurrency.Hrk,
+            "htg" => SubscriptionProvisionParamsPriceOverrideCurrency.Htg,
+            "idr" => SubscriptionProvisionParamsPriceOverrideCurrency.Idr,
+            "ils" => SubscriptionProvisionParamsPriceOverrideCurrency.Ils,
+            "inr" => SubscriptionProvisionParamsPriceOverrideCurrency.Inr,
+            "isk" => SubscriptionProvisionParamsPriceOverrideCurrency.Isk,
+            "jmd" => SubscriptionProvisionParamsPriceOverrideCurrency.Jmd,
+            "jpy" => SubscriptionProvisionParamsPriceOverrideCurrency.Jpy,
+            "kes" => SubscriptionProvisionParamsPriceOverrideCurrency.Kes,
+            "kgs" => SubscriptionProvisionParamsPriceOverrideCurrency.Kgs,
+            "khr" => SubscriptionProvisionParamsPriceOverrideCurrency.Khr,
+            "kmf" => SubscriptionProvisionParamsPriceOverrideCurrency.Kmf,
+            "krw" => SubscriptionProvisionParamsPriceOverrideCurrency.Krw,
+            "kyd" => SubscriptionProvisionParamsPriceOverrideCurrency.Kyd,
+            "kzt" => SubscriptionProvisionParamsPriceOverrideCurrency.Kzt,
+            "lbp" => SubscriptionProvisionParamsPriceOverrideCurrency.Lbp,
+            "lkr" => SubscriptionProvisionParamsPriceOverrideCurrency.Lkr,
+            "lrd" => SubscriptionProvisionParamsPriceOverrideCurrency.Lrd,
+            "lsl" => SubscriptionProvisionParamsPriceOverrideCurrency.Lsl,
+            "mad" => SubscriptionProvisionParamsPriceOverrideCurrency.Mad,
+            "mdl" => SubscriptionProvisionParamsPriceOverrideCurrency.Mdl,
+            "mga" => SubscriptionProvisionParamsPriceOverrideCurrency.Mga,
+            "mkd" => SubscriptionProvisionParamsPriceOverrideCurrency.Mkd,
+            "mmk" => SubscriptionProvisionParamsPriceOverrideCurrency.Mmk,
+            "mnt" => SubscriptionProvisionParamsPriceOverrideCurrency.Mnt,
+            "mop" => SubscriptionProvisionParamsPriceOverrideCurrency.Mop,
+            "mro" => SubscriptionProvisionParamsPriceOverrideCurrency.Mro,
+            "mvr" => SubscriptionProvisionParamsPriceOverrideCurrency.Mvr,
+            "mwk" => SubscriptionProvisionParamsPriceOverrideCurrency.Mwk,
+            "mxn" => SubscriptionProvisionParamsPriceOverrideCurrency.Mxn,
+            "myr" => SubscriptionProvisionParamsPriceOverrideCurrency.Myr,
+            "mzn" => SubscriptionProvisionParamsPriceOverrideCurrency.Mzn,
+            "nad" => SubscriptionProvisionParamsPriceOverrideCurrency.Nad,
+            "ngn" => SubscriptionProvisionParamsPriceOverrideCurrency.Ngn,
+            "nok" => SubscriptionProvisionParamsPriceOverrideCurrency.Nok,
+            "npr" => SubscriptionProvisionParamsPriceOverrideCurrency.Npr,
+            "nzd" => SubscriptionProvisionParamsPriceOverrideCurrency.Nzd,
+            "pgk" => SubscriptionProvisionParamsPriceOverrideCurrency.Pgk,
+            "php" => SubscriptionProvisionParamsPriceOverrideCurrency.Php,
+            "pkr" => SubscriptionProvisionParamsPriceOverrideCurrency.Pkr,
+            "pln" => SubscriptionProvisionParamsPriceOverrideCurrency.Pln,
+            "qar" => SubscriptionProvisionParamsPriceOverrideCurrency.Qar,
+            "ron" => SubscriptionProvisionParamsPriceOverrideCurrency.Ron,
+            "rsd" => SubscriptionProvisionParamsPriceOverrideCurrency.Rsd,
+            "rub" => SubscriptionProvisionParamsPriceOverrideCurrency.Rub,
+            "rwf" => SubscriptionProvisionParamsPriceOverrideCurrency.Rwf,
+            "sar" => SubscriptionProvisionParamsPriceOverrideCurrency.Sar,
+            "sbd" => SubscriptionProvisionParamsPriceOverrideCurrency.Sbd,
+            "scr" => SubscriptionProvisionParamsPriceOverrideCurrency.Scr,
+            "sek" => SubscriptionProvisionParamsPriceOverrideCurrency.Sek,
+            "sgd" => SubscriptionProvisionParamsPriceOverrideCurrency.Sgd,
+            "sle" => SubscriptionProvisionParamsPriceOverrideCurrency.Sle,
+            "sll" => SubscriptionProvisionParamsPriceOverrideCurrency.Sll,
+            "sos" => SubscriptionProvisionParamsPriceOverrideCurrency.Sos,
+            "szl" => SubscriptionProvisionParamsPriceOverrideCurrency.Szl,
+            "thb" => SubscriptionProvisionParamsPriceOverrideCurrency.Thb,
+            "tjs" => SubscriptionProvisionParamsPriceOverrideCurrency.Tjs,
+            "top" => SubscriptionProvisionParamsPriceOverrideCurrency.Top,
+            "try" => SubscriptionProvisionParamsPriceOverrideCurrency.Try,
+            "ttd" => SubscriptionProvisionParamsPriceOverrideCurrency.Ttd,
+            "tzs" => SubscriptionProvisionParamsPriceOverrideCurrency.Tzs,
+            "uah" => SubscriptionProvisionParamsPriceOverrideCurrency.Uah,
+            "uzs" => SubscriptionProvisionParamsPriceOverrideCurrency.Uzs,
+            "vnd" => SubscriptionProvisionParamsPriceOverrideCurrency.Vnd,
+            "vuv" => SubscriptionProvisionParamsPriceOverrideCurrency.Vuv,
+            "wst" => SubscriptionProvisionParamsPriceOverrideCurrency.Wst,
+            "xaf" => SubscriptionProvisionParamsPriceOverrideCurrency.Xaf,
+            "xcd" => SubscriptionProvisionParamsPriceOverrideCurrency.Xcd,
+            "yer" => SubscriptionProvisionParamsPriceOverrideCurrency.Yer,
+            "zar" => SubscriptionProvisionParamsPriceOverrideCurrency.Zar,
+            "zmw" => SubscriptionProvisionParamsPriceOverrideCurrency.Zmw,
+            "clp" => SubscriptionProvisionParamsPriceOverrideCurrency.Clp,
+            "djf" => SubscriptionProvisionParamsPriceOverrideCurrency.Djf,
+            "gnf" => SubscriptionProvisionParamsPriceOverrideCurrency.Gnf,
+            "ugx" => SubscriptionProvisionParamsPriceOverrideCurrency.Ugx,
+            "pyg" => SubscriptionProvisionParamsPriceOverrideCurrency.Pyg,
+            "xof" => SubscriptionProvisionParamsPriceOverrideCurrency.Xof,
+            "xpf" => SubscriptionProvisionParamsPriceOverrideCurrency.Xpf,
+            _ => (SubscriptionProvisionParamsPriceOverrideCurrency)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        SubscriptionProvisionParamsPriceOverridePriceCurrency value,
+        SubscriptionProvisionParamsPriceOverrideCurrency value,
         JsonSerializerOptions options
     )
     {
@@ -4104,122 +3946,122 @@ sealed class SubscriptionProvisionParamsPriceOverridePriceCurrencyConverter
             writer,
             value switch
             {
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Usd => "usd",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Aed => "aed",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.All => "all",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Amd => "amd",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Ang => "ang",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Aud => "aud",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Awg => "awg",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Azn => "azn",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Bam => "bam",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Bbd => "bbd",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Bdt => "bdt",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Bgn => "bgn",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Bif => "bif",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Bmd => "bmd",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Bnd => "bnd",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Bsd => "bsd",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Bwp => "bwp",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Byn => "byn",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Bzd => "bzd",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Brl => "brl",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Cad => "cad",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Cdf => "cdf",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Chf => "chf",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Cny => "cny",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Czk => "czk",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Dkk => "dkk",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Dop => "dop",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Dzd => "dzd",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Egp => "egp",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Etb => "etb",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Eur => "eur",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Fjd => "fjd",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Gbp => "gbp",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Gel => "gel",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Gip => "gip",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Gmd => "gmd",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Gyd => "gyd",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Hkd => "hkd",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Hrk => "hrk",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Htg => "htg",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Idr => "idr",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Ils => "ils",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Inr => "inr",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Isk => "isk",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Jmd => "jmd",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Jpy => "jpy",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Kes => "kes",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Kgs => "kgs",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Khr => "khr",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Kmf => "kmf",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Krw => "krw",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Kyd => "kyd",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Kzt => "kzt",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Lbp => "lbp",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Lkr => "lkr",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Lrd => "lrd",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Lsl => "lsl",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Mad => "mad",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Mdl => "mdl",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Mga => "mga",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Mkd => "mkd",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Mmk => "mmk",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Mnt => "mnt",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Mop => "mop",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Mro => "mro",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Mvr => "mvr",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Mwk => "mwk",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Mxn => "mxn",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Myr => "myr",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Mzn => "mzn",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Nad => "nad",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Ngn => "ngn",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Nok => "nok",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Npr => "npr",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Nzd => "nzd",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Pgk => "pgk",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Php => "php",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Pkr => "pkr",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Pln => "pln",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Qar => "qar",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Ron => "ron",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Rsd => "rsd",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Rub => "rub",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Rwf => "rwf",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Sar => "sar",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Sbd => "sbd",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Scr => "scr",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Sek => "sek",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Sgd => "sgd",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Sle => "sle",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Sll => "sll",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Sos => "sos",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Szl => "szl",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Thb => "thb",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Tjs => "tjs",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Top => "top",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Try => "try",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Ttd => "ttd",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Tzs => "tzs",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Uah => "uah",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Uzs => "uzs",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Vnd => "vnd",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Vuv => "vuv",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Wst => "wst",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Xaf => "xaf",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Xcd => "xcd",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Yer => "yer",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Zar => "zar",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Zmw => "zmw",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Clp => "clp",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Djf => "djf",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Gnf => "gnf",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Ugx => "ugx",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Pyg => "pyg",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Xof => "xof",
-                SubscriptionProvisionParamsPriceOverridePriceCurrency.Xpf => "xpf",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Usd => "usd",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Aed => "aed",
+                SubscriptionProvisionParamsPriceOverrideCurrency.All => "all",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Amd => "amd",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Ang => "ang",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Aud => "aud",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Awg => "awg",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Azn => "azn",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Bam => "bam",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Bbd => "bbd",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Bdt => "bdt",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Bgn => "bgn",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Bif => "bif",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Bmd => "bmd",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Bnd => "bnd",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Bsd => "bsd",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Bwp => "bwp",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Byn => "byn",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Bzd => "bzd",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Brl => "brl",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Cad => "cad",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Cdf => "cdf",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Chf => "chf",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Cny => "cny",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Czk => "czk",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Dkk => "dkk",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Dop => "dop",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Dzd => "dzd",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Egp => "egp",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Etb => "etb",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Eur => "eur",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Fjd => "fjd",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Gbp => "gbp",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Gel => "gel",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Gip => "gip",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Gmd => "gmd",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Gyd => "gyd",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Hkd => "hkd",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Hrk => "hrk",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Htg => "htg",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Idr => "idr",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Ils => "ils",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Inr => "inr",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Isk => "isk",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Jmd => "jmd",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Jpy => "jpy",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Kes => "kes",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Kgs => "kgs",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Khr => "khr",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Kmf => "kmf",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Krw => "krw",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Kyd => "kyd",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Kzt => "kzt",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Lbp => "lbp",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Lkr => "lkr",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Lrd => "lrd",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Lsl => "lsl",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Mad => "mad",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Mdl => "mdl",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Mga => "mga",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Mkd => "mkd",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Mmk => "mmk",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Mnt => "mnt",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Mop => "mop",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Mro => "mro",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Mvr => "mvr",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Mwk => "mwk",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Mxn => "mxn",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Myr => "myr",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Mzn => "mzn",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Nad => "nad",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Ngn => "ngn",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Nok => "nok",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Npr => "npr",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Nzd => "nzd",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Pgk => "pgk",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Php => "php",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Pkr => "pkr",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Pln => "pln",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Qar => "qar",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Ron => "ron",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Rsd => "rsd",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Rub => "rub",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Rwf => "rwf",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Sar => "sar",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Sbd => "sbd",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Scr => "scr",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Sek => "sek",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Sgd => "sgd",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Sle => "sle",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Sll => "sll",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Sos => "sos",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Szl => "szl",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Thb => "thb",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Tjs => "tjs",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Top => "top",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Try => "try",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Ttd => "ttd",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Tzs => "tzs",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Uah => "uah",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Uzs => "uzs",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Vnd => "vnd",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Vuv => "vuv",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Wst => "wst",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Xaf => "xaf",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Xcd => "xcd",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Yer => "yer",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Zar => "zar",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Zmw => "zmw",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Clp => "clp",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Djf => "djf",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Gnf => "gnf",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Ugx => "ugx",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Pyg => "pyg",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Xof => "xof",
+                SubscriptionProvisionParamsPriceOverrideCurrency.Xpf => "xpf",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -4347,64 +4189,34 @@ public sealed record class FlatPrice : JsonModel
     /// <summary>
     /// The price amount
     /// </summary>
-    public double? Amount
+    public required double Amount
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<double>("amount");
+            return this._rawData.GetNotNullStruct<double>("amount");
         }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("amount", value);
-        }
-    }
-
-    /// <summary>
-    /// The billing country code of the price
-    /// </summary>
-    public string? BillingCountryCode
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("billingCountryCode");
-        }
-        init { this._rawData.Set("billingCountryCode", value); }
+        init { this._rawData.Set("amount", value); }
     }
 
     /// <summary>
     /// The price currency
     /// </summary>
-    public ApiEnum<string, FlatPriceCurrency>? Currency
+    public required ApiEnum<string, FlatPriceCurrency> Currency
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ApiEnum<string, FlatPriceCurrency>>("currency");
+            return this._rawData.GetNotNullClass<ApiEnum<string, FlatPriceCurrency>>("currency");
         }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("currency", value);
-        }
+        init { this._rawData.Set("currency", value); }
     }
 
     /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Amount;
-        _ = this.BillingCountryCode;
-        this.Currency?.Validate();
+        this.Currency.Validate();
     }
 
     public FlatPrice() { }
@@ -4840,64 +4652,34 @@ public sealed record class UnitPrice : JsonModel
     /// <summary>
     /// The price amount
     /// </summary>
-    public double? Amount
+    public required double Amount
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<double>("amount");
+            return this._rawData.GetNotNullStruct<double>("amount");
         }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("amount", value);
-        }
-    }
-
-    /// <summary>
-    /// The billing country code of the price
-    /// </summary>
-    public string? BillingCountryCode
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("billingCountryCode");
-        }
-        init { this._rawData.Set("billingCountryCode", value); }
+        init { this._rawData.Set("amount", value); }
     }
 
     /// <summary>
     /// The price currency
     /// </summary>
-    public ApiEnum<string, UnitPriceCurrency>? Currency
+    public required ApiEnum<string, UnitPriceCurrency> Currency
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ApiEnum<string, UnitPriceCurrency>>("currency");
+            return this._rawData.GetNotNullClass<ApiEnum<string, UnitPriceCurrency>>("currency");
         }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("currency", value);
-        }
+        init { this._rawData.Set("currency", value); }
     }
 
     /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Amount;
-        _ = this.BillingCountryCode;
-        this.Currency?.Validate();
+        this.Currency.Validate();
     }
 
     public UnitPrice() { }

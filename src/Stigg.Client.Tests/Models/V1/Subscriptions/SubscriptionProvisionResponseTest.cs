@@ -56,14 +56,70 @@ public class SubscriptionProvisionResponseTest : TestBase
                     StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
                     Addons = [new() { ID = "id", Quantity = 0 }],
+                    BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Budget = new() { HasSoftLimit = true, Limit = 0 },
                     CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CancelReason =
                         SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
+                    Coupons =
+                    [
+                        new()
+                        {
+                            ID = "id",
+                            Name = "name",
+                            Status =
+                                SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+                            AmountsOff =
+                            [
+                                new()
+                                {
+                                    Amount = 0,
+                                    Currency =
+                                        SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                                },
+                            ],
+                            PercentOff = 0,
+                        },
+                    ],
                     CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    FutureUpdates =
+                    [
+                        new()
+                        {
+                            ScheduledExecutionTime = DateTimeOffset.Parse(
+                                "2019-12-27T18:11:19.117Z"
+                            ),
+                            ScheduleStatus =
+                                SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+                            SubscriptionScheduleType =
+                                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+                            TargetPackage = new("id"),
+                        },
+                    ],
+                    LatestInvoice = new()
+                    {
+                        BillingID = "billingId",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        RequiresAction = true,
+                        Status =
+                            SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+                        AmountDue = 0,
+                        BillingReason =
+                            SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+                        Currency = "currency",
+                        PdfUrl = "pdfUrl",
+                        Total = 0,
+                    },
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    MinimumSpend = new()
+                    {
+                        Amount = 0,
+                        Currency =
+                            SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+                    },
                     PayingCustomerID = "payingCustomerId",
                     PaymentCollectionMethod =
                         SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge,
@@ -72,16 +128,13 @@ public class SubscriptionProvisionResponseTest : TestBase
                         new()
                         {
                             AddonID = "addonId",
+                            Amount = 0,
                             BaseCharge = true,
+                            BillingCountryCode = "billingCountryCode",
                             BlockSize = 0,
+                            Currency =
+                                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
                             FeatureID = "featureId",
-                            Price = new()
-                            {
-                                Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
-                                Currency =
-                                    SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-                            },
                             Tiers =
                             [
                                 new()
@@ -89,14 +142,12 @@ public class SubscriptionProvisionResponseTest : TestBase
                                     FlatPrice = new()
                                     {
                                         Amount = 0,
-                                        BillingCountryCode = "billingCountryCode",
                                         Currency =
                                             SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                                     },
                                     UnitPrice = new()
                                     {
                                         Amount = 0,
-                                        BillingCountryCode = "billingCountryCode",
                                         Currency =
                                             SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                                     },
@@ -106,6 +157,18 @@ public class SubscriptionProvisionResponseTest : TestBase
                         },
                     ],
                     ResourceID = "resourceId",
+                    SubscriptionEntitlements =
+                    [
+                        new()
+                        {
+                            ID = "id",
+                            Type =
+                                SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+                        },
+                    ],
+                    Trial = new(
+                        SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid
+                    ),
                     TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
                 CheckoutBillingID = "checkoutBillingId",
@@ -156,14 +219,66 @@ public class SubscriptionProvisionResponseTest : TestBase
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
                 Addons = [new() { ID = "id", Quantity = 0 }],
+                BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Budget = new() { HasSoftLimit = true, Limit = 0 },
                 CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CancelReason =
                     SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
+                Coupons =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        Name = "name",
+                        Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+                        AmountsOff =
+                        [
+                            new()
+                            {
+                                Amount = 0,
+                                Currency =
+                                    SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                            },
+                        ],
+                        PercentOff = 0,
+                    },
+                ],
                 CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                FutureUpdates =
+                [
+                    new()
+                    {
+                        ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        ScheduleStatus =
+                            SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+                        SubscriptionScheduleType =
+                            SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+                        TargetPackage = new("id"),
+                    },
+                ],
+                LatestInvoice = new()
+                {
+                    BillingID = "billingId",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    RequiresAction = true,
+                    Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+                    AmountDue = 0,
+                    BillingReason =
+                        SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+                    Currency = "currency",
+                    PdfUrl = "pdfUrl",
+                    Total = 0,
+                },
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                MinimumSpend = new()
+                {
+                    Amount = 0,
+                    Currency =
+                        SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+                },
                 PayingCustomerID = "payingCustomerId",
                 PaymentCollectionMethod =
                     SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge,
@@ -172,16 +287,12 @@ public class SubscriptionProvisionResponseTest : TestBase
                     new()
                     {
                         AddonID = "addonId",
+                        Amount = 0,
                         BaseCharge = true,
+                        BillingCountryCode = "billingCountryCode",
                         BlockSize = 0,
+                        Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
                         FeatureID = "featureId",
-                        Price = new()
-                        {
-                            Amount = 0,
-                            BillingCountryCode = "billingCountryCode",
-                            Currency =
-                                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-                        },
                         Tiers =
                         [
                             new()
@@ -189,14 +300,12 @@ public class SubscriptionProvisionResponseTest : TestBase
                                 FlatPrice = new()
                                 {
                                     Amount = 0,
-                                    BillingCountryCode = "billingCountryCode",
                                     Currency =
                                         SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                                 },
                                 UnitPrice = new()
                                 {
                                     Amount = 0,
-                                    BillingCountryCode = "billingCountryCode",
                                     Currency =
                                         SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                                 },
@@ -206,6 +315,18 @@ public class SubscriptionProvisionResponseTest : TestBase
                     },
                 ],
                 ResourceID = "resourceId",
+                SubscriptionEntitlements =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        Type =
+                            SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+                    },
+                ],
+                Trial = new(
+                    SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid
+                ),
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             CheckoutBillingID = "checkoutBillingId",
@@ -263,14 +384,70 @@ public class SubscriptionProvisionResponseTest : TestBase
                     StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
                     Addons = [new() { ID = "id", Quantity = 0 }],
+                    BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Budget = new() { HasSoftLimit = true, Limit = 0 },
                     CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CancelReason =
                         SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
+                    Coupons =
+                    [
+                        new()
+                        {
+                            ID = "id",
+                            Name = "name",
+                            Status =
+                                SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+                            AmountsOff =
+                            [
+                                new()
+                                {
+                                    Amount = 0,
+                                    Currency =
+                                        SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                                },
+                            ],
+                            PercentOff = 0,
+                        },
+                    ],
                     CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    FutureUpdates =
+                    [
+                        new()
+                        {
+                            ScheduledExecutionTime = DateTimeOffset.Parse(
+                                "2019-12-27T18:11:19.117Z"
+                            ),
+                            ScheduleStatus =
+                                SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+                            SubscriptionScheduleType =
+                                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+                            TargetPackage = new("id"),
+                        },
+                    ],
+                    LatestInvoice = new()
+                    {
+                        BillingID = "billingId",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        RequiresAction = true,
+                        Status =
+                            SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+                        AmountDue = 0,
+                        BillingReason =
+                            SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+                        Currency = "currency",
+                        PdfUrl = "pdfUrl",
+                        Total = 0,
+                    },
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    MinimumSpend = new()
+                    {
+                        Amount = 0,
+                        Currency =
+                            SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+                    },
                     PayingCustomerID = "payingCustomerId",
                     PaymentCollectionMethod =
                         SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge,
@@ -279,16 +456,13 @@ public class SubscriptionProvisionResponseTest : TestBase
                         new()
                         {
                             AddonID = "addonId",
+                            Amount = 0,
                             BaseCharge = true,
+                            BillingCountryCode = "billingCountryCode",
                             BlockSize = 0,
+                            Currency =
+                                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
                             FeatureID = "featureId",
-                            Price = new()
-                            {
-                                Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
-                                Currency =
-                                    SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-                            },
                             Tiers =
                             [
                                 new()
@@ -296,14 +470,12 @@ public class SubscriptionProvisionResponseTest : TestBase
                                     FlatPrice = new()
                                     {
                                         Amount = 0,
-                                        BillingCountryCode = "billingCountryCode",
                                         Currency =
                                             SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                                     },
                                     UnitPrice = new()
                                     {
                                         Amount = 0,
-                                        BillingCountryCode = "billingCountryCode",
                                         Currency =
                                             SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                                     },
@@ -313,6 +485,18 @@ public class SubscriptionProvisionResponseTest : TestBase
                         },
                     ],
                     ResourceID = "resourceId",
+                    SubscriptionEntitlements =
+                    [
+                        new()
+                        {
+                            ID = "id",
+                            Type =
+                                SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+                        },
+                    ],
+                    Trial = new(
+                        SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid
+                    ),
                     TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
                 CheckoutBillingID = "checkoutBillingId",
@@ -377,14 +561,70 @@ public class SubscriptionProvisionResponseTest : TestBase
                     StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
                     Addons = [new() { ID = "id", Quantity = 0 }],
+                    BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Budget = new() { HasSoftLimit = true, Limit = 0 },
                     CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CancelReason =
                         SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
+                    Coupons =
+                    [
+                        new()
+                        {
+                            ID = "id",
+                            Name = "name",
+                            Status =
+                                SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+                            AmountsOff =
+                            [
+                                new()
+                                {
+                                    Amount = 0,
+                                    Currency =
+                                        SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                                },
+                            ],
+                            PercentOff = 0,
+                        },
+                    ],
                     CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    FutureUpdates =
+                    [
+                        new()
+                        {
+                            ScheduledExecutionTime = DateTimeOffset.Parse(
+                                "2019-12-27T18:11:19.117Z"
+                            ),
+                            ScheduleStatus =
+                                SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+                            SubscriptionScheduleType =
+                                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+                            TargetPackage = new("id"),
+                        },
+                    ],
+                    LatestInvoice = new()
+                    {
+                        BillingID = "billingId",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        RequiresAction = true,
+                        Status =
+                            SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+                        AmountDue = 0,
+                        BillingReason =
+                            SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+                        Currency = "currency",
+                        PdfUrl = "pdfUrl",
+                        Total = 0,
+                    },
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    MinimumSpend = new()
+                    {
+                        Amount = 0,
+                        Currency =
+                            SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+                    },
                     PayingCustomerID = "payingCustomerId",
                     PaymentCollectionMethod =
                         SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge,
@@ -393,16 +633,13 @@ public class SubscriptionProvisionResponseTest : TestBase
                         new()
                         {
                             AddonID = "addonId",
+                            Amount = 0,
                             BaseCharge = true,
+                            BillingCountryCode = "billingCountryCode",
                             BlockSize = 0,
+                            Currency =
+                                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
                             FeatureID = "featureId",
-                            Price = new()
-                            {
-                                Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
-                                Currency =
-                                    SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-                            },
                             Tiers =
                             [
                                 new()
@@ -410,14 +647,12 @@ public class SubscriptionProvisionResponseTest : TestBase
                                     FlatPrice = new()
                                     {
                                         Amount = 0,
-                                        BillingCountryCode = "billingCountryCode",
                                         Currency =
                                             SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                                     },
                                     UnitPrice = new()
                                     {
                                         Amount = 0,
-                                        BillingCountryCode = "billingCountryCode",
                                         Currency =
                                             SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                                     },
@@ -427,6 +662,18 @@ public class SubscriptionProvisionResponseTest : TestBase
                         },
                     ],
                     ResourceID = "resourceId",
+                    SubscriptionEntitlements =
+                    [
+                        new()
+                        {
+                            ID = "id",
+                            Type =
+                                SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+                        },
+                    ],
+                    Trial = new(
+                        SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid
+                    ),
                     TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
                 CheckoutBillingID = "checkoutBillingId",
@@ -484,14 +731,66 @@ public class SubscriptionProvisionResponseTest : TestBase
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
                 Addons = [new() { ID = "id", Quantity = 0 }],
+                BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Budget = new() { HasSoftLimit = true, Limit = 0 },
                 CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CancelReason =
                     SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
+                Coupons =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        Name = "name",
+                        Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+                        AmountsOff =
+                        [
+                            new()
+                            {
+                                Amount = 0,
+                                Currency =
+                                    SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                            },
+                        ],
+                        PercentOff = 0,
+                    },
+                ],
                 CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                FutureUpdates =
+                [
+                    new()
+                    {
+                        ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        ScheduleStatus =
+                            SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+                        SubscriptionScheduleType =
+                            SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+                        TargetPackage = new("id"),
+                    },
+                ],
+                LatestInvoice = new()
+                {
+                    BillingID = "billingId",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    RequiresAction = true,
+                    Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+                    AmountDue = 0,
+                    BillingReason =
+                        SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+                    Currency = "currency",
+                    PdfUrl = "pdfUrl",
+                    Total = 0,
+                },
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                MinimumSpend = new()
+                {
+                    Amount = 0,
+                    Currency =
+                        SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+                },
                 PayingCustomerID = "payingCustomerId",
                 PaymentCollectionMethod =
                     SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge,
@@ -500,16 +799,12 @@ public class SubscriptionProvisionResponseTest : TestBase
                     new()
                     {
                         AddonID = "addonId",
+                        Amount = 0,
                         BaseCharge = true,
+                        BillingCountryCode = "billingCountryCode",
                         BlockSize = 0,
+                        Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
                         FeatureID = "featureId",
-                        Price = new()
-                        {
-                            Amount = 0,
-                            BillingCountryCode = "billingCountryCode",
-                            Currency =
-                                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-                        },
                         Tiers =
                         [
                             new()
@@ -517,14 +812,12 @@ public class SubscriptionProvisionResponseTest : TestBase
                                 FlatPrice = new()
                                 {
                                     Amount = 0,
-                                    BillingCountryCode = "billingCountryCode",
                                     Currency =
                                         SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                                 },
                                 UnitPrice = new()
                                 {
                                     Amount = 0,
-                                    BillingCountryCode = "billingCountryCode",
                                     Currency =
                                         SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                                 },
@@ -534,6 +827,18 @@ public class SubscriptionProvisionResponseTest : TestBase
                     },
                 ],
                 ResourceID = "resourceId",
+                SubscriptionEntitlements =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        Type =
+                            SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+                    },
+                ],
+                Trial = new(
+                    SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid
+                ),
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             CheckoutBillingID = "checkoutBillingId",
@@ -591,14 +896,70 @@ public class SubscriptionProvisionResponseTest : TestBase
                     StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
                     Addons = [new() { ID = "id", Quantity = 0 }],
+                    BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Budget = new() { HasSoftLimit = true, Limit = 0 },
                     CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CancelReason =
                         SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
+                    Coupons =
+                    [
+                        new()
+                        {
+                            ID = "id",
+                            Name = "name",
+                            Status =
+                                SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+                            AmountsOff =
+                            [
+                                new()
+                                {
+                                    Amount = 0,
+                                    Currency =
+                                        SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                                },
+                            ],
+                            PercentOff = 0,
+                        },
+                    ],
                     CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    FutureUpdates =
+                    [
+                        new()
+                        {
+                            ScheduledExecutionTime = DateTimeOffset.Parse(
+                                "2019-12-27T18:11:19.117Z"
+                            ),
+                            ScheduleStatus =
+                                SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+                            SubscriptionScheduleType =
+                                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+                            TargetPackage = new("id"),
+                        },
+                    ],
+                    LatestInvoice = new()
+                    {
+                        BillingID = "billingId",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        RequiresAction = true,
+                        Status =
+                            SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+                        AmountDue = 0,
+                        BillingReason =
+                            SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+                        Currency = "currency",
+                        PdfUrl = "pdfUrl",
+                        Total = 0,
+                    },
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    MinimumSpend = new()
+                    {
+                        Amount = 0,
+                        Currency =
+                            SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+                    },
                     PayingCustomerID = "payingCustomerId",
                     PaymentCollectionMethod =
                         SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge,
@@ -607,16 +968,13 @@ public class SubscriptionProvisionResponseTest : TestBase
                         new()
                         {
                             AddonID = "addonId",
+                            Amount = 0,
                             BaseCharge = true,
+                            BillingCountryCode = "billingCountryCode",
                             BlockSize = 0,
+                            Currency =
+                                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
                             FeatureID = "featureId",
-                            Price = new()
-                            {
-                                Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
-                                Currency =
-                                    SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-                            },
                             Tiers =
                             [
                                 new()
@@ -624,14 +982,12 @@ public class SubscriptionProvisionResponseTest : TestBase
                                     FlatPrice = new()
                                     {
                                         Amount = 0,
-                                        BillingCountryCode = "billingCountryCode",
                                         Currency =
                                             SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                                     },
                                     UnitPrice = new()
                                     {
                                         Amount = 0,
-                                        BillingCountryCode = "billingCountryCode",
                                         Currency =
                                             SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                                     },
@@ -641,6 +997,18 @@ public class SubscriptionProvisionResponseTest : TestBase
                         },
                     ],
                     ResourceID = "resourceId",
+                    SubscriptionEntitlements =
+                    [
+                        new()
+                        {
+                            ID = "id",
+                            Type =
+                                SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+                        },
+                    ],
+                    Trial = new(
+                        SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid
+                    ),
                     TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
                 CheckoutBillingID = "checkoutBillingId",
@@ -699,14 +1067,70 @@ public class SubscriptionProvisionResponseTest : TestBase
                     StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
                     Addons = [new() { ID = "id", Quantity = 0 }],
+                    BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Budget = new() { HasSoftLimit = true, Limit = 0 },
                     CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CancelReason =
                         SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
+                    Coupons =
+                    [
+                        new()
+                        {
+                            ID = "id",
+                            Name = "name",
+                            Status =
+                                SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+                            AmountsOff =
+                            [
+                                new()
+                                {
+                                    Amount = 0,
+                                    Currency =
+                                        SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                                },
+                            ],
+                            PercentOff = 0,
+                        },
+                    ],
                     CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    FutureUpdates =
+                    [
+                        new()
+                        {
+                            ScheduledExecutionTime = DateTimeOffset.Parse(
+                                "2019-12-27T18:11:19.117Z"
+                            ),
+                            ScheduleStatus =
+                                SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+                            SubscriptionScheduleType =
+                                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+                            TargetPackage = new("id"),
+                        },
+                    ],
+                    LatestInvoice = new()
+                    {
+                        BillingID = "billingId",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        RequiresAction = true,
+                        Status =
+                            SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+                        AmountDue = 0,
+                        BillingReason =
+                            SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+                        Currency = "currency",
+                        PdfUrl = "pdfUrl",
+                        Total = 0,
+                    },
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    MinimumSpend = new()
+                    {
+                        Amount = 0,
+                        Currency =
+                            SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+                    },
                     PayingCustomerID = "payingCustomerId",
                     PaymentCollectionMethod =
                         SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge,
@@ -715,16 +1139,13 @@ public class SubscriptionProvisionResponseTest : TestBase
                         new()
                         {
                             AddonID = "addonId",
+                            Amount = 0,
                             BaseCharge = true,
+                            BillingCountryCode = "billingCountryCode",
                             BlockSize = 0,
+                            Currency =
+                                SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
                             FeatureID = "featureId",
-                            Price = new()
-                            {
-                                Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
-                                Currency =
-                                    SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-                            },
                             Tiers =
                             [
                                 new()
@@ -732,14 +1153,12 @@ public class SubscriptionProvisionResponseTest : TestBase
                                     FlatPrice = new()
                                     {
                                         Amount = 0,
-                                        BillingCountryCode = "billingCountryCode",
                                         Currency =
                                             SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                                     },
                                     UnitPrice = new()
                                     {
                                         Amount = 0,
-                                        BillingCountryCode = "billingCountryCode",
                                         Currency =
                                             SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                                     },
@@ -749,6 +1168,18 @@ public class SubscriptionProvisionResponseTest : TestBase
                         },
                     ],
                     ResourceID = "resourceId",
+                    SubscriptionEntitlements =
+                    [
+                        new()
+                        {
+                            ID = "id",
+                            Type =
+                                SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+                        },
+                    ],
+                    Trial = new(
+                        SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid
+                    ),
                     TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
                 CheckoutBillingID = "checkoutBillingId",
@@ -810,14 +1241,66 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
                 Addons = [new() { ID = "id", Quantity = 0 }],
+                BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Budget = new() { HasSoftLimit = true, Limit = 0 },
                 CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CancelReason =
                     SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
+                Coupons =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        Name = "name",
+                        Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+                        AmountsOff =
+                        [
+                            new()
+                            {
+                                Amount = 0,
+                                Currency =
+                                    SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                            },
+                        ],
+                        PercentOff = 0,
+                    },
+                ],
                 CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                FutureUpdates =
+                [
+                    new()
+                    {
+                        ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        ScheduleStatus =
+                            SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+                        SubscriptionScheduleType =
+                            SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+                        TargetPackage = new("id"),
+                    },
+                ],
+                LatestInvoice = new()
+                {
+                    BillingID = "billingId",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    RequiresAction = true,
+                    Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+                    AmountDue = 0,
+                    BillingReason =
+                        SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+                    Currency = "currency",
+                    PdfUrl = "pdfUrl",
+                    Total = 0,
+                },
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                MinimumSpend = new()
+                {
+                    Amount = 0,
+                    Currency =
+                        SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+                },
                 PayingCustomerID = "payingCustomerId",
                 PaymentCollectionMethod =
                     SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge,
@@ -826,16 +1309,12 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                     new()
                     {
                         AddonID = "addonId",
+                        Amount = 0,
                         BaseCharge = true,
+                        BillingCountryCode = "billingCountryCode",
                         BlockSize = 0,
+                        Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
                         FeatureID = "featureId",
-                        Price = new()
-                        {
-                            Amount = 0,
-                            BillingCountryCode = "billingCountryCode",
-                            Currency =
-                                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-                        },
                         Tiers =
                         [
                             new()
@@ -843,14 +1322,12 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                                 FlatPrice = new()
                                 {
                                     Amount = 0,
-                                    BillingCountryCode = "billingCountryCode",
                                     Currency =
                                         SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                                 },
                                 UnitPrice = new()
                                 {
                                     Amount = 0,
-                                    BillingCountryCode = "billingCountryCode",
                                     Currency =
                                         SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                                 },
@@ -860,6 +1337,18 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                     },
                 ],
                 ResourceID = "resourceId",
+                SubscriptionEntitlements =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        Type =
+                            SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+                    },
+                ],
+                Trial = new(
+                    SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid
+                ),
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             CheckoutBillingID = "checkoutBillingId",
@@ -908,14 +1397,65 @@ public class SubscriptionProvisionResponseDataTest : TestBase
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
             Addons = [new() { ID = "id", Quantity = 0 }],
+            BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Budget = new() { HasSoftLimit = true, Limit = 0 },
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CancelReason =
                 SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
+            Coupons =
+            [
+                new()
+                {
+                    ID = "id",
+                    Name = "name",
+                    Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+                    AmountsOff =
+                    [
+                        new()
+                        {
+                            Amount = 0,
+                            Currency =
+                                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                        },
+                    ],
+                    PercentOff = 0,
+                },
+            ],
             CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            FutureUpdates =
+            [
+                new()
+                {
+                    ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ScheduleStatus =
+                        SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+                    SubscriptionScheduleType =
+                        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+                    TargetPackage = new("id"),
+                },
+            ],
+            LatestInvoice = new()
+            {
+                BillingID = "billingId",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                RequiresAction = true,
+                Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+                AmountDue = 0,
+                BillingReason =
+                    SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+                Currency = "currency",
+                PdfUrl = "pdfUrl",
+                Total = 0,
+            },
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MinimumSpend = new()
+            {
+                Amount = 0,
+                Currency = SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+            },
             PayingCustomerID = "payingCustomerId",
             PaymentCollectionMethod =
                 SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge,
@@ -924,16 +1464,12 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 new()
                 {
                     AddonID = "addonId",
+                    Amount = 0,
                     BaseCharge = true,
+                    BillingCountryCode = "billingCountryCode",
                     BlockSize = 0,
+                    Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
                     FeatureID = "featureId",
-                    Price = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency =
-                            SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-                    },
                     Tiers =
                     [
                         new()
@@ -941,14 +1477,12 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                             FlatPrice = new()
                             {
                                 Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
                                 Currency =
                                     SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                             },
                             UnitPrice = new()
                             {
                                 Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
                                 Currency =
                                     SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                             },
@@ -958,6 +1492,18 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 },
             ],
             ResourceID = "resourceId",
+            SubscriptionEntitlements =
+            [
+                new()
+                {
+                    ID = "id",
+                    Type =
+                        SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+                },
+            ],
+            Trial = new(
+                SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid
+            ),
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
         string expectedCheckoutBillingID = "checkoutBillingId";
@@ -1023,14 +1569,66 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
                 Addons = [new() { ID = "id", Quantity = 0 }],
+                BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Budget = new() { HasSoftLimit = true, Limit = 0 },
                 CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CancelReason =
                     SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
+                Coupons =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        Name = "name",
+                        Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+                        AmountsOff =
+                        [
+                            new()
+                            {
+                                Amount = 0,
+                                Currency =
+                                    SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                            },
+                        ],
+                        PercentOff = 0,
+                    },
+                ],
                 CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                FutureUpdates =
+                [
+                    new()
+                    {
+                        ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        ScheduleStatus =
+                            SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+                        SubscriptionScheduleType =
+                            SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+                        TargetPackage = new("id"),
+                    },
+                ],
+                LatestInvoice = new()
+                {
+                    BillingID = "billingId",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    RequiresAction = true,
+                    Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+                    AmountDue = 0,
+                    BillingReason =
+                        SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+                    Currency = "currency",
+                    PdfUrl = "pdfUrl",
+                    Total = 0,
+                },
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                MinimumSpend = new()
+                {
+                    Amount = 0,
+                    Currency =
+                        SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+                },
                 PayingCustomerID = "payingCustomerId",
                 PaymentCollectionMethod =
                     SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge,
@@ -1039,16 +1637,12 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                     new()
                     {
                         AddonID = "addonId",
+                        Amount = 0,
                         BaseCharge = true,
+                        BillingCountryCode = "billingCountryCode",
                         BlockSize = 0,
+                        Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
                         FeatureID = "featureId",
-                        Price = new()
-                        {
-                            Amount = 0,
-                            BillingCountryCode = "billingCountryCode",
-                            Currency =
-                                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-                        },
                         Tiers =
                         [
                             new()
@@ -1056,14 +1650,12 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                                 FlatPrice = new()
                                 {
                                     Amount = 0,
-                                    BillingCountryCode = "billingCountryCode",
                                     Currency =
                                         SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                                 },
                                 UnitPrice = new()
                                 {
                                     Amount = 0,
-                                    BillingCountryCode = "billingCountryCode",
                                     Currency =
                                         SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                                 },
@@ -1073,6 +1665,18 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                     },
                 ],
                 ResourceID = "resourceId",
+                SubscriptionEntitlements =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        Type =
+                            SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+                    },
+                ],
+                Trial = new(
+                    SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid
+                ),
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             CheckoutBillingID = "checkoutBillingId",
@@ -1134,14 +1738,66 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
                 Addons = [new() { ID = "id", Quantity = 0 }],
+                BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Budget = new() { HasSoftLimit = true, Limit = 0 },
                 CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CancelReason =
                     SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
+                Coupons =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        Name = "name",
+                        Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+                        AmountsOff =
+                        [
+                            new()
+                            {
+                                Amount = 0,
+                                Currency =
+                                    SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                            },
+                        ],
+                        PercentOff = 0,
+                    },
+                ],
                 CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                FutureUpdates =
+                [
+                    new()
+                    {
+                        ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        ScheduleStatus =
+                            SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+                        SubscriptionScheduleType =
+                            SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+                        TargetPackage = new("id"),
+                    },
+                ],
+                LatestInvoice = new()
+                {
+                    BillingID = "billingId",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    RequiresAction = true,
+                    Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+                    AmountDue = 0,
+                    BillingReason =
+                        SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+                    Currency = "currency",
+                    PdfUrl = "pdfUrl",
+                    Total = 0,
+                },
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                MinimumSpend = new()
+                {
+                    Amount = 0,
+                    Currency =
+                        SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+                },
                 PayingCustomerID = "payingCustomerId",
                 PaymentCollectionMethod =
                     SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge,
@@ -1150,16 +1806,12 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                     new()
                     {
                         AddonID = "addonId",
+                        Amount = 0,
                         BaseCharge = true,
+                        BillingCountryCode = "billingCountryCode",
                         BlockSize = 0,
+                        Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
                         FeatureID = "featureId",
-                        Price = new()
-                        {
-                            Amount = 0,
-                            BillingCountryCode = "billingCountryCode",
-                            Currency =
-                                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-                        },
                         Tiers =
                         [
                             new()
@@ -1167,14 +1819,12 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                                 FlatPrice = new()
                                 {
                                     Amount = 0,
-                                    BillingCountryCode = "billingCountryCode",
                                     Currency =
                                         SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                                 },
                                 UnitPrice = new()
                                 {
                                     Amount = 0,
-                                    BillingCountryCode = "billingCountryCode",
                                     Currency =
                                         SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                                 },
@@ -1184,6 +1834,18 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                     },
                 ],
                 ResourceID = "resourceId",
+                SubscriptionEntitlements =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        Type =
+                            SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+                    },
+                ],
+                Trial = new(
+                    SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid
+                ),
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             CheckoutBillingID = "checkoutBillingId",
@@ -1239,14 +1901,65 @@ public class SubscriptionProvisionResponseDataTest : TestBase
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
             Addons = [new() { ID = "id", Quantity = 0 }],
+            BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Budget = new() { HasSoftLimit = true, Limit = 0 },
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CancelReason =
                 SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
+            Coupons =
+            [
+                new()
+                {
+                    ID = "id",
+                    Name = "name",
+                    Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+                    AmountsOff =
+                    [
+                        new()
+                        {
+                            Amount = 0,
+                            Currency =
+                                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                        },
+                    ],
+                    PercentOff = 0,
+                },
+            ],
             CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            FutureUpdates =
+            [
+                new()
+                {
+                    ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ScheduleStatus =
+                        SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+                    SubscriptionScheduleType =
+                        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+                    TargetPackage = new("id"),
+                },
+            ],
+            LatestInvoice = new()
+            {
+                BillingID = "billingId",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                RequiresAction = true,
+                Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+                AmountDue = 0,
+                BillingReason =
+                    SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+                Currency = "currency",
+                PdfUrl = "pdfUrl",
+                Total = 0,
+            },
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MinimumSpend = new()
+            {
+                Amount = 0,
+                Currency = SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+            },
             PayingCustomerID = "payingCustomerId",
             PaymentCollectionMethod =
                 SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge,
@@ -1255,16 +1968,12 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 new()
                 {
                     AddonID = "addonId",
+                    Amount = 0,
                     BaseCharge = true,
+                    BillingCountryCode = "billingCountryCode",
                     BlockSize = 0,
+                    Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
                     FeatureID = "featureId",
-                    Price = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency =
-                            SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-                    },
                     Tiers =
                     [
                         new()
@@ -1272,14 +1981,12 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                             FlatPrice = new()
                             {
                                 Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
                                 Currency =
                                     SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                             },
                             UnitPrice = new()
                             {
                                 Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
                                 Currency =
                                     SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                             },
@@ -1289,6 +1996,18 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 },
             ],
             ResourceID = "resourceId",
+            SubscriptionEntitlements =
+            [
+                new()
+                {
+                    ID = "id",
+                    Type =
+                        SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+                },
+            ],
+            Trial = new(
+                SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid
+            ),
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
         string expectedCheckoutBillingID = "checkoutBillingId";
@@ -1354,14 +2073,66 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
                 Addons = [new() { ID = "id", Quantity = 0 }],
+                BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Budget = new() { HasSoftLimit = true, Limit = 0 },
                 CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CancelReason =
                     SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
+                Coupons =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        Name = "name",
+                        Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+                        AmountsOff =
+                        [
+                            new()
+                            {
+                                Amount = 0,
+                                Currency =
+                                    SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                            },
+                        ],
+                        PercentOff = 0,
+                    },
+                ],
                 CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                FutureUpdates =
+                [
+                    new()
+                    {
+                        ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        ScheduleStatus =
+                            SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+                        SubscriptionScheduleType =
+                            SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+                        TargetPackage = new("id"),
+                    },
+                ],
+                LatestInvoice = new()
+                {
+                    BillingID = "billingId",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    RequiresAction = true,
+                    Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+                    AmountDue = 0,
+                    BillingReason =
+                        SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+                    Currency = "currency",
+                    PdfUrl = "pdfUrl",
+                    Total = 0,
+                },
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                MinimumSpend = new()
+                {
+                    Amount = 0,
+                    Currency =
+                        SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+                },
                 PayingCustomerID = "payingCustomerId",
                 PaymentCollectionMethod =
                     SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge,
@@ -1370,16 +2141,12 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                     new()
                     {
                         AddonID = "addonId",
+                        Amount = 0,
                         BaseCharge = true,
+                        BillingCountryCode = "billingCountryCode",
                         BlockSize = 0,
+                        Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
                         FeatureID = "featureId",
-                        Price = new()
-                        {
-                            Amount = 0,
-                            BillingCountryCode = "billingCountryCode",
-                            Currency =
-                                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-                        },
                         Tiers =
                         [
                             new()
@@ -1387,14 +2154,12 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                                 FlatPrice = new()
                                 {
                                     Amount = 0,
-                                    BillingCountryCode = "billingCountryCode",
                                     Currency =
                                         SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                                 },
                                 UnitPrice = new()
                                 {
                                     Amount = 0,
-                                    BillingCountryCode = "billingCountryCode",
                                     Currency =
                                         SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                                 },
@@ -1404,6 +2169,18 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                     },
                 ],
                 ResourceID = "resourceId",
+                SubscriptionEntitlements =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        Type =
+                            SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+                    },
+                ],
+                Trial = new(
+                    SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid
+                ),
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             CheckoutBillingID = "checkoutBillingId",
@@ -1459,14 +2236,66 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
                 Addons = [new() { ID = "id", Quantity = 0 }],
+                BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Budget = new() { HasSoftLimit = true, Limit = 0 },
                 CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CancelReason =
                     SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
+                Coupons =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        Name = "name",
+                        Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+                        AmountsOff =
+                        [
+                            new()
+                            {
+                                Amount = 0,
+                                Currency =
+                                    SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                            },
+                        ],
+                        PercentOff = 0,
+                    },
+                ],
                 CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                FutureUpdates =
+                [
+                    new()
+                    {
+                        ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        ScheduleStatus =
+                            SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+                        SubscriptionScheduleType =
+                            SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+                        TargetPackage = new("id"),
+                    },
+                ],
+                LatestInvoice = new()
+                {
+                    BillingID = "billingId",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    RequiresAction = true,
+                    Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+                    AmountDue = 0,
+                    BillingReason =
+                        SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+                    Currency = "currency",
+                    PdfUrl = "pdfUrl",
+                    Total = 0,
+                },
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                MinimumSpend = new()
+                {
+                    Amount = 0,
+                    Currency =
+                        SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+                },
                 PayingCustomerID = "payingCustomerId",
                 PaymentCollectionMethod =
                     SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge,
@@ -1475,16 +2304,12 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                     new()
                     {
                         AddonID = "addonId",
+                        Amount = 0,
                         BaseCharge = true,
+                        BillingCountryCode = "billingCountryCode",
                         BlockSize = 0,
+                        Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
                         FeatureID = "featureId",
-                        Price = new()
-                        {
-                            Amount = 0,
-                            BillingCountryCode = "billingCountryCode",
-                            Currency =
-                                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-                        },
                         Tiers =
                         [
                             new()
@@ -1492,14 +2317,12 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                                 FlatPrice = new()
                                 {
                                     Amount = 0,
-                                    BillingCountryCode = "billingCountryCode",
                                     Currency =
                                         SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                                 },
                                 UnitPrice = new()
                                 {
                                     Amount = 0,
-                                    BillingCountryCode = "billingCountryCode",
                                     Currency =
                                         SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                                 },
@@ -1509,6 +2332,18 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                     },
                 ],
                 ResourceID = "resourceId",
+                SubscriptionEntitlements =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        Type =
+                            SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+                    },
+                ],
+                Trial = new(
+                    SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid
+                ),
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
         };
@@ -1566,14 +2401,66 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
                 Addons = [new() { ID = "id", Quantity = 0 }],
+                BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Budget = new() { HasSoftLimit = true, Limit = 0 },
                 CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CancelReason =
                     SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
+                Coupons =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        Name = "name",
+                        Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+                        AmountsOff =
+                        [
+                            new()
+                            {
+                                Amount = 0,
+                                Currency =
+                                    SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                            },
+                        ],
+                        PercentOff = 0,
+                    },
+                ],
                 CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                FutureUpdates =
+                [
+                    new()
+                    {
+                        ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        ScheduleStatus =
+                            SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+                        SubscriptionScheduleType =
+                            SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+                        TargetPackage = new("id"),
+                    },
+                ],
+                LatestInvoice = new()
+                {
+                    BillingID = "billingId",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    RequiresAction = true,
+                    Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+                    AmountDue = 0,
+                    BillingReason =
+                        SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+                    Currency = "currency",
+                    PdfUrl = "pdfUrl",
+                    Total = 0,
+                },
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                MinimumSpend = new()
+                {
+                    Amount = 0,
+                    Currency =
+                        SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+                },
                 PayingCustomerID = "payingCustomerId",
                 PaymentCollectionMethod =
                     SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge,
@@ -1582,16 +2469,12 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                     new()
                     {
                         AddonID = "addonId",
+                        Amount = 0,
                         BaseCharge = true,
+                        BillingCountryCode = "billingCountryCode",
                         BlockSize = 0,
+                        Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
                         FeatureID = "featureId",
-                        Price = new()
-                        {
-                            Amount = 0,
-                            BillingCountryCode = "billingCountryCode",
-                            Currency =
-                                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-                        },
                         Tiers =
                         [
                             new()
@@ -1599,14 +2482,12 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                                 FlatPrice = new()
                                 {
                                     Amount = 0,
-                                    BillingCountryCode = "billingCountryCode",
                                     Currency =
                                         SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                                 },
                                 UnitPrice = new()
                                 {
                                     Amount = 0,
-                                    BillingCountryCode = "billingCountryCode",
                                     Currency =
                                         SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                                 },
@@ -1616,6 +2497,18 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                     },
                 ],
                 ResourceID = "resourceId",
+                SubscriptionEntitlements =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        Type =
+                            SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+                    },
+                ],
+                Trial = new(
+                    SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid
+                ),
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
         };
@@ -1668,14 +2561,66 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
                 Addons = [new() { ID = "id", Quantity = 0 }],
+                BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Budget = new() { HasSoftLimit = true, Limit = 0 },
                 CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CancelReason =
                     SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
+                Coupons =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        Name = "name",
+                        Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+                        AmountsOff =
+                        [
+                            new()
+                            {
+                                Amount = 0,
+                                Currency =
+                                    SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                            },
+                        ],
+                        PercentOff = 0,
+                    },
+                ],
                 CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                FutureUpdates =
+                [
+                    new()
+                    {
+                        ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        ScheduleStatus =
+                            SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+                        SubscriptionScheduleType =
+                            SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+                        TargetPackage = new("id"),
+                    },
+                ],
+                LatestInvoice = new()
+                {
+                    BillingID = "billingId",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    RequiresAction = true,
+                    Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+                    AmountDue = 0,
+                    BillingReason =
+                        SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+                    Currency = "currency",
+                    PdfUrl = "pdfUrl",
+                    Total = 0,
+                },
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                MinimumSpend = new()
+                {
+                    Amount = 0,
+                    Currency =
+                        SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+                },
                 PayingCustomerID = "payingCustomerId",
                 PaymentCollectionMethod =
                     SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge,
@@ -1684,16 +2629,12 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                     new()
                     {
                         AddonID = "addonId",
+                        Amount = 0,
                         BaseCharge = true,
+                        BillingCountryCode = "billingCountryCode",
                         BlockSize = 0,
+                        Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
                         FeatureID = "featureId",
-                        Price = new()
-                        {
-                            Amount = 0,
-                            BillingCountryCode = "billingCountryCode",
-                            Currency =
-                                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-                        },
                         Tiers =
                         [
                             new()
@@ -1701,14 +2642,12 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                                 FlatPrice = new()
                                 {
                                     Amount = 0,
-                                    BillingCountryCode = "billingCountryCode",
                                     Currency =
                                         SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                                 },
                                 UnitPrice = new()
                                 {
                                     Amount = 0,
-                                    BillingCountryCode = "billingCountryCode",
                                     Currency =
                                         SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                                 },
@@ -1718,6 +2657,18 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                     },
                 ],
                 ResourceID = "resourceId",
+                SubscriptionEntitlements =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        Type =
+                            SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+                    },
+                ],
+                Trial = new(
+                    SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid
+                ),
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
 
@@ -1780,14 +2731,66 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
                 Addons = [new() { ID = "id", Quantity = 0 }],
+                BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Budget = new() { HasSoftLimit = true, Limit = 0 },
                 CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CancelReason =
                     SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
+                Coupons =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        Name = "name",
+                        Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+                        AmountsOff =
+                        [
+                            new()
+                            {
+                                Amount = 0,
+                                Currency =
+                                    SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                            },
+                        ],
+                        PercentOff = 0,
+                    },
+                ],
                 CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                FutureUpdates =
+                [
+                    new()
+                    {
+                        ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        ScheduleStatus =
+                            SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+                        SubscriptionScheduleType =
+                            SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+                        TargetPackage = new("id"),
+                    },
+                ],
+                LatestInvoice = new()
+                {
+                    BillingID = "billingId",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    RequiresAction = true,
+                    Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+                    AmountDue = 0,
+                    BillingReason =
+                        SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+                    Currency = "currency",
+                    PdfUrl = "pdfUrl",
+                    Total = 0,
+                },
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                MinimumSpend = new()
+                {
+                    Amount = 0,
+                    Currency =
+                        SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+                },
                 PayingCustomerID = "payingCustomerId",
                 PaymentCollectionMethod =
                     SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge,
@@ -1796,16 +2799,12 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                     new()
                     {
                         AddonID = "addonId",
+                        Amount = 0,
                         BaseCharge = true,
+                        BillingCountryCode = "billingCountryCode",
                         BlockSize = 0,
+                        Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
                         FeatureID = "featureId",
-                        Price = new()
-                        {
-                            Amount = 0,
-                            BillingCountryCode = "billingCountryCode",
-                            Currency =
-                                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-                        },
                         Tiers =
                         [
                             new()
@@ -1813,14 +2812,12 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                                 FlatPrice = new()
                                 {
                                     Amount = 0,
-                                    BillingCountryCode = "billingCountryCode",
                                     Currency =
                                         SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                                 },
                                 UnitPrice = new()
                                 {
                                     Amount = 0,
-                                    BillingCountryCode = "billingCountryCode",
                                     Currency =
                                         SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                                 },
@@ -1830,6 +2827,18 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                     },
                 ],
                 ResourceID = "resourceId",
+                SubscriptionEntitlements =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        Type =
+                            SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+                    },
+                ],
+                Trial = new(
+                    SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid
+                ),
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
 
@@ -1887,14 +2896,66 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
                 Addons = [new() { ID = "id", Quantity = 0 }],
+                BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Budget = new() { HasSoftLimit = true, Limit = 0 },
                 CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CancelReason =
                     SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
+                Coupons =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        Name = "name",
+                        Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+                        AmountsOff =
+                        [
+                            new()
+                            {
+                                Amount = 0,
+                                Currency =
+                                    SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                            },
+                        ],
+                        PercentOff = 0,
+                    },
+                ],
                 CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                FutureUpdates =
+                [
+                    new()
+                    {
+                        ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        ScheduleStatus =
+                            SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+                        SubscriptionScheduleType =
+                            SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+                        TargetPackage = new("id"),
+                    },
+                ],
+                LatestInvoice = new()
+                {
+                    BillingID = "billingId",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    RequiresAction = true,
+                    Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+                    AmountDue = 0,
+                    BillingReason =
+                        SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+                    Currency = "currency",
+                    PdfUrl = "pdfUrl",
+                    Total = 0,
+                },
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                MinimumSpend = new()
+                {
+                    Amount = 0,
+                    Currency =
+                        SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+                },
                 PayingCustomerID = "payingCustomerId",
                 PaymentCollectionMethod =
                     SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge,
@@ -1903,16 +2964,12 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                     new()
                     {
                         AddonID = "addonId",
+                        Amount = 0,
                         BaseCharge = true,
+                        BillingCountryCode = "billingCountryCode",
                         BlockSize = 0,
+                        Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
                         FeatureID = "featureId",
-                        Price = new()
-                        {
-                            Amount = 0,
-                            BillingCountryCode = "billingCountryCode",
-                            Currency =
-                                SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-                        },
                         Tiers =
                         [
                             new()
@@ -1920,14 +2977,12 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                                 FlatPrice = new()
                                 {
                                     Amount = 0,
-                                    BillingCountryCode = "billingCountryCode",
                                     Currency =
                                         SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                                 },
                                 UnitPrice = new()
                                 {
                                     Amount = 0,
-                                    BillingCountryCode = "billingCountryCode",
                                     Currency =
                                         SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                                 },
@@ -1937,6 +2992,18 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                     },
                 ],
                 ResourceID = "resourceId",
+                SubscriptionEntitlements =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        Type =
+                            SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+                    },
+                ],
+                Trial = new(
+                    SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid
+                ),
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             CheckoutBillingID = "checkoutBillingId",
@@ -3776,14 +4843,65 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
             Addons = [new() { ID = "id", Quantity = 0 }],
+            BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Budget = new() { HasSoftLimit = true, Limit = 0 },
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CancelReason =
                 SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
+            Coupons =
+            [
+                new()
+                {
+                    ID = "id",
+                    Name = "name",
+                    Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+                    AmountsOff =
+                    [
+                        new()
+                        {
+                            Amount = 0,
+                            Currency =
+                                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                        },
+                    ],
+                    PercentOff = 0,
+                },
+            ],
             CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            FutureUpdates =
+            [
+                new()
+                {
+                    ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ScheduleStatus =
+                        SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+                    SubscriptionScheduleType =
+                        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+                    TargetPackage = new("id"),
+                },
+            ],
+            LatestInvoice = new()
+            {
+                BillingID = "billingId",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                RequiresAction = true,
+                Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+                AmountDue = 0,
+                BillingReason =
+                    SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+                Currency = "currency",
+                PdfUrl = "pdfUrl",
+                Total = 0,
+            },
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MinimumSpend = new()
+            {
+                Amount = 0,
+                Currency = SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+            },
             PayingCustomerID = "payingCustomerId",
             PaymentCollectionMethod =
                 SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge,
@@ -3792,16 +4910,12 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
                 new()
                 {
                     AddonID = "addonId",
+                    Amount = 0,
                     BaseCharge = true,
+                    BillingCountryCode = "billingCountryCode",
                     BlockSize = 0,
+                    Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
                     FeatureID = "featureId",
-                    Price = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency =
-                            SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-                    },
                     Tiers =
                     [
                         new()
@@ -3809,14 +4923,12 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
                             FlatPrice = new()
                             {
                                 Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
                                 Currency =
                                     SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                             },
                             UnitPrice = new()
                             {
                                 Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
                                 Currency =
                                     SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                             },
@@ -3826,6 +4938,18 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
                 },
             ],
             ResourceID = "resourceId",
+            SubscriptionEntitlements =
+            [
+                new()
+                {
+                    ID = "id",
+                    Type =
+                        SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+                },
+            ],
+            Trial = new(
+                SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid
+            ),
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -3850,12 +4974,39 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
         [
             new() { ID = "id", Quantity = 0 },
         ];
+        DateTimeOffset expectedBillingCycleAnchor = DateTimeOffset.Parse(
+            "2019-12-27T18:11:19.117Z"
+        );
+        SubscriptionProvisionResponseDataSubscriptionBudget expectedBudget = new()
+        {
+            HasSoftLimit = true,
+            Limit = 0,
+        };
         DateTimeOffset expectedCancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<
             string,
             SubscriptionProvisionResponseDataSubscriptionCancelReason
         > expectedCancelReason =
             SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade;
+        List<SubscriptionProvisionResponseDataSubscriptionCoupon> expectedCoupons =
+        [
+            new()
+            {
+                ID = "id",
+                Name = "name",
+                Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+                AmountsOff =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        Currency =
+                            SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                    },
+                ],
+                PercentOff = 0,
+            },
+        ];
         DateTimeOffset expectedCurrentBillingPeriodEnd = DateTimeOffset.Parse(
             "2019-12-27T18:11:19.117Z"
         );
@@ -3864,7 +5015,37 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
         );
         DateTimeOffset expectedEffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        List<SubscriptionProvisionResponseDataSubscriptionFutureUpdate> expectedFutureUpdates =
+        [
+            new()
+            {
+                ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ScheduleStatus =
+                    SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+                SubscriptionScheduleType =
+                    SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+                TargetPackage = new("id"),
+            },
+        ];
+        SubscriptionProvisionResponseDataSubscriptionLatestInvoice expectedLatestInvoice = new()
+        {
+            BillingID = "billingId",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            RequiresAction = true,
+            Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+            AmountDue = 0,
+            BillingReason =
+                SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+            Currency = "currency",
+            PdfUrl = "pdfUrl",
+            Total = 0,
+        };
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        SubscriptionProvisionResponseDataSubscriptionMinimumSpend expectedMinimumSpend = new()
+        {
+            Amount = 0,
+            Currency = SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+        };
         string expectedPayingCustomerID = "payingCustomerId";
         ApiEnum<
             string,
@@ -3876,15 +5057,12 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             new()
             {
                 AddonID = "addonId",
+                Amount = 0,
                 BaseCharge = true,
+                BillingCountryCode = "billingCountryCode",
                 BlockSize = 0,
+                Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
                 FeatureID = "featureId",
-                Price = new()
-                {
-                    Amount = 0,
-                    BillingCountryCode = "billingCountryCode",
-                    Currency = SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-                },
                 Tiers =
                 [
                     new()
@@ -3892,14 +5070,12 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
                         FlatPrice = new()
                         {
                             Amount = 0,
-                            BillingCountryCode = "billingCountryCode",
                             Currency =
                                 SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                         },
                         UnitPrice = new()
                         {
                             Amount = 0,
-                            BillingCountryCode = "billingCountryCode",
                             Currency =
                                 SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                         },
@@ -3909,6 +5085,18 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             },
         ];
         string expectedResourceID = "resourceId";
+        List<SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlement> expectedSubscriptionEntitlements =
+        [
+            new()
+            {
+                ID = "id",
+                Type =
+                    SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+            },
+        ];
+        SubscriptionProvisionResponseDataSubscriptionTrial expectedTrial = new(
+            SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid
+        );
         DateTimeOffset expectedTrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedID, model.ID);
@@ -3926,12 +5114,27 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
         {
             Assert.Equal(expectedAddons[i], model.Addons[i]);
         }
+        Assert.Equal(expectedBillingCycleAnchor, model.BillingCycleAnchor);
+        Assert.Equal(expectedBudget, model.Budget);
         Assert.Equal(expectedCancellationDate, model.CancellationDate);
         Assert.Equal(expectedCancelReason, model.CancelReason);
+        Assert.NotNull(model.Coupons);
+        Assert.Equal(expectedCoupons.Count, model.Coupons.Count);
+        for (int i = 0; i < expectedCoupons.Count; i++)
+        {
+            Assert.Equal(expectedCoupons[i], model.Coupons[i]);
+        }
         Assert.Equal(expectedCurrentBillingPeriodEnd, model.CurrentBillingPeriodEnd);
         Assert.Equal(expectedCurrentBillingPeriodStart, model.CurrentBillingPeriodStart);
         Assert.Equal(expectedEffectiveEndDate, model.EffectiveEndDate);
         Assert.Equal(expectedEndDate, model.EndDate);
+        Assert.NotNull(model.FutureUpdates);
+        Assert.Equal(expectedFutureUpdates.Count, model.FutureUpdates.Count);
+        for (int i = 0; i < expectedFutureUpdates.Count; i++)
+        {
+            Assert.Equal(expectedFutureUpdates[i], model.FutureUpdates[i]);
+        }
+        Assert.Equal(expectedLatestInvoice, model.LatestInvoice);
         Assert.NotNull(model.Metadata);
         Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
         foreach (var item in expectedMetadata)
@@ -3940,6 +5143,7 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
 
             Assert.Equal(value, model.Metadata[item.Key]);
         }
+        Assert.Equal(expectedMinimumSpend, model.MinimumSpend);
         Assert.Equal(expectedPayingCustomerID, model.PayingCustomerID);
         Assert.Equal(expectedPaymentCollectionMethod, model.PaymentCollectionMethod);
         Assert.NotNull(model.Prices);
@@ -3949,6 +5153,13 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             Assert.Equal(expectedPrices[i], model.Prices[i]);
         }
         Assert.Equal(expectedResourceID, model.ResourceID);
+        Assert.NotNull(model.SubscriptionEntitlements);
+        Assert.Equal(expectedSubscriptionEntitlements.Count, model.SubscriptionEntitlements.Count);
+        for (int i = 0; i < expectedSubscriptionEntitlements.Count; i++)
+        {
+            Assert.Equal(expectedSubscriptionEntitlements[i], model.SubscriptionEntitlements[i]);
+        }
+        Assert.Equal(expectedTrial, model.Trial);
         Assert.Equal(expectedTrialEndDate, model.TrialEndDate);
     }
 
@@ -3968,14 +5179,65 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
             Addons = [new() { ID = "id", Quantity = 0 }],
+            BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Budget = new() { HasSoftLimit = true, Limit = 0 },
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CancelReason =
                 SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
+            Coupons =
+            [
+                new()
+                {
+                    ID = "id",
+                    Name = "name",
+                    Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+                    AmountsOff =
+                    [
+                        new()
+                        {
+                            Amount = 0,
+                            Currency =
+                                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                        },
+                    ],
+                    PercentOff = 0,
+                },
+            ],
             CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            FutureUpdates =
+            [
+                new()
+                {
+                    ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ScheduleStatus =
+                        SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+                    SubscriptionScheduleType =
+                        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+                    TargetPackage = new("id"),
+                },
+            ],
+            LatestInvoice = new()
+            {
+                BillingID = "billingId",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                RequiresAction = true,
+                Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+                AmountDue = 0,
+                BillingReason =
+                    SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+                Currency = "currency",
+                PdfUrl = "pdfUrl",
+                Total = 0,
+            },
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MinimumSpend = new()
+            {
+                Amount = 0,
+                Currency = SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+            },
             PayingCustomerID = "payingCustomerId",
             PaymentCollectionMethod =
                 SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge,
@@ -3984,16 +5246,12 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
                 new()
                 {
                     AddonID = "addonId",
+                    Amount = 0,
                     BaseCharge = true,
+                    BillingCountryCode = "billingCountryCode",
                     BlockSize = 0,
+                    Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
                     FeatureID = "featureId",
-                    Price = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency =
-                            SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-                    },
                     Tiers =
                     [
                         new()
@@ -4001,14 +5259,12 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
                             FlatPrice = new()
                             {
                                 Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
                                 Currency =
                                     SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                             },
                             UnitPrice = new()
                             {
                                 Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
                                 Currency =
                                     SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                             },
@@ -4018,6 +5274,18 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
                 },
             ],
             ResourceID = "resourceId",
+            SubscriptionEntitlements =
+            [
+                new()
+                {
+                    ID = "id",
+                    Type =
+                        SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+                },
+            ],
+            Trial = new(
+                SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid
+            ),
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -4047,14 +5315,65 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
             Addons = [new() { ID = "id", Quantity = 0 }],
+            BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Budget = new() { HasSoftLimit = true, Limit = 0 },
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CancelReason =
                 SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
+            Coupons =
+            [
+                new()
+                {
+                    ID = "id",
+                    Name = "name",
+                    Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+                    AmountsOff =
+                    [
+                        new()
+                        {
+                            Amount = 0,
+                            Currency =
+                                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                        },
+                    ],
+                    PercentOff = 0,
+                },
+            ],
             CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            FutureUpdates =
+            [
+                new()
+                {
+                    ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ScheduleStatus =
+                        SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+                    SubscriptionScheduleType =
+                        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+                    TargetPackage = new("id"),
+                },
+            ],
+            LatestInvoice = new()
+            {
+                BillingID = "billingId",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                RequiresAction = true,
+                Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+                AmountDue = 0,
+                BillingReason =
+                    SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+                Currency = "currency",
+                PdfUrl = "pdfUrl",
+                Total = 0,
+            },
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MinimumSpend = new()
+            {
+                Amount = 0,
+                Currency = SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+            },
             PayingCustomerID = "payingCustomerId",
             PaymentCollectionMethod =
                 SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge,
@@ -4063,16 +5382,12 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
                 new()
                 {
                     AddonID = "addonId",
+                    Amount = 0,
                     BaseCharge = true,
+                    BillingCountryCode = "billingCountryCode",
                     BlockSize = 0,
+                    Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
                     FeatureID = "featureId",
-                    Price = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency =
-                            SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-                    },
                     Tiers =
                     [
                         new()
@@ -4080,14 +5395,12 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
                             FlatPrice = new()
                             {
                                 Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
                                 Currency =
                                     SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                             },
                             UnitPrice = new()
                             {
                                 Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
                                 Currency =
                                     SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                             },
@@ -4097,6 +5410,18 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
                 },
             ],
             ResourceID = "resourceId",
+            SubscriptionEntitlements =
+            [
+                new()
+                {
+                    ID = "id",
+                    Type =
+                        SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+                },
+            ],
+            Trial = new(
+                SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid
+            ),
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -4129,12 +5454,39 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
         [
             new() { ID = "id", Quantity = 0 },
         ];
+        DateTimeOffset expectedBillingCycleAnchor = DateTimeOffset.Parse(
+            "2019-12-27T18:11:19.117Z"
+        );
+        SubscriptionProvisionResponseDataSubscriptionBudget expectedBudget = new()
+        {
+            HasSoftLimit = true,
+            Limit = 0,
+        };
         DateTimeOffset expectedCancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<
             string,
             SubscriptionProvisionResponseDataSubscriptionCancelReason
         > expectedCancelReason =
             SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade;
+        List<SubscriptionProvisionResponseDataSubscriptionCoupon> expectedCoupons =
+        [
+            new()
+            {
+                ID = "id",
+                Name = "name",
+                Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+                AmountsOff =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        Currency =
+                            SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                    },
+                ],
+                PercentOff = 0,
+            },
+        ];
         DateTimeOffset expectedCurrentBillingPeriodEnd = DateTimeOffset.Parse(
             "2019-12-27T18:11:19.117Z"
         );
@@ -4143,7 +5495,37 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
         );
         DateTimeOffset expectedEffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        List<SubscriptionProvisionResponseDataSubscriptionFutureUpdate> expectedFutureUpdates =
+        [
+            new()
+            {
+                ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ScheduleStatus =
+                    SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+                SubscriptionScheduleType =
+                    SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+                TargetPackage = new("id"),
+            },
+        ];
+        SubscriptionProvisionResponseDataSubscriptionLatestInvoice expectedLatestInvoice = new()
+        {
+            BillingID = "billingId",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            RequiresAction = true,
+            Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+            AmountDue = 0,
+            BillingReason =
+                SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+            Currency = "currency",
+            PdfUrl = "pdfUrl",
+            Total = 0,
+        };
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        SubscriptionProvisionResponseDataSubscriptionMinimumSpend expectedMinimumSpend = new()
+        {
+            Amount = 0,
+            Currency = SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+        };
         string expectedPayingCustomerID = "payingCustomerId";
         ApiEnum<
             string,
@@ -4155,15 +5537,12 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             new()
             {
                 AddonID = "addonId",
+                Amount = 0,
                 BaseCharge = true,
+                BillingCountryCode = "billingCountryCode",
                 BlockSize = 0,
+                Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
                 FeatureID = "featureId",
-                Price = new()
-                {
-                    Amount = 0,
-                    BillingCountryCode = "billingCountryCode",
-                    Currency = SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-                },
                 Tiers =
                 [
                     new()
@@ -4171,14 +5550,12 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
                         FlatPrice = new()
                         {
                             Amount = 0,
-                            BillingCountryCode = "billingCountryCode",
                             Currency =
                                 SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                         },
                         UnitPrice = new()
                         {
                             Amount = 0,
-                            BillingCountryCode = "billingCountryCode",
                             Currency =
                                 SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                         },
@@ -4188,6 +5565,18 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             },
         ];
         string expectedResourceID = "resourceId";
+        List<SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlement> expectedSubscriptionEntitlements =
+        [
+            new()
+            {
+                ID = "id",
+                Type =
+                    SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+            },
+        ];
+        SubscriptionProvisionResponseDataSubscriptionTrial expectedTrial = new(
+            SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid
+        );
         DateTimeOffset expectedTrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedID, deserialized.ID);
@@ -4205,12 +5594,27 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
         {
             Assert.Equal(expectedAddons[i], deserialized.Addons[i]);
         }
+        Assert.Equal(expectedBillingCycleAnchor, deserialized.BillingCycleAnchor);
+        Assert.Equal(expectedBudget, deserialized.Budget);
         Assert.Equal(expectedCancellationDate, deserialized.CancellationDate);
         Assert.Equal(expectedCancelReason, deserialized.CancelReason);
+        Assert.NotNull(deserialized.Coupons);
+        Assert.Equal(expectedCoupons.Count, deserialized.Coupons.Count);
+        for (int i = 0; i < expectedCoupons.Count; i++)
+        {
+            Assert.Equal(expectedCoupons[i], deserialized.Coupons[i]);
+        }
         Assert.Equal(expectedCurrentBillingPeriodEnd, deserialized.CurrentBillingPeriodEnd);
         Assert.Equal(expectedCurrentBillingPeriodStart, deserialized.CurrentBillingPeriodStart);
         Assert.Equal(expectedEffectiveEndDate, deserialized.EffectiveEndDate);
         Assert.Equal(expectedEndDate, deserialized.EndDate);
+        Assert.NotNull(deserialized.FutureUpdates);
+        Assert.Equal(expectedFutureUpdates.Count, deserialized.FutureUpdates.Count);
+        for (int i = 0; i < expectedFutureUpdates.Count; i++)
+        {
+            Assert.Equal(expectedFutureUpdates[i], deserialized.FutureUpdates[i]);
+        }
+        Assert.Equal(expectedLatestInvoice, deserialized.LatestInvoice);
         Assert.NotNull(deserialized.Metadata);
         Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
         foreach (var item in expectedMetadata)
@@ -4219,6 +5623,7 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
 
             Assert.Equal(value, deserialized.Metadata[item.Key]);
         }
+        Assert.Equal(expectedMinimumSpend, deserialized.MinimumSpend);
         Assert.Equal(expectedPayingCustomerID, deserialized.PayingCustomerID);
         Assert.Equal(expectedPaymentCollectionMethod, deserialized.PaymentCollectionMethod);
         Assert.NotNull(deserialized.Prices);
@@ -4228,6 +5633,19 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             Assert.Equal(expectedPrices[i], deserialized.Prices[i]);
         }
         Assert.Equal(expectedResourceID, deserialized.ResourceID);
+        Assert.NotNull(deserialized.SubscriptionEntitlements);
+        Assert.Equal(
+            expectedSubscriptionEntitlements.Count,
+            deserialized.SubscriptionEntitlements.Count
+        );
+        for (int i = 0; i < expectedSubscriptionEntitlements.Count; i++)
+        {
+            Assert.Equal(
+                expectedSubscriptionEntitlements[i],
+                deserialized.SubscriptionEntitlements[i]
+            );
+        }
+        Assert.Equal(expectedTrial, deserialized.Trial);
         Assert.Equal(expectedTrialEndDate, deserialized.TrialEndDate);
     }
 
@@ -4247,14 +5665,65 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
             Addons = [new() { ID = "id", Quantity = 0 }],
+            BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Budget = new() { HasSoftLimit = true, Limit = 0 },
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CancelReason =
                 SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
+            Coupons =
+            [
+                new()
+                {
+                    ID = "id",
+                    Name = "name",
+                    Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+                    AmountsOff =
+                    [
+                        new()
+                        {
+                            Amount = 0,
+                            Currency =
+                                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                        },
+                    ],
+                    PercentOff = 0,
+                },
+            ],
             CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            FutureUpdates =
+            [
+                new()
+                {
+                    ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ScheduleStatus =
+                        SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+                    SubscriptionScheduleType =
+                        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+                    TargetPackage = new("id"),
+                },
+            ],
+            LatestInvoice = new()
+            {
+                BillingID = "billingId",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                RequiresAction = true,
+                Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+                AmountDue = 0,
+                BillingReason =
+                    SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+                Currency = "currency",
+                PdfUrl = "pdfUrl",
+                Total = 0,
+            },
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MinimumSpend = new()
+            {
+                Amount = 0,
+                Currency = SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+            },
             PayingCustomerID = "payingCustomerId",
             PaymentCollectionMethod =
                 SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge,
@@ -4263,16 +5732,12 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
                 new()
                 {
                     AddonID = "addonId",
+                    Amount = 0,
                     BaseCharge = true,
+                    BillingCountryCode = "billingCountryCode",
                     BlockSize = 0,
+                    Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
                     FeatureID = "featureId",
-                    Price = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency =
-                            SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-                    },
                     Tiers =
                     [
                         new()
@@ -4280,14 +5745,12 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
                             FlatPrice = new()
                             {
                                 Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
                                 Currency =
                                     SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                             },
                             UnitPrice = new()
                             {
                                 Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
                                 Currency =
                                     SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                             },
@@ -4297,6 +5760,18 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
                 },
             ],
             ResourceID = "resourceId",
+            SubscriptionEntitlements =
+            [
+                new()
+                {
+                    ID = "id",
+                    Type =
+                        SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+                },
+            ],
+            Trial = new(
+                SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid
+            ),
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -4318,6 +5793,8 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+            BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Budget = new() { HasSoftLimit = true, Limit = 0 },
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CancelReason =
                 SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
@@ -4325,19 +5802,46 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            LatestInvoice = new()
+            {
+                BillingID = "billingId",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                RequiresAction = true,
+                Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+                AmountDue = 0,
+                BillingReason =
+                    SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+                Currency = "currency",
+                PdfUrl = "pdfUrl",
+                Total = 0,
+            },
+            MinimumSpend = new()
+            {
+                Amount = 0,
+                Currency = SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+            },
             PayingCustomerID = "payingCustomerId",
             PaymentCollectionMethod =
                 SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge,
             ResourceID = "resourceId",
+            Trial = new(
+                SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid
+            ),
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         Assert.Null(model.Addons);
         Assert.False(model.RawData.ContainsKey("addons"));
+        Assert.Null(model.Coupons);
+        Assert.False(model.RawData.ContainsKey("coupons"));
+        Assert.Null(model.FutureUpdates);
+        Assert.False(model.RawData.ContainsKey("futureUpdates"));
         Assert.Null(model.Metadata);
         Assert.False(model.RawData.ContainsKey("metadata"));
         Assert.Null(model.Prices);
         Assert.False(model.RawData.ContainsKey("prices"));
+        Assert.Null(model.SubscriptionEntitlements);
+        Assert.False(model.RawData.ContainsKey("subscriptionEntitlements"));
     }
 
     [Fact]
@@ -4355,6 +5859,8 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+            BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Budget = new() { HasSoftLimit = true, Limit = 0 },
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CancelReason =
                 SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
@@ -4362,10 +5868,31 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            LatestInvoice = new()
+            {
+                BillingID = "billingId",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                RequiresAction = true,
+                Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+                AmountDue = 0,
+                BillingReason =
+                    SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+                Currency = "currency",
+                PdfUrl = "pdfUrl",
+                Total = 0,
+            },
+            MinimumSpend = new()
+            {
+                Amount = 0,
+                Currency = SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+            },
             PayingCustomerID = "payingCustomerId",
             PaymentCollectionMethod =
                 SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge,
             ResourceID = "resourceId",
+            Trial = new(
+                SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid
+            ),
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -4387,6 +5914,8 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+            BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Budget = new() { HasSoftLimit = true, Limit = 0 },
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CancelReason =
                 SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
@@ -4394,24 +5923,54 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            LatestInvoice = new()
+            {
+                BillingID = "billingId",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                RequiresAction = true,
+                Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+                AmountDue = 0,
+                BillingReason =
+                    SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+                Currency = "currency",
+                PdfUrl = "pdfUrl",
+                Total = 0,
+            },
+            MinimumSpend = new()
+            {
+                Amount = 0,
+                Currency = SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+            },
             PayingCustomerID = "payingCustomerId",
             PaymentCollectionMethod =
                 SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge,
             ResourceID = "resourceId",
+            Trial = new(
+                SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid
+            ),
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
             // Null should be interpreted as omitted for these properties
             Addons = null,
+            Coupons = null,
+            FutureUpdates = null,
             Metadata = null,
             Prices = null,
+            SubscriptionEntitlements = null,
         };
 
         Assert.Null(model.Addons);
         Assert.False(model.RawData.ContainsKey("addons"));
+        Assert.Null(model.Coupons);
+        Assert.False(model.RawData.ContainsKey("coupons"));
+        Assert.Null(model.FutureUpdates);
+        Assert.False(model.RawData.ContainsKey("futureUpdates"));
         Assert.Null(model.Metadata);
         Assert.False(model.RawData.ContainsKey("metadata"));
         Assert.Null(model.Prices);
         Assert.False(model.RawData.ContainsKey("prices"));
+        Assert.Null(model.SubscriptionEntitlements);
+        Assert.False(model.RawData.ContainsKey("subscriptionEntitlements"));
     }
 
     [Fact]
@@ -4429,6 +5988,8 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             PricingType = SubscriptionProvisionResponseDataSubscriptionPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
+            BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Budget = new() { HasSoftLimit = true, Limit = 0 },
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CancelReason =
                 SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
@@ -4436,16 +5997,40 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            LatestInvoice = new()
+            {
+                BillingID = "billingId",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                RequiresAction = true,
+                Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+                AmountDue = 0,
+                BillingReason =
+                    SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+                Currency = "currency",
+                PdfUrl = "pdfUrl",
+                Total = 0,
+            },
+            MinimumSpend = new()
+            {
+                Amount = 0,
+                Currency = SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+            },
             PayingCustomerID = "payingCustomerId",
             PaymentCollectionMethod =
                 SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge,
             ResourceID = "resourceId",
+            Trial = new(
+                SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid
+            ),
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
             // Null should be interpreted as omitted for these properties
             Addons = null,
+            Coupons = null,
+            FutureUpdates = null,
             Metadata = null,
             Prices = null,
+            SubscriptionEntitlements = null,
         };
 
         model.Validate();
@@ -4467,22 +6052,49 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
             Addons = [new() { ID = "id", Quantity = 0 }],
+            Coupons =
+            [
+                new()
+                {
+                    ID = "id",
+                    Name = "name",
+                    Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+                    AmountsOff =
+                    [
+                        new()
+                        {
+                            Amount = 0,
+                            Currency =
+                                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                        },
+                    ],
+                    PercentOff = 0,
+                },
+            ],
+            FutureUpdates =
+            [
+                new()
+                {
+                    ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ScheduleStatus =
+                        SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+                    SubscriptionScheduleType =
+                        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+                    TargetPackage = new("id"),
+                },
+            ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Prices =
             [
                 new()
                 {
                     AddonID = "addonId",
+                    Amount = 0,
                     BaseCharge = true,
+                    BillingCountryCode = "billingCountryCode",
                     BlockSize = 0,
+                    Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
                     FeatureID = "featureId",
-                    Price = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency =
-                            SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-                    },
                     Tiers =
                     [
                         new()
@@ -4490,14 +6102,12 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
                             FlatPrice = new()
                             {
                                 Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
                                 Currency =
                                     SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                             },
                             UnitPrice = new()
                             {
                                 Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
                                 Currency =
                                     SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                             },
@@ -4506,8 +6116,21 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
                     ],
                 },
             ],
+            SubscriptionEntitlements =
+            [
+                new()
+                {
+                    ID = "id",
+                    Type =
+                        SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+                },
+            ],
         };
 
+        Assert.Null(model.BillingCycleAnchor);
+        Assert.False(model.RawData.ContainsKey("billingCycleAnchor"));
+        Assert.Null(model.Budget);
+        Assert.False(model.RawData.ContainsKey("budget"));
         Assert.Null(model.CancellationDate);
         Assert.False(model.RawData.ContainsKey("cancellationDate"));
         Assert.Null(model.CancelReason);
@@ -4520,12 +6143,18 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
         Assert.False(model.RawData.ContainsKey("effectiveEndDate"));
         Assert.Null(model.EndDate);
         Assert.False(model.RawData.ContainsKey("endDate"));
+        Assert.Null(model.LatestInvoice);
+        Assert.False(model.RawData.ContainsKey("latestInvoice"));
+        Assert.Null(model.MinimumSpend);
+        Assert.False(model.RawData.ContainsKey("minimumSpend"));
         Assert.Null(model.PayingCustomerID);
         Assert.False(model.RawData.ContainsKey("payingCustomerId"));
         Assert.Null(model.PaymentCollectionMethod);
         Assert.False(model.RawData.ContainsKey("paymentCollectionMethod"));
         Assert.Null(model.ResourceID);
         Assert.False(model.RawData.ContainsKey("resourceId"));
+        Assert.Null(model.Trial);
+        Assert.False(model.RawData.ContainsKey("trial"));
         Assert.Null(model.TrialEndDate);
         Assert.False(model.RawData.ContainsKey("trialEndDate"));
     }
@@ -4546,22 +6175,49 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
             Addons = [new() { ID = "id", Quantity = 0 }],
+            Coupons =
+            [
+                new()
+                {
+                    ID = "id",
+                    Name = "name",
+                    Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+                    AmountsOff =
+                    [
+                        new()
+                        {
+                            Amount = 0,
+                            Currency =
+                                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                        },
+                    ],
+                    PercentOff = 0,
+                },
+            ],
+            FutureUpdates =
+            [
+                new()
+                {
+                    ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ScheduleStatus =
+                        SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+                    SubscriptionScheduleType =
+                        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+                    TargetPackage = new("id"),
+                },
+            ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Prices =
             [
                 new()
                 {
                     AddonID = "addonId",
+                    Amount = 0,
                     BaseCharge = true,
+                    BillingCountryCode = "billingCountryCode",
                     BlockSize = 0,
+                    Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
                     FeatureID = "featureId",
-                    Price = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency =
-                            SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-                    },
                     Tiers =
                     [
                         new()
@@ -4569,20 +6225,27 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
                             FlatPrice = new()
                             {
                                 Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
                                 Currency =
                                     SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                             },
                             UnitPrice = new()
                             {
                                 Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
                                 Currency =
                                     SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                             },
                             UpTo = 0,
                         },
                     ],
+                },
+            ],
+            SubscriptionEntitlements =
+            [
+                new()
+                {
+                    ID = "id",
+                    Type =
+                        SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
                 },
             ],
         };
@@ -4606,22 +6269,49 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
             Addons = [new() { ID = "id", Quantity = 0 }],
+            Coupons =
+            [
+                new()
+                {
+                    ID = "id",
+                    Name = "name",
+                    Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+                    AmountsOff =
+                    [
+                        new()
+                        {
+                            Amount = 0,
+                            Currency =
+                                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                        },
+                    ],
+                    PercentOff = 0,
+                },
+            ],
+            FutureUpdates =
+            [
+                new()
+                {
+                    ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ScheduleStatus =
+                        SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+                    SubscriptionScheduleType =
+                        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+                    TargetPackage = new("id"),
+                },
+            ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Prices =
             [
                 new()
                 {
                     AddonID = "addonId",
+                    Amount = 0,
                     BaseCharge = true,
+                    BillingCountryCode = "billingCountryCode",
                     BlockSize = 0,
+                    Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
                     FeatureID = "featureId",
-                    Price = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency =
-                            SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-                    },
                     Tiers =
                     [
                         new()
@@ -4629,14 +6319,12 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
                             FlatPrice = new()
                             {
                                 Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
                                 Currency =
                                     SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                             },
                             UnitPrice = new()
                             {
                                 Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
                                 Currency =
                                     SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                             },
@@ -4645,19 +6333,37 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
                     ],
                 },
             ],
+            SubscriptionEntitlements =
+            [
+                new()
+                {
+                    ID = "id",
+                    Type =
+                        SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+                },
+            ],
 
+            BillingCycleAnchor = null,
+            Budget = null,
             CancellationDate = null,
             CancelReason = null,
             CurrentBillingPeriodEnd = null,
             CurrentBillingPeriodStart = null,
             EffectiveEndDate = null,
             EndDate = null,
+            LatestInvoice = null,
+            MinimumSpend = null,
             PayingCustomerID = null,
             PaymentCollectionMethod = null,
             ResourceID = null,
+            Trial = null,
             TrialEndDate = null,
         };
 
+        Assert.Null(model.BillingCycleAnchor);
+        Assert.True(model.RawData.ContainsKey("billingCycleAnchor"));
+        Assert.Null(model.Budget);
+        Assert.True(model.RawData.ContainsKey("budget"));
         Assert.Null(model.CancellationDate);
         Assert.True(model.RawData.ContainsKey("cancellationDate"));
         Assert.Null(model.CancelReason);
@@ -4670,12 +6376,18 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
         Assert.True(model.RawData.ContainsKey("effectiveEndDate"));
         Assert.Null(model.EndDate);
         Assert.True(model.RawData.ContainsKey("endDate"));
+        Assert.Null(model.LatestInvoice);
+        Assert.True(model.RawData.ContainsKey("latestInvoice"));
+        Assert.Null(model.MinimumSpend);
+        Assert.True(model.RawData.ContainsKey("minimumSpend"));
         Assert.Null(model.PayingCustomerID);
         Assert.True(model.RawData.ContainsKey("payingCustomerId"));
         Assert.Null(model.PaymentCollectionMethod);
         Assert.True(model.RawData.ContainsKey("paymentCollectionMethod"));
         Assert.Null(model.ResourceID);
         Assert.True(model.RawData.ContainsKey("resourceId"));
+        Assert.Null(model.Trial);
+        Assert.True(model.RawData.ContainsKey("trial"));
         Assert.Null(model.TrialEndDate);
         Assert.True(model.RawData.ContainsKey("trialEndDate"));
     }
@@ -4696,22 +6408,49 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
             Addons = [new() { ID = "id", Quantity = 0 }],
+            Coupons =
+            [
+                new()
+                {
+                    ID = "id",
+                    Name = "name",
+                    Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+                    AmountsOff =
+                    [
+                        new()
+                        {
+                            Amount = 0,
+                            Currency =
+                                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                        },
+                    ],
+                    PercentOff = 0,
+                },
+            ],
+            FutureUpdates =
+            [
+                new()
+                {
+                    ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ScheduleStatus =
+                        SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+                    SubscriptionScheduleType =
+                        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+                    TargetPackage = new("id"),
+                },
+            ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Prices =
             [
                 new()
                 {
                     AddonID = "addonId",
+                    Amount = 0,
                     BaseCharge = true,
+                    BillingCountryCode = "billingCountryCode",
                     BlockSize = 0,
+                    Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
                     FeatureID = "featureId",
-                    Price = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency =
-                            SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-                    },
                     Tiers =
                     [
                         new()
@@ -4719,14 +6458,12 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
                             FlatPrice = new()
                             {
                                 Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
                                 Currency =
                                     SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                             },
                             UnitPrice = new()
                             {
                                 Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
                                 Currency =
                                     SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                             },
@@ -4735,16 +6472,30 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
                     ],
                 },
             ],
+            SubscriptionEntitlements =
+            [
+                new()
+                {
+                    ID = "id",
+                    Type =
+                        SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+                },
+            ],
 
+            BillingCycleAnchor = null,
+            Budget = null,
             CancellationDate = null,
             CancelReason = null,
             CurrentBillingPeriodEnd = null,
             CurrentBillingPeriodStart = null,
             EffectiveEndDate = null,
             EndDate = null,
+            LatestInvoice = null,
+            MinimumSpend = null,
             PayingCustomerID = null,
             PaymentCollectionMethod = null,
             ResourceID = null,
+            Trial = null,
             TrialEndDate = null,
         };
 
@@ -4767,14 +6518,65 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Status = SubscriptionProvisionResponseDataSubscriptionStatus.PaymentPending,
             Addons = [new() { ID = "id", Quantity = 0 }],
+            BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Budget = new() { HasSoftLimit = true, Limit = 0 },
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CancelReason =
                 SubscriptionProvisionResponseDataSubscriptionCancelReason.UpgradeOrDowngrade,
+            Coupons =
+            [
+                new()
+                {
+                    ID = "id",
+                    Name = "name",
+                    Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+                    AmountsOff =
+                    [
+                        new()
+                        {
+                            Amount = 0,
+                            Currency =
+                                SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                        },
+                    ],
+                    PercentOff = 0,
+                },
+            ],
             CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            FutureUpdates =
+            [
+                new()
+                {
+                    ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ScheduleStatus =
+                        SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+                    SubscriptionScheduleType =
+                        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+                    TargetPackage = new("id"),
+                },
+            ],
+            LatestInvoice = new()
+            {
+                BillingID = "billingId",
+                CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                RequiresAction = true,
+                Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+                AmountDue = 0,
+                BillingReason =
+                    SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+                Currency = "currency",
+                PdfUrl = "pdfUrl",
+                Total = 0,
+            },
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MinimumSpend = new()
+            {
+                Amount = 0,
+                Currency = SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+            },
             PayingCustomerID = "payingCustomerId",
             PaymentCollectionMethod =
                 SubscriptionProvisionResponseDataSubscriptionPaymentCollectionMethod.Charge,
@@ -4783,16 +6585,12 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
                 new()
                 {
                     AddonID = "addonId",
+                    Amount = 0,
                     BaseCharge = true,
+                    BillingCountryCode = "billingCountryCode",
                     BlockSize = 0,
+                    Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
                     FeatureID = "featureId",
-                    Price = new()
-                    {
-                        Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
-                        Currency =
-                            SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-                    },
                     Tiers =
                     [
                         new()
@@ -4800,14 +6598,12 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
                             FlatPrice = new()
                             {
                                 Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
                                 Currency =
                                     SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                             },
                             UnitPrice = new()
                             {
                                 Amount = 0,
-                                BillingCountryCode = "billingCountryCode",
                                 Currency =
                                     SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                             },
@@ -4817,6 +6613,18 @@ public class SubscriptionProvisionResponseDataSubscriptionTest : TestBase
                 },
             ],
             ResourceID = "resourceId",
+            SubscriptionEntitlements =
+            [
+                new()
+                {
+                    ID = "id",
+                    Type =
+                        SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+                },
+            ],
+            Trial = new(
+                SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid
+            ),
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -5100,6 +6908,94 @@ public class SubscriptionProvisionResponseDataSubscriptionAddonTest : TestBase
     }
 }
 
+public class SubscriptionProvisionResponseDataSubscriptionBudgetTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionBudget
+        {
+            HasSoftLimit = true,
+            Limit = 0,
+        };
+
+        bool expectedHasSoftLimit = true;
+        double expectedLimit = 0;
+
+        Assert.Equal(expectedHasSoftLimit, model.HasSoftLimit);
+        Assert.Equal(expectedLimit, model.Limit);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionBudget
+        {
+            HasSoftLimit = true,
+            Limit = 0,
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionProvisionResponseDataSubscriptionBudget>(
+                json,
+                ModelBase.SerializerOptions
+            );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionBudget
+        {
+            HasSoftLimit = true,
+            Limit = 0,
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionProvisionResponseDataSubscriptionBudget>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        Assert.NotNull(deserialized);
+
+        bool expectedHasSoftLimit = true;
+        double expectedLimit = 0;
+
+        Assert.Equal(expectedHasSoftLimit, deserialized.HasSoftLimit);
+        Assert.Equal(expectedLimit, deserialized.Limit);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionBudget
+        {
+            HasSoftLimit = true,
+            Limit = 0,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionBudget
+        {
+            HasSoftLimit = true,
+            Limit = 0,
+        };
+
+        SubscriptionProvisionResponseDataSubscriptionBudget copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
 public class SubscriptionProvisionResponseDataSubscriptionCancelReasonTest : TestBase
 {
     [Theory]
@@ -5168,6 +7064,2079 @@ public class SubscriptionProvisionResponseDataSubscriptionCancelReasonTest : Tes
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
             ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionCancelReason>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class SubscriptionProvisionResponseDataSubscriptionCouponTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionCoupon
+        {
+            ID = "id",
+            Name = "name",
+            Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+            AmountsOff =
+            [
+                new()
+                {
+                    Amount = 0,
+                    Currency =
+                        SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                },
+            ],
+            PercentOff = 0,
+        };
+
+        string expectedID = "id";
+        string expectedName = "name";
+        ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionCouponStatus> expectedStatus =
+            SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active;
+        List<SubscriptionProvisionResponseDataSubscriptionCouponAmountsOff> expectedAmountsOff =
+        [
+            new()
+            {
+                Amount = 0,
+                Currency =
+                    SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+            },
+        ];
+        double expectedPercentOff = 0;
+
+        Assert.Equal(expectedID, model.ID);
+        Assert.Equal(expectedName, model.Name);
+        Assert.Equal(expectedStatus, model.Status);
+        Assert.NotNull(model.AmountsOff);
+        Assert.Equal(expectedAmountsOff.Count, model.AmountsOff.Count);
+        for (int i = 0; i < expectedAmountsOff.Count; i++)
+        {
+            Assert.Equal(expectedAmountsOff[i], model.AmountsOff[i]);
+        }
+        Assert.Equal(expectedPercentOff, model.PercentOff);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionCoupon
+        {
+            ID = "id",
+            Name = "name",
+            Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+            AmountsOff =
+            [
+                new()
+                {
+                    Amount = 0,
+                    Currency =
+                        SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                },
+            ],
+            PercentOff = 0,
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionProvisionResponseDataSubscriptionCoupon>(
+                json,
+                ModelBase.SerializerOptions
+            );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionCoupon
+        {
+            ID = "id",
+            Name = "name",
+            Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+            AmountsOff =
+            [
+                new()
+                {
+                    Amount = 0,
+                    Currency =
+                        SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                },
+            ],
+            PercentOff = 0,
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionProvisionResponseDataSubscriptionCoupon>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        Assert.NotNull(deserialized);
+
+        string expectedID = "id";
+        string expectedName = "name";
+        ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionCouponStatus> expectedStatus =
+            SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active;
+        List<SubscriptionProvisionResponseDataSubscriptionCouponAmountsOff> expectedAmountsOff =
+        [
+            new()
+            {
+                Amount = 0,
+                Currency =
+                    SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+            },
+        ];
+        double expectedPercentOff = 0;
+
+        Assert.Equal(expectedID, deserialized.ID);
+        Assert.Equal(expectedName, deserialized.Name);
+        Assert.Equal(expectedStatus, deserialized.Status);
+        Assert.NotNull(deserialized.AmountsOff);
+        Assert.Equal(expectedAmountsOff.Count, deserialized.AmountsOff.Count);
+        for (int i = 0; i < expectedAmountsOff.Count; i++)
+        {
+            Assert.Equal(expectedAmountsOff[i], deserialized.AmountsOff[i]);
+        }
+        Assert.Equal(expectedPercentOff, deserialized.PercentOff);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionCoupon
+        {
+            ID = "id",
+            Name = "name",
+            Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+            AmountsOff =
+            [
+                new()
+                {
+                    Amount = 0,
+                    Currency =
+                        SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                },
+            ],
+            PercentOff = 0,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionCoupon
+        {
+            ID = "id",
+            Name = "name",
+            Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+        };
+
+        Assert.Null(model.AmountsOff);
+        Assert.False(model.RawData.ContainsKey("amountsOff"));
+        Assert.Null(model.PercentOff);
+        Assert.False(model.RawData.ContainsKey("percentOff"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionCoupon
+        {
+            ID = "id",
+            Name = "name",
+            Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionCoupon
+        {
+            ID = "id",
+            Name = "name",
+            Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+
+            AmountsOff = null,
+            PercentOff = null,
+        };
+
+        Assert.Null(model.AmountsOff);
+        Assert.True(model.RawData.ContainsKey("amountsOff"));
+        Assert.Null(model.PercentOff);
+        Assert.True(model.RawData.ContainsKey("percentOff"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionCoupon
+        {
+            ID = "id",
+            Name = "name",
+            Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+
+            AmountsOff = null,
+            PercentOff = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionCoupon
+        {
+            ID = "id",
+            Name = "name",
+            Status = SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active,
+            AmountsOff =
+            [
+                new()
+                {
+                    Amount = 0,
+                    Currency =
+                        SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+                },
+            ],
+            PercentOff = 0,
+        };
+
+        SubscriptionProvisionResponseDataSubscriptionCoupon copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class SubscriptionProvisionResponseDataSubscriptionCouponStatusTest : TestBase
+{
+    [Theory]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponStatus.Expired)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponStatus.Removed)]
+    public void Validation_Works(SubscriptionProvisionResponseDataSubscriptionCouponStatus rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionCouponStatus> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionCouponStatus>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponStatus.Active)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponStatus.Expired)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponStatus.Removed)]
+    public void SerializationRoundtrip_Works(
+        SubscriptionProvisionResponseDataSubscriptionCouponStatus rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionCouponStatus> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionCouponStatus>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionCouponStatus>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionCouponStatus>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionCouponAmountsOff
+        {
+            Amount = 0,
+            Currency = SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+        };
+
+        double expectedAmount = 0;
+        ApiEnum<
+            string,
+            SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency
+        > expectedCurrency =
+            SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd;
+
+        Assert.Equal(expectedAmount, model.Amount);
+        Assert.Equal(expectedCurrency, model.Currency);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionCouponAmountsOff
+        {
+            Amount = 0,
+            Currency = SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionProvisionResponseDataSubscriptionCouponAmountsOff>(
+                json,
+                ModelBase.SerializerOptions
+            );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionCouponAmountsOff
+        {
+            Amount = 0,
+            Currency = SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionProvisionResponseDataSubscriptionCouponAmountsOff>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        Assert.NotNull(deserialized);
+
+        double expectedAmount = 0;
+        ApiEnum<
+            string,
+            SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency
+        > expectedCurrency =
+            SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd;
+
+        Assert.Equal(expectedAmount, deserialized.Amount);
+        Assert.Equal(expectedCurrency, deserialized.Currency);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionCouponAmountsOff
+        {
+            Amount = 0,
+            Currency = SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionCouponAmountsOff { };
+
+        Assert.Null(model.Amount);
+        Assert.False(model.RawData.ContainsKey("amount"));
+        Assert.Null(model.Currency);
+        Assert.False(model.RawData.ContainsKey("currency"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionCouponAmountsOff { };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionCouponAmountsOff
+        {
+            // Null should be interpreted as omitted for these properties
+            Amount = null,
+            Currency = null,
+        };
+
+        Assert.Null(model.Amount);
+        Assert.False(model.RawData.ContainsKey("amount"));
+        Assert.Null(model.Currency);
+        Assert.False(model.RawData.ContainsKey("currency"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionCouponAmountsOff
+        {
+            // Null should be interpreted as omitted for these properties
+            Amount = null,
+            Currency = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionCouponAmountsOff
+        {
+            Amount = 0,
+            Currency = SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd,
+        };
+
+        SubscriptionProvisionResponseDataSubscriptionCouponAmountsOff copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrencyTest : TestBase
+{
+    [Theory]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Aed)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.All)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Amd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Ang)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Aud)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Awg)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Azn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bam)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bbd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bdt)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bgn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bif)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bmd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bnd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bsd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bwp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Byn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bzd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Brl)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Cad)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Cdf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Chf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Cny)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Czk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Dkk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Dop)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Dzd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Egp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Etb)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Eur)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Fjd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Gbp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Gel)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Gip)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Gmd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Gyd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Hkd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Hrk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Htg)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Idr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Ils)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Inr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Isk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Jmd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Jpy)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Kes)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Kgs)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Khr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Kmf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Krw)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Kyd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Kzt)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Lbp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Lkr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Lrd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Lsl)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mad)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mdl)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mga)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mkd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mmk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mnt)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mop)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mro)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mvr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mwk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mxn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Myr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mzn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Nad)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Ngn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Nok)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Npr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Nzd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Pgk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Php)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Pkr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Pln)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Qar)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Ron)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Rsd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Rub)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Rwf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Sar)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Sbd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Scr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Sek)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Sgd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Sle)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Sll)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Sos)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Szl)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Thb)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Tjs)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Top)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Try)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Ttd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Tzs)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Uah)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Uzs)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Vnd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Vuv)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Wst)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Xaf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Xcd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Yer)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Zar)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Zmw)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Clp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Djf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Gnf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Ugx)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Pyg)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Xof)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Xpf)]
+    public void Validation_Works(
+        SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<
+            string,
+            SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency
+        > value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Usd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Aed)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.All)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Amd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Ang)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Aud)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Awg)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Azn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bam)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bbd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bdt)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bgn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bif)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bmd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bnd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bsd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bwp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Byn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Bzd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Brl)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Cad)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Cdf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Chf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Cny)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Czk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Dkk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Dop)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Dzd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Egp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Etb)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Eur)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Fjd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Gbp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Gel)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Gip)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Gmd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Gyd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Hkd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Hrk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Htg)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Idr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Ils)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Inr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Isk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Jmd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Jpy)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Kes)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Kgs)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Khr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Kmf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Krw)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Kyd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Kzt)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Lbp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Lkr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Lrd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Lsl)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mad)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mdl)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mga)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mkd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mmk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mnt)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mop)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mro)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mvr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mwk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mxn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Myr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Mzn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Nad)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Ngn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Nok)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Npr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Nzd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Pgk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Php)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Pkr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Pln)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Qar)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Ron)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Rsd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Rub)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Rwf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Sar)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Sbd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Scr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Sek)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Sgd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Sle)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Sll)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Sos)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Szl)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Thb)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Tjs)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Top)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Try)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Ttd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Tzs)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Uah)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Uzs)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Vnd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Vuv)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Wst)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Xaf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Xcd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Yer)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Zar)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Zmw)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Clp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Djf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Gnf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Ugx)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Pyg)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Xof)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency.Xpf)]
+    public void SerializationRoundtrip_Works(
+        SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<
+            string,
+            SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency
+        > value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionCouponAmountsOffCurrency>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class SubscriptionProvisionResponseDataSubscriptionFutureUpdateTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionFutureUpdate
+        {
+            ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ScheduleStatus =
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+            SubscriptionScheduleType =
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+            TargetPackage = new("id"),
+        };
+
+        DateTimeOffset expectedScheduledExecutionTime = DateTimeOffset.Parse(
+            "2019-12-27T18:11:19.117Z"
+        );
+        ApiEnum<
+            string,
+            SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus
+        > expectedScheduleStatus =
+            SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment;
+        ApiEnum<
+            string,
+            SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType
+        > expectedSubscriptionScheduleType =
+            SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade;
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackage expectedTargetPackage =
+            new("id");
+
+        Assert.Equal(expectedScheduledExecutionTime, model.ScheduledExecutionTime);
+        Assert.Equal(expectedScheduleStatus, model.ScheduleStatus);
+        Assert.Equal(expectedSubscriptionScheduleType, model.SubscriptionScheduleType);
+        Assert.Equal(expectedTargetPackage, model.TargetPackage);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionFutureUpdate
+        {
+            ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ScheduleStatus =
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+            SubscriptionScheduleType =
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+            TargetPackage = new("id"),
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionProvisionResponseDataSubscriptionFutureUpdate>(
+                json,
+                ModelBase.SerializerOptions
+            );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionFutureUpdate
+        {
+            ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ScheduleStatus =
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+            SubscriptionScheduleType =
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+            TargetPackage = new("id"),
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionProvisionResponseDataSubscriptionFutureUpdate>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        Assert.NotNull(deserialized);
+
+        DateTimeOffset expectedScheduledExecutionTime = DateTimeOffset.Parse(
+            "2019-12-27T18:11:19.117Z"
+        );
+        ApiEnum<
+            string,
+            SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus
+        > expectedScheduleStatus =
+            SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment;
+        ApiEnum<
+            string,
+            SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType
+        > expectedSubscriptionScheduleType =
+            SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade;
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackage expectedTargetPackage =
+            new("id");
+
+        Assert.Equal(expectedScheduledExecutionTime, deserialized.ScheduledExecutionTime);
+        Assert.Equal(expectedScheduleStatus, deserialized.ScheduleStatus);
+        Assert.Equal(expectedSubscriptionScheduleType, deserialized.SubscriptionScheduleType);
+        Assert.Equal(expectedTargetPackage, deserialized.TargetPackage);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionFutureUpdate
+        {
+            ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ScheduleStatus =
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+            SubscriptionScheduleType =
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+            TargetPackage = new("id"),
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionFutureUpdate
+        {
+            ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ScheduleStatus =
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+            SubscriptionScheduleType =
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+        };
+
+        Assert.Null(model.TargetPackage);
+        Assert.False(model.RawData.ContainsKey("targetPackage"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionFutureUpdate
+        {
+            ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ScheduleStatus =
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+            SubscriptionScheduleType =
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionFutureUpdate
+        {
+            ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ScheduleStatus =
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+            SubscriptionScheduleType =
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+
+            TargetPackage = null,
+        };
+
+        Assert.Null(model.TargetPackage);
+        Assert.True(model.RawData.ContainsKey("targetPackage"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionFutureUpdate
+        {
+            ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ScheduleStatus =
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+            SubscriptionScheduleType =
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+
+            TargetPackage = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionFutureUpdate
+        {
+            ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ScheduleStatus =
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment,
+            SubscriptionScheduleType =
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade,
+            TargetPackage = new("id"),
+        };
+
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdate copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatusTest : TestBase
+{
+    [Theory]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment
+    )]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.Scheduled)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.Canceled)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.Done)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.Failed)]
+    public void Validation_Works(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<
+            string,
+            SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus
+        > value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.PendingPayment
+    )]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.Scheduled)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.Canceled)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.Done)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus.Failed)]
+    public void SerializationRoundtrip_Works(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<
+            string,
+            SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus
+        > value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionFutureUpdateScheduleStatus>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleTypeTest
+    : TestBase
+{
+    [Theory]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade
+    )]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Plan
+    )]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.BillingPeriod
+    )]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.UnitAmount
+    )]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.RecurringCredits
+    )]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.PriceOverride
+    )]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Addon
+    )]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Coupon
+    )]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.MigrateToLatest
+    )]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.AdditionalMetaData
+    )]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.BillingInfoMetadata
+    )]
+    public void Validation_Works(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<
+            string,
+            SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType
+        > value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<
+                string,
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType
+            >
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Downgrade
+    )]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Plan
+    )]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.BillingPeriod
+    )]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.UnitAmount
+    )]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.RecurringCredits
+    )]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.PriceOverride
+    )]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Addon
+    )]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.Coupon
+    )]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.MigrateToLatest
+    )]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.AdditionalMetaData
+    )]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType.BillingInfoMetadata
+    )]
+    public void SerializationRoundtrip_Works(
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<
+            string,
+            SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType
+        > value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<
+                string,
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType
+            >
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<
+                string,
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType
+            >
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<
+                string,
+                SubscriptionProvisionResponseDataSubscriptionFutureUpdateSubscriptionScheduleType
+            >
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class SubscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackageTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackage
+        {
+            ID = "id",
+        };
+
+        string expectedID = "id";
+
+        Assert.Equal(expectedID, model.ID);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackage
+        {
+            ID = "id",
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackage>(
+                json,
+                ModelBase.SerializerOptions
+            );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackage
+        {
+            ID = "id",
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackage>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        Assert.NotNull(deserialized);
+
+        string expectedID = "id";
+
+        Assert.Equal(expectedID, deserialized.ID);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackage
+        {
+            ID = "id",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackage
+        {
+            ID = "id",
+        };
+
+        SubscriptionProvisionResponseDataSubscriptionFutureUpdateTargetPackage copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class SubscriptionProvisionResponseDataSubscriptionLatestInvoiceTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionLatestInvoice
+        {
+            BillingID = "billingId",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            RequiresAction = true,
+            Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+            AmountDue = 0,
+            BillingReason =
+                SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+            Currency = "currency",
+            PdfUrl = "pdfUrl",
+            Total = 0,
+        };
+
+        string expectedBillingID = "billingId";
+        DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        bool expectedRequiresAction = true;
+        ApiEnum<
+            string,
+            SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus
+        > expectedStatus = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open;
+        double expectedAmountDue = 0;
+        ApiEnum<
+            string,
+            SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason
+        > expectedBillingReason =
+            SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle;
+        string expectedCurrency = "currency";
+        string expectedPdfUrl = "pdfUrl";
+        double expectedTotal = 0;
+
+        Assert.Equal(expectedBillingID, model.BillingID);
+        Assert.Equal(expectedCreatedAt, model.CreatedAt);
+        Assert.Equal(expectedRequiresAction, model.RequiresAction);
+        Assert.Equal(expectedStatus, model.Status);
+        Assert.Equal(expectedAmountDue, model.AmountDue);
+        Assert.Equal(expectedBillingReason, model.BillingReason);
+        Assert.Equal(expectedCurrency, model.Currency);
+        Assert.Equal(expectedPdfUrl, model.PdfUrl);
+        Assert.Equal(expectedTotal, model.Total);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionLatestInvoice
+        {
+            BillingID = "billingId",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            RequiresAction = true,
+            Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+            AmountDue = 0,
+            BillingReason =
+                SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+            Currency = "currency",
+            PdfUrl = "pdfUrl",
+            Total = 0,
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionProvisionResponseDataSubscriptionLatestInvoice>(
+                json,
+                ModelBase.SerializerOptions
+            );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionLatestInvoice
+        {
+            BillingID = "billingId",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            RequiresAction = true,
+            Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+            AmountDue = 0,
+            BillingReason =
+                SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+            Currency = "currency",
+            PdfUrl = "pdfUrl",
+            Total = 0,
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionProvisionResponseDataSubscriptionLatestInvoice>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        Assert.NotNull(deserialized);
+
+        string expectedBillingID = "billingId";
+        DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        bool expectedRequiresAction = true;
+        ApiEnum<
+            string,
+            SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus
+        > expectedStatus = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open;
+        double expectedAmountDue = 0;
+        ApiEnum<
+            string,
+            SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason
+        > expectedBillingReason =
+            SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle;
+        string expectedCurrency = "currency";
+        string expectedPdfUrl = "pdfUrl";
+        double expectedTotal = 0;
+
+        Assert.Equal(expectedBillingID, deserialized.BillingID);
+        Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
+        Assert.Equal(expectedRequiresAction, deserialized.RequiresAction);
+        Assert.Equal(expectedStatus, deserialized.Status);
+        Assert.Equal(expectedAmountDue, deserialized.AmountDue);
+        Assert.Equal(expectedBillingReason, deserialized.BillingReason);
+        Assert.Equal(expectedCurrency, deserialized.Currency);
+        Assert.Equal(expectedPdfUrl, deserialized.PdfUrl);
+        Assert.Equal(expectedTotal, deserialized.Total);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionLatestInvoice
+        {
+            BillingID = "billingId",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            RequiresAction = true,
+            Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+            AmountDue = 0,
+            BillingReason =
+                SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+            Currency = "currency",
+            PdfUrl = "pdfUrl",
+            Total = 0,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionLatestInvoice
+        {
+            BillingID = "billingId",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            RequiresAction = true,
+            Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+        };
+
+        Assert.Null(model.AmountDue);
+        Assert.False(model.RawData.ContainsKey("amountDue"));
+        Assert.Null(model.BillingReason);
+        Assert.False(model.RawData.ContainsKey("billingReason"));
+        Assert.Null(model.Currency);
+        Assert.False(model.RawData.ContainsKey("currency"));
+        Assert.Null(model.PdfUrl);
+        Assert.False(model.RawData.ContainsKey("pdfUrl"));
+        Assert.Null(model.Total);
+        Assert.False(model.RawData.ContainsKey("total"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionLatestInvoice
+        {
+            BillingID = "billingId",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            RequiresAction = true,
+            Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionLatestInvoice
+        {
+            BillingID = "billingId",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            RequiresAction = true,
+            Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+
+            AmountDue = null,
+            BillingReason = null,
+            Currency = null,
+            PdfUrl = null,
+            Total = null,
+        };
+
+        Assert.Null(model.AmountDue);
+        Assert.True(model.RawData.ContainsKey("amountDue"));
+        Assert.Null(model.BillingReason);
+        Assert.True(model.RawData.ContainsKey("billingReason"));
+        Assert.Null(model.Currency);
+        Assert.True(model.RawData.ContainsKey("currency"));
+        Assert.Null(model.PdfUrl);
+        Assert.True(model.RawData.ContainsKey("pdfUrl"));
+        Assert.Null(model.Total);
+        Assert.True(model.RawData.ContainsKey("total"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionLatestInvoice
+        {
+            BillingID = "billingId",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            RequiresAction = true,
+            Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+
+            AmountDue = null,
+            BillingReason = null,
+            Currency = null,
+            PdfUrl = null,
+            Total = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionLatestInvoice
+        {
+            BillingID = "billingId",
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            RequiresAction = true,
+            Status = SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open,
+            AmountDue = 0,
+            BillingReason =
+                SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle,
+            Currency = "currency",
+            PdfUrl = "pdfUrl",
+            Total = 0,
+        };
+
+        SubscriptionProvisionResponseDataSubscriptionLatestInvoice copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatusTest : TestBase
+{
+    [Theory]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Canceled)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Paid)]
+    public void Validation_Works(
+        SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus> value =
+            rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Open)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Canceled)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus.Paid)]
+    public void SerializationRoundtrip_Works(
+        SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus> value =
+            rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionLatestInvoiceStatus>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReasonTest : TestBase
+{
+    [Theory]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle
+    )]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.SubscriptionCreation
+    )]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.SubscriptionUpdate
+    )]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.Manual)]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.MinimumInvoiceAmountExceeded
+    )]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.Other)]
+    public void Validation_Works(
+        SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<
+            string,
+            SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason
+        > value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.BillingCycle
+    )]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.SubscriptionCreation
+    )]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.SubscriptionUpdate
+    )]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.Manual)]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.MinimumInvoiceAmountExceeded
+    )]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason.Other)]
+    public void SerializationRoundtrip_Works(
+        SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<
+            string,
+            SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason
+        > value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionLatestInvoiceBillingReason>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class SubscriptionProvisionResponseDataSubscriptionMinimumSpendTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionMinimumSpend
+        {
+            Amount = 0,
+            Currency = SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+        };
+
+        double expectedAmount = 0;
+        ApiEnum<
+            string,
+            SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency
+        > expectedCurrency = SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd;
+
+        Assert.Equal(expectedAmount, model.Amount);
+        Assert.Equal(expectedCurrency, model.Currency);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionMinimumSpend
+        {
+            Amount = 0,
+            Currency = SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionProvisionResponseDataSubscriptionMinimumSpend>(
+                json,
+                ModelBase.SerializerOptions
+            );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionMinimumSpend
+        {
+            Amount = 0,
+            Currency = SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionProvisionResponseDataSubscriptionMinimumSpend>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        Assert.NotNull(deserialized);
+
+        double expectedAmount = 0;
+        ApiEnum<
+            string,
+            SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency
+        > expectedCurrency = SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd;
+
+        Assert.Equal(expectedAmount, deserialized.Amount);
+        Assert.Equal(expectedCurrency, deserialized.Currency);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionMinimumSpend
+        {
+            Amount = 0,
+            Currency = SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionMinimumSpend { };
+
+        Assert.Null(model.Amount);
+        Assert.False(model.RawData.ContainsKey("amount"));
+        Assert.Null(model.Currency);
+        Assert.False(model.RawData.ContainsKey("currency"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionMinimumSpend { };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionMinimumSpend
+        {
+            // Null should be interpreted as omitted for these properties
+            Amount = null,
+            Currency = null,
+        };
+
+        Assert.Null(model.Amount);
+        Assert.False(model.RawData.ContainsKey("amount"));
+        Assert.Null(model.Currency);
+        Assert.False(model.RawData.ContainsKey("currency"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionMinimumSpend
+        {
+            // Null should be interpreted as omitted for these properties
+            Amount = null,
+            Currency = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionMinimumSpend
+        {
+            Amount = 0,
+            Currency = SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd,
+        };
+
+        SubscriptionProvisionResponseDataSubscriptionMinimumSpend copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrencyTest : TestBase
+{
+    [Theory]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Aed)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.All)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Amd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Ang)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Aud)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Awg)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Azn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bam)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bbd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bdt)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bgn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bif)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bmd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bnd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bsd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bwp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Byn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bzd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Brl)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Cad)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Cdf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Chf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Cny)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Czk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Dkk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Dop)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Dzd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Egp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Etb)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Eur)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Fjd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Gbp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Gel)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Gip)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Gmd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Gyd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Hkd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Hrk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Htg)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Idr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Ils)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Inr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Isk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Jmd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Jpy)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Kes)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Kgs)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Khr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Kmf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Krw)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Kyd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Kzt)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Lbp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Lkr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Lrd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Lsl)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mad)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mdl)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mga)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mkd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mmk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mnt)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mop)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mro)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mvr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mwk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mxn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Myr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mzn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Nad)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Ngn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Nok)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Npr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Nzd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Pgk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Php)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Pkr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Pln)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Qar)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Ron)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Rsd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Rub)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Rwf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Sar)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Sbd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Scr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Sek)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Sgd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Sle)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Sll)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Sos)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Szl)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Thb)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Tjs)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Top)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Try)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Ttd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Tzs)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Uah)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Uzs)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Vnd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Vuv)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Wst)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Xaf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Xcd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Yer)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Zar)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Zmw)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Clp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Djf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Gnf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Ugx)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Pyg)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Xof)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Xpf)]
+    public void Validation_Works(
+        SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency> value =
+            rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Usd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Aed)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.All)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Amd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Ang)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Aud)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Awg)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Azn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bam)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bbd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bdt)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bgn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bif)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bmd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bnd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bsd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bwp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Byn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Bzd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Brl)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Cad)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Cdf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Chf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Cny)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Czk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Dkk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Dop)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Dzd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Egp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Etb)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Eur)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Fjd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Gbp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Gel)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Gip)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Gmd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Gyd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Hkd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Hrk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Htg)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Idr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Ils)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Inr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Isk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Jmd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Jpy)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Kes)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Kgs)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Khr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Kmf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Krw)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Kyd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Kzt)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Lbp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Lkr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Lrd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Lsl)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mad)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mdl)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mga)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mkd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mmk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mnt)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mop)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mro)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mvr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mwk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mxn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Myr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Mzn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Nad)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Ngn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Nok)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Npr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Nzd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Pgk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Php)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Pkr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Pln)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Qar)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Ron)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Rsd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Rub)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Rwf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Sar)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Sbd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Scr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Sek)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Sgd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Sle)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Sll)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Sos)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Szl)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Thb)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Tjs)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Top)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Try)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Ttd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Tzs)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Uah)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Uzs)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Vnd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Vuv)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Wst)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Xaf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Xcd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Yer)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Zar)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Zmw)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Clp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Djf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Gnf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Ugx)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Pyg)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Xof)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency.Xpf)]
+    public void SerializationRoundtrip_Works(
+        SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency> value =
+            rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionMinimumSpendCurrency>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -5248,15 +9217,12 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTest : TestBase
         var model = new SubscriptionProvisionResponseDataSubscriptionPrice
         {
             AddonID = "addonId",
+            Amount = 0,
             BaseCharge = true,
+            BillingCountryCode = "billingCountryCode",
             BlockSize = 0,
+            Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
             FeatureID = "featureId",
-            Price = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-            },
             Tiers =
             [
                 new()
@@ -5264,14 +9230,12 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTest : TestBase
                     FlatPrice = new()
                     {
                         Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
                         Currency =
                             SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                     },
                     UnitPrice = new()
                     {
                         Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
                         Currency =
                             SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                     },
@@ -5281,15 +9245,15 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTest : TestBase
         };
 
         string expectedAddonID = "addonId";
+        double expectedAmount = 0;
         bool expectedBaseCharge = true;
+        string expectedBillingCountryCode = "billingCountryCode";
         double expectedBlockSize = 0;
+        ApiEnum<
+            string,
+            SubscriptionProvisionResponseDataSubscriptionPriceCurrency
+        > expectedCurrency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd;
         string expectedFeatureID = "featureId";
-        SubscriptionProvisionResponseDataSubscriptionPricePrice expectedPrice = new()
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-        };
         List<SubscriptionProvisionResponseDataSubscriptionPriceTier> expectedTiers =
         [
             new()
@@ -5297,14 +9261,12 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTest : TestBase
                 FlatPrice = new()
                 {
                     Amount = 0,
-                    BillingCountryCode = "billingCountryCode",
                     Currency =
                         SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                 },
                 UnitPrice = new()
                 {
                     Amount = 0,
-                    BillingCountryCode = "billingCountryCode",
                     Currency =
                         SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                 },
@@ -5313,10 +9275,12 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTest : TestBase
         ];
 
         Assert.Equal(expectedAddonID, model.AddonID);
+        Assert.Equal(expectedAmount, model.Amount);
         Assert.Equal(expectedBaseCharge, model.BaseCharge);
+        Assert.Equal(expectedBillingCountryCode, model.BillingCountryCode);
         Assert.Equal(expectedBlockSize, model.BlockSize);
+        Assert.Equal(expectedCurrency, model.Currency);
         Assert.Equal(expectedFeatureID, model.FeatureID);
-        Assert.Equal(expectedPrice, model.Price);
         Assert.NotNull(model.Tiers);
         Assert.Equal(expectedTiers.Count, model.Tiers.Count);
         for (int i = 0; i < expectedTiers.Count; i++)
@@ -5331,15 +9295,12 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTest : TestBase
         var model = new SubscriptionProvisionResponseDataSubscriptionPrice
         {
             AddonID = "addonId",
+            Amount = 0,
             BaseCharge = true,
+            BillingCountryCode = "billingCountryCode",
             BlockSize = 0,
+            Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
             FeatureID = "featureId",
-            Price = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-            },
             Tiers =
             [
                 new()
@@ -5347,14 +9308,12 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTest : TestBase
                     FlatPrice = new()
                     {
                         Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
                         Currency =
                             SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                     },
                     UnitPrice = new()
                     {
                         Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
                         Currency =
                             SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                     },
@@ -5379,15 +9338,12 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTest : TestBase
         var model = new SubscriptionProvisionResponseDataSubscriptionPrice
         {
             AddonID = "addonId",
+            Amount = 0,
             BaseCharge = true,
+            BillingCountryCode = "billingCountryCode",
             BlockSize = 0,
+            Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
             FeatureID = "featureId",
-            Price = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-            },
             Tiers =
             [
                 new()
@@ -5395,14 +9351,12 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTest : TestBase
                     FlatPrice = new()
                     {
                         Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
                         Currency =
                             SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                     },
                     UnitPrice = new()
                     {
                         Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
                         Currency =
                             SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                     },
@@ -5420,15 +9374,15 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedAddonID = "addonId";
+        double expectedAmount = 0;
         bool expectedBaseCharge = true;
+        string expectedBillingCountryCode = "billingCountryCode";
         double expectedBlockSize = 0;
+        ApiEnum<
+            string,
+            SubscriptionProvisionResponseDataSubscriptionPriceCurrency
+        > expectedCurrency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd;
         string expectedFeatureID = "featureId";
-        SubscriptionProvisionResponseDataSubscriptionPricePrice expectedPrice = new()
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-        };
         List<SubscriptionProvisionResponseDataSubscriptionPriceTier> expectedTiers =
         [
             new()
@@ -5436,14 +9390,12 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTest : TestBase
                 FlatPrice = new()
                 {
                     Amount = 0,
-                    BillingCountryCode = "billingCountryCode",
                     Currency =
                         SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                 },
                 UnitPrice = new()
                 {
                     Amount = 0,
-                    BillingCountryCode = "billingCountryCode",
                     Currency =
                         SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                 },
@@ -5452,10 +9404,12 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTest : TestBase
         ];
 
         Assert.Equal(expectedAddonID, deserialized.AddonID);
+        Assert.Equal(expectedAmount, deserialized.Amount);
         Assert.Equal(expectedBaseCharge, deserialized.BaseCharge);
+        Assert.Equal(expectedBillingCountryCode, deserialized.BillingCountryCode);
         Assert.Equal(expectedBlockSize, deserialized.BlockSize);
+        Assert.Equal(expectedCurrency, deserialized.Currency);
         Assert.Equal(expectedFeatureID, deserialized.FeatureID);
-        Assert.Equal(expectedPrice, deserialized.Price);
         Assert.NotNull(deserialized.Tiers);
         Assert.Equal(expectedTiers.Count, deserialized.Tiers.Count);
         for (int i = 0; i < expectedTiers.Count; i++)
@@ -5470,15 +9424,12 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTest : TestBase
         var model = new SubscriptionProvisionResponseDataSubscriptionPrice
         {
             AddonID = "addonId",
+            Amount = 0,
             BaseCharge = true,
+            BillingCountryCode = "billingCountryCode",
             BlockSize = 0,
+            Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
             FeatureID = "featureId",
-            Price = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-            },
             Tiers =
             [
                 new()
@@ -5486,14 +9437,12 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTest : TestBase
                     FlatPrice = new()
                     {
                         Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
                         Currency =
                             SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                     },
                     UnitPrice = new()
                     {
                         Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
                         Currency =
                             SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                     },
@@ -5514,12 +9463,16 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTest : TestBase
             FeatureID = "featureId",
         };
 
+        Assert.Null(model.Amount);
+        Assert.False(model.RawData.ContainsKey("amount"));
         Assert.Null(model.BaseCharge);
         Assert.False(model.RawData.ContainsKey("baseCharge"));
+        Assert.Null(model.BillingCountryCode);
+        Assert.False(model.RawData.ContainsKey("billingCountryCode"));
         Assert.Null(model.BlockSize);
         Assert.False(model.RawData.ContainsKey("blockSize"));
-        Assert.Null(model.Price);
-        Assert.False(model.RawData.ContainsKey("price"));
+        Assert.Null(model.Currency);
+        Assert.False(model.RawData.ContainsKey("currency"));
         Assert.Null(model.Tiers);
         Assert.False(model.RawData.ContainsKey("tiers"));
     }
@@ -5545,18 +9498,24 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTest : TestBase
             FeatureID = "featureId",
 
             // Null should be interpreted as omitted for these properties
+            Amount = null,
             BaseCharge = null,
+            BillingCountryCode = null,
             BlockSize = null,
-            Price = null,
+            Currency = null,
             Tiers = null,
         };
 
+        Assert.Null(model.Amount);
+        Assert.False(model.RawData.ContainsKey("amount"));
         Assert.Null(model.BaseCharge);
         Assert.False(model.RawData.ContainsKey("baseCharge"));
+        Assert.Null(model.BillingCountryCode);
+        Assert.False(model.RawData.ContainsKey("billingCountryCode"));
         Assert.Null(model.BlockSize);
         Assert.False(model.RawData.ContainsKey("blockSize"));
-        Assert.Null(model.Price);
-        Assert.False(model.RawData.ContainsKey("price"));
+        Assert.Null(model.Currency);
+        Assert.False(model.RawData.ContainsKey("currency"));
         Assert.Null(model.Tiers);
         Assert.False(model.RawData.ContainsKey("tiers"));
     }
@@ -5570,9 +9529,11 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTest : TestBase
             FeatureID = "featureId",
 
             // Null should be interpreted as omitted for these properties
+            Amount = null,
             BaseCharge = null,
+            BillingCountryCode = null,
             BlockSize = null,
-            Price = null,
+            Currency = null,
             Tiers = null,
         };
 
@@ -5584,14 +9545,11 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTest : TestBase
     {
         var model = new SubscriptionProvisionResponseDataSubscriptionPrice
         {
+            Amount = 0,
             BaseCharge = true,
+            BillingCountryCode = "billingCountryCode",
             BlockSize = 0,
-            Price = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-            },
+            Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
             Tiers =
             [
                 new()
@@ -5599,14 +9557,12 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTest : TestBase
                     FlatPrice = new()
                     {
                         Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
                         Currency =
                             SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                     },
                     UnitPrice = new()
                     {
                         Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
                         Currency =
                             SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                     },
@@ -5626,14 +9582,11 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTest : TestBase
     {
         var model = new SubscriptionProvisionResponseDataSubscriptionPrice
         {
+            Amount = 0,
             BaseCharge = true,
+            BillingCountryCode = "billingCountryCode",
             BlockSize = 0,
-            Price = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-            },
+            Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
             Tiers =
             [
                 new()
@@ -5641,14 +9594,12 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTest : TestBase
                     FlatPrice = new()
                     {
                         Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
                         Currency =
                             SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                     },
                     UnitPrice = new()
                     {
                         Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
                         Currency =
                             SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                     },
@@ -5665,14 +9616,11 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTest : TestBase
     {
         var model = new SubscriptionProvisionResponseDataSubscriptionPrice
         {
+            Amount = 0,
             BaseCharge = true,
+            BillingCountryCode = "billingCountryCode",
             BlockSize = 0,
-            Price = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-            },
+            Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
             Tiers =
             [
                 new()
@@ -5680,14 +9628,12 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTest : TestBase
                     FlatPrice = new()
                     {
                         Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
                         Currency =
                             SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                     },
                     UnitPrice = new()
                     {
                         Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
                         Currency =
                             SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                     },
@@ -5710,14 +9656,11 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTest : TestBase
     {
         var model = new SubscriptionProvisionResponseDataSubscriptionPrice
         {
+            Amount = 0,
             BaseCharge = true,
+            BillingCountryCode = "billingCountryCode",
             BlockSize = 0,
-            Price = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-            },
+            Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
             Tiers =
             [
                 new()
@@ -5725,14 +9668,12 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTest : TestBase
                     FlatPrice = new()
                     {
                         Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
                         Currency =
                             SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                     },
                     UnitPrice = new()
                     {
                         Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
                         Currency =
                             SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                     },
@@ -5753,15 +9694,12 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTest : TestBase
         var model = new SubscriptionProvisionResponseDataSubscriptionPrice
         {
             AddonID = "addonId",
+            Amount = 0,
             BaseCharge = true,
+            BillingCountryCode = "billingCountryCode",
             BlockSize = 0,
+            Currency = SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd,
             FeatureID = "featureId",
-            Price = new()
-            {
-                Amount = 0,
-                BillingCountryCode = "billingCountryCode",
-                Currency = SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-            },
             Tiers =
             [
                 new()
@@ -5769,14 +9707,12 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTest : TestBase
                     FlatPrice = new()
                     {
                         Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
                         Currency =
                             SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
                     },
                     UnitPrice = new()
                     {
                         Amount = 0,
-                        BillingCountryCode = "billingCountryCode",
                         Currency =
                             SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
                     },
@@ -5791,346 +9727,131 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTest : TestBase
     }
 }
 
-public class SubscriptionProvisionResponseDataSubscriptionPricePriceTest : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new SubscriptionProvisionResponseDataSubscriptionPricePrice
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-        };
-
-        double expectedAmount = 0;
-        string expectedBillingCountryCode = "billingCountryCode";
-        ApiEnum<
-            string,
-            SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency
-        > expectedCurrency = SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd;
-
-        Assert.Equal(expectedAmount, model.Amount);
-        Assert.Equal(expectedBillingCountryCode, model.BillingCountryCode);
-        Assert.Equal(expectedCurrency, model.Currency);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new SubscriptionProvisionResponseDataSubscriptionPricePrice
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-        };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized =
-            JsonSerializer.Deserialize<SubscriptionProvisionResponseDataSubscriptionPricePrice>(
-                json,
-                ModelBase.SerializerOptions
-            );
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new SubscriptionProvisionResponseDataSubscriptionPricePrice
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-        };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized =
-            JsonSerializer.Deserialize<SubscriptionProvisionResponseDataSubscriptionPricePrice>(
-                element,
-                ModelBase.SerializerOptions
-            );
-        Assert.NotNull(deserialized);
-
-        double expectedAmount = 0;
-        string expectedBillingCountryCode = "billingCountryCode";
-        ApiEnum<
-            string,
-            SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency
-        > expectedCurrency = SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd;
-
-        Assert.Equal(expectedAmount, deserialized.Amount);
-        Assert.Equal(expectedBillingCountryCode, deserialized.BillingCountryCode);
-        Assert.Equal(expectedCurrency, deserialized.Currency);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new SubscriptionProvisionResponseDataSubscriptionPricePrice
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
-    {
-        var model = new SubscriptionProvisionResponseDataSubscriptionPricePrice
-        {
-            BillingCountryCode = "billingCountryCode",
-        };
-
-        Assert.Null(model.Amount);
-        Assert.False(model.RawData.ContainsKey("amount"));
-        Assert.Null(model.Currency);
-        Assert.False(model.RawData.ContainsKey("currency"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new SubscriptionProvisionResponseDataSubscriptionPricePrice
-        {
-            BillingCountryCode = "billingCountryCode",
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
-    {
-        var model = new SubscriptionProvisionResponseDataSubscriptionPricePrice
-        {
-            BillingCountryCode = "billingCountryCode",
-
-            // Null should be interpreted as omitted for these properties
-            Amount = null,
-            Currency = null,
-        };
-
-        Assert.Null(model.Amount);
-        Assert.False(model.RawData.ContainsKey("amount"));
-        Assert.Null(model.Currency);
-        Assert.False(model.RawData.ContainsKey("currency"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new SubscriptionProvisionResponseDataSubscriptionPricePrice
-        {
-            BillingCountryCode = "billingCountryCode",
-
-            // Null should be interpreted as omitted for these properties
-            Amount = null,
-            Currency = null,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
-    {
-        var model = new SubscriptionProvisionResponseDataSubscriptionPricePrice
-        {
-            Amount = 0,
-            Currency = SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-        };
-
-        Assert.Null(model.BillingCountryCode);
-        Assert.False(model.RawData.ContainsKey("billingCountryCode"));
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new SubscriptionProvisionResponseDataSubscriptionPricePrice
-        {
-            Amount = 0,
-            Currency = SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
-    {
-        var model = new SubscriptionProvisionResponseDataSubscriptionPricePrice
-        {
-            Amount = 0,
-            Currency = SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-
-            BillingCountryCode = null,
-        };
-
-        Assert.Null(model.BillingCountryCode);
-        Assert.True(model.RawData.ContainsKey("billingCountryCode"));
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new SubscriptionProvisionResponseDataSubscriptionPricePrice
-        {
-            Amount = 0,
-            Currency = SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-
-            BillingCountryCode = null,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new SubscriptionProvisionResponseDataSubscriptionPricePrice
-        {
-            Amount = 0,
-            BillingCountryCode = "billingCountryCode",
-            Currency = SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd,
-        };
-
-        SubscriptionProvisionResponseDataSubscriptionPricePrice copied = new(model);
-
-        Assert.Equal(model, copied);
-    }
-}
-
-public class SubscriptionProvisionResponseDataSubscriptionPricePriceCurrencyTest : TestBase
+public class SubscriptionProvisionResponseDataSubscriptionPriceCurrencyTest : TestBase
 {
     [Theory]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Aed)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.All)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Amd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Ang)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Aud)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Awg)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Azn)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bam)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bbd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bdt)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bgn)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bif)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bmd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bnd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bsd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bwp)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Byn)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bzd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Brl)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Cad)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Cdf)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Chf)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Cny)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Czk)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Dkk)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Dop)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Dzd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Egp)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Etb)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Eur)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Fjd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Gbp)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Gel)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Gip)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Gmd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Gyd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Hkd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Hrk)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Htg)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Idr)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Ils)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Inr)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Isk)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Jmd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Jpy)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Kes)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Kgs)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Khr)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Kmf)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Krw)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Kyd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Kzt)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Lbp)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Lkr)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Lrd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Lsl)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mad)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mdl)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mga)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mkd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mmk)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mnt)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mop)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mro)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mvr)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mwk)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mxn)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Myr)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mzn)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Nad)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Ngn)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Nok)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Npr)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Nzd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Pgk)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Php)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Pkr)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Pln)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Qar)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Ron)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Rsd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Rub)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Rwf)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Sar)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Sbd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Scr)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Sek)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Sgd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Sle)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Sll)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Sos)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Szl)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Thb)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Tjs)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Top)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Try)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Ttd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Tzs)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Uah)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Uzs)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Vnd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Vuv)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Wst)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Xaf)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Xcd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Yer)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Zar)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Zmw)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Clp)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Djf)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Gnf)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Ugx)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Pyg)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Xof)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Xpf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Aed)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.All)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Amd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Ang)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Aud)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Awg)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Azn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bam)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bbd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bdt)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bgn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bif)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bmd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bnd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bsd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bwp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Byn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bzd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Brl)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Cad)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Cdf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Chf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Cny)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Czk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Dkk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Dop)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Dzd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Egp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Etb)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Eur)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Fjd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Gbp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Gel)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Gip)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Gmd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Gyd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Hkd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Hrk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Htg)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Idr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Ils)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Inr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Isk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Jmd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Jpy)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Kes)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Kgs)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Khr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Kmf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Krw)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Kyd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Kzt)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Lbp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Lkr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Lrd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Lsl)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mad)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mdl)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mga)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mkd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mmk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mnt)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mop)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mro)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mvr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mwk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mxn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Myr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mzn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Nad)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Ngn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Nok)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Npr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Nzd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Pgk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Php)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Pkr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Pln)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Qar)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Ron)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Rsd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Rub)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Rwf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Sar)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Sbd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Scr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Sek)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Sgd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Sle)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Sll)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Sos)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Szl)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Thb)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Tjs)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Top)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Try)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Ttd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Tzs)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Uah)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Uzs)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Vnd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Vuv)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Wst)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Xaf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Xcd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Yer)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Zar)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Zmw)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Clp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Djf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Gnf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Ugx)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Pyg)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Xof)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Xpf)]
     public void Validation_Works(
-        SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency rawValue
+        SubscriptionProvisionResponseDataSubscriptionPriceCurrency rawValue
     )
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency> value =
+        ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionPriceCurrency> value =
             rawValue;
         value.Validate();
     }
@@ -6139,7 +9860,7 @@ public class SubscriptionProvisionResponseDataSubscriptionPricePriceCurrencyTest
     public void InvalidEnumValidationThrows_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency>
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionPriceCurrency>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
@@ -6147,133 +9868,133 @@ public class SubscriptionProvisionResponseDataSubscriptionPricePriceCurrencyTest
     }
 
     [Theory]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Usd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Aed)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.All)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Amd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Ang)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Aud)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Awg)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Azn)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bam)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bbd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bdt)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bgn)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bif)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bmd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bnd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bsd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bwp)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Byn)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Bzd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Brl)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Cad)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Cdf)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Chf)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Cny)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Czk)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Dkk)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Dop)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Dzd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Egp)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Etb)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Eur)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Fjd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Gbp)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Gel)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Gip)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Gmd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Gyd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Hkd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Hrk)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Htg)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Idr)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Ils)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Inr)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Isk)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Jmd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Jpy)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Kes)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Kgs)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Khr)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Kmf)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Krw)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Kyd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Kzt)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Lbp)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Lkr)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Lrd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Lsl)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mad)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mdl)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mga)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mkd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mmk)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mnt)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mop)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mro)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mvr)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mwk)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mxn)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Myr)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Mzn)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Nad)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Ngn)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Nok)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Npr)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Nzd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Pgk)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Php)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Pkr)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Pln)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Qar)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Ron)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Rsd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Rub)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Rwf)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Sar)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Sbd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Scr)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Sek)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Sgd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Sle)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Sll)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Sos)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Szl)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Thb)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Tjs)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Top)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Try)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Ttd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Tzs)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Uah)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Uzs)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Vnd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Vuv)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Wst)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Xaf)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Xcd)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Yer)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Zar)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Zmw)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Clp)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Djf)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Gnf)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Ugx)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Pyg)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Xof)]
-    [InlineData(SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency.Xpf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Usd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Aed)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.All)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Amd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Ang)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Aud)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Awg)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Azn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bam)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bbd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bdt)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bgn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bif)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bmd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bnd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bsd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bwp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Byn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Bzd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Brl)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Cad)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Cdf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Chf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Cny)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Czk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Dkk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Dop)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Dzd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Egp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Etb)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Eur)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Fjd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Gbp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Gel)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Gip)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Gmd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Gyd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Hkd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Hrk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Htg)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Idr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Ils)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Inr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Isk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Jmd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Jpy)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Kes)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Kgs)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Khr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Kmf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Krw)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Kyd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Kzt)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Lbp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Lkr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Lrd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Lsl)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mad)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mdl)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mga)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mkd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mmk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mnt)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mop)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mro)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mvr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mwk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mxn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Myr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Mzn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Nad)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Ngn)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Nok)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Npr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Nzd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Pgk)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Php)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Pkr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Pln)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Qar)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Ron)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Rsd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Rub)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Rwf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Sar)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Sbd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Scr)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Sek)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Sgd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Sle)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Sll)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Sos)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Szl)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Thb)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Tjs)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Top)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Try)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Ttd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Tzs)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Uah)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Uzs)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Vnd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Vuv)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Wst)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Xaf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Xcd)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Yer)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Zar)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Zmw)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Clp)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Djf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Gnf)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Ugx)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Pyg)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Xof)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionPriceCurrency.Xpf)]
     public void SerializationRoundtrip_Works(
-        SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency rawValue
+        SubscriptionProvisionResponseDataSubscriptionPriceCurrency rawValue
     )
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency> value =
+        ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionPriceCurrency> value =
             rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency>
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionPriceCurrency>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -6283,11 +10004,11 @@ public class SubscriptionProvisionResponseDataSubscriptionPricePriceCurrencyTest
     public void InvalidEnumSerializationRoundtrip_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency>
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionPriceCurrency>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionPricePriceCurrency>
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionPriceCurrency>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -6304,14 +10025,12 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTierTest : TestBa
             FlatPrice = new()
             {
                 Amount = 0,
-                BillingCountryCode = "billingCountryCode",
                 Currency =
                     SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
             },
             UnitPrice = new()
             {
                 Amount = 0,
-                BillingCountryCode = "billingCountryCode",
                 Currency =
                     SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
             },
@@ -6321,13 +10040,11 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTierTest : TestBa
         SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPrice expectedFlatPrice = new()
         {
             Amount = 0,
-            BillingCountryCode = "billingCountryCode",
             Currency = SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
         };
         SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPrice expectedUnitPrice = new()
         {
             Amount = 0,
-            BillingCountryCode = "billingCountryCode",
             Currency = SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
         };
         double expectedUpTo = 0;
@@ -6345,14 +10062,12 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTierTest : TestBa
             FlatPrice = new()
             {
                 Amount = 0,
-                BillingCountryCode = "billingCountryCode",
                 Currency =
                     SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
             },
             UnitPrice = new()
             {
                 Amount = 0,
-                BillingCountryCode = "billingCountryCode",
                 Currency =
                     SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
             },
@@ -6377,14 +10092,12 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTierTest : TestBa
             FlatPrice = new()
             {
                 Amount = 0,
-                BillingCountryCode = "billingCountryCode",
                 Currency =
                     SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
             },
             UnitPrice = new()
             {
                 Amount = 0,
-                BillingCountryCode = "billingCountryCode",
                 Currency =
                     SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
             },
@@ -6402,13 +10115,11 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTierTest : TestBa
         SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPrice expectedFlatPrice = new()
         {
             Amount = 0,
-            BillingCountryCode = "billingCountryCode",
             Currency = SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
         };
         SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPrice expectedUnitPrice = new()
         {
             Amount = 0,
-            BillingCountryCode = "billingCountryCode",
             Currency = SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
         };
         double expectedUpTo = 0;
@@ -6426,14 +10137,12 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTierTest : TestBa
             FlatPrice = new()
             {
                 Amount = 0,
-                BillingCountryCode = "billingCountryCode",
                 Currency =
                     SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
             },
             UnitPrice = new()
             {
                 Amount = 0,
-                BillingCountryCode = "billingCountryCode",
                 Currency =
                     SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
             },
@@ -6505,14 +10214,12 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTierTest : TestBa
             FlatPrice = new()
             {
                 Amount = 0,
-                BillingCountryCode = "billingCountryCode",
                 Currency =
                     SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
             },
             UnitPrice = new()
             {
                 Amount = 0,
-                BillingCountryCode = "billingCountryCode",
                 Currency =
                     SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
             },
@@ -6533,12 +10240,10 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceTest
         var model = new SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPrice
         {
             Amount = 0,
-            BillingCountryCode = "billingCountryCode",
             Currency = SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
         };
 
         double expectedAmount = 0;
-        string expectedBillingCountryCode = "billingCountryCode";
         ApiEnum<
             string,
             SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency
@@ -6546,7 +10251,6 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceTest
             SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd;
 
         Assert.Equal(expectedAmount, model.Amount);
-        Assert.Equal(expectedBillingCountryCode, model.BillingCountryCode);
         Assert.Equal(expectedCurrency, model.Currency);
     }
 
@@ -6556,7 +10260,6 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceTest
         var model = new SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPrice
         {
             Amount = 0,
-            BillingCountryCode = "billingCountryCode",
             Currency = SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
         };
 
@@ -6576,7 +10279,6 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceTest
         var model = new SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPrice
         {
             Amount = 0,
-            BillingCountryCode = "billingCountryCode",
             Currency = SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
         };
 
@@ -6589,7 +10291,6 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceTest
         Assert.NotNull(deserialized);
 
         double expectedAmount = 0;
-        string expectedBillingCountryCode = "billingCountryCode";
         ApiEnum<
             string,
             SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency
@@ -6597,7 +10298,6 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceTest
             SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd;
 
         Assert.Equal(expectedAmount, deserialized.Amount);
-        Assert.Equal(expectedBillingCountryCode, deserialized.BillingCountryCode);
         Assert.Equal(expectedCurrency, deserialized.Currency);
     }
 
@@ -6607,120 +10307,7 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceTest
         var model = new SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPrice
         {
             Amount = 0,
-            BillingCountryCode = "billingCountryCode",
             Currency = SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
-    {
-        var model = new SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPrice
-        {
-            BillingCountryCode = "billingCountryCode",
-        };
-
-        Assert.Null(model.Amount);
-        Assert.False(model.RawData.ContainsKey("amount"));
-        Assert.Null(model.Currency);
-        Assert.False(model.RawData.ContainsKey("currency"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPrice
-        {
-            BillingCountryCode = "billingCountryCode",
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
-    {
-        var model = new SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPrice
-        {
-            BillingCountryCode = "billingCountryCode",
-
-            // Null should be interpreted as omitted for these properties
-            Amount = null,
-            Currency = null,
-        };
-
-        Assert.Null(model.Amount);
-        Assert.False(model.RawData.ContainsKey("amount"));
-        Assert.Null(model.Currency);
-        Assert.False(model.RawData.ContainsKey("currency"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPrice
-        {
-            BillingCountryCode = "billingCountryCode",
-
-            // Null should be interpreted as omitted for these properties
-            Amount = null,
-            Currency = null,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
-    {
-        var model = new SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPrice
-        {
-            Amount = 0,
-            Currency = SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
-        };
-
-        Assert.Null(model.BillingCountryCode);
-        Assert.False(model.RawData.ContainsKey("billingCountryCode"));
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPrice
-        {
-            Amount = 0,
-            Currency = SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
-    {
-        var model = new SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPrice
-        {
-            Amount = 0,
-            Currency = SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
-
-            BillingCountryCode = null,
-        };
-
-        Assert.Null(model.BillingCountryCode);
-        Assert.True(model.RawData.ContainsKey("billingCountryCode"));
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPrice
-        {
-            Amount = 0,
-            Currency = SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
-
-            BillingCountryCode = null,
         };
 
         model.Validate();
@@ -6732,7 +10319,6 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceTest
         var model = new SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPrice
         {
             Amount = 0,
-            BillingCountryCode = "billingCountryCode",
             Currency = SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrency.Usd,
         };
 
@@ -7042,12 +10628,10 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceTest
         var model = new SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPrice
         {
             Amount = 0,
-            BillingCountryCode = "billingCountryCode",
             Currency = SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
         };
 
         double expectedAmount = 0;
-        string expectedBillingCountryCode = "billingCountryCode";
         ApiEnum<
             string,
             SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency
@@ -7055,7 +10639,6 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceTest
             SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd;
 
         Assert.Equal(expectedAmount, model.Amount);
-        Assert.Equal(expectedBillingCountryCode, model.BillingCountryCode);
         Assert.Equal(expectedCurrency, model.Currency);
     }
 
@@ -7065,7 +10648,6 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceTest
         var model = new SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPrice
         {
             Amount = 0,
-            BillingCountryCode = "billingCountryCode",
             Currency = SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
         };
 
@@ -7085,7 +10667,6 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceTest
         var model = new SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPrice
         {
             Amount = 0,
-            BillingCountryCode = "billingCountryCode",
             Currency = SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
         };
 
@@ -7098,7 +10679,6 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceTest
         Assert.NotNull(deserialized);
 
         double expectedAmount = 0;
-        string expectedBillingCountryCode = "billingCountryCode";
         ApiEnum<
             string,
             SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency
@@ -7106,7 +10686,6 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceTest
             SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd;
 
         Assert.Equal(expectedAmount, deserialized.Amount);
-        Assert.Equal(expectedBillingCountryCode, deserialized.BillingCountryCode);
         Assert.Equal(expectedCurrency, deserialized.Currency);
     }
 
@@ -7116,120 +10695,7 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceTest
         var model = new SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPrice
         {
             Amount = 0,
-            BillingCountryCode = "billingCountryCode",
             Currency = SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
-    {
-        var model = new SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPrice
-        {
-            BillingCountryCode = "billingCountryCode",
-        };
-
-        Assert.Null(model.Amount);
-        Assert.False(model.RawData.ContainsKey("amount"));
-        Assert.Null(model.Currency);
-        Assert.False(model.RawData.ContainsKey("currency"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPrice
-        {
-            BillingCountryCode = "billingCountryCode",
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
-    {
-        var model = new SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPrice
-        {
-            BillingCountryCode = "billingCountryCode",
-
-            // Null should be interpreted as omitted for these properties
-            Amount = null,
-            Currency = null,
-        };
-
-        Assert.Null(model.Amount);
-        Assert.False(model.RawData.ContainsKey("amount"));
-        Assert.Null(model.Currency);
-        Assert.False(model.RawData.ContainsKey("currency"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPrice
-        {
-            BillingCountryCode = "billingCountryCode",
-
-            // Null should be interpreted as omitted for these properties
-            Amount = null,
-            Currency = null,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
-    {
-        var model = new SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPrice
-        {
-            Amount = 0,
-            Currency = SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
-        };
-
-        Assert.Null(model.BillingCountryCode);
-        Assert.False(model.RawData.ContainsKey("billingCountryCode"));
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPrice
-        {
-            Amount = 0,
-            Currency = SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
-    {
-        var model = new SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPrice
-        {
-            Amount = 0,
-            Currency = SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
-
-            BillingCountryCode = null,
-        };
-
-        Assert.Null(model.BillingCountryCode);
-        Assert.True(model.RawData.ContainsKey("billingCountryCode"));
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPrice
-        {
-            Amount = 0,
-            Currency = SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
-
-            BillingCountryCode = null,
         };
 
         model.Validate();
@@ -7241,7 +10707,6 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceTest
         var model = new SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPrice
         {
             Amount = 0,
-            BillingCountryCode = "billingCountryCode",
             Currency = SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency.Usd,
         };
 
@@ -7537,6 +11002,334 @@ public class SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurr
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
             ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrency>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlement
+        {
+            ID = "id",
+            Type = SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+        };
+
+        string expectedID = "id";
+        ApiEnum<
+            string,
+            SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType
+        > expectedType =
+            SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature;
+
+        Assert.Equal(expectedID, model.ID);
+        Assert.Equal(expectedType, model.Type);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlement
+        {
+            ID = "id",
+            Type = SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlement>(
+                json,
+                ModelBase.SerializerOptions
+            );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlement
+        {
+            ID = "id",
+            Type = SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlement>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        Assert.NotNull(deserialized);
+
+        string expectedID = "id";
+        ApiEnum<
+            string,
+            SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType
+        > expectedType =
+            SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature;
+
+        Assert.Equal(expectedID, deserialized.ID);
+        Assert.Equal(expectedType, deserialized.Type);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlement
+        {
+            ID = "id",
+            Type = SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlement
+        {
+            ID = "id",
+            Type = SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature,
+        };
+
+        SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlement copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Credit)]
+    public void Validation_Works(
+        SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<
+            string,
+            SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType
+        > value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<
+                string,
+                SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType
+            >
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Feature)]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType.Credit)]
+    public void SerializationRoundtrip_Works(
+        SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<
+            string,
+            SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType
+        > value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<
+                string,
+                SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType
+            >
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<
+                string,
+                SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType
+            >
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<
+                string,
+                SubscriptionProvisionResponseDataSubscriptionSubscriptionEntitlementType
+            >
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class SubscriptionProvisionResponseDataSubscriptionTrialTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionTrial
+        {
+            TrialEndBehavior =
+                SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid,
+        };
+
+        ApiEnum<
+            string,
+            SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior
+        > expectedTrialEndBehavior =
+            SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid;
+
+        Assert.Equal(expectedTrialEndBehavior, model.TrialEndBehavior);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionTrial
+        {
+            TrialEndBehavior =
+                SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid,
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionProvisionResponseDataSubscriptionTrial>(
+                json,
+                ModelBase.SerializerOptions
+            );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionTrial
+        {
+            TrialEndBehavior =
+                SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid,
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionProvisionResponseDataSubscriptionTrial>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        Assert.NotNull(deserialized);
+
+        ApiEnum<
+            string,
+            SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior
+        > expectedTrialEndBehavior =
+            SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid;
+
+        Assert.Equal(expectedTrialEndBehavior, deserialized.TrialEndBehavior);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionTrial
+        {
+            TrialEndBehavior =
+                SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionProvisionResponseDataSubscriptionTrial
+        {
+            TrialEndBehavior =
+                SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid,
+        };
+
+        SubscriptionProvisionResponseDataSubscriptionTrial copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehaviorTest : TestBase
+{
+    [Theory]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid)]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.CancelSubscription
+    )]
+    public void Validation_Works(
+        SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior> value =
+            rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.ConvertToPaid)]
+    [InlineData(
+        SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior.CancelSubscription
+    )]
+    public void SerializationRoundtrip_Works(
+        SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior> value =
+            rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionResponseDataSubscriptionTrialTrialEndBehavior>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);

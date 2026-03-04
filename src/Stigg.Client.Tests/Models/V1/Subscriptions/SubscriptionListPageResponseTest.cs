@@ -27,13 +27,65 @@ public class SubscriptionListPageResponseTest : TestBase
                     StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Status = SubscriptionListResponseStatus.PaymentPending,
                     Addons = [new() { ID = "id", Quantity = 0 }],
+                    BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Budget = new() { HasSoftLimit = true, Limit = 0 },
                     CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
+                    Coupons =
+                    [
+                        new()
+                        {
+                            ID = "id",
+                            Name = "name",
+                            Status = SubscriptionListResponseCouponStatus.Active,
+                            AmountsOff =
+                            [
+                                new()
+                                {
+                                    Amount = 0,
+                                    Currency = SubscriptionListResponseCouponAmountsOffCurrency.Usd,
+                                },
+                            ],
+                            PercentOff = 0,
+                        },
+                    ],
                     CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    FutureUpdates =
+                    [
+                        new()
+                        {
+                            ScheduledExecutionTime = DateTimeOffset.Parse(
+                                "2019-12-27T18:11:19.117Z"
+                            ),
+                            ScheduleStatus =
+                                SubscriptionListResponseFutureUpdateScheduleStatus.PendingPayment,
+                            SubscriptionScheduleType =
+                                SubscriptionListResponseFutureUpdateSubscriptionScheduleType.Downgrade,
+                            TargetPackage = new("id"),
+                        },
+                    ],
+                    LatestInvoice = new()
+                    {
+                        BillingID = "billingId",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        RequiresAction = true,
+                        Status = SubscriptionListResponseLatestInvoiceStatus.Open,
+                        AmountDue = 0,
+                        BillingReason =
+                            SubscriptionListResponseLatestInvoiceBillingReason.BillingCycle,
+                        Currency = "currency",
+                        PdfUrl = "pdfUrl",
+                        Total = 0,
+                    },
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    MinimumSpend = new()
+                    {
+                        Amount = 0,
+                        Currency = SubscriptionListResponseMinimumSpendCurrency.Usd,
+                    },
                     PayingCustomerID = "payingCustomerId",
                     PaymentCollectionMethod =
                         SubscriptionListResponsePaymentCollectionMethod.Charge,
@@ -41,12 +93,44 @@ public class SubscriptionListPageResponseTest : TestBase
                     [
                         new()
                         {
-                            ID = "id",
-                            CreatedAt = "createdAt",
-                            UpdatedAt = "updatedAt",
+                            AddonID = "addonId",
+                            Amount = 0,
+                            BaseCharge = true,
+                            BillingCountryCode = "billingCountryCode",
+                            BlockSize = 0,
+                            Currency = SubscriptionListResponsePriceCurrency.Usd,
+                            FeatureID = "featureId",
+                            Tiers =
+                            [
+                                new()
+                                {
+                                    FlatPrice = new()
+                                    {
+                                        Amount = 0,
+                                        Currency =
+                                            SubscriptionListResponsePriceTierFlatPriceCurrency.Usd,
+                                    },
+                                    UnitPrice = new()
+                                    {
+                                        Amount = 0,
+                                        Currency =
+                                            SubscriptionListResponsePriceTierUnitPriceCurrency.Usd,
+                                    },
+                                    UpTo = 0,
+                                },
+                            ],
                         },
                     ],
                     ResourceID = "resourceId",
+                    SubscriptionEntitlements =
+                    [
+                        new()
+                        {
+                            ID = "id",
+                            Type = SubscriptionListResponseSubscriptionEntitlementType.Feature,
+                        },
+                    ],
+                    Trial = new(SubscriptionListResponseTrialTrialEndBehavior.ConvertToPaid),
                     TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
@@ -71,25 +155,106 @@ public class SubscriptionListPageResponseTest : TestBase
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Status = SubscriptionListResponseStatus.PaymentPending,
                 Addons = [new() { ID = "id", Quantity = 0 }],
+                BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Budget = new() { HasSoftLimit = true, Limit = 0 },
                 CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
+                Coupons =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        Name = "name",
+                        Status = SubscriptionListResponseCouponStatus.Active,
+                        AmountsOff =
+                        [
+                            new()
+                            {
+                                Amount = 0,
+                                Currency = SubscriptionListResponseCouponAmountsOffCurrency.Usd,
+                            },
+                        ],
+                        PercentOff = 0,
+                    },
+                ],
                 CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                FutureUpdates =
+                [
+                    new()
+                    {
+                        ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        ScheduleStatus =
+                            SubscriptionListResponseFutureUpdateScheduleStatus.PendingPayment,
+                        SubscriptionScheduleType =
+                            SubscriptionListResponseFutureUpdateSubscriptionScheduleType.Downgrade,
+                        TargetPackage = new("id"),
+                    },
+                ],
+                LatestInvoice = new()
+                {
+                    BillingID = "billingId",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    RequiresAction = true,
+                    Status = SubscriptionListResponseLatestInvoiceStatus.Open,
+                    AmountDue = 0,
+                    BillingReason = SubscriptionListResponseLatestInvoiceBillingReason.BillingCycle,
+                    Currency = "currency",
+                    PdfUrl = "pdfUrl",
+                    Total = 0,
+                },
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                MinimumSpend = new()
+                {
+                    Amount = 0,
+                    Currency = SubscriptionListResponseMinimumSpendCurrency.Usd,
+                },
                 PayingCustomerID = "payingCustomerId",
                 PaymentCollectionMethod = SubscriptionListResponsePaymentCollectionMethod.Charge,
                 Prices =
                 [
                     new()
                     {
-                        ID = "id",
-                        CreatedAt = "createdAt",
-                        UpdatedAt = "updatedAt",
+                        AddonID = "addonId",
+                        Amount = 0,
+                        BaseCharge = true,
+                        BillingCountryCode = "billingCountryCode",
+                        BlockSize = 0,
+                        Currency = SubscriptionListResponsePriceCurrency.Usd,
+                        FeatureID = "featureId",
+                        Tiers =
+                        [
+                            new()
+                            {
+                                FlatPrice = new()
+                                {
+                                    Amount = 0,
+                                    Currency =
+                                        SubscriptionListResponsePriceTierFlatPriceCurrency.Usd,
+                                },
+                                UnitPrice = new()
+                                {
+                                    Amount = 0,
+                                    Currency =
+                                        SubscriptionListResponsePriceTierUnitPriceCurrency.Usd,
+                                },
+                                UpTo = 0,
+                            },
+                        ],
                     },
                 ],
                 ResourceID = "resourceId",
+                SubscriptionEntitlements =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        Type = SubscriptionListResponseSubscriptionEntitlementType.Feature,
+                    },
+                ],
+                Trial = new(SubscriptionListResponseTrialTrialEndBehavior.ConvertToPaid),
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
         ];
@@ -126,13 +291,65 @@ public class SubscriptionListPageResponseTest : TestBase
                     StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Status = SubscriptionListResponseStatus.PaymentPending,
                     Addons = [new() { ID = "id", Quantity = 0 }],
+                    BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Budget = new() { HasSoftLimit = true, Limit = 0 },
                     CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
+                    Coupons =
+                    [
+                        new()
+                        {
+                            ID = "id",
+                            Name = "name",
+                            Status = SubscriptionListResponseCouponStatus.Active,
+                            AmountsOff =
+                            [
+                                new()
+                                {
+                                    Amount = 0,
+                                    Currency = SubscriptionListResponseCouponAmountsOffCurrency.Usd,
+                                },
+                            ],
+                            PercentOff = 0,
+                        },
+                    ],
                     CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    FutureUpdates =
+                    [
+                        new()
+                        {
+                            ScheduledExecutionTime = DateTimeOffset.Parse(
+                                "2019-12-27T18:11:19.117Z"
+                            ),
+                            ScheduleStatus =
+                                SubscriptionListResponseFutureUpdateScheduleStatus.PendingPayment,
+                            SubscriptionScheduleType =
+                                SubscriptionListResponseFutureUpdateSubscriptionScheduleType.Downgrade,
+                            TargetPackage = new("id"),
+                        },
+                    ],
+                    LatestInvoice = new()
+                    {
+                        BillingID = "billingId",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        RequiresAction = true,
+                        Status = SubscriptionListResponseLatestInvoiceStatus.Open,
+                        AmountDue = 0,
+                        BillingReason =
+                            SubscriptionListResponseLatestInvoiceBillingReason.BillingCycle,
+                        Currency = "currency",
+                        PdfUrl = "pdfUrl",
+                        Total = 0,
+                    },
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    MinimumSpend = new()
+                    {
+                        Amount = 0,
+                        Currency = SubscriptionListResponseMinimumSpendCurrency.Usd,
+                    },
                     PayingCustomerID = "payingCustomerId",
                     PaymentCollectionMethod =
                         SubscriptionListResponsePaymentCollectionMethod.Charge,
@@ -140,12 +357,44 @@ public class SubscriptionListPageResponseTest : TestBase
                     [
                         new()
                         {
-                            ID = "id",
-                            CreatedAt = "createdAt",
-                            UpdatedAt = "updatedAt",
+                            AddonID = "addonId",
+                            Amount = 0,
+                            BaseCharge = true,
+                            BillingCountryCode = "billingCountryCode",
+                            BlockSize = 0,
+                            Currency = SubscriptionListResponsePriceCurrency.Usd,
+                            FeatureID = "featureId",
+                            Tiers =
+                            [
+                                new()
+                                {
+                                    FlatPrice = new()
+                                    {
+                                        Amount = 0,
+                                        Currency =
+                                            SubscriptionListResponsePriceTierFlatPriceCurrency.Usd,
+                                    },
+                                    UnitPrice = new()
+                                    {
+                                        Amount = 0,
+                                        Currency =
+                                            SubscriptionListResponsePriceTierUnitPriceCurrency.Usd,
+                                    },
+                                    UpTo = 0,
+                                },
+                            ],
                         },
                     ],
                     ResourceID = "resourceId",
+                    SubscriptionEntitlements =
+                    [
+                        new()
+                        {
+                            ID = "id",
+                            Type = SubscriptionListResponseSubscriptionEntitlementType.Feature,
+                        },
+                    ],
+                    Trial = new(SubscriptionListResponseTrialTrialEndBehavior.ConvertToPaid),
                     TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
@@ -184,13 +433,65 @@ public class SubscriptionListPageResponseTest : TestBase
                     StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Status = SubscriptionListResponseStatus.PaymentPending,
                     Addons = [new() { ID = "id", Quantity = 0 }],
+                    BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Budget = new() { HasSoftLimit = true, Limit = 0 },
                     CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
+                    Coupons =
+                    [
+                        new()
+                        {
+                            ID = "id",
+                            Name = "name",
+                            Status = SubscriptionListResponseCouponStatus.Active,
+                            AmountsOff =
+                            [
+                                new()
+                                {
+                                    Amount = 0,
+                                    Currency = SubscriptionListResponseCouponAmountsOffCurrency.Usd,
+                                },
+                            ],
+                            PercentOff = 0,
+                        },
+                    ],
                     CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    FutureUpdates =
+                    [
+                        new()
+                        {
+                            ScheduledExecutionTime = DateTimeOffset.Parse(
+                                "2019-12-27T18:11:19.117Z"
+                            ),
+                            ScheduleStatus =
+                                SubscriptionListResponseFutureUpdateScheduleStatus.PendingPayment,
+                            SubscriptionScheduleType =
+                                SubscriptionListResponseFutureUpdateSubscriptionScheduleType.Downgrade,
+                            TargetPackage = new("id"),
+                        },
+                    ],
+                    LatestInvoice = new()
+                    {
+                        BillingID = "billingId",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        RequiresAction = true,
+                        Status = SubscriptionListResponseLatestInvoiceStatus.Open,
+                        AmountDue = 0,
+                        BillingReason =
+                            SubscriptionListResponseLatestInvoiceBillingReason.BillingCycle,
+                        Currency = "currency",
+                        PdfUrl = "pdfUrl",
+                        Total = 0,
+                    },
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    MinimumSpend = new()
+                    {
+                        Amount = 0,
+                        Currency = SubscriptionListResponseMinimumSpendCurrency.Usd,
+                    },
                     PayingCustomerID = "payingCustomerId",
                     PaymentCollectionMethod =
                         SubscriptionListResponsePaymentCollectionMethod.Charge,
@@ -198,12 +499,44 @@ public class SubscriptionListPageResponseTest : TestBase
                     [
                         new()
                         {
-                            ID = "id",
-                            CreatedAt = "createdAt",
-                            UpdatedAt = "updatedAt",
+                            AddonID = "addonId",
+                            Amount = 0,
+                            BaseCharge = true,
+                            BillingCountryCode = "billingCountryCode",
+                            BlockSize = 0,
+                            Currency = SubscriptionListResponsePriceCurrency.Usd,
+                            FeatureID = "featureId",
+                            Tiers =
+                            [
+                                new()
+                                {
+                                    FlatPrice = new()
+                                    {
+                                        Amount = 0,
+                                        Currency =
+                                            SubscriptionListResponsePriceTierFlatPriceCurrency.Usd,
+                                    },
+                                    UnitPrice = new()
+                                    {
+                                        Amount = 0,
+                                        Currency =
+                                            SubscriptionListResponsePriceTierUnitPriceCurrency.Usd,
+                                    },
+                                    UpTo = 0,
+                                },
+                            ],
                         },
                     ],
                     ResourceID = "resourceId",
+                    SubscriptionEntitlements =
+                    [
+                        new()
+                        {
+                            ID = "id",
+                            Type = SubscriptionListResponseSubscriptionEntitlementType.Feature,
+                        },
+                    ],
+                    Trial = new(SubscriptionListResponseTrialTrialEndBehavior.ConvertToPaid),
                     TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
@@ -235,25 +568,106 @@ public class SubscriptionListPageResponseTest : TestBase
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Status = SubscriptionListResponseStatus.PaymentPending,
                 Addons = [new() { ID = "id", Quantity = 0 }],
+                BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Budget = new() { HasSoftLimit = true, Limit = 0 },
                 CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
+                Coupons =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        Name = "name",
+                        Status = SubscriptionListResponseCouponStatus.Active,
+                        AmountsOff =
+                        [
+                            new()
+                            {
+                                Amount = 0,
+                                Currency = SubscriptionListResponseCouponAmountsOffCurrency.Usd,
+                            },
+                        ],
+                        PercentOff = 0,
+                    },
+                ],
                 CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                FutureUpdates =
+                [
+                    new()
+                    {
+                        ScheduledExecutionTime = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        ScheduleStatus =
+                            SubscriptionListResponseFutureUpdateScheduleStatus.PendingPayment,
+                        SubscriptionScheduleType =
+                            SubscriptionListResponseFutureUpdateSubscriptionScheduleType.Downgrade,
+                        TargetPackage = new("id"),
+                    },
+                ],
+                LatestInvoice = new()
+                {
+                    BillingID = "billingId",
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    RequiresAction = true,
+                    Status = SubscriptionListResponseLatestInvoiceStatus.Open,
+                    AmountDue = 0,
+                    BillingReason = SubscriptionListResponseLatestInvoiceBillingReason.BillingCycle,
+                    Currency = "currency",
+                    PdfUrl = "pdfUrl",
+                    Total = 0,
+                },
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                MinimumSpend = new()
+                {
+                    Amount = 0,
+                    Currency = SubscriptionListResponseMinimumSpendCurrency.Usd,
+                },
                 PayingCustomerID = "payingCustomerId",
                 PaymentCollectionMethod = SubscriptionListResponsePaymentCollectionMethod.Charge,
                 Prices =
                 [
                     new()
                     {
-                        ID = "id",
-                        CreatedAt = "createdAt",
-                        UpdatedAt = "updatedAt",
+                        AddonID = "addonId",
+                        Amount = 0,
+                        BaseCharge = true,
+                        BillingCountryCode = "billingCountryCode",
+                        BlockSize = 0,
+                        Currency = SubscriptionListResponsePriceCurrency.Usd,
+                        FeatureID = "featureId",
+                        Tiers =
+                        [
+                            new()
+                            {
+                                FlatPrice = new()
+                                {
+                                    Amount = 0,
+                                    Currency =
+                                        SubscriptionListResponsePriceTierFlatPriceCurrency.Usd,
+                                },
+                                UnitPrice = new()
+                                {
+                                    Amount = 0,
+                                    Currency =
+                                        SubscriptionListResponsePriceTierUnitPriceCurrency.Usd,
+                                },
+                                UpTo = 0,
+                            },
+                        ],
                     },
                 ],
                 ResourceID = "resourceId",
+                SubscriptionEntitlements =
+                [
+                    new()
+                    {
+                        ID = "id",
+                        Type = SubscriptionListResponseSubscriptionEntitlementType.Feature,
+                    },
+                ],
+                Trial = new(SubscriptionListResponseTrialTrialEndBehavior.ConvertToPaid),
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
         ];
@@ -290,13 +704,65 @@ public class SubscriptionListPageResponseTest : TestBase
                     StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Status = SubscriptionListResponseStatus.PaymentPending,
                     Addons = [new() { ID = "id", Quantity = 0 }],
+                    BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Budget = new() { HasSoftLimit = true, Limit = 0 },
                     CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
+                    Coupons =
+                    [
+                        new()
+                        {
+                            ID = "id",
+                            Name = "name",
+                            Status = SubscriptionListResponseCouponStatus.Active,
+                            AmountsOff =
+                            [
+                                new()
+                                {
+                                    Amount = 0,
+                                    Currency = SubscriptionListResponseCouponAmountsOffCurrency.Usd,
+                                },
+                            ],
+                            PercentOff = 0,
+                        },
+                    ],
                     CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    FutureUpdates =
+                    [
+                        new()
+                        {
+                            ScheduledExecutionTime = DateTimeOffset.Parse(
+                                "2019-12-27T18:11:19.117Z"
+                            ),
+                            ScheduleStatus =
+                                SubscriptionListResponseFutureUpdateScheduleStatus.PendingPayment,
+                            SubscriptionScheduleType =
+                                SubscriptionListResponseFutureUpdateSubscriptionScheduleType.Downgrade,
+                            TargetPackage = new("id"),
+                        },
+                    ],
+                    LatestInvoice = new()
+                    {
+                        BillingID = "billingId",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        RequiresAction = true,
+                        Status = SubscriptionListResponseLatestInvoiceStatus.Open,
+                        AmountDue = 0,
+                        BillingReason =
+                            SubscriptionListResponseLatestInvoiceBillingReason.BillingCycle,
+                        Currency = "currency",
+                        PdfUrl = "pdfUrl",
+                        Total = 0,
+                    },
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    MinimumSpend = new()
+                    {
+                        Amount = 0,
+                        Currency = SubscriptionListResponseMinimumSpendCurrency.Usd,
+                    },
                     PayingCustomerID = "payingCustomerId",
                     PaymentCollectionMethod =
                         SubscriptionListResponsePaymentCollectionMethod.Charge,
@@ -304,12 +770,44 @@ public class SubscriptionListPageResponseTest : TestBase
                     [
                         new()
                         {
-                            ID = "id",
-                            CreatedAt = "createdAt",
-                            UpdatedAt = "updatedAt",
+                            AddonID = "addonId",
+                            Amount = 0,
+                            BaseCharge = true,
+                            BillingCountryCode = "billingCountryCode",
+                            BlockSize = 0,
+                            Currency = SubscriptionListResponsePriceCurrency.Usd,
+                            FeatureID = "featureId",
+                            Tiers =
+                            [
+                                new()
+                                {
+                                    FlatPrice = new()
+                                    {
+                                        Amount = 0,
+                                        Currency =
+                                            SubscriptionListResponsePriceTierFlatPriceCurrency.Usd,
+                                    },
+                                    UnitPrice = new()
+                                    {
+                                        Amount = 0,
+                                        Currency =
+                                            SubscriptionListResponsePriceTierUnitPriceCurrency.Usd,
+                                    },
+                                    UpTo = 0,
+                                },
+                            ],
                         },
                     ],
                     ResourceID = "resourceId",
+                    SubscriptionEntitlements =
+                    [
+                        new()
+                        {
+                            ID = "id",
+                            Type = SubscriptionListResponseSubscriptionEntitlementType.Feature,
+                        },
+                    ],
+                    Trial = new(SubscriptionListResponseTrialTrialEndBehavior.ConvertToPaid),
                     TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
@@ -342,13 +840,65 @@ public class SubscriptionListPageResponseTest : TestBase
                     StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Status = SubscriptionListResponseStatus.PaymentPending,
                     Addons = [new() { ID = "id", Quantity = 0 }],
+                    BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Budget = new() { HasSoftLimit = true, Limit = 0 },
                     CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
+                    Coupons =
+                    [
+                        new()
+                        {
+                            ID = "id",
+                            Name = "name",
+                            Status = SubscriptionListResponseCouponStatus.Active,
+                            AmountsOff =
+                            [
+                                new()
+                                {
+                                    Amount = 0,
+                                    Currency = SubscriptionListResponseCouponAmountsOffCurrency.Usd,
+                                },
+                            ],
+                            PercentOff = 0,
+                        },
+                    ],
                     CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    FutureUpdates =
+                    [
+                        new()
+                        {
+                            ScheduledExecutionTime = DateTimeOffset.Parse(
+                                "2019-12-27T18:11:19.117Z"
+                            ),
+                            ScheduleStatus =
+                                SubscriptionListResponseFutureUpdateScheduleStatus.PendingPayment,
+                            SubscriptionScheduleType =
+                                SubscriptionListResponseFutureUpdateSubscriptionScheduleType.Downgrade,
+                            TargetPackage = new("id"),
+                        },
+                    ],
+                    LatestInvoice = new()
+                    {
+                        BillingID = "billingId",
+                        CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        RequiresAction = true,
+                        Status = SubscriptionListResponseLatestInvoiceStatus.Open,
+                        AmountDue = 0,
+                        BillingReason =
+                            SubscriptionListResponseLatestInvoiceBillingReason.BillingCycle,
+                        Currency = "currency",
+                        PdfUrl = "pdfUrl",
+                        Total = 0,
+                    },
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    MinimumSpend = new()
+                    {
+                        Amount = 0,
+                        Currency = SubscriptionListResponseMinimumSpendCurrency.Usd,
+                    },
                     PayingCustomerID = "payingCustomerId",
                     PaymentCollectionMethod =
                         SubscriptionListResponsePaymentCollectionMethod.Charge,
@@ -356,12 +906,44 @@ public class SubscriptionListPageResponseTest : TestBase
                     [
                         new()
                         {
-                            ID = "id",
-                            CreatedAt = "createdAt",
-                            UpdatedAt = "updatedAt",
+                            AddonID = "addonId",
+                            Amount = 0,
+                            BaseCharge = true,
+                            BillingCountryCode = "billingCountryCode",
+                            BlockSize = 0,
+                            Currency = SubscriptionListResponsePriceCurrency.Usd,
+                            FeatureID = "featureId",
+                            Tiers =
+                            [
+                                new()
+                                {
+                                    FlatPrice = new()
+                                    {
+                                        Amount = 0,
+                                        Currency =
+                                            SubscriptionListResponsePriceTierFlatPriceCurrency.Usd,
+                                    },
+                                    UnitPrice = new()
+                                    {
+                                        Amount = 0,
+                                        Currency =
+                                            SubscriptionListResponsePriceTierUnitPriceCurrency.Usd,
+                                    },
+                                    UpTo = 0,
+                                },
+                            ],
                         },
                     ],
                     ResourceID = "resourceId",
+                    SubscriptionEntitlements =
+                    [
+                        new()
+                        {
+                            ID = "id",
+                            Type = SubscriptionListResponseSubscriptionEntitlementType.Feature,
+                        },
+                    ],
+                    Trial = new(SubscriptionListResponseTrialTrialEndBehavior.ConvertToPaid),
                     TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
