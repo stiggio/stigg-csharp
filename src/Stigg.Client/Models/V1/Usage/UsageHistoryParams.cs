@@ -74,6 +74,27 @@ public record class UsageHistoryParams : ParamsBase
     }
 
     /// <summary>
+    /// When true, includes usage data from the most recent cancelled or expired subscription
+    /// </summary>
+    public bool? IncludeHistoricalUsage
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<bool>("includeHistoricalUsage");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("includeHistoricalUsage", value);
+        }
+    }
+
+    /// <summary>
     /// Resource id
     /// </summary>
     public string? ResourceID
