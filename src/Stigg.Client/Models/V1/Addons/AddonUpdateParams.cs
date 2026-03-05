@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -6,7 +5,10 @@ using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Stigg.Client.Core;
+using Stigg.Client.Exceptions;
+using System = System;
 
 namespace Stigg.Client.Models.V1.Addons;
 
@@ -130,6 +132,29 @@ public record class AddonUpdateParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// The status of the package
+    /// </summary>
+    public ApiEnum<string, AddonUpdateParamsStatus>? Status
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<ApiEnum<string, AddonUpdateParamsStatus>>(
+                "status"
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawBodyData.Set("status", value);
+        }
+    }
+
     public AddonUpdateParams() { }
 
 #pragma warning disable CS8618
@@ -212,9 +237,9 @@ public record class AddonUpdateParams : ParamsBase
             && this._rawBodyData.Equals(other._rawBodyData);
     }
 
-    public override Uri Url(ClientOptions options)
+    public override System::Uri Url(ClientOptions options)
     {
-        return new UriBuilder(
+        return new System::UriBuilder(
             options.BaseUrl.ToString().TrimEnd('/') + string.Format("/api/v1/addons/{0}", this.ID)
         )
         {
@@ -243,5 +268,55 @@ public record class AddonUpdateParams : ParamsBase
     public override int GetHashCode()
     {
         return 0;
+    }
+}
+
+/// <summary>
+/// The status of the package
+/// </summary>
+[JsonConverter(typeof(AddonUpdateParamsStatusConverter))]
+public enum AddonUpdateParamsStatus
+{
+    Draft,
+    Published,
+    Archived,
+}
+
+sealed class AddonUpdateParamsStatusConverter : JsonConverter<AddonUpdateParamsStatus>
+{
+    public override AddonUpdateParamsStatus Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "DRAFT" => AddonUpdateParamsStatus.Draft,
+            "PUBLISHED" => AddonUpdateParamsStatus.Published,
+            "ARCHIVED" => AddonUpdateParamsStatus.Archived,
+            _ => (AddonUpdateParamsStatus)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        AddonUpdateParamsStatus value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                AddonUpdateParamsStatus.Draft => "DRAFT",
+                AddonUpdateParamsStatus.Published => "PUBLISHED",
+                AddonUpdateParamsStatus.Archived => "ARCHIVED",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
     }
 }

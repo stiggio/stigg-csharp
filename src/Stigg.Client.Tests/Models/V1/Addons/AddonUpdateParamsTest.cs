@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
+using Stigg.Client.Core;
+using Stigg.Client.Exceptions;
 using Stigg.Client.Models.V1.Addons;
 
 namespace Stigg.Client.Tests.Models.V1.Addons;
@@ -18,6 +21,7 @@ public class AddonUpdateParamsTest : TestBase
             DisplayName = "displayName",
             MaxQuantity = 0,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Status = AddonUpdateParamsStatus.Draft,
         };
 
         string expectedID = "x";
@@ -27,6 +31,7 @@ public class AddonUpdateParamsTest : TestBase
         string expectedDisplayName = "displayName";
         long expectedMaxQuantity = 0;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        ApiEnum<string, AddonUpdateParamsStatus> expectedStatus = AddonUpdateParamsStatus.Draft;
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedBillingID, parameters.BillingID);
@@ -47,6 +52,7 @@ public class AddonUpdateParamsTest : TestBase
 
             Assert.Equal(value, parameters.Metadata[item.Key]);
         }
+        Assert.Equal(expectedStatus, parameters.Status);
     }
 
     [Fact]
@@ -65,6 +71,8 @@ public class AddonUpdateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("displayName"));
         Assert.Null(parameters.Metadata);
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
+        Assert.Null(parameters.Status);
+        Assert.False(parameters.RawBodyData.ContainsKey("status"));
     }
 
     [Fact]
@@ -81,12 +89,15 @@ public class AddonUpdateParamsTest : TestBase
             // Null should be interpreted as omitted for these properties
             DisplayName = null,
             Metadata = null,
+            Status = null,
         };
 
         Assert.Null(parameters.DisplayName);
         Assert.False(parameters.RawBodyData.ContainsKey("displayName"));
         Assert.Null(parameters.Metadata);
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
+        Assert.Null(parameters.Status);
+        Assert.False(parameters.RawBodyData.ContainsKey("status"));
     }
 
     [Fact]
@@ -97,6 +108,7 @@ public class AddonUpdateParamsTest : TestBase
             ID = "x",
             DisplayName = "displayName",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Status = AddonUpdateParamsStatus.Draft,
         };
 
         Assert.Null(parameters.BillingID);
@@ -117,6 +129,7 @@ public class AddonUpdateParamsTest : TestBase
             ID = "x",
             DisplayName = "displayName",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Status = AddonUpdateParamsStatus.Draft,
 
             BillingID = null,
             Dependencies = null,
@@ -156,10 +169,71 @@ public class AddonUpdateParamsTest : TestBase
             DisplayName = "displayName",
             MaxQuantity = 0,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Status = AddonUpdateParamsStatus.Draft,
         };
 
         AddonUpdateParams copied = new(parameters);
 
         Assert.Equal(parameters, copied);
+    }
+}
+
+public class AddonUpdateParamsStatusTest : TestBase
+{
+    [Theory]
+    [InlineData(AddonUpdateParamsStatus.Draft)]
+    [InlineData(AddonUpdateParamsStatus.Published)]
+    [InlineData(AddonUpdateParamsStatus.Archived)]
+    public void Validation_Works(AddonUpdateParamsStatus rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, AddonUpdateParamsStatus> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, AddonUpdateParamsStatus>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(AddonUpdateParamsStatus.Draft)]
+    [InlineData(AddonUpdateParamsStatus.Published)]
+    [InlineData(AddonUpdateParamsStatus.Archived)]
+    public void SerializationRoundtrip_Works(AddonUpdateParamsStatus rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, AddonUpdateParamsStatus> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, AddonUpdateParamsStatus>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, AddonUpdateParamsStatus>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, AddonUpdateParamsStatus>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }

@@ -422,6 +422,7 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Addons::AddonListResponseStatus>(),
             new ApiEnumConverter<string, Addons::PricingType>(),
             new ApiEnumConverter<string, Addons::Status>(),
+            new ApiEnumConverter<string, Addons::AddonUpdateParamsStatus>(),
             new ApiEnumConverter<string, Addons::MigrationType>(),
             new ApiEnumConverter<string, Addons::AddonSetPricingParamsPricingType>(),
             new ApiEnumConverter<string, Addons::BillingPeriod>(),
