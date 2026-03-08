@@ -92,6 +92,35 @@ public class SubscriptionProvisionParamsTest : TestBase
                 CollectPhoneNumber = true,
                 ReferenceID = "referenceId",
             },
+            Entitlements =
+            [
+                new()
+                {
+                    Credit = new()
+                    {
+                        Amount = 1,
+                        Cadence = SubscriptionProvisionParamsEntitlementCreditCadence.Month,
+                        CurrencyID = "currencyId",
+                    },
+                    Feature = new()
+                    {
+                        FeatureID = "featureId",
+                        HasSoftLimit = true,
+                        HasUnlimitedUsage = true,
+                        MonthlyResetPeriodConfiguration = new(
+                            SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                        ),
+                        ResetPeriod = SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Year,
+                        UsageLimit = 0,
+                        WeeklyResetPeriodConfiguration = new(
+                            SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                        ),
+                        YearlyResetPeriodConfiguration = new(
+                            SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                        ),
+                    },
+                },
+            ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MinimumSpend = new()
             {
@@ -133,15 +162,6 @@ public class SubscriptionProvisionParamsTest : TestBase
             SalesforceID = "salesforceId",
             ScheduleStrategy = SubscriptionProvisionParamsScheduleStrategy.EndOfBillingPeriod,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            SubscriptionEntitlements =
-            [
-                new()
-                {
-                    FeatureID = "featureId",
-                    UsageLimit = 0,
-                    IsGranted = true,
-                },
-            ],
             TrialOverrideConfiguration = new()
             {
                 IsTrial = true,
@@ -229,6 +249,35 @@ public class SubscriptionProvisionParamsTest : TestBase
             CollectPhoneNumber = true,
             ReferenceID = "referenceId",
         };
+        List<SubscriptionProvisionParamsEntitlement> expectedEntitlements =
+        [
+            new()
+            {
+                Credit = new()
+                {
+                    Amount = 1,
+                    Cadence = SubscriptionProvisionParamsEntitlementCreditCadence.Month,
+                    CurrencyID = "currencyId",
+                },
+                Feature = new()
+                {
+                    FeatureID = "featureId",
+                    HasSoftLimit = true,
+                    HasUnlimitedUsage = true,
+                    MonthlyResetPeriodConfiguration = new(
+                        SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                    ),
+                    ResetPeriod = SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Year,
+                    UsageLimit = 0,
+                    WeeklyResetPeriodConfiguration = new(
+                        SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                    ),
+                    YearlyResetPeriodConfiguration = new(
+                        SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                    ),
+                },
+            },
+        ];
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         SubscriptionProvisionParamsMinimumSpend expectedMinimumSpend = new()
         {
@@ -272,15 +321,6 @@ public class SubscriptionProvisionParamsTest : TestBase
         ApiEnum<string, SubscriptionProvisionParamsScheduleStrategy> expectedScheduleStrategy =
             SubscriptionProvisionParamsScheduleStrategy.EndOfBillingPeriod;
         DateTimeOffset expectedStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        List<SubscriptionProvisionParamsSubscriptionEntitlement> expectedSubscriptionEntitlements =
-        [
-            new()
-            {
-                FeatureID = "featureId",
-                UsageLimit = 0,
-                IsGranted = true,
-            },
-        ];
         SubscriptionProvisionParamsTrialOverrideConfiguration expectedTrialOverrideConfiguration =
             new()
             {
@@ -315,6 +355,12 @@ public class SubscriptionProvisionParamsTest : TestBase
             Assert.Equal(expectedCharges[i], parameters.Charges[i]);
         }
         Assert.Equal(expectedCheckoutOptions, parameters.CheckoutOptions);
+        Assert.NotNull(parameters.Entitlements);
+        Assert.Equal(expectedEntitlements.Count, parameters.Entitlements.Count);
+        for (int i = 0; i < expectedEntitlements.Count; i++)
+        {
+            Assert.Equal(expectedEntitlements[i], parameters.Entitlements[i]);
+        }
         Assert.NotNull(parameters.Metadata);
         Assert.Equal(expectedMetadata.Count, parameters.Metadata.Count);
         foreach (var item in expectedMetadata)
@@ -336,18 +382,6 @@ public class SubscriptionProvisionParamsTest : TestBase
         Assert.Equal(expectedSalesforceID, parameters.SalesforceID);
         Assert.Equal(expectedScheduleStrategy, parameters.ScheduleStrategy);
         Assert.Equal(expectedStartDate, parameters.StartDate);
-        Assert.NotNull(parameters.SubscriptionEntitlements);
-        Assert.Equal(
-            expectedSubscriptionEntitlements.Count,
-            parameters.SubscriptionEntitlements.Count
-        );
-        for (int i = 0; i < expectedSubscriptionEntitlements.Count; i++)
-        {
-            Assert.Equal(
-                expectedSubscriptionEntitlements[i],
-                parameters.SubscriptionEntitlements[i]
-            );
-        }
         Assert.Equal(expectedTrialOverrideConfiguration, parameters.TrialOverrideConfiguration);
         Assert.Equal(expectedUnitQuantity, parameters.UnitQuantity);
     }
@@ -390,6 +424,8 @@ public class SubscriptionProvisionParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("charges"));
         Assert.Null(parameters.CheckoutOptions);
         Assert.False(parameters.RawBodyData.ContainsKey("checkoutOptions"));
+        Assert.Null(parameters.Entitlements);
+        Assert.False(parameters.RawBodyData.ContainsKey("entitlements"));
         Assert.Null(parameters.Metadata);
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.PaymentCollectionMethod);
@@ -400,8 +436,6 @@ public class SubscriptionProvisionParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("scheduleStrategy"));
         Assert.Null(parameters.StartDate);
         Assert.False(parameters.RawBodyData.ContainsKey("startDate"));
-        Assert.Null(parameters.SubscriptionEntitlements);
-        Assert.False(parameters.RawBodyData.ContainsKey("subscriptionEntitlements"));
         Assert.Null(parameters.TrialOverrideConfiguration);
         Assert.False(parameters.RawBodyData.ContainsKey("trialOverrideConfiguration"));
         Assert.Null(parameters.UnitQuantity);
@@ -437,12 +471,12 @@ public class SubscriptionProvisionParamsTest : TestBase
             BillingPeriod = null,
             Charges = null,
             CheckoutOptions = null,
+            Entitlements = null,
             Metadata = null,
             PaymentCollectionMethod = null,
             PriceOverrides = null,
             ScheduleStrategy = null,
             StartDate = null,
-            SubscriptionEntitlements = null,
             TrialOverrideConfiguration = null,
             UnitQuantity = null,
         };
@@ -465,6 +499,8 @@ public class SubscriptionProvisionParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("charges"));
         Assert.Null(parameters.CheckoutOptions);
         Assert.False(parameters.RawBodyData.ContainsKey("checkoutOptions"));
+        Assert.Null(parameters.Entitlements);
+        Assert.False(parameters.RawBodyData.ContainsKey("entitlements"));
         Assert.Null(parameters.Metadata);
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.PaymentCollectionMethod);
@@ -475,8 +511,6 @@ public class SubscriptionProvisionParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("scheduleStrategy"));
         Assert.Null(parameters.StartDate);
         Assert.False(parameters.RawBodyData.ContainsKey("startDate"));
-        Assert.Null(parameters.SubscriptionEntitlements);
-        Assert.False(parameters.RawBodyData.ContainsKey("subscriptionEntitlements"));
         Assert.Null(parameters.TrialOverrideConfiguration);
         Assert.False(parameters.RawBodyData.ContainsKey("trialOverrideConfiguration"));
         Assert.Null(parameters.UnitQuantity);
@@ -563,6 +597,35 @@ public class SubscriptionProvisionParamsTest : TestBase
                 CollectPhoneNumber = true,
                 ReferenceID = "referenceId",
             },
+            Entitlements =
+            [
+                new()
+                {
+                    Credit = new()
+                    {
+                        Amount = 1,
+                        Cadence = SubscriptionProvisionParamsEntitlementCreditCadence.Month,
+                        CurrencyID = "currencyId",
+                    },
+                    Feature = new()
+                    {
+                        FeatureID = "featureId",
+                        HasSoftLimit = true,
+                        HasUnlimitedUsage = true,
+                        MonthlyResetPeriodConfiguration = new(
+                            SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                        ),
+                        ResetPeriod = SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Year,
+                        UsageLimit = 0,
+                        WeeklyResetPeriodConfiguration = new(
+                            SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                        ),
+                        YearlyResetPeriodConfiguration = new(
+                            SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                        ),
+                    },
+                },
+            ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentCollectionMethod = PaymentCollectionMethod.Charge,
             PriceOverrides =
@@ -596,15 +659,6 @@ public class SubscriptionProvisionParamsTest : TestBase
             ],
             ScheduleStrategy = SubscriptionProvisionParamsScheduleStrategy.EndOfBillingPeriod,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            SubscriptionEntitlements =
-            [
-                new()
-                {
-                    FeatureID = "featureId",
-                    UsageLimit = 0,
-                    IsGranted = true,
-                },
-            ],
             TrialOverrideConfiguration = new()
             {
                 IsTrial = true,
@@ -711,6 +765,35 @@ public class SubscriptionProvisionParamsTest : TestBase
                 CollectPhoneNumber = true,
                 ReferenceID = "referenceId",
             },
+            Entitlements =
+            [
+                new()
+                {
+                    Credit = new()
+                    {
+                        Amount = 1,
+                        Cadence = SubscriptionProvisionParamsEntitlementCreditCadence.Month,
+                        CurrencyID = "currencyId",
+                    },
+                    Feature = new()
+                    {
+                        FeatureID = "featureId",
+                        HasSoftLimit = true,
+                        HasUnlimitedUsage = true,
+                        MonthlyResetPeriodConfiguration = new(
+                            SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                        ),
+                        ResetPeriod = SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Year,
+                        UsageLimit = 0,
+                        WeeklyResetPeriodConfiguration = new(
+                            SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                        ),
+                        YearlyResetPeriodConfiguration = new(
+                            SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                        ),
+                    },
+                },
+            ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentCollectionMethod = PaymentCollectionMethod.Charge,
             PriceOverrides =
@@ -744,15 +827,6 @@ public class SubscriptionProvisionParamsTest : TestBase
             ],
             ScheduleStrategy = SubscriptionProvisionParamsScheduleStrategy.EndOfBillingPeriod,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            SubscriptionEntitlements =
-            [
-                new()
-                {
-                    FeatureID = "featureId",
-                    UsageLimit = 0,
-                    IsGranted = true,
-                },
-            ],
             TrialOverrideConfiguration = new()
             {
                 IsTrial = true,
@@ -884,6 +958,35 @@ public class SubscriptionProvisionParamsTest : TestBase
                 CollectPhoneNumber = true,
                 ReferenceID = "referenceId",
             },
+            Entitlements =
+            [
+                new()
+                {
+                    Credit = new()
+                    {
+                        Amount = 1,
+                        Cadence = SubscriptionProvisionParamsEntitlementCreditCadence.Month,
+                        CurrencyID = "currencyId",
+                    },
+                    Feature = new()
+                    {
+                        FeatureID = "featureId",
+                        HasSoftLimit = true,
+                        HasUnlimitedUsage = true,
+                        MonthlyResetPeriodConfiguration = new(
+                            SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                        ),
+                        ResetPeriod = SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Year,
+                        UsageLimit = 0,
+                        WeeklyResetPeriodConfiguration = new(
+                            SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                        ),
+                        YearlyResetPeriodConfiguration = new(
+                            SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                        ),
+                    },
+                },
+            ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MinimumSpend = new()
             {
@@ -925,15 +1028,6 @@ public class SubscriptionProvisionParamsTest : TestBase
             SalesforceID = "salesforceId",
             ScheduleStrategy = SubscriptionProvisionParamsScheduleStrategy.EndOfBillingPeriod,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            SubscriptionEntitlements =
-            [
-                new()
-                {
-                    FeatureID = "featureId",
-                    UsageLimit = 0,
-                    IsGranted = true,
-                },
-            ],
             TrialOverrideConfiguration = new()
             {
                 IsTrial = true,
@@ -3608,6 +3702,1464 @@ public class CheckoutOptionsTest : TestBase
     }
 }
 
+public class SubscriptionProvisionParamsEntitlementTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlement
+        {
+            Credit = new()
+            {
+                Amount = 1,
+                Cadence = SubscriptionProvisionParamsEntitlementCreditCadence.Month,
+                CurrencyID = "currencyId",
+            },
+            Feature = new()
+            {
+                FeatureID = "featureId",
+                HasSoftLimit = true,
+                HasUnlimitedUsage = true,
+                MonthlyResetPeriodConfiguration = new(
+                    SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+                ResetPeriod = SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Year,
+                UsageLimit = 0,
+                WeeklyResetPeriodConfiguration = new(
+                    SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+                YearlyResetPeriodConfiguration = new(
+                    SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+            },
+        };
+
+        SubscriptionProvisionParamsEntitlementCredit expectedCredit = new()
+        {
+            Amount = 1,
+            Cadence = SubscriptionProvisionParamsEntitlementCreditCadence.Month,
+            CurrencyID = "currencyId",
+        };
+        SubscriptionProvisionParamsEntitlementFeature expectedFeature = new()
+        {
+            FeatureID = "featureId",
+            HasSoftLimit = true,
+            HasUnlimitedUsage = true,
+            MonthlyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+            ResetPeriod = SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Year,
+            UsageLimit = 0,
+            WeeklyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+            YearlyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+        };
+
+        Assert.Equal(expectedCredit, model.Credit);
+        Assert.Equal(expectedFeature, model.Feature);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlement
+        {
+            Credit = new()
+            {
+                Amount = 1,
+                Cadence = SubscriptionProvisionParamsEntitlementCreditCadence.Month,
+                CurrencyID = "currencyId",
+            },
+            Feature = new()
+            {
+                FeatureID = "featureId",
+                HasSoftLimit = true,
+                HasUnlimitedUsage = true,
+                MonthlyResetPeriodConfiguration = new(
+                    SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+                ResetPeriod = SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Year,
+                UsageLimit = 0,
+                WeeklyResetPeriodConfiguration = new(
+                    SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+                YearlyResetPeriodConfiguration = new(
+                    SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+            },
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<SubscriptionProvisionParamsEntitlement>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlement
+        {
+            Credit = new()
+            {
+                Amount = 1,
+                Cadence = SubscriptionProvisionParamsEntitlementCreditCadence.Month,
+                CurrencyID = "currencyId",
+            },
+            Feature = new()
+            {
+                FeatureID = "featureId",
+                HasSoftLimit = true,
+                HasUnlimitedUsage = true,
+                MonthlyResetPeriodConfiguration = new(
+                    SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+                ResetPeriod = SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Year,
+                UsageLimit = 0,
+                WeeklyResetPeriodConfiguration = new(
+                    SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+                YearlyResetPeriodConfiguration = new(
+                    SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+            },
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<SubscriptionProvisionParamsEntitlement>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        SubscriptionProvisionParamsEntitlementCredit expectedCredit = new()
+        {
+            Amount = 1,
+            Cadence = SubscriptionProvisionParamsEntitlementCreditCadence.Month,
+            CurrencyID = "currencyId",
+        };
+        SubscriptionProvisionParamsEntitlementFeature expectedFeature = new()
+        {
+            FeatureID = "featureId",
+            HasSoftLimit = true,
+            HasUnlimitedUsage = true,
+            MonthlyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+            ResetPeriod = SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Year,
+            UsageLimit = 0,
+            WeeklyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+            YearlyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+        };
+
+        Assert.Equal(expectedCredit, deserialized.Credit);
+        Assert.Equal(expectedFeature, deserialized.Feature);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlement
+        {
+            Credit = new()
+            {
+                Amount = 1,
+                Cadence = SubscriptionProvisionParamsEntitlementCreditCadence.Month,
+                CurrencyID = "currencyId",
+            },
+            Feature = new()
+            {
+                FeatureID = "featureId",
+                HasSoftLimit = true,
+                HasUnlimitedUsage = true,
+                MonthlyResetPeriodConfiguration = new(
+                    SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+                ResetPeriod = SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Year,
+                UsageLimit = 0,
+                WeeklyResetPeriodConfiguration = new(
+                    SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+                YearlyResetPeriodConfiguration = new(
+                    SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+            },
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlement { };
+
+        Assert.Null(model.Credit);
+        Assert.False(model.RawData.ContainsKey("credit"));
+        Assert.Null(model.Feature);
+        Assert.False(model.RawData.ContainsKey("feature"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlement { };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlement
+        {
+            // Null should be interpreted as omitted for these properties
+            Credit = null,
+            Feature = null,
+        };
+
+        Assert.Null(model.Credit);
+        Assert.False(model.RawData.ContainsKey("credit"));
+        Assert.Null(model.Feature);
+        Assert.False(model.RawData.ContainsKey("feature"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlement
+        {
+            // Null should be interpreted as omitted for these properties
+            Credit = null,
+            Feature = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlement
+        {
+            Credit = new()
+            {
+                Amount = 1,
+                Cadence = SubscriptionProvisionParamsEntitlementCreditCadence.Month,
+                CurrencyID = "currencyId",
+            },
+            Feature = new()
+            {
+                FeatureID = "featureId",
+                HasSoftLimit = true,
+                HasUnlimitedUsage = true,
+                MonthlyResetPeriodConfiguration = new(
+                    SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+                ResetPeriod = SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Year,
+                UsageLimit = 0,
+                WeeklyResetPeriodConfiguration = new(
+                    SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+                YearlyResetPeriodConfiguration = new(
+                    SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+            },
+        };
+
+        SubscriptionProvisionParamsEntitlement copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class SubscriptionProvisionParamsEntitlementCreditTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementCredit
+        {
+            Amount = 1,
+            Cadence = SubscriptionProvisionParamsEntitlementCreditCadence.Month,
+            CurrencyID = "currencyId",
+        };
+
+        double expectedAmount = 1;
+        ApiEnum<string, SubscriptionProvisionParamsEntitlementCreditCadence> expectedCadence =
+            SubscriptionProvisionParamsEntitlementCreditCadence.Month;
+        string expectedCurrencyID = "currencyId";
+
+        Assert.Equal(expectedAmount, model.Amount);
+        Assert.Equal(expectedCadence, model.Cadence);
+        Assert.Equal(expectedCurrencyID, model.CurrencyID);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementCredit
+        {
+            Amount = 1,
+            Cadence = SubscriptionProvisionParamsEntitlementCreditCadence.Month,
+            CurrencyID = "currencyId",
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<SubscriptionProvisionParamsEntitlementCredit>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementCredit
+        {
+            Amount = 1,
+            Cadence = SubscriptionProvisionParamsEntitlementCreditCadence.Month,
+            CurrencyID = "currencyId",
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<SubscriptionProvisionParamsEntitlementCredit>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        double expectedAmount = 1;
+        ApiEnum<string, SubscriptionProvisionParamsEntitlementCreditCadence> expectedCadence =
+            SubscriptionProvisionParamsEntitlementCreditCadence.Month;
+        string expectedCurrencyID = "currencyId";
+
+        Assert.Equal(expectedAmount, deserialized.Amount);
+        Assert.Equal(expectedCadence, deserialized.Cadence);
+        Assert.Equal(expectedCurrencyID, deserialized.CurrencyID);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementCredit
+        {
+            Amount = 1,
+            Cadence = SubscriptionProvisionParamsEntitlementCreditCadence.Month,
+            CurrencyID = "currencyId",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementCredit
+        {
+            Amount = 1,
+            Cadence = SubscriptionProvisionParamsEntitlementCreditCadence.Month,
+            CurrencyID = "currencyId",
+        };
+
+        SubscriptionProvisionParamsEntitlementCredit copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class SubscriptionProvisionParamsEntitlementCreditCadenceTest : TestBase
+{
+    [Theory]
+    [InlineData(SubscriptionProvisionParamsEntitlementCreditCadence.Month)]
+    [InlineData(SubscriptionProvisionParamsEntitlementCreditCadence.Year)]
+    public void Validation_Works(SubscriptionProvisionParamsEntitlementCreditCadence rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionProvisionParamsEntitlementCreditCadence> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionParamsEntitlementCreditCadence>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(SubscriptionProvisionParamsEntitlementCreditCadence.Month)]
+    [InlineData(SubscriptionProvisionParamsEntitlementCreditCadence.Year)]
+    public void SerializationRoundtrip_Works(
+        SubscriptionProvisionParamsEntitlementCreditCadence rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionProvisionParamsEntitlementCreditCadence> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionParamsEntitlementCreditCadence>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionParamsEntitlementCreditCadence>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionParamsEntitlementCreditCadence>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class SubscriptionProvisionParamsEntitlementFeatureTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementFeature
+        {
+            FeatureID = "featureId",
+            HasSoftLimit = true,
+            HasUnlimitedUsage = true,
+            MonthlyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+            ResetPeriod = SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Year,
+            UsageLimit = 0,
+            WeeklyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+            YearlyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+        };
+
+        string expectedFeatureID = "featureId";
+        bool expectedHasSoftLimit = true;
+        bool expectedHasUnlimitedUsage = true;
+        SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfiguration expectedMonthlyResetPeriodConfiguration =
+            new(
+                SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            );
+        ApiEnum<
+            string,
+            SubscriptionProvisionParamsEntitlementFeatureResetPeriod
+        > expectedResetPeriod = SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Year;
+        long expectedUsageLimit = 0;
+        SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfiguration expectedWeeklyResetPeriodConfiguration =
+            new(
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            );
+        SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfiguration expectedYearlyResetPeriodConfiguration =
+            new(
+                SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            );
+
+        Assert.Equal(expectedFeatureID, model.FeatureID);
+        Assert.Equal(expectedHasSoftLimit, model.HasSoftLimit);
+        Assert.Equal(expectedHasUnlimitedUsage, model.HasUnlimitedUsage);
+        Assert.Equal(
+            expectedMonthlyResetPeriodConfiguration,
+            model.MonthlyResetPeriodConfiguration
+        );
+        Assert.Equal(expectedResetPeriod, model.ResetPeriod);
+        Assert.Equal(expectedUsageLimit, model.UsageLimit);
+        Assert.Equal(expectedWeeklyResetPeriodConfiguration, model.WeeklyResetPeriodConfiguration);
+        Assert.Equal(expectedYearlyResetPeriodConfiguration, model.YearlyResetPeriodConfiguration);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementFeature
+        {
+            FeatureID = "featureId",
+            HasSoftLimit = true,
+            HasUnlimitedUsage = true,
+            MonthlyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+            ResetPeriod = SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Year,
+            UsageLimit = 0,
+            WeeklyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+            YearlyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionProvisionParamsEntitlementFeature>(
+                json,
+                ModelBase.SerializerOptions
+            );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementFeature
+        {
+            FeatureID = "featureId",
+            HasSoftLimit = true,
+            HasUnlimitedUsage = true,
+            MonthlyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+            ResetPeriod = SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Year,
+            UsageLimit = 0,
+            WeeklyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+            YearlyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionProvisionParamsEntitlementFeature>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        Assert.NotNull(deserialized);
+
+        string expectedFeatureID = "featureId";
+        bool expectedHasSoftLimit = true;
+        bool expectedHasUnlimitedUsage = true;
+        SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfiguration expectedMonthlyResetPeriodConfiguration =
+            new(
+                SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            );
+        ApiEnum<
+            string,
+            SubscriptionProvisionParamsEntitlementFeatureResetPeriod
+        > expectedResetPeriod = SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Year;
+        long expectedUsageLimit = 0;
+        SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfiguration expectedWeeklyResetPeriodConfiguration =
+            new(
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            );
+        SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfiguration expectedYearlyResetPeriodConfiguration =
+            new(
+                SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            );
+
+        Assert.Equal(expectedFeatureID, deserialized.FeatureID);
+        Assert.Equal(expectedHasSoftLimit, deserialized.HasSoftLimit);
+        Assert.Equal(expectedHasUnlimitedUsage, deserialized.HasUnlimitedUsage);
+        Assert.Equal(
+            expectedMonthlyResetPeriodConfiguration,
+            deserialized.MonthlyResetPeriodConfiguration
+        );
+        Assert.Equal(expectedResetPeriod, deserialized.ResetPeriod);
+        Assert.Equal(expectedUsageLimit, deserialized.UsageLimit);
+        Assert.Equal(
+            expectedWeeklyResetPeriodConfiguration,
+            deserialized.WeeklyResetPeriodConfiguration
+        );
+        Assert.Equal(
+            expectedYearlyResetPeriodConfiguration,
+            deserialized.YearlyResetPeriodConfiguration
+        );
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementFeature
+        {
+            FeatureID = "featureId",
+            HasSoftLimit = true,
+            HasUnlimitedUsage = true,
+            MonthlyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+            ResetPeriod = SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Year,
+            UsageLimit = 0,
+            WeeklyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+            YearlyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementFeature
+        {
+            FeatureID = "featureId",
+            MonthlyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+            WeeklyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+            YearlyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+        };
+
+        Assert.Null(model.HasSoftLimit);
+        Assert.False(model.RawData.ContainsKey("hasSoftLimit"));
+        Assert.Null(model.HasUnlimitedUsage);
+        Assert.False(model.RawData.ContainsKey("hasUnlimitedUsage"));
+        Assert.Null(model.ResetPeriod);
+        Assert.False(model.RawData.ContainsKey("resetPeriod"));
+        Assert.Null(model.UsageLimit);
+        Assert.False(model.RawData.ContainsKey("usageLimit"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementFeature
+        {
+            FeatureID = "featureId",
+            MonthlyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+            WeeklyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+            YearlyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementFeature
+        {
+            FeatureID = "featureId",
+            MonthlyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+            WeeklyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+            YearlyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+
+            // Null should be interpreted as omitted for these properties
+            HasSoftLimit = null,
+            HasUnlimitedUsage = null,
+            ResetPeriod = null,
+            UsageLimit = null,
+        };
+
+        Assert.Null(model.HasSoftLimit);
+        Assert.False(model.RawData.ContainsKey("hasSoftLimit"));
+        Assert.Null(model.HasUnlimitedUsage);
+        Assert.False(model.RawData.ContainsKey("hasUnlimitedUsage"));
+        Assert.Null(model.ResetPeriod);
+        Assert.False(model.RawData.ContainsKey("resetPeriod"));
+        Assert.Null(model.UsageLimit);
+        Assert.False(model.RawData.ContainsKey("usageLimit"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementFeature
+        {
+            FeatureID = "featureId",
+            MonthlyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+            WeeklyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+            YearlyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+
+            // Null should be interpreted as omitted for these properties
+            HasSoftLimit = null,
+            HasUnlimitedUsage = null,
+            ResetPeriod = null,
+            UsageLimit = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementFeature
+        {
+            FeatureID = "featureId",
+            HasSoftLimit = true,
+            HasUnlimitedUsage = true,
+            ResetPeriod = SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Year,
+            UsageLimit = 0,
+        };
+
+        Assert.Null(model.MonthlyResetPeriodConfiguration);
+        Assert.False(model.RawData.ContainsKey("monthlyResetPeriodConfiguration"));
+        Assert.Null(model.WeeklyResetPeriodConfiguration);
+        Assert.False(model.RawData.ContainsKey("weeklyResetPeriodConfiguration"));
+        Assert.Null(model.YearlyResetPeriodConfiguration);
+        Assert.False(model.RawData.ContainsKey("yearlyResetPeriodConfiguration"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementFeature
+        {
+            FeatureID = "featureId",
+            HasSoftLimit = true,
+            HasUnlimitedUsage = true,
+            ResetPeriod = SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Year,
+            UsageLimit = 0,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementFeature
+        {
+            FeatureID = "featureId",
+            HasSoftLimit = true,
+            HasUnlimitedUsage = true,
+            ResetPeriod = SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Year,
+            UsageLimit = 0,
+
+            MonthlyResetPeriodConfiguration = null,
+            WeeklyResetPeriodConfiguration = null,
+            YearlyResetPeriodConfiguration = null,
+        };
+
+        Assert.Null(model.MonthlyResetPeriodConfiguration);
+        Assert.True(model.RawData.ContainsKey("monthlyResetPeriodConfiguration"));
+        Assert.Null(model.WeeklyResetPeriodConfiguration);
+        Assert.True(model.RawData.ContainsKey("weeklyResetPeriodConfiguration"));
+        Assert.Null(model.YearlyResetPeriodConfiguration);
+        Assert.True(model.RawData.ContainsKey("yearlyResetPeriodConfiguration"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementFeature
+        {
+            FeatureID = "featureId",
+            HasSoftLimit = true,
+            HasUnlimitedUsage = true,
+            ResetPeriod = SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Year,
+            UsageLimit = 0,
+
+            MonthlyResetPeriodConfiguration = null,
+            WeeklyResetPeriodConfiguration = null,
+            YearlyResetPeriodConfiguration = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementFeature
+        {
+            FeatureID = "featureId",
+            HasSoftLimit = true,
+            HasUnlimitedUsage = true,
+            MonthlyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+            ResetPeriod = SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Year,
+            UsageLimit = 0,
+            WeeklyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+            YearlyResetPeriodConfiguration = new(
+                SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+        };
+
+        SubscriptionProvisionParamsEntitlementFeature copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationTest
+    : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfiguration
+        {
+            AccordingTo =
+                SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart,
+        };
+
+        ApiEnum<
+            string,
+            SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo
+        > expectedAccordingTo =
+            SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart;
+
+        Assert.Equal(expectedAccordingTo, model.AccordingTo);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfiguration
+        {
+            AccordingTo =
+                SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart,
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfiguration>(
+                json,
+                ModelBase.SerializerOptions
+            );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfiguration
+        {
+            AccordingTo =
+                SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart,
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfiguration>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        Assert.NotNull(deserialized);
+
+        ApiEnum<
+            string,
+            SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo
+        > expectedAccordingTo =
+            SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart;
+
+        Assert.Equal(expectedAccordingTo, deserialized.AccordingTo);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfiguration
+        {
+            AccordingTo =
+                SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfiguration
+        {
+            AccordingTo =
+                SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart,
+        };
+
+        SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfiguration copied = new(
+            model
+        );
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingToTest
+    : TestBase
+{
+    [Theory]
+    [InlineData(
+        SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+    )]
+    [InlineData(
+        SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.StartOfTheMonth
+    )]
+    public void Validation_Works(
+        SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<
+            string,
+            SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo
+        > value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<
+                string,
+                SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo
+            >
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(
+        SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+    )]
+    [InlineData(
+        SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.StartOfTheMonth
+    )]
+    public void SerializationRoundtrip_Works(
+        SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<
+            string,
+            SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo
+        > value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<
+                string,
+                SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo
+            >
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<
+                string,
+                SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo
+            >
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<
+                string,
+                SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo
+            >
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class SubscriptionProvisionParamsEntitlementFeatureResetPeriodTest : TestBase
+{
+    [Theory]
+    [InlineData(SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Year)]
+    [InlineData(SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Month)]
+    [InlineData(SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Week)]
+    [InlineData(SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Day)]
+    [InlineData(SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Hour)]
+    public void Validation_Works(SubscriptionProvisionParamsEntitlementFeatureResetPeriod rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionProvisionParamsEntitlementFeatureResetPeriod> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionParamsEntitlementFeatureResetPeriod>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Year)]
+    [InlineData(SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Month)]
+    [InlineData(SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Week)]
+    [InlineData(SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Day)]
+    [InlineData(SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Hour)]
+    public void SerializationRoundtrip_Works(
+        SubscriptionProvisionParamsEntitlementFeatureResetPeriod rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionProvisionParamsEntitlementFeatureResetPeriod> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionParamsEntitlementFeatureResetPeriod>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionParamsEntitlementFeatureResetPeriod>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionProvisionParamsEntitlementFeatureResetPeriod>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationTest
+    : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfiguration
+        {
+            AccordingTo =
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart,
+        };
+
+        ApiEnum<
+            string,
+            SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo
+        > expectedAccordingTo =
+            SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart;
+
+        Assert.Equal(expectedAccordingTo, model.AccordingTo);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfiguration
+        {
+            AccordingTo =
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart,
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfiguration>(
+                json,
+                ModelBase.SerializerOptions
+            );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfiguration
+        {
+            AccordingTo =
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart,
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfiguration>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        Assert.NotNull(deserialized);
+
+        ApiEnum<
+            string,
+            SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo
+        > expectedAccordingTo =
+            SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart;
+
+        Assert.Equal(expectedAccordingTo, deserialized.AccordingTo);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfiguration
+        {
+            AccordingTo =
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfiguration
+        {
+            AccordingTo =
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart,
+        };
+
+        SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfiguration copied = new(
+            model
+        );
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingToTest
+    : TestBase
+{
+    [Theory]
+    [InlineData(
+        SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+    )]
+    [InlineData(
+        SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.EverySunday
+    )]
+    [InlineData(
+        SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryMonday
+    )]
+    [InlineData(
+        SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryTuesday
+    )]
+    [InlineData(
+        SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryWednesday
+    )]
+    [InlineData(
+        SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryThursday
+    )]
+    [InlineData(
+        SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryFriday
+    )]
+    [InlineData(
+        SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.EverySaturday
+    )]
+    public void Validation_Works(
+        SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<
+            string,
+            SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo
+        > value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<
+                string,
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo
+            >
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(
+        SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+    )]
+    [InlineData(
+        SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.EverySunday
+    )]
+    [InlineData(
+        SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryMonday
+    )]
+    [InlineData(
+        SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryTuesday
+    )]
+    [InlineData(
+        SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryWednesday
+    )]
+    [InlineData(
+        SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryThursday
+    )]
+    [InlineData(
+        SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryFriday
+    )]
+    [InlineData(
+        SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.EverySaturday
+    )]
+    public void SerializationRoundtrip_Works(
+        SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<
+            string,
+            SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo
+        > value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<
+                string,
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo
+            >
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<
+                string,
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo
+            >
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<
+                string,
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo
+            >
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationTest
+    : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfiguration
+        {
+            AccordingTo =
+                SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart,
+        };
+
+        ApiEnum<
+            string,
+            SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo
+        > expectedAccordingTo =
+            SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart;
+
+        Assert.Equal(expectedAccordingTo, model.AccordingTo);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfiguration
+        {
+            AccordingTo =
+                SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart,
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfiguration>(
+                json,
+                ModelBase.SerializerOptions
+            );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfiguration
+        {
+            AccordingTo =
+                SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart,
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfiguration>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        Assert.NotNull(deserialized);
+
+        ApiEnum<
+            string,
+            SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo
+        > expectedAccordingTo =
+            SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart;
+
+        Assert.Equal(expectedAccordingTo, deserialized.AccordingTo);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfiguration
+        {
+            AccordingTo =
+                SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfiguration
+        {
+            AccordingTo =
+                SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart,
+        };
+
+        SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfiguration copied = new(
+            model
+        );
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingToTest
+    : TestBase
+{
+    [Theory]
+    [InlineData(
+        SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+    )]
+    public void Validation_Works(
+        SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<
+            string,
+            SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo
+        > value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<
+                string,
+                SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo
+            >
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(
+        SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+    )]
+    public void SerializationRoundtrip_Works(
+        SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<
+            string,
+            SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo
+        > value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<
+                string,
+                SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo
+            >
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<
+                string,
+                SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo
+            >
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<
+                string,
+                SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo
+            >
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
 public class SubscriptionProvisionParamsMinimumSpendTest : TestBase
 {
     [Fact]
@@ -5962,159 +7514,6 @@ public class SubscriptionProvisionParamsScheduleStrategyTest : TestBase
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
-    }
-}
-
-public class SubscriptionProvisionParamsSubscriptionEntitlementTest : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new SubscriptionProvisionParamsSubscriptionEntitlement
-        {
-            FeatureID = "featureId",
-            UsageLimit = 0,
-            IsGranted = true,
-        };
-
-        string expectedFeatureID = "featureId";
-        double expectedUsageLimit = 0;
-        bool expectedIsGranted = true;
-
-        Assert.Equal(expectedFeatureID, model.FeatureID);
-        Assert.Equal(expectedUsageLimit, model.UsageLimit);
-        Assert.Equal(expectedIsGranted, model.IsGranted);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new SubscriptionProvisionParamsSubscriptionEntitlement
-        {
-            FeatureID = "featureId",
-            UsageLimit = 0,
-            IsGranted = true,
-        };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized =
-            JsonSerializer.Deserialize<SubscriptionProvisionParamsSubscriptionEntitlement>(
-                json,
-                ModelBase.SerializerOptions
-            );
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new SubscriptionProvisionParamsSubscriptionEntitlement
-        {
-            FeatureID = "featureId",
-            UsageLimit = 0,
-            IsGranted = true,
-        };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized =
-            JsonSerializer.Deserialize<SubscriptionProvisionParamsSubscriptionEntitlement>(
-                element,
-                ModelBase.SerializerOptions
-            );
-        Assert.NotNull(deserialized);
-
-        string expectedFeatureID = "featureId";
-        double expectedUsageLimit = 0;
-        bool expectedIsGranted = true;
-
-        Assert.Equal(expectedFeatureID, deserialized.FeatureID);
-        Assert.Equal(expectedUsageLimit, deserialized.UsageLimit);
-        Assert.Equal(expectedIsGranted, deserialized.IsGranted);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new SubscriptionProvisionParamsSubscriptionEntitlement
-        {
-            FeatureID = "featureId",
-            UsageLimit = 0,
-            IsGranted = true,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
-    {
-        var model = new SubscriptionProvisionParamsSubscriptionEntitlement
-        {
-            FeatureID = "featureId",
-            UsageLimit = 0,
-        };
-
-        Assert.Null(model.IsGranted);
-        Assert.False(model.RawData.ContainsKey("isGranted"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new SubscriptionProvisionParamsSubscriptionEntitlement
-        {
-            FeatureID = "featureId",
-            UsageLimit = 0,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
-    {
-        var model = new SubscriptionProvisionParamsSubscriptionEntitlement
-        {
-            FeatureID = "featureId",
-            UsageLimit = 0,
-
-            // Null should be interpreted as omitted for these properties
-            IsGranted = null,
-        };
-
-        Assert.Null(model.IsGranted);
-        Assert.False(model.RawData.ContainsKey("isGranted"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new SubscriptionProvisionParamsSubscriptionEntitlement
-        {
-            FeatureID = "featureId",
-            UsageLimit = 0,
-
-            // Null should be interpreted as omitted for these properties
-            IsGranted = null,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new SubscriptionProvisionParamsSubscriptionEntitlement
-        {
-            FeatureID = "featureId",
-            UsageLimit = 0,
-            IsGranted = true,
-        };
-
-        SubscriptionProvisionParamsSubscriptionEntitlement copied = new(model);
-
-        Assert.Equal(model, copied);
     }
 }
 

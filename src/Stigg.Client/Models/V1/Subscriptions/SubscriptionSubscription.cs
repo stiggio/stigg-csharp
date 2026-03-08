@@ -501,12 +501,12 @@ public sealed record class Data : JsonModel
     /// <summary>
     /// Entitlements associated with the subscription
     /// </summary>
-    public IReadOnlyList<DataSubscriptionEntitlement>? SubscriptionEntitlements
+    public IReadOnlyList<SubscriptionEntitlement>? SubscriptionEntitlements
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<ImmutableArray<DataSubscriptionEntitlement>>(
+            return this._rawData.GetNullableStruct<ImmutableArray<SubscriptionEntitlement>>(
                 "subscriptionEntitlements"
             );
         }
@@ -517,7 +517,7 @@ public sealed record class Data : JsonModel
                 return;
             }
 
-            this._rawData.Set<ImmutableArray<DataSubscriptionEntitlement>?>(
+            this._rawData.Set<ImmutableArray<SubscriptionEntitlement>?>(
                 "subscriptionEntitlements",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
@@ -4431,10 +4431,8 @@ sealed class PriceTierUnitPriceCurrencyConverter : JsonConverter<PriceTierUnitPr
 /// <summary>
 /// Subscription entitlement reference
 /// </summary>
-[JsonConverter(
-    typeof(JsonModelConverter<DataSubscriptionEntitlement, DataSubscriptionEntitlementFromRaw>)
-)]
-public sealed record class DataSubscriptionEntitlement : JsonModel
+[JsonConverter(typeof(JsonModelConverter<SubscriptionEntitlement, SubscriptionEntitlementFromRaw>))]
+public sealed record class SubscriptionEntitlement : JsonModel
 {
     /// <summary>
     /// Feature ID or currency ID
@@ -4452,12 +4450,12 @@ public sealed record class DataSubscriptionEntitlement : JsonModel
     /// <summary>
     /// Entitlement type (FEATURE or CREDIT)
     /// </summary>
-    public required ApiEnum<string, DataSubscriptionEntitlementType> Type
+    public required ApiEnum<string, SubscriptionEntitlementType> Type
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, DataSubscriptionEntitlementType>>(
+            return this._rawData.GetNotNullClass<ApiEnum<string, SubscriptionEntitlementType>>(
                 "type"
             );
         }
@@ -4471,29 +4469,29 @@ public sealed record class DataSubscriptionEntitlement : JsonModel
         this.Type.Validate();
     }
 
-    public DataSubscriptionEntitlement() { }
+    public SubscriptionEntitlement() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public DataSubscriptionEntitlement(DataSubscriptionEntitlement dataSubscriptionEntitlement)
-        : base(dataSubscriptionEntitlement) { }
+    public SubscriptionEntitlement(SubscriptionEntitlement subscriptionEntitlement)
+        : base(subscriptionEntitlement) { }
 #pragma warning restore CS8618
 
-    public DataSubscriptionEntitlement(IReadOnlyDictionary<string, JsonElement> rawData)
+    public SubscriptionEntitlement(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    DataSubscriptionEntitlement(FrozenDictionary<string, JsonElement> rawData)
+    SubscriptionEntitlement(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="DataSubscriptionEntitlementFromRaw.FromRawUnchecked"/>
-    public static DataSubscriptionEntitlement FromRawUnchecked(
+    /// <inheritdoc cref="SubscriptionEntitlementFromRaw.FromRawUnchecked"/>
+    public static SubscriptionEntitlement FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -4501,28 +4499,27 @@ public sealed record class DataSubscriptionEntitlement : JsonModel
     }
 }
 
-class DataSubscriptionEntitlementFromRaw : IFromRawJson<DataSubscriptionEntitlement>
+class SubscriptionEntitlementFromRaw : IFromRawJson<SubscriptionEntitlement>
 {
     /// <inheritdoc/>
-    public DataSubscriptionEntitlement FromRawUnchecked(
+    public SubscriptionEntitlement FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => DataSubscriptionEntitlement.FromRawUnchecked(rawData);
+    ) => SubscriptionEntitlement.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// Entitlement type (FEATURE or CREDIT)
 /// </summary>
-[JsonConverter(typeof(DataSubscriptionEntitlementTypeConverter))]
-public enum DataSubscriptionEntitlementType
+[JsonConverter(typeof(SubscriptionEntitlementTypeConverter))]
+public enum SubscriptionEntitlementType
 {
     Feature,
     Credit,
 }
 
-sealed class DataSubscriptionEntitlementTypeConverter
-    : JsonConverter<DataSubscriptionEntitlementType>
+sealed class SubscriptionEntitlementTypeConverter : JsonConverter<SubscriptionEntitlementType>
 {
-    public override DataSubscriptionEntitlementType Read(
+    public override SubscriptionEntitlementType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -4530,15 +4527,15 @@ sealed class DataSubscriptionEntitlementTypeConverter
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "FEATURE" => DataSubscriptionEntitlementType.Feature,
-            "CREDIT" => DataSubscriptionEntitlementType.Credit,
-            _ => (DataSubscriptionEntitlementType)(-1),
+            "FEATURE" => SubscriptionEntitlementType.Feature,
+            "CREDIT" => SubscriptionEntitlementType.Credit,
+            _ => (SubscriptionEntitlementType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        DataSubscriptionEntitlementType value,
+        SubscriptionEntitlementType value,
         JsonSerializerOptions options
     )
     {
@@ -4546,8 +4543,8 @@ sealed class DataSubscriptionEntitlementTypeConverter
             writer,
             value switch
             {
-                DataSubscriptionEntitlementType.Feature => "FEATURE",
-                DataSubscriptionEntitlementType.Credit => "CREDIT",
+                SubscriptionEntitlementType.Feature => "FEATURE",
+                SubscriptionEntitlementType.Credit => "CREDIT",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

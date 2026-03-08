@@ -107,7 +107,7 @@ public class SubscriptionSubscriptionTest : TestBase
                 ResourceID = "resourceId",
                 SubscriptionEntitlements =
                 [
-                    new() { ID = "id", Type = DataSubscriptionEntitlementType.Feature },
+                    new() { ID = "id", Type = SubscriptionEntitlementType.Feature },
                 ],
                 Trial = new(TrialTrialEndBehavior.ConvertToPaid),
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -204,7 +204,7 @@ public class SubscriptionSubscriptionTest : TestBase
             ResourceID = "resourceId",
             SubscriptionEntitlements =
             [
-                new() { ID = "id", Type = DataSubscriptionEntitlementType.Feature },
+                new() { ID = "id", Type = SubscriptionEntitlementType.Feature },
             ],
             Trial = new(TrialTrialEndBehavior.ConvertToPaid),
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -311,7 +311,7 @@ public class SubscriptionSubscriptionTest : TestBase
                 ResourceID = "resourceId",
                 SubscriptionEntitlements =
                 [
-                    new() { ID = "id", Type = DataSubscriptionEntitlementType.Feature },
+                    new() { ID = "id", Type = SubscriptionEntitlementType.Feature },
                 ],
                 Trial = new(TrialTrialEndBehavior.ConvertToPaid),
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -425,7 +425,7 @@ public class SubscriptionSubscriptionTest : TestBase
                 ResourceID = "resourceId",
                 SubscriptionEntitlements =
                 [
-                    new() { ID = "id", Type = DataSubscriptionEntitlementType.Feature },
+                    new() { ID = "id", Type = SubscriptionEntitlementType.Feature },
                 ],
                 Trial = new(TrialTrialEndBehavior.ConvertToPaid),
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -529,7 +529,7 @@ public class SubscriptionSubscriptionTest : TestBase
             ResourceID = "resourceId",
             SubscriptionEntitlements =
             [
-                new() { ID = "id", Type = DataSubscriptionEntitlementType.Feature },
+                new() { ID = "id", Type = SubscriptionEntitlementType.Feature },
             ],
             Trial = new(TrialTrialEndBehavior.ConvertToPaid),
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -636,7 +636,7 @@ public class SubscriptionSubscriptionTest : TestBase
                 ResourceID = "resourceId",
                 SubscriptionEntitlements =
                 [
-                    new() { ID = "id", Type = DataSubscriptionEntitlementType.Feature },
+                    new() { ID = "id", Type = SubscriptionEntitlementType.Feature },
                 ],
                 Trial = new(TrialTrialEndBehavior.ConvertToPaid),
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -744,7 +744,7 @@ public class SubscriptionSubscriptionTest : TestBase
                 ResourceID = "resourceId",
                 SubscriptionEntitlements =
                 [
-                    new() { ID = "id", Type = DataSubscriptionEntitlementType.Feature },
+                    new() { ID = "id", Type = SubscriptionEntitlementType.Feature },
                 ],
                 Trial = new(TrialTrialEndBehavior.ConvertToPaid),
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -852,7 +852,7 @@ public class DataTest : TestBase
             ResourceID = "resourceId",
             SubscriptionEntitlements =
             [
-                new() { ID = "id", Type = DataSubscriptionEntitlementType.Feature },
+                new() { ID = "id", Type = SubscriptionEntitlementType.Feature },
             ],
             Trial = new(TrialTrialEndBehavior.ConvertToPaid),
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -948,9 +948,9 @@ public class DataTest : TestBase
             },
         ];
         string expectedResourceID = "resourceId";
-        List<DataSubscriptionEntitlement> expectedSubscriptionEntitlements =
+        List<SubscriptionEntitlement> expectedSubscriptionEntitlements =
         [
-            new() { ID = "id", Type = DataSubscriptionEntitlementType.Feature },
+            new() { ID = "id", Type = SubscriptionEntitlementType.Feature },
         ];
         Trial expectedTrial = new(TrialTrialEndBehavior.ConvertToPaid);
         DateTimeOffset expectedTrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -1112,7 +1112,7 @@ public class DataTest : TestBase
             ResourceID = "resourceId",
             SubscriptionEntitlements =
             [
-                new() { ID = "id", Type = DataSubscriptionEntitlementType.Feature },
+                new() { ID = "id", Type = SubscriptionEntitlementType.Feature },
             ],
             Trial = new(TrialTrialEndBehavior.ConvertToPaid),
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1217,7 +1217,7 @@ public class DataTest : TestBase
             ResourceID = "resourceId",
             SubscriptionEntitlements =
             [
-                new() { ID = "id", Type = DataSubscriptionEntitlementType.Feature },
+                new() { ID = "id", Type = SubscriptionEntitlementType.Feature },
             ],
             Trial = new(TrialTrialEndBehavior.ConvertToPaid),
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1317,9 +1317,9 @@ public class DataTest : TestBase
             },
         ];
         string expectedResourceID = "resourceId";
-        List<DataSubscriptionEntitlement> expectedSubscriptionEntitlements =
+        List<SubscriptionEntitlement> expectedSubscriptionEntitlements =
         [
-            new() { ID = "id", Type = DataSubscriptionEntitlementType.Feature },
+            new() { ID = "id", Type = SubscriptionEntitlementType.Feature },
         ];
         Trial expectedTrial = new(TrialTrialEndBehavior.ConvertToPaid);
         DateTimeOffset expectedTrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -1487,7 +1487,7 @@ public class DataTest : TestBase
             ResourceID = "resourceId",
             SubscriptionEntitlements =
             [
-                new() { ID = "id", Type = DataSubscriptionEntitlementType.Feature },
+                new() { ID = "id", Type = SubscriptionEntitlementType.Feature },
             ],
             Trial = new(TrialTrialEndBehavior.ConvertToPaid),
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1783,7 +1783,7 @@ public class DataTest : TestBase
             ],
             SubscriptionEntitlements =
             [
-                new() { ID = "id", Type = DataSubscriptionEntitlementType.Feature },
+                new() { ID = "id", Type = SubscriptionEntitlementType.Feature },
             ],
         };
 
@@ -1888,7 +1888,7 @@ public class DataTest : TestBase
             ],
             SubscriptionEntitlements =
             [
-                new() { ID = "id", Type = DataSubscriptionEntitlementType.Feature },
+                new() { ID = "id", Type = SubscriptionEntitlementType.Feature },
             ],
         };
 
@@ -1964,7 +1964,7 @@ public class DataTest : TestBase
             ],
             SubscriptionEntitlements =
             [
-                new() { ID = "id", Type = DataSubscriptionEntitlementType.Feature },
+                new() { ID = "id", Type = SubscriptionEntitlementType.Feature },
             ],
 
             BillingCycleAnchor = null,
@@ -2085,7 +2085,7 @@ public class DataTest : TestBase
             ],
             SubscriptionEntitlements =
             [
-                new() { ID = "id", Type = DataSubscriptionEntitlementType.Feature },
+                new() { ID = "id", Type = SubscriptionEntitlementType.Feature },
             ],
 
             BillingCycleAnchor = null,
@@ -2201,7 +2201,7 @@ public class DataTest : TestBase
             ResourceID = "resourceId",
             SubscriptionEntitlements =
             [
-                new() { ID = "id", Type = DataSubscriptionEntitlementType.Feature },
+                new() { ID = "id", Type = SubscriptionEntitlementType.Feature },
             ],
             Trial = new(TrialTrialEndBehavior.ConvertToPaid),
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -6026,20 +6026,20 @@ public class PriceTierUnitPriceCurrencyTest : TestBase
     }
 }
 
-public class DataSubscriptionEntitlementTest : TestBase
+public class SubscriptionEntitlementTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new DataSubscriptionEntitlement
+        var model = new SubscriptionEntitlement
         {
             ID = "id",
-            Type = DataSubscriptionEntitlementType.Feature,
+            Type = SubscriptionEntitlementType.Feature,
         };
 
         string expectedID = "id";
-        ApiEnum<string, DataSubscriptionEntitlementType> expectedType =
-            DataSubscriptionEntitlementType.Feature;
+        ApiEnum<string, SubscriptionEntitlementType> expectedType =
+            SubscriptionEntitlementType.Feature;
 
         Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedType, model.Type);
@@ -6048,14 +6048,14 @@ public class DataSubscriptionEntitlementTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new DataSubscriptionEntitlement
+        var model = new SubscriptionEntitlement
         {
             ID = "id",
-            Type = DataSubscriptionEntitlementType.Feature,
+            Type = SubscriptionEntitlementType.Feature,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DataSubscriptionEntitlement>(
+        var deserialized = JsonSerializer.Deserialize<SubscriptionEntitlement>(
             json,
             ModelBase.SerializerOptions
         );
@@ -6066,22 +6066,22 @@ public class DataSubscriptionEntitlementTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new DataSubscriptionEntitlement
+        var model = new SubscriptionEntitlement
         {
             ID = "id",
-            Type = DataSubscriptionEntitlementType.Feature,
+            Type = SubscriptionEntitlementType.Feature,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DataSubscriptionEntitlement>(
+        var deserialized = JsonSerializer.Deserialize<SubscriptionEntitlement>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
-        ApiEnum<string, DataSubscriptionEntitlementType> expectedType =
-            DataSubscriptionEntitlementType.Feature;
+        ApiEnum<string, SubscriptionEntitlementType> expectedType =
+            SubscriptionEntitlementType.Feature;
 
         Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedType, deserialized.Type);
@@ -6090,10 +6090,10 @@ public class DataSubscriptionEntitlementTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new DataSubscriptionEntitlement
+        var model = new SubscriptionEntitlement
         {
             ID = "id",
-            Type = DataSubscriptionEntitlementType.Feature,
+            Type = SubscriptionEntitlementType.Feature,
         };
 
         model.Validate();
@@ -6102,34 +6102,34 @@ public class DataSubscriptionEntitlementTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new DataSubscriptionEntitlement
+        var model = new SubscriptionEntitlement
         {
             ID = "id",
-            Type = DataSubscriptionEntitlementType.Feature,
+            Type = SubscriptionEntitlementType.Feature,
         };
 
-        DataSubscriptionEntitlement copied = new(model);
+        SubscriptionEntitlement copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class DataSubscriptionEntitlementTypeTest : TestBase
+public class SubscriptionEntitlementTypeTest : TestBase
 {
     [Theory]
-    [InlineData(DataSubscriptionEntitlementType.Feature)]
-    [InlineData(DataSubscriptionEntitlementType.Credit)]
-    public void Validation_Works(DataSubscriptionEntitlementType rawValue)
+    [InlineData(SubscriptionEntitlementType.Feature)]
+    [InlineData(SubscriptionEntitlementType.Credit)]
+    public void Validation_Works(SubscriptionEntitlementType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, DataSubscriptionEntitlementType> value = rawValue;
+        ApiEnum<string, SubscriptionEntitlementType> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, DataSubscriptionEntitlementType>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionEntitlementType>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -6139,17 +6139,18 @@ public class DataSubscriptionEntitlementTypeTest : TestBase
     }
 
     [Theory]
-    [InlineData(DataSubscriptionEntitlementType.Feature)]
-    [InlineData(DataSubscriptionEntitlementType.Credit)]
-    public void SerializationRoundtrip_Works(DataSubscriptionEntitlementType rawValue)
+    [InlineData(SubscriptionEntitlementType.Feature)]
+    [InlineData(SubscriptionEntitlementType.Credit)]
+    public void SerializationRoundtrip_Works(SubscriptionEntitlementType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, DataSubscriptionEntitlementType> value = rawValue;
+        ApiEnum<string, SubscriptionEntitlementType> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, DataSubscriptionEntitlementType>
-        >(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionEntitlementType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(value, deserialized);
     }
@@ -6157,14 +6158,15 @@ public class DataSubscriptionEntitlementTypeTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, DataSubscriptionEntitlementType>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionEntitlementType>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, DataSubscriptionEntitlementType>
-        >(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, SubscriptionEntitlementType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(value, deserialized);
     }

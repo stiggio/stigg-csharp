@@ -97,7 +97,7 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Subscriptions::PriceCurrency>(),
             new ApiEnumConverter<string, Subscriptions::PriceTierFlatPriceCurrency>(),
             new ApiEnumConverter<string, Subscriptions::PriceTierUnitPriceCurrency>(),
-            new ApiEnumConverter<string, Subscriptions::DataSubscriptionEntitlementType>(),
+            new ApiEnumConverter<string, Subscriptions::SubscriptionEntitlementType>(),
             new ApiEnumConverter<string, Subscriptions::TrialTrialEndBehavior>(),
             new ApiEnumConverter<
                 string,
@@ -233,9 +233,7 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Subscriptions::ProrationBehavior>(),
             new ApiEnumConverter<string, Subscriptions::BillingPeriod>(),
             new ApiEnumConverter<string, Subscriptions::Type>(),
-            new ApiEnumConverter<string, Subscriptions::MinimumSpendCurrency>(),
-            new ApiEnumConverter<string, Subscriptions::PriceOverrideCurrency>(),
-            new ApiEnumConverter<string, Subscriptions::ScheduleStrategy>(),
+            new ApiEnumConverter<string, Subscriptions::Cadence>(),
             new ApiEnumConverter<string, Subscriptions::AccordingTo>(),
             new ApiEnumConverter<string, Subscriptions::ResetPeriod>(),
             new ApiEnumConverter<
@@ -246,6 +244,9 @@ public abstract record class ModelBase
                 string,
                 Subscriptions::YearlyResetPeriodConfigurationAccordingTo
             >(),
+            new ApiEnumConverter<string, Subscriptions::MinimumSpendCurrency>(),
+            new ApiEnumConverter<string, Subscriptions::PriceOverrideCurrency>(),
+            new ApiEnumConverter<string, Subscriptions::ScheduleStrategy>(),
             new ApiEnumConverter<string, Subscriptions::CancellationAction>(),
             new ApiEnumConverter<string, Subscriptions::CancellationTime>(),
             new ApiEnumConverter<string, Subscriptions::SubscriptionBillingPeriod>(),
@@ -284,6 +285,26 @@ public abstract record class ModelBase
             >(),
             new ApiEnumConverter<string, Subscriptions::SubscriptionProvisionParamsBillingPeriod>(),
             new ApiEnumConverter<string, Subscriptions::SubscriptionProvisionParamsChargeType>(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionProvisionParamsEntitlementCreditCadence
+            >(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo
+            >(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionProvisionParamsEntitlementFeatureResetPeriod
+            >(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo
+            >(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo
+            >(),
             new ApiEnumConverter<
                 string,
                 Subscriptions::SubscriptionProvisionParamsMinimumSpendCurrency

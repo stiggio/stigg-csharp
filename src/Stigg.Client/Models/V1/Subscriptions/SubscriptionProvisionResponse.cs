@@ -108,16 +108,18 @@ public sealed record class SubscriptionProvisionResponseData : JsonModel
         init { this._rawData.Set("id", value); }
     }
 
-    public required IReadOnlyList<Entitlement>? Entitlements
+    public required IReadOnlyList<SubscriptionProvisionResponseDataEntitlement>? Entitlements
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<ImmutableArray<Entitlement>>("entitlements");
+            return this._rawData.GetNullableStruct<
+                ImmutableArray<SubscriptionProvisionResponseDataEntitlement>
+            >("entitlements");
         }
         init
         {
-            this._rawData.Set<ImmutableArray<Entitlement>?>(
+            this._rawData.Set<ImmutableArray<SubscriptionProvisionResponseDataEntitlement>?>(
                 "entitlements",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
@@ -272,8 +274,8 @@ class SubscriptionProvisionResponseDataFromRaw : IFromRawJson<SubscriptionProvis
     ) => SubscriptionProvisionResponseData.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(EntitlementConverter))]
-public record class Entitlement : ModelBase
+[JsonConverter(typeof(SubscriptionProvisionResponseDataEntitlementConverter))]
+public record class SubscriptionProvisionResponseDataEntitlement : ModelBase
 {
     public object? Value { get; } = null;
 
@@ -356,19 +358,25 @@ public record class Entitlement : ModelBase
         }
     }
 
-    public Entitlement(UnionObjectVariant0 value, JsonElement? element = null)
+    public SubscriptionProvisionResponseDataEntitlement(
+        UnionObjectVariant0 value,
+        JsonElement? element = null
+    )
     {
         this.Value = value;
         this._element = element;
     }
 
-    public Entitlement(UnionObjectVariant1 value, JsonElement? element = null)
+    public SubscriptionProvisionResponseDataEntitlement(
+        UnionObjectVariant1 value,
+        JsonElement? element = null
+    )
     {
         this.Value = value;
         this._element = element;
     }
 
-    public Entitlement(JsonElement element)
+    public SubscriptionProvisionResponseDataEntitlement(JsonElement element)
     {
         this._element = element;
     }
@@ -450,7 +458,7 @@ public record class Entitlement : ModelBase
                 break;
             default:
                 throw new StiggInvalidDataException(
-                    "Data did not match any variant of Entitlement"
+                    "Data did not match any variant of SubscriptionProvisionResponseDataEntitlement"
                 );
         }
     }
@@ -486,14 +494,18 @@ public record class Entitlement : ModelBase
             UnionObjectVariant0 value => unionObjectVariant0(value),
             UnionObjectVariant1 value => unionObjectVariant1(value),
             _ => throw new StiggInvalidDataException(
-                "Data did not match any variant of Entitlement"
+                "Data did not match any variant of SubscriptionProvisionResponseDataEntitlement"
             ),
         };
     }
 
-    public static implicit operator Entitlement(UnionObjectVariant0 value) => new(value);
+    public static implicit operator SubscriptionProvisionResponseDataEntitlement(
+        UnionObjectVariant0 value
+    ) => new(value);
 
-    public static implicit operator Entitlement(UnionObjectVariant1 value) => new(value);
+    public static implicit operator SubscriptionProvisionResponseDataEntitlement(
+        UnionObjectVariant1 value
+    ) => new(value);
 
     /// <summary>
     /// Validates that the instance was constructed with a known variant and that this variant is valid
@@ -509,7 +521,9 @@ public record class Entitlement : ModelBase
     {
         if (this.Value == null)
         {
-            throw new StiggInvalidDataException("Data did not match any variant of Entitlement");
+            throw new StiggInvalidDataException(
+                "Data did not match any variant of SubscriptionProvisionResponseDataEntitlement"
+            );
         }
         this.Switch(
             (unionObjectVariant0) => unionObjectVariant0.Validate(),
@@ -517,7 +531,7 @@ public record class Entitlement : ModelBase
         );
     }
 
-    public virtual bool Equals(Entitlement? other) =>
+    public virtual bool Equals(SubscriptionProvisionResponseDataEntitlement? other) =>
         other != null
         && this.VariantIndex() == other.VariantIndex()
         && JsonElement.DeepEquals(this.Json, other.Json);
@@ -544,9 +558,10 @@ public record class Entitlement : ModelBase
     }
 }
 
-sealed class EntitlementConverter : JsonConverter<Entitlement>
+sealed class SubscriptionProvisionResponseDataEntitlementConverter
+    : JsonConverter<SubscriptionProvisionResponseDataEntitlement>
 {
-    public override Entitlement? Read(
+    public override SubscriptionProvisionResponseDataEntitlement? Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -586,7 +601,7 @@ sealed class EntitlementConverter : JsonConverter<Entitlement>
 
     public override void Write(
         Utf8JsonWriter writer,
-        Entitlement value,
+        SubscriptionProvisionResponseDataEntitlement value,
         JsonSerializerOptions options
     )
     {
@@ -668,12 +683,12 @@ public sealed record class UnionObjectVariant0 : JsonModel
         }
     }
 
-    public Feature? Feature
+    public UnionObjectVariant0Feature? Feature
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<Feature>("feature");
+            return this._rawData.GetNullableClass<UnionObjectVariant0Feature>("feature");
         }
         init
         {
@@ -989,8 +1004,10 @@ sealed class UnionObjectVariant0TypeConverter : JsonConverter<UnionObjectVariant
     }
 }
 
-[JsonConverter(typeof(JsonModelConverter<Feature, FeatureFromRaw>))]
-public sealed record class Feature : JsonModel
+[JsonConverter(
+    typeof(JsonModelConverter<UnionObjectVariant0Feature, UnionObjectVariant0FeatureFromRaw>)
+)]
+public sealed record class UnionObjectVariant0Feature : JsonModel
 {
     /// <summary>
     /// The human-readable name of the entitlement, shown in UI elements.
@@ -1053,39 +1070,42 @@ public sealed record class Feature : JsonModel
         _ = this.RefID;
     }
 
-    public Feature() { }
+    public UnionObjectVariant0Feature() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public Feature(Feature feature)
-        : base(feature) { }
+    public UnionObjectVariant0Feature(UnionObjectVariant0Feature unionObjectVariant0Feature)
+        : base(unionObjectVariant0Feature) { }
 #pragma warning restore CS8618
 
-    public Feature(IReadOnlyDictionary<string, JsonElement> rawData)
+    public UnionObjectVariant0Feature(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Feature(FrozenDictionary<string, JsonElement> rawData)
+    UnionObjectVariant0Feature(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="FeatureFromRaw.FromRawUnchecked"/>
-    public static Feature FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="UnionObjectVariant0FeatureFromRaw.FromRawUnchecked"/>
+    public static UnionObjectVariant0Feature FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class FeatureFromRaw : IFromRawJson<Feature>
+class UnionObjectVariant0FeatureFromRaw : IFromRawJson<UnionObjectVariant0Feature>
 {
     /// <inheritdoc/>
-    public Feature FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        Feature.FromRawUnchecked(rawData);
+    public UnionObjectVariant0Feature FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => UnionObjectVariant0Feature.FromRawUnchecked(rawData);
 }
 
 /// <summary>

@@ -288,6 +288,29 @@ public record class SubscriptionProvisionParams : ParamsBase
         }
     }
 
+    public IReadOnlyList<SubscriptionProvisionParamsEntitlement>? Entitlements
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<
+                ImmutableArray<SubscriptionProvisionParamsEntitlement>
+            >("entitlements");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawBodyData.Set<ImmutableArray<SubscriptionProvisionParamsEntitlement>?>(
+                "entitlements",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
     /// <summary>
     /// Additional metadata for the subscription
     /// </summary>
@@ -453,29 +476,6 @@ public record class SubscriptionProvisionParams : ParamsBase
             }
 
             this._rawBodyData.Set("startDate", value);
-        }
-    }
-
-    public IReadOnlyList<SubscriptionProvisionParamsSubscriptionEntitlement>? SubscriptionEntitlements
-    {
-        get
-        {
-            this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableStruct<
-                ImmutableArray<SubscriptionProvisionParamsSubscriptionEntitlement>
-            >("subscriptionEntitlements");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawBodyData.Set<ImmutableArray<SubscriptionProvisionParamsSubscriptionEntitlement>?>(
-                "subscriptionEntitlements",
-                value == null ? null : ImmutableArray.ToImmutableArray(value)
-            );
         }
     }
 
@@ -2743,6 +2743,1030 @@ class CheckoutOptionsFromRaw : IFromRawJson<CheckoutOptions>
     /// <inheritdoc/>
     public CheckoutOptions FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         CheckoutOptions.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// A single subscription entitlement. Provide exactly one of feature or credit.
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        SubscriptionProvisionParamsEntitlement,
+        SubscriptionProvisionParamsEntitlementFromRaw
+    >)
+)]
+public sealed record class SubscriptionProvisionParamsEntitlement : JsonModel
+{
+    /// <summary>
+    /// Credit entitlement configuration
+    /// </summary>
+    public SubscriptionProvisionParamsEntitlementCredit? Credit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<SubscriptionProvisionParamsEntitlementCredit>(
+                "credit"
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("credit", value);
+        }
+    }
+
+    /// <summary>
+    /// Feature entitlement configuration
+    /// </summary>
+    public SubscriptionProvisionParamsEntitlementFeature? Feature
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<SubscriptionProvisionParamsEntitlementFeature>(
+                "feature"
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("feature", value);
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        this.Credit?.Validate();
+        this.Feature?.Validate();
+    }
+
+    public SubscriptionProvisionParamsEntitlement() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public SubscriptionProvisionParamsEntitlement(
+        SubscriptionProvisionParamsEntitlement subscriptionProvisionParamsEntitlement
+    )
+        : base(subscriptionProvisionParamsEntitlement) { }
+#pragma warning restore CS8618
+
+    public SubscriptionProvisionParamsEntitlement(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    SubscriptionProvisionParamsEntitlement(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="SubscriptionProvisionParamsEntitlementFromRaw.FromRawUnchecked"/>
+    public static SubscriptionProvisionParamsEntitlement FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class SubscriptionProvisionParamsEntitlementFromRaw
+    : IFromRawJson<SubscriptionProvisionParamsEntitlement>
+{
+    /// <inheritdoc/>
+    public SubscriptionProvisionParamsEntitlement FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionProvisionParamsEntitlement.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Credit entitlement configuration
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        SubscriptionProvisionParamsEntitlementCredit,
+        SubscriptionProvisionParamsEntitlementCreditFromRaw
+    >)
+)]
+public sealed record class SubscriptionProvisionParamsEntitlementCredit : JsonModel
+{
+    /// <summary>
+    /// Credit grant amount
+    /// </summary>
+    public required double Amount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<double>("amount");
+        }
+        init { this._rawData.Set("amount", value); }
+    }
+
+    /// <summary>
+    /// Credit grant cadence (MONTH or YEAR)
+    /// </summary>
+    public required ApiEnum<string, SubscriptionProvisionParamsEntitlementCreditCadence> Cadence
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, SubscriptionProvisionParamsEntitlementCreditCadence>
+            >("cadence");
+        }
+        init { this._rawData.Set("cadence", value); }
+    }
+
+    /// <summary>
+    /// The custom currency ID for the credit entitlement
+    /// </summary>
+    public required string CurrencyID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("currencyId");
+        }
+        init { this._rawData.Set("currencyId", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.Amount;
+        this.Cadence.Validate();
+        _ = this.CurrencyID;
+    }
+
+    public SubscriptionProvisionParamsEntitlementCredit() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public SubscriptionProvisionParamsEntitlementCredit(
+        SubscriptionProvisionParamsEntitlementCredit subscriptionProvisionParamsEntitlementCredit
+    )
+        : base(subscriptionProvisionParamsEntitlementCredit) { }
+#pragma warning restore CS8618
+
+    public SubscriptionProvisionParamsEntitlementCredit(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    SubscriptionProvisionParamsEntitlementCredit(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="SubscriptionProvisionParamsEntitlementCreditFromRaw.FromRawUnchecked"/>
+    public static SubscriptionProvisionParamsEntitlementCredit FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class SubscriptionProvisionParamsEntitlementCreditFromRaw
+    : IFromRawJson<SubscriptionProvisionParamsEntitlementCredit>
+{
+    /// <inheritdoc/>
+    public SubscriptionProvisionParamsEntitlementCredit FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionProvisionParamsEntitlementCredit.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Credit grant cadence (MONTH or YEAR)
+/// </summary>
+[JsonConverter(typeof(SubscriptionProvisionParamsEntitlementCreditCadenceConverter))]
+public enum SubscriptionProvisionParamsEntitlementCreditCadence
+{
+    Month,
+    Year,
+}
+
+sealed class SubscriptionProvisionParamsEntitlementCreditCadenceConverter
+    : JsonConverter<SubscriptionProvisionParamsEntitlementCreditCadence>
+{
+    public override SubscriptionProvisionParamsEntitlementCreditCadence Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "MONTH" => SubscriptionProvisionParamsEntitlementCreditCadence.Month,
+            "YEAR" => SubscriptionProvisionParamsEntitlementCreditCadence.Year,
+            _ => (SubscriptionProvisionParamsEntitlementCreditCadence)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        SubscriptionProvisionParamsEntitlementCreditCadence value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                SubscriptionProvisionParamsEntitlementCreditCadence.Month => "MONTH",
+                SubscriptionProvisionParamsEntitlementCreditCadence.Year => "YEAR",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Feature entitlement configuration
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        SubscriptionProvisionParamsEntitlementFeature,
+        SubscriptionProvisionParamsEntitlementFeatureFromRaw
+    >)
+)]
+public sealed record class SubscriptionProvisionParamsEntitlementFeature : JsonModel
+{
+    /// <summary>
+    /// The feature ID to attach the entitlement to
+    /// </summary>
+    public required string FeatureID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("featureId");
+        }
+        init { this._rawData.Set("featureId", value); }
+    }
+
+    /// <summary>
+    /// Whether the usage limit is a soft limit
+    /// </summary>
+    public bool? HasSoftLimit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("hasSoftLimit");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("hasSoftLimit", value);
+        }
+    }
+
+    /// <summary>
+    /// Whether usage is unlimited
+    /// </summary>
+    public bool? HasUnlimitedUsage
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("hasUnlimitedUsage");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("hasUnlimitedUsage", value);
+        }
+    }
+
+    /// <summary>
+    /// Configuration for monthly reset period
+    /// </summary>
+    public SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfiguration? MonthlyResetPeriodConfiguration
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfiguration>(
+                "monthlyResetPeriodConfiguration"
+            );
+        }
+        init { this._rawData.Set("monthlyResetPeriodConfiguration", value); }
+    }
+
+    /// <summary>
+    /// Period at which usage resets
+    /// </summary>
+    public ApiEnum<string, SubscriptionProvisionParamsEntitlementFeatureResetPeriod>? ResetPeriod
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, SubscriptionProvisionParamsEntitlementFeatureResetPeriod>
+            >("resetPeriod");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("resetPeriod", value);
+        }
+    }
+
+    /// <summary>
+    /// Maximum allowed usage for the feature
+    /// </summary>
+    public long? UsageLimit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<long>("usageLimit");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("usageLimit", value);
+        }
+    }
+
+    /// <summary>
+    /// Configuration for weekly reset period
+    /// </summary>
+    public SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfiguration? WeeklyResetPeriodConfiguration
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfiguration>(
+                "weeklyResetPeriodConfiguration"
+            );
+        }
+        init { this._rawData.Set("weeklyResetPeriodConfiguration", value); }
+    }
+
+    /// <summary>
+    /// Configuration for yearly reset period
+    /// </summary>
+    public SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfiguration? YearlyResetPeriodConfiguration
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfiguration>(
+                "yearlyResetPeriodConfiguration"
+            );
+        }
+        init { this._rawData.Set("yearlyResetPeriodConfiguration", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.FeatureID;
+        _ = this.HasSoftLimit;
+        _ = this.HasUnlimitedUsage;
+        this.MonthlyResetPeriodConfiguration?.Validate();
+        this.ResetPeriod?.Validate();
+        _ = this.UsageLimit;
+        this.WeeklyResetPeriodConfiguration?.Validate();
+        this.YearlyResetPeriodConfiguration?.Validate();
+    }
+
+    public SubscriptionProvisionParamsEntitlementFeature() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public SubscriptionProvisionParamsEntitlementFeature(
+        SubscriptionProvisionParamsEntitlementFeature subscriptionProvisionParamsEntitlementFeature
+    )
+        : base(subscriptionProvisionParamsEntitlementFeature) { }
+#pragma warning restore CS8618
+
+    public SubscriptionProvisionParamsEntitlementFeature(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    SubscriptionProvisionParamsEntitlementFeature(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="SubscriptionProvisionParamsEntitlementFeatureFromRaw.FromRawUnchecked"/>
+    public static SubscriptionProvisionParamsEntitlementFeature FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+
+    [SetsRequiredMembers]
+    public SubscriptionProvisionParamsEntitlementFeature(string featureID)
+        : this()
+    {
+        this.FeatureID = featureID;
+    }
+}
+
+class SubscriptionProvisionParamsEntitlementFeatureFromRaw
+    : IFromRawJson<SubscriptionProvisionParamsEntitlementFeature>
+{
+    /// <inheritdoc/>
+    public SubscriptionProvisionParamsEntitlementFeature FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionProvisionParamsEntitlementFeature.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Configuration for monthly reset period
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfiguration,
+        SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationFromRaw
+    >)
+)]
+public sealed record class SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfiguration
+    : JsonModel
+{
+    /// <summary>
+    /// Reset anchor (SubscriptionStart or StartOfTheMonth)
+    /// </summary>
+    public required ApiEnum<
+        string,
+        SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo
+    > AccordingTo
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<
+                ApiEnum<
+                    string,
+                    SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo
+                >
+            >("accordingTo");
+        }
+        init { this._rawData.Set("accordingTo", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        this.AccordingTo.Validate();
+    }
+
+    public SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfiguration() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfiguration(
+        SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfiguration subscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfiguration
+    )
+        : base(subscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfiguration) { }
+#pragma warning restore CS8618
+
+    public SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfiguration(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfiguration(
+        FrozenDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationFromRaw.FromRawUnchecked"/>
+    public static SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfiguration FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+
+    [SetsRequiredMembers]
+    public SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfiguration(
+        ApiEnum<
+            string,
+            SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo
+        > accordingTo
+    )
+        : this()
+    {
+        this.AccordingTo = accordingTo;
+    }
+}
+
+class SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationFromRaw
+    : IFromRawJson<SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfiguration>
+{
+    /// <inheritdoc/>
+    public SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfiguration FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) =>
+        SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfiguration.FromRawUnchecked(
+            rawData
+        );
+}
+
+/// <summary>
+/// Reset anchor (SubscriptionStart or StartOfTheMonth)
+/// </summary>
+[JsonConverter(
+    typeof(SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingToConverter)
+)]
+public enum SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo
+{
+    SubscriptionStart,
+    StartOfTheMonth,
+}
+
+sealed class SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingToConverter
+    : JsonConverter<SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo>
+{
+    public override SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "SubscriptionStart" =>
+                SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart,
+            "StartOfTheMonth" =>
+                SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.StartOfTheMonth,
+            _ =>
+                (SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo)(
+                    -1
+                ),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart =>
+                    "SubscriptionStart",
+                SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo.StartOfTheMonth =>
+                    "StartOfTheMonth",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Period at which usage resets
+/// </summary>
+[JsonConverter(typeof(SubscriptionProvisionParamsEntitlementFeatureResetPeriodConverter))]
+public enum SubscriptionProvisionParamsEntitlementFeatureResetPeriod
+{
+    Year,
+    Month,
+    Week,
+    Day,
+    Hour,
+}
+
+sealed class SubscriptionProvisionParamsEntitlementFeatureResetPeriodConverter
+    : JsonConverter<SubscriptionProvisionParamsEntitlementFeatureResetPeriod>
+{
+    public override SubscriptionProvisionParamsEntitlementFeatureResetPeriod Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "YEAR" => SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Year,
+            "MONTH" => SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Month,
+            "WEEK" => SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Week,
+            "DAY" => SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Day,
+            "HOUR" => SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Hour,
+            _ => (SubscriptionProvisionParamsEntitlementFeatureResetPeriod)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        SubscriptionProvisionParamsEntitlementFeatureResetPeriod value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Year => "YEAR",
+                SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Month => "MONTH",
+                SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Week => "WEEK",
+                SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Day => "DAY",
+                SubscriptionProvisionParamsEntitlementFeatureResetPeriod.Hour => "HOUR",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Configuration for weekly reset period
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfiguration,
+        SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationFromRaw
+    >)
+)]
+public sealed record class SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfiguration
+    : JsonModel
+{
+    /// <summary>
+    /// Reset anchor (SubscriptionStart or specific day)
+    /// </summary>
+    public required ApiEnum<
+        string,
+        SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo
+    > AccordingTo
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<
+                ApiEnum<
+                    string,
+                    SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo
+                >
+            >("accordingTo");
+        }
+        init { this._rawData.Set("accordingTo", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        this.AccordingTo.Validate();
+    }
+
+    public SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfiguration() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfiguration(
+        SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfiguration subscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfiguration
+    )
+        : base(subscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfiguration) { }
+#pragma warning restore CS8618
+
+    public SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfiguration(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfiguration(
+        FrozenDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationFromRaw.FromRawUnchecked"/>
+    public static SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfiguration FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+
+    [SetsRequiredMembers]
+    public SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfiguration(
+        ApiEnum<
+            string,
+            SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo
+        > accordingTo
+    )
+        : this()
+    {
+        this.AccordingTo = accordingTo;
+    }
+}
+
+class SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationFromRaw
+    : IFromRawJson<SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfiguration>
+{
+    /// <inheritdoc/>
+    public SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfiguration FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) =>
+        SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfiguration.FromRawUnchecked(
+            rawData
+        );
+}
+
+/// <summary>
+/// Reset anchor (SubscriptionStart or specific day)
+/// </summary>
+[JsonConverter(
+    typeof(SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingToConverter)
+)]
+public enum SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo
+{
+    SubscriptionStart,
+    EverySunday,
+    EveryMonday,
+    EveryTuesday,
+    EveryWednesday,
+    EveryThursday,
+    EveryFriday,
+    EverySaturday,
+}
+
+sealed class SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingToConverter
+    : JsonConverter<SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo>
+{
+    public override SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "SubscriptionStart" =>
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart,
+            "EverySunday" =>
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.EverySunday,
+            "EveryMonday" =>
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryMonday,
+            "EveryTuesday" =>
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryTuesday,
+            "EveryWednesday" =>
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryWednesday,
+            "EveryThursday" =>
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryThursday,
+            "EveryFriday" =>
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryFriday,
+            "EverySaturday" =>
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.EverySaturday,
+            _ =>
+                (SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo)(
+                    -1
+                ),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart =>
+                    "SubscriptionStart",
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.EverySunday =>
+                    "EverySunday",
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryMonday =>
+                    "EveryMonday",
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryTuesday =>
+                    "EveryTuesday",
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryWednesday =>
+                    "EveryWednesday",
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryThursday =>
+                    "EveryThursday",
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryFriday =>
+                    "EveryFriday",
+                SubscriptionProvisionParamsEntitlementFeatureWeeklyResetPeriodConfigurationAccordingTo.EverySaturday =>
+                    "EverySaturday",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Configuration for yearly reset period
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfiguration,
+        SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationFromRaw
+    >)
+)]
+public sealed record class SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfiguration
+    : JsonModel
+{
+    /// <summary>
+    /// Reset anchor (SubscriptionStart)
+    /// </summary>
+    public required ApiEnum<
+        string,
+        SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo
+    > AccordingTo
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<
+                ApiEnum<
+                    string,
+                    SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo
+                >
+            >("accordingTo");
+        }
+        init { this._rawData.Set("accordingTo", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        this.AccordingTo.Validate();
+    }
+
+    public SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfiguration() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfiguration(
+        SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfiguration subscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfiguration
+    )
+        : base(subscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfiguration) { }
+#pragma warning restore CS8618
+
+    public SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfiguration(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfiguration(
+        FrozenDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationFromRaw.FromRawUnchecked"/>
+    public static SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfiguration FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+
+    [SetsRequiredMembers]
+    public SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfiguration(
+        ApiEnum<
+            string,
+            SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo
+        > accordingTo
+    )
+        : this()
+    {
+        this.AccordingTo = accordingTo;
+    }
+}
+
+class SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationFromRaw
+    : IFromRawJson<SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfiguration>
+{
+    /// <inheritdoc/>
+    public SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfiguration FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) =>
+        SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfiguration.FromRawUnchecked(
+            rawData
+        );
+}
+
+/// <summary>
+/// Reset anchor (SubscriptionStart)
+/// </summary>
+[JsonConverter(
+    typeof(SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingToConverter)
+)]
+public enum SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo
+{
+    SubscriptionStart,
+}
+
+sealed class SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingToConverter
+    : JsonConverter<SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo>
+{
+    public override SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "SubscriptionStart" =>
+                SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart,
+            _ =>
+                (SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo)(
+                    -1
+                ),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart =>
+                    "SubscriptionStart",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }
 
 /// <summary>
@@ -5158,108 +6182,6 @@ sealed class SubscriptionProvisionParamsScheduleStrategyConverter
             options
         );
     }
-}
-
-[JsonConverter(
-    typeof(JsonModelConverter<
-        SubscriptionProvisionParamsSubscriptionEntitlement,
-        SubscriptionProvisionParamsSubscriptionEntitlementFromRaw
-    >)
-)]
-public sealed record class SubscriptionProvisionParamsSubscriptionEntitlement : JsonModel
-{
-    /// <summary>
-    /// Feature ID
-    /// </summary>
-    public required string FeatureID
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("featureId");
-        }
-        init { this._rawData.Set("featureId", value); }
-    }
-
-    public required double UsageLimit
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<double>("usageLimit");
-        }
-        init { this._rawData.Set("usageLimit", value); }
-    }
-
-    public bool? IsGranted
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<bool>("isGranted");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("isGranted", value);
-        }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        _ = this.FeatureID;
-        _ = this.UsageLimit;
-        _ = this.IsGranted;
-    }
-
-    public SubscriptionProvisionParamsSubscriptionEntitlement() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public SubscriptionProvisionParamsSubscriptionEntitlement(
-        SubscriptionProvisionParamsSubscriptionEntitlement subscriptionProvisionParamsSubscriptionEntitlement
-    )
-        : base(subscriptionProvisionParamsSubscriptionEntitlement) { }
-#pragma warning restore CS8618
-
-    public SubscriptionProvisionParamsSubscriptionEntitlement(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    SubscriptionProvisionParamsSubscriptionEntitlement(
-        FrozenDictionary<string, JsonElement> rawData
-    )
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="SubscriptionProvisionParamsSubscriptionEntitlementFromRaw.FromRawUnchecked"/>
-    public static SubscriptionProvisionParamsSubscriptionEntitlement FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-}
-
-class SubscriptionProvisionParamsSubscriptionEntitlementFromRaw
-    : IFromRawJson<SubscriptionProvisionParamsSubscriptionEntitlement>
-{
-    /// <inheritdoc/>
-    public SubscriptionProvisionParamsSubscriptionEntitlement FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => SubscriptionProvisionParamsSubscriptionEntitlement.FromRawUnchecked(rawData);
 }
 
 /// <summary>

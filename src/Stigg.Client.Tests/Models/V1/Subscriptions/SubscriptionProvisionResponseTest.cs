@@ -1357,7 +1357,7 @@ public class SubscriptionProvisionResponseDataTest : TestBase
         };
 
         string expectedID = "id";
-        List<Entitlement> expectedEntitlements =
+        List<SubscriptionProvisionResponseDataEntitlement> expectedEntitlements =
         [
             new UnionObjectVariant0()
             {
@@ -1861,7 +1861,7 @@ public class SubscriptionProvisionResponseDataTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
-        List<Entitlement> expectedEntitlements =
+        List<SubscriptionProvisionResponseDataEntitlement> expectedEntitlements =
         [
             new UnionObjectVariant0()
             {
@@ -3017,12 +3017,12 @@ public class SubscriptionProvisionResponseDataTest : TestBase
     }
 }
 
-public class EntitlementTest : TestBase
+public class SubscriptionProvisionResponseDataEntitlementTest : TestBase
 {
     [Fact]
     public void UnionObjectVariant0ValidationWorks()
     {
-        Entitlement value = new UnionObjectVariant0()
+        SubscriptionProvisionResponseDataEntitlement value = new UnionObjectVariant0()
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
@@ -3050,7 +3050,7 @@ public class EntitlementTest : TestBase
     [Fact]
     public void UnionObjectVariant1ValidationWorks()
     {
-        Entitlement value = new UnionObjectVariant1()
+        SubscriptionProvisionResponseDataEntitlement value = new UnionObjectVariant1()
         {
             AccessDeniedReason = UnionObjectVariant1AccessDeniedReason.FeatureNotFound,
             Currency = new()
@@ -3077,7 +3077,7 @@ public class EntitlementTest : TestBase
     [Fact]
     public void UnionObjectVariant0SerializationRoundtripWorks()
     {
-        Entitlement value = new UnionObjectVariant0()
+        SubscriptionProvisionResponseDataEntitlement value = new UnionObjectVariant0()
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
@@ -3100,7 +3100,7 @@ public class EntitlementTest : TestBase
             ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Entitlement>(
+        var deserialized = JsonSerializer.Deserialize<SubscriptionProvisionResponseDataEntitlement>(
             element,
             ModelBase.SerializerOptions
         );
@@ -3111,7 +3111,7 @@ public class EntitlementTest : TestBase
     [Fact]
     public void UnionObjectVariant1SerializationRoundtripWorks()
     {
-        Entitlement value = new UnionObjectVariant1()
+        SubscriptionProvisionResponseDataEntitlement value = new UnionObjectVariant1()
         {
             AccessDeniedReason = UnionObjectVariant1AccessDeniedReason.FeatureNotFound,
             Currency = new()
@@ -3133,7 +3133,7 @@ public class EntitlementTest : TestBase
             ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Entitlement>(
+        var deserialized = JsonSerializer.Deserialize<SubscriptionProvisionResponseDataEntitlement>(
             element,
             ModelBase.SerializerOptions
         );
@@ -3178,7 +3178,7 @@ public class UnionObjectVariant0Test : TestBase
         DateTimeOffset expectedEntitlementUpdatedAt = DateTimeOffset.Parse(
             "2019-12-27T18:11:19.117Z"
         );
-        Feature expectedFeature = new()
+        UnionObjectVariant0Feature expectedFeature = new()
         {
             DisplayName = "displayName",
             FeatureStatus = FeatureStatus.New,
@@ -3285,7 +3285,7 @@ public class UnionObjectVariant0Test : TestBase
         DateTimeOffset expectedEntitlementUpdatedAt = DateTimeOffset.Parse(
             "2019-12-27T18:11:19.117Z"
         );
-        Feature expectedFeature = new()
+        UnionObjectVariant0Feature expectedFeature = new()
         {
             DisplayName = "displayName",
             FeatureStatus = FeatureStatus.New,
@@ -3745,12 +3745,12 @@ public class UnionObjectVariant0TypeTest : TestBase
     }
 }
 
-public class FeatureTest : TestBase
+public class UnionObjectVariant0FeatureTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Feature
+        var model = new UnionObjectVariant0Feature
         {
             DisplayName = "displayName",
             FeatureStatus = FeatureStatus.New,
@@ -3772,7 +3772,7 @@ public class FeatureTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Feature
+        var model = new UnionObjectVariant0Feature
         {
             DisplayName = "displayName",
             FeatureStatus = FeatureStatus.New,
@@ -3781,7 +3781,10 @@ public class FeatureTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Feature>(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<UnionObjectVariant0Feature>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -3789,7 +3792,7 @@ public class FeatureTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Feature
+        var model = new UnionObjectVariant0Feature
         {
             DisplayName = "displayName",
             FeatureStatus = FeatureStatus.New,
@@ -3798,7 +3801,7 @@ public class FeatureTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Feature>(
+        var deserialized = JsonSerializer.Deserialize<UnionObjectVariant0Feature>(
             element,
             ModelBase.SerializerOptions
         );
@@ -3818,7 +3821,7 @@ public class FeatureTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Feature
+        var model = new UnionObjectVariant0Feature
         {
             DisplayName = "displayName",
             FeatureStatus = FeatureStatus.New,
@@ -3832,7 +3835,7 @@ public class FeatureTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Feature
+        var model = new UnionObjectVariant0Feature
         {
             DisplayName = "displayName",
             FeatureStatus = FeatureStatus.New,
@@ -3840,7 +3843,7 @@ public class FeatureTest : TestBase
             RefID = "refId",
         };
 
-        Feature copied = new(model);
+        UnionObjectVariant0Feature copied = new(model);
 
         Assert.Equal(model, copied);
     }
