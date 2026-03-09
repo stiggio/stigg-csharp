@@ -2170,228 +2170,293 @@ sealed class TypeConverter : JsonConverter<global::Stigg.Client.Models.V1.Subscr
 }
 
 /// <summary>
-/// A single subscription entitlement. Provide exactly one of feature or credit.
+/// Feature entitlement configuration for a subscription
 /// </summary>
-[JsonConverter(typeof(JsonModelConverter<Entitlement, EntitlementFromRaw>))]
-public sealed record class Entitlement : JsonModel
+[JsonConverter(typeof(EntitlementConverter))]
+public record class Entitlement : ModelBase
 {
-    /// <summary>
-    /// Credit entitlement configuration
-    /// </summary>
-    public Credit? Credit
+    public object? Value { get; } = null;
+
+    JsonElement? _element = null;
+
+    public JsonElement Json
     {
         get
         {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<Credit>("credit");
+            return this._element ??= JsonSerializer.SerializeToElement(
+                this.Value,
+                ModelBase.SerializerOptions
+            );
         }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
+    }
 
-            this._rawData.Set("credit", value);
+    public string ID
+    {
+        get { return Match(feature: (x) => x.ID, credit: (x) => x.ID); }
+    }
+
+    public JsonElement Type
+    {
+        get { return Match(feature: (x) => x.Type, credit: (x) => x.Type); }
+    }
+
+    public Entitlement(Feature value, JsonElement? element = null)
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public Entitlement(Credit value, JsonElement? element = null)
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public Entitlement(JsonElement element)
+    {
+        this._element = element;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="Feature"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickFeature(out var value)) {
+    ///     // `value` is of type `Feature`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickFeature([NotNullWhen(true)] out Feature? value)
+    {
+        value = this.Value as Feature;
+        return value != null;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="Credit"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickCredit(out var value)) {
+    ///     // `value` is of type `Credit`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickCredit([NotNullWhen(true)] out Credit? value)
+    {
+        value = this.Value as Credit;
+        return value != null;
+    }
+
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match">
+    /// if you need your function parameters to return something.</para>
+    ///
+    /// <exception cref="StiggInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// instance.Switch(
+    ///     (Feature value) => {...},
+    ///     (Credit value) => {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
+    public void Switch(System::Action<Feature> feature, System::Action<Credit> credit)
+    {
+        switch (this.Value)
+        {
+            case Feature value:
+                feature(value);
+                break;
+            case Credit value:
+                credit(value);
+                break;
+            default:
+                throw new StiggInvalidDataException(
+                    "Data did not match any variant of Entitlement"
+                );
         }
     }
 
     /// <summary>
-    /// Feature entitlement configuration
+    /// Calls the function parameter corresponding to the variant the instance was constructed with and
+    /// returns its result.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch">
+    /// if you don't need your function parameters to return a value.</para>
+    ///
+    /// <exception cref="StiggInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// var result = instance.Match(
+    ///     (Feature value) => {...},
+    ///     (Credit value) => {...}
+    /// );
+    /// </code>
+    /// </example>
     /// </summary>
-    public Feature? Feature
+    public T Match<T>(System::Func<Feature, T> feature, System::Func<Credit, T> credit)
     {
-        get
+        return this.Value switch
         {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<Feature>("feature");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("feature", value);
-        }
+            Feature value => feature(value),
+            Credit value => credit(value),
+            _ => throw new StiggInvalidDataException(
+                "Data did not match any variant of Entitlement"
+            ),
+        };
     }
 
-    /// <inheritdoc/>
+    public static implicit operator Entitlement(Feature value) => new(value);
+
+    public static implicit operator Entitlement(Credit value) => new(value);
+
+    /// <summary>
+    /// Validates that the instance was constructed with a known variant and that this variant is valid
+    /// (based on its own <c>Validate</c> method).
+    ///
+    /// <para>This is useful for instances constructed from raw JSON data (e.g. deserialized from an API response).</para>
+    ///
+    /// <exception cref="StiggInvalidDataException">
+    /// Thrown when the instance does not pass validation.
+    /// </exception>
+    /// </summary>
     public override void Validate()
     {
-        this.Credit?.Validate();
-        this.Feature?.Validate();
-    }
-
-    public Entitlement() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public Entitlement(Entitlement entitlement)
-        : base(entitlement) { }
-#pragma warning restore CS8618
-
-    public Entitlement(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    Entitlement(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="EntitlementFromRaw.FromRawUnchecked"/>
-    public static Entitlement FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-}
-
-class EntitlementFromRaw : IFromRawJson<Entitlement>
-{
-    /// <inheritdoc/>
-    public Entitlement FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        Entitlement.FromRawUnchecked(rawData);
-}
-
-/// <summary>
-/// Credit entitlement configuration
-/// </summary>
-[JsonConverter(typeof(JsonModelConverter<Credit, CreditFromRaw>))]
-public sealed record class Credit : JsonModel
-{
-    /// <summary>
-    /// Credit grant amount
-    /// </summary>
-    public required double Amount
-    {
-        get
+        if (this.Value == null)
         {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<double>("amount");
+            throw new StiggInvalidDataException("Data did not match any variant of Entitlement");
         }
-        init { this._rawData.Set("amount", value); }
+        this.Switch((feature) => feature.Validate(), (credit) => credit.Validate());
     }
 
-    /// <summary>
-    /// Credit grant cadence (MONTH or YEAR)
-    /// </summary>
-    public required ApiEnum<string, Cadence> Cadence
+    public virtual bool Equals(Entitlement? other) =>
+        other != null
+        && this.VariantIndex() == other.VariantIndex()
+        && JsonElement.DeepEquals(this.Json, other.Json);
+
+    public override int GetHashCode()
     {
-        get
+        return 0;
+    }
+
+    public override string ToString() =>
+        JsonSerializer.Serialize(
+            FriendlyJsonPrinter.PrintValue(this.Json),
+            ModelBase.ToStringSerializerOptions
+        );
+
+    int VariantIndex()
+    {
+        return this.Value switch
         {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, Cadence>>("cadence");
-        }
-        init { this._rawData.Set("cadence", value); }
-    }
-
-    /// <summary>
-    /// The custom currency ID for the credit entitlement
-    /// </summary>
-    public required string CurrencyID
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("currencyId");
-        }
-        init { this._rawData.Set("currencyId", value); }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        _ = this.Amount;
-        this.Cadence.Validate();
-        _ = this.CurrencyID;
-    }
-
-    public Credit() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public Credit(Credit credit)
-        : base(credit) { }
-#pragma warning restore CS8618
-
-    public Credit(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    Credit(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="CreditFromRaw.FromRawUnchecked"/>
-    public static Credit FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+            Feature _ => 0,
+            Credit _ => 1,
+            _ => -1,
+        };
     }
 }
 
-class CreditFromRaw : IFromRawJson<Credit>
+sealed class EntitlementConverter : JsonConverter<Entitlement>
 {
-    /// <inheritdoc/>
-    public Credit FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        Credit.FromRawUnchecked(rawData);
-}
-
-/// <summary>
-/// Credit grant cadence (MONTH or YEAR)
-/// </summary>
-[JsonConverter(typeof(CadenceConverter))]
-public enum Cadence
-{
-    Month,
-    Year,
-}
-
-sealed class CadenceConverter : JsonConverter<Cadence>
-{
-    public override Cadence Read(
+    public override Entitlement? Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
     )
     {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        string? type;
+        try
         {
-            "MONTH" => Cadence.Month,
-            "YEAR" => Cadence.Year,
-            _ => (Cadence)(-1),
-        };
+            type = element.GetProperty("type").GetString();
+        }
+        catch
+        {
+            type = null;
+        }
+
+        switch (type)
+        {
+            case "FEATURE":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<Feature>(element, options);
+                    if (deserialized != null)
+                    {
+                        deserialized.Validate();
+                        return new(deserialized, element);
+                    }
+                }
+                catch (System::Exception e)
+                    when (e is JsonException || e is StiggInvalidDataException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "CREDIT":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<Credit>(element, options);
+                    if (deserialized != null)
+                    {
+                        deserialized.Validate();
+                        return new(deserialized, element);
+                    }
+                }
+                catch (System::Exception e)
+                    when (e is JsonException || e is StiggInvalidDataException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            default:
+            {
+                return new Entitlement(element);
+            }
+        }
     }
 
-    public override void Write(Utf8JsonWriter writer, Cadence value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        Entitlement value,
+        JsonSerializerOptions options
+    )
     {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                Cadence.Month => "MONTH",
-                Cadence.Year => "YEAR",
-                _ => throw new StiggInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
+        JsonSerializer.Serialize(writer, value.Json, options);
     }
 }
 
 /// <summary>
-/// Feature entitlement configuration
+/// Feature entitlement configuration for a subscription
 /// </summary>
 [JsonConverter(typeof(JsonModelConverter<Feature, FeatureFromRaw>))]
 public sealed record class Feature : JsonModel
@@ -2399,14 +2464,27 @@ public sealed record class Feature : JsonModel
     /// <summary>
     /// The feature ID to attach the entitlement to
     /// </summary>
-    public required string FeatureID
+    public required string ID
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("featureId");
+            return this._rawData.GetNotNullClass<string>("id");
         }
-        init { this._rawData.Set("featureId", value); }
+        init { this._rawData.Set("id", value); }
+    }
+
+    /// <summary>
+    /// SubscriptionFeatureEntitlementRequest
+    /// </summary>
+    public JsonElement Type
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<JsonElement>("type");
+        }
+        init { this._rawData.Set("type", value); }
     }
 
     /// <summary>
@@ -2541,7 +2619,11 @@ public sealed record class Feature : JsonModel
     /// <inheritdoc/>
     public override void Validate()
     {
-        _ = this.FeatureID;
+        _ = this.ID;
+        if (!JsonElement.DeepEquals(this.Type, JsonSerializer.SerializeToElement("FEATURE")))
+        {
+            throw new StiggInvalidDataException("Invalid value given for constant");
+        }
         _ = this.HasSoftLimit;
         _ = this.HasUnlimitedUsage;
         this.MonthlyResetPeriodConfiguration?.Validate();
@@ -2551,7 +2633,10 @@ public sealed record class Feature : JsonModel
         this.YearlyResetPeriodConfiguration?.Validate();
     }
 
-    public Feature() { }
+    public Feature()
+    {
+        this.Type = JsonSerializer.SerializeToElement("FEATURE");
+    }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
@@ -2562,6 +2647,8 @@ public sealed record class Feature : JsonModel
     public Feature(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
+
+        this.Type = JsonSerializer.SerializeToElement("FEATURE");
     }
 
 #pragma warning disable CS8618
@@ -2579,10 +2666,10 @@ public sealed record class Feature : JsonModel
     }
 
     [SetsRequiredMembers]
-    public Feature(string featureID)
+    public Feature(string id)
         : this()
     {
-        this.FeatureID = featureID;
+        this.ID = id;
     }
 }
 
@@ -3037,6 +3124,159 @@ sealed class YearlyResetPeriodConfigurationAccordingToConverter
             value switch
             {
                 YearlyResetPeriodConfigurationAccordingTo.SubscriptionStart => "SubscriptionStart",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Credit entitlement configuration for a subscription
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<Credit, CreditFromRaw>))]
+public sealed record class Credit : JsonModel
+{
+    /// <summary>
+    /// The custom currency ID for the credit entitlement
+    /// </summary>
+    public required string ID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
+        init { this._rawData.Set("id", value); }
+    }
+
+    /// <summary>
+    /// Credit grant amount
+    /// </summary>
+    public required double Amount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<double>("amount");
+        }
+        init { this._rawData.Set("amount", value); }
+    }
+
+    /// <summary>
+    /// Credit grant cadence (MONTH or YEAR)
+    /// </summary>
+    public required ApiEnum<string, Cadence> Cadence
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Cadence>>("cadence");
+        }
+        init { this._rawData.Set("cadence", value); }
+    }
+
+    /// <summary>
+    /// SubscriptionCreditEntitlementRequest
+    /// </summary>
+    public JsonElement Type
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<JsonElement>("type");
+        }
+        init { this._rawData.Set("type", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.ID;
+        _ = this.Amount;
+        this.Cadence.Validate();
+        if (!JsonElement.DeepEquals(this.Type, JsonSerializer.SerializeToElement("CREDIT")))
+        {
+            throw new StiggInvalidDataException("Invalid value given for constant");
+        }
+    }
+
+    public Credit()
+    {
+        this.Type = JsonSerializer.SerializeToElement("CREDIT");
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public Credit(Credit credit)
+        : base(credit) { }
+#pragma warning restore CS8618
+
+    public Credit(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+
+        this.Type = JsonSerializer.SerializeToElement("CREDIT");
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    Credit(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="CreditFromRaw.FromRawUnchecked"/>
+    public static Credit FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class CreditFromRaw : IFromRawJson<Credit>
+{
+    /// <inheritdoc/>
+    public Credit FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Credit.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Credit grant cadence (MONTH or YEAR)
+/// </summary>
+[JsonConverter(typeof(CadenceConverter))]
+public enum Cadence
+{
+    Month,
+    Year,
+}
+
+sealed class CadenceConverter : JsonConverter<Cadence>
+{
+    public override Cadence Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "MONTH" => Cadence.Month,
+            "YEAR" => Cadence.Year,
+            _ => (Cadence)(-1),
+        };
+    }
+
+    public override void Write(Utf8JsonWriter writer, Cadence value, JsonSerializerOptions options)
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                Cadence.Month => "MONTH",
+                Cadence.Year => "YEAR",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

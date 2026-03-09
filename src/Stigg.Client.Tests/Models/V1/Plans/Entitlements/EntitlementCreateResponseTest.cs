@@ -16,30 +16,28 @@ public class EntitlementCreateResponseTest : TestBase
         {
             Data =
             [
-                new()
+                new EntitlementCreateResponseDataFeature()
                 {
                     ID = "id",
-                    Amount = 0,
-                    Behavior = EntitlementCreateResponseDataBehavior.Increment,
-                    Cadence = EntitlementCreateResponseDataCadence.Month,
+                    Behavior = EntitlementCreateResponseDataFeatureBehavior.Increment,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CustomCurrencyID = "customCurrencyId",
                     Description = "description",
                     DisplayNameOverride = "displayNameOverride",
                     EnumValues = ["string"],
-                    FeatureID = "featureId",
                     HasSoftLimit = true,
                     HasUnlimitedUsage = true,
-                    HiddenFromWidgets = [EntitlementCreateResponseDataHiddenFromWidget.Paywall],
+                    HiddenFromWidgets =
+                    [
+                        EntitlementCreateResponseDataFeatureHiddenFromWidget.Paywall,
+                    ],
                     IsCustom = true,
                     IsGranted = true,
                     Order = 0,
-                    ResetPeriod = EntitlementCreateResponseDataResetPeriod.Year,
+                    ResetPeriod = EntitlementCreateResponseDataFeatureResetPeriod.Year,
                     ResetPeriodConfiguration =
-                        new EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfig(
-                            EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
+                        new EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig(
+                            EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
                         ),
-                    Type = EntitlementCreateResponseDataType.Feature,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsageLimit = 0,
                 },
@@ -48,30 +46,25 @@ public class EntitlementCreateResponseTest : TestBase
 
         List<EntitlementCreateResponseData> expectedData =
         [
-            new()
+            new EntitlementCreateResponseDataFeature()
             {
                 ID = "id",
-                Amount = 0,
-                Behavior = EntitlementCreateResponseDataBehavior.Increment,
-                Cadence = EntitlementCreateResponseDataCadence.Month,
+                Behavior = EntitlementCreateResponseDataFeatureBehavior.Increment,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                CustomCurrencyID = "customCurrencyId",
                 Description = "description",
                 DisplayNameOverride = "displayNameOverride",
                 EnumValues = ["string"],
-                FeatureID = "featureId",
                 HasSoftLimit = true,
                 HasUnlimitedUsage = true,
-                HiddenFromWidgets = [EntitlementCreateResponseDataHiddenFromWidget.Paywall],
+                HiddenFromWidgets = [EntitlementCreateResponseDataFeatureHiddenFromWidget.Paywall],
                 IsCustom = true,
                 IsGranted = true,
                 Order = 0,
-                ResetPeriod = EntitlementCreateResponseDataResetPeriod.Year,
+                ResetPeriod = EntitlementCreateResponseDataFeatureResetPeriod.Year,
                 ResetPeriodConfiguration =
-                    new EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfig(
-                        EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
+                    new EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig(
+                        EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
                     ),
-                Type = EntitlementCreateResponseDataType.Feature,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UsageLimit = 0,
             },
@@ -91,30 +84,28 @@ public class EntitlementCreateResponseTest : TestBase
         {
             Data =
             [
-                new()
+                new EntitlementCreateResponseDataFeature()
                 {
                     ID = "id",
-                    Amount = 0,
-                    Behavior = EntitlementCreateResponseDataBehavior.Increment,
-                    Cadence = EntitlementCreateResponseDataCadence.Month,
+                    Behavior = EntitlementCreateResponseDataFeatureBehavior.Increment,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CustomCurrencyID = "customCurrencyId",
                     Description = "description",
                     DisplayNameOverride = "displayNameOverride",
                     EnumValues = ["string"],
-                    FeatureID = "featureId",
                     HasSoftLimit = true,
                     HasUnlimitedUsage = true,
-                    HiddenFromWidgets = [EntitlementCreateResponseDataHiddenFromWidget.Paywall],
+                    HiddenFromWidgets =
+                    [
+                        EntitlementCreateResponseDataFeatureHiddenFromWidget.Paywall,
+                    ],
                     IsCustom = true,
                     IsGranted = true,
                     Order = 0,
-                    ResetPeriod = EntitlementCreateResponseDataResetPeriod.Year,
+                    ResetPeriod = EntitlementCreateResponseDataFeatureResetPeriod.Year,
                     ResetPeriodConfiguration =
-                        new EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfig(
-                            EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
+                        new EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig(
+                            EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
                         ),
-                    Type = EntitlementCreateResponseDataType.Feature,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsageLimit = 0,
                 },
@@ -137,30 +128,28 @@ public class EntitlementCreateResponseTest : TestBase
         {
             Data =
             [
-                new()
+                new EntitlementCreateResponseDataFeature()
                 {
                     ID = "id",
-                    Amount = 0,
-                    Behavior = EntitlementCreateResponseDataBehavior.Increment,
-                    Cadence = EntitlementCreateResponseDataCadence.Month,
+                    Behavior = EntitlementCreateResponseDataFeatureBehavior.Increment,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CustomCurrencyID = "customCurrencyId",
                     Description = "description",
                     DisplayNameOverride = "displayNameOverride",
                     EnumValues = ["string"],
-                    FeatureID = "featureId",
                     HasSoftLimit = true,
                     HasUnlimitedUsage = true,
-                    HiddenFromWidgets = [EntitlementCreateResponseDataHiddenFromWidget.Paywall],
+                    HiddenFromWidgets =
+                    [
+                        EntitlementCreateResponseDataFeatureHiddenFromWidget.Paywall,
+                    ],
                     IsCustom = true,
                     IsGranted = true,
                     Order = 0,
-                    ResetPeriod = EntitlementCreateResponseDataResetPeriod.Year,
+                    ResetPeriod = EntitlementCreateResponseDataFeatureResetPeriod.Year,
                     ResetPeriodConfiguration =
-                        new EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfig(
-                            EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
+                        new EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig(
+                            EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
                         ),
-                    Type = EntitlementCreateResponseDataType.Feature,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsageLimit = 0,
                 },
@@ -176,30 +165,25 @@ public class EntitlementCreateResponseTest : TestBase
 
         List<EntitlementCreateResponseData> expectedData =
         [
-            new()
+            new EntitlementCreateResponseDataFeature()
             {
                 ID = "id",
-                Amount = 0,
-                Behavior = EntitlementCreateResponseDataBehavior.Increment,
-                Cadence = EntitlementCreateResponseDataCadence.Month,
+                Behavior = EntitlementCreateResponseDataFeatureBehavior.Increment,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                CustomCurrencyID = "customCurrencyId",
                 Description = "description",
                 DisplayNameOverride = "displayNameOverride",
                 EnumValues = ["string"],
-                FeatureID = "featureId",
                 HasSoftLimit = true,
                 HasUnlimitedUsage = true,
-                HiddenFromWidgets = [EntitlementCreateResponseDataHiddenFromWidget.Paywall],
+                HiddenFromWidgets = [EntitlementCreateResponseDataFeatureHiddenFromWidget.Paywall],
                 IsCustom = true,
                 IsGranted = true,
                 Order = 0,
-                ResetPeriod = EntitlementCreateResponseDataResetPeriod.Year,
+                ResetPeriod = EntitlementCreateResponseDataFeatureResetPeriod.Year,
                 ResetPeriodConfiguration =
-                    new EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfig(
-                        EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
+                    new EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig(
+                        EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
                     ),
-                Type = EntitlementCreateResponseDataType.Feature,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UsageLimit = 0,
             },
@@ -219,30 +203,28 @@ public class EntitlementCreateResponseTest : TestBase
         {
             Data =
             [
-                new()
+                new EntitlementCreateResponseDataFeature()
                 {
                     ID = "id",
-                    Amount = 0,
-                    Behavior = EntitlementCreateResponseDataBehavior.Increment,
-                    Cadence = EntitlementCreateResponseDataCadence.Month,
+                    Behavior = EntitlementCreateResponseDataFeatureBehavior.Increment,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CustomCurrencyID = "customCurrencyId",
                     Description = "description",
                     DisplayNameOverride = "displayNameOverride",
                     EnumValues = ["string"],
-                    FeatureID = "featureId",
                     HasSoftLimit = true,
                     HasUnlimitedUsage = true,
-                    HiddenFromWidgets = [EntitlementCreateResponseDataHiddenFromWidget.Paywall],
+                    HiddenFromWidgets =
+                    [
+                        EntitlementCreateResponseDataFeatureHiddenFromWidget.Paywall,
+                    ],
                     IsCustom = true,
                     IsGranted = true,
                     Order = 0,
-                    ResetPeriod = EntitlementCreateResponseDataResetPeriod.Year,
+                    ResetPeriod = EntitlementCreateResponseDataFeatureResetPeriod.Year,
                     ResetPeriodConfiguration =
-                        new EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfig(
-                            EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
+                        new EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig(
+                            EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
                         ),
-                    Type = EntitlementCreateResponseDataType.Feature,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsageLimit = 0,
                 },
@@ -259,30 +241,28 @@ public class EntitlementCreateResponseTest : TestBase
         {
             Data =
             [
-                new()
+                new EntitlementCreateResponseDataFeature()
                 {
                     ID = "id",
-                    Amount = 0,
-                    Behavior = EntitlementCreateResponseDataBehavior.Increment,
-                    Cadence = EntitlementCreateResponseDataCadence.Month,
+                    Behavior = EntitlementCreateResponseDataFeatureBehavior.Increment,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    CustomCurrencyID = "customCurrencyId",
                     Description = "description",
                     DisplayNameOverride = "displayNameOverride",
                     EnumValues = ["string"],
-                    FeatureID = "featureId",
                     HasSoftLimit = true,
                     HasUnlimitedUsage = true,
-                    HiddenFromWidgets = [EntitlementCreateResponseDataHiddenFromWidget.Paywall],
+                    HiddenFromWidgets =
+                    [
+                        EntitlementCreateResponseDataFeatureHiddenFromWidget.Paywall,
+                    ],
                     IsCustom = true,
                     IsGranted = true,
                     Order = 0,
-                    ResetPeriod = EntitlementCreateResponseDataResetPeriod.Year,
+                    ResetPeriod = EntitlementCreateResponseDataFeatureResetPeriod.Year,
                     ResetPeriodConfiguration =
-                        new EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfig(
-                            EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
+                        new EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig(
+                            EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
                         ),
-                    Type = EntitlementCreateResponseDataType.Feature,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsageLimit = 0,
                 },
@@ -298,73 +278,175 @@ public class EntitlementCreateResponseTest : TestBase
 public class EntitlementCreateResponseDataTest : TestBase
 {
     [Fact]
-    public void FieldRoundtrip_Works()
+    public void FeatureValidationWorks()
     {
-        var model = new EntitlementCreateResponseData
+        EntitlementCreateResponseData value = new EntitlementCreateResponseDataFeature()
         {
             ID = "id",
-            Amount = 0,
-            Behavior = EntitlementCreateResponseDataBehavior.Increment,
-            Cadence = EntitlementCreateResponseDataCadence.Month,
+            Behavior = EntitlementCreateResponseDataFeatureBehavior.Increment,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            CustomCurrencyID = "customCurrencyId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
             EnumValues = ["string"],
-            FeatureID = "featureId",
             HasSoftLimit = true,
             HasUnlimitedUsage = true,
-            HiddenFromWidgets = [EntitlementCreateResponseDataHiddenFromWidget.Paywall],
+            HiddenFromWidgets = [EntitlementCreateResponseDataFeatureHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
             Order = 0,
-            ResetPeriod = EntitlementCreateResponseDataResetPeriod.Year,
+            ResetPeriod = EntitlementCreateResponseDataFeatureResetPeriod.Year,
             ResetPeriodConfiguration =
-                new EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfig(
-                    EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
+                new EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig(
+                    EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
                 ),
-            Type = EntitlementCreateResponseDataType.Feature,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsageLimit = 0,
+        };
+        value.Validate();
+    }
+
+    [Fact]
+    public void CreditValidationWorks()
+    {
+        EntitlementCreateResponseData value = new EntitlementCreateResponseDataCredit()
+        {
+            ID = "id",
+            Amount = 0,
+            Behavior = EntitlementCreateResponseDataCreditBehavior.Increment,
+            Cadence = EntitlementCreateResponseDataCreditCadence.Month,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            DisplayNameOverride = "displayNameOverride",
+            HiddenFromWidgets = [EntitlementCreateResponseDataCreditHiddenFromWidget.Paywall],
+            IsCustom = true,
+            IsGranted = true,
+            Order = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+        value.Validate();
+    }
+
+    [Fact]
+    public void FeatureSerializationRoundtripWorks()
+    {
+        EntitlementCreateResponseData value = new EntitlementCreateResponseDataFeature()
+        {
+            ID = "id",
+            Behavior = EntitlementCreateResponseDataFeatureBehavior.Increment,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            DisplayNameOverride = "displayNameOverride",
+            EnumValues = ["string"],
+            HasSoftLimit = true,
+            HasUnlimitedUsage = true,
+            HiddenFromWidgets = [EntitlementCreateResponseDataFeatureHiddenFromWidget.Paywall],
+            IsCustom = true,
+            IsGranted = true,
+            Order = 0,
+            ResetPeriod = EntitlementCreateResponseDataFeatureResetPeriod.Year,
+            ResetPeriodConfiguration =
+                new EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig(
+                    EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
+                ),
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsageLimit = 0,
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<EntitlementCreateResponseData>(
+            element,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void CreditSerializationRoundtripWorks()
+    {
+        EntitlementCreateResponseData value = new EntitlementCreateResponseDataCredit()
+        {
+            ID = "id",
+            Amount = 0,
+            Behavior = EntitlementCreateResponseDataCreditBehavior.Increment,
+            Cadence = EntitlementCreateResponseDataCreditCadence.Month,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            DisplayNameOverride = "displayNameOverride",
+            HiddenFromWidgets = [EntitlementCreateResponseDataCreditHiddenFromWidget.Paywall],
+            IsCustom = true,
+            IsGranted = true,
+            Order = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<EntitlementCreateResponseData>(
+            element,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class EntitlementCreateResponseDataFeatureTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new EntitlementCreateResponseDataFeature
+        {
+            ID = "id",
+            Behavior = EntitlementCreateResponseDataFeatureBehavior.Increment,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            DisplayNameOverride = "displayNameOverride",
+            EnumValues = ["string"],
+            HasSoftLimit = true,
+            HasUnlimitedUsage = true,
+            HiddenFromWidgets = [EntitlementCreateResponseDataFeatureHiddenFromWidget.Paywall],
+            IsCustom = true,
+            IsGranted = true,
+            Order = 0,
+            ResetPeriod = EntitlementCreateResponseDataFeatureResetPeriod.Year,
+            ResetPeriodConfiguration =
+                new EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig(
+                    EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
+                ),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
         };
 
         string expectedID = "id";
-        double expectedAmount = 0;
-        ApiEnum<string, EntitlementCreateResponseDataBehavior> expectedBehavior =
-            EntitlementCreateResponseDataBehavior.Increment;
-        ApiEnum<string, EntitlementCreateResponseDataCadence> expectedCadence =
-            EntitlementCreateResponseDataCadence.Month;
+        ApiEnum<string, EntitlementCreateResponseDataFeatureBehavior> expectedBehavior =
+            EntitlementCreateResponseDataFeatureBehavior.Increment;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        string expectedCustomCurrencyID = "customCurrencyId";
         string expectedDescription = "description";
         string expectedDisplayNameOverride = "displayNameOverride";
         List<string> expectedEnumValues = ["string"];
-        string expectedFeatureID = "featureId";
         bool expectedHasSoftLimit = true;
         bool expectedHasUnlimitedUsage = true;
         List<
-            ApiEnum<string, EntitlementCreateResponseDataHiddenFromWidget>
-        > expectedHiddenFromWidgets = [EntitlementCreateResponseDataHiddenFromWidget.Paywall];
+            ApiEnum<string, EntitlementCreateResponseDataFeatureHiddenFromWidget>
+        > expectedHiddenFromWidgets =
+        [
+            EntitlementCreateResponseDataFeatureHiddenFromWidget.Paywall,
+        ];
         bool expectedIsCustom = true;
         bool expectedIsGranted = true;
         double expectedOrder = 0;
-        ApiEnum<string, EntitlementCreateResponseDataResetPeriod> expectedResetPeriod =
-            EntitlementCreateResponseDataResetPeriod.Year;
-        EntitlementCreateResponseDataResetPeriodConfiguration expectedResetPeriodConfiguration =
-            new EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfig(
-                EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
+        ApiEnum<string, EntitlementCreateResponseDataFeatureResetPeriod> expectedResetPeriod =
+            EntitlementCreateResponseDataFeatureResetPeriod.Year;
+        EntitlementCreateResponseDataFeatureResetPeriodConfiguration expectedResetPeriodConfiguration =
+            new EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig(
+                EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
             );
-        ApiEnum<string, EntitlementCreateResponseDataType> expectedType =
-            EntitlementCreateResponseDataType.Feature;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("FEATURE");
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         double expectedUsageLimit = 0;
 
         Assert.Equal(expectedID, model.ID);
-        Assert.Equal(expectedAmount, model.Amount);
         Assert.Equal(expectedBehavior, model.Behavior);
-        Assert.Equal(expectedCadence, model.Cadence);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
-        Assert.Equal(expectedCustomCurrencyID, model.CustomCurrencyID);
         Assert.Equal(expectedDescription, model.Description);
         Assert.Equal(expectedDisplayNameOverride, model.DisplayNameOverride);
         Assert.NotNull(model.EnumValues);
@@ -373,7 +455,6 @@ public class EntitlementCreateResponseDataTest : TestBase
         {
             Assert.Equal(expectedEnumValues[i], model.EnumValues[i]);
         }
-        Assert.Equal(expectedFeatureID, model.FeatureID);
         Assert.Equal(expectedHasSoftLimit, model.HasSoftLimit);
         Assert.Equal(expectedHasUnlimitedUsage, model.HasUnlimitedUsage);
         Assert.Equal(expectedHiddenFromWidgets.Count, model.HiddenFromWidgets.Count);
@@ -386,7 +467,7 @@ public class EntitlementCreateResponseDataTest : TestBase
         Assert.Equal(expectedOrder, model.Order);
         Assert.Equal(expectedResetPeriod, model.ResetPeriod);
         Assert.Equal(expectedResetPeriodConfiguration, model.ResetPeriodConfiguration);
-        Assert.Equal(expectedType, model.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
         Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
         Assert.Equal(expectedUsageLimit, model.UsageLimit);
     }
@@ -394,36 +475,31 @@ public class EntitlementCreateResponseDataTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new EntitlementCreateResponseData
+        var model = new EntitlementCreateResponseDataFeature
         {
             ID = "id",
-            Amount = 0,
-            Behavior = EntitlementCreateResponseDataBehavior.Increment,
-            Cadence = EntitlementCreateResponseDataCadence.Month,
+            Behavior = EntitlementCreateResponseDataFeatureBehavior.Increment,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            CustomCurrencyID = "customCurrencyId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
             EnumValues = ["string"],
-            FeatureID = "featureId",
             HasSoftLimit = true,
             HasUnlimitedUsage = true,
-            HiddenFromWidgets = [EntitlementCreateResponseDataHiddenFromWidget.Paywall],
+            HiddenFromWidgets = [EntitlementCreateResponseDataFeatureHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
             Order = 0,
-            ResetPeriod = EntitlementCreateResponseDataResetPeriod.Year,
+            ResetPeriod = EntitlementCreateResponseDataFeatureResetPeriod.Year,
             ResetPeriodConfiguration =
-                new EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfig(
-                    EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
+                new EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig(
+                    EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
                 ),
-            Type = EntitlementCreateResponseDataType.Feature,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<EntitlementCreateResponseData>(
+        var deserialized = JsonSerializer.Deserialize<EntitlementCreateResponseDataFeature>(
             json,
             ModelBase.SerializerOptions
         );
@@ -434,78 +510,67 @@ public class EntitlementCreateResponseDataTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new EntitlementCreateResponseData
+        var model = new EntitlementCreateResponseDataFeature
         {
             ID = "id",
-            Amount = 0,
-            Behavior = EntitlementCreateResponseDataBehavior.Increment,
-            Cadence = EntitlementCreateResponseDataCadence.Month,
+            Behavior = EntitlementCreateResponseDataFeatureBehavior.Increment,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            CustomCurrencyID = "customCurrencyId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
             EnumValues = ["string"],
-            FeatureID = "featureId",
             HasSoftLimit = true,
             HasUnlimitedUsage = true,
-            HiddenFromWidgets = [EntitlementCreateResponseDataHiddenFromWidget.Paywall],
+            HiddenFromWidgets = [EntitlementCreateResponseDataFeatureHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
             Order = 0,
-            ResetPeriod = EntitlementCreateResponseDataResetPeriod.Year,
+            ResetPeriod = EntitlementCreateResponseDataFeatureResetPeriod.Year,
             ResetPeriodConfiguration =
-                new EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfig(
-                    EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
+                new EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig(
+                    EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
                 ),
-            Type = EntitlementCreateResponseDataType.Feature,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<EntitlementCreateResponseData>(
+        var deserialized = JsonSerializer.Deserialize<EntitlementCreateResponseDataFeature>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
-        double expectedAmount = 0;
-        ApiEnum<string, EntitlementCreateResponseDataBehavior> expectedBehavior =
-            EntitlementCreateResponseDataBehavior.Increment;
-        ApiEnum<string, EntitlementCreateResponseDataCadence> expectedCadence =
-            EntitlementCreateResponseDataCadence.Month;
+        ApiEnum<string, EntitlementCreateResponseDataFeatureBehavior> expectedBehavior =
+            EntitlementCreateResponseDataFeatureBehavior.Increment;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        string expectedCustomCurrencyID = "customCurrencyId";
         string expectedDescription = "description";
         string expectedDisplayNameOverride = "displayNameOverride";
         List<string> expectedEnumValues = ["string"];
-        string expectedFeatureID = "featureId";
         bool expectedHasSoftLimit = true;
         bool expectedHasUnlimitedUsage = true;
         List<
-            ApiEnum<string, EntitlementCreateResponseDataHiddenFromWidget>
-        > expectedHiddenFromWidgets = [EntitlementCreateResponseDataHiddenFromWidget.Paywall];
+            ApiEnum<string, EntitlementCreateResponseDataFeatureHiddenFromWidget>
+        > expectedHiddenFromWidgets =
+        [
+            EntitlementCreateResponseDataFeatureHiddenFromWidget.Paywall,
+        ];
         bool expectedIsCustom = true;
         bool expectedIsGranted = true;
         double expectedOrder = 0;
-        ApiEnum<string, EntitlementCreateResponseDataResetPeriod> expectedResetPeriod =
-            EntitlementCreateResponseDataResetPeriod.Year;
-        EntitlementCreateResponseDataResetPeriodConfiguration expectedResetPeriodConfiguration =
-            new EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfig(
-                EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
+        ApiEnum<string, EntitlementCreateResponseDataFeatureResetPeriod> expectedResetPeriod =
+            EntitlementCreateResponseDataFeatureResetPeriod.Year;
+        EntitlementCreateResponseDataFeatureResetPeriodConfiguration expectedResetPeriodConfiguration =
+            new EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig(
+                EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
             );
-        ApiEnum<string, EntitlementCreateResponseDataType> expectedType =
-            EntitlementCreateResponseDataType.Feature;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("FEATURE");
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         double expectedUsageLimit = 0;
 
         Assert.Equal(expectedID, deserialized.ID);
-        Assert.Equal(expectedAmount, deserialized.Amount);
         Assert.Equal(expectedBehavior, deserialized.Behavior);
-        Assert.Equal(expectedCadence, deserialized.Cadence);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
-        Assert.Equal(expectedCustomCurrencyID, deserialized.CustomCurrencyID);
         Assert.Equal(expectedDescription, deserialized.Description);
         Assert.Equal(expectedDisplayNameOverride, deserialized.DisplayNameOverride);
         Assert.NotNull(deserialized.EnumValues);
@@ -514,7 +579,6 @@ public class EntitlementCreateResponseDataTest : TestBase
         {
             Assert.Equal(expectedEnumValues[i], deserialized.EnumValues[i]);
         }
-        Assert.Equal(expectedFeatureID, deserialized.FeatureID);
         Assert.Equal(expectedHasSoftLimit, deserialized.HasSoftLimit);
         Assert.Equal(expectedHasUnlimitedUsage, deserialized.HasUnlimitedUsage);
         Assert.Equal(expectedHiddenFromWidgets.Count, deserialized.HiddenFromWidgets.Count);
@@ -527,7 +591,7 @@ public class EntitlementCreateResponseDataTest : TestBase
         Assert.Equal(expectedOrder, deserialized.Order);
         Assert.Equal(expectedResetPeriod, deserialized.ResetPeriod);
         Assert.Equal(expectedResetPeriodConfiguration, deserialized.ResetPeriodConfiguration);
-        Assert.Equal(expectedType, deserialized.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
         Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
         Assert.Equal(expectedUsageLimit, deserialized.UsageLimit);
     }
@@ -535,30 +599,25 @@ public class EntitlementCreateResponseDataTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new EntitlementCreateResponseData
+        var model = new EntitlementCreateResponseDataFeature
         {
             ID = "id",
-            Amount = 0,
-            Behavior = EntitlementCreateResponseDataBehavior.Increment,
-            Cadence = EntitlementCreateResponseDataCadence.Month,
+            Behavior = EntitlementCreateResponseDataFeatureBehavior.Increment,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            CustomCurrencyID = "customCurrencyId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
             EnumValues = ["string"],
-            FeatureID = "featureId",
             HasSoftLimit = true,
             HasUnlimitedUsage = true,
-            HiddenFromWidgets = [EntitlementCreateResponseDataHiddenFromWidget.Paywall],
+            HiddenFromWidgets = [EntitlementCreateResponseDataFeatureHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
             Order = 0,
-            ResetPeriod = EntitlementCreateResponseDataResetPeriod.Year,
+            ResetPeriod = EntitlementCreateResponseDataFeatureResetPeriod.Year,
             ResetPeriodConfiguration =
-                new EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfig(
-                    EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
+                new EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig(
+                    EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
                 ),
-            Type = EntitlementCreateResponseDataType.Feature,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
         };
@@ -569,49 +628,44 @@ public class EntitlementCreateResponseDataTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new EntitlementCreateResponseData
+        var model = new EntitlementCreateResponseDataFeature
         {
             ID = "id",
-            Amount = 0,
-            Behavior = EntitlementCreateResponseDataBehavior.Increment,
-            Cadence = EntitlementCreateResponseDataCadence.Month,
+            Behavior = EntitlementCreateResponseDataFeatureBehavior.Increment,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            CustomCurrencyID = "customCurrencyId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
             EnumValues = ["string"],
-            FeatureID = "featureId",
             HasSoftLimit = true,
             HasUnlimitedUsage = true,
-            HiddenFromWidgets = [EntitlementCreateResponseDataHiddenFromWidget.Paywall],
+            HiddenFromWidgets = [EntitlementCreateResponseDataFeatureHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
             Order = 0,
-            ResetPeriod = EntitlementCreateResponseDataResetPeriod.Year,
+            ResetPeriod = EntitlementCreateResponseDataFeatureResetPeriod.Year,
             ResetPeriodConfiguration =
-                new EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfig(
-                    EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
+                new EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig(
+                    EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
                 ),
-            Type = EntitlementCreateResponseDataType.Feature,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
         };
 
-        EntitlementCreateResponseData copied = new(model);
+        EntitlementCreateResponseDataFeature copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class EntitlementCreateResponseDataBehaviorTest : TestBase
+public class EntitlementCreateResponseDataFeatureBehaviorTest : TestBase
 {
     [Theory]
-    [InlineData(EntitlementCreateResponseDataBehavior.Increment)]
-    [InlineData(EntitlementCreateResponseDataBehavior.Override)]
-    public void Validation_Works(EntitlementCreateResponseDataBehavior rawValue)
+    [InlineData(EntitlementCreateResponseDataFeatureBehavior.Increment)]
+    [InlineData(EntitlementCreateResponseDataFeatureBehavior.Override)]
+    public void Validation_Works(EntitlementCreateResponseDataFeatureBehavior rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, EntitlementCreateResponseDataBehavior> value = rawValue;
+        ApiEnum<string, EntitlementCreateResponseDataFeatureBehavior> value = rawValue;
         value.Validate();
     }
 
@@ -619,7 +673,7 @@ public class EntitlementCreateResponseDataBehaviorTest : TestBase
     public void InvalidEnumValidationThrows_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementCreateResponseDataBehavior>
+            ApiEnum<string, EntitlementCreateResponseDataFeatureBehavior>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
@@ -627,16 +681,16 @@ public class EntitlementCreateResponseDataBehaviorTest : TestBase
     }
 
     [Theory]
-    [InlineData(EntitlementCreateResponseDataBehavior.Increment)]
-    [InlineData(EntitlementCreateResponseDataBehavior.Override)]
-    public void SerializationRoundtrip_Works(EntitlementCreateResponseDataBehavior rawValue)
+    [InlineData(EntitlementCreateResponseDataFeatureBehavior.Increment)]
+    [InlineData(EntitlementCreateResponseDataFeatureBehavior.Override)]
+    public void SerializationRoundtrip_Works(EntitlementCreateResponseDataFeatureBehavior rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, EntitlementCreateResponseDataBehavior> value = rawValue;
+        ApiEnum<string, EntitlementCreateResponseDataFeatureBehavior> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementCreateResponseDataBehavior>
+            ApiEnum<string, EntitlementCreateResponseDataFeatureBehavior>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -646,26 +700,27 @@ public class EntitlementCreateResponseDataBehaviorTest : TestBase
     public void InvalidEnumSerializationRoundtrip_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementCreateResponseDataBehavior>
+            ApiEnum<string, EntitlementCreateResponseDataFeatureBehavior>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementCreateResponseDataBehavior>
+            ApiEnum<string, EntitlementCreateResponseDataFeatureBehavior>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
 }
 
-public class EntitlementCreateResponseDataCadenceTest : TestBase
+public class EntitlementCreateResponseDataFeatureHiddenFromWidgetTest : TestBase
 {
     [Theory]
-    [InlineData(EntitlementCreateResponseDataCadence.Month)]
-    [InlineData(EntitlementCreateResponseDataCadence.Year)]
-    public void Validation_Works(EntitlementCreateResponseDataCadence rawValue)
+    [InlineData(EntitlementCreateResponseDataFeatureHiddenFromWidget.Paywall)]
+    [InlineData(EntitlementCreateResponseDataFeatureHiddenFromWidget.CustomerPortal)]
+    [InlineData(EntitlementCreateResponseDataFeatureHiddenFromWidget.Checkout)]
+    public void Validation_Works(EntitlementCreateResponseDataFeatureHiddenFromWidget rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, EntitlementCreateResponseDataCadence> value = rawValue;
+        ApiEnum<string, EntitlementCreateResponseDataFeatureHiddenFromWidget> value = rawValue;
         value.Validate();
     }
 
@@ -673,7 +728,7 @@ public class EntitlementCreateResponseDataCadenceTest : TestBase
     public void InvalidEnumValidationThrows_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementCreateResponseDataCadence>
+            ApiEnum<string, EntitlementCreateResponseDataFeatureHiddenFromWidget>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
@@ -681,16 +736,19 @@ public class EntitlementCreateResponseDataCadenceTest : TestBase
     }
 
     [Theory]
-    [InlineData(EntitlementCreateResponseDataCadence.Month)]
-    [InlineData(EntitlementCreateResponseDataCadence.Year)]
-    public void SerializationRoundtrip_Works(EntitlementCreateResponseDataCadence rawValue)
+    [InlineData(EntitlementCreateResponseDataFeatureHiddenFromWidget.Paywall)]
+    [InlineData(EntitlementCreateResponseDataFeatureHiddenFromWidget.CustomerPortal)]
+    [InlineData(EntitlementCreateResponseDataFeatureHiddenFromWidget.Checkout)]
+    public void SerializationRoundtrip_Works(
+        EntitlementCreateResponseDataFeatureHiddenFromWidget rawValue
+    )
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, EntitlementCreateResponseDataCadence> value = rawValue;
+        ApiEnum<string, EntitlementCreateResponseDataFeatureHiddenFromWidget> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementCreateResponseDataCadence>
+            ApiEnum<string, EntitlementCreateResponseDataFeatureHiddenFromWidget>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -700,27 +758,29 @@ public class EntitlementCreateResponseDataCadenceTest : TestBase
     public void InvalidEnumSerializationRoundtrip_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementCreateResponseDataCadence>
+            ApiEnum<string, EntitlementCreateResponseDataFeatureHiddenFromWidget>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementCreateResponseDataCadence>
+            ApiEnum<string, EntitlementCreateResponseDataFeatureHiddenFromWidget>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
 }
 
-public class EntitlementCreateResponseDataHiddenFromWidgetTest : TestBase
+public class EntitlementCreateResponseDataFeatureResetPeriodTest : TestBase
 {
     [Theory]
-    [InlineData(EntitlementCreateResponseDataHiddenFromWidget.Paywall)]
-    [InlineData(EntitlementCreateResponseDataHiddenFromWidget.CustomerPortal)]
-    [InlineData(EntitlementCreateResponseDataHiddenFromWidget.Checkout)]
-    public void Validation_Works(EntitlementCreateResponseDataHiddenFromWidget rawValue)
+    [InlineData(EntitlementCreateResponseDataFeatureResetPeriod.Year)]
+    [InlineData(EntitlementCreateResponseDataFeatureResetPeriod.Month)]
+    [InlineData(EntitlementCreateResponseDataFeatureResetPeriod.Week)]
+    [InlineData(EntitlementCreateResponseDataFeatureResetPeriod.Day)]
+    [InlineData(EntitlementCreateResponseDataFeatureResetPeriod.Hour)]
+    public void Validation_Works(EntitlementCreateResponseDataFeatureResetPeriod rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, EntitlementCreateResponseDataHiddenFromWidget> value = rawValue;
+        ApiEnum<string, EntitlementCreateResponseDataFeatureResetPeriod> value = rawValue;
         value.Validate();
     }
 
@@ -728,7 +788,7 @@ public class EntitlementCreateResponseDataHiddenFromWidgetTest : TestBase
     public void InvalidEnumValidationThrows_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementCreateResponseDataHiddenFromWidget>
+            ApiEnum<string, EntitlementCreateResponseDataFeatureResetPeriod>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
@@ -736,17 +796,21 @@ public class EntitlementCreateResponseDataHiddenFromWidgetTest : TestBase
     }
 
     [Theory]
-    [InlineData(EntitlementCreateResponseDataHiddenFromWidget.Paywall)]
-    [InlineData(EntitlementCreateResponseDataHiddenFromWidget.CustomerPortal)]
-    [InlineData(EntitlementCreateResponseDataHiddenFromWidget.Checkout)]
-    public void SerializationRoundtrip_Works(EntitlementCreateResponseDataHiddenFromWidget rawValue)
+    [InlineData(EntitlementCreateResponseDataFeatureResetPeriod.Year)]
+    [InlineData(EntitlementCreateResponseDataFeatureResetPeriod.Month)]
+    [InlineData(EntitlementCreateResponseDataFeatureResetPeriod.Week)]
+    [InlineData(EntitlementCreateResponseDataFeatureResetPeriod.Day)]
+    [InlineData(EntitlementCreateResponseDataFeatureResetPeriod.Hour)]
+    public void SerializationRoundtrip_Works(
+        EntitlementCreateResponseDataFeatureResetPeriod rawValue
+    )
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, EntitlementCreateResponseDataHiddenFromWidget> value = rawValue;
+        ApiEnum<string, EntitlementCreateResponseDataFeatureResetPeriod> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementCreateResponseDataHiddenFromWidget>
+            ApiEnum<string, EntitlementCreateResponseDataFeatureResetPeriod>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -756,85 +820,25 @@ public class EntitlementCreateResponseDataHiddenFromWidgetTest : TestBase
     public void InvalidEnumSerializationRoundtrip_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementCreateResponseDataHiddenFromWidget>
+            ApiEnum<string, EntitlementCreateResponseDataFeatureResetPeriod>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementCreateResponseDataHiddenFromWidget>
+            ApiEnum<string, EntitlementCreateResponseDataFeatureResetPeriod>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
 }
 
-public class EntitlementCreateResponseDataResetPeriodTest : TestBase
-{
-    [Theory]
-    [InlineData(EntitlementCreateResponseDataResetPeriod.Year)]
-    [InlineData(EntitlementCreateResponseDataResetPeriod.Month)]
-    [InlineData(EntitlementCreateResponseDataResetPeriod.Week)]
-    [InlineData(EntitlementCreateResponseDataResetPeriod.Day)]
-    [InlineData(EntitlementCreateResponseDataResetPeriod.Hour)]
-    public void Validation_Works(EntitlementCreateResponseDataResetPeriod rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, EntitlementCreateResponseDataResetPeriod> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementCreateResponseDataResetPeriod>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
-
-        Assert.NotNull(value);
-        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(EntitlementCreateResponseDataResetPeriod.Year)]
-    [InlineData(EntitlementCreateResponseDataResetPeriod.Month)]
-    [InlineData(EntitlementCreateResponseDataResetPeriod.Week)]
-    [InlineData(EntitlementCreateResponseDataResetPeriod.Day)]
-    [InlineData(EntitlementCreateResponseDataResetPeriod.Hour)]
-    public void SerializationRoundtrip_Works(EntitlementCreateResponseDataResetPeriod rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, EntitlementCreateResponseDataResetPeriod> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementCreateResponseDataResetPeriod>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementCreateResponseDataResetPeriod>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementCreateResponseDataResetPeriod>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-}
-
-public class EntitlementCreateResponseDataResetPeriodConfigurationTest : TestBase
+public class EntitlementCreateResponseDataFeatureResetPeriodConfigurationTest : TestBase
 {
     [Fact]
     public void YearlyResetPeriodConfigValidationWorks()
     {
-        EntitlementCreateResponseDataResetPeriodConfiguration value =
-            new EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfig(
-                EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
+        EntitlementCreateResponseDataFeatureResetPeriodConfiguration value =
+            new EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig(
+                EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
             );
         value.Validate();
     }
@@ -842,9 +846,9 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationTest : TestBas
     [Fact]
     public void MonthlyResetPeriodConfigValidationWorks()
     {
-        EntitlementCreateResponseDataResetPeriodConfiguration value =
-            new EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfig(
-                EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo.SubscriptionStart
+        EntitlementCreateResponseDataFeatureResetPeriodConfiguration value =
+            new EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfig(
+                EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo.SubscriptionStart
             );
         value.Validate();
     }
@@ -852,9 +856,9 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationTest : TestBas
     [Fact]
     public void WeeklyResetPeriodConfigValidationWorks()
     {
-        EntitlementCreateResponseDataResetPeriodConfiguration value =
-            new EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfig(
-                EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.SubscriptionStart
+        EntitlementCreateResponseDataFeatureResetPeriodConfiguration value =
+            new EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfig(
+                EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.SubscriptionStart
             );
         value.Validate();
     }
@@ -862,13 +866,13 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationTest : TestBas
     [Fact]
     public void YearlyResetPeriodConfigSerializationRoundtripWorks()
     {
-        EntitlementCreateResponseDataResetPeriodConfiguration value =
-            new EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfig(
-                EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
+        EntitlementCreateResponseDataFeatureResetPeriodConfiguration value =
+            new EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig(
+                EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
             );
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized =
-            JsonSerializer.Deserialize<EntitlementCreateResponseDataResetPeriodConfiguration>(
+            JsonSerializer.Deserialize<EntitlementCreateResponseDataFeatureResetPeriodConfiguration>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -879,13 +883,13 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationTest : TestBas
     [Fact]
     public void MonthlyResetPeriodConfigSerializationRoundtripWorks()
     {
-        EntitlementCreateResponseDataResetPeriodConfiguration value =
-            new EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfig(
-                EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo.SubscriptionStart
+        EntitlementCreateResponseDataFeatureResetPeriodConfiguration value =
+            new EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfig(
+                EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo.SubscriptionStart
             );
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized =
-            JsonSerializer.Deserialize<EntitlementCreateResponseDataResetPeriodConfiguration>(
+            JsonSerializer.Deserialize<EntitlementCreateResponseDataFeatureResetPeriodConfiguration>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -896,13 +900,13 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationTest : TestBas
     [Fact]
     public void WeeklyResetPeriodConfigSerializationRoundtripWorks()
     {
-        EntitlementCreateResponseDataResetPeriodConfiguration value =
-            new EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfig(
-                EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.SubscriptionStart
+        EntitlementCreateResponseDataFeatureResetPeriodConfiguration value =
+            new EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfig(
+                EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.SubscriptionStart
             );
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized =
-            JsonSerializer.Deserialize<EntitlementCreateResponseDataResetPeriodConfiguration>(
+            JsonSerializer.Deserialize<EntitlementCreateResponseDataFeatureResetPeriodConfiguration>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -911,23 +915,24 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationTest : TestBas
     }
 }
 
-public class EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigTest
+public class EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigTest
     : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfig
-        {
-            AccordingTo =
-                EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart,
-        };
+        var model =
+            new EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig
+            {
+                AccordingTo =
+                    EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart,
+            };
 
         ApiEnum<
             string,
-            EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
+            EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
         > expectedAccordingTo =
-            EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart;
+            EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart;
 
         Assert.Equal(expectedAccordingTo, model.AccordingTo);
     }
@@ -935,15 +940,16 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPer
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfig
-        {
-            AccordingTo =
-                EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart,
-        };
+        var model =
+            new EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig
+            {
+                AccordingTo =
+                    EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart,
+            };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized =
-            JsonSerializer.Deserialize<EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfig>(
+            JsonSerializer.Deserialize<EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig>(
                 json,
                 ModelBase.SerializerOptions
             );
@@ -954,15 +960,16 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPer
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfig
-        {
-            AccordingTo =
-                EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart,
-        };
+        var model =
+            new EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig
+            {
+                AccordingTo =
+                    EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart,
+            };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized =
-            JsonSerializer.Deserialize<EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfig>(
+            JsonSerializer.Deserialize<EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -970,9 +977,9 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPer
 
         ApiEnum<
             string,
-            EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
+            EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
         > expectedAccordingTo =
-            EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart;
+            EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart;
 
         Assert.Equal(expectedAccordingTo, deserialized.AccordingTo);
     }
@@ -980,11 +987,12 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPer
     [Fact]
     public void Validation_Works()
     {
-        var model = new EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfig
-        {
-            AccordingTo =
-                EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart,
-        };
+        var model =
+            new EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig
+            {
+                AccordingTo =
+                    EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart,
+            };
 
         model.Validate();
     }
@@ -992,35 +1000,35 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPer
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfig
-        {
-            AccordingTo =
-                EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart,
-        };
+        var model =
+            new EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig
+            {
+                AccordingTo =
+                    EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart,
+            };
 
-        EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfig copied = new(
-            model
-        );
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig copied =
+            new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingToTest
+public class EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingToTest
     : TestBase
 {
     [Theory]
     [InlineData(
-        EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
     )]
     public void Validation_Works(
-        EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo rawValue
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo rawValue
     )
     {
         // force implicit conversion because Theory can't do that for us
         ApiEnum<
             string,
-            EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
+            EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
         > value = rawValue;
         value.Validate();
     }
@@ -1031,7 +1039,7 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPer
         var value = JsonSerializer.Deserialize<
             ApiEnum<
                 string,
-                EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
+                EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
             >
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
@@ -1041,23 +1049,23 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPer
 
     [Theory]
     [InlineData(
-        EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo.SubscriptionStart
     )]
     public void SerializationRoundtrip_Works(
-        EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo rawValue
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo rawValue
     )
     {
         // force implicit conversion because Theory can't do that for us
         ApiEnum<
             string,
-            EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
+            EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
         > value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
             ApiEnum<
                 string,
-                EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
+                EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
             >
         >(json, ModelBase.SerializerOptions);
 
@@ -1070,14 +1078,14 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPer
         var value = JsonSerializer.Deserialize<
             ApiEnum<
                 string,
-                EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
+                EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
             >
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
             ApiEnum<
                 string,
-                EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
+                EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
             >
         >(json, ModelBase.SerializerOptions);
 
@@ -1085,24 +1093,24 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPer
     }
 }
 
-public class EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigTest
+public class EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigTest
     : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
         var model =
-            new EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfig
+            new EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfig
             {
                 AccordingTo =
-                    EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo.SubscriptionStart,
+                    EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo.SubscriptionStart,
             };
 
         ApiEnum<
             string,
-            EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
+            EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
         > expectedAccordingTo =
-            EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo.SubscriptionStart;
+            EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo.SubscriptionStart;
 
         Assert.Equal(expectedAccordingTo, model.AccordingTo);
     }
@@ -1111,15 +1119,15 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPe
     public void SerializationRoundtrip_Works()
     {
         var model =
-            new EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfig
+            new EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfig
             {
                 AccordingTo =
-                    EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo.SubscriptionStart,
+                    EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo.SubscriptionStart,
             };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized =
-            JsonSerializer.Deserialize<EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfig>(
+            JsonSerializer.Deserialize<EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfig>(
                 json,
                 ModelBase.SerializerOptions
             );
@@ -1131,15 +1139,15 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPe
     public void FieldRoundtripThroughSerialization_Works()
     {
         var model =
-            new EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfig
+            new EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfig
             {
                 AccordingTo =
-                    EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo.SubscriptionStart,
+                    EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo.SubscriptionStart,
             };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized =
-            JsonSerializer.Deserialize<EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfig>(
+            JsonSerializer.Deserialize<EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfig>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -1147,9 +1155,9 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPe
 
         ApiEnum<
             string,
-            EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
+            EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
         > expectedAccordingTo =
-            EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo.SubscriptionStart;
+            EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo.SubscriptionStart;
 
         Assert.Equal(expectedAccordingTo, deserialized.AccordingTo);
     }
@@ -1158,10 +1166,10 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPe
     public void Validation_Works()
     {
         var model =
-            new EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfig
+            new EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfig
             {
                 AccordingTo =
-                    EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo.SubscriptionStart,
+                    EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo.SubscriptionStart,
             };
 
         model.Validate();
@@ -1171,38 +1179,37 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPe
     public void CopyConstructor_Works()
     {
         var model =
-            new EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfig
+            new EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfig
             {
                 AccordingTo =
-                    EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo.SubscriptionStart,
+                    EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo.SubscriptionStart,
             };
 
-        EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfig copied = new(
-            model
-        );
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfig copied =
+            new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingToTest
+public class EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingToTest
     : TestBase
 {
     [Theory]
     [InlineData(
-        EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo.SubscriptionStart
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo.SubscriptionStart
     )]
     [InlineData(
-        EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo.StartOfTheMonth
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo.StartOfTheMonth
     )]
     public void Validation_Works(
-        EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo rawValue
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo rawValue
     )
     {
         // force implicit conversion because Theory can't do that for us
         ApiEnum<
             string,
-            EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
+            EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
         > value = rawValue;
         value.Validate();
     }
@@ -1213,7 +1220,7 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPe
         var value = JsonSerializer.Deserialize<
             ApiEnum<
                 string,
-                EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
+                EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
             >
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
@@ -1223,26 +1230,26 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPe
 
     [Theory]
     [InlineData(
-        EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo.SubscriptionStart
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo.SubscriptionStart
     )]
     [InlineData(
-        EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo.StartOfTheMonth
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo.StartOfTheMonth
     )]
     public void SerializationRoundtrip_Works(
-        EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo rawValue
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo rawValue
     )
     {
         // force implicit conversion because Theory can't do that for us
         ApiEnum<
             string,
-            EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
+            EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
         > value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
             ApiEnum<
                 string,
-                EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
+                EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
             >
         >(json, ModelBase.SerializerOptions);
 
@@ -1255,14 +1262,14 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPe
         var value = JsonSerializer.Deserialize<
             ApiEnum<
                 string,
-                EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
+                EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
             >
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
             ApiEnum<
                 string,
-                EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
+                EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
             >
         >(json, ModelBase.SerializerOptions);
 
@@ -1270,23 +1277,24 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPe
     }
 }
 
-public class EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigTest
+public class EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigTest
     : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfig
-        {
-            AccordingTo =
-                EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.SubscriptionStart,
-        };
+        var model =
+            new EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfig
+            {
+                AccordingTo =
+                    EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.SubscriptionStart,
+            };
 
         ApiEnum<
             string,
-            EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
+            EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
         > expectedAccordingTo =
-            EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.SubscriptionStart;
+            EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.SubscriptionStart;
 
         Assert.Equal(expectedAccordingTo, model.AccordingTo);
     }
@@ -1294,15 +1302,16 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPer
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfig
-        {
-            AccordingTo =
-                EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.SubscriptionStart,
-        };
+        var model =
+            new EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfig
+            {
+                AccordingTo =
+                    EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.SubscriptionStart,
+            };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized =
-            JsonSerializer.Deserialize<EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfig>(
+            JsonSerializer.Deserialize<EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfig>(
                 json,
                 ModelBase.SerializerOptions
             );
@@ -1313,15 +1322,16 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPer
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfig
-        {
-            AccordingTo =
-                EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.SubscriptionStart,
-        };
+        var model =
+            new EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfig
+            {
+                AccordingTo =
+                    EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.SubscriptionStart,
+            };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized =
-            JsonSerializer.Deserialize<EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfig>(
+            JsonSerializer.Deserialize<EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfig>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -1329,9 +1339,9 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPer
 
         ApiEnum<
             string,
-            EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
+            EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
         > expectedAccordingTo =
-            EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.SubscriptionStart;
+            EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.SubscriptionStart;
 
         Assert.Equal(expectedAccordingTo, deserialized.AccordingTo);
     }
@@ -1339,11 +1349,12 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPer
     [Fact]
     public void Validation_Works()
     {
-        var model = new EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfig
-        {
-            AccordingTo =
-                EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.SubscriptionStart,
-        };
+        var model =
+            new EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfig
+            {
+                AccordingTo =
+                    EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.SubscriptionStart,
+            };
 
         model.Validate();
     }
@@ -1351,56 +1362,56 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPer
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfig
-        {
-            AccordingTo =
-                EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.SubscriptionStart,
-        };
+        var model =
+            new EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfig
+            {
+                AccordingTo =
+                    EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.SubscriptionStart,
+            };
 
-        EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfig copied = new(
-            model
-        );
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfig copied =
+            new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingToTest
+public class EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingToTest
     : TestBase
 {
     [Theory]
     [InlineData(
-        EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.SubscriptionStart
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.SubscriptionStart
     )]
     [InlineData(
-        EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.EverySunday
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.EverySunday
     )]
     [InlineData(
-        EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.EveryMonday
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.EveryMonday
     )]
     [InlineData(
-        EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.EveryTuesday
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.EveryTuesday
     )]
     [InlineData(
-        EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.EveryWednesday
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.EveryWednesday
     )]
     [InlineData(
-        EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.EveryThursday
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.EveryThursday
     )]
     [InlineData(
-        EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.EveryFriday
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.EveryFriday
     )]
     [InlineData(
-        EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.EverySaturday
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.EverySaturday
     )]
     public void Validation_Works(
-        EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo rawValue
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo rawValue
     )
     {
         // force implicit conversion because Theory can't do that for us
         ApiEnum<
             string,
-            EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
+            EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
         > value = rawValue;
         value.Validate();
     }
@@ -1411,7 +1422,7 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPer
         var value = JsonSerializer.Deserialize<
             ApiEnum<
                 string,
-                EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
+                EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
             >
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
@@ -1421,44 +1432,44 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPer
 
     [Theory]
     [InlineData(
-        EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.SubscriptionStart
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.SubscriptionStart
     )]
     [InlineData(
-        EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.EverySunday
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.EverySunday
     )]
     [InlineData(
-        EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.EveryMonday
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.EveryMonday
     )]
     [InlineData(
-        EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.EveryTuesday
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.EveryTuesday
     )]
     [InlineData(
-        EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.EveryWednesday
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.EveryWednesday
     )]
     [InlineData(
-        EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.EveryThursday
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.EveryThursday
     )]
     [InlineData(
-        EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.EveryFriday
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.EveryFriday
     )]
     [InlineData(
-        EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.EverySaturday
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo.EverySaturday
     )]
     public void SerializationRoundtrip_Works(
-        EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo rawValue
+        EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo rawValue
     )
     {
         // force implicit conversion because Theory can't do that for us
         ApiEnum<
             string,
-            EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
+            EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
         > value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
             ApiEnum<
                 string,
-                EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
+                EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
             >
         >(json, ModelBase.SerializerOptions);
 
@@ -1471,14 +1482,14 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPer
         var value = JsonSerializer.Deserialize<
             ApiEnum<
                 string,
-                EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
+                EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
             >
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
             ApiEnum<
                 string,
-                EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
+                EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
             >
         >(json, ModelBase.SerializerOptions);
 
@@ -1486,41 +1497,236 @@ public class EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPer
     }
 }
 
-public class EntitlementCreateResponseDataTypeTest : TestBase
+public class EntitlementCreateResponseDataCreditTest : TestBase
 {
-    [Theory]
-    [InlineData(EntitlementCreateResponseDataType.Feature)]
-    [InlineData(EntitlementCreateResponseDataType.Credit)]
-    public void Validation_Works(EntitlementCreateResponseDataType rawValue)
+    [Fact]
+    public void FieldRoundtrip_Works()
     {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, EntitlementCreateResponseDataType> value = rawValue;
-        value.Validate();
+        var model = new EntitlementCreateResponseDataCredit
+        {
+            ID = "id",
+            Amount = 0,
+            Behavior = EntitlementCreateResponseDataCreditBehavior.Increment,
+            Cadence = EntitlementCreateResponseDataCreditCadence.Month,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            DisplayNameOverride = "displayNameOverride",
+            HiddenFromWidgets = [EntitlementCreateResponseDataCreditHiddenFromWidget.Paywall],
+            IsCustom = true,
+            IsGranted = true,
+            Order = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        string expectedID = "id";
+        double expectedAmount = 0;
+        ApiEnum<string, EntitlementCreateResponseDataCreditBehavior> expectedBehavior =
+            EntitlementCreateResponseDataCreditBehavior.Increment;
+        ApiEnum<string, EntitlementCreateResponseDataCreditCadence> expectedCadence =
+            EntitlementCreateResponseDataCreditCadence.Month;
+        DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedDescription = "description";
+        string expectedDisplayNameOverride = "displayNameOverride";
+        List<
+            ApiEnum<string, EntitlementCreateResponseDataCreditHiddenFromWidget>
+        > expectedHiddenFromWidgets = [EntitlementCreateResponseDataCreditHiddenFromWidget.Paywall];
+        bool expectedIsCustom = true;
+        bool expectedIsGranted = true;
+        double expectedOrder = 0;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("CREDIT");
+        DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+
+        Assert.Equal(expectedID, model.ID);
+        Assert.Equal(expectedAmount, model.Amount);
+        Assert.Equal(expectedBehavior, model.Behavior);
+        Assert.Equal(expectedCadence, model.Cadence);
+        Assert.Equal(expectedCreatedAt, model.CreatedAt);
+        Assert.Equal(expectedDescription, model.Description);
+        Assert.Equal(expectedDisplayNameOverride, model.DisplayNameOverride);
+        Assert.Equal(expectedHiddenFromWidgets.Count, model.HiddenFromWidgets.Count);
+        for (int i = 0; i < expectedHiddenFromWidgets.Count; i++)
+        {
+            Assert.Equal(expectedHiddenFromWidgets[i], model.HiddenFromWidgets[i]);
+        }
+        Assert.Equal(expectedIsCustom, model.IsCustom);
+        Assert.Equal(expectedIsGranted, model.IsGranted);
+        Assert.Equal(expectedOrder, model.Order);
+        Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
+        Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
     }
 
     [Fact]
-    public void InvalidEnumValidationThrows_Works()
+    public void SerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, EntitlementCreateResponseDataType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
+        var model = new EntitlementCreateResponseDataCredit
+        {
+            ID = "id",
+            Amount = 0,
+            Behavior = EntitlementCreateResponseDataCreditBehavior.Increment,
+            Cadence = EntitlementCreateResponseDataCreditCadence.Month,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            DisplayNameOverride = "displayNameOverride",
+            HiddenFromWidgets = [EntitlementCreateResponseDataCreditHiddenFromWidget.Paywall],
+            IsCustom = true,
+            IsGranted = true,
+            Order = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<EntitlementCreateResponseDataCredit>(
+            json,
             ModelBase.SerializerOptions
         );
 
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new EntitlementCreateResponseDataCredit
+        {
+            ID = "id",
+            Amount = 0,
+            Behavior = EntitlementCreateResponseDataCreditBehavior.Increment,
+            Cadence = EntitlementCreateResponseDataCreditCadence.Month,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            DisplayNameOverride = "displayNameOverride",
+            HiddenFromWidgets = [EntitlementCreateResponseDataCreditHiddenFromWidget.Paywall],
+            IsCustom = true,
+            IsGranted = true,
+            Order = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<EntitlementCreateResponseDataCredit>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        string expectedID = "id";
+        double expectedAmount = 0;
+        ApiEnum<string, EntitlementCreateResponseDataCreditBehavior> expectedBehavior =
+            EntitlementCreateResponseDataCreditBehavior.Increment;
+        ApiEnum<string, EntitlementCreateResponseDataCreditCadence> expectedCadence =
+            EntitlementCreateResponseDataCreditCadence.Month;
+        DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedDescription = "description";
+        string expectedDisplayNameOverride = "displayNameOverride";
+        List<
+            ApiEnum<string, EntitlementCreateResponseDataCreditHiddenFromWidget>
+        > expectedHiddenFromWidgets = [EntitlementCreateResponseDataCreditHiddenFromWidget.Paywall];
+        bool expectedIsCustom = true;
+        bool expectedIsGranted = true;
+        double expectedOrder = 0;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("CREDIT");
+        DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+
+        Assert.Equal(expectedID, deserialized.ID);
+        Assert.Equal(expectedAmount, deserialized.Amount);
+        Assert.Equal(expectedBehavior, deserialized.Behavior);
+        Assert.Equal(expectedCadence, deserialized.Cadence);
+        Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
+        Assert.Equal(expectedDescription, deserialized.Description);
+        Assert.Equal(expectedDisplayNameOverride, deserialized.DisplayNameOverride);
+        Assert.Equal(expectedHiddenFromWidgets.Count, deserialized.HiddenFromWidgets.Count);
+        for (int i = 0; i < expectedHiddenFromWidgets.Count; i++)
+        {
+            Assert.Equal(expectedHiddenFromWidgets[i], deserialized.HiddenFromWidgets[i]);
+        }
+        Assert.Equal(expectedIsCustom, deserialized.IsCustom);
+        Assert.Equal(expectedIsGranted, deserialized.IsGranted);
+        Assert.Equal(expectedOrder, deserialized.Order);
+        Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
+        Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new EntitlementCreateResponseDataCredit
+        {
+            ID = "id",
+            Amount = 0,
+            Behavior = EntitlementCreateResponseDataCreditBehavior.Increment,
+            Cadence = EntitlementCreateResponseDataCreditCadence.Month,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            DisplayNameOverride = "displayNameOverride",
+            HiddenFromWidgets = [EntitlementCreateResponseDataCreditHiddenFromWidget.Paywall],
+            IsCustom = true,
+            IsGranted = true,
+            Order = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new EntitlementCreateResponseDataCredit
+        {
+            ID = "id",
+            Amount = 0,
+            Behavior = EntitlementCreateResponseDataCreditBehavior.Increment,
+            Cadence = EntitlementCreateResponseDataCreditCadence.Month,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            DisplayNameOverride = "displayNameOverride",
+            HiddenFromWidgets = [EntitlementCreateResponseDataCreditHiddenFromWidget.Paywall],
+            IsCustom = true,
+            IsGranted = true,
+            Order = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        EntitlementCreateResponseDataCredit copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class EntitlementCreateResponseDataCreditBehaviorTest : TestBase
+{
+    [Theory]
+    [InlineData(EntitlementCreateResponseDataCreditBehavior.Increment)]
+    [InlineData(EntitlementCreateResponseDataCreditBehavior.Override)]
+    public void Validation_Works(EntitlementCreateResponseDataCreditBehavior rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, EntitlementCreateResponseDataCreditBehavior> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementCreateResponseDataCreditBehavior>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
         Assert.NotNull(value);
         Assert.Throws<StiggInvalidDataException>(() => value.Validate());
     }
 
     [Theory]
-    [InlineData(EntitlementCreateResponseDataType.Feature)]
-    [InlineData(EntitlementCreateResponseDataType.Credit)]
-    public void SerializationRoundtrip_Works(EntitlementCreateResponseDataType rawValue)
+    [InlineData(EntitlementCreateResponseDataCreditBehavior.Increment)]
+    [InlineData(EntitlementCreateResponseDataCreditBehavior.Override)]
+    public void SerializationRoundtrip_Works(EntitlementCreateResponseDataCreditBehavior rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, EntitlementCreateResponseDataType> value = rawValue;
+        ApiEnum<string, EntitlementCreateResponseDataCreditBehavior> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementCreateResponseDataType>
+            ApiEnum<string, EntitlementCreateResponseDataCreditBehavior>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -1529,13 +1735,124 @@ public class EntitlementCreateResponseDataTypeTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, EntitlementCreateResponseDataType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementCreateResponseDataCreditBehavior>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, EntitlementCreateResponseDataType>
+            ApiEnum<string, EntitlementCreateResponseDataCreditBehavior>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class EntitlementCreateResponseDataCreditCadenceTest : TestBase
+{
+    [Theory]
+    [InlineData(EntitlementCreateResponseDataCreditCadence.Month)]
+    [InlineData(EntitlementCreateResponseDataCreditCadence.Year)]
+    public void Validation_Works(EntitlementCreateResponseDataCreditCadence rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, EntitlementCreateResponseDataCreditCadence> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementCreateResponseDataCreditCadence>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(EntitlementCreateResponseDataCreditCadence.Month)]
+    [InlineData(EntitlementCreateResponseDataCreditCadence.Year)]
+    public void SerializationRoundtrip_Works(EntitlementCreateResponseDataCreditCadence rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, EntitlementCreateResponseDataCreditCadence> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementCreateResponseDataCreditCadence>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementCreateResponseDataCreditCadence>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementCreateResponseDataCreditCadence>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class EntitlementCreateResponseDataCreditHiddenFromWidgetTest : TestBase
+{
+    [Theory]
+    [InlineData(EntitlementCreateResponseDataCreditHiddenFromWidget.Paywall)]
+    [InlineData(EntitlementCreateResponseDataCreditHiddenFromWidget.CustomerPortal)]
+    [InlineData(EntitlementCreateResponseDataCreditHiddenFromWidget.Checkout)]
+    public void Validation_Works(EntitlementCreateResponseDataCreditHiddenFromWidget rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, EntitlementCreateResponseDataCreditHiddenFromWidget> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementCreateResponseDataCreditHiddenFromWidget>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(EntitlementCreateResponseDataCreditHiddenFromWidget.Paywall)]
+    [InlineData(EntitlementCreateResponseDataCreditHiddenFromWidget.CustomerPortal)]
+    [InlineData(EntitlementCreateResponseDataCreditHiddenFromWidget.Checkout)]
+    public void SerializationRoundtrip_Works(
+        EntitlementCreateResponseDataCreditHiddenFromWidget rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, EntitlementCreateResponseDataCreditHiddenFromWidget> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementCreateResponseDataCreditHiddenFromWidget>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementCreateResponseDataCreditHiddenFromWidget>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementCreateResponseDataCreditHiddenFromWidget>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);

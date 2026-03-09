@@ -233,7 +233,6 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Subscriptions::ProrationBehavior>(),
             new ApiEnumConverter<string, Subscriptions::BillingPeriod>(),
             new ApiEnumConverter<string, Subscriptions::Type>(),
-            new ApiEnumConverter<string, Subscriptions::Cadence>(),
             new ApiEnumConverter<string, Subscriptions::AccordingTo>(),
             new ApiEnumConverter<string, Subscriptions::ResetPeriod>(),
             new ApiEnumConverter<
@@ -244,6 +243,7 @@ public abstract record class ModelBase
                 string,
                 Subscriptions::YearlyResetPeriodConfigurationAccordingTo
             >(),
+            new ApiEnumConverter<string, Subscriptions::Cadence>(),
             new ApiEnumConverter<string, Subscriptions::MinimumSpendCurrency>(),
             new ApiEnumConverter<string, Subscriptions::PriceOverrideCurrency>(),
             new ApiEnumConverter<string, Subscriptions::ScheduleStrategy>(),
@@ -287,10 +287,6 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Subscriptions::SubscriptionProvisionParamsChargeType>(),
             new ApiEnumConverter<
                 string,
-                Subscriptions::SubscriptionProvisionParamsEntitlementCreditCadence
-            >(),
-            new ApiEnumConverter<
-                string,
                 Subscriptions::SubscriptionProvisionParamsEntitlementFeatureMonthlyResetPeriodConfigurationAccordingTo
             >(),
             new ApiEnumConverter<
@@ -304,6 +300,10 @@ public abstract record class ModelBase
             new ApiEnumConverter<
                 string,
                 Subscriptions::SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo
+            >(),
+            new ApiEnumConverter<
+                string,
+                Subscriptions::SubscriptionProvisionParamsEntitlementCreditCadence
             >(),
             new ApiEnumConverter<
                 string,
@@ -481,87 +481,108 @@ public abstract record class ModelBase
                 string,
                 Addons::PricingModelYearlyResetPeriodConfigurationAccordingTo
             >(),
-            new ApiEnumConverter<string, Entitlements::DataBehavior>(),
-            new ApiEnumConverter<string, Entitlements::DataCadence>(),
-            new ApiEnumConverter<string, Entitlements::DataHiddenFromWidget>(),
-            new ApiEnumConverter<string, Entitlements::DataResetPeriod>(),
+            new ApiEnumConverter<string, Entitlements::DataFeatureBehavior>(),
+            new ApiEnumConverter<string, Entitlements::DataFeatureHiddenFromWidget>(),
+            new ApiEnumConverter<string, Entitlements::DataFeatureResetPeriod>(),
             new ApiEnumConverter<string, Entitlements::YearlyResetPeriodConfigAccordingTo>(),
             new ApiEnumConverter<string, Entitlements::MonthlyResetPeriodConfigAccordingTo>(),
             new ApiEnumConverter<string, Entitlements::WeeklyResetPeriodConfigAccordingTo>(),
-            new ApiEnumConverter<string, Entitlements::Type>(),
-            new ApiEnumConverter<string, Entitlements::EntitlementCreateResponseDataBehavior>(),
-            new ApiEnumConverter<string, Entitlements::EntitlementCreateResponseDataCadence>(),
+            new ApiEnumConverter<string, Entitlements::DataCreditBehavior>(),
+            new ApiEnumConverter<string, Entitlements::DataCreditCadence>(),
+            new ApiEnumConverter<string, Entitlements::DataCreditHiddenFromWidget>(),
             new ApiEnumConverter<
                 string,
-                Entitlements::EntitlementCreateResponseDataHiddenFromWidget
-            >(),
-            new ApiEnumConverter<string, Entitlements::EntitlementCreateResponseDataResetPeriod>(),
-            new ApiEnumConverter<
-                string,
-                Entitlements::EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
+                Entitlements::EntitlementCreateResponseDataFeatureBehavior
             >(),
             new ApiEnumConverter<
                 string,
-                Entitlements::EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
+                Entitlements::EntitlementCreateResponseDataFeatureHiddenFromWidget
             >(),
             new ApiEnumConverter<
                 string,
-                Entitlements::EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
-            >(),
-            new ApiEnumConverter<string, Entitlements::EntitlementCreateResponseDataType>(),
-            new ApiEnumConverter<string, Entitlements::EntitlementListResponseDataBehavior>(),
-            new ApiEnumConverter<string, Entitlements::EntitlementListResponseDataCadence>(),
-            new ApiEnumConverter<
-                string,
-                Entitlements::EntitlementListResponseDataHiddenFromWidget
-            >(),
-            new ApiEnumConverter<string, Entitlements::EntitlementListResponseDataResetPeriod>(),
-            new ApiEnumConverter<
-                string,
-                Entitlements::EntitlementListResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
+                Entitlements::EntitlementCreateResponseDataFeatureResetPeriod
             >(),
             new ApiEnumConverter<
                 string,
-                Entitlements::EntitlementListResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
+                Entitlements::EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
             >(),
             new ApiEnumConverter<
                 string,
-                Entitlements::EntitlementListResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
+                Entitlements::EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
             >(),
-            new ApiEnumConverter<string, Entitlements::EntitlementListResponseDataType>(),
-            new ApiEnumConverter<string, Entitlements::Cadence>(),
+            new ApiEnumConverter<
+                string,
+                Entitlements::EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
+            >(),
+            new ApiEnumConverter<
+                string,
+                Entitlements::EntitlementCreateResponseDataCreditBehavior
+            >(),
+            new ApiEnumConverter<
+                string,
+                Entitlements::EntitlementCreateResponseDataCreditCadence
+            >(),
+            new ApiEnumConverter<
+                string,
+                Entitlements::EntitlementCreateResponseDataCreditHiddenFromWidget
+            >(),
+            new ApiEnumConverter<
+                string,
+                Entitlements::EntitlementListResponseDataFeatureBehavior
+            >(),
+            new ApiEnumConverter<
+                string,
+                Entitlements::EntitlementListResponseDataFeatureHiddenFromWidget
+            >(),
+            new ApiEnumConverter<
+                string,
+                Entitlements::EntitlementListResponseDataFeatureResetPeriod
+            >(),
+            new ApiEnumConverter<
+                string,
+                Entitlements::EntitlementListResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
+            >(),
+            new ApiEnumConverter<
+                string,
+                Entitlements::EntitlementListResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
+            >(),
+            new ApiEnumConverter<
+                string,
+                Entitlements::EntitlementListResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
+            >(),
+            new ApiEnumConverter<string, Entitlements::EntitlementListResponseDataCreditBehavior>(),
+            new ApiEnumConverter<string, Entitlements::EntitlementListResponseDataCreditCadence>(),
+            new ApiEnumConverter<
+                string,
+                Entitlements::EntitlementListResponseDataCreditHiddenFromWidget
+            >(),
             new ApiEnumConverter<string, Entitlements::Behavior>(),
             new ApiEnumConverter<string, Entitlements::HiddenFromWidget>(),
-            new ApiEnumConverter<string, Entitlements::FeatureBehavior>(),
-            new ApiEnumConverter<string, Entitlements::FeatureHiddenFromWidget>(),
             new ApiEnumConverter<string, Entitlements::AccordingTo>(),
             new ApiEnumConverter<string, Entitlements::ResetPeriod>(),
             new ApiEnumConverter<string, Entitlements::WeeklyResetPeriodConfigurationAccordingTo>(),
             new ApiEnumConverter<string, Entitlements::YearlyResetPeriodConfigurationAccordingTo>(),
-            new ApiEnumConverter<string, Entitlements::EntitlementUpdateParamsCreditBehavior>(),
-            new ApiEnumConverter<string, Entitlements::EntitlementUpdateParamsCreditCadence>(),
+            new ApiEnumConverter<string, Entitlements::Cadence>(),
+            new ApiEnumConverter<string, Entitlements::CreditBehavior>(),
+            new ApiEnumConverter<string, Entitlements::CreditHiddenFromWidget>(),
+            new ApiEnumConverter<string, Entitlements::BodyFeatureBehavior>(),
+            new ApiEnumConverter<string, Entitlements::BodyFeatureHiddenFromWidget>(),
             new ApiEnumConverter<
                 string,
-                Entitlements::EntitlementUpdateParamsCreditHiddenFromWidget
+                Entitlements::BodyFeatureMonthlyResetPeriodConfigurationAccordingTo
             >(),
-            new ApiEnumConverter<string, Entitlements::EntitlementUpdateParamsFeatureBehavior>(),
+            new ApiEnumConverter<string, Entitlements::BodyFeatureResetPeriod>(),
             new ApiEnumConverter<
                 string,
-                Entitlements::EntitlementUpdateParamsFeatureHiddenFromWidget
-            >(),
-            new ApiEnumConverter<
-                string,
-                Entitlements::EntitlementUpdateParamsFeatureMonthlyResetPeriodConfigurationAccordingTo
-            >(),
-            new ApiEnumConverter<string, Entitlements::EntitlementUpdateParamsFeatureResetPeriod>(),
-            new ApiEnumConverter<
-                string,
-                Entitlements::EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordingTo
+                Entitlements::BodyFeatureWeeklyResetPeriodConfigurationAccordingTo
             >(),
             new ApiEnumConverter<
                 string,
-                Entitlements::EntitlementUpdateParamsFeatureYearlyResetPeriodConfigurationAccordingTo
+                Entitlements::BodyFeatureYearlyResetPeriodConfigurationAccordingTo
             >(),
+            new ApiEnumConverter<string, Entitlements::BodyCreditBehavior>(),
+            new ApiEnumConverter<string, Entitlements::BodyCreditCadence>(),
+            new ApiEnumConverter<string, Entitlements::BodyCreditHiddenFromWidget>(),
             new ApiEnumConverter<string, Plans::DataDefaultTrialConfigUnits>(),
             new ApiEnumConverter<string, Plans::DataDefaultTrialConfigTrialEndBehavior>(),
             new ApiEnumConverter<string, Plans::Type>(),
@@ -621,68 +642,89 @@ public abstract record class ModelBase
                 string,
                 Plans::PricingModelYearlyResetPeriodConfigurationAccordingTo
             >(),
-            new ApiEnumConverter<string, PlansEntitlements::DataBehavior>(),
-            new ApiEnumConverter<string, PlansEntitlements::DataCadence>(),
-            new ApiEnumConverter<string, PlansEntitlements::DataHiddenFromWidget>(),
-            new ApiEnumConverter<string, PlansEntitlements::DataResetPeriod>(),
+            new ApiEnumConverter<string, PlansEntitlements::DataFeatureBehavior>(),
+            new ApiEnumConverter<string, PlansEntitlements::DataFeatureHiddenFromWidget>(),
+            new ApiEnumConverter<string, PlansEntitlements::DataFeatureResetPeriod>(),
             new ApiEnumConverter<string, PlansEntitlements::YearlyResetPeriodConfigAccordingTo>(),
             new ApiEnumConverter<string, PlansEntitlements::MonthlyResetPeriodConfigAccordingTo>(),
             new ApiEnumConverter<string, PlansEntitlements::WeeklyResetPeriodConfigAccordingTo>(),
-            new ApiEnumConverter<string, PlansEntitlements::Type>(),
+            new ApiEnumConverter<string, PlansEntitlements::DataCreditBehavior>(),
+            new ApiEnumConverter<string, PlansEntitlements::DataCreditCadence>(),
+            new ApiEnumConverter<string, PlansEntitlements::DataCreditHiddenFromWidget>(),
             new ApiEnumConverter<
                 string,
-                PlansEntitlements::EntitlementCreateResponseDataBehavior
-            >(),
-            new ApiEnumConverter<string, PlansEntitlements::EntitlementCreateResponseDataCadence>(),
-            new ApiEnumConverter<
-                string,
-                PlansEntitlements::EntitlementCreateResponseDataHiddenFromWidget
+                PlansEntitlements::EntitlementCreateResponseDataFeatureBehavior
             >(),
             new ApiEnumConverter<
                 string,
-                PlansEntitlements::EntitlementCreateResponseDataResetPeriod
+                PlansEntitlements::EntitlementCreateResponseDataFeatureHiddenFromWidget
             >(),
             new ApiEnumConverter<
                 string,
-                PlansEntitlements::EntitlementCreateResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
+                PlansEntitlements::EntitlementCreateResponseDataFeatureResetPeriod
             >(),
             new ApiEnumConverter<
                 string,
-                PlansEntitlements::EntitlementCreateResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
+                PlansEntitlements::EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
             >(),
             new ApiEnumConverter<
                 string,
-                PlansEntitlements::EntitlementCreateResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
-            >(),
-            new ApiEnumConverter<string, PlansEntitlements::EntitlementCreateResponseDataType>(),
-            new ApiEnumConverter<string, PlansEntitlements::EntitlementListResponseDataBehavior>(),
-            new ApiEnumConverter<string, PlansEntitlements::EntitlementListResponseDataCadence>(),
-            new ApiEnumConverter<
-                string,
-                PlansEntitlements::EntitlementListResponseDataHiddenFromWidget
+                PlansEntitlements::EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
             >(),
             new ApiEnumConverter<
                 string,
-                PlansEntitlements::EntitlementListResponseDataResetPeriod
+                PlansEntitlements::EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
             >(),
             new ApiEnumConverter<
                 string,
-                PlansEntitlements::EntitlementListResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
+                PlansEntitlements::EntitlementCreateResponseDataCreditBehavior
             >(),
             new ApiEnumConverter<
                 string,
-                PlansEntitlements::EntitlementListResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
+                PlansEntitlements::EntitlementCreateResponseDataCreditCadence
             >(),
             new ApiEnumConverter<
                 string,
-                PlansEntitlements::EntitlementListResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
+                PlansEntitlements::EntitlementCreateResponseDataCreditHiddenFromWidget
             >(),
-            new ApiEnumConverter<string, PlansEntitlements::EntitlementListResponseDataType>(),
-            new ApiEnumConverter<string, PlansEntitlements::Cadence>(),
+            new ApiEnumConverter<
+                string,
+                PlansEntitlements::EntitlementListResponseDataFeatureBehavior
+            >(),
+            new ApiEnumConverter<
+                string,
+                PlansEntitlements::EntitlementListResponseDataFeatureHiddenFromWidget
+            >(),
+            new ApiEnumConverter<
+                string,
+                PlansEntitlements::EntitlementListResponseDataFeatureResetPeriod
+            >(),
+            new ApiEnumConverter<
+                string,
+                PlansEntitlements::EntitlementListResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
+            >(),
+            new ApiEnumConverter<
+                string,
+                PlansEntitlements::EntitlementListResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
+            >(),
+            new ApiEnumConverter<
+                string,
+                PlansEntitlements::EntitlementListResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
+            >(),
+            new ApiEnumConverter<
+                string,
+                PlansEntitlements::EntitlementListResponseDataCreditBehavior
+            >(),
+            new ApiEnumConverter<
+                string,
+                PlansEntitlements::EntitlementListResponseDataCreditCadence
+            >(),
+            new ApiEnumConverter<
+                string,
+                PlansEntitlements::EntitlementListResponseDataCreditHiddenFromWidget
+            >(),
             new ApiEnumConverter<string, PlansEntitlements::Behavior>(),
             new ApiEnumConverter<string, PlansEntitlements::HiddenFromWidget>(),
-            new ApiEnumConverter<string, PlansEntitlements::FeatureBehavior>(),
-            new ApiEnumConverter<string, PlansEntitlements::FeatureHiddenFromWidget>(),
             new ApiEnumConverter<string, PlansEntitlements::AccordingTo>(),
             new ApiEnumConverter<string, PlansEntitlements::ResetPeriod>(),
             new ApiEnumConverter<
@@ -693,39 +735,27 @@ public abstract record class ModelBase
                 string,
                 PlansEntitlements::YearlyResetPeriodConfigurationAccordingTo
             >(),
+            new ApiEnumConverter<string, PlansEntitlements::Cadence>(),
+            new ApiEnumConverter<string, PlansEntitlements::CreditBehavior>(),
+            new ApiEnumConverter<string, PlansEntitlements::CreditHiddenFromWidget>(),
+            new ApiEnumConverter<string, PlansEntitlements::BodyFeatureBehavior>(),
+            new ApiEnumConverter<string, PlansEntitlements::BodyFeatureHiddenFromWidget>(),
             new ApiEnumConverter<
                 string,
-                PlansEntitlements::EntitlementUpdateParamsCreditBehavior
+                PlansEntitlements::BodyFeatureMonthlyResetPeriodConfigurationAccordingTo
             >(),
-            new ApiEnumConverter<string, PlansEntitlements::EntitlementUpdateParamsCreditCadence>(),
+            new ApiEnumConverter<string, PlansEntitlements::BodyFeatureResetPeriod>(),
             new ApiEnumConverter<
                 string,
-                PlansEntitlements::EntitlementUpdateParamsCreditHiddenFromWidget
-            >(),
-            new ApiEnumConverter<
-                string,
-                PlansEntitlements::EntitlementUpdateParamsFeatureBehavior
-            >(),
-            new ApiEnumConverter<
-                string,
-                PlansEntitlements::EntitlementUpdateParamsFeatureHiddenFromWidget
+                PlansEntitlements::BodyFeatureWeeklyResetPeriodConfigurationAccordingTo
             >(),
             new ApiEnumConverter<
                 string,
-                PlansEntitlements::EntitlementUpdateParamsFeatureMonthlyResetPeriodConfigurationAccordingTo
+                PlansEntitlements::BodyFeatureYearlyResetPeriodConfigurationAccordingTo
             >(),
-            new ApiEnumConverter<
-                string,
-                PlansEntitlements::EntitlementUpdateParamsFeatureResetPeriod
-            >(),
-            new ApiEnumConverter<
-                string,
-                PlansEntitlements::EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordingTo
-            >(),
-            new ApiEnumConverter<
-                string,
-                PlansEntitlements::EntitlementUpdateParamsFeatureYearlyResetPeriodConfigurationAccordingTo
-            >(),
+            new ApiEnumConverter<string, PlansEntitlements::BodyCreditBehavior>(),
+            new ApiEnumConverter<string, PlansEntitlements::BodyCreditCadence>(),
+            new ApiEnumConverter<string, PlansEntitlements::BodyCreditHiddenFromWidget>(),
             new ApiEnumConverter<string, Usage::Type>(),
             new ApiEnumConverter<string, Usage::UpdateBehavior>(),
             new ApiEnumConverter<string, Products::Status>(),

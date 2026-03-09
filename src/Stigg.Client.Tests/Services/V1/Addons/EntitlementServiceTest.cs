@@ -14,44 +14,28 @@ public class EntitlementServiceTest : TestBase
             {
                 Entitlements =
                 [
-                    new()
+                    new Feature()
                     {
-                        Credit = new()
-                        {
-                            Amount = 1,
-                            Cadence = Cadence.Month,
-                            CustomCurrencyID = "customCurrencyId",
-                            Behavior = Behavior.Increment,
-                            Description = "description",
-                            DisplayNameOverride = "displayNameOverride",
-                            HiddenFromWidgets = [HiddenFromWidget.Paywall],
-                            IsCustom = true,
-                            IsGranted = true,
-                            Order = 0,
-                        },
-                        Feature = new()
-                        {
-                            FeatureID = "featureId",
-                            Behavior = FeatureBehavior.Increment,
-                            Description = "description",
-                            DisplayNameOverride = "displayNameOverride",
-                            EnumValues = ["string"],
-                            HasSoftLimit = true,
-                            HasUnlimitedUsage = true,
-                            HiddenFromWidgets = [FeatureHiddenFromWidget.Paywall],
-                            IsCustom = true,
-                            IsGranted = true,
-                            MonthlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),
-                            Order = 0,
-                            ResetPeriod = ResetPeriod.Year,
-                            UsageLimit = 0,
-                            WeeklyResetPeriodConfiguration = new(
-                                WeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
-                            ),
-                            YearlyResetPeriodConfiguration = new(
-                                YearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
-                            ),
-                        },
+                        ID = "id",
+                        Behavior = Behavior.Increment,
+                        Description = "description",
+                        DisplayNameOverride = "displayNameOverride",
+                        EnumValues = ["string"],
+                        HasSoftLimit = true,
+                        HasUnlimitedUsage = true,
+                        HiddenFromWidgets = [HiddenFromWidget.Paywall],
+                        IsCustom = true,
+                        IsGranted = true,
+                        MonthlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),
+                        Order = 0,
+                        ResetPeriod = ResetPeriod.Year,
+                        UsageLimit = 0,
+                        WeeklyResetPeriodConfiguration = new(
+                            WeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                        ),
+                        YearlyResetPeriodConfiguration = new(
+                            YearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                        ),
                     },
                 ],
             },
@@ -65,7 +49,34 @@ public class EntitlementServiceTest : TestBase
     {
         var addonPackageEntitlement = await this.client.V1.Addons.Entitlements.Update(
             "id",
-            new() { AddonID = "addonId" },
+            new()
+            {
+                AddonID = "addonId",
+                Body = new BodyFeature()
+                {
+                    Behavior = BodyFeatureBehavior.Increment,
+                    Description = "description",
+                    DisplayNameOverride = "displayNameOverride",
+                    EnumValues = ["string"],
+                    HasSoftLimit = true,
+                    HasUnlimitedUsage = true,
+                    HiddenFromWidgets = [BodyFeatureHiddenFromWidget.Paywall],
+                    IsCustom = true,
+                    IsGranted = true,
+                    MonthlyResetPeriodConfiguration = new(
+                        BodyFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                    ),
+                    Order = 0,
+                    ResetPeriod = BodyFeatureResetPeriod.Year,
+                    UsageLimit = 0,
+                    WeeklyResetPeriodConfiguration = new(
+                        BodyFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                    ),
+                    YearlyResetPeriodConfiguration = new(
+                        BodyFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                    ),
+                },
+            },
             TestContext.Current.CancellationToken
         );
         addonPackageEntitlement.Validate();

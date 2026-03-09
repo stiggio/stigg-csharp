@@ -2746,263 +2746,324 @@ class CheckoutOptionsFromRaw : IFromRawJson<CheckoutOptions>
 }
 
 /// <summary>
-/// A single subscription entitlement. Provide exactly one of feature or credit.
+/// Feature entitlement configuration for a subscription
 /// </summary>
-[JsonConverter(
-    typeof(JsonModelConverter<
-        SubscriptionProvisionParamsEntitlement,
-        SubscriptionProvisionParamsEntitlementFromRaw
-    >)
-)]
-public sealed record class SubscriptionProvisionParamsEntitlement : JsonModel
+[JsonConverter(typeof(SubscriptionProvisionParamsEntitlementConverter))]
+public record class SubscriptionProvisionParamsEntitlement : ModelBase
 {
-    /// <summary>
-    /// Credit entitlement configuration
-    /// </summary>
-    public SubscriptionProvisionParamsEntitlementCredit? Credit
+    public object? Value { get; } = null;
+
+    JsonElement? _element = null;
+
+    public JsonElement Json
     {
         get
         {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<SubscriptionProvisionParamsEntitlementCredit>(
-                "credit"
+            return this._element ??= JsonSerializer.SerializeToElement(
+                this.Value,
+                ModelBase.SerializerOptions
             );
         }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("credit", value);
-        }
     }
 
-    /// <summary>
-    /// Feature entitlement configuration
-    /// </summary>
-    public SubscriptionProvisionParamsEntitlementFeature? Feature
+    public string ID
     {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<SubscriptionProvisionParamsEntitlementFeature>(
-                "feature"
-            );
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("feature", value);
-        }
+        get { return Match(feature: (x) => x.ID, credit: (x) => x.ID); }
     }
 
-    /// <inheritdoc/>
-    public override void Validate()
+    public JsonElement Type
     {
-        this.Credit?.Validate();
-        this.Feature?.Validate();
+        get { return Match(feature: (x) => x.Type, credit: (x) => x.Type); }
     }
 
-    public SubscriptionProvisionParamsEntitlement() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
     public SubscriptionProvisionParamsEntitlement(
-        SubscriptionProvisionParamsEntitlement subscriptionProvisionParamsEntitlement
-    )
-        : base(subscriptionProvisionParamsEntitlement) { }
-#pragma warning restore CS8618
-
-    public SubscriptionProvisionParamsEntitlement(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    SubscriptionProvisionParamsEntitlement(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="SubscriptionProvisionParamsEntitlementFromRaw.FromRawUnchecked"/>
-    public static SubscriptionProvisionParamsEntitlement FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
+        SubscriptionProvisionParamsEntitlementFeature value,
+        JsonElement? element = null
     )
     {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+        this.Value = value;
+        this._element = element;
     }
-}
 
-class SubscriptionProvisionParamsEntitlementFromRaw
-    : IFromRawJson<SubscriptionProvisionParamsEntitlement>
-{
-    /// <inheritdoc/>
-    public SubscriptionProvisionParamsEntitlement FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => SubscriptionProvisionParamsEntitlement.FromRawUnchecked(rawData);
-}
-
-/// <summary>
-/// Credit entitlement configuration
-/// </summary>
-[JsonConverter(
-    typeof(JsonModelConverter<
-        SubscriptionProvisionParamsEntitlementCredit,
-        SubscriptionProvisionParamsEntitlementCreditFromRaw
-    >)
-)]
-public sealed record class SubscriptionProvisionParamsEntitlementCredit : JsonModel
-{
-    /// <summary>
-    /// Credit grant amount
-    /// </summary>
-    public required double Amount
+    public SubscriptionProvisionParamsEntitlement(
+        SubscriptionProvisionParamsEntitlementCredit value,
+        JsonElement? element = null
+    )
     {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<double>("amount");
-        }
-        init { this._rawData.Set("amount", value); }
+        this.Value = value;
+        this._element = element;
+    }
+
+    public SubscriptionProvisionParamsEntitlement(JsonElement element)
+    {
+        this._element = element;
     }
 
     /// <summary>
-    /// Credit grant cadence (MONTH or YEAR)
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="SubscriptionProvisionParamsEntitlementFeature"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickFeature(out var value)) {
+    ///     // `value` is of type `SubscriptionProvisionParamsEntitlementFeature`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
     /// </summary>
-    public required ApiEnum<string, SubscriptionProvisionParamsEntitlementCreditCadence> Cadence
+    public bool TryPickFeature(
+        [NotNullWhen(true)] out SubscriptionProvisionParamsEntitlementFeature? value
+    )
     {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, SubscriptionProvisionParamsEntitlementCreditCadence>
-            >("cadence");
-        }
-        init { this._rawData.Set("cadence", value); }
+        value = this.Value as SubscriptionProvisionParamsEntitlementFeature;
+        return value != null;
     }
 
     /// <summary>
-    /// The custom currency ID for the credit entitlement
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="SubscriptionProvisionParamsEntitlementCredit"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickCredit(out var value)) {
+    ///     // `value` is of type `SubscriptionProvisionParamsEntitlementCredit`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
     /// </summary>
-    public required string CurrencyID
+    public bool TryPickCredit(
+        [NotNullWhen(true)] out SubscriptionProvisionParamsEntitlementCredit? value
+    )
     {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("currencyId");
-        }
-        init { this._rawData.Set("currencyId", value); }
+        value = this.Value as SubscriptionProvisionParamsEntitlementCredit;
+        return value != null;
     }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match">
+    /// if you need your function parameters to return something.</para>
+    ///
+    /// <exception cref="StiggInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// instance.Switch(
+    ///     (SubscriptionProvisionParamsEntitlementFeature value) => {...},
+    ///     (SubscriptionProvisionParamsEntitlementCredit value) => {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
+    public void Switch(
+        System::Action<SubscriptionProvisionParamsEntitlementFeature> feature,
+        System::Action<SubscriptionProvisionParamsEntitlementCredit> credit
+    )
+    {
+        switch (this.Value)
+        {
+            case SubscriptionProvisionParamsEntitlementFeature value:
+                feature(value);
+                break;
+            case SubscriptionProvisionParamsEntitlementCredit value:
+                credit(value);
+                break;
+            default:
+                throw new StiggInvalidDataException(
+                    "Data did not match any variant of SubscriptionProvisionParamsEntitlement"
+                );
+        }
+    }
+
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with and
+    /// returns its result.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch">
+    /// if you don't need your function parameters to return a value.</para>
+    ///
+    /// <exception cref="StiggInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// var result = instance.Match(
+    ///     (SubscriptionProvisionParamsEntitlementFeature value) => {...},
+    ///     (SubscriptionProvisionParamsEntitlementCredit value) => {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
+    public T Match<T>(
+        System::Func<SubscriptionProvisionParamsEntitlementFeature, T> feature,
+        System::Func<SubscriptionProvisionParamsEntitlementCredit, T> credit
+    )
+    {
+        return this.Value switch
+        {
+            SubscriptionProvisionParamsEntitlementFeature value => feature(value),
+            SubscriptionProvisionParamsEntitlementCredit value => credit(value),
+            _ => throw new StiggInvalidDataException(
+                "Data did not match any variant of SubscriptionProvisionParamsEntitlement"
+            ),
+        };
+    }
+
+    public static implicit operator SubscriptionProvisionParamsEntitlement(
+        SubscriptionProvisionParamsEntitlementFeature value
+    ) => new(value);
+
+    public static implicit operator SubscriptionProvisionParamsEntitlement(
+        SubscriptionProvisionParamsEntitlementCredit value
+    ) => new(value);
+
+    /// <summary>
+    /// Validates that the instance was constructed with a known variant and that this variant is valid
+    /// (based on its own <c>Validate</c> method).
+    ///
+    /// <para>This is useful for instances constructed from raw JSON data (e.g. deserialized from an API response).</para>
+    ///
+    /// <exception cref="StiggInvalidDataException">
+    /// Thrown when the instance does not pass validation.
+    /// </exception>
+    /// </summary>
     public override void Validate()
     {
-        _ = this.Amount;
-        this.Cadence.Validate();
-        _ = this.CurrencyID;
+        if (this.Value == null)
+        {
+            throw new StiggInvalidDataException(
+                "Data did not match any variant of SubscriptionProvisionParamsEntitlement"
+            );
+        }
+        this.Switch((feature) => feature.Validate(), (credit) => credit.Validate());
     }
 
-    public SubscriptionProvisionParamsEntitlementCredit() { }
+    public virtual bool Equals(SubscriptionProvisionParamsEntitlement? other) =>
+        other != null
+        && this.VariantIndex() == other.VariantIndex()
+        && JsonElement.DeepEquals(this.Json, other.Json);
 
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public SubscriptionProvisionParamsEntitlementCredit(
-        SubscriptionProvisionParamsEntitlementCredit subscriptionProvisionParamsEntitlementCredit
-    )
-        : base(subscriptionProvisionParamsEntitlementCredit) { }
-#pragma warning restore CS8618
-
-    public SubscriptionProvisionParamsEntitlementCredit(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
+    public override int GetHashCode()
     {
-        this._rawData = new(rawData);
+        return 0;
     }
 
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    SubscriptionProvisionParamsEntitlementCredit(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
+    public override string ToString() =>
+        JsonSerializer.Serialize(
+            FriendlyJsonPrinter.PrintValue(this.Json),
+            ModelBase.ToStringSerializerOptions
+        );
 
-    /// <inheritdoc cref="SubscriptionProvisionParamsEntitlementCreditFromRaw.FromRawUnchecked"/>
-    public static SubscriptionProvisionParamsEntitlementCredit FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
+    int VariantIndex()
     {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+        return this.Value switch
+        {
+            SubscriptionProvisionParamsEntitlementFeature _ => 0,
+            SubscriptionProvisionParamsEntitlementCredit _ => 1,
+            _ => -1,
+        };
     }
 }
 
-class SubscriptionProvisionParamsEntitlementCreditFromRaw
-    : IFromRawJson<SubscriptionProvisionParamsEntitlementCredit>
+sealed class SubscriptionProvisionParamsEntitlementConverter
+    : JsonConverter<SubscriptionProvisionParamsEntitlement>
 {
-    /// <inheritdoc/>
-    public SubscriptionProvisionParamsEntitlementCredit FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => SubscriptionProvisionParamsEntitlementCredit.FromRawUnchecked(rawData);
-}
-
-/// <summary>
-/// Credit grant cadence (MONTH or YEAR)
-/// </summary>
-[JsonConverter(typeof(SubscriptionProvisionParamsEntitlementCreditCadenceConverter))]
-public enum SubscriptionProvisionParamsEntitlementCreditCadence
-{
-    Month,
-    Year,
-}
-
-sealed class SubscriptionProvisionParamsEntitlementCreditCadenceConverter
-    : JsonConverter<SubscriptionProvisionParamsEntitlementCreditCadence>
-{
-    public override SubscriptionProvisionParamsEntitlementCreditCadence Read(
+    public override SubscriptionProvisionParamsEntitlement? Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
     )
     {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        string? type;
+        try
         {
-            "MONTH" => SubscriptionProvisionParamsEntitlementCreditCadence.Month,
-            "YEAR" => SubscriptionProvisionParamsEntitlementCreditCadence.Year,
-            _ => (SubscriptionProvisionParamsEntitlementCreditCadence)(-1),
-        };
+            type = element.GetProperty("type").GetString();
+        }
+        catch
+        {
+            type = null;
+        }
+
+        switch (type)
+        {
+            case "FEATURE":
+            {
+                try
+                {
+                    var deserialized =
+                        JsonSerializer.Deserialize<SubscriptionProvisionParamsEntitlementFeature>(
+                            element,
+                            options
+                        );
+                    if (deserialized != null)
+                    {
+                        deserialized.Validate();
+                        return new(deserialized, element);
+                    }
+                }
+                catch (System::Exception e)
+                    when (e is JsonException || e is StiggInvalidDataException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "CREDIT":
+            {
+                try
+                {
+                    var deserialized =
+                        JsonSerializer.Deserialize<SubscriptionProvisionParamsEntitlementCredit>(
+                            element,
+                            options
+                        );
+                    if (deserialized != null)
+                    {
+                        deserialized.Validate();
+                        return new(deserialized, element);
+                    }
+                }
+                catch (System::Exception e)
+                    when (e is JsonException || e is StiggInvalidDataException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            default:
+            {
+                return new SubscriptionProvisionParamsEntitlement(element);
+            }
+        }
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        SubscriptionProvisionParamsEntitlementCreditCadence value,
+        SubscriptionProvisionParamsEntitlement value,
         JsonSerializerOptions options
     )
     {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                SubscriptionProvisionParamsEntitlementCreditCadence.Month => "MONTH",
-                SubscriptionProvisionParamsEntitlementCreditCadence.Year => "YEAR",
-                _ => throw new StiggInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
+        JsonSerializer.Serialize(writer, value.Json, options);
     }
 }
 
 /// <summary>
-/// Feature entitlement configuration
+/// Feature entitlement configuration for a subscription
 /// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
@@ -3015,14 +3076,27 @@ public sealed record class SubscriptionProvisionParamsEntitlementFeature : JsonM
     /// <summary>
     /// The feature ID to attach the entitlement to
     /// </summary>
-    public required string FeatureID
+    public required string ID
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("featureId");
+            return this._rawData.GetNotNullClass<string>("id");
         }
-        init { this._rawData.Set("featureId", value); }
+        init { this._rawData.Set("id", value); }
+    }
+
+    /// <summary>
+    /// SubscriptionFeatureEntitlementRequest
+    /// </summary>
+    public JsonElement Type
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<JsonElement>("type");
+        }
+        init { this._rawData.Set("type", value); }
     }
 
     /// <summary>
@@ -3159,7 +3233,11 @@ public sealed record class SubscriptionProvisionParamsEntitlementFeature : JsonM
     /// <inheritdoc/>
     public override void Validate()
     {
-        _ = this.FeatureID;
+        _ = this.ID;
+        if (!JsonElement.DeepEquals(this.Type, JsonSerializer.SerializeToElement("FEATURE")))
+        {
+            throw new StiggInvalidDataException("Invalid value given for constant");
+        }
         _ = this.HasSoftLimit;
         _ = this.HasUnlimitedUsage;
         this.MonthlyResetPeriodConfiguration?.Validate();
@@ -3169,7 +3247,10 @@ public sealed record class SubscriptionProvisionParamsEntitlementFeature : JsonM
         this.YearlyResetPeriodConfiguration?.Validate();
     }
 
-    public SubscriptionProvisionParamsEntitlementFeature() { }
+    public SubscriptionProvisionParamsEntitlementFeature()
+    {
+        this.Type = JsonSerializer.SerializeToElement("FEATURE");
+    }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
@@ -3184,6 +3265,8 @@ public sealed record class SubscriptionProvisionParamsEntitlementFeature : JsonM
     )
     {
         this._rawData = new(rawData);
+
+        this.Type = JsonSerializer.SerializeToElement("FEATURE");
     }
 
 #pragma warning disable CS8618
@@ -3203,10 +3286,10 @@ public sealed record class SubscriptionProvisionParamsEntitlementFeature : JsonM
     }
 
     [SetsRequiredMembers]
-    public SubscriptionProvisionParamsEntitlementFeature(string featureID)
+    public SubscriptionProvisionParamsEntitlementFeature(string id)
         : this()
     {
-        this.FeatureID = featureID;
+        this.ID = id;
     }
 }
 
@@ -3760,6 +3843,179 @@ sealed class SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfi
             {
                 SubscriptionProvisionParamsEntitlementFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart =>
                     "SubscriptionStart",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Credit entitlement configuration for a subscription
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        SubscriptionProvisionParamsEntitlementCredit,
+        SubscriptionProvisionParamsEntitlementCreditFromRaw
+    >)
+)]
+public sealed record class SubscriptionProvisionParamsEntitlementCredit : JsonModel
+{
+    /// <summary>
+    /// The custom currency ID for the credit entitlement
+    /// </summary>
+    public required string ID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
+        init { this._rawData.Set("id", value); }
+    }
+
+    /// <summary>
+    /// Credit grant amount
+    /// </summary>
+    public required double Amount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<double>("amount");
+        }
+        init { this._rawData.Set("amount", value); }
+    }
+
+    /// <summary>
+    /// Credit grant cadence (MONTH or YEAR)
+    /// </summary>
+    public required ApiEnum<string, SubscriptionProvisionParamsEntitlementCreditCadence> Cadence
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, SubscriptionProvisionParamsEntitlementCreditCadence>
+            >("cadence");
+        }
+        init { this._rawData.Set("cadence", value); }
+    }
+
+    /// <summary>
+    /// SubscriptionCreditEntitlementRequest
+    /// </summary>
+    public JsonElement Type
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<JsonElement>("type");
+        }
+        init { this._rawData.Set("type", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.ID;
+        _ = this.Amount;
+        this.Cadence.Validate();
+        if (!JsonElement.DeepEquals(this.Type, JsonSerializer.SerializeToElement("CREDIT")))
+        {
+            throw new StiggInvalidDataException("Invalid value given for constant");
+        }
+    }
+
+    public SubscriptionProvisionParamsEntitlementCredit()
+    {
+        this.Type = JsonSerializer.SerializeToElement("CREDIT");
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public SubscriptionProvisionParamsEntitlementCredit(
+        SubscriptionProvisionParamsEntitlementCredit subscriptionProvisionParamsEntitlementCredit
+    )
+        : base(subscriptionProvisionParamsEntitlementCredit) { }
+#pragma warning restore CS8618
+
+    public SubscriptionProvisionParamsEntitlementCredit(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+
+        this.Type = JsonSerializer.SerializeToElement("CREDIT");
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    SubscriptionProvisionParamsEntitlementCredit(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="SubscriptionProvisionParamsEntitlementCreditFromRaw.FromRawUnchecked"/>
+    public static SubscriptionProvisionParamsEntitlementCredit FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class SubscriptionProvisionParamsEntitlementCreditFromRaw
+    : IFromRawJson<SubscriptionProvisionParamsEntitlementCredit>
+{
+    /// <inheritdoc/>
+    public SubscriptionProvisionParamsEntitlementCredit FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => SubscriptionProvisionParamsEntitlementCredit.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Credit grant cadence (MONTH or YEAR)
+/// </summary>
+[JsonConverter(typeof(SubscriptionProvisionParamsEntitlementCreditCadenceConverter))]
+public enum SubscriptionProvisionParamsEntitlementCreditCadence
+{
+    Month,
+    Year,
+}
+
+sealed class SubscriptionProvisionParamsEntitlementCreditCadenceConverter
+    : JsonConverter<SubscriptionProvisionParamsEntitlementCreditCadence>
+{
+    public override SubscriptionProvisionParamsEntitlementCreditCadence Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "MONTH" => SubscriptionProvisionParamsEntitlementCreditCadence.Month,
+            "YEAR" => SubscriptionProvisionParamsEntitlementCreditCadence.Year,
+            _ => (SubscriptionProvisionParamsEntitlementCreditCadence)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        SubscriptionProvisionParamsEntitlementCreditCadence value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                SubscriptionProvisionParamsEntitlementCreditCadence.Month => "MONTH",
+                SubscriptionProvisionParamsEntitlementCreditCadence.Year => "YEAR",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

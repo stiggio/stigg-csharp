@@ -32,45 +32,16 @@ public record class EntitlementUpdateParams : ParamsBase
     public string? ID { get; init; }
 
     /// <summary>
-    /// Credit entitlement fields to update
+    /// Request to update an addon entitlement
     /// </summary>
-    public EntitlementUpdateParamsCredit? Credit
+    public required Body Body
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableClass<EntitlementUpdateParamsCredit>("credit");
+            return this._rawBodyData.GetNotNullClass<Body>("body");
         }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawBodyData.Set("credit", value);
-        }
-    }
-
-    /// <summary>
-    /// Feature entitlement fields to update
-    /// </summary>
-    public EntitlementUpdateParamsFeature? Feature
-    {
-        get
-        {
-            this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableClass<EntitlementUpdateParamsFeature>("feature");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawBodyData.Set("feature", value);
-        }
+        init { this._rawBodyData.Set("body", value); }
     }
 
     public EntitlementUpdateParams() { }
@@ -194,435 +165,337 @@ public record class EntitlementUpdateParams : ParamsBase
 }
 
 /// <summary>
-/// Credit entitlement fields to update
+/// Request to update an addon entitlement
 /// </summary>
-[JsonConverter(
-    typeof(JsonModelConverter<EntitlementUpdateParamsCredit, EntitlementUpdateParamsCreditFromRaw>)
-)]
-public sealed record class EntitlementUpdateParamsCredit : JsonModel
+[JsonConverter(typeof(BodyConverter))]
+public record class Body : ModelBase
 {
-    /// <summary>
-    /// Credit grant amount
-    /// </summary>
-    public double? Amount
+    public object? Value { get; } = null;
+
+    JsonElement? _element = null;
+
+    public JsonElement Json
     {
         get
         {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<double>("amount");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("amount", value);
+            return this._element ??= JsonSerializer.SerializeToElement(
+                this.Value,
+                ModelBase.SerializerOptions
+            );
         }
     }
 
-    /// <summary>
-    /// Entitlement behavior (Increment or Override)
-    /// </summary>
-    public ApiEnum<string, EntitlementUpdateParamsCreditBehavior>? Behavior
+    public JsonElement Type
     {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<
-                ApiEnum<string, EntitlementUpdateParamsCreditBehavior>
-            >("behavior");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("behavior", value);
-        }
+        get { return Match(feature: (x) => x.Type, credit: (x) => x.Type); }
     }
 
-    /// <summary>
-    /// Credit grant cadence (MONTH or YEAR)
-    /// </summary>
-    public ApiEnum<string, EntitlementUpdateParamsCreditCadence>? Cadence
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<
-                ApiEnum<string, EntitlementUpdateParamsCreditCadence>
-            >("cadence");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("cadence", value);
-        }
-    }
-
-    /// <summary>
-    /// Description of the entitlement
-    /// </summary>
     public string? Description
     {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("description");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("description", value);
-        }
+        get { return Match<string?>(feature: (x) => x.Description, credit: (x) => x.Description); }
     }
 
-    /// <summary>
-    /// Override display name for the entitlement
-    /// </summary>
     public string? DisplayNameOverride
     {
         get
         {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("displayNameOverride");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("displayNameOverride", value);
+            return Match<string?>(
+                feature: (x) => x.DisplayNameOverride,
+                credit: (x) => x.DisplayNameOverride
+            );
         }
     }
 
-    /// <summary>
-    /// Widget types where this entitlement is hidden
-    /// </summary>
-    public IReadOnlyList<
-        ApiEnum<string, EntitlementUpdateParamsCreditHiddenFromWidget>
-    >? HiddenFromWidgets
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<
-                ImmutableArray<ApiEnum<string, EntitlementUpdateParamsCreditHiddenFromWidget>>
-            >("hiddenFromWidgets");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set<ImmutableArray<
-                ApiEnum<string, EntitlementUpdateParamsCreditHiddenFromWidget>
-            >?>("hiddenFromWidgets", value == null ? null : ImmutableArray.ToImmutableArray(value));
-        }
-    }
-
-    /// <summary>
-    /// Whether this is a custom entitlement
-    /// </summary>
     public bool? IsCustom
     {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<bool>("isCustom");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("isCustom", value);
-        }
+        get { return Match<bool?>(feature: (x) => x.IsCustom, credit: (x) => x.IsCustom); }
     }
 
-    /// <summary>
-    /// Whether the entitlement is granted
-    /// </summary>
     public bool? IsGranted
     {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<bool>("isGranted");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
+        get { return Match<bool?>(feature: (x) => x.IsGranted, credit: (x) => x.IsGranted); }
+    }
 
-            this._rawData.Set("isGranted", value);
+    public double? Order
+    {
+        get { return Match<double?>(feature: (x) => x.Order, credit: (x) => x.Order); }
+    }
+
+    public Body(BodyFeature value, JsonElement? element = null)
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public Body(BodyCredit value, JsonElement? element = null)
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public Body(JsonElement element)
+    {
+        this._element = element;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="BodyFeature"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickFeature(out var value)) {
+    ///     // `value` is of type `BodyFeature`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickFeature([NotNullWhen(true)] out BodyFeature? value)
+    {
+        value = this.Value as BodyFeature;
+        return value != null;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="BodyCredit"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickCredit(out var value)) {
+    ///     // `value` is of type `BodyCredit`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickCredit([NotNullWhen(true)] out BodyCredit? value)
+    {
+        value = this.Value as BodyCredit;
+        return value != null;
+    }
+
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match">
+    /// if you need your function parameters to return something.</para>
+    ///
+    /// <exception cref="StiggInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// instance.Switch(
+    ///     (BodyFeature value) => {...},
+    ///     (BodyCredit value) => {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
+    public void Switch(System::Action<BodyFeature> feature, System::Action<BodyCredit> credit)
+    {
+        switch (this.Value)
+        {
+            case BodyFeature value:
+                feature(value);
+                break;
+            case BodyCredit value:
+                credit(value);
+                break;
+            default:
+                throw new StiggInvalidDataException("Data did not match any variant of Body");
         }
     }
 
     /// <summary>
-    /// Display order of the entitlement
+    /// Calls the function parameter corresponding to the variant the instance was constructed with and
+    /// returns its result.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch">
+    /// if you don't need your function parameters to return a value.</para>
+    ///
+    /// <exception cref="StiggInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// var result = instance.Match(
+    ///     (BodyFeature value) => {...},
+    ///     (BodyCredit value) => {...}
+    /// );
+    /// </code>
+    /// </example>
     /// </summary>
-    public double? Order
+    public T Match<T>(System::Func<BodyFeature, T> feature, System::Func<BodyCredit, T> credit)
+    {
+        return this.Value switch
+        {
+            BodyFeature value => feature(value),
+            BodyCredit value => credit(value),
+            _ => throw new StiggInvalidDataException("Data did not match any variant of Body"),
+        };
+    }
+
+    public static implicit operator Body(BodyFeature value) => new(value);
+
+    public static implicit operator Body(BodyCredit value) => new(value);
+
+    /// <summary>
+    /// Validates that the instance was constructed with a known variant and that this variant is valid
+    /// (based on its own <c>Validate</c> method).
+    ///
+    /// <para>This is useful for instances constructed from raw JSON data (e.g. deserialized from an API response).</para>
+    ///
+    /// <exception cref="StiggInvalidDataException">
+    /// Thrown when the instance does not pass validation.
+    /// </exception>
+    /// </summary>
+    public override void Validate()
+    {
+        if (this.Value == null)
+        {
+            throw new StiggInvalidDataException("Data did not match any variant of Body");
+        }
+        this.Switch((feature) => feature.Validate(), (credit) => credit.Validate());
+    }
+
+    public virtual bool Equals(Body? other) =>
+        other != null
+        && this.VariantIndex() == other.VariantIndex()
+        && JsonElement.DeepEquals(this.Json, other.Json);
+
+    public override int GetHashCode()
+    {
+        return 0;
+    }
+
+    public override string ToString() =>
+        JsonSerializer.Serialize(
+            FriendlyJsonPrinter.PrintValue(this.Json),
+            ModelBase.ToStringSerializerOptions
+        );
+
+    int VariantIndex()
+    {
+        return this.Value switch
+        {
+            BodyFeature _ => 0,
+            BodyCredit _ => 1,
+            _ => -1,
+        };
+    }
+}
+
+sealed class BodyConverter : JsonConverter<Body>
+{
+    public override Body? Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        string? type;
+        try
+        {
+            type = element.GetProperty("type").GetString();
+        }
+        catch
+        {
+            type = null;
+        }
+
+        switch (type)
+        {
+            case "FEATURE":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<BodyFeature>(element, options);
+                    if (deserialized != null)
+                    {
+                        deserialized.Validate();
+                        return new(deserialized, element);
+                    }
+                }
+                catch (System::Exception e)
+                    when (e is JsonException || e is StiggInvalidDataException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "CREDIT":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<BodyCredit>(element, options);
+                    if (deserialized != null)
+                    {
+                        deserialized.Validate();
+                        return new(deserialized, element);
+                    }
+                }
+                catch (System::Exception e)
+                    when (e is JsonException || e is StiggInvalidDataException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            default:
+            {
+                return new Body(element);
+            }
+        }
+    }
+
+    public override void Write(Utf8JsonWriter writer, Body value, JsonSerializerOptions options)
+    {
+        JsonSerializer.Serialize(writer, value.Json, options);
+    }
+}
+
+/// <summary>
+/// Fields to update on a feature entitlement
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<BodyFeature, BodyFeatureFromRaw>))]
+public sealed record class BodyFeature : JsonModel
+{
+    /// <summary>
+    /// UpdateFeatureEntitlementRequest
+    /// </summary>
+    public JsonElement Type
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<double>("order");
+            return this._rawData.GetNotNullStruct<JsonElement>("type");
         }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("order", value);
-        }
+        init { this._rawData.Set("type", value); }
     }
 
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        _ = this.Amount;
-        this.Behavior?.Validate();
-        this.Cadence?.Validate();
-        _ = this.Description;
-        _ = this.DisplayNameOverride;
-        foreach (var item in this.HiddenFromWidgets ?? [])
-        {
-            item.Validate();
-        }
-        _ = this.IsCustom;
-        _ = this.IsGranted;
-        _ = this.Order;
-    }
-
-    public EntitlementUpdateParamsCredit() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public EntitlementUpdateParamsCredit(
-        EntitlementUpdateParamsCredit entitlementUpdateParamsCredit
-    )
-        : base(entitlementUpdateParamsCredit) { }
-#pragma warning restore CS8618
-
-    public EntitlementUpdateParamsCredit(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    EntitlementUpdateParamsCredit(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="EntitlementUpdateParamsCreditFromRaw.FromRawUnchecked"/>
-    public static EntitlementUpdateParamsCredit FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-}
-
-class EntitlementUpdateParamsCreditFromRaw : IFromRawJson<EntitlementUpdateParamsCredit>
-{
-    /// <inheritdoc/>
-    public EntitlementUpdateParamsCredit FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => EntitlementUpdateParamsCredit.FromRawUnchecked(rawData);
-}
-
-/// <summary>
-/// Entitlement behavior (Increment or Override)
-/// </summary>
-[JsonConverter(typeof(EntitlementUpdateParamsCreditBehaviorConverter))]
-public enum EntitlementUpdateParamsCreditBehavior
-{
-    Increment,
-    Override,
-}
-
-sealed class EntitlementUpdateParamsCreditBehaviorConverter
-    : JsonConverter<EntitlementUpdateParamsCreditBehavior>
-{
-    public override EntitlementUpdateParamsCreditBehavior Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "Increment" => EntitlementUpdateParamsCreditBehavior.Increment,
-            "Override" => EntitlementUpdateParamsCreditBehavior.Override,
-            _ => (EntitlementUpdateParamsCreditBehavior)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        EntitlementUpdateParamsCreditBehavior value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                EntitlementUpdateParamsCreditBehavior.Increment => "Increment",
-                EntitlementUpdateParamsCreditBehavior.Override => "Override",
-                _ => throw new StiggInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
-}
-
-/// <summary>
-/// Credit grant cadence (MONTH or YEAR)
-/// </summary>
-[JsonConverter(typeof(EntitlementUpdateParamsCreditCadenceConverter))]
-public enum EntitlementUpdateParamsCreditCadence
-{
-    Month,
-    Year,
-}
-
-sealed class EntitlementUpdateParamsCreditCadenceConverter
-    : JsonConverter<EntitlementUpdateParamsCreditCadence>
-{
-    public override EntitlementUpdateParamsCreditCadence Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "MONTH" => EntitlementUpdateParamsCreditCadence.Month,
-            "YEAR" => EntitlementUpdateParamsCreditCadence.Year,
-            _ => (EntitlementUpdateParamsCreditCadence)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        EntitlementUpdateParamsCreditCadence value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                EntitlementUpdateParamsCreditCadence.Month => "MONTH",
-                EntitlementUpdateParamsCreditCadence.Year => "YEAR",
-                _ => throw new StiggInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
-}
-
-[JsonConverter(typeof(EntitlementUpdateParamsCreditHiddenFromWidgetConverter))]
-public enum EntitlementUpdateParamsCreditHiddenFromWidget
-{
-    Paywall,
-    CustomerPortal,
-    Checkout,
-}
-
-sealed class EntitlementUpdateParamsCreditHiddenFromWidgetConverter
-    : JsonConverter<EntitlementUpdateParamsCreditHiddenFromWidget>
-{
-    public override EntitlementUpdateParamsCreditHiddenFromWidget Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "PAYWALL" => EntitlementUpdateParamsCreditHiddenFromWidget.Paywall,
-            "CUSTOMER_PORTAL" => EntitlementUpdateParamsCreditHiddenFromWidget.CustomerPortal,
-            "CHECKOUT" => EntitlementUpdateParamsCreditHiddenFromWidget.Checkout,
-            _ => (EntitlementUpdateParamsCreditHiddenFromWidget)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        EntitlementUpdateParamsCreditHiddenFromWidget value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                EntitlementUpdateParamsCreditHiddenFromWidget.Paywall => "PAYWALL",
-                EntitlementUpdateParamsCreditHiddenFromWidget.CustomerPortal => "CUSTOMER_PORTAL",
-                EntitlementUpdateParamsCreditHiddenFromWidget.Checkout => "CHECKOUT",
-                _ => throw new StiggInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
-}
-
-/// <summary>
-/// Feature entitlement fields to update
-/// </summary>
-[JsonConverter(
-    typeof(JsonModelConverter<
-        EntitlementUpdateParamsFeature,
-        EntitlementUpdateParamsFeatureFromRaw
-    >)
-)]
-public sealed record class EntitlementUpdateParamsFeature : JsonModel
-{
     /// <summary>
     /// Entitlement behavior (Increment or Override)
     /// </summary>
-    public ApiEnum<string, EntitlementUpdateParamsFeatureBehavior>? Behavior
+    public ApiEnum<string, BodyFeatureBehavior>? Behavior
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<
-                ApiEnum<string, EntitlementUpdateParamsFeatureBehavior>
-            >("behavior");
+            return this._rawData.GetNullableClass<ApiEnum<string, BodyFeatureBehavior>>("behavior");
         }
         init
         {
@@ -746,15 +619,13 @@ public sealed record class EntitlementUpdateParamsFeature : JsonModel
     /// <summary>
     /// Widget types where this entitlement is hidden
     /// </summary>
-    public IReadOnlyList<
-        ApiEnum<string, EntitlementUpdateParamsFeatureHiddenFromWidget>
-    >? HiddenFromWidgets
+    public IReadOnlyList<ApiEnum<string, BodyFeatureHiddenFromWidget>>? HiddenFromWidgets
     {
         get
         {
             this._rawData.Freeze();
             return this._rawData.GetNullableStruct<
-                ImmutableArray<ApiEnum<string, EntitlementUpdateParamsFeatureHiddenFromWidget>>
+                ImmutableArray<ApiEnum<string, BodyFeatureHiddenFromWidget>>
             >("hiddenFromWidgets");
         }
         init
@@ -764,9 +635,10 @@ public sealed record class EntitlementUpdateParamsFeature : JsonModel
                 return;
             }
 
-            this._rawData.Set<ImmutableArray<
-                ApiEnum<string, EntitlementUpdateParamsFeatureHiddenFromWidget>
-            >?>("hiddenFromWidgets", value == null ? null : ImmutableArray.ToImmutableArray(value));
+            this._rawData.Set<ImmutableArray<ApiEnum<string, BodyFeatureHiddenFromWidget>>?>(
+                "hiddenFromWidgets",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
         }
     }
 
@@ -815,12 +687,12 @@ public sealed record class EntitlementUpdateParamsFeature : JsonModel
     /// <summary>
     /// Configuration for monthly reset period
     /// </summary>
-    public EntitlementUpdateParamsFeatureMonthlyResetPeriodConfiguration? MonthlyResetPeriodConfiguration
+    public BodyFeatureMonthlyResetPeriodConfiguration? MonthlyResetPeriodConfiguration
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<EntitlementUpdateParamsFeatureMonthlyResetPeriodConfiguration>(
+            return this._rawData.GetNullableClass<BodyFeatureMonthlyResetPeriodConfiguration>(
                 "monthlyResetPeriodConfiguration"
             );
         }
@@ -851,14 +723,14 @@ public sealed record class EntitlementUpdateParamsFeature : JsonModel
     /// <summary>
     /// Period at which usage resets
     /// </summary>
-    public ApiEnum<string, EntitlementUpdateParamsFeatureResetPeriod>? ResetPeriod
+    public ApiEnum<string, BodyFeatureResetPeriod>? ResetPeriod
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<
-                ApiEnum<string, EntitlementUpdateParamsFeatureResetPeriod>
-            >("resetPeriod");
+            return this._rawData.GetNullableClass<ApiEnum<string, BodyFeatureResetPeriod>>(
+                "resetPeriod"
+            );
         }
         init
         {
@@ -887,12 +759,12 @@ public sealed record class EntitlementUpdateParamsFeature : JsonModel
     /// <summary>
     /// Configuration for weekly reset period
     /// </summary>
-    public EntitlementUpdateParamsFeatureWeeklyResetPeriodConfiguration? WeeklyResetPeriodConfiguration
+    public BodyFeatureWeeklyResetPeriodConfiguration? WeeklyResetPeriodConfiguration
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<EntitlementUpdateParamsFeatureWeeklyResetPeriodConfiguration>(
+            return this._rawData.GetNullableClass<BodyFeatureWeeklyResetPeriodConfiguration>(
                 "weeklyResetPeriodConfiguration"
             );
         }
@@ -902,12 +774,12 @@ public sealed record class EntitlementUpdateParamsFeature : JsonModel
     /// <summary>
     /// Configuration for yearly reset period
     /// </summary>
-    public EntitlementUpdateParamsFeatureYearlyResetPeriodConfiguration? YearlyResetPeriodConfiguration
+    public BodyFeatureYearlyResetPeriodConfiguration? YearlyResetPeriodConfiguration
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<EntitlementUpdateParamsFeatureYearlyResetPeriodConfiguration>(
+            return this._rawData.GetNullableClass<BodyFeatureYearlyResetPeriodConfiguration>(
                 "yearlyResetPeriodConfiguration"
             );
         }
@@ -917,6 +789,10 @@ public sealed record class EntitlementUpdateParamsFeature : JsonModel
     /// <inheritdoc/>
     public override void Validate()
     {
+        if (!JsonElement.DeepEquals(this.Type, JsonSerializer.SerializeToElement("FEATURE")))
+        {
+            throw new StiggInvalidDataException("Invalid value given for constant");
+        }
         this.Behavior?.Validate();
         _ = this.Description;
         _ = this.DisplayNameOverride;
@@ -937,60 +813,59 @@ public sealed record class EntitlementUpdateParamsFeature : JsonModel
         this.YearlyResetPeriodConfiguration?.Validate();
     }
 
-    public EntitlementUpdateParamsFeature() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public EntitlementUpdateParamsFeature(
-        EntitlementUpdateParamsFeature entitlementUpdateParamsFeature
-    )
-        : base(entitlementUpdateParamsFeature) { }
-#pragma warning restore CS8618
-
-    public EntitlementUpdateParamsFeature(IReadOnlyDictionary<string, JsonElement> rawData)
+    public BodyFeature()
     {
-        this._rawData = new(rawData);
+        this.Type = JsonSerializer.SerializeToElement("FEATURE");
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    EntitlementUpdateParamsFeature(FrozenDictionary<string, JsonElement> rawData)
+    public BodyFeature(BodyFeature bodyFeature)
+        : base(bodyFeature) { }
+#pragma warning restore CS8618
+
+    public BodyFeature(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+
+        this.Type = JsonSerializer.SerializeToElement("FEATURE");
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    BodyFeature(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="EntitlementUpdateParamsFeatureFromRaw.FromRawUnchecked"/>
-    public static EntitlementUpdateParamsFeature FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
+    /// <inheritdoc cref="BodyFeatureFromRaw.FromRawUnchecked"/>
+    public static BodyFeature FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class EntitlementUpdateParamsFeatureFromRaw : IFromRawJson<EntitlementUpdateParamsFeature>
+class BodyFeatureFromRaw : IFromRawJson<BodyFeature>
 {
     /// <inheritdoc/>
-    public EntitlementUpdateParamsFeature FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => EntitlementUpdateParamsFeature.FromRawUnchecked(rawData);
+    public BodyFeature FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        BodyFeature.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// Entitlement behavior (Increment or Override)
 /// </summary>
-[JsonConverter(typeof(EntitlementUpdateParamsFeatureBehaviorConverter))]
-public enum EntitlementUpdateParamsFeatureBehavior
+[JsonConverter(typeof(BodyFeatureBehaviorConverter))]
+public enum BodyFeatureBehavior
 {
     Increment,
     Override,
 }
 
-sealed class EntitlementUpdateParamsFeatureBehaviorConverter
-    : JsonConverter<EntitlementUpdateParamsFeatureBehavior>
+sealed class BodyFeatureBehaviorConverter : JsonConverter<BodyFeatureBehavior>
 {
-    public override EntitlementUpdateParamsFeatureBehavior Read(
+    public override BodyFeatureBehavior Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -998,15 +873,15 @@ sealed class EntitlementUpdateParamsFeatureBehaviorConverter
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "Increment" => EntitlementUpdateParamsFeatureBehavior.Increment,
-            "Override" => EntitlementUpdateParamsFeatureBehavior.Override,
-            _ => (EntitlementUpdateParamsFeatureBehavior)(-1),
+            "Increment" => BodyFeatureBehavior.Increment,
+            "Override" => BodyFeatureBehavior.Override,
+            _ => (BodyFeatureBehavior)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        EntitlementUpdateParamsFeatureBehavior value,
+        BodyFeatureBehavior value,
         JsonSerializerOptions options
     )
     {
@@ -1014,8 +889,8 @@ sealed class EntitlementUpdateParamsFeatureBehaviorConverter
             writer,
             value switch
             {
-                EntitlementUpdateParamsFeatureBehavior.Increment => "Increment",
-                EntitlementUpdateParamsFeatureBehavior.Override => "Override",
+                BodyFeatureBehavior.Increment => "Increment",
+                BodyFeatureBehavior.Override => "Override",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -1025,18 +900,17 @@ sealed class EntitlementUpdateParamsFeatureBehaviorConverter
     }
 }
 
-[JsonConverter(typeof(EntitlementUpdateParamsFeatureHiddenFromWidgetConverter))]
-public enum EntitlementUpdateParamsFeatureHiddenFromWidget
+[JsonConverter(typeof(BodyFeatureHiddenFromWidgetConverter))]
+public enum BodyFeatureHiddenFromWidget
 {
     Paywall,
     CustomerPortal,
     Checkout,
 }
 
-sealed class EntitlementUpdateParamsFeatureHiddenFromWidgetConverter
-    : JsonConverter<EntitlementUpdateParamsFeatureHiddenFromWidget>
+sealed class BodyFeatureHiddenFromWidgetConverter : JsonConverter<BodyFeatureHiddenFromWidget>
 {
-    public override EntitlementUpdateParamsFeatureHiddenFromWidget Read(
+    public override BodyFeatureHiddenFromWidget Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1044,16 +918,16 @@ sealed class EntitlementUpdateParamsFeatureHiddenFromWidgetConverter
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "PAYWALL" => EntitlementUpdateParamsFeatureHiddenFromWidget.Paywall,
-            "CUSTOMER_PORTAL" => EntitlementUpdateParamsFeatureHiddenFromWidget.CustomerPortal,
-            "CHECKOUT" => EntitlementUpdateParamsFeatureHiddenFromWidget.Checkout,
-            _ => (EntitlementUpdateParamsFeatureHiddenFromWidget)(-1),
+            "PAYWALL" => BodyFeatureHiddenFromWidget.Paywall,
+            "CUSTOMER_PORTAL" => BodyFeatureHiddenFromWidget.CustomerPortal,
+            "CHECKOUT" => BodyFeatureHiddenFromWidget.Checkout,
+            _ => (BodyFeatureHiddenFromWidget)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        EntitlementUpdateParamsFeatureHiddenFromWidget value,
+        BodyFeatureHiddenFromWidget value,
         JsonSerializerOptions options
     )
     {
@@ -1061,9 +935,9 @@ sealed class EntitlementUpdateParamsFeatureHiddenFromWidgetConverter
             writer,
             value switch
             {
-                EntitlementUpdateParamsFeatureHiddenFromWidget.Paywall => "PAYWALL",
-                EntitlementUpdateParamsFeatureHiddenFromWidget.CustomerPortal => "CUSTOMER_PORTAL",
-                EntitlementUpdateParamsFeatureHiddenFromWidget.Checkout => "CHECKOUT",
+                BodyFeatureHiddenFromWidget.Paywall => "PAYWALL",
+                BodyFeatureHiddenFromWidget.CustomerPortal => "CUSTOMER_PORTAL",
+                BodyFeatureHiddenFromWidget.Checkout => "CHECKOUT",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -1078,28 +952,25 @@ sealed class EntitlementUpdateParamsFeatureHiddenFromWidgetConverter
 /// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
-        EntitlementUpdateParamsFeatureMonthlyResetPeriodConfiguration,
-        EntitlementUpdateParamsFeatureMonthlyResetPeriodConfigurationFromRaw
+        BodyFeatureMonthlyResetPeriodConfiguration,
+        BodyFeatureMonthlyResetPeriodConfigurationFromRaw
     >)
 )]
-public sealed record class EntitlementUpdateParamsFeatureMonthlyResetPeriodConfiguration : JsonModel
+public sealed record class BodyFeatureMonthlyResetPeriodConfiguration : JsonModel
 {
     /// <summary>
     /// Reset anchor (SubscriptionStart or StartOfTheMonth)
     /// </summary>
     public required ApiEnum<
         string,
-        EntitlementUpdateParamsFeatureMonthlyResetPeriodConfigurationAccordingTo
+        BodyFeatureMonthlyResetPeriodConfigurationAccordingTo
     > AccordingTo
     {
         get
         {
             this._rawData.Freeze();
             return this._rawData.GetNotNullClass<
-                ApiEnum<
-                    string,
-                    EntitlementUpdateParamsFeatureMonthlyResetPeriodConfigurationAccordingTo
-                >
+                ApiEnum<string, BodyFeatureMonthlyResetPeriodConfigurationAccordingTo>
             >("accordingTo");
         }
         init { this._rawData.Set("accordingTo", value); }
@@ -1111,17 +982,17 @@ public sealed record class EntitlementUpdateParamsFeatureMonthlyResetPeriodConfi
         this.AccordingTo.Validate();
     }
 
-    public EntitlementUpdateParamsFeatureMonthlyResetPeriodConfiguration() { }
+    public BodyFeatureMonthlyResetPeriodConfiguration() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public EntitlementUpdateParamsFeatureMonthlyResetPeriodConfiguration(
-        EntitlementUpdateParamsFeatureMonthlyResetPeriodConfiguration entitlementUpdateParamsFeatureMonthlyResetPeriodConfiguration
+    public BodyFeatureMonthlyResetPeriodConfiguration(
+        BodyFeatureMonthlyResetPeriodConfiguration bodyFeatureMonthlyResetPeriodConfiguration
     )
-        : base(entitlementUpdateParamsFeatureMonthlyResetPeriodConfiguration) { }
+        : base(bodyFeatureMonthlyResetPeriodConfiguration) { }
 #pragma warning restore CS8618
 
-    public EntitlementUpdateParamsFeatureMonthlyResetPeriodConfiguration(
+    public BodyFeatureMonthlyResetPeriodConfiguration(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -1130,16 +1001,14 @@ public sealed record class EntitlementUpdateParamsFeatureMonthlyResetPeriodConfi
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    EntitlementUpdateParamsFeatureMonthlyResetPeriodConfiguration(
-        FrozenDictionary<string, JsonElement> rawData
-    )
+    BodyFeatureMonthlyResetPeriodConfiguration(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="EntitlementUpdateParamsFeatureMonthlyResetPeriodConfigurationFromRaw.FromRawUnchecked"/>
-    public static EntitlementUpdateParamsFeatureMonthlyResetPeriodConfiguration FromRawUnchecked(
+    /// <inheritdoc cref="BodyFeatureMonthlyResetPeriodConfigurationFromRaw.FromRawUnchecked"/>
+    public static BodyFeatureMonthlyResetPeriodConfiguration FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -1147,11 +1016,8 @@ public sealed record class EntitlementUpdateParamsFeatureMonthlyResetPeriodConfi
     }
 
     [SetsRequiredMembers]
-    public EntitlementUpdateParamsFeatureMonthlyResetPeriodConfiguration(
-        ApiEnum<
-            string,
-            EntitlementUpdateParamsFeatureMonthlyResetPeriodConfigurationAccordingTo
-        > accordingTo
+    public BodyFeatureMonthlyResetPeriodConfiguration(
+        ApiEnum<string, BodyFeatureMonthlyResetPeriodConfigurationAccordingTo> accordingTo
     )
         : this()
     {
@@ -1159,31 +1025,29 @@ public sealed record class EntitlementUpdateParamsFeatureMonthlyResetPeriodConfi
     }
 }
 
-class EntitlementUpdateParamsFeatureMonthlyResetPeriodConfigurationFromRaw
-    : IFromRawJson<EntitlementUpdateParamsFeatureMonthlyResetPeriodConfiguration>
+class BodyFeatureMonthlyResetPeriodConfigurationFromRaw
+    : IFromRawJson<BodyFeatureMonthlyResetPeriodConfiguration>
 {
     /// <inheritdoc/>
-    public EntitlementUpdateParamsFeatureMonthlyResetPeriodConfiguration FromRawUnchecked(
+    public BodyFeatureMonthlyResetPeriodConfiguration FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => EntitlementUpdateParamsFeatureMonthlyResetPeriodConfiguration.FromRawUnchecked(rawData);
+    ) => BodyFeatureMonthlyResetPeriodConfiguration.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// Reset anchor (SubscriptionStart or StartOfTheMonth)
 /// </summary>
-[JsonConverter(
-    typeof(EntitlementUpdateParamsFeatureMonthlyResetPeriodConfigurationAccordingToConverter)
-)]
-public enum EntitlementUpdateParamsFeatureMonthlyResetPeriodConfigurationAccordingTo
+[JsonConverter(typeof(BodyFeatureMonthlyResetPeriodConfigurationAccordingToConverter))]
+public enum BodyFeatureMonthlyResetPeriodConfigurationAccordingTo
 {
     SubscriptionStart,
     StartOfTheMonth,
 }
 
-sealed class EntitlementUpdateParamsFeatureMonthlyResetPeriodConfigurationAccordingToConverter
-    : JsonConverter<EntitlementUpdateParamsFeatureMonthlyResetPeriodConfigurationAccordingTo>
+sealed class BodyFeatureMonthlyResetPeriodConfigurationAccordingToConverter
+    : JsonConverter<BodyFeatureMonthlyResetPeriodConfigurationAccordingTo>
 {
-    public override EntitlementUpdateParamsFeatureMonthlyResetPeriodConfigurationAccordingTo Read(
+    public override BodyFeatureMonthlyResetPeriodConfigurationAccordingTo Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1192,16 +1056,16 @@ sealed class EntitlementUpdateParamsFeatureMonthlyResetPeriodConfigurationAccord
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
             "SubscriptionStart" =>
-                EntitlementUpdateParamsFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart,
+                BodyFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart,
             "StartOfTheMonth" =>
-                EntitlementUpdateParamsFeatureMonthlyResetPeriodConfigurationAccordingTo.StartOfTheMonth,
-            _ => (EntitlementUpdateParamsFeatureMonthlyResetPeriodConfigurationAccordingTo)(-1),
+                BodyFeatureMonthlyResetPeriodConfigurationAccordingTo.StartOfTheMonth,
+            _ => (BodyFeatureMonthlyResetPeriodConfigurationAccordingTo)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        EntitlementUpdateParamsFeatureMonthlyResetPeriodConfigurationAccordingTo value,
+        BodyFeatureMonthlyResetPeriodConfigurationAccordingTo value,
         JsonSerializerOptions options
     )
     {
@@ -1209,9 +1073,9 @@ sealed class EntitlementUpdateParamsFeatureMonthlyResetPeriodConfigurationAccord
             writer,
             value switch
             {
-                EntitlementUpdateParamsFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart =>
+                BodyFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart =>
                     "SubscriptionStart",
-                EntitlementUpdateParamsFeatureMonthlyResetPeriodConfigurationAccordingTo.StartOfTheMonth =>
+                BodyFeatureMonthlyResetPeriodConfigurationAccordingTo.StartOfTheMonth =>
                     "StartOfTheMonth",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
@@ -1225,8 +1089,8 @@ sealed class EntitlementUpdateParamsFeatureMonthlyResetPeriodConfigurationAccord
 /// <summary>
 /// Period at which usage resets
 /// </summary>
-[JsonConverter(typeof(EntitlementUpdateParamsFeatureResetPeriodConverter))]
-public enum EntitlementUpdateParamsFeatureResetPeriod
+[JsonConverter(typeof(BodyFeatureResetPeriodConverter))]
+public enum BodyFeatureResetPeriod
 {
     Year,
     Month,
@@ -1235,10 +1099,9 @@ public enum EntitlementUpdateParamsFeatureResetPeriod
     Hour,
 }
 
-sealed class EntitlementUpdateParamsFeatureResetPeriodConverter
-    : JsonConverter<EntitlementUpdateParamsFeatureResetPeriod>
+sealed class BodyFeatureResetPeriodConverter : JsonConverter<BodyFeatureResetPeriod>
 {
-    public override EntitlementUpdateParamsFeatureResetPeriod Read(
+    public override BodyFeatureResetPeriod Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1246,18 +1109,18 @@ sealed class EntitlementUpdateParamsFeatureResetPeriodConverter
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "YEAR" => EntitlementUpdateParamsFeatureResetPeriod.Year,
-            "MONTH" => EntitlementUpdateParamsFeatureResetPeriod.Month,
-            "WEEK" => EntitlementUpdateParamsFeatureResetPeriod.Week,
-            "DAY" => EntitlementUpdateParamsFeatureResetPeriod.Day,
-            "HOUR" => EntitlementUpdateParamsFeatureResetPeriod.Hour,
-            _ => (EntitlementUpdateParamsFeatureResetPeriod)(-1),
+            "YEAR" => BodyFeatureResetPeriod.Year,
+            "MONTH" => BodyFeatureResetPeriod.Month,
+            "WEEK" => BodyFeatureResetPeriod.Week,
+            "DAY" => BodyFeatureResetPeriod.Day,
+            "HOUR" => BodyFeatureResetPeriod.Hour,
+            _ => (BodyFeatureResetPeriod)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        EntitlementUpdateParamsFeatureResetPeriod value,
+        BodyFeatureResetPeriod value,
         JsonSerializerOptions options
     )
     {
@@ -1265,11 +1128,11 @@ sealed class EntitlementUpdateParamsFeatureResetPeriodConverter
             writer,
             value switch
             {
-                EntitlementUpdateParamsFeatureResetPeriod.Year => "YEAR",
-                EntitlementUpdateParamsFeatureResetPeriod.Month => "MONTH",
-                EntitlementUpdateParamsFeatureResetPeriod.Week => "WEEK",
-                EntitlementUpdateParamsFeatureResetPeriod.Day => "DAY",
-                EntitlementUpdateParamsFeatureResetPeriod.Hour => "HOUR",
+                BodyFeatureResetPeriod.Year => "YEAR",
+                BodyFeatureResetPeriod.Month => "MONTH",
+                BodyFeatureResetPeriod.Week => "WEEK",
+                BodyFeatureResetPeriod.Day => "DAY",
+                BodyFeatureResetPeriod.Hour => "HOUR",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -1284,28 +1147,25 @@ sealed class EntitlementUpdateParamsFeatureResetPeriodConverter
 /// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
-        EntitlementUpdateParamsFeatureWeeklyResetPeriodConfiguration,
-        EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationFromRaw
+        BodyFeatureWeeklyResetPeriodConfiguration,
+        BodyFeatureWeeklyResetPeriodConfigurationFromRaw
     >)
 )]
-public sealed record class EntitlementUpdateParamsFeatureWeeklyResetPeriodConfiguration : JsonModel
+public sealed record class BodyFeatureWeeklyResetPeriodConfiguration : JsonModel
 {
     /// <summary>
     /// Reset anchor (SubscriptionStart or specific day)
     /// </summary>
     public required ApiEnum<
         string,
-        EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordingTo
+        BodyFeatureWeeklyResetPeriodConfigurationAccordingTo
     > AccordingTo
     {
         get
         {
             this._rawData.Freeze();
             return this._rawData.GetNotNullClass<
-                ApiEnum<
-                    string,
-                    EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordingTo
-                >
+                ApiEnum<string, BodyFeatureWeeklyResetPeriodConfigurationAccordingTo>
             >("accordingTo");
         }
         init { this._rawData.Set("accordingTo", value); }
@@ -1317,17 +1177,17 @@ public sealed record class EntitlementUpdateParamsFeatureWeeklyResetPeriodConfig
         this.AccordingTo.Validate();
     }
 
-    public EntitlementUpdateParamsFeatureWeeklyResetPeriodConfiguration() { }
+    public BodyFeatureWeeklyResetPeriodConfiguration() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public EntitlementUpdateParamsFeatureWeeklyResetPeriodConfiguration(
-        EntitlementUpdateParamsFeatureWeeklyResetPeriodConfiguration entitlementUpdateParamsFeatureWeeklyResetPeriodConfiguration
+    public BodyFeatureWeeklyResetPeriodConfiguration(
+        BodyFeatureWeeklyResetPeriodConfiguration bodyFeatureWeeklyResetPeriodConfiguration
     )
-        : base(entitlementUpdateParamsFeatureWeeklyResetPeriodConfiguration) { }
+        : base(bodyFeatureWeeklyResetPeriodConfiguration) { }
 #pragma warning restore CS8618
 
-    public EntitlementUpdateParamsFeatureWeeklyResetPeriodConfiguration(
+    public BodyFeatureWeeklyResetPeriodConfiguration(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -1336,16 +1196,14 @@ public sealed record class EntitlementUpdateParamsFeatureWeeklyResetPeriodConfig
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    EntitlementUpdateParamsFeatureWeeklyResetPeriodConfiguration(
-        FrozenDictionary<string, JsonElement> rawData
-    )
+    BodyFeatureWeeklyResetPeriodConfiguration(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationFromRaw.FromRawUnchecked"/>
-    public static EntitlementUpdateParamsFeatureWeeklyResetPeriodConfiguration FromRawUnchecked(
+    /// <inheritdoc cref="BodyFeatureWeeklyResetPeriodConfigurationFromRaw.FromRawUnchecked"/>
+    public static BodyFeatureWeeklyResetPeriodConfiguration FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -1353,11 +1211,8 @@ public sealed record class EntitlementUpdateParamsFeatureWeeklyResetPeriodConfig
     }
 
     [SetsRequiredMembers]
-    public EntitlementUpdateParamsFeatureWeeklyResetPeriodConfiguration(
-        ApiEnum<
-            string,
-            EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordingTo
-        > accordingTo
+    public BodyFeatureWeeklyResetPeriodConfiguration(
+        ApiEnum<string, BodyFeatureWeeklyResetPeriodConfigurationAccordingTo> accordingTo
     )
         : this()
     {
@@ -1365,22 +1220,20 @@ public sealed record class EntitlementUpdateParamsFeatureWeeklyResetPeriodConfig
     }
 }
 
-class EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationFromRaw
-    : IFromRawJson<EntitlementUpdateParamsFeatureWeeklyResetPeriodConfiguration>
+class BodyFeatureWeeklyResetPeriodConfigurationFromRaw
+    : IFromRawJson<BodyFeatureWeeklyResetPeriodConfiguration>
 {
     /// <inheritdoc/>
-    public EntitlementUpdateParamsFeatureWeeklyResetPeriodConfiguration FromRawUnchecked(
+    public BodyFeatureWeeklyResetPeriodConfiguration FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => EntitlementUpdateParamsFeatureWeeklyResetPeriodConfiguration.FromRawUnchecked(rawData);
+    ) => BodyFeatureWeeklyResetPeriodConfiguration.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// Reset anchor (SubscriptionStart or specific day)
 /// </summary>
-[JsonConverter(
-    typeof(EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordingToConverter)
-)]
-public enum EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordingTo
+[JsonConverter(typeof(BodyFeatureWeeklyResetPeriodConfigurationAccordingToConverter))]
+public enum BodyFeatureWeeklyResetPeriodConfigurationAccordingTo
 {
     SubscriptionStart,
     EverySunday,
@@ -1392,10 +1245,10 @@ public enum EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordin
     EverySaturday,
 }
 
-sealed class EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordingToConverter
-    : JsonConverter<EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordingTo>
+sealed class BodyFeatureWeeklyResetPeriodConfigurationAccordingToConverter
+    : JsonConverter<BodyFeatureWeeklyResetPeriodConfigurationAccordingTo>
 {
-    public override EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordingTo Read(
+    public override BodyFeatureWeeklyResetPeriodConfigurationAccordingTo Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1404,28 +1257,21 @@ sealed class EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordi
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
             "SubscriptionStart" =>
-                EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart,
-            "EverySunday" =>
-                EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordingTo.EverySunday,
-            "EveryMonday" =>
-                EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryMonday,
-            "EveryTuesday" =>
-                EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryTuesday,
-            "EveryWednesday" =>
-                EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryWednesday,
-            "EveryThursday" =>
-                EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryThursday,
-            "EveryFriday" =>
-                EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryFriday,
-            "EverySaturday" =>
-                EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordingTo.EverySaturday,
-            _ => (EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordingTo)(-1),
+                BodyFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart,
+            "EverySunday" => BodyFeatureWeeklyResetPeriodConfigurationAccordingTo.EverySunday,
+            "EveryMonday" => BodyFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryMonday,
+            "EveryTuesday" => BodyFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryTuesday,
+            "EveryWednesday" => BodyFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryWednesday,
+            "EveryThursday" => BodyFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryThursday,
+            "EveryFriday" => BodyFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryFriday,
+            "EverySaturday" => BodyFeatureWeeklyResetPeriodConfigurationAccordingTo.EverySaturday,
+            _ => (BodyFeatureWeeklyResetPeriodConfigurationAccordingTo)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordingTo value,
+        BodyFeatureWeeklyResetPeriodConfigurationAccordingTo value,
         JsonSerializerOptions options
     )
     {
@@ -1433,21 +1279,17 @@ sealed class EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordi
             writer,
             value switch
             {
-                EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart =>
+                BodyFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart =>
                     "SubscriptionStart",
-                EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordingTo.EverySunday =>
-                    "EverySunday",
-                EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryMonday =>
-                    "EveryMonday",
-                EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryTuesday =>
-                    "EveryTuesday",
-                EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryWednesday =>
+                BodyFeatureWeeklyResetPeriodConfigurationAccordingTo.EverySunday => "EverySunday",
+                BodyFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryMonday => "EveryMonday",
+                BodyFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryTuesday => "EveryTuesday",
+                BodyFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryWednesday =>
                     "EveryWednesday",
-                EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryThursday =>
+                BodyFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryThursday =>
                     "EveryThursday",
-                EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryFriday =>
-                    "EveryFriday",
-                EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordingTo.EverySaturday =>
+                BodyFeatureWeeklyResetPeriodConfigurationAccordingTo.EveryFriday => "EveryFriday",
+                BodyFeatureWeeklyResetPeriodConfigurationAccordingTo.EverySaturday =>
                     "EverySaturday",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
@@ -1463,28 +1305,25 @@ sealed class EntitlementUpdateParamsFeatureWeeklyResetPeriodConfigurationAccordi
 /// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
-        EntitlementUpdateParamsFeatureYearlyResetPeriodConfiguration,
-        EntitlementUpdateParamsFeatureYearlyResetPeriodConfigurationFromRaw
+        BodyFeatureYearlyResetPeriodConfiguration,
+        BodyFeatureYearlyResetPeriodConfigurationFromRaw
     >)
 )]
-public sealed record class EntitlementUpdateParamsFeatureYearlyResetPeriodConfiguration : JsonModel
+public sealed record class BodyFeatureYearlyResetPeriodConfiguration : JsonModel
 {
     /// <summary>
     /// Reset anchor (SubscriptionStart)
     /// </summary>
     public required ApiEnum<
         string,
-        EntitlementUpdateParamsFeatureYearlyResetPeriodConfigurationAccordingTo
+        BodyFeatureYearlyResetPeriodConfigurationAccordingTo
     > AccordingTo
     {
         get
         {
             this._rawData.Freeze();
             return this._rawData.GetNotNullClass<
-                ApiEnum<
-                    string,
-                    EntitlementUpdateParamsFeatureYearlyResetPeriodConfigurationAccordingTo
-                >
+                ApiEnum<string, BodyFeatureYearlyResetPeriodConfigurationAccordingTo>
             >("accordingTo");
         }
         init { this._rawData.Set("accordingTo", value); }
@@ -1496,17 +1335,17 @@ public sealed record class EntitlementUpdateParamsFeatureYearlyResetPeriodConfig
         this.AccordingTo.Validate();
     }
 
-    public EntitlementUpdateParamsFeatureYearlyResetPeriodConfiguration() { }
+    public BodyFeatureYearlyResetPeriodConfiguration() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public EntitlementUpdateParamsFeatureYearlyResetPeriodConfiguration(
-        EntitlementUpdateParamsFeatureYearlyResetPeriodConfiguration entitlementUpdateParamsFeatureYearlyResetPeriodConfiguration
+    public BodyFeatureYearlyResetPeriodConfiguration(
+        BodyFeatureYearlyResetPeriodConfiguration bodyFeatureYearlyResetPeriodConfiguration
     )
-        : base(entitlementUpdateParamsFeatureYearlyResetPeriodConfiguration) { }
+        : base(bodyFeatureYearlyResetPeriodConfiguration) { }
 #pragma warning restore CS8618
 
-    public EntitlementUpdateParamsFeatureYearlyResetPeriodConfiguration(
+    public BodyFeatureYearlyResetPeriodConfiguration(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -1515,16 +1354,14 @@ public sealed record class EntitlementUpdateParamsFeatureYearlyResetPeriodConfig
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    EntitlementUpdateParamsFeatureYearlyResetPeriodConfiguration(
-        FrozenDictionary<string, JsonElement> rawData
-    )
+    BodyFeatureYearlyResetPeriodConfiguration(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="EntitlementUpdateParamsFeatureYearlyResetPeriodConfigurationFromRaw.FromRawUnchecked"/>
-    public static EntitlementUpdateParamsFeatureYearlyResetPeriodConfiguration FromRawUnchecked(
+    /// <inheritdoc cref="BodyFeatureYearlyResetPeriodConfigurationFromRaw.FromRawUnchecked"/>
+    public static BodyFeatureYearlyResetPeriodConfiguration FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -1532,11 +1369,8 @@ public sealed record class EntitlementUpdateParamsFeatureYearlyResetPeriodConfig
     }
 
     [SetsRequiredMembers]
-    public EntitlementUpdateParamsFeatureYearlyResetPeriodConfiguration(
-        ApiEnum<
-            string,
-            EntitlementUpdateParamsFeatureYearlyResetPeriodConfigurationAccordingTo
-        > accordingTo
+    public BodyFeatureYearlyResetPeriodConfiguration(
+        ApiEnum<string, BodyFeatureYearlyResetPeriodConfigurationAccordingTo> accordingTo
     )
         : this()
     {
@@ -1544,30 +1378,28 @@ public sealed record class EntitlementUpdateParamsFeatureYearlyResetPeriodConfig
     }
 }
 
-class EntitlementUpdateParamsFeatureYearlyResetPeriodConfigurationFromRaw
-    : IFromRawJson<EntitlementUpdateParamsFeatureYearlyResetPeriodConfiguration>
+class BodyFeatureYearlyResetPeriodConfigurationFromRaw
+    : IFromRawJson<BodyFeatureYearlyResetPeriodConfiguration>
 {
     /// <inheritdoc/>
-    public EntitlementUpdateParamsFeatureYearlyResetPeriodConfiguration FromRawUnchecked(
+    public BodyFeatureYearlyResetPeriodConfiguration FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => EntitlementUpdateParamsFeatureYearlyResetPeriodConfiguration.FromRawUnchecked(rawData);
+    ) => BodyFeatureYearlyResetPeriodConfiguration.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// Reset anchor (SubscriptionStart)
 /// </summary>
-[JsonConverter(
-    typeof(EntitlementUpdateParamsFeatureYearlyResetPeriodConfigurationAccordingToConverter)
-)]
-public enum EntitlementUpdateParamsFeatureYearlyResetPeriodConfigurationAccordingTo
+[JsonConverter(typeof(BodyFeatureYearlyResetPeriodConfigurationAccordingToConverter))]
+public enum BodyFeatureYearlyResetPeriodConfigurationAccordingTo
 {
     SubscriptionStart,
 }
 
-sealed class EntitlementUpdateParamsFeatureYearlyResetPeriodConfigurationAccordingToConverter
-    : JsonConverter<EntitlementUpdateParamsFeatureYearlyResetPeriodConfigurationAccordingTo>
+sealed class BodyFeatureYearlyResetPeriodConfigurationAccordingToConverter
+    : JsonConverter<BodyFeatureYearlyResetPeriodConfigurationAccordingTo>
 {
-    public override EntitlementUpdateParamsFeatureYearlyResetPeriodConfigurationAccordingTo Read(
+    public override BodyFeatureYearlyResetPeriodConfigurationAccordingTo Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1576,14 +1408,14 @@ sealed class EntitlementUpdateParamsFeatureYearlyResetPeriodConfigurationAccordi
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
             "SubscriptionStart" =>
-                EntitlementUpdateParamsFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart,
-            _ => (EntitlementUpdateParamsFeatureYearlyResetPeriodConfigurationAccordingTo)(-1),
+                BodyFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart,
+            _ => (BodyFeatureYearlyResetPeriodConfigurationAccordingTo)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        EntitlementUpdateParamsFeatureYearlyResetPeriodConfigurationAccordingTo value,
+        BodyFeatureYearlyResetPeriodConfigurationAccordingTo value,
         JsonSerializerOptions options
     )
     {
@@ -1591,8 +1423,423 @@ sealed class EntitlementUpdateParamsFeatureYearlyResetPeriodConfigurationAccordi
             writer,
             value switch
             {
-                EntitlementUpdateParamsFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart =>
+                BodyFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart =>
                     "SubscriptionStart",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Fields to update on a credit entitlement
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<BodyCredit, BodyCreditFromRaw>))]
+public sealed record class BodyCredit : JsonModel
+{
+    /// <summary>
+    /// UpdateCreditEntitlementRequest
+    /// </summary>
+    public JsonElement Type
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<JsonElement>("type");
+        }
+        init { this._rawData.Set("type", value); }
+    }
+
+    /// <summary>
+    /// Credit grant amount
+    /// </summary>
+    public double? Amount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<double>("amount");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("amount", value);
+        }
+    }
+
+    /// <summary>
+    /// Entitlement behavior (Increment or Override)
+    /// </summary>
+    public ApiEnum<string, BodyCreditBehavior>? Behavior
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, BodyCreditBehavior>>("behavior");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("behavior", value);
+        }
+    }
+
+    /// <summary>
+    /// Credit grant cadence (MONTH or YEAR)
+    /// </summary>
+    public ApiEnum<string, BodyCreditCadence>? Cadence
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, BodyCreditCadence>>("cadence");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("cadence", value);
+        }
+    }
+
+    /// <summary>
+    /// Description of the entitlement
+    /// </summary>
+    public string? Description
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("description");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("description", value);
+        }
+    }
+
+    /// <summary>
+    /// Override display name for the entitlement
+    /// </summary>
+    public string? DisplayNameOverride
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("displayNameOverride");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("displayNameOverride", value);
+        }
+    }
+
+    /// <summary>
+    /// Widget types where this entitlement is hidden
+    /// </summary>
+    public IReadOnlyList<ApiEnum<string, BodyCreditHiddenFromWidget>>? HiddenFromWidgets
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<
+                ImmutableArray<ApiEnum<string, BodyCreditHiddenFromWidget>>
+            >("hiddenFromWidgets");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set<ImmutableArray<ApiEnum<string, BodyCreditHiddenFromWidget>>?>(
+                "hiddenFromWidgets",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
+    /// Whether this is a custom entitlement
+    /// </summary>
+    public bool? IsCustom
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("isCustom");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("isCustom", value);
+        }
+    }
+
+    /// <summary>
+    /// Whether the entitlement is granted
+    /// </summary>
+    public bool? IsGranted
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("isGranted");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("isGranted", value);
+        }
+    }
+
+    /// <summary>
+    /// Display order of the entitlement
+    /// </summary>
+    public double? Order
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<double>("order");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("order", value);
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        if (!JsonElement.DeepEquals(this.Type, JsonSerializer.SerializeToElement("CREDIT")))
+        {
+            throw new StiggInvalidDataException("Invalid value given for constant");
+        }
+        _ = this.Amount;
+        this.Behavior?.Validate();
+        this.Cadence?.Validate();
+        _ = this.Description;
+        _ = this.DisplayNameOverride;
+        foreach (var item in this.HiddenFromWidgets ?? [])
+        {
+            item.Validate();
+        }
+        _ = this.IsCustom;
+        _ = this.IsGranted;
+        _ = this.Order;
+    }
+
+    public BodyCredit()
+    {
+        this.Type = JsonSerializer.SerializeToElement("CREDIT");
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public BodyCredit(BodyCredit bodyCredit)
+        : base(bodyCredit) { }
+#pragma warning restore CS8618
+
+    public BodyCredit(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+
+        this.Type = JsonSerializer.SerializeToElement("CREDIT");
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    BodyCredit(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="BodyCreditFromRaw.FromRawUnchecked"/>
+    public static BodyCredit FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class BodyCreditFromRaw : IFromRawJson<BodyCredit>
+{
+    /// <inheritdoc/>
+    public BodyCredit FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        BodyCredit.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Entitlement behavior (Increment or Override)
+/// </summary>
+[JsonConverter(typeof(BodyCreditBehaviorConverter))]
+public enum BodyCreditBehavior
+{
+    Increment,
+    Override,
+}
+
+sealed class BodyCreditBehaviorConverter : JsonConverter<BodyCreditBehavior>
+{
+    public override BodyCreditBehavior Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "Increment" => BodyCreditBehavior.Increment,
+            "Override" => BodyCreditBehavior.Override,
+            _ => (BodyCreditBehavior)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        BodyCreditBehavior value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                BodyCreditBehavior.Increment => "Increment",
+                BodyCreditBehavior.Override => "Override",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Credit grant cadence (MONTH or YEAR)
+/// </summary>
+[JsonConverter(typeof(BodyCreditCadenceConverter))]
+public enum BodyCreditCadence
+{
+    Month,
+    Year,
+}
+
+sealed class BodyCreditCadenceConverter : JsonConverter<BodyCreditCadence>
+{
+    public override BodyCreditCadence Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "MONTH" => BodyCreditCadence.Month,
+            "YEAR" => BodyCreditCadence.Year,
+            _ => (BodyCreditCadence)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        BodyCreditCadence value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                BodyCreditCadence.Month => "MONTH",
+                BodyCreditCadence.Year => "YEAR",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+[JsonConverter(typeof(BodyCreditHiddenFromWidgetConverter))]
+public enum BodyCreditHiddenFromWidget
+{
+    Paywall,
+    CustomerPortal,
+    Checkout,
+}
+
+sealed class BodyCreditHiddenFromWidgetConverter : JsonConverter<BodyCreditHiddenFromWidget>
+{
+    public override BodyCreditHiddenFromWidget Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "PAYWALL" => BodyCreditHiddenFromWidget.Paywall,
+            "CUSTOMER_PORTAL" => BodyCreditHiddenFromWidget.CustomerPortal,
+            "CHECKOUT" => BodyCreditHiddenFromWidget.Checkout,
+            _ => (BodyCreditHiddenFromWidget)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        BodyCreditHiddenFromWidget value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                BodyCreditHiddenFromWidget.Paywall => "PAYWALL",
+                BodyCreditHiddenFromWidget.CustomerPortal => "CUSTOMER_PORTAL",
+                BodyCreditHiddenFromWidget.Checkout => "CHECKOUT",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

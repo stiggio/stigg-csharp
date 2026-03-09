@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
-using Entitlements = Stigg.Client.Models.V1.Plans.Entitlements;
+using Stigg.Client.Models.V1.Plans.Entitlements;
 
 namespace Stigg.Client.Tests.Models.V1.Plans.Entitlements;
 
@@ -12,59 +12,49 @@ public class PlanEntitlementTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Entitlements::PlanEntitlement
+        var model = new PlanEntitlement
         {
-            Data = new()
+            Data = new DataFeature()
             {
                 ID = "id",
-                Amount = 0,
-                Behavior = Entitlements::DataBehavior.Increment,
-                Cadence = Entitlements::DataCadence.Month,
+                Behavior = DataFeatureBehavior.Increment,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                CustomCurrencyID = "customCurrencyId",
                 Description = "description",
                 DisplayNameOverride = "displayNameOverride",
                 EnumValues = ["string"],
-                FeatureID = "featureId",
                 HasSoftLimit = true,
                 HasUnlimitedUsage = true,
-                HiddenFromWidgets = [Entitlements::DataHiddenFromWidget.Paywall],
+                HiddenFromWidgets = [DataFeatureHiddenFromWidget.Paywall],
                 IsCustom = true,
                 IsGranted = true,
                 Order = 0,
-                ResetPeriod = Entitlements::DataResetPeriod.Year,
-                ResetPeriodConfiguration = new Entitlements::YearlyResetPeriodConfig(
-                    Entitlements::YearlyResetPeriodConfigAccordingTo.SubscriptionStart
+                ResetPeriod = DataFeatureResetPeriod.Year,
+                ResetPeriodConfiguration = new YearlyResetPeriodConfig(
+                    YearlyResetPeriodConfigAccordingTo.SubscriptionStart
                 ),
-                Type = Entitlements::Type.Feature,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UsageLimit = 0,
             },
         };
 
-        Entitlements::Data expectedData = new()
+        Data expectedData = new DataFeature()
         {
             ID = "id",
-            Amount = 0,
-            Behavior = Entitlements::DataBehavior.Increment,
-            Cadence = Entitlements::DataCadence.Month,
+            Behavior = DataFeatureBehavior.Increment,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            CustomCurrencyID = "customCurrencyId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
             EnumValues = ["string"],
-            FeatureID = "featureId",
             HasSoftLimit = true,
             HasUnlimitedUsage = true,
-            HiddenFromWidgets = [Entitlements::DataHiddenFromWidget.Paywall],
+            HiddenFromWidgets = [DataFeatureHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
             Order = 0,
-            ResetPeriod = Entitlements::DataResetPeriod.Year,
-            ResetPeriodConfiguration = new Entitlements::YearlyResetPeriodConfig(
-                Entitlements::YearlyResetPeriodConfigAccordingTo.SubscriptionStart
+            ResetPeriod = DataFeatureResetPeriod.Year,
+            ResetPeriodConfiguration = new YearlyResetPeriodConfig(
+                YearlyResetPeriodConfigAccordingTo.SubscriptionStart
             ),
-            Type = Entitlements::Type.Feature,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
         };
@@ -75,38 +65,33 @@ public class PlanEntitlementTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Entitlements::PlanEntitlement
+        var model = new PlanEntitlement
         {
-            Data = new()
+            Data = new DataFeature()
             {
                 ID = "id",
-                Amount = 0,
-                Behavior = Entitlements::DataBehavior.Increment,
-                Cadence = Entitlements::DataCadence.Month,
+                Behavior = DataFeatureBehavior.Increment,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                CustomCurrencyID = "customCurrencyId",
                 Description = "description",
                 DisplayNameOverride = "displayNameOverride",
                 EnumValues = ["string"],
-                FeatureID = "featureId",
                 HasSoftLimit = true,
                 HasUnlimitedUsage = true,
-                HiddenFromWidgets = [Entitlements::DataHiddenFromWidget.Paywall],
+                HiddenFromWidgets = [DataFeatureHiddenFromWidget.Paywall],
                 IsCustom = true,
                 IsGranted = true,
                 Order = 0,
-                ResetPeriod = Entitlements::DataResetPeriod.Year,
-                ResetPeriodConfiguration = new Entitlements::YearlyResetPeriodConfig(
-                    Entitlements::YearlyResetPeriodConfigAccordingTo.SubscriptionStart
+                ResetPeriod = DataFeatureResetPeriod.Year,
+                ResetPeriodConfiguration = new YearlyResetPeriodConfig(
+                    YearlyResetPeriodConfigAccordingTo.SubscriptionStart
                 ),
-                Type = Entitlements::Type.Feature,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UsageLimit = 0,
             },
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Entitlements::PlanEntitlement>(
+        var deserialized = JsonSerializer.Deserialize<PlanEntitlement>(
             json,
             ModelBase.SerializerOptions
         );
@@ -117,66 +102,56 @@ public class PlanEntitlementTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Entitlements::PlanEntitlement
+        var model = new PlanEntitlement
         {
-            Data = new()
+            Data = new DataFeature()
             {
                 ID = "id",
-                Amount = 0,
-                Behavior = Entitlements::DataBehavior.Increment,
-                Cadence = Entitlements::DataCadence.Month,
+                Behavior = DataFeatureBehavior.Increment,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                CustomCurrencyID = "customCurrencyId",
                 Description = "description",
                 DisplayNameOverride = "displayNameOverride",
                 EnumValues = ["string"],
-                FeatureID = "featureId",
                 HasSoftLimit = true,
                 HasUnlimitedUsage = true,
-                HiddenFromWidgets = [Entitlements::DataHiddenFromWidget.Paywall],
+                HiddenFromWidgets = [DataFeatureHiddenFromWidget.Paywall],
                 IsCustom = true,
                 IsGranted = true,
                 Order = 0,
-                ResetPeriod = Entitlements::DataResetPeriod.Year,
-                ResetPeriodConfiguration = new Entitlements::YearlyResetPeriodConfig(
-                    Entitlements::YearlyResetPeriodConfigAccordingTo.SubscriptionStart
+                ResetPeriod = DataFeatureResetPeriod.Year,
+                ResetPeriodConfiguration = new YearlyResetPeriodConfig(
+                    YearlyResetPeriodConfigAccordingTo.SubscriptionStart
                 ),
-                Type = Entitlements::Type.Feature,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UsageLimit = 0,
             },
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Entitlements::PlanEntitlement>(
+        var deserialized = JsonSerializer.Deserialize<PlanEntitlement>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
-        Entitlements::Data expectedData = new()
+        Data expectedData = new DataFeature()
         {
             ID = "id",
-            Amount = 0,
-            Behavior = Entitlements::DataBehavior.Increment,
-            Cadence = Entitlements::DataCadence.Month,
+            Behavior = DataFeatureBehavior.Increment,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            CustomCurrencyID = "customCurrencyId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
             EnumValues = ["string"],
-            FeatureID = "featureId",
             HasSoftLimit = true,
             HasUnlimitedUsage = true,
-            HiddenFromWidgets = [Entitlements::DataHiddenFromWidget.Paywall],
+            HiddenFromWidgets = [DataFeatureHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
             Order = 0,
-            ResetPeriod = Entitlements::DataResetPeriod.Year,
-            ResetPeriodConfiguration = new Entitlements::YearlyResetPeriodConfig(
-                Entitlements::YearlyResetPeriodConfigAccordingTo.SubscriptionStart
+            ResetPeriod = DataFeatureResetPeriod.Year,
+            ResetPeriodConfiguration = new YearlyResetPeriodConfig(
+                YearlyResetPeriodConfigAccordingTo.SubscriptionStart
             ),
-            Type = Entitlements::Type.Feature,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
         };
@@ -187,31 +162,26 @@ public class PlanEntitlementTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Entitlements::PlanEntitlement
+        var model = new PlanEntitlement
         {
-            Data = new()
+            Data = new DataFeature()
             {
                 ID = "id",
-                Amount = 0,
-                Behavior = Entitlements::DataBehavior.Increment,
-                Cadence = Entitlements::DataCadence.Month,
+                Behavior = DataFeatureBehavior.Increment,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                CustomCurrencyID = "customCurrencyId",
                 Description = "description",
                 DisplayNameOverride = "displayNameOverride",
                 EnumValues = ["string"],
-                FeatureID = "featureId",
                 HasSoftLimit = true,
                 HasUnlimitedUsage = true,
-                HiddenFromWidgets = [Entitlements::DataHiddenFromWidget.Paywall],
+                HiddenFromWidgets = [DataFeatureHiddenFromWidget.Paywall],
                 IsCustom = true,
                 IsGranted = true,
                 Order = 0,
-                ResetPeriod = Entitlements::DataResetPeriod.Year,
-                ResetPeriodConfiguration = new Entitlements::YearlyResetPeriodConfig(
-                    Entitlements::YearlyResetPeriodConfigAccordingTo.SubscriptionStart
+                ResetPeriod = DataFeatureResetPeriod.Year,
+                ResetPeriodConfiguration = new YearlyResetPeriodConfig(
+                    YearlyResetPeriodConfigAccordingTo.SubscriptionStart
                 ),
-                Type = Entitlements::Type.Feature,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UsageLimit = 0,
             },
@@ -223,37 +193,32 @@ public class PlanEntitlementTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Entitlements::PlanEntitlement
+        var model = new PlanEntitlement
         {
-            Data = new()
+            Data = new DataFeature()
             {
                 ID = "id",
-                Amount = 0,
-                Behavior = Entitlements::DataBehavior.Increment,
-                Cadence = Entitlements::DataCadence.Month,
+                Behavior = DataFeatureBehavior.Increment,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                CustomCurrencyID = "customCurrencyId",
                 Description = "description",
                 DisplayNameOverride = "displayNameOverride",
                 EnumValues = ["string"],
-                FeatureID = "featureId",
                 HasSoftLimit = true,
                 HasUnlimitedUsage = true,
-                HiddenFromWidgets = [Entitlements::DataHiddenFromWidget.Paywall],
+                HiddenFromWidgets = [DataFeatureHiddenFromWidget.Paywall],
                 IsCustom = true,
                 IsGranted = true,
                 Order = 0,
-                ResetPeriod = Entitlements::DataResetPeriod.Year,
-                ResetPeriodConfiguration = new Entitlements::YearlyResetPeriodConfig(
-                    Entitlements::YearlyResetPeriodConfigAccordingTo.SubscriptionStart
+                ResetPeriod = DataFeatureResetPeriod.Year,
+                ResetPeriodConfiguration = new YearlyResetPeriodConfig(
+                    YearlyResetPeriodConfigAccordingTo.SubscriptionStart
                 ),
-                Type = Entitlements::Type.Feature,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UsageLimit = 0,
             },
         };
 
-        Entitlements::PlanEntitlement copied = new(model);
+        PlanEntitlement copied = new(model);
 
         Assert.Equal(model, copied);
     }
@@ -262,72 +227,161 @@ public class PlanEntitlementTest : TestBase
 public class DataTest : TestBase
 {
     [Fact]
-    public void FieldRoundtrip_Works()
+    public void FeatureValidationWorks()
     {
-        var model = new Entitlements::Data
+        Data value = new DataFeature()
         {
             ID = "id",
-            Amount = 0,
-            Behavior = Entitlements::DataBehavior.Increment,
-            Cadence = Entitlements::DataCadence.Month,
+            Behavior = DataFeatureBehavior.Increment,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            CustomCurrencyID = "customCurrencyId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
             EnumValues = ["string"],
-            FeatureID = "featureId",
             HasSoftLimit = true,
             HasUnlimitedUsage = true,
-            HiddenFromWidgets = [Entitlements::DataHiddenFromWidget.Paywall],
+            HiddenFromWidgets = [DataFeatureHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
             Order = 0,
-            ResetPeriod = Entitlements::DataResetPeriod.Year,
-            ResetPeriodConfiguration = new Entitlements::YearlyResetPeriodConfig(
-                Entitlements::YearlyResetPeriodConfigAccordingTo.SubscriptionStart
+            ResetPeriod = DataFeatureResetPeriod.Year,
+            ResetPeriodConfiguration = new YearlyResetPeriodConfig(
+                YearlyResetPeriodConfigAccordingTo.SubscriptionStart
             ),
-            Type = Entitlements::Type.Feature,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsageLimit = 0,
+        };
+        value.Validate();
+    }
+
+    [Fact]
+    public void CreditValidationWorks()
+    {
+        Data value = new DataCredit()
+        {
+            ID = "id",
+            Amount = 0,
+            Behavior = DataCreditBehavior.Increment,
+            Cadence = DataCreditCadence.Month,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            DisplayNameOverride = "displayNameOverride",
+            HiddenFromWidgets = [DataCreditHiddenFromWidget.Paywall],
+            IsCustom = true,
+            IsGranted = true,
+            Order = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+        value.Validate();
+    }
+
+    [Fact]
+    public void FeatureSerializationRoundtripWorks()
+    {
+        Data value = new DataFeature()
+        {
+            ID = "id",
+            Behavior = DataFeatureBehavior.Increment,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            DisplayNameOverride = "displayNameOverride",
+            EnumValues = ["string"],
+            HasSoftLimit = true,
+            HasUnlimitedUsage = true,
+            HiddenFromWidgets = [DataFeatureHiddenFromWidget.Paywall],
+            IsCustom = true,
+            IsGranted = true,
+            Order = 0,
+            ResetPeriod = DataFeatureResetPeriod.Year,
+            ResetPeriodConfiguration = new YearlyResetPeriodConfig(
+                YearlyResetPeriodConfigAccordingTo.SubscriptionStart
+            ),
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsageLimit = 0,
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void CreditSerializationRoundtripWorks()
+    {
+        Data value = new DataCredit()
+        {
+            ID = "id",
+            Amount = 0,
+            Behavior = DataCreditBehavior.Increment,
+            Cadence = DataCreditCadence.Month,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            DisplayNameOverride = "displayNameOverride",
+            HiddenFromWidgets = [DataCreditHiddenFromWidget.Paywall],
+            IsCustom = true,
+            IsGranted = true,
+            Order = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class DataFeatureTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new DataFeature
+        {
+            ID = "id",
+            Behavior = DataFeatureBehavior.Increment,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            DisplayNameOverride = "displayNameOverride",
+            EnumValues = ["string"],
+            HasSoftLimit = true,
+            HasUnlimitedUsage = true,
+            HiddenFromWidgets = [DataFeatureHiddenFromWidget.Paywall],
+            IsCustom = true,
+            IsGranted = true,
+            Order = 0,
+            ResetPeriod = DataFeatureResetPeriod.Year,
+            ResetPeriodConfiguration = new YearlyResetPeriodConfig(
+                YearlyResetPeriodConfigAccordingTo.SubscriptionStart
+            ),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
         };
 
         string expectedID = "id";
-        double expectedAmount = 0;
-        ApiEnum<string, Entitlements::DataBehavior> expectedBehavior =
-            Entitlements::DataBehavior.Increment;
-        ApiEnum<string, Entitlements::DataCadence> expectedCadence =
-            Entitlements::DataCadence.Month;
+        ApiEnum<string, DataFeatureBehavior> expectedBehavior = DataFeatureBehavior.Increment;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        string expectedCustomCurrencyID = "customCurrencyId";
         string expectedDescription = "description";
         string expectedDisplayNameOverride = "displayNameOverride";
         List<string> expectedEnumValues = ["string"];
-        string expectedFeatureID = "featureId";
         bool expectedHasSoftLimit = true;
         bool expectedHasUnlimitedUsage = true;
-        List<ApiEnum<string, Entitlements::DataHiddenFromWidget>> expectedHiddenFromWidgets =
+        List<ApiEnum<string, DataFeatureHiddenFromWidget>> expectedHiddenFromWidgets =
         [
-            Entitlements::DataHiddenFromWidget.Paywall,
+            DataFeatureHiddenFromWidget.Paywall,
         ];
         bool expectedIsCustom = true;
         bool expectedIsGranted = true;
         double expectedOrder = 0;
-        ApiEnum<string, Entitlements::DataResetPeriod> expectedResetPeriod =
-            Entitlements::DataResetPeriod.Year;
-        Entitlements::ResetPeriodConfiguration expectedResetPeriodConfiguration =
-            new Entitlements::YearlyResetPeriodConfig(
-                Entitlements::YearlyResetPeriodConfigAccordingTo.SubscriptionStart
-            );
-        ApiEnum<string, Entitlements::Type> expectedType = Entitlements::Type.Feature;
+        ApiEnum<string, DataFeatureResetPeriod> expectedResetPeriod = DataFeatureResetPeriod.Year;
+        ResetPeriodConfiguration expectedResetPeriodConfiguration = new YearlyResetPeriodConfig(
+            YearlyResetPeriodConfigAccordingTo.SubscriptionStart
+        );
+        JsonElement expectedType = JsonSerializer.SerializeToElement("FEATURE");
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         double expectedUsageLimit = 0;
 
         Assert.Equal(expectedID, model.ID);
-        Assert.Equal(expectedAmount, model.Amount);
         Assert.Equal(expectedBehavior, model.Behavior);
-        Assert.Equal(expectedCadence, model.Cadence);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
-        Assert.Equal(expectedCustomCurrencyID, model.CustomCurrencyID);
         Assert.Equal(expectedDescription, model.Description);
         Assert.Equal(expectedDisplayNameOverride, model.DisplayNameOverride);
         Assert.NotNull(model.EnumValues);
@@ -336,7 +390,6 @@ public class DataTest : TestBase
         {
             Assert.Equal(expectedEnumValues[i], model.EnumValues[i]);
         }
-        Assert.Equal(expectedFeatureID, model.FeatureID);
         Assert.Equal(expectedHasSoftLimit, model.HasSoftLimit);
         Assert.Equal(expectedHasUnlimitedUsage, model.HasUnlimitedUsage);
         Assert.Equal(expectedHiddenFromWidgets.Count, model.HiddenFromWidgets.Count);
@@ -349,7 +402,7 @@ public class DataTest : TestBase
         Assert.Equal(expectedOrder, model.Order);
         Assert.Equal(expectedResetPeriod, model.ResetPeriod);
         Assert.Equal(expectedResetPeriodConfiguration, model.ResetPeriodConfiguration);
-        Assert.Equal(expectedType, model.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
         Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
         Assert.Equal(expectedUsageLimit, model.UsageLimit);
     }
@@ -357,35 +410,30 @@ public class DataTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Entitlements::Data
+        var model = new DataFeature
         {
             ID = "id",
-            Amount = 0,
-            Behavior = Entitlements::DataBehavior.Increment,
-            Cadence = Entitlements::DataCadence.Month,
+            Behavior = DataFeatureBehavior.Increment,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            CustomCurrencyID = "customCurrencyId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
             EnumValues = ["string"],
-            FeatureID = "featureId",
             HasSoftLimit = true,
             HasUnlimitedUsage = true,
-            HiddenFromWidgets = [Entitlements::DataHiddenFromWidget.Paywall],
+            HiddenFromWidgets = [DataFeatureHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
             Order = 0,
-            ResetPeriod = Entitlements::DataResetPeriod.Year,
-            ResetPeriodConfiguration = new Entitlements::YearlyResetPeriodConfig(
-                Entitlements::YearlyResetPeriodConfigAccordingTo.SubscriptionStart
+            ResetPeriod = DataFeatureResetPeriod.Year,
+            ResetPeriodConfiguration = new YearlyResetPeriodConfig(
+                YearlyResetPeriodConfigAccordingTo.SubscriptionStart
             ),
-            Type = Entitlements::Type.Feature,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Entitlements::Data>(
+        var deserialized = JsonSerializer.Deserialize<DataFeature>(
             json,
             ModelBase.SerializerOptions
         );
@@ -396,77 +444,61 @@ public class DataTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Entitlements::Data
+        var model = new DataFeature
         {
             ID = "id",
-            Amount = 0,
-            Behavior = Entitlements::DataBehavior.Increment,
-            Cadence = Entitlements::DataCadence.Month,
+            Behavior = DataFeatureBehavior.Increment,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            CustomCurrencyID = "customCurrencyId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
             EnumValues = ["string"],
-            FeatureID = "featureId",
             HasSoftLimit = true,
             HasUnlimitedUsage = true,
-            HiddenFromWidgets = [Entitlements::DataHiddenFromWidget.Paywall],
+            HiddenFromWidgets = [DataFeatureHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
             Order = 0,
-            ResetPeriod = Entitlements::DataResetPeriod.Year,
-            ResetPeriodConfiguration = new Entitlements::YearlyResetPeriodConfig(
-                Entitlements::YearlyResetPeriodConfigAccordingTo.SubscriptionStart
+            ResetPeriod = DataFeatureResetPeriod.Year,
+            ResetPeriodConfiguration = new YearlyResetPeriodConfig(
+                YearlyResetPeriodConfigAccordingTo.SubscriptionStart
             ),
-            Type = Entitlements::Type.Feature,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Entitlements::Data>(
+        var deserialized = JsonSerializer.Deserialize<DataFeature>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
-        double expectedAmount = 0;
-        ApiEnum<string, Entitlements::DataBehavior> expectedBehavior =
-            Entitlements::DataBehavior.Increment;
-        ApiEnum<string, Entitlements::DataCadence> expectedCadence =
-            Entitlements::DataCadence.Month;
+        ApiEnum<string, DataFeatureBehavior> expectedBehavior = DataFeatureBehavior.Increment;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        string expectedCustomCurrencyID = "customCurrencyId";
         string expectedDescription = "description";
         string expectedDisplayNameOverride = "displayNameOverride";
         List<string> expectedEnumValues = ["string"];
-        string expectedFeatureID = "featureId";
         bool expectedHasSoftLimit = true;
         bool expectedHasUnlimitedUsage = true;
-        List<ApiEnum<string, Entitlements::DataHiddenFromWidget>> expectedHiddenFromWidgets =
+        List<ApiEnum<string, DataFeatureHiddenFromWidget>> expectedHiddenFromWidgets =
         [
-            Entitlements::DataHiddenFromWidget.Paywall,
+            DataFeatureHiddenFromWidget.Paywall,
         ];
         bool expectedIsCustom = true;
         bool expectedIsGranted = true;
         double expectedOrder = 0;
-        ApiEnum<string, Entitlements::DataResetPeriod> expectedResetPeriod =
-            Entitlements::DataResetPeriod.Year;
-        Entitlements::ResetPeriodConfiguration expectedResetPeriodConfiguration =
-            new Entitlements::YearlyResetPeriodConfig(
-                Entitlements::YearlyResetPeriodConfigAccordingTo.SubscriptionStart
-            );
-        ApiEnum<string, Entitlements::Type> expectedType = Entitlements::Type.Feature;
+        ApiEnum<string, DataFeatureResetPeriod> expectedResetPeriod = DataFeatureResetPeriod.Year;
+        ResetPeriodConfiguration expectedResetPeriodConfiguration = new YearlyResetPeriodConfig(
+            YearlyResetPeriodConfigAccordingTo.SubscriptionStart
+        );
+        JsonElement expectedType = JsonSerializer.SerializeToElement("FEATURE");
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         double expectedUsageLimit = 0;
 
         Assert.Equal(expectedID, deserialized.ID);
-        Assert.Equal(expectedAmount, deserialized.Amount);
         Assert.Equal(expectedBehavior, deserialized.Behavior);
-        Assert.Equal(expectedCadence, deserialized.Cadence);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
-        Assert.Equal(expectedCustomCurrencyID, deserialized.CustomCurrencyID);
         Assert.Equal(expectedDescription, deserialized.Description);
         Assert.Equal(expectedDisplayNameOverride, deserialized.DisplayNameOverride);
         Assert.NotNull(deserialized.EnumValues);
@@ -475,7 +507,6 @@ public class DataTest : TestBase
         {
             Assert.Equal(expectedEnumValues[i], deserialized.EnumValues[i]);
         }
-        Assert.Equal(expectedFeatureID, deserialized.FeatureID);
         Assert.Equal(expectedHasSoftLimit, deserialized.HasSoftLimit);
         Assert.Equal(expectedHasUnlimitedUsage, deserialized.HasUnlimitedUsage);
         Assert.Equal(expectedHiddenFromWidgets.Count, deserialized.HiddenFromWidgets.Count);
@@ -488,7 +519,7 @@ public class DataTest : TestBase
         Assert.Equal(expectedOrder, deserialized.Order);
         Assert.Equal(expectedResetPeriod, deserialized.ResetPeriod);
         Assert.Equal(expectedResetPeriodConfiguration, deserialized.ResetPeriodConfiguration);
-        Assert.Equal(expectedType, deserialized.Type);
+        Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
         Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
         Assert.Equal(expectedUsageLimit, deserialized.UsageLimit);
     }
@@ -496,29 +527,24 @@ public class DataTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Entitlements::Data
+        var model = new DataFeature
         {
             ID = "id",
-            Amount = 0,
-            Behavior = Entitlements::DataBehavior.Increment,
-            Cadence = Entitlements::DataCadence.Month,
+            Behavior = DataFeatureBehavior.Increment,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            CustomCurrencyID = "customCurrencyId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
             EnumValues = ["string"],
-            FeatureID = "featureId",
             HasSoftLimit = true,
             HasUnlimitedUsage = true,
-            HiddenFromWidgets = [Entitlements::DataHiddenFromWidget.Paywall],
+            HiddenFromWidgets = [DataFeatureHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
             Order = 0,
-            ResetPeriod = Entitlements::DataResetPeriod.Year,
-            ResetPeriodConfiguration = new Entitlements::YearlyResetPeriodConfig(
-                Entitlements::YearlyResetPeriodConfigAccordingTo.SubscriptionStart
+            ResetPeriod = DataFeatureResetPeriod.Year,
+            ResetPeriodConfiguration = new YearlyResetPeriodConfig(
+                YearlyResetPeriodConfigAccordingTo.SubscriptionStart
             ),
-            Type = Entitlements::Type.Feature,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
         };
@@ -529,55 +555,50 @@ public class DataTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Entitlements::Data
+        var model = new DataFeature
         {
             ID = "id",
-            Amount = 0,
-            Behavior = Entitlements::DataBehavior.Increment,
-            Cadence = Entitlements::DataCadence.Month,
+            Behavior = DataFeatureBehavior.Increment,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            CustomCurrencyID = "customCurrencyId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
             EnumValues = ["string"],
-            FeatureID = "featureId",
             HasSoftLimit = true,
             HasUnlimitedUsage = true,
-            HiddenFromWidgets = [Entitlements::DataHiddenFromWidget.Paywall],
+            HiddenFromWidgets = [DataFeatureHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
             Order = 0,
-            ResetPeriod = Entitlements::DataResetPeriod.Year,
-            ResetPeriodConfiguration = new Entitlements::YearlyResetPeriodConfig(
-                Entitlements::YearlyResetPeriodConfigAccordingTo.SubscriptionStart
+            ResetPeriod = DataFeatureResetPeriod.Year,
+            ResetPeriodConfiguration = new YearlyResetPeriodConfig(
+                YearlyResetPeriodConfigAccordingTo.SubscriptionStart
             ),
-            Type = Entitlements::Type.Feature,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
         };
 
-        Entitlements::Data copied = new(model);
+        DataFeature copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class DataBehaviorTest : TestBase
+public class DataFeatureBehaviorTest : TestBase
 {
     [Theory]
-    [InlineData(Entitlements::DataBehavior.Increment)]
-    [InlineData(Entitlements::DataBehavior.Override)]
-    public void Validation_Works(Entitlements::DataBehavior rawValue)
+    [InlineData(DataFeatureBehavior.Increment)]
+    [InlineData(DataFeatureBehavior.Override)]
+    public void Validation_Works(DataFeatureBehavior rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Entitlements::DataBehavior> value = rawValue;
+        ApiEnum<string, DataFeatureBehavior> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Entitlements::DataBehavior>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataFeatureBehavior>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -587,15 +608,15 @@ public class DataBehaviorTest : TestBase
     }
 
     [Theory]
-    [InlineData(Entitlements::DataBehavior.Increment)]
-    [InlineData(Entitlements::DataBehavior.Override)]
-    public void SerializationRoundtrip_Works(Entitlements::DataBehavior rawValue)
+    [InlineData(DataFeatureBehavior.Increment)]
+    [InlineData(DataFeatureBehavior.Override)]
+    public void SerializationRoundtrip_Works(DataFeatureBehavior rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Entitlements::DataBehavior> value = rawValue;
+        ApiEnum<string, DataFeatureBehavior> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Entitlements::DataBehavior>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataFeatureBehavior>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -606,70 +627,12 @@ public class DataBehaviorTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Entitlements::DataBehavior>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataFeatureBehavior>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Entitlements::DataBehavior>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-}
-
-public class DataCadenceTest : TestBase
-{
-    [Theory]
-    [InlineData(Entitlements::DataCadence.Month)]
-    [InlineData(Entitlements::DataCadence.Year)]
-    public void Validation_Works(Entitlements::DataCadence rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Entitlements::DataCadence> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Entitlements::DataCadence>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(Entitlements::DataCadence.Month)]
-    [InlineData(Entitlements::DataCadence.Year)]
-    public void SerializationRoundtrip_Works(Entitlements::DataCadence rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Entitlements::DataCadence> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Entitlements::DataCadence>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Entitlements::DataCadence>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Entitlements::DataCadence>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataFeatureBehavior>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -678,23 +641,23 @@ public class DataCadenceTest : TestBase
     }
 }
 
-public class DataHiddenFromWidgetTest : TestBase
+public class DataFeatureHiddenFromWidgetTest : TestBase
 {
     [Theory]
-    [InlineData(Entitlements::DataHiddenFromWidget.Paywall)]
-    [InlineData(Entitlements::DataHiddenFromWidget.CustomerPortal)]
-    [InlineData(Entitlements::DataHiddenFromWidget.Checkout)]
-    public void Validation_Works(Entitlements::DataHiddenFromWidget rawValue)
+    [InlineData(DataFeatureHiddenFromWidget.Paywall)]
+    [InlineData(DataFeatureHiddenFromWidget.CustomerPortal)]
+    [InlineData(DataFeatureHiddenFromWidget.Checkout)]
+    public void Validation_Works(DataFeatureHiddenFromWidget rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Entitlements::DataHiddenFromWidget> value = rawValue;
+        ApiEnum<string, DataFeatureHiddenFromWidget> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Entitlements::DataHiddenFromWidget>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataFeatureHiddenFromWidget>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -704,18 +667,19 @@ public class DataHiddenFromWidgetTest : TestBase
     }
 
     [Theory]
-    [InlineData(Entitlements::DataHiddenFromWidget.Paywall)]
-    [InlineData(Entitlements::DataHiddenFromWidget.CustomerPortal)]
-    [InlineData(Entitlements::DataHiddenFromWidget.Checkout)]
-    public void SerializationRoundtrip_Works(Entitlements::DataHiddenFromWidget rawValue)
+    [InlineData(DataFeatureHiddenFromWidget.Paywall)]
+    [InlineData(DataFeatureHiddenFromWidget.CustomerPortal)]
+    [InlineData(DataFeatureHiddenFromWidget.Checkout)]
+    public void SerializationRoundtrip_Works(DataFeatureHiddenFromWidget rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Entitlements::DataHiddenFromWidget> value = rawValue;
+        ApiEnum<string, DataFeatureHiddenFromWidget> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, Entitlements::DataHiddenFromWidget>
-        >(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataFeatureHiddenFromWidget>>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(value, deserialized);
     }
@@ -723,38 +687,39 @@ public class DataHiddenFromWidgetTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Entitlements::DataHiddenFromWidget>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataFeatureHiddenFromWidget>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, Entitlements::DataHiddenFromWidget>
-        >(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataFeatureHiddenFromWidget>>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(value, deserialized);
     }
 }
 
-public class DataResetPeriodTest : TestBase
+public class DataFeatureResetPeriodTest : TestBase
 {
     [Theory]
-    [InlineData(Entitlements::DataResetPeriod.Year)]
-    [InlineData(Entitlements::DataResetPeriod.Month)]
-    [InlineData(Entitlements::DataResetPeriod.Week)]
-    [InlineData(Entitlements::DataResetPeriod.Day)]
-    [InlineData(Entitlements::DataResetPeriod.Hour)]
-    public void Validation_Works(Entitlements::DataResetPeriod rawValue)
+    [InlineData(DataFeatureResetPeriod.Year)]
+    [InlineData(DataFeatureResetPeriod.Month)]
+    [InlineData(DataFeatureResetPeriod.Week)]
+    [InlineData(DataFeatureResetPeriod.Day)]
+    [InlineData(DataFeatureResetPeriod.Hour)]
+    public void Validation_Works(DataFeatureResetPeriod rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Entitlements::DataResetPeriod> value = rawValue;
+        ApiEnum<string, DataFeatureResetPeriod> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Entitlements::DataResetPeriod>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataFeatureResetPeriod>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -764,20 +729,21 @@ public class DataResetPeriodTest : TestBase
     }
 
     [Theory]
-    [InlineData(Entitlements::DataResetPeriod.Year)]
-    [InlineData(Entitlements::DataResetPeriod.Month)]
-    [InlineData(Entitlements::DataResetPeriod.Week)]
-    [InlineData(Entitlements::DataResetPeriod.Day)]
-    [InlineData(Entitlements::DataResetPeriod.Hour)]
-    public void SerializationRoundtrip_Works(Entitlements::DataResetPeriod rawValue)
+    [InlineData(DataFeatureResetPeriod.Year)]
+    [InlineData(DataFeatureResetPeriod.Month)]
+    [InlineData(DataFeatureResetPeriod.Week)]
+    [InlineData(DataFeatureResetPeriod.Day)]
+    [InlineData(DataFeatureResetPeriod.Hour)]
+    public void SerializationRoundtrip_Works(DataFeatureResetPeriod rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Entitlements::DataResetPeriod> value = rawValue;
+        ApiEnum<string, DataFeatureResetPeriod> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, Entitlements::DataResetPeriod>
-        >(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataFeatureResetPeriod>>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(value, deserialized);
     }
@@ -785,14 +751,15 @@ public class DataResetPeriodTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Entitlements::DataResetPeriod>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataFeatureResetPeriod>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, Entitlements::DataResetPeriod>
-        >(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataFeatureResetPeriod>>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(value, deserialized);
     }
@@ -803,8 +770,8 @@ public class ResetPeriodConfigurationTest : TestBase
     [Fact]
     public void YearlyResetPeriodConfigValidationWorks()
     {
-        Entitlements::ResetPeriodConfiguration value = new Entitlements::YearlyResetPeriodConfig(
-            Entitlements::YearlyResetPeriodConfigAccordingTo.SubscriptionStart
+        ResetPeriodConfiguration value = new YearlyResetPeriodConfig(
+            YearlyResetPeriodConfigAccordingTo.SubscriptionStart
         );
         value.Validate();
     }
@@ -812,8 +779,8 @@ public class ResetPeriodConfigurationTest : TestBase
     [Fact]
     public void MonthlyResetPeriodConfigValidationWorks()
     {
-        Entitlements::ResetPeriodConfiguration value = new Entitlements::MonthlyResetPeriodConfig(
-            Entitlements::MonthlyResetPeriodConfigAccordingTo.SubscriptionStart
+        ResetPeriodConfiguration value = new MonthlyResetPeriodConfig(
+            MonthlyResetPeriodConfigAccordingTo.SubscriptionStart
         );
         value.Validate();
     }
@@ -821,8 +788,8 @@ public class ResetPeriodConfigurationTest : TestBase
     [Fact]
     public void WeeklyResetPeriodConfigValidationWorks()
     {
-        Entitlements::ResetPeriodConfiguration value = new Entitlements::WeeklyResetPeriodConfig(
-            Entitlements::WeeklyResetPeriodConfigAccordingTo.SubscriptionStart
+        ResetPeriodConfiguration value = new WeeklyResetPeriodConfig(
+            WeeklyResetPeriodConfigAccordingTo.SubscriptionStart
         );
         value.Validate();
     }
@@ -830,11 +797,11 @@ public class ResetPeriodConfigurationTest : TestBase
     [Fact]
     public void YearlyResetPeriodConfigSerializationRoundtripWorks()
     {
-        Entitlements::ResetPeriodConfiguration value = new Entitlements::YearlyResetPeriodConfig(
-            Entitlements::YearlyResetPeriodConfigAccordingTo.SubscriptionStart
+        ResetPeriodConfiguration value = new YearlyResetPeriodConfig(
+            YearlyResetPeriodConfigAccordingTo.SubscriptionStart
         );
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Entitlements::ResetPeriodConfiguration>(
+        var deserialized = JsonSerializer.Deserialize<ResetPeriodConfiguration>(
             element,
             ModelBase.SerializerOptions
         );
@@ -845,11 +812,11 @@ public class ResetPeriodConfigurationTest : TestBase
     [Fact]
     public void MonthlyResetPeriodConfigSerializationRoundtripWorks()
     {
-        Entitlements::ResetPeriodConfiguration value = new Entitlements::MonthlyResetPeriodConfig(
-            Entitlements::MonthlyResetPeriodConfigAccordingTo.SubscriptionStart
+        ResetPeriodConfiguration value = new MonthlyResetPeriodConfig(
+            MonthlyResetPeriodConfigAccordingTo.SubscriptionStart
         );
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Entitlements::ResetPeriodConfiguration>(
+        var deserialized = JsonSerializer.Deserialize<ResetPeriodConfiguration>(
             element,
             ModelBase.SerializerOptions
         );
@@ -860,11 +827,11 @@ public class ResetPeriodConfigurationTest : TestBase
     [Fact]
     public void WeeklyResetPeriodConfigSerializationRoundtripWorks()
     {
-        Entitlements::ResetPeriodConfiguration value = new Entitlements::WeeklyResetPeriodConfig(
-            Entitlements::WeeklyResetPeriodConfigAccordingTo.SubscriptionStart
+        ResetPeriodConfiguration value = new WeeklyResetPeriodConfig(
+            WeeklyResetPeriodConfigAccordingTo.SubscriptionStart
         );
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Entitlements::ResetPeriodConfiguration>(
+        var deserialized = JsonSerializer.Deserialize<ResetPeriodConfiguration>(
             element,
             ModelBase.SerializerOptions
         );
@@ -878,13 +845,13 @@ public class YearlyResetPeriodConfigTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Entitlements::YearlyResetPeriodConfig
+        var model = new YearlyResetPeriodConfig
         {
-            AccordingTo = Entitlements::YearlyResetPeriodConfigAccordingTo.SubscriptionStart,
+            AccordingTo = YearlyResetPeriodConfigAccordingTo.SubscriptionStart,
         };
 
-        ApiEnum<string, Entitlements::YearlyResetPeriodConfigAccordingTo> expectedAccordingTo =
-            Entitlements::YearlyResetPeriodConfigAccordingTo.SubscriptionStart;
+        ApiEnum<string, YearlyResetPeriodConfigAccordingTo> expectedAccordingTo =
+            YearlyResetPeriodConfigAccordingTo.SubscriptionStart;
 
         Assert.Equal(expectedAccordingTo, model.AccordingTo);
     }
@@ -892,13 +859,13 @@ public class YearlyResetPeriodConfigTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Entitlements::YearlyResetPeriodConfig
+        var model = new YearlyResetPeriodConfig
         {
-            AccordingTo = Entitlements::YearlyResetPeriodConfigAccordingTo.SubscriptionStart,
+            AccordingTo = YearlyResetPeriodConfigAccordingTo.SubscriptionStart,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Entitlements::YearlyResetPeriodConfig>(
+        var deserialized = JsonSerializer.Deserialize<YearlyResetPeriodConfig>(
             json,
             ModelBase.SerializerOptions
         );
@@ -909,20 +876,20 @@ public class YearlyResetPeriodConfigTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Entitlements::YearlyResetPeriodConfig
+        var model = new YearlyResetPeriodConfig
         {
-            AccordingTo = Entitlements::YearlyResetPeriodConfigAccordingTo.SubscriptionStart,
+            AccordingTo = YearlyResetPeriodConfigAccordingTo.SubscriptionStart,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Entitlements::YearlyResetPeriodConfig>(
+        var deserialized = JsonSerializer.Deserialize<YearlyResetPeriodConfig>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
-        ApiEnum<string, Entitlements::YearlyResetPeriodConfigAccordingTo> expectedAccordingTo =
-            Entitlements::YearlyResetPeriodConfigAccordingTo.SubscriptionStart;
+        ApiEnum<string, YearlyResetPeriodConfigAccordingTo> expectedAccordingTo =
+            YearlyResetPeriodConfigAccordingTo.SubscriptionStart;
 
         Assert.Equal(expectedAccordingTo, deserialized.AccordingTo);
     }
@@ -930,9 +897,9 @@ public class YearlyResetPeriodConfigTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Entitlements::YearlyResetPeriodConfig
+        var model = new YearlyResetPeriodConfig
         {
-            AccordingTo = Entitlements::YearlyResetPeriodConfigAccordingTo.SubscriptionStart,
+            AccordingTo = YearlyResetPeriodConfigAccordingTo.SubscriptionStart,
         };
 
         model.Validate();
@@ -941,12 +908,12 @@ public class YearlyResetPeriodConfigTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Entitlements::YearlyResetPeriodConfig
+        var model = new YearlyResetPeriodConfig
         {
-            AccordingTo = Entitlements::YearlyResetPeriodConfigAccordingTo.SubscriptionStart,
+            AccordingTo = YearlyResetPeriodConfigAccordingTo.SubscriptionStart,
         };
 
-        Entitlements::YearlyResetPeriodConfig copied = new(model);
+        YearlyResetPeriodConfig copied = new(model);
 
         Assert.Equal(model, copied);
     }
@@ -955,37 +922,36 @@ public class YearlyResetPeriodConfigTest : TestBase
 public class YearlyResetPeriodConfigAccordingToTest : TestBase
 {
     [Theory]
-    [InlineData(Entitlements::YearlyResetPeriodConfigAccordingTo.SubscriptionStart)]
-    public void Validation_Works(Entitlements::YearlyResetPeriodConfigAccordingTo rawValue)
+    [InlineData(YearlyResetPeriodConfigAccordingTo.SubscriptionStart)]
+    public void Validation_Works(YearlyResetPeriodConfigAccordingTo rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Entitlements::YearlyResetPeriodConfigAccordingTo> value = rawValue;
+        ApiEnum<string, YearlyResetPeriodConfigAccordingTo> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, Entitlements::YearlyResetPeriodConfigAccordingTo>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        var value = JsonSerializer.Deserialize<ApiEnum<string, YearlyResetPeriodConfigAccordingTo>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
 
         Assert.NotNull(value);
         Assert.Throws<StiggInvalidDataException>(() => value.Validate());
     }
 
     [Theory]
-    [InlineData(Entitlements::YearlyResetPeriodConfigAccordingTo.SubscriptionStart)]
-    public void SerializationRoundtrip_Works(
-        Entitlements::YearlyResetPeriodConfigAccordingTo rawValue
-    )
+    [InlineData(YearlyResetPeriodConfigAccordingTo.SubscriptionStart)]
+    public void SerializationRoundtrip_Works(YearlyResetPeriodConfigAccordingTo rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Entitlements::YearlyResetPeriodConfigAccordingTo> value = rawValue;
+        ApiEnum<string, YearlyResetPeriodConfigAccordingTo> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, Entitlements::YearlyResetPeriodConfigAccordingTo>
+            ApiEnum<string, YearlyResetPeriodConfigAccordingTo>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -994,12 +960,13 @@ public class YearlyResetPeriodConfigAccordingToTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, Entitlements::YearlyResetPeriodConfigAccordingTo>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        var value = JsonSerializer.Deserialize<ApiEnum<string, YearlyResetPeriodConfigAccordingTo>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, Entitlements::YearlyResetPeriodConfigAccordingTo>
+            ApiEnum<string, YearlyResetPeriodConfigAccordingTo>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -1011,13 +978,13 @@ public class MonthlyResetPeriodConfigTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Entitlements::MonthlyResetPeriodConfig
+        var model = new MonthlyResetPeriodConfig
         {
-            AccordingTo = Entitlements::MonthlyResetPeriodConfigAccordingTo.SubscriptionStart,
+            AccordingTo = MonthlyResetPeriodConfigAccordingTo.SubscriptionStart,
         };
 
-        ApiEnum<string, Entitlements::MonthlyResetPeriodConfigAccordingTo> expectedAccordingTo =
-            Entitlements::MonthlyResetPeriodConfigAccordingTo.SubscriptionStart;
+        ApiEnum<string, MonthlyResetPeriodConfigAccordingTo> expectedAccordingTo =
+            MonthlyResetPeriodConfigAccordingTo.SubscriptionStart;
 
         Assert.Equal(expectedAccordingTo, model.AccordingTo);
     }
@@ -1025,13 +992,13 @@ public class MonthlyResetPeriodConfigTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Entitlements::MonthlyResetPeriodConfig
+        var model = new MonthlyResetPeriodConfig
         {
-            AccordingTo = Entitlements::MonthlyResetPeriodConfigAccordingTo.SubscriptionStart,
+            AccordingTo = MonthlyResetPeriodConfigAccordingTo.SubscriptionStart,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Entitlements::MonthlyResetPeriodConfig>(
+        var deserialized = JsonSerializer.Deserialize<MonthlyResetPeriodConfig>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1042,20 +1009,20 @@ public class MonthlyResetPeriodConfigTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Entitlements::MonthlyResetPeriodConfig
+        var model = new MonthlyResetPeriodConfig
         {
-            AccordingTo = Entitlements::MonthlyResetPeriodConfigAccordingTo.SubscriptionStart,
+            AccordingTo = MonthlyResetPeriodConfigAccordingTo.SubscriptionStart,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Entitlements::MonthlyResetPeriodConfig>(
+        var deserialized = JsonSerializer.Deserialize<MonthlyResetPeriodConfig>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
-        ApiEnum<string, Entitlements::MonthlyResetPeriodConfigAccordingTo> expectedAccordingTo =
-            Entitlements::MonthlyResetPeriodConfigAccordingTo.SubscriptionStart;
+        ApiEnum<string, MonthlyResetPeriodConfigAccordingTo> expectedAccordingTo =
+            MonthlyResetPeriodConfigAccordingTo.SubscriptionStart;
 
         Assert.Equal(expectedAccordingTo, deserialized.AccordingTo);
     }
@@ -1063,9 +1030,9 @@ public class MonthlyResetPeriodConfigTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Entitlements::MonthlyResetPeriodConfig
+        var model = new MonthlyResetPeriodConfig
         {
-            AccordingTo = Entitlements::MonthlyResetPeriodConfigAccordingTo.SubscriptionStart,
+            AccordingTo = MonthlyResetPeriodConfigAccordingTo.SubscriptionStart,
         };
 
         model.Validate();
@@ -1074,12 +1041,12 @@ public class MonthlyResetPeriodConfigTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Entitlements::MonthlyResetPeriodConfig
+        var model = new MonthlyResetPeriodConfig
         {
-            AccordingTo = Entitlements::MonthlyResetPeriodConfigAccordingTo.SubscriptionStart,
+            AccordingTo = MonthlyResetPeriodConfigAccordingTo.SubscriptionStart,
         };
 
-        Entitlements::MonthlyResetPeriodConfig copied = new(model);
+        MonthlyResetPeriodConfig copied = new(model);
 
         Assert.Equal(model, copied);
     }
@@ -1088,12 +1055,12 @@ public class MonthlyResetPeriodConfigTest : TestBase
 public class MonthlyResetPeriodConfigAccordingToTest : TestBase
 {
     [Theory]
-    [InlineData(Entitlements::MonthlyResetPeriodConfigAccordingTo.SubscriptionStart)]
-    [InlineData(Entitlements::MonthlyResetPeriodConfigAccordingTo.StartOfTheMonth)]
-    public void Validation_Works(Entitlements::MonthlyResetPeriodConfigAccordingTo rawValue)
+    [InlineData(MonthlyResetPeriodConfigAccordingTo.SubscriptionStart)]
+    [InlineData(MonthlyResetPeriodConfigAccordingTo.StartOfTheMonth)]
+    public void Validation_Works(MonthlyResetPeriodConfigAccordingTo rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Entitlements::MonthlyResetPeriodConfigAccordingTo> value = rawValue;
+        ApiEnum<string, MonthlyResetPeriodConfigAccordingTo> value = rawValue;
         value.Validate();
     }
 
@@ -1101,7 +1068,7 @@ public class MonthlyResetPeriodConfigAccordingToTest : TestBase
     public void InvalidEnumValidationThrows_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, Entitlements::MonthlyResetPeriodConfigAccordingTo>
+            ApiEnum<string, MonthlyResetPeriodConfigAccordingTo>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
@@ -1109,18 +1076,16 @@ public class MonthlyResetPeriodConfigAccordingToTest : TestBase
     }
 
     [Theory]
-    [InlineData(Entitlements::MonthlyResetPeriodConfigAccordingTo.SubscriptionStart)]
-    [InlineData(Entitlements::MonthlyResetPeriodConfigAccordingTo.StartOfTheMonth)]
-    public void SerializationRoundtrip_Works(
-        Entitlements::MonthlyResetPeriodConfigAccordingTo rawValue
-    )
+    [InlineData(MonthlyResetPeriodConfigAccordingTo.SubscriptionStart)]
+    [InlineData(MonthlyResetPeriodConfigAccordingTo.StartOfTheMonth)]
+    public void SerializationRoundtrip_Works(MonthlyResetPeriodConfigAccordingTo rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Entitlements::MonthlyResetPeriodConfigAccordingTo> value = rawValue;
+        ApiEnum<string, MonthlyResetPeriodConfigAccordingTo> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, Entitlements::MonthlyResetPeriodConfigAccordingTo>
+            ApiEnum<string, MonthlyResetPeriodConfigAccordingTo>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -1130,11 +1095,11 @@ public class MonthlyResetPeriodConfigAccordingToTest : TestBase
     public void InvalidEnumSerializationRoundtrip_Works()
     {
         var value = JsonSerializer.Deserialize<
-            ApiEnum<string, Entitlements::MonthlyResetPeriodConfigAccordingTo>
+            ApiEnum<string, MonthlyResetPeriodConfigAccordingTo>
         >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, Entitlements::MonthlyResetPeriodConfigAccordingTo>
+            ApiEnum<string, MonthlyResetPeriodConfigAccordingTo>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -1146,13 +1111,13 @@ public class WeeklyResetPeriodConfigTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Entitlements::WeeklyResetPeriodConfig
+        var model = new WeeklyResetPeriodConfig
         {
-            AccordingTo = Entitlements::WeeklyResetPeriodConfigAccordingTo.SubscriptionStart,
+            AccordingTo = WeeklyResetPeriodConfigAccordingTo.SubscriptionStart,
         };
 
-        ApiEnum<string, Entitlements::WeeklyResetPeriodConfigAccordingTo> expectedAccordingTo =
-            Entitlements::WeeklyResetPeriodConfigAccordingTo.SubscriptionStart;
+        ApiEnum<string, WeeklyResetPeriodConfigAccordingTo> expectedAccordingTo =
+            WeeklyResetPeriodConfigAccordingTo.SubscriptionStart;
 
         Assert.Equal(expectedAccordingTo, model.AccordingTo);
     }
@@ -1160,13 +1125,13 @@ public class WeeklyResetPeriodConfigTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Entitlements::WeeklyResetPeriodConfig
+        var model = new WeeklyResetPeriodConfig
         {
-            AccordingTo = Entitlements::WeeklyResetPeriodConfigAccordingTo.SubscriptionStart,
+            AccordingTo = WeeklyResetPeriodConfigAccordingTo.SubscriptionStart,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Entitlements::WeeklyResetPeriodConfig>(
+        var deserialized = JsonSerializer.Deserialize<WeeklyResetPeriodConfig>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1177,20 +1142,20 @@ public class WeeklyResetPeriodConfigTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Entitlements::WeeklyResetPeriodConfig
+        var model = new WeeklyResetPeriodConfig
         {
-            AccordingTo = Entitlements::WeeklyResetPeriodConfigAccordingTo.SubscriptionStart,
+            AccordingTo = WeeklyResetPeriodConfigAccordingTo.SubscriptionStart,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Entitlements::WeeklyResetPeriodConfig>(
+        var deserialized = JsonSerializer.Deserialize<WeeklyResetPeriodConfig>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
-        ApiEnum<string, Entitlements::WeeklyResetPeriodConfigAccordingTo> expectedAccordingTo =
-            Entitlements::WeeklyResetPeriodConfigAccordingTo.SubscriptionStart;
+        ApiEnum<string, WeeklyResetPeriodConfigAccordingTo> expectedAccordingTo =
+            WeeklyResetPeriodConfigAccordingTo.SubscriptionStart;
 
         Assert.Equal(expectedAccordingTo, deserialized.AccordingTo);
     }
@@ -1198,9 +1163,9 @@ public class WeeklyResetPeriodConfigTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Entitlements::WeeklyResetPeriodConfig
+        var model = new WeeklyResetPeriodConfig
         {
-            AccordingTo = Entitlements::WeeklyResetPeriodConfigAccordingTo.SubscriptionStart,
+            AccordingTo = WeeklyResetPeriodConfigAccordingTo.SubscriptionStart,
         };
 
         model.Validate();
@@ -1209,12 +1174,12 @@ public class WeeklyResetPeriodConfigTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Entitlements::WeeklyResetPeriodConfig
+        var model = new WeeklyResetPeriodConfig
         {
-            AccordingTo = Entitlements::WeeklyResetPeriodConfigAccordingTo.SubscriptionStart,
+            AccordingTo = WeeklyResetPeriodConfigAccordingTo.SubscriptionStart,
         };
 
-        Entitlements::WeeklyResetPeriodConfig copied = new(model);
+        WeeklyResetPeriodConfig copied = new(model);
 
         Assert.Equal(model, copied);
     }
@@ -1223,87 +1188,25 @@ public class WeeklyResetPeriodConfigTest : TestBase
 public class WeeklyResetPeriodConfigAccordingToTest : TestBase
 {
     [Theory]
-    [InlineData(Entitlements::WeeklyResetPeriodConfigAccordingTo.SubscriptionStart)]
-    [InlineData(Entitlements::WeeklyResetPeriodConfigAccordingTo.EverySunday)]
-    [InlineData(Entitlements::WeeklyResetPeriodConfigAccordingTo.EveryMonday)]
-    [InlineData(Entitlements::WeeklyResetPeriodConfigAccordingTo.EveryTuesday)]
-    [InlineData(Entitlements::WeeklyResetPeriodConfigAccordingTo.EveryWednesday)]
-    [InlineData(Entitlements::WeeklyResetPeriodConfigAccordingTo.EveryThursday)]
-    [InlineData(Entitlements::WeeklyResetPeriodConfigAccordingTo.EveryFriday)]
-    [InlineData(Entitlements::WeeklyResetPeriodConfigAccordingTo.EverySaturday)]
-    public void Validation_Works(Entitlements::WeeklyResetPeriodConfigAccordingTo rawValue)
+    [InlineData(WeeklyResetPeriodConfigAccordingTo.SubscriptionStart)]
+    [InlineData(WeeklyResetPeriodConfigAccordingTo.EverySunday)]
+    [InlineData(WeeklyResetPeriodConfigAccordingTo.EveryMonday)]
+    [InlineData(WeeklyResetPeriodConfigAccordingTo.EveryTuesday)]
+    [InlineData(WeeklyResetPeriodConfigAccordingTo.EveryWednesday)]
+    [InlineData(WeeklyResetPeriodConfigAccordingTo.EveryThursday)]
+    [InlineData(WeeklyResetPeriodConfigAccordingTo.EveryFriday)]
+    [InlineData(WeeklyResetPeriodConfigAccordingTo.EverySaturday)]
+    public void Validation_Works(WeeklyResetPeriodConfigAccordingTo rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Entitlements::WeeklyResetPeriodConfigAccordingTo> value = rawValue;
+        ApiEnum<string, WeeklyResetPeriodConfigAccordingTo> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, Entitlements::WeeklyResetPeriodConfigAccordingTo>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
-
-        Assert.NotNull(value);
-        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(Entitlements::WeeklyResetPeriodConfigAccordingTo.SubscriptionStart)]
-    [InlineData(Entitlements::WeeklyResetPeriodConfigAccordingTo.EverySunday)]
-    [InlineData(Entitlements::WeeklyResetPeriodConfigAccordingTo.EveryMonday)]
-    [InlineData(Entitlements::WeeklyResetPeriodConfigAccordingTo.EveryTuesday)]
-    [InlineData(Entitlements::WeeklyResetPeriodConfigAccordingTo.EveryWednesday)]
-    [InlineData(Entitlements::WeeklyResetPeriodConfigAccordingTo.EveryThursday)]
-    [InlineData(Entitlements::WeeklyResetPeriodConfigAccordingTo.EveryFriday)]
-    [InlineData(Entitlements::WeeklyResetPeriodConfigAccordingTo.EverySaturday)]
-    public void SerializationRoundtrip_Works(
-        Entitlements::WeeklyResetPeriodConfigAccordingTo rawValue
-    )
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Entitlements::WeeklyResetPeriodConfigAccordingTo> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, Entitlements::WeeklyResetPeriodConfigAccordingTo>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, Entitlements::WeeklyResetPeriodConfigAccordingTo>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, Entitlements::WeeklyResetPeriodConfigAccordingTo>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-}
-
-public class TypeTest : TestBase
-{
-    [Theory]
-    [InlineData(Entitlements::Type.Feature)]
-    [InlineData(Entitlements::Type.Credit)]
-    public void Validation_Works(Entitlements::Type rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Entitlements::Type> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Entitlements::Type>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, WeeklyResetPeriodConfigAccordingTo>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -1313,15 +1216,271 @@ public class TypeTest : TestBase
     }
 
     [Theory]
-    [InlineData(Entitlements::Type.Feature)]
-    [InlineData(Entitlements::Type.Credit)]
-    public void SerializationRoundtrip_Works(Entitlements::Type rawValue)
+    [InlineData(WeeklyResetPeriodConfigAccordingTo.SubscriptionStart)]
+    [InlineData(WeeklyResetPeriodConfigAccordingTo.EverySunday)]
+    [InlineData(WeeklyResetPeriodConfigAccordingTo.EveryMonday)]
+    [InlineData(WeeklyResetPeriodConfigAccordingTo.EveryTuesday)]
+    [InlineData(WeeklyResetPeriodConfigAccordingTo.EveryWednesday)]
+    [InlineData(WeeklyResetPeriodConfigAccordingTo.EveryThursday)]
+    [InlineData(WeeklyResetPeriodConfigAccordingTo.EveryFriday)]
+    [InlineData(WeeklyResetPeriodConfigAccordingTo.EverySaturday)]
+    public void SerializationRoundtrip_Works(WeeklyResetPeriodConfigAccordingTo rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Entitlements::Type> value = rawValue;
+        ApiEnum<string, WeeklyResetPeriodConfigAccordingTo> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Entitlements::Type>>(
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, WeeklyResetPeriodConfigAccordingTo>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, WeeklyResetPeriodConfigAccordingTo>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, WeeklyResetPeriodConfigAccordingTo>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class DataCreditTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new DataCredit
+        {
+            ID = "id",
+            Amount = 0,
+            Behavior = DataCreditBehavior.Increment,
+            Cadence = DataCreditCadence.Month,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            DisplayNameOverride = "displayNameOverride",
+            HiddenFromWidgets = [DataCreditHiddenFromWidget.Paywall],
+            IsCustom = true,
+            IsGranted = true,
+            Order = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        string expectedID = "id";
+        double expectedAmount = 0;
+        ApiEnum<string, DataCreditBehavior> expectedBehavior = DataCreditBehavior.Increment;
+        ApiEnum<string, DataCreditCadence> expectedCadence = DataCreditCadence.Month;
+        DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedDescription = "description";
+        string expectedDisplayNameOverride = "displayNameOverride";
+        List<ApiEnum<string, DataCreditHiddenFromWidget>> expectedHiddenFromWidgets =
+        [
+            DataCreditHiddenFromWidget.Paywall,
+        ];
+        bool expectedIsCustom = true;
+        bool expectedIsGranted = true;
+        double expectedOrder = 0;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("CREDIT");
+        DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+
+        Assert.Equal(expectedID, model.ID);
+        Assert.Equal(expectedAmount, model.Amount);
+        Assert.Equal(expectedBehavior, model.Behavior);
+        Assert.Equal(expectedCadence, model.Cadence);
+        Assert.Equal(expectedCreatedAt, model.CreatedAt);
+        Assert.Equal(expectedDescription, model.Description);
+        Assert.Equal(expectedDisplayNameOverride, model.DisplayNameOverride);
+        Assert.Equal(expectedHiddenFromWidgets.Count, model.HiddenFromWidgets.Count);
+        for (int i = 0; i < expectedHiddenFromWidgets.Count; i++)
+        {
+            Assert.Equal(expectedHiddenFromWidgets[i], model.HiddenFromWidgets[i]);
+        }
+        Assert.Equal(expectedIsCustom, model.IsCustom);
+        Assert.Equal(expectedIsGranted, model.IsGranted);
+        Assert.Equal(expectedOrder, model.Order);
+        Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
+        Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new DataCredit
+        {
+            ID = "id",
+            Amount = 0,
+            Behavior = DataCreditBehavior.Increment,
+            Cadence = DataCreditCadence.Month,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            DisplayNameOverride = "displayNameOverride",
+            HiddenFromWidgets = [DataCreditHiddenFromWidget.Paywall],
+            IsCustom = true,
+            IsGranted = true,
+            Order = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<DataCredit>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new DataCredit
+        {
+            ID = "id",
+            Amount = 0,
+            Behavior = DataCreditBehavior.Increment,
+            Cadence = DataCreditCadence.Month,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            DisplayNameOverride = "displayNameOverride",
+            HiddenFromWidgets = [DataCreditHiddenFromWidget.Paywall],
+            IsCustom = true,
+            IsGranted = true,
+            Order = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<DataCredit>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        string expectedID = "id";
+        double expectedAmount = 0;
+        ApiEnum<string, DataCreditBehavior> expectedBehavior = DataCreditBehavior.Increment;
+        ApiEnum<string, DataCreditCadence> expectedCadence = DataCreditCadence.Month;
+        DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedDescription = "description";
+        string expectedDisplayNameOverride = "displayNameOverride";
+        List<ApiEnum<string, DataCreditHiddenFromWidget>> expectedHiddenFromWidgets =
+        [
+            DataCreditHiddenFromWidget.Paywall,
+        ];
+        bool expectedIsCustom = true;
+        bool expectedIsGranted = true;
+        double expectedOrder = 0;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("CREDIT");
+        DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+
+        Assert.Equal(expectedID, deserialized.ID);
+        Assert.Equal(expectedAmount, deserialized.Amount);
+        Assert.Equal(expectedBehavior, deserialized.Behavior);
+        Assert.Equal(expectedCadence, deserialized.Cadence);
+        Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
+        Assert.Equal(expectedDescription, deserialized.Description);
+        Assert.Equal(expectedDisplayNameOverride, deserialized.DisplayNameOverride);
+        Assert.Equal(expectedHiddenFromWidgets.Count, deserialized.HiddenFromWidgets.Count);
+        for (int i = 0; i < expectedHiddenFromWidgets.Count; i++)
+        {
+            Assert.Equal(expectedHiddenFromWidgets[i], deserialized.HiddenFromWidgets[i]);
+        }
+        Assert.Equal(expectedIsCustom, deserialized.IsCustom);
+        Assert.Equal(expectedIsGranted, deserialized.IsGranted);
+        Assert.Equal(expectedOrder, deserialized.Order);
+        Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
+        Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new DataCredit
+        {
+            ID = "id",
+            Amount = 0,
+            Behavior = DataCreditBehavior.Increment,
+            Cadence = DataCreditCadence.Month,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            DisplayNameOverride = "displayNameOverride",
+            HiddenFromWidgets = [DataCreditHiddenFromWidget.Paywall],
+            IsCustom = true,
+            IsGranted = true,
+            Order = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new DataCredit
+        {
+            ID = "id",
+            Amount = 0,
+            Behavior = DataCreditBehavior.Increment,
+            Cadence = DataCreditCadence.Month,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            DisplayNameOverride = "displayNameOverride",
+            HiddenFromWidgets = [DataCreditHiddenFromWidget.Paywall],
+            IsCustom = true,
+            IsGranted = true,
+            Order = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        DataCredit copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class DataCreditBehaviorTest : TestBase
+{
+    [Theory]
+    [InlineData(DataCreditBehavior.Increment)]
+    [InlineData(DataCreditBehavior.Override)]
+    public void Validation_Works(DataCreditBehavior rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, DataCreditBehavior> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataCreditBehavior>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(DataCreditBehavior.Increment)]
+    [InlineData(DataCreditBehavior.Override)]
+    public void SerializationRoundtrip_Works(DataCreditBehavior rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, DataCreditBehavior> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataCreditBehavior>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1332,12 +1491,130 @@ public class TypeTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Entitlements::Type>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataCreditBehavior>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Entitlements::Type>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataCreditBehavior>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class DataCreditCadenceTest : TestBase
+{
+    [Theory]
+    [InlineData(DataCreditCadence.Month)]
+    [InlineData(DataCreditCadence.Year)]
+    public void Validation_Works(DataCreditCadence rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, DataCreditCadence> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataCreditCadence>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(DataCreditCadence.Month)]
+    [InlineData(DataCreditCadence.Year)]
+    public void SerializationRoundtrip_Works(DataCreditCadence rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, DataCreditCadence> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataCreditCadence>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataCreditCadence>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataCreditCadence>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class DataCreditHiddenFromWidgetTest : TestBase
+{
+    [Theory]
+    [InlineData(DataCreditHiddenFromWidget.Paywall)]
+    [InlineData(DataCreditHiddenFromWidget.CustomerPortal)]
+    [InlineData(DataCreditHiddenFromWidget.Checkout)]
+    public void Validation_Works(DataCreditHiddenFromWidget rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, DataCreditHiddenFromWidget> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataCreditHiddenFromWidget>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(DataCreditHiddenFromWidget.Paywall)]
+    [InlineData(DataCreditHiddenFromWidget.CustomerPortal)]
+    [InlineData(DataCreditHiddenFromWidget.Checkout)]
+    public void SerializationRoundtrip_Works(DataCreditHiddenFromWidget rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, DataCreditHiddenFromWidget> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataCreditHiddenFromWidget>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataCreditHiddenFromWidget>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataCreditHiddenFromWidget>>(
             json,
             ModelBase.SerializerOptions
         );
