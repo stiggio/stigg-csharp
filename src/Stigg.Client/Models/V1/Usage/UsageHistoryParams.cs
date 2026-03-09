@@ -76,12 +76,12 @@ public record class UsageHistoryParams : ParamsBase
     /// <summary>
     /// When true, includes usage data from the most recent cancelled or expired subscription
     /// </summary>
-    public bool? IncludeHistoricalUsage
+    public bool? IncludeInactiveSubscriptions
     {
         get
         {
             this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableStruct<bool>("includeHistoricalUsage");
+            return this._rawQueryData.GetNullableStruct<bool>("includeInactiveSubscriptions");
         }
         init
         {
@@ -90,7 +90,7 @@ public record class UsageHistoryParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData.Set("includeHistoricalUsage", value);
+            this._rawQueryData.Set("includeInactiveSubscriptions", value);
         }
     }
 
