@@ -15,6 +15,7 @@ public class CustomerProvisionParamsTest : TestBase
         var parameters = new Customers::CustomerProvisionParams
         {
             ID = "id",
+            BillingID = "billingId",
             CouponID = "couponId",
             DefaultPaymentMethod = new()
             {
@@ -40,6 +41,7 @@ public class CustomerProvisionParamsTest : TestBase
         };
 
         string expectedID = "id";
+        string expectedBillingID = "billingId";
         string expectedCouponID = "couponId";
         Customers::DefaultPaymentMethod expectedDefaultPaymentMethod = new()
         {
@@ -64,6 +66,7 @@ public class CustomerProvisionParamsTest : TestBase
         string expectedName = "name";
 
         Assert.Equal(expectedID, parameters.ID);
+        Assert.Equal(expectedBillingID, parameters.BillingID);
         Assert.Equal(expectedCouponID, parameters.CouponID);
         Assert.Equal(expectedDefaultPaymentMethod, parameters.DefaultPaymentMethod);
         Assert.Equal(expectedEmail, parameters.Email);
@@ -90,6 +93,7 @@ public class CustomerProvisionParamsTest : TestBase
         var parameters = new Customers::CustomerProvisionParams
         {
             ID = "id",
+            BillingID = "billingId",
             CouponID = "couponId",
             DefaultPaymentMethod = new()
             {
@@ -115,6 +119,7 @@ public class CustomerProvisionParamsTest : TestBase
         var parameters = new Customers::CustomerProvisionParams
         {
             ID = "id",
+            BillingID = "billingId",
             CouponID = "couponId",
             DefaultPaymentMethod = new()
             {
@@ -157,6 +162,8 @@ public class CustomerProvisionParamsTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
         };
 
+        Assert.Null(parameters.BillingID);
+        Assert.False(parameters.RawBodyData.ContainsKey("billingId"));
         Assert.Null(parameters.CouponID);
         Assert.False(parameters.RawBodyData.ContainsKey("couponId"));
         Assert.Null(parameters.DefaultPaymentMethod);
@@ -185,12 +192,15 @@ public class CustomerProvisionParamsTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
 
+            BillingID = null,
             CouponID = null,
             DefaultPaymentMethod = null,
             Email = null,
             Name = null,
         };
 
+        Assert.Null(parameters.BillingID);
+        Assert.True(parameters.RawBodyData.ContainsKey("billingId"));
         Assert.Null(parameters.CouponID);
         Assert.True(parameters.RawBodyData.ContainsKey("couponId"));
         Assert.Null(parameters.DefaultPaymentMethod);
@@ -217,6 +227,7 @@ public class CustomerProvisionParamsTest : TestBase
         var parameters = new Customers::CustomerProvisionParams
         {
             ID = "id",
+            BillingID = "billingId",
             CouponID = "couponId",
             DefaultPaymentMethod = new()
             {

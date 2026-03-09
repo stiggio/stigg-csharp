@@ -42,6 +42,19 @@ public record class CustomerProvisionParams : ParamsBase
     }
 
     /// <summary>
+    /// The unique identifier for the entity in the billing provider
+    /// </summary>
+    public string? BillingID
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("billingId");
+        }
+        init { this._rawBodyData.Set("billingId", value); }
+    }
+
+    /// <summary>
     /// Customer level coupon
     /// </summary>
     public string? CouponID

@@ -138,6 +138,19 @@ public sealed record class Data : JsonModel
     }
 
     /// <summary>
+    /// The unique identifier for the entity in the billing provider
+    /// </summary>
+    public string? BillingID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("billingId");
+        }
+        init { this._rawData.Set("billingId", value); }
+    }
+
+    /// <summary>
     /// Customer level coupon
     /// </summary>
     public string? CouponID
@@ -244,6 +257,7 @@ public sealed record class Data : JsonModel
         _ = this.ArchivedAt;
         _ = this.CreatedAt;
         _ = this.UpdatedAt;
+        _ = this.BillingID;
         _ = this.CouponID;
         this.DefaultPaymentMethod?.Validate();
         _ = this.Email;
