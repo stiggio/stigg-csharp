@@ -170,14 +170,33 @@ public sealed record class Data : JsonModel
     /// <summary>
     /// Duration of the coupon validity in months
     /// </summary>
-    public required double? DurationInMonths
+    public required long? DurationInMonths
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<double>("durationInMonths");
+            return this._rawData.GetNullableStruct<long>("durationInMonths");
         }
         init { this._rawData.Set("durationInMonths", value); }
+    }
+
+    /// <summary>
+    /// Metadata associated with the entity
+    /// </summary>
+    public required IReadOnlyDictionary<string, string>? Metadata
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
+        }
+        init
+        {
+            this._rawData.Set<FrozenDictionary<string, string>?>(
+                "metadata",
+                value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
+            );
+        }
     }
 
     /// <summary>
@@ -196,12 +215,12 @@ public sealed record class Data : JsonModel
     /// <summary>
     /// Percentage discount off the original price
     /// </summary>
-    public required double? PercentOff
+    public required long? PercentOff
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<double>("percentOff");
+            return this._rawData.GetNullableStruct<long>("percentOff");
         }
         init { this._rawData.Set("percentOff", value); }
     }
@@ -271,6 +290,7 @@ public sealed record class Data : JsonModel
         _ = this.CreatedAt;
         _ = this.Description;
         _ = this.DurationInMonths;
+        _ = this.Metadata;
         _ = this.Name;
         _ = this.PercentOff;
         this.Source?.Validate();
