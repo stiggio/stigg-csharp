@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Stigg.Client.Core;
 using Stigg.Client.Models.V1.Events;
+using Stigg.Client.Services.V1.Events;
 
 namespace Stigg.Client.Services.V1;
 
@@ -28,6 +29,8 @@ public interface IEventService
     /// </summary>
     IEventService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
+    ICreditService Credits { get; }
+
     /// <summary>
     /// Reports raw usage events for event-based metering. Events are ingested asynchronously
     /// and aggregated into usage totals.
@@ -50,6 +53,8 @@ public interface IEventServiceWithRawResponse
     /// <para>The original service is not modified.</para>
     /// </summary>
     IEventServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
+    ICreditServiceWithRawResponse Credits { get; }
 
     /// <summary>
     /// Returns a raw HTTP response for `post /api/v1/events`, but is otherwise the

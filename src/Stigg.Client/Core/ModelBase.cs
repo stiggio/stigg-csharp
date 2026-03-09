@@ -2,10 +2,12 @@ using System.Text.Json;
 using Stigg.Client.Exceptions;
 using Stigg.Client.Models.V1.Customers;
 using Stigg.Client.Models.V1.Customers.PromotionalEntitlements;
+using Stigg.Client.Models.V1.Events.Credits;
 using Stigg.Client.Models.V1.Features;
 using Addons = Stigg.Client.Models.V1.Addons;
 using Coupons = Stigg.Client.Models.V1.Coupons;
 using Entitlements = Stigg.Client.Models.V1.Addons.Entitlements;
+using Grants = Stigg.Client.Models.V1.Events.Credits.Grants;
 using PaymentMethod = Stigg.Client.Models.V1.Customers.PaymentMethod;
 using Plans = Stigg.Client.Models.V1.Plans;
 using PlansEntitlements = Stigg.Client.Models.V1.Plans.Entitlements;
@@ -335,6 +337,25 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Coupons::CouponListResponseType>(),
             new ApiEnumConverter<string, Coupons::Currency>(),
             new ApiEnumConverter<string, Coupons::Type>(),
+            new ApiEnumConverter<string, GrantExpirationPeriod>(),
+            new ApiEnumConverter<string, ThresholdType>(),
+            new ApiEnumConverter<string, EventType>(),
+            new ApiEnumConverter<string, TimeRange>(),
+            new ApiEnumConverter<string, Grants::DataGrantType>(),
+            new ApiEnumConverter<string, Grants::BillingReason>(),
+            new ApiEnumConverter<string, Grants::Status>(),
+            new ApiEnumConverter<string, Grants::PaymentCollection>(),
+            new ApiEnumConverter<string, Grants::SourceType>(),
+            new ApiEnumConverter<string, Grants::DataStatus>(),
+            new ApiEnumConverter<string, Grants::GrantListResponseGrantType>(),
+            new ApiEnumConverter<string, Grants::GrantListResponseLatestInvoiceBillingReason>(),
+            new ApiEnumConverter<string, Grants::GrantListResponseLatestInvoiceStatus>(),
+            new ApiEnumConverter<string, Grants::GrantListResponsePaymentCollection>(),
+            new ApiEnumConverter<string, Grants::GrantListResponseSourceType>(),
+            new ApiEnumConverter<string, Grants::GrantListResponseStatus>(),
+            new ApiEnumConverter<string, Grants::GrantType>(),
+            new ApiEnumConverter<string, Grants::Currency>(),
+            new ApiEnumConverter<string, Grants::PaymentCollectionMethod>(),
             new ApiEnumConverter<string, DataFeatureStatus>(),
             new ApiEnumConverter<string, DataFeatureType>(),
             new ApiEnumConverter<string, DataMeterType>(),

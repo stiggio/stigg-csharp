@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Stigg.Client.Core;
 using Stigg.Client.Models.V1.Events;
+using Stigg.Client.Services.V1.Events;
 
 namespace Stigg.Client.Services.V1;
 
@@ -31,6 +32,13 @@ public sealed class EventService : IEventService
         _client = client;
 
         _withRawResponse = new(() => new EventServiceWithRawResponse(client.WithRawResponse));
+        _credits = new(() => new CreditService(client));
+    }
+
+    readonly Lazy<ICreditService> _credits;
+    public ICreditService Credits
+    {
+        get { return _credits.Value; }
     }
 
     /// <inheritdoc/>
@@ -60,6 +68,14 @@ public sealed class EventServiceWithRawResponse : IEventServiceWithRawResponse
     public EventServiceWithRawResponse(IStiggClientWithRawResponse client)
     {
         _client = client;
+
+        _credits = new(() => new CreditServiceWithRawResponse(client));
+    }
+
+    readonly Lazy<ICreditServiceWithRawResponse> _credits;
+    public ICreditServiceWithRawResponse Credits
+    {
+        get { return _credits.Value; }
     }
 
     /// <inheritdoc/>
