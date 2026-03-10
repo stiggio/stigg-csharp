@@ -81,6 +81,9 @@ public class SubscriptionUpdateParamsTest : TestBase
             [
                 new()
                 {
+                    AddonID = "addonId",
+                    BaseCharge = true,
+                    CurrencyID = "currencyId",
                     FeatureID = "featureId",
                     Price = new() { Amount = 0, Currency = Subscriptions::PriceCurrency.Usd },
                 },
@@ -176,6 +179,9 @@ public class SubscriptionUpdateParamsTest : TestBase
         [
             new()
             {
+                AddonID = "addonId",
+                BaseCharge = true,
+                CurrencyID = "currencyId",
                 FeatureID = "featureId",
                 Price = new() { Amount = 0, Currency = Subscriptions::PriceCurrency.Usd },
             },
@@ -413,6 +419,9 @@ public class SubscriptionUpdateParamsTest : TestBase
             [
                 new()
                 {
+                    AddonID = "addonId",
+                    BaseCharge = true,
+                    CurrencyID = "currencyId",
                     FeatureID = "featureId",
                     Price = new() { Amount = 0, Currency = Subscriptions::PriceCurrency.Usd },
                 },
@@ -516,6 +525,9 @@ public class SubscriptionUpdateParamsTest : TestBase
             [
                 new()
                 {
+                    AddonID = "addonId",
+                    BaseCharge = true,
+                    CurrencyID = "currencyId",
                     FeatureID = "featureId",
                     Price = new() { Amount = 0, Currency = Subscriptions::PriceCurrency.Usd },
                 },
@@ -562,7 +574,7 @@ public class SubscriptionUpdateParamsTest : TestBase
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
-        Assert.Equal(new Uri("https://api.example.com/api/v1/subscriptions/x"), url);
+        Assert.Equal(new Uri("https://api.stigg.io/api/v1/subscriptions/x"), url);
     }
 
     [Fact]
@@ -637,6 +649,9 @@ public class SubscriptionUpdateParamsTest : TestBase
             [
                 new()
                 {
+                    AddonID = "addonId",
+                    BaseCharge = true,
+                    CurrencyID = "currencyId",
                     FeatureID = "featureId",
                     Price = new() { Amount = 0, Currency = Subscriptions::PriceCurrency.Usd },
                 },
@@ -3393,10 +3408,16 @@ public class PriceOverrideTest : TestBase
     {
         var model = new Subscriptions::PriceOverride
         {
+            AddonID = "addonId",
+            BaseCharge = true,
+            CurrencyID = "currencyId",
             FeatureID = "featureId",
             Price = new() { Amount = 0, Currency = Subscriptions::PriceCurrency.Usd },
         };
 
+        string expectedAddonID = "addonId";
+        bool expectedBaseCharge = true;
+        string expectedCurrencyID = "currencyId";
         string expectedFeatureID = "featureId";
         Subscriptions::Price expectedPrice = new()
         {
@@ -3404,6 +3425,9 @@ public class PriceOverrideTest : TestBase
             Currency = Subscriptions::PriceCurrency.Usd,
         };
 
+        Assert.Equal(expectedAddonID, model.AddonID);
+        Assert.Equal(expectedBaseCharge, model.BaseCharge);
+        Assert.Equal(expectedCurrencyID, model.CurrencyID);
         Assert.Equal(expectedFeatureID, model.FeatureID);
         Assert.Equal(expectedPrice, model.Price);
     }
@@ -3413,6 +3437,9 @@ public class PriceOverrideTest : TestBase
     {
         var model = new Subscriptions::PriceOverride
         {
+            AddonID = "addonId",
+            BaseCharge = true,
+            CurrencyID = "currencyId",
             FeatureID = "featureId",
             Price = new() { Amount = 0, Currency = Subscriptions::PriceCurrency.Usd },
         };
@@ -3431,6 +3458,9 @@ public class PriceOverrideTest : TestBase
     {
         var model = new Subscriptions::PriceOverride
         {
+            AddonID = "addonId",
+            BaseCharge = true,
+            CurrencyID = "currencyId",
             FeatureID = "featureId",
             Price = new() { Amount = 0, Currency = Subscriptions::PriceCurrency.Usd },
         };
@@ -3442,6 +3472,9 @@ public class PriceOverrideTest : TestBase
         );
         Assert.NotNull(deserialized);
 
+        string expectedAddonID = "addonId";
+        bool expectedBaseCharge = true;
+        string expectedCurrencyID = "currencyId";
         string expectedFeatureID = "featureId";
         Subscriptions::Price expectedPrice = new()
         {
@@ -3449,6 +3482,9 @@ public class PriceOverrideTest : TestBase
             Currency = Subscriptions::PriceCurrency.Usd,
         };
 
+        Assert.Equal(expectedAddonID, deserialized.AddonID);
+        Assert.Equal(expectedBaseCharge, deserialized.BaseCharge);
+        Assert.Equal(expectedCurrencyID, deserialized.CurrencyID);
         Assert.Equal(expectedFeatureID, deserialized.FeatureID);
         Assert.Equal(expectedPrice, deserialized.Price);
     }
@@ -3458,6 +3494,9 @@ public class PriceOverrideTest : TestBase
     {
         var model = new Subscriptions::PriceOverride
         {
+            AddonID = "addonId",
+            BaseCharge = true,
+            CurrencyID = "currencyId",
             FeatureID = "featureId",
             Price = new() { Amount = 0, Currency = Subscriptions::PriceCurrency.Usd },
         };
@@ -3468,8 +3507,16 @@ public class PriceOverrideTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Subscriptions::PriceOverride { FeatureID = "featureId" };
+        var model = new Subscriptions::PriceOverride { };
 
+        Assert.Null(model.AddonID);
+        Assert.False(model.RawData.ContainsKey("addonId"));
+        Assert.Null(model.BaseCharge);
+        Assert.False(model.RawData.ContainsKey("baseCharge"));
+        Assert.Null(model.CurrencyID);
+        Assert.False(model.RawData.ContainsKey("currencyId"));
+        Assert.Null(model.FeatureID);
+        Assert.False(model.RawData.ContainsKey("featureId"));
         Assert.Null(model.Price);
         Assert.False(model.RawData.ContainsKey("price"));
     }
@@ -3477,7 +3524,7 @@ public class PriceOverrideTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Subscriptions::PriceOverride { FeatureID = "featureId" };
+        var model = new Subscriptions::PriceOverride { };
 
         model.Validate();
     }
@@ -3487,12 +3534,22 @@ public class PriceOverrideTest : TestBase
     {
         var model = new Subscriptions::PriceOverride
         {
-            FeatureID = "featureId",
-
             // Null should be interpreted as omitted for these properties
+            AddonID = null,
+            BaseCharge = null,
+            CurrencyID = null,
+            FeatureID = null,
             Price = null,
         };
 
+        Assert.Null(model.AddonID);
+        Assert.False(model.RawData.ContainsKey("addonId"));
+        Assert.Null(model.BaseCharge);
+        Assert.False(model.RawData.ContainsKey("baseCharge"));
+        Assert.Null(model.CurrencyID);
+        Assert.False(model.RawData.ContainsKey("currencyId"));
+        Assert.Null(model.FeatureID);
+        Assert.False(model.RawData.ContainsKey("featureId"));
         Assert.Null(model.Price);
         Assert.False(model.RawData.ContainsKey("price"));
     }
@@ -3502,9 +3559,11 @@ public class PriceOverrideTest : TestBase
     {
         var model = new Subscriptions::PriceOverride
         {
-            FeatureID = "featureId",
-
             // Null should be interpreted as omitted for these properties
+            AddonID = null,
+            BaseCharge = null,
+            CurrencyID = null,
+            FeatureID = null,
             Price = null,
         };
 
@@ -3516,6 +3575,9 @@ public class PriceOverrideTest : TestBase
     {
         var model = new Subscriptions::PriceOverride
         {
+            AddonID = "addonId",
+            BaseCharge = true,
+            CurrencyID = "currencyId",
             FeatureID = "featureId",
             Price = new() { Amount = 0, Currency = Subscriptions::PriceCurrency.Usd },
         };

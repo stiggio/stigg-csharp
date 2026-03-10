@@ -23,7 +23,7 @@ public class FutureUpdateCancelPendingPaymentParamsTest : TestBase
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
         Assert.Equal(
-            new Uri("https://api.example.com/api/v1/subscriptions/x/future-update/pending-payment"),
+            new Uri("https://api.stigg.io/api/v1/subscriptions/x/future-update/pending-payment"),
             url
         );
     }

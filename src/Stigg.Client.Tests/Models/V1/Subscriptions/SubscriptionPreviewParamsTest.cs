@@ -304,7 +304,7 @@ public class SubscriptionPreviewParamsTest : TestBase
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
-        Assert.Equal(new Uri("https://api.example.com/api/v1/subscriptions/preview"), url);
+        Assert.Equal(new Uri("https://api.stigg.io/api/v1/subscriptions/preview"), url);
     }
 
     [Fact]

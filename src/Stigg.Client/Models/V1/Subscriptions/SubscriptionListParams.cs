@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Stigg.Client.Core;
 
 namespace Stigg.Client.Models.V1.Subscriptions;
@@ -61,6 +62,27 @@ public record class SubscriptionListParams : ParamsBase
     }
 
     /// <summary>
+    /// Filter by creation date using range operators: gt, gte, lt, lte
+    /// </summary>
+    public CreatedAt? CreatedAt
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<CreatedAt>("createdAt");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("createdAt", value);
+        }
+    }
+
+    /// <summary>
     /// Filter by customer ID
     /// </summary>
     public string? CustomerID
@@ -103,7 +125,70 @@ public record class SubscriptionListParams : ParamsBase
     }
 
     /// <summary>
-    /// Filter by status (comma-separated)
+    /// Filter by plan ID
+    /// </summary>
+    public string? PlanID
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("planId");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("planId", value);
+        }
+    }
+
+    /// <summary>
+    /// Filter by pricing type. Supports comma-separated values for multiple types
+    /// </summary>
+    public string? PricingType
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("pricingType");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("pricingType", value);
+        }
+    }
+
+    /// <summary>
+    /// Filter by resource ID
+    /// </summary>
+    public string? ResourceID
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("resourceId");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("resourceId", value);
+        }
+    }
+
+    /// <summary>
+    /// Filter by subscription status. Supports comma-separated values for multiple statuses
     /// </summary>
     public string? Status
     {
@@ -166,11 +251,17 @@ public record class SubscriptionListParams : ParamsBase
 
     public override string ToString() =>
         JsonSerializer.Serialize(
-            new Dictionary<string, object?>()
-            {
-                ["HeaderData"] = this._rawHeaderData.Freeze(),
-                ["QueryData"] = this._rawQueryData.Freeze(),
-            },
+            FriendlyJsonPrinter.PrintValue(
+                new Dictionary<string, JsonElement>()
+                {
+                    ["HeaderData"] = FriendlyJsonPrinter.PrintValue(
+                        JsonSerializer.SerializeToElement(this._rawHeaderData.Freeze())
+                    ),
+                    ["QueryData"] = FriendlyJsonPrinter.PrintValue(
+                        JsonSerializer.SerializeToElement(this._rawQueryData.Freeze())
+                    ),
+                }
+            ),
             ModelBase.ToStringSerializerOptions
         );
 
@@ -205,4 +296,138 @@ public record class SubscriptionListParams : ParamsBase
     {
         return 0;
     }
+}
+
+/// <summary>
+/// Filter by creation date using range operators: gt, gte, lt, lte
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<CreatedAt, CreatedAtFromRaw>))]
+public sealed record class CreatedAt : JsonModel
+{
+    /// <summary>
+    /// Greater than the specified createdAt value
+    /// </summary>
+    public DateTimeOffset? Gt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("gt");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("gt", value);
+        }
+    }
+
+    /// <summary>
+    /// Greater than or equal to the specified createdAt value
+    /// </summary>
+    public DateTimeOffset? Gte
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("gte");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("gte", value);
+        }
+    }
+
+    /// <summary>
+    /// Less than the specified createdAt value
+    /// </summary>
+    public DateTimeOffset? Lt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("lt");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("lt", value);
+        }
+    }
+
+    /// <summary>
+    /// Less than or equal to the specified createdAt value
+    /// </summary>
+    public DateTimeOffset? Lte
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("lte");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("lte", value);
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.Gt;
+        _ = this.Gte;
+        _ = this.Lt;
+        _ = this.Lte;
+    }
+
+    public CreatedAt() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public CreatedAt(CreatedAt createdAt)
+        : base(createdAt) { }
+#pragma warning restore CS8618
+
+    public CreatedAt(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    CreatedAt(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="CreatedAtFromRaw.FromRawUnchecked"/>
+    public static CreatedAt FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class CreatedAtFromRaw : IFromRawJson<CreatedAt>
+{
+    /// <inheritdoc/>
+    public CreatedAt FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        CreatedAt.FromRawUnchecked(rawData);
 }

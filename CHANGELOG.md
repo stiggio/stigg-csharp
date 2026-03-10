@@ -1,5 +1,44 @@
 # Changelog
 
+## 0.7.0 (2026-02-18)
+
+Full Changelog: [v0.6.0...v0.7.0](https://github.com/stiggio/stigg-csharp/compare/v0.6.0...v0.7.0)
+
+### Features
+
+* **api:** add additional endpoints ([0c2de16](https://github.com/stiggio/stigg-csharp/commit/0c2de167a8ca5a30e4e7c8e16cedbdb57e237710))
+* **api:** Add missing endpoints ([5e81b21](https://github.com/stiggio/stigg-csharp/commit/5e81b21c25cf76f8879ef5b664894dcb7c393be7))
+* **api:** api update ([596218b](https://github.com/stiggio/stigg-csharp/commit/596218baaa277381cd2fa53aaa3ead3591b24715))
+* **api:** api update ([929d367](https://github.com/stiggio/stigg-csharp/commit/929d367ebca44db9ca956c09b316698a73a9e2a4))
+* **api:** api update ([ef15b40](https://github.com/stiggio/stigg-csharp/commit/ef15b409f4e5a0e473e09163c2ec43b15bcc7ab5))
+* **api:** api update ([30ff37c](https://github.com/stiggio/stigg-csharp/commit/30ff37cdc0fa2aa2a64229078cb8932466decb24))
+* **api:** api update ([4419e7a](https://github.com/stiggio/stigg-csharp/commit/4419e7a880d74da5c36756a3c7502f9aa9e59cbf))
+* **api:** api update ([736b4ef](https://github.com/stiggio/stigg-csharp/commit/736b4efee16e4dfed74a8376c554ce3034952c28))
+* **api:** api update ([6b0b08d](https://github.com/stiggio/stigg-csharp/commit/6b0b08d76121394e69855d74f9190c36e93eee94))
+* **api:** api update ([e14907c](https://github.com/stiggio/stigg-csharp/commit/e14907cc89449e20ba93fecdeb5014888f094649))
+* **api:** api update ([57440a9](https://github.com/stiggio/stigg-csharp/commit/57440a91996da5669c6b04ace7c12926ad3eabef))
+* **api:** api update ([46760be](https://github.com/stiggio/stigg-csharp/commit/46760be93ec363208c9b7f3dc03618dde62111af))
+* **api:** manual updates ([2ad0913](https://github.com/stiggio/stigg-csharp/commit/2ad0913622884ac37da899e23d5091de69d6a1dd))
+* **api:** manual updates ([4a0b0b7](https://github.com/stiggio/stigg-csharp/commit/4a0b0b7b3eac6c959aecba1f6c9a5bddd6f5348d))
+* **api:** manual updates ([4a0b0b7](https://github.com/stiggio/stigg-csharp/commit/4a0b0b7b3eac6c959aecba1f6c9a5bddd6f5348d))
+* **api:** manual updates ([4c1b277](https://github.com/stiggio/stigg-csharp/commit/4c1b277a4cc1bf87c8524bbc15df19d1ceb29c67))
+* **api:** manual updates ([8b05cef](https://github.com/stiggio/stigg-csharp/commit/8b05cefebe430bdc6848e63af1b9d6bb61bbaf75))
+* **api:** manual updates ([af38bc7](https://github.com/stiggio/stigg-csharp/commit/af38bc7870ba5d9a933b569c8800ea3851709098))
+* **api:** trigger release ([c8052a4](https://github.com/stiggio/stigg-csharp/commit/c8052a46f01d1c380496becc5efeaf4f4eed7fd0))
+* **api:** trigger release ([c8052a4](https://github.com/stiggio/stigg-csharp/commit/c8052a46f01d1c380496becc5efeaf4f4eed7fd0))
+* **api:** updated the production environment ([bba2b91](https://github.com/stiggio/stigg-csharp/commit/bba2b91415b80e0c7841f8d79c858158b829a429))
+* **client:** add equality and tostring for multipart data ([f3743df](https://github.com/stiggio/stigg-csharp/commit/f3743df232daa55e09e9abea302912711171a6a1))
+
+
+### Bug Fixes
+
+* **client:** improve behaviour for comma-delimited binary content in multipart requests ([b39e11a](https://github.com/stiggio/stigg-csharp/commit/b39e11ab92c4d123e38bb35d05aa9420b2702fe2))
+
+
+### Chores
+
+* remove custom code ([851685d](https://github.com/stiggio/stigg-csharp/commit/851685d1a2f5242711b77c4212585ec79817c1e0))
+
 ## 0.6.0 (2026-02-08)
 
 Full Changelog: [v0.5.0...v0.6.0](https://github.com/stiggio/stigg-csharp/compare/v0.5.0...v0.6.0)

@@ -7,10 +7,10 @@ namespace Stigg.Client.Tests.Services.V1.Customers;
 public class PromotionalEntitlementServiceTest : TestBase
 {
     [Fact(Skip = "Prism tests are disabled")]
-    public async Task Grant_Works()
+    public async Task Create_Works()
     {
-        var response = await this.client.V1.Customers.PromotionalEntitlements.Grant(
-            "customerId",
+        var promotionalEntitlement = await this.client.V1.Customers.PromotionalEntitlements.Create(
+            "x",
             new()
             {
                 PromotionalEntitlements =
@@ -38,7 +38,18 @@ public class PromotionalEntitlementServiceTest : TestBase
             },
             TestContext.Current.CancellationToken
         );
-        response.Validate();
+        promotionalEntitlement.Validate();
+    }
+
+    [Fact(Skip = "Prism tests are disabled")]
+    public async Task List_Works()
+    {
+        var page = await this.client.V1.Customers.PromotionalEntitlements.List(
+            "x",
+            new(),
+            TestContext.Current.CancellationToken
+        );
+        page.Validate();
     }
 
     [Fact(Skip = "Prism tests are disabled")]
@@ -46,7 +57,7 @@ public class PromotionalEntitlementServiceTest : TestBase
     {
         var response = await this.client.V1.Customers.PromotionalEntitlements.Revoke(
             "featureId",
-            new() { CustomerID = "customerId" },
+            new() { ID = "id" },
             TestContext.Current.CancellationToken
         );
         response.Validate();

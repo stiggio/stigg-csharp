@@ -15,11 +15,11 @@ namespace Stigg.Client.Models.V1.Customers.PromotionalEntitlements;
 /// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
-        PromotionalEntitlementGrantResponse,
-        PromotionalEntitlementGrantResponseFromRaw
+        PromotionalEntitlementCreateResponse,
+        PromotionalEntitlementCreateResponseFromRaw
     >)
 )]
-public sealed record class PromotionalEntitlementGrantResponse : JsonModel
+public sealed record class PromotionalEntitlementCreateResponse : JsonModel
 {
     public required IReadOnlyList<Data> Data
     {
@@ -43,31 +43,31 @@ public sealed record class PromotionalEntitlementGrantResponse : JsonModel
         }
     }
 
-    public PromotionalEntitlementGrantResponse() { }
+    public PromotionalEntitlementCreateResponse() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public PromotionalEntitlementGrantResponse(
-        PromotionalEntitlementGrantResponse promotionalEntitlementGrantResponse
+    public PromotionalEntitlementCreateResponse(
+        PromotionalEntitlementCreateResponse promotionalEntitlementCreateResponse
     )
-        : base(promotionalEntitlementGrantResponse) { }
+        : base(promotionalEntitlementCreateResponse) { }
 #pragma warning restore CS8618
 
-    public PromotionalEntitlementGrantResponse(IReadOnlyDictionary<string, JsonElement> rawData)
+    public PromotionalEntitlementCreateResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    PromotionalEntitlementGrantResponse(FrozenDictionary<string, JsonElement> rawData)
+    PromotionalEntitlementCreateResponse(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="PromotionalEntitlementGrantResponseFromRaw.FromRawUnchecked"/>
-    public static PromotionalEntitlementGrantResponse FromRawUnchecked(
+    /// <inheritdoc cref="PromotionalEntitlementCreateResponseFromRaw.FromRawUnchecked"/>
+    public static PromotionalEntitlementCreateResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -75,19 +75,20 @@ public sealed record class PromotionalEntitlementGrantResponse : JsonModel
     }
 
     [SetsRequiredMembers]
-    public PromotionalEntitlementGrantResponse(IReadOnlyList<Data> data)
+    public PromotionalEntitlementCreateResponse(IReadOnlyList<Data> data)
         : this()
     {
         this.Data = data;
     }
 }
 
-class PromotionalEntitlementGrantResponseFromRaw : IFromRawJson<PromotionalEntitlementGrantResponse>
+class PromotionalEntitlementCreateResponseFromRaw
+    : IFromRawJson<PromotionalEntitlementCreateResponse>
 {
     /// <inheritdoc/>
-    public PromotionalEntitlementGrantResponse FromRawUnchecked(
+    public PromotionalEntitlementCreateResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => PromotionalEntitlementGrantResponse.FromRawUnchecked(rawData);
+    ) => PromotionalEntitlementCreateResponse.FromRawUnchecked(rawData);
 }
 
 /// <summary>
@@ -759,7 +760,10 @@ public record class ResetPeriodConfiguration : ModelBase
     }
 
     public override string ToString() =>
-        JsonSerializer.Serialize(this._element, ModelBase.ToStringSerializerOptions);
+        JsonSerializer.Serialize(
+            FriendlyJsonPrinter.PrintValue(this.Json),
+            ModelBase.ToStringSerializerOptions
+        );
 
     int VariantIndex()
     {

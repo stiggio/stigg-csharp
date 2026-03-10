@@ -23,8 +23,20 @@ public class ProductListProductsPageResponseTest : TestBase
                     DisplayName = "displayName",
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     MultipleSubscriptions = true,
-                    Status = Status.Published,
+                    Status = ProductListProductsResponseStatus.Published,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProductSettings = new()
+                    {
+                        SubscriptionCancellationTime =
+                            ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+                        SubscriptionEndSetup =
+                            ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+                        SubscriptionStartSetup =
+                            ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
+                        DowngradePlanID = "downgradePlanId",
+                        ProrateAtEndOfBillingPeriod = true,
+                        SubscriptionStartPlanID = "subscriptionStartPlanId",
+                    },
                 },
             ],
             Pagination = new()
@@ -44,8 +56,20 @@ public class ProductListProductsPageResponseTest : TestBase
                 DisplayName = "displayName",
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 MultipleSubscriptions = true,
-                Status = Status.Published,
+                Status = ProductListProductsResponseStatus.Published,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductSettings = new()
+                {
+                    SubscriptionCancellationTime =
+                        ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+                    SubscriptionEndSetup =
+                        ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+                    SubscriptionStartSetup =
+                        ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
+                    DowngradePlanID = "downgradePlanId",
+                    ProrateAtEndOfBillingPeriod = true,
+                    SubscriptionStartPlanID = "subscriptionStartPlanId",
+                },
             },
         ];
         Pagination expectedPagination = new()
@@ -77,8 +101,20 @@ public class ProductListProductsPageResponseTest : TestBase
                     DisplayName = "displayName",
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     MultipleSubscriptions = true,
-                    Status = Status.Published,
+                    Status = ProductListProductsResponseStatus.Published,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProductSettings = new()
+                    {
+                        SubscriptionCancellationTime =
+                            ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+                        SubscriptionEndSetup =
+                            ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+                        SubscriptionStartSetup =
+                            ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
+                        DowngradePlanID = "downgradePlanId",
+                        ProrateAtEndOfBillingPeriod = true,
+                        SubscriptionStartPlanID = "subscriptionStartPlanId",
+                    },
                 },
             ],
             Pagination = new()
@@ -112,8 +148,20 @@ public class ProductListProductsPageResponseTest : TestBase
                     DisplayName = "displayName",
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     MultipleSubscriptions = true,
-                    Status = Status.Published,
+                    Status = ProductListProductsResponseStatus.Published,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProductSettings = new()
+                    {
+                        SubscriptionCancellationTime =
+                            ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+                        SubscriptionEndSetup =
+                            ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+                        SubscriptionStartSetup =
+                            ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
+                        DowngradePlanID = "downgradePlanId",
+                        ProrateAtEndOfBillingPeriod = true,
+                        SubscriptionStartPlanID = "subscriptionStartPlanId",
+                    },
                 },
             ],
             Pagination = new()
@@ -140,8 +188,20 @@ public class ProductListProductsPageResponseTest : TestBase
                 DisplayName = "displayName",
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 MultipleSubscriptions = true,
-                Status = Status.Published,
+                Status = ProductListProductsResponseStatus.Published,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                ProductSettings = new()
+                {
+                    SubscriptionCancellationTime =
+                        ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+                    SubscriptionEndSetup =
+                        ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+                    SubscriptionStartSetup =
+                        ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
+                    DowngradePlanID = "downgradePlanId",
+                    ProrateAtEndOfBillingPeriod = true,
+                    SubscriptionStartPlanID = "subscriptionStartPlanId",
+                },
             },
         ];
         Pagination expectedPagination = new()
@@ -173,8 +233,20 @@ public class ProductListProductsPageResponseTest : TestBase
                     DisplayName = "displayName",
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     MultipleSubscriptions = true,
-                    Status = Status.Published,
+                    Status = ProductListProductsResponseStatus.Published,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProductSettings = new()
+                    {
+                        SubscriptionCancellationTime =
+                            ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+                        SubscriptionEndSetup =
+                            ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+                        SubscriptionStartSetup =
+                            ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
+                        DowngradePlanID = "downgradePlanId",
+                        ProrateAtEndOfBillingPeriod = true,
+                        SubscriptionStartPlanID = "subscriptionStartPlanId",
+                    },
                 },
             ],
             Pagination = new()
@@ -202,8 +274,20 @@ public class ProductListProductsPageResponseTest : TestBase
                     DisplayName = "displayName",
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     MultipleSubscriptions = true,
-                    Status = Status.Published,
+                    Status = ProductListProductsResponseStatus.Published,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    ProductSettings = new()
+                    {
+                        SubscriptionCancellationTime =
+                            ProductListProductsResponseProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+                        SubscriptionEndSetup =
+                            ProductListProductsResponseProductSettingsSubscriptionEndSetup.DowngradeToFree,
+                        SubscriptionStartSetup =
+                            ProductListProductsResponseProductSettingsSubscriptionStartSetup.PlanSelection,
+                        DowngradePlanID = "downgradePlanId",
+                        ProrateAtEndOfBillingPeriod = true,
+                        SubscriptionStartPlanID = "subscriptionStartPlanId",
+                    },
                 },
             ],
             Pagination = new()

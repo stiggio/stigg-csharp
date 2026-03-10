@@ -17,7 +17,7 @@ namespace Stigg.Client.Models.V1.Customers.PromotionalEntitlements;
 /// </summary>
 public record class PromotionalEntitlementRevokeParams : ParamsBase
 {
-    public required string CustomerID { get; init; }
+    public required string ID { get; init; }
 
     public string? FeatureID { get; init; }
 
@@ -30,7 +30,7 @@ public record class PromotionalEntitlementRevokeParams : ParamsBase
     )
         : base(promotionalEntitlementRevokeParams)
     {
-        this.CustomerID = promotionalEntitlementRevokeParams.CustomerID;
+        this.ID = promotionalEntitlementRevokeParams.ID;
         this.FeatureID = promotionalEntitlementRevokeParams.FeatureID;
     }
 #pragma warning restore CS8618
@@ -70,13 +70,19 @@ public record class PromotionalEntitlementRevokeParams : ParamsBase
 
     public override string ToString() =>
         JsonSerializer.Serialize(
-            new Dictionary<string, object?>()
-            {
-                ["CustomerID"] = this.CustomerID,
-                ["FeatureID"] = this.FeatureID,
-                ["HeaderData"] = this._rawHeaderData.Freeze(),
-                ["QueryData"] = this._rawQueryData.Freeze(),
-            },
+            FriendlyJsonPrinter.PrintValue(
+                new Dictionary<string, JsonElement>()
+                {
+                    ["ID"] = JsonSerializer.SerializeToElement(this.ID),
+                    ["FeatureID"] = JsonSerializer.SerializeToElement(this.FeatureID),
+                    ["HeaderData"] = FriendlyJsonPrinter.PrintValue(
+                        JsonSerializer.SerializeToElement(this._rawHeaderData.Freeze())
+                    ),
+                    ["QueryData"] = FriendlyJsonPrinter.PrintValue(
+                        JsonSerializer.SerializeToElement(this._rawQueryData.Freeze())
+                    ),
+                }
+            ),
             ModelBase.ToStringSerializerOptions
         );
 
@@ -86,7 +92,7 @@ public record class PromotionalEntitlementRevokeParams : ParamsBase
         {
             return false;
         }
-        return this.CustomerID.Equals(other.CustomerID)
+        return this.ID.Equals(other.ID)
             && (this.FeatureID?.Equals(other.FeatureID) ?? other.FeatureID == null)
             && this._rawHeaderData.Equals(other._rawHeaderData)
             && this._rawQueryData.Equals(other._rawQueryData);
@@ -97,8 +103,8 @@ public record class PromotionalEntitlementRevokeParams : ParamsBase
         return new UriBuilder(
             options.BaseUrl.ToString().TrimEnd('/')
                 + string.Format(
-                    "/api/v1/customers/{0}/promotional/{1}",
-                    this.CustomerID,
+                    "/api/v1/customers/{0}/promotional-entitlements/{1}",
+                    this.ID,
                     this.FeatureID
                 )
         )

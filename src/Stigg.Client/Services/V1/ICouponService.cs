@@ -57,6 +57,36 @@ public interface ICouponService
         CouponListParams? parameters = null,
         CancellationToken cancellationToken = default
     );
+
+    /// <summary>
+    /// Archives a coupon, preventing it from being applied to new subscriptions.
+    /// </summary>
+    Task<Coupon> ArchiveCoupon(
+        CouponArchiveCouponParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="ArchiveCoupon(CouponArchiveCouponParams, CancellationToken)"/>
+    Task<Coupon> ArchiveCoupon(
+        string id,
+        CouponArchiveCouponParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Updates an existing coupon's properties such as name, description, and metadata.
+    /// </summary>
+    Task<Coupon> UpdateCoupon(
+        CouponUpdateCouponParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="UpdateCoupon(CouponUpdateCouponParams, CancellationToken)"/>
+    Task<Coupon> UpdateCoupon(
+        string id,
+        CouponUpdateCouponParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
 }
 
 /// <summary>
@@ -103,6 +133,38 @@ public interface ICouponServiceWithRawResponse
     /// </summary>
     Task<HttpResponse<CouponListPage>> List(
         CouponListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `post /api/v1/coupons/{id}/archive`, but is otherwise the
+    /// same as <see cref="ICouponService.ArchiveCoupon(CouponArchiveCouponParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<Coupon>> ArchiveCoupon(
+        CouponArchiveCouponParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="ArchiveCoupon(CouponArchiveCouponParams, CancellationToken)"/>
+    Task<HttpResponse<Coupon>> ArchiveCoupon(
+        string id,
+        CouponArchiveCouponParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `patch /api/v1/coupons/{id}`, but is otherwise the
+    /// same as <see cref="ICouponService.UpdateCoupon(CouponUpdateCouponParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<Coupon>> UpdateCoupon(
+        CouponUpdateCouponParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="UpdateCoupon(CouponUpdateCouponParams, CancellationToken)"/>
+    Task<HttpResponse<Coupon>> UpdateCoupon(
+        string id,
+        CouponUpdateCouponParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 }

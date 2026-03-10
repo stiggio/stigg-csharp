@@ -349,13 +349,19 @@ public record class SubscriptionUpdateParams : ParamsBase
 
     public override string ToString() =>
         JsonSerializer.Serialize(
-            new Dictionary<string, object?>()
-            {
-                ["ID"] = this.ID,
-                ["HeaderData"] = this._rawHeaderData.Freeze(),
-                ["QueryData"] = this._rawQueryData.Freeze(),
-                ["BodyData"] = this._rawBodyData.Freeze(),
-            },
+            FriendlyJsonPrinter.PrintValue(
+                new Dictionary<string, JsonElement>()
+                {
+                    ["ID"] = JsonSerializer.SerializeToElement(this.ID),
+                    ["HeaderData"] = FriendlyJsonPrinter.PrintValue(
+                        JsonSerializer.SerializeToElement(this._rawHeaderData.Freeze())
+                    ),
+                    ["QueryData"] = FriendlyJsonPrinter.PrintValue(
+                        JsonSerializer.SerializeToElement(this._rawQueryData.Freeze())
+                    ),
+                    ["BodyData"] = FriendlyJsonPrinter.PrintValue(this._rawBodyData.Freeze()),
+                }
+            ),
             ModelBase.ToStringSerializerOptions
         );
 
@@ -2613,16 +2619,87 @@ sealed class MinimumCurrencyConverter : JsonConverter<MinimumCurrency>
 public sealed record class PriceOverride : JsonModel
 {
     /// <summary>
-    /// Feature ID
+    /// Addon ID
     /// </summary>
-    public required string FeatureID
+    public string? AddonID
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("featureId");
+            return this._rawData.GetNullableClass<string>("addonId");
         }
-        init { this._rawData.Set("featureId", value); }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("addonId", value);
+        }
+    }
+
+    /// <summary>
+    /// Whether this is a base charge override
+    /// </summary>
+    public bool? BaseCharge
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("baseCharge");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("baseCharge", value);
+        }
+    }
+
+    /// <summary>
+    /// The corresponding custom currency id of the recurring credits price
+    /// </summary>
+    public string? CurrencyID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("currencyId");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("currencyId", value);
+        }
+    }
+
+    /// <summary>
+    /// Feature ID
+    /// </summary>
+    public string? FeatureID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("featureId");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("featureId", value);
+        }
     }
 
     public Price? Price
@@ -2646,6 +2723,9 @@ public sealed record class PriceOverride : JsonModel
     /// <inheritdoc/>
     public override void Validate()
     {
+        _ = this.AddonID;
+        _ = this.BaseCharge;
+        _ = this.CurrencyID;
         _ = this.FeatureID;
         this.Price?.Validate();
     }
@@ -2675,13 +2755,6 @@ public sealed record class PriceOverride : JsonModel
     public static PriceOverride FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-
-    [SetsRequiredMembers]
-    public PriceOverride(string featureID)
-        : this()
-    {
-        this.FeatureID = featureID;
     }
 }
 

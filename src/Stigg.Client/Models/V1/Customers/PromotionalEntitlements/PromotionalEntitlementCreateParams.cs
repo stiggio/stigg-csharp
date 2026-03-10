@@ -20,7 +20,7 @@ namespace Stigg.Client.Models.V1.Customers.PromotionalEntitlements;
 /// breaking changes in non-major versions. We may add new methods in the future that
 /// cause existing derived classes to break.</para>
 /// </summary>
-public record class PromotionalEntitlementGrantParams : ParamsBase
+public record class PromotionalEntitlementCreateParams : ParamsBase
 {
     readonly JsonDictionary _rawBodyData = new();
     public IReadOnlyDictionary<string, JsonElement> RawBodyData
@@ -28,7 +28,7 @@ public record class PromotionalEntitlementGrantParams : ParamsBase
         get { return this._rawBodyData.Freeze(); }
     }
 
-    public string? CustomerID { get; init; }
+    public string? ID { get; init; }
 
     /// <summary>
     /// Promotional entitlements to grant
@@ -51,22 +51,22 @@ public record class PromotionalEntitlementGrantParams : ParamsBase
         }
     }
 
-    public PromotionalEntitlementGrantParams() { }
+    public PromotionalEntitlementCreateParams() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public PromotionalEntitlementGrantParams(
-        PromotionalEntitlementGrantParams promotionalEntitlementGrantParams
+    public PromotionalEntitlementCreateParams(
+        PromotionalEntitlementCreateParams promotionalEntitlementCreateParams
     )
-        : base(promotionalEntitlementGrantParams)
+        : base(promotionalEntitlementCreateParams)
     {
-        this.CustomerID = promotionalEntitlementGrantParams.CustomerID;
+        this.ID = promotionalEntitlementCreateParams.ID;
 
-        this._rawBodyData = new(promotionalEntitlementGrantParams._rawBodyData);
+        this._rawBodyData = new(promotionalEntitlementCreateParams._rawBodyData);
     }
 #pragma warning restore CS8618
 
-    public PromotionalEntitlementGrantParams(
+    public PromotionalEntitlementCreateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
         IReadOnlyDictionary<string, JsonElement> rawBodyData
@@ -79,7 +79,7 @@ public record class PromotionalEntitlementGrantParams : ParamsBase
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    PromotionalEntitlementGrantParams(
+    PromotionalEntitlementCreateParams(
         FrozenDictionary<string, JsonElement> rawHeaderData,
         FrozenDictionary<string, JsonElement> rawQueryData,
         FrozenDictionary<string, JsonElement> rawBodyData
@@ -92,7 +92,7 @@ public record class PromotionalEntitlementGrantParams : ParamsBase
 #pragma warning restore CS8618
 
     /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
-    public static PromotionalEntitlementGrantParams FromRawUnchecked(
+    public static PromotionalEntitlementCreateParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
         IReadOnlyDictionary<string, JsonElement> rawBodyData
@@ -107,23 +107,29 @@ public record class PromotionalEntitlementGrantParams : ParamsBase
 
     public override string ToString() =>
         JsonSerializer.Serialize(
-            new Dictionary<string, object?>()
-            {
-                ["CustomerID"] = this.CustomerID,
-                ["HeaderData"] = this._rawHeaderData.Freeze(),
-                ["QueryData"] = this._rawQueryData.Freeze(),
-                ["BodyData"] = this._rawBodyData.Freeze(),
-            },
+            FriendlyJsonPrinter.PrintValue(
+                new Dictionary<string, JsonElement>()
+                {
+                    ["ID"] = JsonSerializer.SerializeToElement(this.ID),
+                    ["HeaderData"] = FriendlyJsonPrinter.PrintValue(
+                        JsonSerializer.SerializeToElement(this._rawHeaderData.Freeze())
+                    ),
+                    ["QueryData"] = FriendlyJsonPrinter.PrintValue(
+                        JsonSerializer.SerializeToElement(this._rawQueryData.Freeze())
+                    ),
+                    ["BodyData"] = FriendlyJsonPrinter.PrintValue(this._rawBodyData.Freeze()),
+                }
+            ),
             ModelBase.ToStringSerializerOptions
         );
 
-    public virtual bool Equals(PromotionalEntitlementGrantParams? other)
+    public virtual bool Equals(PromotionalEntitlementCreateParams? other)
     {
         if (other == null)
         {
             return false;
         }
-        return (this.CustomerID?.Equals(other.CustomerID) ?? other.CustomerID == null)
+        return (this.ID?.Equals(other.ID) ?? other.ID == null)
             && this._rawHeaderData.Equals(other._rawHeaderData)
             && this._rawQueryData.Equals(other._rawQueryData)
             && this._rawBodyData.Equals(other._rawBodyData);
@@ -133,7 +139,7 @@ public record class PromotionalEntitlementGrantParams : ParamsBase
     {
         return new System::UriBuilder(
             options.BaseUrl.ToString().TrimEnd('/')
-                + string.Format("/api/v1/customers/{0}/promotional", this.CustomerID)
+                + string.Format("/api/v1/customers/{0}/promotional-entitlements", this.ID)
         )
         {
             Query = this.QueryString(options),

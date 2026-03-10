@@ -18,18 +18,18 @@ public class CouponCreateParamsTest : TestBase
             AmountsOff = [new() { Amount = 0, Currency = Currency.Usd }],
             Description = "description",
             DurationInMonths = 1,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
             PercentOff = 1,
-            AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
         };
 
         string expectedID = "id";
         List<AmountsOff> expectedAmountsOff = [new() { Amount = 0, Currency = Currency.Usd }];
         string expectedDescription = "description";
         long expectedDurationInMonths = 1;
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedName = "name";
         double expectedPercentOff = 1;
-        JsonElement expectedAdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}");
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.NotNull(parameters.AmountsOff);
@@ -40,49 +40,16 @@ public class CouponCreateParamsTest : TestBase
         }
         Assert.Equal(expectedDescription, parameters.Description);
         Assert.Equal(expectedDurationInMonths, parameters.DurationInMonths);
+        Assert.NotNull(parameters.Metadata);
+        Assert.Equal(expectedMetadata.Count, parameters.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(parameters.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, parameters.Metadata[item.Key]);
+        }
         Assert.Equal(expectedName, parameters.Name);
         Assert.Equal(expectedPercentOff, parameters.PercentOff);
-        Assert.NotNull(parameters.AdditionalMetaData);
-        Assert.True(
-            JsonElement.DeepEquals(expectedAdditionalMetaData, parameters.AdditionalMetaData.Value)
-        );
-    }
-
-    [Fact]
-    public void OptionalNonNullableParamsUnsetAreNotSet_Works()
-    {
-        var parameters = new CouponCreateParams
-        {
-            ID = "id",
-            AmountsOff = [new() { Amount = 0, Currency = Currency.Usd }],
-            Description = "description",
-            DurationInMonths = 1,
-            Name = "name",
-            PercentOff = 1,
-        };
-
-        Assert.Null(parameters.AdditionalMetaData);
-        Assert.False(parameters.RawBodyData.ContainsKey("additionalMetaData"));
-    }
-
-    [Fact]
-    public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
-    {
-        var parameters = new CouponCreateParams
-        {
-            ID = "id",
-            AmountsOff = [new() { Amount = 0, Currency = Currency.Usd }],
-            Description = "description",
-            DurationInMonths = 1,
-            Name = "name",
-            PercentOff = 1,
-
-            // Null should be interpreted as omitted for these properties
-            AdditionalMetaData = null,
-        };
-
-        Assert.Null(parameters.AdditionalMetaData);
-        Assert.False(parameters.RawBodyData.ContainsKey("additionalMetaData"));
     }
 
     [Fact]
@@ -94,13 +61,14 @@ public class CouponCreateParamsTest : TestBase
             AmountsOff = [new() { Amount = 0, Currency = Currency.Usd }],
             Description = "description",
             DurationInMonths = 1,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
             PercentOff = 1,
         };
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
-        Assert.Equal(new Uri("https://api.example.com/api/v1/coupons"), url);
+        Assert.Equal(new Uri("https://api.stigg.io/api/v1/coupons"), url);
     }
 
     [Fact]
@@ -112,9 +80,9 @@ public class CouponCreateParamsTest : TestBase
             AmountsOff = [new() { Amount = 0, Currency = Currency.Usd }],
             Description = "description",
             DurationInMonths = 1,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
             PercentOff = 1,
-            AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
         };
 
         CouponCreateParams copied = new(parameters);

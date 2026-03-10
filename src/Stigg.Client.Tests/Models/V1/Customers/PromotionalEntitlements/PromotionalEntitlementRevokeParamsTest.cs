@@ -10,14 +10,14 @@ public class PromotionalEntitlementRevokeParamsTest : TestBase
     {
         var parameters = new PromotionalEntitlementRevokeParams
         {
-            CustomerID = "customerId",
+            ID = "id",
             FeatureID = "featureId",
         };
 
-        string expectedCustomerID = "customerId";
+        string expectedID = "id";
         string expectedFeatureID = "featureId";
 
-        Assert.Equal(expectedCustomerID, parameters.CustomerID);
+        Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedFeatureID, parameters.FeatureID);
     }
 
@@ -26,14 +26,14 @@ public class PromotionalEntitlementRevokeParamsTest : TestBase
     {
         PromotionalEntitlementRevokeParams parameters = new()
         {
-            CustomerID = "customerId",
+            ID = "id",
             FeatureID = "featureId",
         };
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
         Assert.Equal(
-            new Uri("https://api.example.com/api/v1/customers/customerId/promotional/featureId"),
+            new Uri("https://api.stigg.io/api/v1/customers/id/promotional-entitlements/featureId"),
             url
         );
     }
@@ -43,7 +43,7 @@ public class PromotionalEntitlementRevokeParamsTest : TestBase
     {
         var parameters = new PromotionalEntitlementRevokeParams
         {
-            CustomerID = "customerId",
+            ID = "id",
             FeatureID = "featureId",
         };
 

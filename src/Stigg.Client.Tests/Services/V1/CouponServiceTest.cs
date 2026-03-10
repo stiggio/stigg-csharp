@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Stigg.Client.Models.V1.Coupons;
 
@@ -15,6 +16,7 @@ public class CouponServiceTest : TestBase
                 AmountsOff = [new() { Amount = 0, Currency = Currency.Usd }],
                 Description = "description",
                 DurationInMonths = 1,
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 Name = "name",
                 PercentOff = 1,
             },
@@ -39,5 +41,27 @@ public class CouponServiceTest : TestBase
     {
         var page = await this.client.V1.Coupons.List(new(), TestContext.Current.CancellationToken);
         page.Validate();
+    }
+
+    [Fact(Skip = "Prism tests are disabled")]
+    public async Task ArchiveCoupon_Works()
+    {
+        var coupon = await this.client.V1.Coupons.ArchiveCoupon(
+            "x",
+            new(),
+            TestContext.Current.CancellationToken
+        );
+        coupon.Validate();
+    }
+
+    [Fact(Skip = "Prism tests are disabled")]
+    public async Task UpdateCoupon_Works()
+    {
+        var coupon = await this.client.V1.Coupons.UpdateCoupon(
+            "x",
+            new(),
+            TestContext.Current.CancellationToken
+        );
+        coupon.Validate();
     }
 }

@@ -7,12 +7,12 @@ using Stigg.Client.Models.V1.Customers.PromotionalEntitlements;
 
 namespace Stigg.Client.Tests.Models.V1.Customers.PromotionalEntitlements;
 
-public class PromotionalEntitlementGrantResponseTest : TestBase
+public class PromotionalEntitlementCreateResponseTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new PromotionalEntitlementGrantResponse
+        var model = new PromotionalEntitlementCreateResponse
         {
             Data =
             [
@@ -79,7 +79,7 @@ public class PromotionalEntitlementGrantResponseTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new PromotionalEntitlementGrantResponse
+        var model = new PromotionalEntitlementCreateResponse
         {
             Data =
             [
@@ -110,7 +110,7 @@ public class PromotionalEntitlementGrantResponseTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<PromotionalEntitlementGrantResponse>(
+        var deserialized = JsonSerializer.Deserialize<PromotionalEntitlementCreateResponse>(
             json,
             ModelBase.SerializerOptions
         );
@@ -121,7 +121,7 @@ public class PromotionalEntitlementGrantResponseTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new PromotionalEntitlementGrantResponse
+        var model = new PromotionalEntitlementCreateResponse
         {
             Data =
             [
@@ -152,7 +152,7 @@ public class PromotionalEntitlementGrantResponseTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<PromotionalEntitlementGrantResponse>(
+        var deserialized = JsonSerializer.Deserialize<PromotionalEntitlementCreateResponse>(
             element,
             ModelBase.SerializerOptions
         );
@@ -195,7 +195,7 @@ public class PromotionalEntitlementGrantResponseTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new PromotionalEntitlementGrantResponse
+        var model = new PromotionalEntitlementCreateResponse
         {
             Data =
             [
@@ -231,7 +231,7 @@ public class PromotionalEntitlementGrantResponseTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new PromotionalEntitlementGrantResponse
+        var model = new PromotionalEntitlementCreateResponse
         {
             Data =
             [
@@ -261,7 +261,7 @@ public class PromotionalEntitlementGrantResponseTest : TestBase
             ],
         };
 
-        PromotionalEntitlementGrantResponse copied = new(model);
+        PromotionalEntitlementCreateResponse copied = new(model);
 
         Assert.Equal(model, copied);
     }

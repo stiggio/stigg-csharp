@@ -1,0 +1,609 @@
+using System;
+using System.Collections.Frozen;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Stigg.Client.Core;
+using Stigg.Client.Exceptions;
+
+namespace Stigg.Client.Models.V1.Products;
+
+/// <summary>
+/// Response object
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<ProductArchiveProductResponse, ProductArchiveProductResponseFromRaw>)
+)]
+public sealed record class ProductArchiveProductResponse : JsonModel
+{
+    /// <summary>
+    /// Product configuration object
+    /// </summary>
+    public required Data Data
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<Data>("data");
+        }
+        init { this._rawData.Set("data", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        this.Data.Validate();
+    }
+
+    public ProductArchiveProductResponse() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public ProductArchiveProductResponse(
+        ProductArchiveProductResponse productArchiveProductResponse
+    )
+        : base(productArchiveProductResponse) { }
+#pragma warning restore CS8618
+
+    public ProductArchiveProductResponse(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    ProductArchiveProductResponse(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="ProductArchiveProductResponseFromRaw.FromRawUnchecked"/>
+    public static ProductArchiveProductResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+
+    [SetsRequiredMembers]
+    public ProductArchiveProductResponse(Data data)
+        : this()
+    {
+        this.Data = data;
+    }
+}
+
+class ProductArchiveProductResponseFromRaw : IFromRawJson<ProductArchiveProductResponse>
+{
+    /// <inheritdoc/>
+    public ProductArchiveProductResponse FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => ProductArchiveProductResponse.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Product configuration object
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<Data, DataFromRaw>))]
+public sealed record class Data : JsonModel
+{
+    /// <summary>
+    /// The unique identifier for the entity
+    /// </summary>
+    public required string ID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
+        init { this._rawData.Set("id", value); }
+    }
+
+    /// <summary>
+    /// Timestamp of when the record was created
+    /// </summary>
+    public required DateTimeOffset CreatedAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("createdAt");
+        }
+        init { this._rawData.Set("createdAt", value); }
+    }
+
+    /// <summary>
+    /// Description of the product
+    /// </summary>
+    public required string? Description
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("description");
+        }
+        init { this._rawData.Set("description", value); }
+    }
+
+    /// <summary>
+    /// Display name of the product
+    /// </summary>
+    public required string DisplayName
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("displayName");
+        }
+        init { this._rawData.Set("displayName", value); }
+    }
+
+    /// <summary>
+    /// Metadata associated with the entity
+    /// </summary>
+    public required IReadOnlyDictionary<string, string> Metadata
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<FrozenDictionary<string, string>>("metadata");
+        }
+        init
+        {
+            this._rawData.Set<FrozenDictionary<string, string>>(
+                "metadata",
+                FrozenDictionary.ToFrozenDictionary(value)
+            );
+        }
+    }
+
+    /// <summary>
+    /// Indicates if multiple subscriptions to this product are allowed
+    /// </summary>
+    public required bool MultipleSubscriptions
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("multipleSubscriptions");
+        }
+        init { this._rawData.Set("multipleSubscriptions", value); }
+    }
+
+    /// <summary>
+    /// The status of the product
+    /// </summary>
+    public required ApiEnum<string, Status> Status
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Status>>("status");
+        }
+        init { this._rawData.Set("status", value); }
+    }
+
+    /// <summary>
+    /// Timestamp of when the record was last updated
+    /// </summary>
+    public required DateTimeOffset UpdatedAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("updatedAt");
+        }
+        init { this._rawData.Set("updatedAt", value); }
+    }
+
+    /// <summary>
+    /// Product behavior settings for subscription lifecycle management.
+    /// </summary>
+    public DataProductSettings? ProductSettings
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<DataProductSettings>("productSettings");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("productSettings", value);
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.ID;
+        _ = this.CreatedAt;
+        _ = this.Description;
+        _ = this.DisplayName;
+        _ = this.Metadata;
+        _ = this.MultipleSubscriptions;
+        this.Status.Validate();
+        _ = this.UpdatedAt;
+        this.ProductSettings?.Validate();
+    }
+
+    public Data() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public Data(Data data)
+        : base(data) { }
+#pragma warning restore CS8618
+
+    public Data(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    Data(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="DataFromRaw.FromRawUnchecked"/>
+    public static Data FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class DataFromRaw : IFromRawJson<Data>
+{
+    /// <inheritdoc/>
+    public Data FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Data.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// The status of the product
+/// </summary>
+[JsonConverter(typeof(StatusConverter))]
+public enum Status
+{
+    Published,
+    Archived,
+}
+
+sealed class StatusConverter : JsonConverter<Status>
+{
+    public override Status Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "PUBLISHED" => Status.Published,
+            "ARCHIVED" => Status.Archived,
+            _ => (Status)(-1),
+        };
+    }
+
+    public override void Write(Utf8JsonWriter writer, Status value, JsonSerializerOptions options)
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                Status.Published => "PUBLISHED",
+                Status.Archived => "ARCHIVED",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Product behavior settings for subscription lifecycle management.
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<DataProductSettings, DataProductSettingsFromRaw>))]
+public sealed record class DataProductSettings : JsonModel
+{
+    /// <summary>
+    /// Time when the subscription will be cancelled
+    /// </summary>
+    public required ApiEnum<
+        string,
+        DataProductSettingsSubscriptionCancellationTime
+    > SubscriptionCancellationTime
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, DataProductSettingsSubscriptionCancellationTime>
+            >("subscriptionCancellationTime");
+        }
+        init { this._rawData.Set("subscriptionCancellationTime", value); }
+    }
+
+    /// <summary>
+    /// Setup for the end of the subscription
+    /// </summary>
+    public required ApiEnum<string, DataProductSettingsSubscriptionEndSetup> SubscriptionEndSetup
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, DataProductSettingsSubscriptionEndSetup>
+            >("subscriptionEndSetup");
+        }
+        init { this._rawData.Set("subscriptionEndSetup", value); }
+    }
+
+    /// <summary>
+    /// Setup for the start of the subscription
+    /// </summary>
+    public required ApiEnum<
+        string,
+        DataProductSettingsSubscriptionStartSetup
+    > SubscriptionStartSetup
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, DataProductSettingsSubscriptionStartSetup>
+            >("subscriptionStartSetup");
+        }
+        init { this._rawData.Set("subscriptionStartSetup", value); }
+    }
+
+    /// <summary>
+    /// ID of the plan to downgrade to at the end of the billing period
+    /// </summary>
+    public string? DowngradePlanID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("downgradePlanId");
+        }
+        init { this._rawData.Set("downgradePlanId", value); }
+    }
+
+    /// <summary>
+    /// Indicates if the subscription should be prorated at the end of the billing period
+    /// </summary>
+    public bool? ProrateAtEndOfBillingPeriod
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("prorateAtEndOfBillingPeriod");
+        }
+        init { this._rawData.Set("prorateAtEndOfBillingPeriod", value); }
+    }
+
+    /// <summary>
+    /// ID of the plan to start the subscription with
+    /// </summary>
+    public string? SubscriptionStartPlanID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("subscriptionStartPlanId");
+        }
+        init { this._rawData.Set("subscriptionStartPlanId", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        this.SubscriptionCancellationTime.Validate();
+        this.SubscriptionEndSetup.Validate();
+        this.SubscriptionStartSetup.Validate();
+        _ = this.DowngradePlanID;
+        _ = this.ProrateAtEndOfBillingPeriod;
+        _ = this.SubscriptionStartPlanID;
+    }
+
+    public DataProductSettings() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public DataProductSettings(DataProductSettings dataProductSettings)
+        : base(dataProductSettings) { }
+#pragma warning restore CS8618
+
+    public DataProductSettings(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    DataProductSettings(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="DataProductSettingsFromRaw.FromRawUnchecked"/>
+    public static DataProductSettings FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class DataProductSettingsFromRaw : IFromRawJson<DataProductSettings>
+{
+    /// <inheritdoc/>
+    public DataProductSettings FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        DataProductSettings.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Time when the subscription will be cancelled
+/// </summary>
+[JsonConverter(typeof(DataProductSettingsSubscriptionCancellationTimeConverter))]
+public enum DataProductSettingsSubscriptionCancellationTime
+{
+    EndOfBillingPeriod,
+    Immediate,
+    SpecificDate,
+}
+
+sealed class DataProductSettingsSubscriptionCancellationTimeConverter
+    : JsonConverter<DataProductSettingsSubscriptionCancellationTime>
+{
+    public override DataProductSettingsSubscriptionCancellationTime Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "END_OF_BILLING_PERIOD" =>
+                DataProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod,
+            "IMMEDIATE" => DataProductSettingsSubscriptionCancellationTime.Immediate,
+            "SPECIFIC_DATE" => DataProductSettingsSubscriptionCancellationTime.SpecificDate,
+            _ => (DataProductSettingsSubscriptionCancellationTime)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        DataProductSettingsSubscriptionCancellationTime value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                DataProductSettingsSubscriptionCancellationTime.EndOfBillingPeriod =>
+                    "END_OF_BILLING_PERIOD",
+                DataProductSettingsSubscriptionCancellationTime.Immediate => "IMMEDIATE",
+                DataProductSettingsSubscriptionCancellationTime.SpecificDate => "SPECIFIC_DATE",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Setup for the end of the subscription
+/// </summary>
+[JsonConverter(typeof(DataProductSettingsSubscriptionEndSetupConverter))]
+public enum DataProductSettingsSubscriptionEndSetup
+{
+    DowngradeToFree,
+    CancelSubscription,
+}
+
+sealed class DataProductSettingsSubscriptionEndSetupConverter
+    : JsonConverter<DataProductSettingsSubscriptionEndSetup>
+{
+    public override DataProductSettingsSubscriptionEndSetup Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "DOWNGRADE_TO_FREE" => DataProductSettingsSubscriptionEndSetup.DowngradeToFree,
+            "CANCEL_SUBSCRIPTION" => DataProductSettingsSubscriptionEndSetup.CancelSubscription,
+            _ => (DataProductSettingsSubscriptionEndSetup)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        DataProductSettingsSubscriptionEndSetup value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                DataProductSettingsSubscriptionEndSetup.DowngradeToFree => "DOWNGRADE_TO_FREE",
+                DataProductSettingsSubscriptionEndSetup.CancelSubscription => "CANCEL_SUBSCRIPTION",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Setup for the start of the subscription
+/// </summary>
+[JsonConverter(typeof(DataProductSettingsSubscriptionStartSetupConverter))]
+public enum DataProductSettingsSubscriptionStartSetup
+{
+    PlanSelection,
+    TrialPeriod,
+    FreePlan,
+}
+
+sealed class DataProductSettingsSubscriptionStartSetupConverter
+    : JsonConverter<DataProductSettingsSubscriptionStartSetup>
+{
+    public override DataProductSettingsSubscriptionStartSetup Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "PLAN_SELECTION" => DataProductSettingsSubscriptionStartSetup.PlanSelection,
+            "TRIAL_PERIOD" => DataProductSettingsSubscriptionStartSetup.TrialPeriod,
+            "FREE_PLAN" => DataProductSettingsSubscriptionStartSetup.FreePlan,
+            _ => (DataProductSettingsSubscriptionStartSetup)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        DataProductSettingsSubscriptionStartSetup value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                DataProductSettingsSubscriptionStartSetup.PlanSelection => "PLAN_SELECTION",
+                DataProductSettingsSubscriptionStartSetup.TrialPeriod => "TRIAL_PERIOD",
+                DataProductSettingsSubscriptionStartSetup.FreePlan => "FREE_PLAN",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}

@@ -7,14 +7,14 @@ using Stigg.Client.Models.V1.Customers.PromotionalEntitlements;
 
 namespace Stigg.Client.Tests.Models.V1.Customers.PromotionalEntitlements;
 
-public class PromotionalEntitlementGrantParamsTest : TestBase
+public class PromotionalEntitlementCreateParamsTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var parameters = new PromotionalEntitlementGrantParams
+        var parameters = new PromotionalEntitlementCreateParams
         {
-            CustomerID = "customerId",
+            ID = "x",
             PromotionalEntitlements =
             [
                 new()
@@ -39,7 +39,7 @@ public class PromotionalEntitlementGrantParamsTest : TestBase
             ],
         };
 
-        string expectedCustomerID = "customerId";
+        string expectedID = "x";
         List<PromotionalEntitlement> expectedPromotionalEntitlements =
         [
             new()
@@ -63,7 +63,7 @@ public class PromotionalEntitlementGrantParamsTest : TestBase
             },
         ];
 
-        Assert.Equal(expectedCustomerID, parameters.CustomerID);
+        Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(
             expectedPromotionalEntitlements.Count,
             parameters.PromotionalEntitlements.Count
@@ -77,9 +77,9 @@ public class PromotionalEntitlementGrantParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        PromotionalEntitlementGrantParams parameters = new()
+        PromotionalEntitlementCreateParams parameters = new()
         {
-            CustomerID = "customerId",
+            ID = "x",
             PromotionalEntitlements =
             [
                 new()
@@ -107,7 +107,7 @@ public class PromotionalEntitlementGrantParamsTest : TestBase
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
         Assert.Equal(
-            new Uri("https://api.example.com/api/v1/customers/customerId/promotional"),
+            new Uri("https://api.stigg.io/api/v1/customers/x/promotional-entitlements"),
             url
         );
     }
@@ -115,9 +115,9 @@ public class PromotionalEntitlementGrantParamsTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var parameters = new PromotionalEntitlementGrantParams
+        var parameters = new PromotionalEntitlementCreateParams
         {
-            CustomerID = "customerId",
+            ID = "x",
             PromotionalEntitlements =
             [
                 new()
@@ -142,7 +142,7 @@ public class PromotionalEntitlementGrantParamsTest : TestBase
             ],
         };
 
-        PromotionalEntitlementGrantParams copied = new(parameters);
+        PromotionalEntitlementCreateParams copied = new(parameters);
 
         Assert.Equal(parameters, copied);
     }

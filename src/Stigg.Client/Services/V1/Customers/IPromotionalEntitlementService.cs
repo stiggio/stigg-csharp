@@ -30,15 +30,30 @@ public interface IPromotionalEntitlementService
     /// Grants promotional entitlements to a customer, providing feature access outside
     /// their subscription. Entitlements can be time-limited or permanent.
     /// </summary>
-    Task<PromotionalEntitlementGrantResponse> Grant(
-        PromotionalEntitlementGrantParams parameters,
+    Task<PromotionalEntitlementCreateResponse> Create(
+        PromotionalEntitlementCreateParams parameters,
         CancellationToken cancellationToken = default
     );
 
-    /// <inheritdoc cref="Grant(PromotionalEntitlementGrantParams, CancellationToken)"/>
-    Task<PromotionalEntitlementGrantResponse> Grant(
-        string customerID,
-        PromotionalEntitlementGrantParams parameters,
+    /// <inheritdoc cref="Create(PromotionalEntitlementCreateParams, CancellationToken)"/>
+    Task<PromotionalEntitlementCreateResponse> Create(
+        string id,
+        PromotionalEntitlementCreateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Retrieves a paginated list of a customer's promotional entitlements.
+    /// </summary>
+    Task<PromotionalEntitlementListPage> List(
+        PromotionalEntitlementListParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="List(PromotionalEntitlementListParams, CancellationToken)"/>
+    Task<PromotionalEntitlementListPage> List(
+        string id,
+        PromotionalEntitlementListParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 
@@ -75,23 +90,39 @@ public interface IPromotionalEntitlementServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/customers/{customerId}/promotional`, but is otherwise the
-    /// same as <see cref="IPromotionalEntitlementService.Grant(PromotionalEntitlementGrantParams, CancellationToken)"/>.
+    /// Returns a raw HTTP response for `post /api/v1/customers/{id}/promotional-entitlements`, but is otherwise the
+    /// same as <see cref="IPromotionalEntitlementService.Create(PromotionalEntitlementCreateParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<PromotionalEntitlementGrantResponse>> Grant(
-        PromotionalEntitlementGrantParams parameters,
+    Task<HttpResponse<PromotionalEntitlementCreateResponse>> Create(
+        PromotionalEntitlementCreateParams parameters,
         CancellationToken cancellationToken = default
     );
 
-    /// <inheritdoc cref="Grant(PromotionalEntitlementGrantParams, CancellationToken)"/>
-    Task<HttpResponse<PromotionalEntitlementGrantResponse>> Grant(
-        string customerID,
-        PromotionalEntitlementGrantParams parameters,
+    /// <inheritdoc cref="Create(PromotionalEntitlementCreateParams, CancellationToken)"/>
+    Task<HttpResponse<PromotionalEntitlementCreateResponse>> Create(
+        string id,
+        PromotionalEntitlementCreateParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `delete /api/v1/customers/{customerId}/promotional/{featureId}`, but is otherwise the
+    /// Returns a raw HTTP response for `get /api/v1/customers/{id}/promotional-entitlements`, but is otherwise the
+    /// same as <see cref="IPromotionalEntitlementService.List(PromotionalEntitlementListParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<PromotionalEntitlementListPage>> List(
+        PromotionalEntitlementListParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="List(PromotionalEntitlementListParams, CancellationToken)"/>
+    Task<HttpResponse<PromotionalEntitlementListPage>> List(
+        string id,
+        PromotionalEntitlementListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for `delete /api/v1/customers/{id}/promotional-entitlements/{featureId}`, but is otherwise the
     /// same as <see cref="IPromotionalEntitlementService.Revoke(PromotionalEntitlementRevokeParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<PromotionalEntitlementRevokeResponse>> Revoke(
