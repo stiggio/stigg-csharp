@@ -20,11 +20,14 @@ public class CustomerImportParamsTest : TestBase
                     ID = "id",
                     Email = "dev@stainless.com",
                     Name = "name",
+                    BillingID = "billingId",
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     PaymentMethodID = "paymentMethodId",
+                    SalesforceID = "salesforceId",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
+            IntegrationID = "integrationId",
         };
 
         List<Customer> expectedCustomers =
@@ -34,17 +37,74 @@ public class CustomerImportParamsTest : TestBase
                 ID = "id",
                 Email = "dev@stainless.com",
                 Name = "name",
+                BillingID = "billingId",
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PaymentMethodID = "paymentMethodId",
+                SalesforceID = "salesforceId",
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
         ];
+        string expectedIntegrationID = "integrationId";
 
         Assert.Equal(expectedCustomers.Count, parameters.Customers.Count);
         for (int i = 0; i < expectedCustomers.Count; i++)
         {
             Assert.Equal(expectedCustomers[i], parameters.Customers[i]);
         }
+        Assert.Equal(expectedIntegrationID, parameters.IntegrationID);
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new CustomerImportParams
+        {
+            Customers =
+            [
+                new()
+                {
+                    ID = "id",
+                    Email = "dev@stainless.com",
+                    Name = "name",
+                    BillingID = "billingId",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    PaymentMethodID = "paymentMethodId",
+                    SalesforceID = "salesforceId",
+                    UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                },
+            ],
+        };
+
+        Assert.Null(parameters.IntegrationID);
+        Assert.False(parameters.RawBodyData.ContainsKey("integrationId"));
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
+    {
+        var parameters = new CustomerImportParams
+        {
+            Customers =
+            [
+                new()
+                {
+                    ID = "id",
+                    Email = "dev@stainless.com",
+                    Name = "name",
+                    BillingID = "billingId",
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    PaymentMethodID = "paymentMethodId",
+                    SalesforceID = "salesforceId",
+                    UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                },
+            ],
+
+            // Null should be interpreted as omitted for these properties
+            IntegrationID = null,
+        };
+
+        Assert.Null(parameters.IntegrationID);
+        Assert.False(parameters.RawBodyData.ContainsKey("integrationId"));
     }
 
     [Fact]
@@ -59,8 +119,10 @@ public class CustomerImportParamsTest : TestBase
                     ID = "id",
                     Email = "dev@stainless.com",
                     Name = "name",
+                    BillingID = "billingId",
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     PaymentMethodID = "paymentMethodId",
+                    SalesforceID = "salesforceId",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
@@ -83,11 +145,14 @@ public class CustomerImportParamsTest : TestBase
                     ID = "id",
                     Email = "dev@stainless.com",
                     Name = "name",
+                    BillingID = "billingId",
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     PaymentMethodID = "paymentMethodId",
+                    SalesforceID = "salesforceId",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
+            IntegrationID = "integrationId",
         };
 
         CustomerImportParams copied = new(parameters);
@@ -106,21 +171,26 @@ public class CustomerTest : TestBase
             ID = "id",
             Email = "dev@stainless.com",
             Name = "name",
+            BillingID = "billingId",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentMethodID = "paymentMethodId",
+            SalesforceID = "salesforceId",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         string expectedID = "id";
         string expectedEmail = "dev@stainless.com";
         string expectedName = "name";
+        string expectedBillingID = "billingId";
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentMethodID = "paymentMethodId";
+        string expectedSalesforceID = "salesforceId";
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedEmail, model.Email);
         Assert.Equal(expectedName, model.Name);
+        Assert.Equal(expectedBillingID, model.BillingID);
         Assert.NotNull(model.Metadata);
         Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
         foreach (var item in expectedMetadata)
@@ -130,6 +200,7 @@ public class CustomerTest : TestBase
             Assert.Equal(value, model.Metadata[item.Key]);
         }
         Assert.Equal(expectedPaymentMethodID, model.PaymentMethodID);
+        Assert.Equal(expectedSalesforceID, model.SalesforceID);
         Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
     }
 
@@ -141,8 +212,10 @@ public class CustomerTest : TestBase
             ID = "id",
             Email = "dev@stainless.com",
             Name = "name",
+            BillingID = "billingId",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentMethodID = "paymentMethodId",
+            SalesforceID = "salesforceId",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -160,8 +233,10 @@ public class CustomerTest : TestBase
             ID = "id",
             Email = "dev@stainless.com",
             Name = "name",
+            BillingID = "billingId",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentMethodID = "paymentMethodId",
+            SalesforceID = "salesforceId",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -175,13 +250,16 @@ public class CustomerTest : TestBase
         string expectedID = "id";
         string expectedEmail = "dev@stainless.com";
         string expectedName = "name";
+        string expectedBillingID = "billingId";
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentMethodID = "paymentMethodId";
+        string expectedSalesforceID = "salesforceId";
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedEmail, deserialized.Email);
         Assert.Equal(expectedName, deserialized.Name);
+        Assert.Equal(expectedBillingID, deserialized.BillingID);
         Assert.NotNull(deserialized.Metadata);
         Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
         foreach (var item in expectedMetadata)
@@ -191,6 +269,7 @@ public class CustomerTest : TestBase
             Assert.Equal(value, deserialized.Metadata[item.Key]);
         }
         Assert.Equal(expectedPaymentMethodID, deserialized.PaymentMethodID);
+        Assert.Equal(expectedSalesforceID, deserialized.SalesforceID);
         Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
     }
 
@@ -202,8 +281,10 @@ public class CustomerTest : TestBase
             ID = "id",
             Email = "dev@stainless.com",
             Name = "name",
+            BillingID = "billingId",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentMethodID = "paymentMethodId",
+            SalesforceID = "salesforceId",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -220,10 +301,14 @@ public class CustomerTest : TestBase
             Name = "name",
         };
 
+        Assert.Null(model.BillingID);
+        Assert.False(model.RawData.ContainsKey("billingId"));
         Assert.Null(model.Metadata);
         Assert.False(model.RawData.ContainsKey("metadata"));
         Assert.Null(model.PaymentMethodID);
         Assert.False(model.RawData.ContainsKey("paymentMethodId"));
+        Assert.Null(model.SalesforceID);
+        Assert.False(model.RawData.ContainsKey("salesforceId"));
         Assert.Null(model.UpdatedAt);
         Assert.False(model.RawData.ContainsKey("updatedAt"));
     }
@@ -251,15 +336,21 @@ public class CustomerTest : TestBase
             Name = "name",
 
             // Null should be interpreted as omitted for these properties
+            BillingID = null,
             Metadata = null,
             PaymentMethodID = null,
+            SalesforceID = null,
             UpdatedAt = null,
         };
 
+        Assert.Null(model.BillingID);
+        Assert.False(model.RawData.ContainsKey("billingId"));
         Assert.Null(model.Metadata);
         Assert.False(model.RawData.ContainsKey("metadata"));
         Assert.Null(model.PaymentMethodID);
         Assert.False(model.RawData.ContainsKey("paymentMethodId"));
+        Assert.Null(model.SalesforceID);
+        Assert.False(model.RawData.ContainsKey("salesforceId"));
         Assert.Null(model.UpdatedAt);
         Assert.False(model.RawData.ContainsKey("updatedAt"));
     }
@@ -274,8 +365,10 @@ public class CustomerTest : TestBase
             Name = "name",
 
             // Null should be interpreted as omitted for these properties
+            BillingID = null,
             Metadata = null,
             PaymentMethodID = null,
+            SalesforceID = null,
             UpdatedAt = null,
         };
 
@@ -290,8 +383,10 @@ public class CustomerTest : TestBase
             ID = "id",
             Email = "dev@stainless.com",
             Name = "name",
+            BillingID = "billingId",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentMethodID = "paymentMethodId",
+            SalesforceID = "salesforceId",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
