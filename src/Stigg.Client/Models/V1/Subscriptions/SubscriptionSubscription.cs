@@ -3514,7 +3514,7 @@ public sealed record class PriceTierFlatPrice : JsonModel
     }
 
     /// <summary>
-    /// The price currency
+    /// ISO 4217 currency code
     /// </summary>
     public required ApiEnum<string, PriceTierFlatPriceCurrency> Currency
     {
@@ -3573,7 +3573,7 @@ class PriceTierFlatPriceFromRaw : IFromRawJson<PriceTierFlatPrice>
 }
 
 /// <summary>
-/// The price currency
+/// ISO 4217 currency code
 /// </summary>
 [JsonConverter(typeof(PriceTierFlatPriceCurrencyConverter))]
 public enum PriceTierFlatPriceCurrency
@@ -3981,7 +3981,7 @@ public sealed record class PriceTierUnitPrice : JsonModel
     }
 
     /// <summary>
-    /// The price currency
+    /// ISO 4217 currency code
     /// </summary>
     public required ApiEnum<string, PriceTierUnitPriceCurrency> Currency
     {
@@ -4040,7 +4040,7 @@ class PriceTierUnitPriceFromRaw : IFromRawJson<PriceTierUnitPrice>
 }
 
 /// <summary>
-/// The price currency
+/// ISO 4217 currency code
 /// </summary>
 [JsonConverter(typeof(PriceTierUnitPriceCurrencyConverter))]
 public enum PriceTierUnitPriceCurrency

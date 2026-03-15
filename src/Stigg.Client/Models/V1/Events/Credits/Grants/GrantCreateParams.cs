@@ -779,7 +779,7 @@ public sealed record class Cost : JsonModel
     }
 
     /// <summary>
-    /// The price currency
+    /// ISO 4217 currency code
     /// </summary>
     public required ApiEnum<string, Currency> Currency
     {
@@ -834,7 +834,7 @@ class CostFromRaw : IFromRawJson<Cost>
 }
 
 /// <summary>
-/// The price currency
+/// ISO 4217 currency code
 /// </summary>
 [JsonConverter(typeof(CurrencyConverter))]
 public enum Currency

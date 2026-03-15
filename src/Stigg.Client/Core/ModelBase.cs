@@ -34,11 +34,15 @@ public abstract record class ModelBase
         Converters =
         {
             new FrozenDictionaryConverterFactory(),
+            new ApiEnumConverter<string, DataBillingCurrency>(),
             new ApiEnumConverter<string, DataDefaultPaymentMethodType>(),
             new ApiEnumConverter<string, DataIntegrationVendorIdentifier>(),
+            new ApiEnumConverter<string, CustomerListResponseBillingCurrency>(),
             new ApiEnumConverter<string, CustomerListResponseDefaultPaymentMethodType>(),
             new ApiEnumConverter<string, CustomerListResponseIntegrationVendorIdentifier>(),
+            new ApiEnumConverter<string, BillingCurrency>(),
             new ApiEnumConverter<string, VendorIdentifier>(),
+            new ApiEnumConverter<string, CustomerProvisionParamsBillingCurrency>(),
             new ApiEnumConverter<string, Type>(),
             new ApiEnumConverter<string, CustomerProvisionParamsIntegrationVendorIdentifier>(),
             new ApiEnumConverter<string, PaymentMethod::VendorIdentifier>(),

@@ -1019,7 +1019,7 @@ public sealed record class SubscriptionPreviewParamsAppliedCouponDiscountAmounts
     }
 
     /// <summary>
-    /// The price currency
+    /// ISO 4217 currency code
     /// </summary>
     public required ApiEnum<
         string,
@@ -1089,7 +1089,7 @@ class SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffFromRaw
 }
 
 /// <summary>
-/// The price currency
+/// ISO 4217 currency code
 /// </summary>
 [JsonConverter(typeof(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrencyConverter))]
 public enum SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency

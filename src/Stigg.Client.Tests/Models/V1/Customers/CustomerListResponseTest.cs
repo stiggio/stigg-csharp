@@ -18,6 +18,7 @@ public class CustomerListResponseTest : TestBase
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            BillingCurrency = CustomerListResponseBillingCurrency.Usd,
             BillingID = "billingId",
             CouponID = "couponId",
             DefaultPaymentMethod = new()
@@ -46,6 +47,8 @@ public class CustomerListResponseTest : TestBase
         DateTimeOffset expectedArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        ApiEnum<string, CustomerListResponseBillingCurrency> expectedBillingCurrency =
+            CustomerListResponseBillingCurrency.Usd;
         string expectedBillingID = "billingId";
         string expectedCouponID = "couponId";
         CustomerListResponseDefaultPaymentMethod expectedDefaultPaymentMethod = new()
@@ -73,6 +76,7 @@ public class CustomerListResponseTest : TestBase
         Assert.Equal(expectedArchivedAt, model.ArchivedAt);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
+        Assert.Equal(expectedBillingCurrency, model.BillingCurrency);
         Assert.Equal(expectedBillingID, model.BillingID);
         Assert.Equal(expectedCouponID, model.CouponID);
         Assert.Equal(expectedDefaultPaymentMethod, model.DefaultPaymentMethod);
@@ -103,6 +107,7 @@ public class CustomerListResponseTest : TestBase
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            BillingCurrency = CustomerListResponseBillingCurrency.Usd,
             BillingID = "billingId",
             CouponID = "couponId",
             DefaultPaymentMethod = new()
@@ -145,6 +150,7 @@ public class CustomerListResponseTest : TestBase
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            BillingCurrency = CustomerListResponseBillingCurrency.Usd,
             BillingID = "billingId",
             CouponID = "couponId",
             DefaultPaymentMethod = new()
@@ -180,6 +186,8 @@ public class CustomerListResponseTest : TestBase
         DateTimeOffset expectedArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        ApiEnum<string, CustomerListResponseBillingCurrency> expectedBillingCurrency =
+            CustomerListResponseBillingCurrency.Usd;
         string expectedBillingID = "billingId";
         string expectedCouponID = "couponId";
         CustomerListResponseDefaultPaymentMethod expectedDefaultPaymentMethod = new()
@@ -207,6 +215,7 @@ public class CustomerListResponseTest : TestBase
         Assert.Equal(expectedArchivedAt, deserialized.ArchivedAt);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
+        Assert.Equal(expectedBillingCurrency, deserialized.BillingCurrency);
         Assert.Equal(expectedBillingID, deserialized.BillingID);
         Assert.Equal(expectedCouponID, deserialized.CouponID);
         Assert.Equal(expectedDefaultPaymentMethod, deserialized.DefaultPaymentMethod);
@@ -237,6 +246,7 @@ public class CustomerListResponseTest : TestBase
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            BillingCurrency = CustomerListResponseBillingCurrency.Usd,
             BillingID = "billingId",
             CouponID = "couponId",
             DefaultPaymentMethod = new()
@@ -273,6 +283,7 @@ public class CustomerListResponseTest : TestBase
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            BillingCurrency = CustomerListResponseBillingCurrency.Usd,
             BillingID = "billingId",
             CouponID = "couponId",
             DefaultPaymentMethod = new()
@@ -302,6 +313,7 @@ public class CustomerListResponseTest : TestBase
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            BillingCurrency = CustomerListResponseBillingCurrency.Usd,
             BillingID = "billingId",
             CouponID = "couponId",
             DefaultPaymentMethod = new()
@@ -328,6 +340,7 @@ public class CustomerListResponseTest : TestBase
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            BillingCurrency = CustomerListResponseBillingCurrency.Usd,
             BillingID = "billingId",
             CouponID = "couponId",
             DefaultPaymentMethod = new()
@@ -361,6 +374,7 @@ public class CustomerListResponseTest : TestBase
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            BillingCurrency = CustomerListResponseBillingCurrency.Usd,
             BillingID = "billingId",
             CouponID = "couponId",
             DefaultPaymentMethod = new()
@@ -403,6 +417,8 @@ public class CustomerListResponseTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
         };
 
+        Assert.Null(model.BillingCurrency);
+        Assert.False(model.RawData.ContainsKey("billingCurrency"));
         Assert.Null(model.BillingID);
         Assert.False(model.RawData.ContainsKey("billingId"));
         Assert.Null(model.CouponID);
@@ -459,6 +475,7 @@ public class CustomerListResponseTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
 
+            BillingCurrency = null,
             BillingID = null,
             CouponID = null,
             DefaultPaymentMethod = null,
@@ -466,6 +483,8 @@ public class CustomerListResponseTest : TestBase
             Name = null,
         };
 
+        Assert.Null(model.BillingCurrency);
+        Assert.True(model.RawData.ContainsKey("billingCurrency"));
         Assert.Null(model.BillingID);
         Assert.True(model.RawData.ContainsKey("billingId"));
         Assert.Null(model.CouponID);
@@ -498,6 +517,7 @@ public class CustomerListResponseTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
 
+            BillingCurrency = null,
             BillingID = null,
             CouponID = null,
             DefaultPaymentMethod = null,
@@ -517,6 +537,7 @@ public class CustomerListResponseTest : TestBase
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            BillingCurrency = CustomerListResponseBillingCurrency.Usd,
             BillingID = "billingId",
             CouponID = "couponId",
             DefaultPaymentMethod = new()
@@ -544,6 +565,288 @@ public class CustomerListResponseTest : TestBase
         CustomerListResponse copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class CustomerListResponseBillingCurrencyTest : TestBase
+{
+    [Theory]
+    [InlineData(CustomerListResponseBillingCurrency.Usd)]
+    [InlineData(CustomerListResponseBillingCurrency.Aed)]
+    [InlineData(CustomerListResponseBillingCurrency.All)]
+    [InlineData(CustomerListResponseBillingCurrency.Amd)]
+    [InlineData(CustomerListResponseBillingCurrency.Ang)]
+    [InlineData(CustomerListResponseBillingCurrency.Aud)]
+    [InlineData(CustomerListResponseBillingCurrency.Awg)]
+    [InlineData(CustomerListResponseBillingCurrency.Azn)]
+    [InlineData(CustomerListResponseBillingCurrency.Bam)]
+    [InlineData(CustomerListResponseBillingCurrency.Bbd)]
+    [InlineData(CustomerListResponseBillingCurrency.Bdt)]
+    [InlineData(CustomerListResponseBillingCurrency.Bgn)]
+    [InlineData(CustomerListResponseBillingCurrency.Bif)]
+    [InlineData(CustomerListResponseBillingCurrency.Bmd)]
+    [InlineData(CustomerListResponseBillingCurrency.Bnd)]
+    [InlineData(CustomerListResponseBillingCurrency.Bsd)]
+    [InlineData(CustomerListResponseBillingCurrency.Bwp)]
+    [InlineData(CustomerListResponseBillingCurrency.Byn)]
+    [InlineData(CustomerListResponseBillingCurrency.Bzd)]
+    [InlineData(CustomerListResponseBillingCurrency.Brl)]
+    [InlineData(CustomerListResponseBillingCurrency.Cad)]
+    [InlineData(CustomerListResponseBillingCurrency.Cdf)]
+    [InlineData(CustomerListResponseBillingCurrency.Chf)]
+    [InlineData(CustomerListResponseBillingCurrency.Cny)]
+    [InlineData(CustomerListResponseBillingCurrency.Czk)]
+    [InlineData(CustomerListResponseBillingCurrency.Dkk)]
+    [InlineData(CustomerListResponseBillingCurrency.Dop)]
+    [InlineData(CustomerListResponseBillingCurrency.Dzd)]
+    [InlineData(CustomerListResponseBillingCurrency.Egp)]
+    [InlineData(CustomerListResponseBillingCurrency.Etb)]
+    [InlineData(CustomerListResponseBillingCurrency.Eur)]
+    [InlineData(CustomerListResponseBillingCurrency.Fjd)]
+    [InlineData(CustomerListResponseBillingCurrency.Gbp)]
+    [InlineData(CustomerListResponseBillingCurrency.Gel)]
+    [InlineData(CustomerListResponseBillingCurrency.Gip)]
+    [InlineData(CustomerListResponseBillingCurrency.Gmd)]
+    [InlineData(CustomerListResponseBillingCurrency.Gyd)]
+    [InlineData(CustomerListResponseBillingCurrency.Hkd)]
+    [InlineData(CustomerListResponseBillingCurrency.Hrk)]
+    [InlineData(CustomerListResponseBillingCurrency.Htg)]
+    [InlineData(CustomerListResponseBillingCurrency.Idr)]
+    [InlineData(CustomerListResponseBillingCurrency.Ils)]
+    [InlineData(CustomerListResponseBillingCurrency.Inr)]
+    [InlineData(CustomerListResponseBillingCurrency.Isk)]
+    [InlineData(CustomerListResponseBillingCurrency.Jmd)]
+    [InlineData(CustomerListResponseBillingCurrency.Jpy)]
+    [InlineData(CustomerListResponseBillingCurrency.Kes)]
+    [InlineData(CustomerListResponseBillingCurrency.Kgs)]
+    [InlineData(CustomerListResponseBillingCurrency.Khr)]
+    [InlineData(CustomerListResponseBillingCurrency.Kmf)]
+    [InlineData(CustomerListResponseBillingCurrency.Krw)]
+    [InlineData(CustomerListResponseBillingCurrency.Kyd)]
+    [InlineData(CustomerListResponseBillingCurrency.Kzt)]
+    [InlineData(CustomerListResponseBillingCurrency.Lbp)]
+    [InlineData(CustomerListResponseBillingCurrency.Lkr)]
+    [InlineData(CustomerListResponseBillingCurrency.Lrd)]
+    [InlineData(CustomerListResponseBillingCurrency.Lsl)]
+    [InlineData(CustomerListResponseBillingCurrency.Mad)]
+    [InlineData(CustomerListResponseBillingCurrency.Mdl)]
+    [InlineData(CustomerListResponseBillingCurrency.Mga)]
+    [InlineData(CustomerListResponseBillingCurrency.Mkd)]
+    [InlineData(CustomerListResponseBillingCurrency.Mmk)]
+    [InlineData(CustomerListResponseBillingCurrency.Mnt)]
+    [InlineData(CustomerListResponseBillingCurrency.Mop)]
+    [InlineData(CustomerListResponseBillingCurrency.Mro)]
+    [InlineData(CustomerListResponseBillingCurrency.Mvr)]
+    [InlineData(CustomerListResponseBillingCurrency.Mwk)]
+    [InlineData(CustomerListResponseBillingCurrency.Mxn)]
+    [InlineData(CustomerListResponseBillingCurrency.Myr)]
+    [InlineData(CustomerListResponseBillingCurrency.Mzn)]
+    [InlineData(CustomerListResponseBillingCurrency.Nad)]
+    [InlineData(CustomerListResponseBillingCurrency.Ngn)]
+    [InlineData(CustomerListResponseBillingCurrency.Nok)]
+    [InlineData(CustomerListResponseBillingCurrency.Npr)]
+    [InlineData(CustomerListResponseBillingCurrency.Nzd)]
+    [InlineData(CustomerListResponseBillingCurrency.Pgk)]
+    [InlineData(CustomerListResponseBillingCurrency.Php)]
+    [InlineData(CustomerListResponseBillingCurrency.Pkr)]
+    [InlineData(CustomerListResponseBillingCurrency.Pln)]
+    [InlineData(CustomerListResponseBillingCurrency.Qar)]
+    [InlineData(CustomerListResponseBillingCurrency.Ron)]
+    [InlineData(CustomerListResponseBillingCurrency.Rsd)]
+    [InlineData(CustomerListResponseBillingCurrency.Rub)]
+    [InlineData(CustomerListResponseBillingCurrency.Rwf)]
+    [InlineData(CustomerListResponseBillingCurrency.Sar)]
+    [InlineData(CustomerListResponseBillingCurrency.Sbd)]
+    [InlineData(CustomerListResponseBillingCurrency.Scr)]
+    [InlineData(CustomerListResponseBillingCurrency.Sek)]
+    [InlineData(CustomerListResponseBillingCurrency.Sgd)]
+    [InlineData(CustomerListResponseBillingCurrency.Sle)]
+    [InlineData(CustomerListResponseBillingCurrency.Sll)]
+    [InlineData(CustomerListResponseBillingCurrency.Sos)]
+    [InlineData(CustomerListResponseBillingCurrency.Szl)]
+    [InlineData(CustomerListResponseBillingCurrency.Thb)]
+    [InlineData(CustomerListResponseBillingCurrency.Tjs)]
+    [InlineData(CustomerListResponseBillingCurrency.Top)]
+    [InlineData(CustomerListResponseBillingCurrency.Try)]
+    [InlineData(CustomerListResponseBillingCurrency.Ttd)]
+    [InlineData(CustomerListResponseBillingCurrency.Tzs)]
+    [InlineData(CustomerListResponseBillingCurrency.Uah)]
+    [InlineData(CustomerListResponseBillingCurrency.Uzs)]
+    [InlineData(CustomerListResponseBillingCurrency.Vnd)]
+    [InlineData(CustomerListResponseBillingCurrency.Vuv)]
+    [InlineData(CustomerListResponseBillingCurrency.Wst)]
+    [InlineData(CustomerListResponseBillingCurrency.Xaf)]
+    [InlineData(CustomerListResponseBillingCurrency.Xcd)]
+    [InlineData(CustomerListResponseBillingCurrency.Yer)]
+    [InlineData(CustomerListResponseBillingCurrency.Zar)]
+    [InlineData(CustomerListResponseBillingCurrency.Zmw)]
+    [InlineData(CustomerListResponseBillingCurrency.Clp)]
+    [InlineData(CustomerListResponseBillingCurrency.Djf)]
+    [InlineData(CustomerListResponseBillingCurrency.Gnf)]
+    [InlineData(CustomerListResponseBillingCurrency.Ugx)]
+    [InlineData(CustomerListResponseBillingCurrency.Pyg)]
+    [InlineData(CustomerListResponseBillingCurrency.Xof)]
+    [InlineData(CustomerListResponseBillingCurrency.Xpf)]
+    public void Validation_Works(CustomerListResponseBillingCurrency rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, CustomerListResponseBillingCurrency> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, CustomerListResponseBillingCurrency>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(CustomerListResponseBillingCurrency.Usd)]
+    [InlineData(CustomerListResponseBillingCurrency.Aed)]
+    [InlineData(CustomerListResponseBillingCurrency.All)]
+    [InlineData(CustomerListResponseBillingCurrency.Amd)]
+    [InlineData(CustomerListResponseBillingCurrency.Ang)]
+    [InlineData(CustomerListResponseBillingCurrency.Aud)]
+    [InlineData(CustomerListResponseBillingCurrency.Awg)]
+    [InlineData(CustomerListResponseBillingCurrency.Azn)]
+    [InlineData(CustomerListResponseBillingCurrency.Bam)]
+    [InlineData(CustomerListResponseBillingCurrency.Bbd)]
+    [InlineData(CustomerListResponseBillingCurrency.Bdt)]
+    [InlineData(CustomerListResponseBillingCurrency.Bgn)]
+    [InlineData(CustomerListResponseBillingCurrency.Bif)]
+    [InlineData(CustomerListResponseBillingCurrency.Bmd)]
+    [InlineData(CustomerListResponseBillingCurrency.Bnd)]
+    [InlineData(CustomerListResponseBillingCurrency.Bsd)]
+    [InlineData(CustomerListResponseBillingCurrency.Bwp)]
+    [InlineData(CustomerListResponseBillingCurrency.Byn)]
+    [InlineData(CustomerListResponseBillingCurrency.Bzd)]
+    [InlineData(CustomerListResponseBillingCurrency.Brl)]
+    [InlineData(CustomerListResponseBillingCurrency.Cad)]
+    [InlineData(CustomerListResponseBillingCurrency.Cdf)]
+    [InlineData(CustomerListResponseBillingCurrency.Chf)]
+    [InlineData(CustomerListResponseBillingCurrency.Cny)]
+    [InlineData(CustomerListResponseBillingCurrency.Czk)]
+    [InlineData(CustomerListResponseBillingCurrency.Dkk)]
+    [InlineData(CustomerListResponseBillingCurrency.Dop)]
+    [InlineData(CustomerListResponseBillingCurrency.Dzd)]
+    [InlineData(CustomerListResponseBillingCurrency.Egp)]
+    [InlineData(CustomerListResponseBillingCurrency.Etb)]
+    [InlineData(CustomerListResponseBillingCurrency.Eur)]
+    [InlineData(CustomerListResponseBillingCurrency.Fjd)]
+    [InlineData(CustomerListResponseBillingCurrency.Gbp)]
+    [InlineData(CustomerListResponseBillingCurrency.Gel)]
+    [InlineData(CustomerListResponseBillingCurrency.Gip)]
+    [InlineData(CustomerListResponseBillingCurrency.Gmd)]
+    [InlineData(CustomerListResponseBillingCurrency.Gyd)]
+    [InlineData(CustomerListResponseBillingCurrency.Hkd)]
+    [InlineData(CustomerListResponseBillingCurrency.Hrk)]
+    [InlineData(CustomerListResponseBillingCurrency.Htg)]
+    [InlineData(CustomerListResponseBillingCurrency.Idr)]
+    [InlineData(CustomerListResponseBillingCurrency.Ils)]
+    [InlineData(CustomerListResponseBillingCurrency.Inr)]
+    [InlineData(CustomerListResponseBillingCurrency.Isk)]
+    [InlineData(CustomerListResponseBillingCurrency.Jmd)]
+    [InlineData(CustomerListResponseBillingCurrency.Jpy)]
+    [InlineData(CustomerListResponseBillingCurrency.Kes)]
+    [InlineData(CustomerListResponseBillingCurrency.Kgs)]
+    [InlineData(CustomerListResponseBillingCurrency.Khr)]
+    [InlineData(CustomerListResponseBillingCurrency.Kmf)]
+    [InlineData(CustomerListResponseBillingCurrency.Krw)]
+    [InlineData(CustomerListResponseBillingCurrency.Kyd)]
+    [InlineData(CustomerListResponseBillingCurrency.Kzt)]
+    [InlineData(CustomerListResponseBillingCurrency.Lbp)]
+    [InlineData(CustomerListResponseBillingCurrency.Lkr)]
+    [InlineData(CustomerListResponseBillingCurrency.Lrd)]
+    [InlineData(CustomerListResponseBillingCurrency.Lsl)]
+    [InlineData(CustomerListResponseBillingCurrency.Mad)]
+    [InlineData(CustomerListResponseBillingCurrency.Mdl)]
+    [InlineData(CustomerListResponseBillingCurrency.Mga)]
+    [InlineData(CustomerListResponseBillingCurrency.Mkd)]
+    [InlineData(CustomerListResponseBillingCurrency.Mmk)]
+    [InlineData(CustomerListResponseBillingCurrency.Mnt)]
+    [InlineData(CustomerListResponseBillingCurrency.Mop)]
+    [InlineData(CustomerListResponseBillingCurrency.Mro)]
+    [InlineData(CustomerListResponseBillingCurrency.Mvr)]
+    [InlineData(CustomerListResponseBillingCurrency.Mwk)]
+    [InlineData(CustomerListResponseBillingCurrency.Mxn)]
+    [InlineData(CustomerListResponseBillingCurrency.Myr)]
+    [InlineData(CustomerListResponseBillingCurrency.Mzn)]
+    [InlineData(CustomerListResponseBillingCurrency.Nad)]
+    [InlineData(CustomerListResponseBillingCurrency.Ngn)]
+    [InlineData(CustomerListResponseBillingCurrency.Nok)]
+    [InlineData(CustomerListResponseBillingCurrency.Npr)]
+    [InlineData(CustomerListResponseBillingCurrency.Nzd)]
+    [InlineData(CustomerListResponseBillingCurrency.Pgk)]
+    [InlineData(CustomerListResponseBillingCurrency.Php)]
+    [InlineData(CustomerListResponseBillingCurrency.Pkr)]
+    [InlineData(CustomerListResponseBillingCurrency.Pln)]
+    [InlineData(CustomerListResponseBillingCurrency.Qar)]
+    [InlineData(CustomerListResponseBillingCurrency.Ron)]
+    [InlineData(CustomerListResponseBillingCurrency.Rsd)]
+    [InlineData(CustomerListResponseBillingCurrency.Rub)]
+    [InlineData(CustomerListResponseBillingCurrency.Rwf)]
+    [InlineData(CustomerListResponseBillingCurrency.Sar)]
+    [InlineData(CustomerListResponseBillingCurrency.Sbd)]
+    [InlineData(CustomerListResponseBillingCurrency.Scr)]
+    [InlineData(CustomerListResponseBillingCurrency.Sek)]
+    [InlineData(CustomerListResponseBillingCurrency.Sgd)]
+    [InlineData(CustomerListResponseBillingCurrency.Sle)]
+    [InlineData(CustomerListResponseBillingCurrency.Sll)]
+    [InlineData(CustomerListResponseBillingCurrency.Sos)]
+    [InlineData(CustomerListResponseBillingCurrency.Szl)]
+    [InlineData(CustomerListResponseBillingCurrency.Thb)]
+    [InlineData(CustomerListResponseBillingCurrency.Tjs)]
+    [InlineData(CustomerListResponseBillingCurrency.Top)]
+    [InlineData(CustomerListResponseBillingCurrency.Try)]
+    [InlineData(CustomerListResponseBillingCurrency.Ttd)]
+    [InlineData(CustomerListResponseBillingCurrency.Tzs)]
+    [InlineData(CustomerListResponseBillingCurrency.Uah)]
+    [InlineData(CustomerListResponseBillingCurrency.Uzs)]
+    [InlineData(CustomerListResponseBillingCurrency.Vnd)]
+    [InlineData(CustomerListResponseBillingCurrency.Vuv)]
+    [InlineData(CustomerListResponseBillingCurrency.Wst)]
+    [InlineData(CustomerListResponseBillingCurrency.Xaf)]
+    [InlineData(CustomerListResponseBillingCurrency.Xcd)]
+    [InlineData(CustomerListResponseBillingCurrency.Yer)]
+    [InlineData(CustomerListResponseBillingCurrency.Zar)]
+    [InlineData(CustomerListResponseBillingCurrency.Zmw)]
+    [InlineData(CustomerListResponseBillingCurrency.Clp)]
+    [InlineData(CustomerListResponseBillingCurrency.Djf)]
+    [InlineData(CustomerListResponseBillingCurrency.Gnf)]
+    [InlineData(CustomerListResponseBillingCurrency.Ugx)]
+    [InlineData(CustomerListResponseBillingCurrency.Pyg)]
+    [InlineData(CustomerListResponseBillingCurrency.Xof)]
+    [InlineData(CustomerListResponseBillingCurrency.Xpf)]
+    public void SerializationRoundtrip_Works(CustomerListResponseBillingCurrency rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, CustomerListResponseBillingCurrency> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, CustomerListResponseBillingCurrency>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, CustomerListResponseBillingCurrency>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, CustomerListResponseBillingCurrency>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
     }
 }
 

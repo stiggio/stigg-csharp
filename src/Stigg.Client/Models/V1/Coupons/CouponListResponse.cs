@@ -297,7 +297,7 @@ public sealed record class CouponListResponseAmountsOff : JsonModel
     }
 
     /// <summary>
-    /// The price currency
+    /// ISO 4217 currency code
     /// </summary>
     public required ApiEnum<string, CouponListResponseAmountsOffCurrency> Currency
     {
@@ -357,7 +357,7 @@ class CouponListResponseAmountsOffFromRaw : IFromRawJson<CouponListResponseAmoun
 }
 
 /// <summary>
-/// The price currency
+/// ISO 4217 currency code
 /// </summary>
 [JsonConverter(typeof(CouponListResponseAmountsOffCurrencyConverter))]
 public enum CouponListResponseAmountsOffCurrency

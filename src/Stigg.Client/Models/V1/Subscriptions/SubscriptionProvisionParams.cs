@@ -1166,7 +1166,7 @@ public sealed record class SubscriptionProvisionParamsAppliedCouponDiscountAmoun
     }
 
     /// <summary>
-    /// The price currency
+    /// ISO 4217 currency code
     /// </summary>
     public required ApiEnum<
         string,
@@ -1236,7 +1236,7 @@ class SubscriptionProvisionParamsAppliedCouponDiscountAmountsOffFromRaw
 }
 
 /// <summary>
-/// The price currency
+/// ISO 4217 currency code
 /// </summary>
 [JsonConverter(typeof(SubscriptionProvisionParamsAppliedCouponDiscountAmountsOffCurrencyConverter))]
 public enum SubscriptionProvisionParamsAppliedCouponDiscountAmountsOffCurrency
@@ -5480,7 +5480,7 @@ public sealed record class FlatPrice : JsonModel
     }
 
     /// <summary>
-    /// The price currency
+    /// ISO 4217 currency code
     /// </summary>
     public required ApiEnum<string, FlatPriceCurrency> Currency
     {
@@ -5535,7 +5535,7 @@ class FlatPriceFromRaw : IFromRawJson<FlatPrice>
 }
 
 /// <summary>
-/// The price currency
+/// ISO 4217 currency code
 /// </summary>
 [JsonConverter(typeof(FlatPriceCurrencyConverter))]
 public enum FlatPriceCurrency
@@ -5943,7 +5943,7 @@ public sealed record class UnitPrice : JsonModel
     }
 
     /// <summary>
-    /// The price currency
+    /// ISO 4217 currency code
     /// </summary>
     public required ApiEnum<string, UnitPriceCurrency> Currency
     {
@@ -5998,7 +5998,7 @@ class UnitPriceFromRaw : IFromRawJson<UnitPrice>
 }
 
 /// <summary>
-/// The price currency
+/// ISO 4217 currency code
 /// </summary>
 [JsonConverter(typeof(UnitPriceCurrencyConverter))]
 public enum UnitPriceCurrency

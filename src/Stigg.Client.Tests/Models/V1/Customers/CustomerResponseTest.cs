@@ -20,6 +20,7 @@ public class CustomerResponseTest : TestBase
                 ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                BillingCurrency = DataBillingCurrency.Usd,
                 BillingID = "billingId",
                 CouponID = "couponId",
                 DefaultPaymentMethod = new()
@@ -51,6 +52,7 @@ public class CustomerResponseTest : TestBase
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            BillingCurrency = DataBillingCurrency.Usd,
             BillingID = "billingId",
             CouponID = "couponId",
             DefaultPaymentMethod = new()
@@ -89,6 +91,7 @@ public class CustomerResponseTest : TestBase
                 ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                BillingCurrency = DataBillingCurrency.Usd,
                 BillingID = "billingId",
                 CouponID = "couponId",
                 DefaultPaymentMethod = new()
@@ -134,6 +137,7 @@ public class CustomerResponseTest : TestBase
                 ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                BillingCurrency = DataBillingCurrency.Usd,
                 BillingID = "billingId",
                 CouponID = "couponId",
                 DefaultPaymentMethod = new()
@@ -172,6 +176,7 @@ public class CustomerResponseTest : TestBase
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            BillingCurrency = DataBillingCurrency.Usd,
             BillingID = "billingId",
             CouponID = "couponId",
             DefaultPaymentMethod = new()
@@ -210,6 +215,7 @@ public class CustomerResponseTest : TestBase
                 ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                BillingCurrency = DataBillingCurrency.Usd,
                 BillingID = "billingId",
                 CouponID = "couponId",
                 DefaultPaymentMethod = new()
@@ -249,6 +255,7 @@ public class CustomerResponseTest : TestBase
                 ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                BillingCurrency = DataBillingCurrency.Usd,
                 BillingID = "billingId",
                 CouponID = "couponId",
                 DefaultPaymentMethod = new()
@@ -291,6 +298,7 @@ public class DataTest : TestBase
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            BillingCurrency = DataBillingCurrency.Usd,
             BillingID = "billingId",
             CouponID = "couponId",
             DefaultPaymentMethod = new()
@@ -319,6 +327,7 @@ public class DataTest : TestBase
         DateTimeOffset expectedArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        ApiEnum<string, DataBillingCurrency> expectedBillingCurrency = DataBillingCurrency.Usd;
         string expectedBillingID = "billingId";
         string expectedCouponID = "couponId";
         DataDefaultPaymentMethod expectedDefaultPaymentMethod = new()
@@ -346,6 +355,7 @@ public class DataTest : TestBase
         Assert.Equal(expectedArchivedAt, model.ArchivedAt);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
+        Assert.Equal(expectedBillingCurrency, model.BillingCurrency);
         Assert.Equal(expectedBillingID, model.BillingID);
         Assert.Equal(expectedCouponID, model.CouponID);
         Assert.Equal(expectedDefaultPaymentMethod, model.DefaultPaymentMethod);
@@ -376,6 +386,7 @@ public class DataTest : TestBase
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            BillingCurrency = DataBillingCurrency.Usd,
             BillingID = "billingId",
             CouponID = "couponId",
             DefaultPaymentMethod = new()
@@ -415,6 +426,7 @@ public class DataTest : TestBase
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            BillingCurrency = DataBillingCurrency.Usd,
             BillingID = "billingId",
             CouponID = "couponId",
             DefaultPaymentMethod = new()
@@ -447,6 +459,7 @@ public class DataTest : TestBase
         DateTimeOffset expectedArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        ApiEnum<string, DataBillingCurrency> expectedBillingCurrency = DataBillingCurrency.Usd;
         string expectedBillingID = "billingId";
         string expectedCouponID = "couponId";
         DataDefaultPaymentMethod expectedDefaultPaymentMethod = new()
@@ -474,6 +487,7 @@ public class DataTest : TestBase
         Assert.Equal(expectedArchivedAt, deserialized.ArchivedAt);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
+        Assert.Equal(expectedBillingCurrency, deserialized.BillingCurrency);
         Assert.Equal(expectedBillingID, deserialized.BillingID);
         Assert.Equal(expectedCouponID, deserialized.CouponID);
         Assert.Equal(expectedDefaultPaymentMethod, deserialized.DefaultPaymentMethod);
@@ -504,6 +518,7 @@ public class DataTest : TestBase
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            BillingCurrency = DataBillingCurrency.Usd,
             BillingID = "billingId",
             CouponID = "couponId",
             DefaultPaymentMethod = new()
@@ -540,6 +555,7 @@ public class DataTest : TestBase
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            BillingCurrency = DataBillingCurrency.Usd,
             BillingID = "billingId",
             CouponID = "couponId",
             DefaultPaymentMethod = new()
@@ -569,6 +585,7 @@ public class DataTest : TestBase
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            BillingCurrency = DataBillingCurrency.Usd,
             BillingID = "billingId",
             CouponID = "couponId",
             DefaultPaymentMethod = new()
@@ -595,6 +612,7 @@ public class DataTest : TestBase
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            BillingCurrency = DataBillingCurrency.Usd,
             BillingID = "billingId",
             CouponID = "couponId",
             DefaultPaymentMethod = new()
@@ -628,6 +646,7 @@ public class DataTest : TestBase
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            BillingCurrency = DataBillingCurrency.Usd,
             BillingID = "billingId",
             CouponID = "couponId",
             DefaultPaymentMethod = new()
@@ -670,6 +689,8 @@ public class DataTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
         };
 
+        Assert.Null(model.BillingCurrency);
+        Assert.False(model.RawData.ContainsKey("billingCurrency"));
         Assert.Null(model.BillingID);
         Assert.False(model.RawData.ContainsKey("billingId"));
         Assert.Null(model.CouponID);
@@ -726,6 +747,7 @@ public class DataTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
 
+            BillingCurrency = null,
             BillingID = null,
             CouponID = null,
             DefaultPaymentMethod = null,
@@ -733,6 +755,8 @@ public class DataTest : TestBase
             Name = null,
         };
 
+        Assert.Null(model.BillingCurrency);
+        Assert.True(model.RawData.ContainsKey("billingCurrency"));
         Assert.Null(model.BillingID);
         Assert.True(model.RawData.ContainsKey("billingId"));
         Assert.Null(model.CouponID);
@@ -765,6 +789,7 @@ public class DataTest : TestBase
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
 
+            BillingCurrency = null,
             BillingID = null,
             CouponID = null,
             DefaultPaymentMethod = null,
@@ -784,6 +809,7 @@ public class DataTest : TestBase
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            BillingCurrency = DataBillingCurrency.Usd,
             BillingID = "billingId",
             CouponID = "couponId",
             DefaultPaymentMethod = new()
@@ -811,6 +837,292 @@ public class DataTest : TestBase
         Data copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class DataBillingCurrencyTest : TestBase
+{
+    [Theory]
+    [InlineData(DataBillingCurrency.Usd)]
+    [InlineData(DataBillingCurrency.Aed)]
+    [InlineData(DataBillingCurrency.All)]
+    [InlineData(DataBillingCurrency.Amd)]
+    [InlineData(DataBillingCurrency.Ang)]
+    [InlineData(DataBillingCurrency.Aud)]
+    [InlineData(DataBillingCurrency.Awg)]
+    [InlineData(DataBillingCurrency.Azn)]
+    [InlineData(DataBillingCurrency.Bam)]
+    [InlineData(DataBillingCurrency.Bbd)]
+    [InlineData(DataBillingCurrency.Bdt)]
+    [InlineData(DataBillingCurrency.Bgn)]
+    [InlineData(DataBillingCurrency.Bif)]
+    [InlineData(DataBillingCurrency.Bmd)]
+    [InlineData(DataBillingCurrency.Bnd)]
+    [InlineData(DataBillingCurrency.Bsd)]
+    [InlineData(DataBillingCurrency.Bwp)]
+    [InlineData(DataBillingCurrency.Byn)]
+    [InlineData(DataBillingCurrency.Bzd)]
+    [InlineData(DataBillingCurrency.Brl)]
+    [InlineData(DataBillingCurrency.Cad)]
+    [InlineData(DataBillingCurrency.Cdf)]
+    [InlineData(DataBillingCurrency.Chf)]
+    [InlineData(DataBillingCurrency.Cny)]
+    [InlineData(DataBillingCurrency.Czk)]
+    [InlineData(DataBillingCurrency.Dkk)]
+    [InlineData(DataBillingCurrency.Dop)]
+    [InlineData(DataBillingCurrency.Dzd)]
+    [InlineData(DataBillingCurrency.Egp)]
+    [InlineData(DataBillingCurrency.Etb)]
+    [InlineData(DataBillingCurrency.Eur)]
+    [InlineData(DataBillingCurrency.Fjd)]
+    [InlineData(DataBillingCurrency.Gbp)]
+    [InlineData(DataBillingCurrency.Gel)]
+    [InlineData(DataBillingCurrency.Gip)]
+    [InlineData(DataBillingCurrency.Gmd)]
+    [InlineData(DataBillingCurrency.Gyd)]
+    [InlineData(DataBillingCurrency.Hkd)]
+    [InlineData(DataBillingCurrency.Hrk)]
+    [InlineData(DataBillingCurrency.Htg)]
+    [InlineData(DataBillingCurrency.Idr)]
+    [InlineData(DataBillingCurrency.Ils)]
+    [InlineData(DataBillingCurrency.Inr)]
+    [InlineData(DataBillingCurrency.Isk)]
+    [InlineData(DataBillingCurrency.Jmd)]
+    [InlineData(DataBillingCurrency.Jpy)]
+    [InlineData(DataBillingCurrency.Kes)]
+    [InlineData(DataBillingCurrency.Kgs)]
+    [InlineData(DataBillingCurrency.Khr)]
+    [InlineData(DataBillingCurrency.Kmf)]
+    [InlineData(DataBillingCurrency.Krw)]
+    [InlineData(DataBillingCurrency.Kyd)]
+    [InlineData(DataBillingCurrency.Kzt)]
+    [InlineData(DataBillingCurrency.Lbp)]
+    [InlineData(DataBillingCurrency.Lkr)]
+    [InlineData(DataBillingCurrency.Lrd)]
+    [InlineData(DataBillingCurrency.Lsl)]
+    [InlineData(DataBillingCurrency.Mad)]
+    [InlineData(DataBillingCurrency.Mdl)]
+    [InlineData(DataBillingCurrency.Mga)]
+    [InlineData(DataBillingCurrency.Mkd)]
+    [InlineData(DataBillingCurrency.Mmk)]
+    [InlineData(DataBillingCurrency.Mnt)]
+    [InlineData(DataBillingCurrency.Mop)]
+    [InlineData(DataBillingCurrency.Mro)]
+    [InlineData(DataBillingCurrency.Mvr)]
+    [InlineData(DataBillingCurrency.Mwk)]
+    [InlineData(DataBillingCurrency.Mxn)]
+    [InlineData(DataBillingCurrency.Myr)]
+    [InlineData(DataBillingCurrency.Mzn)]
+    [InlineData(DataBillingCurrency.Nad)]
+    [InlineData(DataBillingCurrency.Ngn)]
+    [InlineData(DataBillingCurrency.Nok)]
+    [InlineData(DataBillingCurrency.Npr)]
+    [InlineData(DataBillingCurrency.Nzd)]
+    [InlineData(DataBillingCurrency.Pgk)]
+    [InlineData(DataBillingCurrency.Php)]
+    [InlineData(DataBillingCurrency.Pkr)]
+    [InlineData(DataBillingCurrency.Pln)]
+    [InlineData(DataBillingCurrency.Qar)]
+    [InlineData(DataBillingCurrency.Ron)]
+    [InlineData(DataBillingCurrency.Rsd)]
+    [InlineData(DataBillingCurrency.Rub)]
+    [InlineData(DataBillingCurrency.Rwf)]
+    [InlineData(DataBillingCurrency.Sar)]
+    [InlineData(DataBillingCurrency.Sbd)]
+    [InlineData(DataBillingCurrency.Scr)]
+    [InlineData(DataBillingCurrency.Sek)]
+    [InlineData(DataBillingCurrency.Sgd)]
+    [InlineData(DataBillingCurrency.Sle)]
+    [InlineData(DataBillingCurrency.Sll)]
+    [InlineData(DataBillingCurrency.Sos)]
+    [InlineData(DataBillingCurrency.Szl)]
+    [InlineData(DataBillingCurrency.Thb)]
+    [InlineData(DataBillingCurrency.Tjs)]
+    [InlineData(DataBillingCurrency.Top)]
+    [InlineData(DataBillingCurrency.Try)]
+    [InlineData(DataBillingCurrency.Ttd)]
+    [InlineData(DataBillingCurrency.Tzs)]
+    [InlineData(DataBillingCurrency.Uah)]
+    [InlineData(DataBillingCurrency.Uzs)]
+    [InlineData(DataBillingCurrency.Vnd)]
+    [InlineData(DataBillingCurrency.Vuv)]
+    [InlineData(DataBillingCurrency.Wst)]
+    [InlineData(DataBillingCurrency.Xaf)]
+    [InlineData(DataBillingCurrency.Xcd)]
+    [InlineData(DataBillingCurrency.Yer)]
+    [InlineData(DataBillingCurrency.Zar)]
+    [InlineData(DataBillingCurrency.Zmw)]
+    [InlineData(DataBillingCurrency.Clp)]
+    [InlineData(DataBillingCurrency.Djf)]
+    [InlineData(DataBillingCurrency.Gnf)]
+    [InlineData(DataBillingCurrency.Ugx)]
+    [InlineData(DataBillingCurrency.Pyg)]
+    [InlineData(DataBillingCurrency.Xof)]
+    [InlineData(DataBillingCurrency.Xpf)]
+    public void Validation_Works(DataBillingCurrency rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, DataBillingCurrency> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataBillingCurrency>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(DataBillingCurrency.Usd)]
+    [InlineData(DataBillingCurrency.Aed)]
+    [InlineData(DataBillingCurrency.All)]
+    [InlineData(DataBillingCurrency.Amd)]
+    [InlineData(DataBillingCurrency.Ang)]
+    [InlineData(DataBillingCurrency.Aud)]
+    [InlineData(DataBillingCurrency.Awg)]
+    [InlineData(DataBillingCurrency.Azn)]
+    [InlineData(DataBillingCurrency.Bam)]
+    [InlineData(DataBillingCurrency.Bbd)]
+    [InlineData(DataBillingCurrency.Bdt)]
+    [InlineData(DataBillingCurrency.Bgn)]
+    [InlineData(DataBillingCurrency.Bif)]
+    [InlineData(DataBillingCurrency.Bmd)]
+    [InlineData(DataBillingCurrency.Bnd)]
+    [InlineData(DataBillingCurrency.Bsd)]
+    [InlineData(DataBillingCurrency.Bwp)]
+    [InlineData(DataBillingCurrency.Byn)]
+    [InlineData(DataBillingCurrency.Bzd)]
+    [InlineData(DataBillingCurrency.Brl)]
+    [InlineData(DataBillingCurrency.Cad)]
+    [InlineData(DataBillingCurrency.Cdf)]
+    [InlineData(DataBillingCurrency.Chf)]
+    [InlineData(DataBillingCurrency.Cny)]
+    [InlineData(DataBillingCurrency.Czk)]
+    [InlineData(DataBillingCurrency.Dkk)]
+    [InlineData(DataBillingCurrency.Dop)]
+    [InlineData(DataBillingCurrency.Dzd)]
+    [InlineData(DataBillingCurrency.Egp)]
+    [InlineData(DataBillingCurrency.Etb)]
+    [InlineData(DataBillingCurrency.Eur)]
+    [InlineData(DataBillingCurrency.Fjd)]
+    [InlineData(DataBillingCurrency.Gbp)]
+    [InlineData(DataBillingCurrency.Gel)]
+    [InlineData(DataBillingCurrency.Gip)]
+    [InlineData(DataBillingCurrency.Gmd)]
+    [InlineData(DataBillingCurrency.Gyd)]
+    [InlineData(DataBillingCurrency.Hkd)]
+    [InlineData(DataBillingCurrency.Hrk)]
+    [InlineData(DataBillingCurrency.Htg)]
+    [InlineData(DataBillingCurrency.Idr)]
+    [InlineData(DataBillingCurrency.Ils)]
+    [InlineData(DataBillingCurrency.Inr)]
+    [InlineData(DataBillingCurrency.Isk)]
+    [InlineData(DataBillingCurrency.Jmd)]
+    [InlineData(DataBillingCurrency.Jpy)]
+    [InlineData(DataBillingCurrency.Kes)]
+    [InlineData(DataBillingCurrency.Kgs)]
+    [InlineData(DataBillingCurrency.Khr)]
+    [InlineData(DataBillingCurrency.Kmf)]
+    [InlineData(DataBillingCurrency.Krw)]
+    [InlineData(DataBillingCurrency.Kyd)]
+    [InlineData(DataBillingCurrency.Kzt)]
+    [InlineData(DataBillingCurrency.Lbp)]
+    [InlineData(DataBillingCurrency.Lkr)]
+    [InlineData(DataBillingCurrency.Lrd)]
+    [InlineData(DataBillingCurrency.Lsl)]
+    [InlineData(DataBillingCurrency.Mad)]
+    [InlineData(DataBillingCurrency.Mdl)]
+    [InlineData(DataBillingCurrency.Mga)]
+    [InlineData(DataBillingCurrency.Mkd)]
+    [InlineData(DataBillingCurrency.Mmk)]
+    [InlineData(DataBillingCurrency.Mnt)]
+    [InlineData(DataBillingCurrency.Mop)]
+    [InlineData(DataBillingCurrency.Mro)]
+    [InlineData(DataBillingCurrency.Mvr)]
+    [InlineData(DataBillingCurrency.Mwk)]
+    [InlineData(DataBillingCurrency.Mxn)]
+    [InlineData(DataBillingCurrency.Myr)]
+    [InlineData(DataBillingCurrency.Mzn)]
+    [InlineData(DataBillingCurrency.Nad)]
+    [InlineData(DataBillingCurrency.Ngn)]
+    [InlineData(DataBillingCurrency.Nok)]
+    [InlineData(DataBillingCurrency.Npr)]
+    [InlineData(DataBillingCurrency.Nzd)]
+    [InlineData(DataBillingCurrency.Pgk)]
+    [InlineData(DataBillingCurrency.Php)]
+    [InlineData(DataBillingCurrency.Pkr)]
+    [InlineData(DataBillingCurrency.Pln)]
+    [InlineData(DataBillingCurrency.Qar)]
+    [InlineData(DataBillingCurrency.Ron)]
+    [InlineData(DataBillingCurrency.Rsd)]
+    [InlineData(DataBillingCurrency.Rub)]
+    [InlineData(DataBillingCurrency.Rwf)]
+    [InlineData(DataBillingCurrency.Sar)]
+    [InlineData(DataBillingCurrency.Sbd)]
+    [InlineData(DataBillingCurrency.Scr)]
+    [InlineData(DataBillingCurrency.Sek)]
+    [InlineData(DataBillingCurrency.Sgd)]
+    [InlineData(DataBillingCurrency.Sle)]
+    [InlineData(DataBillingCurrency.Sll)]
+    [InlineData(DataBillingCurrency.Sos)]
+    [InlineData(DataBillingCurrency.Szl)]
+    [InlineData(DataBillingCurrency.Thb)]
+    [InlineData(DataBillingCurrency.Tjs)]
+    [InlineData(DataBillingCurrency.Top)]
+    [InlineData(DataBillingCurrency.Try)]
+    [InlineData(DataBillingCurrency.Ttd)]
+    [InlineData(DataBillingCurrency.Tzs)]
+    [InlineData(DataBillingCurrency.Uah)]
+    [InlineData(DataBillingCurrency.Uzs)]
+    [InlineData(DataBillingCurrency.Vnd)]
+    [InlineData(DataBillingCurrency.Vuv)]
+    [InlineData(DataBillingCurrency.Wst)]
+    [InlineData(DataBillingCurrency.Xaf)]
+    [InlineData(DataBillingCurrency.Xcd)]
+    [InlineData(DataBillingCurrency.Yer)]
+    [InlineData(DataBillingCurrency.Zar)]
+    [InlineData(DataBillingCurrency.Zmw)]
+    [InlineData(DataBillingCurrency.Clp)]
+    [InlineData(DataBillingCurrency.Djf)]
+    [InlineData(DataBillingCurrency.Gnf)]
+    [InlineData(DataBillingCurrency.Ugx)]
+    [InlineData(DataBillingCurrency.Pyg)]
+    [InlineData(DataBillingCurrency.Xof)]
+    [InlineData(DataBillingCurrency.Xpf)]
+    public void SerializationRoundtrip_Works(DataBillingCurrency rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, DataBillingCurrency> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataBillingCurrency>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataBillingCurrency>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataBillingCurrency>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }
 

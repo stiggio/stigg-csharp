@@ -3631,7 +3631,7 @@ public sealed record class SubscriptionListResponsePriceTierFlatPrice : JsonMode
     }
 
     /// <summary>
-    /// The price currency
+    /// ISO 4217 currency code
     /// </summary>
     public required ApiEnum<string, SubscriptionListResponsePriceTierFlatPriceCurrency> Currency
     {
@@ -3696,7 +3696,7 @@ class SubscriptionListResponsePriceTierFlatPriceFromRaw
 }
 
 /// <summary>
-/// The price currency
+/// ISO 4217 currency code
 /// </summary>
 [JsonConverter(typeof(SubscriptionListResponsePriceTierFlatPriceCurrencyConverter))]
 public enum SubscriptionListResponsePriceTierFlatPriceCurrency
@@ -4110,7 +4110,7 @@ public sealed record class SubscriptionListResponsePriceTierUnitPrice : JsonMode
     }
 
     /// <summary>
-    /// The price currency
+    /// ISO 4217 currency code
     /// </summary>
     public required ApiEnum<string, SubscriptionListResponsePriceTierUnitPriceCurrency> Currency
     {
@@ -4175,7 +4175,7 @@ class SubscriptionListResponsePriceTierUnitPriceFromRaw
 }
 
 /// <summary>
-/// The price currency
+/// ISO 4217 currency code
 /// </summary>
 [JsonConverter(typeof(SubscriptionListResponsePriceTierUnitPriceCurrencyConverter))]
 public enum SubscriptionListResponsePriceTierUnitPriceCurrency

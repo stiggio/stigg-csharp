@@ -5564,7 +5564,7 @@ public sealed record class SubscriptionProvisionResponseDataSubscriptionPriceTie
     }
 
     /// <summary>
-    /// The price currency
+    /// ISO 4217 currency code
     /// </summary>
     public required ApiEnum<
         string,
@@ -5637,7 +5637,7 @@ class SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceFromRaw
 }
 
 /// <summary>
-/// The price currency
+/// ISO 4217 currency code
 /// </summary>
 [JsonConverter(
     typeof(SubscriptionProvisionResponseDataSubscriptionPriceTierFlatPriceCurrencyConverter)
@@ -6170,7 +6170,7 @@ public sealed record class SubscriptionProvisionResponseDataSubscriptionPriceTie
     }
 
     /// <summary>
-    /// The price currency
+    /// ISO 4217 currency code
     /// </summary>
     public required ApiEnum<
         string,
@@ -6243,7 +6243,7 @@ class SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceFromRaw
 }
 
 /// <summary>
-/// The price currency
+/// ISO 4217 currency code
 /// </summary>
 [JsonConverter(
     typeof(SubscriptionProvisionResponseDataSubscriptionPriceTierUnitPriceCurrencyConverter)
