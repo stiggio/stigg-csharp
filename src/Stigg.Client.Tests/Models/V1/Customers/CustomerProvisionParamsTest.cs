@@ -17,7 +17,7 @@ public class CustomerProvisionParamsTest : TestBase
             ID = "id",
             BillingCurrency = Customers::CustomerProvisionParamsBillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = "couponId",
+            CouponID = Customers::CustomerProvisionParamsCouponID.Undefined,
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
@@ -91,7 +91,8 @@ public class CustomerProvisionParamsTest : TestBase
         ApiEnum<string, Customers::CustomerProvisionParamsBillingCurrency> expectedBillingCurrency =
             Customers::CustomerProvisionParamsBillingCurrency.Usd;
         string expectedBillingID = "billingId";
-        string expectedCouponID = "couponId";
+        ApiEnum<string, Customers::CustomerProvisionParamsCouponID> expectedCouponID =
+            Customers::CustomerProvisionParamsCouponID.Undefined;
         Customers::DefaultPaymentMethod expectedDefaultPaymentMethod = new()
         {
             BillingID = "billingId",
@@ -194,7 +195,7 @@ public class CustomerProvisionParamsTest : TestBase
             ID = "id",
             BillingCurrency = Customers::CustomerProvisionParamsBillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = "couponId",
+            CouponID = Customers::CustomerProvisionParamsCouponID.Undefined,
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
@@ -225,7 +226,7 @@ public class CustomerProvisionParamsTest : TestBase
             ID = "id",
             BillingCurrency = Customers::CustomerProvisionParamsBillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = "couponId",
+            CouponID = Customers::CustomerProvisionParamsCouponID.Undefined,
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
@@ -442,7 +443,7 @@ public class CustomerProvisionParamsTest : TestBase
             ID = "id",
             BillingCurrency = Customers::CustomerProvisionParamsBillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = "couponId",
+            CouponID = Customers::CustomerProvisionParamsCouponID.Undefined,
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
@@ -796,6 +797,58 @@ public class CustomerProvisionParamsBillingCurrencyTest : TestBase
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
             ApiEnum<string, Customers::CustomerProvisionParamsBillingCurrency>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class CustomerProvisionParamsCouponIDTest : TestBase
+{
+    [Theory]
+    [InlineData(Customers::CustomerProvisionParamsCouponID.Undefined)]
+    public void Validation_Works(Customers::CustomerProvisionParamsCouponID rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Customers::CustomerProvisionParamsCouponID> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, Customers::CustomerProvisionParamsCouponID>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(Customers::CustomerProvisionParamsCouponID.Undefined)]
+    public void SerializationRoundtrip_Works(Customers::CustomerProvisionParamsCouponID rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Customers::CustomerProvisionParamsCouponID> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, Customers::CustomerProvisionParamsCouponID>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, Customers::CustomerProvisionParamsCouponID>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, Customers::CustomerProvisionParamsCouponID>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);

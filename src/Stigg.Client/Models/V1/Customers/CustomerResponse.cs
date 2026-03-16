@@ -168,12 +168,12 @@ public sealed record class Data : JsonModel
     /// <summary>
     /// Customer level coupon
     /// </summary>
-    public string? CouponID
+    public ApiEnum<string, DataCouponID>? CouponID
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("couponId");
+            return this._rawData.GetNullableClass<ApiEnum<string, DataCouponID>>("couponId");
         }
         init { this._rawData.Set("couponId", value); }
     }
@@ -321,7 +321,7 @@ public sealed record class Data : JsonModel
         _ = this.UpdatedAt;
         this.BillingCurrency?.Validate();
         _ = this.BillingID;
-        _ = this.CouponID;
+        this.CouponID?.Raw();
         this.DefaultPaymentMethod?.Validate();
         _ = this.Email;
         foreach (var item in this.Integrations ?? [])
@@ -750,6 +750,50 @@ sealed class DataBillingCurrencyConverter : JsonConverter<DataBillingCurrency>
                 DataBillingCurrency.Pyg => "pyg",
                 DataBillingCurrency.Xof => "xof",
                 DataBillingCurrency.Xpf => "xpf",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Customer level coupon
+/// </summary>
+[JsonConverter(typeof(DataCouponIDConverter))]
+public enum DataCouponID
+{
+    Undefined,
+}
+
+sealed class DataCouponIDConverter : JsonConverter<DataCouponID>
+{
+    public override DataCouponID Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "" => DataCouponID.Undefined,
+            _ => (DataCouponID)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        DataCouponID value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                DataCouponID.Undefined => "",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

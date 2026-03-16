@@ -546,6 +546,9 @@ public sealed record class AppliedCoupon : JsonModel
         }
     }
 
+    /// <summary>
+    /// Stigg coupon ID
+    /// </summary>
     public string? CouponID
     {
         get

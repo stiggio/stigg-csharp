@@ -72,12 +72,14 @@ public record class CustomerProvisionParams : ParamsBase
     /// <summary>
     /// Customer level coupon
     /// </summary>
-    public string? CouponID
+    public ApiEnum<string, CustomerProvisionParamsCouponID>? CouponID
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableClass<string>("couponId");
+            return this._rawBodyData.GetNullableClass<
+                ApiEnum<string, CustomerProvisionParamsCouponID>
+            >("couponId");
         }
         init { this._rawBodyData.Set("couponId", value); }
     }
@@ -711,6 +713,51 @@ sealed class CustomerProvisionParamsBillingCurrencyConverter
                 CustomerProvisionParamsBillingCurrency.Pyg => "pyg",
                 CustomerProvisionParamsBillingCurrency.Xof => "xof",
                 CustomerProvisionParamsBillingCurrency.Xpf => "xpf",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Customer level coupon
+/// </summary>
+[JsonConverter(typeof(CustomerProvisionParamsCouponIDConverter))]
+public enum CustomerProvisionParamsCouponID
+{
+    Undefined,
+}
+
+sealed class CustomerProvisionParamsCouponIDConverter
+    : JsonConverter<CustomerProvisionParamsCouponID>
+{
+    public override CustomerProvisionParamsCouponID Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "" => CustomerProvisionParamsCouponID.Undefined,
+            _ => (CustomerProvisionParamsCouponID)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        CustomerProvisionParamsCouponID value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                CustomerProvisionParamsCouponID.Undefined => "",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

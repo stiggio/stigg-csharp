@@ -60,12 +60,12 @@ public record class CustomerUpdateParams : ParamsBase
     /// <summary>
     /// Customer level coupon
     /// </summary>
-    public string? CouponID
+    public ApiEnum<string, CouponID>? CouponID
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableClass<string>("couponId");
+            return this._rawBodyData.GetNullableClass<ApiEnum<string, CouponID>>("couponId");
         }
         init { this._rawBodyData.Set("couponId", value); }
     }
@@ -688,6 +688,46 @@ sealed class BillingCurrencyConverter : JsonConverter<BillingCurrency>
                 BillingCurrency.Pyg => "pyg",
                 BillingCurrency.Xof => "xof",
                 BillingCurrency.Xpf => "xpf",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Customer level coupon
+/// </summary>
+[JsonConverter(typeof(CouponIDConverter))]
+public enum CouponID
+{
+    Undefined,
+}
+
+sealed class CouponIDConverter : JsonConverter<CouponID>
+{
+    public override CouponID Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "" => CouponID.Undefined,
+            _ => (CouponID)(-1),
+        };
+    }
+
+    public override void Write(Utf8JsonWriter writer, CouponID value, JsonSerializerOptions options)
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                CouponID.Undefined => "",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

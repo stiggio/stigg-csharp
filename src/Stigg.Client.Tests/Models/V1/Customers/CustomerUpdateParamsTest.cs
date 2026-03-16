@@ -17,7 +17,7 @@ public class CustomerUpdateParamsTest : TestBase
             ID = "x",
             BillingCurrency = BillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = "couponId",
+            CouponID = CouponID.Undefined,
             Email = "dev@stainless.com",
             Integrations =
             [
@@ -81,7 +81,7 @@ public class CustomerUpdateParamsTest : TestBase
         string expectedID = "x";
         ApiEnum<string, BillingCurrency> expectedBillingCurrency = BillingCurrency.Usd;
         string expectedBillingID = "billingId";
-        string expectedCouponID = "couponId";
+        ApiEnum<string, CouponID> expectedCouponID = CouponID.Undefined;
         string expectedEmail = "dev@stainless.com";
         List<Integration> expectedIntegrations =
         [
@@ -174,7 +174,7 @@ public class CustomerUpdateParamsTest : TestBase
             ID = "x",
             BillingCurrency = BillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = "couponId",
+            CouponID = CouponID.Undefined,
             Email = "dev@stainless.com",
             Language = "language",
             Name = "name",
@@ -197,7 +197,7 @@ public class CustomerUpdateParamsTest : TestBase
             ID = "x",
             BillingCurrency = BillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = "couponId",
+            CouponID = CouponID.Undefined,
             Email = "dev@stainless.com",
             Language = "language",
             Name = "name",
@@ -399,7 +399,7 @@ public class CustomerUpdateParamsTest : TestBase
             ID = "x",
             BillingCurrency = BillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = "couponId",
+            CouponID = CouponID.Undefined,
             Email = "dev@stainless.com",
             Integrations =
             [
@@ -744,6 +744,62 @@ public class BillingCurrencyTest : TestBase
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<ApiEnum<string, BillingCurrency>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class CouponIDTest : TestBase
+{
+    [Theory]
+    [InlineData(CouponID.Undefined)]
+    public void Validation_Works(CouponID rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, CouponID> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, CouponID>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(CouponID.Undefined)]
+    public void SerializationRoundtrip_Works(CouponID rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, CouponID> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, CouponID>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, CouponID>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, CouponID>>(
             json,
             ModelBase.SerializerOptions
         );

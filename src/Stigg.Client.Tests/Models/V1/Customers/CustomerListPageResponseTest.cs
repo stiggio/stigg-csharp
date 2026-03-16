@@ -23,7 +23,7 @@ public class CustomerListPageResponseTest : TestBase
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     BillingCurrency = CustomerListResponseBillingCurrency.Usd,
                     BillingID = "billingId",
-                    CouponID = "couponId",
+                    CouponID = CustomerListResponseCouponID.Undefined,
                     DefaultPaymentMethod = new()
                     {
                         BillingID = "billingId",
@@ -113,7 +113,7 @@ public class CustomerListPageResponseTest : TestBase
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 BillingCurrency = CustomerListResponseBillingCurrency.Usd,
                 BillingID = "billingId",
-                CouponID = "couponId",
+                CouponID = CustomerListResponseCouponID.Undefined,
                 DefaultPaymentMethod = new()
                 {
                     BillingID = "billingId",
@@ -214,7 +214,7 @@ public class CustomerListPageResponseTest : TestBase
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     BillingCurrency = CustomerListResponseBillingCurrency.Usd,
                     BillingID = "billingId",
-                    CouponID = "couponId",
+                    CouponID = CustomerListResponseCouponID.Undefined,
                     DefaultPaymentMethod = new()
                     {
                         BillingID = "billingId",
@@ -318,7 +318,7 @@ public class CustomerListPageResponseTest : TestBase
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     BillingCurrency = CustomerListResponseBillingCurrency.Usd,
                     BillingID = "billingId",
-                    CouponID = "couponId",
+                    CouponID = CustomerListResponseCouponID.Undefined,
                     DefaultPaymentMethod = new()
                     {
                         BillingID = "billingId",
@@ -415,7 +415,7 @@ public class CustomerListPageResponseTest : TestBase
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 BillingCurrency = CustomerListResponseBillingCurrency.Usd,
                 BillingID = "billingId",
-                CouponID = "couponId",
+                CouponID = CustomerListResponseCouponID.Undefined,
                 DefaultPaymentMethod = new()
                 {
                     BillingID = "billingId",
@@ -516,7 +516,7 @@ public class CustomerListPageResponseTest : TestBase
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     BillingCurrency = CustomerListResponseBillingCurrency.Usd,
                     BillingID = "billingId",
-                    CouponID = "couponId",
+                    CouponID = CustomerListResponseCouponID.Undefined,
                     DefaultPaymentMethod = new()
                     {
                         BillingID = "billingId",
@@ -614,7 +614,7 @@ public class CustomerListPageResponseTest : TestBase
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     BillingCurrency = CustomerListResponseBillingCurrency.Usd,
                     BillingID = "billingId",
-                    CouponID = "couponId",
+                    CouponID = CustomerListResponseCouponID.Undefined,
                     DefaultPaymentMethod = new()
                     {
                         BillingID = "billingId",

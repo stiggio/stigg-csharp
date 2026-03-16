@@ -22,7 +22,7 @@ public class CustomerResponseTest : TestBase
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 BillingCurrency = DataBillingCurrency.Usd,
                 BillingID = "billingId",
-                CouponID = "couponId",
+                CouponID = DataCouponID.Undefined,
                 DefaultPaymentMethod = new()
                 {
                     BillingID = "billingId",
@@ -103,7 +103,7 @@ public class CustomerResponseTest : TestBase
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             BillingCurrency = DataBillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = "couponId",
+            CouponID = DataCouponID.Undefined,
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
@@ -188,7 +188,7 @@ public class CustomerResponseTest : TestBase
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 BillingCurrency = DataBillingCurrency.Usd,
                 BillingID = "billingId",
-                CouponID = "couponId",
+                CouponID = DataCouponID.Undefined,
                 DefaultPaymentMethod = new()
                 {
                     BillingID = "billingId",
@@ -283,7 +283,7 @@ public class CustomerResponseTest : TestBase
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 BillingCurrency = DataBillingCurrency.Usd,
                 BillingID = "billingId",
-                CouponID = "couponId",
+                CouponID = DataCouponID.Undefined,
                 DefaultPaymentMethod = new()
                 {
                     BillingID = "billingId",
@@ -371,7 +371,7 @@ public class CustomerResponseTest : TestBase
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             BillingCurrency = DataBillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = "couponId",
+            CouponID = DataCouponID.Undefined,
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
@@ -456,7 +456,7 @@ public class CustomerResponseTest : TestBase
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 BillingCurrency = DataBillingCurrency.Usd,
                 BillingID = "billingId",
-                CouponID = "couponId",
+                CouponID = DataCouponID.Undefined,
                 DefaultPaymentMethod = new()
                 {
                     BillingID = "billingId",
@@ -545,7 +545,7 @@ public class CustomerResponseTest : TestBase
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 BillingCurrency = DataBillingCurrency.Usd,
                 BillingID = "billingId",
-                CouponID = "couponId",
+                CouponID = DataCouponID.Undefined,
                 DefaultPaymentMethod = new()
                 {
                     BillingID = "billingId",
@@ -637,7 +637,7 @@ public class DataTest : TestBase
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             BillingCurrency = DataBillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = "couponId",
+            CouponID = DataCouponID.Undefined,
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
@@ -712,7 +712,7 @@ public class DataTest : TestBase
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, DataBillingCurrency> expectedBillingCurrency = DataBillingCurrency.Usd;
         string expectedBillingID = "billingId";
-        string expectedCouponID = "couponId";
+        ApiEnum<string, DataCouponID> expectedCouponID = DataCouponID.Undefined;
         DataDefaultPaymentMethod expectedDefaultPaymentMethod = new()
         {
             BillingID = "billingId",
@@ -820,7 +820,7 @@ public class DataTest : TestBase
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             BillingCurrency = DataBillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = "couponId",
+            CouponID = DataCouponID.Undefined,
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
@@ -906,7 +906,7 @@ public class DataTest : TestBase
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             BillingCurrency = DataBillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = "couponId",
+            CouponID = DataCouponID.Undefined,
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
@@ -985,7 +985,7 @@ public class DataTest : TestBase
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, DataBillingCurrency> expectedBillingCurrency = DataBillingCurrency.Usd;
         string expectedBillingID = "billingId";
-        string expectedCouponID = "couponId";
+        ApiEnum<string, DataCouponID> expectedCouponID = DataCouponID.Undefined;
         DataDefaultPaymentMethod expectedDefaultPaymentMethod = new()
         {
             BillingID = "billingId",
@@ -1093,7 +1093,7 @@ public class DataTest : TestBase
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             BillingCurrency = DataBillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = "couponId",
+            CouponID = DataCouponID.Undefined,
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
@@ -1176,7 +1176,7 @@ public class DataTest : TestBase
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             BillingCurrency = DataBillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = "couponId",
+            CouponID = DataCouponID.Undefined,
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
@@ -1210,7 +1210,7 @@ public class DataTest : TestBase
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             BillingCurrency = DataBillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = "couponId",
+            CouponID = DataCouponID.Undefined,
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
@@ -1239,7 +1239,7 @@ public class DataTest : TestBase
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             BillingCurrency = DataBillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = "couponId",
+            CouponID = DataCouponID.Undefined,
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
@@ -1278,7 +1278,7 @@ public class DataTest : TestBase
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             BillingCurrency = DataBillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = "couponId",
+            CouponID = DataCouponID.Undefined,
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
@@ -1632,7 +1632,7 @@ public class DataTest : TestBase
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             BillingCurrency = DataBillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = "couponId",
+            CouponID = DataCouponID.Undefined,
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
@@ -1985,6 +1985,62 @@ public class DataBillingCurrencyTest : TestBase
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataBillingCurrency>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class DataCouponIDTest : TestBase
+{
+    [Theory]
+    [InlineData(DataCouponID.Undefined)]
+    public void Validation_Works(DataCouponID rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, DataCouponID> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataCouponID>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(DataCouponID.Undefined)]
+    public void SerializationRoundtrip_Works(DataCouponID rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, DataCouponID> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataCouponID>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataCouponID>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataCouponID>>(
             json,
             ModelBase.SerializerOptions
         );
