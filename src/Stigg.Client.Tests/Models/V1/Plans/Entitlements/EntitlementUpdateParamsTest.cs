@@ -191,6 +191,7 @@ public class BodyTest : TestBase
             Amount = 1,
             Behavior = BodyCreditBehavior.Increment,
             Cadence = BodyCreditCadence.Month,
+            DependencyFeatureID = "dependencyFeatureId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
             HiddenFromWidgets = [BodyCreditHiddenFromWidget.Paywall],
@@ -242,6 +243,7 @@ public class BodyTest : TestBase
             Amount = 1,
             Behavior = BodyCreditBehavior.Increment,
             Cadence = BodyCreditCadence.Month,
+            DependencyFeatureID = "dependencyFeatureId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
             HiddenFromWidgets = [BodyCreditHiddenFromWidget.Paywall],
@@ -1406,6 +1408,7 @@ public class BodyCreditTest : TestBase
             Amount = 1,
             Behavior = BodyCreditBehavior.Increment,
             Cadence = BodyCreditCadence.Month,
+            DependencyFeatureID = "dependencyFeatureId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
             HiddenFromWidgets = [BodyCreditHiddenFromWidget.Paywall],
@@ -1418,6 +1421,7 @@ public class BodyCreditTest : TestBase
         double expectedAmount = 1;
         ApiEnum<string, BodyCreditBehavior> expectedBehavior = BodyCreditBehavior.Increment;
         ApiEnum<string, BodyCreditCadence> expectedCadence = BodyCreditCadence.Month;
+        string expectedDependencyFeatureID = "dependencyFeatureId";
         string expectedDescription = "description";
         string expectedDisplayNameOverride = "displayNameOverride";
         List<ApiEnum<string, BodyCreditHiddenFromWidget>> expectedHiddenFromWidgets =
@@ -1432,6 +1436,7 @@ public class BodyCreditTest : TestBase
         Assert.Equal(expectedAmount, model.Amount);
         Assert.Equal(expectedBehavior, model.Behavior);
         Assert.Equal(expectedCadence, model.Cadence);
+        Assert.Equal(expectedDependencyFeatureID, model.DependencyFeatureID);
         Assert.Equal(expectedDescription, model.Description);
         Assert.Equal(expectedDisplayNameOverride, model.DisplayNameOverride);
         Assert.NotNull(model.HiddenFromWidgets);
@@ -1453,6 +1458,7 @@ public class BodyCreditTest : TestBase
             Amount = 1,
             Behavior = BodyCreditBehavior.Increment,
             Cadence = BodyCreditCadence.Month,
+            DependencyFeatureID = "dependencyFeatureId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
             HiddenFromWidgets = [BodyCreditHiddenFromWidget.Paywall],
@@ -1478,6 +1484,7 @@ public class BodyCreditTest : TestBase
             Amount = 1,
             Behavior = BodyCreditBehavior.Increment,
             Cadence = BodyCreditCadence.Month,
+            DependencyFeatureID = "dependencyFeatureId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
             HiddenFromWidgets = [BodyCreditHiddenFromWidget.Paywall],
@@ -1497,6 +1504,7 @@ public class BodyCreditTest : TestBase
         double expectedAmount = 1;
         ApiEnum<string, BodyCreditBehavior> expectedBehavior = BodyCreditBehavior.Increment;
         ApiEnum<string, BodyCreditCadence> expectedCadence = BodyCreditCadence.Month;
+        string expectedDependencyFeatureID = "dependencyFeatureId";
         string expectedDescription = "description";
         string expectedDisplayNameOverride = "displayNameOverride";
         List<ApiEnum<string, BodyCreditHiddenFromWidget>> expectedHiddenFromWidgets =
@@ -1511,6 +1519,7 @@ public class BodyCreditTest : TestBase
         Assert.Equal(expectedAmount, deserialized.Amount);
         Assert.Equal(expectedBehavior, deserialized.Behavior);
         Assert.Equal(expectedCadence, deserialized.Cadence);
+        Assert.Equal(expectedDependencyFeatureID, deserialized.DependencyFeatureID);
         Assert.Equal(expectedDescription, deserialized.Description);
         Assert.Equal(expectedDisplayNameOverride, deserialized.DisplayNameOverride);
         Assert.NotNull(deserialized.HiddenFromWidgets);
@@ -1532,6 +1541,7 @@ public class BodyCreditTest : TestBase
             Amount = 1,
             Behavior = BodyCreditBehavior.Increment,
             Cadence = BodyCreditCadence.Month,
+            DependencyFeatureID = "dependencyFeatureId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
             HiddenFromWidgets = [BodyCreditHiddenFromWidget.Paywall],
@@ -1546,7 +1556,7 @@ public class BodyCreditTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new BodyCredit { };
+        var model = new BodyCredit { DependencyFeatureID = "dependencyFeatureId" };
 
         Assert.Null(model.Amount);
         Assert.False(model.RawData.ContainsKey("amount"));
@@ -1571,7 +1581,7 @@ public class BodyCreditTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new BodyCredit { };
+        var model = new BodyCredit { DependencyFeatureID = "dependencyFeatureId" };
 
         model.Validate();
     }
@@ -1581,6 +1591,8 @@ public class BodyCreditTest : TestBase
     {
         var model = new BodyCredit
         {
+            DependencyFeatureID = "dependencyFeatureId",
+
             // Null should be interpreted as omitted for these properties
             Amount = null,
             Behavior = null,
@@ -1618,6 +1630,8 @@ public class BodyCreditTest : TestBase
     {
         var model = new BodyCredit
         {
+            DependencyFeatureID = "dependencyFeatureId",
+
             // Null should be interpreted as omitted for these properties
             Amount = null,
             Behavior = null,
@@ -1634,6 +1648,88 @@ public class BodyCreditTest : TestBase
     }
 
     [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new BodyCredit
+        {
+            Amount = 1,
+            Behavior = BodyCreditBehavior.Increment,
+            Cadence = BodyCreditCadence.Month,
+            Description = "description",
+            DisplayNameOverride = "displayNameOverride",
+            HiddenFromWidgets = [BodyCreditHiddenFromWidget.Paywall],
+            IsCustom = true,
+            IsGranted = true,
+            Order = 0,
+        };
+
+        Assert.Null(model.DependencyFeatureID);
+        Assert.False(model.RawData.ContainsKey("dependencyFeatureId"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new BodyCredit
+        {
+            Amount = 1,
+            Behavior = BodyCreditBehavior.Increment,
+            Cadence = BodyCreditCadence.Month,
+            Description = "description",
+            DisplayNameOverride = "displayNameOverride",
+            HiddenFromWidgets = [BodyCreditHiddenFromWidget.Paywall],
+            IsCustom = true,
+            IsGranted = true,
+            Order = 0,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new BodyCredit
+        {
+            Amount = 1,
+            Behavior = BodyCreditBehavior.Increment,
+            Cadence = BodyCreditCadence.Month,
+            Description = "description",
+            DisplayNameOverride = "displayNameOverride",
+            HiddenFromWidgets = [BodyCreditHiddenFromWidget.Paywall],
+            IsCustom = true,
+            IsGranted = true,
+            Order = 0,
+
+            DependencyFeatureID = null,
+        };
+
+        Assert.Null(model.DependencyFeatureID);
+        Assert.True(model.RawData.ContainsKey("dependencyFeatureId"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new BodyCredit
+        {
+            Amount = 1,
+            Behavior = BodyCreditBehavior.Increment,
+            Cadence = BodyCreditCadence.Month,
+            Description = "description",
+            DisplayNameOverride = "displayNameOverride",
+            HiddenFromWidgets = [BodyCreditHiddenFromWidget.Paywall],
+            IsCustom = true,
+            IsGranted = true,
+            Order = 0,
+
+            DependencyFeatureID = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
     public void CopyConstructor_Works()
     {
         var model = new BodyCredit
@@ -1641,6 +1737,7 @@ public class BodyCreditTest : TestBase
             Amount = 1,
             Behavior = BodyCreditBehavior.Increment,
             Cadence = BodyCreditCadence.Month,
+            DependencyFeatureID = "dependencyFeatureId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
             HiddenFromWidgets = [BodyCreditHiddenFromWidget.Paywall],

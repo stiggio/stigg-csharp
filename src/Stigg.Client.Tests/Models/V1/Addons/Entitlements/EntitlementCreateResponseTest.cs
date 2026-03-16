@@ -322,6 +322,7 @@ public class EntitlementCreateResponseDataTest : TestBase
             IsGranted = true,
             Order = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DependencyFeatureID = "dependencyFeatureId",
         };
         value.Validate();
     }
@@ -377,6 +378,7 @@ public class EntitlementCreateResponseDataTest : TestBase
             IsGranted = true,
             Order = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DependencyFeatureID = "dependencyFeatureId",
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<EntitlementCreateResponseData>(
@@ -1516,6 +1518,7 @@ public class EntitlementCreateResponseDataCreditTest : TestBase
             IsGranted = true,
             Order = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DependencyFeatureID = "dependencyFeatureId",
         };
 
         string expectedID = "id";
@@ -1535,6 +1538,7 @@ public class EntitlementCreateResponseDataCreditTest : TestBase
         double expectedOrder = 0;
         JsonElement expectedType = JsonSerializer.SerializeToElement("CREDIT");
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedDependencyFeatureID = "dependencyFeatureId";
 
         Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedAmount, model.Amount);
@@ -1553,6 +1557,7 @@ public class EntitlementCreateResponseDataCreditTest : TestBase
         Assert.Equal(expectedOrder, model.Order);
         Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
         Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
+        Assert.Equal(expectedDependencyFeatureID, model.DependencyFeatureID);
     }
 
     [Fact]
@@ -1572,6 +1577,7 @@ public class EntitlementCreateResponseDataCreditTest : TestBase
             IsGranted = true,
             Order = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DependencyFeatureID = "dependencyFeatureId",
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -1600,6 +1606,7 @@ public class EntitlementCreateResponseDataCreditTest : TestBase
             IsGranted = true,
             Order = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DependencyFeatureID = "dependencyFeatureId",
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -1626,6 +1633,7 @@ public class EntitlementCreateResponseDataCreditTest : TestBase
         double expectedOrder = 0;
         JsonElement expectedType = JsonSerializer.SerializeToElement("CREDIT");
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedDependencyFeatureID = "dependencyFeatureId";
 
         Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedAmount, deserialized.Amount);
@@ -1644,6 +1652,7 @@ public class EntitlementCreateResponseDataCreditTest : TestBase
         Assert.Equal(expectedOrder, deserialized.Order);
         Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
         Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
+        Assert.Equal(expectedDependencyFeatureID, deserialized.DependencyFeatureID);
     }
 
     [Fact]
@@ -1663,6 +1672,101 @@ public class EntitlementCreateResponseDataCreditTest : TestBase
             IsGranted = true,
             Order = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DependencyFeatureID = "dependencyFeatureId",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new EntitlementCreateResponseDataCredit
+        {
+            ID = "id",
+            Amount = 0,
+            Behavior = EntitlementCreateResponseDataCreditBehavior.Increment,
+            Cadence = EntitlementCreateResponseDataCreditCadence.Month,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            DisplayNameOverride = "displayNameOverride",
+            HiddenFromWidgets = [EntitlementCreateResponseDataCreditHiddenFromWidget.Paywall],
+            IsCustom = true,
+            IsGranted = true,
+            Order = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        Assert.Null(model.DependencyFeatureID);
+        Assert.False(model.RawData.ContainsKey("dependencyFeatureId"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new EntitlementCreateResponseDataCredit
+        {
+            ID = "id",
+            Amount = 0,
+            Behavior = EntitlementCreateResponseDataCreditBehavior.Increment,
+            Cadence = EntitlementCreateResponseDataCreditCadence.Month,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            DisplayNameOverride = "displayNameOverride",
+            HiddenFromWidgets = [EntitlementCreateResponseDataCreditHiddenFromWidget.Paywall],
+            IsCustom = true,
+            IsGranted = true,
+            Order = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new EntitlementCreateResponseDataCredit
+        {
+            ID = "id",
+            Amount = 0,
+            Behavior = EntitlementCreateResponseDataCreditBehavior.Increment,
+            Cadence = EntitlementCreateResponseDataCreditCadence.Month,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            DisplayNameOverride = "displayNameOverride",
+            HiddenFromWidgets = [EntitlementCreateResponseDataCreditHiddenFromWidget.Paywall],
+            IsCustom = true,
+            IsGranted = true,
+            Order = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+
+            DependencyFeatureID = null,
+        };
+
+        Assert.Null(model.DependencyFeatureID);
+        Assert.True(model.RawData.ContainsKey("dependencyFeatureId"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new EntitlementCreateResponseDataCredit
+        {
+            ID = "id",
+            Amount = 0,
+            Behavior = EntitlementCreateResponseDataCreditBehavior.Increment,
+            Cadence = EntitlementCreateResponseDataCreditCadence.Month,
+            CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
+            DisplayNameOverride = "displayNameOverride",
+            HiddenFromWidgets = [EntitlementCreateResponseDataCreditHiddenFromWidget.Paywall],
+            IsCustom = true,
+            IsGranted = true,
+            Order = 0,
+            UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+
+            DependencyFeatureID = null,
         };
 
         model.Validate();
@@ -1685,6 +1789,7 @@ public class EntitlementCreateResponseDataCreditTest : TestBase
             IsGranted = true,
             Order = 0,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DependencyFeatureID = "dependencyFeatureId",
         };
 
         EntitlementCreateResponseDataCredit copied = new(model);

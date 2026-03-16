@@ -92,15 +92,4 @@ public class AddonServiceTest : TestBase
         );
         response.Validate();
     }
-
-    [Fact(Skip = "Mock server tests are disabled")]
-    public async Task SetPricing_Works()
-    {
-        var setPackagePricingResponse = await this.client.V1.Addons.SetPricing(
-            "x",
-            new() { PricingType = AddonSetPricingParamsPricingType.Free },
-            TestContext.Current.CancellationToken
-        );
-        setPackagePricingResponse.Validate();
-    }
 }

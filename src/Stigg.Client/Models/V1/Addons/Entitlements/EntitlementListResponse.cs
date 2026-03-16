@@ -1989,6 +1989,21 @@ public sealed record class EntitlementListResponseDataCredit : JsonModel
         init { this._rawData.Set("updatedAt", value); }
     }
 
+    /// <summary>
+    /// The feature ID this entitlement depends on (for credit entitlements). The
+    /// entitlement value will be calculated as: base amount × dependency feature
+    /// usage limit
+    /// </summary>
+    public string? DependencyFeatureID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("dependencyFeatureId");
+        }
+        init { this._rawData.Set("dependencyFeatureId", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -2011,6 +2026,7 @@ public sealed record class EntitlementListResponseDataCredit : JsonModel
             throw new StiggInvalidDataException("Invalid value given for constant");
         }
         _ = this.UpdatedAt;
+        _ = this.DependencyFeatureID;
     }
 
     public EntitlementListResponseDataCredit()

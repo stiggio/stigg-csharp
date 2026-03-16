@@ -2,7 +2,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Stigg.Client.Core;
-using Stigg.Client.Models.V1.Addons;
 using Stigg.Client.Models.V1.Plans;
 using Stigg.Client.Services.V1.Plans;
 
@@ -127,22 +126,6 @@ public interface IPlanService
     Task<PlanRemoveDraftResponse> RemoveDraft(
         string id,
         PlanRemoveDraftParams? parameters = null,
-        CancellationToken cancellationToken = default
-    );
-
-    /// <summary>
-    /// Sets the pricing configuration for a plan, including pricing models, overage
-    /// pricing, and minimum spend.
-    /// </summary>
-    Task<SetPackagePricingResponse> SetPricing(
-        PlanSetPricingParams parameters,
-        CancellationToken cancellationToken = default
-    );
-
-    /// <inheritdoc cref="SetPricing(PlanSetPricingParams, CancellationToken)"/>
-    Task<SetPackagePricingResponse> SetPricing(
-        string id,
-        PlanSetPricingParams parameters,
         CancellationToken cancellationToken = default
     );
 }
@@ -273,22 +256,6 @@ public interface IPlanServiceWithRawResponse
     Task<HttpResponse<PlanRemoveDraftResponse>> RemoveDraft(
         string id,
         PlanRemoveDraftParams? parameters = null,
-        CancellationToken cancellationToken = default
-    );
-
-    /// <summary>
-    /// Returns a raw HTTP response for `put /api/v1/plans/{id}/charges`, but is otherwise the
-    /// same as <see cref="IPlanService.SetPricing(PlanSetPricingParams, CancellationToken)"/>.
-    /// </summary>
-    Task<HttpResponse<SetPackagePricingResponse>> SetPricing(
-        PlanSetPricingParams parameters,
-        CancellationToken cancellationToken = default
-    );
-
-    /// <inheritdoc cref="SetPricing(PlanSetPricingParams, CancellationToken)"/>
-    Task<HttpResponse<SetPackagePricingResponse>> SetPricing(
-        string id,
-        PlanSetPricingParams parameters,
         CancellationToken cancellationToken = default
     );
 }

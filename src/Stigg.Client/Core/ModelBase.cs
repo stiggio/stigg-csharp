@@ -382,99 +382,12 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Addons::Type>(),
             new ApiEnumConverter<string, Addons::DataPricingType>(),
             new ApiEnumConverter<string, Addons::DataStatus>(),
-            new ApiEnumConverter<string, Addons::SetPackagePricingPricingType>(),
-            new ApiEnumConverter<string, Addons::SetPackagePricingMinimumSpendBillingPeriod>(),
-            new ApiEnumConverter<string, Addons::SetPackagePricingMinimumSpendMinimumCurrency>(),
-            new ApiEnumConverter<string, Addons::SetPackagePricingOverageBillingPeriod>(),
-            new ApiEnumConverter<
-                string,
-                Addons::SetPackagePricingOveragePricingModelBillingModel
-            >(),
-            new ApiEnumConverter<
-                string,
-                Addons::SetPackagePricingOveragePricingModelPricePeriodBillingPeriod
-            >(),
-            new ApiEnumConverter<
-                string,
-                Addons::SetPackagePricingOveragePricingModelPricePeriodCreditGrantCadence
-            >(),
-            new ApiEnumConverter<
-                string,
-                Addons::SetPackagePricingOveragePricingModelPricePeriodPriceCurrency
-            >(),
-            new ApiEnumConverter<
-                string,
-                Addons::SetPackagePricingOveragePricingModelPricePeriodTierFlatPriceCurrency
-            >(),
-            new ApiEnumConverter<
-                string,
-                Addons::SetPackagePricingOveragePricingModelPricePeriodTierUnitPriceCurrency
-            >(),
-            new ApiEnumConverter<
-                string,
-                Addons::SetPackagePricingOveragePricingModelBillingCadence
-            >(),
-            new ApiEnumConverter<
-                string,
-                Addons::SetPackagePricingOveragePricingModelEntitlementMonthlyResetPeriodConfigurationAccordingTo
-            >(),
-            new ApiEnumConverter<
-                string,
-                Addons::SetPackagePricingOveragePricingModelEntitlementResetPeriod
-            >(),
-            new ApiEnumConverter<
-                string,
-                Addons::SetPackagePricingOveragePricingModelEntitlementWeeklyResetPeriodConfigurationAccordingTo
-            >(),
-            new ApiEnumConverter<
-                string,
-                Addons::SetPackagePricingOveragePricingModelEntitlementYearlyResetPeriodConfigurationAccordingTo
-            >(),
-            new ApiEnumConverter<string, Addons::SetPackagePricingPricingModelBillingModel>(),
-            new ApiEnumConverter<
-                string,
-                Addons::SetPackagePricingPricingModelPricePeriodBillingPeriod
-            >(),
-            new ApiEnumConverter<
-                string,
-                Addons::SetPackagePricingPricingModelPricePeriodCreditGrantCadence
-            >(),
-            new ApiEnumConverter<
-                string,
-                Addons::SetPackagePricingPricingModelPricePeriodPriceCurrency
-            >(),
-            new ApiEnumConverter<
-                string,
-                Addons::SetPackagePricingPricingModelPricePeriodTierFlatPriceCurrency
-            >(),
-            new ApiEnumConverter<
-                string,
-                Addons::SetPackagePricingPricingModelPricePeriodTierUnitPriceCurrency
-            >(),
-            new ApiEnumConverter<string, Addons::SetPackagePricingPricingModelBillingCadence>(),
-            new ApiEnumConverter<
-                string,
-                Addons::SetPackagePricingPricingModelMonthlyResetPeriodConfigurationAccordingTo
-            >(),
-            new ApiEnumConverter<string, Addons::SetPackagePricingPricingModelResetPeriod>(),
-            new ApiEnumConverter<string, Addons::SetPackagePricingPricingModelTiersMode>(),
-            new ApiEnumConverter<
-                string,
-                Addons::SetPackagePricingPricingModelWeeklyResetPeriodConfigurationAccordingTo
-            >(),
-            new ApiEnumConverter<
-                string,
-                Addons::SetPackagePricingPricingModelYearlyResetPeriodConfigurationAccordingTo
-            >(),
-            new ApiEnumConverter<string, Addons::SetPackagePricingResponseDataPricingType>(),
             new ApiEnumConverter<string, Addons::AddonListResponseEntitlementType>(),
             new ApiEnumConverter<string, Addons::AddonListResponsePricingType>(),
             new ApiEnumConverter<string, Addons::AddonListResponseStatus>(),
             new ApiEnumConverter<string, Addons::PricingType>(),
             new ApiEnumConverter<string, Addons::Status>(),
-            new ApiEnumConverter<string, Addons::AddonUpdateParamsStatus>(),
-            new ApiEnumConverter<string, Addons::MigrationType>(),
-            new ApiEnumConverter<string, Addons::AddonSetPricingParamsPricingType>(),
+            new ApiEnumConverter<string, Addons::ChargesPricingType>(),
             new ApiEnumConverter<string, Addons::BillingPeriod>(),
             new ApiEnumConverter<string, Addons::Currency>(),
             new ApiEnumConverter<string, Addons::OverageBillingPeriod>(),
@@ -510,6 +423,8 @@ public abstract record class ModelBase
                 string,
                 Addons::PricingModelYearlyResetPeriodConfigurationAccordingTo
             >(),
+            new ApiEnumConverter<string, Addons::AddonUpdateParamsStatus>(),
+            new ApiEnumConverter<string, Addons::MigrationType>(),
             new ApiEnumConverter<string, Entitlements::DataFeatureBehavior>(),
             new ApiEnumConverter<string, Entitlements::DataFeatureHiddenFromWidget>(),
             new ApiEnumConverter<string, Entitlements::DataFeatureResetPeriod>(),
@@ -629,13 +544,7 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Plans::TrialEndBehavior>(),
             new ApiEnumConverter<string, Plans::PricingType>(),
             new ApiEnumConverter<string, Plans::Status>(),
-            new ApiEnumConverter<string, Plans::PlanUpdateParamsDefaultTrialConfigUnits>(),
-            new ApiEnumConverter<
-                string,
-                Plans::PlanUpdateParamsDefaultTrialConfigTrialEndBehavior
-            >(),
-            new ApiEnumConverter<string, Plans::MigrationType>(),
-            new ApiEnumConverter<string, Plans::PlanSetPricingParamsPricingType>(),
+            new ApiEnumConverter<string, Plans::ChargesPricingType>(),
             new ApiEnumConverter<string, Plans::BillingPeriod>(),
             new ApiEnumConverter<string, Plans::Currency>(),
             new ApiEnumConverter<string, Plans::OverageBillingPeriod>(),
@@ -671,6 +580,12 @@ public abstract record class ModelBase
                 string,
                 Plans::PricingModelYearlyResetPeriodConfigurationAccordingTo
             >(),
+            new ApiEnumConverter<string, Plans::PlanUpdateParamsDefaultTrialConfigUnits>(),
+            new ApiEnumConverter<
+                string,
+                Plans::PlanUpdateParamsDefaultTrialConfigTrialEndBehavior
+            >(),
+            new ApiEnumConverter<string, Plans::MigrationType>(),
             new ApiEnumConverter<string, PlansEntitlements::DataFeatureBehavior>(),
             new ApiEnumConverter<string, PlansEntitlements::DataFeatureHiddenFromWidget>(),
             new ApiEnumConverter<string, PlansEntitlements::DataFeatureResetPeriod>(),

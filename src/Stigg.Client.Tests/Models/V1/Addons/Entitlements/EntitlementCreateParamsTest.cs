@@ -198,6 +198,7 @@ public class EntitlementTest : TestBase
             Amount = 1,
             Cadence = Cadence.Month,
             Behavior = CreditBehavior.Increment,
+            DependencyFeatureID = "dependencyFeatureId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
             HiddenFromWidgets = [CreditHiddenFromWidget.Paywall],
@@ -252,6 +253,7 @@ public class EntitlementTest : TestBase
             Amount = 1,
             Cadence = Cadence.Month,
             Behavior = CreditBehavior.Increment,
+            DependencyFeatureID = "dependencyFeatureId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
             HiddenFromWidgets = [CreditHiddenFromWidget.Paywall],
@@ -1412,6 +1414,7 @@ public class CreditTest : TestBase
             Amount = 1,
             Cadence = Cadence.Month,
             Behavior = CreditBehavior.Increment,
+            DependencyFeatureID = "dependencyFeatureId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
             HiddenFromWidgets = [CreditHiddenFromWidget.Paywall],
@@ -1425,6 +1428,7 @@ public class CreditTest : TestBase
         ApiEnum<string, Cadence> expectedCadence = Cadence.Month;
         JsonElement expectedType = JsonSerializer.SerializeToElement("CREDIT");
         ApiEnum<string, CreditBehavior> expectedBehavior = CreditBehavior.Increment;
+        string expectedDependencyFeatureID = "dependencyFeatureId";
         string expectedDescription = "description";
         string expectedDisplayNameOverride = "displayNameOverride";
         List<ApiEnum<string, CreditHiddenFromWidget>> expectedHiddenFromWidgets =
@@ -1440,6 +1444,7 @@ public class CreditTest : TestBase
         Assert.Equal(expectedCadence, model.Cadence);
         Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
         Assert.Equal(expectedBehavior, model.Behavior);
+        Assert.Equal(expectedDependencyFeatureID, model.DependencyFeatureID);
         Assert.Equal(expectedDescription, model.Description);
         Assert.Equal(expectedDisplayNameOverride, model.DisplayNameOverride);
         Assert.NotNull(model.HiddenFromWidgets);
@@ -1462,6 +1467,7 @@ public class CreditTest : TestBase
             Amount = 1,
             Cadence = Cadence.Month,
             Behavior = CreditBehavior.Increment,
+            DependencyFeatureID = "dependencyFeatureId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
             HiddenFromWidgets = [CreditHiddenFromWidget.Paywall],
@@ -1485,6 +1491,7 @@ public class CreditTest : TestBase
             Amount = 1,
             Cadence = Cadence.Month,
             Behavior = CreditBehavior.Increment,
+            DependencyFeatureID = "dependencyFeatureId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
             HiddenFromWidgets = [CreditHiddenFromWidget.Paywall],
@@ -1502,6 +1509,7 @@ public class CreditTest : TestBase
         ApiEnum<string, Cadence> expectedCadence = Cadence.Month;
         JsonElement expectedType = JsonSerializer.SerializeToElement("CREDIT");
         ApiEnum<string, CreditBehavior> expectedBehavior = CreditBehavior.Increment;
+        string expectedDependencyFeatureID = "dependencyFeatureId";
         string expectedDescription = "description";
         string expectedDisplayNameOverride = "displayNameOverride";
         List<ApiEnum<string, CreditHiddenFromWidget>> expectedHiddenFromWidgets =
@@ -1517,6 +1525,7 @@ public class CreditTest : TestBase
         Assert.Equal(expectedCadence, deserialized.Cadence);
         Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
         Assert.Equal(expectedBehavior, deserialized.Behavior);
+        Assert.Equal(expectedDependencyFeatureID, deserialized.DependencyFeatureID);
         Assert.Equal(expectedDescription, deserialized.Description);
         Assert.Equal(expectedDisplayNameOverride, deserialized.DisplayNameOverride);
         Assert.NotNull(deserialized.HiddenFromWidgets);
@@ -1539,6 +1548,7 @@ public class CreditTest : TestBase
             Amount = 1,
             Cadence = Cadence.Month,
             Behavior = CreditBehavior.Increment,
+            DependencyFeatureID = "dependencyFeatureId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
             HiddenFromWidgets = [CreditHiddenFromWidget.Paywall],
@@ -1562,6 +1572,8 @@ public class CreditTest : TestBase
 
         Assert.Null(model.Behavior);
         Assert.False(model.RawData.ContainsKey("behavior"));
+        Assert.Null(model.DependencyFeatureID);
+        Assert.False(model.RawData.ContainsKey("dependencyFeatureId"));
         Assert.Null(model.Description);
         Assert.False(model.RawData.ContainsKey("description"));
         Assert.Null(model.DisplayNameOverride);
@@ -1600,6 +1612,7 @@ public class CreditTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             Behavior = null,
+            DependencyFeatureID = null,
             Description = null,
             DisplayNameOverride = null,
             HiddenFromWidgets = null,
@@ -1610,6 +1623,8 @@ public class CreditTest : TestBase
 
         Assert.Null(model.Behavior);
         Assert.False(model.RawData.ContainsKey("behavior"));
+        Assert.Null(model.DependencyFeatureID);
+        Assert.False(model.RawData.ContainsKey("dependencyFeatureId"));
         Assert.Null(model.Description);
         Assert.False(model.RawData.ContainsKey("description"));
         Assert.Null(model.DisplayNameOverride);
@@ -1635,6 +1650,7 @@ public class CreditTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             Behavior = null,
+            DependencyFeatureID = null,
             Description = null,
             DisplayNameOverride = null,
             HiddenFromWidgets = null,
@@ -1655,6 +1671,7 @@ public class CreditTest : TestBase
             Amount = 1,
             Cadence = Cadence.Month,
             Behavior = CreditBehavior.Increment,
+            DependencyFeatureID = "dependencyFeatureId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
             HiddenFromWidgets = [CreditHiddenFromWidget.Paywall],

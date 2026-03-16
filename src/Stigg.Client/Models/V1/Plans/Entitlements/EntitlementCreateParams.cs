@@ -1509,6 +1509,28 @@ public sealed record class Credit : JsonModel
     }
 
     /// <summary>
+    /// The feature ID this entitlement depends on. The entitlement value will be
+    /// calculated as: base amount × dependency feature usage limit
+    /// </summary>
+    public string? DependencyFeatureID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("dependencyFeatureId");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("dependencyFeatureId", value);
+        }
+    }
+
+    /// <summary>
     /// Description of the entitlement
     /// </summary>
     public string? Description
@@ -1650,6 +1672,7 @@ public sealed record class Credit : JsonModel
             throw new StiggInvalidDataException("Invalid value given for constant");
         }
         this.Behavior?.Validate();
+        _ = this.DependencyFeatureID;
         _ = this.Description;
         _ = this.DisplayNameOverride;
         foreach (var item in this.HiddenFromWidgets ?? [])

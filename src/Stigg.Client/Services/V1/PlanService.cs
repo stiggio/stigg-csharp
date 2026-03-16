@@ -4,7 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
-using Stigg.Client.Models.V1.Addons;
 using Stigg.Client.Models.V1.Plans;
 using Stigg.Client.Services.V1.Plans;
 
@@ -207,28 +206,6 @@ public sealed class PlanService : IPlanService
         parameters ??= new();
 
         return this.RemoveDraft(parameters with { ID = id }, cancellationToken);
-    }
-
-    /// <inheritdoc/>
-    public async Task<SetPackagePricingResponse> SetPricing(
-        PlanSetPricingParams parameters,
-        CancellationToken cancellationToken = default
-    )
-    {
-        using var response = await this
-            .WithRawResponse.SetPricing(parameters, cancellationToken)
-            .ConfigureAwait(false);
-        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
-    }
-
-    /// <inheritdoc/>
-    public Task<SetPackagePricingResponse> SetPricing(
-        string id,
-        PlanSetPricingParams parameters,
-        CancellationToken cancellationToken = default
-    )
-    {
-        return this.SetPricing(parameters with { ID = id }, cancellationToken);
     }
 }
 
@@ -570,48 +547,5 @@ public sealed class PlanServiceWithRawResponse : IPlanServiceWithRawResponse
         parameters ??= new();
 
         return this.RemoveDraft(parameters with { ID = id }, cancellationToken);
-    }
-
-    /// <inheritdoc/>
-    public async Task<HttpResponse<SetPackagePricingResponse>> SetPricing(
-        PlanSetPricingParams parameters,
-        CancellationToken cancellationToken = default
-    )
-    {
-        if (parameters.ID == null)
-        {
-            throw new StiggInvalidDataException("'parameters.ID' cannot be null");
-        }
-
-        HttpRequest<PlanSetPricingParams> request = new()
-        {
-            Method = HttpMethod.Put,
-            Params = parameters,
-        };
-        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
-        return new(
-            response,
-            async (token) =>
-            {
-                var setPackagePricingResponse = await response
-                    .Deserialize<SetPackagePricingResponse>(token)
-                    .ConfigureAwait(false);
-                if (this._client.ResponseValidation)
-                {
-                    setPackagePricingResponse.Validate();
-                }
-                return setPackagePricingResponse;
-            }
-        );
-    }
-
-    /// <inheritdoc/>
-    public Task<HttpResponse<SetPackagePricingResponse>> SetPricing(
-        string id,
-        PlanSetPricingParams parameters,
-        CancellationToken cancellationToken = default
-    )
-    {
-        return this.SetPricing(parameters with { ID = id }, cancellationToken);
     }
 }

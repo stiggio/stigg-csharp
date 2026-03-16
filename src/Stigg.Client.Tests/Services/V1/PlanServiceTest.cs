@@ -92,15 +92,4 @@ public class PlanServiceTest : TestBase
         );
         response.Validate();
     }
-
-    [Fact(Skip = "Mock server tests are disabled")]
-    public async Task SetPricing_Works()
-    {
-        var setPackagePricingResponse = await this.client.V1.Plans.SetPricing(
-            "x",
-            new() { PricingType = PlanSetPricingParamsPricingType.Free },
-            TestContext.Current.CancellationToken
-        );
-        setPackagePricingResponse.Validate();
-    }
 }

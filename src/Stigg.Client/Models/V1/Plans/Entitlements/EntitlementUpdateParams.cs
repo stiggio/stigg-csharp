@@ -1517,6 +1517,20 @@ public sealed record class BodyCredit : JsonModel
     }
 
     /// <summary>
+    /// The feature ID this entitlement depends on. The entitlement value will be
+    /// calculated as: base amount × dependency feature usage limit
+    /// </summary>
+    public string? DependencyFeatureID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("dependencyFeatureId");
+        }
+        init { this._rawData.Set("dependencyFeatureId", value); }
+    }
+
+    /// <summary>
     /// Description of the entitlement
     /// </summary>
     public string? Description
@@ -1657,6 +1671,7 @@ public sealed record class BodyCredit : JsonModel
         _ = this.Amount;
         this.Behavior?.Validate();
         this.Cadence?.Validate();
+        _ = this.DependencyFeatureID;
         _ = this.Description;
         _ = this.DisplayNameOverride;
         foreach (var item in this.HiddenFromWidgets ?? [])

@@ -131,21 +131,6 @@ public interface IAddonService
         AddonRemoveDraftParams? parameters = null,
         CancellationToken cancellationToken = default
     );
-
-    /// <summary>
-    /// Sets the pricing configuration for an addon.
-    /// </summary>
-    Task<SetPackagePricingResponse> SetPricing(
-        AddonSetPricingParams parameters,
-        CancellationToken cancellationToken = default
-    );
-
-    /// <inheritdoc cref="SetPricing(AddonSetPricingParams, CancellationToken)"/>
-    Task<SetPackagePricingResponse> SetPricing(
-        string id,
-        AddonSetPricingParams parameters,
-        CancellationToken cancellationToken = default
-    );
 }
 
 /// <summary>
@@ -274,22 +259,6 @@ public interface IAddonServiceWithRawResponse
     Task<HttpResponse<AddonRemoveDraftResponse>> RemoveDraft(
         string id,
         AddonRemoveDraftParams? parameters = null,
-        CancellationToken cancellationToken = default
-    );
-
-    /// <summary>
-    /// Returns a raw HTTP response for `put /api/v1/addons/{id}/charges`, but is otherwise the
-    /// same as <see cref="IAddonService.SetPricing(AddonSetPricingParams, CancellationToken)"/>.
-    /// </summary>
-    Task<HttpResponse<SetPackagePricingResponse>> SetPricing(
-        AddonSetPricingParams parameters,
-        CancellationToken cancellationToken = default
-    );
-
-    /// <inheritdoc cref="SetPricing(AddonSetPricingParams, CancellationToken)"/>
-    Task<HttpResponse<SetPackagePricingResponse>> SetPricing(
-        string id,
-        AddonSetPricingParams parameters,
         CancellationToken cancellationToken = default
     );
 }
