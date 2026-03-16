@@ -2206,6 +2206,9 @@ sealed class SubscriptionProvisionParamsBillingInformationProrationBehaviorConve
     }
 }
 
+/// <summary>
+/// Tax identifier with type and value for customer tax exemptions.
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
         SubscriptionProvisionParamsBillingInformationTaxID,

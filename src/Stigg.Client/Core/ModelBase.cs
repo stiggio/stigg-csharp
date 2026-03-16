@@ -2,10 +2,10 @@ using System.Text.Json;
 using Stigg.Client.Exceptions;
 using Stigg.Client.Models.V1.Customers;
 using Stigg.Client.Models.V1.Customers.PromotionalEntitlements;
-using Stigg.Client.Models.V1.Events.Credits;
 using Stigg.Client.Models.V1.Features;
 using Addons = Stigg.Client.Models.V1.Addons;
 using Coupons = Stigg.Client.Models.V1.Coupons;
+using Credits = Stigg.Client.Models.V1.Events.Credits;
 using Entitlements = Stigg.Client.Models.V1.Addons.Entitlements;
 using Grants = Stigg.Client.Models.V1.Events.Credits.Grants;
 using PaymentMethod = Stigg.Client.Models.V1.Customers.PaymentMethod;
@@ -37,14 +37,18 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, DataBillingCurrency>(),
             new ApiEnumConverter<string, DataDefaultPaymentMethodType>(),
             new ApiEnumConverter<string, DataIntegrationVendorIdentifier>(),
+            new ApiEnumConverter<string, DataPassthroughZuoraCurrency>(),
             new ApiEnumConverter<string, CustomerListResponseBillingCurrency>(),
             new ApiEnumConverter<string, CustomerListResponseDefaultPaymentMethodType>(),
             new ApiEnumConverter<string, CustomerListResponseIntegrationVendorIdentifier>(),
+            new ApiEnumConverter<string, CustomerListResponsePassthroughZuoraCurrency>(),
             new ApiEnumConverter<string, BillingCurrency>(),
             new ApiEnumConverter<string, VendorIdentifier>(),
+            new ApiEnumConverter<string, Currency>(),
             new ApiEnumConverter<string, CustomerProvisionParamsBillingCurrency>(),
             new ApiEnumConverter<string, Type>(),
             new ApiEnumConverter<string, CustomerProvisionParamsIntegrationVendorIdentifier>(),
+            new ApiEnumConverter<string, CustomerProvisionParamsPassthroughZuoraCurrency>(),
             new ApiEnumConverter<string, PaymentMethod::VendorIdentifier>(),
             new ApiEnumConverter<string, PaymentMethod::BillingCurrency>(),
             new ApiEnumConverter<string, DataPeriod>(),
@@ -341,10 +345,10 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Coupons::CouponListResponseType>(),
             new ApiEnumConverter<string, Coupons::Currency>(),
             new ApiEnumConverter<string, Coupons::Type>(),
-            new ApiEnumConverter<string, GrantExpirationPeriod>(),
-            new ApiEnumConverter<string, ThresholdType>(),
-            new ApiEnumConverter<string, EventType>(),
-            new ApiEnumConverter<string, TimeRange>(),
+            new ApiEnumConverter<string, Credits::GrantExpirationPeriod>(),
+            new ApiEnumConverter<string, Credits::ThresholdType>(),
+            new ApiEnumConverter<string, Credits::EventType>(),
+            new ApiEnumConverter<string, Credits::TimeRange>(),
             new ApiEnumConverter<string, Grants::DataGrantType>(),
             new ApiEnumConverter<string, Grants::BillingReason>(),
             new ApiEnumConverter<string, Grants::Status>(),

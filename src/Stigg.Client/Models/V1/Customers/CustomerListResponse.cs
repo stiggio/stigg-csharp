@@ -164,6 +164,19 @@ public sealed record class CustomerListResponse : JsonModel
     }
 
     /// <summary>
+    /// Language to use for this customer
+    /// </summary>
+    public string? Language
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("language");
+        }
+        init { this._rawData.Set("language", value); }
+    }
+
+    /// <summary>
     /// Additional metadata
     /// </summary>
     public IReadOnlyDictionary<string, string>? Metadata
@@ -200,6 +213,40 @@ public sealed record class CustomerListResponse : JsonModel
         init { this._rawData.Set("name", value); }
     }
 
+    /// <summary>
+    /// Vendor-specific billing passthrough fields.
+    /// </summary>
+    public CustomerListResponsePassthrough? Passthrough
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<CustomerListResponsePassthrough>("passthrough");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("passthrough", value);
+        }
+    }
+
+    /// <summary>
+    /// Timezone to use for this customer
+    /// </summary>
+    public string? Timezone
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("timezone");
+        }
+        init { this._rawData.Set("timezone", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -216,8 +263,11 @@ public sealed record class CustomerListResponse : JsonModel
         {
             item.Validate();
         }
+        _ = this.Language;
         _ = this.Metadata;
         _ = this.Name;
+        this.Passthrough?.Validate();
+        _ = this.Timezone;
     }
 
     public CustomerListResponse() { }
@@ -996,6 +1046,1545 @@ sealed class CustomerListResponseIntegrationVendorIdentifierConverter
                 CustomerListResponseIntegrationVendorIdentifier.BigQuery => "BIG_QUERY",
                 CustomerListResponseIntegrationVendorIdentifier.OpenFga => "OPEN_FGA",
                 CustomerListResponseIntegrationVendorIdentifier.AppStore => "APP_STORE",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Vendor-specific billing passthrough fields.
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        CustomerListResponsePassthrough,
+        CustomerListResponsePassthroughFromRaw
+    >)
+)]
+public sealed record class CustomerListResponsePassthrough : JsonModel
+{
+    /// <summary>
+    /// Stripe-specific billing fields for the customer.
+    /// </summary>
+    public CustomerListResponsePassthroughStripe? Stripe
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<CustomerListResponsePassthroughStripe>("stripe");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("stripe", value);
+        }
+    }
+
+    /// <summary>
+    /// Zuora-specific billing fields for the customer.
+    /// </summary>
+    public CustomerListResponsePassthroughZuora? Zuora
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<CustomerListResponsePassthroughZuora>("zuora");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("zuora", value);
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        this.Stripe?.Validate();
+        this.Zuora?.Validate();
+    }
+
+    public CustomerListResponsePassthrough() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public CustomerListResponsePassthrough(
+        CustomerListResponsePassthrough customerListResponsePassthrough
+    )
+        : base(customerListResponsePassthrough) { }
+#pragma warning restore CS8618
+
+    public CustomerListResponsePassthrough(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    CustomerListResponsePassthrough(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="CustomerListResponsePassthroughFromRaw.FromRawUnchecked"/>
+    public static CustomerListResponsePassthrough FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class CustomerListResponsePassthroughFromRaw : IFromRawJson<CustomerListResponsePassthrough>
+{
+    /// <inheritdoc/>
+    public CustomerListResponsePassthrough FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CustomerListResponsePassthrough.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Stripe-specific billing fields for the customer.
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        CustomerListResponsePassthroughStripe,
+        CustomerListResponsePassthroughStripeFromRaw
+    >)
+)]
+public sealed record class CustomerListResponsePassthroughStripe : JsonModel
+{
+    /// <summary>
+    /// Physical address
+    /// </summary>
+    public CustomerListResponsePassthroughStripeBillingAddress? BillingAddress
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<CustomerListResponsePassthroughStripeBillingAddress>(
+                "billingAddress"
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("billingAddress", value);
+        }
+    }
+
+    /// <summary>
+    /// Customer name
+    /// </summary>
+    public string? CustomerName
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("customerName");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("customerName", value);
+        }
+    }
+
+    /// <summary>
+    /// Invoice custom fields
+    /// </summary>
+    public IReadOnlyDictionary<string, string>? InvoiceCustomFields
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<FrozenDictionary<string, string>>(
+                "invoiceCustomFields"
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set<FrozenDictionary<string, string>?>(
+                "invoiceCustomFields",
+                value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
+            );
+        }
+    }
+
+    /// <summary>
+    /// Additional metadata
+    /// </summary>
+    public IReadOnlyDictionary<string, string>? Metadata
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set<FrozenDictionary<string, string>?>(
+                "metadata",
+                value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
+            );
+        }
+    }
+
+    /// <summary>
+    /// Billing provider payment method id, attached to this customer
+    /// </summary>
+    public string? PaymentMethodID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("paymentMethodId");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("paymentMethodId", value);
+        }
+    }
+
+    /// <summary>
+    /// Physical address
+    /// </summary>
+    public CustomerListResponsePassthroughStripeShippingAddress? ShippingAddress
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<CustomerListResponsePassthroughStripeShippingAddress>(
+                "shippingAddress"
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("shippingAddress", value);
+        }
+    }
+
+    /// <summary>
+    /// Tax IDs
+    /// </summary>
+    public IReadOnlyList<CustomerListResponsePassthroughStripeTaxID>? TaxIds
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<
+                ImmutableArray<CustomerListResponsePassthroughStripeTaxID>
+            >("taxIds");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set<ImmutableArray<CustomerListResponsePassthroughStripeTaxID>?>(
+                "taxIds",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        this.BillingAddress?.Validate();
+        _ = this.CustomerName;
+        _ = this.InvoiceCustomFields;
+        _ = this.Metadata;
+        _ = this.PaymentMethodID;
+        this.ShippingAddress?.Validate();
+        foreach (var item in this.TaxIds ?? [])
+        {
+            item.Validate();
+        }
+    }
+
+    public CustomerListResponsePassthroughStripe() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public CustomerListResponsePassthroughStripe(
+        CustomerListResponsePassthroughStripe customerListResponsePassthroughStripe
+    )
+        : base(customerListResponsePassthroughStripe) { }
+#pragma warning restore CS8618
+
+    public CustomerListResponsePassthroughStripe(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    CustomerListResponsePassthroughStripe(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="CustomerListResponsePassthroughStripeFromRaw.FromRawUnchecked"/>
+    public static CustomerListResponsePassthroughStripe FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class CustomerListResponsePassthroughStripeFromRaw
+    : IFromRawJson<CustomerListResponsePassthroughStripe>
+{
+    /// <inheritdoc/>
+    public CustomerListResponsePassthroughStripe FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CustomerListResponsePassthroughStripe.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Physical address
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        CustomerListResponsePassthroughStripeBillingAddress,
+        CustomerListResponsePassthroughStripeBillingAddressFromRaw
+    >)
+)]
+public sealed record class CustomerListResponsePassthroughStripeBillingAddress : JsonModel
+{
+    /// <summary>
+    /// City name
+    /// </summary>
+    public string? City
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("city");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("city", value);
+        }
+    }
+
+    /// <summary>
+    /// Country code or name
+    /// </summary>
+    public string? Country
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("country");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("country", value);
+        }
+    }
+
+    /// <summary>
+    /// Street address line 1
+    /// </summary>
+    public string? Line1
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("line1");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("line1", value);
+        }
+    }
+
+    /// <summary>
+    /// Street address line 2
+    /// </summary>
+    public string? Line2
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("line2");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("line2", value);
+        }
+    }
+
+    /// <summary>
+    /// Postal or ZIP code
+    /// </summary>
+    public string? PostalCode
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("postalCode");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("postalCode", value);
+        }
+    }
+
+    /// <summary>
+    /// State or province
+    /// </summary>
+    public string? State
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("state");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("state", value);
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.City;
+        _ = this.Country;
+        _ = this.Line1;
+        _ = this.Line2;
+        _ = this.PostalCode;
+        _ = this.State;
+    }
+
+    public CustomerListResponsePassthroughStripeBillingAddress() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public CustomerListResponsePassthroughStripeBillingAddress(
+        CustomerListResponsePassthroughStripeBillingAddress customerListResponsePassthroughStripeBillingAddress
+    )
+        : base(customerListResponsePassthroughStripeBillingAddress) { }
+#pragma warning restore CS8618
+
+    public CustomerListResponsePassthroughStripeBillingAddress(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    CustomerListResponsePassthroughStripeBillingAddress(
+        FrozenDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="CustomerListResponsePassthroughStripeBillingAddressFromRaw.FromRawUnchecked"/>
+    public static CustomerListResponsePassthroughStripeBillingAddress FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class CustomerListResponsePassthroughStripeBillingAddressFromRaw
+    : IFromRawJson<CustomerListResponsePassthroughStripeBillingAddress>
+{
+    /// <inheritdoc/>
+    public CustomerListResponsePassthroughStripeBillingAddress FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CustomerListResponsePassthroughStripeBillingAddress.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Physical address
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        CustomerListResponsePassthroughStripeShippingAddress,
+        CustomerListResponsePassthroughStripeShippingAddressFromRaw
+    >)
+)]
+public sealed record class CustomerListResponsePassthroughStripeShippingAddress : JsonModel
+{
+    /// <summary>
+    /// City name
+    /// </summary>
+    public string? City
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("city");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("city", value);
+        }
+    }
+
+    /// <summary>
+    /// Country code or name
+    /// </summary>
+    public string? Country
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("country");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("country", value);
+        }
+    }
+
+    /// <summary>
+    /// Street address line 1
+    /// </summary>
+    public string? Line1
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("line1");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("line1", value);
+        }
+    }
+
+    /// <summary>
+    /// Street address line 2
+    /// </summary>
+    public string? Line2
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("line2");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("line2", value);
+        }
+    }
+
+    /// <summary>
+    /// Postal or ZIP code
+    /// </summary>
+    public string? PostalCode
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("postalCode");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("postalCode", value);
+        }
+    }
+
+    /// <summary>
+    /// State or province
+    /// </summary>
+    public string? State
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("state");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("state", value);
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.City;
+        _ = this.Country;
+        _ = this.Line1;
+        _ = this.Line2;
+        _ = this.PostalCode;
+        _ = this.State;
+    }
+
+    public CustomerListResponsePassthroughStripeShippingAddress() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public CustomerListResponsePassthroughStripeShippingAddress(
+        CustomerListResponsePassthroughStripeShippingAddress customerListResponsePassthroughStripeShippingAddress
+    )
+        : base(customerListResponsePassthroughStripeShippingAddress) { }
+#pragma warning restore CS8618
+
+    public CustomerListResponsePassthroughStripeShippingAddress(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    CustomerListResponsePassthroughStripeShippingAddress(
+        FrozenDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="CustomerListResponsePassthroughStripeShippingAddressFromRaw.FromRawUnchecked"/>
+    public static CustomerListResponsePassthroughStripeShippingAddress FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class CustomerListResponsePassthroughStripeShippingAddressFromRaw
+    : IFromRawJson<CustomerListResponsePassthroughStripeShippingAddress>
+{
+    /// <inheritdoc/>
+    public CustomerListResponsePassthroughStripeShippingAddress FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CustomerListResponsePassthroughStripeShippingAddress.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Tax identifier with type and value for customer tax exemptions.
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        CustomerListResponsePassthroughStripeTaxID,
+        CustomerListResponsePassthroughStripeTaxIDFromRaw
+    >)
+)]
+public sealed record class CustomerListResponsePassthroughStripeTaxID : JsonModel
+{
+    /// <summary>
+    /// The type of tax exemption identifier, such as VAT.
+    /// </summary>
+    public required string Type
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("type");
+        }
+        init { this._rawData.Set("type", value); }
+    }
+
+    /// <summary>
+    /// The actual tax identifier value
+    /// </summary>
+    public required string Value
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("value");
+        }
+        init { this._rawData.Set("value", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.Type;
+        _ = this.Value;
+    }
+
+    public CustomerListResponsePassthroughStripeTaxID() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public CustomerListResponsePassthroughStripeTaxID(
+        CustomerListResponsePassthroughStripeTaxID customerListResponsePassthroughStripeTaxID
+    )
+        : base(customerListResponsePassthroughStripeTaxID) { }
+#pragma warning restore CS8618
+
+    public CustomerListResponsePassthroughStripeTaxID(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    CustomerListResponsePassthroughStripeTaxID(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="CustomerListResponsePassthroughStripeTaxIDFromRaw.FromRawUnchecked"/>
+    public static CustomerListResponsePassthroughStripeTaxID FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class CustomerListResponsePassthroughStripeTaxIDFromRaw
+    : IFromRawJson<CustomerListResponsePassthroughStripeTaxID>
+{
+    /// <inheritdoc/>
+    public CustomerListResponsePassthroughStripeTaxID FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CustomerListResponsePassthroughStripeTaxID.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Zuora-specific billing fields for the customer.
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        CustomerListResponsePassthroughZuora,
+        CustomerListResponsePassthroughZuoraFromRaw
+    >)
+)]
+public sealed record class CustomerListResponsePassthroughZuora : JsonModel
+{
+    /// <summary>
+    /// Physical address
+    /// </summary>
+    public CustomerListResponsePassthroughZuoraBillingAddress? BillingAddress
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<CustomerListResponsePassthroughZuoraBillingAddress>(
+                "billingAddress"
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("billingAddress", value);
+        }
+    }
+
+    /// <summary>
+    /// Customers selected currency
+    /// </summary>
+    public ApiEnum<string, CustomerListResponsePassthroughZuoraCurrency>? Currency
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, CustomerListResponsePassthroughZuoraCurrency>
+            >("currency");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("currency", value);
+        }
+    }
+
+    /// <summary>
+    /// Additional metadata
+    /// </summary>
+    public IReadOnlyDictionary<string, string>? Metadata
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set<FrozenDictionary<string, string>?>(
+                "metadata",
+                value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
+            );
+        }
+    }
+
+    /// <summary>
+    /// Billing provider payment method id, attached to this customer
+    /// </summary>
+    public string? PaymentMethodID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("paymentMethodId");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("paymentMethodId", value);
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        this.BillingAddress?.Validate();
+        this.Currency?.Validate();
+        _ = this.Metadata;
+        _ = this.PaymentMethodID;
+    }
+
+    public CustomerListResponsePassthroughZuora() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public CustomerListResponsePassthroughZuora(
+        CustomerListResponsePassthroughZuora customerListResponsePassthroughZuora
+    )
+        : base(customerListResponsePassthroughZuora) { }
+#pragma warning restore CS8618
+
+    public CustomerListResponsePassthroughZuora(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    CustomerListResponsePassthroughZuora(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="CustomerListResponsePassthroughZuoraFromRaw.FromRawUnchecked"/>
+    public static CustomerListResponsePassthroughZuora FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class CustomerListResponsePassthroughZuoraFromRaw
+    : IFromRawJson<CustomerListResponsePassthroughZuora>
+{
+    /// <inheritdoc/>
+    public CustomerListResponsePassthroughZuora FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CustomerListResponsePassthroughZuora.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Physical address
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        CustomerListResponsePassthroughZuoraBillingAddress,
+        CustomerListResponsePassthroughZuoraBillingAddressFromRaw
+    >)
+)]
+public sealed record class CustomerListResponsePassthroughZuoraBillingAddress : JsonModel
+{
+    /// <summary>
+    /// City name
+    /// </summary>
+    public string? City
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("city");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("city", value);
+        }
+    }
+
+    /// <summary>
+    /// Country code or name
+    /// </summary>
+    public string? Country
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("country");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("country", value);
+        }
+    }
+
+    /// <summary>
+    /// Street address line 1
+    /// </summary>
+    public string? Line1
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("line1");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("line1", value);
+        }
+    }
+
+    /// <summary>
+    /// Street address line 2
+    /// </summary>
+    public string? Line2
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("line2");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("line2", value);
+        }
+    }
+
+    /// <summary>
+    /// Postal or ZIP code
+    /// </summary>
+    public string? PostalCode
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("postalCode");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("postalCode", value);
+        }
+    }
+
+    /// <summary>
+    /// State or province
+    /// </summary>
+    public string? State
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("state");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("state", value);
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.City;
+        _ = this.Country;
+        _ = this.Line1;
+        _ = this.Line2;
+        _ = this.PostalCode;
+        _ = this.State;
+    }
+
+    public CustomerListResponsePassthroughZuoraBillingAddress() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public CustomerListResponsePassthroughZuoraBillingAddress(
+        CustomerListResponsePassthroughZuoraBillingAddress customerListResponsePassthroughZuoraBillingAddress
+    )
+        : base(customerListResponsePassthroughZuoraBillingAddress) { }
+#pragma warning restore CS8618
+
+    public CustomerListResponsePassthroughZuoraBillingAddress(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    CustomerListResponsePassthroughZuoraBillingAddress(
+        FrozenDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="CustomerListResponsePassthroughZuoraBillingAddressFromRaw.FromRawUnchecked"/>
+    public static CustomerListResponsePassthroughZuoraBillingAddress FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class CustomerListResponsePassthroughZuoraBillingAddressFromRaw
+    : IFromRawJson<CustomerListResponsePassthroughZuoraBillingAddress>
+{
+    /// <inheritdoc/>
+    public CustomerListResponsePassthroughZuoraBillingAddress FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CustomerListResponsePassthroughZuoraBillingAddress.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Customers selected currency
+/// </summary>
+[JsonConverter(typeof(CustomerListResponsePassthroughZuoraCurrencyConverter))]
+public enum CustomerListResponsePassthroughZuoraCurrency
+{
+    Usd,
+    Aed,
+    All,
+    Amd,
+    Ang,
+    Aud,
+    Awg,
+    Azn,
+    Bam,
+    Bbd,
+    Bdt,
+    Bgn,
+    Bif,
+    Bmd,
+    Bnd,
+    Bsd,
+    Bwp,
+    Byn,
+    Bzd,
+    Brl,
+    Cad,
+    Cdf,
+    Chf,
+    Cny,
+    Czk,
+    Dkk,
+    Dop,
+    Dzd,
+    Egp,
+    Etb,
+    Eur,
+    Fjd,
+    Gbp,
+    Gel,
+    Gip,
+    Gmd,
+    Gyd,
+    Hkd,
+    Hrk,
+    Htg,
+    Idr,
+    Ils,
+    Inr,
+    Isk,
+    Jmd,
+    Jpy,
+    Kes,
+    Kgs,
+    Khr,
+    Kmf,
+    Krw,
+    Kyd,
+    Kzt,
+    Lbp,
+    Lkr,
+    Lrd,
+    Lsl,
+    Mad,
+    Mdl,
+    Mga,
+    Mkd,
+    Mmk,
+    Mnt,
+    Mop,
+    Mro,
+    Mvr,
+    Mwk,
+    Mxn,
+    Myr,
+    Mzn,
+    Nad,
+    Ngn,
+    Nok,
+    Npr,
+    Nzd,
+    Pgk,
+    Php,
+    Pkr,
+    Pln,
+    Qar,
+    Ron,
+    Rsd,
+    Rub,
+    Rwf,
+    Sar,
+    Sbd,
+    Scr,
+    Sek,
+    Sgd,
+    Sle,
+    Sll,
+    Sos,
+    Szl,
+    Thb,
+    Tjs,
+    Top,
+    Try,
+    Ttd,
+    Tzs,
+    Uah,
+    Uzs,
+    Vnd,
+    Vuv,
+    Wst,
+    Xaf,
+    Xcd,
+    Yer,
+    Zar,
+    Zmw,
+    Clp,
+    Djf,
+    Gnf,
+    Ugx,
+    Pyg,
+    Xof,
+    Xpf,
+}
+
+sealed class CustomerListResponsePassthroughZuoraCurrencyConverter
+    : JsonConverter<CustomerListResponsePassthroughZuoraCurrency>
+{
+    public override CustomerListResponsePassthroughZuoraCurrency Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "usd" => CustomerListResponsePassthroughZuoraCurrency.Usd,
+            "aed" => CustomerListResponsePassthroughZuoraCurrency.Aed,
+            "all" => CustomerListResponsePassthroughZuoraCurrency.All,
+            "amd" => CustomerListResponsePassthroughZuoraCurrency.Amd,
+            "ang" => CustomerListResponsePassthroughZuoraCurrency.Ang,
+            "aud" => CustomerListResponsePassthroughZuoraCurrency.Aud,
+            "awg" => CustomerListResponsePassthroughZuoraCurrency.Awg,
+            "azn" => CustomerListResponsePassthroughZuoraCurrency.Azn,
+            "bam" => CustomerListResponsePassthroughZuoraCurrency.Bam,
+            "bbd" => CustomerListResponsePassthroughZuoraCurrency.Bbd,
+            "bdt" => CustomerListResponsePassthroughZuoraCurrency.Bdt,
+            "bgn" => CustomerListResponsePassthroughZuoraCurrency.Bgn,
+            "bif" => CustomerListResponsePassthroughZuoraCurrency.Bif,
+            "bmd" => CustomerListResponsePassthroughZuoraCurrency.Bmd,
+            "bnd" => CustomerListResponsePassthroughZuoraCurrency.Bnd,
+            "bsd" => CustomerListResponsePassthroughZuoraCurrency.Bsd,
+            "bwp" => CustomerListResponsePassthroughZuoraCurrency.Bwp,
+            "byn" => CustomerListResponsePassthroughZuoraCurrency.Byn,
+            "bzd" => CustomerListResponsePassthroughZuoraCurrency.Bzd,
+            "brl" => CustomerListResponsePassthroughZuoraCurrency.Brl,
+            "cad" => CustomerListResponsePassthroughZuoraCurrency.Cad,
+            "cdf" => CustomerListResponsePassthroughZuoraCurrency.Cdf,
+            "chf" => CustomerListResponsePassthroughZuoraCurrency.Chf,
+            "cny" => CustomerListResponsePassthroughZuoraCurrency.Cny,
+            "czk" => CustomerListResponsePassthroughZuoraCurrency.Czk,
+            "dkk" => CustomerListResponsePassthroughZuoraCurrency.Dkk,
+            "dop" => CustomerListResponsePassthroughZuoraCurrency.Dop,
+            "dzd" => CustomerListResponsePassthroughZuoraCurrency.Dzd,
+            "egp" => CustomerListResponsePassthroughZuoraCurrency.Egp,
+            "etb" => CustomerListResponsePassthroughZuoraCurrency.Etb,
+            "eur" => CustomerListResponsePassthroughZuoraCurrency.Eur,
+            "fjd" => CustomerListResponsePassthroughZuoraCurrency.Fjd,
+            "gbp" => CustomerListResponsePassthroughZuoraCurrency.Gbp,
+            "gel" => CustomerListResponsePassthroughZuoraCurrency.Gel,
+            "gip" => CustomerListResponsePassthroughZuoraCurrency.Gip,
+            "gmd" => CustomerListResponsePassthroughZuoraCurrency.Gmd,
+            "gyd" => CustomerListResponsePassthroughZuoraCurrency.Gyd,
+            "hkd" => CustomerListResponsePassthroughZuoraCurrency.Hkd,
+            "hrk" => CustomerListResponsePassthroughZuoraCurrency.Hrk,
+            "htg" => CustomerListResponsePassthroughZuoraCurrency.Htg,
+            "idr" => CustomerListResponsePassthroughZuoraCurrency.Idr,
+            "ils" => CustomerListResponsePassthroughZuoraCurrency.Ils,
+            "inr" => CustomerListResponsePassthroughZuoraCurrency.Inr,
+            "isk" => CustomerListResponsePassthroughZuoraCurrency.Isk,
+            "jmd" => CustomerListResponsePassthroughZuoraCurrency.Jmd,
+            "jpy" => CustomerListResponsePassthroughZuoraCurrency.Jpy,
+            "kes" => CustomerListResponsePassthroughZuoraCurrency.Kes,
+            "kgs" => CustomerListResponsePassthroughZuoraCurrency.Kgs,
+            "khr" => CustomerListResponsePassthroughZuoraCurrency.Khr,
+            "kmf" => CustomerListResponsePassthroughZuoraCurrency.Kmf,
+            "krw" => CustomerListResponsePassthroughZuoraCurrency.Krw,
+            "kyd" => CustomerListResponsePassthroughZuoraCurrency.Kyd,
+            "kzt" => CustomerListResponsePassthroughZuoraCurrency.Kzt,
+            "lbp" => CustomerListResponsePassthroughZuoraCurrency.Lbp,
+            "lkr" => CustomerListResponsePassthroughZuoraCurrency.Lkr,
+            "lrd" => CustomerListResponsePassthroughZuoraCurrency.Lrd,
+            "lsl" => CustomerListResponsePassthroughZuoraCurrency.Lsl,
+            "mad" => CustomerListResponsePassthroughZuoraCurrency.Mad,
+            "mdl" => CustomerListResponsePassthroughZuoraCurrency.Mdl,
+            "mga" => CustomerListResponsePassthroughZuoraCurrency.Mga,
+            "mkd" => CustomerListResponsePassthroughZuoraCurrency.Mkd,
+            "mmk" => CustomerListResponsePassthroughZuoraCurrency.Mmk,
+            "mnt" => CustomerListResponsePassthroughZuoraCurrency.Mnt,
+            "mop" => CustomerListResponsePassthroughZuoraCurrency.Mop,
+            "mro" => CustomerListResponsePassthroughZuoraCurrency.Mro,
+            "mvr" => CustomerListResponsePassthroughZuoraCurrency.Mvr,
+            "mwk" => CustomerListResponsePassthroughZuoraCurrency.Mwk,
+            "mxn" => CustomerListResponsePassthroughZuoraCurrency.Mxn,
+            "myr" => CustomerListResponsePassthroughZuoraCurrency.Myr,
+            "mzn" => CustomerListResponsePassthroughZuoraCurrency.Mzn,
+            "nad" => CustomerListResponsePassthroughZuoraCurrency.Nad,
+            "ngn" => CustomerListResponsePassthroughZuoraCurrency.Ngn,
+            "nok" => CustomerListResponsePassthroughZuoraCurrency.Nok,
+            "npr" => CustomerListResponsePassthroughZuoraCurrency.Npr,
+            "nzd" => CustomerListResponsePassthroughZuoraCurrency.Nzd,
+            "pgk" => CustomerListResponsePassthroughZuoraCurrency.Pgk,
+            "php" => CustomerListResponsePassthroughZuoraCurrency.Php,
+            "pkr" => CustomerListResponsePassthroughZuoraCurrency.Pkr,
+            "pln" => CustomerListResponsePassthroughZuoraCurrency.Pln,
+            "qar" => CustomerListResponsePassthroughZuoraCurrency.Qar,
+            "ron" => CustomerListResponsePassthroughZuoraCurrency.Ron,
+            "rsd" => CustomerListResponsePassthroughZuoraCurrency.Rsd,
+            "rub" => CustomerListResponsePassthroughZuoraCurrency.Rub,
+            "rwf" => CustomerListResponsePassthroughZuoraCurrency.Rwf,
+            "sar" => CustomerListResponsePassthroughZuoraCurrency.Sar,
+            "sbd" => CustomerListResponsePassthroughZuoraCurrency.Sbd,
+            "scr" => CustomerListResponsePassthroughZuoraCurrency.Scr,
+            "sek" => CustomerListResponsePassthroughZuoraCurrency.Sek,
+            "sgd" => CustomerListResponsePassthroughZuoraCurrency.Sgd,
+            "sle" => CustomerListResponsePassthroughZuoraCurrency.Sle,
+            "sll" => CustomerListResponsePassthroughZuoraCurrency.Sll,
+            "sos" => CustomerListResponsePassthroughZuoraCurrency.Sos,
+            "szl" => CustomerListResponsePassthroughZuoraCurrency.Szl,
+            "thb" => CustomerListResponsePassthroughZuoraCurrency.Thb,
+            "tjs" => CustomerListResponsePassthroughZuoraCurrency.Tjs,
+            "top" => CustomerListResponsePassthroughZuoraCurrency.Top,
+            "try" => CustomerListResponsePassthroughZuoraCurrency.Try,
+            "ttd" => CustomerListResponsePassthroughZuoraCurrency.Ttd,
+            "tzs" => CustomerListResponsePassthroughZuoraCurrency.Tzs,
+            "uah" => CustomerListResponsePassthroughZuoraCurrency.Uah,
+            "uzs" => CustomerListResponsePassthroughZuoraCurrency.Uzs,
+            "vnd" => CustomerListResponsePassthroughZuoraCurrency.Vnd,
+            "vuv" => CustomerListResponsePassthroughZuoraCurrency.Vuv,
+            "wst" => CustomerListResponsePassthroughZuoraCurrency.Wst,
+            "xaf" => CustomerListResponsePassthroughZuoraCurrency.Xaf,
+            "xcd" => CustomerListResponsePassthroughZuoraCurrency.Xcd,
+            "yer" => CustomerListResponsePassthroughZuoraCurrency.Yer,
+            "zar" => CustomerListResponsePassthroughZuoraCurrency.Zar,
+            "zmw" => CustomerListResponsePassthroughZuoraCurrency.Zmw,
+            "clp" => CustomerListResponsePassthroughZuoraCurrency.Clp,
+            "djf" => CustomerListResponsePassthroughZuoraCurrency.Djf,
+            "gnf" => CustomerListResponsePassthroughZuoraCurrency.Gnf,
+            "ugx" => CustomerListResponsePassthroughZuoraCurrency.Ugx,
+            "pyg" => CustomerListResponsePassthroughZuoraCurrency.Pyg,
+            "xof" => CustomerListResponsePassthroughZuoraCurrency.Xof,
+            "xpf" => CustomerListResponsePassthroughZuoraCurrency.Xpf,
+            _ => (CustomerListResponsePassthroughZuoraCurrency)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        CustomerListResponsePassthroughZuoraCurrency value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                CustomerListResponsePassthroughZuoraCurrency.Usd => "usd",
+                CustomerListResponsePassthroughZuoraCurrency.Aed => "aed",
+                CustomerListResponsePassthroughZuoraCurrency.All => "all",
+                CustomerListResponsePassthroughZuoraCurrency.Amd => "amd",
+                CustomerListResponsePassthroughZuoraCurrency.Ang => "ang",
+                CustomerListResponsePassthroughZuoraCurrency.Aud => "aud",
+                CustomerListResponsePassthroughZuoraCurrency.Awg => "awg",
+                CustomerListResponsePassthroughZuoraCurrency.Azn => "azn",
+                CustomerListResponsePassthroughZuoraCurrency.Bam => "bam",
+                CustomerListResponsePassthroughZuoraCurrency.Bbd => "bbd",
+                CustomerListResponsePassthroughZuoraCurrency.Bdt => "bdt",
+                CustomerListResponsePassthroughZuoraCurrency.Bgn => "bgn",
+                CustomerListResponsePassthroughZuoraCurrency.Bif => "bif",
+                CustomerListResponsePassthroughZuoraCurrency.Bmd => "bmd",
+                CustomerListResponsePassthroughZuoraCurrency.Bnd => "bnd",
+                CustomerListResponsePassthroughZuoraCurrency.Bsd => "bsd",
+                CustomerListResponsePassthroughZuoraCurrency.Bwp => "bwp",
+                CustomerListResponsePassthroughZuoraCurrency.Byn => "byn",
+                CustomerListResponsePassthroughZuoraCurrency.Bzd => "bzd",
+                CustomerListResponsePassthroughZuoraCurrency.Brl => "brl",
+                CustomerListResponsePassthroughZuoraCurrency.Cad => "cad",
+                CustomerListResponsePassthroughZuoraCurrency.Cdf => "cdf",
+                CustomerListResponsePassthroughZuoraCurrency.Chf => "chf",
+                CustomerListResponsePassthroughZuoraCurrency.Cny => "cny",
+                CustomerListResponsePassthroughZuoraCurrency.Czk => "czk",
+                CustomerListResponsePassthroughZuoraCurrency.Dkk => "dkk",
+                CustomerListResponsePassthroughZuoraCurrency.Dop => "dop",
+                CustomerListResponsePassthroughZuoraCurrency.Dzd => "dzd",
+                CustomerListResponsePassthroughZuoraCurrency.Egp => "egp",
+                CustomerListResponsePassthroughZuoraCurrency.Etb => "etb",
+                CustomerListResponsePassthroughZuoraCurrency.Eur => "eur",
+                CustomerListResponsePassthroughZuoraCurrency.Fjd => "fjd",
+                CustomerListResponsePassthroughZuoraCurrency.Gbp => "gbp",
+                CustomerListResponsePassthroughZuoraCurrency.Gel => "gel",
+                CustomerListResponsePassthroughZuoraCurrency.Gip => "gip",
+                CustomerListResponsePassthroughZuoraCurrency.Gmd => "gmd",
+                CustomerListResponsePassthroughZuoraCurrency.Gyd => "gyd",
+                CustomerListResponsePassthroughZuoraCurrency.Hkd => "hkd",
+                CustomerListResponsePassthroughZuoraCurrency.Hrk => "hrk",
+                CustomerListResponsePassthroughZuoraCurrency.Htg => "htg",
+                CustomerListResponsePassthroughZuoraCurrency.Idr => "idr",
+                CustomerListResponsePassthroughZuoraCurrency.Ils => "ils",
+                CustomerListResponsePassthroughZuoraCurrency.Inr => "inr",
+                CustomerListResponsePassthroughZuoraCurrency.Isk => "isk",
+                CustomerListResponsePassthroughZuoraCurrency.Jmd => "jmd",
+                CustomerListResponsePassthroughZuoraCurrency.Jpy => "jpy",
+                CustomerListResponsePassthroughZuoraCurrency.Kes => "kes",
+                CustomerListResponsePassthroughZuoraCurrency.Kgs => "kgs",
+                CustomerListResponsePassthroughZuoraCurrency.Khr => "khr",
+                CustomerListResponsePassthroughZuoraCurrency.Kmf => "kmf",
+                CustomerListResponsePassthroughZuoraCurrency.Krw => "krw",
+                CustomerListResponsePassthroughZuoraCurrency.Kyd => "kyd",
+                CustomerListResponsePassthroughZuoraCurrency.Kzt => "kzt",
+                CustomerListResponsePassthroughZuoraCurrency.Lbp => "lbp",
+                CustomerListResponsePassthroughZuoraCurrency.Lkr => "lkr",
+                CustomerListResponsePassthroughZuoraCurrency.Lrd => "lrd",
+                CustomerListResponsePassthroughZuoraCurrency.Lsl => "lsl",
+                CustomerListResponsePassthroughZuoraCurrency.Mad => "mad",
+                CustomerListResponsePassthroughZuoraCurrency.Mdl => "mdl",
+                CustomerListResponsePassthroughZuoraCurrency.Mga => "mga",
+                CustomerListResponsePassthroughZuoraCurrency.Mkd => "mkd",
+                CustomerListResponsePassthroughZuoraCurrency.Mmk => "mmk",
+                CustomerListResponsePassthroughZuoraCurrency.Mnt => "mnt",
+                CustomerListResponsePassthroughZuoraCurrency.Mop => "mop",
+                CustomerListResponsePassthroughZuoraCurrency.Mro => "mro",
+                CustomerListResponsePassthroughZuoraCurrency.Mvr => "mvr",
+                CustomerListResponsePassthroughZuoraCurrency.Mwk => "mwk",
+                CustomerListResponsePassthroughZuoraCurrency.Mxn => "mxn",
+                CustomerListResponsePassthroughZuoraCurrency.Myr => "myr",
+                CustomerListResponsePassthroughZuoraCurrency.Mzn => "mzn",
+                CustomerListResponsePassthroughZuoraCurrency.Nad => "nad",
+                CustomerListResponsePassthroughZuoraCurrency.Ngn => "ngn",
+                CustomerListResponsePassthroughZuoraCurrency.Nok => "nok",
+                CustomerListResponsePassthroughZuoraCurrency.Npr => "npr",
+                CustomerListResponsePassthroughZuoraCurrency.Nzd => "nzd",
+                CustomerListResponsePassthroughZuoraCurrency.Pgk => "pgk",
+                CustomerListResponsePassthroughZuoraCurrency.Php => "php",
+                CustomerListResponsePassthroughZuoraCurrency.Pkr => "pkr",
+                CustomerListResponsePassthroughZuoraCurrency.Pln => "pln",
+                CustomerListResponsePassthroughZuoraCurrency.Qar => "qar",
+                CustomerListResponsePassthroughZuoraCurrency.Ron => "ron",
+                CustomerListResponsePassthroughZuoraCurrency.Rsd => "rsd",
+                CustomerListResponsePassthroughZuoraCurrency.Rub => "rub",
+                CustomerListResponsePassthroughZuoraCurrency.Rwf => "rwf",
+                CustomerListResponsePassthroughZuoraCurrency.Sar => "sar",
+                CustomerListResponsePassthroughZuoraCurrency.Sbd => "sbd",
+                CustomerListResponsePassthroughZuoraCurrency.Scr => "scr",
+                CustomerListResponsePassthroughZuoraCurrency.Sek => "sek",
+                CustomerListResponsePassthroughZuoraCurrency.Sgd => "sgd",
+                CustomerListResponsePassthroughZuoraCurrency.Sle => "sle",
+                CustomerListResponsePassthroughZuoraCurrency.Sll => "sll",
+                CustomerListResponsePassthroughZuoraCurrency.Sos => "sos",
+                CustomerListResponsePassthroughZuoraCurrency.Szl => "szl",
+                CustomerListResponsePassthroughZuoraCurrency.Thb => "thb",
+                CustomerListResponsePassthroughZuoraCurrency.Tjs => "tjs",
+                CustomerListResponsePassthroughZuoraCurrency.Top => "top",
+                CustomerListResponsePassthroughZuoraCurrency.Try => "try",
+                CustomerListResponsePassthroughZuoraCurrency.Ttd => "ttd",
+                CustomerListResponsePassthroughZuoraCurrency.Tzs => "tzs",
+                CustomerListResponsePassthroughZuoraCurrency.Uah => "uah",
+                CustomerListResponsePassthroughZuoraCurrency.Uzs => "uzs",
+                CustomerListResponsePassthroughZuoraCurrency.Vnd => "vnd",
+                CustomerListResponsePassthroughZuoraCurrency.Vuv => "vuv",
+                CustomerListResponsePassthroughZuoraCurrency.Wst => "wst",
+                CustomerListResponsePassthroughZuoraCurrency.Xaf => "xaf",
+                CustomerListResponsePassthroughZuoraCurrency.Xcd => "xcd",
+                CustomerListResponsePassthroughZuoraCurrency.Yer => "yer",
+                CustomerListResponsePassthroughZuoraCurrency.Zar => "zar",
+                CustomerListResponsePassthroughZuoraCurrency.Zmw => "zmw",
+                CustomerListResponsePassthroughZuoraCurrency.Clp => "clp",
+                CustomerListResponsePassthroughZuoraCurrency.Djf => "djf",
+                CustomerListResponsePassthroughZuoraCurrency.Gnf => "gnf",
+                CustomerListResponsePassthroughZuoraCurrency.Ugx => "ugx",
+                CustomerListResponsePassthroughZuoraCurrency.Pyg => "pyg",
+                CustomerListResponsePassthroughZuoraCurrency.Xof => "xof",
+                CustomerListResponsePassthroughZuoraCurrency.Xpf => "xpf",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

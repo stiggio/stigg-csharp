@@ -332,9 +332,9 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Stigg.Client.Models.V1.Customers;
 
-CustomerListParams parameters = new()
+CustomerUpdateParams parameters = new()
 {
-    CreatedAt = new
+    Passthrough = new
     (
         new Dictionary<string, JsonElement>
         {
@@ -351,9 +351,9 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Stigg.Client.Models.V1.Customers;
 
-CustomerListParams parameters = new()
+CustomerUpdateParams parameters = new()
 {
-    CreatedAt = CreatedAt.FromRawUnchecked
+    Passthrough = Passthrough.FromRawUnchecked
     (
         new Dictionary<string, JsonElement>
         {

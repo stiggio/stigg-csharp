@@ -43,8 +43,57 @@ public class CustomerListPageResponseTest : TestBase
                                 CustomerListResponseIntegrationVendorIdentifier.Auth0,
                         },
                     ],
+                    Language = "language",
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     Name = "name",
+                    Passthrough = new()
+                    {
+                        Stripe = new()
+                        {
+                            BillingAddress = new()
+                            {
+                                City = "city",
+                                Country = "country",
+                                Line1 = "line1",
+                                Line2 = "line2",
+                                PostalCode = "postalCode",
+                                State = "state",
+                            },
+                            CustomerName = "customerName",
+                            InvoiceCustomFields = new Dictionary<string, string>()
+                            {
+                                { "foo", "string" },
+                            },
+                            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                            PaymentMethodID = "paymentMethodId",
+                            ShippingAddress = new()
+                            {
+                                City = "city",
+                                Country = "country",
+                                Line1 = "line1",
+                                Line2 = "line2",
+                                PostalCode = "postalCode",
+                                State = "state",
+                            },
+                            TaxIds = [new() { Type = "type", Value = "value" }],
+                        },
+                        Zuora = new()
+                        {
+                            BillingAddress = new()
+                            {
+                                City = "city",
+                                Country = "country",
+                                Line1 = "line1",
+                                Line2 = "line2",
+                                PostalCode = "postalCode",
+                                State = "state",
+                            },
+                            Currency = CustomerListResponsePassthroughZuoraCurrency.Usd,
+                            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                            PaymentMethodID = "paymentMethodId",
+                        },
+                    },
+                    Timezone = "timezone",
                 },
             ],
             Pagination = new()
@@ -83,8 +132,57 @@ public class CustomerListPageResponseTest : TestBase
                         VendorIdentifier = CustomerListResponseIntegrationVendorIdentifier.Auth0,
                     },
                 ],
+                Language = "language",
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 Name = "name",
+                Passthrough = new()
+                {
+                    Stripe = new()
+                    {
+                        BillingAddress = new()
+                        {
+                            City = "city",
+                            Country = "country",
+                            Line1 = "line1",
+                            Line2 = "line2",
+                            PostalCode = "postalCode",
+                            State = "state",
+                        },
+                        CustomerName = "customerName",
+                        InvoiceCustomFields = new Dictionary<string, string>()
+                        {
+                            { "foo", "string" },
+                        },
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        PaymentMethodID = "paymentMethodId",
+                        ShippingAddress = new()
+                        {
+                            City = "city",
+                            Country = "country",
+                            Line1 = "line1",
+                            Line2 = "line2",
+                            PostalCode = "postalCode",
+                            State = "state",
+                        },
+                        TaxIds = [new() { Type = "type", Value = "value" }],
+                    },
+                    Zuora = new()
+                    {
+                        BillingAddress = new()
+                        {
+                            City = "city",
+                            Country = "country",
+                            Line1 = "line1",
+                            Line2 = "line2",
+                            PostalCode = "postalCode",
+                            State = "state",
+                        },
+                        Currency = CustomerListResponsePassthroughZuoraCurrency.Usd,
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        PaymentMethodID = "paymentMethodId",
+                    },
+                },
+                Timezone = "timezone",
             },
         ];
         Pagination expectedPagination = new()
@@ -136,8 +234,57 @@ public class CustomerListPageResponseTest : TestBase
                                 CustomerListResponseIntegrationVendorIdentifier.Auth0,
                         },
                     ],
+                    Language = "language",
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     Name = "name",
+                    Passthrough = new()
+                    {
+                        Stripe = new()
+                        {
+                            BillingAddress = new()
+                            {
+                                City = "city",
+                                Country = "country",
+                                Line1 = "line1",
+                                Line2 = "line2",
+                                PostalCode = "postalCode",
+                                State = "state",
+                            },
+                            CustomerName = "customerName",
+                            InvoiceCustomFields = new Dictionary<string, string>()
+                            {
+                                { "foo", "string" },
+                            },
+                            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                            PaymentMethodID = "paymentMethodId",
+                            ShippingAddress = new()
+                            {
+                                City = "city",
+                                Country = "country",
+                                Line1 = "line1",
+                                Line2 = "line2",
+                                PostalCode = "postalCode",
+                                State = "state",
+                            },
+                            TaxIds = [new() { Type = "type", Value = "value" }],
+                        },
+                        Zuora = new()
+                        {
+                            BillingAddress = new()
+                            {
+                                City = "city",
+                                Country = "country",
+                                Line1 = "line1",
+                                Line2 = "line2",
+                                PostalCode = "postalCode",
+                                State = "state",
+                            },
+                            Currency = CustomerListResponsePassthroughZuoraCurrency.Usd,
+                            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                            PaymentMethodID = "paymentMethodId",
+                        },
+                    },
+                    Timezone = "timezone",
                 },
             ],
             Pagination = new()
@@ -191,8 +338,57 @@ public class CustomerListPageResponseTest : TestBase
                                 CustomerListResponseIntegrationVendorIdentifier.Auth0,
                         },
                     ],
+                    Language = "language",
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     Name = "name",
+                    Passthrough = new()
+                    {
+                        Stripe = new()
+                        {
+                            BillingAddress = new()
+                            {
+                                City = "city",
+                                Country = "country",
+                                Line1 = "line1",
+                                Line2 = "line2",
+                                PostalCode = "postalCode",
+                                State = "state",
+                            },
+                            CustomerName = "customerName",
+                            InvoiceCustomFields = new Dictionary<string, string>()
+                            {
+                                { "foo", "string" },
+                            },
+                            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                            PaymentMethodID = "paymentMethodId",
+                            ShippingAddress = new()
+                            {
+                                City = "city",
+                                Country = "country",
+                                Line1 = "line1",
+                                Line2 = "line2",
+                                PostalCode = "postalCode",
+                                State = "state",
+                            },
+                            TaxIds = [new() { Type = "type", Value = "value" }],
+                        },
+                        Zuora = new()
+                        {
+                            BillingAddress = new()
+                            {
+                                City = "city",
+                                Country = "country",
+                                Line1 = "line1",
+                                Line2 = "line2",
+                                PostalCode = "postalCode",
+                                State = "state",
+                            },
+                            Currency = CustomerListResponsePassthroughZuoraCurrency.Usd,
+                            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                            PaymentMethodID = "paymentMethodId",
+                        },
+                    },
+                    Timezone = "timezone",
                 },
             ],
             Pagination = new()
@@ -238,8 +434,57 @@ public class CustomerListPageResponseTest : TestBase
                         VendorIdentifier = CustomerListResponseIntegrationVendorIdentifier.Auth0,
                     },
                 ],
+                Language = "language",
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 Name = "name",
+                Passthrough = new()
+                {
+                    Stripe = new()
+                    {
+                        BillingAddress = new()
+                        {
+                            City = "city",
+                            Country = "country",
+                            Line1 = "line1",
+                            Line2 = "line2",
+                            PostalCode = "postalCode",
+                            State = "state",
+                        },
+                        CustomerName = "customerName",
+                        InvoiceCustomFields = new Dictionary<string, string>()
+                        {
+                            { "foo", "string" },
+                        },
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        PaymentMethodID = "paymentMethodId",
+                        ShippingAddress = new()
+                        {
+                            City = "city",
+                            Country = "country",
+                            Line1 = "line1",
+                            Line2 = "line2",
+                            PostalCode = "postalCode",
+                            State = "state",
+                        },
+                        TaxIds = [new() { Type = "type", Value = "value" }],
+                    },
+                    Zuora = new()
+                    {
+                        BillingAddress = new()
+                        {
+                            City = "city",
+                            Country = "country",
+                            Line1 = "line1",
+                            Line2 = "line2",
+                            PostalCode = "postalCode",
+                            State = "state",
+                        },
+                        Currency = CustomerListResponsePassthroughZuoraCurrency.Usd,
+                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                        PaymentMethodID = "paymentMethodId",
+                    },
+                },
+                Timezone = "timezone",
             },
         ];
         Pagination expectedPagination = new()
@@ -291,8 +536,57 @@ public class CustomerListPageResponseTest : TestBase
                                 CustomerListResponseIntegrationVendorIdentifier.Auth0,
                         },
                     ],
+                    Language = "language",
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     Name = "name",
+                    Passthrough = new()
+                    {
+                        Stripe = new()
+                        {
+                            BillingAddress = new()
+                            {
+                                City = "city",
+                                Country = "country",
+                                Line1 = "line1",
+                                Line2 = "line2",
+                                PostalCode = "postalCode",
+                                State = "state",
+                            },
+                            CustomerName = "customerName",
+                            InvoiceCustomFields = new Dictionary<string, string>()
+                            {
+                                { "foo", "string" },
+                            },
+                            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                            PaymentMethodID = "paymentMethodId",
+                            ShippingAddress = new()
+                            {
+                                City = "city",
+                                Country = "country",
+                                Line1 = "line1",
+                                Line2 = "line2",
+                                PostalCode = "postalCode",
+                                State = "state",
+                            },
+                            TaxIds = [new() { Type = "type", Value = "value" }],
+                        },
+                        Zuora = new()
+                        {
+                            BillingAddress = new()
+                            {
+                                City = "city",
+                                Country = "country",
+                                Line1 = "line1",
+                                Line2 = "line2",
+                                PostalCode = "postalCode",
+                                State = "state",
+                            },
+                            Currency = CustomerListResponsePassthroughZuoraCurrency.Usd,
+                            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                            PaymentMethodID = "paymentMethodId",
+                        },
+                    },
+                    Timezone = "timezone",
                 },
             ],
             Pagination = new()
@@ -340,8 +634,57 @@ public class CustomerListPageResponseTest : TestBase
                                 CustomerListResponseIntegrationVendorIdentifier.Auth0,
                         },
                     ],
+                    Language = "language",
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     Name = "name",
+                    Passthrough = new()
+                    {
+                        Stripe = new()
+                        {
+                            BillingAddress = new()
+                            {
+                                City = "city",
+                                Country = "country",
+                                Line1 = "line1",
+                                Line2 = "line2",
+                                PostalCode = "postalCode",
+                                State = "state",
+                            },
+                            CustomerName = "customerName",
+                            InvoiceCustomFields = new Dictionary<string, string>()
+                            {
+                                { "foo", "string" },
+                            },
+                            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                            PaymentMethodID = "paymentMethodId",
+                            ShippingAddress = new()
+                            {
+                                City = "city",
+                                Country = "country",
+                                Line1 = "line1",
+                                Line2 = "line2",
+                                PostalCode = "postalCode",
+                                State = "state",
+                            },
+                            TaxIds = [new() { Type = "type", Value = "value" }],
+                        },
+                        Zuora = new()
+                        {
+                            BillingAddress = new()
+                            {
+                                City = "city",
+                                Country = "country",
+                                Line1 = "line1",
+                                Line2 = "line2",
+                                PostalCode = "postalCode",
+                                State = "state",
+                            },
+                            Currency = CustomerListResponsePassthroughZuoraCurrency.Usd,
+                            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                            PaymentMethodID = "paymentMethodId",
+                        },
+                    },
+                    Timezone = "timezone",
                 },
             ],
             Pagination = new()
