@@ -19,7 +19,7 @@ public class ProductServiceTest : TestBase
     public async Task CreateProduct_Works()
     {
         var product = await this.client.V1.Products.CreateProduct(
-            new() { ID = "id" },
+            new() { ID = "id", DisplayName = "displayName" },
             TestContext.Current.CancellationToken
         );
         product.Validate();

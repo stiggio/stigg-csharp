@@ -12,21 +12,21 @@ public class ProductCreateProductParamsTest : TestBase
         var parameters = new ProductCreateProductParams
         {
             ID = "id",
-            Description = "description",
             DisplayName = "displayName",
+            Description = "description",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MultipleSubscriptions = true,
         };
 
         string expectedID = "id";
-        string expectedDescription = "description";
         string expectedDisplayName = "displayName";
+        string expectedDescription = "description";
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         bool expectedMultipleSubscriptions = true;
 
         Assert.Equal(expectedID, parameters.ID);
-        Assert.Equal(expectedDescription, parameters.Description);
         Assert.Equal(expectedDisplayName, parameters.DisplayName);
+        Assert.Equal(expectedDescription, parameters.Description);
         Assert.NotNull(parameters.Metadata);
         Assert.Equal(expectedMetadata.Count, parameters.Metadata.Count);
         foreach (var item in expectedMetadata)
@@ -44,12 +44,11 @@ public class ProductCreateProductParamsTest : TestBase
         var parameters = new ProductCreateProductParams
         {
             ID = "id",
+            DisplayName = "displayName",
             Description = "description",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
         };
 
-        Assert.Null(parameters.DisplayName);
-        Assert.False(parameters.RawBodyData.ContainsKey("displayName"));
         Assert.Null(parameters.MultipleSubscriptions);
         Assert.False(parameters.RawBodyData.ContainsKey("multipleSubscriptions"));
     }
@@ -60,16 +59,14 @@ public class ProductCreateProductParamsTest : TestBase
         var parameters = new ProductCreateProductParams
         {
             ID = "id",
+            DisplayName = "displayName",
             Description = "description",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
 
             // Null should be interpreted as omitted for these properties
-            DisplayName = null,
             MultipleSubscriptions = null,
         };
 
-        Assert.Null(parameters.DisplayName);
-        Assert.False(parameters.RawBodyData.ContainsKey("displayName"));
         Assert.Null(parameters.MultipleSubscriptions);
         Assert.False(parameters.RawBodyData.ContainsKey("multipleSubscriptions"));
     }
@@ -112,7 +109,7 @@ public class ProductCreateProductParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        ProductCreateProductParams parameters = new() { ID = "id" };
+        ProductCreateProductParams parameters = new() { ID = "id", DisplayName = "displayName" };
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
@@ -125,8 +122,8 @@ public class ProductCreateProductParamsTest : TestBase
         var parameters = new ProductCreateProductParams
         {
             ID = "id",
-            Description = "description",
             DisplayName = "displayName",
+            Description = "description",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MultipleSubscriptions = true,
         };

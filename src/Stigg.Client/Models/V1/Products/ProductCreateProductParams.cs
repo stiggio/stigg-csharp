@@ -38,6 +38,19 @@ public record class ProductCreateProductParams : ParamsBase
     }
 
     /// <summary>
+    /// Display name of the product
+    /// </summary>
+    public required string DisplayName
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<string>("displayName");
+        }
+        init { this._rawBodyData.Set("displayName", value); }
+    }
+
+    /// <summary>
     /// Description of the product
     /// </summary>
     public string? Description
@@ -48,27 +61,6 @@ public record class ProductCreateProductParams : ParamsBase
             return this._rawBodyData.GetNullableClass<string>("description");
         }
         init { this._rawBodyData.Set("description", value); }
-    }
-
-    /// <summary>
-    /// Display name of the product
-    /// </summary>
-    public string? DisplayName
-    {
-        get
-        {
-            this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableClass<string>("displayName");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawBodyData.Set("displayName", value);
-        }
     }
 
     /// <summary>
