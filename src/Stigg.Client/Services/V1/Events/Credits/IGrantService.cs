@@ -46,7 +46,8 @@ public interface IGrantService
     );
 
     /// <summary>
-    /// Voids an existing credit grant, preventing further consumption of the remaining credits.
+    /// Voids an existing credit grant, preventing further consumption of the remaining
+    /// credits.
     /// </summary>
     Task<CreditGrantResponse> Void(
         GrantVoidParams parameters,
@@ -75,7 +76,7 @@ public interface IGrantServiceWithRawResponse
     IGrantServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/credits/grants`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/credits/grants</c>, but is otherwise the
     /// same as <see cref="IGrantService.Create(GrantCreateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CreditGrantResponse>> Create(
@@ -84,7 +85,7 @@ public interface IGrantServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /api/v1/credits/grants`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /api/v1/credits/grants</c>, but is otherwise the
     /// same as <see cref="IGrantService.List(GrantListParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<GrantListPage>> List(
@@ -93,7 +94,7 @@ public interface IGrantServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/credits/grants/{id}/void`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/credits/grants/{id}/void</c>, but is otherwise the
     /// same as <see cref="IGrantService.Void(GrantVoidParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CreditGrantResponse>> Void(

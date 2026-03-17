@@ -29,7 +29,8 @@ public interface IProductService
     IProductService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Archives a product, preventing new subscriptions. All plans and addons are archived.
+    /// Archives a product, preventing new subscriptions. All plans and addons are
+    /// archived.
     /// </summary>
     Task<Product> ArchiveProduct(
         ProductArchiveProductParams parameters,
@@ -90,8 +91,8 @@ public interface IProductService
     );
 
     /// <summary>
-    /// Updates an existing product's properties such as display name, description,
-    /// and metadata.
+    /// Updates an existing product's properties such as display name, description, and
+    /// metadata.
     /// </summary>
     Task<Product> UpdateProduct(
         ProductUpdateProductParams parameters,
@@ -120,7 +121,7 @@ public interface IProductServiceWithRawResponse
     IProductServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/products/{id}/archive`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/products/{id}/archive</c>, but is otherwise the
     /// same as <see cref="IProductService.ArchiveProduct(ProductArchiveProductParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Product>> ArchiveProduct(
@@ -136,7 +137,7 @@ public interface IProductServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/products`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/products</c>, but is otherwise the
     /// same as <see cref="IProductService.CreateProduct(ProductCreateProductParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Product>> CreateProduct(
@@ -145,7 +146,7 @@ public interface IProductServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/products/{id}/duplicate`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/products/{id}/duplicate</c>, but is otherwise the
     /// same as <see cref="IProductService.DuplicateProduct(ProductDuplicateProductParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Product>> DuplicateProduct(
@@ -161,7 +162,7 @@ public interface IProductServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /api/v1/products`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /api/v1/products</c>, but is otherwise the
     /// same as <see cref="IProductService.ListProducts(ProductListProductsParams?, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<ProductListProductsPage>> ListProducts(
@@ -170,7 +171,7 @@ public interface IProductServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/products/{id}/unarchive`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/products/{id}/unarchive</c>, but is otherwise the
     /// same as <see cref="IProductService.UnarchiveProduct(ProductUnarchiveProductParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Product>> UnarchiveProduct(
@@ -186,7 +187,7 @@ public interface IProductServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `patch /api/v1/products/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>patch /api/v1/products/{id}</c>, but is otherwise the
     /// same as <see cref="IProductService.UpdateProduct(ProductUpdateProductParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Product>> UpdateProduct(

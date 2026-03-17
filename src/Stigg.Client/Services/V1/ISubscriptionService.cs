@@ -75,8 +75,8 @@ public interface ISubscriptionService
     );
 
     /// <summary>
-    /// Cancels an active subscription, either immediately or at a specified time
-    /// such as end of billing period.
+    /// Cancels an active subscription, either immediately or at a specified time such
+    /// as end of billing period.
     /// </summary>
     Task<SubscriptionSubscription> Cancel(
         SubscriptionCancelParams parameters,
@@ -186,7 +186,7 @@ public interface ISubscriptionServiceWithRawResponse
     Subscriptions::IInvoiceServiceWithRawResponse Invoice { get; }
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /api/v1/subscriptions/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /api/v1/subscriptions/{id}</c>, but is otherwise the
     /// same as <see cref="ISubscriptionService.Retrieve(SubscriptionRetrieveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<SubscriptionSubscription>> Retrieve(
@@ -202,7 +202,7 @@ public interface ISubscriptionServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `patch /api/v1/subscriptions/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>patch /api/v1/subscriptions/{id}</c>, but is otherwise the
     /// same as <see cref="ISubscriptionService.Update(SubscriptionUpdateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<SubscriptionSubscription>> Update(
@@ -218,7 +218,7 @@ public interface ISubscriptionServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /api/v1/subscriptions`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /api/v1/subscriptions</c>, but is otherwise the
     /// same as <see cref="ISubscriptionService.List(SubscriptionListParams?, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<SubscriptionListPage>> List(
@@ -227,7 +227,7 @@ public interface ISubscriptionServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/subscriptions/{id}/cancel`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/subscriptions/{id}/cancel</c>, but is otherwise the
     /// same as <see cref="ISubscriptionService.Cancel(SubscriptionCancelParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<SubscriptionSubscription>> Cancel(
@@ -243,7 +243,7 @@ public interface ISubscriptionServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/subscriptions/{id}/delegate`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/subscriptions/{id}/delegate</c>, but is otherwise the
     /// same as <see cref="ISubscriptionService.Delegate(SubscriptionDelegateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<SubscriptionSubscription>> Delegate(
@@ -259,7 +259,7 @@ public interface ISubscriptionServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/subscriptions/import`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/subscriptions/import</c>, but is otherwise the
     /// same as <see cref="ISubscriptionService.Import(SubscriptionImportParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<SubscriptionImportResponse>> Import(
@@ -268,7 +268,7 @@ public interface ISubscriptionServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/subscriptions/{id}/migrate`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/subscriptions/{id}/migrate</c>, but is otherwise the
     /// same as <see cref="ISubscriptionService.Migrate(SubscriptionMigrateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<SubscriptionSubscription>> Migrate(
@@ -284,7 +284,7 @@ public interface ISubscriptionServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/subscriptions/preview`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/subscriptions/preview</c>, but is otherwise the
     /// same as <see cref="ISubscriptionService.Preview(SubscriptionPreviewParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<SubscriptionPreviewResponse>> Preview(
@@ -293,7 +293,7 @@ public interface ISubscriptionServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/subscriptions`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/subscriptions</c>, but is otherwise the
     /// same as <see cref="ISubscriptionService.Provision(SubscriptionProvisionParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<SubscriptionProvisionResponse>> Provision(
@@ -302,7 +302,7 @@ public interface ISubscriptionServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/subscriptions/{id}/transfer`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/subscriptions/{id}/transfer</c>, but is otherwise the
     /// same as <see cref="ISubscriptionService.Transfer(SubscriptionTransferParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<SubscriptionSubscription>> Transfer(

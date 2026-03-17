@@ -30,8 +30,8 @@ public interface IPaymentMethodService
     IPaymentMethodService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Attaches a payment method to a customer for billing. Required for paid subscriptions
-    /// when integrated with a billing provider.
+    /// Attaches a payment method to a customer for billing. Required for paid
+    /// subscriptions when integrated with a billing provider.
     /// </summary>
     Task<CustomerResponse> Attach(
         PaymentMethodAttachParams parameters,
@@ -76,7 +76,7 @@ public interface IPaymentMethodServiceWithRawResponse
     IPaymentMethodServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/customers/{id}/payment-method`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/customers/{id}/payment-method</c>, but is otherwise the
     /// same as <see cref="IPaymentMethodService.Attach(PaymentMethodAttachParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CustomerResponse>> Attach(
@@ -92,7 +92,7 @@ public interface IPaymentMethodServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `delete /api/v1/customers/{id}/payment-method`, but is otherwise the
+    /// Returns a raw HTTP response for <c>delete /api/v1/customers/{id}/payment-method</c>, but is otherwise the
     /// same as <see cref="IPaymentMethodService.Detach(PaymentMethodDetachParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CustomerResponse>> Detach(

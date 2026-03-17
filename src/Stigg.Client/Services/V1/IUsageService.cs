@@ -7,7 +7,7 @@ using Stigg.Client.Models.V1.Usage;
 namespace Stigg.Client.Services.V1;
 
 /// <summary>
-/// Operations related to usage & metering
+/// Operations related to usage &amp; metering
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
@@ -44,8 +44,8 @@ public interface IUsageService
     );
 
     /// <summary>
-    /// Reports usage measurements for metered features. The reported usage is used
-    /// to track, limit, and bill customer consumption.
+    /// Reports usage measurements for metered features. The reported usage is used to
+    /// track, limit, and bill customer consumption.
     /// </summary>
     Task<UsageReportResponse> Report(
         UsageReportParams parameters,
@@ -67,7 +67,7 @@ public interface IUsageServiceWithRawResponse
     IUsageServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /api/v1/usage/{customerId}/history/{featureId}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /api/v1/usage/{customerId}/history/{featureId}</c>, but is otherwise the
     /// same as <see cref="IUsageService.History(UsageHistoryParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<UsageHistoryResponse>> History(
@@ -83,7 +83,7 @@ public interface IUsageServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/usage`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/usage</c>, but is otherwise the
     /// same as <see cref="IUsageService.Report(UsageReportParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<UsageReportResponse>> Report(

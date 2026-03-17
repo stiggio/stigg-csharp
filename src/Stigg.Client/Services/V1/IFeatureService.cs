@@ -90,8 +90,8 @@ public interface IFeatureService
     );
 
     /// <summary>
-    /// Updates an existing feature's properties such as display name, description,
-    /// and configuration.
+    /// Updates an existing feature's properties such as display name, description, and
+    /// configuration.
     /// </summary>
     Task<Feature> UpdateFeature(
         FeatureUpdateFeatureParams parameters,
@@ -120,7 +120,7 @@ public interface IFeatureServiceWithRawResponse
     IFeatureServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/features/{id}/archive`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/features/{id}/archive</c>, but is otherwise the
     /// same as <see cref="IFeatureService.ArchiveFeature(FeatureArchiveFeatureParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Feature>> ArchiveFeature(
@@ -136,7 +136,7 @@ public interface IFeatureServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/features`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/features</c>, but is otherwise the
     /// same as <see cref="IFeatureService.CreateFeature(FeatureCreateFeatureParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Feature>> CreateFeature(
@@ -145,7 +145,7 @@ public interface IFeatureServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /api/v1/features`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /api/v1/features</c>, but is otherwise the
     /// same as <see cref="IFeatureService.ListFeatures(FeatureListFeaturesParams?, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<FeatureListFeaturesPage>> ListFeatures(
@@ -154,7 +154,7 @@ public interface IFeatureServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /api/v1/features/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /api/v1/features/{id}</c>, but is otherwise the
     /// same as <see cref="IFeatureService.RetrieveFeature(FeatureRetrieveFeatureParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Feature>> RetrieveFeature(
@@ -170,7 +170,7 @@ public interface IFeatureServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/features/{id}/unarchive`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/features/{id}/unarchive</c>, but is otherwise the
     /// same as <see cref="IFeatureService.UnarchiveFeature(FeatureUnarchiveFeatureParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Feature>> UnarchiveFeature(
@@ -186,7 +186,7 @@ public interface IFeatureServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `patch /api/v1/features/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>patch /api/v1/features/{id}</c>, but is otherwise the
     /// same as <see cref="IFeatureService.UpdateFeature(FeatureUpdateFeatureParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Feature>> UpdateFeature(

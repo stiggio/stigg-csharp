@@ -194,7 +194,7 @@ public record class EntitlementListResponseData : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="EntitlementListResponseDataFeature"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -215,7 +215,7 @@ public record class EntitlementListResponseData : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="EntitlementListResponseDataCredit"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -235,7 +235,7 @@ public record class EntitlementListResponseData : ModelBase
     /// <summary>
     /// Calls the function parameter corresponding to the variant the instance was constructed with.
     ///
-    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match">
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match"/>
     /// if you need your function parameters to return something.</para>
     ///
     /// <exception cref="StiggInvalidDataException">
@@ -246,8 +246,8 @@ public record class EntitlementListResponseData : ModelBase
     /// <example>
     /// <code>
     /// instance.Switch(
-    ///     (EntitlementListResponseDataFeature value) => {...},
-    ///     (EntitlementListResponseDataCredit value) => {...}
+    ///     (EntitlementListResponseDataFeature value) =&gt; {...},
+    ///     (EntitlementListResponseDataCredit value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
@@ -276,7 +276,7 @@ public record class EntitlementListResponseData : ModelBase
     /// Calls the function parameter corresponding to the variant the instance was constructed with and
     /// returns its result.
     ///
-    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch">
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch"/>
     /// if you don't need your function parameters to return a value.</para>
     ///
     /// <exception cref="StiggInvalidDataException">
@@ -287,8 +287,8 @@ public record class EntitlementListResponseData : ModelBase
     /// <example>
     /// <code>
     /// var result = instance.Match(
-    ///     (EntitlementListResponseDataFeature value) => {...},
-    ///     (EntitlementListResponseDataCredit value) => {...}
+    ///     (EntitlementListResponseDataFeature value) =&gt; {...},
+    ///     (EntitlementListResponseDataCredit value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
@@ -985,7 +985,7 @@ public record class EntitlementListResponseDataFeatureResetPeriodConfiguration :
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="EntitlementListResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -1011,7 +1011,7 @@ public record class EntitlementListResponseDataFeatureResetPeriodConfiguration :
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="EntitlementListResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfig"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -1037,7 +1037,7 @@ public record class EntitlementListResponseDataFeatureResetPeriodConfiguration :
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="EntitlementListResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfig"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -1062,7 +1062,7 @@ public record class EntitlementListResponseDataFeatureResetPeriodConfiguration :
     /// <summary>
     /// Calls the function parameter corresponding to the variant the instance was constructed with.
     ///
-    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match">
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match"/>
     /// if you need your function parameters to return something.</para>
     ///
     /// <exception cref="StiggInvalidDataException">
@@ -1073,9 +1073,9 @@ public record class EntitlementListResponseDataFeatureResetPeriodConfiguration :
     /// <example>
     /// <code>
     /// instance.Switch(
-    ///     (EntitlementListResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig value) => {...},
-    ///     (EntitlementListResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfig value) => {...},
-    ///     (EntitlementListResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfig value) => {...}
+    ///     (EntitlementListResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig value) =&gt; {...},
+    ///     (EntitlementListResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfig value) =&gt; {...},
+    ///     (EntitlementListResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfig value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
@@ -1108,7 +1108,7 @@ public record class EntitlementListResponseDataFeatureResetPeriodConfiguration :
     /// Calls the function parameter corresponding to the variant the instance was constructed with and
     /// returns its result.
     ///
-    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch">
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch"/>
     /// if you don't need your function parameters to return a value.</para>
     ///
     /// <exception cref="StiggInvalidDataException">
@@ -1119,9 +1119,9 @@ public record class EntitlementListResponseDataFeatureResetPeriodConfiguration :
     /// <example>
     /// <code>
     /// var result = instance.Match(
-    ///     (EntitlementListResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig value) => {...},
-    ///     (EntitlementListResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfig value) => {...},
-    ///     (EntitlementListResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfig value) => {...}
+    ///     (EntitlementListResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfig value) =&gt; {...},
+    ///     (EntitlementListResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfig value) =&gt; {...},
+    ///     (EntitlementListResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfig value) =&gt; {...}
     /// );
     /// </code>
     /// </example>

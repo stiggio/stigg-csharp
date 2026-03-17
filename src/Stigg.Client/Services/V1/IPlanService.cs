@@ -37,7 +37,8 @@ public interface IPlanService
     Task<Plan> Create(PlanCreateParams parameters, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Retrieves a plan by its unique identifier, including entitlements and pricing details.
+    /// Retrieves a plan by its unique identifier, including entitlements and pricing
+    /// details.
     /// </summary>
     Task<Plan> Retrieve(
         PlanRetrieveParams parameters,
@@ -52,8 +53,8 @@ public interface IPlanService
     );
 
     /// <summary>
-    /// Updates an existing plan's properties such as display name, description,
-    /// and metadata.
+    /// Updates an existing plan's properties such as display name, description, and
+    /// metadata.
     /// </summary>
     Task<Plan> Update(PlanUpdateParams parameters, CancellationToken cancellationToken = default);
 
@@ -146,7 +147,7 @@ public interface IPlanServiceWithRawResponse
     IEntitlementServiceWithRawResponse Entitlements { get; }
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/plans`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/plans</c>, but is otherwise the
     /// same as <see cref="IPlanService.Create(PlanCreateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Plan>> Create(
@@ -155,7 +156,7 @@ public interface IPlanServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /api/v1/plans/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /api/v1/plans/{id}</c>, but is otherwise the
     /// same as <see cref="IPlanService.Retrieve(PlanRetrieveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Plan>> Retrieve(
@@ -171,7 +172,7 @@ public interface IPlanServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `patch /api/v1/plans/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>patch /api/v1/plans/{id}</c>, but is otherwise the
     /// same as <see cref="IPlanService.Update(PlanUpdateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Plan>> Update(
@@ -187,7 +188,7 @@ public interface IPlanServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /api/v1/plans`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /api/v1/plans</c>, but is otherwise the
     /// same as <see cref="IPlanService.List(PlanListParams?, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<PlanListPage>> List(
@@ -196,7 +197,7 @@ public interface IPlanServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/plans/{id}/archive`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/plans/{id}/archive</c>, but is otherwise the
     /// same as <see cref="IPlanService.Archive(PlanArchiveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Plan>> Archive(
@@ -212,7 +213,7 @@ public interface IPlanServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/plans/{id}/draft`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/plans/{id}/draft</c>, but is otherwise the
     /// same as <see cref="IPlanService.CreateDraft(PlanCreateDraftParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Plan>> CreateDraft(
@@ -228,7 +229,7 @@ public interface IPlanServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/plans/{id}/publish`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/plans/{id}/publish</c>, but is otherwise the
     /// same as <see cref="IPlanService.Publish(PlanPublishParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<PlanPublishResponse>> Publish(
@@ -244,7 +245,7 @@ public interface IPlanServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `delete /api/v1/plans/{id}/draft`, but is otherwise the
+    /// Returns a raw HTTP response for <c>delete /api/v1/plans/{id}/draft</c>, but is otherwise the
     /// same as <see cref="IPlanService.RemoveDraft(PlanRemoveDraftParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<PlanRemoveDraftResponse>> RemoveDraft(

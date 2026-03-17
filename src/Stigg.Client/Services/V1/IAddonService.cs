@@ -37,7 +37,8 @@ public interface IAddonService
     Task<Addon> Create(AddonCreateParams parameters, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Retrieves an addon by its unique identifier, including entitlements and pricing details.
+    /// Retrieves an addon by its unique identifier, including entitlements and pricing
+    /// details.
     /// </summary>
     Task<Addon> Retrieve(
         AddonRetrieveParams parameters,
@@ -52,8 +53,8 @@ public interface IAddonService
     );
 
     /// <summary>
-    /// Updates an existing addon's properties such as display name, description,
-    /// and metadata.
+    /// Updates an existing addon's properties such as display name, description, and
+    /// metadata.
     /// </summary>
     Task<Addon> Update(AddonUpdateParams parameters, CancellationToken cancellationToken = default);
 
@@ -149,7 +150,7 @@ public interface IAddonServiceWithRawResponse
     IEntitlementServiceWithRawResponse Entitlements { get; }
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/addons`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/addons</c>, but is otherwise the
     /// same as <see cref="IAddonService.Create(AddonCreateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Addon>> Create(
@@ -158,7 +159,7 @@ public interface IAddonServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /api/v1/addons/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /api/v1/addons/{id}</c>, but is otherwise the
     /// same as <see cref="IAddonService.Retrieve(AddonRetrieveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Addon>> Retrieve(
@@ -174,7 +175,7 @@ public interface IAddonServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `patch /api/v1/addons/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>patch /api/v1/addons/{id}</c>, but is otherwise the
     /// same as <see cref="IAddonService.Update(AddonUpdateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Addon>> Update(
@@ -190,7 +191,7 @@ public interface IAddonServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /api/v1/addons`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /api/v1/addons</c>, but is otherwise the
     /// same as <see cref="IAddonService.List(AddonListParams?, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<AddonListPage>> List(
@@ -199,7 +200,7 @@ public interface IAddonServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/addons/{id}/archive`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/addons/{id}/archive</c>, but is otherwise the
     /// same as <see cref="IAddonService.Archive(AddonArchiveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Addon>> Archive(
@@ -215,7 +216,7 @@ public interface IAddonServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/addons/{id}/draft`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/addons/{id}/draft</c>, but is otherwise the
     /// same as <see cref="IAddonService.CreateDraft(AddonCreateDraftParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Addon>> CreateDraft(
@@ -231,7 +232,7 @@ public interface IAddonServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/addons/{id}/publish`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/addons/{id}/publish</c>, but is otherwise the
     /// same as <see cref="IAddonService.Publish(AddonPublishParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<AddonPublishResponse>> Publish(
@@ -247,7 +248,7 @@ public interface IAddonServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `delete /api/v1/addons/{id}/draft`, but is otherwise the
+    /// Returns a raw HTTP response for <c>delete /api/v1/addons/{id}/draft</c>, but is otherwise the
     /// same as <see cref="IAddonService.RemoveDraft(AddonRemoveDraftParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<AddonRemoveDraftResponse>> RemoveDraft(

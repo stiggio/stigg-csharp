@@ -60,8 +60,8 @@ public interface IPromotionalEntitlementService
     );
 
     /// <summary>
-    /// Revokes a previously granted promotional entitlement from a customer for
-    /// a specific feature.
+    /// Revokes a previously granted promotional entitlement from a customer for a
+    /// specific feature.
     /// </summary>
     Task<PromotionalEntitlementRevokeResponse> Revoke(
         PromotionalEntitlementRevokeParams parameters,
@@ -92,7 +92,7 @@ public interface IPromotionalEntitlementServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/customers/{id}/promotional-entitlements`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/customers/{id}/promotional-entitlements</c>, but is otherwise the
     /// same as <see cref="IPromotionalEntitlementService.Create(PromotionalEntitlementCreateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<PromotionalEntitlementCreateResponse>> Create(
@@ -108,7 +108,7 @@ public interface IPromotionalEntitlementServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /api/v1/customers/{id}/promotional-entitlements`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /api/v1/customers/{id}/promotional-entitlements</c>, but is otherwise the
     /// same as <see cref="IPromotionalEntitlementService.List(PromotionalEntitlementListParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<PromotionalEntitlementListPage>> List(
@@ -124,7 +124,7 @@ public interface IPromotionalEntitlementServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `delete /api/v1/customers/{id}/promotional-entitlements/{featureId}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>delete /api/v1/customers/{id}/promotional-entitlements/{featureId}</c>, but is otherwise the
     /// same as <see cref="IPromotionalEntitlementService.Revoke(PromotionalEntitlementRevokeParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<PromotionalEntitlementRevokeResponse>> Revoke(

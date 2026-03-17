@@ -39,8 +39,8 @@ public interface ICreditService
     );
 
     /// <summary>
-    /// Retrieves credit usage time-series data for a customer, grouped by feature,
-    /// over a specified time range.
+    /// Retrieves credit usage time-series data for a customer, grouped by feature, over
+    /// a specified time range.
     /// </summary>
     Task<CreditGetUsageResponse> GetUsage(
         CreditGetUsageParams parameters,
@@ -72,7 +72,7 @@ public interface ICreditServiceWithRawResponse
     IGrantServiceWithRawResponse Grants { get; }
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /api/v1/credits/auto-recharge`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /api/v1/credits/auto-recharge</c>, but is otherwise the
     /// same as <see cref="ICreditService.GetAutoRecharge(CreditGetAutoRechargeParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CreditGetAutoRechargeResponse>> GetAutoRecharge(
@@ -81,7 +81,7 @@ public interface ICreditServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /api/v1/credits/usage`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /api/v1/credits/usage</c>, but is otherwise the
     /// same as <see cref="ICreditService.GetUsage(CreditGetUsageParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CreditGetUsageResponse>> GetUsage(
@@ -90,7 +90,7 @@ public interface ICreditServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /api/v1/credits/ledger`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /api/v1/credits/ledger</c>, but is otherwise the
     /// same as <see cref="ICreditService.ListLedger(CreditListLedgerParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CreditListLedgerPage>> ListLedger(

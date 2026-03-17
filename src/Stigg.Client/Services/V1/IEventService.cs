@@ -8,7 +8,7 @@ using Stigg.Client.Services.V1.Events;
 namespace Stigg.Client.Services.V1;
 
 /// <summary>
-/// Operations related to usage & metering
+/// Operations related to usage &amp; metering
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
@@ -32,8 +32,8 @@ public interface IEventService
     ICreditService Credits { get; }
 
     /// <summary>
-    /// Reports raw usage events for event-based metering. Events are ingested asynchronously
-    /// and aggregated into usage totals.
+    /// Reports raw usage events for event-based metering. Events are ingested
+    /// asynchronously and aggregated into usage totals.
     /// </summary>
     Task<EventReportResponse> Report(
         EventReportParams parameters,
@@ -57,7 +57,7 @@ public interface IEventServiceWithRawResponse
     ICreditServiceWithRawResponse Credits { get; }
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/events`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/events</c>, but is otherwise the
     /// same as <see cref="IEventService.Report(EventReportParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<EventReportResponse>> Report(

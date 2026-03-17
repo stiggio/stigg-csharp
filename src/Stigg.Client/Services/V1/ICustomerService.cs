@@ -48,7 +48,8 @@ public interface ICustomerService
     );
 
     /// <summary>
-    /// Updates an existing customer's properties such as name, email, and billing information.
+    /// Updates an existing customer's properties such as name, email, and billing
+    /// information.
     /// </summary>
     Task<CustomerResponse> Update(
         CustomerUpdateParams parameters,
@@ -71,7 +72,8 @@ public interface ICustomerService
     );
 
     /// <summary>
-    /// Archives a customer, preventing new subscriptions. Optionally cancels existing subscriptions.
+    /// Archives a customer, preventing new subscriptions. Optionally cancels existing
+    /// subscriptions.
     /// </summary>
     Task<CustomerResponse> Archive(
         CustomerArchiveParams parameters,
@@ -110,8 +112,8 @@ public interface ICustomerService
     );
 
     /// <summary>
-    /// Creates a new customer and optionally provisions an initial subscription
-    /// in a single operation.
+    /// Creates a new customer and optionally provisions an initial subscription in a
+    /// single operation.
     /// </summary>
     Task<CustomerResponse> Provision(
         CustomerProvisionParams parameters,
@@ -152,7 +154,7 @@ public interface ICustomerServiceWithRawResponse
     IPromotionalEntitlementServiceWithRawResponse PromotionalEntitlements { get; }
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /api/v1/customers/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /api/v1/customers/{id}</c>, but is otherwise the
     /// same as <see cref="ICustomerService.Retrieve(CustomerRetrieveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CustomerResponse>> Retrieve(
@@ -168,7 +170,7 @@ public interface ICustomerServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `patch /api/v1/customers/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>patch /api/v1/customers/{id}</c>, but is otherwise the
     /// same as <see cref="ICustomerService.Update(CustomerUpdateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CustomerResponse>> Update(
@@ -184,7 +186,7 @@ public interface ICustomerServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /api/v1/customers`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /api/v1/customers</c>, but is otherwise the
     /// same as <see cref="ICustomerService.List(CustomerListParams?, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CustomerListPage>> List(
@@ -193,7 +195,7 @@ public interface ICustomerServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/customers/{id}/archive`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/customers/{id}/archive</c>, but is otherwise the
     /// same as <see cref="ICustomerService.Archive(CustomerArchiveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CustomerResponse>> Archive(
@@ -209,7 +211,7 @@ public interface ICustomerServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/customers/import`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/customers/import</c>, but is otherwise the
     /// same as <see cref="ICustomerService.Import(CustomerImportParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CustomerImportResponse>> Import(
@@ -218,7 +220,7 @@ public interface ICustomerServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /api/v1/customers/{id}/resources`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /api/v1/customers/{id}/resources</c>, but is otherwise the
     /// same as <see cref="ICustomerService.ListResources(CustomerListResourcesParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CustomerListResourcesPage>> ListResources(
@@ -234,7 +236,7 @@ public interface ICustomerServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/customers`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/customers</c>, but is otherwise the
     /// same as <see cref="ICustomerService.Provision(CustomerProvisionParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CustomerResponse>> Provision(
@@ -243,7 +245,7 @@ public interface ICustomerServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/customers/{id}/unarchive`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/customers/{id}/unarchive</c>, but is otherwise the
     /// same as <see cref="ICustomerService.Unarchive(CustomerUnarchiveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CustomerResponse>> Unarchive(

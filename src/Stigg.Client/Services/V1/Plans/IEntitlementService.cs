@@ -101,7 +101,7 @@ public interface IEntitlementServiceWithRawResponse
     IEntitlementServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/plans/{planId}/entitlements`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/plans/{planId}/entitlements</c>, but is otherwise the
     /// same as <see cref="IEntitlementService.Create(EntitlementCreateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<EntitlementCreateResponse>> Create(
@@ -117,7 +117,7 @@ public interface IEntitlementServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `patch /api/v1/plans/{planId}/entitlements/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>patch /api/v1/plans/{planId}/entitlements/{id}</c>, but is otherwise the
     /// same as <see cref="IEntitlementService.Update(EntitlementUpdateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<PlanEntitlement>> Update(
@@ -133,7 +133,7 @@ public interface IEntitlementServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /api/v1/plans/{planId}/entitlements`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /api/v1/plans/{planId}/entitlements</c>, but is otherwise the
     /// same as <see cref="IEntitlementService.List(EntitlementListParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<EntitlementListResponse>> List(
@@ -149,7 +149,7 @@ public interface IEntitlementServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `delete /api/v1/plans/{planId}/entitlements/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>delete /api/v1/plans/{planId}/entitlements/{id}</c>, but is otherwise the
     /// same as <see cref="IEntitlementService.Delete(EntitlementDeleteParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<PlanEntitlement>> Delete(

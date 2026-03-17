@@ -83,7 +83,7 @@ public record class EntitlementUpdateParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson{T}.FromRawUnchecked"/>
     public static EntitlementUpdateParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -242,7 +242,7 @@ public record class Body : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="BodyFeature"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -263,7 +263,7 @@ public record class Body : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="BodyCredit"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -283,7 +283,7 @@ public record class Body : ModelBase
     /// <summary>
     /// Calls the function parameter corresponding to the variant the instance was constructed with.
     ///
-    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match">
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match"/>
     /// if you need your function parameters to return something.</para>
     ///
     /// <exception cref="StiggInvalidDataException">
@@ -294,8 +294,8 @@ public record class Body : ModelBase
     /// <example>
     /// <code>
     /// instance.Switch(
-    ///     (BodyFeature value) => {...},
-    ///     (BodyCredit value) => {...}
+    ///     (BodyFeature value) =&gt; {...},
+    ///     (BodyCredit value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
@@ -319,7 +319,7 @@ public record class Body : ModelBase
     /// Calls the function parameter corresponding to the variant the instance was constructed with and
     /// returns its result.
     ///
-    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch">
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch"/>
     /// if you don't need your function parameters to return a value.</para>
     ///
     /// <exception cref="StiggInvalidDataException">
@@ -330,8 +330,8 @@ public record class Body : ModelBase
     /// <example>
     /// <code>
     /// var result = instance.Match(
-    ///     (BodyFeature value) => {...},
-    ///     (BodyCredit value) => {...}
+    ///     (BodyFeature value) =&gt; {...},
+    ///     (BodyCredit value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
