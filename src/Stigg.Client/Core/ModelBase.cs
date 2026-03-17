@@ -1,17 +1,17 @@
 using System.Text.Json;
 using Stigg.Client.Exceptions;
 using Stigg.Client.Models.V1.Customers;
-using Stigg.Client.Models.V1.Customers.PromotionalEntitlements;
-using Stigg.Client.Models.V1.Features;
+using Stigg.Client.Models.V1.Products;
 using Addons = Stigg.Client.Models.V1.Addons;
 using Coupons = Stigg.Client.Models.V1.Coupons;
 using Credits = Stigg.Client.Models.V1.Events.Credits;
 using Entitlements = Stigg.Client.Models.V1.Addons.Entitlements;
+using Features = Stigg.Client.Models.V1.Features;
 using Grants = Stigg.Client.Models.V1.Events.Credits.Grants;
 using PaymentMethod = Stigg.Client.Models.V1.Customers.PaymentMethod;
 using Plans = Stigg.Client.Models.V1.Plans;
 using PlansEntitlements = Stigg.Client.Models.V1.Plans.Entitlements;
-using Products = Stigg.Client.Models.V1.Products;
+using PromotionalEntitlements = Stigg.Client.Models.V1.Customers.PromotionalEntitlements;
 using Subscriptions = Stigg.Client.Models.V1.Subscriptions;
 using Usage = Stigg.Client.Models.V1.Usage;
 
@@ -44,6 +44,12 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, CustomerListResponseDefaultPaymentMethodType>(),
             new ApiEnumConverter<string, CustomerListResponseIntegrationVendorIdentifier>(),
             new ApiEnumConverter<string, CustomerListResponsePassthroughZuoraCurrency>(),
+            new ApiEnumConverter<string, AccessDeniedReason>(),
+            new ApiEnumConverter<string, FeatureAccessDeniedReason>(),
+            new ApiEnumConverter<string, FeatureStatus>(),
+            new ApiEnumConverter<string, FeatureType>(),
+            new ApiEnumConverter<string, ResetPeriod>(),
+            new ApiEnumConverter<string, CreditAccessDeniedReason>(),
             new ApiEnumConverter<string, BillingCurrency>(),
             new ApiEnumConverter<string, CouponID>(),
             new ApiEnumConverter<string, VendorIdentifier>(),
@@ -55,47 +61,80 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, CustomerProvisionParamsPassthroughZuoraCurrency>(),
             new ApiEnumConverter<string, PaymentMethod::VendorIdentifier>(),
             new ApiEnumConverter<string, PaymentMethod::BillingCurrency>(),
-            new ApiEnumConverter<string, DataPeriod>(),
-            new ApiEnumConverter<string, DataResetPeriod>(),
-            new ApiEnumConverter<string, YearlyResetPeriodConfigAccordingTo>(),
-            new ApiEnumConverter<string, MonthlyResetPeriodConfigAccordingTo>(),
-            new ApiEnumConverter<string, WeeklyResetPeriodConfigAccordingTo>(),
-            new ApiEnumConverter<string, Status>(),
-            new ApiEnumConverter<string, PromotionalEntitlementListResponsePeriod>(),
-            new ApiEnumConverter<string, PromotionalEntitlementListResponseResetPeriod>(),
+            new ApiEnumConverter<string, PromotionalEntitlements::DataPeriod>(),
+            new ApiEnumConverter<string, PromotionalEntitlements::DataResetPeriod>(),
             new ApiEnumConverter<
                 string,
-                PromotionalEntitlementListResponseResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
+                PromotionalEntitlements::YearlyResetPeriodConfigAccordingTo
             >(),
             new ApiEnumConverter<
                 string,
-                PromotionalEntitlementListResponseResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
+                PromotionalEntitlements::MonthlyResetPeriodConfigAccordingTo
             >(),
             new ApiEnumConverter<
                 string,
-                PromotionalEntitlementListResponseResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
+                PromotionalEntitlements::WeeklyResetPeriodConfigAccordingTo
             >(),
-            new ApiEnumConverter<string, PromotionalEntitlementListResponseStatus>(),
-            new ApiEnumConverter<string, PromotionalEntitlementRevokeResponseDataPeriod>(),
-            new ApiEnumConverter<string, PromotionalEntitlementRevokeResponseDataResetPeriod>(),
+            new ApiEnumConverter<string, PromotionalEntitlements::Status>(),
             new ApiEnumConverter<
                 string,
-                PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
-            >(),
-            new ApiEnumConverter<
-                string,
-                PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
+                PromotionalEntitlements::PromotionalEntitlementListResponsePeriod
             >(),
             new ApiEnumConverter<
                 string,
-                PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
+                PromotionalEntitlements::PromotionalEntitlementListResponseResetPeriod
             >(),
-            new ApiEnumConverter<string, PromotionalEntitlementRevokeResponseDataStatus>(),
-            new ApiEnumConverter<string, AccordingTo>(),
-            new ApiEnumConverter<string, Period>(),
-            new ApiEnumConverter<string, ResetPeriod>(),
-            new ApiEnumConverter<string, WeeklyResetPeriodConfigurationAccordingTo>(),
-            new ApiEnumConverter<string, YearlyResetPeriodConfigurationAccordingTo>(),
+            new ApiEnumConverter<
+                string,
+                PromotionalEntitlements::PromotionalEntitlementListResponseResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
+            >(),
+            new ApiEnumConverter<
+                string,
+                PromotionalEntitlements::PromotionalEntitlementListResponseResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
+            >(),
+            new ApiEnumConverter<
+                string,
+                PromotionalEntitlements::PromotionalEntitlementListResponseResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
+            >(),
+            new ApiEnumConverter<
+                string,
+                PromotionalEntitlements::PromotionalEntitlementListResponseStatus
+            >(),
+            new ApiEnumConverter<
+                string,
+                PromotionalEntitlements::PromotionalEntitlementRevokeResponseDataPeriod
+            >(),
+            new ApiEnumConverter<
+                string,
+                PromotionalEntitlements::PromotionalEntitlementRevokeResponseDataResetPeriod
+            >(),
+            new ApiEnumConverter<
+                string,
+                PromotionalEntitlements::PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
+            >(),
+            new ApiEnumConverter<
+                string,
+                PromotionalEntitlements::PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
+            >(),
+            new ApiEnumConverter<
+                string,
+                PromotionalEntitlements::PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
+            >(),
+            new ApiEnumConverter<
+                string,
+                PromotionalEntitlements::PromotionalEntitlementRevokeResponseDataStatus
+            >(),
+            new ApiEnumConverter<string, PromotionalEntitlements::AccordingTo>(),
+            new ApiEnumConverter<string, PromotionalEntitlements::Period>(),
+            new ApiEnumConverter<string, PromotionalEntitlements::ResetPeriod>(),
+            new ApiEnumConverter<
+                string,
+                PromotionalEntitlements::WeeklyResetPeriodConfigurationAccordingTo
+            >(),
+            new ApiEnumConverter<
+                string,
+                PromotionalEntitlements::YearlyResetPeriodConfigurationAccordingTo
+            >(),
             new ApiEnumConverter<string, Subscriptions::PaymentCollection>(),
             new ApiEnumConverter<string, Subscriptions::PricingType>(),
             new ApiEnumConverter<string, Subscriptions::Status>(),
@@ -368,21 +407,27 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Grants::GrantType>(),
             new ApiEnumConverter<string, Grants::Currency>(),
             new ApiEnumConverter<string, Grants::PaymentCollectionMethod>(),
-            new ApiEnumConverter<string, DataFeatureStatus>(),
-            new ApiEnumConverter<string, DataFeatureType>(),
-            new ApiEnumConverter<string, DataMeterType>(),
-            new ApiEnumConverter<string, DataUnitTransformationRound>(),
-            new ApiEnumConverter<string, FeatureListFeaturesResponseFeatureStatus>(),
-            new ApiEnumConverter<string, FeatureListFeaturesResponseFeatureType>(),
-            new ApiEnumConverter<string, FeatureListFeaturesResponseMeterType>(),
-            new ApiEnumConverter<string, FeatureListFeaturesResponseUnitTransformationRound>(),
-            new ApiEnumConverter<string, FeatureType>(),
-            new ApiEnumConverter<string, FeatureStatus>(),
-            new ApiEnumConverter<string, MeterType>(),
-            new ApiEnumConverter<string, Round>(),
-            new ApiEnumConverter<string, Function>(),
-            new ApiEnumConverter<string, Operation>(),
-            new ApiEnumConverter<string, FeatureUpdateFeatureParamsUnitTransformationRound>(),
+            new ApiEnumConverter<string, Features::DataFeatureStatus>(),
+            new ApiEnumConverter<string, Features::DataFeatureType>(),
+            new ApiEnumConverter<string, Features::DataMeterType>(),
+            new ApiEnumConverter<string, Features::DataUnitTransformationRound>(),
+            new ApiEnumConverter<string, Features::FeatureListFeaturesResponseFeatureStatus>(),
+            new ApiEnumConverter<string, Features::FeatureListFeaturesResponseFeatureType>(),
+            new ApiEnumConverter<string, Features::FeatureListFeaturesResponseMeterType>(),
+            new ApiEnumConverter<
+                string,
+                Features::FeatureListFeaturesResponseUnitTransformationRound
+            >(),
+            new ApiEnumConverter<string, Features::FeatureType>(),
+            new ApiEnumConverter<string, Features::FeatureStatus>(),
+            new ApiEnumConverter<string, Features::MeterType>(),
+            new ApiEnumConverter<string, Features::Round>(),
+            new ApiEnumConverter<string, Features::Function>(),
+            new ApiEnumConverter<string, Features::Operation>(),
+            new ApiEnumConverter<
+                string,
+                Features::FeatureUpdateFeatureParamsUnitTransformationRound
+            >(),
             new ApiEnumConverter<string, Addons::Type>(),
             new ApiEnumConverter<string, Addons::DataPricingType>(),
             new ApiEnumConverter<string, Addons::DataStatus>(),
@@ -706,30 +751,27 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, PlansEntitlements::BodyCreditHiddenFromWidget>(),
             new ApiEnumConverter<string, Usage::Type>(),
             new ApiEnumConverter<string, Usage::UpdateBehavior>(),
-            new ApiEnumConverter<string, Products::Status>(),
+            new ApiEnumConverter<string, Status>(),
+            new ApiEnumConverter<string, DataProductSettingsSubscriptionCancellationTime>(),
+            new ApiEnumConverter<string, DataProductSettingsSubscriptionEndSetup>(),
+            new ApiEnumConverter<string, DataProductSettingsSubscriptionStartSetup>(),
+            new ApiEnumConverter<string, ProductListProductsResponseStatus>(),
             new ApiEnumConverter<
                 string,
-                Products::DataProductSettingsSubscriptionCancellationTime
-            >(),
-            new ApiEnumConverter<string, Products::DataProductSettingsSubscriptionEndSetup>(),
-            new ApiEnumConverter<string, Products::DataProductSettingsSubscriptionStartSetup>(),
-            new ApiEnumConverter<string, Products::ProductListProductsResponseStatus>(),
-            new ApiEnumConverter<
-                string,
-                Products::ProductListProductsResponseProductSettingsSubscriptionCancellationTime
+                ProductListProductsResponseProductSettingsSubscriptionCancellationTime
             >(),
             new ApiEnumConverter<
                 string,
-                Products::ProductListProductsResponseProductSettingsSubscriptionEndSetup
+                ProductListProductsResponseProductSettingsSubscriptionEndSetup
             >(),
             new ApiEnumConverter<
                 string,
-                Products::ProductListProductsResponseProductSettingsSubscriptionStartSetup
+                ProductListProductsResponseProductSettingsSubscriptionStartSetup
             >(),
-            new ApiEnumConverter<string, Products::SubscriptionCancellationTime>(),
-            new ApiEnumConverter<string, Products::SubscriptionEndSetup>(),
-            new ApiEnumConverter<string, Products::SubscriptionStartSetup>(),
-            new ApiEnumConverter<string, Products::Behavior>(),
+            new ApiEnumConverter<string, SubscriptionCancellationTime>(),
+            new ApiEnumConverter<string, SubscriptionEndSetup>(),
+            new ApiEnumConverter<string, SubscriptionStartSetup>(),
+            new ApiEnumConverter<string, Behavior>(),
         },
     };
 

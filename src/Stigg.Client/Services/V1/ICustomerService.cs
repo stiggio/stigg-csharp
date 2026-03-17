@@ -121,6 +121,22 @@ public interface ICustomerService
     );
 
     /// <summary>
+    /// Retrieves the effective entitlements for a customer or resource, including
+    /// feature and credit entitlements.
+    /// </summary>
+    Task<CustomerRetrieveEntitlementsResponse> RetrieveEntitlements(
+        CustomerRetrieveEntitlementsParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="RetrieveEntitlements(CustomerRetrieveEntitlementsParams, CancellationToken)"/>
+    Task<CustomerRetrieveEntitlementsResponse> RetrieveEntitlements(
+        string id,
+        CustomerRetrieveEntitlementsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Restores an archived customer, allowing them to create new subscriptions again.
     /// </summary>
     Task<CustomerResponse> Unarchive(
@@ -241,6 +257,22 @@ public interface ICustomerServiceWithRawResponse
     /// </summary>
     Task<HttpResponse<CustomerResponse>> Provision(
         CustomerProvisionParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>get /api/v1/customers/{id}/entitlements</c>, but is otherwise the
+    /// same as <see cref="ICustomerService.RetrieveEntitlements(CustomerRetrieveEntitlementsParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<CustomerRetrieveEntitlementsResponse>> RetrieveEntitlements(
+        CustomerRetrieveEntitlementsParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="RetrieveEntitlements(CustomerRetrieveEntitlementsParams, CancellationToken)"/>
+    Task<HttpResponse<CustomerRetrieveEntitlementsResponse>> RetrieveEntitlements(
+        string id,
+        CustomerRetrieveEntitlementsParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 

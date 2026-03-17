@@ -97,6 +97,17 @@ public class CustomerServiceTest : TestBase
     }
 
     [Fact(Skip = "Mock server tests are disabled")]
+    public async Task RetrieveEntitlements_Works()
+    {
+        var response = await this.client.V1.Customers.RetrieveEntitlements(
+            "x",
+            new(),
+            TestContext.Current.CancellationToken
+        );
+        response.Validate();
+    }
+
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Unarchive_Works()
     {
         var customerResponse = await this.client.V1.Customers.Unarchive(
