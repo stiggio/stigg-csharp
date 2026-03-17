@@ -29,14 +29,14 @@ public record class ProductDuplicateProductParams : ParamsBase
     /// <summary>
     /// The unique identifier for the entity
     /// </summary>
-    public required string IDValue
+    public required string TargetID
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNotNullClass<string>("id");
+            return this._rawBodyData.GetNotNullClass<string>("targetId");
         }
-        init { this._rawBodyData.Set("id", value); }
+        init { this._rawBodyData.Set("targetId", value); }
     }
 
     /// <summary>

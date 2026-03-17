@@ -121,12 +121,12 @@ public record class CouponCreateParams : ParamsBase
     /// <summary>
     /// Percentage discount off the original price
     /// </summary>
-    public required long? PercentOff
+    public required double? PercentOff
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableStruct<long>("percentOff");
+            return this._rawBodyData.GetNullableStruct<double>("percentOff");
         }
         init { this._rawBodyData.Set("percentOff", value); }
     }

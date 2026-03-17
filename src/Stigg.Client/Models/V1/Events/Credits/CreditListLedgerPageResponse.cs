@@ -9,7 +9,7 @@ using Stigg.Client.Core;
 namespace Stigg.Client.Models.V1.Events.Credits;
 
 /// <summary>
-/// Response list object
+/// Paginated list of credit ledger events
 /// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<CreditListLedgerPageResponse, CreditListLedgerPageResponseFromRaw>)

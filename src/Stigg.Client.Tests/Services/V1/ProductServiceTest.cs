@@ -30,7 +30,7 @@ public class ProductServiceTest : TestBase
     {
         var product = await this.client.V1.Products.DuplicateProduct(
             "x",
-            new() { IDValue = "id" },
+            new() { TargetID = "targetId" },
             TestContext.Current.CancellationToken
         );
         product.Validate();

@@ -55,6 +55,9 @@ public record class UsageHistoryParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// Criteria by which to group the usage history
+    /// </summary>
     public string? GroupBy
     {
         get

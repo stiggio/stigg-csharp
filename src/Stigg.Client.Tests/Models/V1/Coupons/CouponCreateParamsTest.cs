@@ -29,7 +29,7 @@ public class CouponCreateParamsTest : TestBase
         long expectedDurationInMonths = 1;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedName = "name";
-        long expectedPercentOff = 1;
+        double expectedPercentOff = 1;
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.NotNull(parameters.AmountsOff);
