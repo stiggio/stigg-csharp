@@ -318,6 +318,9 @@ public sealed record class ProductSettings : JsonModel
         init { this._rawData.Set("downgradePlanId", value); }
     }
 
+    /// <summary>
+    /// Indicates if the subscription should be prorated at the end of the billing period
+    /// </summary>
     public bool? ProrateAtEndOfBillingPeriod
     {
         get

@@ -483,6 +483,9 @@ public sealed record class Aggregation : JsonModel
         init { this._rawData.Set("function", value); }
     }
 
+    /// <summary>
+    /// Aggregation field name
+    /// </summary>
     public string? Field
     {
         get
@@ -675,6 +678,9 @@ class FilterFromRaw : IFromRawJson<Filter>
 [JsonConverter(typeof(JsonModelConverter<Condition, ConditionFromRaw>))]
 public sealed record class Condition : JsonModel
 {
+    /// <summary>
+    /// Condition field name
+    /// </summary>
     public required string Field
     {
         get
@@ -695,6 +701,9 @@ public sealed record class Condition : JsonModel
         init { this._rawData.Set("operation", value); }
     }
 
+    /// <summary>
+    /// Condition value
+    /// </summary>
     public string? Value
     {
         get
