@@ -197,6 +197,8 @@ public enum EventType
     CreditsConsumed,
     CreditsVoided,
     CreditsUpdated,
+    CreditsConsumptionTransferSource,
+    CreditsConsumptionTransferTarget,
 }
 
 sealed class EventTypeConverter : JsonConverter<EventType>
@@ -214,6 +216,8 @@ sealed class EventTypeConverter : JsonConverter<EventType>
             "CREDITS_CONSUMED" => EventType.CreditsConsumed,
             "CREDITS_VOIDED" => EventType.CreditsVoided,
             "CREDITS_UPDATED" => EventType.CreditsUpdated,
+            "CREDITS_CONSUMPTION_TRANSFER_SOURCE" => EventType.CreditsConsumptionTransferSource,
+            "CREDITS_CONSUMPTION_TRANSFER_TARGET" => EventType.CreditsConsumptionTransferTarget,
             _ => (EventType)(-1),
         };
     }
@@ -233,6 +237,8 @@ sealed class EventTypeConverter : JsonConverter<EventType>
                 EventType.CreditsConsumed => "CREDITS_CONSUMED",
                 EventType.CreditsVoided => "CREDITS_VOIDED",
                 EventType.CreditsUpdated => "CREDITS_UPDATED",
+                EventType.CreditsConsumptionTransferSource => "CREDITS_CONSUMPTION_TRANSFER_SOURCE",
+                EventType.CreditsConsumptionTransferTarget => "CREDITS_CONSUMPTION_TRANSFER_TARGET",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
