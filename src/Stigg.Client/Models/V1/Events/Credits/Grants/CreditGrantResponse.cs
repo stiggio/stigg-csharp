@@ -523,6 +523,7 @@ public enum DataGrantType
     Paid,
     Promotional,
     Recurring,
+    Overdraft,
 }
 
 sealed class DataGrantTypeConverter : JsonConverter<DataGrantType>
@@ -538,6 +539,7 @@ sealed class DataGrantTypeConverter : JsonConverter<DataGrantType>
             "PAID" => DataGrantType.Paid,
             "PROMOTIONAL" => DataGrantType.Promotional,
             "RECURRING" => DataGrantType.Recurring,
+            "OVERDRAFT" => DataGrantType.Overdraft,
             _ => (DataGrantType)(-1),
         };
     }
@@ -555,6 +557,7 @@ sealed class DataGrantTypeConverter : JsonConverter<DataGrantType>
                 DataGrantType.Paid => "PAID",
                 DataGrantType.Promotional => "PROMOTIONAL",
                 DataGrantType.Recurring => "RECURRING",
+                DataGrantType.Overdraft => "OVERDRAFT",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

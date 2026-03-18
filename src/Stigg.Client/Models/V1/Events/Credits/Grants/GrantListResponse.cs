@@ -465,6 +465,7 @@ public enum GrantListResponseGrantType
     Paid,
     Promotional,
     Recurring,
+    Overdraft,
 }
 
 sealed class GrantListResponseGrantTypeConverter : JsonConverter<GrantListResponseGrantType>
@@ -480,6 +481,7 @@ sealed class GrantListResponseGrantTypeConverter : JsonConverter<GrantListRespon
             "PAID" => GrantListResponseGrantType.Paid,
             "PROMOTIONAL" => GrantListResponseGrantType.Promotional,
             "RECURRING" => GrantListResponseGrantType.Recurring,
+            "OVERDRAFT" => GrantListResponseGrantType.Overdraft,
             _ => (GrantListResponseGrantType)(-1),
         };
     }
@@ -497,6 +499,7 @@ sealed class GrantListResponseGrantTypeConverter : JsonConverter<GrantListRespon
                 GrantListResponseGrantType.Paid => "PAID",
                 GrantListResponseGrantType.Promotional => "PROMOTIONAL",
                 GrantListResponseGrantType.Recurring => "RECURRING",
+                GrantListResponseGrantType.Overdraft => "OVERDRAFT",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

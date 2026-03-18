@@ -477,6 +477,7 @@ public class GrantListResponseGrantTypeTest : TestBase
     [InlineData(GrantListResponseGrantType.Paid)]
     [InlineData(GrantListResponseGrantType.Promotional)]
     [InlineData(GrantListResponseGrantType.Recurring)]
+    [InlineData(GrantListResponseGrantType.Overdraft)]
     public void Validation_Works(GrantListResponseGrantType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -500,6 +501,7 @@ public class GrantListResponseGrantTypeTest : TestBase
     [InlineData(GrantListResponseGrantType.Paid)]
     [InlineData(GrantListResponseGrantType.Promotional)]
     [InlineData(GrantListResponseGrantType.Recurring)]
+    [InlineData(GrantListResponseGrantType.Overdraft)]
     public void SerializationRoundtrip_Works(GrantListResponseGrantType rawValue)
     {
         // force implicit conversion because Theory can't do that for us

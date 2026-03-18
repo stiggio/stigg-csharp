@@ -819,6 +819,7 @@ public class DataGrantTypeTest : TestBase
     [InlineData(DataGrantType.Paid)]
     [InlineData(DataGrantType.Promotional)]
     [InlineData(DataGrantType.Recurring)]
+    [InlineData(DataGrantType.Overdraft)]
     public void Validation_Works(DataGrantType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -842,6 +843,7 @@ public class DataGrantTypeTest : TestBase
     [InlineData(DataGrantType.Paid)]
     [InlineData(DataGrantType.Promotional)]
     [InlineData(DataGrantType.Recurring)]
+    [InlineData(DataGrantType.Overdraft)]
     public void SerializationRoundtrip_Works(DataGrantType rawValue)
     {
         // force implicit conversion because Theory can't do that for us

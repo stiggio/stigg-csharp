@@ -426,6 +426,7 @@ public enum GrantType
     Paid,
     Promotional,
     Recurring,
+    Overdraft,
 }
 
 sealed class GrantTypeConverter : JsonConverter<GrantType>
@@ -441,6 +442,7 @@ sealed class GrantTypeConverter : JsonConverter<GrantType>
             "PAID" => GrantType.Paid,
             "PROMOTIONAL" => GrantType.Promotional,
             "RECURRING" => GrantType.Recurring,
+            "OVERDRAFT" => GrantType.Overdraft,
             _ => (GrantType)(-1),
         };
     }
@@ -458,6 +460,7 @@ sealed class GrantTypeConverter : JsonConverter<GrantType>
                 GrantType.Paid => "PAID",
                 GrantType.Promotional => "PROMOTIONAL",
                 GrantType.Recurring => "RECURRING",
+                GrantType.Overdraft => "OVERDRAFT",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
