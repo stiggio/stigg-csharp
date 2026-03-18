@@ -27,10 +27,10 @@ public class CustomerRetrieveEntitlementsResponseTest : TestBase
                         EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         FeatureValue = new()
                         {
+                            ID = "id",
                             DisplayName = "displayName",
                             FeatureStatus = FeatureStatus.New,
                             FeatureType = FeatureType.Boolean,
-                            RefID = "refId",
                         },
                         HasUnlimitedUsage = true,
                         ResetPeriod = ResetPeriod.Year,
@@ -57,10 +57,10 @@ public class CustomerRetrieveEntitlementsResponseTest : TestBase
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     FeatureValue = new()
                     {
+                        ID = "id",
                         DisplayName = "displayName",
                         FeatureStatus = FeatureStatus.New,
                         FeatureType = FeatureType.Boolean,
-                        RefID = "refId",
                     },
                     HasUnlimitedUsage = true,
                     ResetPeriod = ResetPeriod.Year,
@@ -94,10 +94,10 @@ public class CustomerRetrieveEntitlementsResponseTest : TestBase
                         EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         FeatureValue = new()
                         {
+                            ID = "id",
                             DisplayName = "displayName",
                             FeatureStatus = FeatureStatus.New,
                             FeatureType = FeatureType.Boolean,
-                            RefID = "refId",
                         },
                         HasUnlimitedUsage = true,
                         ResetPeriod = ResetPeriod.Year,
@@ -138,10 +138,10 @@ public class CustomerRetrieveEntitlementsResponseTest : TestBase
                         EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         FeatureValue = new()
                         {
+                            ID = "id",
                             DisplayName = "displayName",
                             FeatureStatus = FeatureStatus.New,
                             FeatureType = FeatureType.Boolean,
-                            RefID = "refId",
                         },
                         HasUnlimitedUsage = true,
                         ResetPeriod = ResetPeriod.Year,
@@ -175,10 +175,10 @@ public class CustomerRetrieveEntitlementsResponseTest : TestBase
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     FeatureValue = new()
                     {
+                        ID = "id",
                         DisplayName = "displayName",
                         FeatureStatus = FeatureStatus.New,
                         FeatureType = FeatureType.Boolean,
-                        RefID = "refId",
                     },
                     HasUnlimitedUsage = true,
                     ResetPeriod = ResetPeriod.Year,
@@ -212,10 +212,10 @@ public class CustomerRetrieveEntitlementsResponseTest : TestBase
                         EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         FeatureValue = new()
                         {
+                            ID = "id",
                             DisplayName = "displayName",
                             FeatureStatus = FeatureStatus.New,
                             FeatureType = FeatureType.Boolean,
-                            RefID = "refId",
                         },
                         HasUnlimitedUsage = true,
                         ResetPeriod = ResetPeriod.Year,
@@ -250,10 +250,10 @@ public class CustomerRetrieveEntitlementsResponseTest : TestBase
                         EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         FeatureValue = new()
                         {
+                            ID = "id",
                             DisplayName = "displayName",
                             FeatureStatus = FeatureStatus.New,
                             FeatureType = FeatureType.Boolean,
-                            RefID = "refId",
                         },
                         HasUnlimitedUsage = true,
                         ResetPeriod = ResetPeriod.Year,
@@ -291,10 +291,10 @@ public class CustomerRetrieveEntitlementsResponseDataTest : TestBase
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     FeatureValue = new()
                     {
+                        ID = "id",
                         DisplayName = "displayName",
                         FeatureStatus = FeatureStatus.New,
                         FeatureType = FeatureType.Boolean,
-                        RefID = "refId",
                     },
                     HasUnlimitedUsage = true,
                     ResetPeriod = ResetPeriod.Year,
@@ -319,10 +319,10 @@ public class CustomerRetrieveEntitlementsResponseDataTest : TestBase
                 EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 FeatureValue = new()
                 {
+                    ID = "id",
                     DisplayName = "displayName",
                     FeatureStatus = FeatureStatus.New,
                     FeatureType = FeatureType.Boolean,
-                    RefID = "refId",
                 },
                 HasUnlimitedUsage = true,
                 ResetPeriod = ResetPeriod.Year,
@@ -358,10 +358,10 @@ public class CustomerRetrieveEntitlementsResponseDataTest : TestBase
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     FeatureValue = new()
                     {
+                        ID = "id",
                         DisplayName = "displayName",
                         FeatureStatus = FeatureStatus.New,
                         FeatureType = FeatureType.Boolean,
-                        RefID = "refId",
                     },
                     HasUnlimitedUsage = true,
                     ResetPeriod = ResetPeriod.Year,
@@ -399,10 +399,10 @@ public class CustomerRetrieveEntitlementsResponseDataTest : TestBase
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     FeatureValue = new()
                     {
+                        ID = "id",
                         DisplayName = "displayName",
                         FeatureStatus = FeatureStatus.New,
                         FeatureType = FeatureType.Boolean,
-                        RefID = "refId",
                     },
                     HasUnlimitedUsage = true,
                     ResetPeriod = ResetPeriod.Year,
@@ -434,10 +434,10 @@ public class CustomerRetrieveEntitlementsResponseDataTest : TestBase
                 EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 FeatureValue = new()
                 {
+                    ID = "id",
                     DisplayName = "displayName",
                     FeatureStatus = FeatureStatus.New,
                     FeatureType = FeatureType.Boolean,
-                    RefID = "refId",
                 },
                 HasUnlimitedUsage = true,
                 ResetPeriod = ResetPeriod.Year,
@@ -473,10 +473,10 @@ public class CustomerRetrieveEntitlementsResponseDataTest : TestBase
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     FeatureValue = new()
                     {
+                        ID = "id",
                         DisplayName = "displayName",
                         FeatureStatus = FeatureStatus.New,
                         FeatureType = FeatureType.Boolean,
-                        RefID = "refId",
                     },
                     HasUnlimitedUsage = true,
                     ResetPeriod = ResetPeriod.Year,
@@ -508,10 +508,10 @@ public class CustomerRetrieveEntitlementsResponseDataTest : TestBase
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     FeatureValue = new()
                     {
+                        ID = "id",
                         DisplayName = "displayName",
                         FeatureStatus = FeatureStatus.New,
                         FeatureType = FeatureType.Boolean,
-                        RefID = "refId",
                     },
                     HasUnlimitedUsage = true,
                     ResetPeriod = ResetPeriod.Year,
@@ -603,10 +603,10 @@ public class EntitlementTest : TestBase
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             FeatureValue = new()
             {
+                ID = "id",
                 DisplayName = "displayName",
                 FeatureStatus = FeatureStatus.New,
                 FeatureType = FeatureType.Boolean,
-                RefID = "refId",
             },
             HasUnlimitedUsage = true,
             ResetPeriod = ResetPeriod.Year,
@@ -656,10 +656,10 @@ public class EntitlementTest : TestBase
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             FeatureValue = new()
             {
+                ID = "id",
                 DisplayName = "displayName",
                 FeatureStatus = FeatureStatus.New,
                 FeatureType = FeatureType.Boolean,
-                RefID = "refId",
             },
             HasUnlimitedUsage = true,
             ResetPeriod = ResetPeriod.Year,
@@ -724,10 +724,10 @@ public class FeatureTest : TestBase
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             FeatureValue = new()
             {
+                ID = "id",
                 DisplayName = "displayName",
                 FeatureStatus = FeatureStatus.New,
                 FeatureType = FeatureType.Boolean,
-                RefID = "refId",
             },
             HasUnlimitedUsage = true,
             ResetPeriod = ResetPeriod.Year,
@@ -748,10 +748,10 @@ public class FeatureTest : TestBase
         );
         FeatureFeature expectedFeatureValue = new()
         {
+            ID = "id",
             DisplayName = "displayName",
             FeatureStatus = FeatureStatus.New,
             FeatureType = FeatureType.Boolean,
-            RefID = "refId",
         };
         bool expectedHasUnlimitedUsage = true;
         ApiEnum<string, ResetPeriod> expectedResetPeriod = ResetPeriod.Year;
@@ -787,10 +787,10 @@ public class FeatureTest : TestBase
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             FeatureValue = new()
             {
+                ID = "id",
                 DisplayName = "displayName",
                 FeatureStatus = FeatureStatus.New,
                 FeatureType = FeatureType.Boolean,
-                RefID = "refId",
             },
             HasUnlimitedUsage = true,
             ResetPeriod = ResetPeriod.Year,
@@ -818,10 +818,10 @@ public class FeatureTest : TestBase
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             FeatureValue = new()
             {
+                ID = "id",
                 DisplayName = "displayName",
                 FeatureStatus = FeatureStatus.New,
                 FeatureType = FeatureType.Boolean,
-                RefID = "refId",
             },
             HasUnlimitedUsage = true,
             ResetPeriod = ResetPeriod.Year,
@@ -849,10 +849,10 @@ public class FeatureTest : TestBase
         );
         FeatureFeature expectedFeatureValue = new()
         {
+            ID = "id",
             DisplayName = "displayName",
             FeatureStatus = FeatureStatus.New,
             FeatureType = FeatureType.Boolean,
-            RefID = "refId",
         };
         bool expectedHasUnlimitedUsage = true;
         ApiEnum<string, ResetPeriod> expectedResetPeriod = ResetPeriod.Year;
@@ -888,10 +888,10 @@ public class FeatureTest : TestBase
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             FeatureValue = new()
             {
+                ID = "id",
                 DisplayName = "displayName",
                 FeatureStatus = FeatureStatus.New,
                 FeatureType = FeatureType.Boolean,
-                RefID = "refId",
             },
             HasUnlimitedUsage = true,
             ResetPeriod = ResetPeriod.Year,
@@ -1022,10 +1022,10 @@ public class FeatureTest : TestBase
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             FeatureValue = new()
             {
+                ID = "id",
                 DisplayName = "displayName",
                 FeatureStatus = FeatureStatus.New,
                 FeatureType = FeatureType.Boolean,
-                RefID = "refId",
             },
             HasUnlimitedUsage = true,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1051,10 +1051,10 @@ public class FeatureTest : TestBase
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             FeatureValue = new()
             {
+                ID = "id",
                 DisplayName = "displayName",
                 FeatureStatus = FeatureStatus.New,
                 FeatureType = FeatureType.Boolean,
-                RefID = "refId",
             },
             HasUnlimitedUsage = true,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1077,10 +1077,10 @@ public class FeatureTest : TestBase
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             FeatureValue = new()
             {
+                ID = "id",
                 DisplayName = "displayName",
                 FeatureStatus = FeatureStatus.New,
                 FeatureType = FeatureType.Boolean,
-                RefID = "refId",
             },
             HasUnlimitedUsage = true,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1109,10 +1109,10 @@ public class FeatureTest : TestBase
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             FeatureValue = new()
             {
+                ID = "id",
                 DisplayName = "displayName",
                 FeatureStatus = FeatureStatus.New,
                 FeatureType = FeatureType.Boolean,
-                RefID = "refId",
             },
             HasUnlimitedUsage = true,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1138,10 +1138,10 @@ public class FeatureTest : TestBase
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             FeatureValue = new()
             {
+                ID = "id",
                 DisplayName = "displayName",
                 FeatureStatus = FeatureStatus.New,
                 FeatureType = FeatureType.Boolean,
-                RefID = "refId",
             },
             HasUnlimitedUsage = true,
             ResetPeriod = ResetPeriod.Year,
@@ -1247,21 +1247,21 @@ public class FeatureFeatureTest : TestBase
     {
         var model = new FeatureFeature
         {
+            ID = "id",
             DisplayName = "displayName",
             FeatureStatus = FeatureStatus.New,
             FeatureType = FeatureType.Boolean,
-            RefID = "refId",
         };
 
+        string expectedID = "id";
         string expectedDisplayName = "displayName";
         ApiEnum<string, FeatureStatus> expectedFeatureStatus = FeatureStatus.New;
         ApiEnum<string, FeatureType> expectedFeatureType = FeatureType.Boolean;
-        string expectedRefID = "refId";
 
+        Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedDisplayName, model.DisplayName);
         Assert.Equal(expectedFeatureStatus, model.FeatureStatus);
         Assert.Equal(expectedFeatureType, model.FeatureType);
-        Assert.Equal(expectedRefID, model.RefID);
     }
 
     [Fact]
@@ -1269,10 +1269,10 @@ public class FeatureFeatureTest : TestBase
     {
         var model = new FeatureFeature
         {
+            ID = "id",
             DisplayName = "displayName",
             FeatureStatus = FeatureStatus.New,
             FeatureType = FeatureType.Boolean,
-            RefID = "refId",
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -1289,10 +1289,10 @@ public class FeatureFeatureTest : TestBase
     {
         var model = new FeatureFeature
         {
+            ID = "id",
             DisplayName = "displayName",
             FeatureStatus = FeatureStatus.New,
             FeatureType = FeatureType.Boolean,
-            RefID = "refId",
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -1302,15 +1302,15 @@ public class FeatureFeatureTest : TestBase
         );
         Assert.NotNull(deserialized);
 
+        string expectedID = "id";
         string expectedDisplayName = "displayName";
         ApiEnum<string, FeatureStatus> expectedFeatureStatus = FeatureStatus.New;
         ApiEnum<string, FeatureType> expectedFeatureType = FeatureType.Boolean;
-        string expectedRefID = "refId";
 
+        Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedDisplayName, deserialized.DisplayName);
         Assert.Equal(expectedFeatureStatus, deserialized.FeatureStatus);
         Assert.Equal(expectedFeatureType, deserialized.FeatureType);
-        Assert.Equal(expectedRefID, deserialized.RefID);
     }
 
     [Fact]
@@ -1318,10 +1318,10 @@ public class FeatureFeatureTest : TestBase
     {
         var model = new FeatureFeature
         {
+            ID = "id",
             DisplayName = "displayName",
             FeatureStatus = FeatureStatus.New,
             FeatureType = FeatureType.Boolean,
-            RefID = "refId",
         };
 
         model.Validate();
@@ -1332,10 +1332,10 @@ public class FeatureFeatureTest : TestBase
     {
         var model = new FeatureFeature
         {
+            ID = "id",
             DisplayName = "displayName",
             FeatureStatus = FeatureStatus.New,
             FeatureType = FeatureType.Boolean,
-            RefID = "refId",
         };
 
         FeatureFeature copied = new(model);

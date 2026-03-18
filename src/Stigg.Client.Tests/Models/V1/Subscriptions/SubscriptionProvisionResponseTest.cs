@@ -28,10 +28,10 @@ public class SubscriptionProvisionResponseTest : TestBase
                         EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         Feature = new()
                         {
+                            ID = "id",
                             DisplayName = "displayName",
                             FeatureStatus = FeatureStatus.New,
                             FeatureType = FeatureType.Boolean,
-                            RefID = "refId",
                         },
                         HasUnlimitedUsage = true,
                         ResetPeriod = UnionObjectVariant0ResetPeriod.Year,
@@ -191,10 +191,10 @@ public class SubscriptionProvisionResponseTest : TestBase
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Feature = new()
                     {
+                        ID = "id",
                         DisplayName = "displayName",
                         FeatureStatus = FeatureStatus.New,
                         FeatureType = FeatureType.Boolean,
-                        RefID = "refId",
                     },
                     HasUnlimitedUsage = true,
                     ResetPeriod = UnionObjectVariant0ResetPeriod.Year,
@@ -356,10 +356,10 @@ public class SubscriptionProvisionResponseTest : TestBase
                         EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         Feature = new()
                         {
+                            ID = "id",
                             DisplayName = "displayName",
                             FeatureStatus = FeatureStatus.New,
                             FeatureType = FeatureType.Boolean,
-                            RefID = "refId",
                         },
                         HasUnlimitedUsage = true,
                         ResetPeriod = UnionObjectVariant0ResetPeriod.Year,
@@ -533,10 +533,10 @@ public class SubscriptionProvisionResponseTest : TestBase
                         EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         Feature = new()
                         {
+                            ID = "id",
                             DisplayName = "displayName",
                             FeatureStatus = FeatureStatus.New,
                             FeatureType = FeatureType.Boolean,
-                            RefID = "refId",
                         },
                         HasUnlimitedUsage = true,
                         ResetPeriod = UnionObjectVariant0ResetPeriod.Year,
@@ -703,10 +703,10 @@ public class SubscriptionProvisionResponseTest : TestBase
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Feature = new()
                     {
+                        ID = "id",
                         DisplayName = "displayName",
                         FeatureStatus = FeatureStatus.New,
                         FeatureType = FeatureType.Boolean,
-                        RefID = "refId",
                     },
                     HasUnlimitedUsage = true,
                     ResetPeriod = UnionObjectVariant0ResetPeriod.Year,
@@ -868,10 +868,10 @@ public class SubscriptionProvisionResponseTest : TestBase
                         EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         Feature = new()
                         {
+                            ID = "id",
                             DisplayName = "displayName",
                             FeatureStatus = FeatureStatus.New,
                             FeatureType = FeatureType.Boolean,
-                            RefID = "refId",
                         },
                         HasUnlimitedUsage = true,
                         ResetPeriod = UnionObjectVariant0ResetPeriod.Year,
@@ -1039,10 +1039,10 @@ public class SubscriptionProvisionResponseTest : TestBase
                         EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         Feature = new()
                         {
+                            ID = "id",
                             DisplayName = "displayName",
                             FeatureStatus = FeatureStatus.New,
                             FeatureType = FeatureType.Boolean,
-                            RefID = "refId",
                         },
                         HasUnlimitedUsage = true,
                         ResetPeriod = UnionObjectVariant0ResetPeriod.Year,
@@ -1213,10 +1213,10 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Feature = new()
                     {
+                        ID = "id",
                         DisplayName = "displayName",
                         FeatureStatus = FeatureStatus.New,
                         FeatureType = FeatureType.Boolean,
-                        RefID = "refId",
                     },
                     HasUnlimitedUsage = true,
                     ResetPeriod = UnionObjectVariant0ResetPeriod.Year,
@@ -1368,10 +1368,10 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Feature = new()
                 {
+                    ID = "id",
                     DisplayName = "displayName",
                     FeatureStatus = FeatureStatus.New,
                     FeatureType = FeatureType.Boolean,
-                    RefID = "refId",
                 },
                 HasUnlimitedUsage = true,
                 ResetPeriod = UnionObjectVariant0ResetPeriod.Year,
@@ -1541,10 +1541,10 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Feature = new()
                     {
+                        ID = "id",
                         DisplayName = "displayName",
                         FeatureStatus = FeatureStatus.New,
                         FeatureType = FeatureType.Boolean,
-                        RefID = "refId",
                     },
                     HasUnlimitedUsage = true,
                     ResetPeriod = UnionObjectVariant0ResetPeriod.Year,
@@ -1710,10 +1710,10 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Feature = new()
                     {
+                        ID = "id",
                         DisplayName = "displayName",
                         FeatureStatus = FeatureStatus.New,
                         FeatureType = FeatureType.Boolean,
-                        RefID = "refId",
                     },
                     HasUnlimitedUsage = true,
                     ResetPeriod = UnionObjectVariant0ResetPeriod.Year,
@@ -1872,10 +1872,10 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                 EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Feature = new()
                 {
+                    ID = "id",
                     DisplayName = "displayName",
                     FeatureStatus = FeatureStatus.New,
                     FeatureType = FeatureType.Boolean,
-                    RefID = "refId",
                 },
                 HasUnlimitedUsage = true,
                 ResetPeriod = UnionObjectVariant0ResetPeriod.Year,
@@ -2045,10 +2045,10 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Feature = new()
                     {
+                        ID = "id",
                         DisplayName = "displayName",
                         FeatureStatus = FeatureStatus.New,
                         FeatureType = FeatureType.Boolean,
-                        RefID = "refId",
                     },
                     HasUnlimitedUsage = true,
                     ResetPeriod = UnionObjectVariant0ResetPeriod.Year,
@@ -2208,10 +2208,10 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Feature = new()
                     {
+                        ID = "id",
                         DisplayName = "displayName",
                         FeatureStatus = FeatureStatus.New,
                         FeatureType = FeatureType.Boolean,
-                        RefID = "refId",
                     },
                     HasUnlimitedUsage = true,
                     ResetPeriod = UnionObjectVariant0ResetPeriod.Year,
@@ -2373,10 +2373,10 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Feature = new()
                     {
+                        ID = "id",
                         DisplayName = "displayName",
                         FeatureStatus = FeatureStatus.New,
                         FeatureType = FeatureType.Boolean,
-                        RefID = "refId",
                     },
                     HasUnlimitedUsage = true,
                     ResetPeriod = UnionObjectVariant0ResetPeriod.Year,
@@ -2533,10 +2533,10 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Feature = new()
                     {
+                        ID = "id",
                         DisplayName = "displayName",
                         FeatureStatus = FeatureStatus.New,
                         FeatureType = FeatureType.Boolean,
-                        RefID = "refId",
                     },
                     HasUnlimitedUsage = true,
                     ResetPeriod = UnionObjectVariant0ResetPeriod.Year,
@@ -2703,10 +2703,10 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Feature = new()
                     {
+                        ID = "id",
                         DisplayName = "displayName",
                         FeatureStatus = FeatureStatus.New,
                         FeatureType = FeatureType.Boolean,
-                        RefID = "refId",
                     },
                     HasUnlimitedUsage = true,
                     ResetPeriod = UnionObjectVariant0ResetPeriod.Year,
@@ -2868,10 +2868,10 @@ public class SubscriptionProvisionResponseDataTest : TestBase
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Feature = new()
                     {
+                        ID = "id",
                         DisplayName = "displayName",
                         FeatureStatus = FeatureStatus.New,
                         FeatureType = FeatureType.Boolean,
-                        RefID = "refId",
                     },
                     HasUnlimitedUsage = true,
                     ResetPeriod = UnionObjectVariant0ResetPeriod.Year,
@@ -3031,10 +3031,10 @@ public class SubscriptionProvisionResponseDataEntitlementTest : TestBase
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Feature = new()
             {
+                ID = "id",
                 DisplayName = "displayName",
                 FeatureStatus = FeatureStatus.New,
                 FeatureType = FeatureType.Boolean,
-                RefID = "refId",
             },
             HasUnlimitedUsage = true,
             ResetPeriod = UnionObjectVariant0ResetPeriod.Year,
@@ -3086,10 +3086,10 @@ public class SubscriptionProvisionResponseDataEntitlementTest : TestBase
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Feature = new()
             {
+                ID = "id",
                 DisplayName = "displayName",
                 FeatureStatus = FeatureStatus.New,
                 FeatureType = FeatureType.Boolean,
-                RefID = "refId",
             },
             HasUnlimitedUsage = true,
             ResetPeriod = UnionObjectVariant0ResetPeriod.Year,
@@ -3156,10 +3156,10 @@ public class UnionObjectVariant0Test : TestBase
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Feature = new()
             {
+                ID = "id",
                 DisplayName = "displayName",
                 FeatureStatus = FeatureStatus.New,
                 FeatureType = FeatureType.Boolean,
-                RefID = "refId",
             },
             HasUnlimitedUsage = true,
             ResetPeriod = UnionObjectVariant0ResetPeriod.Year,
@@ -3180,10 +3180,10 @@ public class UnionObjectVariant0Test : TestBase
         );
         UnionObjectVariant0Feature expectedFeature = new()
         {
+            ID = "id",
             DisplayName = "displayName",
             FeatureStatus = FeatureStatus.New,
             FeatureType = FeatureType.Boolean,
-            RefID = "refId",
         };
         bool expectedHasUnlimitedUsage = true;
         ApiEnum<string, UnionObjectVariant0ResetPeriod> expectedResetPeriod =
@@ -3221,10 +3221,10 @@ public class UnionObjectVariant0Test : TestBase
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Feature = new()
             {
+                ID = "id",
                 DisplayName = "displayName",
                 FeatureStatus = FeatureStatus.New,
                 FeatureType = FeatureType.Boolean,
-                RefID = "refId",
             },
             HasUnlimitedUsage = true,
             ResetPeriod = UnionObjectVariant0ResetPeriod.Year,
@@ -3256,10 +3256,10 @@ public class UnionObjectVariant0Test : TestBase
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Feature = new()
             {
+                ID = "id",
                 DisplayName = "displayName",
                 FeatureStatus = FeatureStatus.New,
                 FeatureType = FeatureType.Boolean,
-                RefID = "refId",
             },
             HasUnlimitedUsage = true,
             ResetPeriod = UnionObjectVariant0ResetPeriod.Year,
@@ -3287,10 +3287,10 @@ public class UnionObjectVariant0Test : TestBase
         );
         UnionObjectVariant0Feature expectedFeature = new()
         {
+            ID = "id",
             DisplayName = "displayName",
             FeatureStatus = FeatureStatus.New,
             FeatureType = FeatureType.Boolean,
-            RefID = "refId",
         };
         bool expectedHasUnlimitedUsage = true;
         ApiEnum<string, UnionObjectVariant0ResetPeriod> expectedResetPeriod =
@@ -3328,10 +3328,10 @@ public class UnionObjectVariant0Test : TestBase
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Feature = new()
             {
+                ID = "id",
                 DisplayName = "displayName",
                 FeatureStatus = FeatureStatus.New,
                 FeatureType = FeatureType.Boolean,
-                RefID = "refId",
             },
             HasUnlimitedUsage = true,
             ResetPeriod = UnionObjectVariant0ResetPeriod.Year,
@@ -3467,10 +3467,10 @@ public class UnionObjectVariant0Test : TestBase
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Feature = new()
             {
+                ID = "id",
                 DisplayName = "displayName",
                 FeatureStatus = FeatureStatus.New,
                 FeatureType = FeatureType.Boolean,
-                RefID = "refId",
             },
             HasUnlimitedUsage = true,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -3497,10 +3497,10 @@ public class UnionObjectVariant0Test : TestBase
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Feature = new()
             {
+                ID = "id",
                 DisplayName = "displayName",
                 FeatureStatus = FeatureStatus.New,
                 FeatureType = FeatureType.Boolean,
-                RefID = "refId",
             },
             HasUnlimitedUsage = true,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -3524,10 +3524,10 @@ public class UnionObjectVariant0Test : TestBase
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Feature = new()
             {
+                ID = "id",
                 DisplayName = "displayName",
                 FeatureStatus = FeatureStatus.New,
                 FeatureType = FeatureType.Boolean,
-                RefID = "refId",
             },
             HasUnlimitedUsage = true,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -3557,10 +3557,10 @@ public class UnionObjectVariant0Test : TestBase
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Feature = new()
             {
+                ID = "id",
                 DisplayName = "displayName",
                 FeatureStatus = FeatureStatus.New,
                 FeatureType = FeatureType.Boolean,
-                RefID = "refId",
             },
             HasUnlimitedUsage = true,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -3587,10 +3587,10 @@ public class UnionObjectVariant0Test : TestBase
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Feature = new()
             {
+                ID = "id",
                 DisplayName = "displayName",
                 FeatureStatus = FeatureStatus.New,
                 FeatureType = FeatureType.Boolean,
-                RefID = "refId",
             },
             HasUnlimitedUsage = true,
             ResetPeriod = UnionObjectVariant0ResetPeriod.Year,
@@ -3752,21 +3752,21 @@ public class UnionObjectVariant0FeatureTest : TestBase
     {
         var model = new UnionObjectVariant0Feature
         {
+            ID = "id",
             DisplayName = "displayName",
             FeatureStatus = FeatureStatus.New,
             FeatureType = FeatureType.Boolean,
-            RefID = "refId",
         };
 
+        string expectedID = "id";
         string expectedDisplayName = "displayName";
         ApiEnum<string, FeatureStatus> expectedFeatureStatus = FeatureStatus.New;
         ApiEnum<string, FeatureType> expectedFeatureType = FeatureType.Boolean;
-        string expectedRefID = "refId";
 
+        Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedDisplayName, model.DisplayName);
         Assert.Equal(expectedFeatureStatus, model.FeatureStatus);
         Assert.Equal(expectedFeatureType, model.FeatureType);
-        Assert.Equal(expectedRefID, model.RefID);
     }
 
     [Fact]
@@ -3774,10 +3774,10 @@ public class UnionObjectVariant0FeatureTest : TestBase
     {
         var model = new UnionObjectVariant0Feature
         {
+            ID = "id",
             DisplayName = "displayName",
             FeatureStatus = FeatureStatus.New,
             FeatureType = FeatureType.Boolean,
-            RefID = "refId",
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -3794,10 +3794,10 @@ public class UnionObjectVariant0FeatureTest : TestBase
     {
         var model = new UnionObjectVariant0Feature
         {
+            ID = "id",
             DisplayName = "displayName",
             FeatureStatus = FeatureStatus.New,
             FeatureType = FeatureType.Boolean,
-            RefID = "refId",
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -3807,15 +3807,15 @@ public class UnionObjectVariant0FeatureTest : TestBase
         );
         Assert.NotNull(deserialized);
 
+        string expectedID = "id";
         string expectedDisplayName = "displayName";
         ApiEnum<string, FeatureStatus> expectedFeatureStatus = FeatureStatus.New;
         ApiEnum<string, FeatureType> expectedFeatureType = FeatureType.Boolean;
-        string expectedRefID = "refId";
 
+        Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedDisplayName, deserialized.DisplayName);
         Assert.Equal(expectedFeatureStatus, deserialized.FeatureStatus);
         Assert.Equal(expectedFeatureType, deserialized.FeatureType);
-        Assert.Equal(expectedRefID, deserialized.RefID);
     }
 
     [Fact]
@@ -3823,10 +3823,10 @@ public class UnionObjectVariant0FeatureTest : TestBase
     {
         var model = new UnionObjectVariant0Feature
         {
+            ID = "id",
             DisplayName = "displayName",
             FeatureStatus = FeatureStatus.New,
             FeatureType = FeatureType.Boolean,
-            RefID = "refId",
         };
 
         model.Validate();
@@ -3837,10 +3837,10 @@ public class UnionObjectVariant0FeatureTest : TestBase
     {
         var model = new UnionObjectVariant0Feature
         {
+            ID = "id",
             DisplayName = "displayName",
             FeatureStatus = FeatureStatus.New,
             FeatureType = FeatureType.Boolean,
-            RefID = "refId",
         };
 
         UnionObjectVariant0Feature copied = new(model);

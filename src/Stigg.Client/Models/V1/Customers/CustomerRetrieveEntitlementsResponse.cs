@@ -929,6 +929,19 @@ sealed class FeatureAccessDeniedReasonConverter : JsonConverter<FeatureAccessDen
 public sealed record class FeatureFeature : JsonModel
 {
     /// <summary>
+    /// The unique reference ID of the entitlement.
+    /// </summary>
+    public required string ID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
+        init { this._rawData.Set("id", value); }
+    }
+
+    /// <summary>
     /// The human-readable name of the entitlement, shown in UI elements.
     /// </summary>
     public required string DisplayName
@@ -967,26 +980,13 @@ public sealed record class FeatureFeature : JsonModel
         init { this._rawData.Set("featureType", value); }
     }
 
-    /// <summary>
-    /// The unique reference ID of the entitlement.
-    /// </summary>
-    public required string RefID
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("refId");
-        }
-        init { this._rawData.Set("refId", value); }
-    }
-
     /// <inheritdoc/>
     public override void Validate()
     {
+        _ = this.ID;
         _ = this.DisplayName;
         this.FeatureStatus.Validate();
         this.FeatureType.Validate();
-        _ = this.RefID;
     }
 
     public FeatureFeature() { }
