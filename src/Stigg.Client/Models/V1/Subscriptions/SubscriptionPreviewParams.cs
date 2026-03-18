@@ -357,12 +357,12 @@ public record class SubscriptionPreviewParams : ParamsBase
     /// <summary>
     /// Unit quantity for per-unit pricing
     /// </summary>
-    public double? UnitQuantity
+    public long? UnitQuantity
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableStruct<double>("unitQuantity");
+            return this._rawBodyData.GetNullableStruct<long>("unitQuantity");
         }
         init
         {

@@ -502,12 +502,15 @@ public record class SubscriptionProvisionParams : ParamsBase
         }
     }
 
-    public double? UnitQuantity
+    /// <summary>
+    /// Unit quantity
+    /// </summary>
+    public long? UnitQuantity
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableStruct<double>("unitQuantity");
+            return this._rawBodyData.GetNullableStruct<long>("unitQuantity");
         }
         init
         {

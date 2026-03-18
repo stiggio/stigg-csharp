@@ -69,6 +69,9 @@ public record class SubscriptionUpdateParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// Await payment confirmation
+    /// </summary>
     public bool? AwaitPaymentConfirmation
     {
         get
@@ -257,6 +260,9 @@ public record class SubscriptionUpdateParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// Promotion code
+    /// </summary>
     public string? PromotionCode
     {
         get

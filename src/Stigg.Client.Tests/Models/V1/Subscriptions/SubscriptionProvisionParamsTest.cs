@@ -311,7 +311,7 @@ public class SubscriptionProvisionParamsTest : TestBase
                     SubscriptionProvisionParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             };
-        double expectedUnitQuantity = 1;
+        long expectedUnitQuantity = 1;
 
         Assert.Equal(expectedCustomerID, parameters.CustomerID);
         Assert.Equal(expectedPlanID, parameters.PlanID);
