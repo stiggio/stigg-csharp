@@ -3057,8 +3057,8 @@ public class SubscriptionProvisionResponseDataEntitlementTest : TestBase
             {
                 CurrencyID = "currencyId",
                 DisplayName = "displayName",
-                AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
                 Description = "description",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 UnitPlural = "unitPlural",
                 UnitSingular = "unitSingular",
             },
@@ -3118,8 +3118,8 @@ public class SubscriptionProvisionResponseDataEntitlementTest : TestBase
             {
                 CurrencyID = "currencyId",
                 DisplayName = "displayName",
-                AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
                 Description = "description",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 UnitPlural = "unitPlural",
                 UnitSingular = "unitSingular",
             },
@@ -4043,8 +4043,8 @@ public class UnionObjectVariant1Test : TestBase
             {
                 CurrencyID = "currencyId",
                 DisplayName = "displayName",
-                AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
                 Description = "description",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 UnitPlural = "unitPlural",
                 UnitSingular = "unitSingular",
             },
@@ -4064,8 +4064,8 @@ public class UnionObjectVariant1Test : TestBase
         {
             CurrencyID = "currencyId",
             DisplayName = "displayName",
-            AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
             Description = "description",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             UnitPlural = "unitPlural",
             UnitSingular = "unitSingular",
         };
@@ -4102,8 +4102,8 @@ public class UnionObjectVariant1Test : TestBase
             {
                 CurrencyID = "currencyId",
                 DisplayName = "displayName",
-                AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
                 Description = "description",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 UnitPlural = "unitPlural",
                 UnitSingular = "unitSingular",
             },
@@ -4136,8 +4136,8 @@ public class UnionObjectVariant1Test : TestBase
             {
                 CurrencyID = "currencyId",
                 DisplayName = "displayName",
-                AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
                 Description = "description",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 UnitPlural = "unitPlural",
                 UnitSingular = "unitSingular",
             },
@@ -4164,8 +4164,8 @@ public class UnionObjectVariant1Test : TestBase
         {
             CurrencyID = "currencyId",
             DisplayName = "displayName",
-            AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
             Description = "description",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             UnitPlural = "unitPlural",
             UnitSingular = "unitSingular",
         };
@@ -4202,8 +4202,8 @@ public class UnionObjectVariant1Test : TestBase
             {
                 CurrencyID = "currencyId",
                 DisplayName = "displayName",
-                AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
                 Description = "description",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 UnitPlural = "unitPlural",
                 UnitSingular = "unitSingular",
             },
@@ -4230,8 +4230,8 @@ public class UnionObjectVariant1Test : TestBase
             {
                 CurrencyID = "currencyId",
                 DisplayName = "displayName",
-                AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
                 Description = "description",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 UnitPlural = "unitPlural",
                 UnitSingular = "unitSingular",
             },
@@ -4260,8 +4260,8 @@ public class UnionObjectVariant1Test : TestBase
             {
                 CurrencyID = "currencyId",
                 DisplayName = "displayName",
-                AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
                 Description = "description",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 UnitPlural = "unitPlural",
                 UnitSingular = "unitSingular",
             },
@@ -4285,8 +4285,8 @@ public class UnionObjectVariant1Test : TestBase
             {
                 CurrencyID = "currencyId",
                 DisplayName = "displayName",
-                AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
                 Description = "description",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 UnitPlural = "unitPlural",
                 UnitSingular = "unitSingular",
             },
@@ -4320,8 +4320,8 @@ public class UnionObjectVariant1Test : TestBase
             {
                 CurrencyID = "currencyId",
                 DisplayName = "displayName",
-                AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
                 Description = "description",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 UnitPlural = "unitPlural",
                 UnitSingular = "unitSingular",
             },
@@ -4350,8 +4350,8 @@ public class UnionObjectVariant1Test : TestBase
             {
                 CurrencyID = "currencyId",
                 DisplayName = "displayName",
-                AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
                 Description = "description",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 UnitPlural = "unitPlural",
                 UnitSingular = "unitSingular",
             },
@@ -4458,26 +4458,30 @@ public class UnionObjectVariant1CurrencyTest : TestBase
         {
             CurrencyID = "currencyId",
             DisplayName = "displayName",
-            AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
             Description = "description",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             UnitPlural = "unitPlural",
             UnitSingular = "unitSingular",
         };
 
         string expectedCurrencyID = "currencyId";
         string expectedDisplayName = "displayName";
-        JsonElement expectedAdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}");
         string expectedDescription = "description";
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedUnitPlural = "unitPlural";
         string expectedUnitSingular = "unitSingular";
 
         Assert.Equal(expectedCurrencyID, model.CurrencyID);
         Assert.Equal(expectedDisplayName, model.DisplayName);
-        Assert.NotNull(model.AdditionalMetaData);
-        Assert.True(
-            JsonElement.DeepEquals(expectedAdditionalMetaData, model.AdditionalMetaData.Value)
-        );
         Assert.Equal(expectedDescription, model.Description);
+        Assert.NotNull(model.Metadata);
+        Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(model.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, model.Metadata[item.Key]);
+        }
         Assert.Equal(expectedUnitPlural, model.UnitPlural);
         Assert.Equal(expectedUnitSingular, model.UnitSingular);
     }
@@ -4489,8 +4493,8 @@ public class UnionObjectVariant1CurrencyTest : TestBase
         {
             CurrencyID = "currencyId",
             DisplayName = "displayName",
-            AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
             Description = "description",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             UnitPlural = "unitPlural",
             UnitSingular = "unitSingular",
         };
@@ -4511,8 +4515,8 @@ public class UnionObjectVariant1CurrencyTest : TestBase
         {
             CurrencyID = "currencyId",
             DisplayName = "displayName",
-            AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
             Description = "description",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             UnitPlural = "unitPlural",
             UnitSingular = "unitSingular",
         };
@@ -4526,21 +4530,22 @@ public class UnionObjectVariant1CurrencyTest : TestBase
 
         string expectedCurrencyID = "currencyId";
         string expectedDisplayName = "displayName";
-        JsonElement expectedAdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}");
         string expectedDescription = "description";
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedUnitPlural = "unitPlural";
         string expectedUnitSingular = "unitSingular";
 
         Assert.Equal(expectedCurrencyID, deserialized.CurrencyID);
         Assert.Equal(expectedDisplayName, deserialized.DisplayName);
-        Assert.NotNull(deserialized.AdditionalMetaData);
-        Assert.True(
-            JsonElement.DeepEquals(
-                expectedAdditionalMetaData,
-                deserialized.AdditionalMetaData.Value
-            )
-        );
         Assert.Equal(expectedDescription, deserialized.Description);
+        Assert.NotNull(deserialized.Metadata);
+        Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(deserialized.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, deserialized.Metadata[item.Key]);
+        }
         Assert.Equal(expectedUnitPlural, deserialized.UnitPlural);
         Assert.Equal(expectedUnitSingular, deserialized.UnitSingular);
     }
@@ -4552,78 +4557,10 @@ public class UnionObjectVariant1CurrencyTest : TestBase
         {
             CurrencyID = "currencyId",
             DisplayName = "displayName",
-            AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
             Description = "description",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             UnitPlural = "unitPlural",
             UnitSingular = "unitSingular",
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
-    {
-        var model = new UnionObjectVariant1Currency
-        {
-            CurrencyID = "currencyId",
-            DisplayName = "displayName",
-            Description = "description",
-            UnitPlural = "unitPlural",
-            UnitSingular = "unitSingular",
-        };
-
-        Assert.Null(model.AdditionalMetaData);
-        Assert.False(model.RawData.ContainsKey("additionalMetaData"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new UnionObjectVariant1Currency
-        {
-            CurrencyID = "currencyId",
-            DisplayName = "displayName",
-            Description = "description",
-            UnitPlural = "unitPlural",
-            UnitSingular = "unitSingular",
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
-    {
-        var model = new UnionObjectVariant1Currency
-        {
-            CurrencyID = "currencyId",
-            DisplayName = "displayName",
-            Description = "description",
-            UnitPlural = "unitPlural",
-            UnitSingular = "unitSingular",
-
-            // Null should be interpreted as omitted for these properties
-            AdditionalMetaData = null,
-        };
-
-        Assert.Null(model.AdditionalMetaData);
-        Assert.False(model.RawData.ContainsKey("additionalMetaData"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new UnionObjectVariant1Currency
-        {
-            CurrencyID = "currencyId",
-            DisplayName = "displayName",
-            Description = "description",
-            UnitPlural = "unitPlural",
-            UnitSingular = "unitSingular",
-
-            // Null should be interpreted as omitted for these properties
-            AdditionalMetaData = null,
         };
 
         model.Validate();
@@ -4636,11 +4573,12 @@ public class UnionObjectVariant1CurrencyTest : TestBase
         {
             CurrencyID = "currencyId",
             DisplayName = "displayName",
-            AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
         };
 
         Assert.Null(model.Description);
         Assert.False(model.RawData.ContainsKey("description"));
+        Assert.Null(model.Metadata);
+        Assert.False(model.RawData.ContainsKey("metadata"));
         Assert.Null(model.UnitPlural);
         Assert.False(model.RawData.ContainsKey("unitPlural"));
         Assert.Null(model.UnitSingular);
@@ -4654,7 +4592,6 @@ public class UnionObjectVariant1CurrencyTest : TestBase
         {
             CurrencyID = "currencyId",
             DisplayName = "displayName",
-            AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
         };
 
         model.Validate();
@@ -4667,15 +4604,17 @@ public class UnionObjectVariant1CurrencyTest : TestBase
         {
             CurrencyID = "currencyId",
             DisplayName = "displayName",
-            AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
 
             Description = null,
+            Metadata = null,
             UnitPlural = null,
             UnitSingular = null,
         };
 
         Assert.Null(model.Description);
         Assert.True(model.RawData.ContainsKey("description"));
+        Assert.Null(model.Metadata);
+        Assert.True(model.RawData.ContainsKey("metadata"));
         Assert.Null(model.UnitPlural);
         Assert.True(model.RawData.ContainsKey("unitPlural"));
         Assert.Null(model.UnitSingular);
@@ -4689,9 +4628,9 @@ public class UnionObjectVariant1CurrencyTest : TestBase
         {
             CurrencyID = "currencyId",
             DisplayName = "displayName",
-            AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
 
             Description = null,
+            Metadata = null,
             UnitPlural = null,
             UnitSingular = null,
         };
@@ -4706,8 +4645,8 @@ public class UnionObjectVariant1CurrencyTest : TestBase
         {
             CurrencyID = "currencyId",
             DisplayName = "displayName",
-            AdditionalMetaData = JsonSerializer.Deserialize<JsonElement>("{}"),
             Description = "description",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             UnitPlural = "unitPlural",
             UnitSingular = "unitSingular",
         };

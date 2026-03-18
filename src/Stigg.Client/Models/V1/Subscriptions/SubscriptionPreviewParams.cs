@@ -1742,12 +1742,12 @@ public sealed record class SubscriptionPreviewParamsBillingInformation : JsonMod
     /// <summary>
     /// Additional billing metadata
     /// </summary>
-    public JsonElement? Metadata
+    public IReadOnlyDictionary<string, string>? Metadata
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<JsonElement>("metadata");
+            return this._rawData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
         }
         init
         {
@@ -1756,7 +1756,10 @@ public sealed record class SubscriptionPreviewParamsBillingInformation : JsonMod
                 return;
             }
 
-            this._rawData.Set("metadata", value);
+            this._rawData.Set<FrozenDictionary<string, string>?>(
+                "metadata",
+                value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
+            );
         }
     }
 

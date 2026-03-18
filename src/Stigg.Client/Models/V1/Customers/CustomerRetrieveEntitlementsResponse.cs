@@ -1495,27 +1495,6 @@ public sealed record class CreditCurrency : JsonModel
     }
 
     /// <summary>
-    /// Additional metadata associated with the currency.
-    /// </summary>
-    public JsonElement? AdditionalMetaData
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<JsonElement>("additionalMetaData");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("additionalMetaData", value);
-        }
-    }
-
-    /// <summary>
     /// A description of the currency.
     /// </summary>
     public string? Description
@@ -1526,6 +1505,25 @@ public sealed record class CreditCurrency : JsonModel
             return this._rawData.GetNullableClass<string>("description");
         }
         init { this._rawData.Set("description", value); }
+    }
+
+    /// <summary>
+    /// Additional metadata associated with the currency.
+    /// </summary>
+    public IReadOnlyDictionary<string, string>? Metadata
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
+        }
+        init
+        {
+            this._rawData.Set<FrozenDictionary<string, string>?>(
+                "metadata",
+                value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
+            );
+        }
     }
 
     /// <summary>
@@ -1559,8 +1557,8 @@ public sealed record class CreditCurrency : JsonModel
     {
         _ = this.CurrencyID;
         _ = this.DisplayName;
-        _ = this.AdditionalMetaData;
         _ = this.Description;
+        _ = this.Metadata;
         _ = this.UnitPlural;
         _ = this.UnitSingular;
     }

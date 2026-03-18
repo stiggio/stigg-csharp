@@ -62,7 +62,7 @@ public class SubscriptionPreviewParamsTest : TestBase
                 InvoiceDaysUntilDue = 0,
                 IsBackdated = true,
                 IsInvoicePaid = true,
-                Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 ProrationBehavior =
                     SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately,
                 TaxIds = [new() { Type = "type", Value = "value" }],
@@ -141,7 +141,7 @@ public class SubscriptionPreviewParamsTest : TestBase
             InvoiceDaysUntilDue = 0,
             IsBackdated = true,
             IsInvoicePaid = true,
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             ProrationBehavior =
                 SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately,
             TaxIds = [new() { Type = "type", Value = "value" }],
@@ -366,7 +366,7 @@ public class SubscriptionPreviewParamsTest : TestBase
                 InvoiceDaysUntilDue = 0,
                 IsBackdated = true,
                 IsInvoicePaid = true,
-                Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 ProrationBehavior =
                     SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately,
                 TaxIds = [new() { Type = "type", Value = "value" }],
@@ -1734,7 +1734,7 @@ public class SubscriptionPreviewParamsBillingInformationTest : TestBase
             InvoiceDaysUntilDue = 0,
             IsBackdated = true,
             IsInvoicePaid = true,
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             ProrationBehavior =
                 SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately,
             TaxIds = [new() { Type = "type", Value = "value" }],
@@ -1756,7 +1756,7 @@ public class SubscriptionPreviewParamsBillingInformationTest : TestBase
         double expectedInvoiceDaysUntilDue = 0;
         bool expectedIsBackdated = true;
         bool expectedIsInvoicePaid = true;
-        JsonElement expectedMetadata = JsonSerializer.Deserialize<JsonElement>("{}");
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<
             string,
             SubscriptionPreviewParamsBillingInformationProrationBehavior
@@ -1776,7 +1776,13 @@ public class SubscriptionPreviewParamsBillingInformationTest : TestBase
         Assert.Equal(expectedIsBackdated, model.IsBackdated);
         Assert.Equal(expectedIsInvoicePaid, model.IsInvoicePaid);
         Assert.NotNull(model.Metadata);
-        Assert.True(JsonElement.DeepEquals(expectedMetadata, model.Metadata.Value));
+        Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(model.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, model.Metadata[item.Key]);
+        }
         Assert.Equal(expectedProrationBehavior, model.ProrationBehavior);
         Assert.NotNull(model.TaxIds);
         Assert.Equal(expectedTaxIds.Count, model.TaxIds.Count);
@@ -1812,7 +1818,7 @@ public class SubscriptionPreviewParamsBillingInformationTest : TestBase
             InvoiceDaysUntilDue = 0,
             IsBackdated = true,
             IsInvoicePaid = true,
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             ProrationBehavior =
                 SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately,
             TaxIds = [new() { Type = "type", Value = "value" }],
@@ -1848,7 +1854,7 @@ public class SubscriptionPreviewParamsBillingInformationTest : TestBase
             InvoiceDaysUntilDue = 0,
             IsBackdated = true,
             IsInvoicePaid = true,
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             ProrationBehavior =
                 SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately,
             TaxIds = [new() { Type = "type", Value = "value" }],
@@ -1877,7 +1883,7 @@ public class SubscriptionPreviewParamsBillingInformationTest : TestBase
         double expectedInvoiceDaysUntilDue = 0;
         bool expectedIsBackdated = true;
         bool expectedIsInvoicePaid = true;
-        JsonElement expectedMetadata = JsonSerializer.Deserialize<JsonElement>("{}");
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<
             string,
             SubscriptionPreviewParamsBillingInformationProrationBehavior
@@ -1897,7 +1903,13 @@ public class SubscriptionPreviewParamsBillingInformationTest : TestBase
         Assert.Equal(expectedIsBackdated, deserialized.IsBackdated);
         Assert.Equal(expectedIsInvoicePaid, deserialized.IsInvoicePaid);
         Assert.NotNull(deserialized.Metadata);
-        Assert.True(JsonElement.DeepEquals(expectedMetadata, deserialized.Metadata.Value));
+        Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(deserialized.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, deserialized.Metadata[item.Key]);
+        }
         Assert.Equal(expectedProrationBehavior, deserialized.ProrationBehavior);
         Assert.NotNull(deserialized.TaxIds);
         Assert.Equal(expectedTaxIds.Count, deserialized.TaxIds.Count);
@@ -1933,7 +1945,7 @@ public class SubscriptionPreviewParamsBillingInformationTest : TestBase
             InvoiceDaysUntilDue = 0,
             IsBackdated = true,
             IsInvoicePaid = true,
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             ProrationBehavior =
                 SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately,
             TaxIds = [new() { Type = "type", Value = "value" }],
@@ -2065,7 +2077,7 @@ public class SubscriptionPreviewParamsBillingInformationTest : TestBase
             InvoiceDaysUntilDue = 0,
             IsBackdated = true,
             IsInvoicePaid = true,
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             ProrationBehavior =
                 SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately,
             TaxIds = [new() { Type = "type", Value = "value" }],

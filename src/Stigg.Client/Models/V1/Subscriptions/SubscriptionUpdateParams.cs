@@ -1482,14 +1482,12 @@ public sealed record class BillingInformation : JsonModel
     /// <summary>
     /// Additional metadata for the subscription
     /// </summary>
-    public IReadOnlyDictionary<string, JsonElement>? Metadata
+    public IReadOnlyDictionary<string, string>? Metadata
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<FrozenDictionary<string, JsonElement>>(
-                "metadata"
-            );
+            return this._rawData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
         }
         init
         {
@@ -1498,7 +1496,7 @@ public sealed record class BillingInformation : JsonModel
                 return;
             }
 
-            this._rawData.Set<FrozenDictionary<string, JsonElement>?>(
+            this._rawData.Set<FrozenDictionary<string, string>?>(
                 "metadata",
                 value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
             );
