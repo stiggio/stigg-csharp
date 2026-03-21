@@ -21,11 +21,7 @@ namespace Stigg.Client.Models.V1.Plans.Entitlements;
 /// </summary>
 public record class EntitlementUpdateParams : ParamsBase
 {
-    readonly JsonDictionary _rawBodyData = new();
-    public IReadOnlyDictionary<string, JsonElement> RawBodyData
-    {
-        get { return this._rawBodyData.Freeze(); }
-    }
+    public JsonElement RawBodyData { get; private init; }
 
     public required string PlanID { get; init; }
 
@@ -36,12 +32,8 @@ public record class EntitlementUpdateParams : ParamsBase
     /// </summary>
     public required Body Body
     {
-        get
-        {
-            this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNotNullClass<Body>("body");
-        }
-        init { this._rawBodyData.Set("body", value); }
+        get { return WrappedJsonSerializer.GetNotNullClass<Body>(this.RawBodyData, "RawBodyData"); }
+        init { this.RawBodyData = JsonSerializer.SerializeToElement(value); }
     }
 
     public EntitlementUpdateParams() { }
@@ -54,19 +46,19 @@ public record class EntitlementUpdateParams : ParamsBase
         this.PlanID = entitlementUpdateParams.PlanID;
         this.ID = entitlementUpdateParams.ID;
 
-        this._rawBodyData = new(entitlementUpdateParams._rawBodyData);
+        this.RawBodyData = entitlementUpdateParams.RawBodyData;
     }
 #pragma warning restore CS8618
 
     public EntitlementUpdateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
-        IReadOnlyDictionary<string, JsonElement> rawBodyData
+        JsonElement rawBodyData
     )
     {
         this._rawHeaderData = new(rawHeaderData);
         this._rawQueryData = new(rawQueryData);
-        this._rawBodyData = new(rawBodyData);
+        this.RawBodyData = rawBodyData;
     }
 
 #pragma warning disable CS8618
@@ -74,14 +66,14 @@ public record class EntitlementUpdateParams : ParamsBase
     EntitlementUpdateParams(
         FrozenDictionary<string, JsonElement> rawHeaderData,
         FrozenDictionary<string, JsonElement> rawQueryData,
-        FrozenDictionary<string, JsonElement> rawBodyData,
+        JsonElement rawBodyData,
         string planID,
         string id
     )
     {
         this._rawHeaderData = new(rawHeaderData);
         this._rawQueryData = new(rawQueryData);
-        this._rawBodyData = new(rawBodyData);
+        this.RawBodyData = rawBodyData;
         this.PlanID = planID;
         this.ID = id;
     }
@@ -91,7 +83,7 @@ public record class EntitlementUpdateParams : ParamsBase
     public static EntitlementUpdateParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
-        IReadOnlyDictionary<string, JsonElement> rawBodyData,
+        JsonElement rawBodyData,
         string planID,
         string id
     )
@@ -99,7 +91,7 @@ public record class EntitlementUpdateParams : ParamsBase
         return new(
             FrozenDictionary.ToFrozenDictionary(rawHeaderData),
             FrozenDictionary.ToFrozenDictionary(rawQueryData),
-            FrozenDictionary.ToFrozenDictionary(rawBodyData),
+            rawBodyData,
             planID,
             id
         );
@@ -118,7 +110,7 @@ public record class EntitlementUpdateParams : ParamsBase
                     ["QueryData"] = FriendlyJsonPrinter.PrintValue(
                         JsonSerializer.SerializeToElement(this._rawQueryData.Freeze())
                     ),
-                    ["BodyData"] = FriendlyJsonPrinter.PrintValue(this._rawBodyData.Freeze()),
+                    ["BodyData"] = FriendlyJsonPrinter.PrintValue(this.RawBodyData),
                 }
             ),
             ModelBase.ToStringSerializerOptions
@@ -134,7 +126,7 @@ public record class EntitlementUpdateParams : ParamsBase
             && (this.ID?.Equals(other.ID) ?? other.ID == null)
             && this._rawHeaderData.Equals(other._rawHeaderData)
             && this._rawQueryData.Equals(other._rawQueryData)
-            && this._rawBodyData.Equals(other._rawBodyData);
+            && this.RawBodyData.Equals(other.RawBodyData);
     }
 
     public override System::Uri Url(ClientOptions options)
