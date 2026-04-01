@@ -3016,12 +3016,10 @@ sealed class SubscriptionProvisionParamsEntitlementConverter
                         );
                     if (deserialized != null)
                     {
-                        deserialized.Validate();
                         return new(deserialized, element);
                     }
                 }
-                catch (System::Exception e)
-                    when (e is JsonException || e is StiggInvalidDataException)
+                catch (JsonException)
                 {
                     // ignore
                 }
@@ -3039,12 +3037,10 @@ sealed class SubscriptionProvisionParamsEntitlementConverter
                         );
                     if (deserialized != null)
                     {
-                        deserialized.Validate();
                         return new(deserialized, element);
                     }
                 }
-                catch (System::Exception e)
-                    when (e is JsonException || e is StiggInvalidDataException)
+                catch (JsonException)
                 {
                     // ignore
                 }

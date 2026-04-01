@@ -424,12 +424,10 @@ sealed class BodyConverter : JsonConverter<Body>
                     var deserialized = JsonSerializer.Deserialize<BodyFeature>(element, options);
                     if (deserialized != null)
                     {
-                        deserialized.Validate();
                         return new(deserialized, element);
                     }
                 }
-                catch (System::Exception e)
-                    when (e is JsonException || e is StiggInvalidDataException)
+                catch (JsonException)
                 {
                     // ignore
                 }
@@ -443,12 +441,10 @@ sealed class BodyConverter : JsonConverter<Body>
                     var deserialized = JsonSerializer.Deserialize<BodyCredit>(element, options);
                     if (deserialized != null)
                     {
-                        deserialized.Validate();
                         return new(deserialized, element);
                     }
                 }
-                catch (System::Exception e)
-                    when (e is JsonException || e is StiggInvalidDataException)
+                catch (JsonException)
                 {
                     // ignore
                 }

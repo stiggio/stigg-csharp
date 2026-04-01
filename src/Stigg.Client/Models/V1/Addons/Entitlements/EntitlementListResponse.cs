@@ -396,12 +396,10 @@ sealed class EntitlementListResponseDataConverter : JsonConverter<EntitlementLis
                         );
                     if (deserialized != null)
                     {
-                        deserialized.Validate();
                         return new(deserialized, element);
                     }
                 }
-                catch (System::Exception e)
-                    when (e is JsonException || e is StiggInvalidDataException)
+                catch (JsonException)
                 {
                     // ignore
                 }
@@ -419,12 +417,10 @@ sealed class EntitlementListResponseDataConverter : JsonConverter<EntitlementLis
                         );
                     if (deserialized != null)
                     {
-                        deserialized.Validate();
                         return new(deserialized, element);
                     }
                 }
-                catch (System::Exception e)
-                    when (e is JsonException || e is StiggInvalidDataException)
+                catch (JsonException)
                 {
                     // ignore
                 }

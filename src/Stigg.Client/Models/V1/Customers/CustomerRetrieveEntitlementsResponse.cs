@@ -517,12 +517,10 @@ sealed class EntitlementConverter : JsonConverter<Entitlement>
                     var deserialized = JsonSerializer.Deserialize<Feature>(element, options);
                     if (deserialized != null)
                     {
-                        deserialized.Validate();
                         return new(deserialized, element);
                     }
                 }
-                catch (System::Exception e)
-                    when (e is JsonException || e is StiggInvalidDataException)
+                catch (JsonException)
                 {
                     // ignore
                 }
@@ -536,12 +534,10 @@ sealed class EntitlementConverter : JsonConverter<Entitlement>
                     var deserialized = JsonSerializer.Deserialize<Credit>(element, options);
                     if (deserialized != null)
                     {
-                        deserialized.Validate();
                         return new(deserialized, element);
                     }
                 }
-                catch (System::Exception e)
-                    when (e is JsonException || e is StiggInvalidDataException)
+                catch (JsonException)
                 {
                     // ignore
                 }
