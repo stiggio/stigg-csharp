@@ -31,6 +31,8 @@ public interface ICustomerService
 
     IPromotionalEntitlementService PromotionalEntitlements { get; }
 
+    IIntegrationService Integrations { get; }
+
     /// <summary>
     /// Retrieves a customer by their unique identifier, including billing information
     /// and subscription status.
@@ -168,6 +170,8 @@ public interface ICustomerServiceWithRawResponse
     IPaymentMethodServiceWithRawResponse PaymentMethod { get; }
 
     IPromotionalEntitlementServiceWithRawResponse PromotionalEntitlements { get; }
+
+    IIntegrationServiceWithRawResponse Integrations { get; }
 
     /// <summary>
     /// Returns a raw HTTP response for <c>get /api/v1/customers/{id}</c>, but is otherwise the

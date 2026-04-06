@@ -6,8 +6,10 @@ using Addons = Stigg.Client.Models.V1.Addons;
 using Coupons = Stigg.Client.Models.V1.Coupons;
 using Credits = Stigg.Client.Models.V1.Events.Credits;
 using Entitlements = Stigg.Client.Models.V1.Addons.Entitlements;
+using EventQueues = Stigg.Client.Models.Internal.Beta.EventQueues;
 using Features = Stigg.Client.Models.V1.Features;
 using Grants = Stigg.Client.Models.V1.Events.Credits.Grants;
+using Integrations = Stigg.Client.Models.V1.Customers.Integrations;
 using PaymentMethod = Stigg.Client.Models.V1.Customers.PaymentMethod;
 using Plans = Stigg.Client.Models.V1.Plans;
 using PlansEntitlements = Stigg.Client.Models.V1.Plans.Entitlements;
@@ -135,6 +137,21 @@ public abstract record class ModelBase
                 string,
                 PromotionalEntitlements::YearlyResetPeriodConfigurationAccordingTo
             >(),
+            new ApiEnumConverter<string, Integrations::DataVendorIdentifier>(),
+            new ApiEnumConverter<
+                string,
+                Integrations::IntegrationUpdateResponseDataVendorIdentifier
+            >(),
+            new ApiEnumConverter<string, Integrations::IntegrationListResponseVendorIdentifier>(),
+            new ApiEnumConverter<
+                string,
+                Integrations::IntegrationLinkResponseDataVendorIdentifier
+            >(),
+            new ApiEnumConverter<
+                string,
+                Integrations::IntegrationUnlinkResponseDataVendorIdentifier
+            >(),
+            new ApiEnumConverter<string, Integrations::VendorIdentifier>(),
             new ApiEnumConverter<string, Subscriptions::PaymentCollection>(),
             new ApiEnumConverter<string, Subscriptions::PricingType>(),
             new ApiEnumConverter<string, Subscriptions::Status>(),
@@ -772,6 +789,19 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, SubscriptionEndSetup>(),
             new ApiEnumConverter<string, SubscriptionStartSetup>(),
             new ApiEnumConverter<string, Behavior>(),
+            new ApiEnumConverter<string, EventQueues::DataRegion>(),
+            new ApiEnumConverter<string, EventQueues::Status>(),
+            new ApiEnumConverter<string, EventQueues::EventQueueUpdateResponseDataRegion>(),
+            new ApiEnumConverter<string, EventQueues::EventQueueUpdateResponseDataStatus>(),
+            new ApiEnumConverter<string, EventQueues::EventQueueListResponseDataRegion>(),
+            new ApiEnumConverter<string, EventQueues::EventQueueListResponseDataStatus>(),
+            new ApiEnumConverter<string, EventQueues::EventQueueDeleteResponseDataRegion>(),
+            new ApiEnumConverter<string, EventQueues::EventQueueDeleteResponseDataStatus>(),
+            new ApiEnumConverter<string, EventQueues::EventQueueProvisionResponseDataRegion>(),
+            new ApiEnumConverter<string, EventQueues::EventQueueProvisionResponseDataStatus>(),
+            new ApiEnumConverter<string, EventQueues::EventType>(),
+            new ApiEnumConverter<string, EventQueues::Region>(),
+            new ApiEnumConverter<string, EventQueues::EventQueueProvisionParamsEventType>(),
         },
     };
 

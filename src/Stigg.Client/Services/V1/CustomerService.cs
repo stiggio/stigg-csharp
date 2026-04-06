@@ -35,6 +35,7 @@ public sealed class CustomerService : ICustomerService
         _withRawResponse = new(() => new CustomerServiceWithRawResponse(client.WithRawResponse));
         _paymentMethod = new(() => new PaymentMethodService(client));
         _promotionalEntitlements = new(() => new PromotionalEntitlementService(client));
+        _integrations = new(() => new IntegrationService(client));
     }
 
     readonly Lazy<IPaymentMethodService> _paymentMethod;
@@ -47,6 +48,12 @@ public sealed class CustomerService : ICustomerService
     public IPromotionalEntitlementService PromotionalEntitlements
     {
         get { return _promotionalEntitlements.Value; }
+    }
+
+    readonly Lazy<IIntegrationService> _integrations;
+    public IIntegrationService Integrations
+    {
+        get { return _integrations.Value; }
     }
 
     /// <inheritdoc/>
@@ -249,6 +256,7 @@ public sealed class CustomerServiceWithRawResponse : ICustomerServiceWithRawResp
         _promotionalEntitlements = new(() =>
             new PromotionalEntitlementServiceWithRawResponse(client)
         );
+        _integrations = new(() => new IntegrationServiceWithRawResponse(client));
     }
 
     readonly Lazy<IPaymentMethodServiceWithRawResponse> _paymentMethod;
@@ -261,6 +269,12 @@ public sealed class CustomerServiceWithRawResponse : ICustomerServiceWithRawResp
     public IPromotionalEntitlementServiceWithRawResponse PromotionalEntitlements
     {
         get { return _promotionalEntitlements.Value; }
+    }
+
+    readonly Lazy<IIntegrationServiceWithRawResponse> _integrations;
+    public IIntegrationServiceWithRawResponse Integrations
+    {
+        get { return _integrations.Value; }
     }
 
     /// <inheritdoc/>
