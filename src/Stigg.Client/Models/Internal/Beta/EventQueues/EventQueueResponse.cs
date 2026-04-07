@@ -12,10 +12,8 @@ namespace Stigg.Client.Models.Internal.Beta.EventQueues;
 /// <summary>
 /// Response object
 /// </summary>
-[JsonConverter(
-    typeof(JsonModelConverter<EventQueueRetrieveResponse, EventQueueRetrieveResponseFromRaw>)
-)]
-public sealed record class EventQueueRetrieveResponse : JsonModel
+[JsonConverter(typeof(JsonModelConverter<EventQueueResponse, EventQueueResponseFromRaw>))]
+public sealed record class EventQueueResponse : JsonModel
 {
     /// <summary>
     /// Event queue provisioning status and details
@@ -36,29 +34,29 @@ public sealed record class EventQueueRetrieveResponse : JsonModel
         this.Data.Validate();
     }
 
-    public EventQueueRetrieveResponse() { }
+    public EventQueueResponse() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public EventQueueRetrieveResponse(EventQueueRetrieveResponse eventQueueRetrieveResponse)
-        : base(eventQueueRetrieveResponse) { }
+    public EventQueueResponse(EventQueueResponse eventQueueResponse)
+        : base(eventQueueResponse) { }
 #pragma warning restore CS8618
 
-    public EventQueueRetrieveResponse(IReadOnlyDictionary<string, JsonElement> rawData)
+    public EventQueueResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    EventQueueRetrieveResponse(FrozenDictionary<string, JsonElement> rawData)
+    EventQueueResponse(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="EventQueueRetrieveResponseFromRaw.FromRawUnchecked"/>
-    public static EventQueueRetrieveResponse FromRawUnchecked(
+    /// <inheritdoc cref="EventQueueResponseFromRaw.FromRawUnchecked"/>
+    public static EventQueueResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -66,19 +64,18 @@ public sealed record class EventQueueRetrieveResponse : JsonModel
     }
 
     [SetsRequiredMembers]
-    public EventQueueRetrieveResponse(Data data)
+    public EventQueueResponse(Data data)
         : this()
     {
         this.Data = data;
     }
 }
 
-class EventQueueRetrieveResponseFromRaw : IFromRawJson<EventQueueRetrieveResponse>
+class EventQueueResponseFromRaw : IFromRawJson<EventQueueResponse>
 {
     /// <inheritdoc/>
-    public EventQueueRetrieveResponse FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => EventQueueRetrieveResponse.FromRawUnchecked(rawData);
+    public EventQueueResponse FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        EventQueueResponse.FromRawUnchecked(rawData);
 }
 
 /// <summary>

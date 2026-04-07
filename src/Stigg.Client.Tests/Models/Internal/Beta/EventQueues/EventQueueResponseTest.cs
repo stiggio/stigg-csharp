@@ -6,12 +6,12 @@ using Stigg.Client.Models.Internal.Beta.EventQueues;
 
 namespace Stigg.Client.Tests.Models.Internal.Beta.EventQueues;
 
-public class EventQueueRetrieveResponseTest : TestBase
+public class EventQueueResponseTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new EventQueueRetrieveResponse
+        var model = new EventQueueResponse
         {
             Data = new()
             {
@@ -44,7 +44,7 @@ public class EventQueueRetrieveResponseTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new EventQueueRetrieveResponse
+        var model = new EventQueueResponse
         {
             Data = new()
             {
@@ -60,7 +60,7 @@ public class EventQueueRetrieveResponseTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<EventQueueRetrieveResponse>(
+        var deserialized = JsonSerializer.Deserialize<EventQueueResponse>(
             json,
             ModelBase.SerializerOptions
         );
@@ -71,7 +71,7 @@ public class EventQueueRetrieveResponseTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new EventQueueRetrieveResponse
+        var model = new EventQueueResponse
         {
             Data = new()
             {
@@ -87,7 +87,7 @@ public class EventQueueRetrieveResponseTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<EventQueueRetrieveResponse>(
+        var deserialized = JsonSerializer.Deserialize<EventQueueResponse>(
             element,
             ModelBase.SerializerOptions
         );
@@ -111,7 +111,7 @@ public class EventQueueRetrieveResponseTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new EventQueueRetrieveResponse
+        var model = new EventQueueResponse
         {
             Data = new()
             {
@@ -132,7 +132,7 @@ public class EventQueueRetrieveResponseTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new EventQueueRetrieveResponse
+        var model = new EventQueueResponse
         {
             Data = new()
             {
@@ -147,7 +147,7 @@ public class EventQueueRetrieveResponseTest : TestBase
             },
         };
 
-        EventQueueRetrieveResponse copied = new(model);
+        EventQueueResponse copied = new(model);
 
         Assert.Equal(model, copied);
     }

@@ -60,12 +60,12 @@ public sealed record class IntegrationListResponse : JsonModel
     /// Price billing sync revision data containing billing ID, link URL, and price
     /// group package billing ID
     /// </summary>
-    public IntegrationListResponseSyncData? SyncData
+    public SyncData? SyncData
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<IntegrationListResponseSyncData>("syncData");
+            return this._rawData.GetNullableClass<SyncData>("syncData");
         }
         init { this._rawData.Set("syncData", value); }
     }
@@ -193,8 +193,8 @@ sealed class IntegrationListResponseVendorIdentifierConverter
 /// Price billing sync revision data containing billing ID, link URL, and price group
 /// package billing ID
 /// </summary>
-[JsonConverter(typeof(IntegrationListResponseSyncDataConverter))]
-public record class IntegrationListResponseSyncData : ModelBase
+[JsonConverter(typeof(SyncDataConverter))]
+public record class SyncData : ModelBase
 {
     public object? Value { get; } = null;
 
@@ -235,104 +235,93 @@ public record class IntegrationListResponseSyncData : ModelBase
         }
     }
 
-    public IntegrationListResponseSyncData(
-        IntegrationListResponseSyncDataSyncRevisionPriceBillingData value,
-        JsonElement? element = null
-    )
+    public SyncData(SyncRevisionPriceBillingData value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
     }
 
-    public IntegrationListResponseSyncData(
-        IntegrationListResponseSyncDataSyncRevisionBillingData value,
-        JsonElement? element = null
-    )
+    public SyncData(SyncRevisionBillingData value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
     }
 
-    public IntegrationListResponseSyncData(
-        IntegrationListResponseSyncDataSyncRevisionMarketplaceData value,
-        JsonElement? element = null
-    )
+    public SyncData(SyncRevisionMarketplaceData value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
     }
 
-    public IntegrationListResponseSyncData(JsonElement element)
+    public SyncData(JsonElement element)
     {
         this._element = element;
     }
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="IntegrationListResponseSyncDataSyncRevisionPriceBillingData"/>.
+    /// type <see cref="SyncRevisionPriceBillingData"/>.
     ///
     /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
     /// if (instance.TryPickRevisionPriceBilling(out var value)) {
-    ///     // `value` is of type `IntegrationListResponseSyncDataSyncRevisionPriceBillingData`
+    ///     // `value` is of type `SyncRevisionPriceBillingData`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
     /// </example>
     /// </summary>
     public bool TryPickRevisionPriceBilling(
-        [NotNullWhen(true)] out IntegrationListResponseSyncDataSyncRevisionPriceBillingData? value
+        [NotNullWhen(true)] out SyncRevisionPriceBillingData? value
     )
     {
-        value = this.Value as IntegrationListResponseSyncDataSyncRevisionPriceBillingData;
+        value = this.Value as SyncRevisionPriceBillingData;
         return value != null;
     }
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="IntegrationListResponseSyncDataSyncRevisionBillingData"/>.
+    /// type <see cref="SyncRevisionBillingData"/>.
     ///
     /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
     /// if (instance.TryPickRevisionBilling(out var value)) {
-    ///     // `value` is of type `IntegrationListResponseSyncDataSyncRevisionBillingData`
+    ///     // `value` is of type `SyncRevisionBillingData`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
     /// </example>
     /// </summary>
-    public bool TryPickRevisionBilling(
-        [NotNullWhen(true)] out IntegrationListResponseSyncDataSyncRevisionBillingData? value
-    )
+    public bool TryPickRevisionBilling([NotNullWhen(true)] out SyncRevisionBillingData? value)
     {
-        value = this.Value as IntegrationListResponseSyncDataSyncRevisionBillingData;
+        value = this.Value as SyncRevisionBillingData;
         return value != null;
     }
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="IntegrationListResponseSyncDataSyncRevisionMarketplaceData"/>.
+    /// type <see cref="SyncRevisionMarketplaceData"/>.
     ///
     /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
     /// if (instance.TryPickRevisionMarketplace(out var value)) {
-    ///     // `value` is of type `IntegrationListResponseSyncDataSyncRevisionMarketplaceData`
+    ///     // `value` is of type `SyncRevisionMarketplaceData`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
     /// </example>
     /// </summary>
     public bool TryPickRevisionMarketplace(
-        [NotNullWhen(true)] out IntegrationListResponseSyncDataSyncRevisionMarketplaceData? value
+        [NotNullWhen(true)] out SyncRevisionMarketplaceData? value
     )
     {
-        value = this.Value as IntegrationListResponseSyncDataSyncRevisionMarketplaceData;
+        value = this.Value as SyncRevisionMarketplaceData;
         return value != null;
     }
 
@@ -350,34 +339,32 @@ public record class IntegrationListResponseSyncData : ModelBase
     /// <example>
     /// <code>
     /// instance.Switch(
-    ///     (IntegrationListResponseSyncDataSyncRevisionPriceBillingData value) =&gt; {...},
-    ///     (IntegrationListResponseSyncDataSyncRevisionBillingData value) =&gt; {...},
-    ///     (IntegrationListResponseSyncDataSyncRevisionMarketplaceData value) =&gt; {...}
+    ///     (SyncRevisionPriceBillingData value) =&gt; {...},
+    ///     (SyncRevisionBillingData value) =&gt; {...},
+    ///     (SyncRevisionMarketplaceData value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
     /// </summary>
     public void Switch(
-        System::Action<IntegrationListResponseSyncDataSyncRevisionPriceBillingData> revisionPriceBilling,
-        System::Action<IntegrationListResponseSyncDataSyncRevisionBillingData> revisionBilling,
-        System::Action<IntegrationListResponseSyncDataSyncRevisionMarketplaceData> revisionMarketplace
+        System::Action<SyncRevisionPriceBillingData> revisionPriceBilling,
+        System::Action<SyncRevisionBillingData> revisionBilling,
+        System::Action<SyncRevisionMarketplaceData> revisionMarketplace
     )
     {
         switch (this.Value)
         {
-            case IntegrationListResponseSyncDataSyncRevisionPriceBillingData value:
+            case SyncRevisionPriceBillingData value:
                 revisionPriceBilling(value);
                 break;
-            case IntegrationListResponseSyncDataSyncRevisionBillingData value:
+            case SyncRevisionBillingData value:
                 revisionBilling(value);
                 break;
-            case IntegrationListResponseSyncDataSyncRevisionMarketplaceData value:
+            case SyncRevisionMarketplaceData value:
                 revisionMarketplace(value);
                 break;
             default:
-                throw new StiggInvalidDataException(
-                    "Data did not match any variant of IntegrationListResponseSyncData"
-                );
+                throw new StiggInvalidDataException("Data did not match any variant of SyncData");
         }
     }
 
@@ -396,50 +383,33 @@ public record class IntegrationListResponseSyncData : ModelBase
     /// <example>
     /// <code>
     /// var result = instance.Match(
-    ///     (IntegrationListResponseSyncDataSyncRevisionPriceBillingData value) =&gt; {...},
-    ///     (IntegrationListResponseSyncDataSyncRevisionBillingData value) =&gt; {...},
-    ///     (IntegrationListResponseSyncDataSyncRevisionMarketplaceData value) =&gt; {...}
+    ///     (SyncRevisionPriceBillingData value) =&gt; {...},
+    ///     (SyncRevisionBillingData value) =&gt; {...},
+    ///     (SyncRevisionMarketplaceData value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
     /// </summary>
     public T Match<T>(
-        System::Func<
-            IntegrationListResponseSyncDataSyncRevisionPriceBillingData,
-            T
-        > revisionPriceBilling,
-        System::Func<IntegrationListResponseSyncDataSyncRevisionBillingData, T> revisionBilling,
-        System::Func<
-            IntegrationListResponseSyncDataSyncRevisionMarketplaceData,
-            T
-        > revisionMarketplace
+        System::Func<SyncRevisionPriceBillingData, T> revisionPriceBilling,
+        System::Func<SyncRevisionBillingData, T> revisionBilling,
+        System::Func<SyncRevisionMarketplaceData, T> revisionMarketplace
     )
     {
         return this.Value switch
         {
-            IntegrationListResponseSyncDataSyncRevisionPriceBillingData value =>
-                revisionPriceBilling(value),
-            IntegrationListResponseSyncDataSyncRevisionBillingData value => revisionBilling(value),
-            IntegrationListResponseSyncDataSyncRevisionMarketplaceData value => revisionMarketplace(
-                value
-            ),
-            _ => throw new StiggInvalidDataException(
-                "Data did not match any variant of IntegrationListResponseSyncData"
-            ),
+            SyncRevisionPriceBillingData value => revisionPriceBilling(value),
+            SyncRevisionBillingData value => revisionBilling(value),
+            SyncRevisionMarketplaceData value => revisionMarketplace(value),
+            _ => throw new StiggInvalidDataException("Data did not match any variant of SyncData"),
         };
     }
 
-    public static implicit operator IntegrationListResponseSyncData(
-        IntegrationListResponseSyncDataSyncRevisionPriceBillingData value
-    ) => new(value);
+    public static implicit operator SyncData(SyncRevisionPriceBillingData value) => new(value);
 
-    public static implicit operator IntegrationListResponseSyncData(
-        IntegrationListResponseSyncDataSyncRevisionBillingData value
-    ) => new(value);
+    public static implicit operator SyncData(SyncRevisionBillingData value) => new(value);
 
-    public static implicit operator IntegrationListResponseSyncData(
-        IntegrationListResponseSyncDataSyncRevisionMarketplaceData value
-    ) => new(value);
+    public static implicit operator SyncData(SyncRevisionMarketplaceData value) => new(value);
 
     /// <summary>
     /// Validates that the instance was constructed with a known variant and that this variant is valid
@@ -455,9 +425,7 @@ public record class IntegrationListResponseSyncData : ModelBase
     {
         if (this.Value == null)
         {
-            throw new StiggInvalidDataException(
-                "Data did not match any variant of IntegrationListResponseSyncData"
-            );
+            throw new StiggInvalidDataException("Data did not match any variant of SyncData");
         }
         this.Switch(
             (revisionPriceBilling) => revisionPriceBilling.Validate(),
@@ -466,7 +434,7 @@ public record class IntegrationListResponseSyncData : ModelBase
         );
     }
 
-    public virtual bool Equals(IntegrationListResponseSyncData? other) =>
+    public virtual bool Equals(SyncData? other) =>
         other != null
         && this.VariantIndex() == other.VariantIndex()
         && JsonElement.DeepEquals(this.Json, other.Json);
@@ -486,18 +454,17 @@ public record class IntegrationListResponseSyncData : ModelBase
     {
         return this.Value switch
         {
-            IntegrationListResponseSyncDataSyncRevisionPriceBillingData _ => 0,
-            IntegrationListResponseSyncDataSyncRevisionBillingData _ => 1,
-            IntegrationListResponseSyncDataSyncRevisionMarketplaceData _ => 2,
+            SyncRevisionPriceBillingData _ => 0,
+            SyncRevisionBillingData _ => 1,
+            SyncRevisionMarketplaceData _ => 2,
             _ => -1,
         };
     }
 }
 
-sealed class IntegrationListResponseSyncDataConverter
-    : JsonConverter<IntegrationListResponseSyncData?>
+sealed class SyncDataConverter : JsonConverter<SyncData?>
 {
-    public override IntegrationListResponseSyncData? Read(
+    public override SyncData? Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -506,11 +473,10 @@ sealed class IntegrationListResponseSyncDataConverter
         var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
-            var deserialized =
-                JsonSerializer.Deserialize<IntegrationListResponseSyncDataSyncRevisionPriceBillingData>(
-                    element,
-                    options
-                );
+            var deserialized = JsonSerializer.Deserialize<SyncRevisionPriceBillingData>(
+                element,
+                options
+            );
             if (deserialized != null)
             {
                 deserialized.Validate();
@@ -524,11 +490,10 @@ sealed class IntegrationListResponseSyncDataConverter
 
         try
         {
-            var deserialized =
-                JsonSerializer.Deserialize<IntegrationListResponseSyncDataSyncRevisionBillingData>(
-                    element,
-                    options
-                );
+            var deserialized = JsonSerializer.Deserialize<SyncRevisionBillingData>(
+                element,
+                options
+            );
             if (deserialized != null)
             {
                 deserialized.Validate();
@@ -542,11 +507,10 @@ sealed class IntegrationListResponseSyncDataConverter
 
         try
         {
-            var deserialized =
-                JsonSerializer.Deserialize<IntegrationListResponseSyncDataSyncRevisionMarketplaceData>(
-                    element,
-                    options
-                );
+            var deserialized = JsonSerializer.Deserialize<SyncRevisionMarketplaceData>(
+                element,
+                options
+            );
             if (deserialized != null)
             {
                 deserialized.Validate();
@@ -563,7 +527,7 @@ sealed class IntegrationListResponseSyncDataConverter
 
     public override void Write(
         Utf8JsonWriter writer,
-        IntegrationListResponseSyncData? value,
+        SyncData? value,
         JsonSerializerOptions options
     )
     {
@@ -576,12 +540,9 @@ sealed class IntegrationListResponseSyncDataConverter
 /// package billing ID
 /// </summary>
 [JsonConverter(
-    typeof(JsonModelConverter<
-        IntegrationListResponseSyncDataSyncRevisionPriceBillingData,
-        IntegrationListResponseSyncDataSyncRevisionPriceBillingDataFromRaw
-    >)
+    typeof(JsonModelConverter<SyncRevisionPriceBillingData, SyncRevisionPriceBillingDataFromRaw>)
 )]
-public sealed record class IntegrationListResponseSyncDataSyncRevisionPriceBillingData : JsonModel
+public sealed record class SyncRevisionPriceBillingData : JsonModel
 {
     /// <summary>
     /// Billing integration id
@@ -630,35 +591,29 @@ public sealed record class IntegrationListResponseSyncDataSyncRevisionPriceBilli
         _ = this.PriceGroupPackageBillingID;
     }
 
-    public IntegrationListResponseSyncDataSyncRevisionPriceBillingData() { }
+    public SyncRevisionPriceBillingData() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public IntegrationListResponseSyncDataSyncRevisionPriceBillingData(
-        IntegrationListResponseSyncDataSyncRevisionPriceBillingData integrationListResponseSyncDataSyncRevisionPriceBillingData
-    )
-        : base(integrationListResponseSyncDataSyncRevisionPriceBillingData) { }
+    public SyncRevisionPriceBillingData(SyncRevisionPriceBillingData syncRevisionPriceBillingData)
+        : base(syncRevisionPriceBillingData) { }
 #pragma warning restore CS8618
 
-    public IntegrationListResponseSyncDataSyncRevisionPriceBillingData(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
+    public SyncRevisionPriceBillingData(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    IntegrationListResponseSyncDataSyncRevisionPriceBillingData(
-        FrozenDictionary<string, JsonElement> rawData
-    )
+    SyncRevisionPriceBillingData(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IntegrationListResponseSyncDataSyncRevisionPriceBillingDataFromRaw.FromRawUnchecked"/>
-    public static IntegrationListResponseSyncDataSyncRevisionPriceBillingData FromRawUnchecked(
+    /// <inheritdoc cref="SyncRevisionPriceBillingDataFromRaw.FromRawUnchecked"/>
+    public static SyncRevisionPriceBillingData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -666,25 +621,19 @@ public sealed record class IntegrationListResponseSyncDataSyncRevisionPriceBilli
     }
 }
 
-class IntegrationListResponseSyncDataSyncRevisionPriceBillingDataFromRaw
-    : IFromRawJson<IntegrationListResponseSyncDataSyncRevisionPriceBillingData>
+class SyncRevisionPriceBillingDataFromRaw : IFromRawJson<SyncRevisionPriceBillingData>
 {
     /// <inheritdoc/>
-    public IntegrationListResponseSyncDataSyncRevisionPriceBillingData FromRawUnchecked(
+    public SyncRevisionPriceBillingData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => IntegrationListResponseSyncDataSyncRevisionPriceBillingData.FromRawUnchecked(rawData);
+    ) => SyncRevisionPriceBillingData.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// Billing sync revision data containing billing ID and link URL
 /// </summary>
-[JsonConverter(
-    typeof(JsonModelConverter<
-        IntegrationListResponseSyncDataSyncRevisionBillingData,
-        IntegrationListResponseSyncDataSyncRevisionBillingDataFromRaw
-    >)
-)]
-public sealed record class IntegrationListResponseSyncDataSyncRevisionBillingData : JsonModel
+[JsonConverter(typeof(JsonModelConverter<SyncRevisionBillingData, SyncRevisionBillingDataFromRaw>))]
+public sealed record class SyncRevisionBillingData : JsonModel
 {
     /// <summary>
     /// Billing integration id
@@ -719,35 +668,29 @@ public sealed record class IntegrationListResponseSyncDataSyncRevisionBillingDat
         _ = this.BillingLinkUrl;
     }
 
-    public IntegrationListResponseSyncDataSyncRevisionBillingData() { }
+    public SyncRevisionBillingData() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public IntegrationListResponseSyncDataSyncRevisionBillingData(
-        IntegrationListResponseSyncDataSyncRevisionBillingData integrationListResponseSyncDataSyncRevisionBillingData
-    )
-        : base(integrationListResponseSyncDataSyncRevisionBillingData) { }
+    public SyncRevisionBillingData(SyncRevisionBillingData syncRevisionBillingData)
+        : base(syncRevisionBillingData) { }
 #pragma warning restore CS8618
 
-    public IntegrationListResponseSyncDataSyncRevisionBillingData(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
+    public SyncRevisionBillingData(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    IntegrationListResponseSyncDataSyncRevisionBillingData(
-        FrozenDictionary<string, JsonElement> rawData
-    )
+    SyncRevisionBillingData(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IntegrationListResponseSyncDataSyncRevisionBillingDataFromRaw.FromRawUnchecked"/>
-    public static IntegrationListResponseSyncDataSyncRevisionBillingData FromRawUnchecked(
+    /// <inheritdoc cref="SyncRevisionBillingDataFromRaw.FromRawUnchecked"/>
+    public static SyncRevisionBillingData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -755,25 +698,21 @@ public sealed record class IntegrationListResponseSyncDataSyncRevisionBillingDat
     }
 }
 
-class IntegrationListResponseSyncDataSyncRevisionBillingDataFromRaw
-    : IFromRawJson<IntegrationListResponseSyncDataSyncRevisionBillingData>
+class SyncRevisionBillingDataFromRaw : IFromRawJson<SyncRevisionBillingData>
 {
     /// <inheritdoc/>
-    public IntegrationListResponseSyncDataSyncRevisionBillingData FromRawUnchecked(
+    public SyncRevisionBillingData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => IntegrationListResponseSyncDataSyncRevisionBillingData.FromRawUnchecked(rawData);
+    ) => SyncRevisionBillingData.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// Marketplace sync revision data containing dimensions
 /// </summary>
 [JsonConverter(
-    typeof(JsonModelConverter<
-        IntegrationListResponseSyncDataSyncRevisionMarketplaceData,
-        IntegrationListResponseSyncDataSyncRevisionMarketplaceDataFromRaw
-    >)
+    typeof(JsonModelConverter<SyncRevisionMarketplaceData, SyncRevisionMarketplaceDataFromRaw>)
 )]
-public sealed record class IntegrationListResponseSyncDataSyncRevisionMarketplaceData : JsonModel
+public sealed record class SyncRevisionMarketplaceData : JsonModel
 {
     /// <summary>
     /// Dimensions of the marketplace sync revision
@@ -794,35 +733,29 @@ public sealed record class IntegrationListResponseSyncDataSyncRevisionMarketplac
         _ = this.Dimensions;
     }
 
-    public IntegrationListResponseSyncDataSyncRevisionMarketplaceData() { }
+    public SyncRevisionMarketplaceData() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public IntegrationListResponseSyncDataSyncRevisionMarketplaceData(
-        IntegrationListResponseSyncDataSyncRevisionMarketplaceData integrationListResponseSyncDataSyncRevisionMarketplaceData
-    )
-        : base(integrationListResponseSyncDataSyncRevisionMarketplaceData) { }
+    public SyncRevisionMarketplaceData(SyncRevisionMarketplaceData syncRevisionMarketplaceData)
+        : base(syncRevisionMarketplaceData) { }
 #pragma warning restore CS8618
 
-    public IntegrationListResponseSyncDataSyncRevisionMarketplaceData(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
+    public SyncRevisionMarketplaceData(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    IntegrationListResponseSyncDataSyncRevisionMarketplaceData(
-        FrozenDictionary<string, JsonElement> rawData
-    )
+    SyncRevisionMarketplaceData(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IntegrationListResponseSyncDataSyncRevisionMarketplaceDataFromRaw.FromRawUnchecked"/>
-    public static IntegrationListResponseSyncDataSyncRevisionMarketplaceData FromRawUnchecked(
+    /// <inheritdoc cref="SyncRevisionMarketplaceDataFromRaw.FromRawUnchecked"/>
+    public static SyncRevisionMarketplaceData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -830,18 +763,17 @@ public sealed record class IntegrationListResponseSyncDataSyncRevisionMarketplac
     }
 
     [SetsRequiredMembers]
-    public IntegrationListResponseSyncDataSyncRevisionMarketplaceData(string dimensions)
+    public SyncRevisionMarketplaceData(string dimensions)
         : this()
     {
         this.Dimensions = dimensions;
     }
 }
 
-class IntegrationListResponseSyncDataSyncRevisionMarketplaceDataFromRaw
-    : IFromRawJson<IntegrationListResponseSyncDataSyncRevisionMarketplaceData>
+class SyncRevisionMarketplaceDataFromRaw : IFromRawJson<SyncRevisionMarketplaceData>
 {
     /// <inheritdoc/>
-    public IntegrationListResponseSyncDataSyncRevisionMarketplaceData FromRawUnchecked(
+    public SyncRevisionMarketplaceData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => IntegrationListResponseSyncDataSyncRevisionMarketplaceData.FromRawUnchecked(rawData);
+    ) => SyncRevisionMarketplaceData.FromRawUnchecked(rawData);
 }

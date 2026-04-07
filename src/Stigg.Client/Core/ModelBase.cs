@@ -36,11 +36,12 @@ public abstract record class ModelBase
         Converters =
         {
             new FrozenDictionaryConverterFactory(),
-            new ApiEnumConverter<string, DataBillingCurrency>(),
-            new ApiEnumConverter<string, DataCouponID>(),
-            new ApiEnumConverter<string, DataDefaultPaymentMethodType>(),
-            new ApiEnumConverter<string, DataIntegrationVendorIdentifier>(),
-            new ApiEnumConverter<string, DataPassthroughZuoraCurrency>(),
+            new ApiEnumConverter<string, DataVendorIdentifier>(),
+            new ApiEnumConverter<string, CustomerResponseDataBillingCurrency>(),
+            new ApiEnumConverter<string, CustomerResponseDataCouponID>(),
+            new ApiEnumConverter<string, CustomerResponseDataDefaultPaymentMethodType>(),
+            new ApiEnumConverter<string, CustomerResponseDataIntegrationVendorIdentifier>(),
+            new ApiEnumConverter<string, CustomerResponseDataPassthroughZuoraCurrency>(),
             new ApiEnumConverter<string, CustomerListResponseBillingCurrency>(),
             new ApiEnumConverter<string, CustomerListResponseCouponID>(),
             new ApiEnumConverter<string, CustomerListResponseDefaultPaymentMethodType>(),
@@ -137,20 +138,7 @@ public abstract record class ModelBase
                 string,
                 PromotionalEntitlements::YearlyResetPeriodConfigurationAccordingTo
             >(),
-            new ApiEnumConverter<string, Integrations::DataVendorIdentifier>(),
-            new ApiEnumConverter<
-                string,
-                Integrations::IntegrationUpdateResponseDataVendorIdentifier
-            >(),
             new ApiEnumConverter<string, Integrations::IntegrationListResponseVendorIdentifier>(),
-            new ApiEnumConverter<
-                string,
-                Integrations::IntegrationLinkResponseDataVendorIdentifier
-            >(),
-            new ApiEnumConverter<
-                string,
-                Integrations::IntegrationUnlinkResponseDataVendorIdentifier
-            >(),
             new ApiEnumConverter<string, Integrations::VendorIdentifier>(),
             new ApiEnumConverter<string, Subscriptions::PaymentCollection>(),
             new ApiEnumConverter<string, Subscriptions::PricingType>(),
@@ -791,14 +779,8 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Behavior>(),
             new ApiEnumConverter<string, EventQueues::DataRegion>(),
             new ApiEnumConverter<string, EventQueues::Status>(),
-            new ApiEnumConverter<string, EventQueues::EventQueueUpdateResponseDataRegion>(),
-            new ApiEnumConverter<string, EventQueues::EventQueueUpdateResponseDataStatus>(),
             new ApiEnumConverter<string, EventQueues::EventQueueListResponseDataRegion>(),
             new ApiEnumConverter<string, EventQueues::EventQueueListResponseDataStatus>(),
-            new ApiEnumConverter<string, EventQueues::EventQueueDeleteResponseDataRegion>(),
-            new ApiEnumConverter<string, EventQueues::EventQueueDeleteResponseDataStatus>(),
-            new ApiEnumConverter<string, EventQueues::EventQueueProvisionResponseDataRegion>(),
-            new ApiEnumConverter<string, EventQueues::EventQueueProvisionResponseDataStatus>(),
             new ApiEnumConverter<string, EventQueues::EventType>(),
             new ApiEnumConverter<string, EventQueues::Region>(),
             new ApiEnumConverter<string, EventQueues::EventQueueProvisionParamsEventType>(),

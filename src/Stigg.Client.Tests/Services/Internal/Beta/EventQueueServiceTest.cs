@@ -8,23 +8,23 @@ public class EventQueueServiceTest : TestBase
     [Fact(Skip = "Mock server tests are disabled")]
     public async Task Retrieve_Works()
     {
-        var eventQueue = await this.client.Internal.Beta.EventQueues.Retrieve(
+        var eventQueueResponse = await this.client.Internal.Beta.EventQueues.Retrieve(
             "x",
             new(),
             TestContext.Current.CancellationToken
         );
-        eventQueue.Validate();
+        eventQueueResponse.Validate();
     }
 
     [Fact(Skip = "Mock server tests are disabled")]
     public async Task Update_Works()
     {
-        var eventQueue = await this.client.Internal.Beta.EventQueues.Update(
+        var eventQueueResponse = await this.client.Internal.Beta.EventQueues.Update(
             "x",
             new(),
             TestContext.Current.CancellationToken
         );
-        eventQueue.Validate();
+        eventQueueResponse.Validate();
     }
 
     [Fact(Skip = "Mock server tests are disabled")]
@@ -40,21 +40,21 @@ public class EventQueueServiceTest : TestBase
     [Fact(Skip = "Mock server tests are disabled")]
     public async Task Delete_Works()
     {
-        var eventQueue = await this.client.Internal.Beta.EventQueues.Delete(
+        var eventQueueResponse = await this.client.Internal.Beta.EventQueues.Delete(
             "x",
             new(),
             TestContext.Current.CancellationToken
         );
-        eventQueue.Validate();
+        eventQueueResponse.Validate();
     }
 
     [Fact(Skip = "Mock server tests are disabled")]
     public async Task Provision_Works()
     {
-        var response = await this.client.Internal.Beta.EventQueues.Provision(
+        var eventQueueResponse = await this.client.Internal.Beta.EventQueues.Provision(
             new() { Region = Region.UsEast1 },
             TestContext.Current.CancellationToken
         );
-        response.Validate();
+        eventQueueResponse.Validate();
     }
 }

@@ -35,7 +35,7 @@ public sealed class EventQueueService : IEventQueueService
     }
 
     /// <inheritdoc/>
-    public async Task<EventQueueRetrieveResponse> Retrieve(
+    public async Task<EventQueueResponse> Retrieve(
         EventQueueRetrieveParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -47,7 +47,7 @@ public sealed class EventQueueService : IEventQueueService
     }
 
     /// <inheritdoc/>
-    public Task<EventQueueRetrieveResponse> Retrieve(
+    public Task<EventQueueResponse> Retrieve(
         string queueName,
         EventQueueRetrieveParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -59,7 +59,7 @@ public sealed class EventQueueService : IEventQueueService
     }
 
     /// <inheritdoc/>
-    public async Task<EventQueueUpdateResponse> Update(
+    public async Task<EventQueueResponse> Update(
         EventQueueUpdateParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -71,7 +71,7 @@ public sealed class EventQueueService : IEventQueueService
     }
 
     /// <inheritdoc/>
-    public Task<EventQueueUpdateResponse> Update(
+    public Task<EventQueueResponse> Update(
         string queueName,
         EventQueueUpdateParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -95,7 +95,7 @@ public sealed class EventQueueService : IEventQueueService
     }
 
     /// <inheritdoc/>
-    public async Task<EventQueueDeleteResponse> Delete(
+    public async Task<EventQueueResponse> Delete(
         EventQueueDeleteParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -107,7 +107,7 @@ public sealed class EventQueueService : IEventQueueService
     }
 
     /// <inheritdoc/>
-    public Task<EventQueueDeleteResponse> Delete(
+    public Task<EventQueueResponse> Delete(
         string queueName,
         EventQueueDeleteParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -119,7 +119,7 @@ public sealed class EventQueueService : IEventQueueService
     }
 
     /// <inheritdoc/>
-    public async Task<EventQueueProvisionResponse> Provision(
+    public async Task<EventQueueResponse> Provision(
         EventQueueProvisionParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -150,7 +150,7 @@ public sealed class EventQueueServiceWithRawResponse : IEventQueueServiceWithRaw
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<EventQueueRetrieveResponse>> Retrieve(
+    public async Task<HttpResponse<EventQueueResponse>> Retrieve(
         EventQueueRetrieveParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -170,20 +170,20 @@ public sealed class EventQueueServiceWithRawResponse : IEventQueueServiceWithRaw
             response,
             async (token) =>
             {
-                var eventQueue = await response
-                    .Deserialize<EventQueueRetrieveResponse>(token)
+                var eventQueueResponse = await response
+                    .Deserialize<EventQueueResponse>(token)
                     .ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    eventQueue.Validate();
+                    eventQueueResponse.Validate();
                 }
-                return eventQueue;
+                return eventQueueResponse;
             }
         );
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<EventQueueRetrieveResponse>> Retrieve(
+    public Task<HttpResponse<EventQueueResponse>> Retrieve(
         string queueName,
         EventQueueRetrieveParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -195,7 +195,7 @@ public sealed class EventQueueServiceWithRawResponse : IEventQueueServiceWithRaw
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<EventQueueUpdateResponse>> Update(
+    public async Task<HttpResponse<EventQueueResponse>> Update(
         EventQueueUpdateParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -215,20 +215,20 @@ public sealed class EventQueueServiceWithRawResponse : IEventQueueServiceWithRaw
             response,
             async (token) =>
             {
-                var eventQueue = await response
-                    .Deserialize<EventQueueUpdateResponse>(token)
+                var eventQueueResponse = await response
+                    .Deserialize<EventQueueResponse>(token)
                     .ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    eventQueue.Validate();
+                    eventQueueResponse.Validate();
                 }
-                return eventQueue;
+                return eventQueueResponse;
             }
         );
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<EventQueueUpdateResponse>> Update(
+    public Task<HttpResponse<EventQueueResponse>> Update(
         string queueName,
         EventQueueUpdateParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -270,7 +270,7 @@ public sealed class EventQueueServiceWithRawResponse : IEventQueueServiceWithRaw
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<EventQueueDeleteResponse>> Delete(
+    public async Task<HttpResponse<EventQueueResponse>> Delete(
         EventQueueDeleteParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -290,20 +290,20 @@ public sealed class EventQueueServiceWithRawResponse : IEventQueueServiceWithRaw
             response,
             async (token) =>
             {
-                var eventQueue = await response
-                    .Deserialize<EventQueueDeleteResponse>(token)
+                var eventQueueResponse = await response
+                    .Deserialize<EventQueueResponse>(token)
                     .ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    eventQueue.Validate();
+                    eventQueueResponse.Validate();
                 }
-                return eventQueue;
+                return eventQueueResponse;
             }
         );
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<EventQueueDeleteResponse>> Delete(
+    public Task<HttpResponse<EventQueueResponse>> Delete(
         string queueName,
         EventQueueDeleteParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -315,7 +315,7 @@ public sealed class EventQueueServiceWithRawResponse : IEventQueueServiceWithRaw
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<EventQueueProvisionResponse>> Provision(
+    public async Task<HttpResponse<EventQueueResponse>> Provision(
         EventQueueProvisionParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -330,14 +330,14 @@ public sealed class EventQueueServiceWithRawResponse : IEventQueueServiceWithRaw
             response,
             async (token) =>
             {
-                var deserializedResponse = await response
-                    .Deserialize<EventQueueProvisionResponse>(token)
+                var eventQueueResponse = await response
+                    .Deserialize<EventQueueResponse>(token)
                     .ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    deserializedResponse.Validate();
+                    eventQueueResponse.Validate();
                 }
-                return deserializedResponse;
+                return eventQueueResponse;
             }
         );
     }

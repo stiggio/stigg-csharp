@@ -7,25 +7,25 @@ using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
 using System = System;
 
-namespace Stigg.Client.Models.V1.Customers.Integrations;
+namespace Stigg.Client.Models.V1.Customers;
 
 /// <summary>
 /// Response object
 /// </summary>
 [JsonConverter(
-    typeof(JsonModelConverter<IntegrationUnlinkResponse, IntegrationUnlinkResponseFromRaw>)
+    typeof(JsonModelConverter<CustomerIntegrationResponse, CustomerIntegrationResponseFromRaw>)
 )]
-public sealed record class IntegrationUnlinkResponse : JsonModel
+public sealed record class CustomerIntegrationResponse : JsonModel
 {
     /// <summary>
     /// External billing or CRM integration link
     /// </summary>
-    public required IntegrationUnlinkResponseData Data
+    public required Data Data
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<IntegrationUnlinkResponseData>("data");
+            return this._rawData.GetNotNullClass<Data>("data");
         }
         init { this._rawData.Set("data", value); }
     }
@@ -36,29 +36,29 @@ public sealed record class IntegrationUnlinkResponse : JsonModel
         this.Data.Validate();
     }
 
-    public IntegrationUnlinkResponse() { }
+    public CustomerIntegrationResponse() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public IntegrationUnlinkResponse(IntegrationUnlinkResponse integrationUnlinkResponse)
-        : base(integrationUnlinkResponse) { }
+    public CustomerIntegrationResponse(CustomerIntegrationResponse customerIntegrationResponse)
+        : base(customerIntegrationResponse) { }
 #pragma warning restore CS8618
 
-    public IntegrationUnlinkResponse(IReadOnlyDictionary<string, JsonElement> rawData)
+    public CustomerIntegrationResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    IntegrationUnlinkResponse(FrozenDictionary<string, JsonElement> rawData)
+    CustomerIntegrationResponse(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IntegrationUnlinkResponseFromRaw.FromRawUnchecked"/>
-    public static IntegrationUnlinkResponse FromRawUnchecked(
+    /// <inheritdoc cref="CustomerIntegrationResponseFromRaw.FromRawUnchecked"/>
+    public static CustomerIntegrationResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -66,28 +66,26 @@ public sealed record class IntegrationUnlinkResponse : JsonModel
     }
 
     [SetsRequiredMembers]
-    public IntegrationUnlinkResponse(IntegrationUnlinkResponseData data)
+    public CustomerIntegrationResponse(Data data)
         : this()
     {
         this.Data = data;
     }
 }
 
-class IntegrationUnlinkResponseFromRaw : IFromRawJson<IntegrationUnlinkResponse>
+class CustomerIntegrationResponseFromRaw : IFromRawJson<CustomerIntegrationResponse>
 {
     /// <inheritdoc/>
-    public IntegrationUnlinkResponse FromRawUnchecked(
+    public CustomerIntegrationResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => IntegrationUnlinkResponse.FromRawUnchecked(rawData);
+    ) => CustomerIntegrationResponse.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// External billing or CRM integration link
 /// </summary>
-[JsonConverter(
-    typeof(JsonModelConverter<IntegrationUnlinkResponseData, IntegrationUnlinkResponseDataFromRaw>)
-)]
-public sealed record class IntegrationUnlinkResponseData : JsonModel
+[JsonConverter(typeof(JsonModelConverter<Data, DataFromRaw>))]
+public sealed record class Data : JsonModel
 {
     /// <summary>
     /// Integration details
@@ -118,14 +116,14 @@ public sealed record class IntegrationUnlinkResponseData : JsonModel
     /// <summary>
     /// The vendor identifier of integration
     /// </summary>
-    public required ApiEnum<string, IntegrationUnlinkResponseDataVendorIdentifier> VendorIdentifier
+    public required ApiEnum<string, DataVendorIdentifier> VendorIdentifier
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, IntegrationUnlinkResponseDataVendorIdentifier>
-            >("vendorIdentifier");
+            return this._rawData.GetNotNullClass<ApiEnum<string, DataVendorIdentifier>>(
+                "vendorIdentifier"
+            );
         }
         init { this._rawData.Set("vendorIdentifier", value); }
     }
@@ -134,14 +132,12 @@ public sealed record class IntegrationUnlinkResponseData : JsonModel
     /// Price billing sync revision data containing billing ID, link URL, and price
     /// group package billing ID
     /// </summary>
-    public IntegrationUnlinkResponseDataSyncData? SyncData
+    public SyncData? SyncData
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<IntegrationUnlinkResponseDataSyncData>(
-                "syncData"
-            );
+            return this._rawData.GetNullableClass<SyncData>("syncData");
         }
         init { this._rawData.Set("syncData", value); }
     }
@@ -155,51 +151,46 @@ public sealed record class IntegrationUnlinkResponseData : JsonModel
         this.SyncData?.Validate();
     }
 
-    public IntegrationUnlinkResponseData() { }
+    public Data() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public IntegrationUnlinkResponseData(
-        IntegrationUnlinkResponseData integrationUnlinkResponseData
-    )
-        : base(integrationUnlinkResponseData) { }
+    public Data(Data data)
+        : base(data) { }
 #pragma warning restore CS8618
 
-    public IntegrationUnlinkResponseData(IReadOnlyDictionary<string, JsonElement> rawData)
+    public Data(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    IntegrationUnlinkResponseData(FrozenDictionary<string, JsonElement> rawData)
+    Data(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IntegrationUnlinkResponseDataFromRaw.FromRawUnchecked"/>
-    public static IntegrationUnlinkResponseData FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
+    /// <inheritdoc cref="DataFromRaw.FromRawUnchecked"/>
+    public static Data FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class IntegrationUnlinkResponseDataFromRaw : IFromRawJson<IntegrationUnlinkResponseData>
+class DataFromRaw : IFromRawJson<Data>
 {
     /// <inheritdoc/>
-    public IntegrationUnlinkResponseData FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => IntegrationUnlinkResponseData.FromRawUnchecked(rawData);
+    public Data FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Data.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// The vendor identifier of integration
 /// </summary>
-[JsonConverter(typeof(IntegrationUnlinkResponseDataVendorIdentifierConverter))]
-public enum IntegrationUnlinkResponseDataVendorIdentifier
+[JsonConverter(typeof(DataVendorIdentifierConverter))]
+public enum DataVendorIdentifier
 {
     Auth0,
     Zuora,
@@ -213,10 +204,9 @@ public enum IntegrationUnlinkResponseDataVendorIdentifier
     AppStore,
 }
 
-sealed class IntegrationUnlinkResponseDataVendorIdentifierConverter
-    : JsonConverter<IntegrationUnlinkResponseDataVendorIdentifier>
+sealed class DataVendorIdentifierConverter : JsonConverter<DataVendorIdentifier>
 {
-    public override IntegrationUnlinkResponseDataVendorIdentifier Read(
+    public override DataVendorIdentifier Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -224,23 +214,23 @@ sealed class IntegrationUnlinkResponseDataVendorIdentifierConverter
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "AUTH0" => IntegrationUnlinkResponseDataVendorIdentifier.Auth0,
-            "ZUORA" => IntegrationUnlinkResponseDataVendorIdentifier.Zuora,
-            "STRIPE" => IntegrationUnlinkResponseDataVendorIdentifier.Stripe,
-            "HUBSPOT" => IntegrationUnlinkResponseDataVendorIdentifier.Hubspot,
-            "AWS_MARKETPLACE" => IntegrationUnlinkResponseDataVendorIdentifier.AwsMarketplace,
-            "SNOWFLAKE" => IntegrationUnlinkResponseDataVendorIdentifier.Snowflake,
-            "SALESFORCE" => IntegrationUnlinkResponseDataVendorIdentifier.Salesforce,
-            "BIG_QUERY" => IntegrationUnlinkResponseDataVendorIdentifier.BigQuery,
-            "OPEN_FGA" => IntegrationUnlinkResponseDataVendorIdentifier.OpenFga,
-            "APP_STORE" => IntegrationUnlinkResponseDataVendorIdentifier.AppStore,
-            _ => (IntegrationUnlinkResponseDataVendorIdentifier)(-1),
+            "AUTH0" => DataVendorIdentifier.Auth0,
+            "ZUORA" => DataVendorIdentifier.Zuora,
+            "STRIPE" => DataVendorIdentifier.Stripe,
+            "HUBSPOT" => DataVendorIdentifier.Hubspot,
+            "AWS_MARKETPLACE" => DataVendorIdentifier.AwsMarketplace,
+            "SNOWFLAKE" => DataVendorIdentifier.Snowflake,
+            "SALESFORCE" => DataVendorIdentifier.Salesforce,
+            "BIG_QUERY" => DataVendorIdentifier.BigQuery,
+            "OPEN_FGA" => DataVendorIdentifier.OpenFga,
+            "APP_STORE" => DataVendorIdentifier.AppStore,
+            _ => (DataVendorIdentifier)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        IntegrationUnlinkResponseDataVendorIdentifier value,
+        DataVendorIdentifier value,
         JsonSerializerOptions options
     )
     {
@@ -248,16 +238,16 @@ sealed class IntegrationUnlinkResponseDataVendorIdentifierConverter
             writer,
             value switch
             {
-                IntegrationUnlinkResponseDataVendorIdentifier.Auth0 => "AUTH0",
-                IntegrationUnlinkResponseDataVendorIdentifier.Zuora => "ZUORA",
-                IntegrationUnlinkResponseDataVendorIdentifier.Stripe => "STRIPE",
-                IntegrationUnlinkResponseDataVendorIdentifier.Hubspot => "HUBSPOT",
-                IntegrationUnlinkResponseDataVendorIdentifier.AwsMarketplace => "AWS_MARKETPLACE",
-                IntegrationUnlinkResponseDataVendorIdentifier.Snowflake => "SNOWFLAKE",
-                IntegrationUnlinkResponseDataVendorIdentifier.Salesforce => "SALESFORCE",
-                IntegrationUnlinkResponseDataVendorIdentifier.BigQuery => "BIG_QUERY",
-                IntegrationUnlinkResponseDataVendorIdentifier.OpenFga => "OPEN_FGA",
-                IntegrationUnlinkResponseDataVendorIdentifier.AppStore => "APP_STORE",
+                DataVendorIdentifier.Auth0 => "AUTH0",
+                DataVendorIdentifier.Zuora => "ZUORA",
+                DataVendorIdentifier.Stripe => "STRIPE",
+                DataVendorIdentifier.Hubspot => "HUBSPOT",
+                DataVendorIdentifier.AwsMarketplace => "AWS_MARKETPLACE",
+                DataVendorIdentifier.Snowflake => "SNOWFLAKE",
+                DataVendorIdentifier.Salesforce => "SALESFORCE",
+                DataVendorIdentifier.BigQuery => "BIG_QUERY",
+                DataVendorIdentifier.OpenFga => "OPEN_FGA",
+                DataVendorIdentifier.AppStore => "APP_STORE",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -271,8 +261,8 @@ sealed class IntegrationUnlinkResponseDataVendorIdentifierConverter
 /// Price billing sync revision data containing billing ID, link URL, and price group
 /// package billing ID
 /// </summary>
-[JsonConverter(typeof(IntegrationUnlinkResponseDataSyncDataConverter))]
-public record class IntegrationUnlinkResponseDataSyncData : ModelBase
+[JsonConverter(typeof(SyncDataConverter))]
+public record class SyncData : ModelBase
 {
     public object? Value { get; } = null;
 
@@ -313,106 +303,93 @@ public record class IntegrationUnlinkResponseDataSyncData : ModelBase
         }
     }
 
-    public IntegrationUnlinkResponseDataSyncData(
-        IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData value,
-        JsonElement? element = null
-    )
+    public SyncData(SyncRevisionPriceBillingData value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
     }
 
-    public IntegrationUnlinkResponseDataSyncData(
-        IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData value,
-        JsonElement? element = null
-    )
+    public SyncData(SyncRevisionBillingData value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
     }
 
-    public IntegrationUnlinkResponseDataSyncData(
-        IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData value,
-        JsonElement? element = null
-    )
+    public SyncData(SyncRevisionMarketplaceData value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
     }
 
-    public IntegrationUnlinkResponseDataSyncData(JsonElement element)
+    public SyncData(JsonElement element)
     {
         this._element = element;
     }
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData"/>.
+    /// type <see cref="SyncRevisionPriceBillingData"/>.
     ///
     /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
     /// if (instance.TryPickRevisionPriceBilling(out var value)) {
-    ///     // `value` is of type `IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData`
+    ///     // `value` is of type `SyncRevisionPriceBillingData`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
     /// </example>
     /// </summary>
     public bool TryPickRevisionPriceBilling(
-        [NotNullWhen(true)]
-            out IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData? value
+        [NotNullWhen(true)] out SyncRevisionPriceBillingData? value
     )
     {
-        value = this.Value as IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData;
+        value = this.Value as SyncRevisionPriceBillingData;
         return value != null;
     }
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData"/>.
+    /// type <see cref="SyncRevisionBillingData"/>.
     ///
     /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
     /// if (instance.TryPickRevisionBilling(out var value)) {
-    ///     // `value` is of type `IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData`
+    ///     // `value` is of type `SyncRevisionBillingData`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
     /// </example>
     /// </summary>
-    public bool TryPickRevisionBilling(
-        [NotNullWhen(true)] out IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData? value
-    )
+    public bool TryPickRevisionBilling([NotNullWhen(true)] out SyncRevisionBillingData? value)
     {
-        value = this.Value as IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData;
+        value = this.Value as SyncRevisionBillingData;
         return value != null;
     }
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData"/>.
+    /// type <see cref="SyncRevisionMarketplaceData"/>.
     ///
     /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
     /// if (instance.TryPickRevisionMarketplace(out var value)) {
-    ///     // `value` is of type `IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData`
+    ///     // `value` is of type `SyncRevisionMarketplaceData`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
     /// </example>
     /// </summary>
     public bool TryPickRevisionMarketplace(
-        [NotNullWhen(true)]
-            out IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData? value
+        [NotNullWhen(true)] out SyncRevisionMarketplaceData? value
     )
     {
-        value = this.Value as IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData;
+        value = this.Value as SyncRevisionMarketplaceData;
         return value != null;
     }
 
@@ -430,34 +407,32 @@ public record class IntegrationUnlinkResponseDataSyncData : ModelBase
     /// <example>
     /// <code>
     /// instance.Switch(
-    ///     (IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData value) =&gt; {...},
-    ///     (IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData value) =&gt; {...},
-    ///     (IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData value) =&gt; {...}
+    ///     (SyncRevisionPriceBillingData value) =&gt; {...},
+    ///     (SyncRevisionBillingData value) =&gt; {...},
+    ///     (SyncRevisionMarketplaceData value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
     /// </summary>
     public void Switch(
-        System::Action<IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData> revisionPriceBilling,
-        System::Action<IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData> revisionBilling,
-        System::Action<IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData> revisionMarketplace
+        System::Action<SyncRevisionPriceBillingData> revisionPriceBilling,
+        System::Action<SyncRevisionBillingData> revisionBilling,
+        System::Action<SyncRevisionMarketplaceData> revisionMarketplace
     )
     {
         switch (this.Value)
         {
-            case IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData value:
+            case SyncRevisionPriceBillingData value:
                 revisionPriceBilling(value);
                 break;
-            case IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData value:
+            case SyncRevisionBillingData value:
                 revisionBilling(value);
                 break;
-            case IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData value:
+            case SyncRevisionMarketplaceData value:
                 revisionMarketplace(value);
                 break;
             default:
-                throw new StiggInvalidDataException(
-                    "Data did not match any variant of IntegrationUnlinkResponseDataSyncData"
-                );
+                throw new StiggInvalidDataException("Data did not match any variant of SyncData");
         }
     }
 
@@ -476,54 +451,33 @@ public record class IntegrationUnlinkResponseDataSyncData : ModelBase
     /// <example>
     /// <code>
     /// var result = instance.Match(
-    ///     (IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData value) =&gt; {...},
-    ///     (IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData value) =&gt; {...},
-    ///     (IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData value) =&gt; {...}
+    ///     (SyncRevisionPriceBillingData value) =&gt; {...},
+    ///     (SyncRevisionBillingData value) =&gt; {...},
+    ///     (SyncRevisionMarketplaceData value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
     /// </summary>
     public T Match<T>(
-        System::Func<
-            IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData,
-            T
-        > revisionPriceBilling,
-        System::Func<
-            IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData,
-            T
-        > revisionBilling,
-        System::Func<
-            IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData,
-            T
-        > revisionMarketplace
+        System::Func<SyncRevisionPriceBillingData, T> revisionPriceBilling,
+        System::Func<SyncRevisionBillingData, T> revisionBilling,
+        System::Func<SyncRevisionMarketplaceData, T> revisionMarketplace
     )
     {
         return this.Value switch
         {
-            IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData value =>
-                revisionPriceBilling(value),
-            IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData value => revisionBilling(
-                value
-            ),
-            IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData value =>
-                revisionMarketplace(value),
-            _ => throw new StiggInvalidDataException(
-                "Data did not match any variant of IntegrationUnlinkResponseDataSyncData"
-            ),
+            SyncRevisionPriceBillingData value => revisionPriceBilling(value),
+            SyncRevisionBillingData value => revisionBilling(value),
+            SyncRevisionMarketplaceData value => revisionMarketplace(value),
+            _ => throw new StiggInvalidDataException("Data did not match any variant of SyncData"),
         };
     }
 
-    public static implicit operator IntegrationUnlinkResponseDataSyncData(
-        IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData value
-    ) => new(value);
+    public static implicit operator SyncData(SyncRevisionPriceBillingData value) => new(value);
 
-    public static implicit operator IntegrationUnlinkResponseDataSyncData(
-        IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData value
-    ) => new(value);
+    public static implicit operator SyncData(SyncRevisionBillingData value) => new(value);
 
-    public static implicit operator IntegrationUnlinkResponseDataSyncData(
-        IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData value
-    ) => new(value);
+    public static implicit operator SyncData(SyncRevisionMarketplaceData value) => new(value);
 
     /// <summary>
     /// Validates that the instance was constructed with a known variant and that this variant is valid
@@ -539,9 +493,7 @@ public record class IntegrationUnlinkResponseDataSyncData : ModelBase
     {
         if (this.Value == null)
         {
-            throw new StiggInvalidDataException(
-                "Data did not match any variant of IntegrationUnlinkResponseDataSyncData"
-            );
+            throw new StiggInvalidDataException("Data did not match any variant of SyncData");
         }
         this.Switch(
             (revisionPriceBilling) => revisionPriceBilling.Validate(),
@@ -550,7 +502,7 @@ public record class IntegrationUnlinkResponseDataSyncData : ModelBase
         );
     }
 
-    public virtual bool Equals(IntegrationUnlinkResponseDataSyncData? other) =>
+    public virtual bool Equals(SyncData? other) =>
         other != null
         && this.VariantIndex() == other.VariantIndex()
         && JsonElement.DeepEquals(this.Json, other.Json);
@@ -570,18 +522,17 @@ public record class IntegrationUnlinkResponseDataSyncData : ModelBase
     {
         return this.Value switch
         {
-            IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData _ => 0,
-            IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData _ => 1,
-            IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData _ => 2,
+            SyncRevisionPriceBillingData _ => 0,
+            SyncRevisionBillingData _ => 1,
+            SyncRevisionMarketplaceData _ => 2,
             _ => -1,
         };
     }
 }
 
-sealed class IntegrationUnlinkResponseDataSyncDataConverter
-    : JsonConverter<IntegrationUnlinkResponseDataSyncData?>
+sealed class SyncDataConverter : JsonConverter<SyncData?>
 {
-    public override IntegrationUnlinkResponseDataSyncData? Read(
+    public override SyncData? Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -590,11 +541,10 @@ sealed class IntegrationUnlinkResponseDataSyncDataConverter
         var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
-            var deserialized =
-                JsonSerializer.Deserialize<IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData>(
-                    element,
-                    options
-                );
+            var deserialized = JsonSerializer.Deserialize<SyncRevisionPriceBillingData>(
+                element,
+                options
+            );
             if (deserialized != null)
             {
                 deserialized.Validate();
@@ -608,11 +558,10 @@ sealed class IntegrationUnlinkResponseDataSyncDataConverter
 
         try
         {
-            var deserialized =
-                JsonSerializer.Deserialize<IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData>(
-                    element,
-                    options
-                );
+            var deserialized = JsonSerializer.Deserialize<SyncRevisionBillingData>(
+                element,
+                options
+            );
             if (deserialized != null)
             {
                 deserialized.Validate();
@@ -626,11 +575,10 @@ sealed class IntegrationUnlinkResponseDataSyncDataConverter
 
         try
         {
-            var deserialized =
-                JsonSerializer.Deserialize<IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData>(
-                    element,
-                    options
-                );
+            var deserialized = JsonSerializer.Deserialize<SyncRevisionMarketplaceData>(
+                element,
+                options
+            );
             if (deserialized != null)
             {
                 deserialized.Validate();
@@ -647,7 +595,7 @@ sealed class IntegrationUnlinkResponseDataSyncDataConverter
 
     public override void Write(
         Utf8JsonWriter writer,
-        IntegrationUnlinkResponseDataSyncData? value,
+        SyncData? value,
         JsonSerializerOptions options
     )
     {
@@ -660,13 +608,9 @@ sealed class IntegrationUnlinkResponseDataSyncDataConverter
 /// package billing ID
 /// </summary>
 [JsonConverter(
-    typeof(JsonModelConverter<
-        IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData,
-        IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingDataFromRaw
-    >)
+    typeof(JsonModelConverter<SyncRevisionPriceBillingData, SyncRevisionPriceBillingDataFromRaw>)
 )]
-public sealed record class IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData
-    : JsonModel
+public sealed record class SyncRevisionPriceBillingData : JsonModel
 {
     /// <summary>
     /// Billing integration id
@@ -715,35 +659,29 @@ public sealed record class IntegrationUnlinkResponseDataSyncDataSyncRevisionPric
         _ = this.PriceGroupPackageBillingID;
     }
 
-    public IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData() { }
+    public SyncRevisionPriceBillingData() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData(
-        IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData integrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData
-    )
-        : base(integrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData) { }
+    public SyncRevisionPriceBillingData(SyncRevisionPriceBillingData syncRevisionPriceBillingData)
+        : base(syncRevisionPriceBillingData) { }
 #pragma warning restore CS8618
 
-    public IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
+    public SyncRevisionPriceBillingData(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData(
-        FrozenDictionary<string, JsonElement> rawData
-    )
+    SyncRevisionPriceBillingData(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingDataFromRaw.FromRawUnchecked"/>
-    public static IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData FromRawUnchecked(
+    /// <inheritdoc cref="SyncRevisionPriceBillingDataFromRaw.FromRawUnchecked"/>
+    public static SyncRevisionPriceBillingData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -751,26 +689,19 @@ public sealed record class IntegrationUnlinkResponseDataSyncDataSyncRevisionPric
     }
 }
 
-class IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingDataFromRaw
-    : IFromRawJson<IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData>
+class SyncRevisionPriceBillingDataFromRaw : IFromRawJson<SyncRevisionPriceBillingData>
 {
     /// <inheritdoc/>
-    public IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData FromRawUnchecked(
+    public SyncRevisionPriceBillingData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) =>
-        IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData.FromRawUnchecked(rawData);
+    ) => SyncRevisionPriceBillingData.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// Billing sync revision data containing billing ID and link URL
 /// </summary>
-[JsonConverter(
-    typeof(JsonModelConverter<
-        IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData,
-        IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingDataFromRaw
-    >)
-)]
-public sealed record class IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData : JsonModel
+[JsonConverter(typeof(JsonModelConverter<SyncRevisionBillingData, SyncRevisionBillingDataFromRaw>))]
+public sealed record class SyncRevisionBillingData : JsonModel
 {
     /// <summary>
     /// Billing integration id
@@ -805,35 +736,29 @@ public sealed record class IntegrationUnlinkResponseDataSyncDataSyncRevisionBill
         _ = this.BillingLinkUrl;
     }
 
-    public IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData() { }
+    public SyncRevisionBillingData() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData(
-        IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData integrationUnlinkResponseDataSyncDataSyncRevisionBillingData
-    )
-        : base(integrationUnlinkResponseDataSyncDataSyncRevisionBillingData) { }
+    public SyncRevisionBillingData(SyncRevisionBillingData syncRevisionBillingData)
+        : base(syncRevisionBillingData) { }
 #pragma warning restore CS8618
 
-    public IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
+    public SyncRevisionBillingData(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData(
-        FrozenDictionary<string, JsonElement> rawData
-    )
+    SyncRevisionBillingData(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingDataFromRaw.FromRawUnchecked"/>
-    public static IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData FromRawUnchecked(
+    /// <inheritdoc cref="SyncRevisionBillingDataFromRaw.FromRawUnchecked"/>
+    public static SyncRevisionBillingData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -841,26 +766,21 @@ public sealed record class IntegrationUnlinkResponseDataSyncDataSyncRevisionBill
     }
 }
 
-class IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingDataFromRaw
-    : IFromRawJson<IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData>
+class SyncRevisionBillingDataFromRaw : IFromRawJson<SyncRevisionBillingData>
 {
     /// <inheritdoc/>
-    public IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData FromRawUnchecked(
+    public SyncRevisionBillingData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData.FromRawUnchecked(rawData);
+    ) => SyncRevisionBillingData.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// Marketplace sync revision data containing dimensions
 /// </summary>
 [JsonConverter(
-    typeof(JsonModelConverter<
-        IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData,
-        IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceDataFromRaw
-    >)
+    typeof(JsonModelConverter<SyncRevisionMarketplaceData, SyncRevisionMarketplaceDataFromRaw>)
 )]
-public sealed record class IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData
-    : JsonModel
+public sealed record class SyncRevisionMarketplaceData : JsonModel
 {
     /// <summary>
     /// Dimensions of the marketplace sync revision
@@ -881,35 +801,29 @@ public sealed record class IntegrationUnlinkResponseDataSyncDataSyncRevisionMark
         _ = this.Dimensions;
     }
 
-    public IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData() { }
+    public SyncRevisionMarketplaceData() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData(
-        IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData integrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData
-    )
-        : base(integrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData) { }
+    public SyncRevisionMarketplaceData(SyncRevisionMarketplaceData syncRevisionMarketplaceData)
+        : base(syncRevisionMarketplaceData) { }
 #pragma warning restore CS8618
 
-    public IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
+    public SyncRevisionMarketplaceData(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData(
-        FrozenDictionary<string, JsonElement> rawData
-    )
+    SyncRevisionMarketplaceData(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceDataFromRaw.FromRawUnchecked"/>
-    public static IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData FromRawUnchecked(
+    /// <inheritdoc cref="SyncRevisionMarketplaceDataFromRaw.FromRawUnchecked"/>
+    public static SyncRevisionMarketplaceData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -917,18 +831,17 @@ public sealed record class IntegrationUnlinkResponseDataSyncDataSyncRevisionMark
     }
 
     [SetsRequiredMembers]
-    public IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData(string dimensions)
+    public SyncRevisionMarketplaceData(string dimensions)
         : this()
     {
         this.Dimensions = dimensions;
     }
 }
 
-class IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceDataFromRaw
-    : IFromRawJson<IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData>
+class SyncRevisionMarketplaceDataFromRaw : IFromRawJson<SyncRevisionMarketplaceData>
 {
     /// <inheritdoc/>
-    public IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData FromRawUnchecked(
+    public SyncRevisionMarketplaceData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData.FromRawUnchecked(rawData);
+    ) => SyncRevisionMarketplaceData.FromRawUnchecked(rawData);
 }

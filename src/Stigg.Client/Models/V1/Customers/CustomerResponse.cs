@@ -19,12 +19,12 @@ public sealed record class CustomerResponse : JsonModel
     /// <summary>
     /// A customer can be either an organization or an individual
     /// </summary>
-    public required Data Data
+    public required CustomerResponseData Data
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<Data>("data");
+            return this._rawData.GetNotNullClass<CustomerResponseData>("data");
         }
         init { this._rawData.Set("data", value); }
     }
@@ -65,7 +65,7 @@ public sealed record class CustomerResponse : JsonModel
     }
 
     [SetsRequiredMembers]
-    public CustomerResponse(Data data)
+    public CustomerResponse(CustomerResponseData data)
         : this()
     {
         this.Data = data;
@@ -82,8 +82,8 @@ class CustomerResponseFromRaw : IFromRawJson<CustomerResponse>
 /// <summary>
 /// A customer can be either an organization or an individual
 /// </summary>
-[JsonConverter(typeof(JsonModelConverter<Data, DataFromRaw>))]
-public sealed record class Data : JsonModel
+[JsonConverter(typeof(JsonModelConverter<CustomerResponseData, CustomerResponseDataFromRaw>))]
+public sealed record class CustomerResponseData : JsonModel
 {
     /// <summary>
     /// Customer slug
@@ -140,14 +140,14 @@ public sealed record class Data : JsonModel
     /// <summary>
     /// The billing currency of the customer
     /// </summary>
-    public ApiEnum<string, DataBillingCurrency>? BillingCurrency
+    public ApiEnum<string, CustomerResponseDataBillingCurrency>? BillingCurrency
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ApiEnum<string, DataBillingCurrency>>(
-                "billingCurrency"
-            );
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, CustomerResponseDataBillingCurrency>
+            >("billingCurrency");
         }
         init { this._rawData.Set("billingCurrency", value); }
     }
@@ -168,12 +168,14 @@ public sealed record class Data : JsonModel
     /// <summary>
     /// Customer level coupon
     /// </summary>
-    public ApiEnum<string, DataCouponID>? CouponID
+    public ApiEnum<string, CustomerResponseDataCouponID>? CouponID
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ApiEnum<string, DataCouponID>>("couponId");
+            return this._rawData.GetNullableClass<ApiEnum<string, CustomerResponseDataCouponID>>(
+                "couponId"
+            );
         }
         init { this._rawData.Set("couponId", value); }
     }
@@ -181,12 +183,14 @@ public sealed record class Data : JsonModel
     /// <summary>
     /// The default payment method details
     /// </summary>
-    public DataDefaultPaymentMethod? DefaultPaymentMethod
+    public CustomerResponseDataDefaultPaymentMethod? DefaultPaymentMethod
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<DataDefaultPaymentMethod>("defaultPaymentMethod");
+            return this._rawData.GetNullableClass<CustomerResponseDataDefaultPaymentMethod>(
+                "defaultPaymentMethod"
+            );
         }
         init { this._rawData.Set("defaultPaymentMethod", value); }
     }
@@ -207,12 +211,14 @@ public sealed record class Data : JsonModel
     /// <summary>
     /// List of integrations
     /// </summary>
-    public IReadOnlyList<DataIntegration>? Integrations
+    public IReadOnlyList<CustomerResponseDataIntegration>? Integrations
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<ImmutableArray<DataIntegration>>("integrations");
+            return this._rawData.GetNullableStruct<ImmutableArray<CustomerResponseDataIntegration>>(
+                "integrations"
+            );
         }
         init
         {
@@ -221,7 +227,7 @@ public sealed record class Data : JsonModel
                 return;
             }
 
-            this._rawData.Set<ImmutableArray<DataIntegration>?>(
+            this._rawData.Set<ImmutableArray<CustomerResponseDataIntegration>?>(
                 "integrations",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
@@ -281,12 +287,12 @@ public sealed record class Data : JsonModel
     /// <summary>
     /// Vendor-specific billing passthrough fields.
     /// </summary>
-    public DataPassthrough? Passthrough
+    public CustomerResponseDataPassthrough? Passthrough
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<DataPassthrough>("passthrough");
+            return this._rawData.GetNullableClass<CustomerResponseDataPassthrough>("passthrough");
         }
         init
         {
@@ -335,46 +341,49 @@ public sealed record class Data : JsonModel
         _ = this.Timezone;
     }
 
-    public Data() { }
+    public CustomerResponseData() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public Data(Data data)
-        : base(data) { }
+    public CustomerResponseData(CustomerResponseData customerResponseData)
+        : base(customerResponseData) { }
 #pragma warning restore CS8618
 
-    public Data(IReadOnlyDictionary<string, JsonElement> rawData)
+    public CustomerResponseData(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Data(FrozenDictionary<string, JsonElement> rawData)
+    CustomerResponseData(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="DataFromRaw.FromRawUnchecked"/>
-    public static Data FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="CustomerResponseDataFromRaw.FromRawUnchecked"/>
+    public static CustomerResponseData FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class DataFromRaw : IFromRawJson<Data>
+class CustomerResponseDataFromRaw : IFromRawJson<CustomerResponseData>
 {
     /// <inheritdoc/>
-    public Data FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        Data.FromRawUnchecked(rawData);
+    public CustomerResponseData FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CustomerResponseData.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// The billing currency of the customer
 /// </summary>
-[JsonConverter(typeof(DataBillingCurrencyConverter))]
-public enum DataBillingCurrency
+[JsonConverter(typeof(CustomerResponseDataBillingCurrencyConverter))]
+public enum CustomerResponseDataBillingCurrency
 {
     Usd,
     Aed,
@@ -494,9 +503,10 @@ public enum DataBillingCurrency
     Xpf,
 }
 
-sealed class DataBillingCurrencyConverter : JsonConverter<DataBillingCurrency>
+sealed class CustomerResponseDataBillingCurrencyConverter
+    : JsonConverter<CustomerResponseDataBillingCurrency>
 {
-    public override DataBillingCurrency Read(
+    public override CustomerResponseDataBillingCurrency Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -504,129 +514,129 @@ sealed class DataBillingCurrencyConverter : JsonConverter<DataBillingCurrency>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "usd" => DataBillingCurrency.Usd,
-            "aed" => DataBillingCurrency.Aed,
-            "all" => DataBillingCurrency.All,
-            "amd" => DataBillingCurrency.Amd,
-            "ang" => DataBillingCurrency.Ang,
-            "aud" => DataBillingCurrency.Aud,
-            "awg" => DataBillingCurrency.Awg,
-            "azn" => DataBillingCurrency.Azn,
-            "bam" => DataBillingCurrency.Bam,
-            "bbd" => DataBillingCurrency.Bbd,
-            "bdt" => DataBillingCurrency.Bdt,
-            "bgn" => DataBillingCurrency.Bgn,
-            "bif" => DataBillingCurrency.Bif,
-            "bmd" => DataBillingCurrency.Bmd,
-            "bnd" => DataBillingCurrency.Bnd,
-            "bsd" => DataBillingCurrency.Bsd,
-            "bwp" => DataBillingCurrency.Bwp,
-            "byn" => DataBillingCurrency.Byn,
-            "bzd" => DataBillingCurrency.Bzd,
-            "brl" => DataBillingCurrency.Brl,
-            "cad" => DataBillingCurrency.Cad,
-            "cdf" => DataBillingCurrency.Cdf,
-            "chf" => DataBillingCurrency.Chf,
-            "cny" => DataBillingCurrency.Cny,
-            "czk" => DataBillingCurrency.Czk,
-            "dkk" => DataBillingCurrency.Dkk,
-            "dop" => DataBillingCurrency.Dop,
-            "dzd" => DataBillingCurrency.Dzd,
-            "egp" => DataBillingCurrency.Egp,
-            "etb" => DataBillingCurrency.Etb,
-            "eur" => DataBillingCurrency.Eur,
-            "fjd" => DataBillingCurrency.Fjd,
-            "gbp" => DataBillingCurrency.Gbp,
-            "gel" => DataBillingCurrency.Gel,
-            "gip" => DataBillingCurrency.Gip,
-            "gmd" => DataBillingCurrency.Gmd,
-            "gyd" => DataBillingCurrency.Gyd,
-            "hkd" => DataBillingCurrency.Hkd,
-            "hrk" => DataBillingCurrency.Hrk,
-            "htg" => DataBillingCurrency.Htg,
-            "idr" => DataBillingCurrency.Idr,
-            "ils" => DataBillingCurrency.Ils,
-            "inr" => DataBillingCurrency.Inr,
-            "isk" => DataBillingCurrency.Isk,
-            "jmd" => DataBillingCurrency.Jmd,
-            "jpy" => DataBillingCurrency.Jpy,
-            "kes" => DataBillingCurrency.Kes,
-            "kgs" => DataBillingCurrency.Kgs,
-            "khr" => DataBillingCurrency.Khr,
-            "kmf" => DataBillingCurrency.Kmf,
-            "krw" => DataBillingCurrency.Krw,
-            "kyd" => DataBillingCurrency.Kyd,
-            "kzt" => DataBillingCurrency.Kzt,
-            "lbp" => DataBillingCurrency.Lbp,
-            "lkr" => DataBillingCurrency.Lkr,
-            "lrd" => DataBillingCurrency.Lrd,
-            "lsl" => DataBillingCurrency.Lsl,
-            "mad" => DataBillingCurrency.Mad,
-            "mdl" => DataBillingCurrency.Mdl,
-            "mga" => DataBillingCurrency.Mga,
-            "mkd" => DataBillingCurrency.Mkd,
-            "mmk" => DataBillingCurrency.Mmk,
-            "mnt" => DataBillingCurrency.Mnt,
-            "mop" => DataBillingCurrency.Mop,
-            "mro" => DataBillingCurrency.Mro,
-            "mvr" => DataBillingCurrency.Mvr,
-            "mwk" => DataBillingCurrency.Mwk,
-            "mxn" => DataBillingCurrency.Mxn,
-            "myr" => DataBillingCurrency.Myr,
-            "mzn" => DataBillingCurrency.Mzn,
-            "nad" => DataBillingCurrency.Nad,
-            "ngn" => DataBillingCurrency.Ngn,
-            "nok" => DataBillingCurrency.Nok,
-            "npr" => DataBillingCurrency.Npr,
-            "nzd" => DataBillingCurrency.Nzd,
-            "pgk" => DataBillingCurrency.Pgk,
-            "php" => DataBillingCurrency.Php,
-            "pkr" => DataBillingCurrency.Pkr,
-            "pln" => DataBillingCurrency.Pln,
-            "qar" => DataBillingCurrency.Qar,
-            "ron" => DataBillingCurrency.Ron,
-            "rsd" => DataBillingCurrency.Rsd,
-            "rub" => DataBillingCurrency.Rub,
-            "rwf" => DataBillingCurrency.Rwf,
-            "sar" => DataBillingCurrency.Sar,
-            "sbd" => DataBillingCurrency.Sbd,
-            "scr" => DataBillingCurrency.Scr,
-            "sek" => DataBillingCurrency.Sek,
-            "sgd" => DataBillingCurrency.Sgd,
-            "sle" => DataBillingCurrency.Sle,
-            "sll" => DataBillingCurrency.Sll,
-            "sos" => DataBillingCurrency.Sos,
-            "szl" => DataBillingCurrency.Szl,
-            "thb" => DataBillingCurrency.Thb,
-            "tjs" => DataBillingCurrency.Tjs,
-            "top" => DataBillingCurrency.Top,
-            "try" => DataBillingCurrency.Try,
-            "ttd" => DataBillingCurrency.Ttd,
-            "tzs" => DataBillingCurrency.Tzs,
-            "uah" => DataBillingCurrency.Uah,
-            "uzs" => DataBillingCurrency.Uzs,
-            "vnd" => DataBillingCurrency.Vnd,
-            "vuv" => DataBillingCurrency.Vuv,
-            "wst" => DataBillingCurrency.Wst,
-            "xaf" => DataBillingCurrency.Xaf,
-            "xcd" => DataBillingCurrency.Xcd,
-            "yer" => DataBillingCurrency.Yer,
-            "zar" => DataBillingCurrency.Zar,
-            "zmw" => DataBillingCurrency.Zmw,
-            "clp" => DataBillingCurrency.Clp,
-            "djf" => DataBillingCurrency.Djf,
-            "gnf" => DataBillingCurrency.Gnf,
-            "ugx" => DataBillingCurrency.Ugx,
-            "pyg" => DataBillingCurrency.Pyg,
-            "xof" => DataBillingCurrency.Xof,
-            "xpf" => DataBillingCurrency.Xpf,
-            _ => (DataBillingCurrency)(-1),
+            "usd" => CustomerResponseDataBillingCurrency.Usd,
+            "aed" => CustomerResponseDataBillingCurrency.Aed,
+            "all" => CustomerResponseDataBillingCurrency.All,
+            "amd" => CustomerResponseDataBillingCurrency.Amd,
+            "ang" => CustomerResponseDataBillingCurrency.Ang,
+            "aud" => CustomerResponseDataBillingCurrency.Aud,
+            "awg" => CustomerResponseDataBillingCurrency.Awg,
+            "azn" => CustomerResponseDataBillingCurrency.Azn,
+            "bam" => CustomerResponseDataBillingCurrency.Bam,
+            "bbd" => CustomerResponseDataBillingCurrency.Bbd,
+            "bdt" => CustomerResponseDataBillingCurrency.Bdt,
+            "bgn" => CustomerResponseDataBillingCurrency.Bgn,
+            "bif" => CustomerResponseDataBillingCurrency.Bif,
+            "bmd" => CustomerResponseDataBillingCurrency.Bmd,
+            "bnd" => CustomerResponseDataBillingCurrency.Bnd,
+            "bsd" => CustomerResponseDataBillingCurrency.Bsd,
+            "bwp" => CustomerResponseDataBillingCurrency.Bwp,
+            "byn" => CustomerResponseDataBillingCurrency.Byn,
+            "bzd" => CustomerResponseDataBillingCurrency.Bzd,
+            "brl" => CustomerResponseDataBillingCurrency.Brl,
+            "cad" => CustomerResponseDataBillingCurrency.Cad,
+            "cdf" => CustomerResponseDataBillingCurrency.Cdf,
+            "chf" => CustomerResponseDataBillingCurrency.Chf,
+            "cny" => CustomerResponseDataBillingCurrency.Cny,
+            "czk" => CustomerResponseDataBillingCurrency.Czk,
+            "dkk" => CustomerResponseDataBillingCurrency.Dkk,
+            "dop" => CustomerResponseDataBillingCurrency.Dop,
+            "dzd" => CustomerResponseDataBillingCurrency.Dzd,
+            "egp" => CustomerResponseDataBillingCurrency.Egp,
+            "etb" => CustomerResponseDataBillingCurrency.Etb,
+            "eur" => CustomerResponseDataBillingCurrency.Eur,
+            "fjd" => CustomerResponseDataBillingCurrency.Fjd,
+            "gbp" => CustomerResponseDataBillingCurrency.Gbp,
+            "gel" => CustomerResponseDataBillingCurrency.Gel,
+            "gip" => CustomerResponseDataBillingCurrency.Gip,
+            "gmd" => CustomerResponseDataBillingCurrency.Gmd,
+            "gyd" => CustomerResponseDataBillingCurrency.Gyd,
+            "hkd" => CustomerResponseDataBillingCurrency.Hkd,
+            "hrk" => CustomerResponseDataBillingCurrency.Hrk,
+            "htg" => CustomerResponseDataBillingCurrency.Htg,
+            "idr" => CustomerResponseDataBillingCurrency.Idr,
+            "ils" => CustomerResponseDataBillingCurrency.Ils,
+            "inr" => CustomerResponseDataBillingCurrency.Inr,
+            "isk" => CustomerResponseDataBillingCurrency.Isk,
+            "jmd" => CustomerResponseDataBillingCurrency.Jmd,
+            "jpy" => CustomerResponseDataBillingCurrency.Jpy,
+            "kes" => CustomerResponseDataBillingCurrency.Kes,
+            "kgs" => CustomerResponseDataBillingCurrency.Kgs,
+            "khr" => CustomerResponseDataBillingCurrency.Khr,
+            "kmf" => CustomerResponseDataBillingCurrency.Kmf,
+            "krw" => CustomerResponseDataBillingCurrency.Krw,
+            "kyd" => CustomerResponseDataBillingCurrency.Kyd,
+            "kzt" => CustomerResponseDataBillingCurrency.Kzt,
+            "lbp" => CustomerResponseDataBillingCurrency.Lbp,
+            "lkr" => CustomerResponseDataBillingCurrency.Lkr,
+            "lrd" => CustomerResponseDataBillingCurrency.Lrd,
+            "lsl" => CustomerResponseDataBillingCurrency.Lsl,
+            "mad" => CustomerResponseDataBillingCurrency.Mad,
+            "mdl" => CustomerResponseDataBillingCurrency.Mdl,
+            "mga" => CustomerResponseDataBillingCurrency.Mga,
+            "mkd" => CustomerResponseDataBillingCurrency.Mkd,
+            "mmk" => CustomerResponseDataBillingCurrency.Mmk,
+            "mnt" => CustomerResponseDataBillingCurrency.Mnt,
+            "mop" => CustomerResponseDataBillingCurrency.Mop,
+            "mro" => CustomerResponseDataBillingCurrency.Mro,
+            "mvr" => CustomerResponseDataBillingCurrency.Mvr,
+            "mwk" => CustomerResponseDataBillingCurrency.Mwk,
+            "mxn" => CustomerResponseDataBillingCurrency.Mxn,
+            "myr" => CustomerResponseDataBillingCurrency.Myr,
+            "mzn" => CustomerResponseDataBillingCurrency.Mzn,
+            "nad" => CustomerResponseDataBillingCurrency.Nad,
+            "ngn" => CustomerResponseDataBillingCurrency.Ngn,
+            "nok" => CustomerResponseDataBillingCurrency.Nok,
+            "npr" => CustomerResponseDataBillingCurrency.Npr,
+            "nzd" => CustomerResponseDataBillingCurrency.Nzd,
+            "pgk" => CustomerResponseDataBillingCurrency.Pgk,
+            "php" => CustomerResponseDataBillingCurrency.Php,
+            "pkr" => CustomerResponseDataBillingCurrency.Pkr,
+            "pln" => CustomerResponseDataBillingCurrency.Pln,
+            "qar" => CustomerResponseDataBillingCurrency.Qar,
+            "ron" => CustomerResponseDataBillingCurrency.Ron,
+            "rsd" => CustomerResponseDataBillingCurrency.Rsd,
+            "rub" => CustomerResponseDataBillingCurrency.Rub,
+            "rwf" => CustomerResponseDataBillingCurrency.Rwf,
+            "sar" => CustomerResponseDataBillingCurrency.Sar,
+            "sbd" => CustomerResponseDataBillingCurrency.Sbd,
+            "scr" => CustomerResponseDataBillingCurrency.Scr,
+            "sek" => CustomerResponseDataBillingCurrency.Sek,
+            "sgd" => CustomerResponseDataBillingCurrency.Sgd,
+            "sle" => CustomerResponseDataBillingCurrency.Sle,
+            "sll" => CustomerResponseDataBillingCurrency.Sll,
+            "sos" => CustomerResponseDataBillingCurrency.Sos,
+            "szl" => CustomerResponseDataBillingCurrency.Szl,
+            "thb" => CustomerResponseDataBillingCurrency.Thb,
+            "tjs" => CustomerResponseDataBillingCurrency.Tjs,
+            "top" => CustomerResponseDataBillingCurrency.Top,
+            "try" => CustomerResponseDataBillingCurrency.Try,
+            "ttd" => CustomerResponseDataBillingCurrency.Ttd,
+            "tzs" => CustomerResponseDataBillingCurrency.Tzs,
+            "uah" => CustomerResponseDataBillingCurrency.Uah,
+            "uzs" => CustomerResponseDataBillingCurrency.Uzs,
+            "vnd" => CustomerResponseDataBillingCurrency.Vnd,
+            "vuv" => CustomerResponseDataBillingCurrency.Vuv,
+            "wst" => CustomerResponseDataBillingCurrency.Wst,
+            "xaf" => CustomerResponseDataBillingCurrency.Xaf,
+            "xcd" => CustomerResponseDataBillingCurrency.Xcd,
+            "yer" => CustomerResponseDataBillingCurrency.Yer,
+            "zar" => CustomerResponseDataBillingCurrency.Zar,
+            "zmw" => CustomerResponseDataBillingCurrency.Zmw,
+            "clp" => CustomerResponseDataBillingCurrency.Clp,
+            "djf" => CustomerResponseDataBillingCurrency.Djf,
+            "gnf" => CustomerResponseDataBillingCurrency.Gnf,
+            "ugx" => CustomerResponseDataBillingCurrency.Ugx,
+            "pyg" => CustomerResponseDataBillingCurrency.Pyg,
+            "xof" => CustomerResponseDataBillingCurrency.Xof,
+            "xpf" => CustomerResponseDataBillingCurrency.Xpf,
+            _ => (CustomerResponseDataBillingCurrency)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        DataBillingCurrency value,
+        CustomerResponseDataBillingCurrency value,
         JsonSerializerOptions options
     )
     {
@@ -634,122 +644,122 @@ sealed class DataBillingCurrencyConverter : JsonConverter<DataBillingCurrency>
             writer,
             value switch
             {
-                DataBillingCurrency.Usd => "usd",
-                DataBillingCurrency.Aed => "aed",
-                DataBillingCurrency.All => "all",
-                DataBillingCurrency.Amd => "amd",
-                DataBillingCurrency.Ang => "ang",
-                DataBillingCurrency.Aud => "aud",
-                DataBillingCurrency.Awg => "awg",
-                DataBillingCurrency.Azn => "azn",
-                DataBillingCurrency.Bam => "bam",
-                DataBillingCurrency.Bbd => "bbd",
-                DataBillingCurrency.Bdt => "bdt",
-                DataBillingCurrency.Bgn => "bgn",
-                DataBillingCurrency.Bif => "bif",
-                DataBillingCurrency.Bmd => "bmd",
-                DataBillingCurrency.Bnd => "bnd",
-                DataBillingCurrency.Bsd => "bsd",
-                DataBillingCurrency.Bwp => "bwp",
-                DataBillingCurrency.Byn => "byn",
-                DataBillingCurrency.Bzd => "bzd",
-                DataBillingCurrency.Brl => "brl",
-                DataBillingCurrency.Cad => "cad",
-                DataBillingCurrency.Cdf => "cdf",
-                DataBillingCurrency.Chf => "chf",
-                DataBillingCurrency.Cny => "cny",
-                DataBillingCurrency.Czk => "czk",
-                DataBillingCurrency.Dkk => "dkk",
-                DataBillingCurrency.Dop => "dop",
-                DataBillingCurrency.Dzd => "dzd",
-                DataBillingCurrency.Egp => "egp",
-                DataBillingCurrency.Etb => "etb",
-                DataBillingCurrency.Eur => "eur",
-                DataBillingCurrency.Fjd => "fjd",
-                DataBillingCurrency.Gbp => "gbp",
-                DataBillingCurrency.Gel => "gel",
-                DataBillingCurrency.Gip => "gip",
-                DataBillingCurrency.Gmd => "gmd",
-                DataBillingCurrency.Gyd => "gyd",
-                DataBillingCurrency.Hkd => "hkd",
-                DataBillingCurrency.Hrk => "hrk",
-                DataBillingCurrency.Htg => "htg",
-                DataBillingCurrency.Idr => "idr",
-                DataBillingCurrency.Ils => "ils",
-                DataBillingCurrency.Inr => "inr",
-                DataBillingCurrency.Isk => "isk",
-                DataBillingCurrency.Jmd => "jmd",
-                DataBillingCurrency.Jpy => "jpy",
-                DataBillingCurrency.Kes => "kes",
-                DataBillingCurrency.Kgs => "kgs",
-                DataBillingCurrency.Khr => "khr",
-                DataBillingCurrency.Kmf => "kmf",
-                DataBillingCurrency.Krw => "krw",
-                DataBillingCurrency.Kyd => "kyd",
-                DataBillingCurrency.Kzt => "kzt",
-                DataBillingCurrency.Lbp => "lbp",
-                DataBillingCurrency.Lkr => "lkr",
-                DataBillingCurrency.Lrd => "lrd",
-                DataBillingCurrency.Lsl => "lsl",
-                DataBillingCurrency.Mad => "mad",
-                DataBillingCurrency.Mdl => "mdl",
-                DataBillingCurrency.Mga => "mga",
-                DataBillingCurrency.Mkd => "mkd",
-                DataBillingCurrency.Mmk => "mmk",
-                DataBillingCurrency.Mnt => "mnt",
-                DataBillingCurrency.Mop => "mop",
-                DataBillingCurrency.Mro => "mro",
-                DataBillingCurrency.Mvr => "mvr",
-                DataBillingCurrency.Mwk => "mwk",
-                DataBillingCurrency.Mxn => "mxn",
-                DataBillingCurrency.Myr => "myr",
-                DataBillingCurrency.Mzn => "mzn",
-                DataBillingCurrency.Nad => "nad",
-                DataBillingCurrency.Ngn => "ngn",
-                DataBillingCurrency.Nok => "nok",
-                DataBillingCurrency.Npr => "npr",
-                DataBillingCurrency.Nzd => "nzd",
-                DataBillingCurrency.Pgk => "pgk",
-                DataBillingCurrency.Php => "php",
-                DataBillingCurrency.Pkr => "pkr",
-                DataBillingCurrency.Pln => "pln",
-                DataBillingCurrency.Qar => "qar",
-                DataBillingCurrency.Ron => "ron",
-                DataBillingCurrency.Rsd => "rsd",
-                DataBillingCurrency.Rub => "rub",
-                DataBillingCurrency.Rwf => "rwf",
-                DataBillingCurrency.Sar => "sar",
-                DataBillingCurrency.Sbd => "sbd",
-                DataBillingCurrency.Scr => "scr",
-                DataBillingCurrency.Sek => "sek",
-                DataBillingCurrency.Sgd => "sgd",
-                DataBillingCurrency.Sle => "sle",
-                DataBillingCurrency.Sll => "sll",
-                DataBillingCurrency.Sos => "sos",
-                DataBillingCurrency.Szl => "szl",
-                DataBillingCurrency.Thb => "thb",
-                DataBillingCurrency.Tjs => "tjs",
-                DataBillingCurrency.Top => "top",
-                DataBillingCurrency.Try => "try",
-                DataBillingCurrency.Ttd => "ttd",
-                DataBillingCurrency.Tzs => "tzs",
-                DataBillingCurrency.Uah => "uah",
-                DataBillingCurrency.Uzs => "uzs",
-                DataBillingCurrency.Vnd => "vnd",
-                DataBillingCurrency.Vuv => "vuv",
-                DataBillingCurrency.Wst => "wst",
-                DataBillingCurrency.Xaf => "xaf",
-                DataBillingCurrency.Xcd => "xcd",
-                DataBillingCurrency.Yer => "yer",
-                DataBillingCurrency.Zar => "zar",
-                DataBillingCurrency.Zmw => "zmw",
-                DataBillingCurrency.Clp => "clp",
-                DataBillingCurrency.Djf => "djf",
-                DataBillingCurrency.Gnf => "gnf",
-                DataBillingCurrency.Ugx => "ugx",
-                DataBillingCurrency.Pyg => "pyg",
-                DataBillingCurrency.Xof => "xof",
-                DataBillingCurrency.Xpf => "xpf",
+                CustomerResponseDataBillingCurrency.Usd => "usd",
+                CustomerResponseDataBillingCurrency.Aed => "aed",
+                CustomerResponseDataBillingCurrency.All => "all",
+                CustomerResponseDataBillingCurrency.Amd => "amd",
+                CustomerResponseDataBillingCurrency.Ang => "ang",
+                CustomerResponseDataBillingCurrency.Aud => "aud",
+                CustomerResponseDataBillingCurrency.Awg => "awg",
+                CustomerResponseDataBillingCurrency.Azn => "azn",
+                CustomerResponseDataBillingCurrency.Bam => "bam",
+                CustomerResponseDataBillingCurrency.Bbd => "bbd",
+                CustomerResponseDataBillingCurrency.Bdt => "bdt",
+                CustomerResponseDataBillingCurrency.Bgn => "bgn",
+                CustomerResponseDataBillingCurrency.Bif => "bif",
+                CustomerResponseDataBillingCurrency.Bmd => "bmd",
+                CustomerResponseDataBillingCurrency.Bnd => "bnd",
+                CustomerResponseDataBillingCurrency.Bsd => "bsd",
+                CustomerResponseDataBillingCurrency.Bwp => "bwp",
+                CustomerResponseDataBillingCurrency.Byn => "byn",
+                CustomerResponseDataBillingCurrency.Bzd => "bzd",
+                CustomerResponseDataBillingCurrency.Brl => "brl",
+                CustomerResponseDataBillingCurrency.Cad => "cad",
+                CustomerResponseDataBillingCurrency.Cdf => "cdf",
+                CustomerResponseDataBillingCurrency.Chf => "chf",
+                CustomerResponseDataBillingCurrency.Cny => "cny",
+                CustomerResponseDataBillingCurrency.Czk => "czk",
+                CustomerResponseDataBillingCurrency.Dkk => "dkk",
+                CustomerResponseDataBillingCurrency.Dop => "dop",
+                CustomerResponseDataBillingCurrency.Dzd => "dzd",
+                CustomerResponseDataBillingCurrency.Egp => "egp",
+                CustomerResponseDataBillingCurrency.Etb => "etb",
+                CustomerResponseDataBillingCurrency.Eur => "eur",
+                CustomerResponseDataBillingCurrency.Fjd => "fjd",
+                CustomerResponseDataBillingCurrency.Gbp => "gbp",
+                CustomerResponseDataBillingCurrency.Gel => "gel",
+                CustomerResponseDataBillingCurrency.Gip => "gip",
+                CustomerResponseDataBillingCurrency.Gmd => "gmd",
+                CustomerResponseDataBillingCurrency.Gyd => "gyd",
+                CustomerResponseDataBillingCurrency.Hkd => "hkd",
+                CustomerResponseDataBillingCurrency.Hrk => "hrk",
+                CustomerResponseDataBillingCurrency.Htg => "htg",
+                CustomerResponseDataBillingCurrency.Idr => "idr",
+                CustomerResponseDataBillingCurrency.Ils => "ils",
+                CustomerResponseDataBillingCurrency.Inr => "inr",
+                CustomerResponseDataBillingCurrency.Isk => "isk",
+                CustomerResponseDataBillingCurrency.Jmd => "jmd",
+                CustomerResponseDataBillingCurrency.Jpy => "jpy",
+                CustomerResponseDataBillingCurrency.Kes => "kes",
+                CustomerResponseDataBillingCurrency.Kgs => "kgs",
+                CustomerResponseDataBillingCurrency.Khr => "khr",
+                CustomerResponseDataBillingCurrency.Kmf => "kmf",
+                CustomerResponseDataBillingCurrency.Krw => "krw",
+                CustomerResponseDataBillingCurrency.Kyd => "kyd",
+                CustomerResponseDataBillingCurrency.Kzt => "kzt",
+                CustomerResponseDataBillingCurrency.Lbp => "lbp",
+                CustomerResponseDataBillingCurrency.Lkr => "lkr",
+                CustomerResponseDataBillingCurrency.Lrd => "lrd",
+                CustomerResponseDataBillingCurrency.Lsl => "lsl",
+                CustomerResponseDataBillingCurrency.Mad => "mad",
+                CustomerResponseDataBillingCurrency.Mdl => "mdl",
+                CustomerResponseDataBillingCurrency.Mga => "mga",
+                CustomerResponseDataBillingCurrency.Mkd => "mkd",
+                CustomerResponseDataBillingCurrency.Mmk => "mmk",
+                CustomerResponseDataBillingCurrency.Mnt => "mnt",
+                CustomerResponseDataBillingCurrency.Mop => "mop",
+                CustomerResponseDataBillingCurrency.Mro => "mro",
+                CustomerResponseDataBillingCurrency.Mvr => "mvr",
+                CustomerResponseDataBillingCurrency.Mwk => "mwk",
+                CustomerResponseDataBillingCurrency.Mxn => "mxn",
+                CustomerResponseDataBillingCurrency.Myr => "myr",
+                CustomerResponseDataBillingCurrency.Mzn => "mzn",
+                CustomerResponseDataBillingCurrency.Nad => "nad",
+                CustomerResponseDataBillingCurrency.Ngn => "ngn",
+                CustomerResponseDataBillingCurrency.Nok => "nok",
+                CustomerResponseDataBillingCurrency.Npr => "npr",
+                CustomerResponseDataBillingCurrency.Nzd => "nzd",
+                CustomerResponseDataBillingCurrency.Pgk => "pgk",
+                CustomerResponseDataBillingCurrency.Php => "php",
+                CustomerResponseDataBillingCurrency.Pkr => "pkr",
+                CustomerResponseDataBillingCurrency.Pln => "pln",
+                CustomerResponseDataBillingCurrency.Qar => "qar",
+                CustomerResponseDataBillingCurrency.Ron => "ron",
+                CustomerResponseDataBillingCurrency.Rsd => "rsd",
+                CustomerResponseDataBillingCurrency.Rub => "rub",
+                CustomerResponseDataBillingCurrency.Rwf => "rwf",
+                CustomerResponseDataBillingCurrency.Sar => "sar",
+                CustomerResponseDataBillingCurrency.Sbd => "sbd",
+                CustomerResponseDataBillingCurrency.Scr => "scr",
+                CustomerResponseDataBillingCurrency.Sek => "sek",
+                CustomerResponseDataBillingCurrency.Sgd => "sgd",
+                CustomerResponseDataBillingCurrency.Sle => "sle",
+                CustomerResponseDataBillingCurrency.Sll => "sll",
+                CustomerResponseDataBillingCurrency.Sos => "sos",
+                CustomerResponseDataBillingCurrency.Szl => "szl",
+                CustomerResponseDataBillingCurrency.Thb => "thb",
+                CustomerResponseDataBillingCurrency.Tjs => "tjs",
+                CustomerResponseDataBillingCurrency.Top => "top",
+                CustomerResponseDataBillingCurrency.Try => "try",
+                CustomerResponseDataBillingCurrency.Ttd => "ttd",
+                CustomerResponseDataBillingCurrency.Tzs => "tzs",
+                CustomerResponseDataBillingCurrency.Uah => "uah",
+                CustomerResponseDataBillingCurrency.Uzs => "uzs",
+                CustomerResponseDataBillingCurrency.Vnd => "vnd",
+                CustomerResponseDataBillingCurrency.Vuv => "vuv",
+                CustomerResponseDataBillingCurrency.Wst => "wst",
+                CustomerResponseDataBillingCurrency.Xaf => "xaf",
+                CustomerResponseDataBillingCurrency.Xcd => "xcd",
+                CustomerResponseDataBillingCurrency.Yer => "yer",
+                CustomerResponseDataBillingCurrency.Zar => "zar",
+                CustomerResponseDataBillingCurrency.Zmw => "zmw",
+                CustomerResponseDataBillingCurrency.Clp => "clp",
+                CustomerResponseDataBillingCurrency.Djf => "djf",
+                CustomerResponseDataBillingCurrency.Gnf => "gnf",
+                CustomerResponseDataBillingCurrency.Ugx => "ugx",
+                CustomerResponseDataBillingCurrency.Pyg => "pyg",
+                CustomerResponseDataBillingCurrency.Xof => "xof",
+                CustomerResponseDataBillingCurrency.Xpf => "xpf",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -762,15 +772,15 @@ sealed class DataBillingCurrencyConverter : JsonConverter<DataBillingCurrency>
 /// <summary>
 /// Customer level coupon
 /// </summary>
-[JsonConverter(typeof(DataCouponIDConverter))]
-public enum DataCouponID
+[JsonConverter(typeof(CustomerResponseDataCouponIDConverter))]
+public enum CustomerResponseDataCouponID
 {
     Undefined,
 }
 
-sealed class DataCouponIDConverter : JsonConverter<DataCouponID>
+sealed class CustomerResponseDataCouponIDConverter : JsonConverter<CustomerResponseDataCouponID>
 {
-    public override DataCouponID Read(
+    public override CustomerResponseDataCouponID Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -778,14 +788,14 @@ sealed class DataCouponIDConverter : JsonConverter<DataCouponID>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "" => DataCouponID.Undefined,
-            _ => (DataCouponID)(-1),
+            "" => CustomerResponseDataCouponID.Undefined,
+            _ => (CustomerResponseDataCouponID)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        DataCouponID value,
+        CustomerResponseDataCouponID value,
         JsonSerializerOptions options
     )
     {
@@ -793,7 +803,7 @@ sealed class DataCouponIDConverter : JsonConverter<DataCouponID>
             writer,
             value switch
             {
-                DataCouponID.Undefined => "",
+                CustomerResponseDataCouponID.Undefined => "",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -807,9 +817,12 @@ sealed class DataCouponIDConverter : JsonConverter<DataCouponID>
 /// The default payment method details
 /// </summary>
 [JsonConverter(
-    typeof(JsonModelConverter<DataDefaultPaymentMethod, DataDefaultPaymentMethodFromRaw>)
+    typeof(JsonModelConverter<
+        CustomerResponseDataDefaultPaymentMethod,
+        CustomerResponseDataDefaultPaymentMethodFromRaw
+    >)
 )]
-public sealed record class DataDefaultPaymentMethod : JsonModel
+public sealed record class CustomerResponseDataDefaultPaymentMethod : JsonModel
 {
     /// <summary>
     /// The default payment method id
@@ -866,14 +879,14 @@ public sealed record class DataDefaultPaymentMethod : JsonModel
     /// <summary>
     /// The default payment method type
     /// </summary>
-    public required ApiEnum<string, DataDefaultPaymentMethodType> Type
+    public required ApiEnum<string, CustomerResponseDataDefaultPaymentMethodType> Type
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, DataDefaultPaymentMethodType>>(
-                "type"
-            );
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, CustomerResponseDataDefaultPaymentMethodType>
+            >("type");
         }
         init { this._rawData.Set("type", value); }
     }
@@ -888,29 +901,33 @@ public sealed record class DataDefaultPaymentMethod : JsonModel
         this.Type.Validate();
     }
 
-    public DataDefaultPaymentMethod() { }
+    public CustomerResponseDataDefaultPaymentMethod() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public DataDefaultPaymentMethod(DataDefaultPaymentMethod dataDefaultPaymentMethod)
-        : base(dataDefaultPaymentMethod) { }
+    public CustomerResponseDataDefaultPaymentMethod(
+        CustomerResponseDataDefaultPaymentMethod customerResponseDataDefaultPaymentMethod
+    )
+        : base(customerResponseDataDefaultPaymentMethod) { }
 #pragma warning restore CS8618
 
-    public DataDefaultPaymentMethod(IReadOnlyDictionary<string, JsonElement> rawData)
+    public CustomerResponseDataDefaultPaymentMethod(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    DataDefaultPaymentMethod(FrozenDictionary<string, JsonElement> rawData)
+    CustomerResponseDataDefaultPaymentMethod(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="DataDefaultPaymentMethodFromRaw.FromRawUnchecked"/>
-    public static DataDefaultPaymentMethod FromRawUnchecked(
+    /// <inheritdoc cref="CustomerResponseDataDefaultPaymentMethodFromRaw.FromRawUnchecked"/>
+    public static CustomerResponseDataDefaultPaymentMethod FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -918,28 +935,30 @@ public sealed record class DataDefaultPaymentMethod : JsonModel
     }
 }
 
-class DataDefaultPaymentMethodFromRaw : IFromRawJson<DataDefaultPaymentMethod>
+class CustomerResponseDataDefaultPaymentMethodFromRaw
+    : IFromRawJson<CustomerResponseDataDefaultPaymentMethod>
 {
     /// <inheritdoc/>
-    public DataDefaultPaymentMethod FromRawUnchecked(
+    public CustomerResponseDataDefaultPaymentMethod FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => DataDefaultPaymentMethod.FromRawUnchecked(rawData);
+    ) => CustomerResponseDataDefaultPaymentMethod.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// The default payment method type
 /// </summary>
-[JsonConverter(typeof(DataDefaultPaymentMethodTypeConverter))]
-public enum DataDefaultPaymentMethodType
+[JsonConverter(typeof(CustomerResponseDataDefaultPaymentMethodTypeConverter))]
+public enum CustomerResponseDataDefaultPaymentMethodType
 {
     Card,
     Bank,
     CashApp,
 }
 
-sealed class DataDefaultPaymentMethodTypeConverter : JsonConverter<DataDefaultPaymentMethodType>
+sealed class CustomerResponseDataDefaultPaymentMethodTypeConverter
+    : JsonConverter<CustomerResponseDataDefaultPaymentMethodType>
 {
-    public override DataDefaultPaymentMethodType Read(
+    public override CustomerResponseDataDefaultPaymentMethodType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -947,16 +966,16 @@ sealed class DataDefaultPaymentMethodTypeConverter : JsonConverter<DataDefaultPa
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "CARD" => DataDefaultPaymentMethodType.Card,
-            "BANK" => DataDefaultPaymentMethodType.Bank,
-            "CASH_APP" => DataDefaultPaymentMethodType.CashApp,
-            _ => (DataDefaultPaymentMethodType)(-1),
+            "CARD" => CustomerResponseDataDefaultPaymentMethodType.Card,
+            "BANK" => CustomerResponseDataDefaultPaymentMethodType.Bank,
+            "CASH_APP" => CustomerResponseDataDefaultPaymentMethodType.CashApp,
+            _ => (CustomerResponseDataDefaultPaymentMethodType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        DataDefaultPaymentMethodType value,
+        CustomerResponseDataDefaultPaymentMethodType value,
         JsonSerializerOptions options
     )
     {
@@ -964,9 +983,9 @@ sealed class DataDefaultPaymentMethodTypeConverter : JsonConverter<DataDefaultPa
             writer,
             value switch
             {
-                DataDefaultPaymentMethodType.Card => "CARD",
-                DataDefaultPaymentMethodType.Bank => "BANK",
-                DataDefaultPaymentMethodType.CashApp => "CASH_APP",
+                CustomerResponseDataDefaultPaymentMethodType.Card => "CARD",
+                CustomerResponseDataDefaultPaymentMethodType.Bank => "BANK",
+                CustomerResponseDataDefaultPaymentMethodType.CashApp => "CASH_APP",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -979,8 +998,13 @@ sealed class DataDefaultPaymentMethodTypeConverter : JsonConverter<DataDefaultPa
 /// <summary>
 /// External billing or CRM integration link
 /// </summary>
-[JsonConverter(typeof(JsonModelConverter<DataIntegration, DataIntegrationFromRaw>))]
-public sealed record class DataIntegration : JsonModel
+[JsonConverter(
+    typeof(JsonModelConverter<
+        CustomerResponseDataIntegration,
+        CustomerResponseDataIntegrationFromRaw
+    >)
+)]
+public sealed record class CustomerResponseDataIntegration : JsonModel
 {
     /// <summary>
     /// Integration details
@@ -1011,14 +1035,17 @@ public sealed record class DataIntegration : JsonModel
     /// <summary>
     /// The vendor identifier of integration
     /// </summary>
-    public required ApiEnum<string, DataIntegrationVendorIdentifier> VendorIdentifier
+    public required ApiEnum<
+        string,
+        CustomerResponseDataIntegrationVendorIdentifier
+    > VendorIdentifier
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, DataIntegrationVendorIdentifier>>(
-                "vendorIdentifier"
-            );
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, CustomerResponseDataIntegrationVendorIdentifier>
+            >("vendorIdentifier");
         }
         init { this._rawData.Set("vendorIdentifier", value); }
     }
@@ -1031,46 +1058,51 @@ public sealed record class DataIntegration : JsonModel
         this.VendorIdentifier.Validate();
     }
 
-    public DataIntegration() { }
+    public CustomerResponseDataIntegration() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public DataIntegration(DataIntegration dataIntegration)
-        : base(dataIntegration) { }
+    public CustomerResponseDataIntegration(
+        CustomerResponseDataIntegration customerResponseDataIntegration
+    )
+        : base(customerResponseDataIntegration) { }
 #pragma warning restore CS8618
 
-    public DataIntegration(IReadOnlyDictionary<string, JsonElement> rawData)
+    public CustomerResponseDataIntegration(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    DataIntegration(FrozenDictionary<string, JsonElement> rawData)
+    CustomerResponseDataIntegration(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="DataIntegrationFromRaw.FromRawUnchecked"/>
-    public static DataIntegration FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="CustomerResponseDataIntegrationFromRaw.FromRawUnchecked"/>
+    public static CustomerResponseDataIntegration FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class DataIntegrationFromRaw : IFromRawJson<DataIntegration>
+class CustomerResponseDataIntegrationFromRaw : IFromRawJson<CustomerResponseDataIntegration>
 {
     /// <inheritdoc/>
-    public DataIntegration FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        DataIntegration.FromRawUnchecked(rawData);
+    public CustomerResponseDataIntegration FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CustomerResponseDataIntegration.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// The vendor identifier of integration
 /// </summary>
-[JsonConverter(typeof(DataIntegrationVendorIdentifierConverter))]
-public enum DataIntegrationVendorIdentifier
+[JsonConverter(typeof(CustomerResponseDataIntegrationVendorIdentifierConverter))]
+public enum CustomerResponseDataIntegrationVendorIdentifier
 {
     Auth0,
     Zuora,
@@ -1084,10 +1116,10 @@ public enum DataIntegrationVendorIdentifier
     AppStore,
 }
 
-sealed class DataIntegrationVendorIdentifierConverter
-    : JsonConverter<DataIntegrationVendorIdentifier>
+sealed class CustomerResponseDataIntegrationVendorIdentifierConverter
+    : JsonConverter<CustomerResponseDataIntegrationVendorIdentifier>
 {
-    public override DataIntegrationVendorIdentifier Read(
+    public override CustomerResponseDataIntegrationVendorIdentifier Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1095,23 +1127,23 @@ sealed class DataIntegrationVendorIdentifierConverter
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "AUTH0" => DataIntegrationVendorIdentifier.Auth0,
-            "ZUORA" => DataIntegrationVendorIdentifier.Zuora,
-            "STRIPE" => DataIntegrationVendorIdentifier.Stripe,
-            "HUBSPOT" => DataIntegrationVendorIdentifier.Hubspot,
-            "AWS_MARKETPLACE" => DataIntegrationVendorIdentifier.AwsMarketplace,
-            "SNOWFLAKE" => DataIntegrationVendorIdentifier.Snowflake,
-            "SALESFORCE" => DataIntegrationVendorIdentifier.Salesforce,
-            "BIG_QUERY" => DataIntegrationVendorIdentifier.BigQuery,
-            "OPEN_FGA" => DataIntegrationVendorIdentifier.OpenFga,
-            "APP_STORE" => DataIntegrationVendorIdentifier.AppStore,
-            _ => (DataIntegrationVendorIdentifier)(-1),
+            "AUTH0" => CustomerResponseDataIntegrationVendorIdentifier.Auth0,
+            "ZUORA" => CustomerResponseDataIntegrationVendorIdentifier.Zuora,
+            "STRIPE" => CustomerResponseDataIntegrationVendorIdentifier.Stripe,
+            "HUBSPOT" => CustomerResponseDataIntegrationVendorIdentifier.Hubspot,
+            "AWS_MARKETPLACE" => CustomerResponseDataIntegrationVendorIdentifier.AwsMarketplace,
+            "SNOWFLAKE" => CustomerResponseDataIntegrationVendorIdentifier.Snowflake,
+            "SALESFORCE" => CustomerResponseDataIntegrationVendorIdentifier.Salesforce,
+            "BIG_QUERY" => CustomerResponseDataIntegrationVendorIdentifier.BigQuery,
+            "OPEN_FGA" => CustomerResponseDataIntegrationVendorIdentifier.OpenFga,
+            "APP_STORE" => CustomerResponseDataIntegrationVendorIdentifier.AppStore,
+            _ => (CustomerResponseDataIntegrationVendorIdentifier)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        DataIntegrationVendorIdentifier value,
+        CustomerResponseDataIntegrationVendorIdentifier value,
         JsonSerializerOptions options
     )
     {
@@ -1119,16 +1151,16 @@ sealed class DataIntegrationVendorIdentifierConverter
             writer,
             value switch
             {
-                DataIntegrationVendorIdentifier.Auth0 => "AUTH0",
-                DataIntegrationVendorIdentifier.Zuora => "ZUORA",
-                DataIntegrationVendorIdentifier.Stripe => "STRIPE",
-                DataIntegrationVendorIdentifier.Hubspot => "HUBSPOT",
-                DataIntegrationVendorIdentifier.AwsMarketplace => "AWS_MARKETPLACE",
-                DataIntegrationVendorIdentifier.Snowflake => "SNOWFLAKE",
-                DataIntegrationVendorIdentifier.Salesforce => "SALESFORCE",
-                DataIntegrationVendorIdentifier.BigQuery => "BIG_QUERY",
-                DataIntegrationVendorIdentifier.OpenFga => "OPEN_FGA",
-                DataIntegrationVendorIdentifier.AppStore => "APP_STORE",
+                CustomerResponseDataIntegrationVendorIdentifier.Auth0 => "AUTH0",
+                CustomerResponseDataIntegrationVendorIdentifier.Zuora => "ZUORA",
+                CustomerResponseDataIntegrationVendorIdentifier.Stripe => "STRIPE",
+                CustomerResponseDataIntegrationVendorIdentifier.Hubspot => "HUBSPOT",
+                CustomerResponseDataIntegrationVendorIdentifier.AwsMarketplace => "AWS_MARKETPLACE",
+                CustomerResponseDataIntegrationVendorIdentifier.Snowflake => "SNOWFLAKE",
+                CustomerResponseDataIntegrationVendorIdentifier.Salesforce => "SALESFORCE",
+                CustomerResponseDataIntegrationVendorIdentifier.BigQuery => "BIG_QUERY",
+                CustomerResponseDataIntegrationVendorIdentifier.OpenFga => "OPEN_FGA",
+                CustomerResponseDataIntegrationVendorIdentifier.AppStore => "APP_STORE",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -1141,18 +1173,23 @@ sealed class DataIntegrationVendorIdentifierConverter
 /// <summary>
 /// Vendor-specific billing passthrough fields.
 /// </summary>
-[JsonConverter(typeof(JsonModelConverter<DataPassthrough, DataPassthroughFromRaw>))]
-public sealed record class DataPassthrough : JsonModel
+[JsonConverter(
+    typeof(JsonModelConverter<
+        CustomerResponseDataPassthrough,
+        CustomerResponseDataPassthroughFromRaw
+    >)
+)]
+public sealed record class CustomerResponseDataPassthrough : JsonModel
 {
     /// <summary>
     /// Stripe-specific billing fields for the customer.
     /// </summary>
-    public DataPassthroughStripe? Stripe
+    public CustomerResponseDataPassthroughStripe? Stripe
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<DataPassthroughStripe>("stripe");
+            return this._rawData.GetNullableClass<CustomerResponseDataPassthroughStripe>("stripe");
         }
         init
         {
@@ -1168,12 +1205,12 @@ public sealed record class DataPassthrough : JsonModel
     /// <summary>
     /// Zuora-specific billing fields for the customer.
     /// </summary>
-    public DataPassthroughZuora? Zuora
+    public CustomerResponseDataPassthroughZuora? Zuora
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<DataPassthroughZuora>("zuora");
+            return this._rawData.GetNullableClass<CustomerResponseDataPassthroughZuora>("zuora");
         }
         init
         {
@@ -1193,56 +1230,66 @@ public sealed record class DataPassthrough : JsonModel
         this.Zuora?.Validate();
     }
 
-    public DataPassthrough() { }
+    public CustomerResponseDataPassthrough() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public DataPassthrough(DataPassthrough dataPassthrough)
-        : base(dataPassthrough) { }
+    public CustomerResponseDataPassthrough(
+        CustomerResponseDataPassthrough customerResponseDataPassthrough
+    )
+        : base(customerResponseDataPassthrough) { }
 #pragma warning restore CS8618
 
-    public DataPassthrough(IReadOnlyDictionary<string, JsonElement> rawData)
+    public CustomerResponseDataPassthrough(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    DataPassthrough(FrozenDictionary<string, JsonElement> rawData)
+    CustomerResponseDataPassthrough(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="DataPassthroughFromRaw.FromRawUnchecked"/>
-    public static DataPassthrough FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="CustomerResponseDataPassthroughFromRaw.FromRawUnchecked"/>
+    public static CustomerResponseDataPassthrough FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class DataPassthroughFromRaw : IFromRawJson<DataPassthrough>
+class CustomerResponseDataPassthroughFromRaw : IFromRawJson<CustomerResponseDataPassthrough>
 {
     /// <inheritdoc/>
-    public DataPassthrough FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        DataPassthrough.FromRawUnchecked(rawData);
+    public CustomerResponseDataPassthrough FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => CustomerResponseDataPassthrough.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// Stripe-specific billing fields for the customer.
 /// </summary>
-[JsonConverter(typeof(JsonModelConverter<DataPassthroughStripe, DataPassthroughStripeFromRaw>))]
-public sealed record class DataPassthroughStripe : JsonModel
+[JsonConverter(
+    typeof(JsonModelConverter<
+        CustomerResponseDataPassthroughStripe,
+        CustomerResponseDataPassthroughStripeFromRaw
+    >)
+)]
+public sealed record class CustomerResponseDataPassthroughStripe : JsonModel
 {
     /// <summary>
     /// Physical address
     /// </summary>
-    public DataPassthroughStripeBillingAddress? BillingAddress
+    public CustomerResponseDataPassthroughStripeBillingAddress? BillingAddress
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<DataPassthroughStripeBillingAddress>(
+            return this._rawData.GetNullableClass<CustomerResponseDataPassthroughStripeBillingAddress>(
                 "billingAddress"
             );
         }
@@ -1352,12 +1399,12 @@ public sealed record class DataPassthroughStripe : JsonModel
     /// <summary>
     /// Physical address
     /// </summary>
-    public DataPassthroughStripeShippingAddress? ShippingAddress
+    public CustomerResponseDataPassthroughStripeShippingAddress? ShippingAddress
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<DataPassthroughStripeShippingAddress>(
+            return this._rawData.GetNullableClass<CustomerResponseDataPassthroughStripeShippingAddress>(
                 "shippingAddress"
             );
         }
@@ -1375,14 +1422,14 @@ public sealed record class DataPassthroughStripe : JsonModel
     /// <summary>
     /// Tax IDs
     /// </summary>
-    public IReadOnlyList<DataPassthroughStripeTaxID>? TaxIds
+    public IReadOnlyList<CustomerResponseDataPassthroughStripeTaxID>? TaxIds
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<ImmutableArray<DataPassthroughStripeTaxID>>(
-                "taxIds"
-            );
+            return this._rawData.GetNullableStruct<
+                ImmutableArray<CustomerResponseDataPassthroughStripeTaxID>
+            >("taxIds");
         }
         init
         {
@@ -1391,7 +1438,7 @@ public sealed record class DataPassthroughStripe : JsonModel
                 return;
             }
 
-            this._rawData.Set<ImmutableArray<DataPassthroughStripeTaxID>?>(
+            this._rawData.Set<ImmutableArray<CustomerResponseDataPassthroughStripeTaxID>?>(
                 "taxIds",
                 value == null ? null : ImmutableArray.ToImmutableArray(value)
             );
@@ -1413,29 +1460,31 @@ public sealed record class DataPassthroughStripe : JsonModel
         }
     }
 
-    public DataPassthroughStripe() { }
+    public CustomerResponseDataPassthroughStripe() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public DataPassthroughStripe(DataPassthroughStripe dataPassthroughStripe)
-        : base(dataPassthroughStripe) { }
+    public CustomerResponseDataPassthroughStripe(
+        CustomerResponseDataPassthroughStripe customerResponseDataPassthroughStripe
+    )
+        : base(customerResponseDataPassthroughStripe) { }
 #pragma warning restore CS8618
 
-    public DataPassthroughStripe(IReadOnlyDictionary<string, JsonElement> rawData)
+    public CustomerResponseDataPassthroughStripe(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    DataPassthroughStripe(FrozenDictionary<string, JsonElement> rawData)
+    CustomerResponseDataPassthroughStripe(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="DataPassthroughStripeFromRaw.FromRawUnchecked"/>
-    public static DataPassthroughStripe FromRawUnchecked(
+    /// <inheritdoc cref="CustomerResponseDataPassthroughStripeFromRaw.FromRawUnchecked"/>
+    public static CustomerResponseDataPassthroughStripe FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -1443,12 +1492,13 @@ public sealed record class DataPassthroughStripe : JsonModel
     }
 }
 
-class DataPassthroughStripeFromRaw : IFromRawJson<DataPassthroughStripe>
+class CustomerResponseDataPassthroughStripeFromRaw
+    : IFromRawJson<CustomerResponseDataPassthroughStripe>
 {
     /// <inheritdoc/>
-    public DataPassthroughStripe FromRawUnchecked(
+    public CustomerResponseDataPassthroughStripe FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => DataPassthroughStripe.FromRawUnchecked(rawData);
+    ) => CustomerResponseDataPassthroughStripe.FromRawUnchecked(rawData);
 }
 
 /// <summary>
@@ -1456,11 +1506,11 @@ class DataPassthroughStripeFromRaw : IFromRawJson<DataPassthroughStripe>
 /// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
-        DataPassthroughStripeBillingAddress,
-        DataPassthroughStripeBillingAddressFromRaw
+        CustomerResponseDataPassthroughStripeBillingAddress,
+        CustomerResponseDataPassthroughStripeBillingAddressFromRaw
     >)
 )]
-public sealed record class DataPassthroughStripeBillingAddress : JsonModel
+public sealed record class CustomerResponseDataPassthroughStripeBillingAddress : JsonModel
 {
     /// <summary>
     /// City name
@@ -1599,31 +1649,35 @@ public sealed record class DataPassthroughStripeBillingAddress : JsonModel
         _ = this.State;
     }
 
-    public DataPassthroughStripeBillingAddress() { }
+    public CustomerResponseDataPassthroughStripeBillingAddress() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public DataPassthroughStripeBillingAddress(
-        DataPassthroughStripeBillingAddress dataPassthroughStripeBillingAddress
+    public CustomerResponseDataPassthroughStripeBillingAddress(
+        CustomerResponseDataPassthroughStripeBillingAddress customerResponseDataPassthroughStripeBillingAddress
     )
-        : base(dataPassthroughStripeBillingAddress) { }
+        : base(customerResponseDataPassthroughStripeBillingAddress) { }
 #pragma warning restore CS8618
 
-    public DataPassthroughStripeBillingAddress(IReadOnlyDictionary<string, JsonElement> rawData)
+    public CustomerResponseDataPassthroughStripeBillingAddress(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    DataPassthroughStripeBillingAddress(FrozenDictionary<string, JsonElement> rawData)
+    CustomerResponseDataPassthroughStripeBillingAddress(
+        FrozenDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="DataPassthroughStripeBillingAddressFromRaw.FromRawUnchecked"/>
-    public static DataPassthroughStripeBillingAddress FromRawUnchecked(
+    /// <inheritdoc cref="CustomerResponseDataPassthroughStripeBillingAddressFromRaw.FromRawUnchecked"/>
+    public static CustomerResponseDataPassthroughStripeBillingAddress FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -1631,12 +1685,13 @@ public sealed record class DataPassthroughStripeBillingAddress : JsonModel
     }
 }
 
-class DataPassthroughStripeBillingAddressFromRaw : IFromRawJson<DataPassthroughStripeBillingAddress>
+class CustomerResponseDataPassthroughStripeBillingAddressFromRaw
+    : IFromRawJson<CustomerResponseDataPassthroughStripeBillingAddress>
 {
     /// <inheritdoc/>
-    public DataPassthroughStripeBillingAddress FromRawUnchecked(
+    public CustomerResponseDataPassthroughStripeBillingAddress FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => DataPassthroughStripeBillingAddress.FromRawUnchecked(rawData);
+    ) => CustomerResponseDataPassthroughStripeBillingAddress.FromRawUnchecked(rawData);
 }
 
 /// <summary>
@@ -1644,11 +1699,11 @@ class DataPassthroughStripeBillingAddressFromRaw : IFromRawJson<DataPassthroughS
 /// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
-        DataPassthroughStripeShippingAddress,
-        DataPassthroughStripeShippingAddressFromRaw
+        CustomerResponseDataPassthroughStripeShippingAddress,
+        CustomerResponseDataPassthroughStripeShippingAddressFromRaw
     >)
 )]
-public sealed record class DataPassthroughStripeShippingAddress : JsonModel
+public sealed record class CustomerResponseDataPassthroughStripeShippingAddress : JsonModel
 {
     /// <summary>
     /// City name
@@ -1787,31 +1842,35 @@ public sealed record class DataPassthroughStripeShippingAddress : JsonModel
         _ = this.State;
     }
 
-    public DataPassthroughStripeShippingAddress() { }
+    public CustomerResponseDataPassthroughStripeShippingAddress() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public DataPassthroughStripeShippingAddress(
-        DataPassthroughStripeShippingAddress dataPassthroughStripeShippingAddress
+    public CustomerResponseDataPassthroughStripeShippingAddress(
+        CustomerResponseDataPassthroughStripeShippingAddress customerResponseDataPassthroughStripeShippingAddress
     )
-        : base(dataPassthroughStripeShippingAddress) { }
+        : base(customerResponseDataPassthroughStripeShippingAddress) { }
 #pragma warning restore CS8618
 
-    public DataPassthroughStripeShippingAddress(IReadOnlyDictionary<string, JsonElement> rawData)
+    public CustomerResponseDataPassthroughStripeShippingAddress(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    DataPassthroughStripeShippingAddress(FrozenDictionary<string, JsonElement> rawData)
+    CustomerResponseDataPassthroughStripeShippingAddress(
+        FrozenDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="DataPassthroughStripeShippingAddressFromRaw.FromRawUnchecked"/>
-    public static DataPassthroughStripeShippingAddress FromRawUnchecked(
+    /// <inheritdoc cref="CustomerResponseDataPassthroughStripeShippingAddressFromRaw.FromRawUnchecked"/>
+    public static CustomerResponseDataPassthroughStripeShippingAddress FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -1819,22 +1878,25 @@ public sealed record class DataPassthroughStripeShippingAddress : JsonModel
     }
 }
 
-class DataPassthroughStripeShippingAddressFromRaw
-    : IFromRawJson<DataPassthroughStripeShippingAddress>
+class CustomerResponseDataPassthroughStripeShippingAddressFromRaw
+    : IFromRawJson<CustomerResponseDataPassthroughStripeShippingAddress>
 {
     /// <inheritdoc/>
-    public DataPassthroughStripeShippingAddress FromRawUnchecked(
+    public CustomerResponseDataPassthroughStripeShippingAddress FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => DataPassthroughStripeShippingAddress.FromRawUnchecked(rawData);
+    ) => CustomerResponseDataPassthroughStripeShippingAddress.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// Tax identifier with type and value for customer tax exemptions.
 /// </summary>
 [JsonConverter(
-    typeof(JsonModelConverter<DataPassthroughStripeTaxID, DataPassthroughStripeTaxIDFromRaw>)
+    typeof(JsonModelConverter<
+        CustomerResponseDataPassthroughStripeTaxID,
+        CustomerResponseDataPassthroughStripeTaxIDFromRaw
+    >)
 )]
-public sealed record class DataPassthroughStripeTaxID : JsonModel
+public sealed record class CustomerResponseDataPassthroughStripeTaxID : JsonModel
 {
     /// <summary>
     /// The type of tax exemption identifier, such as VAT.
@@ -1869,29 +1931,33 @@ public sealed record class DataPassthroughStripeTaxID : JsonModel
         _ = this.Value;
     }
 
-    public DataPassthroughStripeTaxID() { }
+    public CustomerResponseDataPassthroughStripeTaxID() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public DataPassthroughStripeTaxID(DataPassthroughStripeTaxID dataPassthroughStripeTaxID)
-        : base(dataPassthroughStripeTaxID) { }
+    public CustomerResponseDataPassthroughStripeTaxID(
+        CustomerResponseDataPassthroughStripeTaxID customerResponseDataPassthroughStripeTaxID
+    )
+        : base(customerResponseDataPassthroughStripeTaxID) { }
 #pragma warning restore CS8618
 
-    public DataPassthroughStripeTaxID(IReadOnlyDictionary<string, JsonElement> rawData)
+    public CustomerResponseDataPassthroughStripeTaxID(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    DataPassthroughStripeTaxID(FrozenDictionary<string, JsonElement> rawData)
+    CustomerResponseDataPassthroughStripeTaxID(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="DataPassthroughStripeTaxIDFromRaw.FromRawUnchecked"/>
-    public static DataPassthroughStripeTaxID FromRawUnchecked(
+    /// <inheritdoc cref="CustomerResponseDataPassthroughStripeTaxIDFromRaw.FromRawUnchecked"/>
+    public static CustomerResponseDataPassthroughStripeTaxID FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -1899,29 +1965,35 @@ public sealed record class DataPassthroughStripeTaxID : JsonModel
     }
 }
 
-class DataPassthroughStripeTaxIDFromRaw : IFromRawJson<DataPassthroughStripeTaxID>
+class CustomerResponseDataPassthroughStripeTaxIDFromRaw
+    : IFromRawJson<CustomerResponseDataPassthroughStripeTaxID>
 {
     /// <inheritdoc/>
-    public DataPassthroughStripeTaxID FromRawUnchecked(
+    public CustomerResponseDataPassthroughStripeTaxID FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => DataPassthroughStripeTaxID.FromRawUnchecked(rawData);
+    ) => CustomerResponseDataPassthroughStripeTaxID.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// Zuora-specific billing fields for the customer.
 /// </summary>
-[JsonConverter(typeof(JsonModelConverter<DataPassthroughZuora, DataPassthroughZuoraFromRaw>))]
-public sealed record class DataPassthroughZuora : JsonModel
+[JsonConverter(
+    typeof(JsonModelConverter<
+        CustomerResponseDataPassthroughZuora,
+        CustomerResponseDataPassthroughZuoraFromRaw
+    >)
+)]
+public sealed record class CustomerResponseDataPassthroughZuora : JsonModel
 {
     /// <summary>
     /// Physical address
     /// </summary>
-    public DataPassthroughZuoraBillingAddress? BillingAddress
+    public CustomerResponseDataPassthroughZuoraBillingAddress? BillingAddress
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<DataPassthroughZuoraBillingAddress>(
+            return this._rawData.GetNullableClass<CustomerResponseDataPassthroughZuoraBillingAddress>(
                 "billingAddress"
             );
         }
@@ -1939,14 +2011,14 @@ public sealed record class DataPassthroughZuora : JsonModel
     /// <summary>
     /// Customers selected currency
     /// </summary>
-    public ApiEnum<string, DataPassthroughZuoraCurrency>? Currency
+    public ApiEnum<string, CustomerResponseDataPassthroughZuoraCurrency>? Currency
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ApiEnum<string, DataPassthroughZuoraCurrency>>(
-                "currency"
-            );
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, CustomerResponseDataPassthroughZuoraCurrency>
+            >("currency");
         }
         init
         {
@@ -2013,29 +2085,31 @@ public sealed record class DataPassthroughZuora : JsonModel
         _ = this.PaymentMethodID;
     }
 
-    public DataPassthroughZuora() { }
+    public CustomerResponseDataPassthroughZuora() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public DataPassthroughZuora(DataPassthroughZuora dataPassthroughZuora)
-        : base(dataPassthroughZuora) { }
+    public CustomerResponseDataPassthroughZuora(
+        CustomerResponseDataPassthroughZuora customerResponseDataPassthroughZuora
+    )
+        : base(customerResponseDataPassthroughZuora) { }
 #pragma warning restore CS8618
 
-    public DataPassthroughZuora(IReadOnlyDictionary<string, JsonElement> rawData)
+    public CustomerResponseDataPassthroughZuora(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    DataPassthroughZuora(FrozenDictionary<string, JsonElement> rawData)
+    CustomerResponseDataPassthroughZuora(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="DataPassthroughZuoraFromRaw.FromRawUnchecked"/>
-    public static DataPassthroughZuora FromRawUnchecked(
+    /// <inheritdoc cref="CustomerResponseDataPassthroughZuoraFromRaw.FromRawUnchecked"/>
+    public static CustomerResponseDataPassthroughZuora FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -2043,12 +2117,13 @@ public sealed record class DataPassthroughZuora : JsonModel
     }
 }
 
-class DataPassthroughZuoraFromRaw : IFromRawJson<DataPassthroughZuora>
+class CustomerResponseDataPassthroughZuoraFromRaw
+    : IFromRawJson<CustomerResponseDataPassthroughZuora>
 {
     /// <inheritdoc/>
-    public DataPassthroughZuora FromRawUnchecked(
+    public CustomerResponseDataPassthroughZuora FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => DataPassthroughZuora.FromRawUnchecked(rawData);
+    ) => CustomerResponseDataPassthroughZuora.FromRawUnchecked(rawData);
 }
 
 /// <summary>
@@ -2056,11 +2131,11 @@ class DataPassthroughZuoraFromRaw : IFromRawJson<DataPassthroughZuora>
 /// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
-        DataPassthroughZuoraBillingAddress,
-        DataPassthroughZuoraBillingAddressFromRaw
+        CustomerResponseDataPassthroughZuoraBillingAddress,
+        CustomerResponseDataPassthroughZuoraBillingAddressFromRaw
     >)
 )]
-public sealed record class DataPassthroughZuoraBillingAddress : JsonModel
+public sealed record class CustomerResponseDataPassthroughZuoraBillingAddress : JsonModel
 {
     /// <summary>
     /// City name
@@ -2199,31 +2274,35 @@ public sealed record class DataPassthroughZuoraBillingAddress : JsonModel
         _ = this.State;
     }
 
-    public DataPassthroughZuoraBillingAddress() { }
+    public CustomerResponseDataPassthroughZuoraBillingAddress() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public DataPassthroughZuoraBillingAddress(
-        DataPassthroughZuoraBillingAddress dataPassthroughZuoraBillingAddress
+    public CustomerResponseDataPassthroughZuoraBillingAddress(
+        CustomerResponseDataPassthroughZuoraBillingAddress customerResponseDataPassthroughZuoraBillingAddress
     )
-        : base(dataPassthroughZuoraBillingAddress) { }
+        : base(customerResponseDataPassthroughZuoraBillingAddress) { }
 #pragma warning restore CS8618
 
-    public DataPassthroughZuoraBillingAddress(IReadOnlyDictionary<string, JsonElement> rawData)
+    public CustomerResponseDataPassthroughZuoraBillingAddress(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    DataPassthroughZuoraBillingAddress(FrozenDictionary<string, JsonElement> rawData)
+    CustomerResponseDataPassthroughZuoraBillingAddress(
+        FrozenDictionary<string, JsonElement> rawData
+    )
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="DataPassthroughZuoraBillingAddressFromRaw.FromRawUnchecked"/>
-    public static DataPassthroughZuoraBillingAddress FromRawUnchecked(
+    /// <inheritdoc cref="CustomerResponseDataPassthroughZuoraBillingAddressFromRaw.FromRawUnchecked"/>
+    public static CustomerResponseDataPassthroughZuoraBillingAddress FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -2231,19 +2310,20 @@ public sealed record class DataPassthroughZuoraBillingAddress : JsonModel
     }
 }
 
-class DataPassthroughZuoraBillingAddressFromRaw : IFromRawJson<DataPassthroughZuoraBillingAddress>
+class CustomerResponseDataPassthroughZuoraBillingAddressFromRaw
+    : IFromRawJson<CustomerResponseDataPassthroughZuoraBillingAddress>
 {
     /// <inheritdoc/>
-    public DataPassthroughZuoraBillingAddress FromRawUnchecked(
+    public CustomerResponseDataPassthroughZuoraBillingAddress FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => DataPassthroughZuoraBillingAddress.FromRawUnchecked(rawData);
+    ) => CustomerResponseDataPassthroughZuoraBillingAddress.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// Customers selected currency
 /// </summary>
-[JsonConverter(typeof(DataPassthroughZuoraCurrencyConverter))]
-public enum DataPassthroughZuoraCurrency
+[JsonConverter(typeof(CustomerResponseDataPassthroughZuoraCurrencyConverter))]
+public enum CustomerResponseDataPassthroughZuoraCurrency
 {
     Usd,
     Aed,
@@ -2363,9 +2443,10 @@ public enum DataPassthroughZuoraCurrency
     Xpf,
 }
 
-sealed class DataPassthroughZuoraCurrencyConverter : JsonConverter<DataPassthroughZuoraCurrency>
+sealed class CustomerResponseDataPassthroughZuoraCurrencyConverter
+    : JsonConverter<CustomerResponseDataPassthroughZuoraCurrency>
 {
-    public override DataPassthroughZuoraCurrency Read(
+    public override CustomerResponseDataPassthroughZuoraCurrency Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -2373,129 +2454,129 @@ sealed class DataPassthroughZuoraCurrencyConverter : JsonConverter<DataPassthrou
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "usd" => DataPassthroughZuoraCurrency.Usd,
-            "aed" => DataPassthroughZuoraCurrency.Aed,
-            "all" => DataPassthroughZuoraCurrency.All,
-            "amd" => DataPassthroughZuoraCurrency.Amd,
-            "ang" => DataPassthroughZuoraCurrency.Ang,
-            "aud" => DataPassthroughZuoraCurrency.Aud,
-            "awg" => DataPassthroughZuoraCurrency.Awg,
-            "azn" => DataPassthroughZuoraCurrency.Azn,
-            "bam" => DataPassthroughZuoraCurrency.Bam,
-            "bbd" => DataPassthroughZuoraCurrency.Bbd,
-            "bdt" => DataPassthroughZuoraCurrency.Bdt,
-            "bgn" => DataPassthroughZuoraCurrency.Bgn,
-            "bif" => DataPassthroughZuoraCurrency.Bif,
-            "bmd" => DataPassthroughZuoraCurrency.Bmd,
-            "bnd" => DataPassthroughZuoraCurrency.Bnd,
-            "bsd" => DataPassthroughZuoraCurrency.Bsd,
-            "bwp" => DataPassthroughZuoraCurrency.Bwp,
-            "byn" => DataPassthroughZuoraCurrency.Byn,
-            "bzd" => DataPassthroughZuoraCurrency.Bzd,
-            "brl" => DataPassthroughZuoraCurrency.Brl,
-            "cad" => DataPassthroughZuoraCurrency.Cad,
-            "cdf" => DataPassthroughZuoraCurrency.Cdf,
-            "chf" => DataPassthroughZuoraCurrency.Chf,
-            "cny" => DataPassthroughZuoraCurrency.Cny,
-            "czk" => DataPassthroughZuoraCurrency.Czk,
-            "dkk" => DataPassthroughZuoraCurrency.Dkk,
-            "dop" => DataPassthroughZuoraCurrency.Dop,
-            "dzd" => DataPassthroughZuoraCurrency.Dzd,
-            "egp" => DataPassthroughZuoraCurrency.Egp,
-            "etb" => DataPassthroughZuoraCurrency.Etb,
-            "eur" => DataPassthroughZuoraCurrency.Eur,
-            "fjd" => DataPassthroughZuoraCurrency.Fjd,
-            "gbp" => DataPassthroughZuoraCurrency.Gbp,
-            "gel" => DataPassthroughZuoraCurrency.Gel,
-            "gip" => DataPassthroughZuoraCurrency.Gip,
-            "gmd" => DataPassthroughZuoraCurrency.Gmd,
-            "gyd" => DataPassthroughZuoraCurrency.Gyd,
-            "hkd" => DataPassthroughZuoraCurrency.Hkd,
-            "hrk" => DataPassthroughZuoraCurrency.Hrk,
-            "htg" => DataPassthroughZuoraCurrency.Htg,
-            "idr" => DataPassthroughZuoraCurrency.Idr,
-            "ils" => DataPassthroughZuoraCurrency.Ils,
-            "inr" => DataPassthroughZuoraCurrency.Inr,
-            "isk" => DataPassthroughZuoraCurrency.Isk,
-            "jmd" => DataPassthroughZuoraCurrency.Jmd,
-            "jpy" => DataPassthroughZuoraCurrency.Jpy,
-            "kes" => DataPassthroughZuoraCurrency.Kes,
-            "kgs" => DataPassthroughZuoraCurrency.Kgs,
-            "khr" => DataPassthroughZuoraCurrency.Khr,
-            "kmf" => DataPassthroughZuoraCurrency.Kmf,
-            "krw" => DataPassthroughZuoraCurrency.Krw,
-            "kyd" => DataPassthroughZuoraCurrency.Kyd,
-            "kzt" => DataPassthroughZuoraCurrency.Kzt,
-            "lbp" => DataPassthroughZuoraCurrency.Lbp,
-            "lkr" => DataPassthroughZuoraCurrency.Lkr,
-            "lrd" => DataPassthroughZuoraCurrency.Lrd,
-            "lsl" => DataPassthroughZuoraCurrency.Lsl,
-            "mad" => DataPassthroughZuoraCurrency.Mad,
-            "mdl" => DataPassthroughZuoraCurrency.Mdl,
-            "mga" => DataPassthroughZuoraCurrency.Mga,
-            "mkd" => DataPassthroughZuoraCurrency.Mkd,
-            "mmk" => DataPassthroughZuoraCurrency.Mmk,
-            "mnt" => DataPassthroughZuoraCurrency.Mnt,
-            "mop" => DataPassthroughZuoraCurrency.Mop,
-            "mro" => DataPassthroughZuoraCurrency.Mro,
-            "mvr" => DataPassthroughZuoraCurrency.Mvr,
-            "mwk" => DataPassthroughZuoraCurrency.Mwk,
-            "mxn" => DataPassthroughZuoraCurrency.Mxn,
-            "myr" => DataPassthroughZuoraCurrency.Myr,
-            "mzn" => DataPassthroughZuoraCurrency.Mzn,
-            "nad" => DataPassthroughZuoraCurrency.Nad,
-            "ngn" => DataPassthroughZuoraCurrency.Ngn,
-            "nok" => DataPassthroughZuoraCurrency.Nok,
-            "npr" => DataPassthroughZuoraCurrency.Npr,
-            "nzd" => DataPassthroughZuoraCurrency.Nzd,
-            "pgk" => DataPassthroughZuoraCurrency.Pgk,
-            "php" => DataPassthroughZuoraCurrency.Php,
-            "pkr" => DataPassthroughZuoraCurrency.Pkr,
-            "pln" => DataPassthroughZuoraCurrency.Pln,
-            "qar" => DataPassthroughZuoraCurrency.Qar,
-            "ron" => DataPassthroughZuoraCurrency.Ron,
-            "rsd" => DataPassthroughZuoraCurrency.Rsd,
-            "rub" => DataPassthroughZuoraCurrency.Rub,
-            "rwf" => DataPassthroughZuoraCurrency.Rwf,
-            "sar" => DataPassthroughZuoraCurrency.Sar,
-            "sbd" => DataPassthroughZuoraCurrency.Sbd,
-            "scr" => DataPassthroughZuoraCurrency.Scr,
-            "sek" => DataPassthroughZuoraCurrency.Sek,
-            "sgd" => DataPassthroughZuoraCurrency.Sgd,
-            "sle" => DataPassthroughZuoraCurrency.Sle,
-            "sll" => DataPassthroughZuoraCurrency.Sll,
-            "sos" => DataPassthroughZuoraCurrency.Sos,
-            "szl" => DataPassthroughZuoraCurrency.Szl,
-            "thb" => DataPassthroughZuoraCurrency.Thb,
-            "tjs" => DataPassthroughZuoraCurrency.Tjs,
-            "top" => DataPassthroughZuoraCurrency.Top,
-            "try" => DataPassthroughZuoraCurrency.Try,
-            "ttd" => DataPassthroughZuoraCurrency.Ttd,
-            "tzs" => DataPassthroughZuoraCurrency.Tzs,
-            "uah" => DataPassthroughZuoraCurrency.Uah,
-            "uzs" => DataPassthroughZuoraCurrency.Uzs,
-            "vnd" => DataPassthroughZuoraCurrency.Vnd,
-            "vuv" => DataPassthroughZuoraCurrency.Vuv,
-            "wst" => DataPassthroughZuoraCurrency.Wst,
-            "xaf" => DataPassthroughZuoraCurrency.Xaf,
-            "xcd" => DataPassthroughZuoraCurrency.Xcd,
-            "yer" => DataPassthroughZuoraCurrency.Yer,
-            "zar" => DataPassthroughZuoraCurrency.Zar,
-            "zmw" => DataPassthroughZuoraCurrency.Zmw,
-            "clp" => DataPassthroughZuoraCurrency.Clp,
-            "djf" => DataPassthroughZuoraCurrency.Djf,
-            "gnf" => DataPassthroughZuoraCurrency.Gnf,
-            "ugx" => DataPassthroughZuoraCurrency.Ugx,
-            "pyg" => DataPassthroughZuoraCurrency.Pyg,
-            "xof" => DataPassthroughZuoraCurrency.Xof,
-            "xpf" => DataPassthroughZuoraCurrency.Xpf,
-            _ => (DataPassthroughZuoraCurrency)(-1),
+            "usd" => CustomerResponseDataPassthroughZuoraCurrency.Usd,
+            "aed" => CustomerResponseDataPassthroughZuoraCurrency.Aed,
+            "all" => CustomerResponseDataPassthroughZuoraCurrency.All,
+            "amd" => CustomerResponseDataPassthroughZuoraCurrency.Amd,
+            "ang" => CustomerResponseDataPassthroughZuoraCurrency.Ang,
+            "aud" => CustomerResponseDataPassthroughZuoraCurrency.Aud,
+            "awg" => CustomerResponseDataPassthroughZuoraCurrency.Awg,
+            "azn" => CustomerResponseDataPassthroughZuoraCurrency.Azn,
+            "bam" => CustomerResponseDataPassthroughZuoraCurrency.Bam,
+            "bbd" => CustomerResponseDataPassthroughZuoraCurrency.Bbd,
+            "bdt" => CustomerResponseDataPassthroughZuoraCurrency.Bdt,
+            "bgn" => CustomerResponseDataPassthroughZuoraCurrency.Bgn,
+            "bif" => CustomerResponseDataPassthroughZuoraCurrency.Bif,
+            "bmd" => CustomerResponseDataPassthroughZuoraCurrency.Bmd,
+            "bnd" => CustomerResponseDataPassthroughZuoraCurrency.Bnd,
+            "bsd" => CustomerResponseDataPassthroughZuoraCurrency.Bsd,
+            "bwp" => CustomerResponseDataPassthroughZuoraCurrency.Bwp,
+            "byn" => CustomerResponseDataPassthroughZuoraCurrency.Byn,
+            "bzd" => CustomerResponseDataPassthroughZuoraCurrency.Bzd,
+            "brl" => CustomerResponseDataPassthroughZuoraCurrency.Brl,
+            "cad" => CustomerResponseDataPassthroughZuoraCurrency.Cad,
+            "cdf" => CustomerResponseDataPassthroughZuoraCurrency.Cdf,
+            "chf" => CustomerResponseDataPassthroughZuoraCurrency.Chf,
+            "cny" => CustomerResponseDataPassthroughZuoraCurrency.Cny,
+            "czk" => CustomerResponseDataPassthroughZuoraCurrency.Czk,
+            "dkk" => CustomerResponseDataPassthroughZuoraCurrency.Dkk,
+            "dop" => CustomerResponseDataPassthroughZuoraCurrency.Dop,
+            "dzd" => CustomerResponseDataPassthroughZuoraCurrency.Dzd,
+            "egp" => CustomerResponseDataPassthroughZuoraCurrency.Egp,
+            "etb" => CustomerResponseDataPassthroughZuoraCurrency.Etb,
+            "eur" => CustomerResponseDataPassthroughZuoraCurrency.Eur,
+            "fjd" => CustomerResponseDataPassthroughZuoraCurrency.Fjd,
+            "gbp" => CustomerResponseDataPassthroughZuoraCurrency.Gbp,
+            "gel" => CustomerResponseDataPassthroughZuoraCurrency.Gel,
+            "gip" => CustomerResponseDataPassthroughZuoraCurrency.Gip,
+            "gmd" => CustomerResponseDataPassthroughZuoraCurrency.Gmd,
+            "gyd" => CustomerResponseDataPassthroughZuoraCurrency.Gyd,
+            "hkd" => CustomerResponseDataPassthroughZuoraCurrency.Hkd,
+            "hrk" => CustomerResponseDataPassthroughZuoraCurrency.Hrk,
+            "htg" => CustomerResponseDataPassthroughZuoraCurrency.Htg,
+            "idr" => CustomerResponseDataPassthroughZuoraCurrency.Idr,
+            "ils" => CustomerResponseDataPassthroughZuoraCurrency.Ils,
+            "inr" => CustomerResponseDataPassthroughZuoraCurrency.Inr,
+            "isk" => CustomerResponseDataPassthroughZuoraCurrency.Isk,
+            "jmd" => CustomerResponseDataPassthroughZuoraCurrency.Jmd,
+            "jpy" => CustomerResponseDataPassthroughZuoraCurrency.Jpy,
+            "kes" => CustomerResponseDataPassthroughZuoraCurrency.Kes,
+            "kgs" => CustomerResponseDataPassthroughZuoraCurrency.Kgs,
+            "khr" => CustomerResponseDataPassthroughZuoraCurrency.Khr,
+            "kmf" => CustomerResponseDataPassthroughZuoraCurrency.Kmf,
+            "krw" => CustomerResponseDataPassthroughZuoraCurrency.Krw,
+            "kyd" => CustomerResponseDataPassthroughZuoraCurrency.Kyd,
+            "kzt" => CustomerResponseDataPassthroughZuoraCurrency.Kzt,
+            "lbp" => CustomerResponseDataPassthroughZuoraCurrency.Lbp,
+            "lkr" => CustomerResponseDataPassthroughZuoraCurrency.Lkr,
+            "lrd" => CustomerResponseDataPassthroughZuoraCurrency.Lrd,
+            "lsl" => CustomerResponseDataPassthroughZuoraCurrency.Lsl,
+            "mad" => CustomerResponseDataPassthroughZuoraCurrency.Mad,
+            "mdl" => CustomerResponseDataPassthroughZuoraCurrency.Mdl,
+            "mga" => CustomerResponseDataPassthroughZuoraCurrency.Mga,
+            "mkd" => CustomerResponseDataPassthroughZuoraCurrency.Mkd,
+            "mmk" => CustomerResponseDataPassthroughZuoraCurrency.Mmk,
+            "mnt" => CustomerResponseDataPassthroughZuoraCurrency.Mnt,
+            "mop" => CustomerResponseDataPassthroughZuoraCurrency.Mop,
+            "mro" => CustomerResponseDataPassthroughZuoraCurrency.Mro,
+            "mvr" => CustomerResponseDataPassthroughZuoraCurrency.Mvr,
+            "mwk" => CustomerResponseDataPassthroughZuoraCurrency.Mwk,
+            "mxn" => CustomerResponseDataPassthroughZuoraCurrency.Mxn,
+            "myr" => CustomerResponseDataPassthroughZuoraCurrency.Myr,
+            "mzn" => CustomerResponseDataPassthroughZuoraCurrency.Mzn,
+            "nad" => CustomerResponseDataPassthroughZuoraCurrency.Nad,
+            "ngn" => CustomerResponseDataPassthroughZuoraCurrency.Ngn,
+            "nok" => CustomerResponseDataPassthroughZuoraCurrency.Nok,
+            "npr" => CustomerResponseDataPassthroughZuoraCurrency.Npr,
+            "nzd" => CustomerResponseDataPassthroughZuoraCurrency.Nzd,
+            "pgk" => CustomerResponseDataPassthroughZuoraCurrency.Pgk,
+            "php" => CustomerResponseDataPassthroughZuoraCurrency.Php,
+            "pkr" => CustomerResponseDataPassthroughZuoraCurrency.Pkr,
+            "pln" => CustomerResponseDataPassthroughZuoraCurrency.Pln,
+            "qar" => CustomerResponseDataPassthroughZuoraCurrency.Qar,
+            "ron" => CustomerResponseDataPassthroughZuoraCurrency.Ron,
+            "rsd" => CustomerResponseDataPassthroughZuoraCurrency.Rsd,
+            "rub" => CustomerResponseDataPassthroughZuoraCurrency.Rub,
+            "rwf" => CustomerResponseDataPassthroughZuoraCurrency.Rwf,
+            "sar" => CustomerResponseDataPassthroughZuoraCurrency.Sar,
+            "sbd" => CustomerResponseDataPassthroughZuoraCurrency.Sbd,
+            "scr" => CustomerResponseDataPassthroughZuoraCurrency.Scr,
+            "sek" => CustomerResponseDataPassthroughZuoraCurrency.Sek,
+            "sgd" => CustomerResponseDataPassthroughZuoraCurrency.Sgd,
+            "sle" => CustomerResponseDataPassthroughZuoraCurrency.Sle,
+            "sll" => CustomerResponseDataPassthroughZuoraCurrency.Sll,
+            "sos" => CustomerResponseDataPassthroughZuoraCurrency.Sos,
+            "szl" => CustomerResponseDataPassthroughZuoraCurrency.Szl,
+            "thb" => CustomerResponseDataPassthroughZuoraCurrency.Thb,
+            "tjs" => CustomerResponseDataPassthroughZuoraCurrency.Tjs,
+            "top" => CustomerResponseDataPassthroughZuoraCurrency.Top,
+            "try" => CustomerResponseDataPassthroughZuoraCurrency.Try,
+            "ttd" => CustomerResponseDataPassthroughZuoraCurrency.Ttd,
+            "tzs" => CustomerResponseDataPassthroughZuoraCurrency.Tzs,
+            "uah" => CustomerResponseDataPassthroughZuoraCurrency.Uah,
+            "uzs" => CustomerResponseDataPassthroughZuoraCurrency.Uzs,
+            "vnd" => CustomerResponseDataPassthroughZuoraCurrency.Vnd,
+            "vuv" => CustomerResponseDataPassthroughZuoraCurrency.Vuv,
+            "wst" => CustomerResponseDataPassthroughZuoraCurrency.Wst,
+            "xaf" => CustomerResponseDataPassthroughZuoraCurrency.Xaf,
+            "xcd" => CustomerResponseDataPassthroughZuoraCurrency.Xcd,
+            "yer" => CustomerResponseDataPassthroughZuoraCurrency.Yer,
+            "zar" => CustomerResponseDataPassthroughZuoraCurrency.Zar,
+            "zmw" => CustomerResponseDataPassthroughZuoraCurrency.Zmw,
+            "clp" => CustomerResponseDataPassthroughZuoraCurrency.Clp,
+            "djf" => CustomerResponseDataPassthroughZuoraCurrency.Djf,
+            "gnf" => CustomerResponseDataPassthroughZuoraCurrency.Gnf,
+            "ugx" => CustomerResponseDataPassthroughZuoraCurrency.Ugx,
+            "pyg" => CustomerResponseDataPassthroughZuoraCurrency.Pyg,
+            "xof" => CustomerResponseDataPassthroughZuoraCurrency.Xof,
+            "xpf" => CustomerResponseDataPassthroughZuoraCurrency.Xpf,
+            _ => (CustomerResponseDataPassthroughZuoraCurrency)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        DataPassthroughZuoraCurrency value,
+        CustomerResponseDataPassthroughZuoraCurrency value,
         JsonSerializerOptions options
     )
     {
@@ -2503,122 +2584,122 @@ sealed class DataPassthroughZuoraCurrencyConverter : JsonConverter<DataPassthrou
             writer,
             value switch
             {
-                DataPassthroughZuoraCurrency.Usd => "usd",
-                DataPassthroughZuoraCurrency.Aed => "aed",
-                DataPassthroughZuoraCurrency.All => "all",
-                DataPassthroughZuoraCurrency.Amd => "amd",
-                DataPassthroughZuoraCurrency.Ang => "ang",
-                DataPassthroughZuoraCurrency.Aud => "aud",
-                DataPassthroughZuoraCurrency.Awg => "awg",
-                DataPassthroughZuoraCurrency.Azn => "azn",
-                DataPassthroughZuoraCurrency.Bam => "bam",
-                DataPassthroughZuoraCurrency.Bbd => "bbd",
-                DataPassthroughZuoraCurrency.Bdt => "bdt",
-                DataPassthroughZuoraCurrency.Bgn => "bgn",
-                DataPassthroughZuoraCurrency.Bif => "bif",
-                DataPassthroughZuoraCurrency.Bmd => "bmd",
-                DataPassthroughZuoraCurrency.Bnd => "bnd",
-                DataPassthroughZuoraCurrency.Bsd => "bsd",
-                DataPassthroughZuoraCurrency.Bwp => "bwp",
-                DataPassthroughZuoraCurrency.Byn => "byn",
-                DataPassthroughZuoraCurrency.Bzd => "bzd",
-                DataPassthroughZuoraCurrency.Brl => "brl",
-                DataPassthroughZuoraCurrency.Cad => "cad",
-                DataPassthroughZuoraCurrency.Cdf => "cdf",
-                DataPassthroughZuoraCurrency.Chf => "chf",
-                DataPassthroughZuoraCurrency.Cny => "cny",
-                DataPassthroughZuoraCurrency.Czk => "czk",
-                DataPassthroughZuoraCurrency.Dkk => "dkk",
-                DataPassthroughZuoraCurrency.Dop => "dop",
-                DataPassthroughZuoraCurrency.Dzd => "dzd",
-                DataPassthroughZuoraCurrency.Egp => "egp",
-                DataPassthroughZuoraCurrency.Etb => "etb",
-                DataPassthroughZuoraCurrency.Eur => "eur",
-                DataPassthroughZuoraCurrency.Fjd => "fjd",
-                DataPassthroughZuoraCurrency.Gbp => "gbp",
-                DataPassthroughZuoraCurrency.Gel => "gel",
-                DataPassthroughZuoraCurrency.Gip => "gip",
-                DataPassthroughZuoraCurrency.Gmd => "gmd",
-                DataPassthroughZuoraCurrency.Gyd => "gyd",
-                DataPassthroughZuoraCurrency.Hkd => "hkd",
-                DataPassthroughZuoraCurrency.Hrk => "hrk",
-                DataPassthroughZuoraCurrency.Htg => "htg",
-                DataPassthroughZuoraCurrency.Idr => "idr",
-                DataPassthroughZuoraCurrency.Ils => "ils",
-                DataPassthroughZuoraCurrency.Inr => "inr",
-                DataPassthroughZuoraCurrency.Isk => "isk",
-                DataPassthroughZuoraCurrency.Jmd => "jmd",
-                DataPassthroughZuoraCurrency.Jpy => "jpy",
-                DataPassthroughZuoraCurrency.Kes => "kes",
-                DataPassthroughZuoraCurrency.Kgs => "kgs",
-                DataPassthroughZuoraCurrency.Khr => "khr",
-                DataPassthroughZuoraCurrency.Kmf => "kmf",
-                DataPassthroughZuoraCurrency.Krw => "krw",
-                DataPassthroughZuoraCurrency.Kyd => "kyd",
-                DataPassthroughZuoraCurrency.Kzt => "kzt",
-                DataPassthroughZuoraCurrency.Lbp => "lbp",
-                DataPassthroughZuoraCurrency.Lkr => "lkr",
-                DataPassthroughZuoraCurrency.Lrd => "lrd",
-                DataPassthroughZuoraCurrency.Lsl => "lsl",
-                DataPassthroughZuoraCurrency.Mad => "mad",
-                DataPassthroughZuoraCurrency.Mdl => "mdl",
-                DataPassthroughZuoraCurrency.Mga => "mga",
-                DataPassthroughZuoraCurrency.Mkd => "mkd",
-                DataPassthroughZuoraCurrency.Mmk => "mmk",
-                DataPassthroughZuoraCurrency.Mnt => "mnt",
-                DataPassthroughZuoraCurrency.Mop => "mop",
-                DataPassthroughZuoraCurrency.Mro => "mro",
-                DataPassthroughZuoraCurrency.Mvr => "mvr",
-                DataPassthroughZuoraCurrency.Mwk => "mwk",
-                DataPassthroughZuoraCurrency.Mxn => "mxn",
-                DataPassthroughZuoraCurrency.Myr => "myr",
-                DataPassthroughZuoraCurrency.Mzn => "mzn",
-                DataPassthroughZuoraCurrency.Nad => "nad",
-                DataPassthroughZuoraCurrency.Ngn => "ngn",
-                DataPassthroughZuoraCurrency.Nok => "nok",
-                DataPassthroughZuoraCurrency.Npr => "npr",
-                DataPassthroughZuoraCurrency.Nzd => "nzd",
-                DataPassthroughZuoraCurrency.Pgk => "pgk",
-                DataPassthroughZuoraCurrency.Php => "php",
-                DataPassthroughZuoraCurrency.Pkr => "pkr",
-                DataPassthroughZuoraCurrency.Pln => "pln",
-                DataPassthroughZuoraCurrency.Qar => "qar",
-                DataPassthroughZuoraCurrency.Ron => "ron",
-                DataPassthroughZuoraCurrency.Rsd => "rsd",
-                DataPassthroughZuoraCurrency.Rub => "rub",
-                DataPassthroughZuoraCurrency.Rwf => "rwf",
-                DataPassthroughZuoraCurrency.Sar => "sar",
-                DataPassthroughZuoraCurrency.Sbd => "sbd",
-                DataPassthroughZuoraCurrency.Scr => "scr",
-                DataPassthroughZuoraCurrency.Sek => "sek",
-                DataPassthroughZuoraCurrency.Sgd => "sgd",
-                DataPassthroughZuoraCurrency.Sle => "sle",
-                DataPassthroughZuoraCurrency.Sll => "sll",
-                DataPassthroughZuoraCurrency.Sos => "sos",
-                DataPassthroughZuoraCurrency.Szl => "szl",
-                DataPassthroughZuoraCurrency.Thb => "thb",
-                DataPassthroughZuoraCurrency.Tjs => "tjs",
-                DataPassthroughZuoraCurrency.Top => "top",
-                DataPassthroughZuoraCurrency.Try => "try",
-                DataPassthroughZuoraCurrency.Ttd => "ttd",
-                DataPassthroughZuoraCurrency.Tzs => "tzs",
-                DataPassthroughZuoraCurrency.Uah => "uah",
-                DataPassthroughZuoraCurrency.Uzs => "uzs",
-                DataPassthroughZuoraCurrency.Vnd => "vnd",
-                DataPassthroughZuoraCurrency.Vuv => "vuv",
-                DataPassthroughZuoraCurrency.Wst => "wst",
-                DataPassthroughZuoraCurrency.Xaf => "xaf",
-                DataPassthroughZuoraCurrency.Xcd => "xcd",
-                DataPassthroughZuoraCurrency.Yer => "yer",
-                DataPassthroughZuoraCurrency.Zar => "zar",
-                DataPassthroughZuoraCurrency.Zmw => "zmw",
-                DataPassthroughZuoraCurrency.Clp => "clp",
-                DataPassthroughZuoraCurrency.Djf => "djf",
-                DataPassthroughZuoraCurrency.Gnf => "gnf",
-                DataPassthroughZuoraCurrency.Ugx => "ugx",
-                DataPassthroughZuoraCurrency.Pyg => "pyg",
-                DataPassthroughZuoraCurrency.Xof => "xof",
-                DataPassthroughZuoraCurrency.Xpf => "xpf",
+                CustomerResponseDataPassthroughZuoraCurrency.Usd => "usd",
+                CustomerResponseDataPassthroughZuoraCurrency.Aed => "aed",
+                CustomerResponseDataPassthroughZuoraCurrency.All => "all",
+                CustomerResponseDataPassthroughZuoraCurrency.Amd => "amd",
+                CustomerResponseDataPassthroughZuoraCurrency.Ang => "ang",
+                CustomerResponseDataPassthroughZuoraCurrency.Aud => "aud",
+                CustomerResponseDataPassthroughZuoraCurrency.Awg => "awg",
+                CustomerResponseDataPassthroughZuoraCurrency.Azn => "azn",
+                CustomerResponseDataPassthroughZuoraCurrency.Bam => "bam",
+                CustomerResponseDataPassthroughZuoraCurrency.Bbd => "bbd",
+                CustomerResponseDataPassthroughZuoraCurrency.Bdt => "bdt",
+                CustomerResponseDataPassthroughZuoraCurrency.Bgn => "bgn",
+                CustomerResponseDataPassthroughZuoraCurrency.Bif => "bif",
+                CustomerResponseDataPassthroughZuoraCurrency.Bmd => "bmd",
+                CustomerResponseDataPassthroughZuoraCurrency.Bnd => "bnd",
+                CustomerResponseDataPassthroughZuoraCurrency.Bsd => "bsd",
+                CustomerResponseDataPassthroughZuoraCurrency.Bwp => "bwp",
+                CustomerResponseDataPassthroughZuoraCurrency.Byn => "byn",
+                CustomerResponseDataPassthroughZuoraCurrency.Bzd => "bzd",
+                CustomerResponseDataPassthroughZuoraCurrency.Brl => "brl",
+                CustomerResponseDataPassthroughZuoraCurrency.Cad => "cad",
+                CustomerResponseDataPassthroughZuoraCurrency.Cdf => "cdf",
+                CustomerResponseDataPassthroughZuoraCurrency.Chf => "chf",
+                CustomerResponseDataPassthroughZuoraCurrency.Cny => "cny",
+                CustomerResponseDataPassthroughZuoraCurrency.Czk => "czk",
+                CustomerResponseDataPassthroughZuoraCurrency.Dkk => "dkk",
+                CustomerResponseDataPassthroughZuoraCurrency.Dop => "dop",
+                CustomerResponseDataPassthroughZuoraCurrency.Dzd => "dzd",
+                CustomerResponseDataPassthroughZuoraCurrency.Egp => "egp",
+                CustomerResponseDataPassthroughZuoraCurrency.Etb => "etb",
+                CustomerResponseDataPassthroughZuoraCurrency.Eur => "eur",
+                CustomerResponseDataPassthroughZuoraCurrency.Fjd => "fjd",
+                CustomerResponseDataPassthroughZuoraCurrency.Gbp => "gbp",
+                CustomerResponseDataPassthroughZuoraCurrency.Gel => "gel",
+                CustomerResponseDataPassthroughZuoraCurrency.Gip => "gip",
+                CustomerResponseDataPassthroughZuoraCurrency.Gmd => "gmd",
+                CustomerResponseDataPassthroughZuoraCurrency.Gyd => "gyd",
+                CustomerResponseDataPassthroughZuoraCurrency.Hkd => "hkd",
+                CustomerResponseDataPassthroughZuoraCurrency.Hrk => "hrk",
+                CustomerResponseDataPassthroughZuoraCurrency.Htg => "htg",
+                CustomerResponseDataPassthroughZuoraCurrency.Idr => "idr",
+                CustomerResponseDataPassthroughZuoraCurrency.Ils => "ils",
+                CustomerResponseDataPassthroughZuoraCurrency.Inr => "inr",
+                CustomerResponseDataPassthroughZuoraCurrency.Isk => "isk",
+                CustomerResponseDataPassthroughZuoraCurrency.Jmd => "jmd",
+                CustomerResponseDataPassthroughZuoraCurrency.Jpy => "jpy",
+                CustomerResponseDataPassthroughZuoraCurrency.Kes => "kes",
+                CustomerResponseDataPassthroughZuoraCurrency.Kgs => "kgs",
+                CustomerResponseDataPassthroughZuoraCurrency.Khr => "khr",
+                CustomerResponseDataPassthroughZuoraCurrency.Kmf => "kmf",
+                CustomerResponseDataPassthroughZuoraCurrency.Krw => "krw",
+                CustomerResponseDataPassthroughZuoraCurrency.Kyd => "kyd",
+                CustomerResponseDataPassthroughZuoraCurrency.Kzt => "kzt",
+                CustomerResponseDataPassthroughZuoraCurrency.Lbp => "lbp",
+                CustomerResponseDataPassthroughZuoraCurrency.Lkr => "lkr",
+                CustomerResponseDataPassthroughZuoraCurrency.Lrd => "lrd",
+                CustomerResponseDataPassthroughZuoraCurrency.Lsl => "lsl",
+                CustomerResponseDataPassthroughZuoraCurrency.Mad => "mad",
+                CustomerResponseDataPassthroughZuoraCurrency.Mdl => "mdl",
+                CustomerResponseDataPassthroughZuoraCurrency.Mga => "mga",
+                CustomerResponseDataPassthroughZuoraCurrency.Mkd => "mkd",
+                CustomerResponseDataPassthroughZuoraCurrency.Mmk => "mmk",
+                CustomerResponseDataPassthroughZuoraCurrency.Mnt => "mnt",
+                CustomerResponseDataPassthroughZuoraCurrency.Mop => "mop",
+                CustomerResponseDataPassthroughZuoraCurrency.Mro => "mro",
+                CustomerResponseDataPassthroughZuoraCurrency.Mvr => "mvr",
+                CustomerResponseDataPassthroughZuoraCurrency.Mwk => "mwk",
+                CustomerResponseDataPassthroughZuoraCurrency.Mxn => "mxn",
+                CustomerResponseDataPassthroughZuoraCurrency.Myr => "myr",
+                CustomerResponseDataPassthroughZuoraCurrency.Mzn => "mzn",
+                CustomerResponseDataPassthroughZuoraCurrency.Nad => "nad",
+                CustomerResponseDataPassthroughZuoraCurrency.Ngn => "ngn",
+                CustomerResponseDataPassthroughZuoraCurrency.Nok => "nok",
+                CustomerResponseDataPassthroughZuoraCurrency.Npr => "npr",
+                CustomerResponseDataPassthroughZuoraCurrency.Nzd => "nzd",
+                CustomerResponseDataPassthroughZuoraCurrency.Pgk => "pgk",
+                CustomerResponseDataPassthroughZuoraCurrency.Php => "php",
+                CustomerResponseDataPassthroughZuoraCurrency.Pkr => "pkr",
+                CustomerResponseDataPassthroughZuoraCurrency.Pln => "pln",
+                CustomerResponseDataPassthroughZuoraCurrency.Qar => "qar",
+                CustomerResponseDataPassthroughZuoraCurrency.Ron => "ron",
+                CustomerResponseDataPassthroughZuoraCurrency.Rsd => "rsd",
+                CustomerResponseDataPassthroughZuoraCurrency.Rub => "rub",
+                CustomerResponseDataPassthroughZuoraCurrency.Rwf => "rwf",
+                CustomerResponseDataPassthroughZuoraCurrency.Sar => "sar",
+                CustomerResponseDataPassthroughZuoraCurrency.Sbd => "sbd",
+                CustomerResponseDataPassthroughZuoraCurrency.Scr => "scr",
+                CustomerResponseDataPassthroughZuoraCurrency.Sek => "sek",
+                CustomerResponseDataPassthroughZuoraCurrency.Sgd => "sgd",
+                CustomerResponseDataPassthroughZuoraCurrency.Sle => "sle",
+                CustomerResponseDataPassthroughZuoraCurrency.Sll => "sll",
+                CustomerResponseDataPassthroughZuoraCurrency.Sos => "sos",
+                CustomerResponseDataPassthroughZuoraCurrency.Szl => "szl",
+                CustomerResponseDataPassthroughZuoraCurrency.Thb => "thb",
+                CustomerResponseDataPassthroughZuoraCurrency.Tjs => "tjs",
+                CustomerResponseDataPassthroughZuoraCurrency.Top => "top",
+                CustomerResponseDataPassthroughZuoraCurrency.Try => "try",
+                CustomerResponseDataPassthroughZuoraCurrency.Ttd => "ttd",
+                CustomerResponseDataPassthroughZuoraCurrency.Tzs => "tzs",
+                CustomerResponseDataPassthroughZuoraCurrency.Uah => "uah",
+                CustomerResponseDataPassthroughZuoraCurrency.Uzs => "uzs",
+                CustomerResponseDataPassthroughZuoraCurrency.Vnd => "vnd",
+                CustomerResponseDataPassthroughZuoraCurrency.Vuv => "vuv",
+                CustomerResponseDataPassthroughZuoraCurrency.Wst => "wst",
+                CustomerResponseDataPassthroughZuoraCurrency.Xaf => "xaf",
+                CustomerResponseDataPassthroughZuoraCurrency.Xcd => "xcd",
+                CustomerResponseDataPassthroughZuoraCurrency.Yer => "yer",
+                CustomerResponseDataPassthroughZuoraCurrency.Zar => "zar",
+                CustomerResponseDataPassthroughZuoraCurrency.Zmw => "zmw",
+                CustomerResponseDataPassthroughZuoraCurrency.Clp => "clp",
+                CustomerResponseDataPassthroughZuoraCurrency.Djf => "djf",
+                CustomerResponseDataPassthroughZuoraCurrency.Gnf => "gnf",
+                CustomerResponseDataPassthroughZuoraCurrency.Ugx => "ugx",
+                CustomerResponseDataPassthroughZuoraCurrency.Pyg => "pyg",
+                CustomerResponseDataPassthroughZuoraCurrency.Xof => "xof",
+                CustomerResponseDataPassthroughZuoraCurrency.Xpf => "xpf",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

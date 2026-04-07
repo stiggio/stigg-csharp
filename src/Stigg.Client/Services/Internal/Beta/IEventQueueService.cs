@@ -29,13 +29,13 @@ public interface IEventQueueService
     /// <summary>
     /// Get event queue by queue name
     /// </summary>
-    Task<EventQueueRetrieveResponse> Retrieve(
+    Task<EventQueueResponse> Retrieve(
         EventQueueRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Retrieve(EventQueueRetrieveParams, CancellationToken)"/>
-    Task<EventQueueRetrieveResponse> Retrieve(
+    Task<EventQueueResponse> Retrieve(
         string queueName,
         EventQueueRetrieveParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -44,13 +44,13 @@ public interface IEventQueueService
     /// <summary>
     /// Update event queue configuration
     /// </summary>
-    Task<EventQueueUpdateResponse> Update(
+    Task<EventQueueResponse> Update(
         EventQueueUpdateParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Update(EventQueueUpdateParams, CancellationToken)"/>
-    Task<EventQueueUpdateResponse> Update(
+    Task<EventQueueResponse> Update(
         string queueName,
         EventQueueUpdateParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -67,13 +67,13 @@ public interface IEventQueueService
     /// <summary>
     /// Delete an event queue and tear down its infrastructure
     /// </summary>
-    Task<EventQueueDeleteResponse> Delete(
+    Task<EventQueueResponse> Delete(
         EventQueueDeleteParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Delete(EventQueueDeleteParams, CancellationToken)"/>
-    Task<EventQueueDeleteResponse> Delete(
+    Task<EventQueueResponse> Delete(
         string queueName,
         EventQueueDeleteParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -82,7 +82,7 @@ public interface IEventQueueService
     /// <summary>
     /// Provision SQS queue, SNS subscriptions, and IAM role for the current environment
     /// </summary>
-    Task<EventQueueProvisionResponse> Provision(
+    Task<EventQueueResponse> Provision(
         EventQueueProvisionParams parameters,
         CancellationToken cancellationToken = default
     );
@@ -105,13 +105,13 @@ public interface IEventQueueServiceWithRawResponse
     /// Returns a raw HTTP response for <c>get /internal/beta/event-queues/{queueName}</c>, but is otherwise the
     /// same as <see cref="IEventQueueService.Retrieve(EventQueueRetrieveParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<EventQueueRetrieveResponse>> Retrieve(
+    Task<HttpResponse<EventQueueResponse>> Retrieve(
         EventQueueRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Retrieve(EventQueueRetrieveParams, CancellationToken)"/>
-    Task<HttpResponse<EventQueueRetrieveResponse>> Retrieve(
+    Task<HttpResponse<EventQueueResponse>> Retrieve(
         string queueName,
         EventQueueRetrieveParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -121,13 +121,13 @@ public interface IEventQueueServiceWithRawResponse
     /// Returns a raw HTTP response for <c>patch /internal/beta/event-queues/{queueName}</c>, but is otherwise the
     /// same as <see cref="IEventQueueService.Update(EventQueueUpdateParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<EventQueueUpdateResponse>> Update(
+    Task<HttpResponse<EventQueueResponse>> Update(
         EventQueueUpdateParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Update(EventQueueUpdateParams, CancellationToken)"/>
-    Task<HttpResponse<EventQueueUpdateResponse>> Update(
+    Task<HttpResponse<EventQueueResponse>> Update(
         string queueName,
         EventQueueUpdateParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -146,13 +146,13 @@ public interface IEventQueueServiceWithRawResponse
     /// Returns a raw HTTP response for <c>delete /internal/beta/event-queues/{queueName}</c>, but is otherwise the
     /// same as <see cref="IEventQueueService.Delete(EventQueueDeleteParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<EventQueueDeleteResponse>> Delete(
+    Task<HttpResponse<EventQueueResponse>> Delete(
         EventQueueDeleteParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Delete(EventQueueDeleteParams, CancellationToken)"/>
-    Task<HttpResponse<EventQueueDeleteResponse>> Delete(
+    Task<HttpResponse<EventQueueResponse>> Delete(
         string queueName,
         EventQueueDeleteParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -162,7 +162,7 @@ public interface IEventQueueServiceWithRawResponse
     /// Returns a raw HTTP response for <c>post /internal/beta/event-queues/provision</c>, but is otherwise the
     /// same as <see cref="IEventQueueService.Provision(EventQueueProvisionParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<EventQueueProvisionResponse>> Provision(
+    Task<HttpResponse<EventQueueResponse>> Provision(
         EventQueueProvisionParams parameters,
         CancellationToken cancellationToken = default
     );

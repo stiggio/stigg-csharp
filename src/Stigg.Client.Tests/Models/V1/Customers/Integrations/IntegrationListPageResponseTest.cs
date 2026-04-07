@@ -19,7 +19,7 @@ public class IntegrationListPageResponseTest : TestBase
                     ID = "id",
                     SyncedEntityID = "syncedEntityId",
                     VendorIdentifier = IntegrationListResponseVendorIdentifier.Auth0,
-                    SyncData = new IntegrationListResponseSyncDataSyncRevisionPriceBillingData()
+                    SyncData = new SyncRevisionPriceBillingData()
                     {
                         BillingID = "billingId",
                         BillingLinkUrl = "billingLinkUrl",
@@ -41,7 +41,7 @@ public class IntegrationListPageResponseTest : TestBase
                 ID = "id",
                 SyncedEntityID = "syncedEntityId",
                 VendorIdentifier = IntegrationListResponseVendorIdentifier.Auth0,
-                SyncData = new IntegrationListResponseSyncDataSyncRevisionPriceBillingData()
+                SyncData = new SyncRevisionPriceBillingData()
                 {
                     BillingID = "billingId",
                     BillingLinkUrl = "billingLinkUrl",
@@ -75,7 +75,7 @@ public class IntegrationListPageResponseTest : TestBase
                     ID = "id",
                     SyncedEntityID = "syncedEntityId",
                     VendorIdentifier = IntegrationListResponseVendorIdentifier.Auth0,
-                    SyncData = new IntegrationListResponseSyncDataSyncRevisionPriceBillingData()
+                    SyncData = new SyncRevisionPriceBillingData()
                     {
                         BillingID = "billingId",
                         BillingLinkUrl = "billingLinkUrl",
@@ -111,7 +111,7 @@ public class IntegrationListPageResponseTest : TestBase
                     ID = "id",
                     SyncedEntityID = "syncedEntityId",
                     VendorIdentifier = IntegrationListResponseVendorIdentifier.Auth0,
-                    SyncData = new IntegrationListResponseSyncDataSyncRevisionPriceBillingData()
+                    SyncData = new SyncRevisionPriceBillingData()
                     {
                         BillingID = "billingId",
                         BillingLinkUrl = "billingLinkUrl",
@@ -140,7 +140,7 @@ public class IntegrationListPageResponseTest : TestBase
                 ID = "id",
                 SyncedEntityID = "syncedEntityId",
                 VendorIdentifier = IntegrationListResponseVendorIdentifier.Auth0,
-                SyncData = new IntegrationListResponseSyncDataSyncRevisionPriceBillingData()
+                SyncData = new SyncRevisionPriceBillingData()
                 {
                     BillingID = "billingId",
                     BillingLinkUrl = "billingLinkUrl",
@@ -174,7 +174,7 @@ public class IntegrationListPageResponseTest : TestBase
                     ID = "id",
                     SyncedEntityID = "syncedEntityId",
                     VendorIdentifier = IntegrationListResponseVendorIdentifier.Auth0,
-                    SyncData = new IntegrationListResponseSyncDataSyncRevisionPriceBillingData()
+                    SyncData = new SyncRevisionPriceBillingData()
                     {
                         BillingID = "billingId",
                         BillingLinkUrl = "billingLinkUrl",
@@ -204,7 +204,7 @@ public class IntegrationListPageResponseTest : TestBase
                     ID = "id",
                     SyncedEntityID = "syncedEntityId",
                     VendorIdentifier = IntegrationListResponseVendorIdentifier.Auth0,
-                    SyncData = new IntegrationListResponseSyncDataSyncRevisionPriceBillingData()
+                    SyncData = new SyncRevisionPriceBillingData()
                     {
                         BillingID = "billingId",
                         BillingLinkUrl = "billingLinkUrl",

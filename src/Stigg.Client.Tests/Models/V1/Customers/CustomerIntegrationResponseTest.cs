@@ -1,23 +1,23 @@
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
-using Stigg.Client.Models.V1.Customers.Integrations;
+using Stigg.Client.Models.V1.Customers;
 
-namespace Stigg.Client.Tests.Models.V1.Customers.Integrations;
+namespace Stigg.Client.Tests.Models.V1.Customers;
 
-public class IntegrationUnlinkResponseTest : TestBase
+public class CustomerIntegrationResponseTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new IntegrationUnlinkResponse
+        var model = new CustomerIntegrationResponse
         {
             Data = new()
             {
                 ID = "id",
                 SyncedEntityID = "syncedEntityId",
-                VendorIdentifier = IntegrationUnlinkResponseDataVendorIdentifier.Auth0,
-                SyncData = new IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData()
+                VendorIdentifier = DataVendorIdentifier.Auth0,
+                SyncData = new SyncRevisionPriceBillingData()
                 {
                     BillingID = "billingId",
                     BillingLinkUrl = "billingLinkUrl",
@@ -26,12 +26,12 @@ public class IntegrationUnlinkResponseTest : TestBase
             },
         };
 
-        IntegrationUnlinkResponseData expectedData = new()
+        Data expectedData = new()
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = IntegrationUnlinkResponseDataVendorIdentifier.Auth0,
-            SyncData = new IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData()
+            VendorIdentifier = DataVendorIdentifier.Auth0,
+            SyncData = new SyncRevisionPriceBillingData()
             {
                 BillingID = "billingId",
                 BillingLinkUrl = "billingLinkUrl",
@@ -45,14 +45,14 @@ public class IntegrationUnlinkResponseTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new IntegrationUnlinkResponse
+        var model = new CustomerIntegrationResponse
         {
             Data = new()
             {
                 ID = "id",
                 SyncedEntityID = "syncedEntityId",
-                VendorIdentifier = IntegrationUnlinkResponseDataVendorIdentifier.Auth0,
-                SyncData = new IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData()
+                VendorIdentifier = DataVendorIdentifier.Auth0,
+                SyncData = new SyncRevisionPriceBillingData()
                 {
                     BillingID = "billingId",
                     BillingLinkUrl = "billingLinkUrl",
@@ -62,7 +62,7 @@ public class IntegrationUnlinkResponseTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<IntegrationUnlinkResponse>(
+        var deserialized = JsonSerializer.Deserialize<CustomerIntegrationResponse>(
             json,
             ModelBase.SerializerOptions
         );
@@ -73,14 +73,14 @@ public class IntegrationUnlinkResponseTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new IntegrationUnlinkResponse
+        var model = new CustomerIntegrationResponse
         {
             Data = new()
             {
                 ID = "id",
                 SyncedEntityID = "syncedEntityId",
-                VendorIdentifier = IntegrationUnlinkResponseDataVendorIdentifier.Auth0,
-                SyncData = new IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData()
+                VendorIdentifier = DataVendorIdentifier.Auth0,
+                SyncData = new SyncRevisionPriceBillingData()
                 {
                     BillingID = "billingId",
                     BillingLinkUrl = "billingLinkUrl",
@@ -90,18 +90,18 @@ public class IntegrationUnlinkResponseTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<IntegrationUnlinkResponse>(
+        var deserialized = JsonSerializer.Deserialize<CustomerIntegrationResponse>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
-        IntegrationUnlinkResponseData expectedData = new()
+        Data expectedData = new()
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = IntegrationUnlinkResponseDataVendorIdentifier.Auth0,
-            SyncData = new IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData()
+            VendorIdentifier = DataVendorIdentifier.Auth0,
+            SyncData = new SyncRevisionPriceBillingData()
             {
                 BillingID = "billingId",
                 BillingLinkUrl = "billingLinkUrl",
@@ -115,14 +115,14 @@ public class IntegrationUnlinkResponseTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new IntegrationUnlinkResponse
+        var model = new CustomerIntegrationResponse
         {
             Data = new()
             {
                 ID = "id",
                 SyncedEntityID = "syncedEntityId",
-                VendorIdentifier = IntegrationUnlinkResponseDataVendorIdentifier.Auth0,
-                SyncData = new IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData()
+                VendorIdentifier = DataVendorIdentifier.Auth0,
+                SyncData = new SyncRevisionPriceBillingData()
                 {
                     BillingID = "billingId",
                     BillingLinkUrl = "billingLinkUrl",
@@ -137,14 +137,14 @@ public class IntegrationUnlinkResponseTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new IntegrationUnlinkResponse
+        var model = new CustomerIntegrationResponse
         {
             Data = new()
             {
                 ID = "id",
                 SyncedEntityID = "syncedEntityId",
-                VendorIdentifier = IntegrationUnlinkResponseDataVendorIdentifier.Auth0,
-                SyncData = new IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData()
+                VendorIdentifier = DataVendorIdentifier.Auth0,
+                SyncData = new SyncRevisionPriceBillingData()
                 {
                     BillingID = "billingId",
                     BillingLinkUrl = "billingLinkUrl",
@@ -153,23 +153,23 @@ public class IntegrationUnlinkResponseTest : TestBase
             },
         };
 
-        IntegrationUnlinkResponse copied = new(model);
+        CustomerIntegrationResponse copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class IntegrationUnlinkResponseDataTest : TestBase
+public class DataTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new IntegrationUnlinkResponseData
+        var model = new Data
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = IntegrationUnlinkResponseDataVendorIdentifier.Auth0,
-            SyncData = new IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData()
+            VendorIdentifier = DataVendorIdentifier.Auth0,
+            SyncData = new SyncRevisionPriceBillingData()
             {
                 BillingID = "billingId",
                 BillingLinkUrl = "billingLinkUrl",
@@ -179,15 +179,13 @@ public class IntegrationUnlinkResponseDataTest : TestBase
 
         string expectedID = "id";
         string expectedSyncedEntityID = "syncedEntityId";
-        ApiEnum<string, IntegrationUnlinkResponseDataVendorIdentifier> expectedVendorIdentifier =
-            IntegrationUnlinkResponseDataVendorIdentifier.Auth0;
-        IntegrationUnlinkResponseDataSyncData expectedSyncData =
-            new IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData()
-            {
-                BillingID = "billingId",
-                BillingLinkUrl = "billingLinkUrl",
-                PriceGroupPackageBillingID = "priceGroupPackageBillingId",
-            };
+        ApiEnum<string, DataVendorIdentifier> expectedVendorIdentifier = DataVendorIdentifier.Auth0;
+        SyncData expectedSyncData = new SyncRevisionPriceBillingData()
+        {
+            BillingID = "billingId",
+            BillingLinkUrl = "billingLinkUrl",
+            PriceGroupPackageBillingID = "priceGroupPackageBillingId",
+        };
 
         Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedSyncedEntityID, model.SyncedEntityID);
@@ -198,12 +196,12 @@ public class IntegrationUnlinkResponseDataTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new IntegrationUnlinkResponseData
+        var model = new Data
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = IntegrationUnlinkResponseDataVendorIdentifier.Auth0,
-            SyncData = new IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData()
+            VendorIdentifier = DataVendorIdentifier.Auth0,
+            SyncData = new SyncRevisionPriceBillingData()
             {
                 BillingID = "billingId",
                 BillingLinkUrl = "billingLinkUrl",
@@ -212,10 +210,7 @@ public class IntegrationUnlinkResponseDataTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<IntegrationUnlinkResponseData>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Data>(json, ModelBase.SerializerOptions);
 
         Assert.Equal(model, deserialized);
     }
@@ -223,12 +218,12 @@ public class IntegrationUnlinkResponseDataTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new IntegrationUnlinkResponseData
+        var model = new Data
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = IntegrationUnlinkResponseDataVendorIdentifier.Auth0,
-            SyncData = new IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData()
+            VendorIdentifier = DataVendorIdentifier.Auth0,
+            SyncData = new SyncRevisionPriceBillingData()
             {
                 BillingID = "billingId",
                 BillingLinkUrl = "billingLinkUrl",
@@ -237,23 +232,18 @@ public class IntegrationUnlinkResponseDataTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<IntegrationUnlinkResponseData>(
-            element,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
         string expectedSyncedEntityID = "syncedEntityId";
-        ApiEnum<string, IntegrationUnlinkResponseDataVendorIdentifier> expectedVendorIdentifier =
-            IntegrationUnlinkResponseDataVendorIdentifier.Auth0;
-        IntegrationUnlinkResponseDataSyncData expectedSyncData =
-            new IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData()
-            {
-                BillingID = "billingId",
-                BillingLinkUrl = "billingLinkUrl",
-                PriceGroupPackageBillingID = "priceGroupPackageBillingId",
-            };
+        ApiEnum<string, DataVendorIdentifier> expectedVendorIdentifier = DataVendorIdentifier.Auth0;
+        SyncData expectedSyncData = new SyncRevisionPriceBillingData()
+        {
+            BillingID = "billingId",
+            BillingLinkUrl = "billingLinkUrl",
+            PriceGroupPackageBillingID = "priceGroupPackageBillingId",
+        };
 
         Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedSyncedEntityID, deserialized.SyncedEntityID);
@@ -264,12 +254,12 @@ public class IntegrationUnlinkResponseDataTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new IntegrationUnlinkResponseData
+        var model = new Data
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = IntegrationUnlinkResponseDataVendorIdentifier.Auth0,
-            SyncData = new IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData()
+            VendorIdentifier = DataVendorIdentifier.Auth0,
+            SyncData = new SyncRevisionPriceBillingData()
             {
                 BillingID = "billingId",
                 BillingLinkUrl = "billingLinkUrl",
@@ -283,11 +273,11 @@ public class IntegrationUnlinkResponseDataTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new IntegrationUnlinkResponseData
+        var model = new Data
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = IntegrationUnlinkResponseDataVendorIdentifier.Auth0,
+            VendorIdentifier = DataVendorIdentifier.Auth0,
         };
 
         Assert.Null(model.SyncData);
@@ -297,11 +287,11 @@ public class IntegrationUnlinkResponseDataTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new IntegrationUnlinkResponseData
+        var model = new Data
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = IntegrationUnlinkResponseDataVendorIdentifier.Auth0,
+            VendorIdentifier = DataVendorIdentifier.Auth0,
         };
 
         model.Validate();
@@ -310,11 +300,11 @@ public class IntegrationUnlinkResponseDataTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new IntegrationUnlinkResponseData
+        var model = new Data
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = IntegrationUnlinkResponseDataVendorIdentifier.Auth0,
+            VendorIdentifier = DataVendorIdentifier.Auth0,
 
             SyncData = null,
         };
@@ -326,11 +316,11 @@ public class IntegrationUnlinkResponseDataTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new IntegrationUnlinkResponseData
+        var model = new Data
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = IntegrationUnlinkResponseDataVendorIdentifier.Auth0,
+            VendorIdentifier = DataVendorIdentifier.Auth0,
 
             SyncData = null,
         };
@@ -341,12 +331,12 @@ public class IntegrationUnlinkResponseDataTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new IntegrationUnlinkResponseData
+        var model = new Data
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = IntegrationUnlinkResponseDataVendorIdentifier.Auth0,
-            SyncData = new IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData()
+            VendorIdentifier = DataVendorIdentifier.Auth0,
+            SyncData = new SyncRevisionPriceBillingData()
             {
                 BillingID = "billingId",
                 BillingLinkUrl = "billingLinkUrl",
@@ -354,63 +344,65 @@ public class IntegrationUnlinkResponseDataTest : TestBase
             },
         };
 
-        IntegrationUnlinkResponseData copied = new(model);
+        Data copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class IntegrationUnlinkResponseDataVendorIdentifierTest : TestBase
+public class DataVendorIdentifierTest : TestBase
 {
     [Theory]
-    [InlineData(IntegrationUnlinkResponseDataVendorIdentifier.Auth0)]
-    [InlineData(IntegrationUnlinkResponseDataVendorIdentifier.Zuora)]
-    [InlineData(IntegrationUnlinkResponseDataVendorIdentifier.Stripe)]
-    [InlineData(IntegrationUnlinkResponseDataVendorIdentifier.Hubspot)]
-    [InlineData(IntegrationUnlinkResponseDataVendorIdentifier.AwsMarketplace)]
-    [InlineData(IntegrationUnlinkResponseDataVendorIdentifier.Snowflake)]
-    [InlineData(IntegrationUnlinkResponseDataVendorIdentifier.Salesforce)]
-    [InlineData(IntegrationUnlinkResponseDataVendorIdentifier.BigQuery)]
-    [InlineData(IntegrationUnlinkResponseDataVendorIdentifier.OpenFga)]
-    [InlineData(IntegrationUnlinkResponseDataVendorIdentifier.AppStore)]
-    public void Validation_Works(IntegrationUnlinkResponseDataVendorIdentifier rawValue)
+    [InlineData(DataVendorIdentifier.Auth0)]
+    [InlineData(DataVendorIdentifier.Zuora)]
+    [InlineData(DataVendorIdentifier.Stripe)]
+    [InlineData(DataVendorIdentifier.Hubspot)]
+    [InlineData(DataVendorIdentifier.AwsMarketplace)]
+    [InlineData(DataVendorIdentifier.Snowflake)]
+    [InlineData(DataVendorIdentifier.Salesforce)]
+    [InlineData(DataVendorIdentifier.BigQuery)]
+    [InlineData(DataVendorIdentifier.OpenFga)]
+    [InlineData(DataVendorIdentifier.AppStore)]
+    public void Validation_Works(DataVendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, IntegrationUnlinkResponseDataVendorIdentifier> value = rawValue;
+        ApiEnum<string, DataVendorIdentifier> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, IntegrationUnlinkResponseDataVendorIdentifier>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataVendorIdentifier>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
 
         Assert.NotNull(value);
         Assert.Throws<StiggInvalidDataException>(() => value.Validate());
     }
 
     [Theory]
-    [InlineData(IntegrationUnlinkResponseDataVendorIdentifier.Auth0)]
-    [InlineData(IntegrationUnlinkResponseDataVendorIdentifier.Zuora)]
-    [InlineData(IntegrationUnlinkResponseDataVendorIdentifier.Stripe)]
-    [InlineData(IntegrationUnlinkResponseDataVendorIdentifier.Hubspot)]
-    [InlineData(IntegrationUnlinkResponseDataVendorIdentifier.AwsMarketplace)]
-    [InlineData(IntegrationUnlinkResponseDataVendorIdentifier.Snowflake)]
-    [InlineData(IntegrationUnlinkResponseDataVendorIdentifier.Salesforce)]
-    [InlineData(IntegrationUnlinkResponseDataVendorIdentifier.BigQuery)]
-    [InlineData(IntegrationUnlinkResponseDataVendorIdentifier.OpenFga)]
-    [InlineData(IntegrationUnlinkResponseDataVendorIdentifier.AppStore)]
-    public void SerializationRoundtrip_Works(IntegrationUnlinkResponseDataVendorIdentifier rawValue)
+    [InlineData(DataVendorIdentifier.Auth0)]
+    [InlineData(DataVendorIdentifier.Zuora)]
+    [InlineData(DataVendorIdentifier.Stripe)]
+    [InlineData(DataVendorIdentifier.Hubspot)]
+    [InlineData(DataVendorIdentifier.AwsMarketplace)]
+    [InlineData(DataVendorIdentifier.Snowflake)]
+    [InlineData(DataVendorIdentifier.Salesforce)]
+    [InlineData(DataVendorIdentifier.BigQuery)]
+    [InlineData(DataVendorIdentifier.OpenFga)]
+    [InlineData(DataVendorIdentifier.AppStore)]
+    public void SerializationRoundtrip_Works(DataVendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, IntegrationUnlinkResponseDataVendorIdentifier> value = rawValue;
+        ApiEnum<string, DataVendorIdentifier> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, IntegrationUnlinkResponseDataVendorIdentifier>
-        >(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataVendorIdentifier>>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(value, deserialized);
     }
@@ -418,65 +410,63 @@ public class IntegrationUnlinkResponseDataVendorIdentifierTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<
-            ApiEnum<string, IntegrationUnlinkResponseDataVendorIdentifier>
-        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataVendorIdentifier>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, IntegrationUnlinkResponseDataVendorIdentifier>
-        >(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataVendorIdentifier>>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(value, deserialized);
     }
 }
 
-public class IntegrationUnlinkResponseDataSyncDataTest : TestBase
+public class SyncDataTest : TestBase
 {
     [Fact]
     public void RevisionPriceBillingValidationWorks()
     {
-        IntegrationUnlinkResponseDataSyncData value =
-            new IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData()
-            {
-                BillingID = "billingId",
-                BillingLinkUrl = "billingLinkUrl",
-                PriceGroupPackageBillingID = "priceGroupPackageBillingId",
-            };
+        SyncData value = new SyncRevisionPriceBillingData()
+        {
+            BillingID = "billingId",
+            BillingLinkUrl = "billingLinkUrl",
+            PriceGroupPackageBillingID = "priceGroupPackageBillingId",
+        };
         value.Validate();
     }
 
     [Fact]
     public void RevisionBillingValidationWorks()
     {
-        IntegrationUnlinkResponseDataSyncData value =
-            new IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData()
-            {
-                BillingID = "billingId",
-                BillingLinkUrl = "billingLinkUrl",
-            };
+        SyncData value = new SyncRevisionBillingData()
+        {
+            BillingID = "billingId",
+            BillingLinkUrl = "billingLinkUrl",
+        };
         value.Validate();
     }
 
     [Fact]
     public void RevisionMarketplaceValidationWorks()
     {
-        IntegrationUnlinkResponseDataSyncData value =
-            new IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData("dimensions");
+        SyncData value = new SyncRevisionMarketplaceData("dimensions");
         value.Validate();
     }
 
     [Fact]
     public void RevisionPriceBillingSerializationRoundtripWorks()
     {
-        IntegrationUnlinkResponseDataSyncData value =
-            new IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData()
-            {
-                BillingID = "billingId",
-                BillingLinkUrl = "billingLinkUrl",
-                PriceGroupPackageBillingID = "priceGroupPackageBillingId",
-            };
+        SyncData value = new SyncRevisionPriceBillingData()
+        {
+            BillingID = "billingId",
+            BillingLinkUrl = "billingLinkUrl",
+            PriceGroupPackageBillingID = "priceGroupPackageBillingId",
+        };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<IntegrationUnlinkResponseDataSyncData>(
+        var deserialized = JsonSerializer.Deserialize<SyncData>(
             element,
             ModelBase.SerializerOptions
         );
@@ -487,14 +477,13 @@ public class IntegrationUnlinkResponseDataSyncDataTest : TestBase
     [Fact]
     public void RevisionBillingSerializationRoundtripWorks()
     {
-        IntegrationUnlinkResponseDataSyncData value =
-            new IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData()
-            {
-                BillingID = "billingId",
-                BillingLinkUrl = "billingLinkUrl",
-            };
+        SyncData value = new SyncRevisionBillingData()
+        {
+            BillingID = "billingId",
+            BillingLinkUrl = "billingLinkUrl",
+        };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<IntegrationUnlinkResponseDataSyncData>(
+        var deserialized = JsonSerializer.Deserialize<SyncData>(
             element,
             ModelBase.SerializerOptions
         );
@@ -505,10 +494,9 @@ public class IntegrationUnlinkResponseDataSyncDataTest : TestBase
     [Fact]
     public void RevisionMarketplaceSerializationRoundtripWorks()
     {
-        IntegrationUnlinkResponseDataSyncData value =
-            new IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData("dimensions");
+        SyncData value = new SyncRevisionMarketplaceData("dimensions");
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<IntegrationUnlinkResponseDataSyncData>(
+        var deserialized = JsonSerializer.Deserialize<SyncData>(
             element,
             ModelBase.SerializerOptions
         );
@@ -517,12 +505,12 @@ public class IntegrationUnlinkResponseDataSyncDataTest : TestBase
     }
 }
 
-public class IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingDataTest : TestBase
+public class SyncRevisionPriceBillingDataTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData
+        var model = new SyncRevisionPriceBillingData
         {
             BillingID = "billingId",
             BillingLinkUrl = "billingLinkUrl",
@@ -541,7 +529,7 @@ public class IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingDataTe
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData
+        var model = new SyncRevisionPriceBillingData
         {
             BillingID = "billingId",
             BillingLinkUrl = "billingLinkUrl",
@@ -549,11 +537,10 @@ public class IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingDataTe
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized =
-            JsonSerializer.Deserialize<IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData>(
-                json,
-                ModelBase.SerializerOptions
-            );
+        var deserialized = JsonSerializer.Deserialize<SyncRevisionPriceBillingData>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -561,7 +548,7 @@ public class IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingDataTe
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData
+        var model = new SyncRevisionPriceBillingData
         {
             BillingID = "billingId",
             BillingLinkUrl = "billingLinkUrl",
@@ -569,11 +556,10 @@ public class IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingDataTe
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized =
-            JsonSerializer.Deserialize<IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData>(
-                element,
-                ModelBase.SerializerOptions
-            );
+        var deserialized = JsonSerializer.Deserialize<SyncRevisionPriceBillingData>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         string expectedBillingID = "billingId";
@@ -588,7 +574,7 @@ public class IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingDataTe
     [Fact]
     public void Validation_Works()
     {
-        var model = new IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData
+        var model = new SyncRevisionPriceBillingData
         {
             BillingID = "billingId",
             BillingLinkUrl = "billingLinkUrl",
@@ -601,25 +587,25 @@ public class IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingDataTe
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData
+        var model = new SyncRevisionPriceBillingData
         {
             BillingID = "billingId",
             BillingLinkUrl = "billingLinkUrl",
             PriceGroupPackageBillingID = "priceGroupPackageBillingId",
         };
 
-        IntegrationUnlinkResponseDataSyncDataSyncRevisionPriceBillingData copied = new(model);
+        SyncRevisionPriceBillingData copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingDataTest : TestBase
+public class SyncRevisionBillingDataTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData
+        var model = new SyncRevisionBillingData
         {
             BillingID = "billingId",
             BillingLinkUrl = "billingLinkUrl",
@@ -635,18 +621,17 @@ public class IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingDataTest : 
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData
+        var model = new SyncRevisionBillingData
         {
             BillingID = "billingId",
             BillingLinkUrl = "billingLinkUrl",
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized =
-            JsonSerializer.Deserialize<IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData>(
-                json,
-                ModelBase.SerializerOptions
-            );
+        var deserialized = JsonSerializer.Deserialize<SyncRevisionBillingData>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -654,18 +639,17 @@ public class IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingDataTest : 
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData
+        var model = new SyncRevisionBillingData
         {
             BillingID = "billingId",
             BillingLinkUrl = "billingLinkUrl",
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized =
-            JsonSerializer.Deserialize<IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData>(
-                element,
-                ModelBase.SerializerOptions
-            );
+        var deserialized = JsonSerializer.Deserialize<SyncRevisionBillingData>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         string expectedBillingID = "billingId";
@@ -678,7 +662,7 @@ public class IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingDataTest : 
     [Fact]
     public void Validation_Works()
     {
-        var model = new IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData
+        var model = new SyncRevisionBillingData
         {
             BillingID = "billingId",
             BillingLinkUrl = "billingLinkUrl",
@@ -690,27 +674,24 @@ public class IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingDataTest : 
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData
+        var model = new SyncRevisionBillingData
         {
             BillingID = "billingId",
             BillingLinkUrl = "billingLinkUrl",
         };
 
-        IntegrationUnlinkResponseDataSyncDataSyncRevisionBillingData copied = new(model);
+        SyncRevisionBillingData copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceDataTest : TestBase
+public class SyncRevisionMarketplaceDataTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData
-        {
-            Dimensions = "dimensions",
-        };
+        var model = new SyncRevisionMarketplaceData { Dimensions = "dimensions" };
 
         string expectedDimensions = "dimensions";
 
@@ -720,17 +701,13 @@ public class IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceDataTes
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData
-        {
-            Dimensions = "dimensions",
-        };
+        var model = new SyncRevisionMarketplaceData { Dimensions = "dimensions" };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized =
-            JsonSerializer.Deserialize<IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData>(
-                json,
-                ModelBase.SerializerOptions
-            );
+        var deserialized = JsonSerializer.Deserialize<SyncRevisionMarketplaceData>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -738,17 +715,13 @@ public class IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceDataTes
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData
-        {
-            Dimensions = "dimensions",
-        };
+        var model = new SyncRevisionMarketplaceData { Dimensions = "dimensions" };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized =
-            JsonSerializer.Deserialize<IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData>(
-                element,
-                ModelBase.SerializerOptions
-            );
+        var deserialized = JsonSerializer.Deserialize<SyncRevisionMarketplaceData>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         string expectedDimensions = "dimensions";
@@ -759,10 +732,7 @@ public class IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceDataTes
     [Fact]
     public void Validation_Works()
     {
-        var model = new IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData
-        {
-            Dimensions = "dimensions",
-        };
+        var model = new SyncRevisionMarketplaceData { Dimensions = "dimensions" };
 
         model.Validate();
     }
@@ -770,12 +740,9 @@ public class IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceDataTes
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData
-        {
-            Dimensions = "dimensions",
-        };
+        var model = new SyncRevisionMarketplaceData { Dimensions = "dimensions" };
 
-        IntegrationUnlinkResponseDataSyncDataSyncRevisionMarketplaceData copied = new(model);
+        SyncRevisionMarketplaceData copied = new(model);
 
         Assert.Equal(model, copied);
     }

@@ -8,23 +8,23 @@ public class IntegrationServiceTest : TestBase
     [Fact(Skip = "Mock server tests are disabled")]
     public async Task Retrieve_Works()
     {
-        var integration = await this.client.V1.Customers.Integrations.Retrieve(
+        var customerIntegrationResponse = await this.client.V1.Customers.Integrations.Retrieve(
             "integrationId",
             new() { ID = "id" },
             TestContext.Current.CancellationToken
         );
-        integration.Validate();
+        customerIntegrationResponse.Validate();
     }
 
     [Fact(Skip = "Mock server tests are disabled")]
     public async Task Update_Works()
     {
-        var integration = await this.client.V1.Customers.Integrations.Update(
+        var customerIntegrationResponse = await this.client.V1.Customers.Integrations.Update(
             "integrationId",
             new() { ID = "id", SyncedEntityID = "syncedEntityId" },
             TestContext.Current.CancellationToken
         );
-        integration.Validate();
+        customerIntegrationResponse.Validate();
     }
 
     [Fact(Skip = "Mock server tests are disabled")]
@@ -41,7 +41,7 @@ public class IntegrationServiceTest : TestBase
     [Fact(Skip = "Mock server tests are disabled")]
     public async Task Link_Works()
     {
-        var response = await this.client.V1.Customers.Integrations.Link(
+        var customerIntegrationResponse = await this.client.V1.Customers.Integrations.Link(
             "x",
             new()
             {
@@ -51,17 +51,17 @@ public class IntegrationServiceTest : TestBase
             },
             TestContext.Current.CancellationToken
         );
-        response.Validate();
+        customerIntegrationResponse.Validate();
     }
 
     [Fact(Skip = "Mock server tests are disabled")]
     public async Task Unlink_Works()
     {
-        var response = await this.client.V1.Customers.Integrations.Unlink(
+        var customerIntegrationResponse = await this.client.V1.Customers.Integrations.Unlink(
             "integrationId",
             new() { ID = "id" },
             TestContext.Current.CancellationToken
         );
-        response.Validate();
+        customerIntegrationResponse.Validate();
     }
 }

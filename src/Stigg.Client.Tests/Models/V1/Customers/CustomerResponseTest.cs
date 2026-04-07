@@ -20,16 +20,16 @@ public class CustomerResponseTest : TestBase
                 ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                BillingCurrency = DataBillingCurrency.Usd,
+                BillingCurrency = CustomerResponseDataBillingCurrency.Usd,
                 BillingID = "billingId",
-                CouponID = DataCouponID.Undefined,
+                CouponID = CustomerResponseDataCouponID.Undefined,
                 DefaultPaymentMethod = new()
                 {
                     BillingID = "billingId",
                     CardExpiryMonth = 0,
                     CardExpiryYear = 0,
                     CardLast4Digits = "cardLast4Digits",
-                    Type = DataDefaultPaymentMethodType.Card,
+                    Type = CustomerResponseDataDefaultPaymentMethodType.Card,
                 },
                 Email = "dev@stainless.com",
                 Integrations =
@@ -38,7 +38,7 @@ public class CustomerResponseTest : TestBase
                     {
                         ID = "id",
                         SyncedEntityID = "syncedEntityId",
-                        VendorIdentifier = DataIntegrationVendorIdentifier.Auth0,
+                        VendorIdentifier = CustomerResponseDataIntegrationVendorIdentifier.Auth0,
                     },
                 ],
                 Language = "language",
@@ -86,7 +86,7 @@ public class CustomerResponseTest : TestBase
                             PostalCode = "postalCode",
                             State = "state",
                         },
-                        Currency = DataPassthroughZuoraCurrency.Usd,
+                        Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
                         Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                         PaymentMethodID = "paymentMethodId",
                     },
@@ -95,22 +95,22 @@ public class CustomerResponseTest : TestBase
             },
         };
 
-        Data expectedData = new()
+        CustomerResponseData expectedData = new()
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            BillingCurrency = DataBillingCurrency.Usd,
+            BillingCurrency = CustomerResponseDataBillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = DataCouponID.Undefined,
+            CouponID = CustomerResponseDataCouponID.Undefined,
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
                 CardExpiryMonth = 0,
                 CardExpiryYear = 0,
                 CardLast4Digits = "cardLast4Digits",
-                Type = DataDefaultPaymentMethodType.Card,
+                Type = CustomerResponseDataDefaultPaymentMethodType.Card,
             },
             Email = "dev@stainless.com",
             Integrations =
@@ -119,7 +119,7 @@ public class CustomerResponseTest : TestBase
                 {
                     ID = "id",
                     SyncedEntityID = "syncedEntityId",
-                    VendorIdentifier = DataIntegrationVendorIdentifier.Auth0,
+                    VendorIdentifier = CustomerResponseDataIntegrationVendorIdentifier.Auth0,
                 },
             ],
             Language = "language",
@@ -164,7 +164,7 @@ public class CustomerResponseTest : TestBase
                         PostalCode = "postalCode",
                         State = "state",
                     },
-                    Currency = DataPassthroughZuoraCurrency.Usd,
+                    Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     PaymentMethodID = "paymentMethodId",
                 },
@@ -186,16 +186,16 @@ public class CustomerResponseTest : TestBase
                 ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                BillingCurrency = DataBillingCurrency.Usd,
+                BillingCurrency = CustomerResponseDataBillingCurrency.Usd,
                 BillingID = "billingId",
-                CouponID = DataCouponID.Undefined,
+                CouponID = CustomerResponseDataCouponID.Undefined,
                 DefaultPaymentMethod = new()
                 {
                     BillingID = "billingId",
                     CardExpiryMonth = 0,
                     CardExpiryYear = 0,
                     CardLast4Digits = "cardLast4Digits",
-                    Type = DataDefaultPaymentMethodType.Card,
+                    Type = CustomerResponseDataDefaultPaymentMethodType.Card,
                 },
                 Email = "dev@stainless.com",
                 Integrations =
@@ -204,7 +204,7 @@ public class CustomerResponseTest : TestBase
                     {
                         ID = "id",
                         SyncedEntityID = "syncedEntityId",
-                        VendorIdentifier = DataIntegrationVendorIdentifier.Auth0,
+                        VendorIdentifier = CustomerResponseDataIntegrationVendorIdentifier.Auth0,
                     },
                 ],
                 Language = "language",
@@ -252,7 +252,7 @@ public class CustomerResponseTest : TestBase
                             PostalCode = "postalCode",
                             State = "state",
                         },
-                        Currency = DataPassthroughZuoraCurrency.Usd,
+                        Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
                         Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                         PaymentMethodID = "paymentMethodId",
                     },
@@ -281,16 +281,16 @@ public class CustomerResponseTest : TestBase
                 ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                BillingCurrency = DataBillingCurrency.Usd,
+                BillingCurrency = CustomerResponseDataBillingCurrency.Usd,
                 BillingID = "billingId",
-                CouponID = DataCouponID.Undefined,
+                CouponID = CustomerResponseDataCouponID.Undefined,
                 DefaultPaymentMethod = new()
                 {
                     BillingID = "billingId",
                     CardExpiryMonth = 0,
                     CardExpiryYear = 0,
                     CardLast4Digits = "cardLast4Digits",
-                    Type = DataDefaultPaymentMethodType.Card,
+                    Type = CustomerResponseDataDefaultPaymentMethodType.Card,
                 },
                 Email = "dev@stainless.com",
                 Integrations =
@@ -299,7 +299,7 @@ public class CustomerResponseTest : TestBase
                     {
                         ID = "id",
                         SyncedEntityID = "syncedEntityId",
-                        VendorIdentifier = DataIntegrationVendorIdentifier.Auth0,
+                        VendorIdentifier = CustomerResponseDataIntegrationVendorIdentifier.Auth0,
                     },
                 ],
                 Language = "language",
@@ -347,7 +347,7 @@ public class CustomerResponseTest : TestBase
                             PostalCode = "postalCode",
                             State = "state",
                         },
-                        Currency = DataPassthroughZuoraCurrency.Usd,
+                        Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
                         Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                         PaymentMethodID = "paymentMethodId",
                     },
@@ -363,22 +363,22 @@ public class CustomerResponseTest : TestBase
         );
         Assert.NotNull(deserialized);
 
-        Data expectedData = new()
+        CustomerResponseData expectedData = new()
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            BillingCurrency = DataBillingCurrency.Usd,
+            BillingCurrency = CustomerResponseDataBillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = DataCouponID.Undefined,
+            CouponID = CustomerResponseDataCouponID.Undefined,
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
                 CardExpiryMonth = 0,
                 CardExpiryYear = 0,
                 CardLast4Digits = "cardLast4Digits",
-                Type = DataDefaultPaymentMethodType.Card,
+                Type = CustomerResponseDataDefaultPaymentMethodType.Card,
             },
             Email = "dev@stainless.com",
             Integrations =
@@ -387,7 +387,7 @@ public class CustomerResponseTest : TestBase
                 {
                     ID = "id",
                     SyncedEntityID = "syncedEntityId",
-                    VendorIdentifier = DataIntegrationVendorIdentifier.Auth0,
+                    VendorIdentifier = CustomerResponseDataIntegrationVendorIdentifier.Auth0,
                 },
             ],
             Language = "language",
@@ -432,7 +432,7 @@ public class CustomerResponseTest : TestBase
                         PostalCode = "postalCode",
                         State = "state",
                     },
-                    Currency = DataPassthroughZuoraCurrency.Usd,
+                    Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     PaymentMethodID = "paymentMethodId",
                 },
@@ -454,16 +454,16 @@ public class CustomerResponseTest : TestBase
                 ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                BillingCurrency = DataBillingCurrency.Usd,
+                BillingCurrency = CustomerResponseDataBillingCurrency.Usd,
                 BillingID = "billingId",
-                CouponID = DataCouponID.Undefined,
+                CouponID = CustomerResponseDataCouponID.Undefined,
                 DefaultPaymentMethod = new()
                 {
                     BillingID = "billingId",
                     CardExpiryMonth = 0,
                     CardExpiryYear = 0,
                     CardLast4Digits = "cardLast4Digits",
-                    Type = DataDefaultPaymentMethodType.Card,
+                    Type = CustomerResponseDataDefaultPaymentMethodType.Card,
                 },
                 Email = "dev@stainless.com",
                 Integrations =
@@ -472,7 +472,7 @@ public class CustomerResponseTest : TestBase
                     {
                         ID = "id",
                         SyncedEntityID = "syncedEntityId",
-                        VendorIdentifier = DataIntegrationVendorIdentifier.Auth0,
+                        VendorIdentifier = CustomerResponseDataIntegrationVendorIdentifier.Auth0,
                     },
                 ],
                 Language = "language",
@@ -520,7 +520,7 @@ public class CustomerResponseTest : TestBase
                             PostalCode = "postalCode",
                             State = "state",
                         },
-                        Currency = DataPassthroughZuoraCurrency.Usd,
+                        Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
                         Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                         PaymentMethodID = "paymentMethodId",
                     },
@@ -543,16 +543,16 @@ public class CustomerResponseTest : TestBase
                 ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                BillingCurrency = DataBillingCurrency.Usd,
+                BillingCurrency = CustomerResponseDataBillingCurrency.Usd,
                 BillingID = "billingId",
-                CouponID = DataCouponID.Undefined,
+                CouponID = CustomerResponseDataCouponID.Undefined,
                 DefaultPaymentMethod = new()
                 {
                     BillingID = "billingId",
                     CardExpiryMonth = 0,
                     CardExpiryYear = 0,
                     CardLast4Digits = "cardLast4Digits",
-                    Type = DataDefaultPaymentMethodType.Card,
+                    Type = CustomerResponseDataDefaultPaymentMethodType.Card,
                 },
                 Email = "dev@stainless.com",
                 Integrations =
@@ -561,7 +561,7 @@ public class CustomerResponseTest : TestBase
                     {
                         ID = "id",
                         SyncedEntityID = "syncedEntityId",
-                        VendorIdentifier = DataIntegrationVendorIdentifier.Auth0,
+                        VendorIdentifier = CustomerResponseDataIntegrationVendorIdentifier.Auth0,
                     },
                 ],
                 Language = "language",
@@ -609,7 +609,7 @@ public class CustomerResponseTest : TestBase
                             PostalCode = "postalCode",
                             State = "state",
                         },
-                        Currency = DataPassthroughZuoraCurrency.Usd,
+                        Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
                         Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                         PaymentMethodID = "paymentMethodId",
                     },
@@ -624,27 +624,27 @@ public class CustomerResponseTest : TestBase
     }
 }
 
-public class DataTest : TestBase
+public class CustomerResponseDataTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Data
+        var model = new CustomerResponseData
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            BillingCurrency = DataBillingCurrency.Usd,
+            BillingCurrency = CustomerResponseDataBillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = DataCouponID.Undefined,
+            CouponID = CustomerResponseDataCouponID.Undefined,
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
                 CardExpiryMonth = 0,
                 CardExpiryYear = 0,
                 CardLast4Digits = "cardLast4Digits",
-                Type = DataDefaultPaymentMethodType.Card,
+                Type = CustomerResponseDataDefaultPaymentMethodType.Card,
             },
             Email = "dev@stainless.com",
             Integrations =
@@ -653,7 +653,7 @@ public class DataTest : TestBase
                 {
                     ID = "id",
                     SyncedEntityID = "syncedEntityId",
-                    VendorIdentifier = DataIntegrationVendorIdentifier.Auth0,
+                    VendorIdentifier = CustomerResponseDataIntegrationVendorIdentifier.Auth0,
                 },
             ],
             Language = "language",
@@ -698,7 +698,7 @@ public class DataTest : TestBase
                         PostalCode = "postalCode",
                         State = "state",
                     },
-                    Currency = DataPassthroughZuoraCurrency.Usd,
+                    Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     PaymentMethodID = "paymentMethodId",
                 },
@@ -710,31 +710,33 @@ public class DataTest : TestBase
         DateTimeOffset expectedArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, DataBillingCurrency> expectedBillingCurrency = DataBillingCurrency.Usd;
+        ApiEnum<string, CustomerResponseDataBillingCurrency> expectedBillingCurrency =
+            CustomerResponseDataBillingCurrency.Usd;
         string expectedBillingID = "billingId";
-        ApiEnum<string, DataCouponID> expectedCouponID = DataCouponID.Undefined;
-        DataDefaultPaymentMethod expectedDefaultPaymentMethod = new()
+        ApiEnum<string, CustomerResponseDataCouponID> expectedCouponID =
+            CustomerResponseDataCouponID.Undefined;
+        CustomerResponseDataDefaultPaymentMethod expectedDefaultPaymentMethod = new()
         {
             BillingID = "billingId",
             CardExpiryMonth = 0,
             CardExpiryYear = 0,
             CardLast4Digits = "cardLast4Digits",
-            Type = DataDefaultPaymentMethodType.Card,
+            Type = CustomerResponseDataDefaultPaymentMethodType.Card,
         };
         string expectedEmail = "dev@stainless.com";
-        List<DataIntegration> expectedIntegrations =
+        List<CustomerResponseDataIntegration> expectedIntegrations =
         [
             new()
             {
                 ID = "id",
                 SyncedEntityID = "syncedEntityId",
-                VendorIdentifier = DataIntegrationVendorIdentifier.Auth0,
+                VendorIdentifier = CustomerResponseDataIntegrationVendorIdentifier.Auth0,
             },
         ];
         string expectedLanguage = "language";
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedName = "name";
-        DataPassthrough expectedPassthrough = new()
+        CustomerResponseDataPassthrough expectedPassthrough = new()
         {
             Stripe = new()
             {
@@ -773,7 +775,7 @@ public class DataTest : TestBase
                     PostalCode = "postalCode",
                     State = "state",
                 },
-                Currency = DataPassthroughZuoraCurrency.Usd,
+                Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PaymentMethodID = "paymentMethodId",
             },
@@ -812,22 +814,22 @@ public class DataTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Data
+        var model = new CustomerResponseData
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            BillingCurrency = DataBillingCurrency.Usd,
+            BillingCurrency = CustomerResponseDataBillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = DataCouponID.Undefined,
+            CouponID = CustomerResponseDataCouponID.Undefined,
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
                 CardExpiryMonth = 0,
                 CardExpiryYear = 0,
                 CardLast4Digits = "cardLast4Digits",
-                Type = DataDefaultPaymentMethodType.Card,
+                Type = CustomerResponseDataDefaultPaymentMethodType.Card,
             },
             Email = "dev@stainless.com",
             Integrations =
@@ -836,7 +838,7 @@ public class DataTest : TestBase
                 {
                     ID = "id",
                     SyncedEntityID = "syncedEntityId",
-                    VendorIdentifier = DataIntegrationVendorIdentifier.Auth0,
+                    VendorIdentifier = CustomerResponseDataIntegrationVendorIdentifier.Auth0,
                 },
             ],
             Language = "language",
@@ -881,7 +883,7 @@ public class DataTest : TestBase
                         PostalCode = "postalCode",
                         State = "state",
                     },
-                    Currency = DataPassthroughZuoraCurrency.Usd,
+                    Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     PaymentMethodID = "paymentMethodId",
                 },
@@ -890,7 +892,10 @@ public class DataTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Data>(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CustomerResponseData>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -898,22 +903,22 @@ public class DataTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Data
+        var model = new CustomerResponseData
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            BillingCurrency = DataBillingCurrency.Usd,
+            BillingCurrency = CustomerResponseDataBillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = DataCouponID.Undefined,
+            CouponID = CustomerResponseDataCouponID.Undefined,
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
                 CardExpiryMonth = 0,
                 CardExpiryYear = 0,
                 CardLast4Digits = "cardLast4Digits",
-                Type = DataDefaultPaymentMethodType.Card,
+                Type = CustomerResponseDataDefaultPaymentMethodType.Card,
             },
             Email = "dev@stainless.com",
             Integrations =
@@ -922,7 +927,7 @@ public class DataTest : TestBase
                 {
                     ID = "id",
                     SyncedEntityID = "syncedEntityId",
-                    VendorIdentifier = DataIntegrationVendorIdentifier.Auth0,
+                    VendorIdentifier = CustomerResponseDataIntegrationVendorIdentifier.Auth0,
                 },
             ],
             Language = "language",
@@ -967,7 +972,7 @@ public class DataTest : TestBase
                         PostalCode = "postalCode",
                         State = "state",
                     },
-                    Currency = DataPassthroughZuoraCurrency.Usd,
+                    Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     PaymentMethodID = "paymentMethodId",
                 },
@@ -976,38 +981,43 @@ public class DataTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CustomerResponseData>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
         DateTimeOffset expectedArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, DataBillingCurrency> expectedBillingCurrency = DataBillingCurrency.Usd;
+        ApiEnum<string, CustomerResponseDataBillingCurrency> expectedBillingCurrency =
+            CustomerResponseDataBillingCurrency.Usd;
         string expectedBillingID = "billingId";
-        ApiEnum<string, DataCouponID> expectedCouponID = DataCouponID.Undefined;
-        DataDefaultPaymentMethod expectedDefaultPaymentMethod = new()
+        ApiEnum<string, CustomerResponseDataCouponID> expectedCouponID =
+            CustomerResponseDataCouponID.Undefined;
+        CustomerResponseDataDefaultPaymentMethod expectedDefaultPaymentMethod = new()
         {
             BillingID = "billingId",
             CardExpiryMonth = 0,
             CardExpiryYear = 0,
             CardLast4Digits = "cardLast4Digits",
-            Type = DataDefaultPaymentMethodType.Card,
+            Type = CustomerResponseDataDefaultPaymentMethodType.Card,
         };
         string expectedEmail = "dev@stainless.com";
-        List<DataIntegration> expectedIntegrations =
+        List<CustomerResponseDataIntegration> expectedIntegrations =
         [
             new()
             {
                 ID = "id",
                 SyncedEntityID = "syncedEntityId",
-                VendorIdentifier = DataIntegrationVendorIdentifier.Auth0,
+                VendorIdentifier = CustomerResponseDataIntegrationVendorIdentifier.Auth0,
             },
         ];
         string expectedLanguage = "language";
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedName = "name";
-        DataPassthrough expectedPassthrough = new()
+        CustomerResponseDataPassthrough expectedPassthrough = new()
         {
             Stripe = new()
             {
@@ -1046,7 +1056,7 @@ public class DataTest : TestBase
                     PostalCode = "postalCode",
                     State = "state",
                 },
-                Currency = DataPassthroughZuoraCurrency.Usd,
+                Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PaymentMethodID = "paymentMethodId",
             },
@@ -1085,22 +1095,22 @@ public class DataTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Data
+        var model = new CustomerResponseData
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            BillingCurrency = DataBillingCurrency.Usd,
+            BillingCurrency = CustomerResponseDataBillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = DataCouponID.Undefined,
+            CouponID = CustomerResponseDataCouponID.Undefined,
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
                 CardExpiryMonth = 0,
                 CardExpiryYear = 0,
                 CardLast4Digits = "cardLast4Digits",
-                Type = DataDefaultPaymentMethodType.Card,
+                Type = CustomerResponseDataDefaultPaymentMethodType.Card,
             },
             Email = "dev@stainless.com",
             Integrations =
@@ -1109,7 +1119,7 @@ public class DataTest : TestBase
                 {
                     ID = "id",
                     SyncedEntityID = "syncedEntityId",
-                    VendorIdentifier = DataIntegrationVendorIdentifier.Auth0,
+                    VendorIdentifier = CustomerResponseDataIntegrationVendorIdentifier.Auth0,
                 },
             ],
             Language = "language",
@@ -1154,7 +1164,7 @@ public class DataTest : TestBase
                         PostalCode = "postalCode",
                         State = "state",
                     },
-                    Currency = DataPassthroughZuoraCurrency.Usd,
+                    Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     PaymentMethodID = "paymentMethodId",
                 },
@@ -1168,22 +1178,22 @@ public class DataTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Data
+        var model = new CustomerResponseData
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            BillingCurrency = DataBillingCurrency.Usd,
+            BillingCurrency = CustomerResponseDataBillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = DataCouponID.Undefined,
+            CouponID = CustomerResponseDataCouponID.Undefined,
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
                 CardExpiryMonth = 0,
                 CardExpiryYear = 0,
                 CardLast4Digits = "cardLast4Digits",
-                Type = DataDefaultPaymentMethodType.Card,
+                Type = CustomerResponseDataDefaultPaymentMethodType.Card,
             },
             Email = "dev@stainless.com",
             Language = "language",
@@ -1202,22 +1212,22 @@ public class DataTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Data
+        var model = new CustomerResponseData
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            BillingCurrency = DataBillingCurrency.Usd,
+            BillingCurrency = CustomerResponseDataBillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = DataCouponID.Undefined,
+            CouponID = CustomerResponseDataCouponID.Undefined,
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
                 CardExpiryMonth = 0,
                 CardExpiryYear = 0,
                 CardLast4Digits = "cardLast4Digits",
-                Type = DataDefaultPaymentMethodType.Card,
+                Type = CustomerResponseDataDefaultPaymentMethodType.Card,
             },
             Email = "dev@stainless.com",
             Language = "language",
@@ -1231,22 +1241,22 @@ public class DataTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new Data
+        var model = new CustomerResponseData
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            BillingCurrency = DataBillingCurrency.Usd,
+            BillingCurrency = CustomerResponseDataBillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = DataCouponID.Undefined,
+            CouponID = CustomerResponseDataCouponID.Undefined,
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
                 CardExpiryMonth = 0,
                 CardExpiryYear = 0,
                 CardLast4Digits = "cardLast4Digits",
-                Type = DataDefaultPaymentMethodType.Card,
+                Type = CustomerResponseDataDefaultPaymentMethodType.Card,
             },
             Email = "dev@stainless.com",
             Language = "language",
@@ -1270,22 +1280,22 @@ public class DataTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Data
+        var model = new CustomerResponseData
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            BillingCurrency = DataBillingCurrency.Usd,
+            BillingCurrency = CustomerResponseDataBillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = DataCouponID.Undefined,
+            CouponID = CustomerResponseDataCouponID.Undefined,
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
                 CardExpiryMonth = 0,
                 CardExpiryYear = 0,
                 CardLast4Digits = "cardLast4Digits",
-                Type = DataDefaultPaymentMethodType.Card,
+                Type = CustomerResponseDataDefaultPaymentMethodType.Card,
             },
             Email = "dev@stainless.com",
             Language = "language",
@@ -1304,7 +1314,7 @@ public class DataTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Data
+        var model = new CustomerResponseData
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1316,7 +1326,7 @@ public class DataTest : TestBase
                 {
                     ID = "id",
                     SyncedEntityID = "syncedEntityId",
-                    VendorIdentifier = DataIntegrationVendorIdentifier.Auth0,
+                    VendorIdentifier = CustomerResponseDataIntegrationVendorIdentifier.Auth0,
                 },
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
@@ -1359,7 +1369,7 @@ public class DataTest : TestBase
                         PostalCode = "postalCode",
                         State = "state",
                     },
-                    Currency = DataPassthroughZuoraCurrency.Usd,
+                    Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     PaymentMethodID = "paymentMethodId",
                 },
@@ -1387,7 +1397,7 @@ public class DataTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Data
+        var model = new CustomerResponseData
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1399,7 +1409,7 @@ public class DataTest : TestBase
                 {
                     ID = "id",
                     SyncedEntityID = "syncedEntityId",
-                    VendorIdentifier = DataIntegrationVendorIdentifier.Auth0,
+                    VendorIdentifier = CustomerResponseDataIntegrationVendorIdentifier.Auth0,
                 },
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
@@ -1442,7 +1452,7 @@ public class DataTest : TestBase
                         PostalCode = "postalCode",
                         State = "state",
                     },
-                    Currency = DataPassthroughZuoraCurrency.Usd,
+                    Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     PaymentMethodID = "paymentMethodId",
                 },
@@ -1455,7 +1465,7 @@ public class DataTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new Data
+        var model = new CustomerResponseData
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1467,7 +1477,7 @@ public class DataTest : TestBase
                 {
                     ID = "id",
                     SyncedEntityID = "syncedEntityId",
-                    VendorIdentifier = DataIntegrationVendorIdentifier.Auth0,
+                    VendorIdentifier = CustomerResponseDataIntegrationVendorIdentifier.Auth0,
                 },
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
@@ -1510,7 +1520,7 @@ public class DataTest : TestBase
                         PostalCode = "postalCode",
                         State = "state",
                     },
-                    Currency = DataPassthroughZuoraCurrency.Usd,
+                    Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     PaymentMethodID = "paymentMethodId",
                 },
@@ -1547,7 +1557,7 @@ public class DataTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Data
+        var model = new CustomerResponseData
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1559,7 +1569,7 @@ public class DataTest : TestBase
                 {
                     ID = "id",
                     SyncedEntityID = "syncedEntityId",
-                    VendorIdentifier = DataIntegrationVendorIdentifier.Auth0,
+                    VendorIdentifier = CustomerResponseDataIntegrationVendorIdentifier.Auth0,
                 },
             ],
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
@@ -1602,7 +1612,7 @@ public class DataTest : TestBase
                         PostalCode = "postalCode",
                         State = "state",
                     },
-                    Currency = DataPassthroughZuoraCurrency.Usd,
+                    Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     PaymentMethodID = "paymentMethodId",
                 },
@@ -1624,22 +1634,22 @@ public class DataTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Data
+        var model = new CustomerResponseData
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            BillingCurrency = DataBillingCurrency.Usd,
+            BillingCurrency = CustomerResponseDataBillingCurrency.Usd,
             BillingID = "billingId",
-            CouponID = DataCouponID.Undefined,
+            CouponID = CustomerResponseDataCouponID.Undefined,
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
                 CardExpiryMonth = 0,
                 CardExpiryYear = 0,
                 CardLast4Digits = "cardLast4Digits",
-                Type = DataDefaultPaymentMethodType.Card,
+                Type = CustomerResponseDataDefaultPaymentMethodType.Card,
             },
             Email = "dev@stainless.com",
             Integrations =
@@ -1648,7 +1658,7 @@ public class DataTest : TestBase
                 {
                     ID = "id",
                     SyncedEntityID = "syncedEntityId",
-                    VendorIdentifier = DataIntegrationVendorIdentifier.Auth0,
+                    VendorIdentifier = CustomerResponseDataIntegrationVendorIdentifier.Auth0,
                 },
             ],
             Language = "language",
@@ -1693,7 +1703,7 @@ public class DataTest : TestBase
                         PostalCode = "postalCode",
                         State = "state",
                     },
-                    Currency = DataPassthroughZuoraCurrency.Usd,
+                    Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     PaymentMethodID = "paymentMethodId",
                 },
@@ -1701,142 +1711,309 @@ public class DataTest : TestBase
             Timezone = "timezone",
         };
 
-        Data copied = new(model);
+        CustomerResponseData copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class DataBillingCurrencyTest : TestBase
+public class CustomerResponseDataBillingCurrencyTest : TestBase
 {
     [Theory]
-    [InlineData(DataBillingCurrency.Usd)]
-    [InlineData(DataBillingCurrency.Aed)]
-    [InlineData(DataBillingCurrency.All)]
-    [InlineData(DataBillingCurrency.Amd)]
-    [InlineData(DataBillingCurrency.Ang)]
-    [InlineData(DataBillingCurrency.Aud)]
-    [InlineData(DataBillingCurrency.Awg)]
-    [InlineData(DataBillingCurrency.Azn)]
-    [InlineData(DataBillingCurrency.Bam)]
-    [InlineData(DataBillingCurrency.Bbd)]
-    [InlineData(DataBillingCurrency.Bdt)]
-    [InlineData(DataBillingCurrency.Bgn)]
-    [InlineData(DataBillingCurrency.Bif)]
-    [InlineData(DataBillingCurrency.Bmd)]
-    [InlineData(DataBillingCurrency.Bnd)]
-    [InlineData(DataBillingCurrency.Bsd)]
-    [InlineData(DataBillingCurrency.Bwp)]
-    [InlineData(DataBillingCurrency.Byn)]
-    [InlineData(DataBillingCurrency.Bzd)]
-    [InlineData(DataBillingCurrency.Brl)]
-    [InlineData(DataBillingCurrency.Cad)]
-    [InlineData(DataBillingCurrency.Cdf)]
-    [InlineData(DataBillingCurrency.Chf)]
-    [InlineData(DataBillingCurrency.Cny)]
-    [InlineData(DataBillingCurrency.Czk)]
-    [InlineData(DataBillingCurrency.Dkk)]
-    [InlineData(DataBillingCurrency.Dop)]
-    [InlineData(DataBillingCurrency.Dzd)]
-    [InlineData(DataBillingCurrency.Egp)]
-    [InlineData(DataBillingCurrency.Etb)]
-    [InlineData(DataBillingCurrency.Eur)]
-    [InlineData(DataBillingCurrency.Fjd)]
-    [InlineData(DataBillingCurrency.Gbp)]
-    [InlineData(DataBillingCurrency.Gel)]
-    [InlineData(DataBillingCurrency.Gip)]
-    [InlineData(DataBillingCurrency.Gmd)]
-    [InlineData(DataBillingCurrency.Gyd)]
-    [InlineData(DataBillingCurrency.Hkd)]
-    [InlineData(DataBillingCurrency.Hrk)]
-    [InlineData(DataBillingCurrency.Htg)]
-    [InlineData(DataBillingCurrency.Idr)]
-    [InlineData(DataBillingCurrency.Ils)]
-    [InlineData(DataBillingCurrency.Inr)]
-    [InlineData(DataBillingCurrency.Isk)]
-    [InlineData(DataBillingCurrency.Jmd)]
-    [InlineData(DataBillingCurrency.Jpy)]
-    [InlineData(DataBillingCurrency.Kes)]
-    [InlineData(DataBillingCurrency.Kgs)]
-    [InlineData(DataBillingCurrency.Khr)]
-    [InlineData(DataBillingCurrency.Kmf)]
-    [InlineData(DataBillingCurrency.Krw)]
-    [InlineData(DataBillingCurrency.Kyd)]
-    [InlineData(DataBillingCurrency.Kzt)]
-    [InlineData(DataBillingCurrency.Lbp)]
-    [InlineData(DataBillingCurrency.Lkr)]
-    [InlineData(DataBillingCurrency.Lrd)]
-    [InlineData(DataBillingCurrency.Lsl)]
-    [InlineData(DataBillingCurrency.Mad)]
-    [InlineData(DataBillingCurrency.Mdl)]
-    [InlineData(DataBillingCurrency.Mga)]
-    [InlineData(DataBillingCurrency.Mkd)]
-    [InlineData(DataBillingCurrency.Mmk)]
-    [InlineData(DataBillingCurrency.Mnt)]
-    [InlineData(DataBillingCurrency.Mop)]
-    [InlineData(DataBillingCurrency.Mro)]
-    [InlineData(DataBillingCurrency.Mvr)]
-    [InlineData(DataBillingCurrency.Mwk)]
-    [InlineData(DataBillingCurrency.Mxn)]
-    [InlineData(DataBillingCurrency.Myr)]
-    [InlineData(DataBillingCurrency.Mzn)]
-    [InlineData(DataBillingCurrency.Nad)]
-    [InlineData(DataBillingCurrency.Ngn)]
-    [InlineData(DataBillingCurrency.Nok)]
-    [InlineData(DataBillingCurrency.Npr)]
-    [InlineData(DataBillingCurrency.Nzd)]
-    [InlineData(DataBillingCurrency.Pgk)]
-    [InlineData(DataBillingCurrency.Php)]
-    [InlineData(DataBillingCurrency.Pkr)]
-    [InlineData(DataBillingCurrency.Pln)]
-    [InlineData(DataBillingCurrency.Qar)]
-    [InlineData(DataBillingCurrency.Ron)]
-    [InlineData(DataBillingCurrency.Rsd)]
-    [InlineData(DataBillingCurrency.Rub)]
-    [InlineData(DataBillingCurrency.Rwf)]
-    [InlineData(DataBillingCurrency.Sar)]
-    [InlineData(DataBillingCurrency.Sbd)]
-    [InlineData(DataBillingCurrency.Scr)]
-    [InlineData(DataBillingCurrency.Sek)]
-    [InlineData(DataBillingCurrency.Sgd)]
-    [InlineData(DataBillingCurrency.Sle)]
-    [InlineData(DataBillingCurrency.Sll)]
-    [InlineData(DataBillingCurrency.Sos)]
-    [InlineData(DataBillingCurrency.Szl)]
-    [InlineData(DataBillingCurrency.Thb)]
-    [InlineData(DataBillingCurrency.Tjs)]
-    [InlineData(DataBillingCurrency.Top)]
-    [InlineData(DataBillingCurrency.Try)]
-    [InlineData(DataBillingCurrency.Ttd)]
-    [InlineData(DataBillingCurrency.Tzs)]
-    [InlineData(DataBillingCurrency.Uah)]
-    [InlineData(DataBillingCurrency.Uzs)]
-    [InlineData(DataBillingCurrency.Vnd)]
-    [InlineData(DataBillingCurrency.Vuv)]
-    [InlineData(DataBillingCurrency.Wst)]
-    [InlineData(DataBillingCurrency.Xaf)]
-    [InlineData(DataBillingCurrency.Xcd)]
-    [InlineData(DataBillingCurrency.Yer)]
-    [InlineData(DataBillingCurrency.Zar)]
-    [InlineData(DataBillingCurrency.Zmw)]
-    [InlineData(DataBillingCurrency.Clp)]
-    [InlineData(DataBillingCurrency.Djf)]
-    [InlineData(DataBillingCurrency.Gnf)]
-    [InlineData(DataBillingCurrency.Ugx)]
-    [InlineData(DataBillingCurrency.Pyg)]
-    [InlineData(DataBillingCurrency.Xof)]
-    [InlineData(DataBillingCurrency.Xpf)]
-    public void Validation_Works(DataBillingCurrency rawValue)
+    [InlineData(CustomerResponseDataBillingCurrency.Usd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Aed)]
+    [InlineData(CustomerResponseDataBillingCurrency.All)]
+    [InlineData(CustomerResponseDataBillingCurrency.Amd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Ang)]
+    [InlineData(CustomerResponseDataBillingCurrency.Aud)]
+    [InlineData(CustomerResponseDataBillingCurrency.Awg)]
+    [InlineData(CustomerResponseDataBillingCurrency.Azn)]
+    [InlineData(CustomerResponseDataBillingCurrency.Bam)]
+    [InlineData(CustomerResponseDataBillingCurrency.Bbd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Bdt)]
+    [InlineData(CustomerResponseDataBillingCurrency.Bgn)]
+    [InlineData(CustomerResponseDataBillingCurrency.Bif)]
+    [InlineData(CustomerResponseDataBillingCurrency.Bmd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Bnd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Bsd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Bwp)]
+    [InlineData(CustomerResponseDataBillingCurrency.Byn)]
+    [InlineData(CustomerResponseDataBillingCurrency.Bzd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Brl)]
+    [InlineData(CustomerResponseDataBillingCurrency.Cad)]
+    [InlineData(CustomerResponseDataBillingCurrency.Cdf)]
+    [InlineData(CustomerResponseDataBillingCurrency.Chf)]
+    [InlineData(CustomerResponseDataBillingCurrency.Cny)]
+    [InlineData(CustomerResponseDataBillingCurrency.Czk)]
+    [InlineData(CustomerResponseDataBillingCurrency.Dkk)]
+    [InlineData(CustomerResponseDataBillingCurrency.Dop)]
+    [InlineData(CustomerResponseDataBillingCurrency.Dzd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Egp)]
+    [InlineData(CustomerResponseDataBillingCurrency.Etb)]
+    [InlineData(CustomerResponseDataBillingCurrency.Eur)]
+    [InlineData(CustomerResponseDataBillingCurrency.Fjd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Gbp)]
+    [InlineData(CustomerResponseDataBillingCurrency.Gel)]
+    [InlineData(CustomerResponseDataBillingCurrency.Gip)]
+    [InlineData(CustomerResponseDataBillingCurrency.Gmd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Gyd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Hkd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Hrk)]
+    [InlineData(CustomerResponseDataBillingCurrency.Htg)]
+    [InlineData(CustomerResponseDataBillingCurrency.Idr)]
+    [InlineData(CustomerResponseDataBillingCurrency.Ils)]
+    [InlineData(CustomerResponseDataBillingCurrency.Inr)]
+    [InlineData(CustomerResponseDataBillingCurrency.Isk)]
+    [InlineData(CustomerResponseDataBillingCurrency.Jmd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Jpy)]
+    [InlineData(CustomerResponseDataBillingCurrency.Kes)]
+    [InlineData(CustomerResponseDataBillingCurrency.Kgs)]
+    [InlineData(CustomerResponseDataBillingCurrency.Khr)]
+    [InlineData(CustomerResponseDataBillingCurrency.Kmf)]
+    [InlineData(CustomerResponseDataBillingCurrency.Krw)]
+    [InlineData(CustomerResponseDataBillingCurrency.Kyd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Kzt)]
+    [InlineData(CustomerResponseDataBillingCurrency.Lbp)]
+    [InlineData(CustomerResponseDataBillingCurrency.Lkr)]
+    [InlineData(CustomerResponseDataBillingCurrency.Lrd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Lsl)]
+    [InlineData(CustomerResponseDataBillingCurrency.Mad)]
+    [InlineData(CustomerResponseDataBillingCurrency.Mdl)]
+    [InlineData(CustomerResponseDataBillingCurrency.Mga)]
+    [InlineData(CustomerResponseDataBillingCurrency.Mkd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Mmk)]
+    [InlineData(CustomerResponseDataBillingCurrency.Mnt)]
+    [InlineData(CustomerResponseDataBillingCurrency.Mop)]
+    [InlineData(CustomerResponseDataBillingCurrency.Mro)]
+    [InlineData(CustomerResponseDataBillingCurrency.Mvr)]
+    [InlineData(CustomerResponseDataBillingCurrency.Mwk)]
+    [InlineData(CustomerResponseDataBillingCurrency.Mxn)]
+    [InlineData(CustomerResponseDataBillingCurrency.Myr)]
+    [InlineData(CustomerResponseDataBillingCurrency.Mzn)]
+    [InlineData(CustomerResponseDataBillingCurrency.Nad)]
+    [InlineData(CustomerResponseDataBillingCurrency.Ngn)]
+    [InlineData(CustomerResponseDataBillingCurrency.Nok)]
+    [InlineData(CustomerResponseDataBillingCurrency.Npr)]
+    [InlineData(CustomerResponseDataBillingCurrency.Nzd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Pgk)]
+    [InlineData(CustomerResponseDataBillingCurrency.Php)]
+    [InlineData(CustomerResponseDataBillingCurrency.Pkr)]
+    [InlineData(CustomerResponseDataBillingCurrency.Pln)]
+    [InlineData(CustomerResponseDataBillingCurrency.Qar)]
+    [InlineData(CustomerResponseDataBillingCurrency.Ron)]
+    [InlineData(CustomerResponseDataBillingCurrency.Rsd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Rub)]
+    [InlineData(CustomerResponseDataBillingCurrency.Rwf)]
+    [InlineData(CustomerResponseDataBillingCurrency.Sar)]
+    [InlineData(CustomerResponseDataBillingCurrency.Sbd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Scr)]
+    [InlineData(CustomerResponseDataBillingCurrency.Sek)]
+    [InlineData(CustomerResponseDataBillingCurrency.Sgd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Sle)]
+    [InlineData(CustomerResponseDataBillingCurrency.Sll)]
+    [InlineData(CustomerResponseDataBillingCurrency.Sos)]
+    [InlineData(CustomerResponseDataBillingCurrency.Szl)]
+    [InlineData(CustomerResponseDataBillingCurrency.Thb)]
+    [InlineData(CustomerResponseDataBillingCurrency.Tjs)]
+    [InlineData(CustomerResponseDataBillingCurrency.Top)]
+    [InlineData(CustomerResponseDataBillingCurrency.Try)]
+    [InlineData(CustomerResponseDataBillingCurrency.Ttd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Tzs)]
+    [InlineData(CustomerResponseDataBillingCurrency.Uah)]
+    [InlineData(CustomerResponseDataBillingCurrency.Uzs)]
+    [InlineData(CustomerResponseDataBillingCurrency.Vnd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Vuv)]
+    [InlineData(CustomerResponseDataBillingCurrency.Wst)]
+    [InlineData(CustomerResponseDataBillingCurrency.Xaf)]
+    [InlineData(CustomerResponseDataBillingCurrency.Xcd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Yer)]
+    [InlineData(CustomerResponseDataBillingCurrency.Zar)]
+    [InlineData(CustomerResponseDataBillingCurrency.Zmw)]
+    [InlineData(CustomerResponseDataBillingCurrency.Clp)]
+    [InlineData(CustomerResponseDataBillingCurrency.Djf)]
+    [InlineData(CustomerResponseDataBillingCurrency.Gnf)]
+    [InlineData(CustomerResponseDataBillingCurrency.Ugx)]
+    [InlineData(CustomerResponseDataBillingCurrency.Pyg)]
+    [InlineData(CustomerResponseDataBillingCurrency.Xof)]
+    [InlineData(CustomerResponseDataBillingCurrency.Xpf)]
+    public void Validation_Works(CustomerResponseDataBillingCurrency rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, DataBillingCurrency> value = rawValue;
+        ApiEnum<string, CustomerResponseDataBillingCurrency> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, DataBillingCurrency>>(
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, CustomerResponseDataBillingCurrency>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(CustomerResponseDataBillingCurrency.Usd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Aed)]
+    [InlineData(CustomerResponseDataBillingCurrency.All)]
+    [InlineData(CustomerResponseDataBillingCurrency.Amd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Ang)]
+    [InlineData(CustomerResponseDataBillingCurrency.Aud)]
+    [InlineData(CustomerResponseDataBillingCurrency.Awg)]
+    [InlineData(CustomerResponseDataBillingCurrency.Azn)]
+    [InlineData(CustomerResponseDataBillingCurrency.Bam)]
+    [InlineData(CustomerResponseDataBillingCurrency.Bbd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Bdt)]
+    [InlineData(CustomerResponseDataBillingCurrency.Bgn)]
+    [InlineData(CustomerResponseDataBillingCurrency.Bif)]
+    [InlineData(CustomerResponseDataBillingCurrency.Bmd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Bnd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Bsd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Bwp)]
+    [InlineData(CustomerResponseDataBillingCurrency.Byn)]
+    [InlineData(CustomerResponseDataBillingCurrency.Bzd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Brl)]
+    [InlineData(CustomerResponseDataBillingCurrency.Cad)]
+    [InlineData(CustomerResponseDataBillingCurrency.Cdf)]
+    [InlineData(CustomerResponseDataBillingCurrency.Chf)]
+    [InlineData(CustomerResponseDataBillingCurrency.Cny)]
+    [InlineData(CustomerResponseDataBillingCurrency.Czk)]
+    [InlineData(CustomerResponseDataBillingCurrency.Dkk)]
+    [InlineData(CustomerResponseDataBillingCurrency.Dop)]
+    [InlineData(CustomerResponseDataBillingCurrency.Dzd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Egp)]
+    [InlineData(CustomerResponseDataBillingCurrency.Etb)]
+    [InlineData(CustomerResponseDataBillingCurrency.Eur)]
+    [InlineData(CustomerResponseDataBillingCurrency.Fjd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Gbp)]
+    [InlineData(CustomerResponseDataBillingCurrency.Gel)]
+    [InlineData(CustomerResponseDataBillingCurrency.Gip)]
+    [InlineData(CustomerResponseDataBillingCurrency.Gmd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Gyd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Hkd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Hrk)]
+    [InlineData(CustomerResponseDataBillingCurrency.Htg)]
+    [InlineData(CustomerResponseDataBillingCurrency.Idr)]
+    [InlineData(CustomerResponseDataBillingCurrency.Ils)]
+    [InlineData(CustomerResponseDataBillingCurrency.Inr)]
+    [InlineData(CustomerResponseDataBillingCurrency.Isk)]
+    [InlineData(CustomerResponseDataBillingCurrency.Jmd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Jpy)]
+    [InlineData(CustomerResponseDataBillingCurrency.Kes)]
+    [InlineData(CustomerResponseDataBillingCurrency.Kgs)]
+    [InlineData(CustomerResponseDataBillingCurrency.Khr)]
+    [InlineData(CustomerResponseDataBillingCurrency.Kmf)]
+    [InlineData(CustomerResponseDataBillingCurrency.Krw)]
+    [InlineData(CustomerResponseDataBillingCurrency.Kyd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Kzt)]
+    [InlineData(CustomerResponseDataBillingCurrency.Lbp)]
+    [InlineData(CustomerResponseDataBillingCurrency.Lkr)]
+    [InlineData(CustomerResponseDataBillingCurrency.Lrd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Lsl)]
+    [InlineData(CustomerResponseDataBillingCurrency.Mad)]
+    [InlineData(CustomerResponseDataBillingCurrency.Mdl)]
+    [InlineData(CustomerResponseDataBillingCurrency.Mga)]
+    [InlineData(CustomerResponseDataBillingCurrency.Mkd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Mmk)]
+    [InlineData(CustomerResponseDataBillingCurrency.Mnt)]
+    [InlineData(CustomerResponseDataBillingCurrency.Mop)]
+    [InlineData(CustomerResponseDataBillingCurrency.Mro)]
+    [InlineData(CustomerResponseDataBillingCurrency.Mvr)]
+    [InlineData(CustomerResponseDataBillingCurrency.Mwk)]
+    [InlineData(CustomerResponseDataBillingCurrency.Mxn)]
+    [InlineData(CustomerResponseDataBillingCurrency.Myr)]
+    [InlineData(CustomerResponseDataBillingCurrency.Mzn)]
+    [InlineData(CustomerResponseDataBillingCurrency.Nad)]
+    [InlineData(CustomerResponseDataBillingCurrency.Ngn)]
+    [InlineData(CustomerResponseDataBillingCurrency.Nok)]
+    [InlineData(CustomerResponseDataBillingCurrency.Npr)]
+    [InlineData(CustomerResponseDataBillingCurrency.Nzd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Pgk)]
+    [InlineData(CustomerResponseDataBillingCurrency.Php)]
+    [InlineData(CustomerResponseDataBillingCurrency.Pkr)]
+    [InlineData(CustomerResponseDataBillingCurrency.Pln)]
+    [InlineData(CustomerResponseDataBillingCurrency.Qar)]
+    [InlineData(CustomerResponseDataBillingCurrency.Ron)]
+    [InlineData(CustomerResponseDataBillingCurrency.Rsd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Rub)]
+    [InlineData(CustomerResponseDataBillingCurrency.Rwf)]
+    [InlineData(CustomerResponseDataBillingCurrency.Sar)]
+    [InlineData(CustomerResponseDataBillingCurrency.Sbd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Scr)]
+    [InlineData(CustomerResponseDataBillingCurrency.Sek)]
+    [InlineData(CustomerResponseDataBillingCurrency.Sgd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Sle)]
+    [InlineData(CustomerResponseDataBillingCurrency.Sll)]
+    [InlineData(CustomerResponseDataBillingCurrency.Sos)]
+    [InlineData(CustomerResponseDataBillingCurrency.Szl)]
+    [InlineData(CustomerResponseDataBillingCurrency.Thb)]
+    [InlineData(CustomerResponseDataBillingCurrency.Tjs)]
+    [InlineData(CustomerResponseDataBillingCurrency.Top)]
+    [InlineData(CustomerResponseDataBillingCurrency.Try)]
+    [InlineData(CustomerResponseDataBillingCurrency.Ttd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Tzs)]
+    [InlineData(CustomerResponseDataBillingCurrency.Uah)]
+    [InlineData(CustomerResponseDataBillingCurrency.Uzs)]
+    [InlineData(CustomerResponseDataBillingCurrency.Vnd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Vuv)]
+    [InlineData(CustomerResponseDataBillingCurrency.Wst)]
+    [InlineData(CustomerResponseDataBillingCurrency.Xaf)]
+    [InlineData(CustomerResponseDataBillingCurrency.Xcd)]
+    [InlineData(CustomerResponseDataBillingCurrency.Yer)]
+    [InlineData(CustomerResponseDataBillingCurrency.Zar)]
+    [InlineData(CustomerResponseDataBillingCurrency.Zmw)]
+    [InlineData(CustomerResponseDataBillingCurrency.Clp)]
+    [InlineData(CustomerResponseDataBillingCurrency.Djf)]
+    [InlineData(CustomerResponseDataBillingCurrency.Gnf)]
+    [InlineData(CustomerResponseDataBillingCurrency.Ugx)]
+    [InlineData(CustomerResponseDataBillingCurrency.Pyg)]
+    [InlineData(CustomerResponseDataBillingCurrency.Xof)]
+    [InlineData(CustomerResponseDataBillingCurrency.Xpf)]
+    public void SerializationRoundtrip_Works(CustomerResponseDataBillingCurrency rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, CustomerResponseDataBillingCurrency> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, CustomerResponseDataBillingCurrency>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, CustomerResponseDataBillingCurrency>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, CustomerResponseDataBillingCurrency>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class CustomerResponseDataCouponIDTest : TestBase
+{
+    [Theory]
+    [InlineData(CustomerResponseDataCouponID.Undefined)]
+    public void Validation_Works(CustomerResponseDataCouponID rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, CustomerResponseDataCouponID> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, CustomerResponseDataCouponID>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -1846,132 +2023,16 @@ public class DataBillingCurrencyTest : TestBase
     }
 
     [Theory]
-    [InlineData(DataBillingCurrency.Usd)]
-    [InlineData(DataBillingCurrency.Aed)]
-    [InlineData(DataBillingCurrency.All)]
-    [InlineData(DataBillingCurrency.Amd)]
-    [InlineData(DataBillingCurrency.Ang)]
-    [InlineData(DataBillingCurrency.Aud)]
-    [InlineData(DataBillingCurrency.Awg)]
-    [InlineData(DataBillingCurrency.Azn)]
-    [InlineData(DataBillingCurrency.Bam)]
-    [InlineData(DataBillingCurrency.Bbd)]
-    [InlineData(DataBillingCurrency.Bdt)]
-    [InlineData(DataBillingCurrency.Bgn)]
-    [InlineData(DataBillingCurrency.Bif)]
-    [InlineData(DataBillingCurrency.Bmd)]
-    [InlineData(DataBillingCurrency.Bnd)]
-    [InlineData(DataBillingCurrency.Bsd)]
-    [InlineData(DataBillingCurrency.Bwp)]
-    [InlineData(DataBillingCurrency.Byn)]
-    [InlineData(DataBillingCurrency.Bzd)]
-    [InlineData(DataBillingCurrency.Brl)]
-    [InlineData(DataBillingCurrency.Cad)]
-    [InlineData(DataBillingCurrency.Cdf)]
-    [InlineData(DataBillingCurrency.Chf)]
-    [InlineData(DataBillingCurrency.Cny)]
-    [InlineData(DataBillingCurrency.Czk)]
-    [InlineData(DataBillingCurrency.Dkk)]
-    [InlineData(DataBillingCurrency.Dop)]
-    [InlineData(DataBillingCurrency.Dzd)]
-    [InlineData(DataBillingCurrency.Egp)]
-    [InlineData(DataBillingCurrency.Etb)]
-    [InlineData(DataBillingCurrency.Eur)]
-    [InlineData(DataBillingCurrency.Fjd)]
-    [InlineData(DataBillingCurrency.Gbp)]
-    [InlineData(DataBillingCurrency.Gel)]
-    [InlineData(DataBillingCurrency.Gip)]
-    [InlineData(DataBillingCurrency.Gmd)]
-    [InlineData(DataBillingCurrency.Gyd)]
-    [InlineData(DataBillingCurrency.Hkd)]
-    [InlineData(DataBillingCurrency.Hrk)]
-    [InlineData(DataBillingCurrency.Htg)]
-    [InlineData(DataBillingCurrency.Idr)]
-    [InlineData(DataBillingCurrency.Ils)]
-    [InlineData(DataBillingCurrency.Inr)]
-    [InlineData(DataBillingCurrency.Isk)]
-    [InlineData(DataBillingCurrency.Jmd)]
-    [InlineData(DataBillingCurrency.Jpy)]
-    [InlineData(DataBillingCurrency.Kes)]
-    [InlineData(DataBillingCurrency.Kgs)]
-    [InlineData(DataBillingCurrency.Khr)]
-    [InlineData(DataBillingCurrency.Kmf)]
-    [InlineData(DataBillingCurrency.Krw)]
-    [InlineData(DataBillingCurrency.Kyd)]
-    [InlineData(DataBillingCurrency.Kzt)]
-    [InlineData(DataBillingCurrency.Lbp)]
-    [InlineData(DataBillingCurrency.Lkr)]
-    [InlineData(DataBillingCurrency.Lrd)]
-    [InlineData(DataBillingCurrency.Lsl)]
-    [InlineData(DataBillingCurrency.Mad)]
-    [InlineData(DataBillingCurrency.Mdl)]
-    [InlineData(DataBillingCurrency.Mga)]
-    [InlineData(DataBillingCurrency.Mkd)]
-    [InlineData(DataBillingCurrency.Mmk)]
-    [InlineData(DataBillingCurrency.Mnt)]
-    [InlineData(DataBillingCurrency.Mop)]
-    [InlineData(DataBillingCurrency.Mro)]
-    [InlineData(DataBillingCurrency.Mvr)]
-    [InlineData(DataBillingCurrency.Mwk)]
-    [InlineData(DataBillingCurrency.Mxn)]
-    [InlineData(DataBillingCurrency.Myr)]
-    [InlineData(DataBillingCurrency.Mzn)]
-    [InlineData(DataBillingCurrency.Nad)]
-    [InlineData(DataBillingCurrency.Ngn)]
-    [InlineData(DataBillingCurrency.Nok)]
-    [InlineData(DataBillingCurrency.Npr)]
-    [InlineData(DataBillingCurrency.Nzd)]
-    [InlineData(DataBillingCurrency.Pgk)]
-    [InlineData(DataBillingCurrency.Php)]
-    [InlineData(DataBillingCurrency.Pkr)]
-    [InlineData(DataBillingCurrency.Pln)]
-    [InlineData(DataBillingCurrency.Qar)]
-    [InlineData(DataBillingCurrency.Ron)]
-    [InlineData(DataBillingCurrency.Rsd)]
-    [InlineData(DataBillingCurrency.Rub)]
-    [InlineData(DataBillingCurrency.Rwf)]
-    [InlineData(DataBillingCurrency.Sar)]
-    [InlineData(DataBillingCurrency.Sbd)]
-    [InlineData(DataBillingCurrency.Scr)]
-    [InlineData(DataBillingCurrency.Sek)]
-    [InlineData(DataBillingCurrency.Sgd)]
-    [InlineData(DataBillingCurrency.Sle)]
-    [InlineData(DataBillingCurrency.Sll)]
-    [InlineData(DataBillingCurrency.Sos)]
-    [InlineData(DataBillingCurrency.Szl)]
-    [InlineData(DataBillingCurrency.Thb)]
-    [InlineData(DataBillingCurrency.Tjs)]
-    [InlineData(DataBillingCurrency.Top)]
-    [InlineData(DataBillingCurrency.Try)]
-    [InlineData(DataBillingCurrency.Ttd)]
-    [InlineData(DataBillingCurrency.Tzs)]
-    [InlineData(DataBillingCurrency.Uah)]
-    [InlineData(DataBillingCurrency.Uzs)]
-    [InlineData(DataBillingCurrency.Vnd)]
-    [InlineData(DataBillingCurrency.Vuv)]
-    [InlineData(DataBillingCurrency.Wst)]
-    [InlineData(DataBillingCurrency.Xaf)]
-    [InlineData(DataBillingCurrency.Xcd)]
-    [InlineData(DataBillingCurrency.Yer)]
-    [InlineData(DataBillingCurrency.Zar)]
-    [InlineData(DataBillingCurrency.Zmw)]
-    [InlineData(DataBillingCurrency.Clp)]
-    [InlineData(DataBillingCurrency.Djf)]
-    [InlineData(DataBillingCurrency.Gnf)]
-    [InlineData(DataBillingCurrency.Ugx)]
-    [InlineData(DataBillingCurrency.Pyg)]
-    [InlineData(DataBillingCurrency.Xof)]
-    [InlineData(DataBillingCurrency.Xpf)]
-    public void SerializationRoundtrip_Works(DataBillingCurrency rawValue)
+    [InlineData(CustomerResponseDataCouponID.Undefined)]
+    public void SerializationRoundtrip_Works(CustomerResponseDataCouponID rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, DataBillingCurrency> value = rawValue;
+        ApiEnum<string, CustomerResponseDataCouponID> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataBillingCurrency>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, CustomerResponseDataCouponID>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
@@ -1979,96 +2040,39 @@ public class DataBillingCurrencyTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, DataBillingCurrency>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, CustomerResponseDataCouponID>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataBillingCurrency>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, CustomerResponseDataCouponID>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
 }
 
-public class DataCouponIDTest : TestBase
-{
-    [Theory]
-    [InlineData(DataCouponID.Undefined)]
-    public void Validation_Works(DataCouponID rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, DataCouponID> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, DataCouponID>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(DataCouponID.Undefined)]
-    public void SerializationRoundtrip_Works(DataCouponID rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, DataCouponID> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataCouponID>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, DataCouponID>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataCouponID>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-}
-
-public class DataDefaultPaymentMethodTest : TestBase
+public class CustomerResponseDataDefaultPaymentMethodTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new DataDefaultPaymentMethod
+        var model = new CustomerResponseDataDefaultPaymentMethod
         {
             BillingID = "billingId",
             CardExpiryMonth = 0,
             CardExpiryYear = 0,
             CardLast4Digits = "cardLast4Digits",
-            Type = DataDefaultPaymentMethodType.Card,
+            Type = CustomerResponseDataDefaultPaymentMethodType.Card,
         };
 
         string expectedBillingID = "billingId";
         double expectedCardExpiryMonth = 0;
         double expectedCardExpiryYear = 0;
         string expectedCardLast4Digits = "cardLast4Digits";
-        ApiEnum<string, DataDefaultPaymentMethodType> expectedType =
-            DataDefaultPaymentMethodType.Card;
+        ApiEnum<string, CustomerResponseDataDefaultPaymentMethodType> expectedType =
+            CustomerResponseDataDefaultPaymentMethodType.Card;
 
         Assert.Equal(expectedBillingID, model.BillingID);
         Assert.Equal(expectedCardExpiryMonth, model.CardExpiryMonth);
@@ -2080,17 +2084,17 @@ public class DataDefaultPaymentMethodTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new DataDefaultPaymentMethod
+        var model = new CustomerResponseDataDefaultPaymentMethod
         {
             BillingID = "billingId",
             CardExpiryMonth = 0,
             CardExpiryYear = 0,
             CardLast4Digits = "cardLast4Digits",
-            Type = DataDefaultPaymentMethodType.Card,
+            Type = CustomerResponseDataDefaultPaymentMethodType.Card,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DataDefaultPaymentMethod>(
+        var deserialized = JsonSerializer.Deserialize<CustomerResponseDataDefaultPaymentMethod>(
             json,
             ModelBase.SerializerOptions
         );
@@ -2101,17 +2105,17 @@ public class DataDefaultPaymentMethodTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new DataDefaultPaymentMethod
+        var model = new CustomerResponseDataDefaultPaymentMethod
         {
             BillingID = "billingId",
             CardExpiryMonth = 0,
             CardExpiryYear = 0,
             CardLast4Digits = "cardLast4Digits",
-            Type = DataDefaultPaymentMethodType.Card,
+            Type = CustomerResponseDataDefaultPaymentMethodType.Card,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DataDefaultPaymentMethod>(
+        var deserialized = JsonSerializer.Deserialize<CustomerResponseDataDefaultPaymentMethod>(
             element,
             ModelBase.SerializerOptions
         );
@@ -2121,8 +2125,8 @@ public class DataDefaultPaymentMethodTest : TestBase
         double expectedCardExpiryMonth = 0;
         double expectedCardExpiryYear = 0;
         string expectedCardLast4Digits = "cardLast4Digits";
-        ApiEnum<string, DataDefaultPaymentMethodType> expectedType =
-            DataDefaultPaymentMethodType.Card;
+        ApiEnum<string, CustomerResponseDataDefaultPaymentMethodType> expectedType =
+            CustomerResponseDataDefaultPaymentMethodType.Card;
 
         Assert.Equal(expectedBillingID, deserialized.BillingID);
         Assert.Equal(expectedCardExpiryMonth, deserialized.CardExpiryMonth);
@@ -2134,13 +2138,13 @@ public class DataDefaultPaymentMethodTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new DataDefaultPaymentMethod
+        var model = new CustomerResponseDataDefaultPaymentMethod
         {
             BillingID = "billingId",
             CardExpiryMonth = 0,
             CardExpiryYear = 0,
             CardLast4Digits = "cardLast4Digits",
-            Type = DataDefaultPaymentMethodType.Card,
+            Type = CustomerResponseDataDefaultPaymentMethodType.Card,
         };
 
         model.Validate();
@@ -2149,58 +2153,57 @@ public class DataDefaultPaymentMethodTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new DataDefaultPaymentMethod
+        var model = new CustomerResponseDataDefaultPaymentMethod
         {
             BillingID = "billingId",
             CardExpiryMonth = 0,
             CardExpiryYear = 0,
             CardLast4Digits = "cardLast4Digits",
-            Type = DataDefaultPaymentMethodType.Card,
+            Type = CustomerResponseDataDefaultPaymentMethodType.Card,
         };
 
-        DataDefaultPaymentMethod copied = new(model);
+        CustomerResponseDataDefaultPaymentMethod copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class DataDefaultPaymentMethodTypeTest : TestBase
+public class CustomerResponseDataDefaultPaymentMethodTypeTest : TestBase
 {
     [Theory]
-    [InlineData(DataDefaultPaymentMethodType.Card)]
-    [InlineData(DataDefaultPaymentMethodType.Bank)]
-    [InlineData(DataDefaultPaymentMethodType.CashApp)]
-    public void Validation_Works(DataDefaultPaymentMethodType rawValue)
+    [InlineData(CustomerResponseDataDefaultPaymentMethodType.Card)]
+    [InlineData(CustomerResponseDataDefaultPaymentMethodType.Bank)]
+    [InlineData(CustomerResponseDataDefaultPaymentMethodType.CashApp)]
+    public void Validation_Works(CustomerResponseDataDefaultPaymentMethodType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, DataDefaultPaymentMethodType> value = rawValue;
+        ApiEnum<string, CustomerResponseDataDefaultPaymentMethodType> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, DataDefaultPaymentMethodType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, CustomerResponseDataDefaultPaymentMethodType>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
         Assert.Throws<StiggInvalidDataException>(() => value.Validate());
     }
 
     [Theory]
-    [InlineData(DataDefaultPaymentMethodType.Card)]
-    [InlineData(DataDefaultPaymentMethodType.Bank)]
-    [InlineData(DataDefaultPaymentMethodType.CashApp)]
-    public void SerializationRoundtrip_Works(DataDefaultPaymentMethodType rawValue)
+    [InlineData(CustomerResponseDataDefaultPaymentMethodType.Card)]
+    [InlineData(CustomerResponseDataDefaultPaymentMethodType.Bank)]
+    [InlineData(CustomerResponseDataDefaultPaymentMethodType.CashApp)]
+    public void SerializationRoundtrip_Works(CustomerResponseDataDefaultPaymentMethodType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, DataDefaultPaymentMethodType> value = rawValue;
+        ApiEnum<string, CustomerResponseDataDefaultPaymentMethodType> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, DataDefaultPaymentMethodType>
+            ApiEnum<string, CustomerResponseDataDefaultPaymentMethodType>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -2209,35 +2212,34 @@ public class DataDefaultPaymentMethodTypeTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, DataDefaultPaymentMethodType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, CustomerResponseDataDefaultPaymentMethodType>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, DataDefaultPaymentMethodType>
+            ApiEnum<string, CustomerResponseDataDefaultPaymentMethodType>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
 }
 
-public class DataIntegrationTest : TestBase
+public class CustomerResponseDataIntegrationTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new DataIntegration
+        var model = new CustomerResponseDataIntegration
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = DataIntegrationVendorIdentifier.Auth0,
+            VendorIdentifier = CustomerResponseDataIntegrationVendorIdentifier.Auth0,
         };
 
         string expectedID = "id";
         string expectedSyncedEntityID = "syncedEntityId";
-        ApiEnum<string, DataIntegrationVendorIdentifier> expectedVendorIdentifier =
-            DataIntegrationVendorIdentifier.Auth0;
+        ApiEnum<string, CustomerResponseDataIntegrationVendorIdentifier> expectedVendorIdentifier =
+            CustomerResponseDataIntegrationVendorIdentifier.Auth0;
 
         Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedSyncedEntityID, model.SyncedEntityID);
@@ -2247,15 +2249,15 @@ public class DataIntegrationTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new DataIntegration
+        var model = new CustomerResponseDataIntegration
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = DataIntegrationVendorIdentifier.Auth0,
+            VendorIdentifier = CustomerResponseDataIntegrationVendorIdentifier.Auth0,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DataIntegration>(
+        var deserialized = JsonSerializer.Deserialize<CustomerResponseDataIntegration>(
             json,
             ModelBase.SerializerOptions
         );
@@ -2266,15 +2268,15 @@ public class DataIntegrationTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new DataIntegration
+        var model = new CustomerResponseDataIntegration
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = DataIntegrationVendorIdentifier.Auth0,
+            VendorIdentifier = CustomerResponseDataIntegrationVendorIdentifier.Auth0,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DataIntegration>(
+        var deserialized = JsonSerializer.Deserialize<CustomerResponseDataIntegration>(
             element,
             ModelBase.SerializerOptions
         );
@@ -2282,8 +2284,8 @@ public class DataIntegrationTest : TestBase
 
         string expectedID = "id";
         string expectedSyncedEntityID = "syncedEntityId";
-        ApiEnum<string, DataIntegrationVendorIdentifier> expectedVendorIdentifier =
-            DataIntegrationVendorIdentifier.Auth0;
+        ApiEnum<string, CustomerResponseDataIntegrationVendorIdentifier> expectedVendorIdentifier =
+            CustomerResponseDataIntegrationVendorIdentifier.Auth0;
 
         Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedSyncedEntityID, deserialized.SyncedEntityID);
@@ -2293,11 +2295,11 @@ public class DataIntegrationTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new DataIntegration
+        var model = new CustomerResponseDataIntegration
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = DataIntegrationVendorIdentifier.Auth0,
+            VendorIdentifier = CustomerResponseDataIntegrationVendorIdentifier.Auth0,
         };
 
         model.Validate();
@@ -2306,70 +2308,71 @@ public class DataIntegrationTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new DataIntegration
+        var model = new CustomerResponseDataIntegration
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = DataIntegrationVendorIdentifier.Auth0,
+            VendorIdentifier = CustomerResponseDataIntegrationVendorIdentifier.Auth0,
         };
 
-        DataIntegration copied = new(model);
+        CustomerResponseDataIntegration copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class DataIntegrationVendorIdentifierTest : TestBase
+public class CustomerResponseDataIntegrationVendorIdentifierTest : TestBase
 {
     [Theory]
-    [InlineData(DataIntegrationVendorIdentifier.Auth0)]
-    [InlineData(DataIntegrationVendorIdentifier.Zuora)]
-    [InlineData(DataIntegrationVendorIdentifier.Stripe)]
-    [InlineData(DataIntegrationVendorIdentifier.Hubspot)]
-    [InlineData(DataIntegrationVendorIdentifier.AwsMarketplace)]
-    [InlineData(DataIntegrationVendorIdentifier.Snowflake)]
-    [InlineData(DataIntegrationVendorIdentifier.Salesforce)]
-    [InlineData(DataIntegrationVendorIdentifier.BigQuery)]
-    [InlineData(DataIntegrationVendorIdentifier.OpenFga)]
-    [InlineData(DataIntegrationVendorIdentifier.AppStore)]
-    public void Validation_Works(DataIntegrationVendorIdentifier rawValue)
+    [InlineData(CustomerResponseDataIntegrationVendorIdentifier.Auth0)]
+    [InlineData(CustomerResponseDataIntegrationVendorIdentifier.Zuora)]
+    [InlineData(CustomerResponseDataIntegrationVendorIdentifier.Stripe)]
+    [InlineData(CustomerResponseDataIntegrationVendorIdentifier.Hubspot)]
+    [InlineData(CustomerResponseDataIntegrationVendorIdentifier.AwsMarketplace)]
+    [InlineData(CustomerResponseDataIntegrationVendorIdentifier.Snowflake)]
+    [InlineData(CustomerResponseDataIntegrationVendorIdentifier.Salesforce)]
+    [InlineData(CustomerResponseDataIntegrationVendorIdentifier.BigQuery)]
+    [InlineData(CustomerResponseDataIntegrationVendorIdentifier.OpenFga)]
+    [InlineData(CustomerResponseDataIntegrationVendorIdentifier.AppStore)]
+    public void Validation_Works(CustomerResponseDataIntegrationVendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, DataIntegrationVendorIdentifier> value = rawValue;
+        ApiEnum<string, CustomerResponseDataIntegrationVendorIdentifier> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, DataIntegrationVendorIdentifier>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, CustomerResponseDataIntegrationVendorIdentifier>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
         Assert.Throws<StiggInvalidDataException>(() => value.Validate());
     }
 
     [Theory]
-    [InlineData(DataIntegrationVendorIdentifier.Auth0)]
-    [InlineData(DataIntegrationVendorIdentifier.Zuora)]
-    [InlineData(DataIntegrationVendorIdentifier.Stripe)]
-    [InlineData(DataIntegrationVendorIdentifier.Hubspot)]
-    [InlineData(DataIntegrationVendorIdentifier.AwsMarketplace)]
-    [InlineData(DataIntegrationVendorIdentifier.Snowflake)]
-    [InlineData(DataIntegrationVendorIdentifier.Salesforce)]
-    [InlineData(DataIntegrationVendorIdentifier.BigQuery)]
-    [InlineData(DataIntegrationVendorIdentifier.OpenFga)]
-    [InlineData(DataIntegrationVendorIdentifier.AppStore)]
-    public void SerializationRoundtrip_Works(DataIntegrationVendorIdentifier rawValue)
+    [InlineData(CustomerResponseDataIntegrationVendorIdentifier.Auth0)]
+    [InlineData(CustomerResponseDataIntegrationVendorIdentifier.Zuora)]
+    [InlineData(CustomerResponseDataIntegrationVendorIdentifier.Stripe)]
+    [InlineData(CustomerResponseDataIntegrationVendorIdentifier.Hubspot)]
+    [InlineData(CustomerResponseDataIntegrationVendorIdentifier.AwsMarketplace)]
+    [InlineData(CustomerResponseDataIntegrationVendorIdentifier.Snowflake)]
+    [InlineData(CustomerResponseDataIntegrationVendorIdentifier.Salesforce)]
+    [InlineData(CustomerResponseDataIntegrationVendorIdentifier.BigQuery)]
+    [InlineData(CustomerResponseDataIntegrationVendorIdentifier.OpenFga)]
+    [InlineData(CustomerResponseDataIntegrationVendorIdentifier.AppStore)]
+    public void SerializationRoundtrip_Works(
+        CustomerResponseDataIntegrationVendorIdentifier rawValue
+    )
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, DataIntegrationVendorIdentifier> value = rawValue;
+        ApiEnum<string, CustomerResponseDataIntegrationVendorIdentifier> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, DataIntegrationVendorIdentifier>
+            ApiEnum<string, CustomerResponseDataIntegrationVendorIdentifier>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -2378,25 +2381,24 @@ public class DataIntegrationVendorIdentifierTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, DataIntegrationVendorIdentifier>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, CustomerResponseDataIntegrationVendorIdentifier>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, DataIntegrationVendorIdentifier>
+            ApiEnum<string, CustomerResponseDataIntegrationVendorIdentifier>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
 }
 
-public class DataPassthroughTest : TestBase
+public class CustomerResponseDataPassthroughTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new DataPassthrough
+        var model = new CustomerResponseDataPassthrough
         {
             Stripe = new()
             {
@@ -2435,13 +2437,13 @@ public class DataPassthroughTest : TestBase
                     PostalCode = "postalCode",
                     State = "state",
                 },
-                Currency = DataPassthroughZuoraCurrency.Usd,
+                Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PaymentMethodID = "paymentMethodId",
             },
         };
 
-        DataPassthroughStripe expectedStripe = new()
+        CustomerResponseDataPassthroughStripe expectedStripe = new()
         {
             BillingAddress = new()
             {
@@ -2467,7 +2469,7 @@ public class DataPassthroughTest : TestBase
             },
             TaxIds = [new() { Type = "type", Value = "value" }],
         };
-        DataPassthroughZuora expectedZuora = new()
+        CustomerResponseDataPassthroughZuora expectedZuora = new()
         {
             BillingAddress = new()
             {
@@ -2478,7 +2480,7 @@ public class DataPassthroughTest : TestBase
                 PostalCode = "postalCode",
                 State = "state",
             },
-            Currency = DataPassthroughZuoraCurrency.Usd,
+            Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentMethodID = "paymentMethodId",
         };
@@ -2490,7 +2492,7 @@ public class DataPassthroughTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new DataPassthrough
+        var model = new CustomerResponseDataPassthrough
         {
             Stripe = new()
             {
@@ -2529,14 +2531,14 @@ public class DataPassthroughTest : TestBase
                     PostalCode = "postalCode",
                     State = "state",
                 },
-                Currency = DataPassthroughZuoraCurrency.Usd,
+                Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PaymentMethodID = "paymentMethodId",
             },
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DataPassthrough>(
+        var deserialized = JsonSerializer.Deserialize<CustomerResponseDataPassthrough>(
             json,
             ModelBase.SerializerOptions
         );
@@ -2547,7 +2549,7 @@ public class DataPassthroughTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new DataPassthrough
+        var model = new CustomerResponseDataPassthrough
         {
             Stripe = new()
             {
@@ -2586,20 +2588,20 @@ public class DataPassthroughTest : TestBase
                     PostalCode = "postalCode",
                     State = "state",
                 },
-                Currency = DataPassthroughZuoraCurrency.Usd,
+                Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PaymentMethodID = "paymentMethodId",
             },
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DataPassthrough>(
+        var deserialized = JsonSerializer.Deserialize<CustomerResponseDataPassthrough>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
-        DataPassthroughStripe expectedStripe = new()
+        CustomerResponseDataPassthroughStripe expectedStripe = new()
         {
             BillingAddress = new()
             {
@@ -2625,7 +2627,7 @@ public class DataPassthroughTest : TestBase
             },
             TaxIds = [new() { Type = "type", Value = "value" }],
         };
-        DataPassthroughZuora expectedZuora = new()
+        CustomerResponseDataPassthroughZuora expectedZuora = new()
         {
             BillingAddress = new()
             {
@@ -2636,7 +2638,7 @@ public class DataPassthroughTest : TestBase
                 PostalCode = "postalCode",
                 State = "state",
             },
-            Currency = DataPassthroughZuoraCurrency.Usd,
+            Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentMethodID = "paymentMethodId",
         };
@@ -2648,7 +2650,7 @@ public class DataPassthroughTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new DataPassthrough
+        var model = new CustomerResponseDataPassthrough
         {
             Stripe = new()
             {
@@ -2687,7 +2689,7 @@ public class DataPassthroughTest : TestBase
                     PostalCode = "postalCode",
                     State = "state",
                 },
-                Currency = DataPassthroughZuoraCurrency.Usd,
+                Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PaymentMethodID = "paymentMethodId",
             },
@@ -2699,7 +2701,7 @@ public class DataPassthroughTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new DataPassthrough { };
+        var model = new CustomerResponseDataPassthrough { };
 
         Assert.Null(model.Stripe);
         Assert.False(model.RawData.ContainsKey("stripe"));
@@ -2710,7 +2712,7 @@ public class DataPassthroughTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new DataPassthrough { };
+        var model = new CustomerResponseDataPassthrough { };
 
         model.Validate();
     }
@@ -2718,7 +2720,7 @@ public class DataPassthroughTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new DataPassthrough
+        var model = new CustomerResponseDataPassthrough
         {
             // Null should be interpreted as omitted for these properties
             Stripe = null,
@@ -2734,7 +2736,7 @@ public class DataPassthroughTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new DataPassthrough
+        var model = new CustomerResponseDataPassthrough
         {
             // Null should be interpreted as omitted for these properties
             Stripe = null,
@@ -2747,7 +2749,7 @@ public class DataPassthroughTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new DataPassthrough
+        var model = new CustomerResponseDataPassthrough
         {
             Stripe = new()
             {
@@ -2786,24 +2788,24 @@ public class DataPassthroughTest : TestBase
                     PostalCode = "postalCode",
                     State = "state",
                 },
-                Currency = DataPassthroughZuoraCurrency.Usd,
+                Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PaymentMethodID = "paymentMethodId",
             },
         };
 
-        DataPassthrough copied = new(model);
+        CustomerResponseDataPassthrough copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class DataPassthroughStripeTest : TestBase
+public class CustomerResponseDataPassthroughStripeTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new DataPassthroughStripe
+        var model = new CustomerResponseDataPassthroughStripe
         {
             BillingAddress = new()
             {
@@ -2830,7 +2832,7 @@ public class DataPassthroughStripeTest : TestBase
             TaxIds = [new() { Type = "type", Value = "value" }],
         };
 
-        DataPassthroughStripeBillingAddress expectedBillingAddress = new()
+        CustomerResponseDataPassthroughStripeBillingAddress expectedBillingAddress = new()
         {
             City = "city",
             Country = "country",
@@ -2843,7 +2845,7 @@ public class DataPassthroughStripeTest : TestBase
         Dictionary<string, string> expectedInvoiceCustomFields = new() { { "foo", "string" } };
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentMethodID = "paymentMethodId";
-        DataPassthroughStripeShippingAddress expectedShippingAddress = new()
+        CustomerResponseDataPassthroughStripeShippingAddress expectedShippingAddress = new()
         {
             City = "city",
             Country = "country",
@@ -2852,7 +2854,7 @@ public class DataPassthroughStripeTest : TestBase
             PostalCode = "postalCode",
             State = "state",
         };
-        List<DataPassthroughStripeTaxID> expectedTaxIds =
+        List<CustomerResponseDataPassthroughStripeTaxID> expectedTaxIds =
         [
             new() { Type = "type", Value = "value" },
         ];
@@ -2888,7 +2890,7 @@ public class DataPassthroughStripeTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new DataPassthroughStripe
+        var model = new CustomerResponseDataPassthroughStripe
         {
             BillingAddress = new()
             {
@@ -2916,7 +2918,7 @@ public class DataPassthroughStripeTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DataPassthroughStripe>(
+        var deserialized = JsonSerializer.Deserialize<CustomerResponseDataPassthroughStripe>(
             json,
             ModelBase.SerializerOptions
         );
@@ -2927,7 +2929,7 @@ public class DataPassthroughStripeTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new DataPassthroughStripe
+        var model = new CustomerResponseDataPassthroughStripe
         {
             BillingAddress = new()
             {
@@ -2955,13 +2957,13 @@ public class DataPassthroughStripeTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DataPassthroughStripe>(
+        var deserialized = JsonSerializer.Deserialize<CustomerResponseDataPassthroughStripe>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
-        DataPassthroughStripeBillingAddress expectedBillingAddress = new()
+        CustomerResponseDataPassthroughStripeBillingAddress expectedBillingAddress = new()
         {
             City = "city",
             Country = "country",
@@ -2974,7 +2976,7 @@ public class DataPassthroughStripeTest : TestBase
         Dictionary<string, string> expectedInvoiceCustomFields = new() { { "foo", "string" } };
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentMethodID = "paymentMethodId";
-        DataPassthroughStripeShippingAddress expectedShippingAddress = new()
+        CustomerResponseDataPassthroughStripeShippingAddress expectedShippingAddress = new()
         {
             City = "city",
             Country = "country",
@@ -2983,7 +2985,7 @@ public class DataPassthroughStripeTest : TestBase
             PostalCode = "postalCode",
             State = "state",
         };
-        List<DataPassthroughStripeTaxID> expectedTaxIds =
+        List<CustomerResponseDataPassthroughStripeTaxID> expectedTaxIds =
         [
             new() { Type = "type", Value = "value" },
         ];
@@ -3019,7 +3021,7 @@ public class DataPassthroughStripeTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new DataPassthroughStripe
+        var model = new CustomerResponseDataPassthroughStripe
         {
             BillingAddress = new()
             {
@@ -3052,7 +3054,7 @@ public class DataPassthroughStripeTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new DataPassthroughStripe { };
+        var model = new CustomerResponseDataPassthroughStripe { };
 
         Assert.Null(model.BillingAddress);
         Assert.False(model.RawData.ContainsKey("billingAddress"));
@@ -3073,7 +3075,7 @@ public class DataPassthroughStripeTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new DataPassthroughStripe { };
+        var model = new CustomerResponseDataPassthroughStripe { };
 
         model.Validate();
     }
@@ -3081,7 +3083,7 @@ public class DataPassthroughStripeTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new DataPassthroughStripe
+        var model = new CustomerResponseDataPassthroughStripe
         {
             // Null should be interpreted as omitted for these properties
             BillingAddress = null,
@@ -3112,7 +3114,7 @@ public class DataPassthroughStripeTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new DataPassthroughStripe
+        var model = new CustomerResponseDataPassthroughStripe
         {
             // Null should be interpreted as omitted for these properties
             BillingAddress = null,
@@ -3130,7 +3132,7 @@ public class DataPassthroughStripeTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new DataPassthroughStripe
+        var model = new CustomerResponseDataPassthroughStripe
         {
             BillingAddress = new()
             {
@@ -3157,18 +3159,18 @@ public class DataPassthroughStripeTest : TestBase
             TaxIds = [new() { Type = "type", Value = "value" }],
         };
 
-        DataPassthroughStripe copied = new(model);
+        CustomerResponseDataPassthroughStripe copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class DataPassthroughStripeBillingAddressTest : TestBase
+public class CustomerResponseDataPassthroughStripeBillingAddressTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new DataPassthroughStripeBillingAddress
+        var model = new CustomerResponseDataPassthroughStripeBillingAddress
         {
             City = "city",
             Country = "country",
@@ -3196,7 +3198,7 @@ public class DataPassthroughStripeBillingAddressTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new DataPassthroughStripeBillingAddress
+        var model = new CustomerResponseDataPassthroughStripeBillingAddress
         {
             City = "city",
             Country = "country",
@@ -3207,10 +3209,11 @@ public class DataPassthroughStripeBillingAddressTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DataPassthroughStripeBillingAddress>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized =
+            JsonSerializer.Deserialize<CustomerResponseDataPassthroughStripeBillingAddress>(
+                json,
+                ModelBase.SerializerOptions
+            );
 
         Assert.Equal(model, deserialized);
     }
@@ -3218,7 +3221,7 @@ public class DataPassthroughStripeBillingAddressTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new DataPassthroughStripeBillingAddress
+        var model = new CustomerResponseDataPassthroughStripeBillingAddress
         {
             City = "city",
             Country = "country",
@@ -3229,10 +3232,11 @@ public class DataPassthroughStripeBillingAddressTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DataPassthroughStripeBillingAddress>(
-            element,
-            ModelBase.SerializerOptions
-        );
+        var deserialized =
+            JsonSerializer.Deserialize<CustomerResponseDataPassthroughStripeBillingAddress>(
+                element,
+                ModelBase.SerializerOptions
+            );
         Assert.NotNull(deserialized);
 
         string expectedCity = "city";
@@ -3253,7 +3257,7 @@ public class DataPassthroughStripeBillingAddressTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new DataPassthroughStripeBillingAddress
+        var model = new CustomerResponseDataPassthroughStripeBillingAddress
         {
             City = "city",
             Country = "country",
@@ -3269,7 +3273,7 @@ public class DataPassthroughStripeBillingAddressTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new DataPassthroughStripeBillingAddress { };
+        var model = new CustomerResponseDataPassthroughStripeBillingAddress { };
 
         Assert.Null(model.City);
         Assert.False(model.RawData.ContainsKey("city"));
@@ -3288,7 +3292,7 @@ public class DataPassthroughStripeBillingAddressTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new DataPassthroughStripeBillingAddress { };
+        var model = new CustomerResponseDataPassthroughStripeBillingAddress { };
 
         model.Validate();
     }
@@ -3296,7 +3300,7 @@ public class DataPassthroughStripeBillingAddressTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new DataPassthroughStripeBillingAddress
+        var model = new CustomerResponseDataPassthroughStripeBillingAddress
         {
             // Null should be interpreted as omitted for these properties
             City = null,
@@ -3324,7 +3328,7 @@ public class DataPassthroughStripeBillingAddressTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new DataPassthroughStripeBillingAddress
+        var model = new CustomerResponseDataPassthroughStripeBillingAddress
         {
             // Null should be interpreted as omitted for these properties
             City = null,
@@ -3341,7 +3345,7 @@ public class DataPassthroughStripeBillingAddressTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new DataPassthroughStripeBillingAddress
+        var model = new CustomerResponseDataPassthroughStripeBillingAddress
         {
             City = "city",
             Country = "country",
@@ -3351,18 +3355,18 @@ public class DataPassthroughStripeBillingAddressTest : TestBase
             State = "state",
         };
 
-        DataPassthroughStripeBillingAddress copied = new(model);
+        CustomerResponseDataPassthroughStripeBillingAddress copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class DataPassthroughStripeShippingAddressTest : TestBase
+public class CustomerResponseDataPassthroughStripeShippingAddressTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new DataPassthroughStripeShippingAddress
+        var model = new CustomerResponseDataPassthroughStripeShippingAddress
         {
             City = "city",
             Country = "country",
@@ -3390,7 +3394,7 @@ public class DataPassthroughStripeShippingAddressTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new DataPassthroughStripeShippingAddress
+        var model = new CustomerResponseDataPassthroughStripeShippingAddress
         {
             City = "city",
             Country = "country",
@@ -3401,10 +3405,11 @@ public class DataPassthroughStripeShippingAddressTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DataPassthroughStripeShippingAddress>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized =
+            JsonSerializer.Deserialize<CustomerResponseDataPassthroughStripeShippingAddress>(
+                json,
+                ModelBase.SerializerOptions
+            );
 
         Assert.Equal(model, deserialized);
     }
@@ -3412,7 +3417,7 @@ public class DataPassthroughStripeShippingAddressTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new DataPassthroughStripeShippingAddress
+        var model = new CustomerResponseDataPassthroughStripeShippingAddress
         {
             City = "city",
             Country = "country",
@@ -3423,10 +3428,11 @@ public class DataPassthroughStripeShippingAddressTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DataPassthroughStripeShippingAddress>(
-            element,
-            ModelBase.SerializerOptions
-        );
+        var deserialized =
+            JsonSerializer.Deserialize<CustomerResponseDataPassthroughStripeShippingAddress>(
+                element,
+                ModelBase.SerializerOptions
+            );
         Assert.NotNull(deserialized);
 
         string expectedCity = "city";
@@ -3447,7 +3453,7 @@ public class DataPassthroughStripeShippingAddressTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new DataPassthroughStripeShippingAddress
+        var model = new CustomerResponseDataPassthroughStripeShippingAddress
         {
             City = "city",
             Country = "country",
@@ -3463,7 +3469,7 @@ public class DataPassthroughStripeShippingAddressTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new DataPassthroughStripeShippingAddress { };
+        var model = new CustomerResponseDataPassthroughStripeShippingAddress { };
 
         Assert.Null(model.City);
         Assert.False(model.RawData.ContainsKey("city"));
@@ -3482,7 +3488,7 @@ public class DataPassthroughStripeShippingAddressTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new DataPassthroughStripeShippingAddress { };
+        var model = new CustomerResponseDataPassthroughStripeShippingAddress { };
 
         model.Validate();
     }
@@ -3490,7 +3496,7 @@ public class DataPassthroughStripeShippingAddressTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new DataPassthroughStripeShippingAddress
+        var model = new CustomerResponseDataPassthroughStripeShippingAddress
         {
             // Null should be interpreted as omitted for these properties
             City = null,
@@ -3518,7 +3524,7 @@ public class DataPassthroughStripeShippingAddressTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new DataPassthroughStripeShippingAddress
+        var model = new CustomerResponseDataPassthroughStripeShippingAddress
         {
             // Null should be interpreted as omitted for these properties
             City = null,
@@ -3535,7 +3541,7 @@ public class DataPassthroughStripeShippingAddressTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new DataPassthroughStripeShippingAddress
+        var model = new CustomerResponseDataPassthroughStripeShippingAddress
         {
             City = "city",
             Country = "country",
@@ -3545,18 +3551,22 @@ public class DataPassthroughStripeShippingAddressTest : TestBase
             State = "state",
         };
 
-        DataPassthroughStripeShippingAddress copied = new(model);
+        CustomerResponseDataPassthroughStripeShippingAddress copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class DataPassthroughStripeTaxIDTest : TestBase
+public class CustomerResponseDataPassthroughStripeTaxIDTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new DataPassthroughStripeTaxID { Type = "type", Value = "value" };
+        var model = new CustomerResponseDataPassthroughStripeTaxID
+        {
+            Type = "type",
+            Value = "value",
+        };
 
         string expectedType = "type";
         string expectedValue = "value";
@@ -3568,10 +3578,14 @@ public class DataPassthroughStripeTaxIDTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new DataPassthroughStripeTaxID { Type = "type", Value = "value" };
+        var model = new CustomerResponseDataPassthroughStripeTaxID
+        {
+            Type = "type",
+            Value = "value",
+        };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DataPassthroughStripeTaxID>(
+        var deserialized = JsonSerializer.Deserialize<CustomerResponseDataPassthroughStripeTaxID>(
             json,
             ModelBase.SerializerOptions
         );
@@ -3582,10 +3596,14 @@ public class DataPassthroughStripeTaxIDTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new DataPassthroughStripeTaxID { Type = "type", Value = "value" };
+        var model = new CustomerResponseDataPassthroughStripeTaxID
+        {
+            Type = "type",
+            Value = "value",
+        };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DataPassthroughStripeTaxID>(
+        var deserialized = JsonSerializer.Deserialize<CustomerResponseDataPassthroughStripeTaxID>(
             element,
             ModelBase.SerializerOptions
         );
@@ -3601,7 +3619,11 @@ public class DataPassthroughStripeTaxIDTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new DataPassthroughStripeTaxID { Type = "type", Value = "value" };
+        var model = new CustomerResponseDataPassthroughStripeTaxID
+        {
+            Type = "type",
+            Value = "value",
+        };
 
         model.Validate();
     }
@@ -3609,20 +3631,24 @@ public class DataPassthroughStripeTaxIDTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new DataPassthroughStripeTaxID { Type = "type", Value = "value" };
+        var model = new CustomerResponseDataPassthroughStripeTaxID
+        {
+            Type = "type",
+            Value = "value",
+        };
 
-        DataPassthroughStripeTaxID copied = new(model);
+        CustomerResponseDataPassthroughStripeTaxID copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class DataPassthroughZuoraTest : TestBase
+public class CustomerResponseDataPassthroughZuoraTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new DataPassthroughZuora
+        var model = new CustomerResponseDataPassthroughZuora
         {
             BillingAddress = new()
             {
@@ -3633,12 +3659,12 @@ public class DataPassthroughZuoraTest : TestBase
                 PostalCode = "postalCode",
                 State = "state",
             },
-            Currency = DataPassthroughZuoraCurrency.Usd,
+            Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentMethodID = "paymentMethodId",
         };
 
-        DataPassthroughZuoraBillingAddress expectedBillingAddress = new()
+        CustomerResponseDataPassthroughZuoraBillingAddress expectedBillingAddress = new()
         {
             City = "city",
             Country = "country",
@@ -3647,8 +3673,8 @@ public class DataPassthroughZuoraTest : TestBase
             PostalCode = "postalCode",
             State = "state",
         };
-        ApiEnum<string, DataPassthroughZuoraCurrency> expectedCurrency =
-            DataPassthroughZuoraCurrency.Usd;
+        ApiEnum<string, CustomerResponseDataPassthroughZuoraCurrency> expectedCurrency =
+            CustomerResponseDataPassthroughZuoraCurrency.Usd;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentMethodID = "paymentMethodId";
 
@@ -3668,7 +3694,7 @@ public class DataPassthroughZuoraTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new DataPassthroughZuora
+        var model = new CustomerResponseDataPassthroughZuora
         {
             BillingAddress = new()
             {
@@ -3679,13 +3705,13 @@ public class DataPassthroughZuoraTest : TestBase
                 PostalCode = "postalCode",
                 State = "state",
             },
-            Currency = DataPassthroughZuoraCurrency.Usd,
+            Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentMethodID = "paymentMethodId",
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DataPassthroughZuora>(
+        var deserialized = JsonSerializer.Deserialize<CustomerResponseDataPassthroughZuora>(
             json,
             ModelBase.SerializerOptions
         );
@@ -3696,7 +3722,7 @@ public class DataPassthroughZuoraTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new DataPassthroughZuora
+        var model = new CustomerResponseDataPassthroughZuora
         {
             BillingAddress = new()
             {
@@ -3707,19 +3733,19 @@ public class DataPassthroughZuoraTest : TestBase
                 PostalCode = "postalCode",
                 State = "state",
             },
-            Currency = DataPassthroughZuoraCurrency.Usd,
+            Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentMethodID = "paymentMethodId",
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DataPassthroughZuora>(
+        var deserialized = JsonSerializer.Deserialize<CustomerResponseDataPassthroughZuora>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
-        DataPassthroughZuoraBillingAddress expectedBillingAddress = new()
+        CustomerResponseDataPassthroughZuoraBillingAddress expectedBillingAddress = new()
         {
             City = "city",
             Country = "country",
@@ -3728,8 +3754,8 @@ public class DataPassthroughZuoraTest : TestBase
             PostalCode = "postalCode",
             State = "state",
         };
-        ApiEnum<string, DataPassthroughZuoraCurrency> expectedCurrency =
-            DataPassthroughZuoraCurrency.Usd;
+        ApiEnum<string, CustomerResponseDataPassthroughZuoraCurrency> expectedCurrency =
+            CustomerResponseDataPassthroughZuoraCurrency.Usd;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedPaymentMethodID = "paymentMethodId";
 
@@ -3749,7 +3775,7 @@ public class DataPassthroughZuoraTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new DataPassthroughZuora
+        var model = new CustomerResponseDataPassthroughZuora
         {
             BillingAddress = new()
             {
@@ -3760,7 +3786,7 @@ public class DataPassthroughZuoraTest : TestBase
                 PostalCode = "postalCode",
                 State = "state",
             },
-            Currency = DataPassthroughZuoraCurrency.Usd,
+            Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentMethodID = "paymentMethodId",
         };
@@ -3771,7 +3797,7 @@ public class DataPassthroughZuoraTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new DataPassthroughZuora { };
+        var model = new CustomerResponseDataPassthroughZuora { };
 
         Assert.Null(model.BillingAddress);
         Assert.False(model.RawData.ContainsKey("billingAddress"));
@@ -3786,7 +3812,7 @@ public class DataPassthroughZuoraTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new DataPassthroughZuora { };
+        var model = new CustomerResponseDataPassthroughZuora { };
 
         model.Validate();
     }
@@ -3794,7 +3820,7 @@ public class DataPassthroughZuoraTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new DataPassthroughZuora
+        var model = new CustomerResponseDataPassthroughZuora
         {
             // Null should be interpreted as omitted for these properties
             BillingAddress = null,
@@ -3816,7 +3842,7 @@ public class DataPassthroughZuoraTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new DataPassthroughZuora
+        var model = new CustomerResponseDataPassthroughZuora
         {
             // Null should be interpreted as omitted for these properties
             BillingAddress = null,
@@ -3831,7 +3857,7 @@ public class DataPassthroughZuoraTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new DataPassthroughZuora
+        var model = new CustomerResponseDataPassthroughZuora
         {
             BillingAddress = new()
             {
@@ -3842,23 +3868,23 @@ public class DataPassthroughZuoraTest : TestBase
                 PostalCode = "postalCode",
                 State = "state",
             },
-            Currency = DataPassthroughZuoraCurrency.Usd,
+            Currency = CustomerResponseDataPassthroughZuoraCurrency.Usd,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PaymentMethodID = "paymentMethodId",
         };
 
-        DataPassthroughZuora copied = new(model);
+        CustomerResponseDataPassthroughZuora copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class DataPassthroughZuoraBillingAddressTest : TestBase
+public class CustomerResponseDataPassthroughZuoraBillingAddressTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new DataPassthroughZuoraBillingAddress
+        var model = new CustomerResponseDataPassthroughZuoraBillingAddress
         {
             City = "city",
             Country = "country",
@@ -3886,7 +3912,7 @@ public class DataPassthroughZuoraBillingAddressTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new DataPassthroughZuoraBillingAddress
+        var model = new CustomerResponseDataPassthroughZuoraBillingAddress
         {
             City = "city",
             Country = "country",
@@ -3897,10 +3923,11 @@ public class DataPassthroughZuoraBillingAddressTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DataPassthroughZuoraBillingAddress>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized =
+            JsonSerializer.Deserialize<CustomerResponseDataPassthroughZuoraBillingAddress>(
+                json,
+                ModelBase.SerializerOptions
+            );
 
         Assert.Equal(model, deserialized);
     }
@@ -3908,7 +3935,7 @@ public class DataPassthroughZuoraBillingAddressTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new DataPassthroughZuoraBillingAddress
+        var model = new CustomerResponseDataPassthroughZuoraBillingAddress
         {
             City = "city",
             Country = "country",
@@ -3919,10 +3946,11 @@ public class DataPassthroughZuoraBillingAddressTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DataPassthroughZuoraBillingAddress>(
-            element,
-            ModelBase.SerializerOptions
-        );
+        var deserialized =
+            JsonSerializer.Deserialize<CustomerResponseDataPassthroughZuoraBillingAddress>(
+                element,
+                ModelBase.SerializerOptions
+            );
         Assert.NotNull(deserialized);
 
         string expectedCity = "city";
@@ -3943,7 +3971,7 @@ public class DataPassthroughZuoraBillingAddressTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new DataPassthroughZuoraBillingAddress
+        var model = new CustomerResponseDataPassthroughZuoraBillingAddress
         {
             City = "city",
             Country = "country",
@@ -3959,7 +3987,7 @@ public class DataPassthroughZuoraBillingAddressTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new DataPassthroughZuoraBillingAddress { };
+        var model = new CustomerResponseDataPassthroughZuoraBillingAddress { };
 
         Assert.Null(model.City);
         Assert.False(model.RawData.ContainsKey("city"));
@@ -3978,7 +4006,7 @@ public class DataPassthroughZuoraBillingAddressTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new DataPassthroughZuoraBillingAddress { };
+        var model = new CustomerResponseDataPassthroughZuoraBillingAddress { };
 
         model.Validate();
     }
@@ -3986,7 +4014,7 @@ public class DataPassthroughZuoraBillingAddressTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new DataPassthroughZuoraBillingAddress
+        var model = new CustomerResponseDataPassthroughZuoraBillingAddress
         {
             // Null should be interpreted as omitted for these properties
             City = null,
@@ -4014,7 +4042,7 @@ public class DataPassthroughZuoraBillingAddressTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new DataPassthroughZuoraBillingAddress
+        var model = new CustomerResponseDataPassthroughZuoraBillingAddress
         {
             // Null should be interpreted as omitted for these properties
             City = null,
@@ -4031,7 +4059,7 @@ public class DataPassthroughZuoraBillingAddressTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new DataPassthroughZuoraBillingAddress
+        var model = new CustomerResponseDataPassthroughZuoraBillingAddress
         {
             City = "city",
             Country = "country",
@@ -4041,275 +4069,274 @@ public class DataPassthroughZuoraBillingAddressTest : TestBase
             State = "state",
         };
 
-        DataPassthroughZuoraBillingAddress copied = new(model);
+        CustomerResponseDataPassthroughZuoraBillingAddress copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class DataPassthroughZuoraCurrencyTest : TestBase
+public class CustomerResponseDataPassthroughZuoraCurrencyTest : TestBase
 {
     [Theory]
-    [InlineData(DataPassthroughZuoraCurrency.Usd)]
-    [InlineData(DataPassthroughZuoraCurrency.Aed)]
-    [InlineData(DataPassthroughZuoraCurrency.All)]
-    [InlineData(DataPassthroughZuoraCurrency.Amd)]
-    [InlineData(DataPassthroughZuoraCurrency.Ang)]
-    [InlineData(DataPassthroughZuoraCurrency.Aud)]
-    [InlineData(DataPassthroughZuoraCurrency.Awg)]
-    [InlineData(DataPassthroughZuoraCurrency.Azn)]
-    [InlineData(DataPassthroughZuoraCurrency.Bam)]
-    [InlineData(DataPassthroughZuoraCurrency.Bbd)]
-    [InlineData(DataPassthroughZuoraCurrency.Bdt)]
-    [InlineData(DataPassthroughZuoraCurrency.Bgn)]
-    [InlineData(DataPassthroughZuoraCurrency.Bif)]
-    [InlineData(DataPassthroughZuoraCurrency.Bmd)]
-    [InlineData(DataPassthroughZuoraCurrency.Bnd)]
-    [InlineData(DataPassthroughZuoraCurrency.Bsd)]
-    [InlineData(DataPassthroughZuoraCurrency.Bwp)]
-    [InlineData(DataPassthroughZuoraCurrency.Byn)]
-    [InlineData(DataPassthroughZuoraCurrency.Bzd)]
-    [InlineData(DataPassthroughZuoraCurrency.Brl)]
-    [InlineData(DataPassthroughZuoraCurrency.Cad)]
-    [InlineData(DataPassthroughZuoraCurrency.Cdf)]
-    [InlineData(DataPassthroughZuoraCurrency.Chf)]
-    [InlineData(DataPassthroughZuoraCurrency.Cny)]
-    [InlineData(DataPassthroughZuoraCurrency.Czk)]
-    [InlineData(DataPassthroughZuoraCurrency.Dkk)]
-    [InlineData(DataPassthroughZuoraCurrency.Dop)]
-    [InlineData(DataPassthroughZuoraCurrency.Dzd)]
-    [InlineData(DataPassthroughZuoraCurrency.Egp)]
-    [InlineData(DataPassthroughZuoraCurrency.Etb)]
-    [InlineData(DataPassthroughZuoraCurrency.Eur)]
-    [InlineData(DataPassthroughZuoraCurrency.Fjd)]
-    [InlineData(DataPassthroughZuoraCurrency.Gbp)]
-    [InlineData(DataPassthroughZuoraCurrency.Gel)]
-    [InlineData(DataPassthroughZuoraCurrency.Gip)]
-    [InlineData(DataPassthroughZuoraCurrency.Gmd)]
-    [InlineData(DataPassthroughZuoraCurrency.Gyd)]
-    [InlineData(DataPassthroughZuoraCurrency.Hkd)]
-    [InlineData(DataPassthroughZuoraCurrency.Hrk)]
-    [InlineData(DataPassthroughZuoraCurrency.Htg)]
-    [InlineData(DataPassthroughZuoraCurrency.Idr)]
-    [InlineData(DataPassthroughZuoraCurrency.Ils)]
-    [InlineData(DataPassthroughZuoraCurrency.Inr)]
-    [InlineData(DataPassthroughZuoraCurrency.Isk)]
-    [InlineData(DataPassthroughZuoraCurrency.Jmd)]
-    [InlineData(DataPassthroughZuoraCurrency.Jpy)]
-    [InlineData(DataPassthroughZuoraCurrency.Kes)]
-    [InlineData(DataPassthroughZuoraCurrency.Kgs)]
-    [InlineData(DataPassthroughZuoraCurrency.Khr)]
-    [InlineData(DataPassthroughZuoraCurrency.Kmf)]
-    [InlineData(DataPassthroughZuoraCurrency.Krw)]
-    [InlineData(DataPassthroughZuoraCurrency.Kyd)]
-    [InlineData(DataPassthroughZuoraCurrency.Kzt)]
-    [InlineData(DataPassthroughZuoraCurrency.Lbp)]
-    [InlineData(DataPassthroughZuoraCurrency.Lkr)]
-    [InlineData(DataPassthroughZuoraCurrency.Lrd)]
-    [InlineData(DataPassthroughZuoraCurrency.Lsl)]
-    [InlineData(DataPassthroughZuoraCurrency.Mad)]
-    [InlineData(DataPassthroughZuoraCurrency.Mdl)]
-    [InlineData(DataPassthroughZuoraCurrency.Mga)]
-    [InlineData(DataPassthroughZuoraCurrency.Mkd)]
-    [InlineData(DataPassthroughZuoraCurrency.Mmk)]
-    [InlineData(DataPassthroughZuoraCurrency.Mnt)]
-    [InlineData(DataPassthroughZuoraCurrency.Mop)]
-    [InlineData(DataPassthroughZuoraCurrency.Mro)]
-    [InlineData(DataPassthroughZuoraCurrency.Mvr)]
-    [InlineData(DataPassthroughZuoraCurrency.Mwk)]
-    [InlineData(DataPassthroughZuoraCurrency.Mxn)]
-    [InlineData(DataPassthroughZuoraCurrency.Myr)]
-    [InlineData(DataPassthroughZuoraCurrency.Mzn)]
-    [InlineData(DataPassthroughZuoraCurrency.Nad)]
-    [InlineData(DataPassthroughZuoraCurrency.Ngn)]
-    [InlineData(DataPassthroughZuoraCurrency.Nok)]
-    [InlineData(DataPassthroughZuoraCurrency.Npr)]
-    [InlineData(DataPassthroughZuoraCurrency.Nzd)]
-    [InlineData(DataPassthroughZuoraCurrency.Pgk)]
-    [InlineData(DataPassthroughZuoraCurrency.Php)]
-    [InlineData(DataPassthroughZuoraCurrency.Pkr)]
-    [InlineData(DataPassthroughZuoraCurrency.Pln)]
-    [InlineData(DataPassthroughZuoraCurrency.Qar)]
-    [InlineData(DataPassthroughZuoraCurrency.Ron)]
-    [InlineData(DataPassthroughZuoraCurrency.Rsd)]
-    [InlineData(DataPassthroughZuoraCurrency.Rub)]
-    [InlineData(DataPassthroughZuoraCurrency.Rwf)]
-    [InlineData(DataPassthroughZuoraCurrency.Sar)]
-    [InlineData(DataPassthroughZuoraCurrency.Sbd)]
-    [InlineData(DataPassthroughZuoraCurrency.Scr)]
-    [InlineData(DataPassthroughZuoraCurrency.Sek)]
-    [InlineData(DataPassthroughZuoraCurrency.Sgd)]
-    [InlineData(DataPassthroughZuoraCurrency.Sle)]
-    [InlineData(DataPassthroughZuoraCurrency.Sll)]
-    [InlineData(DataPassthroughZuoraCurrency.Sos)]
-    [InlineData(DataPassthroughZuoraCurrency.Szl)]
-    [InlineData(DataPassthroughZuoraCurrency.Thb)]
-    [InlineData(DataPassthroughZuoraCurrency.Tjs)]
-    [InlineData(DataPassthroughZuoraCurrency.Top)]
-    [InlineData(DataPassthroughZuoraCurrency.Try)]
-    [InlineData(DataPassthroughZuoraCurrency.Ttd)]
-    [InlineData(DataPassthroughZuoraCurrency.Tzs)]
-    [InlineData(DataPassthroughZuoraCurrency.Uah)]
-    [InlineData(DataPassthroughZuoraCurrency.Uzs)]
-    [InlineData(DataPassthroughZuoraCurrency.Vnd)]
-    [InlineData(DataPassthroughZuoraCurrency.Vuv)]
-    [InlineData(DataPassthroughZuoraCurrency.Wst)]
-    [InlineData(DataPassthroughZuoraCurrency.Xaf)]
-    [InlineData(DataPassthroughZuoraCurrency.Xcd)]
-    [InlineData(DataPassthroughZuoraCurrency.Yer)]
-    [InlineData(DataPassthroughZuoraCurrency.Zar)]
-    [InlineData(DataPassthroughZuoraCurrency.Zmw)]
-    [InlineData(DataPassthroughZuoraCurrency.Clp)]
-    [InlineData(DataPassthroughZuoraCurrency.Djf)]
-    [InlineData(DataPassthroughZuoraCurrency.Gnf)]
-    [InlineData(DataPassthroughZuoraCurrency.Ugx)]
-    [InlineData(DataPassthroughZuoraCurrency.Pyg)]
-    [InlineData(DataPassthroughZuoraCurrency.Xof)]
-    [InlineData(DataPassthroughZuoraCurrency.Xpf)]
-    public void Validation_Works(DataPassthroughZuoraCurrency rawValue)
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Usd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Aed)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.All)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Amd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Ang)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Aud)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Awg)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Azn)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Bam)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Bbd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Bdt)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Bgn)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Bif)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Bmd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Bnd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Bsd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Bwp)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Byn)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Bzd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Brl)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Cad)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Cdf)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Chf)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Cny)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Czk)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Dkk)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Dop)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Dzd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Egp)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Etb)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Eur)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Fjd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Gbp)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Gel)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Gip)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Gmd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Gyd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Hkd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Hrk)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Htg)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Idr)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Ils)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Inr)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Isk)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Jmd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Jpy)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Kes)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Kgs)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Khr)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Kmf)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Krw)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Kyd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Kzt)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Lbp)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Lkr)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Lrd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Lsl)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Mad)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Mdl)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Mga)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Mkd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Mmk)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Mnt)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Mop)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Mro)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Mvr)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Mwk)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Mxn)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Myr)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Mzn)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Nad)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Ngn)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Nok)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Npr)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Nzd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Pgk)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Php)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Pkr)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Pln)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Qar)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Ron)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Rsd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Rub)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Rwf)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Sar)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Sbd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Scr)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Sek)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Sgd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Sle)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Sll)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Sos)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Szl)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Thb)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Tjs)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Top)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Try)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Ttd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Tzs)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Uah)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Uzs)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Vnd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Vuv)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Wst)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Xaf)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Xcd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Yer)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Zar)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Zmw)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Clp)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Djf)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Gnf)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Ugx)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Pyg)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Xof)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Xpf)]
+    public void Validation_Works(CustomerResponseDataPassthroughZuoraCurrency rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, DataPassthroughZuoraCurrency> value = rawValue;
+        ApiEnum<string, CustomerResponseDataPassthroughZuoraCurrency> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, DataPassthroughZuoraCurrency>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, CustomerResponseDataPassthroughZuoraCurrency>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
         Assert.Throws<StiggInvalidDataException>(() => value.Validate());
     }
 
     [Theory]
-    [InlineData(DataPassthroughZuoraCurrency.Usd)]
-    [InlineData(DataPassthroughZuoraCurrency.Aed)]
-    [InlineData(DataPassthroughZuoraCurrency.All)]
-    [InlineData(DataPassthroughZuoraCurrency.Amd)]
-    [InlineData(DataPassthroughZuoraCurrency.Ang)]
-    [InlineData(DataPassthroughZuoraCurrency.Aud)]
-    [InlineData(DataPassthroughZuoraCurrency.Awg)]
-    [InlineData(DataPassthroughZuoraCurrency.Azn)]
-    [InlineData(DataPassthroughZuoraCurrency.Bam)]
-    [InlineData(DataPassthroughZuoraCurrency.Bbd)]
-    [InlineData(DataPassthroughZuoraCurrency.Bdt)]
-    [InlineData(DataPassthroughZuoraCurrency.Bgn)]
-    [InlineData(DataPassthroughZuoraCurrency.Bif)]
-    [InlineData(DataPassthroughZuoraCurrency.Bmd)]
-    [InlineData(DataPassthroughZuoraCurrency.Bnd)]
-    [InlineData(DataPassthroughZuoraCurrency.Bsd)]
-    [InlineData(DataPassthroughZuoraCurrency.Bwp)]
-    [InlineData(DataPassthroughZuoraCurrency.Byn)]
-    [InlineData(DataPassthroughZuoraCurrency.Bzd)]
-    [InlineData(DataPassthroughZuoraCurrency.Brl)]
-    [InlineData(DataPassthroughZuoraCurrency.Cad)]
-    [InlineData(DataPassthroughZuoraCurrency.Cdf)]
-    [InlineData(DataPassthroughZuoraCurrency.Chf)]
-    [InlineData(DataPassthroughZuoraCurrency.Cny)]
-    [InlineData(DataPassthroughZuoraCurrency.Czk)]
-    [InlineData(DataPassthroughZuoraCurrency.Dkk)]
-    [InlineData(DataPassthroughZuoraCurrency.Dop)]
-    [InlineData(DataPassthroughZuoraCurrency.Dzd)]
-    [InlineData(DataPassthroughZuoraCurrency.Egp)]
-    [InlineData(DataPassthroughZuoraCurrency.Etb)]
-    [InlineData(DataPassthroughZuoraCurrency.Eur)]
-    [InlineData(DataPassthroughZuoraCurrency.Fjd)]
-    [InlineData(DataPassthroughZuoraCurrency.Gbp)]
-    [InlineData(DataPassthroughZuoraCurrency.Gel)]
-    [InlineData(DataPassthroughZuoraCurrency.Gip)]
-    [InlineData(DataPassthroughZuoraCurrency.Gmd)]
-    [InlineData(DataPassthroughZuoraCurrency.Gyd)]
-    [InlineData(DataPassthroughZuoraCurrency.Hkd)]
-    [InlineData(DataPassthroughZuoraCurrency.Hrk)]
-    [InlineData(DataPassthroughZuoraCurrency.Htg)]
-    [InlineData(DataPassthroughZuoraCurrency.Idr)]
-    [InlineData(DataPassthroughZuoraCurrency.Ils)]
-    [InlineData(DataPassthroughZuoraCurrency.Inr)]
-    [InlineData(DataPassthroughZuoraCurrency.Isk)]
-    [InlineData(DataPassthroughZuoraCurrency.Jmd)]
-    [InlineData(DataPassthroughZuoraCurrency.Jpy)]
-    [InlineData(DataPassthroughZuoraCurrency.Kes)]
-    [InlineData(DataPassthroughZuoraCurrency.Kgs)]
-    [InlineData(DataPassthroughZuoraCurrency.Khr)]
-    [InlineData(DataPassthroughZuoraCurrency.Kmf)]
-    [InlineData(DataPassthroughZuoraCurrency.Krw)]
-    [InlineData(DataPassthroughZuoraCurrency.Kyd)]
-    [InlineData(DataPassthroughZuoraCurrency.Kzt)]
-    [InlineData(DataPassthroughZuoraCurrency.Lbp)]
-    [InlineData(DataPassthroughZuoraCurrency.Lkr)]
-    [InlineData(DataPassthroughZuoraCurrency.Lrd)]
-    [InlineData(DataPassthroughZuoraCurrency.Lsl)]
-    [InlineData(DataPassthroughZuoraCurrency.Mad)]
-    [InlineData(DataPassthroughZuoraCurrency.Mdl)]
-    [InlineData(DataPassthroughZuoraCurrency.Mga)]
-    [InlineData(DataPassthroughZuoraCurrency.Mkd)]
-    [InlineData(DataPassthroughZuoraCurrency.Mmk)]
-    [InlineData(DataPassthroughZuoraCurrency.Mnt)]
-    [InlineData(DataPassthroughZuoraCurrency.Mop)]
-    [InlineData(DataPassthroughZuoraCurrency.Mro)]
-    [InlineData(DataPassthroughZuoraCurrency.Mvr)]
-    [InlineData(DataPassthroughZuoraCurrency.Mwk)]
-    [InlineData(DataPassthroughZuoraCurrency.Mxn)]
-    [InlineData(DataPassthroughZuoraCurrency.Myr)]
-    [InlineData(DataPassthroughZuoraCurrency.Mzn)]
-    [InlineData(DataPassthroughZuoraCurrency.Nad)]
-    [InlineData(DataPassthroughZuoraCurrency.Ngn)]
-    [InlineData(DataPassthroughZuoraCurrency.Nok)]
-    [InlineData(DataPassthroughZuoraCurrency.Npr)]
-    [InlineData(DataPassthroughZuoraCurrency.Nzd)]
-    [InlineData(DataPassthroughZuoraCurrency.Pgk)]
-    [InlineData(DataPassthroughZuoraCurrency.Php)]
-    [InlineData(DataPassthroughZuoraCurrency.Pkr)]
-    [InlineData(DataPassthroughZuoraCurrency.Pln)]
-    [InlineData(DataPassthroughZuoraCurrency.Qar)]
-    [InlineData(DataPassthroughZuoraCurrency.Ron)]
-    [InlineData(DataPassthroughZuoraCurrency.Rsd)]
-    [InlineData(DataPassthroughZuoraCurrency.Rub)]
-    [InlineData(DataPassthroughZuoraCurrency.Rwf)]
-    [InlineData(DataPassthroughZuoraCurrency.Sar)]
-    [InlineData(DataPassthroughZuoraCurrency.Sbd)]
-    [InlineData(DataPassthroughZuoraCurrency.Scr)]
-    [InlineData(DataPassthroughZuoraCurrency.Sek)]
-    [InlineData(DataPassthroughZuoraCurrency.Sgd)]
-    [InlineData(DataPassthroughZuoraCurrency.Sle)]
-    [InlineData(DataPassthroughZuoraCurrency.Sll)]
-    [InlineData(DataPassthroughZuoraCurrency.Sos)]
-    [InlineData(DataPassthroughZuoraCurrency.Szl)]
-    [InlineData(DataPassthroughZuoraCurrency.Thb)]
-    [InlineData(DataPassthroughZuoraCurrency.Tjs)]
-    [InlineData(DataPassthroughZuoraCurrency.Top)]
-    [InlineData(DataPassthroughZuoraCurrency.Try)]
-    [InlineData(DataPassthroughZuoraCurrency.Ttd)]
-    [InlineData(DataPassthroughZuoraCurrency.Tzs)]
-    [InlineData(DataPassthroughZuoraCurrency.Uah)]
-    [InlineData(DataPassthroughZuoraCurrency.Uzs)]
-    [InlineData(DataPassthroughZuoraCurrency.Vnd)]
-    [InlineData(DataPassthroughZuoraCurrency.Vuv)]
-    [InlineData(DataPassthroughZuoraCurrency.Wst)]
-    [InlineData(DataPassthroughZuoraCurrency.Xaf)]
-    [InlineData(DataPassthroughZuoraCurrency.Xcd)]
-    [InlineData(DataPassthroughZuoraCurrency.Yer)]
-    [InlineData(DataPassthroughZuoraCurrency.Zar)]
-    [InlineData(DataPassthroughZuoraCurrency.Zmw)]
-    [InlineData(DataPassthroughZuoraCurrency.Clp)]
-    [InlineData(DataPassthroughZuoraCurrency.Djf)]
-    [InlineData(DataPassthroughZuoraCurrency.Gnf)]
-    [InlineData(DataPassthroughZuoraCurrency.Ugx)]
-    [InlineData(DataPassthroughZuoraCurrency.Pyg)]
-    [InlineData(DataPassthroughZuoraCurrency.Xof)]
-    [InlineData(DataPassthroughZuoraCurrency.Xpf)]
-    public void SerializationRoundtrip_Works(DataPassthroughZuoraCurrency rawValue)
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Usd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Aed)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.All)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Amd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Ang)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Aud)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Awg)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Azn)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Bam)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Bbd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Bdt)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Bgn)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Bif)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Bmd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Bnd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Bsd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Bwp)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Byn)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Bzd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Brl)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Cad)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Cdf)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Chf)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Cny)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Czk)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Dkk)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Dop)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Dzd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Egp)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Etb)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Eur)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Fjd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Gbp)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Gel)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Gip)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Gmd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Gyd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Hkd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Hrk)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Htg)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Idr)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Ils)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Inr)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Isk)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Jmd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Jpy)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Kes)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Kgs)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Khr)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Kmf)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Krw)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Kyd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Kzt)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Lbp)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Lkr)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Lrd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Lsl)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Mad)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Mdl)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Mga)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Mkd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Mmk)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Mnt)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Mop)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Mro)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Mvr)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Mwk)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Mxn)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Myr)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Mzn)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Nad)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Ngn)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Nok)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Npr)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Nzd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Pgk)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Php)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Pkr)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Pln)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Qar)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Ron)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Rsd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Rub)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Rwf)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Sar)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Sbd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Scr)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Sek)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Sgd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Sle)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Sll)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Sos)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Szl)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Thb)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Tjs)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Top)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Try)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Ttd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Tzs)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Uah)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Uzs)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Vnd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Vuv)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Wst)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Xaf)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Xcd)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Yer)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Zar)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Zmw)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Clp)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Djf)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Gnf)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Ugx)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Pyg)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Xof)]
+    [InlineData(CustomerResponseDataPassthroughZuoraCurrency.Xpf)]
+    public void SerializationRoundtrip_Works(CustomerResponseDataPassthroughZuoraCurrency rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, DataPassthroughZuoraCurrency> value = rawValue;
+        ApiEnum<string, CustomerResponseDataPassthroughZuoraCurrency> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, DataPassthroughZuoraCurrency>
+            ApiEnum<string, CustomerResponseDataPassthroughZuoraCurrency>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
@@ -4318,13 +4345,12 @@ public class DataPassthroughZuoraCurrencyTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, DataPassthroughZuoraCurrency>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, CustomerResponseDataPassthroughZuoraCurrency>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, DataPassthroughZuoraCurrency>
+            ApiEnum<string, CustomerResponseDataPassthroughZuoraCurrency>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);

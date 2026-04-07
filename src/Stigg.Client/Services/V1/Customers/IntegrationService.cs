@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
+using Stigg.Client.Models.V1.Customers;
 using Stigg.Client.Models.V1.Customers.Integrations;
 
 namespace Stigg.Client.Services.V1.Customers;
@@ -35,7 +36,7 @@ public sealed class IntegrationService : IIntegrationService
     }
 
     /// <inheritdoc/>
-    public async Task<IntegrationRetrieveResponse> Retrieve(
+    public async Task<CustomerIntegrationResponse> Retrieve(
         IntegrationRetrieveParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -47,7 +48,7 @@ public sealed class IntegrationService : IIntegrationService
     }
 
     /// <inheritdoc/>
-    public Task<IntegrationRetrieveResponse> Retrieve(
+    public Task<CustomerIntegrationResponse> Retrieve(
         string integrationID,
         IntegrationRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -57,7 +58,7 @@ public sealed class IntegrationService : IIntegrationService
     }
 
     /// <inheritdoc/>
-    public async Task<IntegrationUpdateResponse> Update(
+    public async Task<CustomerIntegrationResponse> Update(
         IntegrationUpdateParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -69,7 +70,7 @@ public sealed class IntegrationService : IIntegrationService
     }
 
     /// <inheritdoc/>
-    public Task<IntegrationUpdateResponse> Update(
+    public Task<CustomerIntegrationResponse> Update(
         string integrationID,
         IntegrationUpdateParams parameters,
         CancellationToken cancellationToken = default
@@ -103,7 +104,7 @@ public sealed class IntegrationService : IIntegrationService
     }
 
     /// <inheritdoc/>
-    public async Task<IntegrationLinkResponse> Link(
+    public async Task<CustomerIntegrationResponse> Link(
         IntegrationLinkParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -115,7 +116,7 @@ public sealed class IntegrationService : IIntegrationService
     }
 
     /// <inheritdoc/>
-    public Task<IntegrationLinkResponse> Link(
+    public Task<CustomerIntegrationResponse> Link(
         string id,
         IntegrationLinkParams parameters,
         CancellationToken cancellationToken = default
@@ -125,7 +126,7 @@ public sealed class IntegrationService : IIntegrationService
     }
 
     /// <inheritdoc/>
-    public async Task<IntegrationUnlinkResponse> Unlink(
+    public async Task<CustomerIntegrationResponse> Unlink(
         IntegrationUnlinkParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -137,7 +138,7 @@ public sealed class IntegrationService : IIntegrationService
     }
 
     /// <inheritdoc/>
-    public Task<IntegrationUnlinkResponse> Unlink(
+    public Task<CustomerIntegrationResponse> Unlink(
         string integrationID,
         IntegrationUnlinkParams parameters,
         CancellationToken cancellationToken = default
@@ -166,7 +167,7 @@ public sealed class IntegrationServiceWithRawResponse : IIntegrationServiceWithR
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<IntegrationRetrieveResponse>> Retrieve(
+    public async Task<HttpResponse<CustomerIntegrationResponse>> Retrieve(
         IntegrationRetrieveParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -186,20 +187,20 @@ public sealed class IntegrationServiceWithRawResponse : IIntegrationServiceWithR
             response,
             async (token) =>
             {
-                var integration = await response
-                    .Deserialize<IntegrationRetrieveResponse>(token)
+                var customerIntegrationResponse = await response
+                    .Deserialize<CustomerIntegrationResponse>(token)
                     .ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    integration.Validate();
+                    customerIntegrationResponse.Validate();
                 }
-                return integration;
+                return customerIntegrationResponse;
             }
         );
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<IntegrationRetrieveResponse>> Retrieve(
+    public Task<HttpResponse<CustomerIntegrationResponse>> Retrieve(
         string integrationID,
         IntegrationRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -209,7 +210,7 @@ public sealed class IntegrationServiceWithRawResponse : IIntegrationServiceWithR
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<IntegrationUpdateResponse>> Update(
+    public async Task<HttpResponse<CustomerIntegrationResponse>> Update(
         IntegrationUpdateParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -229,20 +230,20 @@ public sealed class IntegrationServiceWithRawResponse : IIntegrationServiceWithR
             response,
             async (token) =>
             {
-                var integration = await response
-                    .Deserialize<IntegrationUpdateResponse>(token)
+                var customerIntegrationResponse = await response
+                    .Deserialize<CustomerIntegrationResponse>(token)
                     .ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    integration.Validate();
+                    customerIntegrationResponse.Validate();
                 }
-                return integration;
+                return customerIntegrationResponse;
             }
         );
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<IntegrationUpdateResponse>> Update(
+    public Task<HttpResponse<CustomerIntegrationResponse>> Update(
         string integrationID,
         IntegrationUpdateParams parameters,
         CancellationToken cancellationToken = default
@@ -297,7 +298,7 @@ public sealed class IntegrationServiceWithRawResponse : IIntegrationServiceWithR
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<IntegrationLinkResponse>> Link(
+    public async Task<HttpResponse<CustomerIntegrationResponse>> Link(
         IntegrationLinkParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -317,20 +318,20 @@ public sealed class IntegrationServiceWithRawResponse : IIntegrationServiceWithR
             response,
             async (token) =>
             {
-                var deserializedResponse = await response
-                    .Deserialize<IntegrationLinkResponse>(token)
+                var customerIntegrationResponse = await response
+                    .Deserialize<CustomerIntegrationResponse>(token)
                     .ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    deserializedResponse.Validate();
+                    customerIntegrationResponse.Validate();
                 }
-                return deserializedResponse;
+                return customerIntegrationResponse;
             }
         );
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<IntegrationLinkResponse>> Link(
+    public Task<HttpResponse<CustomerIntegrationResponse>> Link(
         string id,
         IntegrationLinkParams parameters,
         CancellationToken cancellationToken = default
@@ -340,7 +341,7 @@ public sealed class IntegrationServiceWithRawResponse : IIntegrationServiceWithR
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<IntegrationUnlinkResponse>> Unlink(
+    public async Task<HttpResponse<CustomerIntegrationResponse>> Unlink(
         IntegrationUnlinkParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -360,20 +361,20 @@ public sealed class IntegrationServiceWithRawResponse : IIntegrationServiceWithR
             response,
             async (token) =>
             {
-                var deserializedResponse = await response
-                    .Deserialize<IntegrationUnlinkResponse>(token)
+                var customerIntegrationResponse = await response
+                    .Deserialize<CustomerIntegrationResponse>(token)
                     .ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    deserializedResponse.Validate();
+                    customerIntegrationResponse.Validate();
                 }
-                return deserializedResponse;
+                return customerIntegrationResponse;
             }
         );
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<IntegrationUnlinkResponse>> Unlink(
+    public Task<HttpResponse<CustomerIntegrationResponse>> Unlink(
         string integrationID,
         IntegrationUnlinkParams parameters,
         CancellationToken cancellationToken = default

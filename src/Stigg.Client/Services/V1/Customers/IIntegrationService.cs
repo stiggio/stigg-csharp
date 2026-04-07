@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Stigg.Client.Core;
+using Stigg.Client.Models.V1.Customers;
 using Stigg.Client.Models.V1.Customers.Integrations;
 
 namespace Stigg.Client.Services.V1.Customers;
@@ -29,13 +30,13 @@ public interface IIntegrationService
     /// <summary>
     /// Retrieves a specific integration for a customer by integration ID.
     /// </summary>
-    Task<IntegrationRetrieveResponse> Retrieve(
+    Task<CustomerIntegrationResponse> Retrieve(
         IntegrationRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Retrieve(IntegrationRetrieveParams, CancellationToken)"/>
-    Task<IntegrationRetrieveResponse> Retrieve(
+    Task<CustomerIntegrationResponse> Retrieve(
         string integrationID,
         IntegrationRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -45,13 +46,13 @@ public interface IIntegrationService
     /// Updates a customer's integration link, such as changing the synced external
     /// entity ID.
     /// </summary>
-    Task<IntegrationUpdateResponse> Update(
+    Task<CustomerIntegrationResponse> Update(
         IntegrationUpdateParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Update(IntegrationUpdateParams, CancellationToken)"/>
-    Task<IntegrationUpdateResponse> Update(
+    Task<CustomerIntegrationResponse> Update(
         string integrationID,
         IntegrationUpdateParams parameters,
         CancellationToken cancellationToken = default
@@ -77,13 +78,13 @@ public interface IIntegrationService
     /// Links a customer to an external integration by specifying the vendor and
     /// external entity ID.
     /// </summary>
-    Task<IntegrationLinkResponse> Link(
+    Task<CustomerIntegrationResponse> Link(
         IntegrationLinkParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Link(IntegrationLinkParams, CancellationToken)"/>
-    Task<IntegrationLinkResponse> Link(
+    Task<CustomerIntegrationResponse> Link(
         string id,
         IntegrationLinkParams parameters,
         CancellationToken cancellationToken = default
@@ -92,13 +93,13 @@ public interface IIntegrationService
     /// <summary>
     /// Removes the link between a customer and an external integration.
     /// </summary>
-    Task<IntegrationUnlinkResponse> Unlink(
+    Task<CustomerIntegrationResponse> Unlink(
         IntegrationUnlinkParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Unlink(IntegrationUnlinkParams, CancellationToken)"/>
-    Task<IntegrationUnlinkResponse> Unlink(
+    Task<CustomerIntegrationResponse> Unlink(
         string integrationID,
         IntegrationUnlinkParams parameters,
         CancellationToken cancellationToken = default
@@ -122,13 +123,13 @@ public interface IIntegrationServiceWithRawResponse
     /// Returns a raw HTTP response for <c>get /api/v1/customers/{id}/integrations/{integrationId}</c>, but is otherwise the
     /// same as <see cref="IIntegrationService.Retrieve(IntegrationRetrieveParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<IntegrationRetrieveResponse>> Retrieve(
+    Task<HttpResponse<CustomerIntegrationResponse>> Retrieve(
         IntegrationRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Retrieve(IntegrationRetrieveParams, CancellationToken)"/>
-    Task<HttpResponse<IntegrationRetrieveResponse>> Retrieve(
+    Task<HttpResponse<CustomerIntegrationResponse>> Retrieve(
         string integrationID,
         IntegrationRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -138,13 +139,13 @@ public interface IIntegrationServiceWithRawResponse
     /// Returns a raw HTTP response for <c>patch /api/v1/customers/{id}/integrations/{integrationId}</c>, but is otherwise the
     /// same as <see cref="IIntegrationService.Update(IntegrationUpdateParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<IntegrationUpdateResponse>> Update(
+    Task<HttpResponse<CustomerIntegrationResponse>> Update(
         IntegrationUpdateParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Update(IntegrationUpdateParams, CancellationToken)"/>
-    Task<HttpResponse<IntegrationUpdateResponse>> Update(
+    Task<HttpResponse<CustomerIntegrationResponse>> Update(
         string integrationID,
         IntegrationUpdateParams parameters,
         CancellationToken cancellationToken = default
@@ -170,13 +171,13 @@ public interface IIntegrationServiceWithRawResponse
     /// Returns a raw HTTP response for <c>post /api/v1/customers/{id}/integrations</c>, but is otherwise the
     /// same as <see cref="IIntegrationService.Link(IntegrationLinkParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<IntegrationLinkResponse>> Link(
+    Task<HttpResponse<CustomerIntegrationResponse>> Link(
         IntegrationLinkParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Link(IntegrationLinkParams, CancellationToken)"/>
-    Task<HttpResponse<IntegrationLinkResponse>> Link(
+    Task<HttpResponse<CustomerIntegrationResponse>> Link(
         string id,
         IntegrationLinkParams parameters,
         CancellationToken cancellationToken = default
@@ -186,13 +187,13 @@ public interface IIntegrationServiceWithRawResponse
     /// Returns a raw HTTP response for <c>delete /api/v1/customers/{id}/integrations/{integrationId}</c>, but is otherwise the
     /// same as <see cref="IIntegrationService.Unlink(IntegrationUnlinkParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<IntegrationUnlinkResponse>> Unlink(
+    Task<HttpResponse<CustomerIntegrationResponse>> Unlink(
         IntegrationUnlinkParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Unlink(IntegrationUnlinkParams, CancellationToken)"/>
-    Task<HttpResponse<IntegrationUnlinkResponse>> Unlink(
+    Task<HttpResponse<CustomerIntegrationResponse>> Unlink(
         string integrationID,
         IntegrationUnlinkParams parameters,
         CancellationToken cancellationToken = default
