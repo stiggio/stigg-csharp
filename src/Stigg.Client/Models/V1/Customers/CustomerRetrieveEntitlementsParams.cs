@@ -12,11 +12,6 @@ namespace Stigg.Client.Models.V1.Customers;
 /// Retrieves the effective entitlements for a customer or resource, including feature
 /// and credit entitlements.
 ///
-/// <para>**Warning:** This REST API endpoint lacks built-in client-side caching,
-/// fallback mechanisms, and low-latency guarantees. It is not recommended for hot-path
-/// entitlement checks. For production use, consider using the Stigg Node Server SDK
-/// with caching or the Sidecar for low-latency cached responses.</para>
-///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
 /// cause existing derived classes to break.</para>

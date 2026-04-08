@@ -453,7 +453,6 @@ public enum EventQueueProvisionParamsEventType
     EdgeApiPackageEntitlementsDataResync,
     EdgeApiProductCacheDataResync,
     EdgeApiPlanCacheDataResync,
-    EdgeApiCustomCurrencyCacheDataResync,
     ReplayWebhookEvent,
     SubscriptionsMigrated,
     SubscriptionsMigrationTriggered,
@@ -616,8 +615,6 @@ sealed class EventQueueProvisionParamsEventTypeConverter
                 EventQueueProvisionParamsEventType.EdgeApiProductCacheDataResync,
             "EDGE_API_PLAN_CACHE_DATA_RESYNC" =>
                 EventQueueProvisionParamsEventType.EdgeApiPlanCacheDataResync,
-            "EDGE_API_CUSTOM_CURRENCY_CACHE_DATA_RESYNC" =>
-                EventQueueProvisionParamsEventType.EdgeApiCustomCurrencyCacheDataResync,
             "REPLAY_WEBHOOK_EVENT" => EventQueueProvisionParamsEventType.ReplayWebhookEvent,
             "SUBSCRIPTIONS_MIGRATED" => EventQueueProvisionParamsEventType.SubscriptionsMigrated,
             "SUBSCRIPTIONS_MIGRATION_TRIGGERED" =>
@@ -796,8 +793,6 @@ sealed class EventQueueProvisionParamsEventTypeConverter
                     "EDGE_API_PRODUCT_CACHE_DATA_RESYNC",
                 EventQueueProvisionParamsEventType.EdgeApiPlanCacheDataResync =>
                     "EDGE_API_PLAN_CACHE_DATA_RESYNC",
-                EventQueueProvisionParamsEventType.EdgeApiCustomCurrencyCacheDataResync =>
-                    "EDGE_API_CUSTOM_CURRENCY_CACHE_DATA_RESYNC",
                 EventQueueProvisionParamsEventType.ReplayWebhookEvent => "REPLAY_WEBHOOK_EVENT",
                 EventQueueProvisionParamsEventType.SubscriptionsMigrated =>
                     "SUBSCRIPTIONS_MIGRATED",
