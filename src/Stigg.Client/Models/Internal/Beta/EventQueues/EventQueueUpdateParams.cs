@@ -307,6 +307,7 @@ public enum EventType
     EdgeApiPackageEntitlementsDataResync,
     EdgeApiProductCacheDataResync,
     EdgeApiPlanCacheDataResync,
+    EdgeApiCustomCurrencyCacheDataResync,
     ReplayWebhookEvent,
     SubscriptionsMigrated,
     SubscriptionsMigrationTriggered,
@@ -442,6 +443,8 @@ sealed class EventTypeConverter : JsonConverter<EventType>
                 EventType.EdgeApiPackageEntitlementsDataResync,
             "EDGE_API_PRODUCT_CACHE_DATA_RESYNC" => EventType.EdgeApiProductCacheDataResync,
             "EDGE_API_PLAN_CACHE_DATA_RESYNC" => EventType.EdgeApiPlanCacheDataResync,
+            "EDGE_API_CUSTOM_CURRENCY_CACHE_DATA_RESYNC" =>
+                EventType.EdgeApiCustomCurrencyCacheDataResync,
             "REPLAY_WEBHOOK_EVENT" => EventType.ReplayWebhookEvent,
             "SUBSCRIPTIONS_MIGRATED" => EventType.SubscriptionsMigrated,
             "SUBSCRIPTIONS_MIGRATION_TRIGGERED" => EventType.SubscriptionsMigrationTriggered,
@@ -583,6 +586,8 @@ sealed class EventTypeConverter : JsonConverter<EventType>
                     "EDGE_API_PACKAGE_ENTITLEMENTS_DATA_RESYNC",
                 EventType.EdgeApiProductCacheDataResync => "EDGE_API_PRODUCT_CACHE_DATA_RESYNC",
                 EventType.EdgeApiPlanCacheDataResync => "EDGE_API_PLAN_CACHE_DATA_RESYNC",
+                EventType.EdgeApiCustomCurrencyCacheDataResync =>
+                    "EDGE_API_CUSTOM_CURRENCY_CACHE_DATA_RESYNC",
                 EventType.ReplayWebhookEvent => "REPLAY_WEBHOOK_EVENT",
                 EventType.SubscriptionsMigrated => "SUBSCRIPTIONS_MIGRATED",
                 EventType.SubscriptionsMigrationTriggered => "SUBSCRIPTIONS_MIGRATION_TRIGGERED",
