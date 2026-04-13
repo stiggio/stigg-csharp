@@ -15,7 +15,6 @@ public class UsageHistoryParamsTest : TestBase
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             GroupBy = "groupBy",
-            IncludeInactiveSubscriptions = true,
             ResourceID = "resourceId",
         };
 
@@ -24,7 +23,6 @@ public class UsageHistoryParamsTest : TestBase
         DateTimeOffset expectedStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedGroupBy = "groupBy";
-        bool expectedIncludeInactiveSubscriptions = true;
         string expectedResourceID = "resourceId";
 
         Assert.Equal(expectedCustomerID, parameters.CustomerID);
@@ -32,7 +30,6 @@ public class UsageHistoryParamsTest : TestBase
         Assert.Equal(expectedStartDate, parameters.StartDate);
         Assert.Equal(expectedEndDate, parameters.EndDate);
         Assert.Equal(expectedGroupBy, parameters.GroupBy);
-        Assert.Equal(expectedIncludeInactiveSubscriptions, parameters.IncludeInactiveSubscriptions);
         Assert.Equal(expectedResourceID, parameters.ResourceID);
     }
 
@@ -51,8 +48,6 @@ public class UsageHistoryParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("endDate"));
         Assert.Null(parameters.GroupBy);
         Assert.False(parameters.RawQueryData.ContainsKey("groupBy"));
-        Assert.Null(parameters.IncludeInactiveSubscriptions);
-        Assert.False(parameters.RawQueryData.ContainsKey("includeInactiveSubscriptions"));
     }
 
     [Fact]
@@ -68,15 +63,12 @@ public class UsageHistoryParamsTest : TestBase
             // Null should be interpreted as omitted for these properties
             EndDate = null,
             GroupBy = null,
-            IncludeInactiveSubscriptions = null,
         };
 
         Assert.Null(parameters.EndDate);
         Assert.False(parameters.RawQueryData.ContainsKey("endDate"));
         Assert.Null(parameters.GroupBy);
         Assert.False(parameters.RawQueryData.ContainsKey("groupBy"));
-        Assert.Null(parameters.IncludeInactiveSubscriptions);
-        Assert.False(parameters.RawQueryData.ContainsKey("includeInactiveSubscriptions"));
     }
 
     [Fact]
@@ -89,7 +81,6 @@ public class UsageHistoryParamsTest : TestBase
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             GroupBy = "groupBy",
-            IncludeInactiveSubscriptions = true,
         };
 
         Assert.Null(parameters.ResourceID);
@@ -106,7 +97,6 @@ public class UsageHistoryParamsTest : TestBase
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             GroupBy = "groupBy",
-            IncludeInactiveSubscriptions = true,
 
             ResourceID = null,
         };
@@ -125,7 +115,6 @@ public class UsageHistoryParamsTest : TestBase
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             GroupBy = "groupBy",
-            IncludeInactiveSubscriptions = true,
             ResourceID = "resourceId",
         };
 
@@ -133,7 +122,7 @@ public class UsageHistoryParamsTest : TestBase
 
         Assert.Equal(
             new Uri(
-                "https://api.stigg.io/api/v1/usage/customerId/history/featureId?startDate=2019-12-27T18%3a11%3a19.117%2b00%3a00&endDate=2019-12-27T18%3a11%3a19.117%2b00%3a00&groupBy=groupBy&includeInactiveSubscriptions=true&resourceId=resourceId"
+                "https://api.stigg.io/api/v1/usage/customerId/history/featureId?startDate=2019-12-27T18%3a11%3a19.117%2b00%3a00&endDate=2019-12-27T18%3a11%3a19.117%2b00%3a00&groupBy=groupBy&resourceId=resourceId"
             ),
             url
         );
@@ -149,7 +138,6 @@ public class UsageHistoryParamsTest : TestBase
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             GroupBy = "groupBy",
-            IncludeInactiveSubscriptions = true,
             ResourceID = "resourceId",
         };
 
