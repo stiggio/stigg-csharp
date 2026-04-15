@@ -479,6 +479,10 @@ public enum EventQueueProvisionParamsEventType
     FeatureGroupUpdated,
     FeatureGroupArchived,
     FeatureGroupUnArchived,
+    CustomCurrencyCreated,
+    CustomCurrencyUpdated,
+    CustomCurrencyArchived,
+    CustomCurrencyUnarchived,
     StripeAppDrawerViewed,
     EventQueueProvisioningRequested,
     EventQueueDeprovisioningRequested,
@@ -652,6 +656,11 @@ sealed class EventQueueProvisionParamsEventTypeConverter
             "FEATURE_GROUP_ARCHIVED" => EventQueueProvisionParamsEventType.FeatureGroupArchived,
             "FEATURE_GROUP_UN_ARCHIVED" =>
                 EventQueueProvisionParamsEventType.FeatureGroupUnArchived,
+            "CUSTOM_CURRENCY_CREATED" => EventQueueProvisionParamsEventType.CustomCurrencyCreated,
+            "CUSTOM_CURRENCY_UPDATED" => EventQueueProvisionParamsEventType.CustomCurrencyUpdated,
+            "CUSTOM_CURRENCY_ARCHIVED" => EventQueueProvisionParamsEventType.CustomCurrencyArchived,
+            "CUSTOM_CURRENCY_UNARCHIVED" =>
+                EventQueueProvisionParamsEventType.CustomCurrencyUnarchived,
             "STRIPE_APP_DRAWER_VIEWED" => EventQueueProvisionParamsEventType.StripeAppDrawerViewed,
             "EVENT_QUEUE_PROVISIONING_REQUESTED" =>
                 EventQueueProvisionParamsEventType.EventQueueProvisioningRequested,
@@ -835,6 +844,14 @@ sealed class EventQueueProvisionParamsEventTypeConverter
                 EventQueueProvisionParamsEventType.FeatureGroupArchived => "FEATURE_GROUP_ARCHIVED",
                 EventQueueProvisionParamsEventType.FeatureGroupUnArchived =>
                     "FEATURE_GROUP_UN_ARCHIVED",
+                EventQueueProvisionParamsEventType.CustomCurrencyCreated =>
+                    "CUSTOM_CURRENCY_CREATED",
+                EventQueueProvisionParamsEventType.CustomCurrencyUpdated =>
+                    "CUSTOM_CURRENCY_UPDATED",
+                EventQueueProvisionParamsEventType.CustomCurrencyArchived =>
+                    "CUSTOM_CURRENCY_ARCHIVED",
+                EventQueueProvisionParamsEventType.CustomCurrencyUnarchived =>
+                    "CUSTOM_CURRENCY_UNARCHIVED",
                 EventQueueProvisionParamsEventType.StripeAppDrawerViewed =>
                     "STRIPE_APP_DRAWER_VIEWED",
                 EventQueueProvisionParamsEventType.EventQueueProvisioningRequested =>
