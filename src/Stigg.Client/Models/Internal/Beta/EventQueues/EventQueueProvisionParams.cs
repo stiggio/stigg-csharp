@@ -425,11 +425,13 @@ public enum EventQueueProvisionParamsEventType
     IncomingZuoraWebhook,
     IncomingDoggoWebhook,
     IncomingAppStoreWebhook,
+    IncomingAirbyteWebhook,
     ResyncIntegration,
     SyncCoupon,
     ImportIntegrationCatalog,
     ImportIntegrationCustomers,
     SyncFailed,
+    DataExportSyncFailed,
     CustomerPaymentFailed,
     ProductCreated,
     ProductUpdated,
@@ -577,6 +579,7 @@ sealed class EventQueueProvisionParamsEventTypeConverter
             "INCOMING_DOGGO_WEBHOOK" => EventQueueProvisionParamsEventType.IncomingDoggoWebhook,
             "INCOMING_APP_STORE_WEBHOOK" =>
                 EventQueueProvisionParamsEventType.IncomingAppStoreWebhook,
+            "INCOMING_AIRBYTE_WEBHOOK" => EventQueueProvisionParamsEventType.IncomingAirbyteWebhook,
             "RESYNC_INTEGRATION" => EventQueueProvisionParamsEventType.ResyncIntegration,
             "SYNC_COUPON" => EventQueueProvisionParamsEventType.SyncCoupon,
             "IMPORT_INTEGRATION_CATALOG" =>
@@ -584,6 +587,7 @@ sealed class EventQueueProvisionParamsEventTypeConverter
             "IMPORT_INTEGRATION_CUSTOMERS" =>
                 EventQueueProvisionParamsEventType.ImportIntegrationCustomers,
             "SYNC_FAILED" => EventQueueProvisionParamsEventType.SyncFailed,
+            "DATA_EXPORT_SYNC_FAILED" => EventQueueProvisionParamsEventType.DataExportSyncFailed,
             "CUSTOMER_PAYMENT_FAILED" => EventQueueProvisionParamsEventType.CustomerPaymentFailed,
             "PRODUCT_CREATED" => EventQueueProvisionParamsEventType.ProductCreated,
             "PRODUCT_UPDATED" => EventQueueProvisionParamsEventType.ProductUpdated,
@@ -761,6 +765,8 @@ sealed class EventQueueProvisionParamsEventTypeConverter
                 EventQueueProvisionParamsEventType.IncomingDoggoWebhook => "INCOMING_DOGGO_WEBHOOK",
                 EventQueueProvisionParamsEventType.IncomingAppStoreWebhook =>
                     "INCOMING_APP_STORE_WEBHOOK",
+                EventQueueProvisionParamsEventType.IncomingAirbyteWebhook =>
+                    "INCOMING_AIRBYTE_WEBHOOK",
                 EventQueueProvisionParamsEventType.ResyncIntegration => "RESYNC_INTEGRATION",
                 EventQueueProvisionParamsEventType.SyncCoupon => "SYNC_COUPON",
                 EventQueueProvisionParamsEventType.ImportIntegrationCatalog =>
@@ -768,6 +774,8 @@ sealed class EventQueueProvisionParamsEventTypeConverter
                 EventQueueProvisionParamsEventType.ImportIntegrationCustomers =>
                     "IMPORT_INTEGRATION_CUSTOMERS",
                 EventQueueProvisionParamsEventType.SyncFailed => "SYNC_FAILED",
+                EventQueueProvisionParamsEventType.DataExportSyncFailed =>
+                    "DATA_EXPORT_SYNC_FAILED",
                 EventQueueProvisionParamsEventType.CustomerPaymentFailed =>
                     "CUSTOMER_PAYMENT_FAILED",
                 EventQueueProvisionParamsEventType.ProductCreated => "PRODUCT_CREATED",
