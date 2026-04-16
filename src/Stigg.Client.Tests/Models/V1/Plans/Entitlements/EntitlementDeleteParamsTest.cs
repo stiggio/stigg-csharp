@@ -24,7 +24,12 @@ public class EntitlementDeleteParamsTest : TestBase
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
-        Assert.Equal(new Uri("https://api.stigg.io/api/v1/plans/planId/entitlements/id"), url);
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri("https://api.stigg.io/api/v1/plans/planId/entitlements/id"),
+                url
+            )
+        );
     }
 
     [Fact]

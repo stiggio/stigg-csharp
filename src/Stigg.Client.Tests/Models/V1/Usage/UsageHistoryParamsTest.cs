@@ -112,19 +112,21 @@ public class UsageHistoryParamsTest : TestBase
         {
             CustomerID = "customerId",
             FeatureID = "featureId",
-            StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
+            EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
             GroupBy = "groupBy",
             ResourceID = "resourceId",
         };
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
-        Assert.Equal(
-            new Uri(
-                "https://api.stigg.io/api/v1/usage/customerId/history/featureId?startDate=2019-12-27T18%3a11%3a19.117%2b00%3a00&endDate=2019-12-27T18%3a11%3a19.117%2b00%3a00&groupBy=groupBy&resourceId=resourceId"
-            ),
-            url
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri(
+                    "https://api.stigg.io/api/v1/usage/customerId/history/featureId?startDate=2019-12-27T18%3a11%3a19.117%2b00%3a00&endDate=2019-12-27T18%3a11%3a19.117%2b00%3a00&groupBy=groupBy&resourceId=resourceId"
+                ),
+                url
+            )
         );
     }
 

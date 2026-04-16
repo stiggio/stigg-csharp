@@ -210,7 +210,7 @@ public class FeatureCreateFeatureParamsTest : TestBase
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
-        Assert.Equal(new Uri("https://api.stigg.io/api/v1/features"), url);
+        Assert.True(TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/features"), url));
     }
 
     [Fact]

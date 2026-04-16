@@ -120,10 +120,10 @@ public class FeatureListFeaturesParamsTest : TestBase
             Before = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             CreatedAt = new()
             {
-                Gt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Gte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Lt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Lte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Gt = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
+                Gte = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
+                Lt = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
+                Lte = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
             },
             FeatureType = "featureType",
             Limit = 1,
@@ -133,11 +133,13 @@ public class FeatureListFeaturesParamsTest : TestBase
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
-        Assert.Equal(
-            new Uri(
-                "https://api.stigg.io/api/v1/features?id=id&after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&createdAt%5bgt%5d=2019-12-27T18%3a11%3a19.117Z&createdAt%5bgte%5d=2019-12-27T18%3a11%3a19.117Z&createdAt%5blt%5d=2019-12-27T18%3a11%3a19.117Z&createdAt%5blte%5d=2019-12-27T18%3a11%3a19.117Z&featureType=featureType&limit=1&meterType=meterType&status=status"
-            ),
-            url
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri(
+                    "https://api.stigg.io/api/v1/features?id=id&after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&createdAt%5bgt%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5bgte%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5blt%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5blte%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&featureType=featureType&limit=1&meterType=meterType&status=status"
+                ),
+                url
+            )
         );
     }
 

@@ -77,11 +77,13 @@ public class CreditGetUsageParamsTest : TestBase
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
-        Assert.Equal(
-            new Uri(
-                "https://api.stigg.io/api/v1/credits/usage?customerId=customerId&currencyId=currencyId&resourceId=resourceId&timeRange=LAST_DAY"
-            ),
-            url
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri(
+                    "https://api.stigg.io/api/v1/credits/usage?customerId=customerId&currencyId=currencyId&resourceId=resourceId&timeRange=LAST_DAY"
+                ),
+                url
+            )
         );
     }
 

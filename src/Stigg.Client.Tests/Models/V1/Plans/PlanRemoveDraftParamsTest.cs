@@ -22,7 +22,7 @@ public class PlanRemoveDraftParamsTest : TestBase
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
-        Assert.Equal(new Uri("https://api.stigg.io/api/v1/plans/x/draft"), url);
+        Assert.True(TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/plans/x/draft"), url));
     }
 
     [Fact]

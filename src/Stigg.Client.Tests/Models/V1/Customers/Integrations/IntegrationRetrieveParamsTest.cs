@@ -28,9 +28,11 @@ public class IntegrationRetrieveParamsTest : TestBase
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
-        Assert.Equal(
-            new Uri("https://api.stigg.io/api/v1/customers/id/integrations/integrationId"),
-            url
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri("https://api.stigg.io/api/v1/customers/id/integrations/integrationId"),
+                url
+            )
         );
     }
 

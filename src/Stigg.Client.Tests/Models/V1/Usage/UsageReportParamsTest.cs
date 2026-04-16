@@ -72,7 +72,7 @@ public class UsageReportParamsTest : TestBase
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
-        Assert.Equal(new Uri("https://api.stigg.io/api/v1/usage"), url);
+        Assert.True(TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/usage"), url));
     }
 
     [Fact]
