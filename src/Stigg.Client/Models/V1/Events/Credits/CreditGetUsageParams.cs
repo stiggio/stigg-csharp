@@ -55,6 +55,28 @@ public record class CreditGetUsageParams : ParamsBase
     }
 
     /// <summary>
+    /// End date for the credit usage time range (ISO 8601). Defaults to now when
+    /// startDate is provided
+    /// </summary>
+    public DateTimeOffset? EndDate
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<DateTimeOffset>("endDate");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("endDate", value);
+        }
+    }
+
+    /// <summary>
     /// Filter by resource ID
     /// </summary>
     public string? ResourceID
@@ -72,6 +94,28 @@ public record class CreditGetUsageParams : ParamsBase
             }
 
             this._rawQueryData.Set("resourceId", value);
+        }
+    }
+
+    /// <summary>
+    /// Start date for the credit usage time range (ISO 8601). Takes precedence over
+    /// timeRange when provided
+    /// </summary>
+    public DateTimeOffset? StartDate
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<DateTimeOffset>("startDate");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("startDate", value);
         }
     }
 
