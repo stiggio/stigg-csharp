@@ -6,7 +6,6 @@ using Addons = Stigg.Client.Models.V1.Addons;
 using Coupons = Stigg.Client.Models.V1.Coupons;
 using Credits = Stigg.Client.Models.V1.Events.Credits;
 using Entitlements = Stigg.Client.Models.V1.Addons.Entitlements;
-using EventQueues = Stigg.Client.Models.Internal.Beta.EventQueues;
 using Features = Stigg.Client.Models.V1.Features;
 using Grants = Stigg.Client.Models.V1.Events.Credits.Grants;
 using Integrations = Stigg.Client.Models.V1.Customers.Integrations;
@@ -777,13 +776,6 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, SubscriptionEndSetup>(),
             new ApiEnumConverter<string, SubscriptionStartSetup>(),
             new ApiEnumConverter<string, Behavior>(),
-            new ApiEnumConverter<string, EventQueues::DataRegion>(),
-            new ApiEnumConverter<string, EventQueues::Status>(),
-            new ApiEnumConverter<string, EventQueues::EventQueueListResponseDataRegion>(),
-            new ApiEnumConverter<string, EventQueues::EventQueueListResponseDataStatus>(),
-            new ApiEnumConverter<string, EventQueues::EventType>(),
-            new ApiEnumConverter<string, EventQueues::Region>(),
-            new ApiEnumConverter<string, EventQueues::EventQueueProvisionParamsEventType>(),
         },
     };
 

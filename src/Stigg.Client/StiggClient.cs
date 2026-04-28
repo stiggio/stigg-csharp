@@ -78,12 +78,6 @@ public sealed class StiggClient : IStiggClient
         get { return _v1.Value; }
     }
 
-    readonly Lazy<IInternalService> _internal;
-    public IInternalService Internal
-    {
-        get { return _internal.Value; }
-    }
-
     public void Dispose() => this.HttpClient.Dispose();
 
     public StiggClient()
@@ -92,7 +86,6 @@ public sealed class StiggClient : IStiggClient
 
         _withRawResponse = new(() => new StiggClientWithRawResponse(this._options));
         _v1 = new(() => new V1Service(this));
-        _internal = new(() => new InternalService(this));
     }
 
     public StiggClient(ClientOptions options)
@@ -172,12 +165,6 @@ public sealed class StiggClientWithRawResponse : IStiggClientWithRawResponse
     public IV1ServiceWithRawResponse V1
     {
         get { return _v1.Value; }
-    }
-
-    readonly Lazy<IInternalServiceWithRawResponse> _internal;
-    public IInternalServiceWithRawResponse Internal
-    {
-        get { return _internal.Value; }
     }
 
     /// <inheritdoc/>
@@ -379,7 +366,6 @@ public sealed class StiggClientWithRawResponse : IStiggClientWithRawResponse
         _options = new();
 
         _v1 = new(() => new V1ServiceWithRawResponse(this));
-        _internal = new(() => new InternalServiceWithRawResponse(this));
     }
 
     public StiggClientWithRawResponse(ClientOptions options)
