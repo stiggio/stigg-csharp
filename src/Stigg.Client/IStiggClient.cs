@@ -52,6 +52,8 @@ public interface IStiggClient : IDisposable
     IStiggClient WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     IV1Service V1 { get; }
+
+    IInternalService Internal { get; }
 }
 
 /// <summary>
@@ -84,6 +86,8 @@ public interface IStiggClientWithRawResponse : IDisposable
     IStiggClientWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     IV1ServiceWithRawResponse V1 { get; }
+
+    IInternalServiceWithRawResponse Internal { get; }
 
     /// <summary>
     /// Sends a request to the Stigg REST API.
