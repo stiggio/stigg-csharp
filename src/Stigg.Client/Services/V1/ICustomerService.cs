@@ -90,6 +90,28 @@ public interface ICustomerService
     );
 
     /// <summary>
+    /// Checks a single entitlement (feature or credit) for a customer or resource.
+    /// Supports `requestedUsage` and `requestedValues` to evaluate against limits or
+    /// enum values.
+    ///
+    /// <para>**Warning:** This REST API endpoint lacks built-in client-side caching,
+    /// fallback mechanisms, and low-latency guarantees. It is not recommended for
+    /// hot-path entitlement checks. For production use, consider using the Stigg Node
+    /// Server SDK with caching or the Sidecar for low-latency cached responses.</para>
+    /// </summary>
+    Task<CustomerCheckEntitlementResponse> CheckEntitlement(
+        CustomerCheckEntitlementParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="CheckEntitlement(CustomerCheckEntitlementParams, CancellationToken)"/>
+    Task<CustomerCheckEntitlementResponse> CheckEntitlement(
+        string id,
+        CustomerCheckEntitlementParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Imports multiple customers in bulk. Used for migrating customer data from
     /// external systems.
     /// </summary>
@@ -232,6 +254,22 @@ public interface ICustomerServiceWithRawResponse
     Task<HttpResponse<CustomerResponse>> Archive(
         string id,
         CustomerArchiveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>get /api/v1/customers/{id}/entitlements/check</c>, but is otherwise the
+    /// same as <see cref="ICustomerService.CheckEntitlement(CustomerCheckEntitlementParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<CustomerCheckEntitlementResponse>> CheckEntitlement(
+        CustomerCheckEntitlementParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="CheckEntitlement(CustomerCheckEntitlementParams, CancellationToken)"/>
+    Task<HttpResponse<CustomerCheckEntitlementResponse>> CheckEntitlement(
+        string id,
+        CustomerCheckEntitlementParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 

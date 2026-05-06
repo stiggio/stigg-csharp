@@ -141,6 +141,30 @@ public sealed class CustomerService : ICustomerService
     }
 
     /// <inheritdoc/>
+    public async Task<CustomerCheckEntitlementResponse> CheckEntitlement(
+        CustomerCheckEntitlementParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.CheckEntitlement(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<CustomerCheckEntitlementResponse> CheckEntitlement(
+        string id,
+        CustomerCheckEntitlementParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.CheckEntitlement(parameters with { ID = id }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
     public async Task<CustomerImportResponse> Import(
         CustomerImportParams parameters,
         CancellationToken cancellationToken = default
@@ -440,6 +464,51 @@ public sealed class CustomerServiceWithRawResponse : ICustomerServiceWithRawResp
         parameters ??= new();
 
         return this.Archive(parameters with { ID = id }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<CustomerCheckEntitlementResponse>> CheckEntitlement(
+        CustomerCheckEntitlementParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.ID == null)
+        {
+            throw new StiggInvalidDataException("'parameters.ID' cannot be null");
+        }
+
+        HttpRequest<CustomerCheckEntitlementParams> request = new()
+        {
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var deserializedResponse = await response
+                    .Deserialize<CustomerCheckEntitlementResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    deserializedResponse.Validate();
+                }
+                return deserializedResponse;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<CustomerCheckEntitlementResponse>> CheckEntitlement(
+        string id,
+        CustomerCheckEntitlementParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.CheckEntitlement(parameters with { ID = id }, cancellationToken);
     }
 
     /// <inheritdoc/>

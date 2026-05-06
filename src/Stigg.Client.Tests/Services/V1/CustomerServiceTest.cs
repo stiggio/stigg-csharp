@@ -50,6 +50,17 @@ public class CustomerServiceTest : TestBase
     }
 
     [Fact(Skip = "Mock server tests are disabled")]
+    public async Task CheckEntitlement_Works()
+    {
+        var response = await this.client.V1.Customers.CheckEntitlement(
+            "x",
+            new(),
+            TestContext.Current.CancellationToken
+        );
+        response.Validate();
+    }
+
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Import_Works()
     {
         var response = await this.client.V1.Customers.Import(

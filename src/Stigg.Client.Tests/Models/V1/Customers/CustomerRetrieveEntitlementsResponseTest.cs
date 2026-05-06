@@ -16,24 +16,25 @@ public class CustomerRetrieveEntitlementsResponseTest : TestBase
         {
             Data = new()
             {
-                AccessDeniedReason = AccessDeniedReason.CustomerNotFound,
+                AccessDeniedReason =
+                    CustomerRetrieveEntitlementsResponseDataAccessDeniedReason.CustomerNotFound,
                 Entitlements =
                 [
-                    new Feature()
+                    new EntitlementFeature()
                     {
-                        AccessDeniedReason = FeatureAccessDeniedReason.FeatureNotFound,
+                        AccessDeniedReason = EntitlementFeatureAccessDeniedReason.FeatureNotFound,
                         IsGranted = true,
                         CurrentUsage = 0,
                         EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                        FeatureValue = new()
+                        Feature = new()
                         {
                             ID = "id",
                             DisplayName = "displayName",
-                            FeatureStatus = FeatureStatus.New,
-                            FeatureType = FeatureType.Boolean,
+                            FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+                            FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
                         },
                         HasUnlimitedUsage = true,
-                        ResetPeriod = ResetPeriod.Year,
+                        ResetPeriod = EntitlementFeatureResetPeriod.Year,
                         UsageLimit = 0,
                         UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -46,24 +47,25 @@ public class CustomerRetrieveEntitlementsResponseTest : TestBase
 
         CustomerRetrieveEntitlementsResponseData expectedData = new()
         {
-            AccessDeniedReason = AccessDeniedReason.CustomerNotFound,
+            AccessDeniedReason =
+                CustomerRetrieveEntitlementsResponseDataAccessDeniedReason.CustomerNotFound,
             Entitlements =
             [
-                new Feature()
+                new EntitlementFeature()
                 {
-                    AccessDeniedReason = FeatureAccessDeniedReason.FeatureNotFound,
+                    AccessDeniedReason = EntitlementFeatureAccessDeniedReason.FeatureNotFound,
                     IsGranted = true,
                     CurrentUsage = 0,
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    FeatureValue = new()
+                    Feature = new()
                     {
                         ID = "id",
                         DisplayName = "displayName",
-                        FeatureStatus = FeatureStatus.New,
-                        FeatureType = FeatureType.Boolean,
+                        FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+                        FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
                     },
                     HasUnlimitedUsage = true,
-                    ResetPeriod = ResetPeriod.Year,
+                    ResetPeriod = EntitlementFeatureResetPeriod.Year,
                     UsageLimit = 0,
                     UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -83,24 +85,25 @@ public class CustomerRetrieveEntitlementsResponseTest : TestBase
         {
             Data = new()
             {
-                AccessDeniedReason = AccessDeniedReason.CustomerNotFound,
+                AccessDeniedReason =
+                    CustomerRetrieveEntitlementsResponseDataAccessDeniedReason.CustomerNotFound,
                 Entitlements =
                 [
-                    new Feature()
+                    new EntitlementFeature()
                     {
-                        AccessDeniedReason = FeatureAccessDeniedReason.FeatureNotFound,
+                        AccessDeniedReason = EntitlementFeatureAccessDeniedReason.FeatureNotFound,
                         IsGranted = true,
                         CurrentUsage = 0,
                         EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                        FeatureValue = new()
+                        Feature = new()
                         {
                             ID = "id",
                             DisplayName = "displayName",
-                            FeatureStatus = FeatureStatus.New,
-                            FeatureType = FeatureType.Boolean,
+                            FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+                            FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
                         },
                         HasUnlimitedUsage = true,
-                        ResetPeriod = ResetPeriod.Year,
+                        ResetPeriod = EntitlementFeatureResetPeriod.Year,
                         UsageLimit = 0,
                         UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -127,24 +130,25 @@ public class CustomerRetrieveEntitlementsResponseTest : TestBase
         {
             Data = new()
             {
-                AccessDeniedReason = AccessDeniedReason.CustomerNotFound,
+                AccessDeniedReason =
+                    CustomerRetrieveEntitlementsResponseDataAccessDeniedReason.CustomerNotFound,
                 Entitlements =
                 [
-                    new Feature()
+                    new EntitlementFeature()
                     {
-                        AccessDeniedReason = FeatureAccessDeniedReason.FeatureNotFound,
+                        AccessDeniedReason = EntitlementFeatureAccessDeniedReason.FeatureNotFound,
                         IsGranted = true,
                         CurrentUsage = 0,
                         EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                        FeatureValue = new()
+                        Feature = new()
                         {
                             ID = "id",
                             DisplayName = "displayName",
-                            FeatureStatus = FeatureStatus.New,
-                            FeatureType = FeatureType.Boolean,
+                            FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+                            FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
                         },
                         HasUnlimitedUsage = true,
-                        ResetPeriod = ResetPeriod.Year,
+                        ResetPeriod = EntitlementFeatureResetPeriod.Year,
                         UsageLimit = 0,
                         UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -164,24 +168,25 @@ public class CustomerRetrieveEntitlementsResponseTest : TestBase
 
         CustomerRetrieveEntitlementsResponseData expectedData = new()
         {
-            AccessDeniedReason = AccessDeniedReason.CustomerNotFound,
+            AccessDeniedReason =
+                CustomerRetrieveEntitlementsResponseDataAccessDeniedReason.CustomerNotFound,
             Entitlements =
             [
-                new Feature()
+                new EntitlementFeature()
                 {
-                    AccessDeniedReason = FeatureAccessDeniedReason.FeatureNotFound,
+                    AccessDeniedReason = EntitlementFeatureAccessDeniedReason.FeatureNotFound,
                     IsGranted = true,
                     CurrentUsage = 0,
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    FeatureValue = new()
+                    Feature = new()
                     {
                         ID = "id",
                         DisplayName = "displayName",
-                        FeatureStatus = FeatureStatus.New,
-                        FeatureType = FeatureType.Boolean,
+                        FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+                        FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
                     },
                     HasUnlimitedUsage = true,
-                    ResetPeriod = ResetPeriod.Year,
+                    ResetPeriod = EntitlementFeatureResetPeriod.Year,
                     UsageLimit = 0,
                     UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -201,24 +206,25 @@ public class CustomerRetrieveEntitlementsResponseTest : TestBase
         {
             Data = new()
             {
-                AccessDeniedReason = AccessDeniedReason.CustomerNotFound,
+                AccessDeniedReason =
+                    CustomerRetrieveEntitlementsResponseDataAccessDeniedReason.CustomerNotFound,
                 Entitlements =
                 [
-                    new Feature()
+                    new EntitlementFeature()
                     {
-                        AccessDeniedReason = FeatureAccessDeniedReason.FeatureNotFound,
+                        AccessDeniedReason = EntitlementFeatureAccessDeniedReason.FeatureNotFound,
                         IsGranted = true,
                         CurrentUsage = 0,
                         EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                        FeatureValue = new()
+                        Feature = new()
                         {
                             ID = "id",
                             DisplayName = "displayName",
-                            FeatureStatus = FeatureStatus.New,
-                            FeatureType = FeatureType.Boolean,
+                            FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+                            FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
                         },
                         HasUnlimitedUsage = true,
-                        ResetPeriod = ResetPeriod.Year,
+                        ResetPeriod = EntitlementFeatureResetPeriod.Year,
                         UsageLimit = 0,
                         UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -239,24 +245,25 @@ public class CustomerRetrieveEntitlementsResponseTest : TestBase
         {
             Data = new()
             {
-                AccessDeniedReason = AccessDeniedReason.CustomerNotFound,
+                AccessDeniedReason =
+                    CustomerRetrieveEntitlementsResponseDataAccessDeniedReason.CustomerNotFound,
                 Entitlements =
                 [
-                    new Feature()
+                    new EntitlementFeature()
                     {
-                        AccessDeniedReason = FeatureAccessDeniedReason.FeatureNotFound,
+                        AccessDeniedReason = EntitlementFeatureAccessDeniedReason.FeatureNotFound,
                         IsGranted = true,
                         CurrentUsage = 0,
                         EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                        FeatureValue = new()
+                        Feature = new()
                         {
                             ID = "id",
                             DisplayName = "displayName",
-                            FeatureStatus = FeatureStatus.New,
-                            FeatureType = FeatureType.Boolean,
+                            FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+                            FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
                         },
                         HasUnlimitedUsage = true,
-                        ResetPeriod = ResetPeriod.Year,
+                        ResetPeriod = EntitlementFeatureResetPeriod.Year,
                         UsageLimit = 0,
                         UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -280,24 +287,25 @@ public class CustomerRetrieveEntitlementsResponseDataTest : TestBase
     {
         var model = new CustomerRetrieveEntitlementsResponseData
         {
-            AccessDeniedReason = AccessDeniedReason.CustomerNotFound,
+            AccessDeniedReason =
+                CustomerRetrieveEntitlementsResponseDataAccessDeniedReason.CustomerNotFound,
             Entitlements =
             [
-                new Feature()
+                new EntitlementFeature()
                 {
-                    AccessDeniedReason = FeatureAccessDeniedReason.FeatureNotFound,
+                    AccessDeniedReason = EntitlementFeatureAccessDeniedReason.FeatureNotFound,
                     IsGranted = true,
                     CurrentUsage = 0,
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    FeatureValue = new()
+                    Feature = new()
                     {
                         ID = "id",
                         DisplayName = "displayName",
-                        FeatureStatus = FeatureStatus.New,
-                        FeatureType = FeatureType.Boolean,
+                        FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+                        FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
                     },
                     HasUnlimitedUsage = true,
-                    ResetPeriod = ResetPeriod.Year,
+                    ResetPeriod = EntitlementFeatureResetPeriod.Year,
                     UsageLimit = 0,
                     UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -307,25 +315,28 @@ public class CustomerRetrieveEntitlementsResponseDataTest : TestBase
             ],
         };
 
-        ApiEnum<string, AccessDeniedReason> expectedAccessDeniedReason =
-            AccessDeniedReason.CustomerNotFound;
+        ApiEnum<
+            string,
+            CustomerRetrieveEntitlementsResponseDataAccessDeniedReason
+        > expectedAccessDeniedReason =
+            CustomerRetrieveEntitlementsResponseDataAccessDeniedReason.CustomerNotFound;
         List<Entitlement> expectedEntitlements =
         [
-            new Feature()
+            new EntitlementFeature()
             {
-                AccessDeniedReason = FeatureAccessDeniedReason.FeatureNotFound,
+                AccessDeniedReason = EntitlementFeatureAccessDeniedReason.FeatureNotFound,
                 IsGranted = true,
                 CurrentUsage = 0,
                 EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                FeatureValue = new()
+                Feature = new()
                 {
                     ID = "id",
                     DisplayName = "displayName",
-                    FeatureStatus = FeatureStatus.New,
-                    FeatureType = FeatureType.Boolean,
+                    FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+                    FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
                 },
                 HasUnlimitedUsage = true,
-                ResetPeriod = ResetPeriod.Year,
+                ResetPeriod = EntitlementFeatureResetPeriod.Year,
                 UsageLimit = 0,
                 UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -347,24 +358,25 @@ public class CustomerRetrieveEntitlementsResponseDataTest : TestBase
     {
         var model = new CustomerRetrieveEntitlementsResponseData
         {
-            AccessDeniedReason = AccessDeniedReason.CustomerNotFound,
+            AccessDeniedReason =
+                CustomerRetrieveEntitlementsResponseDataAccessDeniedReason.CustomerNotFound,
             Entitlements =
             [
-                new Feature()
+                new EntitlementFeature()
                 {
-                    AccessDeniedReason = FeatureAccessDeniedReason.FeatureNotFound,
+                    AccessDeniedReason = EntitlementFeatureAccessDeniedReason.FeatureNotFound,
                     IsGranted = true,
                     CurrentUsage = 0,
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    FeatureValue = new()
+                    Feature = new()
                     {
                         ID = "id",
                         DisplayName = "displayName",
-                        FeatureStatus = FeatureStatus.New,
-                        FeatureType = FeatureType.Boolean,
+                        FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+                        FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
                     },
                     HasUnlimitedUsage = true,
-                    ResetPeriod = ResetPeriod.Year,
+                    ResetPeriod = EntitlementFeatureResetPeriod.Year,
                     UsageLimit = 0,
                     UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -388,24 +400,25 @@ public class CustomerRetrieveEntitlementsResponseDataTest : TestBase
     {
         var model = new CustomerRetrieveEntitlementsResponseData
         {
-            AccessDeniedReason = AccessDeniedReason.CustomerNotFound,
+            AccessDeniedReason =
+                CustomerRetrieveEntitlementsResponseDataAccessDeniedReason.CustomerNotFound,
             Entitlements =
             [
-                new Feature()
+                new EntitlementFeature()
                 {
-                    AccessDeniedReason = FeatureAccessDeniedReason.FeatureNotFound,
+                    AccessDeniedReason = EntitlementFeatureAccessDeniedReason.FeatureNotFound,
                     IsGranted = true,
                     CurrentUsage = 0,
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    FeatureValue = new()
+                    Feature = new()
                     {
                         ID = "id",
                         DisplayName = "displayName",
-                        FeatureStatus = FeatureStatus.New,
-                        FeatureType = FeatureType.Boolean,
+                        FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+                        FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
                     },
                     HasUnlimitedUsage = true,
-                    ResetPeriod = ResetPeriod.Year,
+                    ResetPeriod = EntitlementFeatureResetPeriod.Year,
                     UsageLimit = 0,
                     UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -422,25 +435,28 @@ public class CustomerRetrieveEntitlementsResponseDataTest : TestBase
         );
         Assert.NotNull(deserialized);
 
-        ApiEnum<string, AccessDeniedReason> expectedAccessDeniedReason =
-            AccessDeniedReason.CustomerNotFound;
+        ApiEnum<
+            string,
+            CustomerRetrieveEntitlementsResponseDataAccessDeniedReason
+        > expectedAccessDeniedReason =
+            CustomerRetrieveEntitlementsResponseDataAccessDeniedReason.CustomerNotFound;
         List<Entitlement> expectedEntitlements =
         [
-            new Feature()
+            new EntitlementFeature()
             {
-                AccessDeniedReason = FeatureAccessDeniedReason.FeatureNotFound,
+                AccessDeniedReason = EntitlementFeatureAccessDeniedReason.FeatureNotFound,
                 IsGranted = true,
                 CurrentUsage = 0,
                 EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                FeatureValue = new()
+                Feature = new()
                 {
                     ID = "id",
                     DisplayName = "displayName",
-                    FeatureStatus = FeatureStatus.New,
-                    FeatureType = FeatureType.Boolean,
+                    FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+                    FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
                 },
                 HasUnlimitedUsage = true,
-                ResetPeriod = ResetPeriod.Year,
+                ResetPeriod = EntitlementFeatureResetPeriod.Year,
                 UsageLimit = 0,
                 UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -462,24 +478,25 @@ public class CustomerRetrieveEntitlementsResponseDataTest : TestBase
     {
         var model = new CustomerRetrieveEntitlementsResponseData
         {
-            AccessDeniedReason = AccessDeniedReason.CustomerNotFound,
+            AccessDeniedReason =
+                CustomerRetrieveEntitlementsResponseDataAccessDeniedReason.CustomerNotFound,
             Entitlements =
             [
-                new Feature()
+                new EntitlementFeature()
                 {
-                    AccessDeniedReason = FeatureAccessDeniedReason.FeatureNotFound,
+                    AccessDeniedReason = EntitlementFeatureAccessDeniedReason.FeatureNotFound,
                     IsGranted = true,
                     CurrentUsage = 0,
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    FeatureValue = new()
+                    Feature = new()
                     {
                         ID = "id",
                         DisplayName = "displayName",
-                        FeatureStatus = FeatureStatus.New,
-                        FeatureType = FeatureType.Boolean,
+                        FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+                        FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
                     },
                     HasUnlimitedUsage = true,
-                    ResetPeriod = ResetPeriod.Year,
+                    ResetPeriod = EntitlementFeatureResetPeriod.Year,
                     UsageLimit = 0,
                     UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -497,24 +514,25 @@ public class CustomerRetrieveEntitlementsResponseDataTest : TestBase
     {
         var model = new CustomerRetrieveEntitlementsResponseData
         {
-            AccessDeniedReason = AccessDeniedReason.CustomerNotFound,
+            AccessDeniedReason =
+                CustomerRetrieveEntitlementsResponseDataAccessDeniedReason.CustomerNotFound,
             Entitlements =
             [
-                new Feature()
+                new EntitlementFeature()
                 {
-                    AccessDeniedReason = FeatureAccessDeniedReason.FeatureNotFound,
+                    AccessDeniedReason = EntitlementFeatureAccessDeniedReason.FeatureNotFound,
                     IsGranted = true,
                     CurrentUsage = 0,
                     EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    FeatureValue = new()
+                    Feature = new()
                     {
                         ID = "id",
                         DisplayName = "displayName",
-                        FeatureStatus = FeatureStatus.New,
-                        FeatureType = FeatureType.Boolean,
+                        FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+                        FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
                     },
                     HasUnlimitedUsage = true,
-                    ResetPeriod = ResetPeriod.Year,
+                    ResetPeriod = EntitlementFeatureResetPeriod.Year,
                     UsageLimit = 0,
                     UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -530,45 +548,49 @@ public class CustomerRetrieveEntitlementsResponseDataTest : TestBase
     }
 }
 
-public class AccessDeniedReasonTest : TestBase
+public class CustomerRetrieveEntitlementsResponseDataAccessDeniedReasonTest : TestBase
 {
     [Theory]
-    [InlineData(AccessDeniedReason.CustomerNotFound)]
-    [InlineData(AccessDeniedReason.NoActiveSubscription)]
-    [InlineData(AccessDeniedReason.CustomerIsArchived)]
-    public void Validation_Works(AccessDeniedReason rawValue)
+    [InlineData(CustomerRetrieveEntitlementsResponseDataAccessDeniedReason.CustomerNotFound)]
+    [InlineData(CustomerRetrieveEntitlementsResponseDataAccessDeniedReason.NoActiveSubscription)]
+    [InlineData(CustomerRetrieveEntitlementsResponseDataAccessDeniedReason.CustomerIsArchived)]
+    public void Validation_Works(
+        CustomerRetrieveEntitlementsResponseDataAccessDeniedReason rawValue
+    )
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, AccessDeniedReason> value = rawValue;
+        ApiEnum<string, CustomerRetrieveEntitlementsResponseDataAccessDeniedReason> value =
+            rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, AccessDeniedReason>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, CustomerRetrieveEntitlementsResponseDataAccessDeniedReason>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
         Assert.Throws<StiggInvalidDataException>(() => value.Validate());
     }
 
     [Theory]
-    [InlineData(AccessDeniedReason.CustomerNotFound)]
-    [InlineData(AccessDeniedReason.NoActiveSubscription)]
-    [InlineData(AccessDeniedReason.CustomerIsArchived)]
-    public void SerializationRoundtrip_Works(AccessDeniedReason rawValue)
+    [InlineData(CustomerRetrieveEntitlementsResponseDataAccessDeniedReason.CustomerNotFound)]
+    [InlineData(CustomerRetrieveEntitlementsResponseDataAccessDeniedReason.NoActiveSubscription)]
+    [InlineData(CustomerRetrieveEntitlementsResponseDataAccessDeniedReason.CustomerIsArchived)]
+    public void SerializationRoundtrip_Works(
+        CustomerRetrieveEntitlementsResponseDataAccessDeniedReason rawValue
+    )
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, AccessDeniedReason> value = rawValue;
+        ApiEnum<string, CustomerRetrieveEntitlementsResponseDataAccessDeniedReason> value =
+            rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, AccessDeniedReason>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, CustomerRetrieveEntitlementsResponseDataAccessDeniedReason>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
@@ -576,15 +598,13 @@ public class AccessDeniedReasonTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, AccessDeniedReason>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, CustomerRetrieveEntitlementsResponseDataAccessDeniedReason>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, AccessDeniedReason>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, CustomerRetrieveEntitlementsResponseDataAccessDeniedReason>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
@@ -595,21 +615,21 @@ public class EntitlementTest : TestBase
     [Fact]
     public void FeatureValidationWorks()
     {
-        Entitlement value = new Feature()
+        Entitlement value = new EntitlementFeature()
         {
-            AccessDeniedReason = FeatureAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = EntitlementFeatureAccessDeniedReason.FeatureNotFound,
             IsGranted = true,
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            FeatureValue = new()
+            Feature = new()
             {
                 ID = "id",
                 DisplayName = "displayName",
-                FeatureStatus = FeatureStatus.New,
-                FeatureType = FeatureType.Boolean,
+                FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+                FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
             },
             HasUnlimitedUsage = true,
-            ResetPeriod = ResetPeriod.Year,
+            ResetPeriod = EntitlementFeatureResetPeriod.Year,
             UsageLimit = 0,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -622,9 +642,9 @@ public class EntitlementTest : TestBase
     [Fact]
     public void CreditValidationWorks()
     {
-        Entitlement value = new Credit()
+        Entitlement value = new EntitlementCredit()
         {
-            AccessDeniedReason = CreditAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = EntitlementCreditAccessDeniedReason.FeatureNotFound,
             Currency = new()
             {
                 CurrencyID = "currencyId",
@@ -648,21 +668,21 @@ public class EntitlementTest : TestBase
     [Fact]
     public void FeatureSerializationRoundtripWorks()
     {
-        Entitlement value = new Feature()
+        Entitlement value = new EntitlementFeature()
         {
-            AccessDeniedReason = FeatureAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = EntitlementFeatureAccessDeniedReason.FeatureNotFound,
             IsGranted = true,
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            FeatureValue = new()
+            Feature = new()
             {
                 ID = "id",
                 DisplayName = "displayName",
-                FeatureStatus = FeatureStatus.New,
-                FeatureType = FeatureType.Boolean,
+                FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+                FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
             },
             HasUnlimitedUsage = true,
-            ResetPeriod = ResetPeriod.Year,
+            ResetPeriod = EntitlementFeatureResetPeriod.Year,
             UsageLimit = 0,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -681,9 +701,9 @@ public class EntitlementTest : TestBase
     [Fact]
     public void CreditSerializationRoundtripWorks()
     {
-        Entitlement value = new Credit()
+        Entitlement value = new EntitlementCredit()
         {
-            AccessDeniedReason = CreditAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = EntitlementCreditAccessDeniedReason.FeatureNotFound,
             Currency = new()
             {
                 CurrencyID = "currencyId",
@@ -711,26 +731,26 @@ public class EntitlementTest : TestBase
     }
 }
 
-public class FeatureTest : TestBase
+public class EntitlementFeatureTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Feature
+        var model = new EntitlementFeature
         {
-            AccessDeniedReason = FeatureAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = EntitlementFeatureAccessDeniedReason.FeatureNotFound,
             IsGranted = true,
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            FeatureValue = new()
+            Feature = new()
             {
                 ID = "id",
                 DisplayName = "displayName",
-                FeatureStatus = FeatureStatus.New,
-                FeatureType = FeatureType.Boolean,
+                FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+                FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
             },
             HasUnlimitedUsage = true,
-            ResetPeriod = ResetPeriod.Year,
+            ResetPeriod = EntitlementFeatureResetPeriod.Year,
             UsageLimit = 0,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -738,23 +758,24 @@ public class FeatureTest : TestBase
             ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
-        ApiEnum<string, FeatureAccessDeniedReason> expectedAccessDeniedReason =
-            FeatureAccessDeniedReason.FeatureNotFound;
+        ApiEnum<string, EntitlementFeatureAccessDeniedReason> expectedAccessDeniedReason =
+            EntitlementFeatureAccessDeniedReason.FeatureNotFound;
         bool expectedIsGranted = true;
         JsonElement expectedType = JsonSerializer.SerializeToElement("FEATURE");
         double expectedCurrentUsage = 0;
         DateTimeOffset expectedEntitlementUpdatedAt = DateTimeOffset.Parse(
             "2019-12-27T18:11:19.117Z"
         );
-        FeatureFeature expectedFeatureValue = new()
+        EntitlementFeatureFeature expectedFeature = new()
         {
             ID = "id",
             DisplayName = "displayName",
-            FeatureStatus = FeatureStatus.New,
-            FeatureType = FeatureType.Boolean,
+            FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+            FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
         };
         bool expectedHasUnlimitedUsage = true;
-        ApiEnum<string, ResetPeriod> expectedResetPeriod = ResetPeriod.Year;
+        ApiEnum<string, EntitlementFeatureResetPeriod> expectedResetPeriod =
+            EntitlementFeatureResetPeriod.Year;
         double expectedUsageLimit = 0;
         DateTimeOffset expectedUsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedUsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -766,7 +787,7 @@ public class FeatureTest : TestBase
         Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
         Assert.Equal(expectedCurrentUsage, model.CurrentUsage);
         Assert.Equal(expectedEntitlementUpdatedAt, model.EntitlementUpdatedAt);
-        Assert.Equal(expectedFeatureValue, model.FeatureValue);
+        Assert.Equal(expectedFeature, model.Feature);
         Assert.Equal(expectedHasUnlimitedUsage, model.HasUnlimitedUsage);
         Assert.Equal(expectedResetPeriod, model.ResetPeriod);
         Assert.Equal(expectedUsageLimit, model.UsageLimit);
@@ -779,21 +800,21 @@ public class FeatureTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Feature
+        var model = new EntitlementFeature
         {
-            AccessDeniedReason = FeatureAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = EntitlementFeatureAccessDeniedReason.FeatureNotFound,
             IsGranted = true,
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            FeatureValue = new()
+            Feature = new()
             {
                 ID = "id",
                 DisplayName = "displayName",
-                FeatureStatus = FeatureStatus.New,
-                FeatureType = FeatureType.Boolean,
+                FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+                FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
             },
             HasUnlimitedUsage = true,
-            ResetPeriod = ResetPeriod.Year,
+            ResetPeriod = EntitlementFeatureResetPeriod.Year,
             UsageLimit = 0,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -802,7 +823,10 @@ public class FeatureTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Feature>(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<EntitlementFeature>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -810,21 +834,21 @@ public class FeatureTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Feature
+        var model = new EntitlementFeature
         {
-            AccessDeniedReason = FeatureAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = EntitlementFeatureAccessDeniedReason.FeatureNotFound,
             IsGranted = true,
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            FeatureValue = new()
+            Feature = new()
             {
                 ID = "id",
                 DisplayName = "displayName",
-                FeatureStatus = FeatureStatus.New,
-                FeatureType = FeatureType.Boolean,
+                FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+                FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
             },
             HasUnlimitedUsage = true,
-            ResetPeriod = ResetPeriod.Year,
+            ResetPeriod = EntitlementFeatureResetPeriod.Year,
             UsageLimit = 0,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -833,29 +857,30 @@ public class FeatureTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Feature>(
+        var deserialized = JsonSerializer.Deserialize<EntitlementFeature>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
-        ApiEnum<string, FeatureAccessDeniedReason> expectedAccessDeniedReason =
-            FeatureAccessDeniedReason.FeatureNotFound;
+        ApiEnum<string, EntitlementFeatureAccessDeniedReason> expectedAccessDeniedReason =
+            EntitlementFeatureAccessDeniedReason.FeatureNotFound;
         bool expectedIsGranted = true;
         JsonElement expectedType = JsonSerializer.SerializeToElement("FEATURE");
         double expectedCurrentUsage = 0;
         DateTimeOffset expectedEntitlementUpdatedAt = DateTimeOffset.Parse(
             "2019-12-27T18:11:19.117Z"
         );
-        FeatureFeature expectedFeatureValue = new()
+        EntitlementFeatureFeature expectedFeature = new()
         {
             ID = "id",
             DisplayName = "displayName",
-            FeatureStatus = FeatureStatus.New,
-            FeatureType = FeatureType.Boolean,
+            FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+            FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
         };
         bool expectedHasUnlimitedUsage = true;
-        ApiEnum<string, ResetPeriod> expectedResetPeriod = ResetPeriod.Year;
+        ApiEnum<string, EntitlementFeatureResetPeriod> expectedResetPeriod =
+            EntitlementFeatureResetPeriod.Year;
         double expectedUsageLimit = 0;
         DateTimeOffset expectedUsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedUsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -867,7 +892,7 @@ public class FeatureTest : TestBase
         Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
         Assert.Equal(expectedCurrentUsage, deserialized.CurrentUsage);
         Assert.Equal(expectedEntitlementUpdatedAt, deserialized.EntitlementUpdatedAt);
-        Assert.Equal(expectedFeatureValue, deserialized.FeatureValue);
+        Assert.Equal(expectedFeature, deserialized.Feature);
         Assert.Equal(expectedHasUnlimitedUsage, deserialized.HasUnlimitedUsage);
         Assert.Equal(expectedResetPeriod, deserialized.ResetPeriod);
         Assert.Equal(expectedUsageLimit, deserialized.UsageLimit);
@@ -880,21 +905,21 @@ public class FeatureTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Feature
+        var model = new EntitlementFeature
         {
-            AccessDeniedReason = FeatureAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = EntitlementFeatureAccessDeniedReason.FeatureNotFound,
             IsGranted = true,
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            FeatureValue = new()
+            Feature = new()
             {
                 ID = "id",
                 DisplayName = "displayName",
-                FeatureStatus = FeatureStatus.New,
-                FeatureType = FeatureType.Boolean,
+                FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+                FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
             },
             HasUnlimitedUsage = true,
-            ResetPeriod = ResetPeriod.Year,
+            ResetPeriod = EntitlementFeatureResetPeriod.Year,
             UsageLimit = 0,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -908,11 +933,11 @@ public class FeatureTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Feature
+        var model = new EntitlementFeature
         {
-            AccessDeniedReason = FeatureAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = EntitlementFeatureAccessDeniedReason.FeatureNotFound,
             IsGranted = true,
-            ResetPeriod = ResetPeriod.Year,
+            ResetPeriod = EntitlementFeatureResetPeriod.Year,
             UsageLimit = 0,
         };
 
@@ -920,7 +945,7 @@ public class FeatureTest : TestBase
         Assert.False(model.RawData.ContainsKey("currentUsage"));
         Assert.Null(model.EntitlementUpdatedAt);
         Assert.False(model.RawData.ContainsKey("entitlementUpdatedAt"));
-        Assert.Null(model.FeatureValue);
+        Assert.Null(model.Feature);
         Assert.False(model.RawData.ContainsKey("feature"));
         Assert.Null(model.HasUnlimitedUsage);
         Assert.False(model.RawData.ContainsKey("hasUnlimitedUsage"));
@@ -937,11 +962,11 @@ public class FeatureTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Feature
+        var model = new EntitlementFeature
         {
-            AccessDeniedReason = FeatureAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = EntitlementFeatureAccessDeniedReason.FeatureNotFound,
             IsGranted = true,
-            ResetPeriod = ResetPeriod.Year,
+            ResetPeriod = EntitlementFeatureResetPeriod.Year,
             UsageLimit = 0,
         };
 
@@ -951,17 +976,17 @@ public class FeatureTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new Feature
+        var model = new EntitlementFeature
         {
-            AccessDeniedReason = FeatureAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = EntitlementFeatureAccessDeniedReason.FeatureNotFound,
             IsGranted = true,
-            ResetPeriod = ResetPeriod.Year,
+            ResetPeriod = EntitlementFeatureResetPeriod.Year,
             UsageLimit = 0,
 
             // Null should be interpreted as omitted for these properties
             CurrentUsage = null,
             EntitlementUpdatedAt = null,
-            FeatureValue = null,
+            Feature = null,
             HasUnlimitedUsage = null,
             UsagePeriodAnchor = null,
             UsagePeriodEnd = null,
@@ -973,7 +998,7 @@ public class FeatureTest : TestBase
         Assert.False(model.RawData.ContainsKey("currentUsage"));
         Assert.Null(model.EntitlementUpdatedAt);
         Assert.False(model.RawData.ContainsKey("entitlementUpdatedAt"));
-        Assert.Null(model.FeatureValue);
+        Assert.Null(model.Feature);
         Assert.False(model.RawData.ContainsKey("feature"));
         Assert.Null(model.HasUnlimitedUsage);
         Assert.False(model.RawData.ContainsKey("hasUnlimitedUsage"));
@@ -990,17 +1015,17 @@ public class FeatureTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Feature
+        var model = new EntitlementFeature
         {
-            AccessDeniedReason = FeatureAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = EntitlementFeatureAccessDeniedReason.FeatureNotFound,
             IsGranted = true,
-            ResetPeriod = ResetPeriod.Year,
+            ResetPeriod = EntitlementFeatureResetPeriod.Year,
             UsageLimit = 0,
 
             // Null should be interpreted as omitted for these properties
             CurrentUsage = null,
             EntitlementUpdatedAt = null,
-            FeatureValue = null,
+            Feature = null,
             HasUnlimitedUsage = null,
             UsagePeriodAnchor = null,
             UsagePeriodEnd = null,
@@ -1014,18 +1039,18 @@ public class FeatureTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Feature
+        var model = new EntitlementFeature
         {
-            AccessDeniedReason = FeatureAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = EntitlementFeatureAccessDeniedReason.FeatureNotFound,
             IsGranted = true,
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            FeatureValue = new()
+            Feature = new()
             {
                 ID = "id",
                 DisplayName = "displayName",
-                FeatureStatus = FeatureStatus.New,
-                FeatureType = FeatureType.Boolean,
+                FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+                FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
             },
             HasUnlimitedUsage = true,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1043,18 +1068,18 @@ public class FeatureTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Feature
+        var model = new EntitlementFeature
         {
-            AccessDeniedReason = FeatureAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = EntitlementFeatureAccessDeniedReason.FeatureNotFound,
             IsGranted = true,
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            FeatureValue = new()
+            Feature = new()
             {
                 ID = "id",
                 DisplayName = "displayName",
-                FeatureStatus = FeatureStatus.New,
-                FeatureType = FeatureType.Boolean,
+                FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+                FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
             },
             HasUnlimitedUsage = true,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1069,18 +1094,18 @@ public class FeatureTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new Feature
+        var model = new EntitlementFeature
         {
-            AccessDeniedReason = FeatureAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = EntitlementFeatureAccessDeniedReason.FeatureNotFound,
             IsGranted = true,
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            FeatureValue = new()
+            Feature = new()
             {
                 ID = "id",
                 DisplayName = "displayName",
-                FeatureStatus = FeatureStatus.New,
-                FeatureType = FeatureType.Boolean,
+                FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+                FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
             },
             HasUnlimitedUsage = true,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1101,18 +1126,18 @@ public class FeatureTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Feature
+        var model = new EntitlementFeature
         {
-            AccessDeniedReason = FeatureAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = EntitlementFeatureAccessDeniedReason.FeatureNotFound,
             IsGranted = true,
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            FeatureValue = new()
+            Feature = new()
             {
                 ID = "id",
                 DisplayName = "displayName",
-                FeatureStatus = FeatureStatus.New,
-                FeatureType = FeatureType.Boolean,
+                FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+                FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
             },
             HasUnlimitedUsage = true,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1130,21 +1155,21 @@ public class FeatureTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Feature
+        var model = new EntitlementFeature
         {
-            AccessDeniedReason = FeatureAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = EntitlementFeatureAccessDeniedReason.FeatureNotFound,
             IsGranted = true,
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            FeatureValue = new()
+            Feature = new()
             {
                 ID = "id",
                 DisplayName = "displayName",
-                FeatureStatus = FeatureStatus.New,
-                FeatureType = FeatureType.Boolean,
+                FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+                FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
             },
             HasUnlimitedUsage = true,
-            ResetPeriod = ResetPeriod.Year,
+            ResetPeriod = EntitlementFeatureResetPeriod.Year,
             UsageLimit = 0,
             UsagePeriodAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1152,73 +1177,71 @@ public class FeatureTest : TestBase
             ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
-        Feature copied = new(model);
+        EntitlementFeature copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class FeatureAccessDeniedReasonTest : TestBase
+public class EntitlementFeatureAccessDeniedReasonTest : TestBase
 {
     [Theory]
-    [InlineData(FeatureAccessDeniedReason.FeatureNotFound)]
-    [InlineData(FeatureAccessDeniedReason.CustomerNotFound)]
-    [InlineData(FeatureAccessDeniedReason.CustomerIsArchived)]
-    [InlineData(FeatureAccessDeniedReason.CustomerResourceNotFound)]
-    [InlineData(FeatureAccessDeniedReason.NoActiveSubscription)]
-    [InlineData(FeatureAccessDeniedReason.NoFeatureEntitlementInSubscription)]
-    [InlineData(FeatureAccessDeniedReason.RequestedUsageExceedingLimit)]
-    [InlineData(FeatureAccessDeniedReason.RequestedValuesMismatch)]
-    [InlineData(FeatureAccessDeniedReason.BudgetExceeded)]
-    [InlineData(FeatureAccessDeniedReason.Unknown)]
-    [InlineData(FeatureAccessDeniedReason.FeatureTypeMismatch)]
-    [InlineData(FeatureAccessDeniedReason.Revoked)]
-    [InlineData(FeatureAccessDeniedReason.InsufficientCredits)]
-    [InlineData(FeatureAccessDeniedReason.EntitlementNotFound)]
-    public void Validation_Works(FeatureAccessDeniedReason rawValue)
+    [InlineData(EntitlementFeatureAccessDeniedReason.FeatureNotFound)]
+    [InlineData(EntitlementFeatureAccessDeniedReason.CustomerNotFound)]
+    [InlineData(EntitlementFeatureAccessDeniedReason.CustomerIsArchived)]
+    [InlineData(EntitlementFeatureAccessDeniedReason.CustomerResourceNotFound)]
+    [InlineData(EntitlementFeatureAccessDeniedReason.NoActiveSubscription)]
+    [InlineData(EntitlementFeatureAccessDeniedReason.NoFeatureEntitlementInSubscription)]
+    [InlineData(EntitlementFeatureAccessDeniedReason.RequestedUsageExceedingLimit)]
+    [InlineData(EntitlementFeatureAccessDeniedReason.RequestedValuesMismatch)]
+    [InlineData(EntitlementFeatureAccessDeniedReason.BudgetExceeded)]
+    [InlineData(EntitlementFeatureAccessDeniedReason.Unknown)]
+    [InlineData(EntitlementFeatureAccessDeniedReason.FeatureTypeMismatch)]
+    [InlineData(EntitlementFeatureAccessDeniedReason.Revoked)]
+    [InlineData(EntitlementFeatureAccessDeniedReason.InsufficientCredits)]
+    [InlineData(EntitlementFeatureAccessDeniedReason.EntitlementNotFound)]
+    public void Validation_Works(EntitlementFeatureAccessDeniedReason rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, FeatureAccessDeniedReason> value = rawValue;
+        ApiEnum<string, EntitlementFeatureAccessDeniedReason> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, FeatureAccessDeniedReason>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementFeatureAccessDeniedReason>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
         Assert.Throws<StiggInvalidDataException>(() => value.Validate());
     }
 
     [Theory]
-    [InlineData(FeatureAccessDeniedReason.FeatureNotFound)]
-    [InlineData(FeatureAccessDeniedReason.CustomerNotFound)]
-    [InlineData(FeatureAccessDeniedReason.CustomerIsArchived)]
-    [InlineData(FeatureAccessDeniedReason.CustomerResourceNotFound)]
-    [InlineData(FeatureAccessDeniedReason.NoActiveSubscription)]
-    [InlineData(FeatureAccessDeniedReason.NoFeatureEntitlementInSubscription)]
-    [InlineData(FeatureAccessDeniedReason.RequestedUsageExceedingLimit)]
-    [InlineData(FeatureAccessDeniedReason.RequestedValuesMismatch)]
-    [InlineData(FeatureAccessDeniedReason.BudgetExceeded)]
-    [InlineData(FeatureAccessDeniedReason.Unknown)]
-    [InlineData(FeatureAccessDeniedReason.FeatureTypeMismatch)]
-    [InlineData(FeatureAccessDeniedReason.Revoked)]
-    [InlineData(FeatureAccessDeniedReason.InsufficientCredits)]
-    [InlineData(FeatureAccessDeniedReason.EntitlementNotFound)]
-    public void SerializationRoundtrip_Works(FeatureAccessDeniedReason rawValue)
+    [InlineData(EntitlementFeatureAccessDeniedReason.FeatureNotFound)]
+    [InlineData(EntitlementFeatureAccessDeniedReason.CustomerNotFound)]
+    [InlineData(EntitlementFeatureAccessDeniedReason.CustomerIsArchived)]
+    [InlineData(EntitlementFeatureAccessDeniedReason.CustomerResourceNotFound)]
+    [InlineData(EntitlementFeatureAccessDeniedReason.NoActiveSubscription)]
+    [InlineData(EntitlementFeatureAccessDeniedReason.NoFeatureEntitlementInSubscription)]
+    [InlineData(EntitlementFeatureAccessDeniedReason.RequestedUsageExceedingLimit)]
+    [InlineData(EntitlementFeatureAccessDeniedReason.RequestedValuesMismatch)]
+    [InlineData(EntitlementFeatureAccessDeniedReason.BudgetExceeded)]
+    [InlineData(EntitlementFeatureAccessDeniedReason.Unknown)]
+    [InlineData(EntitlementFeatureAccessDeniedReason.FeatureTypeMismatch)]
+    [InlineData(EntitlementFeatureAccessDeniedReason.Revoked)]
+    [InlineData(EntitlementFeatureAccessDeniedReason.InsufficientCredits)]
+    [InlineData(EntitlementFeatureAccessDeniedReason.EntitlementNotFound)]
+    public void SerializationRoundtrip_Works(EntitlementFeatureAccessDeniedReason rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, FeatureAccessDeniedReason> value = rawValue;
+        ApiEnum<string, EntitlementFeatureAccessDeniedReason> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, FeatureAccessDeniedReason>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementFeatureAccessDeniedReason>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
@@ -1226,37 +1249,37 @@ public class FeatureAccessDeniedReasonTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, FeatureAccessDeniedReason>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementFeatureAccessDeniedReason>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, FeatureAccessDeniedReason>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementFeatureAccessDeniedReason>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
 }
 
-public class FeatureFeatureTest : TestBase
+public class EntitlementFeatureFeatureTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new FeatureFeature
+        var model = new EntitlementFeatureFeature
         {
             ID = "id",
             DisplayName = "displayName",
-            FeatureStatus = FeatureStatus.New,
-            FeatureType = FeatureType.Boolean,
+            FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+            FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
         };
 
         string expectedID = "id";
         string expectedDisplayName = "displayName";
-        ApiEnum<string, FeatureStatus> expectedFeatureStatus = FeatureStatus.New;
-        ApiEnum<string, FeatureType> expectedFeatureType = FeatureType.Boolean;
+        ApiEnum<string, EntitlementFeatureFeatureFeatureStatus> expectedFeatureStatus =
+            EntitlementFeatureFeatureFeatureStatus.New;
+        ApiEnum<string, EntitlementFeatureFeatureFeatureType> expectedFeatureType =
+            EntitlementFeatureFeatureFeatureType.Boolean;
 
         Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedDisplayName, model.DisplayName);
@@ -1267,16 +1290,16 @@ public class FeatureFeatureTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new FeatureFeature
+        var model = new EntitlementFeatureFeature
         {
             ID = "id",
             DisplayName = "displayName",
-            FeatureStatus = FeatureStatus.New,
-            FeatureType = FeatureType.Boolean,
+            FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+            FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<FeatureFeature>(
+        var deserialized = JsonSerializer.Deserialize<EntitlementFeatureFeature>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1287,16 +1310,16 @@ public class FeatureFeatureTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new FeatureFeature
+        var model = new EntitlementFeatureFeature
         {
             ID = "id",
             DisplayName = "displayName",
-            FeatureStatus = FeatureStatus.New,
-            FeatureType = FeatureType.Boolean,
+            FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+            FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<FeatureFeature>(
+        var deserialized = JsonSerializer.Deserialize<EntitlementFeatureFeature>(
             element,
             ModelBase.SerializerOptions
         );
@@ -1304,8 +1327,10 @@ public class FeatureFeatureTest : TestBase
 
         string expectedID = "id";
         string expectedDisplayName = "displayName";
-        ApiEnum<string, FeatureStatus> expectedFeatureStatus = FeatureStatus.New;
-        ApiEnum<string, FeatureType> expectedFeatureType = FeatureType.Boolean;
+        ApiEnum<string, EntitlementFeatureFeatureFeatureStatus> expectedFeatureStatus =
+            EntitlementFeatureFeatureFeatureStatus.New;
+        ApiEnum<string, EntitlementFeatureFeatureFeatureType> expectedFeatureType =
+            EntitlementFeatureFeatureFeatureType.Boolean;
 
         Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedDisplayName, deserialized.DisplayName);
@@ -1316,12 +1341,12 @@ public class FeatureFeatureTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new FeatureFeature
+        var model = new EntitlementFeatureFeature
         {
             ID = "id",
             DisplayName = "displayName",
-            FeatureStatus = FeatureStatus.New,
-            FeatureType = FeatureType.Boolean,
+            FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+            FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
         };
 
         model.Validate();
@@ -1330,37 +1355,151 @@ public class FeatureFeatureTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new FeatureFeature
+        var model = new EntitlementFeatureFeature
         {
             ID = "id",
             DisplayName = "displayName",
-            FeatureStatus = FeatureStatus.New,
-            FeatureType = FeatureType.Boolean,
+            FeatureStatus = EntitlementFeatureFeatureFeatureStatus.New,
+            FeatureType = EntitlementFeatureFeatureFeatureType.Boolean,
         };
 
-        FeatureFeature copied = new(model);
+        EntitlementFeatureFeature copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class FeatureStatusTest : TestBase
+public class EntitlementFeatureFeatureFeatureStatusTest : TestBase
 {
     [Theory]
-    [InlineData(FeatureStatus.New)]
-    [InlineData(FeatureStatus.Suspended)]
-    [InlineData(FeatureStatus.Active)]
-    public void Validation_Works(FeatureStatus rawValue)
+    [InlineData(EntitlementFeatureFeatureFeatureStatus.New)]
+    [InlineData(EntitlementFeatureFeatureFeatureStatus.Suspended)]
+    [InlineData(EntitlementFeatureFeatureFeatureStatus.Active)]
+    public void Validation_Works(EntitlementFeatureFeatureFeatureStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, FeatureStatus> value = rawValue;
+        ApiEnum<string, EntitlementFeatureFeatureFeatureStatus> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, FeatureStatus>>(
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementFeatureFeatureFeatureStatus>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(EntitlementFeatureFeatureFeatureStatus.New)]
+    [InlineData(EntitlementFeatureFeatureFeatureStatus.Suspended)]
+    [InlineData(EntitlementFeatureFeatureFeatureStatus.Active)]
+    public void SerializationRoundtrip_Works(EntitlementFeatureFeatureFeatureStatus rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, EntitlementFeatureFeatureFeatureStatus> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementFeatureFeatureFeatureStatus>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementFeatureFeatureFeatureStatus>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementFeatureFeatureFeatureStatus>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class EntitlementFeatureFeatureFeatureTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(EntitlementFeatureFeatureFeatureType.Boolean)]
+    [InlineData(EntitlementFeatureFeatureFeatureType.Number)]
+    [InlineData(EntitlementFeatureFeatureFeatureType.Enum)]
+    public void Validation_Works(EntitlementFeatureFeatureFeatureType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, EntitlementFeatureFeatureFeatureType> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementFeatureFeatureFeatureType>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(EntitlementFeatureFeatureFeatureType.Boolean)]
+    [InlineData(EntitlementFeatureFeatureFeatureType.Number)]
+    [InlineData(EntitlementFeatureFeatureFeatureType.Enum)]
+    public void SerializationRoundtrip_Works(EntitlementFeatureFeatureFeatureType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, EntitlementFeatureFeatureFeatureType> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementFeatureFeatureFeatureType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementFeatureFeatureFeatureType>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementFeatureFeatureFeatureType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class EntitlementFeatureResetPeriodTest : TestBase
+{
+    [Theory]
+    [InlineData(EntitlementFeatureResetPeriod.Year)]
+    [InlineData(EntitlementFeatureResetPeriod.Month)]
+    [InlineData(EntitlementFeatureResetPeriod.Week)]
+    [InlineData(EntitlementFeatureResetPeriod.Day)]
+    [InlineData(EntitlementFeatureResetPeriod.Hour)]
+    public void Validation_Works(EntitlementFeatureResetPeriod rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, EntitlementFeatureResetPeriod> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, EntitlementFeatureResetPeriod>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -1370,19 +1509,20 @@ public class FeatureStatusTest : TestBase
     }
 
     [Theory]
-    [InlineData(FeatureStatus.New)]
-    [InlineData(FeatureStatus.Suspended)]
-    [InlineData(FeatureStatus.Active)]
-    public void SerializationRoundtrip_Works(FeatureStatus rawValue)
+    [InlineData(EntitlementFeatureResetPeriod.Year)]
+    [InlineData(EntitlementFeatureResetPeriod.Month)]
+    [InlineData(EntitlementFeatureResetPeriod.Week)]
+    [InlineData(EntitlementFeatureResetPeriod.Day)]
+    [InlineData(EntitlementFeatureResetPeriod.Hour)]
+    public void SerializationRoundtrip_Works(EntitlementFeatureResetPeriod rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, FeatureStatus> value = rawValue;
+        ApiEnum<string, EntitlementFeatureResetPeriod> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, FeatureStatus>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementFeatureResetPeriod>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
@@ -1390,152 +1530,27 @@ public class FeatureStatusTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, FeatureStatus>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, EntitlementFeatureResetPeriod>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, FeatureStatus>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementFeatureResetPeriod>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
 }
 
-public class FeatureTypeTest : TestBase
-{
-    [Theory]
-    [InlineData(FeatureType.Boolean)]
-    [InlineData(FeatureType.Number)]
-    [InlineData(FeatureType.Enum)]
-    public void Validation_Works(FeatureType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, FeatureType> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, FeatureType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(FeatureType.Boolean)]
-    [InlineData(FeatureType.Number)]
-    [InlineData(FeatureType.Enum)]
-    public void SerializationRoundtrip_Works(FeatureType rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, FeatureType> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, FeatureType>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, FeatureType>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, FeatureType>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-}
-
-public class ResetPeriodTest : TestBase
-{
-    [Theory]
-    [InlineData(ResetPeriod.Year)]
-    [InlineData(ResetPeriod.Month)]
-    [InlineData(ResetPeriod.Week)]
-    [InlineData(ResetPeriod.Day)]
-    [InlineData(ResetPeriod.Hour)]
-    public void Validation_Works(ResetPeriod rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, ResetPeriod> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, ResetPeriod>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(ResetPeriod.Year)]
-    [InlineData(ResetPeriod.Month)]
-    [InlineData(ResetPeriod.Week)]
-    [InlineData(ResetPeriod.Day)]
-    [InlineData(ResetPeriod.Hour)]
-    public void SerializationRoundtrip_Works(ResetPeriod rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, ResetPeriod> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, ResetPeriod>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, ResetPeriod>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, ResetPeriod>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-}
-
-public class CreditTest : TestBase
+public class EntitlementCreditTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Credit
+        var model = new EntitlementCredit
         {
-            AccessDeniedReason = CreditAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = EntitlementCreditAccessDeniedReason.FeatureNotFound,
             Currency = new()
             {
                 CurrencyID = "currencyId",
@@ -1554,9 +1569,9 @@ public class CreditTest : TestBase
             ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
-        ApiEnum<string, CreditAccessDeniedReason> expectedAccessDeniedReason =
-            CreditAccessDeniedReason.FeatureNotFound;
-        CreditCurrency expectedCurrency = new()
+        ApiEnum<string, EntitlementCreditAccessDeniedReason> expectedAccessDeniedReason =
+            EntitlementCreditAccessDeniedReason.FeatureNotFound;
+        EntitlementCreditCurrency expectedCurrency = new()
         {
             CurrencyID = "currencyId",
             DisplayName = "displayName",
@@ -1591,9 +1606,9 @@ public class CreditTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Credit
+        var model = new EntitlementCredit
         {
-            AccessDeniedReason = CreditAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = EntitlementCreditAccessDeniedReason.FeatureNotFound,
             Currency = new()
             {
                 CurrencyID = "currencyId",
@@ -1613,7 +1628,10 @@ public class CreditTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Credit>(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<EntitlementCredit>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -1621,9 +1639,9 @@ public class CreditTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Credit
+        var model = new EntitlementCredit
         {
-            AccessDeniedReason = CreditAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = EntitlementCreditAccessDeniedReason.FeatureNotFound,
             Currency = new()
             {
                 CurrencyID = "currencyId",
@@ -1643,12 +1661,15 @@ public class CreditTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Credit>(element, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<EntitlementCredit>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
-        ApiEnum<string, CreditAccessDeniedReason> expectedAccessDeniedReason =
-            CreditAccessDeniedReason.FeatureNotFound;
-        CreditCurrency expectedCurrency = new()
+        ApiEnum<string, EntitlementCreditAccessDeniedReason> expectedAccessDeniedReason =
+            EntitlementCreditAccessDeniedReason.FeatureNotFound;
+        EntitlementCreditCurrency expectedCurrency = new()
         {
             CurrencyID = "currencyId",
             DisplayName = "displayName",
@@ -1683,9 +1704,9 @@ public class CreditTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Credit
+        var model = new EntitlementCredit
         {
-            AccessDeniedReason = CreditAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = EntitlementCreditAccessDeniedReason.FeatureNotFound,
             Currency = new()
             {
                 CurrencyID = "currencyId",
@@ -1710,9 +1731,9 @@ public class CreditTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Credit
+        var model = new EntitlementCredit
         {
-            AccessDeniedReason = CreditAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = EntitlementCreditAccessDeniedReason.FeatureNotFound,
             Currency = new()
             {
                 CurrencyID = "currencyId",
@@ -1739,9 +1760,9 @@ public class CreditTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Credit
+        var model = new EntitlementCredit
         {
-            AccessDeniedReason = CreditAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = EntitlementCreditAccessDeniedReason.FeatureNotFound,
             Currency = new()
             {
                 CurrencyID = "currencyId",
@@ -1763,9 +1784,9 @@ public class CreditTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new Credit
+        var model = new EntitlementCredit
         {
-            AccessDeniedReason = CreditAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = EntitlementCreditAccessDeniedReason.FeatureNotFound,
             Currency = new()
             {
                 CurrencyID = "currencyId",
@@ -1797,9 +1818,9 @@ public class CreditTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Credit
+        var model = new EntitlementCredit
         {
-            AccessDeniedReason = CreditAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = EntitlementCreditAccessDeniedReason.FeatureNotFound,
             Currency = new()
             {
                 CurrencyID = "currencyId",
@@ -1826,9 +1847,9 @@ public class CreditTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Credit
+        var model = new EntitlementCredit
         {
-            AccessDeniedReason = CreditAccessDeniedReason.FeatureNotFound,
+            AccessDeniedReason = EntitlementCreditAccessDeniedReason.FeatureNotFound,
             Currency = new()
             {
                 CurrencyID = "currencyId",
@@ -1847,73 +1868,71 @@ public class CreditTest : TestBase
             ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
-        Credit copied = new(model);
+        EntitlementCredit copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class CreditAccessDeniedReasonTest : TestBase
+public class EntitlementCreditAccessDeniedReasonTest : TestBase
 {
     [Theory]
-    [InlineData(CreditAccessDeniedReason.FeatureNotFound)]
-    [InlineData(CreditAccessDeniedReason.CustomerNotFound)]
-    [InlineData(CreditAccessDeniedReason.CustomerIsArchived)]
-    [InlineData(CreditAccessDeniedReason.CustomerResourceNotFound)]
-    [InlineData(CreditAccessDeniedReason.NoActiveSubscription)]
-    [InlineData(CreditAccessDeniedReason.NoFeatureEntitlementInSubscription)]
-    [InlineData(CreditAccessDeniedReason.RequestedUsageExceedingLimit)]
-    [InlineData(CreditAccessDeniedReason.RequestedValuesMismatch)]
-    [InlineData(CreditAccessDeniedReason.BudgetExceeded)]
-    [InlineData(CreditAccessDeniedReason.Unknown)]
-    [InlineData(CreditAccessDeniedReason.FeatureTypeMismatch)]
-    [InlineData(CreditAccessDeniedReason.Revoked)]
-    [InlineData(CreditAccessDeniedReason.InsufficientCredits)]
-    [InlineData(CreditAccessDeniedReason.EntitlementNotFound)]
-    public void Validation_Works(CreditAccessDeniedReason rawValue)
+    [InlineData(EntitlementCreditAccessDeniedReason.FeatureNotFound)]
+    [InlineData(EntitlementCreditAccessDeniedReason.CustomerNotFound)]
+    [InlineData(EntitlementCreditAccessDeniedReason.CustomerIsArchived)]
+    [InlineData(EntitlementCreditAccessDeniedReason.CustomerResourceNotFound)]
+    [InlineData(EntitlementCreditAccessDeniedReason.NoActiveSubscription)]
+    [InlineData(EntitlementCreditAccessDeniedReason.NoFeatureEntitlementInSubscription)]
+    [InlineData(EntitlementCreditAccessDeniedReason.RequestedUsageExceedingLimit)]
+    [InlineData(EntitlementCreditAccessDeniedReason.RequestedValuesMismatch)]
+    [InlineData(EntitlementCreditAccessDeniedReason.BudgetExceeded)]
+    [InlineData(EntitlementCreditAccessDeniedReason.Unknown)]
+    [InlineData(EntitlementCreditAccessDeniedReason.FeatureTypeMismatch)]
+    [InlineData(EntitlementCreditAccessDeniedReason.Revoked)]
+    [InlineData(EntitlementCreditAccessDeniedReason.InsufficientCredits)]
+    [InlineData(EntitlementCreditAccessDeniedReason.EntitlementNotFound)]
+    public void Validation_Works(EntitlementCreditAccessDeniedReason rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, CreditAccessDeniedReason> value = rawValue;
+        ApiEnum<string, EntitlementCreditAccessDeniedReason> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, CreditAccessDeniedReason>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementCreditAccessDeniedReason>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
         Assert.Throws<StiggInvalidDataException>(() => value.Validate());
     }
 
     [Theory]
-    [InlineData(CreditAccessDeniedReason.FeatureNotFound)]
-    [InlineData(CreditAccessDeniedReason.CustomerNotFound)]
-    [InlineData(CreditAccessDeniedReason.CustomerIsArchived)]
-    [InlineData(CreditAccessDeniedReason.CustomerResourceNotFound)]
-    [InlineData(CreditAccessDeniedReason.NoActiveSubscription)]
-    [InlineData(CreditAccessDeniedReason.NoFeatureEntitlementInSubscription)]
-    [InlineData(CreditAccessDeniedReason.RequestedUsageExceedingLimit)]
-    [InlineData(CreditAccessDeniedReason.RequestedValuesMismatch)]
-    [InlineData(CreditAccessDeniedReason.BudgetExceeded)]
-    [InlineData(CreditAccessDeniedReason.Unknown)]
-    [InlineData(CreditAccessDeniedReason.FeatureTypeMismatch)]
-    [InlineData(CreditAccessDeniedReason.Revoked)]
-    [InlineData(CreditAccessDeniedReason.InsufficientCredits)]
-    [InlineData(CreditAccessDeniedReason.EntitlementNotFound)]
-    public void SerializationRoundtrip_Works(CreditAccessDeniedReason rawValue)
+    [InlineData(EntitlementCreditAccessDeniedReason.FeatureNotFound)]
+    [InlineData(EntitlementCreditAccessDeniedReason.CustomerNotFound)]
+    [InlineData(EntitlementCreditAccessDeniedReason.CustomerIsArchived)]
+    [InlineData(EntitlementCreditAccessDeniedReason.CustomerResourceNotFound)]
+    [InlineData(EntitlementCreditAccessDeniedReason.NoActiveSubscription)]
+    [InlineData(EntitlementCreditAccessDeniedReason.NoFeatureEntitlementInSubscription)]
+    [InlineData(EntitlementCreditAccessDeniedReason.RequestedUsageExceedingLimit)]
+    [InlineData(EntitlementCreditAccessDeniedReason.RequestedValuesMismatch)]
+    [InlineData(EntitlementCreditAccessDeniedReason.BudgetExceeded)]
+    [InlineData(EntitlementCreditAccessDeniedReason.Unknown)]
+    [InlineData(EntitlementCreditAccessDeniedReason.FeatureTypeMismatch)]
+    [InlineData(EntitlementCreditAccessDeniedReason.Revoked)]
+    [InlineData(EntitlementCreditAccessDeniedReason.InsufficientCredits)]
+    [InlineData(EntitlementCreditAccessDeniedReason.EntitlementNotFound)]
+    public void SerializationRoundtrip_Works(EntitlementCreditAccessDeniedReason rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, CreditAccessDeniedReason> value = rawValue;
+        ApiEnum<string, EntitlementCreditAccessDeniedReason> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, CreditAccessDeniedReason>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementCreditAccessDeniedReason>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
@@ -1921,26 +1940,24 @@ public class CreditAccessDeniedReasonTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, CreditAccessDeniedReason>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementCreditAccessDeniedReason>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, CreditAccessDeniedReason>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, EntitlementCreditAccessDeniedReason>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
 }
 
-public class CreditCurrencyTest : TestBase
+public class EntitlementCreditCurrencyTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new CreditCurrency
+        var model = new EntitlementCreditCurrency
         {
             CurrencyID = "currencyId",
             DisplayName = "displayName",
@@ -1975,7 +1992,7 @@ public class CreditCurrencyTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new CreditCurrency
+        var model = new EntitlementCreditCurrency
         {
             CurrencyID = "currencyId",
             DisplayName = "displayName",
@@ -1986,7 +2003,7 @@ public class CreditCurrencyTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<CreditCurrency>(
+        var deserialized = JsonSerializer.Deserialize<EntitlementCreditCurrency>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1997,7 +2014,7 @@ public class CreditCurrencyTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new CreditCurrency
+        var model = new EntitlementCreditCurrency
         {
             CurrencyID = "currencyId",
             DisplayName = "displayName",
@@ -2008,7 +2025,7 @@ public class CreditCurrencyTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<CreditCurrency>(
+        var deserialized = JsonSerializer.Deserialize<EntitlementCreditCurrency>(
             element,
             ModelBase.SerializerOptions
         );
@@ -2039,7 +2056,7 @@ public class CreditCurrencyTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new CreditCurrency
+        var model = new EntitlementCreditCurrency
         {
             CurrencyID = "currencyId",
             DisplayName = "displayName",
@@ -2055,7 +2072,11 @@ public class CreditCurrencyTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new CreditCurrency { CurrencyID = "currencyId", DisplayName = "displayName" };
+        var model = new EntitlementCreditCurrency
+        {
+            CurrencyID = "currencyId",
+            DisplayName = "displayName",
+        };
 
         Assert.Null(model.Description);
         Assert.False(model.RawData.ContainsKey("description"));
@@ -2070,7 +2091,11 @@ public class CreditCurrencyTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new CreditCurrency { CurrencyID = "currencyId", DisplayName = "displayName" };
+        var model = new EntitlementCreditCurrency
+        {
+            CurrencyID = "currencyId",
+            DisplayName = "displayName",
+        };
 
         model.Validate();
     }
@@ -2078,7 +2103,7 @@ public class CreditCurrencyTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
     {
-        var model = new CreditCurrency
+        var model = new EntitlementCreditCurrency
         {
             CurrencyID = "currencyId",
             DisplayName = "displayName",
@@ -2102,7 +2127,7 @@ public class CreditCurrencyTest : TestBase
     [Fact]
     public void OptionalNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new CreditCurrency
+        var model = new EntitlementCreditCurrency
         {
             CurrencyID = "currencyId",
             DisplayName = "displayName",
@@ -2119,7 +2144,7 @@ public class CreditCurrencyTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new CreditCurrency
+        var model = new EntitlementCreditCurrency
         {
             CurrencyID = "currencyId",
             DisplayName = "displayName",
@@ -2129,7 +2154,7 @@ public class CreditCurrencyTest : TestBase
             UnitSingular = "unitSingular",
         };
 
-        CreditCurrency copied = new(model);
+        EntitlementCreditCurrency copied = new(model);
 
         Assert.Equal(model, copied);
     }

@@ -1,6 +1,5 @@
 using System.Collections.Frozen;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -15,21 +14,18 @@ namespace Stigg.Client.Models.V1.Customers;
 /// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
-        CustomerRetrieveEntitlementsResponse,
-        CustomerRetrieveEntitlementsResponseFromRaw
+        CustomerCheckEntitlementResponse,
+        CustomerCheckEntitlementResponseFromRaw
     >)
 )]
-public sealed record class CustomerRetrieveEntitlementsResponse : JsonModel
+public sealed record class CustomerCheckEntitlementResponse : JsonModel
 {
-    /// <summary>
-    /// The effective entitlements state for a customer or resource.
-    /// </summary>
-    public required CustomerRetrieveEntitlementsResponseData Data
+    public required CustomerCheckEntitlementResponseData Data
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<CustomerRetrieveEntitlementsResponseData>("data");
+            return this._rawData.GetNotNullClass<CustomerCheckEntitlementResponseData>("data");
         }
         init { this._rawData.Set("data", value); }
     }
@@ -40,31 +36,31 @@ public sealed record class CustomerRetrieveEntitlementsResponse : JsonModel
         this.Data.Validate();
     }
 
-    public CustomerRetrieveEntitlementsResponse() { }
+    public CustomerCheckEntitlementResponse() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public CustomerRetrieveEntitlementsResponse(
-        CustomerRetrieveEntitlementsResponse customerRetrieveEntitlementsResponse
+    public CustomerCheckEntitlementResponse(
+        CustomerCheckEntitlementResponse customerCheckEntitlementResponse
     )
-        : base(customerRetrieveEntitlementsResponse) { }
+        : base(customerCheckEntitlementResponse) { }
 #pragma warning restore CS8618
 
-    public CustomerRetrieveEntitlementsResponse(IReadOnlyDictionary<string, JsonElement> rawData)
+    public CustomerCheckEntitlementResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    CustomerRetrieveEntitlementsResponse(FrozenDictionary<string, JsonElement> rawData)
+    CustomerCheckEntitlementResponse(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="CustomerRetrieveEntitlementsResponseFromRaw.FromRawUnchecked"/>
-    public static CustomerRetrieveEntitlementsResponse FromRawUnchecked(
+    /// <inheritdoc cref="CustomerCheckEntitlementResponseFromRaw.FromRawUnchecked"/>
+    public static CustomerCheckEntitlementResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -72,182 +68,23 @@ public sealed record class CustomerRetrieveEntitlementsResponse : JsonModel
     }
 
     [SetsRequiredMembers]
-    public CustomerRetrieveEntitlementsResponse(CustomerRetrieveEntitlementsResponseData data)
+    public CustomerCheckEntitlementResponse(CustomerCheckEntitlementResponseData data)
         : this()
     {
         this.Data = data;
     }
 }
 
-class CustomerRetrieveEntitlementsResponseFromRaw
-    : IFromRawJson<CustomerRetrieveEntitlementsResponse>
+class CustomerCheckEntitlementResponseFromRaw : IFromRawJson<CustomerCheckEntitlementResponse>
 {
     /// <inheritdoc/>
-    public CustomerRetrieveEntitlementsResponse FromRawUnchecked(
+    public CustomerCheckEntitlementResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => CustomerRetrieveEntitlementsResponse.FromRawUnchecked(rawData);
+    ) => CustomerCheckEntitlementResponse.FromRawUnchecked(rawData);
 }
 
-/// <summary>
-/// The effective entitlements state for a customer or resource.
-/// </summary>
-[JsonConverter(
-    typeof(JsonModelConverter<
-        CustomerRetrieveEntitlementsResponseData,
-        CustomerRetrieveEntitlementsResponseDataFromRaw
-    >)
-)]
-public sealed record class CustomerRetrieveEntitlementsResponseData : JsonModel
-{
-    /// <summary>
-    /// Reason why entitlements access was denied, if applicable
-    /// </summary>
-    public required ApiEnum<
-        string,
-        CustomerRetrieveEntitlementsResponseDataAccessDeniedReason
-    >? AccessDeniedReason
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<
-                ApiEnum<string, CustomerRetrieveEntitlementsResponseDataAccessDeniedReason>
-            >("accessDeniedReason");
-        }
-        init { this._rawData.Set("accessDeniedReason", value); }
-    }
-
-    /// <summary>
-    /// List of effective feature and credit entitlements
-    /// </summary>
-    public required IReadOnlyList<Entitlement> Entitlements
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<ImmutableArray<Entitlement>>("entitlements");
-        }
-        init
-        {
-            this._rawData.Set<ImmutableArray<Entitlement>>(
-                "entitlements",
-                ImmutableArray.ToImmutableArray(value)
-            );
-        }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        this.AccessDeniedReason?.Validate();
-        foreach (var item in this.Entitlements)
-        {
-            item.Validate();
-        }
-    }
-
-    public CustomerRetrieveEntitlementsResponseData() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public CustomerRetrieveEntitlementsResponseData(
-        CustomerRetrieveEntitlementsResponseData customerRetrieveEntitlementsResponseData
-    )
-        : base(customerRetrieveEntitlementsResponseData) { }
-#pragma warning restore CS8618
-
-    public CustomerRetrieveEntitlementsResponseData(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    CustomerRetrieveEntitlementsResponseData(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="CustomerRetrieveEntitlementsResponseDataFromRaw.FromRawUnchecked"/>
-    public static CustomerRetrieveEntitlementsResponseData FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-}
-
-class CustomerRetrieveEntitlementsResponseDataFromRaw
-    : IFromRawJson<CustomerRetrieveEntitlementsResponseData>
-{
-    /// <inheritdoc/>
-    public CustomerRetrieveEntitlementsResponseData FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => CustomerRetrieveEntitlementsResponseData.FromRawUnchecked(rawData);
-}
-
-/// <summary>
-/// Reason why entitlements access was denied, if applicable
-/// </summary>
-[JsonConverter(typeof(CustomerRetrieveEntitlementsResponseDataAccessDeniedReasonConverter))]
-public enum CustomerRetrieveEntitlementsResponseDataAccessDeniedReason
-{
-    CustomerNotFound,
-    NoActiveSubscription,
-    CustomerIsArchived,
-}
-
-sealed class CustomerRetrieveEntitlementsResponseDataAccessDeniedReasonConverter
-    : JsonConverter<CustomerRetrieveEntitlementsResponseDataAccessDeniedReason>
-{
-    public override CustomerRetrieveEntitlementsResponseDataAccessDeniedReason Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "CustomerNotFound" =>
-                CustomerRetrieveEntitlementsResponseDataAccessDeniedReason.CustomerNotFound,
-            "NoActiveSubscription" =>
-                CustomerRetrieveEntitlementsResponseDataAccessDeniedReason.NoActiveSubscription,
-            "CustomerIsArchived" =>
-                CustomerRetrieveEntitlementsResponseDataAccessDeniedReason.CustomerIsArchived,
-            _ => (CustomerRetrieveEntitlementsResponseDataAccessDeniedReason)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        CustomerRetrieveEntitlementsResponseDataAccessDeniedReason value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                CustomerRetrieveEntitlementsResponseDataAccessDeniedReason.CustomerNotFound =>
-                    "CustomerNotFound",
-                CustomerRetrieveEntitlementsResponseDataAccessDeniedReason.NoActiveSubscription =>
-                    "NoActiveSubscription",
-                CustomerRetrieveEntitlementsResponseDataAccessDeniedReason.CustomerIsArchived =>
-                    "CustomerIsArchived",
-                _ => throw new StiggInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
-}
-
-[JsonConverter(typeof(EntitlementConverter))]
-public record class Entitlement : ModelBase
+[JsonConverter(typeof(CustomerCheckEntitlementResponseDataConverter))]
+public record class CustomerCheckEntitlementResponseData : ModelBase
 {
     public object? Value { get; } = null;
 
@@ -320,62 +157,62 @@ public record class Entitlement : ModelBase
         }
     }
 
-    public Entitlement(EntitlementFeature value, JsonElement? element = null)
+    public CustomerCheckEntitlementResponseData(Feature value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
     }
 
-    public Entitlement(EntitlementCredit value, JsonElement? element = null)
+    public CustomerCheckEntitlementResponseData(Credit value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
     }
 
-    public Entitlement(JsonElement element)
+    public CustomerCheckEntitlementResponseData(JsonElement element)
     {
         this._element = element;
     }
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="EntitlementFeature"/>.
+    /// type <see cref="Feature"/>.
     ///
     /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
     /// if (instance.TryPickFeature(out var value)) {
-    ///     // `value` is of type `EntitlementFeature`
+    ///     // `value` is of type `Feature`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
     /// </example>
     /// </summary>
-    public bool TryPickFeature([NotNullWhen(true)] out EntitlementFeature? value)
+    public bool TryPickFeature([NotNullWhen(true)] out Feature? value)
     {
-        value = this.Value as EntitlementFeature;
+        value = this.Value as Feature;
         return value != null;
     }
 
     /// <summary>
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
-    /// type <see cref="EntitlementCredit"/>.
+    /// type <see cref="Credit"/>.
     ///
     /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
     /// if (instance.TryPickCredit(out var value)) {
-    ///     // `value` is of type `EntitlementCredit`
+    ///     // `value` is of type `Credit`
     ///     Console.WriteLine(value);
     /// }
     /// </code>
     /// </example>
     /// </summary>
-    public bool TryPickCredit([NotNullWhen(true)] out EntitlementCredit? value)
+    public bool TryPickCredit([NotNullWhen(true)] out Credit? value)
     {
-        value = this.Value as EntitlementCredit;
+        value = this.Value as Credit;
         return value != null;
     }
 
@@ -393,28 +230,25 @@ public record class Entitlement : ModelBase
     /// <example>
     /// <code>
     /// instance.Switch(
-    ///     (EntitlementFeature value) =&gt; {...},
-    ///     (EntitlementCredit value) =&gt; {...}
+    ///     (Feature value) =&gt; {...},
+    ///     (Credit value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
     /// </summary>
-    public void Switch(
-        System::Action<EntitlementFeature> feature,
-        System::Action<EntitlementCredit> credit
-    )
+    public void Switch(System::Action<Feature> feature, System::Action<Credit> credit)
     {
         switch (this.Value)
         {
-            case EntitlementFeature value:
+            case Feature value:
                 feature(value);
                 break;
-            case EntitlementCredit value:
+            case Credit value:
                 credit(value);
                 break;
             default:
                 throw new StiggInvalidDataException(
-                    "Data did not match any variant of Entitlement"
+                    "Data did not match any variant of CustomerCheckEntitlementResponseData"
                 );
         }
     }
@@ -434,30 +268,29 @@ public record class Entitlement : ModelBase
     /// <example>
     /// <code>
     /// var result = instance.Match(
-    ///     (EntitlementFeature value) =&gt; {...},
-    ///     (EntitlementCredit value) =&gt; {...}
+    ///     (Feature value) =&gt; {...},
+    ///     (Credit value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
     /// </summary>
-    public T Match<T>(
-        System::Func<EntitlementFeature, T> feature,
-        System::Func<EntitlementCredit, T> credit
-    )
+    public T Match<T>(System::Func<Feature, T> feature, System::Func<Credit, T> credit)
     {
         return this.Value switch
         {
-            EntitlementFeature value => feature(value),
-            EntitlementCredit value => credit(value),
+            Feature value => feature(value),
+            Credit value => credit(value),
             _ => throw new StiggInvalidDataException(
-                "Data did not match any variant of Entitlement"
+                "Data did not match any variant of CustomerCheckEntitlementResponseData"
             ),
         };
     }
 
-    public static implicit operator Entitlement(EntitlementFeature value) => new(value);
+    public static implicit operator CustomerCheckEntitlementResponseData(Feature value) =>
+        new(value);
 
-    public static implicit operator Entitlement(EntitlementCredit value) => new(value);
+    public static implicit operator CustomerCheckEntitlementResponseData(Credit value) =>
+        new(value);
 
     /// <summary>
     /// Validates that the instance was constructed with a known variant and that this variant is valid
@@ -473,12 +306,14 @@ public record class Entitlement : ModelBase
     {
         if (this.Value == null)
         {
-            throw new StiggInvalidDataException("Data did not match any variant of Entitlement");
+            throw new StiggInvalidDataException(
+                "Data did not match any variant of CustomerCheckEntitlementResponseData"
+            );
         }
         this.Switch((feature) => feature.Validate(), (credit) => credit.Validate());
     }
 
-    public virtual bool Equals(Entitlement? other) =>
+    public virtual bool Equals(CustomerCheckEntitlementResponseData? other) =>
         other != null
         && this.VariantIndex() == other.VariantIndex()
         && JsonElement.DeepEquals(this.Json, other.Json);
@@ -498,16 +333,17 @@ public record class Entitlement : ModelBase
     {
         return this.Value switch
         {
-            EntitlementFeature _ => 0,
-            EntitlementCredit _ => 1,
+            Feature _ => 0,
+            Credit _ => 1,
             _ => -1,
         };
     }
 }
 
-sealed class EntitlementConverter : JsonConverter<Entitlement>
+sealed class CustomerCheckEntitlementResponseDataConverter
+    : JsonConverter<CustomerCheckEntitlementResponseData>
 {
-    public override Entitlement? Read(
+    public override CustomerCheckEntitlementResponseData? Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -530,10 +366,7 @@ sealed class EntitlementConverter : JsonConverter<Entitlement>
             {
                 try
                 {
-                    var deserialized = JsonSerializer.Deserialize<EntitlementFeature>(
-                        element,
-                        options
-                    );
+                    var deserialized = JsonSerializer.Deserialize<Feature>(element, options);
                     if (deserialized != null)
                     {
                         return new(deserialized, element);
@@ -550,10 +383,7 @@ sealed class EntitlementConverter : JsonConverter<Entitlement>
             {
                 try
                 {
-                    var deserialized = JsonSerializer.Deserialize<EntitlementCredit>(
-                        element,
-                        options
-                    );
+                    var deserialized = JsonSerializer.Deserialize<Credit>(element, options);
                     if (deserialized != null)
                     {
                         return new(deserialized, element);
@@ -568,14 +398,14 @@ sealed class EntitlementConverter : JsonConverter<Entitlement>
             }
             default:
             {
-                return new Entitlement(element);
+                return new CustomerCheckEntitlementResponseData(element);
             }
         }
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        Entitlement value,
+        CustomerCheckEntitlementResponseData value,
         JsonSerializerOptions options
     )
     {
@@ -583,17 +413,17 @@ sealed class EntitlementConverter : JsonConverter<Entitlement>
     }
 }
 
-[JsonConverter(typeof(JsonModelConverter<EntitlementFeature, EntitlementFeatureFromRaw>))]
-public sealed record class EntitlementFeature : JsonModel
+[JsonConverter(typeof(JsonModelConverter<Feature, FeatureFromRaw>))]
+public sealed record class Feature : JsonModel
 {
-    public required ApiEnum<string, EntitlementFeatureAccessDeniedReason>? AccessDeniedReason
+    public required ApiEnum<string, AccessDeniedReason>? AccessDeniedReason
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<
-                ApiEnum<string, EntitlementFeatureAccessDeniedReason>
-            >("accessDeniedReason");
+            return this._rawData.GetNullableClass<ApiEnum<string, AccessDeniedReason>>(
+                "accessDeniedReason"
+            );
         }
         init { this._rawData.Set("accessDeniedReason", value); }
     }
@@ -657,12 +487,12 @@ public sealed record class EntitlementFeature : JsonModel
         }
     }
 
-    public EntitlementFeatureFeature? Feature
+    public FeatureFeature? FeatureValue
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<EntitlementFeatureFeature>("feature");
+            return this._rawData.GetNullableClass<FeatureFeature>("feature");
         }
         init
         {
@@ -693,14 +523,12 @@ public sealed record class EntitlementFeature : JsonModel
         }
     }
 
-    public ApiEnum<string, EntitlementFeatureResetPeriod>? ResetPeriod
+    public ApiEnum<string, ResetPeriod>? ResetPeriod
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ApiEnum<string, EntitlementFeatureResetPeriod>>(
-                "resetPeriod"
-            );
+            return this._rawData.GetNullableClass<ApiEnum<string, ResetPeriod>>("resetPeriod");
         }
         init { this._rawData.Set("resetPeriod", value); }
     }
@@ -811,7 +639,7 @@ public sealed record class EntitlementFeature : JsonModel
         }
         _ = this.CurrentUsage;
         _ = this.EntitlementUpdatedAt;
-        this.Feature?.Validate();
+        this.FeatureValue?.Validate();
         _ = this.HasUnlimitedUsage;
         this.ResetPeriod?.Validate();
         _ = this.UsageLimit;
@@ -821,18 +649,18 @@ public sealed record class EntitlementFeature : JsonModel
         _ = this.ValidUntil;
     }
 
-    public EntitlementFeature()
+    public Feature()
     {
         this.Type = JsonSerializer.SerializeToElement("FEATURE");
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public EntitlementFeature(EntitlementFeature entitlementFeature)
-        : base(entitlementFeature) { }
+    public Feature(Feature feature)
+        : base(feature) { }
 #pragma warning restore CS8618
 
-    public EntitlementFeature(IReadOnlyDictionary<string, JsonElement> rawData)
+    public Feature(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
 
@@ -841,30 +669,28 @@ public sealed record class EntitlementFeature : JsonModel
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    EntitlementFeature(FrozenDictionary<string, JsonElement> rawData)
+    Feature(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="EntitlementFeatureFromRaw.FromRawUnchecked"/>
-    public static EntitlementFeature FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
+    /// <inheritdoc cref="FeatureFromRaw.FromRawUnchecked"/>
+    public static Feature FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class EntitlementFeatureFromRaw : IFromRawJson<EntitlementFeature>
+class FeatureFromRaw : IFromRawJson<Feature>
 {
     /// <inheritdoc/>
-    public EntitlementFeature FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        EntitlementFeature.FromRawUnchecked(rawData);
+    public Feature FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Feature.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(EntitlementFeatureAccessDeniedReasonConverter))]
-public enum EntitlementFeatureAccessDeniedReason
+[JsonConverter(typeof(AccessDeniedReasonConverter))]
+public enum AccessDeniedReason
 {
     FeatureNotFound,
     CustomerNotFound,
@@ -882,10 +708,9 @@ public enum EntitlementFeatureAccessDeniedReason
     EntitlementNotFound,
 }
 
-sealed class EntitlementFeatureAccessDeniedReasonConverter
-    : JsonConverter<EntitlementFeatureAccessDeniedReason>
+sealed class AccessDeniedReasonConverter : JsonConverter<AccessDeniedReason>
 {
-    public override EntitlementFeatureAccessDeniedReason Read(
+    public override AccessDeniedReason Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -893,31 +718,28 @@ sealed class EntitlementFeatureAccessDeniedReasonConverter
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "FeatureNotFound" => EntitlementFeatureAccessDeniedReason.FeatureNotFound,
-            "CustomerNotFound" => EntitlementFeatureAccessDeniedReason.CustomerNotFound,
-            "CustomerIsArchived" => EntitlementFeatureAccessDeniedReason.CustomerIsArchived,
-            "CustomerResourceNotFound" =>
-                EntitlementFeatureAccessDeniedReason.CustomerResourceNotFound,
-            "NoActiveSubscription" => EntitlementFeatureAccessDeniedReason.NoActiveSubscription,
+            "FeatureNotFound" => AccessDeniedReason.FeatureNotFound,
+            "CustomerNotFound" => AccessDeniedReason.CustomerNotFound,
+            "CustomerIsArchived" => AccessDeniedReason.CustomerIsArchived,
+            "CustomerResourceNotFound" => AccessDeniedReason.CustomerResourceNotFound,
+            "NoActiveSubscription" => AccessDeniedReason.NoActiveSubscription,
             "NoFeatureEntitlementInSubscription" =>
-                EntitlementFeatureAccessDeniedReason.NoFeatureEntitlementInSubscription,
-            "RequestedUsageExceedingLimit" =>
-                EntitlementFeatureAccessDeniedReason.RequestedUsageExceedingLimit,
-            "RequestedValuesMismatch" =>
-                EntitlementFeatureAccessDeniedReason.RequestedValuesMismatch,
-            "BudgetExceeded" => EntitlementFeatureAccessDeniedReason.BudgetExceeded,
-            "Unknown" => EntitlementFeatureAccessDeniedReason.Unknown,
-            "FeatureTypeMismatch" => EntitlementFeatureAccessDeniedReason.FeatureTypeMismatch,
-            "Revoked" => EntitlementFeatureAccessDeniedReason.Revoked,
-            "InsufficientCredits" => EntitlementFeatureAccessDeniedReason.InsufficientCredits,
-            "EntitlementNotFound" => EntitlementFeatureAccessDeniedReason.EntitlementNotFound,
-            _ => (EntitlementFeatureAccessDeniedReason)(-1),
+                AccessDeniedReason.NoFeatureEntitlementInSubscription,
+            "RequestedUsageExceedingLimit" => AccessDeniedReason.RequestedUsageExceedingLimit,
+            "RequestedValuesMismatch" => AccessDeniedReason.RequestedValuesMismatch,
+            "BudgetExceeded" => AccessDeniedReason.BudgetExceeded,
+            "Unknown" => AccessDeniedReason.Unknown,
+            "FeatureTypeMismatch" => AccessDeniedReason.FeatureTypeMismatch,
+            "Revoked" => AccessDeniedReason.Revoked,
+            "InsufficientCredits" => AccessDeniedReason.InsufficientCredits,
+            "EntitlementNotFound" => AccessDeniedReason.EntitlementNotFound,
+            _ => (AccessDeniedReason)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        EntitlementFeatureAccessDeniedReason value,
+        AccessDeniedReason value,
         JsonSerializerOptions options
     )
     {
@@ -925,24 +747,21 @@ sealed class EntitlementFeatureAccessDeniedReasonConverter
             writer,
             value switch
             {
-                EntitlementFeatureAccessDeniedReason.FeatureNotFound => "FeatureNotFound",
-                EntitlementFeatureAccessDeniedReason.CustomerNotFound => "CustomerNotFound",
-                EntitlementFeatureAccessDeniedReason.CustomerIsArchived => "CustomerIsArchived",
-                EntitlementFeatureAccessDeniedReason.CustomerResourceNotFound =>
-                    "CustomerResourceNotFound",
-                EntitlementFeatureAccessDeniedReason.NoActiveSubscription => "NoActiveSubscription",
-                EntitlementFeatureAccessDeniedReason.NoFeatureEntitlementInSubscription =>
+                AccessDeniedReason.FeatureNotFound => "FeatureNotFound",
+                AccessDeniedReason.CustomerNotFound => "CustomerNotFound",
+                AccessDeniedReason.CustomerIsArchived => "CustomerIsArchived",
+                AccessDeniedReason.CustomerResourceNotFound => "CustomerResourceNotFound",
+                AccessDeniedReason.NoActiveSubscription => "NoActiveSubscription",
+                AccessDeniedReason.NoFeatureEntitlementInSubscription =>
                     "NoFeatureEntitlementInSubscription",
-                EntitlementFeatureAccessDeniedReason.RequestedUsageExceedingLimit =>
-                    "RequestedUsageExceedingLimit",
-                EntitlementFeatureAccessDeniedReason.RequestedValuesMismatch =>
-                    "RequestedValuesMismatch",
-                EntitlementFeatureAccessDeniedReason.BudgetExceeded => "BudgetExceeded",
-                EntitlementFeatureAccessDeniedReason.Unknown => "Unknown",
-                EntitlementFeatureAccessDeniedReason.FeatureTypeMismatch => "FeatureTypeMismatch",
-                EntitlementFeatureAccessDeniedReason.Revoked => "Revoked",
-                EntitlementFeatureAccessDeniedReason.InsufficientCredits => "InsufficientCredits",
-                EntitlementFeatureAccessDeniedReason.EntitlementNotFound => "EntitlementNotFound",
+                AccessDeniedReason.RequestedUsageExceedingLimit => "RequestedUsageExceedingLimit",
+                AccessDeniedReason.RequestedValuesMismatch => "RequestedValuesMismatch",
+                AccessDeniedReason.BudgetExceeded => "BudgetExceeded",
+                AccessDeniedReason.Unknown => "Unknown",
+                AccessDeniedReason.FeatureTypeMismatch => "FeatureTypeMismatch",
+                AccessDeniedReason.Revoked => "Revoked",
+                AccessDeniedReason.InsufficientCredits => "InsufficientCredits",
+                AccessDeniedReason.EntitlementNotFound => "EntitlementNotFound",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -952,10 +771,8 @@ sealed class EntitlementFeatureAccessDeniedReasonConverter
     }
 }
 
-[JsonConverter(
-    typeof(JsonModelConverter<EntitlementFeatureFeature, EntitlementFeatureFeatureFromRaw>)
-)]
-public sealed record class EntitlementFeatureFeature : JsonModel
+[JsonConverter(typeof(JsonModelConverter<FeatureFeature, FeatureFeatureFromRaw>))]
+public sealed record class FeatureFeature : JsonModel
 {
     /// <summary>
     /// The unique reference ID of the entitlement.
@@ -986,14 +803,12 @@ public sealed record class EntitlementFeatureFeature : JsonModel
     /// <summary>
     /// The current status of the feature.
     /// </summary>
-    public required ApiEnum<string, EntitlementFeatureFeatureFeatureStatus> FeatureStatus
+    public required ApiEnum<string, FeatureStatus> FeatureStatus
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, EntitlementFeatureFeatureFeatureStatus>
-            >("featureStatus");
+            return this._rawData.GetNotNullClass<ApiEnum<string, FeatureStatus>>("featureStatus");
         }
         init { this._rawData.Set("featureStatus", value); }
     }
@@ -1001,14 +816,12 @@ public sealed record class EntitlementFeatureFeature : JsonModel
     /// <summary>
     /// The type of feature associated with the entitlement.
     /// </summary>
-    public required ApiEnum<string, EntitlementFeatureFeatureFeatureType> FeatureType
+    public required ApiEnum<string, FeatureType> FeatureType
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
-                ApiEnum<string, EntitlementFeatureFeatureFeatureType>
-            >("featureType");
+            return this._rawData.GetNotNullClass<ApiEnum<string, FeatureType>>("featureType");
         }
         init { this._rawData.Set("featureType", value); }
     }
@@ -1022,59 +835,55 @@ public sealed record class EntitlementFeatureFeature : JsonModel
         this.FeatureType.Validate();
     }
 
-    public EntitlementFeatureFeature() { }
+    public FeatureFeature() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public EntitlementFeatureFeature(EntitlementFeatureFeature entitlementFeatureFeature)
-        : base(entitlementFeatureFeature) { }
+    public FeatureFeature(FeatureFeature featureFeature)
+        : base(featureFeature) { }
 #pragma warning restore CS8618
 
-    public EntitlementFeatureFeature(IReadOnlyDictionary<string, JsonElement> rawData)
+    public FeatureFeature(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    EntitlementFeatureFeature(FrozenDictionary<string, JsonElement> rawData)
+    FeatureFeature(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="EntitlementFeatureFeatureFromRaw.FromRawUnchecked"/>
-    public static EntitlementFeatureFeature FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
+    /// <inheritdoc cref="FeatureFeatureFromRaw.FromRawUnchecked"/>
+    public static FeatureFeature FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class EntitlementFeatureFeatureFromRaw : IFromRawJson<EntitlementFeatureFeature>
+class FeatureFeatureFromRaw : IFromRawJson<FeatureFeature>
 {
     /// <inheritdoc/>
-    public EntitlementFeatureFeature FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => EntitlementFeatureFeature.FromRawUnchecked(rawData);
+    public FeatureFeature FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        FeatureFeature.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// The current status of the feature.
 /// </summary>
-[JsonConverter(typeof(EntitlementFeatureFeatureFeatureStatusConverter))]
-public enum EntitlementFeatureFeatureFeatureStatus
+[JsonConverter(typeof(FeatureStatusConverter))]
+public enum FeatureStatus
 {
     New,
     Suspended,
     Active,
 }
 
-sealed class EntitlementFeatureFeatureFeatureStatusConverter
-    : JsonConverter<EntitlementFeatureFeatureFeatureStatus>
+sealed class FeatureStatusConverter : JsonConverter<FeatureStatus>
 {
-    public override EntitlementFeatureFeatureFeatureStatus Read(
+    public override FeatureStatus Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1082,16 +891,16 @@ sealed class EntitlementFeatureFeatureFeatureStatusConverter
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "NEW" => EntitlementFeatureFeatureFeatureStatus.New,
-            "SUSPENDED" => EntitlementFeatureFeatureFeatureStatus.Suspended,
-            "ACTIVE" => EntitlementFeatureFeatureFeatureStatus.Active,
-            _ => (EntitlementFeatureFeatureFeatureStatus)(-1),
+            "NEW" => FeatureStatus.New,
+            "SUSPENDED" => FeatureStatus.Suspended,
+            "ACTIVE" => FeatureStatus.Active,
+            _ => (FeatureStatus)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        EntitlementFeatureFeatureFeatureStatus value,
+        FeatureStatus value,
         JsonSerializerOptions options
     )
     {
@@ -1099,9 +908,9 @@ sealed class EntitlementFeatureFeatureFeatureStatusConverter
             writer,
             value switch
             {
-                EntitlementFeatureFeatureFeatureStatus.New => "NEW",
-                EntitlementFeatureFeatureFeatureStatus.Suspended => "SUSPENDED",
-                EntitlementFeatureFeatureFeatureStatus.Active => "ACTIVE",
+                FeatureStatus.New => "NEW",
+                FeatureStatus.Suspended => "SUSPENDED",
+                FeatureStatus.Active => "ACTIVE",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -1114,18 +923,17 @@ sealed class EntitlementFeatureFeatureFeatureStatusConverter
 /// <summary>
 /// The type of feature associated with the entitlement.
 /// </summary>
-[JsonConverter(typeof(EntitlementFeatureFeatureFeatureTypeConverter))]
-public enum EntitlementFeatureFeatureFeatureType
+[JsonConverter(typeof(FeatureTypeConverter))]
+public enum FeatureType
 {
     Boolean,
     Number,
     Enum,
 }
 
-sealed class EntitlementFeatureFeatureFeatureTypeConverter
-    : JsonConverter<EntitlementFeatureFeatureFeatureType>
+sealed class FeatureTypeConverter : JsonConverter<FeatureType>
 {
-    public override EntitlementFeatureFeatureFeatureType Read(
+    public override FeatureType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1133,16 +941,16 @@ sealed class EntitlementFeatureFeatureFeatureTypeConverter
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "BOOLEAN" => EntitlementFeatureFeatureFeatureType.Boolean,
-            "NUMBER" => EntitlementFeatureFeatureFeatureType.Number,
-            "ENUM" => EntitlementFeatureFeatureFeatureType.Enum,
-            _ => (EntitlementFeatureFeatureFeatureType)(-1),
+            "BOOLEAN" => FeatureType.Boolean,
+            "NUMBER" => FeatureType.Number,
+            "ENUM" => FeatureType.Enum,
+            _ => (FeatureType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        EntitlementFeatureFeatureFeatureType value,
+        FeatureType value,
         JsonSerializerOptions options
     )
     {
@@ -1150,9 +958,9 @@ sealed class EntitlementFeatureFeatureFeatureTypeConverter
             writer,
             value switch
             {
-                EntitlementFeatureFeatureFeatureType.Boolean => "BOOLEAN",
-                EntitlementFeatureFeatureFeatureType.Number => "NUMBER",
-                EntitlementFeatureFeatureFeatureType.Enum => "ENUM",
+                FeatureType.Boolean => "BOOLEAN",
+                FeatureType.Number => "NUMBER",
+                FeatureType.Enum => "ENUM",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -1162,8 +970,8 @@ sealed class EntitlementFeatureFeatureFeatureTypeConverter
     }
 }
 
-[JsonConverter(typeof(EntitlementFeatureResetPeriodConverter))]
-public enum EntitlementFeatureResetPeriod
+[JsonConverter(typeof(ResetPeriodConverter))]
+public enum ResetPeriod
 {
     Year,
     Month,
@@ -1172,9 +980,9 @@ public enum EntitlementFeatureResetPeriod
     Hour,
 }
 
-sealed class EntitlementFeatureResetPeriodConverter : JsonConverter<EntitlementFeatureResetPeriod>
+sealed class ResetPeriodConverter : JsonConverter<ResetPeriod>
 {
-    public override EntitlementFeatureResetPeriod Read(
+    public override ResetPeriod Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1182,18 +990,18 @@ sealed class EntitlementFeatureResetPeriodConverter : JsonConverter<EntitlementF
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "YEAR" => EntitlementFeatureResetPeriod.Year,
-            "MONTH" => EntitlementFeatureResetPeriod.Month,
-            "WEEK" => EntitlementFeatureResetPeriod.Week,
-            "DAY" => EntitlementFeatureResetPeriod.Day,
-            "HOUR" => EntitlementFeatureResetPeriod.Hour,
-            _ => (EntitlementFeatureResetPeriod)(-1),
+            "YEAR" => ResetPeriod.Year,
+            "MONTH" => ResetPeriod.Month,
+            "WEEK" => ResetPeriod.Week,
+            "DAY" => ResetPeriod.Day,
+            "HOUR" => ResetPeriod.Hour,
+            _ => (ResetPeriod)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        EntitlementFeatureResetPeriod value,
+        ResetPeriod value,
         JsonSerializerOptions options
     )
     {
@@ -1201,11 +1009,11 @@ sealed class EntitlementFeatureResetPeriodConverter : JsonConverter<EntitlementF
             writer,
             value switch
             {
-                EntitlementFeatureResetPeriod.Year => "YEAR",
-                EntitlementFeatureResetPeriod.Month => "MONTH",
-                EntitlementFeatureResetPeriod.Week => "WEEK",
-                EntitlementFeatureResetPeriod.Day => "DAY",
-                EntitlementFeatureResetPeriod.Hour => "HOUR",
+                ResetPeriod.Year => "YEAR",
+                ResetPeriod.Month => "MONTH",
+                ResetPeriod.Week => "WEEK",
+                ResetPeriod.Day => "DAY",
+                ResetPeriod.Hour => "HOUR",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -1215,17 +1023,17 @@ sealed class EntitlementFeatureResetPeriodConverter : JsonConverter<EntitlementF
     }
 }
 
-[JsonConverter(typeof(JsonModelConverter<EntitlementCredit, EntitlementCreditFromRaw>))]
-public sealed record class EntitlementCredit : JsonModel
+[JsonConverter(typeof(JsonModelConverter<Credit, CreditFromRaw>))]
+public sealed record class Credit : JsonModel
 {
-    public required ApiEnum<string, EntitlementCreditAccessDeniedReason>? AccessDeniedReason
+    public required ApiEnum<string, CreditAccessDeniedReason>? AccessDeniedReason
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<
-                ApiEnum<string, EntitlementCreditAccessDeniedReason>
-            >("accessDeniedReason");
+            return this._rawData.GetNullableClass<ApiEnum<string, CreditAccessDeniedReason>>(
+                "accessDeniedReason"
+            );
         }
         init { this._rawData.Set("accessDeniedReason", value); }
     }
@@ -1233,12 +1041,12 @@ public sealed record class EntitlementCredit : JsonModel
     /// <summary>
     /// The currency associated with a credit entitlement.
     /// </summary>
-    public required EntitlementCreditCurrency Currency
+    public required CreditCurrency Currency
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<EntitlementCreditCurrency>("currency");
+            return this._rawData.GetNotNullClass<CreditCurrency>("currency");
         }
         init { this._rawData.Set("currency", value); }
     }
@@ -1377,18 +1185,18 @@ public sealed record class EntitlementCredit : JsonModel
         _ = this.ValidUntil;
     }
 
-    public EntitlementCredit()
+    public Credit()
     {
         this.Type = JsonSerializer.SerializeToElement("CREDIT");
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public EntitlementCredit(EntitlementCredit entitlementCredit)
-        : base(entitlementCredit) { }
+    public Credit(Credit credit)
+        : base(credit) { }
 #pragma warning restore CS8618
 
-    public EntitlementCredit(IReadOnlyDictionary<string, JsonElement> rawData)
+    public Credit(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
 
@@ -1397,30 +1205,28 @@ public sealed record class EntitlementCredit : JsonModel
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    EntitlementCredit(FrozenDictionary<string, JsonElement> rawData)
+    Credit(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="EntitlementCreditFromRaw.FromRawUnchecked"/>
-    public static EntitlementCredit FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
+    /// <inheritdoc cref="CreditFromRaw.FromRawUnchecked"/>
+    public static Credit FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class EntitlementCreditFromRaw : IFromRawJson<EntitlementCredit>
+class CreditFromRaw : IFromRawJson<Credit>
 {
     /// <inheritdoc/>
-    public EntitlementCredit FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        EntitlementCredit.FromRawUnchecked(rawData);
+    public Credit FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Credit.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(EntitlementCreditAccessDeniedReasonConverter))]
-public enum EntitlementCreditAccessDeniedReason
+[JsonConverter(typeof(CreditAccessDeniedReasonConverter))]
+public enum CreditAccessDeniedReason
 {
     FeatureNotFound,
     CustomerNotFound,
@@ -1438,10 +1244,9 @@ public enum EntitlementCreditAccessDeniedReason
     EntitlementNotFound,
 }
 
-sealed class EntitlementCreditAccessDeniedReasonConverter
-    : JsonConverter<EntitlementCreditAccessDeniedReason>
+sealed class CreditAccessDeniedReasonConverter : JsonConverter<CreditAccessDeniedReason>
 {
-    public override EntitlementCreditAccessDeniedReason Read(
+    public override CreditAccessDeniedReason Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1449,31 +1254,28 @@ sealed class EntitlementCreditAccessDeniedReasonConverter
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "FeatureNotFound" => EntitlementCreditAccessDeniedReason.FeatureNotFound,
-            "CustomerNotFound" => EntitlementCreditAccessDeniedReason.CustomerNotFound,
-            "CustomerIsArchived" => EntitlementCreditAccessDeniedReason.CustomerIsArchived,
-            "CustomerResourceNotFound" =>
-                EntitlementCreditAccessDeniedReason.CustomerResourceNotFound,
-            "NoActiveSubscription" => EntitlementCreditAccessDeniedReason.NoActiveSubscription,
+            "FeatureNotFound" => CreditAccessDeniedReason.FeatureNotFound,
+            "CustomerNotFound" => CreditAccessDeniedReason.CustomerNotFound,
+            "CustomerIsArchived" => CreditAccessDeniedReason.CustomerIsArchived,
+            "CustomerResourceNotFound" => CreditAccessDeniedReason.CustomerResourceNotFound,
+            "NoActiveSubscription" => CreditAccessDeniedReason.NoActiveSubscription,
             "NoFeatureEntitlementInSubscription" =>
-                EntitlementCreditAccessDeniedReason.NoFeatureEntitlementInSubscription,
-            "RequestedUsageExceedingLimit" =>
-                EntitlementCreditAccessDeniedReason.RequestedUsageExceedingLimit,
-            "RequestedValuesMismatch" =>
-                EntitlementCreditAccessDeniedReason.RequestedValuesMismatch,
-            "BudgetExceeded" => EntitlementCreditAccessDeniedReason.BudgetExceeded,
-            "Unknown" => EntitlementCreditAccessDeniedReason.Unknown,
-            "FeatureTypeMismatch" => EntitlementCreditAccessDeniedReason.FeatureTypeMismatch,
-            "Revoked" => EntitlementCreditAccessDeniedReason.Revoked,
-            "InsufficientCredits" => EntitlementCreditAccessDeniedReason.InsufficientCredits,
-            "EntitlementNotFound" => EntitlementCreditAccessDeniedReason.EntitlementNotFound,
-            _ => (EntitlementCreditAccessDeniedReason)(-1),
+                CreditAccessDeniedReason.NoFeatureEntitlementInSubscription,
+            "RequestedUsageExceedingLimit" => CreditAccessDeniedReason.RequestedUsageExceedingLimit,
+            "RequestedValuesMismatch" => CreditAccessDeniedReason.RequestedValuesMismatch,
+            "BudgetExceeded" => CreditAccessDeniedReason.BudgetExceeded,
+            "Unknown" => CreditAccessDeniedReason.Unknown,
+            "FeatureTypeMismatch" => CreditAccessDeniedReason.FeatureTypeMismatch,
+            "Revoked" => CreditAccessDeniedReason.Revoked,
+            "InsufficientCredits" => CreditAccessDeniedReason.InsufficientCredits,
+            "EntitlementNotFound" => CreditAccessDeniedReason.EntitlementNotFound,
+            _ => (CreditAccessDeniedReason)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        EntitlementCreditAccessDeniedReason value,
+        CreditAccessDeniedReason value,
         JsonSerializerOptions options
     )
     {
@@ -1481,24 +1283,22 @@ sealed class EntitlementCreditAccessDeniedReasonConverter
             writer,
             value switch
             {
-                EntitlementCreditAccessDeniedReason.FeatureNotFound => "FeatureNotFound",
-                EntitlementCreditAccessDeniedReason.CustomerNotFound => "CustomerNotFound",
-                EntitlementCreditAccessDeniedReason.CustomerIsArchived => "CustomerIsArchived",
-                EntitlementCreditAccessDeniedReason.CustomerResourceNotFound =>
-                    "CustomerResourceNotFound",
-                EntitlementCreditAccessDeniedReason.NoActiveSubscription => "NoActiveSubscription",
-                EntitlementCreditAccessDeniedReason.NoFeatureEntitlementInSubscription =>
+                CreditAccessDeniedReason.FeatureNotFound => "FeatureNotFound",
+                CreditAccessDeniedReason.CustomerNotFound => "CustomerNotFound",
+                CreditAccessDeniedReason.CustomerIsArchived => "CustomerIsArchived",
+                CreditAccessDeniedReason.CustomerResourceNotFound => "CustomerResourceNotFound",
+                CreditAccessDeniedReason.NoActiveSubscription => "NoActiveSubscription",
+                CreditAccessDeniedReason.NoFeatureEntitlementInSubscription =>
                     "NoFeatureEntitlementInSubscription",
-                EntitlementCreditAccessDeniedReason.RequestedUsageExceedingLimit =>
+                CreditAccessDeniedReason.RequestedUsageExceedingLimit =>
                     "RequestedUsageExceedingLimit",
-                EntitlementCreditAccessDeniedReason.RequestedValuesMismatch =>
-                    "RequestedValuesMismatch",
-                EntitlementCreditAccessDeniedReason.BudgetExceeded => "BudgetExceeded",
-                EntitlementCreditAccessDeniedReason.Unknown => "Unknown",
-                EntitlementCreditAccessDeniedReason.FeatureTypeMismatch => "FeatureTypeMismatch",
-                EntitlementCreditAccessDeniedReason.Revoked => "Revoked",
-                EntitlementCreditAccessDeniedReason.InsufficientCredits => "InsufficientCredits",
-                EntitlementCreditAccessDeniedReason.EntitlementNotFound => "EntitlementNotFound",
+                CreditAccessDeniedReason.RequestedValuesMismatch => "RequestedValuesMismatch",
+                CreditAccessDeniedReason.BudgetExceeded => "BudgetExceeded",
+                CreditAccessDeniedReason.Unknown => "Unknown",
+                CreditAccessDeniedReason.FeatureTypeMismatch => "FeatureTypeMismatch",
+                CreditAccessDeniedReason.Revoked => "Revoked",
+                CreditAccessDeniedReason.InsufficientCredits => "InsufficientCredits",
+                CreditAccessDeniedReason.EntitlementNotFound => "EntitlementNotFound",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -1511,10 +1311,8 @@ sealed class EntitlementCreditAccessDeniedReasonConverter
 /// <summary>
 /// The currency associated with a credit entitlement.
 /// </summary>
-[JsonConverter(
-    typeof(JsonModelConverter<EntitlementCreditCurrency, EntitlementCreditCurrencyFromRaw>)
-)]
-public sealed record class EntitlementCreditCurrency : JsonModel
+[JsonConverter(typeof(JsonModelConverter<CreditCurrency, CreditCurrencyFromRaw>))]
+public sealed record class CreditCurrency : JsonModel
 {
     /// <summary>
     /// The unique identifier of the custom currency.
@@ -1611,40 +1409,37 @@ public sealed record class EntitlementCreditCurrency : JsonModel
         _ = this.UnitSingular;
     }
 
-    public EntitlementCreditCurrency() { }
+    public CreditCurrency() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public EntitlementCreditCurrency(EntitlementCreditCurrency entitlementCreditCurrency)
-        : base(entitlementCreditCurrency) { }
+    public CreditCurrency(CreditCurrency creditCurrency)
+        : base(creditCurrency) { }
 #pragma warning restore CS8618
 
-    public EntitlementCreditCurrency(IReadOnlyDictionary<string, JsonElement> rawData)
+    public CreditCurrency(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    EntitlementCreditCurrency(FrozenDictionary<string, JsonElement> rawData)
+    CreditCurrency(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="EntitlementCreditCurrencyFromRaw.FromRawUnchecked"/>
-    public static EntitlementCreditCurrency FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
+    /// <inheritdoc cref="CreditCurrencyFromRaw.FromRawUnchecked"/>
+    public static CreditCurrency FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class EntitlementCreditCurrencyFromRaw : IFromRawJson<EntitlementCreditCurrency>
+class CreditCurrencyFromRaw : IFromRawJson<CreditCurrency>
 {
     /// <inheritdoc/>
-    public EntitlementCreditCurrency FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => EntitlementCreditCurrency.FromRawUnchecked(rawData);
+    public CreditCurrency FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        CreditCurrency.FromRawUnchecked(rawData);
 }
