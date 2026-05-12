@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Stigg.Client.Core;
+using Stigg.Client.Exceptions;
 using Stigg.Client.Models.V1.Customers.PromotionalEntitlements;
 
 namespace Stigg.Client.Tests.Models.V1.Customers.PromotionalEntitlements;
@@ -23,7 +25,7 @@ public class PromotionalEntitlementListParamsTest : TestBase
                 Lte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             Limit = 1,
-            Status = "status",
+            Status = [Status.Active],
         };
 
         string expectedID = "x";
@@ -37,14 +39,19 @@ public class PromotionalEntitlementListParamsTest : TestBase
             Lte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
         long expectedLimit = 1;
-        string expectedStatus = "status";
+        List<ApiEnum<string, Status>> expectedStatus = [Status.Active];
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedAfter, parameters.After);
         Assert.Equal(expectedBefore, parameters.Before);
         Assert.Equal(expectedCreatedAt, parameters.CreatedAt);
         Assert.Equal(expectedLimit, parameters.Limit);
-        Assert.Equal(expectedStatus, parameters.Status);
+        Assert.NotNull(parameters.Status);
+        Assert.Equal(expectedStatus.Count, parameters.Status.Count);
+        for (int i = 0; i < expectedStatus.Count; i++)
+        {
+            Assert.Equal(expectedStatus[i], parameters.Status[i]);
+        }
     }
 
     [Fact]
@@ -107,7 +114,7 @@ public class PromotionalEntitlementListParamsTest : TestBase
                 Lte = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
             },
             Limit = 1,
-            Status = "status",
+            Status = [Status.Active],
         };
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
@@ -115,7 +122,7 @@ public class PromotionalEntitlementListParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://api.stigg.io/api/v1/customers/x/promotional-entitlements?after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&createdAt%5bgt%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5bgte%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5blt%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5blte%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&limit=1&status=status"
+                    "https://api.stigg.io/api/v1/customers/x/promotional-entitlements?after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&createdAt%5bgt%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5bgte%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5blt%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5blte%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&limit=1&status=Active"
                 ),
                 url
             )
@@ -138,7 +145,7 @@ public class PromotionalEntitlementListParamsTest : TestBase
                 Lte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             Limit = 1,
-            Status = "status",
+            Status = [Status.Active],
         };
 
         PromotionalEntitlementListParams copied = new(parameters);
@@ -305,5 +312,65 @@ public class CreatedAtTest : TestBase
         CreatedAt copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class StatusTest : TestBase
+{
+    [Theory]
+    [InlineData(Status.Active)]
+    [InlineData(Status.Expired)]
+    [InlineData(Status.Paused)]
+    public void Validation_Works(Status rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Status> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(Status.Active)]
+    [InlineData(Status.Expired)]
+    [InlineData(Status.Paused)]
+    public void SerializationRoundtrip_Works(Status rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Status> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }

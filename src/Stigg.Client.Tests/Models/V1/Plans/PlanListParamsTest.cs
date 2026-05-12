@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Stigg.Client.Core;
+using Stigg.Client.Exceptions;
 using Stigg.Client.Models.V1.Plans;
 
 namespace Stigg.Client.Tests.Models.V1.Plans;
@@ -23,7 +25,7 @@ public class PlanListParamsTest : TestBase
             },
             Limit = 1,
             ProductID = "productId",
-            Status = "status",
+            Status = [PlanListParamsStatus.Draft],
         };
 
         string expectedAfter = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
@@ -37,14 +39,19 @@ public class PlanListParamsTest : TestBase
         };
         long expectedLimit = 1;
         string expectedProductID = "productId";
-        string expectedStatus = "status";
+        List<ApiEnum<string, PlanListParamsStatus>> expectedStatus = [PlanListParamsStatus.Draft];
 
         Assert.Equal(expectedAfter, parameters.After);
         Assert.Equal(expectedBefore, parameters.Before);
         Assert.Equal(expectedCreatedAt, parameters.CreatedAt);
         Assert.Equal(expectedLimit, parameters.Limit);
         Assert.Equal(expectedProductID, parameters.ProductID);
-        Assert.Equal(expectedStatus, parameters.Status);
+        Assert.NotNull(parameters.Status);
+        Assert.Equal(expectedStatus.Count, parameters.Status.Count);
+        for (int i = 0; i < expectedStatus.Count; i++)
+        {
+            Assert.Equal(expectedStatus[i], parameters.Status[i]);
+        }
     }
 
     [Fact]
@@ -110,7 +117,7 @@ public class PlanListParamsTest : TestBase
             },
             Limit = 1,
             ProductID = "productId",
-            Status = "status",
+            Status = [PlanListParamsStatus.Draft],
         };
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
@@ -118,7 +125,7 @@ public class PlanListParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://api.stigg.io/api/v1/plans?after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&createdAt%5bgt%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5bgte%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5blt%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5blte%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&limit=1&productId=productId&status=status"
+                    "https://api.stigg.io/api/v1/plans?after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&createdAt%5bgt%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5bgte%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5blt%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5blte%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&limit=1&productId=productId&status=DRAFT"
                 ),
                 url
             )
@@ -141,7 +148,7 @@ public class PlanListParamsTest : TestBase
             },
             Limit = 1,
             ProductID = "productId",
-            Status = "status",
+            Status = [PlanListParamsStatus.Draft],
         };
 
         PlanListParams copied = new(parameters);
@@ -308,5 +315,65 @@ public class CreatedAtTest : TestBase
         CreatedAt copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class PlanListParamsStatusTest : TestBase
+{
+    [Theory]
+    [InlineData(PlanListParamsStatus.Draft)]
+    [InlineData(PlanListParamsStatus.Published)]
+    [InlineData(PlanListParamsStatus.Archived)]
+    public void Validation_Works(PlanListParamsStatus rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, PlanListParamsStatus> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, PlanListParamsStatus>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(PlanListParamsStatus.Draft)]
+    [InlineData(PlanListParamsStatus.Published)]
+    [InlineData(PlanListParamsStatus.Archived)]
+    public void SerializationRoundtrip_Works(PlanListParamsStatus rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, PlanListParamsStatus> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, PlanListParamsStatus>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, PlanListParamsStatus>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, PlanListParamsStatus>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }

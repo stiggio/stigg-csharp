@@ -47,7 +47,7 @@ public class IntegrationServiceTest : TestBase
             {
                 IDValue = "id",
                 SyncedEntityID = "syncedEntityId",
-                VendorIdentifier = VendorIdentifier.Auth0,
+                VendorIdentifier = IntegrationLinkParamsVendorIdentifier.Auth0,
             },
             TestContext.Current.CancellationToken
         );

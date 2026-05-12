@@ -33,12 +33,19 @@ public sealed class CreditService : ICreditService
 
         _withRawResponse = new(() => new CreditServiceWithRawResponse(client.WithRawResponse));
         _grants = new(() => new GrantService(client));
+        _customCurrencies = new(() => new CustomCurrencyService(client));
     }
 
     readonly Lazy<IGrantService> _grants;
     public IGrantService Grants
     {
         get { return _grants.Value; }
+    }
+
+    readonly Lazy<ICustomCurrencyService> _customCurrencies;
+    public ICustomCurrencyService CustomCurrencies
+    {
+        get { return _customCurrencies.Value; }
     }
 
     /// <inheritdoc/>
@@ -94,12 +101,19 @@ public sealed class CreditServiceWithRawResponse : ICreditServiceWithRawResponse
         _client = client;
 
         _grants = new(() => new GrantServiceWithRawResponse(client));
+        _customCurrencies = new(() => new CustomCurrencyServiceWithRawResponse(client));
     }
 
     readonly Lazy<IGrantServiceWithRawResponse> _grants;
     public IGrantServiceWithRawResponse Grants
     {
         get { return _grants.Value; }
+    }
+
+    readonly Lazy<ICustomCurrencyServiceWithRawResponse> _customCurrencies;
+    public ICustomCurrencyServiceWithRawResponse CustomCurrencies
+    {
+        get { return _customCurrencies.Value; }
     }
 
     /// <inheritdoc/>

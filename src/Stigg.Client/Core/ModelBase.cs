@@ -1,7 +1,7 @@
 using System.Text.Json;
 using Stigg.Client.Exceptions;
 using Stigg.Client.Models.V1.Customers;
-using Stigg.Client.Models.V1.Products;
+using Stigg.Client.Models.V1.Events.Credits.CustomCurrencies;
 using Addons = Stigg.Client.Models.V1.Addons;
 using Coupons = Stigg.Client.Models.V1.Coupons;
 using Credits = Stigg.Client.Models.V1.Events.Credits;
@@ -12,6 +12,7 @@ using Integrations = Stigg.Client.Models.V1.Customers.Integrations;
 using PaymentMethod = Stigg.Client.Models.V1.Customers.PaymentMethod;
 using Plans = Stigg.Client.Models.V1.Plans;
 using PlansEntitlements = Stigg.Client.Models.V1.Plans.Entitlements;
+using Products = Stigg.Client.Models.V1.Products;
 using PromotionalEntitlements = Stigg.Client.Models.V1.Customers.PromotionalEntitlements;
 using Subscriptions = Stigg.Client.Models.V1.Subscriptions;
 using Usage = Stigg.Client.Models.V1.Usage;
@@ -85,7 +86,7 @@ public abstract record class ModelBase
                 string,
                 PromotionalEntitlements::WeeklyResetPeriodConfigAccordingTo
             >(),
-            new ApiEnumConverter<string, PromotionalEntitlements::Status>(),
+            new ApiEnumConverter<string, PromotionalEntitlements::DataStatus>(),
             new ApiEnumConverter<
                 string,
                 PromotionalEntitlements::PromotionalEntitlementListResponsePeriod
@@ -145,11 +146,13 @@ public abstract record class ModelBase
                 string,
                 PromotionalEntitlements::YearlyResetPeriodConfigurationAccordingTo
             >(),
+            new ApiEnumConverter<string, PromotionalEntitlements::Status>(),
             new ApiEnumConverter<string, Integrations::IntegrationListResponseVendorIdentifier>(),
             new ApiEnumConverter<string, Integrations::VendorIdentifier>(),
+            new ApiEnumConverter<string, Integrations::IntegrationLinkParamsVendorIdentifier>(),
             new ApiEnumConverter<string, Subscriptions::PaymentCollection>(),
-            new ApiEnumConverter<string, Subscriptions::PricingType>(),
-            new ApiEnumConverter<string, Subscriptions::Status>(),
+            new ApiEnumConverter<string, Subscriptions::DataPricingType>(),
+            new ApiEnumConverter<string, Subscriptions::DataStatus>(),
             new ApiEnumConverter<string, Subscriptions::CancelReason>(),
             new ApiEnumConverter<string, Subscriptions::CouponStatus>(),
             new ApiEnumConverter<string, Subscriptions::CouponAmountsOffCurrency>(),
@@ -312,6 +315,8 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Subscriptions::MinimumSpendCurrency>(),
             new ApiEnumConverter<string, Subscriptions::PriceOverrideCurrency>(),
             new ApiEnumConverter<string, Subscriptions::ScheduleStrategy>(),
+            new ApiEnumConverter<string, Subscriptions::PricingType>(),
+            new ApiEnumConverter<string, Subscriptions::Status>(),
             new ApiEnumConverter<string, Subscriptions::CancellationAction>(),
             new ApiEnumConverter<string, Subscriptions::CancellationTime>(),
             new ApiEnumConverter<string, Subscriptions::SubscriptionBillingPeriod>(),
@@ -392,13 +397,14 @@ public abstract record class ModelBase
             >(),
             new ApiEnumConverter<string, Coupons::DataAmountsOffCurrency>(),
             new ApiEnumConverter<string, Coupons::Source>(),
-            new ApiEnumConverter<string, Coupons::Status>(),
+            new ApiEnumConverter<string, Coupons::DataStatus>(),
             new ApiEnumConverter<string, Coupons::DataType>(),
             new ApiEnumConverter<string, Coupons::CouponListResponseAmountsOffCurrency>(),
             new ApiEnumConverter<string, Coupons::CouponListResponseSource>(),
             new ApiEnumConverter<string, Coupons::CouponListResponseStatus>(),
             new ApiEnumConverter<string, Coupons::CouponListResponseType>(),
             new ApiEnumConverter<string, Coupons::Currency>(),
+            new ApiEnumConverter<string, Coupons::Status>(),
             new ApiEnumConverter<string, Coupons::Type>(),
             new ApiEnumConverter<string, Credits::GrantExpirationPeriod>(),
             new ApiEnumConverter<string, Credits::ThresholdType>(),
@@ -419,6 +425,7 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Grants::GrantType>(),
             new ApiEnumConverter<string, Grants::Currency>(),
             new ApiEnumConverter<string, Grants::PaymentCollectionMethod>(),
+            new ApiEnumConverter<string, Status>(),
             new ApiEnumConverter<string, Features::DataFeatureStatus>(),
             new ApiEnumConverter<string, Features::DataFeatureType>(),
             new ApiEnumConverter<string, Features::DataMeterType>(),
@@ -434,6 +441,9 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Features::FeatureStatus>(),
             new ApiEnumConverter<string, Features::MeterType>(),
             new ApiEnumConverter<string, Features::Round>(),
+            new ApiEnumConverter<string, Features::FeatureListFeaturesParamsFeatureType>(),
+            new ApiEnumConverter<string, Features::FeatureListFeaturesParamsMeterType>(),
+            new ApiEnumConverter<string, Features::Status>(),
             new ApiEnumConverter<string, Features::Function>(),
             new ApiEnumConverter<string, Features::Operation>(),
             new ApiEnumConverter<
@@ -485,6 +495,7 @@ public abstract record class ModelBase
                 Addons::PricingModelYearlyResetPeriodConfigurationAccordingTo
             >(),
             new ApiEnumConverter<string, Addons::AddonUpdateParamsStatus>(),
+            new ApiEnumConverter<string, Addons::AddonListParamsStatus>(),
             new ApiEnumConverter<string, Addons::MigrationType>(),
             new ApiEnumConverter<string, Entitlements::DataFeatureBehavior>(),
             new ApiEnumConverter<string, Entitlements::DataFeatureHiddenFromWidget>(),
@@ -646,6 +657,7 @@ public abstract record class ModelBase
                 string,
                 Plans::PlanUpdateParamsDefaultTrialConfigTrialEndBehavior
             >(),
+            new ApiEnumConverter<string, Plans::PlanListParamsStatus>(),
             new ApiEnumConverter<string, Plans::MigrationType>(),
             new ApiEnumConverter<string, PlansEntitlements::DataFeatureBehavior>(),
             new ApiEnumConverter<string, PlansEntitlements::DataFeatureHiddenFromWidget>(),
@@ -763,27 +775,31 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, PlansEntitlements::BodyCreditHiddenFromWidget>(),
             new ApiEnumConverter<string, Usage::Type>(),
             new ApiEnumConverter<string, Usage::UpdateBehavior>(),
-            new ApiEnumConverter<string, Status>(),
-            new ApiEnumConverter<string, DataProductSettingsSubscriptionCancellationTime>(),
-            new ApiEnumConverter<string, DataProductSettingsSubscriptionEndSetup>(),
-            new ApiEnumConverter<string, DataProductSettingsSubscriptionStartSetup>(),
-            new ApiEnumConverter<string, ProductListProductsResponseStatus>(),
+            new ApiEnumConverter<string, Products::DataStatus>(),
             new ApiEnumConverter<
                 string,
-                ProductListProductsResponseProductSettingsSubscriptionCancellationTime
+                Products::DataProductSettingsSubscriptionCancellationTime
+            >(),
+            new ApiEnumConverter<string, Products::DataProductSettingsSubscriptionEndSetup>(),
+            new ApiEnumConverter<string, Products::DataProductSettingsSubscriptionStartSetup>(),
+            new ApiEnumConverter<string, Products::ProductListProductsResponseStatus>(),
+            new ApiEnumConverter<
+                string,
+                Products::ProductListProductsResponseProductSettingsSubscriptionCancellationTime
             >(),
             new ApiEnumConverter<
                 string,
-                ProductListProductsResponseProductSettingsSubscriptionEndSetup
+                Products::ProductListProductsResponseProductSettingsSubscriptionEndSetup
             >(),
             new ApiEnumConverter<
                 string,
-                ProductListProductsResponseProductSettingsSubscriptionStartSetup
+                Products::ProductListProductsResponseProductSettingsSubscriptionStartSetup
             >(),
-            new ApiEnumConverter<string, SubscriptionCancellationTime>(),
-            new ApiEnumConverter<string, SubscriptionEndSetup>(),
-            new ApiEnumConverter<string, SubscriptionStartSetup>(),
-            new ApiEnumConverter<string, Behavior>(),
+            new ApiEnumConverter<string, Products::Status>(),
+            new ApiEnumConverter<string, Products::SubscriptionCancellationTime>(),
+            new ApiEnumConverter<string, Products::SubscriptionEndSetup>(),
+            new ApiEnumConverter<string, Products::SubscriptionStartSetup>(),
+            new ApiEnumConverter<string, Products::Behavior>(),
         },
     };
 

@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Stigg.Client.Core;
+using Stigg.Client.Exceptions;
 using Stigg.Client.Models.V1.Subscriptions;
 
 namespace Stigg.Client.Tests.Models.V1.Subscriptions;
@@ -24,9 +26,9 @@ public class SubscriptionListParamsTest : TestBase
             CustomerID = "customerId",
             Limit = 1,
             PlanID = "planId",
-            PricingType = "pricingType",
+            PricingType = [PricingType.Free],
             ResourceID = "resourceId",
-            Status = "status",
+            Status = [Status.PaymentPending],
         };
 
         string expectedAfter = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
@@ -41,9 +43,9 @@ public class SubscriptionListParamsTest : TestBase
         string expectedCustomerID = "customerId";
         long expectedLimit = 1;
         string expectedPlanID = "planId";
-        string expectedPricingType = "pricingType";
+        List<ApiEnum<string, PricingType>> expectedPricingType = [PricingType.Free];
         string expectedResourceID = "resourceId";
-        string expectedStatus = "status";
+        List<ApiEnum<string, Status>> expectedStatus = [Status.PaymentPending];
 
         Assert.Equal(expectedAfter, parameters.After);
         Assert.Equal(expectedBefore, parameters.Before);
@@ -51,9 +53,19 @@ public class SubscriptionListParamsTest : TestBase
         Assert.Equal(expectedCustomerID, parameters.CustomerID);
         Assert.Equal(expectedLimit, parameters.Limit);
         Assert.Equal(expectedPlanID, parameters.PlanID);
-        Assert.Equal(expectedPricingType, parameters.PricingType);
+        Assert.NotNull(parameters.PricingType);
+        Assert.Equal(expectedPricingType.Count, parameters.PricingType.Count);
+        for (int i = 0; i < expectedPricingType.Count; i++)
+        {
+            Assert.Equal(expectedPricingType[i], parameters.PricingType[i]);
+        }
         Assert.Equal(expectedResourceID, parameters.ResourceID);
-        Assert.Equal(expectedStatus, parameters.Status);
+        Assert.NotNull(parameters.Status);
+        Assert.Equal(expectedStatus.Count, parameters.Status.Count);
+        for (int i = 0; i < expectedStatus.Count; i++)
+        {
+            Assert.Equal(expectedStatus[i], parameters.Status[i]);
+        }
     }
 
     [Fact]
@@ -135,9 +147,9 @@ public class SubscriptionListParamsTest : TestBase
             CustomerID = "customerId",
             Limit = 1,
             PlanID = "planId",
-            PricingType = "pricingType",
+            PricingType = [PricingType.Free],
             ResourceID = "resourceId",
-            Status = "status",
+            Status = [Status.PaymentPending],
         };
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
@@ -145,7 +157,7 @@ public class SubscriptionListParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://api.stigg.io/api/v1/subscriptions?after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&createdAt%5bgt%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5bgte%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5blt%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5blte%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&customerId=customerId&limit=1&planId=planId&pricingType=pricingType&resourceId=resourceId&status=status"
+                    "https://api.stigg.io/api/v1/subscriptions?after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&createdAt%5bgt%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5bgte%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5blt%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5blte%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&customerId=customerId&limit=1&planId=planId&pricingType=FREE&resourceId=resourceId&status=PAYMENT_PENDING"
                 ),
                 url
             )
@@ -169,9 +181,9 @@ public class SubscriptionListParamsTest : TestBase
             CustomerID = "customerId",
             Limit = 1,
             PlanID = "planId",
-            PricingType = "pricingType",
+            PricingType = [PricingType.Free],
             ResourceID = "resourceId",
-            Status = "status",
+            Status = [Status.PaymentPending],
         };
 
         SubscriptionListParams copied = new(parameters);
@@ -338,5 +350,131 @@ public class CreatedAtTest : TestBase
         CreatedAt copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class PricingTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(PricingType.Free)]
+    [InlineData(PricingType.Paid)]
+    [InlineData(PricingType.Custom)]
+    public void Validation_Works(PricingType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, PricingType> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, PricingType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(PricingType.Free)]
+    [InlineData(PricingType.Paid)]
+    [InlineData(PricingType.Custom)]
+    public void SerializationRoundtrip_Works(PricingType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, PricingType> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, PricingType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, PricingType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, PricingType>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class StatusTest : TestBase
+{
+    [Theory]
+    [InlineData(Status.PaymentPending)]
+    [InlineData(Status.Active)]
+    [InlineData(Status.Expired)]
+    [InlineData(Status.InTrial)]
+    [InlineData(Status.Canceled)]
+    [InlineData(Status.NotStarted)]
+    public void Validation_Works(Status rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Status> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(Status.PaymentPending)]
+    [InlineData(Status.Active)]
+    [InlineData(Status.Expired)]
+    [InlineData(Status.InTrial)]
+    [InlineData(Status.Canceled)]
+    [InlineData(Status.NotStarted)]
+    public void SerializationRoundtrip_Works(Status rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Status> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }

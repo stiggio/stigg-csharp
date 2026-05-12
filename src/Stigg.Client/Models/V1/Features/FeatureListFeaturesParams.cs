@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Stigg.Client.Core;
+using Stigg.Client.Exceptions;
 
 namespace Stigg.Client.Models.V1.Features;
 
@@ -105,12 +107,14 @@ public record class FeatureListFeaturesParams : ParamsBase
     /// <summary>
     /// Filter by feature type. Supports comma-separated values for multiple types
     /// </summary>
-    public string? FeatureType
+    public IReadOnlyList<ApiEnum<string, FeatureListFeaturesParamsFeatureType>>? FeatureType
     {
         get
         {
             this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableClass<string>("featureType");
+            return this._rawQueryData.GetNullableStruct<
+                ImmutableArray<ApiEnum<string, FeatureListFeaturesParamsFeatureType>>
+            >("featureType");
         }
         init
         {
@@ -119,7 +123,9 @@ public record class FeatureListFeaturesParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData.Set("featureType", value);
+            this._rawQueryData.Set<ImmutableArray<
+                ApiEnum<string, FeatureListFeaturesParamsFeatureType>
+            >?>("featureType", value == null ? null : ImmutableArray.ToImmutableArray(value));
         }
     }
 
@@ -147,12 +153,14 @@ public record class FeatureListFeaturesParams : ParamsBase
     /// <summary>
     /// Filter by meter type. Supports comma-separated values for multiple types
     /// </summary>
-    public string? MeterType
+    public IReadOnlyList<ApiEnum<string, FeatureListFeaturesParamsMeterType>>? MeterType
     {
         get
         {
             this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableClass<string>("meterType");
+            return this._rawQueryData.GetNullableStruct<
+                ImmutableArray<ApiEnum<string, FeatureListFeaturesParamsMeterType>>
+            >("meterType");
         }
         init
         {
@@ -161,19 +169,23 @@ public record class FeatureListFeaturesParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData.Set("meterType", value);
+            this._rawQueryData.Set<ImmutableArray<
+                ApiEnum<string, FeatureListFeaturesParamsMeterType>
+            >?>("meterType", value == null ? null : ImmutableArray.ToImmutableArray(value));
         }
     }
 
     /// <summary>
     /// Filter by feature status. Supports comma-separated values for multiple statuses
     /// </summary>
-    public string? Status
+    public IReadOnlyList<ApiEnum<string, Status>>? Status
     {
         get
         {
             this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableClass<string>("status");
+            return this._rawQueryData.GetNullableStruct<ImmutableArray<ApiEnum<string, Status>>>(
+                "status"
+            );
         }
         init
         {
@@ -182,7 +194,10 @@ public record class FeatureListFeaturesParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData.Set("status", value);
+            this._rawQueryData.Set<ImmutableArray<ApiEnum<string, Status>>?>(
+                "status",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
         }
     }
 
@@ -408,4 +423,143 @@ class CreatedAtFromRaw : IFromRawJson<CreatedAt>
     /// <inheritdoc/>
     public CreatedAt FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         CreatedAt.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(FeatureListFeaturesParamsFeatureTypeConverter))]
+public enum FeatureListFeaturesParamsFeatureType
+{
+    Boolean,
+    Number,
+    Enum,
+}
+
+sealed class FeatureListFeaturesParamsFeatureTypeConverter
+    : JsonConverter<FeatureListFeaturesParamsFeatureType>
+{
+    public override FeatureListFeaturesParamsFeatureType Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "BOOLEAN" => FeatureListFeaturesParamsFeatureType.Boolean,
+            "NUMBER" => FeatureListFeaturesParamsFeatureType.Number,
+            "ENUM" => FeatureListFeaturesParamsFeatureType.Enum,
+            _ => (FeatureListFeaturesParamsFeatureType)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        FeatureListFeaturesParamsFeatureType value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                FeatureListFeaturesParamsFeatureType.Boolean => "BOOLEAN",
+                FeatureListFeaturesParamsFeatureType.Number => "NUMBER",
+                FeatureListFeaturesParamsFeatureType.Enum => "ENUM",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+[JsonConverter(typeof(FeatureListFeaturesParamsMeterTypeConverter))]
+public enum FeatureListFeaturesParamsMeterType
+{
+    None,
+    Fluctuating,
+    Incremental,
+}
+
+sealed class FeatureListFeaturesParamsMeterTypeConverter
+    : JsonConverter<FeatureListFeaturesParamsMeterType>
+{
+    public override FeatureListFeaturesParamsMeterType Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "None" => FeatureListFeaturesParamsMeterType.None,
+            "FLUCTUATING" => FeatureListFeaturesParamsMeterType.Fluctuating,
+            "INCREMENTAL" => FeatureListFeaturesParamsMeterType.Incremental,
+            _ => (FeatureListFeaturesParamsMeterType)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        FeatureListFeaturesParamsMeterType value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                FeatureListFeaturesParamsMeterType.None => "None",
+                FeatureListFeaturesParamsMeterType.Fluctuating => "FLUCTUATING",
+                FeatureListFeaturesParamsMeterType.Incremental => "INCREMENTAL",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+[JsonConverter(typeof(StatusConverter))]
+public enum Status
+{
+    New,
+    Suspended,
+    Active,
+}
+
+sealed class StatusConverter : JsonConverter<Status>
+{
+    public override Status Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "NEW" => Status.New,
+            "SUSPENDED" => Status.Suspended,
+            "ACTIVE" => Status.Active,
+            _ => (Status)(-1),
+        };
+    }
+
+    public override void Write(Utf8JsonWriter writer, Status value, JsonSerializerOptions options)
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                Status.New => "NEW",
+                Status.Suspended => "SUSPENDED",
+                Status.Active => "ACTIVE",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }

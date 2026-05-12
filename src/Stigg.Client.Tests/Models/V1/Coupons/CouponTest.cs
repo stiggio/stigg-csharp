@@ -27,7 +27,7 @@ public class CouponTest : TestBase
                 Name = "name",
                 PercentOff = 1,
                 Source = Source.Stigg,
-                Status = Status.Active,
+                Status = DataStatus.Active,
                 Type = DataType.Fixed,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -46,7 +46,7 @@ public class CouponTest : TestBase
             Name = "name",
             PercentOff = 1,
             Source = Source.Stigg,
-            Status = Status.Active,
+            Status = DataStatus.Active,
             Type = DataType.Fixed,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -72,7 +72,7 @@ public class CouponTest : TestBase
                 Name = "name",
                 PercentOff = 1,
                 Source = Source.Stigg,
-                Status = Status.Active,
+                Status = DataStatus.Active,
                 Type = DataType.Fixed,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -102,7 +102,7 @@ public class CouponTest : TestBase
                 Name = "name",
                 PercentOff = 1,
                 Source = Source.Stigg,
-                Status = Status.Active,
+                Status = DataStatus.Active,
                 Type = DataType.Fixed,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -125,7 +125,7 @@ public class CouponTest : TestBase
             Name = "name",
             PercentOff = 1,
             Source = Source.Stigg,
-            Status = Status.Active,
+            Status = DataStatus.Active,
             Type = DataType.Fixed,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -151,7 +151,7 @@ public class CouponTest : TestBase
                 Name = "name",
                 PercentOff = 1,
                 Source = Source.Stigg,
-                Status = Status.Active,
+                Status = DataStatus.Active,
                 Type = DataType.Fixed,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -178,7 +178,7 @@ public class CouponTest : TestBase
                 Name = "name",
                 PercentOff = 1,
                 Source = Source.Stigg,
-                Status = Status.Active,
+                Status = DataStatus.Active,
                 Type = DataType.Fixed,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -208,7 +208,7 @@ public class DataTest : TestBase
             Name = "name",
             PercentOff = 1,
             Source = Source.Stigg,
-            Status = Status.Active,
+            Status = DataStatus.Active,
             Type = DataType.Fixed,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -227,7 +227,7 @@ public class DataTest : TestBase
         string expectedName = "name";
         long expectedPercentOff = 1;
         ApiEnum<string, Source> expectedSource = Source.Stigg;
-        ApiEnum<string, Status> expectedStatus = Status.Active;
+        ApiEnum<string, DataStatus> expectedStatus = DataStatus.Active;
         ApiEnum<string, DataType> expectedType = DataType.Fixed;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
@@ -275,7 +275,7 @@ public class DataTest : TestBase
             Name = "name",
             PercentOff = 1,
             Source = Source.Stigg,
-            Status = Status.Active,
+            Status = DataStatus.Active,
             Type = DataType.Fixed,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -302,7 +302,7 @@ public class DataTest : TestBase
             Name = "name",
             PercentOff = 1,
             Source = Source.Stigg,
-            Status = Status.Active,
+            Status = DataStatus.Active,
             Type = DataType.Fixed,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -325,7 +325,7 @@ public class DataTest : TestBase
         string expectedName = "name";
         long expectedPercentOff = 1;
         ApiEnum<string, Source> expectedSource = Source.Stigg;
-        ApiEnum<string, Status> expectedStatus = Status.Active;
+        ApiEnum<string, DataStatus> expectedStatus = DataStatus.Active;
         ApiEnum<string, DataType> expectedType = DataType.Fixed;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
@@ -373,7 +373,7 @@ public class DataTest : TestBase
             Name = "name",
             PercentOff = 1,
             Source = Source.Stigg,
-            Status = Status.Active,
+            Status = DataStatus.Active,
             Type = DataType.Fixed,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -397,7 +397,7 @@ public class DataTest : TestBase
             Name = "name",
             PercentOff = 1,
             Source = Source.Stigg,
-            Status = Status.Active,
+            Status = DataStatus.Active,
             Type = DataType.Fixed,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -820,22 +820,22 @@ public class SourceTest : TestBase
     }
 }
 
-public class StatusTest : TestBase
+public class DataStatusTest : TestBase
 {
     [Theory]
-    [InlineData(Status.Active)]
-    [InlineData(Status.Archived)]
-    public void Validation_Works(Status rawValue)
+    [InlineData(DataStatus.Active)]
+    [InlineData(DataStatus.Archived)]
+    public void Validation_Works(DataStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Status> value = rawValue;
+        ApiEnum<string, DataStatus> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataStatus>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -845,15 +845,15 @@ public class StatusTest : TestBase
     }
 
     [Theory]
-    [InlineData(Status.Active)]
-    [InlineData(Status.Archived)]
-    public void SerializationRoundtrip_Works(Status rawValue)
+    [InlineData(DataStatus.Active)]
+    [InlineData(DataStatus.Archived)]
+    public void SerializationRoundtrip_Works(DataStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Status> value = rawValue;
+        ApiEnum<string, DataStatus> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataStatus>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -864,12 +864,12 @@ public class StatusTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataStatus>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataStatus>>(
             json,
             ModelBase.SerializerOptions
         );

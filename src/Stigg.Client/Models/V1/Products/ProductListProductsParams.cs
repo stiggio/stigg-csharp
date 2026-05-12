@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Stigg.Client.Core;
+using Stigg.Client.Exceptions;
 
 namespace Stigg.Client.Models.V1.Products;
 
@@ -126,12 +128,14 @@ public record class ProductListProductsParams : ParamsBase
     /// <summary>
     /// Filter by product status. Supports comma-separated values for multiple statuses
     /// </summary>
-    public string? Status
+    public IReadOnlyList<ApiEnum<string, Status>>? Status
     {
         get
         {
             this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableClass<string>("status");
+            return this._rawQueryData.GetNullableStruct<ImmutableArray<ApiEnum<string, Status>>>(
+                "status"
+            );
         }
         init
         {
@@ -140,7 +144,10 @@ public record class ProductListProductsParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData.Set("status", value);
+            this._rawQueryData.Set<ImmutableArray<ApiEnum<string, Status>>?>(
+                "status",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
         }
     }
 
@@ -366,4 +373,44 @@ class CreatedAtFromRaw : IFromRawJson<CreatedAt>
     /// <inheritdoc/>
     public CreatedAt FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         CreatedAt.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(StatusConverter))]
+public enum Status
+{
+    Published,
+    Archived,
+}
+
+sealed class StatusConverter : JsonConverter<Status>
+{
+    public override Status Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "PUBLISHED" => Status.Published,
+            "ARCHIVED" => Status.Archived,
+            _ => (Status)(-1),
+        };
+    }
+
+    public override void Write(Utf8JsonWriter writer, Status value, JsonSerializerOptions options)
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                Status.Published => "PUBLISHED",
+                Status.Archived => "ARCHIVED",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }

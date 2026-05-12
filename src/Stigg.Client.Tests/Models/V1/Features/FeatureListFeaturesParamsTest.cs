@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Stigg.Client.Core;
+using Stigg.Client.Exceptions;
 using Stigg.Client.Models.V1.Features;
 
 namespace Stigg.Client.Tests.Models.V1.Features;
@@ -22,10 +24,10 @@ public class FeatureListFeaturesParamsTest : TestBase
                 Lt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Lte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            FeatureType = "featureType",
+            FeatureType = [FeatureListFeaturesParamsFeatureType.Boolean],
             Limit = 1,
-            MeterType = "meterType",
-            Status = "status",
+            MeterType = [FeatureListFeaturesParamsMeterType.None],
+            Status = [Status.New],
         };
 
         string expectedID = "id";
@@ -38,19 +40,40 @@ public class FeatureListFeaturesParamsTest : TestBase
             Lt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Lte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
-        string expectedFeatureType = "featureType";
+        List<ApiEnum<string, FeatureListFeaturesParamsFeatureType>> expectedFeatureType =
+        [
+            FeatureListFeaturesParamsFeatureType.Boolean,
+        ];
         long expectedLimit = 1;
-        string expectedMeterType = "meterType";
-        string expectedStatus = "status";
+        List<ApiEnum<string, FeatureListFeaturesParamsMeterType>> expectedMeterType =
+        [
+            FeatureListFeaturesParamsMeterType.None,
+        ];
+        List<ApiEnum<string, Status>> expectedStatus = [Status.New];
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedAfter, parameters.After);
         Assert.Equal(expectedBefore, parameters.Before);
         Assert.Equal(expectedCreatedAt, parameters.CreatedAt);
-        Assert.Equal(expectedFeatureType, parameters.FeatureType);
+        Assert.NotNull(parameters.FeatureType);
+        Assert.Equal(expectedFeatureType.Count, parameters.FeatureType.Count);
+        for (int i = 0; i < expectedFeatureType.Count; i++)
+        {
+            Assert.Equal(expectedFeatureType[i], parameters.FeatureType[i]);
+        }
         Assert.Equal(expectedLimit, parameters.Limit);
-        Assert.Equal(expectedMeterType, parameters.MeterType);
-        Assert.Equal(expectedStatus, parameters.Status);
+        Assert.NotNull(parameters.MeterType);
+        Assert.Equal(expectedMeterType.Count, parameters.MeterType.Count);
+        for (int i = 0; i < expectedMeterType.Count; i++)
+        {
+            Assert.Equal(expectedMeterType[i], parameters.MeterType[i]);
+        }
+        Assert.NotNull(parameters.Status);
+        Assert.Equal(expectedStatus.Count, parameters.Status.Count);
+        for (int i = 0; i < expectedStatus.Count; i++)
+        {
+            Assert.Equal(expectedStatus[i], parameters.Status[i]);
+        }
     }
 
     [Fact]
@@ -125,10 +148,10 @@ public class FeatureListFeaturesParamsTest : TestBase
                 Lt = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
                 Lte = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
             },
-            FeatureType = "featureType",
+            FeatureType = [FeatureListFeaturesParamsFeatureType.Boolean],
             Limit = 1,
-            MeterType = "meterType",
-            Status = "status",
+            MeterType = [FeatureListFeaturesParamsMeterType.None],
+            Status = [Status.New],
         };
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
@@ -136,7 +159,7 @@ public class FeatureListFeaturesParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://api.stigg.io/api/v1/features?id=id&after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&createdAt%5bgt%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5bgte%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5blt%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5blte%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&featureType=featureType&limit=1&meterType=meterType&status=status"
+                    "https://api.stigg.io/api/v1/features?id=id&after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&createdAt%5bgt%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5bgte%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5blt%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5blte%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&featureType=BOOLEAN&limit=1&meterType=None&status=NEW"
                 ),
                 url
             )
@@ -158,10 +181,10 @@ public class FeatureListFeaturesParamsTest : TestBase
                 Lt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Lte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            FeatureType = "featureType",
+            FeatureType = [FeatureListFeaturesParamsFeatureType.Boolean],
             Limit = 1,
-            MeterType = "meterType",
-            Status = "status",
+            MeterType = [FeatureListFeaturesParamsMeterType.None],
+            Status = [Status.New],
         };
 
         FeatureListFeaturesParams copied = new(parameters);
@@ -328,5 +351,179 @@ public class CreatedAtTest : TestBase
         CreatedAt copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class FeatureListFeaturesParamsFeatureTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(FeatureListFeaturesParamsFeatureType.Boolean)]
+    [InlineData(FeatureListFeaturesParamsFeatureType.Number)]
+    [InlineData(FeatureListFeaturesParamsFeatureType.Enum)]
+    public void Validation_Works(FeatureListFeaturesParamsFeatureType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, FeatureListFeaturesParamsFeatureType> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, FeatureListFeaturesParamsFeatureType>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(FeatureListFeaturesParamsFeatureType.Boolean)]
+    [InlineData(FeatureListFeaturesParamsFeatureType.Number)]
+    [InlineData(FeatureListFeaturesParamsFeatureType.Enum)]
+    public void SerializationRoundtrip_Works(FeatureListFeaturesParamsFeatureType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, FeatureListFeaturesParamsFeatureType> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, FeatureListFeaturesParamsFeatureType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, FeatureListFeaturesParamsFeatureType>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, FeatureListFeaturesParamsFeatureType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class FeatureListFeaturesParamsMeterTypeTest : TestBase
+{
+    [Theory]
+    [InlineData(FeatureListFeaturesParamsMeterType.None)]
+    [InlineData(FeatureListFeaturesParamsMeterType.Fluctuating)]
+    [InlineData(FeatureListFeaturesParamsMeterType.Incremental)]
+    public void Validation_Works(FeatureListFeaturesParamsMeterType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, FeatureListFeaturesParamsMeterType> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, FeatureListFeaturesParamsMeterType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(FeatureListFeaturesParamsMeterType.None)]
+    [InlineData(FeatureListFeaturesParamsMeterType.Fluctuating)]
+    [InlineData(FeatureListFeaturesParamsMeterType.Incremental)]
+    public void SerializationRoundtrip_Works(FeatureListFeaturesParamsMeterType rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, FeatureListFeaturesParamsMeterType> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, FeatureListFeaturesParamsMeterType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, FeatureListFeaturesParamsMeterType>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, FeatureListFeaturesParamsMeterType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class StatusTest : TestBase
+{
+    [Theory]
+    [InlineData(Status.New)]
+    [InlineData(Status.Suspended)]
+    [InlineData(Status.Active)]
+    public void Validation_Works(Status rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Status> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(Status.New)]
+    [InlineData(Status.Suspended)]
+    [InlineData(Status.Active)]
+    public void SerializationRoundtrip_Works(Status rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Status> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }

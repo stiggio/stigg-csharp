@@ -241,12 +241,12 @@ public sealed record class Data : JsonModel
     /// <summary>
     /// Current status of the coupon
     /// </summary>
-    public required ApiEnum<string, Status> Status
+    public required ApiEnum<string, DataStatus> Status
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, Status>>("status");
+            return this._rawData.GetNotNullClass<ApiEnum<string, DataStatus>>("status");
         }
         init { this._rawData.Set("status", value); }
     }
@@ -848,16 +848,16 @@ sealed class SourceConverter : JsonConverter<Source>
 /// <summary>
 /// Current status of the coupon
 /// </summary>
-[JsonConverter(typeof(StatusConverter))]
-public enum Status
+[JsonConverter(typeof(DataStatusConverter))]
+public enum DataStatus
 {
     Active,
     Archived,
 }
 
-sealed class StatusConverter : JsonConverter<Status>
+sealed class DataStatusConverter : JsonConverter<DataStatus>
 {
-    public override Status Read(
+    public override DataStatus Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -865,20 +865,24 @@ sealed class StatusConverter : JsonConverter<Status>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "ACTIVE" => Status.Active,
-            "ARCHIVED" => Status.Archived,
-            _ => (Status)(-1),
+            "ACTIVE" => DataStatus.Active,
+            "ARCHIVED" => DataStatus.Archived,
+            _ => (DataStatus)(-1),
         };
     }
 
-    public override void Write(Utf8JsonWriter writer, Status value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        DataStatus value,
+        JsonSerializerOptions options
+    )
     {
         JsonSerializer.Serialize(
             writer,
             value switch
             {
-                Status.Active => "ACTIVE",
-                Status.Archived => "ARCHIVED",
+                DataStatus.Active => "ACTIVE",
+                DataStatus.Archived => "ARCHIVED",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

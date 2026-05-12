@@ -309,12 +309,12 @@ public sealed record class Data : JsonModel
     /// <summary>
     /// The status of the entitlement
     /// </summary>
-    public required ApiEnum<string, Status> Status
+    public required ApiEnum<string, DataStatus> Status
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, Status>>("status");
+            return this._rawData.GetNotNullClass<ApiEnum<string, DataStatus>>("status");
         }
         init { this._rawData.Set("status", value); }
     }
@@ -1232,17 +1232,17 @@ sealed class WeeklyResetPeriodConfigAccordingToConverter
 /// <summary>
 /// The status of the entitlement
 /// </summary>
-[JsonConverter(typeof(StatusConverter))]
-public enum Status
+[JsonConverter(typeof(DataStatusConverter))]
+public enum DataStatus
 {
     Active,
     Expired,
     Paused,
 }
 
-sealed class StatusConverter : JsonConverter<Status>
+sealed class DataStatusConverter : JsonConverter<DataStatus>
 {
-    public override Status Read(
+    public override DataStatus Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1250,22 +1250,26 @@ sealed class StatusConverter : JsonConverter<Status>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "Active" => Status.Active,
-            "Expired" => Status.Expired,
-            "Paused" => Status.Paused,
-            _ => (Status)(-1),
+            "Active" => DataStatus.Active,
+            "Expired" => DataStatus.Expired,
+            "Paused" => DataStatus.Paused,
+            _ => (DataStatus)(-1),
         };
     }
 
-    public override void Write(Utf8JsonWriter writer, Status value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        DataStatus value,
+        JsonSerializerOptions options
+    )
     {
         JsonSerializer.Serialize(
             writer,
             value switch
             {
-                Status.Active => "Active",
-                Status.Expired => "Expired",
-                Status.Paused => "Paused",
+                DataStatus.Active => "Active",
+                DataStatus.Expired => "Expired",
+                DataStatus.Paused => "Paused",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

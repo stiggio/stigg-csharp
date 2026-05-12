@@ -58,14 +58,14 @@ public record class IntegrationLinkParams : ParamsBase
     /// <summary>
     /// The vendor identifier of integration
     /// </summary>
-    public required ApiEnum<string, VendorIdentifier> VendorIdentifier
+    public required ApiEnum<string, IntegrationLinkParamsVendorIdentifier> VendorIdentifier
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNotNullClass<ApiEnum<string, VendorIdentifier>>(
-                "vendorIdentifier"
-            );
+            return this._rawBodyData.GetNotNullClass<
+                ApiEnum<string, IntegrationLinkParamsVendorIdentifier>
+            >("vendorIdentifier");
         }
         init { this._rawBodyData.Set("vendorIdentifier", value); }
     }
@@ -194,8 +194,8 @@ public record class IntegrationLinkParams : ParamsBase
 /// <summary>
 /// The vendor identifier of integration
 /// </summary>
-[JsonConverter(typeof(VendorIdentifierConverter))]
-public enum VendorIdentifier
+[JsonConverter(typeof(IntegrationLinkParamsVendorIdentifierConverter))]
+public enum IntegrationLinkParamsVendorIdentifier
 {
     Auth0,
     Zuora,
@@ -209,9 +209,10 @@ public enum VendorIdentifier
     AppStore,
 }
 
-sealed class VendorIdentifierConverter : JsonConverter<VendorIdentifier>
+sealed class IntegrationLinkParamsVendorIdentifierConverter
+    : JsonConverter<IntegrationLinkParamsVendorIdentifier>
 {
-    public override VendorIdentifier Read(
+    public override IntegrationLinkParamsVendorIdentifier Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -219,23 +220,23 @@ sealed class VendorIdentifierConverter : JsonConverter<VendorIdentifier>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "AUTH0" => VendorIdentifier.Auth0,
-            "ZUORA" => VendorIdentifier.Zuora,
-            "STRIPE" => VendorIdentifier.Stripe,
-            "HUBSPOT" => VendorIdentifier.Hubspot,
-            "AWS_MARKETPLACE" => VendorIdentifier.AwsMarketplace,
-            "SNOWFLAKE" => VendorIdentifier.Snowflake,
-            "SALESFORCE" => VendorIdentifier.Salesforce,
-            "BIG_QUERY" => VendorIdentifier.BigQuery,
-            "OPEN_FGA" => VendorIdentifier.OpenFga,
-            "APP_STORE" => VendorIdentifier.AppStore,
-            _ => (VendorIdentifier)(-1),
+            "AUTH0" => IntegrationLinkParamsVendorIdentifier.Auth0,
+            "ZUORA" => IntegrationLinkParamsVendorIdentifier.Zuora,
+            "STRIPE" => IntegrationLinkParamsVendorIdentifier.Stripe,
+            "HUBSPOT" => IntegrationLinkParamsVendorIdentifier.Hubspot,
+            "AWS_MARKETPLACE" => IntegrationLinkParamsVendorIdentifier.AwsMarketplace,
+            "SNOWFLAKE" => IntegrationLinkParamsVendorIdentifier.Snowflake,
+            "SALESFORCE" => IntegrationLinkParamsVendorIdentifier.Salesforce,
+            "BIG_QUERY" => IntegrationLinkParamsVendorIdentifier.BigQuery,
+            "OPEN_FGA" => IntegrationLinkParamsVendorIdentifier.OpenFga,
+            "APP_STORE" => IntegrationLinkParamsVendorIdentifier.AppStore,
+            _ => (IntegrationLinkParamsVendorIdentifier)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        VendorIdentifier value,
+        IntegrationLinkParamsVendorIdentifier value,
         JsonSerializerOptions options
     )
     {
@@ -243,16 +244,16 @@ sealed class VendorIdentifierConverter : JsonConverter<VendorIdentifier>
             writer,
             value switch
             {
-                VendorIdentifier.Auth0 => "AUTH0",
-                VendorIdentifier.Zuora => "ZUORA",
-                VendorIdentifier.Stripe => "STRIPE",
-                VendorIdentifier.Hubspot => "HUBSPOT",
-                VendorIdentifier.AwsMarketplace => "AWS_MARKETPLACE",
-                VendorIdentifier.Snowflake => "SNOWFLAKE",
-                VendorIdentifier.Salesforce => "SALESFORCE",
-                VendorIdentifier.BigQuery => "BIG_QUERY",
-                VendorIdentifier.OpenFga => "OPEN_FGA",
-                VendorIdentifier.AppStore => "APP_STORE",
+                IntegrationLinkParamsVendorIdentifier.Auth0 => "AUTH0",
+                IntegrationLinkParamsVendorIdentifier.Zuora => "ZUORA",
+                IntegrationLinkParamsVendorIdentifier.Stripe => "STRIPE",
+                IntegrationLinkParamsVendorIdentifier.Hubspot => "HUBSPOT",
+                IntegrationLinkParamsVendorIdentifier.AwsMarketplace => "AWS_MARKETPLACE",
+                IntegrationLinkParamsVendorIdentifier.Snowflake => "SNOWFLAKE",
+                IntegrationLinkParamsVendorIdentifier.Salesforce => "SALESFORCE",
+                IntegrationLinkParamsVendorIdentifier.BigQuery => "BIG_QUERY",
+                IntegrationLinkParamsVendorIdentifier.OpenFga => "OPEN_FGA",
+                IntegrationLinkParamsVendorIdentifier.AppStore => "APP_STORE",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

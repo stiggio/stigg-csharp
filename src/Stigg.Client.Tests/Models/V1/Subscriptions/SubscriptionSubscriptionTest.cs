@@ -22,9 +22,9 @@ public class SubscriptionSubscriptionTest : TestBase
                 CustomerID = "customerId",
                 PaymentCollection = PaymentCollection.NotRequired,
                 PlanID = "planId",
-                PricingType = PricingType.Free,
+                PricingType = DataPricingType.Free,
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Status = Status.PaymentPending,
+                Status = DataStatus.PaymentPending,
                 Addons = [new() { ID = "id", Quantity = 0 }],
                 BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Budget = new() { HasSoftLimit = true, Limit = 0 },
@@ -122,9 +122,9 @@ public class SubscriptionSubscriptionTest : TestBase
             CustomerID = "customerId",
             PaymentCollection = PaymentCollection.NotRequired,
             PlanID = "planId",
-            PricingType = PricingType.Free,
+            PricingType = DataPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = Status.PaymentPending,
+            Status = DataStatus.PaymentPending,
             Addons = [new() { ID = "id", Quantity = 0 }],
             BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Budget = new() { HasSoftLimit = true, Limit = 0 },
@@ -226,9 +226,9 @@ public class SubscriptionSubscriptionTest : TestBase
                 CustomerID = "customerId",
                 PaymentCollection = PaymentCollection.NotRequired,
                 PlanID = "planId",
-                PricingType = PricingType.Free,
+                PricingType = DataPricingType.Free,
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Status = Status.PaymentPending,
+                Status = DataStatus.PaymentPending,
                 Addons = [new() { ID = "id", Quantity = 0 }],
                 BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Budget = new() { HasSoftLimit = true, Limit = 0 },
@@ -340,9 +340,9 @@ public class SubscriptionSubscriptionTest : TestBase
                 CustomerID = "customerId",
                 PaymentCollection = PaymentCollection.NotRequired,
                 PlanID = "planId",
-                PricingType = PricingType.Free,
+                PricingType = DataPricingType.Free,
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Status = Status.PaymentPending,
+                Status = DataStatus.PaymentPending,
                 Addons = [new() { ID = "id", Quantity = 0 }],
                 BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Budget = new() { HasSoftLimit = true, Limit = 0 },
@@ -447,9 +447,9 @@ public class SubscriptionSubscriptionTest : TestBase
             CustomerID = "customerId",
             PaymentCollection = PaymentCollection.NotRequired,
             PlanID = "planId",
-            PricingType = PricingType.Free,
+            PricingType = DataPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = Status.PaymentPending,
+            Status = DataStatus.PaymentPending,
             Addons = [new() { ID = "id", Quantity = 0 }],
             BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Budget = new() { HasSoftLimit = true, Limit = 0 },
@@ -551,9 +551,9 @@ public class SubscriptionSubscriptionTest : TestBase
                 CustomerID = "customerId",
                 PaymentCollection = PaymentCollection.NotRequired,
                 PlanID = "planId",
-                PricingType = PricingType.Free,
+                PricingType = DataPricingType.Free,
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Status = Status.PaymentPending,
+                Status = DataStatus.PaymentPending,
                 Addons = [new() { ID = "id", Quantity = 0 }],
                 BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Budget = new() { HasSoftLimit = true, Limit = 0 },
@@ -659,9 +659,9 @@ public class SubscriptionSubscriptionTest : TestBase
                 CustomerID = "customerId",
                 PaymentCollection = PaymentCollection.NotRequired,
                 PlanID = "planId",
-                PricingType = PricingType.Free,
+                PricingType = DataPricingType.Free,
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Status = Status.PaymentPending,
+                Status = DataStatus.PaymentPending,
                 Addons = [new() { ID = "id", Quantity = 0 }],
                 BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Budget = new() { HasSoftLimit = true, Limit = 0 },
@@ -770,9 +770,9 @@ public class DataTest : TestBase
             CustomerID = "customerId",
             PaymentCollection = PaymentCollection.NotRequired,
             PlanID = "planId",
-            PricingType = PricingType.Free,
+            PricingType = DataPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = Status.PaymentPending,
+            Status = DataStatus.PaymentPending,
             Addons = [new() { ID = "id", Quantity = 0 }],
             BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Budget = new() { HasSoftLimit = true, Limit = 0 },
@@ -865,9 +865,9 @@ public class DataTest : TestBase
         ApiEnum<string, PaymentCollection> expectedPaymentCollection =
             PaymentCollection.NotRequired;
         string expectedPlanID = "planId";
-        ApiEnum<string, PricingType> expectedPricingType = PricingType.Free;
+        ApiEnum<string, DataPricingType> expectedPricingType = DataPricingType.Free;
         DateTimeOffset expectedStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, Status> expectedStatus = Status.PaymentPending;
+        ApiEnum<string, DataStatus> expectedStatus = DataStatus.PaymentPending;
         List<DataAddon> expectedAddons = [new() { ID = "id", Quantity = 0 }];
         DateTimeOffset expectedBillingCycleAnchor = DateTimeOffset.Parse(
             "2019-12-27T18:11:19.117Z"
@@ -1030,9 +1030,9 @@ public class DataTest : TestBase
             CustomerID = "customerId",
             PaymentCollection = PaymentCollection.NotRequired,
             PlanID = "planId",
-            PricingType = PricingType.Free,
+            PricingType = DataPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = Status.PaymentPending,
+            Status = DataStatus.PaymentPending,
             Addons = [new() { ID = "id", Quantity = 0 }],
             BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Budget = new() { HasSoftLimit = true, Limit = 0 },
@@ -1135,9 +1135,9 @@ public class DataTest : TestBase
             CustomerID = "customerId",
             PaymentCollection = PaymentCollection.NotRequired,
             PlanID = "planId",
-            PricingType = PricingType.Free,
+            PricingType = DataPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = Status.PaymentPending,
+            Status = DataStatus.PaymentPending,
             Addons = [new() { ID = "id", Quantity = 0 }],
             BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Budget = new() { HasSoftLimit = true, Limit = 0 },
@@ -1234,9 +1234,9 @@ public class DataTest : TestBase
         ApiEnum<string, PaymentCollection> expectedPaymentCollection =
             PaymentCollection.NotRequired;
         string expectedPlanID = "planId";
-        ApiEnum<string, PricingType> expectedPricingType = PricingType.Free;
+        ApiEnum<string, DataPricingType> expectedPricingType = DataPricingType.Free;
         DateTimeOffset expectedStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, Status> expectedStatus = Status.PaymentPending;
+        ApiEnum<string, DataStatus> expectedStatus = DataStatus.PaymentPending;
         List<DataAddon> expectedAddons = [new() { ID = "id", Quantity = 0 }];
         DateTimeOffset expectedBillingCycleAnchor = DateTimeOffset.Parse(
             "2019-12-27T18:11:19.117Z"
@@ -1405,9 +1405,9 @@ public class DataTest : TestBase
             CustomerID = "customerId",
             PaymentCollection = PaymentCollection.NotRequired,
             PlanID = "planId",
-            PricingType = PricingType.Free,
+            PricingType = DataPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = Status.PaymentPending,
+            Status = DataStatus.PaymentPending,
             Addons = [new() { ID = "id", Quantity = 0 }],
             BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Budget = new() { HasSoftLimit = true, Limit = 0 },
@@ -1507,9 +1507,9 @@ public class DataTest : TestBase
             CustomerID = "customerId",
             PaymentCollection = PaymentCollection.NotRequired,
             PlanID = "planId",
-            PricingType = PricingType.Free,
+            PricingType = DataPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = Status.PaymentPending,
+            Status = DataStatus.PaymentPending,
             BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Budget = new() { HasSoftLimit = true, Limit = 0 },
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1563,9 +1563,9 @@ public class DataTest : TestBase
             CustomerID = "customerId",
             PaymentCollection = PaymentCollection.NotRequired,
             PlanID = "planId",
-            PricingType = PricingType.Free,
+            PricingType = DataPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = Status.PaymentPending,
+            Status = DataStatus.PaymentPending,
             BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Budget = new() { HasSoftLimit = true, Limit = 0 },
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1608,9 +1608,9 @@ public class DataTest : TestBase
             CustomerID = "customerId",
             PaymentCollection = PaymentCollection.NotRequired,
             PlanID = "planId",
-            PricingType = PricingType.Free,
+            PricingType = DataPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = Status.PaymentPending,
+            Status = DataStatus.PaymentPending,
             BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Budget = new() { HasSoftLimit = true, Limit = 0 },
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1672,9 +1672,9 @@ public class DataTest : TestBase
             CustomerID = "customerId",
             PaymentCollection = PaymentCollection.NotRequired,
             PlanID = "planId",
-            PricingType = PricingType.Free,
+            PricingType = DataPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = Status.PaymentPending,
+            Status = DataStatus.PaymentPending,
             BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Budget = new() { HasSoftLimit = true, Limit = 0 },
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1725,9 +1725,9 @@ public class DataTest : TestBase
             CustomerID = "customerId",
             PaymentCollection = PaymentCollection.NotRequired,
             PlanID = "planId",
-            PricingType = PricingType.Free,
+            PricingType = DataPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = Status.PaymentPending,
+            Status = DataStatus.PaymentPending,
             Addons = [new() { ID = "id", Quantity = 0 }],
             Coupons =
             [
@@ -1830,9 +1830,9 @@ public class DataTest : TestBase
             CustomerID = "customerId",
             PaymentCollection = PaymentCollection.NotRequired,
             PlanID = "planId",
-            PricingType = PricingType.Free,
+            PricingType = DataPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = Status.PaymentPending,
+            Status = DataStatus.PaymentPending,
             Addons = [new() { ID = "id", Quantity = 0 }],
             Coupons =
             [
@@ -1906,9 +1906,9 @@ public class DataTest : TestBase
             CustomerID = "customerId",
             PaymentCollection = PaymentCollection.NotRequired,
             PlanID = "planId",
-            PricingType = PricingType.Free,
+            PricingType = DataPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = Status.PaymentPending,
+            Status = DataStatus.PaymentPending,
             Addons = [new() { ID = "id", Quantity = 0 }],
             Coupons =
             [
@@ -2027,9 +2027,9 @@ public class DataTest : TestBase
             CustomerID = "customerId",
             PaymentCollection = PaymentCollection.NotRequired,
             PlanID = "planId",
-            PricingType = PricingType.Free,
+            PricingType = DataPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = Status.PaymentPending,
+            Status = DataStatus.PaymentPending,
             Addons = [new() { ID = "id", Quantity = 0 }],
             Coupons =
             [
@@ -2119,9 +2119,9 @@ public class DataTest : TestBase
             CustomerID = "customerId",
             PaymentCollection = PaymentCollection.NotRequired,
             PlanID = "planId",
-            PricingType = PricingType.Free,
+            PricingType = DataPricingType.Free,
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = Status.PaymentPending,
+            Status = DataStatus.PaymentPending,
             Addons = [new() { ID = "id", Quantity = 0 }],
             BillingCycleAnchor = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Budget = new() { HasSoftLimit = true, Limit = 0 },
@@ -2275,23 +2275,23 @@ public class PaymentCollectionTest : TestBase
     }
 }
 
-public class PricingTypeTest : TestBase
+public class DataPricingTypeTest : TestBase
 {
     [Theory]
-    [InlineData(PricingType.Free)]
-    [InlineData(PricingType.Paid)]
-    [InlineData(PricingType.Custom)]
-    public void Validation_Works(PricingType rawValue)
+    [InlineData(DataPricingType.Free)]
+    [InlineData(DataPricingType.Paid)]
+    [InlineData(DataPricingType.Custom)]
+    public void Validation_Works(DataPricingType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, PricingType> value = rawValue;
+        ApiEnum<string, DataPricingType> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, PricingType>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataPricingType>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -2301,16 +2301,16 @@ public class PricingTypeTest : TestBase
     }
 
     [Theory]
-    [InlineData(PricingType.Free)]
-    [InlineData(PricingType.Paid)]
-    [InlineData(PricingType.Custom)]
-    public void SerializationRoundtrip_Works(PricingType rawValue)
+    [InlineData(DataPricingType.Free)]
+    [InlineData(DataPricingType.Paid)]
+    [InlineData(DataPricingType.Custom)]
+    public void SerializationRoundtrip_Works(DataPricingType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, PricingType> value = rawValue;
+        ApiEnum<string, DataPricingType> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, PricingType>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataPricingType>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -2321,12 +2321,12 @@ public class PricingTypeTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, PricingType>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataPricingType>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, PricingType>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataPricingType>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -2335,26 +2335,26 @@ public class PricingTypeTest : TestBase
     }
 }
 
-public class StatusTest : TestBase
+public class DataStatusTest : TestBase
 {
     [Theory]
-    [InlineData(Status.PaymentPending)]
-    [InlineData(Status.Active)]
-    [InlineData(Status.Expired)]
-    [InlineData(Status.InTrial)]
-    [InlineData(Status.Canceled)]
-    [InlineData(Status.NotStarted)]
-    public void Validation_Works(Status rawValue)
+    [InlineData(DataStatus.PaymentPending)]
+    [InlineData(DataStatus.Active)]
+    [InlineData(DataStatus.Expired)]
+    [InlineData(DataStatus.InTrial)]
+    [InlineData(DataStatus.Canceled)]
+    [InlineData(DataStatus.NotStarted)]
+    public void Validation_Works(DataStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Status> value = rawValue;
+        ApiEnum<string, DataStatus> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataStatus>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -2364,19 +2364,19 @@ public class StatusTest : TestBase
     }
 
     [Theory]
-    [InlineData(Status.PaymentPending)]
-    [InlineData(Status.Active)]
-    [InlineData(Status.Expired)]
-    [InlineData(Status.InTrial)]
-    [InlineData(Status.Canceled)]
-    [InlineData(Status.NotStarted)]
-    public void SerializationRoundtrip_Works(Status rawValue)
+    [InlineData(DataStatus.PaymentPending)]
+    [InlineData(DataStatus.Active)]
+    [InlineData(DataStatus.Expired)]
+    [InlineData(DataStatus.InTrial)]
+    [InlineData(DataStatus.Canceled)]
+    [InlineData(DataStatus.NotStarted)]
+    public void SerializationRoundtrip_Works(DataStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Status> value = rawValue;
+        ApiEnum<string, DataStatus> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataStatus>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -2387,12 +2387,12 @@ public class StatusTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataStatus>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataStatus>>(
             json,
             ModelBase.SerializerOptions
         );

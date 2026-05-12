@@ -1,10 +1,13 @@
-using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Stigg.Client.Core;
+using Stigg.Client.Exceptions;
+using System = System;
 
 namespace Stigg.Client.Models.V1.Customers.Integrations;
 
@@ -86,12 +89,14 @@ public record class IntegrationListParams : ParamsBase
     /// Filter by vendor identifier. Supports comma-separated values for multiple
     /// vendors (e.g., STRIPE,HUBSPOT)
     /// </summary>
-    public string? VendorIdentifier
+    public IReadOnlyList<ApiEnum<string, VendorIdentifier>>? VendorIdentifier
     {
         get
         {
             this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableClass<string>("vendorIdentifier");
+            return this._rawQueryData.GetNullableStruct<
+                ImmutableArray<ApiEnum<string, VendorIdentifier>>
+            >("vendorIdentifier");
         }
         init
         {
@@ -100,7 +105,10 @@ public record class IntegrationListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData.Set("vendorIdentifier", value);
+            this._rawQueryData.Set<ImmutableArray<ApiEnum<string, VendorIdentifier>>?>(
+                "vendorIdentifier",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
         }
     }
 
@@ -180,9 +188,9 @@ public record class IntegrationListParams : ParamsBase
             && this._rawQueryData.Equals(other._rawQueryData);
     }
 
-    public override Uri Url(ClientOptions options)
+    public override System::Uri Url(ClientOptions options)
     {
-        return new UriBuilder(
+        return new System::UriBuilder(
             options.BaseUrl.ToString().TrimEnd('/')
                 + string.Format("/api/v1/customers/{0}/integrations", this.ID)
         )
@@ -203,5 +211,73 @@ public record class IntegrationListParams : ParamsBase
     public override int GetHashCode()
     {
         return 0;
+    }
+}
+
+[JsonConverter(typeof(VendorIdentifierConverter))]
+public enum VendorIdentifier
+{
+    Auth0,
+    Zuora,
+    Stripe,
+    Hubspot,
+    AwsMarketplace,
+    Snowflake,
+    Salesforce,
+    BigQuery,
+    OpenFga,
+    AppStore,
+}
+
+sealed class VendorIdentifierConverter : JsonConverter<VendorIdentifier>
+{
+    public override VendorIdentifier Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "AUTH0" => VendorIdentifier.Auth0,
+            "ZUORA" => VendorIdentifier.Zuora,
+            "STRIPE" => VendorIdentifier.Stripe,
+            "HUBSPOT" => VendorIdentifier.Hubspot,
+            "AWS_MARKETPLACE" => VendorIdentifier.AwsMarketplace,
+            "SNOWFLAKE" => VendorIdentifier.Snowflake,
+            "SALESFORCE" => VendorIdentifier.Salesforce,
+            "BIG_QUERY" => VendorIdentifier.BigQuery,
+            "OPEN_FGA" => VendorIdentifier.OpenFga,
+            "APP_STORE" => VendorIdentifier.AppStore,
+            _ => (VendorIdentifier)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        VendorIdentifier value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                VendorIdentifier.Auth0 => "AUTH0",
+                VendorIdentifier.Zuora => "ZUORA",
+                VendorIdentifier.Stripe => "STRIPE",
+                VendorIdentifier.Hubspot => "HUBSPOT",
+                VendorIdentifier.AwsMarketplace => "AWS_MARKETPLACE",
+                VendorIdentifier.Snowflake => "SNOWFLAKE",
+                VendorIdentifier.Salesforce => "SALESFORCE",
+                VendorIdentifier.BigQuery => "BIG_QUERY",
+                VendorIdentifier.OpenFga => "OPEN_FGA",
+                VendorIdentifier.AppStore => "APP_STORE",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
     }
 }

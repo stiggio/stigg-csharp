@@ -1,11 +1,13 @@
-using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Stigg.Client.Core;
+using Stigg.Client.Exceptions;
+using System = System;
 
 namespace Stigg.Client.Models.V1.Addons;
 
@@ -126,12 +128,14 @@ public record class AddonListParams : ParamsBase
     /// <summary>
     /// Filter by status. Supports comma-separated values for multiple statuses
     /// </summary>
-    public string? Status
+    public IReadOnlyList<ApiEnum<string, AddonListParamsStatus>>? Status
     {
         get
         {
             this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableClass<string>("status");
+            return this._rawQueryData.GetNullableStruct<
+                ImmutableArray<ApiEnum<string, AddonListParamsStatus>>
+            >("status");
         }
         init
         {
@@ -140,7 +144,10 @@ public record class AddonListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData.Set("status", value);
+            this._rawQueryData.Set<ImmutableArray<ApiEnum<string, AddonListParamsStatus>>?>(
+                "status",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
         }
     }
 
@@ -211,9 +218,9 @@ public record class AddonListParams : ParamsBase
             && this._rawQueryData.Equals(other._rawQueryData);
     }
 
-    public override Uri Url(ClientOptions options)
+    public override System::Uri Url(ClientOptions options)
     {
-        return new UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/api/v1/addons")
+        return new System::UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/api/v1/addons")
         {
             Query = this.QueryString(options),
         }.Uri;
@@ -243,12 +250,12 @@ public sealed record class CreatedAt : JsonModel
     /// <summary>
     /// Greater than the specified createdAt value
     /// </summary>
-    public DateTimeOffset? Gt
+    public System::DateTimeOffset? Gt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<DateTimeOffset>("gt");
+            return this._rawData.GetNullableStruct<System::DateTimeOffset>("gt");
         }
         init
         {
@@ -264,12 +271,12 @@ public sealed record class CreatedAt : JsonModel
     /// <summary>
     /// Greater than or equal to the specified createdAt value
     /// </summary>
-    public DateTimeOffset? Gte
+    public System::DateTimeOffset? Gte
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<DateTimeOffset>("gte");
+            return this._rawData.GetNullableStruct<System::DateTimeOffset>("gte");
         }
         init
         {
@@ -285,12 +292,12 @@ public sealed record class CreatedAt : JsonModel
     /// <summary>
     /// Less than the specified createdAt value
     /// </summary>
-    public DateTimeOffset? Lt
+    public System::DateTimeOffset? Lt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<DateTimeOffset>("lt");
+            return this._rawData.GetNullableStruct<System::DateTimeOffset>("lt");
         }
         init
         {
@@ -306,12 +313,12 @@ public sealed record class CreatedAt : JsonModel
     /// <summary>
     /// Less than or equal to the specified createdAt value
     /// </summary>
-    public DateTimeOffset? Lte
+    public System::DateTimeOffset? Lte
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<DateTimeOffset>("lte");
+            return this._rawData.GetNullableStruct<System::DateTimeOffset>("lte");
         }
         init
         {
@@ -366,4 +373,51 @@ class CreatedAtFromRaw : IFromRawJson<CreatedAt>
     /// <inheritdoc/>
     public CreatedAt FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         CreatedAt.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(AddonListParamsStatusConverter))]
+public enum AddonListParamsStatus
+{
+    Draft,
+    Published,
+    Archived,
+}
+
+sealed class AddonListParamsStatusConverter : JsonConverter<AddonListParamsStatus>
+{
+    public override AddonListParamsStatus Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "DRAFT" => AddonListParamsStatus.Draft,
+            "PUBLISHED" => AddonListParamsStatus.Published,
+            "ARCHIVED" => AddonListParamsStatus.Archived,
+            _ => (AddonListParamsStatus)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        AddonListParamsStatus value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                AddonListParamsStatus.Draft => "DRAFT",
+                AddonListParamsStatus.Published => "PUBLISHED",
+                AddonListParamsStatus.Archived => "ARCHIVED",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }

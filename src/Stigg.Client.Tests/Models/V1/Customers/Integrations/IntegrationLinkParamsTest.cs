@@ -16,13 +16,14 @@ public class IntegrationLinkParamsTest : TestBase
             ID = "x",
             IDValue = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = VendorIdentifier.Auth0,
+            VendorIdentifier = IntegrationLinkParamsVendorIdentifier.Auth0,
         };
 
         string expectedID = "x";
         string expectedIDValue = "id";
         string expectedSyncedEntityID = "syncedEntityId";
-        ApiEnum<string, VendorIdentifier> expectedVendorIdentifier = VendorIdentifier.Auth0;
+        ApiEnum<string, IntegrationLinkParamsVendorIdentifier> expectedVendorIdentifier =
+            IntegrationLinkParamsVendorIdentifier.Auth0;
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedIDValue, parameters.IDValue);
@@ -38,7 +39,7 @@ public class IntegrationLinkParamsTest : TestBase
             ID = "x",
             IDValue = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = VendorIdentifier.Auth0,
+            VendorIdentifier = IntegrationLinkParamsVendorIdentifier.Auth0,
         };
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
@@ -56,7 +57,7 @@ public class IntegrationLinkParamsTest : TestBase
             ID = "x",
             IDValue = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = VendorIdentifier.Auth0,
+            VendorIdentifier = IntegrationLinkParamsVendorIdentifier.Auth0,
         };
 
         IntegrationLinkParams copied = new(parameters);
@@ -65,59 +66,57 @@ public class IntegrationLinkParamsTest : TestBase
     }
 }
 
-public class VendorIdentifierTest : TestBase
+public class IntegrationLinkParamsVendorIdentifierTest : TestBase
 {
     [Theory]
-    [InlineData(VendorIdentifier.Auth0)]
-    [InlineData(VendorIdentifier.Zuora)]
-    [InlineData(VendorIdentifier.Stripe)]
-    [InlineData(VendorIdentifier.Hubspot)]
-    [InlineData(VendorIdentifier.AwsMarketplace)]
-    [InlineData(VendorIdentifier.Snowflake)]
-    [InlineData(VendorIdentifier.Salesforce)]
-    [InlineData(VendorIdentifier.BigQuery)]
-    [InlineData(VendorIdentifier.OpenFga)]
-    [InlineData(VendorIdentifier.AppStore)]
-    public void Validation_Works(VendorIdentifier rawValue)
+    [InlineData(IntegrationLinkParamsVendorIdentifier.Auth0)]
+    [InlineData(IntegrationLinkParamsVendorIdentifier.Zuora)]
+    [InlineData(IntegrationLinkParamsVendorIdentifier.Stripe)]
+    [InlineData(IntegrationLinkParamsVendorIdentifier.Hubspot)]
+    [InlineData(IntegrationLinkParamsVendorIdentifier.AwsMarketplace)]
+    [InlineData(IntegrationLinkParamsVendorIdentifier.Snowflake)]
+    [InlineData(IntegrationLinkParamsVendorIdentifier.Salesforce)]
+    [InlineData(IntegrationLinkParamsVendorIdentifier.BigQuery)]
+    [InlineData(IntegrationLinkParamsVendorIdentifier.OpenFga)]
+    [InlineData(IntegrationLinkParamsVendorIdentifier.AppStore)]
+    public void Validation_Works(IntegrationLinkParamsVendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, VendorIdentifier> value = rawValue;
+        ApiEnum<string, IntegrationLinkParamsVendorIdentifier> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, VendorIdentifier>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, IntegrationLinkParamsVendorIdentifier>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
         Assert.Throws<StiggInvalidDataException>(() => value.Validate());
     }
 
     [Theory]
-    [InlineData(VendorIdentifier.Auth0)]
-    [InlineData(VendorIdentifier.Zuora)]
-    [InlineData(VendorIdentifier.Stripe)]
-    [InlineData(VendorIdentifier.Hubspot)]
-    [InlineData(VendorIdentifier.AwsMarketplace)]
-    [InlineData(VendorIdentifier.Snowflake)]
-    [InlineData(VendorIdentifier.Salesforce)]
-    [InlineData(VendorIdentifier.BigQuery)]
-    [InlineData(VendorIdentifier.OpenFga)]
-    [InlineData(VendorIdentifier.AppStore)]
-    public void SerializationRoundtrip_Works(VendorIdentifier rawValue)
+    [InlineData(IntegrationLinkParamsVendorIdentifier.Auth0)]
+    [InlineData(IntegrationLinkParamsVendorIdentifier.Zuora)]
+    [InlineData(IntegrationLinkParamsVendorIdentifier.Stripe)]
+    [InlineData(IntegrationLinkParamsVendorIdentifier.Hubspot)]
+    [InlineData(IntegrationLinkParamsVendorIdentifier.AwsMarketplace)]
+    [InlineData(IntegrationLinkParamsVendorIdentifier.Snowflake)]
+    [InlineData(IntegrationLinkParamsVendorIdentifier.Salesforce)]
+    [InlineData(IntegrationLinkParamsVendorIdentifier.BigQuery)]
+    [InlineData(IntegrationLinkParamsVendorIdentifier.OpenFga)]
+    [InlineData(IntegrationLinkParamsVendorIdentifier.AppStore)]
+    public void SerializationRoundtrip_Works(IntegrationLinkParamsVendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, VendorIdentifier> value = rawValue;
+        ApiEnum<string, IntegrationLinkParamsVendorIdentifier> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, VendorIdentifier>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, IntegrationLinkParamsVendorIdentifier>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
@@ -125,15 +124,13 @@ public class VendorIdentifierTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, VendorIdentifier>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, IntegrationLinkParamsVendorIdentifier>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, VendorIdentifier>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, IntegrationLinkParamsVendorIdentifier>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }

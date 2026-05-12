@@ -171,12 +171,12 @@ public sealed record class Data : JsonModel
     /// <summary>
     /// Pricing type
     /// </summary>
-    public required ApiEnum<string, PricingType> PricingType
+    public required ApiEnum<string, DataPricingType> PricingType
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, PricingType>>("pricingType");
+            return this._rawData.GetNotNullClass<ApiEnum<string, DataPricingType>>("pricingType");
         }
         init { this._rawData.Set("pricingType", value); }
     }
@@ -197,12 +197,12 @@ public sealed record class Data : JsonModel
     /// <summary>
     /// Subscription status
     /// </summary>
-    public required ApiEnum<string, Status> Status
+    public required ApiEnum<string, DataStatus> Status
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, Status>>("status");
+            return this._rawData.GetNotNullClass<ApiEnum<string, DataStatus>>("status");
         }
         init { this._rawData.Set("status", value); }
     }
@@ -691,17 +691,17 @@ sealed class PaymentCollectionConverter : JsonConverter<PaymentCollection>
 /// <summary>
 /// Pricing type
 /// </summary>
-[JsonConverter(typeof(PricingTypeConverter))]
-public enum PricingType
+[JsonConverter(typeof(DataPricingTypeConverter))]
+public enum DataPricingType
 {
     Free,
     Paid,
     Custom,
 }
 
-sealed class PricingTypeConverter : JsonConverter<PricingType>
+sealed class DataPricingTypeConverter : JsonConverter<DataPricingType>
 {
-    public override PricingType Read(
+    public override DataPricingType Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -709,16 +709,16 @@ sealed class PricingTypeConverter : JsonConverter<PricingType>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "FREE" => PricingType.Free,
-            "PAID" => PricingType.Paid,
-            "CUSTOM" => PricingType.Custom,
-            _ => (PricingType)(-1),
+            "FREE" => DataPricingType.Free,
+            "PAID" => DataPricingType.Paid,
+            "CUSTOM" => DataPricingType.Custom,
+            _ => (DataPricingType)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        PricingType value,
+        DataPricingType value,
         JsonSerializerOptions options
     )
     {
@@ -726,9 +726,9 @@ sealed class PricingTypeConverter : JsonConverter<PricingType>
             writer,
             value switch
             {
-                PricingType.Free => "FREE",
-                PricingType.Paid => "PAID",
-                PricingType.Custom => "CUSTOM",
+                DataPricingType.Free => "FREE",
+                DataPricingType.Paid => "PAID",
+                DataPricingType.Custom => "CUSTOM",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -741,8 +741,8 @@ sealed class PricingTypeConverter : JsonConverter<PricingType>
 /// <summary>
 /// Subscription status
 /// </summary>
-[JsonConverter(typeof(StatusConverter))]
-public enum Status
+[JsonConverter(typeof(DataStatusConverter))]
+public enum DataStatus
 {
     PaymentPending,
     Active,
@@ -752,9 +752,9 @@ public enum Status
     NotStarted,
 }
 
-sealed class StatusConverter : JsonConverter<Status>
+sealed class DataStatusConverter : JsonConverter<DataStatus>
 {
-    public override Status Read(
+    public override DataStatus Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -762,28 +762,32 @@ sealed class StatusConverter : JsonConverter<Status>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "PAYMENT_PENDING" => Status.PaymentPending,
-            "ACTIVE" => Status.Active,
-            "EXPIRED" => Status.Expired,
-            "IN_TRIAL" => Status.InTrial,
-            "CANCELED" => Status.Canceled,
-            "NOT_STARTED" => Status.NotStarted,
-            _ => (Status)(-1),
+            "PAYMENT_PENDING" => DataStatus.PaymentPending,
+            "ACTIVE" => DataStatus.Active,
+            "EXPIRED" => DataStatus.Expired,
+            "IN_TRIAL" => DataStatus.InTrial,
+            "CANCELED" => DataStatus.Canceled,
+            "NOT_STARTED" => DataStatus.NotStarted,
+            _ => (DataStatus)(-1),
         };
     }
 
-    public override void Write(Utf8JsonWriter writer, Status value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        DataStatus value,
+        JsonSerializerOptions options
+    )
     {
         JsonSerializer.Serialize(
             writer,
             value switch
             {
-                Status.PaymentPending => "PAYMENT_PENDING",
-                Status.Active => "ACTIVE",
-                Status.Expired => "EXPIRED",
-                Status.InTrial => "IN_TRIAL",
-                Status.Canceled => "CANCELED",
-                Status.NotStarted => "NOT_STARTED",
+                DataStatus.PaymentPending => "PAYMENT_PENDING",
+                DataStatus.Active => "ACTIVE",
+                DataStatus.Expired => "EXPIRED",
+                DataStatus.InTrial => "IN_TRIAL",
+                DataStatus.Canceled => "CANCELED",
+                DataStatus.NotStarted => "NOT_STARTED",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

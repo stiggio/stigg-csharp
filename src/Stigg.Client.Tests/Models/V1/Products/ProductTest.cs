@@ -22,7 +22,7 @@ public class ProductTest : TestBase
                 DisplayName = "displayName",
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 MultipleSubscriptions = true,
-                Status = Status.Published,
+                Status = DataStatus.Published,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 ProductSettings = new()
                 {
@@ -46,7 +46,7 @@ public class ProductTest : TestBase
             DisplayName = "displayName",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MultipleSubscriptions = true,
-            Status = Status.Published,
+            Status = DataStatus.Published,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ProductSettings = new()
             {
@@ -76,7 +76,7 @@ public class ProductTest : TestBase
                 DisplayName = "displayName",
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 MultipleSubscriptions = true,
-                Status = Status.Published,
+                Status = DataStatus.Published,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 ProductSettings = new()
                 {
@@ -111,7 +111,7 @@ public class ProductTest : TestBase
                 DisplayName = "displayName",
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 MultipleSubscriptions = true,
-                Status = Status.Published,
+                Status = DataStatus.Published,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 ProductSettings = new()
                 {
@@ -142,7 +142,7 @@ public class ProductTest : TestBase
             DisplayName = "displayName",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MultipleSubscriptions = true,
-            Status = Status.Published,
+            Status = DataStatus.Published,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ProductSettings = new()
             {
@@ -172,7 +172,7 @@ public class ProductTest : TestBase
                 DisplayName = "displayName",
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 MultipleSubscriptions = true,
-                Status = Status.Published,
+                Status = DataStatus.Published,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 ProductSettings = new()
                 {
@@ -204,7 +204,7 @@ public class ProductTest : TestBase
                 DisplayName = "displayName",
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 MultipleSubscriptions = true,
-                Status = Status.Published,
+                Status = DataStatus.Published,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 ProductSettings = new()
                 {
@@ -239,7 +239,7 @@ public class DataTest : TestBase
             DisplayName = "displayName",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MultipleSubscriptions = true,
-            Status = Status.Published,
+            Status = DataStatus.Published,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ProductSettings = new()
             {
@@ -259,7 +259,7 @@ public class DataTest : TestBase
         string expectedDisplayName = "displayName";
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         bool expectedMultipleSubscriptions = true;
-        ApiEnum<string, Status> expectedStatus = Status.Published;
+        ApiEnum<string, DataStatus> expectedStatus = DataStatus.Published;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DataProductSettings expectedProductSettings = new()
         {
@@ -300,7 +300,7 @@ public class DataTest : TestBase
             DisplayName = "displayName",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MultipleSubscriptions = true,
-            Status = Status.Published,
+            Status = DataStatus.Published,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ProductSettings = new()
             {
@@ -331,7 +331,7 @@ public class DataTest : TestBase
             DisplayName = "displayName",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MultipleSubscriptions = true,
-            Status = Status.Published,
+            Status = DataStatus.Published,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ProductSettings = new()
             {
@@ -355,7 +355,7 @@ public class DataTest : TestBase
         string expectedDisplayName = "displayName";
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         bool expectedMultipleSubscriptions = true;
-        ApiEnum<string, Status> expectedStatus = Status.Published;
+        ApiEnum<string, DataStatus> expectedStatus = DataStatus.Published;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DataProductSettings expectedProductSettings = new()
         {
@@ -396,7 +396,7 @@ public class DataTest : TestBase
             DisplayName = "displayName",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MultipleSubscriptions = true,
-            Status = Status.Published,
+            Status = DataStatus.Published,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ProductSettings = new()
             {
@@ -424,7 +424,7 @@ public class DataTest : TestBase
             DisplayName = "displayName",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MultipleSubscriptions = true,
-            Status = Status.Published,
+            Status = DataStatus.Published,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -443,7 +443,7 @@ public class DataTest : TestBase
             DisplayName = "displayName",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MultipleSubscriptions = true,
-            Status = Status.Published,
+            Status = DataStatus.Published,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -461,7 +461,7 @@ public class DataTest : TestBase
             DisplayName = "displayName",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MultipleSubscriptions = true,
-            Status = Status.Published,
+            Status = DataStatus.Published,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
             // Null should be interpreted as omitted for these properties
@@ -483,7 +483,7 @@ public class DataTest : TestBase
             DisplayName = "displayName",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MultipleSubscriptions = true,
-            Status = Status.Published,
+            Status = DataStatus.Published,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
             // Null should be interpreted as omitted for these properties
@@ -504,7 +504,7 @@ public class DataTest : TestBase
             DisplayName = "displayName",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MultipleSubscriptions = true,
-            Status = Status.Published,
+            Status = DataStatus.Published,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ProductSettings = new()
             {
@@ -524,22 +524,22 @@ public class DataTest : TestBase
     }
 }
 
-public class StatusTest : TestBase
+public class DataStatusTest : TestBase
 {
     [Theory]
-    [InlineData(Status.Published)]
-    [InlineData(Status.Archived)]
-    public void Validation_Works(Status rawValue)
+    [InlineData(DataStatus.Published)]
+    [InlineData(DataStatus.Archived)]
+    public void Validation_Works(DataStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Status> value = rawValue;
+        ApiEnum<string, DataStatus> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataStatus>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -549,15 +549,15 @@ public class StatusTest : TestBase
     }
 
     [Theory]
-    [InlineData(Status.Published)]
-    [InlineData(Status.Archived)]
-    public void SerializationRoundtrip_Works(Status rawValue)
+    [InlineData(DataStatus.Published)]
+    [InlineData(DataStatus.Archived)]
+    public void SerializationRoundtrip_Works(DataStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Status> value = rawValue;
+        ApiEnum<string, DataStatus> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataStatus>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -568,12 +568,12 @@ public class StatusTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataStatus>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataStatus>>(
             json,
             ModelBase.SerializerOptions
         );
