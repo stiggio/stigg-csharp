@@ -1,13 +1,14 @@
 using System.Text.Json;
 using Stigg.Client.Exceptions;
+using Stigg.Client.Models.V1.Credits.AutoRecharge;
+using Stigg.Client.Models.V1.Credits.CustomCurrencies;
 using Stigg.Client.Models.V1.Customers;
-using Stigg.Client.Models.V1.Events.Credits.CustomCurrencies;
 using Addons = Stigg.Client.Models.V1.Addons;
 using Coupons = Stigg.Client.Models.V1.Coupons;
-using Credits = Stigg.Client.Models.V1.Events.Credits;
+using Credits = Stigg.Client.Models.V1.Credits;
 using Entitlements = Stigg.Client.Models.V1.Addons.Entitlements;
 using Features = Stigg.Client.Models.V1.Features;
-using Grants = Stigg.Client.Models.V1.Events.Credits.Grants;
+using Grants = Stigg.Client.Models.V1.Credits.Grants;
 using Integrations = Stigg.Client.Models.V1.Customers.Integrations;
 using PaymentMethod = Stigg.Client.Models.V1.Customers.PaymentMethod;
 using Plans = Stigg.Client.Models.V1.Plans;
@@ -406,8 +407,6 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Coupons::Currency>(),
             new ApiEnumConverter<string, Coupons::Status>(),
             new ApiEnumConverter<string, Coupons::Type>(),
-            new ApiEnumConverter<string, Credits::GrantExpirationPeriod>(),
-            new ApiEnumConverter<string, Credits::ThresholdType>(),
             new ApiEnumConverter<string, Credits::EventType>(),
             new ApiEnumConverter<string, Credits::TimeRange>(),
             new ApiEnumConverter<string, Grants::DataGrantType>(),
@@ -426,6 +425,8 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Grants::Currency>(),
             new ApiEnumConverter<string, Grants::PaymentCollectionMethod>(),
             new ApiEnumConverter<string, Status>(),
+            new ApiEnumConverter<string, GrantExpirationPeriod>(),
+            new ApiEnumConverter<string, ThresholdType>(),
             new ApiEnumConverter<string, Features::DataFeatureStatus>(),
             new ApiEnumConverter<string, Features::DataFeatureType>(),
             new ApiEnumConverter<string, Features::DataMeterType>(),
