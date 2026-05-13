@@ -29,7 +29,7 @@ public class SubscriptionImportParamsTest : TestBase
                         new()
                         {
                             ID = "id",
-                            Quantity = 1,
+                            Quantity = 0,
                             Type = SubscriptionChargeType.Feature,
                         },
                     ],
@@ -57,7 +57,7 @@ public class SubscriptionImportParamsTest : TestBase
                     new()
                     {
                         ID = "id",
-                        Quantity = 1,
+                        Quantity = 0,
                         Type = SubscriptionChargeType.Feature,
                     },
                 ],
@@ -97,7 +97,7 @@ public class SubscriptionImportParamsTest : TestBase
                         new()
                         {
                             ID = "id",
-                            Quantity = 1,
+                            Quantity = 0,
                             Type = SubscriptionChargeType.Feature,
                         },
                     ],
@@ -133,7 +133,7 @@ public class SubscriptionImportParamsTest : TestBase
                         new()
                         {
                             ID = "id",
-                            Quantity = 1,
+                            Quantity = 0,
                             Type = SubscriptionChargeType.Feature,
                         },
                     ],
@@ -171,7 +171,7 @@ public class SubscriptionImportParamsTest : TestBase
                         new()
                         {
                             ID = "id",
-                            Quantity = 1,
+                            Quantity = 0,
                             Type = SubscriptionChargeType.Feature,
                         },
                     ],
@@ -210,7 +210,7 @@ public class SubscriptionImportParamsTest : TestBase
                         new()
                         {
                             ID = "id",
-                            Quantity = 1,
+                            Quantity = 0,
                             Type = SubscriptionChargeType.Feature,
                         },
                     ],
@@ -247,7 +247,7 @@ public class SubscriptionTest : TestBase
                 new()
                 {
                     ID = "id",
-                    Quantity = 1,
+                    Quantity = 0,
                     Type = SubscriptionChargeType.Feature,
                 },
             ],
@@ -269,7 +269,7 @@ public class SubscriptionTest : TestBase
             new()
             {
                 ID = "id",
-                Quantity = 1,
+                Quantity = 0,
                 Type = SubscriptionChargeType.Feature,
             },
         ];
@@ -324,7 +324,7 @@ public class SubscriptionTest : TestBase
                 new()
                 {
                     ID = "id",
-                    Quantity = 1,
+                    Quantity = 0,
                     Type = SubscriptionChargeType.Feature,
                 },
             ],
@@ -359,7 +359,7 @@ public class SubscriptionTest : TestBase
                 new()
                 {
                     ID = "id",
-                    Quantity = 1,
+                    Quantity = 0,
                     Type = SubscriptionChargeType.Feature,
                 },
             ],
@@ -388,7 +388,7 @@ public class SubscriptionTest : TestBase
             new()
             {
                 ID = "id",
-                Quantity = 1,
+                Quantity = 0,
                 Type = SubscriptionChargeType.Feature,
             },
         ];
@@ -443,7 +443,7 @@ public class SubscriptionTest : TestBase
                 new()
                 {
                     ID = "id",
-                    Quantity = 1,
+                    Quantity = 0,
                     Type = SubscriptionChargeType.Feature,
                 },
             ],
@@ -567,7 +567,7 @@ public class SubscriptionTest : TestBase
                 new()
                 {
                     ID = "id",
-                    Quantity = 1,
+                    Quantity = 0,
                     Type = SubscriptionChargeType.Feature,
                 },
             ],
@@ -598,7 +598,7 @@ public class SubscriptionTest : TestBase
                 new()
                 {
                     ID = "id",
-                    Quantity = 1,
+                    Quantity = 0,
                     Type = SubscriptionChargeType.Feature,
                 },
             ],
@@ -624,7 +624,7 @@ public class SubscriptionTest : TestBase
                 new()
                 {
                     ID = "id",
-                    Quantity = 1,
+                    Quantity = 0,
                     Type = SubscriptionChargeType.Feature,
                 },
             ],
@@ -659,7 +659,7 @@ public class SubscriptionTest : TestBase
                 new()
                 {
                     ID = "id",
-                    Quantity = 1,
+                    Quantity = 0,
                     Type = SubscriptionChargeType.Feature,
                 },
             ],
@@ -690,7 +690,7 @@ public class SubscriptionTest : TestBase
                 new()
                 {
                     ID = "id",
-                    Quantity = 1,
+                    Quantity = 0,
                     Type = SubscriptionChargeType.Feature,
                 },
             ],
@@ -838,12 +838,12 @@ public class SubscriptionChargeTest : TestBase
         var model = new SubscriptionCharge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = SubscriptionChargeType.Feature,
         };
 
         string expectedID = "id";
-        double expectedQuantity = 1;
+        double expectedQuantity = 0;
         ApiEnum<string, SubscriptionChargeType> expectedType = SubscriptionChargeType.Feature;
 
         Assert.Equal(expectedID, model.ID);
@@ -857,7 +857,7 @@ public class SubscriptionChargeTest : TestBase
         var model = new SubscriptionCharge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = SubscriptionChargeType.Feature,
         };
 
@@ -876,7 +876,7 @@ public class SubscriptionChargeTest : TestBase
         var model = new SubscriptionCharge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = SubscriptionChargeType.Feature,
         };
 
@@ -888,7 +888,7 @@ public class SubscriptionChargeTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
-        double expectedQuantity = 1;
+        double expectedQuantity = 0;
         ApiEnum<string, SubscriptionChargeType> expectedType = SubscriptionChargeType.Feature;
 
         Assert.Equal(expectedID, deserialized.ID);
@@ -902,7 +902,7 @@ public class SubscriptionChargeTest : TestBase
         var model = new SubscriptionCharge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = SubscriptionChargeType.Feature,
         };
 
@@ -915,7 +915,7 @@ public class SubscriptionChargeTest : TestBase
         var model = new SubscriptionCharge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = SubscriptionChargeType.Feature,
         };
 

@@ -503,7 +503,7 @@ public record class SubscriptionProvisionParams : ParamsBase
     }
 
     /// <summary>
-    /// Unit quantity
+    /// Unit quantity for per-unit pricing. Minimum is 0 (zero is allowed).
     /// </summary>
     public long? UnitQuantity
     {
@@ -2452,7 +2452,7 @@ public sealed record class SubscriptionProvisionParamsCharge : JsonModel
     }
 
     /// <summary>
-    /// Charge quantity
+    /// Charge quantity. Minimum is 0 (zero is allowed).
     /// </summary>
     public required double Quantity
     {

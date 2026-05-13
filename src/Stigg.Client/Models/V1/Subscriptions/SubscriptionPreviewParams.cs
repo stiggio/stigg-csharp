@@ -355,7 +355,7 @@ public record class SubscriptionPreviewParams : ParamsBase
     }
 
     /// <summary>
-    /// Unit quantity for per-unit pricing
+    /// Unit quantity for per-unit pricing. Minimum is 0 (zero is allowed).
     /// </summary>
     public long? UnitQuantity
     {
@@ -1498,7 +1498,7 @@ public sealed record class BillableFeature : JsonModel
     }
 
     /// <summary>
-    /// Quantity of feature units
+    /// Quantity of feature units. Minimum is 0 (zero is allowed).
     /// </summary>
     public required double Quantity
     {
@@ -2312,7 +2312,7 @@ public sealed record class SubscriptionPreviewParamsCharge : JsonModel
     }
 
     /// <summary>
-    /// Charge quantity
+    /// Charge quantity. Minimum is 0 (zero is allowed).
     /// </summary>
     public required double Quantity
     {

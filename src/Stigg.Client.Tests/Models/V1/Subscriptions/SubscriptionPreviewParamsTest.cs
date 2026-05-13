@@ -43,7 +43,7 @@ public class SubscriptionPreviewParamsTest : TestBase
                 },
                 PromotionCode = "promotionCode",
             },
-            BillableFeatures = [new() { FeatureID = "featureId", Quantity = 1 }],
+            BillableFeatures = [new() { FeatureID = "featureId", Quantity = 0 }],
             BillingCountryCode = "billingCountryCode",
             BillingCycleAnchor = SubscriptionPreviewParamsBillingCycleAnchor.Unchanged,
             BillingInformation = new()
@@ -75,7 +75,7 @@ public class SubscriptionPreviewParamsTest : TestBase
                 new()
                 {
                     ID = "id",
-                    Quantity = 1,
+                    Quantity = 0,
                     Type = SubscriptionPreviewParamsChargeType.Feature,
                 },
             ],
@@ -89,7 +89,7 @@ public class SubscriptionPreviewParamsTest : TestBase
                 TrialEndBehavior = TrialEndBehavior.ConvertToPaid,
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            UnitQuantity = 1,
+            UnitQuantity = 0,
         };
 
         string expectedCustomerID = "customerId";
@@ -120,7 +120,7 @@ public class SubscriptionPreviewParamsTest : TestBase
         };
         List<BillableFeature> expectedBillableFeatures =
         [
-            new() { FeatureID = "featureId", Quantity = 1 },
+            new() { FeatureID = "featureId", Quantity = 0 },
         ];
         string expectedBillingCountryCode = "billingCountryCode";
         ApiEnum<string, SubscriptionPreviewParamsBillingCycleAnchor> expectedBillingCycleAnchor =
@@ -155,7 +155,7 @@ public class SubscriptionPreviewParamsTest : TestBase
             new()
             {
                 ID = "id",
-                Quantity = 1,
+                Quantity = 0,
                 Type = SubscriptionPreviewParamsChargeType.Feature,
             },
         ];
@@ -170,7 +170,7 @@ public class SubscriptionPreviewParamsTest : TestBase
             TrialEndBehavior = TrialEndBehavior.ConvertToPaid,
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
-        long expectedUnitQuantity = 1;
+        long expectedUnitQuantity = 0;
 
         Assert.Equal(expectedCustomerID, parameters.CustomerID);
         Assert.Equal(expectedPlanID, parameters.PlanID);
@@ -349,7 +349,7 @@ public class SubscriptionPreviewParamsTest : TestBase
                 },
                 PromotionCode = "promotionCode",
             },
-            BillableFeatures = [new() { FeatureID = "featureId", Quantity = 1 }],
+            BillableFeatures = [new() { FeatureID = "featureId", Quantity = 0 }],
             BillingCountryCode = "billingCountryCode",
             BillingCycleAnchor = SubscriptionPreviewParamsBillingCycleAnchor.Unchanged,
             BillingInformation = new()
@@ -381,7 +381,7 @@ public class SubscriptionPreviewParamsTest : TestBase
                 new()
                 {
                     ID = "id",
-                    Quantity = 1,
+                    Quantity = 0,
                     Type = SubscriptionPreviewParamsChargeType.Feature,
                 },
             ],
@@ -395,7 +395,7 @@ public class SubscriptionPreviewParamsTest : TestBase
                 TrialEndBehavior = TrialEndBehavior.ConvertToPaid,
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            UnitQuantity = 1,
+            UnitQuantity = 0,
         };
 
         SubscriptionPreviewParams copied = new(parameters);
@@ -1600,10 +1600,10 @@ public class BillableFeatureTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new BillableFeature { FeatureID = "featureId", Quantity = 1 };
+        var model = new BillableFeature { FeatureID = "featureId", Quantity = 0 };
 
         string expectedFeatureID = "featureId";
-        double expectedQuantity = 1;
+        double expectedQuantity = 0;
 
         Assert.Equal(expectedFeatureID, model.FeatureID);
         Assert.Equal(expectedQuantity, model.Quantity);
@@ -1612,7 +1612,7 @@ public class BillableFeatureTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new BillableFeature { FeatureID = "featureId", Quantity = 1 };
+        var model = new BillableFeature { FeatureID = "featureId", Quantity = 0 };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<BillableFeature>(
@@ -1626,7 +1626,7 @@ public class BillableFeatureTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new BillableFeature { FeatureID = "featureId", Quantity = 1 };
+        var model = new BillableFeature { FeatureID = "featureId", Quantity = 0 };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<BillableFeature>(
@@ -1636,7 +1636,7 @@ public class BillableFeatureTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedFeatureID = "featureId";
-        double expectedQuantity = 1;
+        double expectedQuantity = 0;
 
         Assert.Equal(expectedFeatureID, deserialized.FeatureID);
         Assert.Equal(expectedQuantity, deserialized.Quantity);
@@ -1645,7 +1645,7 @@ public class BillableFeatureTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new BillableFeature { FeatureID = "featureId", Quantity = 1 };
+        var model = new BillableFeature { FeatureID = "featureId", Quantity = 0 };
 
         model.Validate();
     }
@@ -1653,7 +1653,7 @@ public class BillableFeatureTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new BillableFeature { FeatureID = "featureId", Quantity = 1 };
+        var model = new BillableFeature { FeatureID = "featureId", Quantity = 0 };
 
         BillableFeature copied = new(model);
 
@@ -2501,12 +2501,12 @@ public class SubscriptionPreviewParamsChargeTest : TestBase
         var model = new SubscriptionPreviewParamsCharge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = SubscriptionPreviewParamsChargeType.Feature,
         };
 
         string expectedID = "id";
-        double expectedQuantity = 1;
+        double expectedQuantity = 0;
         ApiEnum<string, SubscriptionPreviewParamsChargeType> expectedType =
             SubscriptionPreviewParamsChargeType.Feature;
 
@@ -2521,7 +2521,7 @@ public class SubscriptionPreviewParamsChargeTest : TestBase
         var model = new SubscriptionPreviewParamsCharge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = SubscriptionPreviewParamsChargeType.Feature,
         };
 
@@ -2540,7 +2540,7 @@ public class SubscriptionPreviewParamsChargeTest : TestBase
         var model = new SubscriptionPreviewParamsCharge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = SubscriptionPreviewParamsChargeType.Feature,
         };
 
@@ -2552,7 +2552,7 @@ public class SubscriptionPreviewParamsChargeTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
-        double expectedQuantity = 1;
+        double expectedQuantity = 0;
         ApiEnum<string, SubscriptionPreviewParamsChargeType> expectedType =
             SubscriptionPreviewParamsChargeType.Feature;
 
@@ -2567,7 +2567,7 @@ public class SubscriptionPreviewParamsChargeTest : TestBase
         var model = new SubscriptionPreviewParamsCharge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = SubscriptionPreviewParamsChargeType.Feature,
         };
 
@@ -2580,7 +2580,7 @@ public class SubscriptionPreviewParamsChargeTest : TestBase
         var model = new SubscriptionPreviewParamsCharge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = SubscriptionPreviewParamsChargeType.Feature,
         };
 

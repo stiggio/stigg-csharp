@@ -82,7 +82,7 @@ public class SubscriptionServiceTest : TestBase
                             new()
                             {
                                 ID = "id",
-                                Quantity = 1,
+                                Quantity = 0,
                                 Type = SubscriptionChargeType.Feature,
                             },
                         ],

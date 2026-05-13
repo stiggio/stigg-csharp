@@ -12,19 +12,19 @@ public class CustomerCheckEntitlementParamsTest : TestBase
         var parameters = new CustomerCheckEntitlementParams
         {
             ID = "x",
-            CurrencyID = "x",
-            FeatureID = "x",
+            CurrencyID = "currencyId",
+            FeatureID = "featureId",
             RequestedUsage = 0,
             RequestedValues = ["string"],
-            ResourceID = "x",
+            ResourceID = "resourceId",
         };
 
         string expectedID = "x";
-        string expectedCurrencyID = "x";
-        string expectedFeatureID = "x";
+        string expectedCurrencyID = "currencyId";
+        string expectedFeatureID = "featureId";
         long expectedRequestedUsage = 0;
         List<string> expectedRequestedValues = ["string"];
-        string expectedResourceID = "x";
+        string expectedResourceID = "resourceId";
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedCurrencyID, parameters.CurrencyID);
@@ -89,11 +89,11 @@ public class CustomerCheckEntitlementParamsTest : TestBase
         CustomerCheckEntitlementParams parameters = new()
         {
             ID = "x",
-            CurrencyID = "x",
-            FeatureID = "x",
+            CurrencyID = "currencyId",
+            FeatureID = "featureId",
             RequestedUsage = 0,
             RequestedValues = ["string"],
-            ResourceID = "x",
+            ResourceID = "resourceId",
         };
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
@@ -101,7 +101,7 @@ public class CustomerCheckEntitlementParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://api.stigg.io/api/v1/customers/x/entitlements/check?currencyId=x&featureId=x&requestedUsage=0&requestedValues=string&resourceId=x"
+                    "https://api.stigg.io/api/v1/customers/x/entitlements/check?currencyId=currencyId&featureId=featureId&requestedUsage=0&requestedValues=string&resourceId=resourceId"
                 ),
                 url
             )
@@ -114,11 +114,11 @@ public class CustomerCheckEntitlementParamsTest : TestBase
         var parameters = new CustomerCheckEntitlementParams
         {
             ID = "x",
-            CurrencyID = "x",
-            FeatureID = "x",
+            CurrencyID = "currencyId",
+            FeatureID = "featureId",
             RequestedUsage = 0,
             RequestedValues = ["string"],
-            ResourceID = "x",
+            ResourceID = "resourceId",
         };
 
         CustomerCheckEntitlementParams copied = new(parameters);

@@ -565,7 +565,7 @@ public sealed record class SubscriptionCharge : JsonModel
     }
 
     /// <summary>
-    /// Charge quantity
+    /// Charge quantity. Minimum is 0 (zero is allowed).
     /// </summary>
     public required double Quantity
     {

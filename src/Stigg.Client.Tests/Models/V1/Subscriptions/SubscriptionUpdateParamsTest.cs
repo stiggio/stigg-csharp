@@ -66,7 +66,7 @@ public class SubscriptionUpdateParamsTest : TestBase
                 new()
                 {
                     ID = "id",
-                    Quantity = 1,
+                    Quantity = 0,
                     Type = Subscriptions::Type.Feature,
                 },
             ],
@@ -160,7 +160,7 @@ public class SubscriptionUpdateParamsTest : TestBase
             new()
             {
                 ID = "id",
-                Quantity = 1,
+                Quantity = 0,
                 Type = Subscriptions::Type.Feature,
             },
         ];
@@ -397,7 +397,7 @@ public class SubscriptionUpdateParamsTest : TestBase
                 new()
                 {
                     ID = "id",
-                    Quantity = 1,
+                    Quantity = 0,
                     Type = Subscriptions::Type.Feature,
                 },
             ],
@@ -501,7 +501,7 @@ public class SubscriptionUpdateParamsTest : TestBase
                 new()
                 {
                     ID = "id",
-                    Quantity = 1,
+                    Quantity = 0,
                     Type = Subscriptions::Type.Feature,
                 },
             ],
@@ -621,7 +621,7 @@ public class SubscriptionUpdateParamsTest : TestBase
                 new()
                 {
                     ID = "id",
-                    Quantity = 1,
+                    Quantity = 0,
                     Type = Subscriptions::Type.Feature,
                 },
             ],
@@ -2690,12 +2690,12 @@ public class ChargeTest : TestBase
         var model = new Subscriptions::Charge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = Subscriptions::Type.Feature,
         };
 
         string expectedID = "id";
-        double expectedQuantity = 1;
+        double expectedQuantity = 0;
         ApiEnum<string, Subscriptions::Type> expectedType = Subscriptions::Type.Feature;
 
         Assert.Equal(expectedID, model.ID);
@@ -2709,7 +2709,7 @@ public class ChargeTest : TestBase
         var model = new Subscriptions::Charge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = Subscriptions::Type.Feature,
         };
 
@@ -2728,7 +2728,7 @@ public class ChargeTest : TestBase
         var model = new Subscriptions::Charge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = Subscriptions::Type.Feature,
         };
 
@@ -2740,7 +2740,7 @@ public class ChargeTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
-        double expectedQuantity = 1;
+        double expectedQuantity = 0;
         ApiEnum<string, Subscriptions::Type> expectedType = Subscriptions::Type.Feature;
 
         Assert.Equal(expectedID, deserialized.ID);
@@ -2754,7 +2754,7 @@ public class ChargeTest : TestBase
         var model = new Subscriptions::Charge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = Subscriptions::Type.Feature,
         };
 
@@ -2767,7 +2767,7 @@ public class ChargeTest : TestBase
         var model = new Subscriptions::Charge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = Subscriptions::Type.Feature,
         };
 

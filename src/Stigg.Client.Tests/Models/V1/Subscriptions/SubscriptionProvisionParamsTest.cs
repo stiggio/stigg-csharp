@@ -78,7 +78,7 @@ public class SubscriptionProvisionParamsTest : TestBase
                 new()
                 {
                     ID = "id",
-                    Quantity = 1,
+                    Quantity = 0,
                     Type = SubscriptionProvisionParamsChargeType.Feature,
                 },
             ],
@@ -160,7 +160,7 @@ public class SubscriptionProvisionParamsTest : TestBase
                     SubscriptionProvisionParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            UnitQuantity = 1,
+            UnitQuantity = 0,
         };
 
         string expectedCustomerID = "customerId";
@@ -226,7 +226,7 @@ public class SubscriptionProvisionParamsTest : TestBase
             new()
             {
                 ID = "id",
-                Quantity = 1,
+                Quantity = 0,
                 Type = SubscriptionProvisionParamsChargeType.Feature,
             },
         ];
@@ -311,7 +311,7 @@ public class SubscriptionProvisionParamsTest : TestBase
                     SubscriptionProvisionParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             };
-        long expectedUnitQuantity = 1;
+        long expectedUnitQuantity = 0;
 
         Assert.Equal(expectedCustomerID, parameters.CustomerID);
         Assert.Equal(expectedPlanID, parameters.PlanID);
@@ -565,7 +565,7 @@ public class SubscriptionProvisionParamsTest : TestBase
                 new()
                 {
                     ID = "id",
-                    Quantity = 1,
+                    Quantity = 0,
                     Type = SubscriptionProvisionParamsChargeType.Feature,
                 },
             ],
@@ -639,7 +639,7 @@ public class SubscriptionProvisionParamsTest : TestBase
                     SubscriptionProvisionParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            UnitQuantity = 1,
+            UnitQuantity = 0,
         };
 
         Assert.Null(parameters.BillingCountryCode);
@@ -724,7 +724,7 @@ public class SubscriptionProvisionParamsTest : TestBase
                 new()
                 {
                     ID = "id",
-                    Quantity = 1,
+                    Quantity = 0,
                     Type = SubscriptionProvisionParamsChargeType.Feature,
                 },
             ],
@@ -798,7 +798,7 @@ public class SubscriptionProvisionParamsTest : TestBase
                     SubscriptionProvisionParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            UnitQuantity = 1,
+            UnitQuantity = 0,
 
             BillingCountryCode = null,
             BillingID = null,
@@ -908,7 +908,7 @@ public class SubscriptionProvisionParamsTest : TestBase
                 new()
                 {
                     ID = "id",
-                    Quantity = 1,
+                    Quantity = 0,
                     Type = SubscriptionProvisionParamsChargeType.Feature,
                 },
             ],
@@ -990,7 +990,7 @@ public class SubscriptionProvisionParamsTest : TestBase
                     SubscriptionProvisionParamsTrialOverrideConfigurationTrialEndBehavior.ConvertToPaid,
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            UnitQuantity = 1,
+            UnitQuantity = 0,
         };
 
         SubscriptionProvisionParams copied = new(parameters);
@@ -3235,12 +3235,12 @@ public class SubscriptionProvisionParamsChargeTest : TestBase
         var model = new SubscriptionProvisionParamsCharge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = SubscriptionProvisionParamsChargeType.Feature,
         };
 
         string expectedID = "id";
-        double expectedQuantity = 1;
+        double expectedQuantity = 0;
         ApiEnum<string, SubscriptionProvisionParamsChargeType> expectedType =
             SubscriptionProvisionParamsChargeType.Feature;
 
@@ -3255,7 +3255,7 @@ public class SubscriptionProvisionParamsChargeTest : TestBase
         var model = new SubscriptionProvisionParamsCharge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = SubscriptionProvisionParamsChargeType.Feature,
         };
 
@@ -3274,7 +3274,7 @@ public class SubscriptionProvisionParamsChargeTest : TestBase
         var model = new SubscriptionProvisionParamsCharge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = SubscriptionProvisionParamsChargeType.Feature,
         };
 
@@ -3286,7 +3286,7 @@ public class SubscriptionProvisionParamsChargeTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
-        double expectedQuantity = 1;
+        double expectedQuantity = 0;
         ApiEnum<string, SubscriptionProvisionParamsChargeType> expectedType =
             SubscriptionProvisionParamsChargeType.Feature;
 
@@ -3301,7 +3301,7 @@ public class SubscriptionProvisionParamsChargeTest : TestBase
         var model = new SubscriptionProvisionParamsCharge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = SubscriptionProvisionParamsChargeType.Feature,
         };
 
@@ -3314,7 +3314,7 @@ public class SubscriptionProvisionParamsChargeTest : TestBase
         var model = new SubscriptionProvisionParamsCharge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = SubscriptionProvisionParamsChargeType.Feature,
         };
 
