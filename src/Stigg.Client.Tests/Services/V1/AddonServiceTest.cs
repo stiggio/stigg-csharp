@@ -72,6 +72,17 @@ public class AddonServiceTest : TestBase
     }
 
     [Fact(Skip = "Mock server tests are disabled")]
+    public async Task ListCharges_Works()
+    {
+        var page = await this.client.V1.Addons.ListCharges(
+            "x",
+            new(),
+            TestContext.Current.CancellationToken
+        );
+        page.Validate();
+    }
+
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Publish_Works()
     {
         var response = await this.client.V1.Addons.Publish(

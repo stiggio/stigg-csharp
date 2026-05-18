@@ -546,7 +546,7 @@ sealed class SubscriptionBillingPeriodConverter : JsonConverter<SubscriptionBill
 }
 
 /// <summary>
-/// Charge item
+/// A charge selection for a subscription (references a catalog charge with a quantity).
 /// </summary>
 [JsonConverter(typeof(JsonModelConverter<SubscriptionCharge, SubscriptionChargeFromRaw>))]
 public sealed record class SubscriptionCharge : JsonModel

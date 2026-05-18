@@ -104,6 +104,21 @@ public interface IAddonService
     );
 
     /// <summary>
+    /// Retrieves the list of charges configured on an addon.
+    /// </summary>
+    Task<AddonListChargesPage> ListCharges(
+        AddonListChargesParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="ListCharges(AddonListChargesParams, CancellationToken)"/>
+    Task<AddonListChargesPage> ListCharges(
+        string id,
+        AddonListChargesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Publishes a draft addon, making it available for use in subscriptions.
     /// </summary>
     Task<AddonPublishResponse> Publish(
@@ -228,6 +243,22 @@ public interface IAddonServiceWithRawResponse
     Task<HttpResponse<Addon>> CreateDraft(
         string id,
         AddonCreateDraftParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>get /api/v1/addons/{id}/charges</c>, but is otherwise the
+    /// same as <see cref="IAddonService.ListCharges(AddonListChargesParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<AddonListChargesPage>> ListCharges(
+        AddonListChargesParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="ListCharges(AddonListChargesParams, CancellationToken)"/>
+    Task<HttpResponse<AddonListChargesPage>> ListCharges(
+        string id,
+        AddonListChargesParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 

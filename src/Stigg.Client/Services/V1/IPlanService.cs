@@ -101,6 +101,36 @@ public interface IPlanService
     );
 
     /// <summary>
+    /// Retrieves the list of charges configured on a plan.
+    /// </summary>
+    Task<PlanListChargesPage> ListCharges(
+        PlanListChargesParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="ListCharges(PlanListChargesParams, CancellationToken)"/>
+    Task<PlanListChargesPage> ListCharges(
+        string id,
+        PlanListChargesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Retrieves the list of overage charges configured on a plan.
+    /// </summary>
+    Task<PlanListOverageChargesPage> ListOverageCharges(
+        PlanListOverageChargesParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="ListOverageCharges(PlanListOverageChargesParams, CancellationToken)"/>
+    Task<PlanListOverageChargesPage> ListOverageCharges(
+        string id,
+        PlanListOverageChargesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Publishes a draft plan, making it available for use in subscriptions.
     /// </summary>
     Task<PlanPublishResponse> Publish(
@@ -225,6 +255,38 @@ public interface IPlanServiceWithRawResponse
     Task<HttpResponse<Plan>> CreateDraft(
         string id,
         PlanCreateDraftParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>get /api/v1/plans/{id}/charges</c>, but is otherwise the
+    /// same as <see cref="IPlanService.ListCharges(PlanListChargesParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<PlanListChargesPage>> ListCharges(
+        PlanListChargesParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="ListCharges(PlanListChargesParams, CancellationToken)"/>
+    Task<HttpResponse<PlanListChargesPage>> ListCharges(
+        string id,
+        PlanListChargesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>get /api/v1/plans/{id}/overage-charges</c>, but is otherwise the
+    /// same as <see cref="IPlanService.ListOverageCharges(PlanListOverageChargesParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<PlanListOverageChargesPage>> ListOverageCharges(
+        PlanListOverageChargesParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="ListOverageCharges(PlanListOverageChargesParams, CancellationToken)"/>
+    Task<HttpResponse<PlanListOverageChargesPage>> ListOverageCharges(
+        string id,
+        PlanListOverageChargesParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 

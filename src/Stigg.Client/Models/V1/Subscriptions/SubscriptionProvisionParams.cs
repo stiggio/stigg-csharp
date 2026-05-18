@@ -2428,7 +2428,7 @@ class SubscriptionProvisionParamsBudgetFromRaw : IFromRawJson<SubscriptionProvis
 }
 
 /// <summary>
-/// Charge item
+/// A charge selection for a subscription (references a catalog charge with a quantity).
 /// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<

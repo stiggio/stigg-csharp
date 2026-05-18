@@ -163,6 +163,54 @@ public sealed class PlanService : IPlanService
     }
 
     /// <inheritdoc/>
+    public async Task<PlanListChargesPage> ListCharges(
+        PlanListChargesParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.ListCharges(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<PlanListChargesPage> ListCharges(
+        string id,
+        PlanListChargesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.ListCharges(parameters with { ID = id }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<PlanListOverageChargesPage> ListOverageCharges(
+        PlanListOverageChargesParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.ListOverageCharges(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<PlanListOverageChargesPage> ListOverageCharges(
+        string id,
+        PlanListOverageChargesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.ListOverageCharges(parameters with { ID = id }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
     public async Task<PlanPublishResponse> Publish(
         PlanPublishParams parameters,
         CancellationToken cancellationToken = default
@@ -459,6 +507,96 @@ public sealed class PlanServiceWithRawResponse : IPlanServiceWithRawResponse
         parameters ??= new();
 
         return this.CreateDraft(parameters with { ID = id }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<PlanListChargesPage>> ListCharges(
+        PlanListChargesParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.ID == null)
+        {
+            throw new StiggInvalidDataException("'parameters.ID' cannot be null");
+        }
+
+        HttpRequest<PlanListChargesParams> request = new()
+        {
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var page = await response
+                    .Deserialize<PlanListChargesPageResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    page.Validate();
+                }
+                return new PlanListChargesPage(this, parameters, page);
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<PlanListChargesPage>> ListCharges(
+        string id,
+        PlanListChargesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.ListCharges(parameters with { ID = id }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<PlanListOverageChargesPage>> ListOverageCharges(
+        PlanListOverageChargesParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.ID == null)
+        {
+            throw new StiggInvalidDataException("'parameters.ID' cannot be null");
+        }
+
+        HttpRequest<PlanListOverageChargesParams> request = new()
+        {
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var page = await response
+                    .Deserialize<PlanListOverageChargesPageResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    page.Validate();
+                }
+                return new PlanListOverageChargesPage(this, parameters, page);
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<PlanListOverageChargesPage>> ListOverageCharges(
+        string id,
+        PlanListOverageChargesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.ListOverageCharges(parameters with { ID = id }, cancellationToken);
     }
 
     /// <inheritdoc/>

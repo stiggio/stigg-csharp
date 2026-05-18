@@ -72,6 +72,28 @@ public class PlanServiceTest : TestBase
     }
 
     [Fact(Skip = "Mock server tests are disabled")]
+    public async Task ListCharges_Works()
+    {
+        var page = await this.client.V1.Plans.ListCharges(
+            "x",
+            new(),
+            TestContext.Current.CancellationToken
+        );
+        page.Validate();
+    }
+
+    [Fact(Skip = "Mock server tests are disabled")]
+    public async Task ListOverageCharges_Works()
+    {
+        var page = await this.client.V1.Plans.ListOverageCharges(
+            "x",
+            new(),
+            TestContext.Current.CancellationToken
+        );
+        page.Validate();
+    }
+
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Publish_Works()
     {
         var response = await this.client.V1.Plans.Publish(

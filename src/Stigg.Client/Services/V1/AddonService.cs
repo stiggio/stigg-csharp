@@ -163,6 +163,30 @@ public sealed class AddonService : IAddonService
     }
 
     /// <inheritdoc/>
+    public async Task<AddonListChargesPage> ListCharges(
+        AddonListChargesParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.ListCharges(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<AddonListChargesPage> ListCharges(
+        string id,
+        AddonListChargesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.ListCharges(parameters with { ID = id }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
     public async Task<AddonPublishResponse> Publish(
         AddonPublishParams parameters,
         CancellationToken cancellationToken = default
@@ -459,6 +483,51 @@ public sealed class AddonServiceWithRawResponse : IAddonServiceWithRawResponse
         parameters ??= new();
 
         return this.CreateDraft(parameters with { ID = id }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<AddonListChargesPage>> ListCharges(
+        AddonListChargesParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.ID == null)
+        {
+            throw new StiggInvalidDataException("'parameters.ID' cannot be null");
+        }
+
+        HttpRequest<AddonListChargesParams> request = new()
+        {
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var page = await response
+                    .Deserialize<AddonListChargesPageResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    page.Validate();
+                }
+                return new AddonListChargesPage(this, parameters, page);
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<AddonListChargesPage>> ListCharges(
+        string id,
+        AddonListChargesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.ListCharges(parameters with { ID = id }, cancellationToken);
     }
 
     /// <inheritdoc/>
