@@ -32,6 +32,8 @@ public interface IV1Service
 
     IEventService Events { get; }
 
+    ICreditService Credits { get; }
+
     IFeatureService Features { get; }
 
     IAddonService Addons { get; }
@@ -63,6 +65,8 @@ public interface IV1ServiceWithRawResponse
     ICouponServiceWithRawResponse Coupons { get; }
 
     IEventServiceWithRawResponse Events { get; }
+
+    ICreditServiceWithRawResponse Credits { get; }
 
     IFeatureServiceWithRawResponse Features { get; }
 
