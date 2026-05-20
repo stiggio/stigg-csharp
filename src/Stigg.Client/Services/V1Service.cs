@@ -32,7 +32,6 @@ public sealed class V1Service : IV1Service
         _subscriptions = new(() => new SubscriptionService(client));
         _coupons = new(() => new CouponService(client));
         _events = new(() => new EventService(client));
-        _credits = new(() => new CreditService(client));
         _features = new(() => new FeatureService(client));
         _addons = new(() => new AddonService(client));
         _plans = new(() => new PlanService(client));
@@ -62,12 +61,6 @@ public sealed class V1Service : IV1Service
     public IEventService Events
     {
         get { return _events.Value; }
-    }
-
-    readonly Lazy<ICreditService> _credits;
-    public ICreditService Credits
-    {
-        get { return _credits.Value; }
     }
 
     readonly Lazy<IFeatureService> _features;
@@ -120,7 +113,6 @@ public sealed class V1ServiceWithRawResponse : IV1ServiceWithRawResponse
         _subscriptions = new(() => new SubscriptionServiceWithRawResponse(client));
         _coupons = new(() => new CouponServiceWithRawResponse(client));
         _events = new(() => new EventServiceWithRawResponse(client));
-        _credits = new(() => new CreditServiceWithRawResponse(client));
         _features = new(() => new FeatureServiceWithRawResponse(client));
         _addons = new(() => new AddonServiceWithRawResponse(client));
         _plans = new(() => new PlanServiceWithRawResponse(client));
@@ -150,12 +142,6 @@ public sealed class V1ServiceWithRawResponse : IV1ServiceWithRawResponse
     public IEventServiceWithRawResponse Events
     {
         get { return _events.Value; }
-    }
-
-    readonly Lazy<ICreditServiceWithRawResponse> _credits;
-    public ICreditServiceWithRawResponse Credits
-    {
-        get { return _credits.Value; }
     }
 
     readonly Lazy<IFeatureServiceWithRawResponse> _features;

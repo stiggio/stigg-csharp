@@ -1,13 +1,13 @@
 using System.Text.Json;
 using Stigg.Client.Exceptions;
-using Stigg.Client.Models.V1.Credits.CustomCurrencies;
 using Stigg.Client.Models.V1.Customers;
+using Stigg.Client.Models.V1.Events.Credits.CustomCurrencies;
 using Addons = Stigg.Client.Models.V1.Addons;
 using Coupons = Stigg.Client.Models.V1.Coupons;
-using Credits = Stigg.Client.Models.V1.Credits;
+using Credits = Stigg.Client.Models.V1.Events.Credits;
 using Entitlements = Stigg.Client.Models.V1.Addons.Entitlements;
 using Features = Stigg.Client.Models.V1.Features;
-using Grants = Stigg.Client.Models.V1.Credits.Grants;
+using Grants = Stigg.Client.Models.V1.Events.Credits.Grants;
 using Integrations = Stigg.Client.Models.V1.Customers.Integrations;
 using PaymentMethod = Stigg.Client.Models.V1.Customers.PaymentMethod;
 using Plans = Stigg.Client.Models.V1.Plans;
