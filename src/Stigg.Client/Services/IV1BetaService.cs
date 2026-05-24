@@ -1,44 +1,48 @@
 using System;
 using Stigg.Client.Core;
-using Beta = Stigg.Client.Services.V1.Events.Beta;
+using Stigg.Client.Services.V1Beta;
 
-namespace Stigg.Client.Services.V1.Events;
+namespace Stigg.Client.Services;
 
 /// <summary>
 /// NOTE: Do not inherit from this type outside the SDK unless you're okay with breaking
 /// changes in non-major versions. We may add new methods in the future that cause
 /// existing derived classes to break.
 /// </summary>
-public interface IBetaService
+public interface IV1BetaService
 {
     /// <summary>
     /// Returns a view of this service that provides access to raw HTTP responses
     /// for each method.
     /// </summary>
-    IBetaServiceWithRawResponse WithRawResponse { get; }
+    IV1BetaServiceWithRawResponse WithRawResponse { get; }
 
     /// <summary>
     /// Returns a view of this service with the given option modifications applied.
     ///
     /// <para>The original service is not modified.</para>
     /// </summary>
-    IBetaService WithOptions(Func<ClientOptions, ClientOptions> modifier);
+    IV1BetaService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
-    Beta::ICustomerService Customers { get; }
+    ICustomerService Customers { get; }
+
+    IEntityTypeService EntityTypes { get; }
 }
 
 /// <summary>
-/// A view of <see cref="IBetaService"/> that provides access to raw
+/// A view of <see cref="IV1BetaService"/> that provides access to raw
 /// HTTP responses for each method.
 /// </summary>
-public interface IBetaServiceWithRawResponse
+public interface IV1BetaServiceWithRawResponse
 {
     /// <summary>
     /// Returns a view of this service with the given option modifications applied.
     ///
     /// <para>The original service is not modified.</para>
     /// </summary>
-    IBetaServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
+    IV1BetaServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
-    Beta::ICustomerServiceWithRawResponse Customers { get; }
+    ICustomerServiceWithRawResponse Customers { get; }
+
+    IEntityTypeServiceWithRawResponse EntityTypes { get; }
 }

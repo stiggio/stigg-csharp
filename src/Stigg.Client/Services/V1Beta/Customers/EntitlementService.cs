@@ -4,9 +4,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
-using Stigg.Client.Models.V1.Events.Beta.Customers.Entitlements;
+using Stigg.Client.Models.V1Beta.Customers.Entitlements;
 
-namespace Stigg.Client.Services.V1.Events.Beta.Customers;
+namespace Stigg.Client.Services.V1Beta.Customers;
 
 /// <inheritdoc/>
 public sealed class EntitlementService : IEntitlementService

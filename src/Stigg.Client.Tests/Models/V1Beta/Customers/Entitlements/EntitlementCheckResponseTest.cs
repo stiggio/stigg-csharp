@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
-using Stigg.Client.Models.V1.Events.Beta.Customers.Entitlements;
+using Stigg.Client.Models.V1Beta.Customers.Entitlements;
 
-namespace Stigg.Client.Tests.Models.V1.Events.Beta.Customers.Entitlements;
+namespace Stigg.Client.Tests.Models.V1Beta.Customers.Entitlements;
 
 public class EntitlementCheckResponseTest : TestBase
 {

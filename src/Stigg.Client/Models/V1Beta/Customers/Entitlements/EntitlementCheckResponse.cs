@@ -9,7 +9,7 @@ using System.Text.Json.Serialization;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
 
-namespace Stigg.Client.Models.V1.Events.Beta.Customers.Entitlements;
+namespace Stigg.Client.Models.V1Beta.Customers.Entitlements;
 
 /// <summary>
 /// Response object

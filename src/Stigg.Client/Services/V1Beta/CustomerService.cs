@@ -1,8 +1,8 @@
 using System;
 using Stigg.Client.Core;
-using Stigg.Client.Services.V1.Events.Beta.Customers;
+using Stigg.Client.Services.V1Beta.Customers;
 
-namespace Stigg.Client.Services.V1.Events.Beta;
+namespace Stigg.Client.Services.V1Beta;
 
 /// <inheritdoc/>
 public sealed class CustomerService : ICustomerService

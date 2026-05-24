@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 
-namespace Stigg.Client.Models.V1.Events.Beta.Customers.Entitlements;
+namespace Stigg.Client.Models.V1Beta.Customers.Entitlements;
 
 /// <summary>
 /// Experimental — request and response shapes may change without notice. Same semantics

@@ -2,9 +2,9 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Stigg.Client.Core;
-using Stigg.Client.Models.V1.Events.Beta.Customers.Entitlements;
+using Stigg.Client.Models.V1Beta.Customers.Entitlements;
 
-namespace Stigg.Client.Services.V1.Events.Beta.Customers;
+namespace Stigg.Client.Services.V1Beta.Customers;
 
 /// <summary>
 /// NOTE: Do not inherit from this type outside the SDK unless you're okay with breaking
