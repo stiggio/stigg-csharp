@@ -2,6 +2,7 @@ using System.Text.Json;
 using Stigg.Client.Exceptions;
 using Stigg.Client.Models.V1.Credits.CustomCurrencies;
 using Stigg.Client.Models.V1.Customers;
+using Stigg.Client.Models.V1Beta.Entities;
 using Addons = Stigg.Client.Models.V1.Addons;
 using Coupons = Stigg.Client.Models.V1.Coupons;
 using Credits = Stigg.Client.Models.V1.Credits;
@@ -836,6 +837,7 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, CustomersEntitlements::FeatureType>(),
             new ApiEnumConverter<string, CustomersEntitlements::ResetPeriod>(),
             new ApiEnumConverter<string, CustomersEntitlements::CreditAccessDeniedReason>(),
+            new ApiEnumConverter<string, IncludeArchived>(),
         },
     };
 

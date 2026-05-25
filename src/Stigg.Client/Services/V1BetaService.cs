@@ -30,6 +30,7 @@ public sealed class V1BetaService : IV1BetaService
         _withRawResponse = new(() => new V1BetaServiceWithRawResponse(client.WithRawResponse));
         _customers = new(() => new CustomerService(client));
         _entityTypes = new(() => new EntityTypeService(client));
+        _entities = new(() => new EntityService(client));
     }
 
     readonly Lazy<ICustomerService> _customers;
@@ -42,6 +43,12 @@ public sealed class V1BetaService : IV1BetaService
     public IEntityTypeService EntityTypes
     {
         get { return _entityTypes.Value; }
+    }
+
+    readonly Lazy<IEntityService> _entities;
+    public IEntityService Entities
+    {
+        get { return _entities.Value; }
     }
 }
 
@@ -62,6 +69,7 @@ public sealed class V1BetaServiceWithRawResponse : IV1BetaServiceWithRawResponse
 
         _customers = new(() => new CustomerServiceWithRawResponse(client));
         _entityTypes = new(() => new EntityTypeServiceWithRawResponse(client));
+        _entities = new(() => new EntityServiceWithRawResponse(client));
     }
 
     readonly Lazy<ICustomerServiceWithRawResponse> _customers;
@@ -74,5 +82,11 @@ public sealed class V1BetaServiceWithRawResponse : IV1BetaServiceWithRawResponse
     public IEntityTypeServiceWithRawResponse EntityTypes
     {
         get { return _entityTypes.Value; }
+    }
+
+    readonly Lazy<IEntityServiceWithRawResponse> _entities;
+    public IEntityServiceWithRawResponse Entities
+    {
+        get { return _entities.Value; }
     }
 }

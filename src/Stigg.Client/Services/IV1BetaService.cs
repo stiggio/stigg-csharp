@@ -27,6 +27,8 @@ public interface IV1BetaService
     ICustomerService Customers { get; }
 
     IEntityTypeService EntityTypes { get; }
+
+    IEntityService Entities { get; }
 }
 
 /// <summary>
@@ -45,4 +47,6 @@ public interface IV1BetaServiceWithRawResponse
     ICustomerServiceWithRawResponse Customers { get; }
 
     IEntityTypeServiceWithRawResponse EntityTypes { get; }
+
+    IEntityServiceWithRawResponse Entities { get; }
 }
