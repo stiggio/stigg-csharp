@@ -290,27 +290,27 @@ class CurrencyFromRaw : IFromRawJson<Currency>
 public sealed record class Series : JsonModel
 {
     /// <summary>
-    /// The feature ID
+    /// The feature ID; null when grouping by dimensions only
     /// </summary>
-    public required string FeatureID
+    public required string? FeatureID
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("featureId");
+            return this._rawData.GetNullableClass<string>("featureId");
         }
         init { this._rawData.Set("featureId", value); }
     }
 
     /// <summary>
-    /// The display name of the feature
+    /// The display name of the feature; null when grouping by dimensions only
     /// </summary>
-    public required string FeatureName
+    public required string? FeatureName
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("featureName");
+            return this._rawData.GetNullableClass<string>("featureName");
         }
         init { this._rawData.Set("featureName", value); }
     }
@@ -347,6 +347,30 @@ public sealed record class Series : JsonModel
         init { this._rawData.Set("totalCredits", value); }
     }
 
+    /// <summary>
+    /// Dimension key/value pairs identifying this series when groupBy is applied
+    /// </summary>
+    public IReadOnlyList<Tag>? Tags
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<Tag>>("tags");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set<ImmutableArray<Tag>?>(
+                "tags",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -357,6 +381,10 @@ public sealed record class Series : JsonModel
             item.Validate();
         }
         _ = this.TotalCredits;
+        foreach (var item in this.Tags ?? [])
+        {
+            item.Validate();
+        }
     }
 
     public Series() { }
@@ -466,4 +494,78 @@ class PointFromRaw : IFromRawJson<Point>
     /// <inheritdoc/>
     public Point FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Point.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Dimension key/value pair identifying a credit usage series
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<Tag, TagFromRaw>))]
+public sealed record class Tag : JsonModel
+{
+    /// <summary>
+    /// The dimension key
+    /// </summary>
+    public required string Key
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("key");
+        }
+        init { this._rawData.Set("key", value); }
+    }
+
+    /// <summary>
+    /// The dimension value for this series
+    /// </summary>
+    public required string Value
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("value");
+        }
+        init { this._rawData.Set("value", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.Key;
+        _ = this.Value;
+    }
+
+    public Tag() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public Tag(Tag tag)
+        : base(tag) { }
+#pragma warning restore CS8618
+
+    public Tag(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    Tag(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="TagFromRaw.FromRawUnchecked"/>
+    public static Tag FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class TagFromRaw : IFromRawJson<Tag>
+{
+    /// <inheritdoc/>
+    public Tag FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Tag.FromRawUnchecked(rawData);
 }

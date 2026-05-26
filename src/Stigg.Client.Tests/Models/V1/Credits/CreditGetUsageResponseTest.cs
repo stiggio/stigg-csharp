@@ -38,6 +38,7 @@ public class CreditGetUsageResponseTest : TestBase
                             },
                         ],
                         TotalCredits = 0,
+                        Tags = [new() { Key = "key", Value = "value" }],
                     },
                 ],
             },
@@ -68,6 +69,7 @@ public class CreditGetUsageResponseTest : TestBase
                         },
                     ],
                     TotalCredits = 0,
+                    Tags = [new() { Key = "key", Value = "value" }],
                 },
             ],
         };
@@ -105,6 +107,7 @@ public class CreditGetUsageResponseTest : TestBase
                             },
                         ],
                         TotalCredits = 0,
+                        Tags = [new() { Key = "key", Value = "value" }],
                     },
                 ],
             },
@@ -149,6 +152,7 @@ public class CreditGetUsageResponseTest : TestBase
                             },
                         ],
                         TotalCredits = 0,
+                        Tags = [new() { Key = "key", Value = "value" }],
                     },
                 ],
             },
@@ -186,6 +190,7 @@ public class CreditGetUsageResponseTest : TestBase
                         },
                     ],
                     TotalCredits = 0,
+                    Tags = [new() { Key = "key", Value = "value" }],
                 },
             ],
         };
@@ -223,6 +228,7 @@ public class CreditGetUsageResponseTest : TestBase
                             },
                         ],
                         TotalCredits = 0,
+                        Tags = [new() { Key = "key", Value = "value" }],
                     },
                 ],
             },
@@ -261,6 +267,7 @@ public class CreditGetUsageResponseTest : TestBase
                             },
                         ],
                         TotalCredits = 0,
+                        Tags = [new() { Key = "key", Value = "value" }],
                     },
                 ],
             },
@@ -302,6 +309,7 @@ public class CreditGetUsageResponseDataTest : TestBase
                         },
                     ],
                     TotalCredits = 0,
+                    Tags = [new() { Key = "key", Value = "value" }],
                 },
             ],
         };
@@ -329,6 +337,7 @@ public class CreditGetUsageResponseDataTest : TestBase
                     },
                 ],
                 TotalCredits = 0,
+                Tags = [new() { Key = "key", Value = "value" }],
             },
         ];
 
@@ -368,6 +377,7 @@ public class CreditGetUsageResponseDataTest : TestBase
                         },
                     ],
                     TotalCredits = 0,
+                    Tags = [new() { Key = "key", Value = "value" }],
                 },
             ],
         };
@@ -409,6 +419,7 @@ public class CreditGetUsageResponseDataTest : TestBase
                         },
                     ],
                     TotalCredits = 0,
+                    Tags = [new() { Key = "key", Value = "value" }],
                 },
             ],
         };
@@ -443,6 +454,7 @@ public class CreditGetUsageResponseDataTest : TestBase
                     },
                 ],
                 TotalCredits = 0,
+                Tags = [new() { Key = "key", Value = "value" }],
             },
         ];
 
@@ -482,6 +494,7 @@ public class CreditGetUsageResponseDataTest : TestBase
                         },
                     ],
                     TotalCredits = 0,
+                    Tags = [new() { Key = "key", Value = "value" }],
                 },
             ],
         };
@@ -517,6 +530,7 @@ public class CreditGetUsageResponseDataTest : TestBase
                         },
                     ],
                     TotalCredits = 0,
+                    Tags = [new() { Key = "key", Value = "value" }],
                 },
             ],
         };
@@ -651,6 +665,7 @@ public class SeriesTest : TestBase
                 new() { Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"), Value = 0 },
             ],
             TotalCredits = 0,
+            Tags = [new() { Key = "key", Value = "value" }],
         };
 
         string expectedFeatureID = "featureId";
@@ -660,6 +675,7 @@ public class SeriesTest : TestBase
             new() { Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"), Value = 0 },
         ];
         double expectedTotalCredits = 0;
+        List<Tag> expectedTags = [new() { Key = "key", Value = "value" }];
 
         Assert.Equal(expectedFeatureID, model.FeatureID);
         Assert.Equal(expectedFeatureName, model.FeatureName);
@@ -669,6 +685,12 @@ public class SeriesTest : TestBase
             Assert.Equal(expectedPoints[i], model.Points[i]);
         }
         Assert.Equal(expectedTotalCredits, model.TotalCredits);
+        Assert.NotNull(model.Tags);
+        Assert.Equal(expectedTags.Count, model.Tags.Count);
+        for (int i = 0; i < expectedTags.Count; i++)
+        {
+            Assert.Equal(expectedTags[i], model.Tags[i]);
+        }
     }
 
     [Fact]
@@ -683,6 +705,7 @@ public class SeriesTest : TestBase
                 new() { Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"), Value = 0 },
             ],
             TotalCredits = 0,
+            Tags = [new() { Key = "key", Value = "value" }],
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -703,6 +726,7 @@ public class SeriesTest : TestBase
                 new() { Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"), Value = 0 },
             ],
             TotalCredits = 0,
+            Tags = [new() { Key = "key", Value = "value" }],
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -716,6 +740,7 @@ public class SeriesTest : TestBase
             new() { Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"), Value = 0 },
         ];
         double expectedTotalCredits = 0;
+        List<Tag> expectedTags = [new() { Key = "key", Value = "value" }];
 
         Assert.Equal(expectedFeatureID, deserialized.FeatureID);
         Assert.Equal(expectedFeatureName, deserialized.FeatureName);
@@ -725,6 +750,12 @@ public class SeriesTest : TestBase
             Assert.Equal(expectedPoints[i], deserialized.Points[i]);
         }
         Assert.Equal(expectedTotalCredits, deserialized.TotalCredits);
+        Assert.NotNull(deserialized.Tags);
+        Assert.Equal(expectedTags.Count, deserialized.Tags.Count);
+        for (int i = 0; i < expectedTags.Count; i++)
+        {
+            Assert.Equal(expectedTags[i], deserialized.Tags[i]);
+        }
     }
 
     [Fact]
@@ -739,6 +770,83 @@ public class SeriesTest : TestBase
                 new() { Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"), Value = 0 },
             ],
             TotalCredits = 0,
+            Tags = [new() { Key = "key", Value = "value" }],
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new Series
+        {
+            FeatureID = "featureId",
+            FeatureName = "featureName",
+            Points =
+            [
+                new() { Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"), Value = 0 },
+            ],
+            TotalCredits = 0,
+        };
+
+        Assert.Null(model.Tags);
+        Assert.False(model.RawData.ContainsKey("tags"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new Series
+        {
+            FeatureID = "featureId",
+            FeatureName = "featureName",
+            Points =
+            [
+                new() { Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"), Value = 0 },
+            ],
+            TotalCredits = 0,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
+    {
+        var model = new Series
+        {
+            FeatureID = "featureId",
+            FeatureName = "featureName",
+            Points =
+            [
+                new() { Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"), Value = 0 },
+            ],
+            TotalCredits = 0,
+
+            // Null should be interpreted as omitted for these properties
+            Tags = null,
+        };
+
+        Assert.Null(model.Tags);
+        Assert.False(model.RawData.ContainsKey("tags"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new Series
+        {
+            FeatureID = "featureId",
+            FeatureName = "featureName",
+            Points =
+            [
+                new() { Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"), Value = 0 },
+            ],
+            TotalCredits = 0,
+
+            // Null should be interpreted as omitted for these properties
+            Tags = null,
         };
 
         model.Validate();
@@ -756,6 +864,7 @@ public class SeriesTest : TestBase
                 new() { Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"), Value = 0 },
             ],
             TotalCredits = 0,
+            Tags = [new() { Key = "key", Value = "value" }],
         };
 
         Series copied = new(model);
@@ -839,6 +948,66 @@ public class PointTest : TestBase
         };
 
         Point copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class TagTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new Tag { Key = "key", Value = "value" };
+
+        string expectedKey = "key";
+        string expectedValue = "value";
+
+        Assert.Equal(expectedKey, model.Key);
+        Assert.Equal(expectedValue, model.Value);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new Tag { Key = "key", Value = "value" };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Tag>(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new Tag { Key = "key", Value = "value" };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Tag>(element, ModelBase.SerializerOptions);
+        Assert.NotNull(deserialized);
+
+        string expectedKey = "key";
+        string expectedValue = "value";
+
+        Assert.Equal(expectedKey, deserialized.Key);
+        Assert.Equal(expectedValue, deserialized.Value);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new Tag { Key = "key", Value = "value" };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Tag { Key = "key", Value = "value" };
+
+        Tag copied = new(model);
 
         Assert.Equal(model, copied);
     }

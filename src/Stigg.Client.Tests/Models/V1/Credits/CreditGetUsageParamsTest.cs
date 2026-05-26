@@ -16,6 +16,7 @@ public class CreditGetUsageParamsTest : TestBase
             CustomerID = "customerId",
             CurrencyID = "currencyId",
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            GroupBy = "groupBy",
             ResourceID = "resourceId",
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             TimeRange = TimeRange.LastDay,
@@ -24,6 +25,7 @@ public class CreditGetUsageParamsTest : TestBase
         string expectedCustomerID = "customerId";
         string expectedCurrencyID = "currencyId";
         DateTimeOffset expectedEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedGroupBy = "groupBy";
         string expectedResourceID = "resourceId";
         DateTimeOffset expectedStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, TimeRange> expectedTimeRange = TimeRange.LastDay;
@@ -31,6 +33,7 @@ public class CreditGetUsageParamsTest : TestBase
         Assert.Equal(expectedCustomerID, parameters.CustomerID);
         Assert.Equal(expectedCurrencyID, parameters.CurrencyID);
         Assert.Equal(expectedEndDate, parameters.EndDate);
+        Assert.Equal(expectedGroupBy, parameters.GroupBy);
         Assert.Equal(expectedResourceID, parameters.ResourceID);
         Assert.Equal(expectedStartDate, parameters.StartDate);
         Assert.Equal(expectedTimeRange, parameters.TimeRange);
@@ -45,6 +48,8 @@ public class CreditGetUsageParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("currencyId"));
         Assert.Null(parameters.EndDate);
         Assert.False(parameters.RawQueryData.ContainsKey("endDate"));
+        Assert.Null(parameters.GroupBy);
+        Assert.False(parameters.RawQueryData.ContainsKey("groupBy"));
         Assert.Null(parameters.ResourceID);
         Assert.False(parameters.RawQueryData.ContainsKey("resourceId"));
         Assert.Null(parameters.StartDate);
@@ -63,6 +68,7 @@ public class CreditGetUsageParamsTest : TestBase
             // Null should be interpreted as omitted for these properties
             CurrencyID = null,
             EndDate = null,
+            GroupBy = null,
             ResourceID = null,
             StartDate = null,
             TimeRange = null,
@@ -72,6 +78,8 @@ public class CreditGetUsageParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("currencyId"));
         Assert.Null(parameters.EndDate);
         Assert.False(parameters.RawQueryData.ContainsKey("endDate"));
+        Assert.Null(parameters.GroupBy);
+        Assert.False(parameters.RawQueryData.ContainsKey("groupBy"));
         Assert.Null(parameters.ResourceID);
         Assert.False(parameters.RawQueryData.ContainsKey("resourceId"));
         Assert.Null(parameters.StartDate);
@@ -88,6 +96,7 @@ public class CreditGetUsageParamsTest : TestBase
             CustomerID = "customerId",
             CurrencyID = "currencyId",
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
+            GroupBy = "groupBy",
             ResourceID = "resourceId",
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
             TimeRange = TimeRange.LastDay,
@@ -98,7 +107,7 @@ public class CreditGetUsageParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://api.stigg.io/api/v1/credits/usage?customerId=customerId&currencyId=currencyId&endDate=2019-12-27T18%3a11%3a19.117%2b00%3a00&resourceId=resourceId&startDate=2019-12-27T18%3a11%3a19.117%2b00%3a00&timeRange=LAST_DAY"
+                    "https://api.stigg.io/api/v1/credits/usage?customerId=customerId&currencyId=currencyId&endDate=2019-12-27T18%3a11%3a19.117%2b00%3a00&groupBy=groupBy&resourceId=resourceId&startDate=2019-12-27T18%3a11%3a19.117%2b00%3a00&timeRange=LAST_DAY"
                 ),
                 url
             )
@@ -113,6 +122,7 @@ public class CreditGetUsageParamsTest : TestBase
             CustomerID = "customerId",
             CurrencyID = "currencyId",
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            GroupBy = "groupBy",
             ResourceID = "resourceId",
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             TimeRange = TimeRange.LastDay,

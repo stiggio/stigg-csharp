@@ -77,6 +77,28 @@ public record class CreditGetUsageParams : ParamsBase
     }
 
     /// <summary>
+    /// Comma-separated list of feature dimension keys to group usage series by (up
+    /// to 3). Each key matches /^[a-zA-Z0-9_$-]+$/
+    /// </summary>
+    public string? GroupBy
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("groupBy");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("groupBy", value);
+        }
+    }
+
+    /// <summary>
     /// Filter by resource ID
     /// </summary>
     public string? ResourceID
