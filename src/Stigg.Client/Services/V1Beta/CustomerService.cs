@@ -29,12 +29,26 @@ public sealed class CustomerService : ICustomerService
 
         _withRawResponse = new(() => new CustomerServiceWithRawResponse(client.WithRawResponse));
         _entitlements = new(() => new EntitlementService(client));
+        _entities = new(() => new EntityService(client));
+        _assignments = new(() => new AssignmentService(client));
     }
 
     readonly Lazy<IEntitlementService> _entitlements;
     public IEntitlementService Entitlements
     {
         get { return _entitlements.Value; }
+    }
+
+    readonly Lazy<IEntityService> _entities;
+    public IEntityService Entities
+    {
+        get { return _entities.Value; }
+    }
+
+    readonly Lazy<IAssignmentService> _assignments;
+    public IAssignmentService Assignments
+    {
+        get { return _assignments.Value; }
     }
 }
 
@@ -54,11 +68,25 @@ public sealed class CustomerServiceWithRawResponse : ICustomerServiceWithRawResp
         _client = client;
 
         _entitlements = new(() => new EntitlementServiceWithRawResponse(client));
+        _entities = new(() => new EntityServiceWithRawResponse(client));
+        _assignments = new(() => new AssignmentServiceWithRawResponse(client));
     }
 
     readonly Lazy<IEntitlementServiceWithRawResponse> _entitlements;
     public IEntitlementServiceWithRawResponse Entitlements
     {
         get { return _entitlements.Value; }
+    }
+
+    readonly Lazy<IEntityServiceWithRawResponse> _entities;
+    public IEntityServiceWithRawResponse Entities
+    {
+        get { return _entities.Value; }
+    }
+
+    readonly Lazy<IAssignmentServiceWithRawResponse> _assignments;
+    public IAssignmentServiceWithRawResponse Assignments
+    {
+        get { return _assignments.Value; }
     }
 }

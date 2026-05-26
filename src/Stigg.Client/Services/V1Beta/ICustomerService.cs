@@ -25,6 +25,10 @@ public interface ICustomerService
     ICustomerService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     IEntitlementService Entitlements { get; }
+
+    IEntityService Entities { get; }
+
+    IAssignmentService Assignments { get; }
 }
 
 /// <summary>
@@ -41,4 +45,8 @@ public interface ICustomerServiceWithRawResponse
     ICustomerServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     IEntitlementServiceWithRawResponse Entitlements { get; }
+
+    IEntityServiceWithRawResponse Entities { get; }
+
+    IAssignmentServiceWithRawResponse Assignments { get; }
 }
