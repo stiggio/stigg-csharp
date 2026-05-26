@@ -5,14 +5,14 @@ using Stigg.Client.Models.V1Beta.Customers.Entities;
 
 namespace Stigg.Client.Tests.Models.V1Beta.Customers.Entities;
 
-public class EntityUnarchiveResponseTest : TestBase
+public class EntityIdsActionResponseDtoTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new EntityUnarchiveResponse { Data = new(["string"]) };
+        var model = new EntityIdsActionResponseDto { Data = new(["string"]) };
 
-        EntityUnarchiveResponseData expectedData = new(["string"]);
+        Data expectedData = new(["string"]);
 
         Assert.Equal(expectedData, model.Data);
     }
@@ -20,10 +20,10 @@ public class EntityUnarchiveResponseTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new EntityUnarchiveResponse { Data = new(["string"]) };
+        var model = new EntityIdsActionResponseDto { Data = new(["string"]) };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<EntityUnarchiveResponse>(
+        var deserialized = JsonSerializer.Deserialize<EntityIdsActionResponseDto>(
             json,
             ModelBase.SerializerOptions
         );
@@ -34,16 +34,16 @@ public class EntityUnarchiveResponseTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new EntityUnarchiveResponse { Data = new(["string"]) };
+        var model = new EntityIdsActionResponseDto { Data = new(["string"]) };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<EntityUnarchiveResponse>(
+        var deserialized = JsonSerializer.Deserialize<EntityIdsActionResponseDto>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
-        EntityUnarchiveResponseData expectedData = new(["string"]);
+        Data expectedData = new(["string"]);
 
         Assert.Equal(expectedData, deserialized.Data);
     }
@@ -51,7 +51,7 @@ public class EntityUnarchiveResponseTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new EntityUnarchiveResponse { Data = new(["string"]) };
+        var model = new EntityIdsActionResponseDto { Data = new(["string"]) };
 
         model.Validate();
     }
@@ -59,20 +59,20 @@ public class EntityUnarchiveResponseTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new EntityUnarchiveResponse { Data = new(["string"]) };
+        var model = new EntityIdsActionResponseDto { Data = new(["string"]) };
 
-        EntityUnarchiveResponse copied = new(model);
+        EntityIdsActionResponseDto copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class EntityUnarchiveResponseDataTest : TestBase
+public class DataTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new EntityUnarchiveResponseData { Ids = ["string"] };
+        var model = new Data { Ids = ["string"] };
 
         List<string> expectedIds = ["string"];
 
@@ -86,13 +86,10 @@ public class EntityUnarchiveResponseDataTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new EntityUnarchiveResponseData { Ids = ["string"] };
+        var model = new Data { Ids = ["string"] };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<EntityUnarchiveResponseData>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Data>(json, ModelBase.SerializerOptions);
 
         Assert.Equal(model, deserialized);
     }
@@ -100,13 +97,10 @@ public class EntityUnarchiveResponseDataTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new EntityUnarchiveResponseData { Ids = ["string"] };
+        var model = new Data { Ids = ["string"] };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<EntityUnarchiveResponseData>(
-            element,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
         Assert.NotNull(deserialized);
 
         List<string> expectedIds = ["string"];
@@ -121,7 +115,7 @@ public class EntityUnarchiveResponseDataTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new EntityUnarchiveResponseData { Ids = ["string"] };
+        var model = new Data { Ids = ["string"] };
 
         model.Validate();
     }
@@ -129,9 +123,9 @@ public class EntityUnarchiveResponseDataTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new EntityUnarchiveResponseData { Ids = ["string"] };
+        var model = new Data { Ids = ["string"] };
 
-        EntityUnarchiveResponseData copied = new(model);
+        Data copied = new(model);
 
         Assert.Equal(model, copied);
     }

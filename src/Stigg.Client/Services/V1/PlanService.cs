@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
+using Stigg.Client.Models.V1.Addons;
 using Stigg.Client.Models.V1.Plans;
 using Stigg.Client.Services.V1.Plans;
 
@@ -530,9 +531,7 @@ public sealed class PlanServiceWithRawResponse : IPlanServiceWithRawResponse
             response,
             async (token) =>
             {
-                var page = await response
-                    .Deserialize<PlanListChargesPageResponse>(token)
-                    .ConfigureAwait(false);
+                var page = await response.Deserialize<ChargeList>(token).ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
                     page.Validate();
@@ -575,9 +574,7 @@ public sealed class PlanServiceWithRawResponse : IPlanServiceWithRawResponse
             response,
             async (token) =>
             {
-                var page = await response
-                    .Deserialize<PlanListOverageChargesPageResponse>(token)
-                    .ConfigureAwait(false);
+                var page = await response.Deserialize<ChargeList>(token).ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
                     page.Validate();

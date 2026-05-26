@@ -33,12 +33,12 @@ public sealed record class AddonListPageResponse : JsonModel
     /// <summary>
     /// Pagination metadata including cursors for navigating through results
     /// </summary>
-    public required Pagination Pagination
+    public required AddonListPageResponsePagination Pagination
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<Pagination>("pagination");
+            return this._rawData.GetNotNullClass<AddonListPageResponsePagination>("pagination");
         }
         init { this._rawData.Set("pagination", value); }
     }
@@ -94,8 +94,13 @@ class AddonListPageResponseFromRaw : IFromRawJson<AddonListPageResponse>
 /// <summary>
 /// Pagination metadata including cursors for navigating through results
 /// </summary>
-[JsonConverter(typeof(JsonModelConverter<Pagination, PaginationFromRaw>))]
-public sealed record class Pagination : JsonModel
+[JsonConverter(
+    typeof(JsonModelConverter<
+        AddonListPageResponsePagination,
+        AddonListPageResponsePaginationFromRaw
+    >)
+)]
+public sealed record class AddonListPageResponsePagination : JsonModel
 {
     /// <summary>
     /// Cursor for fetching the next page of results, or null if no additional pages exist
@@ -130,37 +135,42 @@ public sealed record class Pagination : JsonModel
         _ = this.Prev;
     }
 
-    public Pagination() { }
+    public AddonListPageResponsePagination() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public Pagination(Pagination pagination)
-        : base(pagination) { }
+    public AddonListPageResponsePagination(
+        AddonListPageResponsePagination addonListPageResponsePagination
+    )
+        : base(addonListPageResponsePagination) { }
 #pragma warning restore CS8618
 
-    public Pagination(IReadOnlyDictionary<string, JsonElement> rawData)
+    public AddonListPageResponsePagination(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Pagination(FrozenDictionary<string, JsonElement> rawData)
+    AddonListPageResponsePagination(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="PaginationFromRaw.FromRawUnchecked"/>
-    public static Pagination FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="AddonListPageResponsePaginationFromRaw.FromRawUnchecked"/>
+    public static AddonListPageResponsePagination FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class PaginationFromRaw : IFromRawJson<Pagination>
+class AddonListPageResponsePaginationFromRaw : IFromRawJson<AddonListPageResponsePagination>
 {
     /// <inheritdoc/>
-    public Pagination FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        Pagination.FromRawUnchecked(rawData);
+    public AddonListPageResponsePagination FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => AddonListPageResponsePagination.FromRawUnchecked(rawData);
 }

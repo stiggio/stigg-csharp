@@ -30,23 +30,23 @@ public class EntityServiceTest : TestBase
     [Fact(Skip = "Mock server tests are disabled")]
     public async Task Archive_Works()
     {
-        var response = await this.client.V1Beta.Customers.Entities.Archive(
+        var entityIdsActionResponseDto = await this.client.V1Beta.Customers.Entities.Archive(
             "id",
             new() { Ids = ["user-7f3a0c1d", "user-c4d1b2e9"] },
             TestContext.Current.CancellationToken
         );
-        response.Validate();
+        entityIdsActionResponseDto.Validate();
     }
 
     [Fact(Skip = "Mock server tests are disabled")]
     public async Task Unarchive_Works()
     {
-        var response = await this.client.V1Beta.Customers.Entities.Unarchive(
+        var entityIdsActionResponseDto = await this.client.V1Beta.Customers.Entities.Unarchive(
             "id",
             new() { Ids = ["user-7f3a0c1d", "user-c4d1b2e9"] },
             TestContext.Current.CancellationToken
         );
-        response.Validate();
+        entityIdsActionResponseDto.Validate();
     }
 
     [Fact(Skip = "Mock server tests are disabled")]

@@ -24,7 +24,7 @@ public class EntityRetrieveResponseTest : TestBase
             },
         };
 
-        Data expectedData = new()
+        EntityRetrieveResponseData expectedData = new()
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -85,7 +85,7 @@ public class EntityRetrieveResponseTest : TestBase
         );
         Assert.NotNull(deserialized);
 
-        Data expectedData = new()
+        EntityRetrieveResponseData expectedData = new()
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -139,12 +139,12 @@ public class EntityRetrieveResponseTest : TestBase
     }
 }
 
-public class DataTest : TestBase
+public class EntityRetrieveResponseDataTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Data
+        var model = new EntityRetrieveResponseData
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -178,7 +178,7 @@ public class DataTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Data
+        var model = new EntityRetrieveResponseData
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -189,7 +189,10 @@ public class DataTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Data>(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<EntityRetrieveResponseData>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -197,7 +200,7 @@ public class DataTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Data
+        var model = new EntityRetrieveResponseData
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -208,7 +211,10 @@ public class DataTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<EntityRetrieveResponseData>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
@@ -235,7 +241,7 @@ public class DataTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Data
+        var model = new EntityRetrieveResponseData
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -251,7 +257,7 @@ public class DataTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Data
+        var model = new EntityRetrieveResponseData
         {
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -261,7 +267,7 @@ public class DataTest : TestBase
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
-        Data copied = new(model);
+        EntityRetrieveResponseData copied = new(model);
 
         Assert.Equal(model, copied);
     }

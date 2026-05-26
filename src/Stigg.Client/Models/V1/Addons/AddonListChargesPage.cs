@@ -16,11 +16,11 @@ namespace Stigg.Client.Models.V1.Addons;
 public sealed class AddonListChargesPage(
     IAddonServiceWithRawResponse service,
     AddonListChargesParams parameters,
-    AddonListChargesPageResponse response
-) : IPage<AddonListChargesResponse>
+    ChargeList response
+) : IPage<ChargeListData>
 {
     /// <inheritdoc/>
-    public IReadOnlyList<AddonListChargesResponse> Items
+    public IReadOnlyList<ChargeListData> Items
     {
         get { return response.Data; }
     }
@@ -41,7 +41,7 @@ public sealed class AddonListChargesPage(
     }
 
     /// <inheritdoc/>
-    async Task<IPage<AddonListChargesResponse>> IPage<AddonListChargesResponse>.Next(
+    async Task<IPage<ChargeListData>> IPage<ChargeListData>.Next(
         CancellationToken cancellationToken
     ) => await this.Next(cancellationToken).ConfigureAwait(false);
 

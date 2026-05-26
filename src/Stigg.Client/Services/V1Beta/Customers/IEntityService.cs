@@ -59,13 +59,13 @@ public interface IEntityService
     /// <summary>
     /// Archives entities in bulk for the given customer by id.
     /// </summary>
-    Task<EntityArchiveResponse> Archive(
+    Task<EntityIdsActionResponseDto> Archive(
         EntityArchiveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Archive(EntityArchiveParams, CancellationToken)"/>
-    Task<EntityArchiveResponse> Archive(
+    Task<EntityIdsActionResponseDto> Archive(
         string id,
         EntityArchiveParams parameters,
         CancellationToken cancellationToken = default
@@ -74,13 +74,13 @@ public interface IEntityService
     /// <summary>
     /// Restores previously archived entities in bulk for the given customer by id.
     /// </summary>
-    Task<EntityUnarchiveResponse> Unarchive(
+    Task<EntityIdsActionResponseDto> Unarchive(
         EntityUnarchiveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Unarchive(EntityUnarchiveParams, CancellationToken)"/>
-    Task<EntityUnarchiveResponse> Unarchive(
+    Task<EntityIdsActionResponseDto> Unarchive(
         string id,
         EntityUnarchiveParams parameters,
         CancellationToken cancellationToken = default
@@ -152,13 +152,13 @@ public interface IEntityServiceWithRawResponse
     /// Returns a raw HTTP response for <c>post /api/v1-beta/customers/{id}/entities/archive</c>, but is otherwise the
     /// same as <see cref="IEntityService.Archive(EntityArchiveParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<EntityArchiveResponse>> Archive(
+    Task<HttpResponse<EntityIdsActionResponseDto>> Archive(
         EntityArchiveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Archive(EntityArchiveParams, CancellationToken)"/>
-    Task<HttpResponse<EntityArchiveResponse>> Archive(
+    Task<HttpResponse<EntityIdsActionResponseDto>> Archive(
         string id,
         EntityArchiveParams parameters,
         CancellationToken cancellationToken = default
@@ -168,13 +168,13 @@ public interface IEntityServiceWithRawResponse
     /// Returns a raw HTTP response for <c>post /api/v1-beta/customers/{id}/entities/unarchive</c>, but is otherwise the
     /// same as <see cref="IEntityService.Unarchive(EntityUnarchiveParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<EntityUnarchiveResponse>> Unarchive(
+    Task<HttpResponse<EntityIdsActionResponseDto>> Unarchive(
         EntityUnarchiveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Unarchive(EntityUnarchiveParams, CancellationToken)"/>
-    Task<HttpResponse<EntityUnarchiveResponse>> Unarchive(
+    Task<HttpResponse<EntityIdsActionResponseDto>> Unarchive(
         string id,
         EntityUnarchiveParams parameters,
         CancellationToken cancellationToken = default

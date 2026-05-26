@@ -81,7 +81,7 @@ public sealed class EntityService : IEntityService
     }
 
     /// <inheritdoc/>
-    public async Task<EntityArchiveResponse> Archive(
+    public async Task<EntityIdsActionResponseDto> Archive(
         EntityArchiveParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -93,7 +93,7 @@ public sealed class EntityService : IEntityService
     }
 
     /// <inheritdoc/>
-    public Task<EntityArchiveResponse> Archive(
+    public Task<EntityIdsActionResponseDto> Archive(
         string id,
         EntityArchiveParams parameters,
         CancellationToken cancellationToken = default
@@ -103,7 +103,7 @@ public sealed class EntityService : IEntityService
     }
 
     /// <inheritdoc/>
-    public async Task<EntityUnarchiveResponse> Unarchive(
+    public async Task<EntityIdsActionResponseDto> Unarchive(
         EntityUnarchiveParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -115,7 +115,7 @@ public sealed class EntityService : IEntityService
     }
 
     /// <inheritdoc/>
-    public Task<EntityUnarchiveResponse> Unarchive(
+    public Task<EntityIdsActionResponseDto> Unarchive(
         string id,
         EntityUnarchiveParams parameters,
         CancellationToken cancellationToken = default
@@ -252,7 +252,7 @@ public sealed class EntityServiceWithRawResponse : IEntityServiceWithRawResponse
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<EntityArchiveResponse>> Archive(
+    public async Task<HttpResponse<EntityIdsActionResponseDto>> Archive(
         EntityArchiveParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -272,20 +272,20 @@ public sealed class EntityServiceWithRawResponse : IEntityServiceWithRawResponse
             response,
             async (token) =>
             {
-                var deserializedResponse = await response
-                    .Deserialize<EntityArchiveResponse>(token)
+                var entityIdsActionResponseDto = await response
+                    .Deserialize<EntityIdsActionResponseDto>(token)
                     .ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    deserializedResponse.Validate();
+                    entityIdsActionResponseDto.Validate();
                 }
-                return deserializedResponse;
+                return entityIdsActionResponseDto;
             }
         );
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<EntityArchiveResponse>> Archive(
+    public Task<HttpResponse<EntityIdsActionResponseDto>> Archive(
         string id,
         EntityArchiveParams parameters,
         CancellationToken cancellationToken = default
@@ -295,7 +295,7 @@ public sealed class EntityServiceWithRawResponse : IEntityServiceWithRawResponse
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<EntityUnarchiveResponse>> Unarchive(
+    public async Task<HttpResponse<EntityIdsActionResponseDto>> Unarchive(
         EntityUnarchiveParams parameters,
         CancellationToken cancellationToken = default
     )
@@ -315,20 +315,20 @@ public sealed class EntityServiceWithRawResponse : IEntityServiceWithRawResponse
             response,
             async (token) =>
             {
-                var deserializedResponse = await response
-                    .Deserialize<EntityUnarchiveResponse>(token)
+                var entityIdsActionResponseDto = await response
+                    .Deserialize<EntityIdsActionResponseDto>(token)
                     .ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
-                    deserializedResponse.Validate();
+                    entityIdsActionResponseDto.Validate();
                 }
-                return deserializedResponse;
+                return entityIdsActionResponseDto;
             }
         );
     }
 
     /// <inheritdoc/>
-    public Task<HttpResponse<EntityUnarchiveResponse>> Unarchive(
+    public Task<HttpResponse<EntityIdsActionResponseDto>> Unarchive(
         string id,
         EntityUnarchiveParams parameters,
         CancellationToken cancellationToken = default
