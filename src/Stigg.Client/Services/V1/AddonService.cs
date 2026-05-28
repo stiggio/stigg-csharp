@@ -506,7 +506,9 @@ public sealed class AddonServiceWithRawResponse : IAddonServiceWithRawResponse
             response,
             async (token) =>
             {
-                var page = await response.Deserialize<ChargeList>(token).ConfigureAwait(false);
+                var page = await response
+                    .Deserialize<AddonListChargesPageResponse>(token)
+                    .ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {
                     page.Validate();

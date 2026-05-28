@@ -133,6 +133,7 @@ public enum IntegrationListResponseVendorIdentifier
     BigQuery,
     OpenFga,
     AppStore,
+    Received,
 }
 
 sealed class IntegrationListResponseVendorIdentifierConverter
@@ -156,6 +157,7 @@ sealed class IntegrationListResponseVendorIdentifierConverter
             "BIG_QUERY" => IntegrationListResponseVendorIdentifier.BigQuery,
             "OPEN_FGA" => IntegrationListResponseVendorIdentifier.OpenFga,
             "APP_STORE" => IntegrationListResponseVendorIdentifier.AppStore,
+            "RECEIVED" => IntegrationListResponseVendorIdentifier.Received,
             _ => (IntegrationListResponseVendorIdentifier)(-1),
         };
     }
@@ -180,6 +182,7 @@ sealed class IntegrationListResponseVendorIdentifierConverter
                 IntegrationListResponseVendorIdentifier.BigQuery => "BIG_QUERY",
                 IntegrationListResponseVendorIdentifier.OpenFga => "OPEN_FGA",
                 IntegrationListResponseVendorIdentifier.AppStore => "APP_STORE",
+                IntegrationListResponseVendorIdentifier.Received => "RECEIVED",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

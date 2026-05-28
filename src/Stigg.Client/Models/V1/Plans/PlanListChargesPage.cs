@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
-using Stigg.Client.Models.V1.Addons;
 using Stigg.Client.Services.V1;
 
 namespace Stigg.Client.Models.V1.Plans;
@@ -17,11 +16,11 @@ namespace Stigg.Client.Models.V1.Plans;
 public sealed class PlanListChargesPage(
     IPlanServiceWithRawResponse service,
     PlanListChargesParams parameters,
-    ChargeList response
-) : IPage<ChargeListData>
+    PlanListChargesPageResponse response
+) : IPage<PlanListChargesResponse>
 {
     /// <inheritdoc/>
-    public IReadOnlyList<ChargeListData> Items
+    public IReadOnlyList<PlanListChargesResponse> Items
     {
         get { return response.Data; }
     }
@@ -42,7 +41,7 @@ public sealed class PlanListChargesPage(
     }
 
     /// <inheritdoc/>
-    async Task<IPage<ChargeListData>> IPage<ChargeListData>.Next(
+    async Task<IPage<PlanListChargesResponse>> IPage<PlanListChargesResponse>.Next(
         CancellationToken cancellationToken
     ) => await this.Next(cancellationToken).ConfigureAwait(false);
 

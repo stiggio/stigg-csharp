@@ -363,6 +363,7 @@ public class DataVendorIdentifierTest : TestBase
     [InlineData(DataVendorIdentifier.BigQuery)]
     [InlineData(DataVendorIdentifier.OpenFga)]
     [InlineData(DataVendorIdentifier.AppStore)]
+    [InlineData(DataVendorIdentifier.Received)]
     public void Validation_Works(DataVendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -393,6 +394,7 @@ public class DataVendorIdentifierTest : TestBase
     [InlineData(DataVendorIdentifier.BigQuery)]
     [InlineData(DataVendorIdentifier.OpenFga)]
     [InlineData(DataVendorIdentifier.AppStore)]
+    [InlineData(DataVendorIdentifier.Received)]
     public void SerializationRoundtrip_Works(DataVendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us

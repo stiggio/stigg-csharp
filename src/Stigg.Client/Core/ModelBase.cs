@@ -2,13 +2,13 @@ using System.Text.Json;
 using Stigg.Client.Exceptions;
 using Stigg.Client.Models.V1.Credits.CustomCurrencies;
 using Stigg.Client.Models.V1.Customers;
-using Stigg.Client.Models.V1Beta.Customers.Assignments;
-using Stigg.Client.Models.V1Beta.Customers.Entities;
+using Stigg.Client.Models.V1.Events.Beta.Customers.Assignments;
+using Stigg.Client.Models.V1.Events.Beta.Customers.Entities;
 using Addons = Stigg.Client.Models.V1.Addons;
+using AddonsEntitlements = Stigg.Client.Models.V1.Addons.Entitlements;
 using Coupons = Stigg.Client.Models.V1.Coupons;
 using Credits = Stigg.Client.Models.V1.Credits;
-using CustomersEntitlements = Stigg.Client.Models.V1Beta.Customers.Entitlements;
-using Entitlements = Stigg.Client.Models.V1.Addons.Entitlements;
+using Entitlements = Stigg.Client.Models.V1.Events.Beta.Customers.Entitlements;
 using Features = Stigg.Client.Models.V1.Features;
 using Grants = Stigg.Client.Models.V1.Credits.Grants;
 using Integrations = Stigg.Client.Models.V1.Customers.Integrations;
@@ -409,6 +409,15 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Coupons::Currency>(),
             new ApiEnumConverter<string, Coupons::Status>(),
             new ApiEnumConverter<string, Coupons::Type>(),
+            new ApiEnumConverter<string, Entitlements::AccessDeniedReason>(),
+            new ApiEnumConverter<string, Entitlements::FeatureStatus>(),
+            new ApiEnumConverter<string, Entitlements::FeatureType>(),
+            new ApiEnumConverter<string, Entitlements::ResetPeriod>(),
+            new ApiEnumConverter<string, Entitlements::CreditAccessDeniedReason>(),
+            new ApiEnumConverter<string, IncludeArchived>(),
+            new ApiEnumConverter<string, AssignmentListResponseCadence>(),
+            new ApiEnumConverter<string, DataCadence>(),
+            new ApiEnumConverter<string, Cadence>(),
             new ApiEnumConverter<string, Credits::GrantExpirationPeriod>(),
             new ApiEnumConverter<string, Credits::ThresholdType>(),
             new ApiEnumConverter<string, Credits::EventType>(),
@@ -456,17 +465,17 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Addons::Type>(),
             new ApiEnumConverter<string, Addons::DataPricingType>(),
             new ApiEnumConverter<string, Addons::DataStatus>(),
-            new ApiEnumConverter<string, Addons::ChargeListDataBillingCadence>(),
-            new ApiEnumConverter<string, Addons::ChargeListDataBillingModel>(),
-            new ApiEnumConverter<string, Addons::ChargeListDataBillingPeriod>(),
-            new ApiEnumConverter<string, Addons::ChargeListDataCreditGrantCadence>(),
-            new ApiEnumConverter<string, Addons::ChargeListDataPriceCurrency>(),
-            new ApiEnumConverter<string, Addons::ChargeListDataTierFlatPriceCurrency>(),
-            new ApiEnumConverter<string, Addons::ChargeListDataTierUnitPriceCurrency>(),
-            new ApiEnumConverter<string, Addons::ChargeListDataTiersMode>(),
             new ApiEnumConverter<string, Addons::AddonListResponseEntitlementType>(),
             new ApiEnumConverter<string, Addons::AddonListResponsePricingType>(),
             new ApiEnumConverter<string, Addons::AddonListResponseStatus>(),
+            new ApiEnumConverter<string, Addons::AddonListChargesResponseBillingCadence>(),
+            new ApiEnumConverter<string, Addons::AddonListChargesResponseBillingModel>(),
+            new ApiEnumConverter<string, Addons::AddonListChargesResponseBillingPeriod>(),
+            new ApiEnumConverter<string, Addons::AddonListChargesResponseCreditGrantCadence>(),
+            new ApiEnumConverter<string, Addons::AddonListChargesResponsePriceCurrency>(),
+            new ApiEnumConverter<string, Addons::AddonListChargesResponseTierFlatPriceCurrency>(),
+            new ApiEnumConverter<string, Addons::AddonListChargesResponseTierUnitPriceCurrency>(),
+            new ApiEnumConverter<string, Addons::AddonListChargesResponseTiersMode>(),
             new ApiEnumConverter<string, Addons::PricingType>(),
             new ApiEnumConverter<string, Addons::Status>(),
             new ApiEnumConverter<string, Addons::ChargesPricingType>(),
@@ -508,108 +517,120 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Addons::AddonUpdateParamsStatus>(),
             new ApiEnumConverter<string, Addons::AddonListParamsStatus>(),
             new ApiEnumConverter<string, Addons::MigrationType>(),
-            new ApiEnumConverter<string, Entitlements::DataFeatureBehavior>(),
-            new ApiEnumConverter<string, Entitlements::DataFeatureHiddenFromWidget>(),
-            new ApiEnumConverter<string, Entitlements::DataFeatureResetPeriod>(),
-            new ApiEnumConverter<string, Entitlements::YearlyResetPeriodConfigAccordingTo>(),
-            new ApiEnumConverter<string, Entitlements::MonthlyResetPeriodConfigAccordingTo>(),
-            new ApiEnumConverter<string, Entitlements::WeeklyResetPeriodConfigAccordingTo>(),
-            new ApiEnumConverter<string, Entitlements::DataCreditBehavior>(),
-            new ApiEnumConverter<string, Entitlements::DataCreditCadence>(),
-            new ApiEnumConverter<string, Entitlements::DataCreditHiddenFromWidget>(),
+            new ApiEnumConverter<string, AddonsEntitlements::DataFeatureBehavior>(),
+            new ApiEnumConverter<string, AddonsEntitlements::DataFeatureHiddenFromWidget>(),
+            new ApiEnumConverter<string, AddonsEntitlements::DataFeatureResetPeriod>(),
+            new ApiEnumConverter<string, AddonsEntitlements::YearlyResetPeriodConfigAccordingTo>(),
+            new ApiEnumConverter<string, AddonsEntitlements::MonthlyResetPeriodConfigAccordingTo>(),
+            new ApiEnumConverter<string, AddonsEntitlements::WeeklyResetPeriodConfigAccordingTo>(),
+            new ApiEnumConverter<string, AddonsEntitlements::DataCreditBehavior>(),
+            new ApiEnumConverter<string, AddonsEntitlements::DataCreditCadence>(),
+            new ApiEnumConverter<string, AddonsEntitlements::DataCreditHiddenFromWidget>(),
             new ApiEnumConverter<
                 string,
-                Entitlements::EntitlementCreateResponseDataFeatureBehavior
+                AddonsEntitlements::EntitlementCreateResponseDataFeatureBehavior
             >(),
             new ApiEnumConverter<
                 string,
-                Entitlements::EntitlementCreateResponseDataFeatureHiddenFromWidget
+                AddonsEntitlements::EntitlementCreateResponseDataFeatureHiddenFromWidget
             >(),
             new ApiEnumConverter<
                 string,
-                Entitlements::EntitlementCreateResponseDataFeatureResetPeriod
+                AddonsEntitlements::EntitlementCreateResponseDataFeatureResetPeriod
             >(),
             new ApiEnumConverter<
                 string,
-                Entitlements::EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
+                AddonsEntitlements::EntitlementCreateResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
             >(),
             new ApiEnumConverter<
                 string,
-                Entitlements::EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
+                AddonsEntitlements::EntitlementCreateResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
             >(),
             new ApiEnumConverter<
                 string,
-                Entitlements::EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
+                AddonsEntitlements::EntitlementCreateResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
             >(),
             new ApiEnumConverter<
                 string,
-                Entitlements::EntitlementCreateResponseDataCreditBehavior
+                AddonsEntitlements::EntitlementCreateResponseDataCreditBehavior
             >(),
             new ApiEnumConverter<
                 string,
-                Entitlements::EntitlementCreateResponseDataCreditCadence
+                AddonsEntitlements::EntitlementCreateResponseDataCreditCadence
             >(),
             new ApiEnumConverter<
                 string,
-                Entitlements::EntitlementCreateResponseDataCreditHiddenFromWidget
+                AddonsEntitlements::EntitlementCreateResponseDataCreditHiddenFromWidget
             >(),
             new ApiEnumConverter<
                 string,
-                Entitlements::EntitlementListResponseDataFeatureBehavior
+                AddonsEntitlements::EntitlementListResponseDataFeatureBehavior
             >(),
             new ApiEnumConverter<
                 string,
-                Entitlements::EntitlementListResponseDataFeatureHiddenFromWidget
+                AddonsEntitlements::EntitlementListResponseDataFeatureHiddenFromWidget
             >(),
             new ApiEnumConverter<
                 string,
-                Entitlements::EntitlementListResponseDataFeatureResetPeriod
+                AddonsEntitlements::EntitlementListResponseDataFeatureResetPeriod
             >(),
             new ApiEnumConverter<
                 string,
-                Entitlements::EntitlementListResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
+                AddonsEntitlements::EntitlementListResponseDataFeatureResetPeriodConfigurationYearlyResetPeriodConfigAccordingTo
             >(),
             new ApiEnumConverter<
                 string,
-                Entitlements::EntitlementListResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
+                AddonsEntitlements::EntitlementListResponseDataFeatureResetPeriodConfigurationMonthlyResetPeriodConfigAccordingTo
             >(),
             new ApiEnumConverter<
                 string,
-                Entitlements::EntitlementListResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
-            >(),
-            new ApiEnumConverter<string, Entitlements::EntitlementListResponseDataCreditBehavior>(),
-            new ApiEnumConverter<string, Entitlements::EntitlementListResponseDataCreditCadence>(),
-            new ApiEnumConverter<
-                string,
-                Entitlements::EntitlementListResponseDataCreditHiddenFromWidget
-            >(),
-            new ApiEnumConverter<string, Entitlements::Behavior>(),
-            new ApiEnumConverter<string, Entitlements::HiddenFromWidget>(),
-            new ApiEnumConverter<string, Entitlements::AccordingTo>(),
-            new ApiEnumConverter<string, Entitlements::ResetPeriod>(),
-            new ApiEnumConverter<string, Entitlements::WeeklyResetPeriodConfigurationAccordingTo>(),
-            new ApiEnumConverter<string, Entitlements::YearlyResetPeriodConfigurationAccordingTo>(),
-            new ApiEnumConverter<string, Entitlements::Cadence>(),
-            new ApiEnumConverter<string, Entitlements::CreditBehavior>(),
-            new ApiEnumConverter<string, Entitlements::CreditHiddenFromWidget>(),
-            new ApiEnumConverter<string, Entitlements::BodyFeatureBehavior>(),
-            new ApiEnumConverter<string, Entitlements::BodyFeatureHiddenFromWidget>(),
-            new ApiEnumConverter<
-                string,
-                Entitlements::BodyFeatureMonthlyResetPeriodConfigurationAccordingTo
-            >(),
-            new ApiEnumConverter<string, Entitlements::BodyFeatureResetPeriod>(),
-            new ApiEnumConverter<
-                string,
-                Entitlements::BodyFeatureWeeklyResetPeriodConfigurationAccordingTo
+                AddonsEntitlements::EntitlementListResponseDataFeatureResetPeriodConfigurationWeeklyResetPeriodConfigAccordingTo
             >(),
             new ApiEnumConverter<
                 string,
-                Entitlements::BodyFeatureYearlyResetPeriodConfigurationAccordingTo
+                AddonsEntitlements::EntitlementListResponseDataCreditBehavior
             >(),
-            new ApiEnumConverter<string, Entitlements::BodyCreditBehavior>(),
-            new ApiEnumConverter<string, Entitlements::BodyCreditCadence>(),
-            new ApiEnumConverter<string, Entitlements::BodyCreditHiddenFromWidget>(),
+            new ApiEnumConverter<
+                string,
+                AddonsEntitlements::EntitlementListResponseDataCreditCadence
+            >(),
+            new ApiEnumConverter<
+                string,
+                AddonsEntitlements::EntitlementListResponseDataCreditHiddenFromWidget
+            >(),
+            new ApiEnumConverter<string, AddonsEntitlements::Behavior>(),
+            new ApiEnumConverter<string, AddonsEntitlements::HiddenFromWidget>(),
+            new ApiEnumConverter<string, AddonsEntitlements::AccordingTo>(),
+            new ApiEnumConverter<string, AddonsEntitlements::ResetPeriod>(),
+            new ApiEnumConverter<
+                string,
+                AddonsEntitlements::WeeklyResetPeriodConfigurationAccordingTo
+            >(),
+            new ApiEnumConverter<
+                string,
+                AddonsEntitlements::YearlyResetPeriodConfigurationAccordingTo
+            >(),
+            new ApiEnumConverter<string, AddonsEntitlements::Cadence>(),
+            new ApiEnumConverter<string, AddonsEntitlements::CreditBehavior>(),
+            new ApiEnumConverter<string, AddonsEntitlements::CreditHiddenFromWidget>(),
+            new ApiEnumConverter<string, AddonsEntitlements::BodyFeatureBehavior>(),
+            new ApiEnumConverter<string, AddonsEntitlements::BodyFeatureHiddenFromWidget>(),
+            new ApiEnumConverter<
+                string,
+                AddonsEntitlements::BodyFeatureMonthlyResetPeriodConfigurationAccordingTo
+            >(),
+            new ApiEnumConverter<string, AddonsEntitlements::BodyFeatureResetPeriod>(),
+            new ApiEnumConverter<
+                string,
+                AddonsEntitlements::BodyFeatureWeeklyResetPeriodConfigurationAccordingTo
+            >(),
+            new ApiEnumConverter<
+                string,
+                AddonsEntitlements::BodyFeatureYearlyResetPeriodConfigurationAccordingTo
+            >(),
+            new ApiEnumConverter<string, AddonsEntitlements::BodyCreditBehavior>(),
+            new ApiEnumConverter<string, AddonsEntitlements::BodyCreditCadence>(),
+            new ApiEnumConverter<string, AddonsEntitlements::BodyCreditHiddenFromWidget>(),
             new ApiEnumConverter<string, Plans::DataDefaultTrialConfigUnits>(),
             new ApiEnumConverter<string, Plans::DataDefaultTrialConfigTrialEndBehavior>(),
             new ApiEnumConverter<string, Plans::Type>(),
@@ -623,6 +644,28 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Plans::PlanListResponseEntitlementType>(),
             new ApiEnumConverter<string, Plans::PlanListResponsePricingType>(),
             new ApiEnumConverter<string, Plans::PlanListResponseStatus>(),
+            new ApiEnumConverter<string, Plans::PlanListChargesResponseBillingCadence>(),
+            new ApiEnumConverter<string, Plans::PlanListChargesResponseBillingModel>(),
+            new ApiEnumConverter<string, Plans::PlanListChargesResponseBillingPeriod>(),
+            new ApiEnumConverter<string, Plans::PlanListChargesResponseCreditGrantCadence>(),
+            new ApiEnumConverter<string, Plans::PlanListChargesResponsePriceCurrency>(),
+            new ApiEnumConverter<string, Plans::PlanListChargesResponseTierFlatPriceCurrency>(),
+            new ApiEnumConverter<string, Plans::PlanListChargesResponseTierUnitPriceCurrency>(),
+            new ApiEnumConverter<string, Plans::PlanListChargesResponseTiersMode>(),
+            new ApiEnumConverter<string, Plans::PlanListOverageChargesResponseBillingCadence>(),
+            new ApiEnumConverter<string, Plans::PlanListOverageChargesResponseBillingModel>(),
+            new ApiEnumConverter<string, Plans::PlanListOverageChargesResponseBillingPeriod>(),
+            new ApiEnumConverter<string, Plans::PlanListOverageChargesResponseCreditGrantCadence>(),
+            new ApiEnumConverter<string, Plans::PlanListOverageChargesResponsePriceCurrency>(),
+            new ApiEnumConverter<
+                string,
+                Plans::PlanListOverageChargesResponseTierFlatPriceCurrency
+            >(),
+            new ApiEnumConverter<
+                string,
+                Plans::PlanListOverageChargesResponseTierUnitPriceCurrency
+            >(),
+            new ApiEnumConverter<string, Plans::PlanListOverageChargesResponseTiersMode>(),
             new ApiEnumConverter<string, Plans::Units>(),
             new ApiEnumConverter<string, Plans::TrialEndBehavior>(),
             new ApiEnumConverter<string, Plans::PricingType>(),
@@ -811,15 +854,6 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Products::SubscriptionEndSetup>(),
             new ApiEnumConverter<string, Products::SubscriptionStartSetup>(),
             new ApiEnumConverter<string, Products::Behavior>(),
-            new ApiEnumConverter<string, CustomersEntitlements::AccessDeniedReason>(),
-            new ApiEnumConverter<string, CustomersEntitlements::FeatureStatus>(),
-            new ApiEnumConverter<string, CustomersEntitlements::FeatureType>(),
-            new ApiEnumConverter<string, CustomersEntitlements::ResetPeriod>(),
-            new ApiEnumConverter<string, CustomersEntitlements::CreditAccessDeniedReason>(),
-            new ApiEnumConverter<string, IncludeArchived>(),
-            new ApiEnumConverter<string, AssignmentListResponseCadence>(),
-            new ApiEnumConverter<string, DataCadence>(),
-            new ApiEnumConverter<string, Cadence>(),
         },
     };
 

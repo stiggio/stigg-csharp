@@ -1146,6 +1146,7 @@ public class CustomerProvisionParamsIntegrationVendorIdentifierTest : TestBase
     [InlineData(Customers::CustomerProvisionParamsIntegrationVendorIdentifier.BigQuery)]
     [InlineData(Customers::CustomerProvisionParamsIntegrationVendorIdentifier.OpenFga)]
     [InlineData(Customers::CustomerProvisionParamsIntegrationVendorIdentifier.AppStore)]
+    [InlineData(Customers::CustomerProvisionParamsIntegrationVendorIdentifier.Received)]
     public void Validation_Works(
         Customers::CustomerProvisionParamsIntegrationVendorIdentifier rawValue
     )
@@ -1178,6 +1179,7 @@ public class CustomerProvisionParamsIntegrationVendorIdentifierTest : TestBase
     [InlineData(Customers::CustomerProvisionParamsIntegrationVendorIdentifier.BigQuery)]
     [InlineData(Customers::CustomerProvisionParamsIntegrationVendorIdentifier.OpenFga)]
     [InlineData(Customers::CustomerProvisionParamsIntegrationVendorIdentifier.AppStore)]
+    [InlineData(Customers::CustomerProvisionParamsIntegrationVendorIdentifier.Received)]
     public void SerializationRoundtrip_Works(
         Customers::CustomerProvisionParamsIntegrationVendorIdentifier rawValue
     )

@@ -79,6 +79,7 @@ public class IntegrationLinkParamsVendorIdentifierTest : TestBase
     [InlineData(IntegrationLinkParamsVendorIdentifier.BigQuery)]
     [InlineData(IntegrationLinkParamsVendorIdentifier.OpenFga)]
     [InlineData(IntegrationLinkParamsVendorIdentifier.AppStore)]
+    [InlineData(IntegrationLinkParamsVendorIdentifier.Received)]
     public void Validation_Works(IntegrationLinkParamsVendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -108,6 +109,7 @@ public class IntegrationLinkParamsVendorIdentifierTest : TestBase
     [InlineData(IntegrationLinkParamsVendorIdentifier.BigQuery)]
     [InlineData(IntegrationLinkParamsVendorIdentifier.OpenFga)]
     [InlineData(IntegrationLinkParamsVendorIdentifier.AppStore)]
+    [InlineData(IntegrationLinkParamsVendorIdentifier.Received)]
     public void SerializationRoundtrip_Works(IntegrationLinkParamsVendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us

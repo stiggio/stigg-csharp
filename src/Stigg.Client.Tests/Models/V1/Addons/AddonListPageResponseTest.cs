@@ -68,7 +68,7 @@ public class AddonListPageResponseTest : TestBase
                 VersionNumber = 0,
             },
         ];
-        AddonListPageResponsePagination expectedPagination = new()
+        Pagination expectedPagination = new()
         {
             Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -194,7 +194,7 @@ public class AddonListPageResponseTest : TestBase
                 VersionNumber = 0,
             },
         ];
-        AddonListPageResponsePagination expectedPagination = new()
+        Pagination expectedPagination = new()
         {
             Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -289,12 +289,12 @@ public class AddonListPageResponseTest : TestBase
     }
 }
 
-public class AddonListPageResponsePaginationTest : TestBase
+public class PaginationTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new AddonListPageResponsePagination
+        var model = new Pagination
         {
             Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -310,14 +310,14 @@ public class AddonListPageResponsePaginationTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new AddonListPageResponsePagination
+        var model = new Pagination
         {
             Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<AddonListPageResponsePagination>(
+        var deserialized = JsonSerializer.Deserialize<Pagination>(
             json,
             ModelBase.SerializerOptions
         );
@@ -328,14 +328,14 @@ public class AddonListPageResponsePaginationTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new AddonListPageResponsePagination
+        var model = new Pagination
         {
             Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<AddonListPageResponsePagination>(
+        var deserialized = JsonSerializer.Deserialize<Pagination>(
             element,
             ModelBase.SerializerOptions
         );
@@ -351,7 +351,7 @@ public class AddonListPageResponsePaginationTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new AddonListPageResponsePagination
+        var model = new Pagination
         {
             Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
@@ -363,13 +363,13 @@ public class AddonListPageResponsePaginationTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new AddonListPageResponsePagination
+        var model = new Pagination
         {
             Next = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Prev = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
         };
 
-        AddonListPageResponsePagination copied = new(model);
+        Pagination copied = new(model);
 
         Assert.Equal(model, copied);
     }

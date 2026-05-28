@@ -1057,6 +1057,7 @@ public enum CustomerProvisionParamsIntegrationVendorIdentifier
     BigQuery,
     OpenFga,
     AppStore,
+    Received,
 }
 
 sealed class CustomerProvisionParamsIntegrationVendorIdentifierConverter
@@ -1080,6 +1081,7 @@ sealed class CustomerProvisionParamsIntegrationVendorIdentifierConverter
             "BIG_QUERY" => CustomerProvisionParamsIntegrationVendorIdentifier.BigQuery,
             "OPEN_FGA" => CustomerProvisionParamsIntegrationVendorIdentifier.OpenFga,
             "APP_STORE" => CustomerProvisionParamsIntegrationVendorIdentifier.AppStore,
+            "RECEIVED" => CustomerProvisionParamsIntegrationVendorIdentifier.Received,
             _ => (CustomerProvisionParamsIntegrationVendorIdentifier)(-1),
         };
     }
@@ -1105,6 +1107,7 @@ sealed class CustomerProvisionParamsIntegrationVendorIdentifierConverter
                 CustomerProvisionParamsIntegrationVendorIdentifier.BigQuery => "BIG_QUERY",
                 CustomerProvisionParamsIntegrationVendorIdentifier.OpenFga => "OPEN_FGA",
                 CustomerProvisionParamsIntegrationVendorIdentifier.AppStore => "APP_STORE",
+                CustomerProvisionParamsIntegrationVendorIdentifier.Received => "RECEIVED",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
