@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Stigg.Client.Models.V1.Subscriptions;
 
 namespace Stigg.Client.Tests.Services.V1;
 
 public class SubscriptionServiceTest : TestBase
 {
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Retrieve_Works()
     {
         var subscription = await this.client.V1.Subscriptions.Retrieve(
@@ -17,7 +18,7 @@ public class SubscriptionServiceTest : TestBase
         subscription.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Update_Works()
     {
         var subscription = await this.client.V1.Subscriptions.Update(
@@ -28,7 +29,7 @@ public class SubscriptionServiceTest : TestBase
         subscription.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task List_Works()
     {
         var page = await this.client.V1.Subscriptions.List(
@@ -38,7 +39,7 @@ public class SubscriptionServiceTest : TestBase
         page.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Cancel_Works()
     {
         var subscription = await this.client.V1.Subscriptions.Cancel(
@@ -49,7 +50,7 @@ public class SubscriptionServiceTest : TestBase
         subscription.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Delegate_Works()
     {
         var subscription = await this.client.V1.Subscriptions.Delegate(
@@ -60,7 +61,7 @@ public class SubscriptionServiceTest : TestBase
         subscription.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Import_Works()
     {
         var response = await this.client.V1.Subscriptions.Import(
@@ -73,7 +74,18 @@ public class SubscriptionServiceTest : TestBase
                         ID = "id",
                         CustomerID = "customerId",
                         PlanID = "planId",
+                        Addons = [new() { ID = "id", Quantity = 0 }],
                         BillingID = "billingId",
+                        BillingPeriod = SubscriptionBillingPeriod.Monthly,
+                        Charges =
+                        [
+                            new()
+                            {
+                                ID = "id",
+                                Quantity = 0,
+                                Type = SubscriptionChargeType.Feature,
+                            },
+                        ],
                         EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                         ResourceID = "resourceId",
@@ -86,7 +98,7 @@ public class SubscriptionServiceTest : TestBase
         response.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Migrate_Works()
     {
         var subscription = await this.client.V1.Subscriptions.Migrate(
@@ -97,7 +109,7 @@ public class SubscriptionServiceTest : TestBase
         subscription.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Preview_Works()
     {
         var response = await this.client.V1.Subscriptions.Preview(
@@ -107,7 +119,7 @@ public class SubscriptionServiceTest : TestBase
         response.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Provision_Works()
     {
         var response = await this.client.V1.Subscriptions.Provision(
@@ -117,7 +129,7 @@ public class SubscriptionServiceTest : TestBase
         response.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Transfer_Works()
     {
         var subscription = await this.client.V1.Subscriptions.Transfer(

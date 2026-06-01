@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
@@ -24,7 +25,7 @@ public class CouponListParamsTest : TestBase
                 Lte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             Limit = 1,
-            Status = "status",
+            Status = [Coupons::Status.Active],
             Type = Coupons::Type.Fixed,
         };
 
@@ -39,7 +40,7 @@ public class CouponListParamsTest : TestBase
             Lte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
         long expectedLimit = 1;
-        string expectedStatus = "status";
+        List<ApiEnum<string, Coupons::Status>> expectedStatus = [Coupons::Status.Active];
         ApiEnum<string, Coupons::Type> expectedType = Coupons::Type.Fixed;
 
         Assert.Equal(expectedID, parameters.ID);
@@ -47,7 +48,12 @@ public class CouponListParamsTest : TestBase
         Assert.Equal(expectedBefore, parameters.Before);
         Assert.Equal(expectedCreatedAt, parameters.CreatedAt);
         Assert.Equal(expectedLimit, parameters.Limit);
-        Assert.Equal(expectedStatus, parameters.Status);
+        Assert.NotNull(parameters.Status);
+        Assert.Equal(expectedStatus.Count, parameters.Status.Count);
+        for (int i = 0; i < expectedStatus.Count; i++)
+        {
+            Assert.Equal(expectedStatus[i], parameters.Status[i]);
+        }
         Assert.Equal(expectedType, parameters.Type);
     }
 
@@ -113,23 +119,25 @@ public class CouponListParamsTest : TestBase
             Before = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             CreatedAt = new()
             {
-                Gt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Gte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Lt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Lte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Gt = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
+                Gte = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
+                Lt = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
+                Lte = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
             },
             Limit = 1,
-            Status = "status",
+            Status = [Coupons::Status.Active],
             Type = Coupons::Type.Fixed,
         };
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
-        Assert.Equal(
-            new Uri(
-                "https://api.stigg.io/api/v1/coupons?id=id&after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&createdAt%5bgt%5d=2019-12-27T18%3a11%3a19.117Z&createdAt%5bgte%5d=2019-12-27T18%3a11%3a19.117Z&createdAt%5blt%5d=2019-12-27T18%3a11%3a19.117Z&createdAt%5blte%5d=2019-12-27T18%3a11%3a19.117Z&limit=1&status=status&type=FIXED"
-            ),
-            url
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri(
+                    "https://api.stigg.io/api/v1/coupons?id=id&after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&createdAt%5bgt%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5bgte%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5blt%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5blte%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&limit=1&status=ACTIVE&type=FIXED"
+                ),
+                url
+            )
         );
     }
 
@@ -149,7 +157,7 @@ public class CouponListParamsTest : TestBase
                 Lte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             Limit = 1,
-            Status = "status",
+            Status = [Coupons::Status.Active],
             Type = Coupons::Type.Fixed,
         };
 
@@ -320,6 +328,64 @@ public class CreatedAtTest : TestBase
         Coupons::CreatedAt copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class StatusTest : TestBase
+{
+    [Theory]
+    [InlineData(Coupons::Status.Active)]
+    [InlineData(Coupons::Status.Archived)]
+    public void Validation_Works(Coupons::Status rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Coupons::Status> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Coupons::Status>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(Coupons::Status.Active)]
+    [InlineData(Coupons::Status.Archived)]
+    public void SerializationRoundtrip_Works(Coupons::Status rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Coupons::Status> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Coupons::Status>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Coupons::Status>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Coupons::Status>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }
 

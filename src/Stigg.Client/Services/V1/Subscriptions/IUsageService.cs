@@ -7,9 +7,11 @@ using Stigg.Client.Models.V1.Subscriptions.Usage;
 namespace Stigg.Client.Services.V1.Subscriptions;
 
 /// <summary>
-/// NOTE: Do not inherit from this type outside the SDK unless you're okay with breaking
-/// changes in non-major versions. We may add new methods in the future that cause
-/// existing derived classes to break.
+/// Operations related to subscriptions
+///
+/// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
+/// breaking changes in non-major versions. We may add new methods in the future that
+/// cause existing derived classes to break.</para>
 /// </summary>
 public interface IUsageService
 {
@@ -43,8 +45,8 @@ public interface IUsageService
     );
 
     /// <summary>
-    /// Triggers a usage sync for a subscription, reporting current usage to the
-    /// billing provider.
+    /// Triggers a usage sync for a subscription, reporting current usage to the billing
+    /// provider.
     /// </summary>
     Task<UsageSyncResponse> Sync(
         UsageSyncParams parameters,
@@ -73,7 +75,7 @@ public interface IUsageServiceWithRawResponse
     IUsageServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/subscriptions/{id}/usage/charge`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/subscriptions/{id}/usage/charge</c>, but is otherwise the
     /// same as <see cref="IUsageService.ChargeUsage(UsageChargeUsageParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<UsageChargeUsageResponse>> ChargeUsage(
@@ -89,7 +91,7 @@ public interface IUsageServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/subscriptions/{id}/usage/sync`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/subscriptions/{id}/usage/sync</c>, but is otherwise the
     /// same as <see cref="IUsageService.Sync(UsageSyncParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<UsageSyncResponse>> Sync(

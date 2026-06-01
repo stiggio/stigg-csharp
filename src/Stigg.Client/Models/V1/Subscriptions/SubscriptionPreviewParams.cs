@@ -151,6 +151,29 @@ public record class SubscriptionPreviewParams : ParamsBase
     }
 
     /// <summary>
+    /// Billing cycle anchor behavior for the subscription
+    /// </summary>
+    public ApiEnum<string, SubscriptionPreviewParamsBillingCycleAnchor>? BillingCycleAnchor
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<
+                ApiEnum<string, SubscriptionPreviewParamsBillingCycleAnchor>
+            >("billingCycleAnchor");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawBodyData.Set("billingCycleAnchor", value);
+        }
+    }
+
+    /// <summary>
     /// Billing and tax configuration
     /// </summary>
     public SubscriptionPreviewParamsBillingInformation? BillingInformation
@@ -332,14 +355,14 @@ public record class SubscriptionPreviewParams : ParamsBase
     }
 
     /// <summary>
-    /// Unit quantity for per-unit pricing
+    /// Unit quantity for per-unit pricing. Minimum is 0 (zero is allowed).
     /// </summary>
-    public double? UnitQuantity
+    public long? UnitQuantity
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableStruct<double>("unitQuantity");
+            return this._rawBodyData.GetNullableStruct<long>("unitQuantity");
         }
         init
         {
@@ -388,7 +411,7 @@ public record class SubscriptionPreviewParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson{T}.FromRawUnchecked"/>
     public static SubscriptionPreviewParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -478,41 +501,33 @@ public sealed record class SubscriptionPreviewParamsAddon : JsonModel
     /// <summary>
     /// Addon ID
     /// </summary>
-    public required string AddonID
+    public required string ID
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("addonId");
+            return this._rawData.GetNotNullClass<string>("id");
         }
-        init { this._rawData.Set("addonId", value); }
+        init { this._rawData.Set("id", value); }
     }
 
     /// <summary>
     /// Number of addon instances
     /// </summary>
-    public long? Quantity
+    public required long Quantity
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<long>("quantity");
+            return this._rawData.GetNotNullStruct<long>("quantity");
         }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("quantity", value);
-        }
+        init { this._rawData.Set("quantity", value); }
     }
 
     /// <inheritdoc/>
     public override void Validate()
     {
-        _ = this.AddonID;
+        _ = this.ID;
         _ = this.Quantity;
     }
 
@@ -545,13 +560,6 @@ public sealed record class SubscriptionPreviewParamsAddon : JsonModel
     )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-
-    [SetsRequiredMembers]
-    public SubscriptionPreviewParamsAddon(string addonID)
-        : this()
-    {
-        this.AddonID = addonID;
     }
 }
 
@@ -1011,7 +1019,7 @@ public sealed record class SubscriptionPreviewParamsAppliedCouponDiscountAmounts
     }
 
     /// <summary>
-    /// The price currency
+    /// ISO 4217 currency code
     /// </summary>
     public required ApiEnum<
         string,
@@ -1081,7 +1089,7 @@ class SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffFromRaw
 }
 
 /// <summary>
-/// The price currency
+/// ISO 4217 currency code
 /// </summary>
 [JsonConverter(typeof(SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrencyConverter))]
 public enum SubscriptionPreviewParamsAppliedCouponDiscountAmountsOffCurrency
@@ -1490,7 +1498,7 @@ public sealed record class BillableFeature : JsonModel
     }
 
     /// <summary>
-    /// Quantity of feature units
+    /// Quantity of feature units. Minimum is 0 (zero is allowed).
     /// </summary>
     public required double Quantity
     {
@@ -1542,6 +1550,54 @@ class BillableFeatureFromRaw : IFromRawJson<BillableFeature>
     /// <inheritdoc/>
     public BillableFeature FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         BillableFeature.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Billing cycle anchor behavior for the subscription
+/// </summary>
+[JsonConverter(typeof(SubscriptionPreviewParamsBillingCycleAnchorConverter))]
+public enum SubscriptionPreviewParamsBillingCycleAnchor
+{
+    Unchanged,
+    Now,
+}
+
+sealed class SubscriptionPreviewParamsBillingCycleAnchorConverter
+    : JsonConverter<SubscriptionPreviewParamsBillingCycleAnchor>
+{
+    public override SubscriptionPreviewParamsBillingCycleAnchor Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "UNCHANGED" => SubscriptionPreviewParamsBillingCycleAnchor.Unchanged,
+            "NOW" => SubscriptionPreviewParamsBillingCycleAnchor.Now,
+            _ => (SubscriptionPreviewParamsBillingCycleAnchor)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        SubscriptionPreviewParamsBillingCycleAnchor value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                SubscriptionPreviewParamsBillingCycleAnchor.Unchanged => "UNCHANGED",
+                SubscriptionPreviewParamsBillingCycleAnchor.Now => "NOW",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }
 
 /// <summary>
@@ -1686,12 +1742,12 @@ public sealed record class SubscriptionPreviewParamsBillingInformation : JsonMod
     /// <summary>
     /// Additional billing metadata
     /// </summary>
-    public JsonElement? Metadata
+    public IReadOnlyDictionary<string, string>? Metadata
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<JsonElement>("metadata");
+            return this._rawData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
         }
         init
         {
@@ -1700,7 +1756,10 @@ public sealed record class SubscriptionPreviewParamsBillingInformation : JsonMod
                 return;
             }
 
-            this._rawData.Set("metadata", value);
+            this._rawData.Set<FrozenDictionary<string, string>?>(
+                "metadata",
+                value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
+            );
         }
     }
 
@@ -2229,7 +2288,7 @@ sealed class SubscriptionPreviewParamsBillingPeriodConverter
 }
 
 /// <summary>
-/// Charge item
+/// A charge selection for a subscription (references a catalog charge with a quantity).
 /// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
@@ -2253,7 +2312,7 @@ public sealed record class SubscriptionPreviewParamsCharge : JsonModel
     }
 
     /// <summary>
-    /// Charge quantity
+    /// Charge quantity. Minimum is 0 (zero is allowed).
     /// </summary>
     public required double Quantity
     {

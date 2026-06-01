@@ -35,7 +35,7 @@ public class PromotionalEntitlementCreateResponseTest : TestBase
                         YearlyResetPeriodConfigAccordingTo.SubscriptionStart
                     ),
                     StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Status = Status.Active,
+                    Status = DataStatus.Active,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsageLimit = 0,
                 },
@@ -63,7 +63,7 @@ public class PromotionalEntitlementCreateResponseTest : TestBase
                     YearlyResetPeriodConfigAccordingTo.SubscriptionStart
                 ),
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Status = Status.Active,
+                Status = DataStatus.Active,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UsageLimit = 0,
             },
@@ -102,7 +102,7 @@ public class PromotionalEntitlementCreateResponseTest : TestBase
                         YearlyResetPeriodConfigAccordingTo.SubscriptionStart
                     ),
                     StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Status = Status.Active,
+                    Status = DataStatus.Active,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsageLimit = 0,
                 },
@@ -144,7 +144,7 @@ public class PromotionalEntitlementCreateResponseTest : TestBase
                         YearlyResetPeriodConfigAccordingTo.SubscriptionStart
                     ),
                     StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Status = Status.Active,
+                    Status = DataStatus.Active,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsageLimit = 0,
                 },
@@ -179,7 +179,7 @@ public class PromotionalEntitlementCreateResponseTest : TestBase
                     YearlyResetPeriodConfigAccordingTo.SubscriptionStart
                 ),
                 StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Status = Status.Active,
+                Status = DataStatus.Active,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UsageLimit = 0,
             },
@@ -218,7 +218,7 @@ public class PromotionalEntitlementCreateResponseTest : TestBase
                         YearlyResetPeriodConfigAccordingTo.SubscriptionStart
                     ),
                     StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Status = Status.Active,
+                    Status = DataStatus.Active,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsageLimit = 0,
                 },
@@ -254,7 +254,7 @@ public class PromotionalEntitlementCreateResponseTest : TestBase
                         YearlyResetPeriodConfigAccordingTo.SubscriptionStart
                     ),
                     StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Status = Status.Active,
+                    Status = DataStatus.Active,
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsageLimit = 0,
                 },
@@ -291,7 +291,7 @@ public class DataTest : TestBase
                 YearlyResetPeriodConfigAccordingTo.SubscriptionStart
             ),
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = Status.Active,
+            Status = DataStatus.Active,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
         };
@@ -313,7 +313,7 @@ public class DataTest : TestBase
             YearlyResetPeriodConfigAccordingTo.SubscriptionStart
         );
         DateTimeOffset expectedStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, Status> expectedStatus = Status.Active;
+        ApiEnum<string, DataStatus> expectedStatus = DataStatus.Active;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         double expectedUsageLimit = 0;
 
@@ -369,7 +369,7 @@ public class DataTest : TestBase
                 YearlyResetPeriodConfigAccordingTo.SubscriptionStart
             ),
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = Status.Active,
+            Status = DataStatus.Active,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
         };
@@ -402,7 +402,7 @@ public class DataTest : TestBase
                 YearlyResetPeriodConfigAccordingTo.SubscriptionStart
             ),
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = Status.Active,
+            Status = DataStatus.Active,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
         };
@@ -428,7 +428,7 @@ public class DataTest : TestBase
             YearlyResetPeriodConfigAccordingTo.SubscriptionStart
         );
         DateTimeOffset expectedStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        ApiEnum<string, Status> expectedStatus = Status.Active;
+        ApiEnum<string, DataStatus> expectedStatus = DataStatus.Active;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         double expectedUsageLimit = 0;
 
@@ -484,7 +484,7 @@ public class DataTest : TestBase
                 YearlyResetPeriodConfigAccordingTo.SubscriptionStart
             ),
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = Status.Active,
+            Status = DataStatus.Active,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
         };
@@ -514,7 +514,7 @@ public class DataTest : TestBase
                 YearlyResetPeriodConfigAccordingTo.SubscriptionStart
             ),
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Status = Status.Active,
+            Status = DataStatus.Active,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
         };
@@ -1143,23 +1143,23 @@ public class WeeklyResetPeriodConfigAccordingToTest : TestBase
     }
 }
 
-public class StatusTest : TestBase
+public class DataStatusTest : TestBase
 {
     [Theory]
-    [InlineData(Status.Active)]
-    [InlineData(Status.Expired)]
-    [InlineData(Status.Paused)]
-    public void Validation_Works(Status rawValue)
+    [InlineData(DataStatus.Active)]
+    [InlineData(DataStatus.Expired)]
+    [InlineData(DataStatus.Paused)]
+    public void Validation_Works(DataStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Status> value = rawValue;
+        ApiEnum<string, DataStatus> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataStatus>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -1169,16 +1169,16 @@ public class StatusTest : TestBase
     }
 
     [Theory]
-    [InlineData(Status.Active)]
-    [InlineData(Status.Expired)]
-    [InlineData(Status.Paused)]
-    public void SerializationRoundtrip_Works(Status rawValue)
+    [InlineData(DataStatus.Active)]
+    [InlineData(DataStatus.Expired)]
+    [InlineData(DataStatus.Paused)]
+    public void SerializationRoundtrip_Works(DataStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Status> value = rawValue;
+        ApiEnum<string, DataStatus> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataStatus>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1189,12 +1189,12 @@ public class StatusTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataStatus>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataStatus>>(
             json,
             ModelBase.SerializerOptions
         );

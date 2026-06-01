@@ -45,6 +45,27 @@ public record class CustomerImportParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// Integration details
+    /// </summary>
+    public string? IntegrationID
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("integrationId");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawBodyData.Set("integrationId", value);
+        }
+    }
+
     public CustomerImportParams() { }
 
 #pragma warning disable CS8618
@@ -81,7 +102,7 @@ public record class CustomerImportParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson{T}.FromRawUnchecked"/>
     public static CustomerImportParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -198,6 +219,27 @@ public sealed record class Customer : JsonModel
     }
 
     /// <summary>
+    /// Id in the billing provider
+    /// </summary>
+    public string? BillingID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("billingId");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("billingId", value);
+        }
+    }
+
+    /// <summary>
     /// Additional metadata
     /// </summary>
     public IReadOnlyDictionary<string, string>? Metadata
@@ -243,6 +285,27 @@ public sealed record class Customer : JsonModel
     }
 
     /// <summary>
+    /// The unique identifier for the customer in Salesforce integration
+    /// </summary>
+    public string? SalesforceID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("salesforceId");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("salesforceId", value);
+        }
+    }
+
+    /// <summary>
     /// Timestamp of when the record was last updated
     /// </summary>
     public DateTimeOffset? UpdatedAt
@@ -269,8 +332,10 @@ public sealed record class Customer : JsonModel
         _ = this.ID;
         _ = this.Email;
         _ = this.Name;
+        _ = this.BillingID;
         _ = this.Metadata;
         _ = this.PaymentMethodID;
+        _ = this.SalesforceID;
         _ = this.UpdatedAt;
     }
 

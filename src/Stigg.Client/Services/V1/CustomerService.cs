@@ -35,6 +35,7 @@ public sealed class CustomerService : ICustomerService
         _withRawResponse = new(() => new CustomerServiceWithRawResponse(client.WithRawResponse));
         _paymentMethod = new(() => new PaymentMethodService(client));
         _promotionalEntitlements = new(() => new PromotionalEntitlementService(client));
+        _integrations = new(() => new IntegrationService(client));
     }
 
     readonly Lazy<IPaymentMethodService> _paymentMethod;
@@ -47,6 +48,12 @@ public sealed class CustomerService : ICustomerService
     public IPromotionalEntitlementService PromotionalEntitlements
     {
         get { return _promotionalEntitlements.Value; }
+    }
+
+    readonly Lazy<IIntegrationService> _integrations;
+    public IIntegrationService Integrations
+    {
+        get { return _integrations.Value; }
     }
 
     /// <inheritdoc/>
@@ -134,6 +141,30 @@ public sealed class CustomerService : ICustomerService
     }
 
     /// <inheritdoc/>
+    public async Task<CustomerCheckEntitlementResponse> CheckEntitlement(
+        CustomerCheckEntitlementParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.CheckEntitlement(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<CustomerCheckEntitlementResponse> CheckEntitlement(
+        string id,
+        CustomerCheckEntitlementParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.CheckEntitlement(parameters with { ID = id }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
     public async Task<CustomerImportResponse> Import(
         CustomerImportParams parameters,
         CancellationToken cancellationToken = default
@@ -182,6 +213,30 @@ public sealed class CustomerService : ICustomerService
     }
 
     /// <inheritdoc/>
+    public async Task<CustomerRetrieveEntitlementsResponse> RetrieveEntitlements(
+        CustomerRetrieveEntitlementsParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.RetrieveEntitlements(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<CustomerRetrieveEntitlementsResponse> RetrieveEntitlements(
+        string id,
+        CustomerRetrieveEntitlementsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.RetrieveEntitlements(parameters with { ID = id }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
     public async Task<CustomerResponse> Unarchive(
         CustomerUnarchiveParams parameters,
         CancellationToken cancellationToken = default
@@ -225,6 +280,7 @@ public sealed class CustomerServiceWithRawResponse : ICustomerServiceWithRawResp
         _promotionalEntitlements = new(() =>
             new PromotionalEntitlementServiceWithRawResponse(client)
         );
+        _integrations = new(() => new IntegrationServiceWithRawResponse(client));
     }
 
     readonly Lazy<IPaymentMethodServiceWithRawResponse> _paymentMethod;
@@ -237,6 +293,12 @@ public sealed class CustomerServiceWithRawResponse : ICustomerServiceWithRawResp
     public IPromotionalEntitlementServiceWithRawResponse PromotionalEntitlements
     {
         get { return _promotionalEntitlements.Value; }
+    }
+
+    readonly Lazy<IIntegrationServiceWithRawResponse> _integrations;
+    public IIntegrationServiceWithRawResponse Integrations
+    {
+        get { return _integrations.Value; }
     }
 
     /// <inheritdoc/>
@@ -405,6 +467,51 @@ public sealed class CustomerServiceWithRawResponse : ICustomerServiceWithRawResp
     }
 
     /// <inheritdoc/>
+    public async Task<HttpResponse<CustomerCheckEntitlementResponse>> CheckEntitlement(
+        CustomerCheckEntitlementParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.ID == null)
+        {
+            throw new StiggInvalidDataException("'parameters.ID' cannot be null");
+        }
+
+        HttpRequest<CustomerCheckEntitlementParams> request = new()
+        {
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var deserializedResponse = await response
+                    .Deserialize<CustomerCheckEntitlementResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    deserializedResponse.Validate();
+                }
+                return deserializedResponse;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<CustomerCheckEntitlementResponse>> CheckEntitlement(
+        string id,
+        CustomerCheckEntitlementParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.CheckEntitlement(parameters with { ID = id }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
     public async Task<HttpResponse<CustomerImportResponse>> Import(
         CustomerImportParams parameters,
         CancellationToken cancellationToken = default
@@ -503,6 +610,51 @@ public sealed class CustomerServiceWithRawResponse : ICustomerServiceWithRawResp
                 return customerResponse;
             }
         );
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<CustomerRetrieveEntitlementsResponse>> RetrieveEntitlements(
+        CustomerRetrieveEntitlementsParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.ID == null)
+        {
+            throw new StiggInvalidDataException("'parameters.ID' cannot be null");
+        }
+
+        HttpRequest<CustomerRetrieveEntitlementsParams> request = new()
+        {
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var deserializedResponse = await response
+                    .Deserialize<CustomerRetrieveEntitlementsResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    deserializedResponse.Validate();
+                }
+                return deserializedResponse;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<CustomerRetrieveEntitlementsResponse>> RetrieveEntitlements(
+        string id,
+        CustomerRetrieveEntitlementsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.RetrieveEntitlements(parameters with { ID = id }, cancellationToken);
     }
 
     /// <inheritdoc/>

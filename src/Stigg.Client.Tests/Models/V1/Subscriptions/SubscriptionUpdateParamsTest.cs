@@ -15,7 +15,7 @@ public class SubscriptionUpdateParamsTest : TestBase
         var parameters = new Subscriptions::SubscriptionUpdateParams
         {
             ID = "x",
-            Addons = [new() { AddonID = "addonId", Quantity = 0 }],
+            Addons = [new() { ID = "id", Quantity = 0 }],
             AppliedCoupon = new()
             {
                 BillingCouponID = "billingCouponId",
@@ -35,6 +35,7 @@ public class SubscriptionUpdateParamsTest : TestBase
                 PromotionCode = "promotionCode",
             },
             AwaitPaymentConfirmation = true,
+            BillingCycleAnchor = Subscriptions::BillingCycleAnchor.Unchanged,
             BillingInformation = new()
             {
                 BillingAddress = new()
@@ -52,10 +53,7 @@ public class SubscriptionUpdateParamsTest : TestBase
                 InvoiceDaysUntilDue = 0,
                 IsBackdated = true,
                 IsInvoicePaid = true,
-                Metadata = new Dictionary<string, JsonElement>()
-                {
-                    { "foo", JsonSerializer.SerializeToElement("bar") },
-                },
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 ProrationBehavior = Subscriptions::ProrationBehavior.InvoiceImmediately,
                 TaxIds = [new() { Type = "type", Value = "value" }],
                 TaxPercentage = 0,
@@ -68,34 +66,15 @@ public class SubscriptionUpdateParamsTest : TestBase
                 new()
                 {
                     ID = "id",
-                    Quantity = 1,
+                    Quantity = 0,
                     Type = Subscriptions::Type.Feature,
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-            MinimumSpend = new()
-            {
-                Minimum = new() { Amount = 0, Currency = Subscriptions::MinimumCurrency.Usd },
-            },
-            PriceOverrides =
+            Entitlements =
             [
-                new()
-                {
-                    AddonID = "addonId",
-                    BaseCharge = true,
-                    CurrencyID = "currencyId",
-                    FeatureID = "featureId",
-                    Price = new() { Amount = 0, Currency = Subscriptions::PriceCurrency.Usd },
-                },
-            ],
-            PromotionCode = "promotionCode",
-            ScheduleStrategy = Subscriptions::ScheduleStrategy.EndOfBillingPeriod,
-            SubscriptionEntitlements =
-            [
-                new()
+                new Subscriptions::Feature()
                 {
                     ID = "id",
-                    FeatureID = "featureId",
                     HasSoftLimit = true,
                     HasUnlimitedUsage = true,
                     MonthlyResetPeriodConfiguration = new(
@@ -111,11 +90,27 @@ public class SubscriptionUpdateParamsTest : TestBase
                     ),
                 },
             ],
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MinimumSpend = new() { Amount = 0, Currency = Subscriptions::MinimumSpendCurrency.Usd },
+            PriceOverrides =
+            [
+                new()
+                {
+                    AddonID = "addonId",
+                    Amount = 0,
+                    BaseCharge = true,
+                    Currency = Subscriptions::PriceOverrideCurrency.Usd,
+                    CurrencyID = "currencyId",
+                    FeatureID = "featureId",
+                },
+            ],
+            PromotionCode = "promotionCode",
+            ScheduleStrategy = Subscriptions::ScheduleStrategy.EndOfBillingPeriod,
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         string expectedID = "x";
-        List<Subscriptions::Addon> expectedAddons = [new() { AddonID = "addonId", Quantity = 0 }];
+        List<Subscriptions::Addon> expectedAddons = [new() { ID = "id", Quantity = 0 }];
         Subscriptions::AppliedCoupon expectedAppliedCoupon = new()
         {
             BillingCouponID = "billingCouponId",
@@ -132,6 +127,8 @@ public class SubscriptionUpdateParamsTest : TestBase
             PromotionCode = "promotionCode",
         };
         bool expectedAwaitPaymentConfirmation = true;
+        ApiEnum<string, Subscriptions::BillingCycleAnchor> expectedBillingCycleAnchor =
+            Subscriptions::BillingCycleAnchor.Unchanged;
         Subscriptions::BillingInformation expectedBillingInformation = new()
         {
             BillingAddress = new()
@@ -149,10 +146,7 @@ public class SubscriptionUpdateParamsTest : TestBase
             InvoiceDaysUntilDue = 0,
             IsBackdated = true,
             IsInvoicePaid = true,
-            Metadata = new Dictionary<string, JsonElement>()
-            {
-                { "foo", JsonSerializer.SerializeToElement("bar") },
-            },
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             ProrationBehavior = Subscriptions::ProrationBehavior.InvoiceImmediately,
             TaxIds = [new() { Type = "type", Value = "value" }],
             TaxPercentage = 0,
@@ -166,35 +160,15 @@ public class SubscriptionUpdateParamsTest : TestBase
             new()
             {
                 ID = "id",
-                Quantity = 1,
+                Quantity = 0,
                 Type = Subscriptions::Type.Feature,
             },
         ];
-        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
-        Subscriptions::MinimumSpend expectedMinimumSpend = new()
-        {
-            Minimum = new() { Amount = 0, Currency = Subscriptions::MinimumCurrency.Usd },
-        };
-        List<Subscriptions::PriceOverride> expectedPriceOverrides =
+        List<Subscriptions::Entitlement> expectedEntitlements =
         [
-            new()
-            {
-                AddonID = "addonId",
-                BaseCharge = true,
-                CurrencyID = "currencyId",
-                FeatureID = "featureId",
-                Price = new() { Amount = 0, Currency = Subscriptions::PriceCurrency.Usd },
-            },
-        ];
-        string expectedPromotionCode = "promotionCode";
-        ApiEnum<string, Subscriptions::ScheduleStrategy> expectedScheduleStrategy =
-            Subscriptions::ScheduleStrategy.EndOfBillingPeriod;
-        List<Subscriptions::SubscriptionEntitlement> expectedSubscriptionEntitlements =
-        [
-            new()
+            new Subscriptions::Feature()
             {
                 ID = "id",
-                FeatureID = "featureId",
                 HasSoftLimit = true,
                 HasUnlimitedUsage = true,
                 MonthlyResetPeriodConfiguration = new(Subscriptions::AccordingTo.SubscriptionStart),
@@ -208,6 +182,27 @@ public class SubscriptionUpdateParamsTest : TestBase
                 ),
             },
         ];
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        Subscriptions::MinimumSpend expectedMinimumSpend = new()
+        {
+            Amount = 0,
+            Currency = Subscriptions::MinimumSpendCurrency.Usd,
+        };
+        List<Subscriptions::PriceOverride> expectedPriceOverrides =
+        [
+            new()
+            {
+                AddonID = "addonId",
+                Amount = 0,
+                BaseCharge = true,
+                Currency = Subscriptions::PriceOverrideCurrency.Usd,
+                CurrencyID = "currencyId",
+                FeatureID = "featureId",
+            },
+        ];
+        string expectedPromotionCode = "promotionCode";
+        ApiEnum<string, Subscriptions::ScheduleStrategy> expectedScheduleStrategy =
+            Subscriptions::ScheduleStrategy.EndOfBillingPeriod;
         DateTimeOffset expectedTrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedID, parameters.ID);
@@ -219,6 +214,7 @@ public class SubscriptionUpdateParamsTest : TestBase
         }
         Assert.Equal(expectedAppliedCoupon, parameters.AppliedCoupon);
         Assert.Equal(expectedAwaitPaymentConfirmation, parameters.AwaitPaymentConfirmation);
+        Assert.Equal(expectedBillingCycleAnchor, parameters.BillingCycleAnchor);
         Assert.Equal(expectedBillingInformation, parameters.BillingInformation);
         Assert.Equal(expectedBillingPeriod, parameters.BillingPeriod);
         Assert.Equal(expectedBudget, parameters.Budget);
@@ -227,6 +223,12 @@ public class SubscriptionUpdateParamsTest : TestBase
         for (int i = 0; i < expectedCharges.Count; i++)
         {
             Assert.Equal(expectedCharges[i], parameters.Charges[i]);
+        }
+        Assert.NotNull(parameters.Entitlements);
+        Assert.Equal(expectedEntitlements.Count, parameters.Entitlements.Count);
+        for (int i = 0; i < expectedEntitlements.Count; i++)
+        {
+            Assert.Equal(expectedEntitlements[i], parameters.Entitlements[i]);
         }
         Assert.NotNull(parameters.Metadata);
         Assert.Equal(expectedMetadata.Count, parameters.Metadata.Count);
@@ -245,18 +247,6 @@ public class SubscriptionUpdateParamsTest : TestBase
         }
         Assert.Equal(expectedPromotionCode, parameters.PromotionCode);
         Assert.Equal(expectedScheduleStrategy, parameters.ScheduleStrategy);
-        Assert.NotNull(parameters.SubscriptionEntitlements);
-        Assert.Equal(
-            expectedSubscriptionEntitlements.Count,
-            parameters.SubscriptionEntitlements.Count
-        );
-        for (int i = 0; i < expectedSubscriptionEntitlements.Count; i++)
-        {
-            Assert.Equal(
-                expectedSubscriptionEntitlements[i],
-                parameters.SubscriptionEntitlements[i]
-            );
-        }
         Assert.Equal(expectedTrialEndDate, parameters.TrialEndDate);
     }
 
@@ -267,10 +257,7 @@ public class SubscriptionUpdateParamsTest : TestBase
         {
             ID = "x",
             Budget = new() { HasSoftLimit = true, Limit = 0 },
-            MinimumSpend = new()
-            {
-                Minimum = new() { Amount = 0, Currency = Subscriptions::MinimumCurrency.Usd },
-            },
+            MinimumSpend = new() { Amount = 0, Currency = Subscriptions::MinimumSpendCurrency.Usd },
         };
 
         Assert.Null(parameters.Addons);
@@ -279,12 +266,16 @@ public class SubscriptionUpdateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("appliedCoupon"));
         Assert.Null(parameters.AwaitPaymentConfirmation);
         Assert.False(parameters.RawBodyData.ContainsKey("awaitPaymentConfirmation"));
+        Assert.Null(parameters.BillingCycleAnchor);
+        Assert.False(parameters.RawBodyData.ContainsKey("billingCycleAnchor"));
         Assert.Null(parameters.BillingInformation);
         Assert.False(parameters.RawBodyData.ContainsKey("billingInformation"));
         Assert.Null(parameters.BillingPeriod);
         Assert.False(parameters.RawBodyData.ContainsKey("billingPeriod"));
         Assert.Null(parameters.Charges);
         Assert.False(parameters.RawBodyData.ContainsKey("charges"));
+        Assert.Null(parameters.Entitlements);
+        Assert.False(parameters.RawBodyData.ContainsKey("entitlements"));
         Assert.Null(parameters.Metadata);
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.PriceOverrides);
@@ -293,8 +284,6 @@ public class SubscriptionUpdateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("promotionCode"));
         Assert.Null(parameters.ScheduleStrategy);
         Assert.False(parameters.RawBodyData.ContainsKey("scheduleStrategy"));
-        Assert.Null(parameters.SubscriptionEntitlements);
-        Assert.False(parameters.RawBodyData.ContainsKey("subscriptionEntitlements"));
         Assert.Null(parameters.TrialEndDate);
         Assert.False(parameters.RawBodyData.ContainsKey("trialEndDate"));
     }
@@ -306,23 +295,21 @@ public class SubscriptionUpdateParamsTest : TestBase
         {
             ID = "x",
             Budget = new() { HasSoftLimit = true, Limit = 0 },
-            MinimumSpend = new()
-            {
-                Minimum = new() { Amount = 0, Currency = Subscriptions::MinimumCurrency.Usd },
-            },
+            MinimumSpend = new() { Amount = 0, Currency = Subscriptions::MinimumSpendCurrency.Usd },
 
             // Null should be interpreted as omitted for these properties
             Addons = null,
             AppliedCoupon = null,
             AwaitPaymentConfirmation = null,
+            BillingCycleAnchor = null,
             BillingInformation = null,
             BillingPeriod = null,
             Charges = null,
+            Entitlements = null,
             Metadata = null,
             PriceOverrides = null,
             PromotionCode = null,
             ScheduleStrategy = null,
-            SubscriptionEntitlements = null,
             TrialEndDate = null,
         };
 
@@ -332,12 +319,16 @@ public class SubscriptionUpdateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("appliedCoupon"));
         Assert.Null(parameters.AwaitPaymentConfirmation);
         Assert.False(parameters.RawBodyData.ContainsKey("awaitPaymentConfirmation"));
+        Assert.Null(parameters.BillingCycleAnchor);
+        Assert.False(parameters.RawBodyData.ContainsKey("billingCycleAnchor"));
         Assert.Null(parameters.BillingInformation);
         Assert.False(parameters.RawBodyData.ContainsKey("billingInformation"));
         Assert.Null(parameters.BillingPeriod);
         Assert.False(parameters.RawBodyData.ContainsKey("billingPeriod"));
         Assert.Null(parameters.Charges);
         Assert.False(parameters.RawBodyData.ContainsKey("charges"));
+        Assert.Null(parameters.Entitlements);
+        Assert.False(parameters.RawBodyData.ContainsKey("entitlements"));
         Assert.Null(parameters.Metadata);
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.PriceOverrides);
@@ -346,8 +337,6 @@ public class SubscriptionUpdateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("promotionCode"));
         Assert.Null(parameters.ScheduleStrategy);
         Assert.False(parameters.RawBodyData.ContainsKey("scheduleStrategy"));
-        Assert.Null(parameters.SubscriptionEntitlements);
-        Assert.False(parameters.RawBodyData.ContainsKey("subscriptionEntitlements"));
         Assert.Null(parameters.TrialEndDate);
         Assert.False(parameters.RawBodyData.ContainsKey("trialEndDate"));
     }
@@ -358,7 +347,7 @@ public class SubscriptionUpdateParamsTest : TestBase
         var parameters = new Subscriptions::SubscriptionUpdateParams
         {
             ID = "x",
-            Addons = [new() { AddonID = "addonId", Quantity = 0 }],
+            Addons = [new() { ID = "id", Quantity = 0 }],
             AppliedCoupon = new()
             {
                 BillingCouponID = "billingCouponId",
@@ -378,6 +367,7 @@ public class SubscriptionUpdateParamsTest : TestBase
                 PromotionCode = "promotionCode",
             },
             AwaitPaymentConfirmation = true,
+            BillingCycleAnchor = Subscriptions::BillingCycleAnchor.Unchanged,
             BillingInformation = new()
             {
                 BillingAddress = new()
@@ -395,10 +385,7 @@ public class SubscriptionUpdateParamsTest : TestBase
                 InvoiceDaysUntilDue = 0,
                 IsBackdated = true,
                 IsInvoicePaid = true,
-                Metadata = new Dictionary<string, JsonElement>()
-                {
-                    { "foo", JsonSerializer.SerializeToElement("bar") },
-                },
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 ProrationBehavior = Subscriptions::ProrationBehavior.InvoiceImmediately,
                 TaxIds = [new() { Type = "type", Value = "value" }],
                 TaxPercentage = 0,
@@ -410,30 +397,15 @@ public class SubscriptionUpdateParamsTest : TestBase
                 new()
                 {
                     ID = "id",
-                    Quantity = 1,
+                    Quantity = 0,
                     Type = Subscriptions::Type.Feature,
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-            PriceOverrides =
+            Entitlements =
             [
-                new()
-                {
-                    AddonID = "addonId",
-                    BaseCharge = true,
-                    CurrencyID = "currencyId",
-                    FeatureID = "featureId",
-                    Price = new() { Amount = 0, Currency = Subscriptions::PriceCurrency.Usd },
-                },
-            ],
-            PromotionCode = "promotionCode",
-            ScheduleStrategy = Subscriptions::ScheduleStrategy.EndOfBillingPeriod,
-            SubscriptionEntitlements =
-            [
-                new()
+                new Subscriptions::Feature()
                 {
                     ID = "id",
-                    FeatureID = "featureId",
                     HasSoftLimit = true,
                     HasUnlimitedUsage = true,
                     MonthlyResetPeriodConfiguration = new(
@@ -449,6 +421,21 @@ public class SubscriptionUpdateParamsTest : TestBase
                     ),
                 },
             ],
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            PriceOverrides =
+            [
+                new()
+                {
+                    AddonID = "addonId",
+                    Amount = 0,
+                    BaseCharge = true,
+                    Currency = Subscriptions::PriceOverrideCurrency.Usd,
+                    CurrencyID = "currencyId",
+                    FeatureID = "featureId",
+                },
+            ],
+            PromotionCode = "promotionCode",
+            ScheduleStrategy = Subscriptions::ScheduleStrategy.EndOfBillingPeriod,
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -464,7 +451,7 @@ public class SubscriptionUpdateParamsTest : TestBase
         var parameters = new Subscriptions::SubscriptionUpdateParams
         {
             ID = "x",
-            Addons = [new() { AddonID = "addonId", Quantity = 0 }],
+            Addons = [new() { ID = "id", Quantity = 0 }],
             AppliedCoupon = new()
             {
                 BillingCouponID = "billingCouponId",
@@ -484,6 +471,7 @@ public class SubscriptionUpdateParamsTest : TestBase
                 PromotionCode = "promotionCode",
             },
             AwaitPaymentConfirmation = true,
+            BillingCycleAnchor = Subscriptions::BillingCycleAnchor.Unchanged,
             BillingInformation = new()
             {
                 BillingAddress = new()
@@ -501,10 +489,7 @@ public class SubscriptionUpdateParamsTest : TestBase
                 InvoiceDaysUntilDue = 0,
                 IsBackdated = true,
                 IsInvoicePaid = true,
-                Metadata = new Dictionary<string, JsonElement>()
-                {
-                    { "foo", JsonSerializer.SerializeToElement("bar") },
-                },
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 ProrationBehavior = Subscriptions::ProrationBehavior.InvoiceImmediately,
                 TaxIds = [new() { Type = "type", Value = "value" }],
                 TaxPercentage = 0,
@@ -516,30 +501,15 @@ public class SubscriptionUpdateParamsTest : TestBase
                 new()
                 {
                     ID = "id",
-                    Quantity = 1,
+                    Quantity = 0,
                     Type = Subscriptions::Type.Feature,
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-            PriceOverrides =
+            Entitlements =
             [
-                new()
-                {
-                    AddonID = "addonId",
-                    BaseCharge = true,
-                    CurrencyID = "currencyId",
-                    FeatureID = "featureId",
-                    Price = new() { Amount = 0, Currency = Subscriptions::PriceCurrency.Usd },
-                },
-            ],
-            PromotionCode = "promotionCode",
-            ScheduleStrategy = Subscriptions::ScheduleStrategy.EndOfBillingPeriod,
-            SubscriptionEntitlements =
-            [
-                new()
+                new Subscriptions::Feature()
                 {
                     ID = "id",
-                    FeatureID = "featureId",
                     HasSoftLimit = true,
                     HasUnlimitedUsage = true,
                     MonthlyResetPeriodConfiguration = new(
@@ -555,6 +525,21 @@ public class SubscriptionUpdateParamsTest : TestBase
                     ),
                 },
             ],
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            PriceOverrides =
+            [
+                new()
+                {
+                    AddonID = "addonId",
+                    Amount = 0,
+                    BaseCharge = true,
+                    Currency = Subscriptions::PriceOverrideCurrency.Usd,
+                    CurrencyID = "currencyId",
+                    FeatureID = "featureId",
+                },
+            ],
+            PromotionCode = "promotionCode",
+            ScheduleStrategy = Subscriptions::ScheduleStrategy.EndOfBillingPeriod,
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
             Budget = null,
@@ -574,7 +559,9 @@ public class SubscriptionUpdateParamsTest : TestBase
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
-        Assert.Equal(new Uri("https://api.stigg.io/api/v1/subscriptions/x"), url);
+        Assert.True(
+            TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/subscriptions/x"), url)
+        );
     }
 
     [Fact]
@@ -583,7 +570,7 @@ public class SubscriptionUpdateParamsTest : TestBase
         var parameters = new Subscriptions::SubscriptionUpdateParams
         {
             ID = "x",
-            Addons = [new() { AddonID = "addonId", Quantity = 0 }],
+            Addons = [new() { ID = "id", Quantity = 0 }],
             AppliedCoupon = new()
             {
                 BillingCouponID = "billingCouponId",
@@ -603,6 +590,7 @@ public class SubscriptionUpdateParamsTest : TestBase
                 PromotionCode = "promotionCode",
             },
             AwaitPaymentConfirmation = true,
+            BillingCycleAnchor = Subscriptions::BillingCycleAnchor.Unchanged,
             BillingInformation = new()
             {
                 BillingAddress = new()
@@ -620,10 +608,7 @@ public class SubscriptionUpdateParamsTest : TestBase
                 InvoiceDaysUntilDue = 0,
                 IsBackdated = true,
                 IsInvoicePaid = true,
-                Metadata = new Dictionary<string, JsonElement>()
-                {
-                    { "foo", JsonSerializer.SerializeToElement("bar") },
-                },
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 ProrationBehavior = Subscriptions::ProrationBehavior.InvoiceImmediately,
                 TaxIds = [new() { Type = "type", Value = "value" }],
                 TaxPercentage = 0,
@@ -636,34 +621,15 @@ public class SubscriptionUpdateParamsTest : TestBase
                 new()
                 {
                     ID = "id",
-                    Quantity = 1,
+                    Quantity = 0,
                     Type = Subscriptions::Type.Feature,
                 },
             ],
-            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-            MinimumSpend = new()
-            {
-                Minimum = new() { Amount = 0, Currency = Subscriptions::MinimumCurrency.Usd },
-            },
-            PriceOverrides =
+            Entitlements =
             [
-                new()
-                {
-                    AddonID = "addonId",
-                    BaseCharge = true,
-                    CurrencyID = "currencyId",
-                    FeatureID = "featureId",
-                    Price = new() { Amount = 0, Currency = Subscriptions::PriceCurrency.Usd },
-                },
-            ],
-            PromotionCode = "promotionCode",
-            ScheduleStrategy = Subscriptions::ScheduleStrategy.EndOfBillingPeriod,
-            SubscriptionEntitlements =
-            [
-                new()
+                new Subscriptions::Feature()
                 {
                     ID = "id",
-                    FeatureID = "featureId",
                     HasSoftLimit = true,
                     HasUnlimitedUsage = true,
                     MonthlyResetPeriodConfiguration = new(
@@ -679,6 +645,22 @@ public class SubscriptionUpdateParamsTest : TestBase
                     ),
                 },
             ],
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            MinimumSpend = new() { Amount = 0, Currency = Subscriptions::MinimumSpendCurrency.Usd },
+            PriceOverrides =
+            [
+                new()
+                {
+                    AddonID = "addonId",
+                    Amount = 0,
+                    BaseCharge = true,
+                    Currency = Subscriptions::PriceOverrideCurrency.Usd,
+                    CurrencyID = "currencyId",
+                    FeatureID = "featureId",
+                },
+            ],
+            PromotionCode = "promotionCode",
+            ScheduleStrategy = Subscriptions::ScheduleStrategy.EndOfBillingPeriod,
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -693,19 +675,19 @@ public class AddonTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Subscriptions::Addon { AddonID = "addonId", Quantity = 0 };
+        var model = new Subscriptions::Addon { ID = "id", Quantity = 0 };
 
-        string expectedAddonID = "addonId";
-        double expectedQuantity = 0;
+        string expectedID = "id";
+        long expectedQuantity = 0;
 
-        Assert.Equal(expectedAddonID, model.AddonID);
+        Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedQuantity, model.Quantity);
     }
 
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Subscriptions::Addon { AddonID = "addonId", Quantity = 0 };
+        var model = new Subscriptions::Addon { ID = "id", Quantity = 0 };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<Subscriptions::Addon>(
@@ -719,7 +701,7 @@ public class AddonTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Subscriptions::Addon { AddonID = "addonId", Quantity = 0 };
+        var model = new Subscriptions::Addon { ID = "id", Quantity = 0 };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<Subscriptions::Addon>(
@@ -728,17 +710,17 @@ public class AddonTest : TestBase
         );
         Assert.NotNull(deserialized);
 
-        string expectedAddonID = "addonId";
-        double expectedQuantity = 0;
+        string expectedID = "id";
+        long expectedQuantity = 0;
 
-        Assert.Equal(expectedAddonID, deserialized.AddonID);
+        Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedQuantity, deserialized.Quantity);
     }
 
     [Fact]
     public void Validation_Works()
     {
-        var model = new Subscriptions::Addon { AddonID = "addonId", Quantity = 0 };
+        var model = new Subscriptions::Addon { ID = "id", Quantity = 0 };
 
         model.Validate();
     }
@@ -746,7 +728,7 @@ public class AddonTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Subscriptions::Addon { AddonID = "addonId", Quantity = 0 };
+        var model = new Subscriptions::Addon { ID = "id", Quantity = 0 };
 
         Subscriptions::Addon copied = new(model);
 
@@ -1528,52 +1510,6 @@ public class AmountsOffTest : TestBase
     }
 
     [Fact]
-    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
-    {
-        var model = new Subscriptions::AmountsOff { Amount = 0 };
-
-        Assert.Null(model.Currency);
-        Assert.False(model.RawData.ContainsKey("currency"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new Subscriptions::AmountsOff { Amount = 0 };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
-    {
-        var model = new Subscriptions::AmountsOff
-        {
-            Amount = 0,
-
-            // Null should be interpreted as omitted for these properties
-            Currency = null,
-        };
-
-        Assert.Null(model.Currency);
-        Assert.False(model.RawData.ContainsKey("currency"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new Subscriptions::AmountsOff
-        {
-            Amount = 0,
-
-            // Null should be interpreted as omitted for these properties
-            Currency = null,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
     public void CopyConstructor_Works()
     {
         var model = new Subscriptions::AmountsOff
@@ -1874,6 +1810,62 @@ public class CurrencyTest : TestBase
     }
 }
 
+public class BillingCycleAnchorTest : TestBase
+{
+    [Theory]
+    [InlineData(Subscriptions::BillingCycleAnchor.Unchanged)]
+    [InlineData(Subscriptions::BillingCycleAnchor.Now)]
+    public void Validation_Works(Subscriptions::BillingCycleAnchor rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Subscriptions::BillingCycleAnchor> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::BillingCycleAnchor>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(Subscriptions::BillingCycleAnchor.Unchanged)]
+    [InlineData(Subscriptions::BillingCycleAnchor.Now)]
+    public void SerializationRoundtrip_Works(Subscriptions::BillingCycleAnchor rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Subscriptions::BillingCycleAnchor> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, Subscriptions::BillingCycleAnchor>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::BillingCycleAnchor>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, Subscriptions::BillingCycleAnchor>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
 public class BillingInformationTest : TestBase
 {
     [Fact]
@@ -1896,10 +1888,7 @@ public class BillingInformationTest : TestBase
             InvoiceDaysUntilDue = 0,
             IsBackdated = true,
             IsInvoicePaid = true,
-            Metadata = new Dictionary<string, JsonElement>()
-            {
-                { "foo", JsonSerializer.SerializeToElement("bar") },
-            },
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             ProrationBehavior = Subscriptions::ProrationBehavior.InvoiceImmediately,
             TaxIds = [new() { Type = "type", Value = "value" }],
             TaxPercentage = 0,
@@ -1921,10 +1910,7 @@ public class BillingInformationTest : TestBase
         double expectedInvoiceDaysUntilDue = 0;
         bool expectedIsBackdated = true;
         bool expectedIsInvoicePaid = true;
-        Dictionary<string, JsonElement> expectedMetadata = new()
-        {
-            { "foo", JsonSerializer.SerializeToElement("bar") },
-        };
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, Subscriptions::ProrationBehavior> expectedProrationBehavior =
             Subscriptions::ProrationBehavior.InvoiceImmediately;
         List<Subscriptions::TaxID> expectedTaxIds = [new() { Type = "type", Value = "value" }];
@@ -1944,7 +1930,7 @@ public class BillingInformationTest : TestBase
         {
             Assert.True(model.Metadata.TryGetValue(item.Key, out var value));
 
-            Assert.True(JsonElement.DeepEquals(value, model.Metadata[item.Key]));
+            Assert.Equal(value, model.Metadata[item.Key]);
         }
         Assert.Equal(expectedProrationBehavior, model.ProrationBehavior);
         Assert.NotNull(model.TaxIds);
@@ -1982,10 +1968,7 @@ public class BillingInformationTest : TestBase
             InvoiceDaysUntilDue = 0,
             IsBackdated = true,
             IsInvoicePaid = true,
-            Metadata = new Dictionary<string, JsonElement>()
-            {
-                { "foo", JsonSerializer.SerializeToElement("bar") },
-            },
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             ProrationBehavior = Subscriptions::ProrationBehavior.InvoiceImmediately,
             TaxIds = [new() { Type = "type", Value = "value" }],
             TaxPercentage = 0,
@@ -2021,10 +2004,7 @@ public class BillingInformationTest : TestBase
             InvoiceDaysUntilDue = 0,
             IsBackdated = true,
             IsInvoicePaid = true,
-            Metadata = new Dictionary<string, JsonElement>()
-            {
-                { "foo", JsonSerializer.SerializeToElement("bar") },
-            },
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             ProrationBehavior = Subscriptions::ProrationBehavior.InvoiceImmediately,
             TaxIds = [new() { Type = "type", Value = "value" }],
             TaxPercentage = 0,
@@ -2053,10 +2033,7 @@ public class BillingInformationTest : TestBase
         double expectedInvoiceDaysUntilDue = 0;
         bool expectedIsBackdated = true;
         bool expectedIsInvoicePaid = true;
-        Dictionary<string, JsonElement> expectedMetadata = new()
-        {
-            { "foo", JsonSerializer.SerializeToElement("bar") },
-        };
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, Subscriptions::ProrationBehavior> expectedProrationBehavior =
             Subscriptions::ProrationBehavior.InvoiceImmediately;
         List<Subscriptions::TaxID> expectedTaxIds = [new() { Type = "type", Value = "value" }];
@@ -2076,7 +2053,7 @@ public class BillingInformationTest : TestBase
         {
             Assert.True(deserialized.Metadata.TryGetValue(item.Key, out var value));
 
-            Assert.True(JsonElement.DeepEquals(value, deserialized.Metadata[item.Key]));
+            Assert.Equal(value, deserialized.Metadata[item.Key]);
         }
         Assert.Equal(expectedProrationBehavior, deserialized.ProrationBehavior);
         Assert.NotNull(deserialized.TaxIds);
@@ -2114,10 +2091,7 @@ public class BillingInformationTest : TestBase
             InvoiceDaysUntilDue = 0,
             IsBackdated = true,
             IsInvoicePaid = true,
-            Metadata = new Dictionary<string, JsonElement>()
-            {
-                { "foo", JsonSerializer.SerializeToElement("bar") },
-            },
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             ProrationBehavior = Subscriptions::ProrationBehavior.InvoiceImmediately,
             TaxIds = [new() { Type = "type", Value = "value" }],
             TaxPercentage = 0,
@@ -2255,10 +2229,7 @@ public class BillingInformationTest : TestBase
             InvoiceDaysUntilDue = 0,
             IsBackdated = true,
             IsInvoicePaid = true,
-            Metadata = new Dictionary<string, JsonElement>()
-            {
-                { "foo", JsonSerializer.SerializeToElement("bar") },
-            },
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             ProrationBehavior = Subscriptions::ProrationBehavior.InvoiceImmediately,
             TaxIds = [new() { Type = "type", Value = "value" }],
             TaxPercentage = 0,
@@ -2719,12 +2690,12 @@ public class ChargeTest : TestBase
         var model = new Subscriptions::Charge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = Subscriptions::Type.Feature,
         };
 
         string expectedID = "id";
-        double expectedQuantity = 1;
+        double expectedQuantity = 0;
         ApiEnum<string, Subscriptions::Type> expectedType = Subscriptions::Type.Feature;
 
         Assert.Equal(expectedID, model.ID);
@@ -2738,7 +2709,7 @@ public class ChargeTest : TestBase
         var model = new Subscriptions::Charge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = Subscriptions::Type.Feature,
         };
 
@@ -2757,7 +2728,7 @@ public class ChargeTest : TestBase
         var model = new Subscriptions::Charge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = Subscriptions::Type.Feature,
         };
 
@@ -2769,7 +2740,7 @@ public class ChargeTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
-        double expectedQuantity = 1;
+        double expectedQuantity = 0;
         ApiEnum<string, Subscriptions::Type> expectedType = Subscriptions::Type.Feature;
 
         Assert.Equal(expectedID, deserialized.ID);
@@ -2783,7 +2754,7 @@ public class ChargeTest : TestBase
         var model = new Subscriptions::Charge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = Subscriptions::Type.Feature,
         };
 
@@ -2796,7 +2767,7 @@ public class ChargeTest : TestBase
         var model = new Subscriptions::Charge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = Subscriptions::Type.Feature,
         };
 
@@ -2864,1215 +2835,95 @@ public class TypeTest : TestBase
     }
 }
 
-public class MinimumSpendTest : TestBase
+public class EntitlementTest : TestBase
 {
     [Fact]
-    public void FieldRoundtrip_Works()
+    public void FeatureValidationWorks()
     {
-        var model = new Subscriptions::MinimumSpend
-        {
-            Minimum = new() { Amount = 0, Currency = Subscriptions::MinimumCurrency.Usd },
-        };
-
-        Subscriptions::Minimum expectedMinimum = new()
-        {
-            Amount = 0,
-            Currency = Subscriptions::MinimumCurrency.Usd,
-        };
-
-        Assert.Equal(expectedMinimum, model.Minimum);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new Subscriptions::MinimumSpend
-        {
-            Minimum = new() { Amount = 0, Currency = Subscriptions::MinimumCurrency.Usd },
-        };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::MinimumSpend>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new Subscriptions::MinimumSpend
-        {
-            Minimum = new() { Amount = 0, Currency = Subscriptions::MinimumCurrency.Usd },
-        };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::MinimumSpend>(
-            element,
-            ModelBase.SerializerOptions
-        );
-        Assert.NotNull(deserialized);
-
-        Subscriptions::Minimum expectedMinimum = new()
-        {
-            Amount = 0,
-            Currency = Subscriptions::MinimumCurrency.Usd,
-        };
-
-        Assert.Equal(expectedMinimum, deserialized.Minimum);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new Subscriptions::MinimumSpend
-        {
-            Minimum = new() { Amount = 0, Currency = Subscriptions::MinimumCurrency.Usd },
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
-    {
-        var model = new Subscriptions::MinimumSpend { };
-
-        Assert.Null(model.Minimum);
-        Assert.False(model.RawData.ContainsKey("minimum"));
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new Subscriptions::MinimumSpend { };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
-    {
-        var model = new Subscriptions::MinimumSpend { Minimum = null };
-
-        Assert.Null(model.Minimum);
-        Assert.True(model.RawData.ContainsKey("minimum"));
-    }
-
-    [Fact]
-    public void OptionalNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new Subscriptions::MinimumSpend { Minimum = null };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new Subscriptions::MinimumSpend
-        {
-            Minimum = new() { Amount = 0, Currency = Subscriptions::MinimumCurrency.Usd },
-        };
-
-        Subscriptions::MinimumSpend copied = new(model);
-
-        Assert.Equal(model, copied);
-    }
-}
-
-public class MinimumTest : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new Subscriptions::Minimum
-        {
-            Amount = 0,
-            Currency = Subscriptions::MinimumCurrency.Usd,
-        };
-
-        double expectedAmount = 0;
-        ApiEnum<string, Subscriptions::MinimumCurrency> expectedCurrency =
-            Subscriptions::MinimumCurrency.Usd;
-
-        Assert.Equal(expectedAmount, model.Amount);
-        Assert.Equal(expectedCurrency, model.Currency);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new Subscriptions::Minimum
-        {
-            Amount = 0,
-            Currency = Subscriptions::MinimumCurrency.Usd,
-        };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::Minimum>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new Subscriptions::Minimum
-        {
-            Amount = 0,
-            Currency = Subscriptions::MinimumCurrency.Usd,
-        };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::Minimum>(
-            element,
-            ModelBase.SerializerOptions
-        );
-        Assert.NotNull(deserialized);
-
-        double expectedAmount = 0;
-        ApiEnum<string, Subscriptions::MinimumCurrency> expectedCurrency =
-            Subscriptions::MinimumCurrency.Usd;
-
-        Assert.Equal(expectedAmount, deserialized.Amount);
-        Assert.Equal(expectedCurrency, deserialized.Currency);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new Subscriptions::Minimum
-        {
-            Amount = 0,
-            Currency = Subscriptions::MinimumCurrency.Usd,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
-    {
-        var model = new Subscriptions::Minimum { Amount = 0 };
-
-        Assert.Null(model.Currency);
-        Assert.False(model.RawData.ContainsKey("currency"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new Subscriptions::Minimum { Amount = 0 };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
-    {
-        var model = new Subscriptions::Minimum
-        {
-            Amount = 0,
-
-            // Null should be interpreted as omitted for these properties
-            Currency = null,
-        };
-
-        Assert.Null(model.Currency);
-        Assert.False(model.RawData.ContainsKey("currency"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new Subscriptions::Minimum
-        {
-            Amount = 0,
-
-            // Null should be interpreted as omitted for these properties
-            Currency = null,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new Subscriptions::Minimum
-        {
-            Amount = 0,
-            Currency = Subscriptions::MinimumCurrency.Usd,
-        };
-
-        Subscriptions::Minimum copied = new(model);
-
-        Assert.Equal(model, copied);
-    }
-}
-
-public class MinimumCurrencyTest : TestBase
-{
-    [Theory]
-    [InlineData(Subscriptions::MinimumCurrency.Usd)]
-    [InlineData(Subscriptions::MinimumCurrency.Aed)]
-    [InlineData(Subscriptions::MinimumCurrency.All)]
-    [InlineData(Subscriptions::MinimumCurrency.Amd)]
-    [InlineData(Subscriptions::MinimumCurrency.Ang)]
-    [InlineData(Subscriptions::MinimumCurrency.Aud)]
-    [InlineData(Subscriptions::MinimumCurrency.Awg)]
-    [InlineData(Subscriptions::MinimumCurrency.Azn)]
-    [InlineData(Subscriptions::MinimumCurrency.Bam)]
-    [InlineData(Subscriptions::MinimumCurrency.Bbd)]
-    [InlineData(Subscriptions::MinimumCurrency.Bdt)]
-    [InlineData(Subscriptions::MinimumCurrency.Bgn)]
-    [InlineData(Subscriptions::MinimumCurrency.Bif)]
-    [InlineData(Subscriptions::MinimumCurrency.Bmd)]
-    [InlineData(Subscriptions::MinimumCurrency.Bnd)]
-    [InlineData(Subscriptions::MinimumCurrency.Bsd)]
-    [InlineData(Subscriptions::MinimumCurrency.Bwp)]
-    [InlineData(Subscriptions::MinimumCurrency.Byn)]
-    [InlineData(Subscriptions::MinimumCurrency.Bzd)]
-    [InlineData(Subscriptions::MinimumCurrency.Brl)]
-    [InlineData(Subscriptions::MinimumCurrency.Cad)]
-    [InlineData(Subscriptions::MinimumCurrency.Cdf)]
-    [InlineData(Subscriptions::MinimumCurrency.Chf)]
-    [InlineData(Subscriptions::MinimumCurrency.Cny)]
-    [InlineData(Subscriptions::MinimumCurrency.Czk)]
-    [InlineData(Subscriptions::MinimumCurrency.Dkk)]
-    [InlineData(Subscriptions::MinimumCurrency.Dop)]
-    [InlineData(Subscriptions::MinimumCurrency.Dzd)]
-    [InlineData(Subscriptions::MinimumCurrency.Egp)]
-    [InlineData(Subscriptions::MinimumCurrency.Etb)]
-    [InlineData(Subscriptions::MinimumCurrency.Eur)]
-    [InlineData(Subscriptions::MinimumCurrency.Fjd)]
-    [InlineData(Subscriptions::MinimumCurrency.Gbp)]
-    [InlineData(Subscriptions::MinimumCurrency.Gel)]
-    [InlineData(Subscriptions::MinimumCurrency.Gip)]
-    [InlineData(Subscriptions::MinimumCurrency.Gmd)]
-    [InlineData(Subscriptions::MinimumCurrency.Gyd)]
-    [InlineData(Subscriptions::MinimumCurrency.Hkd)]
-    [InlineData(Subscriptions::MinimumCurrency.Hrk)]
-    [InlineData(Subscriptions::MinimumCurrency.Htg)]
-    [InlineData(Subscriptions::MinimumCurrency.Idr)]
-    [InlineData(Subscriptions::MinimumCurrency.Ils)]
-    [InlineData(Subscriptions::MinimumCurrency.Inr)]
-    [InlineData(Subscriptions::MinimumCurrency.Isk)]
-    [InlineData(Subscriptions::MinimumCurrency.Jmd)]
-    [InlineData(Subscriptions::MinimumCurrency.Jpy)]
-    [InlineData(Subscriptions::MinimumCurrency.Kes)]
-    [InlineData(Subscriptions::MinimumCurrency.Kgs)]
-    [InlineData(Subscriptions::MinimumCurrency.Khr)]
-    [InlineData(Subscriptions::MinimumCurrency.Kmf)]
-    [InlineData(Subscriptions::MinimumCurrency.Krw)]
-    [InlineData(Subscriptions::MinimumCurrency.Kyd)]
-    [InlineData(Subscriptions::MinimumCurrency.Kzt)]
-    [InlineData(Subscriptions::MinimumCurrency.Lbp)]
-    [InlineData(Subscriptions::MinimumCurrency.Lkr)]
-    [InlineData(Subscriptions::MinimumCurrency.Lrd)]
-    [InlineData(Subscriptions::MinimumCurrency.Lsl)]
-    [InlineData(Subscriptions::MinimumCurrency.Mad)]
-    [InlineData(Subscriptions::MinimumCurrency.Mdl)]
-    [InlineData(Subscriptions::MinimumCurrency.Mga)]
-    [InlineData(Subscriptions::MinimumCurrency.Mkd)]
-    [InlineData(Subscriptions::MinimumCurrency.Mmk)]
-    [InlineData(Subscriptions::MinimumCurrency.Mnt)]
-    [InlineData(Subscriptions::MinimumCurrency.Mop)]
-    [InlineData(Subscriptions::MinimumCurrency.Mro)]
-    [InlineData(Subscriptions::MinimumCurrency.Mvr)]
-    [InlineData(Subscriptions::MinimumCurrency.Mwk)]
-    [InlineData(Subscriptions::MinimumCurrency.Mxn)]
-    [InlineData(Subscriptions::MinimumCurrency.Myr)]
-    [InlineData(Subscriptions::MinimumCurrency.Mzn)]
-    [InlineData(Subscriptions::MinimumCurrency.Nad)]
-    [InlineData(Subscriptions::MinimumCurrency.Ngn)]
-    [InlineData(Subscriptions::MinimumCurrency.Nok)]
-    [InlineData(Subscriptions::MinimumCurrency.Npr)]
-    [InlineData(Subscriptions::MinimumCurrency.Nzd)]
-    [InlineData(Subscriptions::MinimumCurrency.Pgk)]
-    [InlineData(Subscriptions::MinimumCurrency.Php)]
-    [InlineData(Subscriptions::MinimumCurrency.Pkr)]
-    [InlineData(Subscriptions::MinimumCurrency.Pln)]
-    [InlineData(Subscriptions::MinimumCurrency.Qar)]
-    [InlineData(Subscriptions::MinimumCurrency.Ron)]
-    [InlineData(Subscriptions::MinimumCurrency.Rsd)]
-    [InlineData(Subscriptions::MinimumCurrency.Rub)]
-    [InlineData(Subscriptions::MinimumCurrency.Rwf)]
-    [InlineData(Subscriptions::MinimumCurrency.Sar)]
-    [InlineData(Subscriptions::MinimumCurrency.Sbd)]
-    [InlineData(Subscriptions::MinimumCurrency.Scr)]
-    [InlineData(Subscriptions::MinimumCurrency.Sek)]
-    [InlineData(Subscriptions::MinimumCurrency.Sgd)]
-    [InlineData(Subscriptions::MinimumCurrency.Sle)]
-    [InlineData(Subscriptions::MinimumCurrency.Sll)]
-    [InlineData(Subscriptions::MinimumCurrency.Sos)]
-    [InlineData(Subscriptions::MinimumCurrency.Szl)]
-    [InlineData(Subscriptions::MinimumCurrency.Thb)]
-    [InlineData(Subscriptions::MinimumCurrency.Tjs)]
-    [InlineData(Subscriptions::MinimumCurrency.Top)]
-    [InlineData(Subscriptions::MinimumCurrency.Try)]
-    [InlineData(Subscriptions::MinimumCurrency.Ttd)]
-    [InlineData(Subscriptions::MinimumCurrency.Tzs)]
-    [InlineData(Subscriptions::MinimumCurrency.Uah)]
-    [InlineData(Subscriptions::MinimumCurrency.Uzs)]
-    [InlineData(Subscriptions::MinimumCurrency.Vnd)]
-    [InlineData(Subscriptions::MinimumCurrency.Vuv)]
-    [InlineData(Subscriptions::MinimumCurrency.Wst)]
-    [InlineData(Subscriptions::MinimumCurrency.Xaf)]
-    [InlineData(Subscriptions::MinimumCurrency.Xcd)]
-    [InlineData(Subscriptions::MinimumCurrency.Yer)]
-    [InlineData(Subscriptions::MinimumCurrency.Zar)]
-    [InlineData(Subscriptions::MinimumCurrency.Zmw)]
-    [InlineData(Subscriptions::MinimumCurrency.Clp)]
-    [InlineData(Subscriptions::MinimumCurrency.Djf)]
-    [InlineData(Subscriptions::MinimumCurrency.Gnf)]
-    [InlineData(Subscriptions::MinimumCurrency.Ugx)]
-    [InlineData(Subscriptions::MinimumCurrency.Pyg)]
-    [InlineData(Subscriptions::MinimumCurrency.Xof)]
-    [InlineData(Subscriptions::MinimumCurrency.Xpf)]
-    public void Validation_Works(Subscriptions::MinimumCurrency rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Subscriptions::MinimumCurrency> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::MinimumCurrency>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(Subscriptions::MinimumCurrency.Usd)]
-    [InlineData(Subscriptions::MinimumCurrency.Aed)]
-    [InlineData(Subscriptions::MinimumCurrency.All)]
-    [InlineData(Subscriptions::MinimumCurrency.Amd)]
-    [InlineData(Subscriptions::MinimumCurrency.Ang)]
-    [InlineData(Subscriptions::MinimumCurrency.Aud)]
-    [InlineData(Subscriptions::MinimumCurrency.Awg)]
-    [InlineData(Subscriptions::MinimumCurrency.Azn)]
-    [InlineData(Subscriptions::MinimumCurrency.Bam)]
-    [InlineData(Subscriptions::MinimumCurrency.Bbd)]
-    [InlineData(Subscriptions::MinimumCurrency.Bdt)]
-    [InlineData(Subscriptions::MinimumCurrency.Bgn)]
-    [InlineData(Subscriptions::MinimumCurrency.Bif)]
-    [InlineData(Subscriptions::MinimumCurrency.Bmd)]
-    [InlineData(Subscriptions::MinimumCurrency.Bnd)]
-    [InlineData(Subscriptions::MinimumCurrency.Bsd)]
-    [InlineData(Subscriptions::MinimumCurrency.Bwp)]
-    [InlineData(Subscriptions::MinimumCurrency.Byn)]
-    [InlineData(Subscriptions::MinimumCurrency.Bzd)]
-    [InlineData(Subscriptions::MinimumCurrency.Brl)]
-    [InlineData(Subscriptions::MinimumCurrency.Cad)]
-    [InlineData(Subscriptions::MinimumCurrency.Cdf)]
-    [InlineData(Subscriptions::MinimumCurrency.Chf)]
-    [InlineData(Subscriptions::MinimumCurrency.Cny)]
-    [InlineData(Subscriptions::MinimumCurrency.Czk)]
-    [InlineData(Subscriptions::MinimumCurrency.Dkk)]
-    [InlineData(Subscriptions::MinimumCurrency.Dop)]
-    [InlineData(Subscriptions::MinimumCurrency.Dzd)]
-    [InlineData(Subscriptions::MinimumCurrency.Egp)]
-    [InlineData(Subscriptions::MinimumCurrency.Etb)]
-    [InlineData(Subscriptions::MinimumCurrency.Eur)]
-    [InlineData(Subscriptions::MinimumCurrency.Fjd)]
-    [InlineData(Subscriptions::MinimumCurrency.Gbp)]
-    [InlineData(Subscriptions::MinimumCurrency.Gel)]
-    [InlineData(Subscriptions::MinimumCurrency.Gip)]
-    [InlineData(Subscriptions::MinimumCurrency.Gmd)]
-    [InlineData(Subscriptions::MinimumCurrency.Gyd)]
-    [InlineData(Subscriptions::MinimumCurrency.Hkd)]
-    [InlineData(Subscriptions::MinimumCurrency.Hrk)]
-    [InlineData(Subscriptions::MinimumCurrency.Htg)]
-    [InlineData(Subscriptions::MinimumCurrency.Idr)]
-    [InlineData(Subscriptions::MinimumCurrency.Ils)]
-    [InlineData(Subscriptions::MinimumCurrency.Inr)]
-    [InlineData(Subscriptions::MinimumCurrency.Isk)]
-    [InlineData(Subscriptions::MinimumCurrency.Jmd)]
-    [InlineData(Subscriptions::MinimumCurrency.Jpy)]
-    [InlineData(Subscriptions::MinimumCurrency.Kes)]
-    [InlineData(Subscriptions::MinimumCurrency.Kgs)]
-    [InlineData(Subscriptions::MinimumCurrency.Khr)]
-    [InlineData(Subscriptions::MinimumCurrency.Kmf)]
-    [InlineData(Subscriptions::MinimumCurrency.Krw)]
-    [InlineData(Subscriptions::MinimumCurrency.Kyd)]
-    [InlineData(Subscriptions::MinimumCurrency.Kzt)]
-    [InlineData(Subscriptions::MinimumCurrency.Lbp)]
-    [InlineData(Subscriptions::MinimumCurrency.Lkr)]
-    [InlineData(Subscriptions::MinimumCurrency.Lrd)]
-    [InlineData(Subscriptions::MinimumCurrency.Lsl)]
-    [InlineData(Subscriptions::MinimumCurrency.Mad)]
-    [InlineData(Subscriptions::MinimumCurrency.Mdl)]
-    [InlineData(Subscriptions::MinimumCurrency.Mga)]
-    [InlineData(Subscriptions::MinimumCurrency.Mkd)]
-    [InlineData(Subscriptions::MinimumCurrency.Mmk)]
-    [InlineData(Subscriptions::MinimumCurrency.Mnt)]
-    [InlineData(Subscriptions::MinimumCurrency.Mop)]
-    [InlineData(Subscriptions::MinimumCurrency.Mro)]
-    [InlineData(Subscriptions::MinimumCurrency.Mvr)]
-    [InlineData(Subscriptions::MinimumCurrency.Mwk)]
-    [InlineData(Subscriptions::MinimumCurrency.Mxn)]
-    [InlineData(Subscriptions::MinimumCurrency.Myr)]
-    [InlineData(Subscriptions::MinimumCurrency.Mzn)]
-    [InlineData(Subscriptions::MinimumCurrency.Nad)]
-    [InlineData(Subscriptions::MinimumCurrency.Ngn)]
-    [InlineData(Subscriptions::MinimumCurrency.Nok)]
-    [InlineData(Subscriptions::MinimumCurrency.Npr)]
-    [InlineData(Subscriptions::MinimumCurrency.Nzd)]
-    [InlineData(Subscriptions::MinimumCurrency.Pgk)]
-    [InlineData(Subscriptions::MinimumCurrency.Php)]
-    [InlineData(Subscriptions::MinimumCurrency.Pkr)]
-    [InlineData(Subscriptions::MinimumCurrency.Pln)]
-    [InlineData(Subscriptions::MinimumCurrency.Qar)]
-    [InlineData(Subscriptions::MinimumCurrency.Ron)]
-    [InlineData(Subscriptions::MinimumCurrency.Rsd)]
-    [InlineData(Subscriptions::MinimumCurrency.Rub)]
-    [InlineData(Subscriptions::MinimumCurrency.Rwf)]
-    [InlineData(Subscriptions::MinimumCurrency.Sar)]
-    [InlineData(Subscriptions::MinimumCurrency.Sbd)]
-    [InlineData(Subscriptions::MinimumCurrency.Scr)]
-    [InlineData(Subscriptions::MinimumCurrency.Sek)]
-    [InlineData(Subscriptions::MinimumCurrency.Sgd)]
-    [InlineData(Subscriptions::MinimumCurrency.Sle)]
-    [InlineData(Subscriptions::MinimumCurrency.Sll)]
-    [InlineData(Subscriptions::MinimumCurrency.Sos)]
-    [InlineData(Subscriptions::MinimumCurrency.Szl)]
-    [InlineData(Subscriptions::MinimumCurrency.Thb)]
-    [InlineData(Subscriptions::MinimumCurrency.Tjs)]
-    [InlineData(Subscriptions::MinimumCurrency.Top)]
-    [InlineData(Subscriptions::MinimumCurrency.Try)]
-    [InlineData(Subscriptions::MinimumCurrency.Ttd)]
-    [InlineData(Subscriptions::MinimumCurrency.Tzs)]
-    [InlineData(Subscriptions::MinimumCurrency.Uah)]
-    [InlineData(Subscriptions::MinimumCurrency.Uzs)]
-    [InlineData(Subscriptions::MinimumCurrency.Vnd)]
-    [InlineData(Subscriptions::MinimumCurrency.Vuv)]
-    [InlineData(Subscriptions::MinimumCurrency.Wst)]
-    [InlineData(Subscriptions::MinimumCurrency.Xaf)]
-    [InlineData(Subscriptions::MinimumCurrency.Xcd)]
-    [InlineData(Subscriptions::MinimumCurrency.Yer)]
-    [InlineData(Subscriptions::MinimumCurrency.Zar)]
-    [InlineData(Subscriptions::MinimumCurrency.Zmw)]
-    [InlineData(Subscriptions::MinimumCurrency.Clp)]
-    [InlineData(Subscriptions::MinimumCurrency.Djf)]
-    [InlineData(Subscriptions::MinimumCurrency.Gnf)]
-    [InlineData(Subscriptions::MinimumCurrency.Ugx)]
-    [InlineData(Subscriptions::MinimumCurrency.Pyg)]
-    [InlineData(Subscriptions::MinimumCurrency.Xof)]
-    [InlineData(Subscriptions::MinimumCurrency.Xpf)]
-    public void SerializationRoundtrip_Works(Subscriptions::MinimumCurrency rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Subscriptions::MinimumCurrency> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, Subscriptions::MinimumCurrency>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::MinimumCurrency>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, Subscriptions::MinimumCurrency>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-}
-
-public class PriceOverrideTest : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new Subscriptions::PriceOverride
-        {
-            AddonID = "addonId",
-            BaseCharge = true,
-            CurrencyID = "currencyId",
-            FeatureID = "featureId",
-            Price = new() { Amount = 0, Currency = Subscriptions::PriceCurrency.Usd },
-        };
-
-        string expectedAddonID = "addonId";
-        bool expectedBaseCharge = true;
-        string expectedCurrencyID = "currencyId";
-        string expectedFeatureID = "featureId";
-        Subscriptions::Price expectedPrice = new()
-        {
-            Amount = 0,
-            Currency = Subscriptions::PriceCurrency.Usd,
-        };
-
-        Assert.Equal(expectedAddonID, model.AddonID);
-        Assert.Equal(expectedBaseCharge, model.BaseCharge);
-        Assert.Equal(expectedCurrencyID, model.CurrencyID);
-        Assert.Equal(expectedFeatureID, model.FeatureID);
-        Assert.Equal(expectedPrice, model.Price);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new Subscriptions::PriceOverride
-        {
-            AddonID = "addonId",
-            BaseCharge = true,
-            CurrencyID = "currencyId",
-            FeatureID = "featureId",
-            Price = new() { Amount = 0, Currency = Subscriptions::PriceCurrency.Usd },
-        };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::PriceOverride>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new Subscriptions::PriceOverride
-        {
-            AddonID = "addonId",
-            BaseCharge = true,
-            CurrencyID = "currencyId",
-            FeatureID = "featureId",
-            Price = new() { Amount = 0, Currency = Subscriptions::PriceCurrency.Usd },
-        };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::PriceOverride>(
-            element,
-            ModelBase.SerializerOptions
-        );
-        Assert.NotNull(deserialized);
-
-        string expectedAddonID = "addonId";
-        bool expectedBaseCharge = true;
-        string expectedCurrencyID = "currencyId";
-        string expectedFeatureID = "featureId";
-        Subscriptions::Price expectedPrice = new()
-        {
-            Amount = 0,
-            Currency = Subscriptions::PriceCurrency.Usd,
-        };
-
-        Assert.Equal(expectedAddonID, deserialized.AddonID);
-        Assert.Equal(expectedBaseCharge, deserialized.BaseCharge);
-        Assert.Equal(expectedCurrencyID, deserialized.CurrencyID);
-        Assert.Equal(expectedFeatureID, deserialized.FeatureID);
-        Assert.Equal(expectedPrice, deserialized.Price);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new Subscriptions::PriceOverride
-        {
-            AddonID = "addonId",
-            BaseCharge = true,
-            CurrencyID = "currencyId",
-            FeatureID = "featureId",
-            Price = new() { Amount = 0, Currency = Subscriptions::PriceCurrency.Usd },
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
-    {
-        var model = new Subscriptions::PriceOverride { };
-
-        Assert.Null(model.AddonID);
-        Assert.False(model.RawData.ContainsKey("addonId"));
-        Assert.Null(model.BaseCharge);
-        Assert.False(model.RawData.ContainsKey("baseCharge"));
-        Assert.Null(model.CurrencyID);
-        Assert.False(model.RawData.ContainsKey("currencyId"));
-        Assert.Null(model.FeatureID);
-        Assert.False(model.RawData.ContainsKey("featureId"));
-        Assert.Null(model.Price);
-        Assert.False(model.RawData.ContainsKey("price"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new Subscriptions::PriceOverride { };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
-    {
-        var model = new Subscriptions::PriceOverride
-        {
-            // Null should be interpreted as omitted for these properties
-            AddonID = null,
-            BaseCharge = null,
-            CurrencyID = null,
-            FeatureID = null,
-            Price = null,
-        };
-
-        Assert.Null(model.AddonID);
-        Assert.False(model.RawData.ContainsKey("addonId"));
-        Assert.Null(model.BaseCharge);
-        Assert.False(model.RawData.ContainsKey("baseCharge"));
-        Assert.Null(model.CurrencyID);
-        Assert.False(model.RawData.ContainsKey("currencyId"));
-        Assert.Null(model.FeatureID);
-        Assert.False(model.RawData.ContainsKey("featureId"));
-        Assert.Null(model.Price);
-        Assert.False(model.RawData.ContainsKey("price"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new Subscriptions::PriceOverride
-        {
-            // Null should be interpreted as omitted for these properties
-            AddonID = null,
-            BaseCharge = null,
-            CurrencyID = null,
-            FeatureID = null,
-            Price = null,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new Subscriptions::PriceOverride
-        {
-            AddonID = "addonId",
-            BaseCharge = true,
-            CurrencyID = "currencyId",
-            FeatureID = "featureId",
-            Price = new() { Amount = 0, Currency = Subscriptions::PriceCurrency.Usd },
-        };
-
-        Subscriptions::PriceOverride copied = new(model);
-
-        Assert.Equal(model, copied);
-    }
-}
-
-public class PriceTest : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new Subscriptions::Price
-        {
-            Amount = 0,
-            Currency = Subscriptions::PriceCurrency.Usd,
-        };
-
-        double expectedAmount = 0;
-        ApiEnum<string, Subscriptions::PriceCurrency> expectedCurrency =
-            Subscriptions::PriceCurrency.Usd;
-
-        Assert.Equal(expectedAmount, model.Amount);
-        Assert.Equal(expectedCurrency, model.Currency);
-    }
-
-    [Fact]
-    public void SerializationRoundtrip_Works()
-    {
-        var model = new Subscriptions::Price
-        {
-            Amount = 0,
-            Currency = Subscriptions::PriceCurrency.Usd,
-        };
-
-        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::Price>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(model, deserialized);
-    }
-
-    [Fact]
-    public void FieldRoundtripThroughSerialization_Works()
-    {
-        var model = new Subscriptions::Price
-        {
-            Amount = 0,
-            Currency = Subscriptions::PriceCurrency.Usd,
-        };
-
-        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::Price>(
-            element,
-            ModelBase.SerializerOptions
-        );
-        Assert.NotNull(deserialized);
-
-        double expectedAmount = 0;
-        ApiEnum<string, Subscriptions::PriceCurrency> expectedCurrency =
-            Subscriptions::PriceCurrency.Usd;
-
-        Assert.Equal(expectedAmount, deserialized.Amount);
-        Assert.Equal(expectedCurrency, deserialized.Currency);
-    }
-
-    [Fact]
-    public void Validation_Works()
-    {
-        var model = new Subscriptions::Price
-        {
-            Amount = 0,
-            Currency = Subscriptions::PriceCurrency.Usd,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
-    {
-        var model = new Subscriptions::Price { Amount = 0 };
-
-        Assert.Null(model.Currency);
-        Assert.False(model.RawData.ContainsKey("currency"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new Subscriptions::Price { Amount = 0 };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
-    {
-        var model = new Subscriptions::Price
-        {
-            Amount = 0,
-
-            // Null should be interpreted as omitted for these properties
-            Currency = null,
-        };
-
-        Assert.Null(model.Currency);
-        Assert.False(model.RawData.ContainsKey("currency"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new Subscriptions::Price
-        {
-            Amount = 0,
-
-            // Null should be interpreted as omitted for these properties
-            Currency = null,
-        };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void CopyConstructor_Works()
-    {
-        var model = new Subscriptions::Price
-        {
-            Amount = 0,
-            Currency = Subscriptions::PriceCurrency.Usd,
-        };
-
-        Subscriptions::Price copied = new(model);
-
-        Assert.Equal(model, copied);
-    }
-}
-
-public class PriceCurrencyTest : TestBase
-{
-    [Theory]
-    [InlineData(Subscriptions::PriceCurrency.Usd)]
-    [InlineData(Subscriptions::PriceCurrency.Aed)]
-    [InlineData(Subscriptions::PriceCurrency.All)]
-    [InlineData(Subscriptions::PriceCurrency.Amd)]
-    [InlineData(Subscriptions::PriceCurrency.Ang)]
-    [InlineData(Subscriptions::PriceCurrency.Aud)]
-    [InlineData(Subscriptions::PriceCurrency.Awg)]
-    [InlineData(Subscriptions::PriceCurrency.Azn)]
-    [InlineData(Subscriptions::PriceCurrency.Bam)]
-    [InlineData(Subscriptions::PriceCurrency.Bbd)]
-    [InlineData(Subscriptions::PriceCurrency.Bdt)]
-    [InlineData(Subscriptions::PriceCurrency.Bgn)]
-    [InlineData(Subscriptions::PriceCurrency.Bif)]
-    [InlineData(Subscriptions::PriceCurrency.Bmd)]
-    [InlineData(Subscriptions::PriceCurrency.Bnd)]
-    [InlineData(Subscriptions::PriceCurrency.Bsd)]
-    [InlineData(Subscriptions::PriceCurrency.Bwp)]
-    [InlineData(Subscriptions::PriceCurrency.Byn)]
-    [InlineData(Subscriptions::PriceCurrency.Bzd)]
-    [InlineData(Subscriptions::PriceCurrency.Brl)]
-    [InlineData(Subscriptions::PriceCurrency.Cad)]
-    [InlineData(Subscriptions::PriceCurrency.Cdf)]
-    [InlineData(Subscriptions::PriceCurrency.Chf)]
-    [InlineData(Subscriptions::PriceCurrency.Cny)]
-    [InlineData(Subscriptions::PriceCurrency.Czk)]
-    [InlineData(Subscriptions::PriceCurrency.Dkk)]
-    [InlineData(Subscriptions::PriceCurrency.Dop)]
-    [InlineData(Subscriptions::PriceCurrency.Dzd)]
-    [InlineData(Subscriptions::PriceCurrency.Egp)]
-    [InlineData(Subscriptions::PriceCurrency.Etb)]
-    [InlineData(Subscriptions::PriceCurrency.Eur)]
-    [InlineData(Subscriptions::PriceCurrency.Fjd)]
-    [InlineData(Subscriptions::PriceCurrency.Gbp)]
-    [InlineData(Subscriptions::PriceCurrency.Gel)]
-    [InlineData(Subscriptions::PriceCurrency.Gip)]
-    [InlineData(Subscriptions::PriceCurrency.Gmd)]
-    [InlineData(Subscriptions::PriceCurrency.Gyd)]
-    [InlineData(Subscriptions::PriceCurrency.Hkd)]
-    [InlineData(Subscriptions::PriceCurrency.Hrk)]
-    [InlineData(Subscriptions::PriceCurrency.Htg)]
-    [InlineData(Subscriptions::PriceCurrency.Idr)]
-    [InlineData(Subscriptions::PriceCurrency.Ils)]
-    [InlineData(Subscriptions::PriceCurrency.Inr)]
-    [InlineData(Subscriptions::PriceCurrency.Isk)]
-    [InlineData(Subscriptions::PriceCurrency.Jmd)]
-    [InlineData(Subscriptions::PriceCurrency.Jpy)]
-    [InlineData(Subscriptions::PriceCurrency.Kes)]
-    [InlineData(Subscriptions::PriceCurrency.Kgs)]
-    [InlineData(Subscriptions::PriceCurrency.Khr)]
-    [InlineData(Subscriptions::PriceCurrency.Kmf)]
-    [InlineData(Subscriptions::PriceCurrency.Krw)]
-    [InlineData(Subscriptions::PriceCurrency.Kyd)]
-    [InlineData(Subscriptions::PriceCurrency.Kzt)]
-    [InlineData(Subscriptions::PriceCurrency.Lbp)]
-    [InlineData(Subscriptions::PriceCurrency.Lkr)]
-    [InlineData(Subscriptions::PriceCurrency.Lrd)]
-    [InlineData(Subscriptions::PriceCurrency.Lsl)]
-    [InlineData(Subscriptions::PriceCurrency.Mad)]
-    [InlineData(Subscriptions::PriceCurrency.Mdl)]
-    [InlineData(Subscriptions::PriceCurrency.Mga)]
-    [InlineData(Subscriptions::PriceCurrency.Mkd)]
-    [InlineData(Subscriptions::PriceCurrency.Mmk)]
-    [InlineData(Subscriptions::PriceCurrency.Mnt)]
-    [InlineData(Subscriptions::PriceCurrency.Mop)]
-    [InlineData(Subscriptions::PriceCurrency.Mro)]
-    [InlineData(Subscriptions::PriceCurrency.Mvr)]
-    [InlineData(Subscriptions::PriceCurrency.Mwk)]
-    [InlineData(Subscriptions::PriceCurrency.Mxn)]
-    [InlineData(Subscriptions::PriceCurrency.Myr)]
-    [InlineData(Subscriptions::PriceCurrency.Mzn)]
-    [InlineData(Subscriptions::PriceCurrency.Nad)]
-    [InlineData(Subscriptions::PriceCurrency.Ngn)]
-    [InlineData(Subscriptions::PriceCurrency.Nok)]
-    [InlineData(Subscriptions::PriceCurrency.Npr)]
-    [InlineData(Subscriptions::PriceCurrency.Nzd)]
-    [InlineData(Subscriptions::PriceCurrency.Pgk)]
-    [InlineData(Subscriptions::PriceCurrency.Php)]
-    [InlineData(Subscriptions::PriceCurrency.Pkr)]
-    [InlineData(Subscriptions::PriceCurrency.Pln)]
-    [InlineData(Subscriptions::PriceCurrency.Qar)]
-    [InlineData(Subscriptions::PriceCurrency.Ron)]
-    [InlineData(Subscriptions::PriceCurrency.Rsd)]
-    [InlineData(Subscriptions::PriceCurrency.Rub)]
-    [InlineData(Subscriptions::PriceCurrency.Rwf)]
-    [InlineData(Subscriptions::PriceCurrency.Sar)]
-    [InlineData(Subscriptions::PriceCurrency.Sbd)]
-    [InlineData(Subscriptions::PriceCurrency.Scr)]
-    [InlineData(Subscriptions::PriceCurrency.Sek)]
-    [InlineData(Subscriptions::PriceCurrency.Sgd)]
-    [InlineData(Subscriptions::PriceCurrency.Sle)]
-    [InlineData(Subscriptions::PriceCurrency.Sll)]
-    [InlineData(Subscriptions::PriceCurrency.Sos)]
-    [InlineData(Subscriptions::PriceCurrency.Szl)]
-    [InlineData(Subscriptions::PriceCurrency.Thb)]
-    [InlineData(Subscriptions::PriceCurrency.Tjs)]
-    [InlineData(Subscriptions::PriceCurrency.Top)]
-    [InlineData(Subscriptions::PriceCurrency.Try)]
-    [InlineData(Subscriptions::PriceCurrency.Ttd)]
-    [InlineData(Subscriptions::PriceCurrency.Tzs)]
-    [InlineData(Subscriptions::PriceCurrency.Uah)]
-    [InlineData(Subscriptions::PriceCurrency.Uzs)]
-    [InlineData(Subscriptions::PriceCurrency.Vnd)]
-    [InlineData(Subscriptions::PriceCurrency.Vuv)]
-    [InlineData(Subscriptions::PriceCurrency.Wst)]
-    [InlineData(Subscriptions::PriceCurrency.Xaf)]
-    [InlineData(Subscriptions::PriceCurrency.Xcd)]
-    [InlineData(Subscriptions::PriceCurrency.Yer)]
-    [InlineData(Subscriptions::PriceCurrency.Zar)]
-    [InlineData(Subscriptions::PriceCurrency.Zmw)]
-    [InlineData(Subscriptions::PriceCurrency.Clp)]
-    [InlineData(Subscriptions::PriceCurrency.Djf)]
-    [InlineData(Subscriptions::PriceCurrency.Gnf)]
-    [InlineData(Subscriptions::PriceCurrency.Ugx)]
-    [InlineData(Subscriptions::PriceCurrency.Pyg)]
-    [InlineData(Subscriptions::PriceCurrency.Xof)]
-    [InlineData(Subscriptions::PriceCurrency.Xpf)]
-    public void Validation_Works(Subscriptions::PriceCurrency rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Subscriptions::PriceCurrency> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::PriceCurrency>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(Subscriptions::PriceCurrency.Usd)]
-    [InlineData(Subscriptions::PriceCurrency.Aed)]
-    [InlineData(Subscriptions::PriceCurrency.All)]
-    [InlineData(Subscriptions::PriceCurrency.Amd)]
-    [InlineData(Subscriptions::PriceCurrency.Ang)]
-    [InlineData(Subscriptions::PriceCurrency.Aud)]
-    [InlineData(Subscriptions::PriceCurrency.Awg)]
-    [InlineData(Subscriptions::PriceCurrency.Azn)]
-    [InlineData(Subscriptions::PriceCurrency.Bam)]
-    [InlineData(Subscriptions::PriceCurrency.Bbd)]
-    [InlineData(Subscriptions::PriceCurrency.Bdt)]
-    [InlineData(Subscriptions::PriceCurrency.Bgn)]
-    [InlineData(Subscriptions::PriceCurrency.Bif)]
-    [InlineData(Subscriptions::PriceCurrency.Bmd)]
-    [InlineData(Subscriptions::PriceCurrency.Bnd)]
-    [InlineData(Subscriptions::PriceCurrency.Bsd)]
-    [InlineData(Subscriptions::PriceCurrency.Bwp)]
-    [InlineData(Subscriptions::PriceCurrency.Byn)]
-    [InlineData(Subscriptions::PriceCurrency.Bzd)]
-    [InlineData(Subscriptions::PriceCurrency.Brl)]
-    [InlineData(Subscriptions::PriceCurrency.Cad)]
-    [InlineData(Subscriptions::PriceCurrency.Cdf)]
-    [InlineData(Subscriptions::PriceCurrency.Chf)]
-    [InlineData(Subscriptions::PriceCurrency.Cny)]
-    [InlineData(Subscriptions::PriceCurrency.Czk)]
-    [InlineData(Subscriptions::PriceCurrency.Dkk)]
-    [InlineData(Subscriptions::PriceCurrency.Dop)]
-    [InlineData(Subscriptions::PriceCurrency.Dzd)]
-    [InlineData(Subscriptions::PriceCurrency.Egp)]
-    [InlineData(Subscriptions::PriceCurrency.Etb)]
-    [InlineData(Subscriptions::PriceCurrency.Eur)]
-    [InlineData(Subscriptions::PriceCurrency.Fjd)]
-    [InlineData(Subscriptions::PriceCurrency.Gbp)]
-    [InlineData(Subscriptions::PriceCurrency.Gel)]
-    [InlineData(Subscriptions::PriceCurrency.Gip)]
-    [InlineData(Subscriptions::PriceCurrency.Gmd)]
-    [InlineData(Subscriptions::PriceCurrency.Gyd)]
-    [InlineData(Subscriptions::PriceCurrency.Hkd)]
-    [InlineData(Subscriptions::PriceCurrency.Hrk)]
-    [InlineData(Subscriptions::PriceCurrency.Htg)]
-    [InlineData(Subscriptions::PriceCurrency.Idr)]
-    [InlineData(Subscriptions::PriceCurrency.Ils)]
-    [InlineData(Subscriptions::PriceCurrency.Inr)]
-    [InlineData(Subscriptions::PriceCurrency.Isk)]
-    [InlineData(Subscriptions::PriceCurrency.Jmd)]
-    [InlineData(Subscriptions::PriceCurrency.Jpy)]
-    [InlineData(Subscriptions::PriceCurrency.Kes)]
-    [InlineData(Subscriptions::PriceCurrency.Kgs)]
-    [InlineData(Subscriptions::PriceCurrency.Khr)]
-    [InlineData(Subscriptions::PriceCurrency.Kmf)]
-    [InlineData(Subscriptions::PriceCurrency.Krw)]
-    [InlineData(Subscriptions::PriceCurrency.Kyd)]
-    [InlineData(Subscriptions::PriceCurrency.Kzt)]
-    [InlineData(Subscriptions::PriceCurrency.Lbp)]
-    [InlineData(Subscriptions::PriceCurrency.Lkr)]
-    [InlineData(Subscriptions::PriceCurrency.Lrd)]
-    [InlineData(Subscriptions::PriceCurrency.Lsl)]
-    [InlineData(Subscriptions::PriceCurrency.Mad)]
-    [InlineData(Subscriptions::PriceCurrency.Mdl)]
-    [InlineData(Subscriptions::PriceCurrency.Mga)]
-    [InlineData(Subscriptions::PriceCurrency.Mkd)]
-    [InlineData(Subscriptions::PriceCurrency.Mmk)]
-    [InlineData(Subscriptions::PriceCurrency.Mnt)]
-    [InlineData(Subscriptions::PriceCurrency.Mop)]
-    [InlineData(Subscriptions::PriceCurrency.Mro)]
-    [InlineData(Subscriptions::PriceCurrency.Mvr)]
-    [InlineData(Subscriptions::PriceCurrency.Mwk)]
-    [InlineData(Subscriptions::PriceCurrency.Mxn)]
-    [InlineData(Subscriptions::PriceCurrency.Myr)]
-    [InlineData(Subscriptions::PriceCurrency.Mzn)]
-    [InlineData(Subscriptions::PriceCurrency.Nad)]
-    [InlineData(Subscriptions::PriceCurrency.Ngn)]
-    [InlineData(Subscriptions::PriceCurrency.Nok)]
-    [InlineData(Subscriptions::PriceCurrency.Npr)]
-    [InlineData(Subscriptions::PriceCurrency.Nzd)]
-    [InlineData(Subscriptions::PriceCurrency.Pgk)]
-    [InlineData(Subscriptions::PriceCurrency.Php)]
-    [InlineData(Subscriptions::PriceCurrency.Pkr)]
-    [InlineData(Subscriptions::PriceCurrency.Pln)]
-    [InlineData(Subscriptions::PriceCurrency.Qar)]
-    [InlineData(Subscriptions::PriceCurrency.Ron)]
-    [InlineData(Subscriptions::PriceCurrency.Rsd)]
-    [InlineData(Subscriptions::PriceCurrency.Rub)]
-    [InlineData(Subscriptions::PriceCurrency.Rwf)]
-    [InlineData(Subscriptions::PriceCurrency.Sar)]
-    [InlineData(Subscriptions::PriceCurrency.Sbd)]
-    [InlineData(Subscriptions::PriceCurrency.Scr)]
-    [InlineData(Subscriptions::PriceCurrency.Sek)]
-    [InlineData(Subscriptions::PriceCurrency.Sgd)]
-    [InlineData(Subscriptions::PriceCurrency.Sle)]
-    [InlineData(Subscriptions::PriceCurrency.Sll)]
-    [InlineData(Subscriptions::PriceCurrency.Sos)]
-    [InlineData(Subscriptions::PriceCurrency.Szl)]
-    [InlineData(Subscriptions::PriceCurrency.Thb)]
-    [InlineData(Subscriptions::PriceCurrency.Tjs)]
-    [InlineData(Subscriptions::PriceCurrency.Top)]
-    [InlineData(Subscriptions::PriceCurrency.Try)]
-    [InlineData(Subscriptions::PriceCurrency.Ttd)]
-    [InlineData(Subscriptions::PriceCurrency.Tzs)]
-    [InlineData(Subscriptions::PriceCurrency.Uah)]
-    [InlineData(Subscriptions::PriceCurrency.Uzs)]
-    [InlineData(Subscriptions::PriceCurrency.Vnd)]
-    [InlineData(Subscriptions::PriceCurrency.Vuv)]
-    [InlineData(Subscriptions::PriceCurrency.Wst)]
-    [InlineData(Subscriptions::PriceCurrency.Xaf)]
-    [InlineData(Subscriptions::PriceCurrency.Xcd)]
-    [InlineData(Subscriptions::PriceCurrency.Yer)]
-    [InlineData(Subscriptions::PriceCurrency.Zar)]
-    [InlineData(Subscriptions::PriceCurrency.Zmw)]
-    [InlineData(Subscriptions::PriceCurrency.Clp)]
-    [InlineData(Subscriptions::PriceCurrency.Djf)]
-    [InlineData(Subscriptions::PriceCurrency.Gnf)]
-    [InlineData(Subscriptions::PriceCurrency.Ugx)]
-    [InlineData(Subscriptions::PriceCurrency.Pyg)]
-    [InlineData(Subscriptions::PriceCurrency.Xof)]
-    [InlineData(Subscriptions::PriceCurrency.Xpf)]
-    public void SerializationRoundtrip_Works(Subscriptions::PriceCurrency rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Subscriptions::PriceCurrency> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, Subscriptions::PriceCurrency>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::PriceCurrency>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, Subscriptions::PriceCurrency>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-}
-
-public class ScheduleStrategyTest : TestBase
-{
-    [Theory]
-    [InlineData(Subscriptions::ScheduleStrategy.EndOfBillingPeriod)]
-    [InlineData(Subscriptions::ScheduleStrategy.EndOfBillingMonth)]
-    [InlineData(Subscriptions::ScheduleStrategy.Immediate)]
-    public void Validation_Works(Subscriptions::ScheduleStrategy rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Subscriptions::ScheduleStrategy> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::ScheduleStrategy>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(Subscriptions::ScheduleStrategy.EndOfBillingPeriod)]
-    [InlineData(Subscriptions::ScheduleStrategy.EndOfBillingMonth)]
-    [InlineData(Subscriptions::ScheduleStrategy.Immediate)]
-    public void SerializationRoundtrip_Works(Subscriptions::ScheduleStrategy rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Subscriptions::ScheduleStrategy> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, Subscriptions::ScheduleStrategy>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::ScheduleStrategy>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, Subscriptions::ScheduleStrategy>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-}
-
-public class SubscriptionEntitlementTest : TestBase
-{
-    [Fact]
-    public void FieldRoundtrip_Works()
-    {
-        var model = new Subscriptions::SubscriptionEntitlement
+        Subscriptions::Entitlement value = new Subscriptions::Feature()
         {
             ID = "id",
-            FeatureID = "featureId",
+            HasSoftLimit = true,
+            HasUnlimitedUsage = true,
+            MonthlyResetPeriodConfiguration = new(Subscriptions::AccordingTo.SubscriptionStart),
+            ResetPeriod = Subscriptions::ResetPeriod.Year,
+            UsageLimit = 0,
+            WeeklyResetPeriodConfiguration = new(
+                Subscriptions::WeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+            YearlyResetPeriodConfiguration = new(
+                Subscriptions::YearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+        };
+        value.Validate();
+    }
+
+    [Fact]
+    public void CreditValidationWorks()
+    {
+        Subscriptions::Entitlement value = new Subscriptions::Credit()
+        {
+            ID = "id",
+            Amount = 1,
+            Cadence = Subscriptions::Cadence.Month,
+        };
+        value.Validate();
+    }
+
+    [Fact]
+    public void FeatureSerializationRoundtripWorks()
+    {
+        Subscriptions::Entitlement value = new Subscriptions::Feature()
+        {
+            ID = "id",
+            HasSoftLimit = true,
+            HasUnlimitedUsage = true,
+            MonthlyResetPeriodConfiguration = new(Subscriptions::AccordingTo.SubscriptionStart),
+            ResetPeriod = Subscriptions::ResetPeriod.Year,
+            UsageLimit = 0,
+            WeeklyResetPeriodConfiguration = new(
+                Subscriptions::WeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+            YearlyResetPeriodConfiguration = new(
+                Subscriptions::YearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Subscriptions::Entitlement>(
+            element,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void CreditSerializationRoundtripWorks()
+    {
+        Subscriptions::Entitlement value = new Subscriptions::Credit()
+        {
+            ID = "id",
+            Amount = 1,
+            Cadence = Subscriptions::Cadence.Month,
+        };
+        string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Subscriptions::Entitlement>(
+            element,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class FeatureTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new Subscriptions::Feature
+        {
+            ID = "id",
             HasSoftLimit = true,
             HasUnlimitedUsage = true,
             MonthlyResetPeriodConfiguration = new(Subscriptions::AccordingTo.SubscriptionStart),
@@ -4087,14 +2938,14 @@ public class SubscriptionEntitlementTest : TestBase
         };
 
         string expectedID = "id";
-        string expectedFeatureID = "featureId";
+        JsonElement expectedType = JsonSerializer.SerializeToElement("FEATURE");
         bool expectedHasSoftLimit = true;
         bool expectedHasUnlimitedUsage = true;
         Subscriptions::MonthlyResetPeriodConfiguration expectedMonthlyResetPeriodConfiguration =
             new(Subscriptions::AccordingTo.SubscriptionStart);
         ApiEnum<string, Subscriptions::ResetPeriod> expectedResetPeriod =
             Subscriptions::ResetPeriod.Year;
-        double expectedUsageLimit = 0;
+        long expectedUsageLimit = 0;
         Subscriptions::WeeklyResetPeriodConfiguration expectedWeeklyResetPeriodConfiguration = new(
             Subscriptions::WeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
         );
@@ -4103,7 +2954,7 @@ public class SubscriptionEntitlementTest : TestBase
         );
 
         Assert.Equal(expectedID, model.ID);
-        Assert.Equal(expectedFeatureID, model.FeatureID);
+        Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
         Assert.Equal(expectedHasSoftLimit, model.HasSoftLimit);
         Assert.Equal(expectedHasUnlimitedUsage, model.HasUnlimitedUsage);
         Assert.Equal(
@@ -4119,10 +2970,9 @@ public class SubscriptionEntitlementTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Subscriptions::SubscriptionEntitlement
+        var model = new Subscriptions::Feature
         {
             ID = "id",
-            FeatureID = "featureId",
             HasSoftLimit = true,
             HasUnlimitedUsage = true,
             MonthlyResetPeriodConfiguration = new(Subscriptions::AccordingTo.SubscriptionStart),
@@ -4137,7 +2987,7 @@ public class SubscriptionEntitlementTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::SubscriptionEntitlement>(
+        var deserialized = JsonSerializer.Deserialize<Subscriptions::Feature>(
             json,
             ModelBase.SerializerOptions
         );
@@ -4148,10 +2998,9 @@ public class SubscriptionEntitlementTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Subscriptions::SubscriptionEntitlement
+        var model = new Subscriptions::Feature
         {
             ID = "id",
-            FeatureID = "featureId",
             HasSoftLimit = true,
             HasUnlimitedUsage = true,
             MonthlyResetPeriodConfiguration = new(Subscriptions::AccordingTo.SubscriptionStart),
@@ -4166,21 +3015,21 @@ public class SubscriptionEntitlementTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Subscriptions::SubscriptionEntitlement>(
+        var deserialized = JsonSerializer.Deserialize<Subscriptions::Feature>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
-        string expectedFeatureID = "featureId";
+        JsonElement expectedType = JsonSerializer.SerializeToElement("FEATURE");
         bool expectedHasSoftLimit = true;
         bool expectedHasUnlimitedUsage = true;
         Subscriptions::MonthlyResetPeriodConfiguration expectedMonthlyResetPeriodConfiguration =
             new(Subscriptions::AccordingTo.SubscriptionStart);
         ApiEnum<string, Subscriptions::ResetPeriod> expectedResetPeriod =
             Subscriptions::ResetPeriod.Year;
-        double expectedUsageLimit = 0;
+        long expectedUsageLimit = 0;
         Subscriptions::WeeklyResetPeriodConfiguration expectedWeeklyResetPeriodConfiguration = new(
             Subscriptions::WeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
         );
@@ -4189,7 +3038,7 @@ public class SubscriptionEntitlementTest : TestBase
         );
 
         Assert.Equal(expectedID, deserialized.ID);
-        Assert.Equal(expectedFeatureID, deserialized.FeatureID);
+        Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
         Assert.Equal(expectedHasSoftLimit, deserialized.HasSoftLimit);
         Assert.Equal(expectedHasUnlimitedUsage, deserialized.HasUnlimitedUsage);
         Assert.Equal(
@@ -4211,10 +3060,9 @@ public class SubscriptionEntitlementTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Subscriptions::SubscriptionEntitlement
+        var model = new Subscriptions::Feature
         {
             ID = "id",
-            FeatureID = "featureId",
             HasSoftLimit = true,
             HasUnlimitedUsage = true,
             MonthlyResetPeriodConfiguration = new(Subscriptions::AccordingTo.SubscriptionStart),
@@ -4234,32 +3082,42 @@ public class SubscriptionEntitlementTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Subscriptions::SubscriptionEntitlement { };
+        var model = new Subscriptions::Feature
+        {
+            ID = "id",
+            MonthlyResetPeriodConfiguration = new(Subscriptions::AccordingTo.SubscriptionStart),
+            WeeklyResetPeriodConfiguration = new(
+                Subscriptions::WeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+            YearlyResetPeriodConfiguration = new(
+                Subscriptions::YearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+        };
 
-        Assert.Null(model.ID);
-        Assert.False(model.RawData.ContainsKey("id"));
-        Assert.Null(model.FeatureID);
-        Assert.False(model.RawData.ContainsKey("featureId"));
         Assert.Null(model.HasSoftLimit);
         Assert.False(model.RawData.ContainsKey("hasSoftLimit"));
         Assert.Null(model.HasUnlimitedUsage);
         Assert.False(model.RawData.ContainsKey("hasUnlimitedUsage"));
-        Assert.Null(model.MonthlyResetPeriodConfiguration);
-        Assert.False(model.RawData.ContainsKey("monthlyResetPeriodConfiguration"));
         Assert.Null(model.ResetPeriod);
         Assert.False(model.RawData.ContainsKey("resetPeriod"));
         Assert.Null(model.UsageLimit);
         Assert.False(model.RawData.ContainsKey("usageLimit"));
-        Assert.Null(model.WeeklyResetPeriodConfiguration);
-        Assert.False(model.RawData.ContainsKey("weeklyResetPeriodConfiguration"));
-        Assert.Null(model.YearlyResetPeriodConfiguration);
-        Assert.False(model.RawData.ContainsKey("yearlyResetPeriodConfiguration"));
     }
 
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Subscriptions::SubscriptionEntitlement { };
+        var model = new Subscriptions::Feature
+        {
+            ID = "id",
+            MonthlyResetPeriodConfiguration = new(Subscriptions::AccordingTo.SubscriptionStart),
+            WeeklyResetPeriodConfiguration = new(
+                Subscriptions::WeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+            YearlyResetPeriodConfiguration = new(
+                Subscriptions::YearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+        };
 
         model.Validate();
     }
@@ -4267,34 +3125,72 @@ public class SubscriptionEntitlementTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new Subscriptions::SubscriptionEntitlement
+        var model = new Subscriptions::Feature
         {
+            ID = "id",
+            MonthlyResetPeriodConfiguration = new(Subscriptions::AccordingTo.SubscriptionStart),
+            WeeklyResetPeriodConfiguration = new(
+                Subscriptions::WeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+            YearlyResetPeriodConfiguration = new(
+                Subscriptions::YearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+
             // Null should be interpreted as omitted for these properties
-            ID = null,
-            FeatureID = null,
             HasSoftLimit = null,
             HasUnlimitedUsage = null,
-            MonthlyResetPeriodConfiguration = null,
             ResetPeriod = null,
             UsageLimit = null,
-            WeeklyResetPeriodConfiguration = null,
-            YearlyResetPeriodConfiguration = null,
         };
 
-        Assert.Null(model.ID);
-        Assert.False(model.RawData.ContainsKey("id"));
-        Assert.Null(model.FeatureID);
-        Assert.False(model.RawData.ContainsKey("featureId"));
         Assert.Null(model.HasSoftLimit);
         Assert.False(model.RawData.ContainsKey("hasSoftLimit"));
         Assert.Null(model.HasUnlimitedUsage);
         Assert.False(model.RawData.ContainsKey("hasUnlimitedUsage"));
-        Assert.Null(model.MonthlyResetPeriodConfiguration);
-        Assert.False(model.RawData.ContainsKey("monthlyResetPeriodConfiguration"));
         Assert.Null(model.ResetPeriod);
         Assert.False(model.RawData.ContainsKey("resetPeriod"));
         Assert.Null(model.UsageLimit);
         Assert.False(model.RawData.ContainsKey("usageLimit"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new Subscriptions::Feature
+        {
+            ID = "id",
+            MonthlyResetPeriodConfiguration = new(Subscriptions::AccordingTo.SubscriptionStart),
+            WeeklyResetPeriodConfiguration = new(
+                Subscriptions::WeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+            YearlyResetPeriodConfiguration = new(
+                Subscriptions::YearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+            ),
+
+            // Null should be interpreted as omitted for these properties
+            HasSoftLimit = null,
+            HasUnlimitedUsage = null,
+            ResetPeriod = null,
+            UsageLimit = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new Subscriptions::Feature
+        {
+            ID = "id",
+            HasSoftLimit = true,
+            HasUnlimitedUsage = true,
+            ResetPeriod = Subscriptions::ResetPeriod.Year,
+            UsageLimit = 0,
+        };
+
+        Assert.Null(model.MonthlyResetPeriodConfiguration);
+        Assert.False(model.RawData.ContainsKey("monthlyResetPeriodConfiguration"));
         Assert.Null(model.WeeklyResetPeriodConfiguration);
         Assert.False(model.RawData.ContainsKey("weeklyResetPeriodConfiguration"));
         Assert.Null(model.YearlyResetPeriodConfiguration);
@@ -4302,18 +3198,56 @@ public class SubscriptionEntitlementTest : TestBase
     }
 
     [Fact]
-    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
+    public void OptionalNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Subscriptions::SubscriptionEntitlement
+        var model = new Subscriptions::Feature
         {
-            // Null should be interpreted as omitted for these properties
-            ID = null,
-            FeatureID = null,
-            HasSoftLimit = null,
-            HasUnlimitedUsage = null,
+            ID = "id",
+            HasSoftLimit = true,
+            HasUnlimitedUsage = true,
+            ResetPeriod = Subscriptions::ResetPeriod.Year,
+            UsageLimit = 0,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new Subscriptions::Feature
+        {
+            ID = "id",
+            HasSoftLimit = true,
+            HasUnlimitedUsage = true,
+            ResetPeriod = Subscriptions::ResetPeriod.Year,
+            UsageLimit = 0,
+
             MonthlyResetPeriodConfiguration = null,
-            ResetPeriod = null,
-            UsageLimit = null,
+            WeeklyResetPeriodConfiguration = null,
+            YearlyResetPeriodConfiguration = null,
+        };
+
+        Assert.Null(model.MonthlyResetPeriodConfiguration);
+        Assert.True(model.RawData.ContainsKey("monthlyResetPeriodConfiguration"));
+        Assert.Null(model.WeeklyResetPeriodConfiguration);
+        Assert.True(model.RawData.ContainsKey("weeklyResetPeriodConfiguration"));
+        Assert.Null(model.YearlyResetPeriodConfiguration);
+        Assert.True(model.RawData.ContainsKey("yearlyResetPeriodConfiguration"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new Subscriptions::Feature
+        {
+            ID = "id",
+            HasSoftLimit = true,
+            HasUnlimitedUsage = true,
+            ResetPeriod = Subscriptions::ResetPeriod.Year,
+            UsageLimit = 0,
+
+            MonthlyResetPeriodConfiguration = null,
             WeeklyResetPeriodConfiguration = null,
             YearlyResetPeriodConfiguration = null,
         };
@@ -4324,10 +3258,9 @@ public class SubscriptionEntitlementTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Subscriptions::SubscriptionEntitlement
+        var model = new Subscriptions::Feature
         {
             ID = "id",
-            FeatureID = "featureId",
             HasSoftLimit = true,
             HasUnlimitedUsage = true,
             MonthlyResetPeriodConfiguration = new(Subscriptions::AccordingTo.SubscriptionStart),
@@ -4341,7 +3274,7 @@ public class SubscriptionEntitlementTest : TestBase
             ),
         };
 
-        Subscriptions::SubscriptionEntitlement copied = new(model);
+        Subscriptions::Feature copied = new(model);
 
         Assert.Equal(model, copied);
     }
@@ -4850,6 +3783,1117 @@ public class YearlyResetPeriodConfigurationAccordingToTest : TestBase
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
             ApiEnum<string, Subscriptions::YearlyResetPeriodConfigurationAccordingTo>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class CreditTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new Subscriptions::Credit
+        {
+            ID = "id",
+            Amount = 1,
+            Cadence = Subscriptions::Cadence.Month,
+        };
+
+        string expectedID = "id";
+        double expectedAmount = 1;
+        ApiEnum<string, Subscriptions::Cadence> expectedCadence = Subscriptions::Cadence.Month;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("CREDIT");
+
+        Assert.Equal(expectedID, model.ID);
+        Assert.Equal(expectedAmount, model.Amount);
+        Assert.Equal(expectedCadence, model.Cadence);
+        Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new Subscriptions::Credit
+        {
+            ID = "id",
+            Amount = 1,
+            Cadence = Subscriptions::Cadence.Month,
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Subscriptions::Credit>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new Subscriptions::Credit
+        {
+            ID = "id",
+            Amount = 1,
+            Cadence = Subscriptions::Cadence.Month,
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Subscriptions::Credit>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        string expectedID = "id";
+        double expectedAmount = 1;
+        ApiEnum<string, Subscriptions::Cadence> expectedCadence = Subscriptions::Cadence.Month;
+        JsonElement expectedType = JsonSerializer.SerializeToElement("CREDIT");
+
+        Assert.Equal(expectedID, deserialized.ID);
+        Assert.Equal(expectedAmount, deserialized.Amount);
+        Assert.Equal(expectedCadence, deserialized.Cadence);
+        Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new Subscriptions::Credit
+        {
+            ID = "id",
+            Amount = 1,
+            Cadence = Subscriptions::Cadence.Month,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Subscriptions::Credit
+        {
+            ID = "id",
+            Amount = 1,
+            Cadence = Subscriptions::Cadence.Month,
+        };
+
+        Subscriptions::Credit copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class CadenceTest : TestBase
+{
+    [Theory]
+    [InlineData(Subscriptions::Cadence.Month)]
+    [InlineData(Subscriptions::Cadence.Year)]
+    public void Validation_Works(Subscriptions::Cadence rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Subscriptions::Cadence> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::Cadence>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(Subscriptions::Cadence.Month)]
+    [InlineData(Subscriptions::Cadence.Year)]
+    public void SerializationRoundtrip_Works(Subscriptions::Cadence rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Subscriptions::Cadence> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::Cadence>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::Cadence>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::Cadence>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class MinimumSpendTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new Subscriptions::MinimumSpend
+        {
+            Amount = 0,
+            Currency = Subscriptions::MinimumSpendCurrency.Usd,
+        };
+
+        double expectedAmount = 0;
+        ApiEnum<string, Subscriptions::MinimumSpendCurrency> expectedCurrency =
+            Subscriptions::MinimumSpendCurrency.Usd;
+
+        Assert.Equal(expectedAmount, model.Amount);
+        Assert.Equal(expectedCurrency, model.Currency);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new Subscriptions::MinimumSpend
+        {
+            Amount = 0,
+            Currency = Subscriptions::MinimumSpendCurrency.Usd,
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Subscriptions::MinimumSpend>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new Subscriptions::MinimumSpend
+        {
+            Amount = 0,
+            Currency = Subscriptions::MinimumSpendCurrency.Usd,
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Subscriptions::MinimumSpend>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        double expectedAmount = 0;
+        ApiEnum<string, Subscriptions::MinimumSpendCurrency> expectedCurrency =
+            Subscriptions::MinimumSpendCurrency.Usd;
+
+        Assert.Equal(expectedAmount, deserialized.Amount);
+        Assert.Equal(expectedCurrency, deserialized.Currency);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new Subscriptions::MinimumSpend
+        {
+            Amount = 0,
+            Currency = Subscriptions::MinimumSpendCurrency.Usd,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new Subscriptions::MinimumSpend { };
+
+        Assert.Null(model.Amount);
+        Assert.False(model.RawData.ContainsKey("amount"));
+        Assert.Null(model.Currency);
+        Assert.False(model.RawData.ContainsKey("currency"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new Subscriptions::MinimumSpend { };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
+    {
+        var model = new Subscriptions::MinimumSpend
+        {
+            // Null should be interpreted as omitted for these properties
+            Amount = null,
+            Currency = null,
+        };
+
+        Assert.Null(model.Amount);
+        Assert.False(model.RawData.ContainsKey("amount"));
+        Assert.Null(model.Currency);
+        Assert.False(model.RawData.ContainsKey("currency"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new Subscriptions::MinimumSpend
+        {
+            // Null should be interpreted as omitted for these properties
+            Amount = null,
+            Currency = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Subscriptions::MinimumSpend
+        {
+            Amount = 0,
+            Currency = Subscriptions::MinimumSpendCurrency.Usd,
+        };
+
+        Subscriptions::MinimumSpend copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class MinimumSpendCurrencyTest : TestBase
+{
+    [Theory]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Usd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Aed)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.All)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Amd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Ang)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Aud)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Awg)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Azn)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Bam)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Bbd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Bdt)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Bgn)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Bif)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Bmd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Bnd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Bsd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Bwp)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Byn)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Bzd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Brl)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Cad)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Cdf)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Chf)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Cny)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Czk)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Dkk)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Dop)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Dzd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Egp)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Etb)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Eur)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Fjd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Gbp)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Gel)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Gip)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Gmd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Gyd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Hkd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Hrk)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Htg)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Idr)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Ils)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Inr)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Isk)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Jmd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Jpy)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Kes)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Kgs)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Khr)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Kmf)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Krw)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Kyd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Kzt)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Lbp)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Lkr)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Lrd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Lsl)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Mad)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Mdl)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Mga)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Mkd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Mmk)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Mnt)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Mop)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Mro)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Mvr)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Mwk)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Mxn)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Myr)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Mzn)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Nad)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Ngn)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Nok)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Npr)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Nzd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Pgk)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Php)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Pkr)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Pln)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Qar)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Ron)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Rsd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Rub)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Rwf)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Sar)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Sbd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Scr)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Sek)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Sgd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Sle)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Sll)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Sos)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Szl)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Thb)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Tjs)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Top)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Try)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Ttd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Tzs)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Uah)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Uzs)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Vnd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Vuv)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Wst)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Xaf)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Xcd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Yer)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Zar)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Zmw)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Clp)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Djf)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Gnf)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Ugx)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Pyg)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Xof)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Xpf)]
+    public void Validation_Works(Subscriptions::MinimumSpendCurrency rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Subscriptions::MinimumSpendCurrency> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, Subscriptions::MinimumSpendCurrency>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Usd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Aed)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.All)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Amd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Ang)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Aud)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Awg)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Azn)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Bam)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Bbd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Bdt)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Bgn)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Bif)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Bmd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Bnd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Bsd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Bwp)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Byn)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Bzd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Brl)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Cad)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Cdf)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Chf)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Cny)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Czk)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Dkk)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Dop)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Dzd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Egp)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Etb)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Eur)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Fjd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Gbp)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Gel)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Gip)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Gmd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Gyd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Hkd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Hrk)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Htg)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Idr)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Ils)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Inr)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Isk)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Jmd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Jpy)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Kes)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Kgs)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Khr)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Kmf)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Krw)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Kyd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Kzt)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Lbp)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Lkr)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Lrd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Lsl)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Mad)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Mdl)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Mga)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Mkd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Mmk)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Mnt)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Mop)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Mro)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Mvr)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Mwk)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Mxn)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Myr)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Mzn)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Nad)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Ngn)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Nok)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Npr)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Nzd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Pgk)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Php)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Pkr)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Pln)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Qar)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Ron)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Rsd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Rub)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Rwf)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Sar)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Sbd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Scr)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Sek)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Sgd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Sle)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Sll)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Sos)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Szl)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Thb)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Tjs)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Top)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Try)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Ttd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Tzs)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Uah)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Uzs)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Vnd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Vuv)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Wst)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Xaf)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Xcd)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Yer)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Zar)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Zmw)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Clp)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Djf)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Gnf)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Ugx)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Pyg)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Xof)]
+    [InlineData(Subscriptions::MinimumSpendCurrency.Xpf)]
+    public void SerializationRoundtrip_Works(Subscriptions::MinimumSpendCurrency rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Subscriptions::MinimumSpendCurrency> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, Subscriptions::MinimumSpendCurrency>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, Subscriptions::MinimumSpendCurrency>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, Subscriptions::MinimumSpendCurrency>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class PriceOverrideTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new Subscriptions::PriceOverride
+        {
+            AddonID = "addonId",
+            Amount = 0,
+            BaseCharge = true,
+            Currency = Subscriptions::PriceOverrideCurrency.Usd,
+            CurrencyID = "currencyId",
+            FeatureID = "featureId",
+        };
+
+        string expectedAddonID = "addonId";
+        double expectedAmount = 0;
+        bool expectedBaseCharge = true;
+        ApiEnum<string, Subscriptions::PriceOverrideCurrency> expectedCurrency =
+            Subscriptions::PriceOverrideCurrency.Usd;
+        string expectedCurrencyID = "currencyId";
+        string expectedFeatureID = "featureId";
+
+        Assert.Equal(expectedAddonID, model.AddonID);
+        Assert.Equal(expectedAmount, model.Amount);
+        Assert.Equal(expectedBaseCharge, model.BaseCharge);
+        Assert.Equal(expectedCurrency, model.Currency);
+        Assert.Equal(expectedCurrencyID, model.CurrencyID);
+        Assert.Equal(expectedFeatureID, model.FeatureID);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new Subscriptions::PriceOverride
+        {
+            AddonID = "addonId",
+            Amount = 0,
+            BaseCharge = true,
+            Currency = Subscriptions::PriceOverrideCurrency.Usd,
+            CurrencyID = "currencyId",
+            FeatureID = "featureId",
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Subscriptions::PriceOverride>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new Subscriptions::PriceOverride
+        {
+            AddonID = "addonId",
+            Amount = 0,
+            BaseCharge = true,
+            Currency = Subscriptions::PriceOverrideCurrency.Usd,
+            CurrencyID = "currencyId",
+            FeatureID = "featureId",
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Subscriptions::PriceOverride>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        string expectedAddonID = "addonId";
+        double expectedAmount = 0;
+        bool expectedBaseCharge = true;
+        ApiEnum<string, Subscriptions::PriceOverrideCurrency> expectedCurrency =
+            Subscriptions::PriceOverrideCurrency.Usd;
+        string expectedCurrencyID = "currencyId";
+        string expectedFeatureID = "featureId";
+
+        Assert.Equal(expectedAddonID, deserialized.AddonID);
+        Assert.Equal(expectedAmount, deserialized.Amount);
+        Assert.Equal(expectedBaseCharge, deserialized.BaseCharge);
+        Assert.Equal(expectedCurrency, deserialized.Currency);
+        Assert.Equal(expectedCurrencyID, deserialized.CurrencyID);
+        Assert.Equal(expectedFeatureID, deserialized.FeatureID);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new Subscriptions::PriceOverride
+        {
+            AddonID = "addonId",
+            Amount = 0,
+            BaseCharge = true,
+            Currency = Subscriptions::PriceOverrideCurrency.Usd,
+            CurrencyID = "currencyId",
+            FeatureID = "featureId",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new Subscriptions::PriceOverride { };
+
+        Assert.Null(model.AddonID);
+        Assert.False(model.RawData.ContainsKey("addonId"));
+        Assert.Null(model.Amount);
+        Assert.False(model.RawData.ContainsKey("amount"));
+        Assert.Null(model.BaseCharge);
+        Assert.False(model.RawData.ContainsKey("baseCharge"));
+        Assert.Null(model.Currency);
+        Assert.False(model.RawData.ContainsKey("currency"));
+        Assert.Null(model.CurrencyID);
+        Assert.False(model.RawData.ContainsKey("currencyId"));
+        Assert.Null(model.FeatureID);
+        Assert.False(model.RawData.ContainsKey("featureId"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new Subscriptions::PriceOverride { };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
+    {
+        var model = new Subscriptions::PriceOverride
+        {
+            // Null should be interpreted as omitted for these properties
+            AddonID = null,
+            Amount = null,
+            BaseCharge = null,
+            Currency = null,
+            CurrencyID = null,
+            FeatureID = null,
+        };
+
+        Assert.Null(model.AddonID);
+        Assert.False(model.RawData.ContainsKey("addonId"));
+        Assert.Null(model.Amount);
+        Assert.False(model.RawData.ContainsKey("amount"));
+        Assert.Null(model.BaseCharge);
+        Assert.False(model.RawData.ContainsKey("baseCharge"));
+        Assert.Null(model.Currency);
+        Assert.False(model.RawData.ContainsKey("currency"));
+        Assert.Null(model.CurrencyID);
+        Assert.False(model.RawData.ContainsKey("currencyId"));
+        Assert.Null(model.FeatureID);
+        Assert.False(model.RawData.ContainsKey("featureId"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new Subscriptions::PriceOverride
+        {
+            // Null should be interpreted as omitted for these properties
+            AddonID = null,
+            Amount = null,
+            BaseCharge = null,
+            Currency = null,
+            CurrencyID = null,
+            FeatureID = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Subscriptions::PriceOverride
+        {
+            AddonID = "addonId",
+            Amount = 0,
+            BaseCharge = true,
+            Currency = Subscriptions::PriceOverrideCurrency.Usd,
+            CurrencyID = "currencyId",
+            FeatureID = "featureId",
+        };
+
+        Subscriptions::PriceOverride copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class PriceOverrideCurrencyTest : TestBase
+{
+    [Theory]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Usd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Aed)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.All)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Amd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Ang)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Aud)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Awg)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Azn)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Bam)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Bbd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Bdt)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Bgn)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Bif)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Bmd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Bnd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Bsd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Bwp)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Byn)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Bzd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Brl)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Cad)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Cdf)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Chf)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Cny)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Czk)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Dkk)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Dop)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Dzd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Egp)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Etb)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Eur)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Fjd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Gbp)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Gel)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Gip)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Gmd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Gyd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Hkd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Hrk)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Htg)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Idr)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Ils)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Inr)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Isk)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Jmd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Jpy)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Kes)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Kgs)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Khr)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Kmf)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Krw)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Kyd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Kzt)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Lbp)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Lkr)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Lrd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Lsl)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Mad)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Mdl)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Mga)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Mkd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Mmk)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Mnt)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Mop)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Mro)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Mvr)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Mwk)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Mxn)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Myr)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Mzn)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Nad)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Ngn)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Nok)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Npr)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Nzd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Pgk)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Php)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Pkr)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Pln)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Qar)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Ron)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Rsd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Rub)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Rwf)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Sar)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Sbd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Scr)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Sek)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Sgd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Sle)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Sll)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Sos)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Szl)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Thb)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Tjs)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Top)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Try)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Ttd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Tzs)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Uah)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Uzs)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Vnd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Vuv)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Wst)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Xaf)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Xcd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Yer)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Zar)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Zmw)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Clp)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Djf)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Gnf)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Ugx)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Pyg)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Xof)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Xpf)]
+    public void Validation_Works(Subscriptions::PriceOverrideCurrency rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Subscriptions::PriceOverrideCurrency> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, Subscriptions::PriceOverrideCurrency>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Usd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Aed)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.All)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Amd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Ang)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Aud)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Awg)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Azn)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Bam)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Bbd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Bdt)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Bgn)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Bif)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Bmd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Bnd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Bsd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Bwp)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Byn)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Bzd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Brl)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Cad)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Cdf)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Chf)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Cny)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Czk)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Dkk)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Dop)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Dzd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Egp)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Etb)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Eur)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Fjd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Gbp)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Gel)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Gip)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Gmd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Gyd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Hkd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Hrk)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Htg)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Idr)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Ils)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Inr)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Isk)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Jmd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Jpy)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Kes)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Kgs)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Khr)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Kmf)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Krw)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Kyd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Kzt)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Lbp)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Lkr)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Lrd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Lsl)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Mad)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Mdl)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Mga)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Mkd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Mmk)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Mnt)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Mop)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Mro)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Mvr)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Mwk)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Mxn)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Myr)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Mzn)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Nad)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Ngn)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Nok)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Npr)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Nzd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Pgk)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Php)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Pkr)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Pln)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Qar)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Ron)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Rsd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Rub)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Rwf)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Sar)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Sbd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Scr)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Sek)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Sgd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Sle)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Sll)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Sos)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Szl)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Thb)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Tjs)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Top)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Try)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Ttd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Tzs)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Uah)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Uzs)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Vnd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Vuv)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Wst)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Xaf)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Xcd)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Yer)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Zar)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Zmw)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Clp)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Djf)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Gnf)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Ugx)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Pyg)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Xof)]
+    [InlineData(Subscriptions::PriceOverrideCurrency.Xpf)]
+    public void SerializationRoundtrip_Works(Subscriptions::PriceOverrideCurrency rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Subscriptions::PriceOverrideCurrency> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, Subscriptions::PriceOverrideCurrency>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, Subscriptions::PriceOverrideCurrency>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, Subscriptions::PriceOverrideCurrency>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class ScheduleStrategyTest : TestBase
+{
+    [Theory]
+    [InlineData(Subscriptions::ScheduleStrategy.EndOfBillingPeriod)]
+    [InlineData(Subscriptions::ScheduleStrategy.EndOfBillingMonth)]
+    [InlineData(Subscriptions::ScheduleStrategy.Immediate)]
+    public void Validation_Works(Subscriptions::ScheduleStrategy rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Subscriptions::ScheduleStrategy> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::ScheduleStrategy>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(Subscriptions::ScheduleStrategy.EndOfBillingPeriod)]
+    [InlineData(Subscriptions::ScheduleStrategy.EndOfBillingMonth)]
+    [InlineData(Subscriptions::ScheduleStrategy.Immediate)]
+    public void SerializationRoundtrip_Works(Subscriptions::ScheduleStrategy rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Subscriptions::ScheduleStrategy> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, Subscriptions::ScheduleStrategy>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Subscriptions::ScheduleStrategy>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, Subscriptions::ScheduleStrategy>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);

@@ -1,11 +1,13 @@
-using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Stigg.Client.Core;
+using Stigg.Client.Exceptions;
+using System = System;
 
 namespace Stigg.Client.Models.V1.Subscriptions;
 
@@ -148,12 +150,14 @@ public record class SubscriptionListParams : ParamsBase
     /// <summary>
     /// Filter by pricing type. Supports comma-separated values for multiple types
     /// </summary>
-    public string? PricingType
+    public IReadOnlyList<ApiEnum<string, PricingType>>? PricingType
     {
         get
         {
             this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableClass<string>("pricingType");
+            return this._rawQueryData.GetNullableStruct<
+                ImmutableArray<ApiEnum<string, PricingType>>
+            >("pricingType");
         }
         init
         {
@@ -162,7 +166,10 @@ public record class SubscriptionListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData.Set("pricingType", value);
+            this._rawQueryData.Set<ImmutableArray<ApiEnum<string, PricingType>>?>(
+                "pricingType",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
         }
     }
 
@@ -190,12 +197,14 @@ public record class SubscriptionListParams : ParamsBase
     /// <summary>
     /// Filter by subscription status. Supports comma-separated values for multiple statuses
     /// </summary>
-    public string? Status
+    public IReadOnlyList<ApiEnum<string, Status>>? Status
     {
         get
         {
             this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableClass<string>("status");
+            return this._rawQueryData.GetNullableStruct<ImmutableArray<ApiEnum<string, Status>>>(
+                "status"
+            );
         }
         init
         {
@@ -204,7 +213,10 @@ public record class SubscriptionListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData.Set("status", value);
+            this._rawQueryData.Set<ImmutableArray<ApiEnum<string, Status>>?>(
+                "status",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
         }
     }
 
@@ -237,7 +249,7 @@ public record class SubscriptionListParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson{T}.FromRawUnchecked"/>
     public static SubscriptionListParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData
@@ -275,9 +287,11 @@ public record class SubscriptionListParams : ParamsBase
             && this._rawQueryData.Equals(other._rawQueryData);
     }
 
-    public override Uri Url(ClientOptions options)
+    public override System::Uri Url(ClientOptions options)
     {
-        return new UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/api/v1/subscriptions")
+        return new System::UriBuilder(
+            options.BaseUrl.ToString().TrimEnd('/') + "/api/v1/subscriptions"
+        )
         {
             Query = this.QueryString(options),
         }.Uri;
@@ -307,12 +321,12 @@ public sealed record class CreatedAt : JsonModel
     /// <summary>
     /// Greater than the specified createdAt value
     /// </summary>
-    public DateTimeOffset? Gt
+    public System::DateTimeOffset? Gt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<DateTimeOffset>("gt");
+            return this._rawData.GetNullableStruct<System::DateTimeOffset>("gt");
         }
         init
         {
@@ -328,12 +342,12 @@ public sealed record class CreatedAt : JsonModel
     /// <summary>
     /// Greater than or equal to the specified createdAt value
     /// </summary>
-    public DateTimeOffset? Gte
+    public System::DateTimeOffset? Gte
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<DateTimeOffset>("gte");
+            return this._rawData.GetNullableStruct<System::DateTimeOffset>("gte");
         }
         init
         {
@@ -349,12 +363,12 @@ public sealed record class CreatedAt : JsonModel
     /// <summary>
     /// Less than the specified createdAt value
     /// </summary>
-    public DateTimeOffset? Lt
+    public System::DateTimeOffset? Lt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<DateTimeOffset>("lt");
+            return this._rawData.GetNullableStruct<System::DateTimeOffset>("lt");
         }
         init
         {
@@ -370,12 +384,12 @@ public sealed record class CreatedAt : JsonModel
     /// <summary>
     /// Less than or equal to the specified createdAt value
     /// </summary>
-    public DateTimeOffset? Lte
+    public System::DateTimeOffset? Lte
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<DateTimeOffset>("lte");
+            return this._rawData.GetNullableStruct<System::DateTimeOffset>("lte");
         }
         init
         {
@@ -430,4 +444,103 @@ class CreatedAtFromRaw : IFromRawJson<CreatedAt>
     /// <inheritdoc/>
     public CreatedAt FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         CreatedAt.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(PricingTypeConverter))]
+public enum PricingType
+{
+    Free,
+    Paid,
+    Custom,
+}
+
+sealed class PricingTypeConverter : JsonConverter<PricingType>
+{
+    public override PricingType Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "FREE" => PricingType.Free,
+            "PAID" => PricingType.Paid,
+            "CUSTOM" => PricingType.Custom,
+            _ => (PricingType)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        PricingType value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                PricingType.Free => "FREE",
+                PricingType.Paid => "PAID",
+                PricingType.Custom => "CUSTOM",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+[JsonConverter(typeof(StatusConverter))]
+public enum Status
+{
+    PaymentPending,
+    Active,
+    Expired,
+    InTrial,
+    Canceled,
+    NotStarted,
+}
+
+sealed class StatusConverter : JsonConverter<Status>
+{
+    public override Status Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "PAYMENT_PENDING" => Status.PaymentPending,
+            "ACTIVE" => Status.Active,
+            "EXPIRED" => Status.Expired,
+            "IN_TRIAL" => Status.InTrial,
+            "CANCELED" => Status.Canceled,
+            "NOT_STARTED" => Status.NotStarted,
+            _ => (Status)(-1),
+        };
+    }
+
+    public override void Write(Utf8JsonWriter writer, Status value, JsonSerializerOptions options)
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                Status.PaymentPending => "PAYMENT_PENDING",
+                Status.Active => "ACTIVE",
+                Status.Expired => "EXPIRED",
+                Status.InTrial => "IN_TRIAL",
+                Status.Canceled => "CANCELED",
+                Status.NotStarted => "NOT_STARTED",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }

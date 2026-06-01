@@ -31,6 +31,8 @@ public interface ICustomerService
 
     IPromotionalEntitlementService PromotionalEntitlements { get; }
 
+    IIntegrationService Integrations { get; }
+
     /// <summary>
     /// Retrieves a customer by their unique identifier, including billing information
     /// and subscription status.
@@ -48,7 +50,8 @@ public interface ICustomerService
     );
 
     /// <summary>
-    /// Updates an existing customer's properties such as name, email, and billing information.
+    /// Updates an existing customer's properties such as name, email, and billing
+    /// information.
     /// </summary>
     Task<CustomerResponse> Update(
         CustomerUpdateParams parameters,
@@ -71,7 +74,8 @@ public interface ICustomerService
     );
 
     /// <summary>
-    /// Archives a customer, preventing new subscriptions. Optionally cancels existing subscriptions.
+    /// Archives a customer, preventing new subscriptions. Optionally cancels existing
+    /// subscriptions.
     /// </summary>
     Task<CustomerResponse> Archive(
         CustomerArchiveParams parameters,
@@ -86,6 +90,28 @@ public interface ICustomerService
     );
 
     /// <summary>
+    /// Checks a single entitlement (feature or credit) for a customer or resource.
+    /// Supports `requestedUsage` and `requestedValues` to evaluate against limits or
+    /// enum values.
+    ///
+    /// <para>**Warning:** This REST API endpoint lacks built-in client-side caching,
+    /// fallback mechanisms, and low-latency guarantees. It is not recommended for
+    /// hot-path entitlement checks. For production use, consider using the Stigg Node
+    /// Server SDK with caching or the Sidecar for low-latency cached responses.</para>
+    /// </summary>
+    Task<CustomerCheckEntitlementResponse> CheckEntitlement(
+        CustomerCheckEntitlementParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="CheckEntitlement(CustomerCheckEntitlementParams, CancellationToken)"/>
+    Task<CustomerCheckEntitlementResponse> CheckEntitlement(
+        string id,
+        CustomerCheckEntitlementParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Imports multiple customers in bulk. Used for migrating customer data from
     /// external systems.
     /// </summary>
@@ -95,7 +121,7 @@ public interface ICustomerService
     );
 
     /// <summary>
-    /// Get a list of customerresources
+    /// Retrieves a paginated list of resources within the same customer.
     /// </summary>
     Task<CustomerListResourcesPage> ListResources(
         CustomerListResourcesParams parameters,
@@ -110,11 +136,32 @@ public interface ICustomerService
     );
 
     /// <summary>
-    /// Creates a new customer and optionally provisions an initial subscription
-    /// in a single operation.
+    /// Creates a new customer and optionally provisions an initial subscription in a
+    /// single operation.
     /// </summary>
     Task<CustomerResponse> Provision(
         CustomerProvisionParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Retrieves the effective entitlements for a customer or resource, including
+    /// feature and credit entitlements.
+    ///
+    /// <para>**Warning:** This REST API endpoint lacks built-in client-side caching,
+    /// fallback mechanisms, and low-latency guarantees. It is not recommended for
+    /// hot-path entitlement checks. For production use, consider using the Stigg Node
+    /// Server SDK with caching or the Sidecar for low-latency cached responses.</para>
+    /// </summary>
+    Task<CustomerRetrieveEntitlementsResponse> RetrieveEntitlements(
+        CustomerRetrieveEntitlementsParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="RetrieveEntitlements(CustomerRetrieveEntitlementsParams, CancellationToken)"/>
+    Task<CustomerRetrieveEntitlementsResponse> RetrieveEntitlements(
+        string id,
+        CustomerRetrieveEntitlementsParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 
@@ -151,8 +198,10 @@ public interface ICustomerServiceWithRawResponse
 
     IPromotionalEntitlementServiceWithRawResponse PromotionalEntitlements { get; }
 
+    IIntegrationServiceWithRawResponse Integrations { get; }
+
     /// <summary>
-    /// Returns a raw HTTP response for `get /api/v1/customers/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /api/v1/customers/{id}</c>, but is otherwise the
     /// same as <see cref="ICustomerService.Retrieve(CustomerRetrieveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CustomerResponse>> Retrieve(
@@ -168,7 +217,7 @@ public interface ICustomerServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `patch /api/v1/customers/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>patch /api/v1/customers/{id}</c>, but is otherwise the
     /// same as <see cref="ICustomerService.Update(CustomerUpdateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CustomerResponse>> Update(
@@ -184,7 +233,7 @@ public interface ICustomerServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /api/v1/customers`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /api/v1/customers</c>, but is otherwise the
     /// same as <see cref="ICustomerService.List(CustomerListParams?, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CustomerListPage>> List(
@@ -193,7 +242,7 @@ public interface ICustomerServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/customers/{id}/archive`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/customers/{id}/archive</c>, but is otherwise the
     /// same as <see cref="ICustomerService.Archive(CustomerArchiveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CustomerResponse>> Archive(
@@ -209,7 +258,23 @@ public interface ICustomerServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/customers/import`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /api/v1/customers/{id}/entitlements/check</c>, but is otherwise the
+    /// same as <see cref="ICustomerService.CheckEntitlement(CustomerCheckEntitlementParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<CustomerCheckEntitlementResponse>> CheckEntitlement(
+        CustomerCheckEntitlementParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="CheckEntitlement(CustomerCheckEntitlementParams, CancellationToken)"/>
+    Task<HttpResponse<CustomerCheckEntitlementResponse>> CheckEntitlement(
+        string id,
+        CustomerCheckEntitlementParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>post /api/v1/customers/import</c>, but is otherwise the
     /// same as <see cref="ICustomerService.Import(CustomerImportParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CustomerImportResponse>> Import(
@@ -218,7 +283,7 @@ public interface ICustomerServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /api/v1/customers/{id}/resources`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /api/v1/customers/{id}/resources</c>, but is otherwise the
     /// same as <see cref="ICustomerService.ListResources(CustomerListResourcesParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CustomerListResourcesPage>> ListResources(
@@ -234,7 +299,7 @@ public interface ICustomerServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/customers`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/customers</c>, but is otherwise the
     /// same as <see cref="ICustomerService.Provision(CustomerProvisionParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CustomerResponse>> Provision(
@@ -243,7 +308,23 @@ public interface ICustomerServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/customers/{id}/unarchive`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /api/v1/customers/{id}/entitlements</c>, but is otherwise the
+    /// same as <see cref="ICustomerService.RetrieveEntitlements(CustomerRetrieveEntitlementsParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<CustomerRetrieveEntitlementsResponse>> RetrieveEntitlements(
+        CustomerRetrieveEntitlementsParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="RetrieveEntitlements(CustomerRetrieveEntitlementsParams, CancellationToken)"/>
+    Task<HttpResponse<CustomerRetrieveEntitlementsResponse>> RetrieveEntitlements(
+        string id,
+        CustomerRetrieveEntitlementsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>post /api/v1/customers/{id}/unarchive</c>, but is otherwise the
     /// same as <see cref="ICustomerService.Unarchive(CustomerUnarchiveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CustomerResponse>> Unarchive(

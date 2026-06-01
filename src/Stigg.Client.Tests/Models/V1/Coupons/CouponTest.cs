@@ -22,11 +22,12 @@ public class CouponTest : TestBase
                 BillingLinkUrl = "billingLinkUrl",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Description = "description",
-                DurationInMonths = 0,
+                DurationInMonths = 1,
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 Name = "name",
-                PercentOff = 0,
+                PercentOff = 1,
                 Source = Source.Stigg,
-                Status = Status.Active,
+                Status = DataStatus.Active,
                 Type = DataType.Fixed,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -40,11 +41,12 @@ public class CouponTest : TestBase
             BillingLinkUrl = "billingLinkUrl",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
-            DurationInMonths = 0,
+            DurationInMonths = 1,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
-            PercentOff = 0,
+            PercentOff = 1,
             Source = Source.Stigg,
-            Status = Status.Active,
+            Status = DataStatus.Active,
             Type = DataType.Fixed,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -65,11 +67,12 @@ public class CouponTest : TestBase
                 BillingLinkUrl = "billingLinkUrl",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Description = "description",
-                DurationInMonths = 0,
+                DurationInMonths = 1,
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 Name = "name",
-                PercentOff = 0,
+                PercentOff = 1,
                 Source = Source.Stigg,
-                Status = Status.Active,
+                Status = DataStatus.Active,
                 Type = DataType.Fixed,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -94,11 +97,12 @@ public class CouponTest : TestBase
                 BillingLinkUrl = "billingLinkUrl",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Description = "description",
-                DurationInMonths = 0,
+                DurationInMonths = 1,
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 Name = "name",
-                PercentOff = 0,
+                PercentOff = 1,
                 Source = Source.Stigg,
-                Status = Status.Active,
+                Status = DataStatus.Active,
                 Type = DataType.Fixed,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -116,11 +120,12 @@ public class CouponTest : TestBase
             BillingLinkUrl = "billingLinkUrl",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
-            DurationInMonths = 0,
+            DurationInMonths = 1,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
-            PercentOff = 0,
+            PercentOff = 1,
             Source = Source.Stigg,
-            Status = Status.Active,
+            Status = DataStatus.Active,
             Type = DataType.Fixed,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -141,11 +146,12 @@ public class CouponTest : TestBase
                 BillingLinkUrl = "billingLinkUrl",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Description = "description",
-                DurationInMonths = 0,
+                DurationInMonths = 1,
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 Name = "name",
-                PercentOff = 0,
+                PercentOff = 1,
                 Source = Source.Stigg,
-                Status = Status.Active,
+                Status = DataStatus.Active,
                 Type = DataType.Fixed,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -167,11 +173,12 @@ public class CouponTest : TestBase
                 BillingLinkUrl = "billingLinkUrl",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Description = "description",
-                DurationInMonths = 0,
+                DurationInMonths = 1,
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 Name = "name",
-                PercentOff = 0,
+                PercentOff = 1,
                 Source = Source.Stigg,
-                Status = Status.Active,
+                Status = DataStatus.Active,
                 Type = DataType.Fixed,
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -196,11 +203,12 @@ public class DataTest : TestBase
             BillingLinkUrl = "billingLinkUrl",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
-            DurationInMonths = 0,
+            DurationInMonths = 1,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
-            PercentOff = 0,
+            PercentOff = 1,
             Source = Source.Stigg,
-            Status = Status.Active,
+            Status = DataStatus.Active,
             Type = DataType.Fixed,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -214,11 +222,12 @@ public class DataTest : TestBase
         string expectedBillingLinkUrl = "billingLinkUrl";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedDescription = "description";
-        double expectedDurationInMonths = 0;
+        long expectedDurationInMonths = 1;
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedName = "name";
-        double expectedPercentOff = 0;
+        long expectedPercentOff = 1;
         ApiEnum<string, Source> expectedSource = Source.Stigg;
-        ApiEnum<string, Status> expectedStatus = Status.Active;
+        ApiEnum<string, DataStatus> expectedStatus = DataStatus.Active;
         ApiEnum<string, DataType> expectedType = DataType.Fixed;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
@@ -234,6 +243,14 @@ public class DataTest : TestBase
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedDescription, model.Description);
         Assert.Equal(expectedDurationInMonths, model.DurationInMonths);
+        Assert.NotNull(model.Metadata);
+        Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(model.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, model.Metadata[item.Key]);
+        }
         Assert.Equal(expectedName, model.Name);
         Assert.Equal(expectedPercentOff, model.PercentOff);
         Assert.Equal(expectedSource, model.Source);
@@ -253,11 +270,12 @@ public class DataTest : TestBase
             BillingLinkUrl = "billingLinkUrl",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
-            DurationInMonths = 0,
+            DurationInMonths = 1,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
-            PercentOff = 0,
+            PercentOff = 1,
             Source = Source.Stigg,
-            Status = Status.Active,
+            Status = DataStatus.Active,
             Type = DataType.Fixed,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -279,11 +297,12 @@ public class DataTest : TestBase
             BillingLinkUrl = "billingLinkUrl",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
-            DurationInMonths = 0,
+            DurationInMonths = 1,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
-            PercentOff = 0,
+            PercentOff = 1,
             Source = Source.Stigg,
-            Status = Status.Active,
+            Status = DataStatus.Active,
             Type = DataType.Fixed,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -301,11 +320,12 @@ public class DataTest : TestBase
         string expectedBillingLinkUrl = "billingLinkUrl";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedDescription = "description";
-        double expectedDurationInMonths = 0;
+        long expectedDurationInMonths = 1;
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedName = "name";
-        double expectedPercentOff = 0;
+        long expectedPercentOff = 1;
         ApiEnum<string, Source> expectedSource = Source.Stigg;
-        ApiEnum<string, Status> expectedStatus = Status.Active;
+        ApiEnum<string, DataStatus> expectedStatus = DataStatus.Active;
         ApiEnum<string, DataType> expectedType = DataType.Fixed;
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
@@ -321,6 +341,14 @@ public class DataTest : TestBase
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedDescription, deserialized.Description);
         Assert.Equal(expectedDurationInMonths, deserialized.DurationInMonths);
+        Assert.NotNull(deserialized.Metadata);
+        Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(deserialized.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, deserialized.Metadata[item.Key]);
+        }
         Assert.Equal(expectedName, deserialized.Name);
         Assert.Equal(expectedPercentOff, deserialized.PercentOff);
         Assert.Equal(expectedSource, deserialized.Source);
@@ -340,11 +368,12 @@ public class DataTest : TestBase
             BillingLinkUrl = "billingLinkUrl",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
-            DurationInMonths = 0,
+            DurationInMonths = 1,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
-            PercentOff = 0,
+            PercentOff = 1,
             Source = Source.Stigg,
-            Status = Status.Active,
+            Status = DataStatus.Active,
             Type = DataType.Fixed,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -363,11 +392,12 @@ public class DataTest : TestBase
             BillingLinkUrl = "billingLinkUrl",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
-            DurationInMonths = 0,
+            DurationInMonths = 1,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
-            PercentOff = 0,
+            PercentOff = 1,
             Source = Source.Stigg,
-            Status = Status.Active,
+            Status = DataStatus.Active,
             Type = DataType.Fixed,
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -790,22 +820,22 @@ public class SourceTest : TestBase
     }
 }
 
-public class StatusTest : TestBase
+public class DataStatusTest : TestBase
 {
     [Theory]
-    [InlineData(Status.Active)]
-    [InlineData(Status.Archived)]
-    public void Validation_Works(Status rawValue)
+    [InlineData(DataStatus.Active)]
+    [InlineData(DataStatus.Archived)]
+    public void Validation_Works(DataStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Status> value = rawValue;
+        ApiEnum<string, DataStatus> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataStatus>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -815,15 +845,15 @@ public class StatusTest : TestBase
     }
 
     [Theory]
-    [InlineData(Status.Active)]
-    [InlineData(Status.Archived)]
-    public void SerializationRoundtrip_Works(Status rawValue)
+    [InlineData(DataStatus.Active)]
+    [InlineData(DataStatus.Archived)]
+    public void SerializationRoundtrip_Works(DataStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Status> value = rawValue;
+        ApiEnum<string, DataStatus> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataStatus>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -834,12 +864,12 @@ public class StatusTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataStatus>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataStatus>>(
             json,
             ModelBase.SerializerOptions
         );

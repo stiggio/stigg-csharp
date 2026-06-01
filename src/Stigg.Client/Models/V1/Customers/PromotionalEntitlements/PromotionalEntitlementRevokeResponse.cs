@@ -596,7 +596,7 @@ public record class PromotionalEntitlementRevokeResponseDataResetPeriodConfigura
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationYearlyResetPeriodConfig"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -622,7 +622,7 @@ public record class PromotionalEntitlementRevokeResponseDataResetPeriodConfigura
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationMonthlyResetPeriodConfig"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -648,7 +648,7 @@ public record class PromotionalEntitlementRevokeResponseDataResetPeriodConfigura
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationWeeklyResetPeriodConfig"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -673,7 +673,7 @@ public record class PromotionalEntitlementRevokeResponseDataResetPeriodConfigura
     /// <summary>
     /// Calls the function parameter corresponding to the variant the instance was constructed with.
     ///
-    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match">
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match"/>
     /// if you need your function parameters to return something.</para>
     ///
     /// <exception cref="StiggInvalidDataException">
@@ -684,9 +684,9 @@ public record class PromotionalEntitlementRevokeResponseDataResetPeriodConfigura
     /// <example>
     /// <code>
     /// instance.Switch(
-    ///     (PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationYearlyResetPeriodConfig value) => {...},
-    ///     (PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationMonthlyResetPeriodConfig value) => {...},
-    ///     (PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationWeeklyResetPeriodConfig value) => {...}
+    ///     (PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationYearlyResetPeriodConfig value) =&gt; {...},
+    ///     (PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationMonthlyResetPeriodConfig value) =&gt; {...},
+    ///     (PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationWeeklyResetPeriodConfig value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
@@ -719,7 +719,7 @@ public record class PromotionalEntitlementRevokeResponseDataResetPeriodConfigura
     /// Calls the function parameter corresponding to the variant the instance was constructed with and
     /// returns its result.
     ///
-    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch">
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch"/>
     /// if you don't need your function parameters to return a value.</para>
     ///
     /// <exception cref="StiggInvalidDataException">
@@ -730,9 +730,9 @@ public record class PromotionalEntitlementRevokeResponseDataResetPeriodConfigura
     /// <example>
     /// <code>
     /// var result = instance.Match(
-    ///     (PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationYearlyResetPeriodConfig value) => {...},
-    ///     (PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationMonthlyResetPeriodConfig value) => {...},
-    ///     (PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationWeeklyResetPeriodConfig value) => {...}
+    ///     (PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationYearlyResetPeriodConfig value) =&gt; {...},
+    ///     (PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationMonthlyResetPeriodConfig value) =&gt; {...},
+    ///     (PromotionalEntitlementRevokeResponseDataResetPeriodConfigurationWeeklyResetPeriodConfig value) =&gt; {...}
     /// );
     /// </code>
     /// </example>

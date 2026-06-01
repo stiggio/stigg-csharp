@@ -22,7 +22,7 @@ public class CouponRetrieveParamsTest : TestBase
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
-        Assert.Equal(new Uri("https://api.stigg.io/api/v1/coupons/x"), url);
+        Assert.True(TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/coupons/x"), url));
     }
 
     [Fact]

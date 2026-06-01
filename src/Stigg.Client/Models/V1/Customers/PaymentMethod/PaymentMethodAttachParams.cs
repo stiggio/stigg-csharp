@@ -114,26 +114,30 @@ public record class PaymentMethodAttachParams : ParamsBase
     PaymentMethodAttachParams(
         FrozenDictionary<string, JsonElement> rawHeaderData,
         FrozenDictionary<string, JsonElement> rawQueryData,
-        FrozenDictionary<string, JsonElement> rawBodyData
+        FrozenDictionary<string, JsonElement> rawBodyData,
+        string id
     )
     {
         this._rawHeaderData = new(rawHeaderData);
         this._rawQueryData = new(rawQueryData);
         this._rawBodyData = new(rawBodyData);
+        this.ID = id;
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson{T}.FromRawUnchecked"/>
     public static PaymentMethodAttachParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
-        IReadOnlyDictionary<string, JsonElement> rawBodyData
+        IReadOnlyDictionary<string, JsonElement> rawBodyData,
+        string id
     )
     {
         return new(
             FrozenDictionary.ToFrozenDictionary(rawHeaderData),
             FrozenDictionary.ToFrozenDictionary(rawQueryData),
-            FrozenDictionary.ToFrozenDictionary(rawBodyData)
+            FrozenDictionary.ToFrozenDictionary(rawBodyData),
+            id
         );
     }
 
@@ -218,6 +222,8 @@ public enum VendorIdentifier
     BigQuery,
     OpenFga,
     AppStore,
+    Received,
+    Prequel,
 }
 
 sealed class VendorIdentifierConverter : JsonConverter<VendorIdentifier>
@@ -240,6 +246,8 @@ sealed class VendorIdentifierConverter : JsonConverter<VendorIdentifier>
             "BIG_QUERY" => VendorIdentifier.BigQuery,
             "OPEN_FGA" => VendorIdentifier.OpenFga,
             "APP_STORE" => VendorIdentifier.AppStore,
+            "RECEIVED" => VendorIdentifier.Received,
+            "PREQUEL" => VendorIdentifier.Prequel,
             _ => (VendorIdentifier)(-1),
         };
     }
@@ -264,6 +272,8 @@ sealed class VendorIdentifierConverter : JsonConverter<VendorIdentifier>
                 VendorIdentifier.BigQuery => "BIG_QUERY",
                 VendorIdentifier.OpenFga => "OPEN_FGA",
                 VendorIdentifier.AppStore => "APP_STORE",
+                VendorIdentifier.Received => "RECEIVED",
+                VendorIdentifier.Prequel => "PREQUEL",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

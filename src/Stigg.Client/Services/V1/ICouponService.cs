@@ -7,9 +7,11 @@ using Stigg.Client.Models.V1.Coupons;
 namespace Stigg.Client.Services.V1;
 
 /// <summary>
-/// NOTE: Do not inherit from this type outside the SDK unless you're okay with breaking
-/// changes in non-major versions. We may add new methods in the future that cause
-/// existing derived classes to break.
+/// Operations related to coupons
+///
+/// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
+/// breaking changes in non-major versions. We may add new methods in the future that
+/// cause existing derived classes to break.</para>
 /// </summary>
 public interface ICouponService
 {
@@ -27,8 +29,8 @@ public interface ICouponService
     ICouponService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Creates a new discount coupon with percentage or fixed amount off, applicable
-    /// to customer subscriptions.
+    /// Creates a new discount coupon with percentage or fixed amount off, applicable to
+    /// customer subscriptions.
     /// </summary>
     Task<Coupon> Create(
         CouponCreateParams parameters,
@@ -103,7 +105,7 @@ public interface ICouponServiceWithRawResponse
     ICouponServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/coupons`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/coupons</c>, but is otherwise the
     /// same as <see cref="ICouponService.Create(CouponCreateParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Coupon>> Create(
@@ -112,7 +114,7 @@ public interface ICouponServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /api/v1/coupons/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /api/v1/coupons/{id}</c>, but is otherwise the
     /// same as <see cref="ICouponService.Retrieve(CouponRetrieveParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Coupon>> Retrieve(
@@ -128,7 +130,7 @@ public interface ICouponServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /api/v1/coupons`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /api/v1/coupons</c>, but is otherwise the
     /// same as <see cref="ICouponService.List(CouponListParams?, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CouponListPage>> List(
@@ -137,7 +139,7 @@ public interface ICouponServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/coupons/{id}/archive`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/coupons/{id}/archive</c>, but is otherwise the
     /// same as <see cref="ICouponService.ArchiveCoupon(CouponArchiveCouponParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Coupon>> ArchiveCoupon(
@@ -153,7 +155,7 @@ public interface ICouponServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `patch /api/v1/coupons/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>patch /api/v1/coupons/{id}</c>, but is otherwise the
     /// same as <see cref="ICouponService.UpdateCoupon(CouponUpdateCouponParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<Coupon>> UpdateCoupon(

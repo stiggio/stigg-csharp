@@ -1,11 +1,13 @@
-using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Stigg.Client.Core;
+using Stigg.Client.Exceptions;
+using System = System;
 
 namespace Stigg.Client.Models.V1.Customers.PromotionalEntitlements;
 
@@ -108,12 +110,14 @@ public record class PromotionalEntitlementListParams : ParamsBase
     /// Filter by promotional entitlement status. Supports comma-separated values
     /// for multiple statuses
     /// </summary>
-    public string? Status
+    public IReadOnlyList<ApiEnum<string, Status>>? Status
     {
         get
         {
             this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableClass<string>("status");
+            return this._rawQueryData.GetNullableStruct<ImmutableArray<ApiEnum<string, Status>>>(
+                "status"
+            );
         }
         init
         {
@@ -122,7 +126,10 @@ public record class PromotionalEntitlementListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData.Set("status", value);
+            this._rawQueryData.Set<ImmutableArray<ApiEnum<string, Status>>?>(
+                "status",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
         }
     }
 
@@ -152,23 +159,27 @@ public record class PromotionalEntitlementListParams : ParamsBase
     [SetsRequiredMembers]
     PromotionalEntitlementListParams(
         FrozenDictionary<string, JsonElement> rawHeaderData,
-        FrozenDictionary<string, JsonElement> rawQueryData
+        FrozenDictionary<string, JsonElement> rawQueryData,
+        string id
     )
     {
         this._rawHeaderData = new(rawHeaderData);
         this._rawQueryData = new(rawQueryData);
+        this.ID = id;
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson{T}.FromRawUnchecked"/>
     public static PromotionalEntitlementListParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
-        IReadOnlyDictionary<string, JsonElement> rawQueryData
+        IReadOnlyDictionary<string, JsonElement> rawQueryData,
+        string id
     )
     {
         return new(
             FrozenDictionary.ToFrozenDictionary(rawHeaderData),
-            FrozenDictionary.ToFrozenDictionary(rawQueryData)
+            FrozenDictionary.ToFrozenDictionary(rawQueryData),
+            id
         );
     }
 
@@ -200,9 +211,9 @@ public record class PromotionalEntitlementListParams : ParamsBase
             && this._rawQueryData.Equals(other._rawQueryData);
     }
 
-    public override Uri Url(ClientOptions options)
+    public override System::Uri Url(ClientOptions options)
     {
-        return new UriBuilder(
+        return new System::UriBuilder(
             options.BaseUrl.ToString().TrimEnd('/')
                 + string.Format("/api/v1/customers/{0}/promotional-entitlements", this.ID)
         )
@@ -235,12 +246,12 @@ public sealed record class CreatedAt : JsonModel
     /// <summary>
     /// Greater than the specified createdAt value
     /// </summary>
-    public DateTimeOffset? Gt
+    public System::DateTimeOffset? Gt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<DateTimeOffset>("gt");
+            return this._rawData.GetNullableStruct<System::DateTimeOffset>("gt");
         }
         init
         {
@@ -256,12 +267,12 @@ public sealed record class CreatedAt : JsonModel
     /// <summary>
     /// Greater than or equal to the specified createdAt value
     /// </summary>
-    public DateTimeOffset? Gte
+    public System::DateTimeOffset? Gte
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<DateTimeOffset>("gte");
+            return this._rawData.GetNullableStruct<System::DateTimeOffset>("gte");
         }
         init
         {
@@ -277,12 +288,12 @@ public sealed record class CreatedAt : JsonModel
     /// <summary>
     /// Less than the specified createdAt value
     /// </summary>
-    public DateTimeOffset? Lt
+    public System::DateTimeOffset? Lt
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<DateTimeOffset>("lt");
+            return this._rawData.GetNullableStruct<System::DateTimeOffset>("lt");
         }
         init
         {
@@ -298,12 +309,12 @@ public sealed record class CreatedAt : JsonModel
     /// <summary>
     /// Less than or equal to the specified createdAt value
     /// </summary>
-    public DateTimeOffset? Lte
+    public System::DateTimeOffset? Lte
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<DateTimeOffset>("lte");
+            return this._rawData.GetNullableStruct<System::DateTimeOffset>("lte");
         }
         init
         {
@@ -358,4 +369,47 @@ class CreatedAtFromRaw : IFromRawJson<CreatedAt>
     /// <inheritdoc/>
     public CreatedAt FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         CreatedAt.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(StatusConverter))]
+public enum Status
+{
+    Active,
+    Expired,
+    Paused,
+}
+
+sealed class StatusConverter : JsonConverter<Status>
+{
+    public override Status Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "Active" => Status.Active,
+            "Expired" => Status.Expired,
+            "Paused" => Status.Paused,
+            _ => (Status)(-1),
+        };
+    }
+
+    public override void Write(Utf8JsonWriter writer, Status value, JsonSerializerOptions options)
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                Status.Active => "Active",
+                Status.Expired => "Expired",
+                Status.Paused => "Paused",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }

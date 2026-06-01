@@ -59,7 +59,7 @@ public class SubscriptionPreviewResponseTest : TestBase
                     End = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Start = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
-                FreeItems = [new() { AddonID = "addonId", Quantity = 0 }],
+                FreeItems = [new() { ID = "id", Quantity = 0 }],
                 HasScheduledUpdates = true,
                 IsPlanDowngrade = true,
                 RecurringInvoice = new()
@@ -150,7 +150,7 @@ public class SubscriptionPreviewResponseTest : TestBase
                 End = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Start = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            FreeItems = [new() { AddonID = "addonId", Quantity = 0 }],
+            FreeItems = [new() { ID = "id", Quantity = 0 }],
             HasScheduledUpdates = true,
             IsPlanDowngrade = true,
             RecurringInvoice = new()
@@ -248,7 +248,7 @@ public class SubscriptionPreviewResponseTest : TestBase
                     End = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Start = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
-                FreeItems = [new() { AddonID = "addonId", Quantity = 0 }],
+                FreeItems = [new() { ID = "id", Quantity = 0 }],
                 HasScheduledUpdates = true,
                 IsPlanDowngrade = true,
                 RecurringInvoice = new()
@@ -353,7 +353,7 @@ public class SubscriptionPreviewResponseTest : TestBase
                     End = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Start = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
-                FreeItems = [new() { AddonID = "addonId", Quantity = 0 }],
+                FreeItems = [new() { ID = "id", Quantity = 0 }],
                 HasScheduledUpdates = true,
                 IsPlanDowngrade = true,
                 RecurringInvoice = new()
@@ -451,7 +451,7 @@ public class SubscriptionPreviewResponseTest : TestBase
                 End = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Start = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            FreeItems = [new() { AddonID = "addonId", Quantity = 0 }],
+            FreeItems = [new() { ID = "id", Quantity = 0 }],
             HasScheduledUpdates = true,
             IsPlanDowngrade = true,
             RecurringInvoice = new()
@@ -549,7 +549,7 @@ public class SubscriptionPreviewResponseTest : TestBase
                     End = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Start = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
-                FreeItems = [new() { AddonID = "addonId", Quantity = 0 }],
+                FreeItems = [new() { ID = "id", Quantity = 0 }],
                 HasScheduledUpdates = true,
                 IsPlanDowngrade = true,
                 RecurringInvoice = new()
@@ -648,7 +648,7 @@ public class SubscriptionPreviewResponseTest : TestBase
                     End = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Start = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
-                FreeItems = [new() { AddonID = "addonId", Quantity = 0 }],
+                FreeItems = [new() { ID = "id", Quantity = 0 }],
                 HasScheduledUpdates = true,
                 IsPlanDowngrade = true,
                 RecurringInvoice = new()
@@ -750,7 +750,7 @@ public class SubscriptionPreviewResponseDataTest : TestBase
                 End = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Start = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            FreeItems = [new() { AddonID = "addonId", Quantity = 0 }],
+            FreeItems = [new() { ID = "id", Quantity = 0 }],
             HasScheduledUpdates = true,
             IsPlanDowngrade = true,
             RecurringInvoice = new()
@@ -838,7 +838,7 @@ public class SubscriptionPreviewResponseDataTest : TestBase
             End = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Start = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
-        List<FreeItem> expectedFreeItems = [new() { AddonID = "addonId", Quantity = 0 }];
+        List<FreeItem> expectedFreeItems = [new() { ID = "id", Quantity = 0 }];
         bool expectedHasScheduledUpdates = true;
         bool expectedIsPlanDowngrade = true;
         RecurringInvoice expectedRecurringInvoice = new()
@@ -943,7 +943,7 @@ public class SubscriptionPreviewResponseDataTest : TestBase
                 End = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Start = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            FreeItems = [new() { AddonID = "addonId", Quantity = 0 }],
+            FreeItems = [new() { ID = "id", Quantity = 0 }],
             HasScheduledUpdates = true,
             IsPlanDowngrade = true,
             RecurringInvoice = new()
@@ -1045,7 +1045,7 @@ public class SubscriptionPreviewResponseDataTest : TestBase
                 End = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Start = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            FreeItems = [new() { AddonID = "addonId", Quantity = 0 }],
+            FreeItems = [new() { ID = "id", Quantity = 0 }],
             HasScheduledUpdates = true,
             IsPlanDowngrade = true,
             RecurringInvoice = new()
@@ -1140,7 +1140,7 @@ public class SubscriptionPreviewResponseDataTest : TestBase
             End = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Start = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
-        List<FreeItem> expectedFreeItems = [new() { AddonID = "addonId", Quantity = 0 }];
+        List<FreeItem> expectedFreeItems = [new() { ID = "id", Quantity = 0 }];
         bool expectedHasScheduledUpdates = true;
         bool expectedIsPlanDowngrade = true;
         RecurringInvoice expectedRecurringInvoice = new()
@@ -1245,7 +1245,7 @@ public class SubscriptionPreviewResponseDataTest : TestBase
                 End = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Start = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            FreeItems = [new() { AddonID = "addonId", Quantity = 0 }],
+            FreeItems = [new() { ID = "id", Quantity = 0 }],
             HasScheduledUpdates = true,
             IsPlanDowngrade = true,
             RecurringInvoice = new()
@@ -1569,7 +1569,7 @@ public class SubscriptionPreviewResponseDataTest : TestBase
                 End = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Start = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            FreeItems = [new() { AddonID = "addonId", Quantity = 0 }],
+            FreeItems = [new() { ID = "id", Quantity = 0 }],
             HasScheduledUpdates = true,
             IsPlanDowngrade = true,
             RecurringInvoice = new()
@@ -2895,19 +2895,19 @@ public class FreeItemTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new FreeItem { AddonID = "addonId", Quantity = 0 };
+        var model = new FreeItem { ID = "id", Quantity = 0 };
 
-        string expectedAddonID = "addonId";
-        double expectedQuantity = 0;
+        string expectedID = "id";
+        long expectedQuantity = 0;
 
-        Assert.Equal(expectedAddonID, model.AddonID);
+        Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedQuantity, model.Quantity);
     }
 
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new FreeItem { AddonID = "addonId", Quantity = 0 };
+        var model = new FreeItem { ID = "id", Quantity = 0 };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<FreeItem>(json, ModelBase.SerializerOptions);
@@ -2918,7 +2918,7 @@ public class FreeItemTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new FreeItem { AddonID = "addonId", Quantity = 0 };
+        var model = new FreeItem { ID = "id", Quantity = 0 };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<FreeItem>(
@@ -2927,17 +2927,17 @@ public class FreeItemTest : TestBase
         );
         Assert.NotNull(deserialized);
 
-        string expectedAddonID = "addonId";
-        double expectedQuantity = 0;
+        string expectedID = "id";
+        long expectedQuantity = 0;
 
-        Assert.Equal(expectedAddonID, deserialized.AddonID);
+        Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedQuantity, deserialized.Quantity);
     }
 
     [Fact]
     public void Validation_Works()
     {
-        var model = new FreeItem { AddonID = "addonId", Quantity = 0 };
+        var model = new FreeItem { ID = "id", Quantity = 0 };
 
         model.Validate();
     }
@@ -2945,7 +2945,7 @@ public class FreeItemTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new FreeItem { AddonID = "addonId", Quantity = 0 };
+        var model = new FreeItem { ID = "id", Quantity = 0 };
 
         FreeItem copied = new(model);
 

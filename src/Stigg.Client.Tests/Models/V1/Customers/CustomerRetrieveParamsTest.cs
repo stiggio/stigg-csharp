@@ -22,7 +22,7 @@ public class CustomerRetrieveParamsTest : TestBase
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
-        Assert.Equal(new Uri("https://api.stigg.io/api/v1/customers/x"), url);
+        Assert.True(TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/customers/x"), url));
     }
 
     [Fact]

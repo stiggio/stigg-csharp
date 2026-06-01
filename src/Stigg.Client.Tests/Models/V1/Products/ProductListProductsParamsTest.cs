@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Stigg.Client.Core;
+using Stigg.Client.Exceptions;
 using Stigg.Client.Models.V1.Products;
 
 namespace Stigg.Client.Tests.Models.V1.Products;
@@ -23,7 +25,7 @@ public class ProductListProductsParamsTest : TestBase
                 Lte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             Limit = 1,
-            Status = "status",
+            Status = [Status.Published],
         };
 
         string expectedID = "id";
@@ -37,14 +39,19 @@ public class ProductListProductsParamsTest : TestBase
             Lte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
         long expectedLimit = 1;
-        string expectedStatus = "status";
+        List<ApiEnum<string, Status>> expectedStatus = [Status.Published];
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedAfter, parameters.After);
         Assert.Equal(expectedBefore, parameters.Before);
         Assert.Equal(expectedCreatedAt, parameters.CreatedAt);
         Assert.Equal(expectedLimit, parameters.Limit);
-        Assert.Equal(expectedStatus, parameters.Status);
+        Assert.NotNull(parameters.Status);
+        Assert.Equal(expectedStatus.Count, parameters.Status.Count);
+        for (int i = 0; i < expectedStatus.Count; i++)
+        {
+            Assert.Equal(expectedStatus[i], parameters.Status[i]);
+        }
     }
 
     [Fact]
@@ -104,22 +111,24 @@ public class ProductListProductsParamsTest : TestBase
             Before = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             CreatedAt = new()
             {
-                Gt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Gte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Lt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Lte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Gt = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
+                Gte = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
+                Lt = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
+                Lte = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
             },
             Limit = 1,
-            Status = "status",
+            Status = [Status.Published],
         };
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
-        Assert.Equal(
-            new Uri(
-                "https://api.stigg.io/api/v1/products?id=id&after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&createdAt%5bgt%5d=2019-12-27T18%3a11%3a19.117Z&createdAt%5bgte%5d=2019-12-27T18%3a11%3a19.117Z&createdAt%5blt%5d=2019-12-27T18%3a11%3a19.117Z&createdAt%5blte%5d=2019-12-27T18%3a11%3a19.117Z&limit=1&status=status"
-            ),
-            url
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri(
+                    "https://api.stigg.io/api/v1/products?id=id&after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&createdAt%5bgt%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5bgte%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5blt%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&createdAt%5blte%5d=2019-12-27T18%3a11%3a19.117%2b00%3a00&limit=1&status=PUBLISHED"
+                ),
+                url
+            )
         );
     }
 
@@ -139,7 +148,7 @@ public class ProductListProductsParamsTest : TestBase
                 Lte = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             Limit = 1,
-            Status = "status",
+            Status = [Status.Published],
         };
 
         ProductListProductsParams copied = new(parameters);
@@ -306,5 +315,63 @@ public class CreatedAtTest : TestBase
         CreatedAt copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class StatusTest : TestBase
+{
+    [Theory]
+    [InlineData(Status.Published)]
+    [InlineData(Status.Archived)]
+    public void Validation_Works(Status rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Status> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(Status.Published)]
+    [InlineData(Status.Archived)]
+    public void SerializationRoundtrip_Works(Status rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Status> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }

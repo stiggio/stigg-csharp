@@ -170,14 +170,33 @@ public sealed record class Data : JsonModel
     /// <summary>
     /// Duration of the coupon validity in months
     /// </summary>
-    public required double? DurationInMonths
+    public required long? DurationInMonths
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<double>("durationInMonths");
+            return this._rawData.GetNullableStruct<long>("durationInMonths");
         }
         init { this._rawData.Set("durationInMonths", value); }
+    }
+
+    /// <summary>
+    /// Metadata associated with the entity
+    /// </summary>
+    public required IReadOnlyDictionary<string, string>? Metadata
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
+        }
+        init
+        {
+            this._rawData.Set<FrozenDictionary<string, string>?>(
+                "metadata",
+                value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
+            );
+        }
     }
 
     /// <summary>
@@ -196,12 +215,12 @@ public sealed record class Data : JsonModel
     /// <summary>
     /// Percentage discount off the original price
     /// </summary>
-    public required double? PercentOff
+    public required long? PercentOff
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<double>("percentOff");
+            return this._rawData.GetNullableStruct<long>("percentOff");
         }
         init { this._rawData.Set("percentOff", value); }
     }
@@ -222,12 +241,12 @@ public sealed record class Data : JsonModel
     /// <summary>
     /// Current status of the coupon
     /// </summary>
-    public required ApiEnum<string, Status> Status
+    public required ApiEnum<string, DataStatus> Status
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, Status>>("status");
+            return this._rawData.GetNotNullClass<ApiEnum<string, DataStatus>>("status");
         }
         init { this._rawData.Set("status", value); }
     }
@@ -271,6 +290,7 @@ public sealed record class Data : JsonModel
         _ = this.CreatedAt;
         _ = this.Description;
         _ = this.DurationInMonths;
+        _ = this.Metadata;
         _ = this.Name;
         _ = this.PercentOff;
         this.Source?.Validate();
@@ -334,7 +354,7 @@ public sealed record class DataAmountsOff : JsonModel
     }
 
     /// <summary>
-    /// The price currency
+    /// ISO 4217 currency code
     /// </summary>
     public required ApiEnum<string, DataAmountsOffCurrency> Currency
     {
@@ -391,7 +411,7 @@ class DataAmountsOffFromRaw : IFromRawJson<DataAmountsOff>
 }
 
 /// <summary>
-/// The price currency
+/// ISO 4217 currency code
 /// </summary>
 [JsonConverter(typeof(DataAmountsOffCurrencyConverter))]
 public enum DataAmountsOffCurrency
@@ -828,16 +848,16 @@ sealed class SourceConverter : JsonConverter<Source>
 /// <summary>
 /// Current status of the coupon
 /// </summary>
-[JsonConverter(typeof(StatusConverter))]
-public enum Status
+[JsonConverter(typeof(DataStatusConverter))]
+public enum DataStatus
 {
     Active,
     Archived,
 }
 
-sealed class StatusConverter : JsonConverter<Status>
+sealed class DataStatusConverter : JsonConverter<DataStatus>
 {
-    public override Status Read(
+    public override DataStatus Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -845,20 +865,24 @@ sealed class StatusConverter : JsonConverter<Status>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "ACTIVE" => Status.Active,
-            "ARCHIVED" => Status.Archived,
-            _ => (Status)(-1),
+            "ACTIVE" => DataStatus.Active,
+            "ARCHIVED" => DataStatus.Archived,
+            _ => (DataStatus)(-1),
         };
     }
 
-    public override void Write(Utf8JsonWriter writer, Status value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        DataStatus value,
+        JsonSerializerOptions options
+    )
     {
         JsonSerializer.Serialize(
             writer,
             value switch
             {
-                Status.Active => "ACTIVE",
-                Status.Archived => "ARCHIVED",
+                DataStatus.Active => "ACTIVE",
+                DataStatus.Archived => "ARCHIVED",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

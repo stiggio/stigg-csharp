@@ -23,9 +23,10 @@ public class CouponListResponseTest : TestBase
             BillingLinkUrl = "billingLinkUrl",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
-            DurationInMonths = 0,
+            DurationInMonths = 1,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
-            PercentOff = 0,
+            PercentOff = 1,
             Source = CouponListResponseSource.Stigg,
             Status = CouponListResponseStatus.Active,
             Type = CouponListResponseType.Fixed,
@@ -41,9 +42,10 @@ public class CouponListResponseTest : TestBase
         string expectedBillingLinkUrl = "billingLinkUrl";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedDescription = "description";
-        double expectedDurationInMonths = 0;
+        long expectedDurationInMonths = 1;
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedName = "name";
-        double expectedPercentOff = 0;
+        long expectedPercentOff = 1;
         ApiEnum<string, CouponListResponseSource> expectedSource = CouponListResponseSource.Stigg;
         ApiEnum<string, CouponListResponseStatus> expectedStatus = CouponListResponseStatus.Active;
         ApiEnum<string, CouponListResponseType> expectedType = CouponListResponseType.Fixed;
@@ -61,6 +63,14 @@ public class CouponListResponseTest : TestBase
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedDescription, model.Description);
         Assert.Equal(expectedDurationInMonths, model.DurationInMonths);
+        Assert.NotNull(model.Metadata);
+        Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(model.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, model.Metadata[item.Key]);
+        }
         Assert.Equal(expectedName, model.Name);
         Assert.Equal(expectedPercentOff, model.PercentOff);
         Assert.Equal(expectedSource, model.Source);
@@ -83,9 +93,10 @@ public class CouponListResponseTest : TestBase
             BillingLinkUrl = "billingLinkUrl",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
-            DurationInMonths = 0,
+            DurationInMonths = 1,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
-            PercentOff = 0,
+            PercentOff = 1,
             Source = CouponListResponseSource.Stigg,
             Status = CouponListResponseStatus.Active,
             Type = CouponListResponseType.Fixed,
@@ -115,9 +126,10 @@ public class CouponListResponseTest : TestBase
             BillingLinkUrl = "billingLinkUrl",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
-            DurationInMonths = 0,
+            DurationInMonths = 1,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
-            PercentOff = 0,
+            PercentOff = 1,
             Source = CouponListResponseSource.Stigg,
             Status = CouponListResponseStatus.Active,
             Type = CouponListResponseType.Fixed,
@@ -140,9 +152,10 @@ public class CouponListResponseTest : TestBase
         string expectedBillingLinkUrl = "billingLinkUrl";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedDescription = "description";
-        double expectedDurationInMonths = 0;
+        long expectedDurationInMonths = 1;
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedName = "name";
-        double expectedPercentOff = 0;
+        long expectedPercentOff = 1;
         ApiEnum<string, CouponListResponseSource> expectedSource = CouponListResponseSource.Stigg;
         ApiEnum<string, CouponListResponseStatus> expectedStatus = CouponListResponseStatus.Active;
         ApiEnum<string, CouponListResponseType> expectedType = CouponListResponseType.Fixed;
@@ -160,6 +173,14 @@ public class CouponListResponseTest : TestBase
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedDescription, deserialized.Description);
         Assert.Equal(expectedDurationInMonths, deserialized.DurationInMonths);
+        Assert.NotNull(deserialized.Metadata);
+        Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(deserialized.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, deserialized.Metadata[item.Key]);
+        }
         Assert.Equal(expectedName, deserialized.Name);
         Assert.Equal(expectedPercentOff, deserialized.PercentOff);
         Assert.Equal(expectedSource, deserialized.Source);
@@ -182,9 +203,10 @@ public class CouponListResponseTest : TestBase
             BillingLinkUrl = "billingLinkUrl",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
-            DurationInMonths = 0,
+            DurationInMonths = 1,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
-            PercentOff = 0,
+            PercentOff = 1,
             Source = CouponListResponseSource.Stigg,
             Status = CouponListResponseStatus.Active,
             Type = CouponListResponseType.Fixed,
@@ -208,9 +230,10 @@ public class CouponListResponseTest : TestBase
             BillingLinkUrl = "billingLinkUrl",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
-            DurationInMonths = 0,
+            DurationInMonths = 1,
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Name = "name",
-            PercentOff = 0,
+            PercentOff = 1,
             Source = CouponListResponseSource.Stigg,
             Status = CouponListResponseStatus.Active,
             Type = CouponListResponseType.Fixed,

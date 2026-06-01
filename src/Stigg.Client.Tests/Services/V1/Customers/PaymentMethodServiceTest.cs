@@ -5,7 +5,7 @@ namespace Stigg.Client.Tests.Services.V1.Customers;
 
 public class PaymentMethodServiceTest : TestBase
 {
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Attach_Works()
     {
         var customerResponse = await this.client.V1.Customers.PaymentMethod.Attach(
@@ -21,7 +21,7 @@ public class PaymentMethodServiceTest : TestBase
         customerResponse.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Detach_Works()
     {
         var customerResponse = await this.client.V1.Customers.PaymentMethod.Detach(

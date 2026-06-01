@@ -309,12 +309,12 @@ public sealed record class Data : JsonModel
     /// <summary>
     /// The status of the entitlement
     /// </summary>
-    public required ApiEnum<string, Status> Status
+    public required ApiEnum<string, DataStatus> Status
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, Status>>("status");
+            return this._rawData.GetNotNullClass<ApiEnum<string, DataStatus>>("status");
         }
         init { this._rawData.Set("status", value); }
     }
@@ -566,7 +566,7 @@ public record class ResetPeriodConfiguration : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="YearlyResetPeriodConfig"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -589,7 +589,7 @@ public record class ResetPeriodConfiguration : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="MonthlyResetPeriodConfig"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -612,7 +612,7 @@ public record class ResetPeriodConfiguration : ModelBase
     /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
     /// type <see cref="WeeklyResetPeriodConfig"/>.
     ///
-    /// <para>Consider using <see cref="Switch"> or <see cref="Match"> if you need to handle every variant.</para>
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
     ///
     /// <example>
     /// <code>
@@ -634,7 +634,7 @@ public record class ResetPeriodConfiguration : ModelBase
     /// <summary>
     /// Calls the function parameter corresponding to the variant the instance was constructed with.
     ///
-    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match">
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match"/>
     /// if you need your function parameters to return something.</para>
     ///
     /// <exception cref="StiggInvalidDataException">
@@ -645,9 +645,9 @@ public record class ResetPeriodConfiguration : ModelBase
     /// <example>
     /// <code>
     /// instance.Switch(
-    ///     (YearlyResetPeriodConfig value) => {...},
-    ///     (MonthlyResetPeriodConfig value) => {...},
-    ///     (WeeklyResetPeriodConfig value) => {...}
+    ///     (YearlyResetPeriodConfig value) =&gt; {...},
+    ///     (MonthlyResetPeriodConfig value) =&gt; {...},
+    ///     (WeeklyResetPeriodConfig value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
@@ -680,7 +680,7 @@ public record class ResetPeriodConfiguration : ModelBase
     /// Calls the function parameter corresponding to the variant the instance was constructed with and
     /// returns its result.
     ///
-    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch">
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch"/>
     /// if you don't need your function parameters to return a value.</para>
     ///
     /// <exception cref="StiggInvalidDataException">
@@ -691,9 +691,9 @@ public record class ResetPeriodConfiguration : ModelBase
     /// <example>
     /// <code>
     /// var result = instance.Match(
-    ///     (YearlyResetPeriodConfig value) => {...},
-    ///     (MonthlyResetPeriodConfig value) => {...},
-    ///     (WeeklyResetPeriodConfig value) => {...}
+    ///     (YearlyResetPeriodConfig value) =&gt; {...},
+    ///     (MonthlyResetPeriodConfig value) =&gt; {...},
+    ///     (WeeklyResetPeriodConfig value) =&gt; {...}
     /// );
     /// </code>
     /// </example>
@@ -1232,17 +1232,17 @@ sealed class WeeklyResetPeriodConfigAccordingToConverter
 /// <summary>
 /// The status of the entitlement
 /// </summary>
-[JsonConverter(typeof(StatusConverter))]
-public enum Status
+[JsonConverter(typeof(DataStatusConverter))]
+public enum DataStatus
 {
     Active,
     Expired,
     Paused,
 }
 
-sealed class StatusConverter : JsonConverter<Status>
+sealed class DataStatusConverter : JsonConverter<DataStatus>
 {
-    public override Status Read(
+    public override DataStatus Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -1250,22 +1250,26 @@ sealed class StatusConverter : JsonConverter<Status>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "Active" => Status.Active,
-            "Expired" => Status.Expired,
-            "Paused" => Status.Paused,
-            _ => (Status)(-1),
+            "Active" => DataStatus.Active,
+            "Expired" => DataStatus.Expired,
+            "Paused" => DataStatus.Paused,
+            _ => (DataStatus)(-1),
         };
     }
 
-    public override void Write(Utf8JsonWriter writer, Status value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        DataStatus value,
+        JsonSerializerOptions options
+    )
     {
         JsonSerializer.Serialize(
             writer,
             value switch
             {
-                Status.Active => "Active",
-                Status.Expired => "Expired",
-                Status.Paused => "Paused",
+                DataStatus.Active => "Active",
+                DataStatus.Expired => "Expired",
+                DataStatus.Paused => "Paused",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
