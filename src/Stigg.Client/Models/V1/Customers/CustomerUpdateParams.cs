@@ -848,6 +848,7 @@ public enum VendorIdentifier
     OpenFga,
     AppStore,
     Received,
+    Prequel,
 }
 
 sealed class VendorIdentifierConverter : JsonConverter<VendorIdentifier>
@@ -871,6 +872,7 @@ sealed class VendorIdentifierConverter : JsonConverter<VendorIdentifier>
             "OPEN_FGA" => VendorIdentifier.OpenFga,
             "APP_STORE" => VendorIdentifier.AppStore,
             "RECEIVED" => VendorIdentifier.Received,
+            "PREQUEL" => VendorIdentifier.Prequel,
             _ => (VendorIdentifier)(-1),
         };
     }
@@ -896,6 +898,7 @@ sealed class VendorIdentifierConverter : JsonConverter<VendorIdentifier>
                 VendorIdentifier.OpenFga => "OPEN_FGA",
                 VendorIdentifier.AppStore => "APP_STORE",
                 VendorIdentifier.Received => "RECEIVED",
+                VendorIdentifier.Prequel => "PREQUEL",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

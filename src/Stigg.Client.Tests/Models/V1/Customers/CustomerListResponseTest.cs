@@ -1718,6 +1718,7 @@ public class CustomerListResponseIntegrationVendorIdentifierTest : TestBase
     [InlineData(CustomerListResponseIntegrationVendorIdentifier.OpenFga)]
     [InlineData(CustomerListResponseIntegrationVendorIdentifier.AppStore)]
     [InlineData(CustomerListResponseIntegrationVendorIdentifier.Received)]
+    [InlineData(CustomerListResponseIntegrationVendorIdentifier.Prequel)]
     public void Validation_Works(CustomerListResponseIntegrationVendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -1748,6 +1749,7 @@ public class CustomerListResponseIntegrationVendorIdentifierTest : TestBase
     [InlineData(CustomerListResponseIntegrationVendorIdentifier.OpenFga)]
     [InlineData(CustomerListResponseIntegrationVendorIdentifier.AppStore)]
     [InlineData(CustomerListResponseIntegrationVendorIdentifier.Received)]
+    [InlineData(CustomerListResponseIntegrationVendorIdentifier.Prequel)]
     public void SerializationRoundtrip_Works(
         CustomerListResponseIntegrationVendorIdentifier rawValue
     )

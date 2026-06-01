@@ -203,6 +203,7 @@ public enum DataVendorIdentifier
     OpenFga,
     AppStore,
     Received,
+    Prequel,
 }
 
 sealed class DataVendorIdentifierConverter : JsonConverter<DataVendorIdentifier>
@@ -226,6 +227,7 @@ sealed class DataVendorIdentifierConverter : JsonConverter<DataVendorIdentifier>
             "OPEN_FGA" => DataVendorIdentifier.OpenFga,
             "APP_STORE" => DataVendorIdentifier.AppStore,
             "RECEIVED" => DataVendorIdentifier.Received,
+            "PREQUEL" => DataVendorIdentifier.Prequel,
             _ => (DataVendorIdentifier)(-1),
         };
     }
@@ -251,6 +253,7 @@ sealed class DataVendorIdentifierConverter : JsonConverter<DataVendorIdentifier>
                 DataVendorIdentifier.OpenFga => "OPEN_FGA",
                 DataVendorIdentifier.AppStore => "APP_STORE",
                 DataVendorIdentifier.Received => "RECEIVED",
+                DataVendorIdentifier.Prequel => "PREQUEL",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
