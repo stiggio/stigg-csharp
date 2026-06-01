@@ -1,0 +1,324 @@
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Stigg.Client.Core;
+using Stigg.Client.Models.V1.Plans;
+using Stigg.Client.Services.V1.Plans;
+
+namespace Stigg.Client.Services.V1;
+
+/// <summary>
+/// Operations related to plans
+///
+/// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
+/// breaking changes in non-major versions. We may add new methods in the future that
+/// cause existing derived classes to break.</para>
+/// </summary>
+public interface IPlanService
+{
+    /// <summary>
+    /// Returns a view of this service that provides access to raw HTTP responses
+    /// for each method.
+    /// </summary>
+    IPlanServiceWithRawResponse WithRawResponse { get; }
+
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
+    IPlanService WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
+    IEntitlementService Entitlements { get; }
+
+    /// <summary>
+    /// Creates a new plan in draft status.
+    /// </summary>
+    Task<Plan> Create(PlanCreateParams parameters, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Retrieves a plan by its unique identifier, including entitlements and pricing
+    /// details.
+    /// </summary>
+    Task<Plan> Retrieve(
+        PlanRetrieveParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Retrieve(PlanRetrieveParams, CancellationToken)"/>
+    Task<Plan> Retrieve(
+        string id,
+        PlanRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Updates an existing plan's properties such as display name, description, and
+    /// metadata.
+    /// </summary>
+    Task<Plan> Update(PlanUpdateParams parameters, CancellationToken cancellationToken = default);
+
+    /// <inheritdoc cref="Update(PlanUpdateParams, CancellationToken)"/>
+    Task<Plan> Update(
+        string id,
+        PlanUpdateParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Retrieves a paginated list of plans in the environment.
+    /// </summary>
+    Task<PlanListPage> List(
+        PlanListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Archives a plan, preventing it from being used in new subscriptions.
+    /// </summary>
+    Task<Plan> Archive(PlanArchiveParams parameters, CancellationToken cancellationToken = default);
+
+    /// <inheritdoc cref="Archive(PlanArchiveParams, CancellationToken)"/>
+    Task<Plan> Archive(
+        string id,
+        PlanArchiveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Creates a draft version of an existing plan for modification before publishing.
+    /// </summary>
+    Task<Plan> CreateDraft(
+        PlanCreateDraftParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="CreateDraft(PlanCreateDraftParams, CancellationToken)"/>
+    Task<Plan> CreateDraft(
+        string id,
+        PlanCreateDraftParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Retrieves the list of charges configured on a plan.
+    /// </summary>
+    Task<PlanListChargesPage> ListCharges(
+        PlanListChargesParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="ListCharges(PlanListChargesParams, CancellationToken)"/>
+    Task<PlanListChargesPage> ListCharges(
+        string id,
+        PlanListChargesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Retrieves the list of overage charges configured on a plan.
+    /// </summary>
+    Task<PlanListOverageChargesPage> ListOverageCharges(
+        PlanListOverageChargesParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="ListOverageCharges(PlanListOverageChargesParams, CancellationToken)"/>
+    Task<PlanListOverageChargesPage> ListOverageCharges(
+        string id,
+        PlanListOverageChargesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Publishes a draft plan, making it available for use in subscriptions.
+    /// </summary>
+    Task<PlanPublishResponse> Publish(
+        PlanPublishParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Publish(PlanPublishParams, CancellationToken)"/>
+    Task<PlanPublishResponse> Publish(
+        string id,
+        PlanPublishParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Removes a draft version of a plan.
+    /// </summary>
+    Task<PlanRemoveDraftResponse> RemoveDraft(
+        PlanRemoveDraftParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="RemoveDraft(PlanRemoveDraftParams, CancellationToken)"/>
+    Task<PlanRemoveDraftResponse> RemoveDraft(
+        string id,
+        PlanRemoveDraftParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+}
+
+/// <summary>
+/// A view of <see cref="IPlanService"/> that provides access to raw
+/// HTTP responses for each method.
+/// </summary>
+public interface IPlanServiceWithRawResponse
+{
+    /// <summary>
+    /// Returns a view of this service with the given option modifications applied.
+    ///
+    /// <para>The original service is not modified.</para>
+    /// </summary>
+    IPlanServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
+    IEntitlementServiceWithRawResponse Entitlements { get; }
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>post /api/v1/plans</c>, but is otherwise the
+    /// same as <see cref="IPlanService.Create(PlanCreateParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<Plan>> Create(
+        PlanCreateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>get /api/v1/plans/{id}</c>, but is otherwise the
+    /// same as <see cref="IPlanService.Retrieve(PlanRetrieveParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<Plan>> Retrieve(
+        PlanRetrieveParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Retrieve(PlanRetrieveParams, CancellationToken)"/>
+    Task<HttpResponse<Plan>> Retrieve(
+        string id,
+        PlanRetrieveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>patch /api/v1/plans/{id}</c>, but is otherwise the
+    /// same as <see cref="IPlanService.Update(PlanUpdateParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<Plan>> Update(
+        PlanUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Update(PlanUpdateParams, CancellationToken)"/>
+    Task<HttpResponse<Plan>> Update(
+        string id,
+        PlanUpdateParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>get /api/v1/plans</c>, but is otherwise the
+    /// same as <see cref="IPlanService.List(PlanListParams?, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<PlanListPage>> List(
+        PlanListParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>post /api/v1/plans/{id}/archive</c>, but is otherwise the
+    /// same as <see cref="IPlanService.Archive(PlanArchiveParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<Plan>> Archive(
+        PlanArchiveParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Archive(PlanArchiveParams, CancellationToken)"/>
+    Task<HttpResponse<Plan>> Archive(
+        string id,
+        PlanArchiveParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>post /api/v1/plans/{id}/draft</c>, but is otherwise the
+    /// same as <see cref="IPlanService.CreateDraft(PlanCreateDraftParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<Plan>> CreateDraft(
+        PlanCreateDraftParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="CreateDraft(PlanCreateDraftParams, CancellationToken)"/>
+    Task<HttpResponse<Plan>> CreateDraft(
+        string id,
+        PlanCreateDraftParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>get /api/v1/plans/{id}/charges</c>, but is otherwise the
+    /// same as <see cref="IPlanService.ListCharges(PlanListChargesParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<PlanListChargesPage>> ListCharges(
+        PlanListChargesParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="ListCharges(PlanListChargesParams, CancellationToken)"/>
+    Task<HttpResponse<PlanListChargesPage>> ListCharges(
+        string id,
+        PlanListChargesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>get /api/v1/plans/{id}/overage-charges</c>, but is otherwise the
+    /// same as <see cref="IPlanService.ListOverageCharges(PlanListOverageChargesParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<PlanListOverageChargesPage>> ListOverageCharges(
+        PlanListOverageChargesParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="ListOverageCharges(PlanListOverageChargesParams, CancellationToken)"/>
+    Task<HttpResponse<PlanListOverageChargesPage>> ListOverageCharges(
+        string id,
+        PlanListOverageChargesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>post /api/v1/plans/{id}/publish</c>, but is otherwise the
+    /// same as <see cref="IPlanService.Publish(PlanPublishParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<PlanPublishResponse>> Publish(
+        PlanPublishParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Publish(PlanPublishParams, CancellationToken)"/>
+    Task<HttpResponse<PlanPublishResponse>> Publish(
+        string id,
+        PlanPublishParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>delete /api/v1/plans/{id}/draft</c>, but is otherwise the
+    /// same as <see cref="IPlanService.RemoveDraft(PlanRemoveDraftParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<PlanRemoveDraftResponse>> RemoveDraft(
+        PlanRemoveDraftParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="RemoveDraft(PlanRemoveDraftParams, CancellationToken)"/>
+    Task<HttpResponse<PlanRemoveDraftResponse>> RemoveDraft(
+        string id,
+        PlanRemoveDraftParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+}

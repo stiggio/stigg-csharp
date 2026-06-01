@@ -78,7 +78,12 @@ public class PaymentMethodAttachParamsTest : TestBase
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
-        Assert.Equal(new Uri("https://api.stigg.io/api/v1/customers/x/payment-method"), url);
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri("https://api.stigg.io/api/v1/customers/x/payment-method"),
+                url
+            )
+        );
     }
 
     [Fact]
@@ -112,6 +117,8 @@ public class VendorIdentifierTest : TestBase
     [InlineData(VendorIdentifier.BigQuery)]
     [InlineData(VendorIdentifier.OpenFga)]
     [InlineData(VendorIdentifier.AppStore)]
+    [InlineData(VendorIdentifier.Received)]
+    [InlineData(VendorIdentifier.Prequel)]
     public void Validation_Works(VendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -142,6 +149,8 @@ public class VendorIdentifierTest : TestBase
     [InlineData(VendorIdentifier.BigQuery)]
     [InlineData(VendorIdentifier.OpenFga)]
     [InlineData(VendorIdentifier.AppStore)]
+    [InlineData(VendorIdentifier.Received)]
+    [InlineData(VendorIdentifier.Prequel)]
     public void SerializationRoundtrip_Works(VendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us

@@ -22,7 +22,7 @@ public class UsageReportResponseTest : TestBase
                     CustomerID = "customerId",
                     FeatureID = "featureId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Value = 0,
+                    Value = -9007199254740991,
                     CurrentUsage = 0,
                     NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     ResourceID = "resourceId",
@@ -41,7 +41,7 @@ public class UsageReportResponseTest : TestBase
                 CustomerID = "customerId",
                 FeatureID = "featureId",
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Value = 0,
+                Value = -9007199254740991,
                 CurrentUsage = 0,
                 NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 ResourceID = "resourceId",
@@ -71,7 +71,7 @@ public class UsageReportResponseTest : TestBase
                     CustomerID = "customerId",
                     FeatureID = "featureId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Value = 0,
+                    Value = -9007199254740991,
                     CurrentUsage = 0,
                     NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     ResourceID = "resourceId",
@@ -104,7 +104,7 @@ public class UsageReportResponseTest : TestBase
                     CustomerID = "customerId",
                     FeatureID = "featureId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Value = 0,
+                    Value = -9007199254740991,
                     CurrentUsage = 0,
                     NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     ResourceID = "resourceId",
@@ -130,7 +130,7 @@ public class UsageReportResponseTest : TestBase
                 CustomerID = "customerId",
                 FeatureID = "featureId",
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Value = 0,
+                Value = -9007199254740991,
                 CurrentUsage = 0,
                 NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 ResourceID = "resourceId",
@@ -160,7 +160,7 @@ public class UsageReportResponseTest : TestBase
                     CustomerID = "customerId",
                     FeatureID = "featureId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Value = 0,
+                    Value = -9007199254740991,
                     CurrentUsage = 0,
                     NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     ResourceID = "resourceId",
@@ -187,7 +187,7 @@ public class UsageReportResponseTest : TestBase
                     CustomerID = "customerId",
                     FeatureID = "featureId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Value = 0,
+                    Value = -9007199254740991,
                     CurrentUsage = 0,
                     NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     ResourceID = "resourceId",
@@ -215,7 +215,7 @@ public class UsageReportResponseDataTest : TestBase
             CustomerID = "customerId",
             FeatureID = "featureId",
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Value = 0,
+            Value = -9007199254740991,
             CurrentUsage = 0,
             NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ResourceID = "resourceId",
@@ -228,7 +228,7 @@ public class UsageReportResponseDataTest : TestBase
         string expectedCustomerID = "customerId";
         string expectedFeatureID = "featureId";
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        double expectedValue = 0;
+        long expectedValue = -9007199254740991;
         double expectedCurrentUsage = 0;
         DateTimeOffset expectedNextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedResourceID = "resourceId";
@@ -258,7 +258,7 @@ public class UsageReportResponseDataTest : TestBase
             CustomerID = "customerId",
             FeatureID = "featureId",
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Value = 0,
+            Value = -9007199254740991,
             CurrentUsage = 0,
             NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ResourceID = "resourceId",
@@ -285,7 +285,7 @@ public class UsageReportResponseDataTest : TestBase
             CustomerID = "customerId",
             FeatureID = "featureId",
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Value = 0,
+            Value = -9007199254740991,
             CurrentUsage = 0,
             NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ResourceID = "resourceId",
@@ -305,7 +305,7 @@ public class UsageReportResponseDataTest : TestBase
         string expectedCustomerID = "customerId";
         string expectedFeatureID = "featureId";
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        double expectedValue = 0;
+        long expectedValue = -9007199254740991;
         double expectedCurrentUsage = 0;
         DateTimeOffset expectedNextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedResourceID = "resourceId";
@@ -335,7 +335,7 @@ public class UsageReportResponseDataTest : TestBase
             CustomerID = "customerId",
             FeatureID = "featureId",
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Value = 0,
+            Value = -9007199254740991,
             CurrentUsage = 0,
             NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ResourceID = "resourceId",
@@ -356,7 +356,7 @@ public class UsageReportResponseDataTest : TestBase
             CustomerID = "customerId",
             FeatureID = "featureId",
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Value = 0,
+            Value = -9007199254740991,
         };
 
         Assert.Null(model.CurrentUsage);
@@ -381,7 +381,7 @@ public class UsageReportResponseDataTest : TestBase
             CustomerID = "customerId",
             FeatureID = "featureId",
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Value = 0,
+            Value = -9007199254740991,
         };
 
         model.Validate();
@@ -397,7 +397,7 @@ public class UsageReportResponseDataTest : TestBase
             CustomerID = "customerId",
             FeatureID = "featureId",
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Value = 0,
+            Value = -9007199254740991,
 
             CurrentUsage = null,
             NextResetDate = null,
@@ -428,7 +428,7 @@ public class UsageReportResponseDataTest : TestBase
             CustomerID = "customerId",
             FeatureID = "featureId",
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Value = 0,
+            Value = -9007199254740991,
 
             CurrentUsage = null,
             NextResetDate = null,
@@ -450,7 +450,7 @@ public class UsageReportResponseDataTest : TestBase
             CustomerID = "customerId",
             FeatureID = "featureId",
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Value = 0,
+            Value = -9007199254740991,
             CurrentUsage = 0,
             NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ResourceID = "resourceId",

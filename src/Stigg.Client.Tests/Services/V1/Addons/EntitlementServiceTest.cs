@@ -1,0 +1,106 @@
+using System.Threading.Tasks;
+using Stigg.Client.Models.V1.Addons.Entitlements;
+
+namespace Stigg.Client.Tests.Services.V1.Addons;
+
+public class EntitlementServiceTest : TestBase
+{
+    [Fact(Skip = "Mock server tests are disabled")]
+    public async Task Create_Works()
+    {
+        var entitlement = await this.client.V1.Addons.Entitlements.Create(
+            "addonId",
+            new()
+            {
+                Entitlements =
+                [
+                    new Feature()
+                    {
+                        ID = "id",
+                        Behavior = Behavior.Increment,
+                        Description = "description",
+                        DisplayNameOverride = "displayNameOverride",
+                        EnumValues = ["string"],
+                        HasSoftLimit = true,
+                        HasUnlimitedUsage = true,
+                        HiddenFromWidgets = [HiddenFromWidget.Paywall],
+                        IsCustom = true,
+                        IsGranted = true,
+                        MonthlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),
+                        Order = 0,
+                        ResetPeriod = ResetPeriod.Year,
+                        UsageLimit = 0,
+                        WeeklyResetPeriodConfiguration = new(
+                            WeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                        ),
+                        YearlyResetPeriodConfiguration = new(
+                            YearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                        ),
+                    },
+                ],
+            },
+            TestContext.Current.CancellationToken
+        );
+        entitlement.Validate();
+    }
+
+    [Fact(Skip = "Mock server tests are disabled")]
+    public async Task Update_Works()
+    {
+        var addonPackageEntitlement = await this.client.V1.Addons.Entitlements.Update(
+            "id",
+            new()
+            {
+                AddonID = "addonId",
+                Body = new BodyFeature()
+                {
+                    Behavior = BodyFeatureBehavior.Increment,
+                    Description = "description",
+                    DisplayNameOverride = "displayNameOverride",
+                    EnumValues = ["string"],
+                    HasSoftLimit = true,
+                    HasUnlimitedUsage = true,
+                    HiddenFromWidgets = [BodyFeatureHiddenFromWidget.Paywall],
+                    IsCustom = true,
+                    IsGranted = true,
+                    MonthlyResetPeriodConfiguration = new(
+                        BodyFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                    ),
+                    Order = 0,
+                    ResetPeriod = BodyFeatureResetPeriod.Year,
+                    UsageLimit = 0,
+                    WeeklyResetPeriodConfiguration = new(
+                        BodyFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                    ),
+                    YearlyResetPeriodConfiguration = new(
+                        BodyFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                    ),
+                },
+            },
+            TestContext.Current.CancellationToken
+        );
+        addonPackageEntitlement.Validate();
+    }
+
+    [Fact(Skip = "Mock server tests are disabled")]
+    public async Task List_Works()
+    {
+        var entitlements = await this.client.V1.Addons.Entitlements.List(
+            "addonId",
+            new(),
+            TestContext.Current.CancellationToken
+        );
+        entitlements.Validate();
+    }
+
+    [Fact(Skip = "Mock server tests are disabled")]
+    public async Task Delete_Works()
+    {
+        var addonPackageEntitlement = await this.client.V1.Addons.Entitlements.Delete(
+            "id",
+            new() { AddonID = "addonId" },
+            TestContext.Current.CancellationToken
+        );
+        addonPackageEntitlement.Validate();
+    }
+}

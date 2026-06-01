@@ -69,6 +69,9 @@ public record class SubscriptionUpdateParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// Await payment confirmation
+    /// </summary>
     public bool? AwaitPaymentConfirmation
     {
         get
@@ -84,6 +87,26 @@ public record class SubscriptionUpdateParams : ParamsBase
             }
 
             this._rawBodyData.Set("awaitPaymentConfirmation", value);
+        }
+    }
+
+    public ApiEnum<string, BillingCycleAnchor>? BillingCycleAnchor
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<ApiEnum<string, BillingCycleAnchor>>(
+                "billingCycleAnchor"
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawBodyData.Set("billingCycleAnchor", value);
         }
     }
 
@@ -156,6 +179,27 @@ public record class SubscriptionUpdateParams : ParamsBase
         }
     }
 
+    public IReadOnlyList<Entitlement>? Entitlements
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<ImmutableArray<Entitlement>>("entitlements");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawBodyData.Set<ImmutableArray<Entitlement>?>(
+                "entitlements",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
     /// <summary>
     /// Additional metadata for the subscription
     /// </summary>
@@ -180,6 +224,9 @@ public record class SubscriptionUpdateParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// Minimum spend amount
+    /// </summary>
     public MinimumSpend? MinimumSpend
     {
         get
@@ -213,6 +260,9 @@ public record class SubscriptionUpdateParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// Promotion code
+    /// </summary>
     public string? PromotionCode
     {
         get
@@ -248,29 +298,6 @@ public record class SubscriptionUpdateParams : ParamsBase
             }
 
             this._rawBodyData.Set("scheduleStrategy", value);
-        }
-    }
-
-    public IReadOnlyList<SubscriptionEntitlement>? SubscriptionEntitlements
-    {
-        get
-        {
-            this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNullableStruct<ImmutableArray<SubscriptionEntitlement>>(
-                "subscriptionEntitlements"
-            );
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawBodyData.Set<ImmutableArray<SubscriptionEntitlement>?>(
-                "subscriptionEntitlements",
-                value == null ? null : ImmutableArray.ToImmutableArray(value)
-            );
         }
     }
 
@@ -324,26 +351,30 @@ public record class SubscriptionUpdateParams : ParamsBase
     SubscriptionUpdateParams(
         FrozenDictionary<string, JsonElement> rawHeaderData,
         FrozenDictionary<string, JsonElement> rawQueryData,
-        FrozenDictionary<string, JsonElement> rawBodyData
+        FrozenDictionary<string, JsonElement> rawBodyData,
+        string id
     )
     {
         this._rawHeaderData = new(rawHeaderData);
         this._rawQueryData = new(rawQueryData);
         this._rawBodyData = new(rawBodyData);
+        this.ID = id;
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson{T}.FromRawUnchecked"/>
     public static SubscriptionUpdateParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
-        IReadOnlyDictionary<string, JsonElement> rawBodyData
+        IReadOnlyDictionary<string, JsonElement> rawBodyData,
+        string id
     )
     {
         return new(
             FrozenDictionary.ToFrozenDictionary(rawHeaderData),
             FrozenDictionary.ToFrozenDictionary(rawQueryData),
-            FrozenDictionary.ToFrozenDictionary(rawBodyData)
+            FrozenDictionary.ToFrozenDictionary(rawBodyData),
+            id
         );
     }
 
@@ -412,28 +443,34 @@ public record class SubscriptionUpdateParams : ParamsBase
     }
 }
 
+/// <summary>
+/// Addon configuration
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<Addon, AddonFromRaw>))]
 public sealed record class Addon : JsonModel
 {
     /// <summary>
     /// Addon ID
     /// </summary>
-    public required string AddonID
+    public required string ID
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("addonId");
+            return this._rawData.GetNotNullClass<string>("id");
         }
-        init { this._rawData.Set("addonId", value); }
+        init { this._rawData.Set("id", value); }
     }
 
-    public required double Quantity
+    /// <summary>
+    /// Number of addon instances
+    /// </summary>
+    public required long Quantity
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<double>("quantity");
+            return this._rawData.GetNotNullStruct<long>("quantity");
         }
         init { this._rawData.Set("quantity", value); }
     }
@@ -441,7 +478,7 @@ public sealed record class Addon : JsonModel
     /// <inheritdoc/>
     public override void Validate()
     {
-        _ = this.AddonID;
+        _ = this.ID;
         _ = this.Quantity;
     }
 
@@ -519,6 +556,9 @@ public sealed record class AppliedCoupon : JsonModel
         }
     }
 
+    /// <summary>
+    /// Stigg coupon ID
+    /// </summary>
     public string? CouponID
     {
         get
@@ -814,9 +854,15 @@ class DiscountFromRaw : IFromRawJson<Discount>
         Discount.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Monetary amount with currency
+/// </summary>
 [JsonConverter(typeof(JsonModelConverter<AmountsOff, AmountsOffFromRaw>))]
 public sealed record class AmountsOff : JsonModel
 {
+    /// <summary>
+    /// The price amount
+    /// </summary>
     public required double Amount
     {
         get
@@ -827,29 +873,24 @@ public sealed record class AmountsOff : JsonModel
         init { this._rawData.Set("amount", value); }
     }
 
-    public ApiEnum<string, Currency>? Currency
+    /// <summary>
+    /// ISO 4217 currency code
+    /// </summary>
+    public required ApiEnum<string, Currency> Currency
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ApiEnum<string, Currency>>("currency");
+            return this._rawData.GetNotNullClass<ApiEnum<string, Currency>>("currency");
         }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("currency", value);
-        }
+        init { this._rawData.Set("currency", value); }
     }
 
     /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Amount;
-        this.Currency?.Validate();
+        this.Currency.Validate();
     }
 
     public AmountsOff() { }
@@ -878,13 +919,6 @@ public sealed record class AmountsOff : JsonModel
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
-
-    [SetsRequiredMembers]
-    public AmountsOff(double amount)
-        : this()
-    {
-        this.Amount = amount;
-    }
 }
 
 class AmountsOffFromRaw : IFromRawJson<AmountsOff>
@@ -894,6 +928,9 @@ class AmountsOffFromRaw : IFromRawJson<AmountsOff>
         AmountsOff.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// ISO 4217 currency code
+/// </summary>
 [JsonConverter(typeof(CurrencyConverter))]
 public enum Currency
 {
@@ -1276,6 +1313,50 @@ sealed class CurrencyConverter : JsonConverter<Currency>
     }
 }
 
+[JsonConverter(typeof(BillingCycleAnchorConverter))]
+public enum BillingCycleAnchor
+{
+    Unchanged,
+    Now,
+}
+
+sealed class BillingCycleAnchorConverter : JsonConverter<BillingCycleAnchor>
+{
+    public override BillingCycleAnchor Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "UNCHANGED" => BillingCycleAnchor.Unchanged,
+            "NOW" => BillingCycleAnchor.Now,
+            _ => (BillingCycleAnchor)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        BillingCycleAnchor value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                BillingCycleAnchor.Unchanged => "UNCHANGED",
+                BillingCycleAnchor.Now => "NOW",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
 [JsonConverter(typeof(JsonModelConverter<BillingInformation, BillingInformationFromRaw>))]
 public sealed record class BillingInformation : JsonModel
 {
@@ -1411,14 +1492,12 @@ public sealed record class BillingInformation : JsonModel
     /// <summary>
     /// Additional metadata for the subscription
     /// </summary>
-    public IReadOnlyDictionary<string, JsonElement>? Metadata
+    public IReadOnlyDictionary<string, string>? Metadata
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<FrozenDictionary<string, JsonElement>>(
-                "metadata"
-            );
+            return this._rawData.GetNullableClass<FrozenDictionary<string, string>>("metadata");
         }
         init
         {
@@ -1427,7 +1506,7 @@ public sealed record class BillingInformation : JsonModel
                 return;
             }
 
-            this._rawData.Set<FrozenDictionary<string, JsonElement>?>(
+            this._rawData.Set<FrozenDictionary<string, string>?>(
                 "metadata",
                 value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
             );
@@ -1908,6 +1987,9 @@ sealed class BillingPeriodConverter : JsonConverter<BillingPeriod>
 [JsonConverter(typeof(JsonModelConverter<Budget, BudgetFromRaw>))]
 public sealed record class Budget : JsonModel
 {
+    /// <summary>
+    /// Whether the budget is a soft limit
+    /// </summary>
     public required bool HasSoftLimit
     {
         get
@@ -1918,6 +2000,9 @@ public sealed record class Budget : JsonModel
         init { this._rawData.Set("hasSoftLimit", value); }
     }
 
+    /// <summary>
+    /// Maximum spending limit
+    /// </summary>
     public required double Limit
     {
         get
@@ -2095,1228 +2180,323 @@ sealed class TypeConverter : JsonConverter<global::Stigg.Client.Models.V1.Subscr
     }
 }
 
-[JsonConverter(typeof(JsonModelConverter<MinimumSpend, MinimumSpendFromRaw>))]
-public sealed record class MinimumSpend : JsonModel
+/// <summary>
+/// Feature entitlement configuration for a subscription
+/// </summary>
+[JsonConverter(typeof(EntitlementConverter))]
+public record class Entitlement : ModelBase
 {
-    public Minimum? Minimum
+    public object? Value { get; } = null;
+
+    JsonElement? _element = null;
+
+    public JsonElement Json
     {
         get
         {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<Minimum>("minimum");
+            return this._element ??= JsonSerializer.SerializeToElement(
+                this.Value,
+                ModelBase.SerializerOptions
+            );
         }
-        init { this._rawData.Set("minimum", value); }
     }
 
-    /// <inheritdoc/>
+    public string ID
+    {
+        get { return Match(feature: (x) => x.ID, credit: (x) => x.ID); }
+    }
+
+    public JsonElement Type
+    {
+        get { return Match(feature: (x) => x.Type, credit: (x) => x.Type); }
+    }
+
+    public Entitlement(Feature value, JsonElement? element = null)
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public Entitlement(Credit value, JsonElement? element = null)
+    {
+        this.Value = value;
+        this._element = element;
+    }
+
+    public Entitlement(JsonElement element)
+    {
+        this._element = element;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="Feature"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickFeature(out var value)) {
+    ///     // `value` is of type `Feature`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickFeature([NotNullWhen(true)] out Feature? value)
+    {
+        value = this.Value as Feature;
+        return value != null;
+    }
+
+    /// <summary>
+    /// Returns true and sets the <c>out</c> parameter if the instance was constructed with a variant of
+    /// type <see cref="Credit"/>.
+    ///
+    /// <para>Consider using <see cref="Switch"/> or <see cref="Match"/> if you need to handle every variant.</para>
+    ///
+    /// <example>
+    /// <code>
+    /// if (instance.TryPickCredit(out var value)) {
+    ///     // `value` is of type `Credit`
+    ///     Console.WriteLine(value);
+    /// }
+    /// </code>
+    /// </example>
+    /// </summary>
+    public bool TryPickCredit([NotNullWhen(true)] out Credit? value)
+    {
+        value = this.Value as Credit;
+        return value != null;
+    }
+
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Match"/>
+    /// if you need your function parameters to return something.</para>
+    ///
+    /// <exception cref="StiggInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// instance.Switch(
+    ///     (Feature value) =&gt; {...},
+    ///     (Credit value) =&gt; {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
+    public void Switch(System::Action<Feature> feature, System::Action<Credit> credit)
+    {
+        switch (this.Value)
+        {
+            case Feature value:
+                feature(value);
+                break;
+            case Credit value:
+                credit(value);
+                break;
+            default:
+                throw new StiggInvalidDataException(
+                    "Data did not match any variant of Entitlement"
+                );
+        }
+    }
+
+    /// <summary>
+    /// Calls the function parameter corresponding to the variant the instance was constructed with and
+    /// returns its result.
+    ///
+    /// <para>Use the <c>TryPick</c> method(s) if you don't need to handle every variant, or <see cref="Switch"/>
+    /// if you don't need your function parameters to return a value.</para>
+    ///
+    /// <exception cref="StiggInvalidDataException">
+    /// Thrown when the instance was constructed with an unknown variant (e.g. deserialized from raw data
+    /// that doesn't match any variant's expected shape).
+    /// </exception>
+    ///
+    /// <example>
+    /// <code>
+    /// var result = instance.Match(
+    ///     (Feature value) =&gt; {...},
+    ///     (Credit value) =&gt; {...}
+    /// );
+    /// </code>
+    /// </example>
+    /// </summary>
+    public T Match<T>(System::Func<Feature, T> feature, System::Func<Credit, T> credit)
+    {
+        return this.Value switch
+        {
+            Feature value => feature(value),
+            Credit value => credit(value),
+            _ => throw new StiggInvalidDataException(
+                "Data did not match any variant of Entitlement"
+            ),
+        };
+    }
+
+    public static implicit operator Entitlement(Feature value) => new(value);
+
+    public static implicit operator Entitlement(Credit value) => new(value);
+
+    /// <summary>
+    /// Validates that the instance was constructed with a known variant and that this variant is valid
+    /// (based on its own <c>Validate</c> method).
+    ///
+    /// <para>This is useful for instances constructed from raw JSON data (e.g. deserialized from an API response).</para>
+    ///
+    /// <exception cref="StiggInvalidDataException">
+    /// Thrown when the instance does not pass validation.
+    /// </exception>
+    /// </summary>
     public override void Validate()
     {
-        this.Minimum?.Validate();
-    }
-
-    public MinimumSpend() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public MinimumSpend(MinimumSpend minimumSpend)
-        : base(minimumSpend) { }
-#pragma warning restore CS8618
-
-    public MinimumSpend(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    MinimumSpend(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="MinimumSpendFromRaw.FromRawUnchecked"/>
-    public static MinimumSpend FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-}
-
-class MinimumSpendFromRaw : IFromRawJson<MinimumSpend>
-{
-    /// <inheritdoc/>
-    public MinimumSpend FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        MinimumSpend.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(JsonModelConverter<Minimum, MinimumFromRaw>))]
-public sealed record class Minimum : JsonModel
-{
-    public required double Amount
-    {
-        get
+        if (this.Value == null)
         {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<double>("amount");
+            throw new StiggInvalidDataException("Data did not match any variant of Entitlement");
         }
-        init { this._rawData.Set("amount", value); }
+        this.Switch((feature) => feature.Validate(), (credit) => credit.Validate());
     }
 
-    public ApiEnum<string, MinimumCurrency>? Currency
+    public virtual bool Equals(Entitlement? other) =>
+        other != null
+        && this.VariantIndex() == other.VariantIndex()
+        && JsonElement.DeepEquals(this.Json, other.Json);
+
+    public override int GetHashCode()
     {
-        get
+        return 0;
+    }
+
+    public override string ToString() =>
+        JsonSerializer.Serialize(
+            FriendlyJsonPrinter.PrintValue(this.Json),
+            ModelBase.ToStringSerializerOptions
+        );
+
+    int VariantIndex()
+    {
+        return this.Value switch
         {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ApiEnum<string, MinimumCurrency>>("currency");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("currency", value);
-        }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        _ = this.Amount;
-        this.Currency?.Validate();
-    }
-
-    public Minimum() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public Minimum(Minimum minimum)
-        : base(minimum) { }
-#pragma warning restore CS8618
-
-    public Minimum(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    Minimum(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="MinimumFromRaw.FromRawUnchecked"/>
-    public static Minimum FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-
-    [SetsRequiredMembers]
-    public Minimum(double amount)
-        : this()
-    {
-        this.Amount = amount;
+            Feature _ => 0,
+            Credit _ => 1,
+            _ => -1,
+        };
     }
 }
 
-class MinimumFromRaw : IFromRawJson<Minimum>
+sealed class EntitlementConverter : JsonConverter<Entitlement>
 {
-    /// <inheritdoc/>
-    public Minimum FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        Minimum.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(MinimumCurrencyConverter))]
-public enum MinimumCurrency
-{
-    Usd,
-    Aed,
-    All,
-    Amd,
-    Ang,
-    Aud,
-    Awg,
-    Azn,
-    Bam,
-    Bbd,
-    Bdt,
-    Bgn,
-    Bif,
-    Bmd,
-    Bnd,
-    Bsd,
-    Bwp,
-    Byn,
-    Bzd,
-    Brl,
-    Cad,
-    Cdf,
-    Chf,
-    Cny,
-    Czk,
-    Dkk,
-    Dop,
-    Dzd,
-    Egp,
-    Etb,
-    Eur,
-    Fjd,
-    Gbp,
-    Gel,
-    Gip,
-    Gmd,
-    Gyd,
-    Hkd,
-    Hrk,
-    Htg,
-    Idr,
-    Ils,
-    Inr,
-    Isk,
-    Jmd,
-    Jpy,
-    Kes,
-    Kgs,
-    Khr,
-    Kmf,
-    Krw,
-    Kyd,
-    Kzt,
-    Lbp,
-    Lkr,
-    Lrd,
-    Lsl,
-    Mad,
-    Mdl,
-    Mga,
-    Mkd,
-    Mmk,
-    Mnt,
-    Mop,
-    Mro,
-    Mvr,
-    Mwk,
-    Mxn,
-    Myr,
-    Mzn,
-    Nad,
-    Ngn,
-    Nok,
-    Npr,
-    Nzd,
-    Pgk,
-    Php,
-    Pkr,
-    Pln,
-    Qar,
-    Ron,
-    Rsd,
-    Rub,
-    Rwf,
-    Sar,
-    Sbd,
-    Scr,
-    Sek,
-    Sgd,
-    Sle,
-    Sll,
-    Sos,
-    Szl,
-    Thb,
-    Tjs,
-    Top,
-    Try,
-    Ttd,
-    Tzs,
-    Uah,
-    Uzs,
-    Vnd,
-    Vuv,
-    Wst,
-    Xaf,
-    Xcd,
-    Yer,
-    Zar,
-    Zmw,
-    Clp,
-    Djf,
-    Gnf,
-    Ugx,
-    Pyg,
-    Xof,
-    Xpf,
-}
-
-sealed class MinimumCurrencyConverter : JsonConverter<MinimumCurrency>
-{
-    public override MinimumCurrency Read(
+    public override Entitlement? Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
     )
     {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
+        string? type;
+        try
         {
-            "usd" => MinimumCurrency.Usd,
-            "aed" => MinimumCurrency.Aed,
-            "all" => MinimumCurrency.All,
-            "amd" => MinimumCurrency.Amd,
-            "ang" => MinimumCurrency.Ang,
-            "aud" => MinimumCurrency.Aud,
-            "awg" => MinimumCurrency.Awg,
-            "azn" => MinimumCurrency.Azn,
-            "bam" => MinimumCurrency.Bam,
-            "bbd" => MinimumCurrency.Bbd,
-            "bdt" => MinimumCurrency.Bdt,
-            "bgn" => MinimumCurrency.Bgn,
-            "bif" => MinimumCurrency.Bif,
-            "bmd" => MinimumCurrency.Bmd,
-            "bnd" => MinimumCurrency.Bnd,
-            "bsd" => MinimumCurrency.Bsd,
-            "bwp" => MinimumCurrency.Bwp,
-            "byn" => MinimumCurrency.Byn,
-            "bzd" => MinimumCurrency.Bzd,
-            "brl" => MinimumCurrency.Brl,
-            "cad" => MinimumCurrency.Cad,
-            "cdf" => MinimumCurrency.Cdf,
-            "chf" => MinimumCurrency.Chf,
-            "cny" => MinimumCurrency.Cny,
-            "czk" => MinimumCurrency.Czk,
-            "dkk" => MinimumCurrency.Dkk,
-            "dop" => MinimumCurrency.Dop,
-            "dzd" => MinimumCurrency.Dzd,
-            "egp" => MinimumCurrency.Egp,
-            "etb" => MinimumCurrency.Etb,
-            "eur" => MinimumCurrency.Eur,
-            "fjd" => MinimumCurrency.Fjd,
-            "gbp" => MinimumCurrency.Gbp,
-            "gel" => MinimumCurrency.Gel,
-            "gip" => MinimumCurrency.Gip,
-            "gmd" => MinimumCurrency.Gmd,
-            "gyd" => MinimumCurrency.Gyd,
-            "hkd" => MinimumCurrency.Hkd,
-            "hrk" => MinimumCurrency.Hrk,
-            "htg" => MinimumCurrency.Htg,
-            "idr" => MinimumCurrency.Idr,
-            "ils" => MinimumCurrency.Ils,
-            "inr" => MinimumCurrency.Inr,
-            "isk" => MinimumCurrency.Isk,
-            "jmd" => MinimumCurrency.Jmd,
-            "jpy" => MinimumCurrency.Jpy,
-            "kes" => MinimumCurrency.Kes,
-            "kgs" => MinimumCurrency.Kgs,
-            "khr" => MinimumCurrency.Khr,
-            "kmf" => MinimumCurrency.Kmf,
-            "krw" => MinimumCurrency.Krw,
-            "kyd" => MinimumCurrency.Kyd,
-            "kzt" => MinimumCurrency.Kzt,
-            "lbp" => MinimumCurrency.Lbp,
-            "lkr" => MinimumCurrency.Lkr,
-            "lrd" => MinimumCurrency.Lrd,
-            "lsl" => MinimumCurrency.Lsl,
-            "mad" => MinimumCurrency.Mad,
-            "mdl" => MinimumCurrency.Mdl,
-            "mga" => MinimumCurrency.Mga,
-            "mkd" => MinimumCurrency.Mkd,
-            "mmk" => MinimumCurrency.Mmk,
-            "mnt" => MinimumCurrency.Mnt,
-            "mop" => MinimumCurrency.Mop,
-            "mro" => MinimumCurrency.Mro,
-            "mvr" => MinimumCurrency.Mvr,
-            "mwk" => MinimumCurrency.Mwk,
-            "mxn" => MinimumCurrency.Mxn,
-            "myr" => MinimumCurrency.Myr,
-            "mzn" => MinimumCurrency.Mzn,
-            "nad" => MinimumCurrency.Nad,
-            "ngn" => MinimumCurrency.Ngn,
-            "nok" => MinimumCurrency.Nok,
-            "npr" => MinimumCurrency.Npr,
-            "nzd" => MinimumCurrency.Nzd,
-            "pgk" => MinimumCurrency.Pgk,
-            "php" => MinimumCurrency.Php,
-            "pkr" => MinimumCurrency.Pkr,
-            "pln" => MinimumCurrency.Pln,
-            "qar" => MinimumCurrency.Qar,
-            "ron" => MinimumCurrency.Ron,
-            "rsd" => MinimumCurrency.Rsd,
-            "rub" => MinimumCurrency.Rub,
-            "rwf" => MinimumCurrency.Rwf,
-            "sar" => MinimumCurrency.Sar,
-            "sbd" => MinimumCurrency.Sbd,
-            "scr" => MinimumCurrency.Scr,
-            "sek" => MinimumCurrency.Sek,
-            "sgd" => MinimumCurrency.Sgd,
-            "sle" => MinimumCurrency.Sle,
-            "sll" => MinimumCurrency.Sll,
-            "sos" => MinimumCurrency.Sos,
-            "szl" => MinimumCurrency.Szl,
-            "thb" => MinimumCurrency.Thb,
-            "tjs" => MinimumCurrency.Tjs,
-            "top" => MinimumCurrency.Top,
-            "try" => MinimumCurrency.Try,
-            "ttd" => MinimumCurrency.Ttd,
-            "tzs" => MinimumCurrency.Tzs,
-            "uah" => MinimumCurrency.Uah,
-            "uzs" => MinimumCurrency.Uzs,
-            "vnd" => MinimumCurrency.Vnd,
-            "vuv" => MinimumCurrency.Vuv,
-            "wst" => MinimumCurrency.Wst,
-            "xaf" => MinimumCurrency.Xaf,
-            "xcd" => MinimumCurrency.Xcd,
-            "yer" => MinimumCurrency.Yer,
-            "zar" => MinimumCurrency.Zar,
-            "zmw" => MinimumCurrency.Zmw,
-            "clp" => MinimumCurrency.Clp,
-            "djf" => MinimumCurrency.Djf,
-            "gnf" => MinimumCurrency.Gnf,
-            "ugx" => MinimumCurrency.Ugx,
-            "pyg" => MinimumCurrency.Pyg,
-            "xof" => MinimumCurrency.Xof,
-            "xpf" => MinimumCurrency.Xpf,
-            _ => (MinimumCurrency)(-1),
-        };
+            type = element.GetProperty("type").GetString();
+        }
+        catch
+        {
+            type = null;
+        }
+
+        switch (type)
+        {
+            case "FEATURE":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<Feature>(element, options);
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            case "CREDIT":
+            {
+                try
+                {
+                    var deserialized = JsonSerializer.Deserialize<Credit>(element, options);
+                    if (deserialized != null)
+                    {
+                        return new(deserialized, element);
+                    }
+                }
+                catch (JsonException)
+                {
+                    // ignore
+                }
+
+                return new(element);
+            }
+            default:
+            {
+                return new Entitlement(element);
+            }
+        }
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        MinimumCurrency value,
+        Entitlement value,
         JsonSerializerOptions options
     )
     {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                MinimumCurrency.Usd => "usd",
-                MinimumCurrency.Aed => "aed",
-                MinimumCurrency.All => "all",
-                MinimumCurrency.Amd => "amd",
-                MinimumCurrency.Ang => "ang",
-                MinimumCurrency.Aud => "aud",
-                MinimumCurrency.Awg => "awg",
-                MinimumCurrency.Azn => "azn",
-                MinimumCurrency.Bam => "bam",
-                MinimumCurrency.Bbd => "bbd",
-                MinimumCurrency.Bdt => "bdt",
-                MinimumCurrency.Bgn => "bgn",
-                MinimumCurrency.Bif => "bif",
-                MinimumCurrency.Bmd => "bmd",
-                MinimumCurrency.Bnd => "bnd",
-                MinimumCurrency.Bsd => "bsd",
-                MinimumCurrency.Bwp => "bwp",
-                MinimumCurrency.Byn => "byn",
-                MinimumCurrency.Bzd => "bzd",
-                MinimumCurrency.Brl => "brl",
-                MinimumCurrency.Cad => "cad",
-                MinimumCurrency.Cdf => "cdf",
-                MinimumCurrency.Chf => "chf",
-                MinimumCurrency.Cny => "cny",
-                MinimumCurrency.Czk => "czk",
-                MinimumCurrency.Dkk => "dkk",
-                MinimumCurrency.Dop => "dop",
-                MinimumCurrency.Dzd => "dzd",
-                MinimumCurrency.Egp => "egp",
-                MinimumCurrency.Etb => "etb",
-                MinimumCurrency.Eur => "eur",
-                MinimumCurrency.Fjd => "fjd",
-                MinimumCurrency.Gbp => "gbp",
-                MinimumCurrency.Gel => "gel",
-                MinimumCurrency.Gip => "gip",
-                MinimumCurrency.Gmd => "gmd",
-                MinimumCurrency.Gyd => "gyd",
-                MinimumCurrency.Hkd => "hkd",
-                MinimumCurrency.Hrk => "hrk",
-                MinimumCurrency.Htg => "htg",
-                MinimumCurrency.Idr => "idr",
-                MinimumCurrency.Ils => "ils",
-                MinimumCurrency.Inr => "inr",
-                MinimumCurrency.Isk => "isk",
-                MinimumCurrency.Jmd => "jmd",
-                MinimumCurrency.Jpy => "jpy",
-                MinimumCurrency.Kes => "kes",
-                MinimumCurrency.Kgs => "kgs",
-                MinimumCurrency.Khr => "khr",
-                MinimumCurrency.Kmf => "kmf",
-                MinimumCurrency.Krw => "krw",
-                MinimumCurrency.Kyd => "kyd",
-                MinimumCurrency.Kzt => "kzt",
-                MinimumCurrency.Lbp => "lbp",
-                MinimumCurrency.Lkr => "lkr",
-                MinimumCurrency.Lrd => "lrd",
-                MinimumCurrency.Lsl => "lsl",
-                MinimumCurrency.Mad => "mad",
-                MinimumCurrency.Mdl => "mdl",
-                MinimumCurrency.Mga => "mga",
-                MinimumCurrency.Mkd => "mkd",
-                MinimumCurrency.Mmk => "mmk",
-                MinimumCurrency.Mnt => "mnt",
-                MinimumCurrency.Mop => "mop",
-                MinimumCurrency.Mro => "mro",
-                MinimumCurrency.Mvr => "mvr",
-                MinimumCurrency.Mwk => "mwk",
-                MinimumCurrency.Mxn => "mxn",
-                MinimumCurrency.Myr => "myr",
-                MinimumCurrency.Mzn => "mzn",
-                MinimumCurrency.Nad => "nad",
-                MinimumCurrency.Ngn => "ngn",
-                MinimumCurrency.Nok => "nok",
-                MinimumCurrency.Npr => "npr",
-                MinimumCurrency.Nzd => "nzd",
-                MinimumCurrency.Pgk => "pgk",
-                MinimumCurrency.Php => "php",
-                MinimumCurrency.Pkr => "pkr",
-                MinimumCurrency.Pln => "pln",
-                MinimumCurrency.Qar => "qar",
-                MinimumCurrency.Ron => "ron",
-                MinimumCurrency.Rsd => "rsd",
-                MinimumCurrency.Rub => "rub",
-                MinimumCurrency.Rwf => "rwf",
-                MinimumCurrency.Sar => "sar",
-                MinimumCurrency.Sbd => "sbd",
-                MinimumCurrency.Scr => "scr",
-                MinimumCurrency.Sek => "sek",
-                MinimumCurrency.Sgd => "sgd",
-                MinimumCurrency.Sle => "sle",
-                MinimumCurrency.Sll => "sll",
-                MinimumCurrency.Sos => "sos",
-                MinimumCurrency.Szl => "szl",
-                MinimumCurrency.Thb => "thb",
-                MinimumCurrency.Tjs => "tjs",
-                MinimumCurrency.Top => "top",
-                MinimumCurrency.Try => "try",
-                MinimumCurrency.Ttd => "ttd",
-                MinimumCurrency.Tzs => "tzs",
-                MinimumCurrency.Uah => "uah",
-                MinimumCurrency.Uzs => "uzs",
-                MinimumCurrency.Vnd => "vnd",
-                MinimumCurrency.Vuv => "vuv",
-                MinimumCurrency.Wst => "wst",
-                MinimumCurrency.Xaf => "xaf",
-                MinimumCurrency.Xcd => "xcd",
-                MinimumCurrency.Yer => "yer",
-                MinimumCurrency.Zar => "zar",
-                MinimumCurrency.Zmw => "zmw",
-                MinimumCurrency.Clp => "clp",
-                MinimumCurrency.Djf => "djf",
-                MinimumCurrency.Gnf => "gnf",
-                MinimumCurrency.Ugx => "ugx",
-                MinimumCurrency.Pyg => "pyg",
-                MinimumCurrency.Xof => "xof",
-                MinimumCurrency.Xpf => "xpf",
-                _ => throw new StiggInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
+        JsonSerializer.Serialize(writer, value.Json, options);
     }
 }
 
-[JsonConverter(typeof(JsonModelConverter<PriceOverride, PriceOverrideFromRaw>))]
-public sealed record class PriceOverride : JsonModel
+/// <summary>
+/// Feature entitlement configuration for a subscription
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<Feature, FeatureFromRaw>))]
+public sealed record class Feature : JsonModel
 {
     /// <summary>
-    /// Addon ID
+    /// The feature ID to attach the entitlement to
     /// </summary>
-    public string? AddonID
+    public required string ID
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("addonId");
+            return this._rawData.GetNotNullClass<string>("id");
         }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("addonId", value);
-        }
+        init { this._rawData.Set("id", value); }
     }
 
     /// <summary>
-    /// Whether this is a base charge override
+    /// SubscriptionFeatureEntitlementRequest
     /// </summary>
-    public bool? BaseCharge
+    public JsonElement Type
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<bool>("baseCharge");
+            return this._rawData.GetNotNullStruct<JsonElement>("type");
         }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("baseCharge", value);
-        }
+        init { this._rawData.Set("type", value); }
     }
 
     /// <summary>
-    /// The corresponding custom currency id of the recurring credits price
+    /// Whether the usage limit is a soft limit
     /// </summary>
-    public string? CurrencyID
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("currencyId");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("currencyId", value);
-        }
-    }
-
-    /// <summary>
-    /// Feature ID
-    /// </summary>
-    public string? FeatureID
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("featureId");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("featureId", value);
-        }
-    }
-
-    public Price? Price
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<Price>("price");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("price", value);
-        }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        _ = this.AddonID;
-        _ = this.BaseCharge;
-        _ = this.CurrencyID;
-        _ = this.FeatureID;
-        this.Price?.Validate();
-    }
-
-    public PriceOverride() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public PriceOverride(PriceOverride priceOverride)
-        : base(priceOverride) { }
-#pragma warning restore CS8618
-
-    public PriceOverride(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    PriceOverride(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="PriceOverrideFromRaw.FromRawUnchecked"/>
-    public static PriceOverride FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-}
-
-class PriceOverrideFromRaw : IFromRawJson<PriceOverride>
-{
-    /// <inheritdoc/>
-    public PriceOverride FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        PriceOverride.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(JsonModelConverter<Price, PriceFromRaw>))]
-public sealed record class Price : JsonModel
-{
-    public required double Amount
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<double>("amount");
-        }
-        init { this._rawData.Set("amount", value); }
-    }
-
-    public ApiEnum<string, PriceCurrency>? Currency
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ApiEnum<string, PriceCurrency>>("currency");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("currency", value);
-        }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        _ = this.Amount;
-        this.Currency?.Validate();
-    }
-
-    public Price() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public Price(Price price)
-        : base(price) { }
-#pragma warning restore CS8618
-
-    public Price(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    Price(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="PriceFromRaw.FromRawUnchecked"/>
-    public static Price FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-
-    [SetsRequiredMembers]
-    public Price(double amount)
-        : this()
-    {
-        this.Amount = amount;
-    }
-}
-
-class PriceFromRaw : IFromRawJson<Price>
-{
-    /// <inheritdoc/>
-    public Price FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        Price.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(PriceCurrencyConverter))]
-public enum PriceCurrency
-{
-    Usd,
-    Aed,
-    All,
-    Amd,
-    Ang,
-    Aud,
-    Awg,
-    Azn,
-    Bam,
-    Bbd,
-    Bdt,
-    Bgn,
-    Bif,
-    Bmd,
-    Bnd,
-    Bsd,
-    Bwp,
-    Byn,
-    Bzd,
-    Brl,
-    Cad,
-    Cdf,
-    Chf,
-    Cny,
-    Czk,
-    Dkk,
-    Dop,
-    Dzd,
-    Egp,
-    Etb,
-    Eur,
-    Fjd,
-    Gbp,
-    Gel,
-    Gip,
-    Gmd,
-    Gyd,
-    Hkd,
-    Hrk,
-    Htg,
-    Idr,
-    Ils,
-    Inr,
-    Isk,
-    Jmd,
-    Jpy,
-    Kes,
-    Kgs,
-    Khr,
-    Kmf,
-    Krw,
-    Kyd,
-    Kzt,
-    Lbp,
-    Lkr,
-    Lrd,
-    Lsl,
-    Mad,
-    Mdl,
-    Mga,
-    Mkd,
-    Mmk,
-    Mnt,
-    Mop,
-    Mro,
-    Mvr,
-    Mwk,
-    Mxn,
-    Myr,
-    Mzn,
-    Nad,
-    Ngn,
-    Nok,
-    Npr,
-    Nzd,
-    Pgk,
-    Php,
-    Pkr,
-    Pln,
-    Qar,
-    Ron,
-    Rsd,
-    Rub,
-    Rwf,
-    Sar,
-    Sbd,
-    Scr,
-    Sek,
-    Sgd,
-    Sle,
-    Sll,
-    Sos,
-    Szl,
-    Thb,
-    Tjs,
-    Top,
-    Try,
-    Ttd,
-    Tzs,
-    Uah,
-    Uzs,
-    Vnd,
-    Vuv,
-    Wst,
-    Xaf,
-    Xcd,
-    Yer,
-    Zar,
-    Zmw,
-    Clp,
-    Djf,
-    Gnf,
-    Ugx,
-    Pyg,
-    Xof,
-    Xpf,
-}
-
-sealed class PriceCurrencyConverter : JsonConverter<PriceCurrency>
-{
-    public override PriceCurrency Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "usd" => PriceCurrency.Usd,
-            "aed" => PriceCurrency.Aed,
-            "all" => PriceCurrency.All,
-            "amd" => PriceCurrency.Amd,
-            "ang" => PriceCurrency.Ang,
-            "aud" => PriceCurrency.Aud,
-            "awg" => PriceCurrency.Awg,
-            "azn" => PriceCurrency.Azn,
-            "bam" => PriceCurrency.Bam,
-            "bbd" => PriceCurrency.Bbd,
-            "bdt" => PriceCurrency.Bdt,
-            "bgn" => PriceCurrency.Bgn,
-            "bif" => PriceCurrency.Bif,
-            "bmd" => PriceCurrency.Bmd,
-            "bnd" => PriceCurrency.Bnd,
-            "bsd" => PriceCurrency.Bsd,
-            "bwp" => PriceCurrency.Bwp,
-            "byn" => PriceCurrency.Byn,
-            "bzd" => PriceCurrency.Bzd,
-            "brl" => PriceCurrency.Brl,
-            "cad" => PriceCurrency.Cad,
-            "cdf" => PriceCurrency.Cdf,
-            "chf" => PriceCurrency.Chf,
-            "cny" => PriceCurrency.Cny,
-            "czk" => PriceCurrency.Czk,
-            "dkk" => PriceCurrency.Dkk,
-            "dop" => PriceCurrency.Dop,
-            "dzd" => PriceCurrency.Dzd,
-            "egp" => PriceCurrency.Egp,
-            "etb" => PriceCurrency.Etb,
-            "eur" => PriceCurrency.Eur,
-            "fjd" => PriceCurrency.Fjd,
-            "gbp" => PriceCurrency.Gbp,
-            "gel" => PriceCurrency.Gel,
-            "gip" => PriceCurrency.Gip,
-            "gmd" => PriceCurrency.Gmd,
-            "gyd" => PriceCurrency.Gyd,
-            "hkd" => PriceCurrency.Hkd,
-            "hrk" => PriceCurrency.Hrk,
-            "htg" => PriceCurrency.Htg,
-            "idr" => PriceCurrency.Idr,
-            "ils" => PriceCurrency.Ils,
-            "inr" => PriceCurrency.Inr,
-            "isk" => PriceCurrency.Isk,
-            "jmd" => PriceCurrency.Jmd,
-            "jpy" => PriceCurrency.Jpy,
-            "kes" => PriceCurrency.Kes,
-            "kgs" => PriceCurrency.Kgs,
-            "khr" => PriceCurrency.Khr,
-            "kmf" => PriceCurrency.Kmf,
-            "krw" => PriceCurrency.Krw,
-            "kyd" => PriceCurrency.Kyd,
-            "kzt" => PriceCurrency.Kzt,
-            "lbp" => PriceCurrency.Lbp,
-            "lkr" => PriceCurrency.Lkr,
-            "lrd" => PriceCurrency.Lrd,
-            "lsl" => PriceCurrency.Lsl,
-            "mad" => PriceCurrency.Mad,
-            "mdl" => PriceCurrency.Mdl,
-            "mga" => PriceCurrency.Mga,
-            "mkd" => PriceCurrency.Mkd,
-            "mmk" => PriceCurrency.Mmk,
-            "mnt" => PriceCurrency.Mnt,
-            "mop" => PriceCurrency.Mop,
-            "mro" => PriceCurrency.Mro,
-            "mvr" => PriceCurrency.Mvr,
-            "mwk" => PriceCurrency.Mwk,
-            "mxn" => PriceCurrency.Mxn,
-            "myr" => PriceCurrency.Myr,
-            "mzn" => PriceCurrency.Mzn,
-            "nad" => PriceCurrency.Nad,
-            "ngn" => PriceCurrency.Ngn,
-            "nok" => PriceCurrency.Nok,
-            "npr" => PriceCurrency.Npr,
-            "nzd" => PriceCurrency.Nzd,
-            "pgk" => PriceCurrency.Pgk,
-            "php" => PriceCurrency.Php,
-            "pkr" => PriceCurrency.Pkr,
-            "pln" => PriceCurrency.Pln,
-            "qar" => PriceCurrency.Qar,
-            "ron" => PriceCurrency.Ron,
-            "rsd" => PriceCurrency.Rsd,
-            "rub" => PriceCurrency.Rub,
-            "rwf" => PriceCurrency.Rwf,
-            "sar" => PriceCurrency.Sar,
-            "sbd" => PriceCurrency.Sbd,
-            "scr" => PriceCurrency.Scr,
-            "sek" => PriceCurrency.Sek,
-            "sgd" => PriceCurrency.Sgd,
-            "sle" => PriceCurrency.Sle,
-            "sll" => PriceCurrency.Sll,
-            "sos" => PriceCurrency.Sos,
-            "szl" => PriceCurrency.Szl,
-            "thb" => PriceCurrency.Thb,
-            "tjs" => PriceCurrency.Tjs,
-            "top" => PriceCurrency.Top,
-            "try" => PriceCurrency.Try,
-            "ttd" => PriceCurrency.Ttd,
-            "tzs" => PriceCurrency.Tzs,
-            "uah" => PriceCurrency.Uah,
-            "uzs" => PriceCurrency.Uzs,
-            "vnd" => PriceCurrency.Vnd,
-            "vuv" => PriceCurrency.Vuv,
-            "wst" => PriceCurrency.Wst,
-            "xaf" => PriceCurrency.Xaf,
-            "xcd" => PriceCurrency.Xcd,
-            "yer" => PriceCurrency.Yer,
-            "zar" => PriceCurrency.Zar,
-            "zmw" => PriceCurrency.Zmw,
-            "clp" => PriceCurrency.Clp,
-            "djf" => PriceCurrency.Djf,
-            "gnf" => PriceCurrency.Gnf,
-            "ugx" => PriceCurrency.Ugx,
-            "pyg" => PriceCurrency.Pyg,
-            "xof" => PriceCurrency.Xof,
-            "xpf" => PriceCurrency.Xpf,
-            _ => (PriceCurrency)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        PriceCurrency value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                PriceCurrency.Usd => "usd",
-                PriceCurrency.Aed => "aed",
-                PriceCurrency.All => "all",
-                PriceCurrency.Amd => "amd",
-                PriceCurrency.Ang => "ang",
-                PriceCurrency.Aud => "aud",
-                PriceCurrency.Awg => "awg",
-                PriceCurrency.Azn => "azn",
-                PriceCurrency.Bam => "bam",
-                PriceCurrency.Bbd => "bbd",
-                PriceCurrency.Bdt => "bdt",
-                PriceCurrency.Bgn => "bgn",
-                PriceCurrency.Bif => "bif",
-                PriceCurrency.Bmd => "bmd",
-                PriceCurrency.Bnd => "bnd",
-                PriceCurrency.Bsd => "bsd",
-                PriceCurrency.Bwp => "bwp",
-                PriceCurrency.Byn => "byn",
-                PriceCurrency.Bzd => "bzd",
-                PriceCurrency.Brl => "brl",
-                PriceCurrency.Cad => "cad",
-                PriceCurrency.Cdf => "cdf",
-                PriceCurrency.Chf => "chf",
-                PriceCurrency.Cny => "cny",
-                PriceCurrency.Czk => "czk",
-                PriceCurrency.Dkk => "dkk",
-                PriceCurrency.Dop => "dop",
-                PriceCurrency.Dzd => "dzd",
-                PriceCurrency.Egp => "egp",
-                PriceCurrency.Etb => "etb",
-                PriceCurrency.Eur => "eur",
-                PriceCurrency.Fjd => "fjd",
-                PriceCurrency.Gbp => "gbp",
-                PriceCurrency.Gel => "gel",
-                PriceCurrency.Gip => "gip",
-                PriceCurrency.Gmd => "gmd",
-                PriceCurrency.Gyd => "gyd",
-                PriceCurrency.Hkd => "hkd",
-                PriceCurrency.Hrk => "hrk",
-                PriceCurrency.Htg => "htg",
-                PriceCurrency.Idr => "idr",
-                PriceCurrency.Ils => "ils",
-                PriceCurrency.Inr => "inr",
-                PriceCurrency.Isk => "isk",
-                PriceCurrency.Jmd => "jmd",
-                PriceCurrency.Jpy => "jpy",
-                PriceCurrency.Kes => "kes",
-                PriceCurrency.Kgs => "kgs",
-                PriceCurrency.Khr => "khr",
-                PriceCurrency.Kmf => "kmf",
-                PriceCurrency.Krw => "krw",
-                PriceCurrency.Kyd => "kyd",
-                PriceCurrency.Kzt => "kzt",
-                PriceCurrency.Lbp => "lbp",
-                PriceCurrency.Lkr => "lkr",
-                PriceCurrency.Lrd => "lrd",
-                PriceCurrency.Lsl => "lsl",
-                PriceCurrency.Mad => "mad",
-                PriceCurrency.Mdl => "mdl",
-                PriceCurrency.Mga => "mga",
-                PriceCurrency.Mkd => "mkd",
-                PriceCurrency.Mmk => "mmk",
-                PriceCurrency.Mnt => "mnt",
-                PriceCurrency.Mop => "mop",
-                PriceCurrency.Mro => "mro",
-                PriceCurrency.Mvr => "mvr",
-                PriceCurrency.Mwk => "mwk",
-                PriceCurrency.Mxn => "mxn",
-                PriceCurrency.Myr => "myr",
-                PriceCurrency.Mzn => "mzn",
-                PriceCurrency.Nad => "nad",
-                PriceCurrency.Ngn => "ngn",
-                PriceCurrency.Nok => "nok",
-                PriceCurrency.Npr => "npr",
-                PriceCurrency.Nzd => "nzd",
-                PriceCurrency.Pgk => "pgk",
-                PriceCurrency.Php => "php",
-                PriceCurrency.Pkr => "pkr",
-                PriceCurrency.Pln => "pln",
-                PriceCurrency.Qar => "qar",
-                PriceCurrency.Ron => "ron",
-                PriceCurrency.Rsd => "rsd",
-                PriceCurrency.Rub => "rub",
-                PriceCurrency.Rwf => "rwf",
-                PriceCurrency.Sar => "sar",
-                PriceCurrency.Sbd => "sbd",
-                PriceCurrency.Scr => "scr",
-                PriceCurrency.Sek => "sek",
-                PriceCurrency.Sgd => "sgd",
-                PriceCurrency.Sle => "sle",
-                PriceCurrency.Sll => "sll",
-                PriceCurrency.Sos => "sos",
-                PriceCurrency.Szl => "szl",
-                PriceCurrency.Thb => "thb",
-                PriceCurrency.Tjs => "tjs",
-                PriceCurrency.Top => "top",
-                PriceCurrency.Try => "try",
-                PriceCurrency.Ttd => "ttd",
-                PriceCurrency.Tzs => "tzs",
-                PriceCurrency.Uah => "uah",
-                PriceCurrency.Uzs => "uzs",
-                PriceCurrency.Vnd => "vnd",
-                PriceCurrency.Vuv => "vuv",
-                PriceCurrency.Wst => "wst",
-                PriceCurrency.Xaf => "xaf",
-                PriceCurrency.Xcd => "xcd",
-                PriceCurrency.Yer => "yer",
-                PriceCurrency.Zar => "zar",
-                PriceCurrency.Zmw => "zmw",
-                PriceCurrency.Clp => "clp",
-                PriceCurrency.Djf => "djf",
-                PriceCurrency.Gnf => "gnf",
-                PriceCurrency.Ugx => "ugx",
-                PriceCurrency.Pyg => "pyg",
-                PriceCurrency.Xof => "xof",
-                PriceCurrency.Xpf => "xpf",
-                _ => throw new StiggInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
-}
-
-[JsonConverter(typeof(ScheduleStrategyConverter))]
-public enum ScheduleStrategy
-{
-    EndOfBillingPeriod,
-    EndOfBillingMonth,
-    Immediate,
-}
-
-sealed class ScheduleStrategyConverter : JsonConverter<ScheduleStrategy>
-{
-    public override ScheduleStrategy Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "END_OF_BILLING_PERIOD" => ScheduleStrategy.EndOfBillingPeriod,
-            "END_OF_BILLING_MONTH" => ScheduleStrategy.EndOfBillingMonth,
-            "IMMEDIATE" => ScheduleStrategy.Immediate,
-            _ => (ScheduleStrategy)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        ScheduleStrategy value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                ScheduleStrategy.EndOfBillingPeriod => "END_OF_BILLING_PERIOD",
-                ScheduleStrategy.EndOfBillingMonth => "END_OF_BILLING_MONTH",
-                ScheduleStrategy.Immediate => "IMMEDIATE",
-                _ => throw new StiggInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
-}
-
-[JsonConverter(typeof(JsonModelConverter<SubscriptionEntitlement, SubscriptionEntitlementFromRaw>))]
-public sealed record class SubscriptionEntitlement : JsonModel
-{
-    public string? ID
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("id");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("id", value);
-        }
-    }
-
-    public string? FeatureID
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("featureId");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("featureId", value);
-        }
-    }
-
     public bool? HasSoftLimit
     {
         get
@@ -3335,6 +2515,9 @@ public sealed record class SubscriptionEntitlement : JsonModel
         }
     }
 
+    /// <summary>
+    /// Whether usage is unlimited
+    /// </summary>
     public bool? HasUnlimitedUsage
     {
         get
@@ -3353,6 +2536,9 @@ public sealed record class SubscriptionEntitlement : JsonModel
         }
     }
 
+    /// <summary>
+    /// Configuration for monthly reset period
+    /// </summary>
     public MonthlyResetPeriodConfiguration? MonthlyResetPeriodConfiguration
     {
         get
@@ -3362,17 +2548,12 @@ public sealed record class SubscriptionEntitlement : JsonModel
                 "monthlyResetPeriodConfiguration"
             );
         }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("monthlyResetPeriodConfiguration", value);
-        }
+        init { this._rawData.Set("monthlyResetPeriodConfiguration", value); }
     }
 
+    /// <summary>
+    /// Period at which usage resets
+    /// </summary>
     public ApiEnum<string, ResetPeriod>? ResetPeriod
     {
         get
@@ -3391,12 +2572,15 @@ public sealed record class SubscriptionEntitlement : JsonModel
         }
     }
 
-    public double? UsageLimit
+    /// <summary>
+    /// Maximum allowed usage for the feature
+    /// </summary>
+    public long? UsageLimit
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<double>("usageLimit");
+            return this._rawData.GetNullableStruct<long>("usageLimit");
         }
         init
         {
@@ -3409,6 +2593,9 @@ public sealed record class SubscriptionEntitlement : JsonModel
         }
     }
 
+    /// <summary>
+    /// Configuration for weekly reset period
+    /// </summary>
     public WeeklyResetPeriodConfiguration? WeeklyResetPeriodConfiguration
     {
         get
@@ -3418,17 +2605,12 @@ public sealed record class SubscriptionEntitlement : JsonModel
                 "weeklyResetPeriodConfiguration"
             );
         }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("weeklyResetPeriodConfiguration", value);
-        }
+        init { this._rawData.Set("weeklyResetPeriodConfiguration", value); }
     }
 
+    /// <summary>
+    /// Configuration for yearly reset period
+    /// </summary>
     public YearlyResetPeriodConfiguration? YearlyResetPeriodConfiguration
     {
         get
@@ -3438,22 +2620,17 @@ public sealed record class SubscriptionEntitlement : JsonModel
                 "yearlyResetPeriodConfiguration"
             );
         }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("yearlyResetPeriodConfiguration", value);
-        }
+        init { this._rawData.Set("yearlyResetPeriodConfiguration", value); }
     }
 
     /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ID;
-        _ = this.FeatureID;
+        if (!JsonElement.DeepEquals(this.Type, JsonSerializer.SerializeToElement("FEATURE")))
+        {
+            throw new StiggInvalidDataException("Invalid value given for constant");
+        }
         _ = this.HasSoftLimit;
         _ = this.HasUnlimitedUsage;
         this.MonthlyResetPeriodConfiguration?.Validate();
@@ -3463,44 +2640,56 @@ public sealed record class SubscriptionEntitlement : JsonModel
         this.YearlyResetPeriodConfiguration?.Validate();
     }
 
-    public SubscriptionEntitlement() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public SubscriptionEntitlement(SubscriptionEntitlement subscriptionEntitlement)
-        : base(subscriptionEntitlement) { }
-#pragma warning restore CS8618
-
-    public SubscriptionEntitlement(IReadOnlyDictionary<string, JsonElement> rawData)
+    public Feature()
     {
-        this._rawData = new(rawData);
+        this.Type = JsonSerializer.SerializeToElement("FEATURE");
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    SubscriptionEntitlement(FrozenDictionary<string, JsonElement> rawData)
+    public Feature(Feature feature)
+        : base(feature) { }
+#pragma warning restore CS8618
+
+    public Feature(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+
+        this.Type = JsonSerializer.SerializeToElement("FEATURE");
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    Feature(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="SubscriptionEntitlementFromRaw.FromRawUnchecked"/>
-    public static SubscriptionEntitlement FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
+    /// <inheritdoc cref="FeatureFromRaw.FromRawUnchecked"/>
+    public static Feature FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+
+    [SetsRequiredMembers]
+    public Feature(string id)
+        : this()
+    {
+        this.ID = id;
+    }
 }
 
-class SubscriptionEntitlementFromRaw : IFromRawJson<SubscriptionEntitlement>
+class FeatureFromRaw : IFromRawJson<Feature>
 {
     /// <inheritdoc/>
-    public SubscriptionEntitlement FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => SubscriptionEntitlement.FromRawUnchecked(rawData);
+    public Feature FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Feature.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Configuration for monthly reset period
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
         MonthlyResetPeriodConfiguration,
@@ -3509,6 +2698,9 @@ class SubscriptionEntitlementFromRaw : IFromRawJson<SubscriptionEntitlement>
 )]
 public sealed record class MonthlyResetPeriodConfiguration : JsonModel
 {
+    /// <summary>
+    /// Reset anchor (SubscriptionStart or StartOfTheMonth)
+    /// </summary>
     public required ApiEnum<string, AccordingTo> AccordingTo
     {
         get
@@ -3572,6 +2764,9 @@ class MonthlyResetPeriodConfigurationFromRaw : IFromRawJson<MonthlyResetPeriodCo
     ) => MonthlyResetPeriodConfiguration.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Reset anchor (SubscriptionStart or StartOfTheMonth)
+/// </summary>
 [JsonConverter(typeof(AccordingToConverter))]
 public enum AccordingTo
 {
@@ -3616,6 +2811,9 @@ sealed class AccordingToConverter : JsonConverter<AccordingTo>
     }
 }
 
+/// <summary>
+/// Period at which usage resets
+/// </summary>
 [JsonConverter(typeof(ResetPeriodConverter))]
 public enum ResetPeriod
 {
@@ -3669,6 +2867,9 @@ sealed class ResetPeriodConverter : JsonConverter<ResetPeriod>
     }
 }
 
+/// <summary>
+/// Configuration for weekly reset period
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
         WeeklyResetPeriodConfiguration,
@@ -3677,6 +2878,9 @@ sealed class ResetPeriodConverter : JsonConverter<ResetPeriod>
 )]
 public sealed record class WeeklyResetPeriodConfiguration : JsonModel
 {
+    /// <summary>
+    /// Reset anchor (SubscriptionStart or specific day)
+    /// </summary>
     public required ApiEnum<string, WeeklyResetPeriodConfigurationAccordingTo> AccordingTo
     {
         get
@@ -3744,6 +2948,9 @@ class WeeklyResetPeriodConfigurationFromRaw : IFromRawJson<WeeklyResetPeriodConf
     ) => WeeklyResetPeriodConfiguration.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Reset anchor (SubscriptionStart or specific day)
+/// </summary>
 [JsonConverter(typeof(WeeklyResetPeriodConfigurationAccordingToConverter))]
 public enum WeeklyResetPeriodConfigurationAccordingTo
 {
@@ -3807,6 +3014,9 @@ sealed class WeeklyResetPeriodConfigurationAccordingToConverter
     }
 }
 
+/// <summary>
+/// Configuration for yearly reset period
+/// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
         YearlyResetPeriodConfiguration,
@@ -3815,6 +3025,9 @@ sealed class WeeklyResetPeriodConfigurationAccordingToConverter
 )]
 public sealed record class YearlyResetPeriodConfiguration : JsonModel
 {
+    /// <summary>
+    /// Reset anchor (SubscriptionStart)
+    /// </summary>
     public required ApiEnum<string, YearlyResetPeriodConfigurationAccordingTo> AccordingTo
     {
         get
@@ -3882,6 +3095,9 @@ class YearlyResetPeriodConfigurationFromRaw : IFromRawJson<YearlyResetPeriodConf
     ) => YearlyResetPeriodConfiguration.FromRawUnchecked(rawData);
 }
 
+/// <summary>
+/// Reset anchor (SubscriptionStart)
+/// </summary>
 [JsonConverter(typeof(YearlyResetPeriodConfigurationAccordingToConverter))]
 public enum YearlyResetPeriodConfigurationAccordingTo
 {
@@ -3915,6 +3131,1253 @@ sealed class YearlyResetPeriodConfigurationAccordingToConverter
             value switch
             {
                 YearlyResetPeriodConfigurationAccordingTo.SubscriptionStart => "SubscriptionStart",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Credit entitlement configuration for a subscription
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<Credit, CreditFromRaw>))]
+public sealed record class Credit : JsonModel
+{
+    /// <summary>
+    /// The custom currency ID for the credit entitlement
+    /// </summary>
+    public required string ID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
+        init { this._rawData.Set("id", value); }
+    }
+
+    /// <summary>
+    /// Credit grant amount
+    /// </summary>
+    public required double Amount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<double>("amount");
+        }
+        init { this._rawData.Set("amount", value); }
+    }
+
+    /// <summary>
+    /// Credit grant cadence (MONTH or YEAR)
+    /// </summary>
+    public required ApiEnum<string, Cadence> Cadence
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Cadence>>("cadence");
+        }
+        init { this._rawData.Set("cadence", value); }
+    }
+
+    /// <summary>
+    /// SubscriptionCreditEntitlementRequest
+    /// </summary>
+    public JsonElement Type
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<JsonElement>("type");
+        }
+        init { this._rawData.Set("type", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.ID;
+        _ = this.Amount;
+        this.Cadence.Validate();
+        if (!JsonElement.DeepEquals(this.Type, JsonSerializer.SerializeToElement("CREDIT")))
+        {
+            throw new StiggInvalidDataException("Invalid value given for constant");
+        }
+    }
+
+    public Credit()
+    {
+        this.Type = JsonSerializer.SerializeToElement("CREDIT");
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public Credit(Credit credit)
+        : base(credit) { }
+#pragma warning restore CS8618
+
+    public Credit(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+
+        this.Type = JsonSerializer.SerializeToElement("CREDIT");
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    Credit(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="CreditFromRaw.FromRawUnchecked"/>
+    public static Credit FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class CreditFromRaw : IFromRawJson<Credit>
+{
+    /// <inheritdoc/>
+    public Credit FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Credit.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Credit grant cadence (MONTH or YEAR)
+/// </summary>
+[JsonConverter(typeof(CadenceConverter))]
+public enum Cadence
+{
+    Month,
+    Year,
+}
+
+sealed class CadenceConverter : JsonConverter<Cadence>
+{
+    public override Cadence Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "MONTH" => Cadence.Month,
+            "YEAR" => Cadence.Year,
+            _ => (Cadence)(-1),
+        };
+    }
+
+    public override void Write(Utf8JsonWriter writer, Cadence value, JsonSerializerOptions options)
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                Cadence.Month => "MONTH",
+                Cadence.Year => "YEAR",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Minimum spend amount
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<MinimumSpend, MinimumSpendFromRaw>))]
+public sealed record class MinimumSpend : JsonModel
+{
+    /// <summary>
+    /// The price amount
+    /// </summary>
+    public double? Amount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<double>("amount");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("amount", value);
+        }
+    }
+
+    /// <summary>
+    /// The price currency
+    /// </summary>
+    public ApiEnum<string, MinimumSpendCurrency>? Currency
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, MinimumSpendCurrency>>(
+                "currency"
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("currency", value);
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.Amount;
+        this.Currency?.Validate();
+    }
+
+    public MinimumSpend() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public MinimumSpend(MinimumSpend minimumSpend)
+        : base(minimumSpend) { }
+#pragma warning restore CS8618
+
+    public MinimumSpend(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    MinimumSpend(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="MinimumSpendFromRaw.FromRawUnchecked"/>
+    public static MinimumSpend FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class MinimumSpendFromRaw : IFromRawJson<MinimumSpend>
+{
+    /// <inheritdoc/>
+    public MinimumSpend FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        MinimumSpend.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// The price currency
+/// </summary>
+[JsonConverter(typeof(MinimumSpendCurrencyConverter))]
+public enum MinimumSpendCurrency
+{
+    Usd,
+    Aed,
+    All,
+    Amd,
+    Ang,
+    Aud,
+    Awg,
+    Azn,
+    Bam,
+    Bbd,
+    Bdt,
+    Bgn,
+    Bif,
+    Bmd,
+    Bnd,
+    Bsd,
+    Bwp,
+    Byn,
+    Bzd,
+    Brl,
+    Cad,
+    Cdf,
+    Chf,
+    Cny,
+    Czk,
+    Dkk,
+    Dop,
+    Dzd,
+    Egp,
+    Etb,
+    Eur,
+    Fjd,
+    Gbp,
+    Gel,
+    Gip,
+    Gmd,
+    Gyd,
+    Hkd,
+    Hrk,
+    Htg,
+    Idr,
+    Ils,
+    Inr,
+    Isk,
+    Jmd,
+    Jpy,
+    Kes,
+    Kgs,
+    Khr,
+    Kmf,
+    Krw,
+    Kyd,
+    Kzt,
+    Lbp,
+    Lkr,
+    Lrd,
+    Lsl,
+    Mad,
+    Mdl,
+    Mga,
+    Mkd,
+    Mmk,
+    Mnt,
+    Mop,
+    Mro,
+    Mvr,
+    Mwk,
+    Mxn,
+    Myr,
+    Mzn,
+    Nad,
+    Ngn,
+    Nok,
+    Npr,
+    Nzd,
+    Pgk,
+    Php,
+    Pkr,
+    Pln,
+    Qar,
+    Ron,
+    Rsd,
+    Rub,
+    Rwf,
+    Sar,
+    Sbd,
+    Scr,
+    Sek,
+    Sgd,
+    Sle,
+    Sll,
+    Sos,
+    Szl,
+    Thb,
+    Tjs,
+    Top,
+    Try,
+    Ttd,
+    Tzs,
+    Uah,
+    Uzs,
+    Vnd,
+    Vuv,
+    Wst,
+    Xaf,
+    Xcd,
+    Yer,
+    Zar,
+    Zmw,
+    Clp,
+    Djf,
+    Gnf,
+    Ugx,
+    Pyg,
+    Xof,
+    Xpf,
+}
+
+sealed class MinimumSpendCurrencyConverter : JsonConverter<MinimumSpendCurrency>
+{
+    public override MinimumSpendCurrency Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "usd" => MinimumSpendCurrency.Usd,
+            "aed" => MinimumSpendCurrency.Aed,
+            "all" => MinimumSpendCurrency.All,
+            "amd" => MinimumSpendCurrency.Amd,
+            "ang" => MinimumSpendCurrency.Ang,
+            "aud" => MinimumSpendCurrency.Aud,
+            "awg" => MinimumSpendCurrency.Awg,
+            "azn" => MinimumSpendCurrency.Azn,
+            "bam" => MinimumSpendCurrency.Bam,
+            "bbd" => MinimumSpendCurrency.Bbd,
+            "bdt" => MinimumSpendCurrency.Bdt,
+            "bgn" => MinimumSpendCurrency.Bgn,
+            "bif" => MinimumSpendCurrency.Bif,
+            "bmd" => MinimumSpendCurrency.Bmd,
+            "bnd" => MinimumSpendCurrency.Bnd,
+            "bsd" => MinimumSpendCurrency.Bsd,
+            "bwp" => MinimumSpendCurrency.Bwp,
+            "byn" => MinimumSpendCurrency.Byn,
+            "bzd" => MinimumSpendCurrency.Bzd,
+            "brl" => MinimumSpendCurrency.Brl,
+            "cad" => MinimumSpendCurrency.Cad,
+            "cdf" => MinimumSpendCurrency.Cdf,
+            "chf" => MinimumSpendCurrency.Chf,
+            "cny" => MinimumSpendCurrency.Cny,
+            "czk" => MinimumSpendCurrency.Czk,
+            "dkk" => MinimumSpendCurrency.Dkk,
+            "dop" => MinimumSpendCurrency.Dop,
+            "dzd" => MinimumSpendCurrency.Dzd,
+            "egp" => MinimumSpendCurrency.Egp,
+            "etb" => MinimumSpendCurrency.Etb,
+            "eur" => MinimumSpendCurrency.Eur,
+            "fjd" => MinimumSpendCurrency.Fjd,
+            "gbp" => MinimumSpendCurrency.Gbp,
+            "gel" => MinimumSpendCurrency.Gel,
+            "gip" => MinimumSpendCurrency.Gip,
+            "gmd" => MinimumSpendCurrency.Gmd,
+            "gyd" => MinimumSpendCurrency.Gyd,
+            "hkd" => MinimumSpendCurrency.Hkd,
+            "hrk" => MinimumSpendCurrency.Hrk,
+            "htg" => MinimumSpendCurrency.Htg,
+            "idr" => MinimumSpendCurrency.Idr,
+            "ils" => MinimumSpendCurrency.Ils,
+            "inr" => MinimumSpendCurrency.Inr,
+            "isk" => MinimumSpendCurrency.Isk,
+            "jmd" => MinimumSpendCurrency.Jmd,
+            "jpy" => MinimumSpendCurrency.Jpy,
+            "kes" => MinimumSpendCurrency.Kes,
+            "kgs" => MinimumSpendCurrency.Kgs,
+            "khr" => MinimumSpendCurrency.Khr,
+            "kmf" => MinimumSpendCurrency.Kmf,
+            "krw" => MinimumSpendCurrency.Krw,
+            "kyd" => MinimumSpendCurrency.Kyd,
+            "kzt" => MinimumSpendCurrency.Kzt,
+            "lbp" => MinimumSpendCurrency.Lbp,
+            "lkr" => MinimumSpendCurrency.Lkr,
+            "lrd" => MinimumSpendCurrency.Lrd,
+            "lsl" => MinimumSpendCurrency.Lsl,
+            "mad" => MinimumSpendCurrency.Mad,
+            "mdl" => MinimumSpendCurrency.Mdl,
+            "mga" => MinimumSpendCurrency.Mga,
+            "mkd" => MinimumSpendCurrency.Mkd,
+            "mmk" => MinimumSpendCurrency.Mmk,
+            "mnt" => MinimumSpendCurrency.Mnt,
+            "mop" => MinimumSpendCurrency.Mop,
+            "mro" => MinimumSpendCurrency.Mro,
+            "mvr" => MinimumSpendCurrency.Mvr,
+            "mwk" => MinimumSpendCurrency.Mwk,
+            "mxn" => MinimumSpendCurrency.Mxn,
+            "myr" => MinimumSpendCurrency.Myr,
+            "mzn" => MinimumSpendCurrency.Mzn,
+            "nad" => MinimumSpendCurrency.Nad,
+            "ngn" => MinimumSpendCurrency.Ngn,
+            "nok" => MinimumSpendCurrency.Nok,
+            "npr" => MinimumSpendCurrency.Npr,
+            "nzd" => MinimumSpendCurrency.Nzd,
+            "pgk" => MinimumSpendCurrency.Pgk,
+            "php" => MinimumSpendCurrency.Php,
+            "pkr" => MinimumSpendCurrency.Pkr,
+            "pln" => MinimumSpendCurrency.Pln,
+            "qar" => MinimumSpendCurrency.Qar,
+            "ron" => MinimumSpendCurrency.Ron,
+            "rsd" => MinimumSpendCurrency.Rsd,
+            "rub" => MinimumSpendCurrency.Rub,
+            "rwf" => MinimumSpendCurrency.Rwf,
+            "sar" => MinimumSpendCurrency.Sar,
+            "sbd" => MinimumSpendCurrency.Sbd,
+            "scr" => MinimumSpendCurrency.Scr,
+            "sek" => MinimumSpendCurrency.Sek,
+            "sgd" => MinimumSpendCurrency.Sgd,
+            "sle" => MinimumSpendCurrency.Sle,
+            "sll" => MinimumSpendCurrency.Sll,
+            "sos" => MinimumSpendCurrency.Sos,
+            "szl" => MinimumSpendCurrency.Szl,
+            "thb" => MinimumSpendCurrency.Thb,
+            "tjs" => MinimumSpendCurrency.Tjs,
+            "top" => MinimumSpendCurrency.Top,
+            "try" => MinimumSpendCurrency.Try,
+            "ttd" => MinimumSpendCurrency.Ttd,
+            "tzs" => MinimumSpendCurrency.Tzs,
+            "uah" => MinimumSpendCurrency.Uah,
+            "uzs" => MinimumSpendCurrency.Uzs,
+            "vnd" => MinimumSpendCurrency.Vnd,
+            "vuv" => MinimumSpendCurrency.Vuv,
+            "wst" => MinimumSpendCurrency.Wst,
+            "xaf" => MinimumSpendCurrency.Xaf,
+            "xcd" => MinimumSpendCurrency.Xcd,
+            "yer" => MinimumSpendCurrency.Yer,
+            "zar" => MinimumSpendCurrency.Zar,
+            "zmw" => MinimumSpendCurrency.Zmw,
+            "clp" => MinimumSpendCurrency.Clp,
+            "djf" => MinimumSpendCurrency.Djf,
+            "gnf" => MinimumSpendCurrency.Gnf,
+            "ugx" => MinimumSpendCurrency.Ugx,
+            "pyg" => MinimumSpendCurrency.Pyg,
+            "xof" => MinimumSpendCurrency.Xof,
+            "xpf" => MinimumSpendCurrency.Xpf,
+            _ => (MinimumSpendCurrency)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        MinimumSpendCurrency value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                MinimumSpendCurrency.Usd => "usd",
+                MinimumSpendCurrency.Aed => "aed",
+                MinimumSpendCurrency.All => "all",
+                MinimumSpendCurrency.Amd => "amd",
+                MinimumSpendCurrency.Ang => "ang",
+                MinimumSpendCurrency.Aud => "aud",
+                MinimumSpendCurrency.Awg => "awg",
+                MinimumSpendCurrency.Azn => "azn",
+                MinimumSpendCurrency.Bam => "bam",
+                MinimumSpendCurrency.Bbd => "bbd",
+                MinimumSpendCurrency.Bdt => "bdt",
+                MinimumSpendCurrency.Bgn => "bgn",
+                MinimumSpendCurrency.Bif => "bif",
+                MinimumSpendCurrency.Bmd => "bmd",
+                MinimumSpendCurrency.Bnd => "bnd",
+                MinimumSpendCurrency.Bsd => "bsd",
+                MinimumSpendCurrency.Bwp => "bwp",
+                MinimumSpendCurrency.Byn => "byn",
+                MinimumSpendCurrency.Bzd => "bzd",
+                MinimumSpendCurrency.Brl => "brl",
+                MinimumSpendCurrency.Cad => "cad",
+                MinimumSpendCurrency.Cdf => "cdf",
+                MinimumSpendCurrency.Chf => "chf",
+                MinimumSpendCurrency.Cny => "cny",
+                MinimumSpendCurrency.Czk => "czk",
+                MinimumSpendCurrency.Dkk => "dkk",
+                MinimumSpendCurrency.Dop => "dop",
+                MinimumSpendCurrency.Dzd => "dzd",
+                MinimumSpendCurrency.Egp => "egp",
+                MinimumSpendCurrency.Etb => "etb",
+                MinimumSpendCurrency.Eur => "eur",
+                MinimumSpendCurrency.Fjd => "fjd",
+                MinimumSpendCurrency.Gbp => "gbp",
+                MinimumSpendCurrency.Gel => "gel",
+                MinimumSpendCurrency.Gip => "gip",
+                MinimumSpendCurrency.Gmd => "gmd",
+                MinimumSpendCurrency.Gyd => "gyd",
+                MinimumSpendCurrency.Hkd => "hkd",
+                MinimumSpendCurrency.Hrk => "hrk",
+                MinimumSpendCurrency.Htg => "htg",
+                MinimumSpendCurrency.Idr => "idr",
+                MinimumSpendCurrency.Ils => "ils",
+                MinimumSpendCurrency.Inr => "inr",
+                MinimumSpendCurrency.Isk => "isk",
+                MinimumSpendCurrency.Jmd => "jmd",
+                MinimumSpendCurrency.Jpy => "jpy",
+                MinimumSpendCurrency.Kes => "kes",
+                MinimumSpendCurrency.Kgs => "kgs",
+                MinimumSpendCurrency.Khr => "khr",
+                MinimumSpendCurrency.Kmf => "kmf",
+                MinimumSpendCurrency.Krw => "krw",
+                MinimumSpendCurrency.Kyd => "kyd",
+                MinimumSpendCurrency.Kzt => "kzt",
+                MinimumSpendCurrency.Lbp => "lbp",
+                MinimumSpendCurrency.Lkr => "lkr",
+                MinimumSpendCurrency.Lrd => "lrd",
+                MinimumSpendCurrency.Lsl => "lsl",
+                MinimumSpendCurrency.Mad => "mad",
+                MinimumSpendCurrency.Mdl => "mdl",
+                MinimumSpendCurrency.Mga => "mga",
+                MinimumSpendCurrency.Mkd => "mkd",
+                MinimumSpendCurrency.Mmk => "mmk",
+                MinimumSpendCurrency.Mnt => "mnt",
+                MinimumSpendCurrency.Mop => "mop",
+                MinimumSpendCurrency.Mro => "mro",
+                MinimumSpendCurrency.Mvr => "mvr",
+                MinimumSpendCurrency.Mwk => "mwk",
+                MinimumSpendCurrency.Mxn => "mxn",
+                MinimumSpendCurrency.Myr => "myr",
+                MinimumSpendCurrency.Mzn => "mzn",
+                MinimumSpendCurrency.Nad => "nad",
+                MinimumSpendCurrency.Ngn => "ngn",
+                MinimumSpendCurrency.Nok => "nok",
+                MinimumSpendCurrency.Npr => "npr",
+                MinimumSpendCurrency.Nzd => "nzd",
+                MinimumSpendCurrency.Pgk => "pgk",
+                MinimumSpendCurrency.Php => "php",
+                MinimumSpendCurrency.Pkr => "pkr",
+                MinimumSpendCurrency.Pln => "pln",
+                MinimumSpendCurrency.Qar => "qar",
+                MinimumSpendCurrency.Ron => "ron",
+                MinimumSpendCurrency.Rsd => "rsd",
+                MinimumSpendCurrency.Rub => "rub",
+                MinimumSpendCurrency.Rwf => "rwf",
+                MinimumSpendCurrency.Sar => "sar",
+                MinimumSpendCurrency.Sbd => "sbd",
+                MinimumSpendCurrency.Scr => "scr",
+                MinimumSpendCurrency.Sek => "sek",
+                MinimumSpendCurrency.Sgd => "sgd",
+                MinimumSpendCurrency.Sle => "sle",
+                MinimumSpendCurrency.Sll => "sll",
+                MinimumSpendCurrency.Sos => "sos",
+                MinimumSpendCurrency.Szl => "szl",
+                MinimumSpendCurrency.Thb => "thb",
+                MinimumSpendCurrency.Tjs => "tjs",
+                MinimumSpendCurrency.Top => "top",
+                MinimumSpendCurrency.Try => "try",
+                MinimumSpendCurrency.Ttd => "ttd",
+                MinimumSpendCurrency.Tzs => "tzs",
+                MinimumSpendCurrency.Uah => "uah",
+                MinimumSpendCurrency.Uzs => "uzs",
+                MinimumSpendCurrency.Vnd => "vnd",
+                MinimumSpendCurrency.Vuv => "vuv",
+                MinimumSpendCurrency.Wst => "wst",
+                MinimumSpendCurrency.Xaf => "xaf",
+                MinimumSpendCurrency.Xcd => "xcd",
+                MinimumSpendCurrency.Yer => "yer",
+                MinimumSpendCurrency.Zar => "zar",
+                MinimumSpendCurrency.Zmw => "zmw",
+                MinimumSpendCurrency.Clp => "clp",
+                MinimumSpendCurrency.Djf => "djf",
+                MinimumSpendCurrency.Gnf => "gnf",
+                MinimumSpendCurrency.Ugx => "ugx",
+                MinimumSpendCurrency.Pyg => "pyg",
+                MinimumSpendCurrency.Xof => "xof",
+                MinimumSpendCurrency.Xpf => "xpf",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+[JsonConverter(typeof(JsonModelConverter<PriceOverride, PriceOverrideFromRaw>))]
+public sealed record class PriceOverride : JsonModel
+{
+    /// <summary>
+    /// Addon ID
+    /// </summary>
+    public string? AddonID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("addonId");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("addonId", value);
+        }
+    }
+
+    /// <summary>
+    /// The price amount
+    /// </summary>
+    public double? Amount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<double>("amount");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("amount", value);
+        }
+    }
+
+    /// <summary>
+    /// Whether this is a base charge override
+    /// </summary>
+    public bool? BaseCharge
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("baseCharge");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("baseCharge", value);
+        }
+    }
+
+    /// <summary>
+    /// The price currency
+    /// </summary>
+    public ApiEnum<string, PriceOverrideCurrency>? Currency
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, PriceOverrideCurrency>>(
+                "currency"
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("currency", value);
+        }
+    }
+
+    /// <summary>
+    /// The corresponding custom currency id of the recurring credits price
+    /// </summary>
+    public string? CurrencyID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("currencyId");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("currencyId", value);
+        }
+    }
+
+    /// <summary>
+    /// Feature ID
+    /// </summary>
+    public string? FeatureID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("featureId");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("featureId", value);
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.AddonID;
+        _ = this.Amount;
+        _ = this.BaseCharge;
+        this.Currency?.Validate();
+        _ = this.CurrencyID;
+        _ = this.FeatureID;
+    }
+
+    public PriceOverride() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public PriceOverride(PriceOverride priceOverride)
+        : base(priceOverride) { }
+#pragma warning restore CS8618
+
+    public PriceOverride(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    PriceOverride(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="PriceOverrideFromRaw.FromRawUnchecked"/>
+    public static PriceOverride FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class PriceOverrideFromRaw : IFromRawJson<PriceOverride>
+{
+    /// <inheritdoc/>
+    public PriceOverride FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        PriceOverride.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// The price currency
+/// </summary>
+[JsonConverter(typeof(PriceOverrideCurrencyConverter))]
+public enum PriceOverrideCurrency
+{
+    Usd,
+    Aed,
+    All,
+    Amd,
+    Ang,
+    Aud,
+    Awg,
+    Azn,
+    Bam,
+    Bbd,
+    Bdt,
+    Bgn,
+    Bif,
+    Bmd,
+    Bnd,
+    Bsd,
+    Bwp,
+    Byn,
+    Bzd,
+    Brl,
+    Cad,
+    Cdf,
+    Chf,
+    Cny,
+    Czk,
+    Dkk,
+    Dop,
+    Dzd,
+    Egp,
+    Etb,
+    Eur,
+    Fjd,
+    Gbp,
+    Gel,
+    Gip,
+    Gmd,
+    Gyd,
+    Hkd,
+    Hrk,
+    Htg,
+    Idr,
+    Ils,
+    Inr,
+    Isk,
+    Jmd,
+    Jpy,
+    Kes,
+    Kgs,
+    Khr,
+    Kmf,
+    Krw,
+    Kyd,
+    Kzt,
+    Lbp,
+    Lkr,
+    Lrd,
+    Lsl,
+    Mad,
+    Mdl,
+    Mga,
+    Mkd,
+    Mmk,
+    Mnt,
+    Mop,
+    Mro,
+    Mvr,
+    Mwk,
+    Mxn,
+    Myr,
+    Mzn,
+    Nad,
+    Ngn,
+    Nok,
+    Npr,
+    Nzd,
+    Pgk,
+    Php,
+    Pkr,
+    Pln,
+    Qar,
+    Ron,
+    Rsd,
+    Rub,
+    Rwf,
+    Sar,
+    Sbd,
+    Scr,
+    Sek,
+    Sgd,
+    Sle,
+    Sll,
+    Sos,
+    Szl,
+    Thb,
+    Tjs,
+    Top,
+    Try,
+    Ttd,
+    Tzs,
+    Uah,
+    Uzs,
+    Vnd,
+    Vuv,
+    Wst,
+    Xaf,
+    Xcd,
+    Yer,
+    Zar,
+    Zmw,
+    Clp,
+    Djf,
+    Gnf,
+    Ugx,
+    Pyg,
+    Xof,
+    Xpf,
+}
+
+sealed class PriceOverrideCurrencyConverter : JsonConverter<PriceOverrideCurrency>
+{
+    public override PriceOverrideCurrency Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "usd" => PriceOverrideCurrency.Usd,
+            "aed" => PriceOverrideCurrency.Aed,
+            "all" => PriceOverrideCurrency.All,
+            "amd" => PriceOverrideCurrency.Amd,
+            "ang" => PriceOverrideCurrency.Ang,
+            "aud" => PriceOverrideCurrency.Aud,
+            "awg" => PriceOverrideCurrency.Awg,
+            "azn" => PriceOverrideCurrency.Azn,
+            "bam" => PriceOverrideCurrency.Bam,
+            "bbd" => PriceOverrideCurrency.Bbd,
+            "bdt" => PriceOverrideCurrency.Bdt,
+            "bgn" => PriceOverrideCurrency.Bgn,
+            "bif" => PriceOverrideCurrency.Bif,
+            "bmd" => PriceOverrideCurrency.Bmd,
+            "bnd" => PriceOverrideCurrency.Bnd,
+            "bsd" => PriceOverrideCurrency.Bsd,
+            "bwp" => PriceOverrideCurrency.Bwp,
+            "byn" => PriceOverrideCurrency.Byn,
+            "bzd" => PriceOverrideCurrency.Bzd,
+            "brl" => PriceOverrideCurrency.Brl,
+            "cad" => PriceOverrideCurrency.Cad,
+            "cdf" => PriceOverrideCurrency.Cdf,
+            "chf" => PriceOverrideCurrency.Chf,
+            "cny" => PriceOverrideCurrency.Cny,
+            "czk" => PriceOverrideCurrency.Czk,
+            "dkk" => PriceOverrideCurrency.Dkk,
+            "dop" => PriceOverrideCurrency.Dop,
+            "dzd" => PriceOverrideCurrency.Dzd,
+            "egp" => PriceOverrideCurrency.Egp,
+            "etb" => PriceOverrideCurrency.Etb,
+            "eur" => PriceOverrideCurrency.Eur,
+            "fjd" => PriceOverrideCurrency.Fjd,
+            "gbp" => PriceOverrideCurrency.Gbp,
+            "gel" => PriceOverrideCurrency.Gel,
+            "gip" => PriceOverrideCurrency.Gip,
+            "gmd" => PriceOverrideCurrency.Gmd,
+            "gyd" => PriceOverrideCurrency.Gyd,
+            "hkd" => PriceOverrideCurrency.Hkd,
+            "hrk" => PriceOverrideCurrency.Hrk,
+            "htg" => PriceOverrideCurrency.Htg,
+            "idr" => PriceOverrideCurrency.Idr,
+            "ils" => PriceOverrideCurrency.Ils,
+            "inr" => PriceOverrideCurrency.Inr,
+            "isk" => PriceOverrideCurrency.Isk,
+            "jmd" => PriceOverrideCurrency.Jmd,
+            "jpy" => PriceOverrideCurrency.Jpy,
+            "kes" => PriceOverrideCurrency.Kes,
+            "kgs" => PriceOverrideCurrency.Kgs,
+            "khr" => PriceOverrideCurrency.Khr,
+            "kmf" => PriceOverrideCurrency.Kmf,
+            "krw" => PriceOverrideCurrency.Krw,
+            "kyd" => PriceOverrideCurrency.Kyd,
+            "kzt" => PriceOverrideCurrency.Kzt,
+            "lbp" => PriceOverrideCurrency.Lbp,
+            "lkr" => PriceOverrideCurrency.Lkr,
+            "lrd" => PriceOverrideCurrency.Lrd,
+            "lsl" => PriceOverrideCurrency.Lsl,
+            "mad" => PriceOverrideCurrency.Mad,
+            "mdl" => PriceOverrideCurrency.Mdl,
+            "mga" => PriceOverrideCurrency.Mga,
+            "mkd" => PriceOverrideCurrency.Mkd,
+            "mmk" => PriceOverrideCurrency.Mmk,
+            "mnt" => PriceOverrideCurrency.Mnt,
+            "mop" => PriceOverrideCurrency.Mop,
+            "mro" => PriceOverrideCurrency.Mro,
+            "mvr" => PriceOverrideCurrency.Mvr,
+            "mwk" => PriceOverrideCurrency.Mwk,
+            "mxn" => PriceOverrideCurrency.Mxn,
+            "myr" => PriceOverrideCurrency.Myr,
+            "mzn" => PriceOverrideCurrency.Mzn,
+            "nad" => PriceOverrideCurrency.Nad,
+            "ngn" => PriceOverrideCurrency.Ngn,
+            "nok" => PriceOverrideCurrency.Nok,
+            "npr" => PriceOverrideCurrency.Npr,
+            "nzd" => PriceOverrideCurrency.Nzd,
+            "pgk" => PriceOverrideCurrency.Pgk,
+            "php" => PriceOverrideCurrency.Php,
+            "pkr" => PriceOverrideCurrency.Pkr,
+            "pln" => PriceOverrideCurrency.Pln,
+            "qar" => PriceOverrideCurrency.Qar,
+            "ron" => PriceOverrideCurrency.Ron,
+            "rsd" => PriceOverrideCurrency.Rsd,
+            "rub" => PriceOverrideCurrency.Rub,
+            "rwf" => PriceOverrideCurrency.Rwf,
+            "sar" => PriceOverrideCurrency.Sar,
+            "sbd" => PriceOverrideCurrency.Sbd,
+            "scr" => PriceOverrideCurrency.Scr,
+            "sek" => PriceOverrideCurrency.Sek,
+            "sgd" => PriceOverrideCurrency.Sgd,
+            "sle" => PriceOverrideCurrency.Sle,
+            "sll" => PriceOverrideCurrency.Sll,
+            "sos" => PriceOverrideCurrency.Sos,
+            "szl" => PriceOverrideCurrency.Szl,
+            "thb" => PriceOverrideCurrency.Thb,
+            "tjs" => PriceOverrideCurrency.Tjs,
+            "top" => PriceOverrideCurrency.Top,
+            "try" => PriceOverrideCurrency.Try,
+            "ttd" => PriceOverrideCurrency.Ttd,
+            "tzs" => PriceOverrideCurrency.Tzs,
+            "uah" => PriceOverrideCurrency.Uah,
+            "uzs" => PriceOverrideCurrency.Uzs,
+            "vnd" => PriceOverrideCurrency.Vnd,
+            "vuv" => PriceOverrideCurrency.Vuv,
+            "wst" => PriceOverrideCurrency.Wst,
+            "xaf" => PriceOverrideCurrency.Xaf,
+            "xcd" => PriceOverrideCurrency.Xcd,
+            "yer" => PriceOverrideCurrency.Yer,
+            "zar" => PriceOverrideCurrency.Zar,
+            "zmw" => PriceOverrideCurrency.Zmw,
+            "clp" => PriceOverrideCurrency.Clp,
+            "djf" => PriceOverrideCurrency.Djf,
+            "gnf" => PriceOverrideCurrency.Gnf,
+            "ugx" => PriceOverrideCurrency.Ugx,
+            "pyg" => PriceOverrideCurrency.Pyg,
+            "xof" => PriceOverrideCurrency.Xof,
+            "xpf" => PriceOverrideCurrency.Xpf,
+            _ => (PriceOverrideCurrency)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        PriceOverrideCurrency value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                PriceOverrideCurrency.Usd => "usd",
+                PriceOverrideCurrency.Aed => "aed",
+                PriceOverrideCurrency.All => "all",
+                PriceOverrideCurrency.Amd => "amd",
+                PriceOverrideCurrency.Ang => "ang",
+                PriceOverrideCurrency.Aud => "aud",
+                PriceOverrideCurrency.Awg => "awg",
+                PriceOverrideCurrency.Azn => "azn",
+                PriceOverrideCurrency.Bam => "bam",
+                PriceOverrideCurrency.Bbd => "bbd",
+                PriceOverrideCurrency.Bdt => "bdt",
+                PriceOverrideCurrency.Bgn => "bgn",
+                PriceOverrideCurrency.Bif => "bif",
+                PriceOverrideCurrency.Bmd => "bmd",
+                PriceOverrideCurrency.Bnd => "bnd",
+                PriceOverrideCurrency.Bsd => "bsd",
+                PriceOverrideCurrency.Bwp => "bwp",
+                PriceOverrideCurrency.Byn => "byn",
+                PriceOverrideCurrency.Bzd => "bzd",
+                PriceOverrideCurrency.Brl => "brl",
+                PriceOverrideCurrency.Cad => "cad",
+                PriceOverrideCurrency.Cdf => "cdf",
+                PriceOverrideCurrency.Chf => "chf",
+                PriceOverrideCurrency.Cny => "cny",
+                PriceOverrideCurrency.Czk => "czk",
+                PriceOverrideCurrency.Dkk => "dkk",
+                PriceOverrideCurrency.Dop => "dop",
+                PriceOverrideCurrency.Dzd => "dzd",
+                PriceOverrideCurrency.Egp => "egp",
+                PriceOverrideCurrency.Etb => "etb",
+                PriceOverrideCurrency.Eur => "eur",
+                PriceOverrideCurrency.Fjd => "fjd",
+                PriceOverrideCurrency.Gbp => "gbp",
+                PriceOverrideCurrency.Gel => "gel",
+                PriceOverrideCurrency.Gip => "gip",
+                PriceOverrideCurrency.Gmd => "gmd",
+                PriceOverrideCurrency.Gyd => "gyd",
+                PriceOverrideCurrency.Hkd => "hkd",
+                PriceOverrideCurrency.Hrk => "hrk",
+                PriceOverrideCurrency.Htg => "htg",
+                PriceOverrideCurrency.Idr => "idr",
+                PriceOverrideCurrency.Ils => "ils",
+                PriceOverrideCurrency.Inr => "inr",
+                PriceOverrideCurrency.Isk => "isk",
+                PriceOverrideCurrency.Jmd => "jmd",
+                PriceOverrideCurrency.Jpy => "jpy",
+                PriceOverrideCurrency.Kes => "kes",
+                PriceOverrideCurrency.Kgs => "kgs",
+                PriceOverrideCurrency.Khr => "khr",
+                PriceOverrideCurrency.Kmf => "kmf",
+                PriceOverrideCurrency.Krw => "krw",
+                PriceOverrideCurrency.Kyd => "kyd",
+                PriceOverrideCurrency.Kzt => "kzt",
+                PriceOverrideCurrency.Lbp => "lbp",
+                PriceOverrideCurrency.Lkr => "lkr",
+                PriceOverrideCurrency.Lrd => "lrd",
+                PriceOverrideCurrency.Lsl => "lsl",
+                PriceOverrideCurrency.Mad => "mad",
+                PriceOverrideCurrency.Mdl => "mdl",
+                PriceOverrideCurrency.Mga => "mga",
+                PriceOverrideCurrency.Mkd => "mkd",
+                PriceOverrideCurrency.Mmk => "mmk",
+                PriceOverrideCurrency.Mnt => "mnt",
+                PriceOverrideCurrency.Mop => "mop",
+                PriceOverrideCurrency.Mro => "mro",
+                PriceOverrideCurrency.Mvr => "mvr",
+                PriceOverrideCurrency.Mwk => "mwk",
+                PriceOverrideCurrency.Mxn => "mxn",
+                PriceOverrideCurrency.Myr => "myr",
+                PriceOverrideCurrency.Mzn => "mzn",
+                PriceOverrideCurrency.Nad => "nad",
+                PriceOverrideCurrency.Ngn => "ngn",
+                PriceOverrideCurrency.Nok => "nok",
+                PriceOverrideCurrency.Npr => "npr",
+                PriceOverrideCurrency.Nzd => "nzd",
+                PriceOverrideCurrency.Pgk => "pgk",
+                PriceOverrideCurrency.Php => "php",
+                PriceOverrideCurrency.Pkr => "pkr",
+                PriceOverrideCurrency.Pln => "pln",
+                PriceOverrideCurrency.Qar => "qar",
+                PriceOverrideCurrency.Ron => "ron",
+                PriceOverrideCurrency.Rsd => "rsd",
+                PriceOverrideCurrency.Rub => "rub",
+                PriceOverrideCurrency.Rwf => "rwf",
+                PriceOverrideCurrency.Sar => "sar",
+                PriceOverrideCurrency.Sbd => "sbd",
+                PriceOverrideCurrency.Scr => "scr",
+                PriceOverrideCurrency.Sek => "sek",
+                PriceOverrideCurrency.Sgd => "sgd",
+                PriceOverrideCurrency.Sle => "sle",
+                PriceOverrideCurrency.Sll => "sll",
+                PriceOverrideCurrency.Sos => "sos",
+                PriceOverrideCurrency.Szl => "szl",
+                PriceOverrideCurrency.Thb => "thb",
+                PriceOverrideCurrency.Tjs => "tjs",
+                PriceOverrideCurrency.Top => "top",
+                PriceOverrideCurrency.Try => "try",
+                PriceOverrideCurrency.Ttd => "ttd",
+                PriceOverrideCurrency.Tzs => "tzs",
+                PriceOverrideCurrency.Uah => "uah",
+                PriceOverrideCurrency.Uzs => "uzs",
+                PriceOverrideCurrency.Vnd => "vnd",
+                PriceOverrideCurrency.Vuv => "vuv",
+                PriceOverrideCurrency.Wst => "wst",
+                PriceOverrideCurrency.Xaf => "xaf",
+                PriceOverrideCurrency.Xcd => "xcd",
+                PriceOverrideCurrency.Yer => "yer",
+                PriceOverrideCurrency.Zar => "zar",
+                PriceOverrideCurrency.Zmw => "zmw",
+                PriceOverrideCurrency.Clp => "clp",
+                PriceOverrideCurrency.Djf => "djf",
+                PriceOverrideCurrency.Gnf => "gnf",
+                PriceOverrideCurrency.Ugx => "ugx",
+                PriceOverrideCurrency.Pyg => "pyg",
+                PriceOverrideCurrency.Xof => "xof",
+                PriceOverrideCurrency.Xpf => "xpf",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+[JsonConverter(typeof(ScheduleStrategyConverter))]
+public enum ScheduleStrategy
+{
+    EndOfBillingPeriod,
+    EndOfBillingMonth,
+    Immediate,
+}
+
+sealed class ScheduleStrategyConverter : JsonConverter<ScheduleStrategy>
+{
+    public override ScheduleStrategy Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "END_OF_BILLING_PERIOD" => ScheduleStrategy.EndOfBillingPeriod,
+            "END_OF_BILLING_MONTH" => ScheduleStrategy.EndOfBillingMonth,
+            "IMMEDIATE" => ScheduleStrategy.Immediate,
+            _ => (ScheduleStrategy)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        ScheduleStrategy value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                ScheduleStrategy.EndOfBillingPeriod => "END_OF_BILLING_PERIOD",
+                ScheduleStrategy.EndOfBillingMonth => "END_OF_BILLING_MONTH",
+                ScheduleStrategy.Immediate => "IMMEDIATE",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

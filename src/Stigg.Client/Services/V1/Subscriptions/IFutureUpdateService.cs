@@ -7,9 +7,11 @@ using Stigg.Client.Models.V1.Subscriptions.FutureUpdate;
 namespace Stigg.Client.Services.V1.Subscriptions;
 
 /// <summary>
-/// NOTE: Do not inherit from this type outside the SDK unless you're okay with breaking
-/// changes in non-major versions. We may add new methods in the future that cause
-/// existing derived classes to break.
+/// Operations related to subscriptions
+///
+/// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
+/// breaking changes in non-major versions. We may add new methods in the future that
+/// cause existing derived classes to break.</para>
 /// </summary>
 public interface IFutureUpdateService
 {
@@ -42,7 +44,8 @@ public interface IFutureUpdateService
     );
 
     /// <summary>
-    /// Cancels a scheduled subscription update, such as a future downgrade or plan change.
+    /// Cancels a scheduled subscription update, such as a future downgrade or plan
+    /// change.
     /// </summary>
     Task<CancelSubscription> CancelSchedule(
         FutureUpdateCancelScheduleParams parameters,
@@ -71,7 +74,7 @@ public interface IFutureUpdateServiceWithRawResponse
     IFutureUpdateServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `delete /api/v1/subscriptions/{id}/future-update/pending-payment`, but is otherwise the
+    /// Returns a raw HTTP response for <c>delete /api/v1/subscriptions/{id}/future-update/pending-payment</c>, but is otherwise the
     /// same as <see cref="IFutureUpdateService.CancelPendingPayment(FutureUpdateCancelPendingPaymentParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CancelSubscription>> CancelPendingPayment(
@@ -87,7 +90,7 @@ public interface IFutureUpdateServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `delete /api/v1/subscriptions/{id}/future-update/schedule`, but is otherwise the
+    /// Returns a raw HTTP response for <c>delete /api/v1/subscriptions/{id}/future-update/schedule</c>, but is otherwise the
     /// same as <see cref="IFutureUpdateService.CancelSchedule(FutureUpdateCancelScheduleParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<CancelSubscription>> CancelSchedule(

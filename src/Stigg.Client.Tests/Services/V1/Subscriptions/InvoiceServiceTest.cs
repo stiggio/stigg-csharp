@@ -4,7 +4,7 @@ namespace Stigg.Client.Tests.Services.V1.Subscriptions;
 
 public class InvoiceServiceTest : TestBase
 {
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task MarkAsPaid_Works()
     {
         var response = await this.client.V1.Subscriptions.Invoice.MarkAsPaid(

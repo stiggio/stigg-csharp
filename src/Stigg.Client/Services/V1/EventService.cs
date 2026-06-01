@@ -32,27 +32,13 @@ public sealed class EventService : IEventService
         _client = client;
 
         _withRawResponse = new(() => new EventServiceWithRawResponse(client.WithRawResponse));
-        _features = new(() => new FeatureService(client));
-        _addons = new(() => new AddonService(client));
-        _plans = new(() => new PlanService(client));
+        _beta = new(() => new BetaService(client));
     }
 
-    readonly Lazy<IFeatureService> _features;
-    public IFeatureService Features
+    readonly Lazy<IBetaService> _beta;
+    public IBetaService Beta
     {
-        get { return _features.Value; }
-    }
-
-    readonly Lazy<IAddonService> _addons;
-    public IAddonService Addons
-    {
-        get { return _addons.Value; }
-    }
-
-    readonly Lazy<IPlanService> _plans;
-    public IPlanService Plans
-    {
-        get { return _plans.Value; }
+        get { return _beta.Value; }
     }
 
     /// <inheritdoc/>
@@ -83,27 +69,13 @@ public sealed class EventServiceWithRawResponse : IEventServiceWithRawResponse
     {
         _client = client;
 
-        _features = new(() => new FeatureServiceWithRawResponse(client));
-        _addons = new(() => new AddonServiceWithRawResponse(client));
-        _plans = new(() => new PlanServiceWithRawResponse(client));
+        _beta = new(() => new BetaServiceWithRawResponse(client));
     }
 
-    readonly Lazy<IFeatureServiceWithRawResponse> _features;
-    public IFeatureServiceWithRawResponse Features
+    readonly Lazy<IBetaServiceWithRawResponse> _beta;
+    public IBetaServiceWithRawResponse Beta
     {
-        get { return _features.Value; }
-    }
-
-    readonly Lazy<IAddonServiceWithRawResponse> _addons;
-    public IAddonServiceWithRawResponse Addons
-    {
-        get { return _addons.Value; }
-    }
-
-    readonly Lazy<IPlanServiceWithRawResponse> _plans;
-    public IPlanServiceWithRawResponse Plans
-    {
-        get { return _plans.Value; }
+        get { return _beta.Value; }
     }
 
     /// <inheritdoc/>

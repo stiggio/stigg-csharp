@@ -4,7 +4,7 @@ namespace Stigg.Client.Tests.Services.V1.Subscriptions;
 
 public class UsageServiceTest : TestBase
 {
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task ChargeUsage_Works()
     {
         var response = await this.client.V1.Subscriptions.Usage.ChargeUsage(
@@ -15,7 +15,7 @@ public class UsageServiceTest : TestBase
         response.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Sync_Works()
     {
         var response = await this.client.V1.Subscriptions.Usage.Sync(

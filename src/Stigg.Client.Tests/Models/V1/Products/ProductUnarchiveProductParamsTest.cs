@@ -22,7 +22,9 @@ public class ProductUnarchiveProductParamsTest : TestBase
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
-        Assert.Equal(new Uri("https://api.stigg.io/api/v1/products/x/unarchive"), url);
+        Assert.True(
+            TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/products/x/unarchive"), url)
+        );
     }
 
     [Fact]

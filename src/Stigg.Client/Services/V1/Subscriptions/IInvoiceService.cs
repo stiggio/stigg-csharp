@@ -7,9 +7,11 @@ using Stigg.Client.Models.V1.Subscriptions.Invoice;
 namespace Stigg.Client.Services.V1.Subscriptions;
 
 /// <summary>
-/// NOTE: Do not inherit from this type outside the SDK unless you're okay with breaking
-/// changes in non-major versions. We may add new methods in the future that cause
-/// existing derived classes to break.
+/// Operations related to subscriptions
+///
+/// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
+/// breaking changes in non-major versions. We may add new methods in the future that
+/// cause existing derived classes to break.</para>
 /// </summary>
 public interface IInvoiceService
 {
@@ -27,8 +29,8 @@ public interface IInvoiceService
     IInvoiceService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Marks the latest invoice of a subscription as paid in the billing provider.
-    /// The invoice must exist and have an OPEN status.
+    /// Marks the latest invoice of a subscription as paid in the billing provider. The
+    /// invoice must exist and have an OPEN status.
     /// </summary>
     Task<InvoiceMarkAsPaidResponse> MarkAsPaid(
         InvoiceMarkAsPaidParams parameters,
@@ -57,7 +59,7 @@ public interface IInvoiceServiceWithRawResponse
     IInvoiceServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/subscriptions/{id}/invoice/paid`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/subscriptions/{id}/invoice/paid</c>, but is otherwise the
     /// same as <see cref="IInvoiceService.MarkAsPaid(InvoiceMarkAsPaidParams, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<InvoiceMarkAsPaidResponse>> MarkAsPaid(

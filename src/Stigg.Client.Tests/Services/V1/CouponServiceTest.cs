@@ -6,7 +6,7 @@ namespace Stigg.Client.Tests.Services.V1;
 
 public class CouponServiceTest : TestBase
 {
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Create_Works()
     {
         var coupon = await this.client.V1.Coupons.Create(
@@ -25,7 +25,7 @@ public class CouponServiceTest : TestBase
         coupon.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Retrieve_Works()
     {
         var coupon = await this.client.V1.Coupons.Retrieve(
@@ -36,14 +36,14 @@ public class CouponServiceTest : TestBase
         coupon.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task List_Works()
     {
         var page = await this.client.V1.Coupons.List(new(), TestContext.Current.CancellationToken);
         page.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task ArchiveCoupon_Works()
     {
         var coupon = await this.client.V1.Coupons.ArchiveCoupon(
@@ -54,7 +54,7 @@ public class CouponServiceTest : TestBase
         coupon.Validate();
     }
 
-    [Fact(Skip = "Prism tests are disabled")]
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task UpdateCoupon_Works()
     {
         var coupon = await this.client.V1.Coupons.UpdateCoupon(

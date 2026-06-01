@@ -7,9 +7,11 @@ using Stigg.Client.Models.V1.Products;
 namespace Stigg.Client.Services.V1;
 
 /// <summary>
-/// NOTE: Do not inherit from this type outside the SDK unless you're okay with breaking
-/// changes in non-major versions. We may add new methods in the future that cause
-/// existing derived classes to break.
+/// Operations related to products
+///
+/// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
+/// breaking changes in non-major versions. We may add new methods in the future that
+/// cause existing derived classes to break.</para>
 /// </summary>
 public interface IProductService
 {
@@ -27,15 +29,16 @@ public interface IProductService
     IProductService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Archives a product, preventing new subscriptions. All plans and addons are archived.
+    /// Archives a product, preventing new subscriptions. All plans and addons are
+    /// archived.
     /// </summary>
-    Task<ProductArchiveProductResponse> ArchiveProduct(
+    Task<Product> ArchiveProduct(
         ProductArchiveProductParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="ArchiveProduct(ProductArchiveProductParams, CancellationToken)"/>
-    Task<ProductArchiveProductResponse> ArchiveProduct(
+    Task<Product> ArchiveProduct(
         string id,
         ProductArchiveProductParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -44,7 +47,7 @@ public interface IProductService
     /// <summary>
     /// Creates a new product.
     /// </summary>
-    Task<ProductCreateProductResponse> CreateProduct(
+    Task<Product> CreateProduct(
         ProductCreateProductParams parameters,
         CancellationToken cancellationToken = default
     );
@@ -52,13 +55,13 @@ public interface IProductService
     /// <summary>
     /// Duplicates an existing product, including its plans, addons, and configuration.
     /// </summary>
-    Task<ProductDuplicateProductResponse> DuplicateProduct(
+    Task<Product> DuplicateProduct(
         ProductDuplicateProductParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="DuplicateProduct(ProductDuplicateProductParams, CancellationToken)"/>
-    Task<ProductDuplicateProductResponse> DuplicateProduct(
+    Task<Product> DuplicateProduct(
         string id,
         ProductDuplicateProductParams parameters,
         CancellationToken cancellationToken = default
@@ -75,29 +78,29 @@ public interface IProductService
     /// <summary>
     /// Restores an archived product, allowing new subscriptions to be created.
     /// </summary>
-    Task<ProductUnarchiveProductResponse> UnarchiveProduct(
+    Task<Product> UnarchiveProduct(
         ProductUnarchiveProductParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="UnarchiveProduct(ProductUnarchiveProductParams, CancellationToken)"/>
-    Task<ProductUnarchiveProductResponse> UnarchiveProduct(
+    Task<Product> UnarchiveProduct(
         string id,
         ProductUnarchiveProductParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 
     /// <summary>
-    /// Updates an existing product's properties such as display name, description,
-    /// and metadata.
+    /// Updates an existing product's properties such as display name, description, and
+    /// metadata.
     /// </summary>
-    Task<ProductUpdateProductResponse> UpdateProduct(
+    Task<Product> UpdateProduct(
         ProductUpdateProductParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="UpdateProduct(ProductUpdateProductParams, CancellationToken)"/>
-    Task<ProductUpdateProductResponse> UpdateProduct(
+    Task<Product> UpdateProduct(
         string id,
         ProductUpdateProductParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -118,48 +121,48 @@ public interface IProductServiceWithRawResponse
     IProductServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/products/{id}/archive`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/products/{id}/archive</c>, but is otherwise the
     /// same as <see cref="IProductService.ArchiveProduct(ProductArchiveProductParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<ProductArchiveProductResponse>> ArchiveProduct(
+    Task<HttpResponse<Product>> ArchiveProduct(
         ProductArchiveProductParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="ArchiveProduct(ProductArchiveProductParams, CancellationToken)"/>
-    Task<HttpResponse<ProductArchiveProductResponse>> ArchiveProduct(
+    Task<HttpResponse<Product>> ArchiveProduct(
         string id,
         ProductArchiveProductParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/products`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/products</c>, but is otherwise the
     /// same as <see cref="IProductService.CreateProduct(ProductCreateProductParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<ProductCreateProductResponse>> CreateProduct(
+    Task<HttpResponse<Product>> CreateProduct(
         ProductCreateProductParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/products/{id}/duplicate`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/products/{id}/duplicate</c>, but is otherwise the
     /// same as <see cref="IProductService.DuplicateProduct(ProductDuplicateProductParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<ProductDuplicateProductResponse>> DuplicateProduct(
+    Task<HttpResponse<Product>> DuplicateProduct(
         ProductDuplicateProductParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="DuplicateProduct(ProductDuplicateProductParams, CancellationToken)"/>
-    Task<HttpResponse<ProductDuplicateProductResponse>> DuplicateProduct(
+    Task<HttpResponse<Product>> DuplicateProduct(
         string id,
         ProductDuplicateProductParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `get /api/v1/products`, but is otherwise the
+    /// Returns a raw HTTP response for <c>get /api/v1/products</c>, but is otherwise the
     /// same as <see cref="IProductService.ListProducts(ProductListProductsParams?, CancellationToken)"/>.
     /// </summary>
     Task<HttpResponse<ProductListProductsPage>> ListProducts(
@@ -168,32 +171,32 @@ public interface IProductServiceWithRawResponse
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `post /api/v1/products/{id}/unarchive`, but is otherwise the
+    /// Returns a raw HTTP response for <c>post /api/v1/products/{id}/unarchive</c>, but is otherwise the
     /// same as <see cref="IProductService.UnarchiveProduct(ProductUnarchiveProductParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<ProductUnarchiveProductResponse>> UnarchiveProduct(
+    Task<HttpResponse<Product>> UnarchiveProduct(
         ProductUnarchiveProductParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="UnarchiveProduct(ProductUnarchiveProductParams, CancellationToken)"/>
-    Task<HttpResponse<ProductUnarchiveProductResponse>> UnarchiveProduct(
+    Task<HttpResponse<Product>> UnarchiveProduct(
         string id,
         ProductUnarchiveProductParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 
     /// <summary>
-    /// Returns a raw HTTP response for `patch /api/v1/products/{id}`, but is otherwise the
+    /// Returns a raw HTTP response for <c>patch /api/v1/products/{id}</c>, but is otherwise the
     /// same as <see cref="IProductService.UpdateProduct(ProductUpdateProductParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<ProductUpdateProductResponse>> UpdateProduct(
+    Task<HttpResponse<Product>> UpdateProduct(
         ProductUpdateProductParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="UpdateProduct(ProductUpdateProductParams, CancellationToken)"/>
-    Task<HttpResponse<ProductUpdateProductResponse>> UpdateProduct(
+    Task<HttpResponse<Product>> UpdateProduct(
         string id,
         ProductUpdateProductParams? parameters = null,
         CancellationToken cancellationToken = default

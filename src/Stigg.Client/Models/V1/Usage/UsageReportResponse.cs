@@ -162,12 +162,12 @@ public sealed record class UsageReportResponseData : JsonModel
     /// <summary>
     /// The usage measurement record
     /// </summary>
-    public required double Value
+    public required long Value
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<double>("value");
+            return this._rawData.GetNotNullStruct<long>("value");
         }
         init { this._rawData.Set("value", value); }
     }

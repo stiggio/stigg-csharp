@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -8,6 +7,8 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Stigg.Client.Core;
+using Stigg.Client.Exceptions;
+using System = System;
 
 namespace Stigg.Client.Models.V1.Subscriptions;
 
@@ -97,7 +98,7 @@ public record class SubscriptionImportParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson{T}.FromRawUnchecked"/>
     public static SubscriptionImportParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
@@ -139,9 +140,9 @@ public record class SubscriptionImportParams : ParamsBase
             && this._rawBodyData.Equals(other._rawBodyData);
     }
 
-    public override Uri Url(ClientOptions options)
+    public override System::Uri Url(ClientOptions options)
     {
-        return new UriBuilder(
+        return new System::UriBuilder(
             options.BaseUrl.ToString().TrimEnd('/') + "/api/v1/subscriptions/import"
         )
         {
@@ -215,6 +216,27 @@ public sealed record class Subscription : JsonModel
         init { this._rawData.Set("planId", value); }
     }
 
+    public IReadOnlyList<SubscriptionAddon>? Addons
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<SubscriptionAddon>>("addons");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set<ImmutableArray<SubscriptionAddon>?>(
+                "addons",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
     /// <summary>
     /// Billing ID
     /// </summary>
@@ -229,14 +251,58 @@ public sealed record class Subscription : JsonModel
     }
 
     /// <summary>
-    /// Subscription end date
+    /// Billing period (MONTHLY or ANNUALLY)
     /// </summary>
-    public DateTimeOffset? EndDate
+    public ApiEnum<string, SubscriptionBillingPeriod>? BillingPeriod
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<DateTimeOffset>("endDate");
+            return this._rawData.GetNullableClass<ApiEnum<string, SubscriptionBillingPeriod>>(
+                "billingPeriod"
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("billingPeriod", value);
+        }
+    }
+
+    public IReadOnlyList<SubscriptionCharge>? Charges
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<SubscriptionCharge>>("charges");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set<ImmutableArray<SubscriptionCharge>?>(
+                "charges",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
+    /// Subscription end date
+    /// </summary>
+    public System::DateTimeOffset? EndDate
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<System::DateTimeOffset>("endDate");
         }
         init { this._rawData.Set("endDate", value); }
     }
@@ -281,12 +347,12 @@ public sealed record class Subscription : JsonModel
     /// <summary>
     /// Subscription start date
     /// </summary>
-    public DateTimeOffset? StartDate
+    public System::DateTimeOffset? StartDate
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<DateTimeOffset>("startDate");
+            return this._rawData.GetNullableStruct<System::DateTimeOffset>("startDate");
         }
         init
         {
@@ -305,7 +371,16 @@ public sealed record class Subscription : JsonModel
         _ = this.ID;
         _ = this.CustomerID;
         _ = this.PlanID;
+        foreach (var item in this.Addons ?? [])
+        {
+            item.Validate();
+        }
         _ = this.BillingID;
+        this.BillingPeriod?.Validate();
+        foreach (var item in this.Charges ?? [])
+        {
+            item.Validate();
+        }
         _ = this.EndDate;
         _ = this.Metadata;
         _ = this.ResourceID;
@@ -345,4 +420,264 @@ class SubscriptionFromRaw : IFromRawJson<Subscription>
     /// <inheritdoc/>
     public Subscription FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Subscription.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Addon configuration
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<SubscriptionAddon, SubscriptionAddonFromRaw>))]
+public sealed record class SubscriptionAddon : JsonModel
+{
+    /// <summary>
+    /// Addon ID
+    /// </summary>
+    public required string ID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
+        init { this._rawData.Set("id", value); }
+    }
+
+    /// <summary>
+    /// Number of addon instances
+    /// </summary>
+    public required long Quantity
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<long>("quantity");
+        }
+        init { this._rawData.Set("quantity", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.ID;
+        _ = this.Quantity;
+    }
+
+    public SubscriptionAddon() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public SubscriptionAddon(SubscriptionAddon subscriptionAddon)
+        : base(subscriptionAddon) { }
+#pragma warning restore CS8618
+
+    public SubscriptionAddon(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    SubscriptionAddon(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="SubscriptionAddonFromRaw.FromRawUnchecked"/>
+    public static SubscriptionAddon FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class SubscriptionAddonFromRaw : IFromRawJson<SubscriptionAddon>
+{
+    /// <inheritdoc/>
+    public SubscriptionAddon FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        SubscriptionAddon.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Billing period (MONTHLY or ANNUALLY)
+/// </summary>
+[JsonConverter(typeof(SubscriptionBillingPeriodConverter))]
+public enum SubscriptionBillingPeriod
+{
+    Monthly,
+    Annually,
+}
+
+sealed class SubscriptionBillingPeriodConverter : JsonConverter<SubscriptionBillingPeriod>
+{
+    public override SubscriptionBillingPeriod Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "MONTHLY" => SubscriptionBillingPeriod.Monthly,
+            "ANNUALLY" => SubscriptionBillingPeriod.Annually,
+            _ => (SubscriptionBillingPeriod)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        SubscriptionBillingPeriod value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                SubscriptionBillingPeriod.Monthly => "MONTHLY",
+                SubscriptionBillingPeriod.Annually => "ANNUALLY",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// A charge selection for a subscription (references a catalog charge with a quantity).
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<SubscriptionCharge, SubscriptionChargeFromRaw>))]
+public sealed record class SubscriptionCharge : JsonModel
+{
+    /// <summary>
+    /// Charge ID
+    /// </summary>
+    public required string ID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
+        init { this._rawData.Set("id", value); }
+    }
+
+    /// <summary>
+    /// Charge quantity. Minimum is 0 (zero is allowed).
+    /// </summary>
+    public required double Quantity
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<double>("quantity");
+        }
+        init { this._rawData.Set("quantity", value); }
+    }
+
+    /// <summary>
+    /// Charge type
+    /// </summary>
+    public required ApiEnum<string, SubscriptionChargeType> Type
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, SubscriptionChargeType>>("type");
+        }
+        init { this._rawData.Set("type", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.ID;
+        _ = this.Quantity;
+        this.Type.Validate();
+    }
+
+    public SubscriptionCharge() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public SubscriptionCharge(SubscriptionCharge subscriptionCharge)
+        : base(subscriptionCharge) { }
+#pragma warning restore CS8618
+
+    public SubscriptionCharge(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    SubscriptionCharge(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="SubscriptionChargeFromRaw.FromRawUnchecked"/>
+    public static SubscriptionCharge FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class SubscriptionChargeFromRaw : IFromRawJson<SubscriptionCharge>
+{
+    /// <inheritdoc/>
+    public SubscriptionCharge FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        SubscriptionCharge.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Charge type
+/// </summary>
+[JsonConverter(typeof(SubscriptionChargeTypeConverter))]
+public enum SubscriptionChargeType
+{
+    Feature,
+    Credit,
+}
+
+sealed class SubscriptionChargeTypeConverter : JsonConverter<SubscriptionChargeType>
+{
+    public override SubscriptionChargeType Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "FEATURE" => SubscriptionChargeType.Feature,
+            "CREDIT" => SubscriptionChargeType.Credit,
+            _ => (SubscriptionChargeType)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        SubscriptionChargeType value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                SubscriptionChargeType.Feature => "FEATURE",
+                SubscriptionChargeType.Credit => "CREDIT",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }

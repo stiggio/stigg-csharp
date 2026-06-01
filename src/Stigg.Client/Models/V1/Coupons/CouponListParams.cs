@@ -1,5 +1,6 @@
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text.Json;
@@ -127,12 +128,14 @@ public record class CouponListParams : ParamsBase
     /// <summary>
     /// Filter by coupon status. Supports comma-separated values for multiple statuses
     /// </summary>
-    public string? Status
+    public IReadOnlyList<ApiEnum<string, Status>>? Status
     {
         get
         {
             this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableClass<string>("status");
+            return this._rawQueryData.GetNullableStruct<ImmutableArray<ApiEnum<string, Status>>>(
+                "status"
+            );
         }
         init
         {
@@ -141,7 +144,10 @@ public record class CouponListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData.Set("status", value);
+            this._rawQueryData.Set<ImmutableArray<ApiEnum<string, Status>>?>(
+                "status",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
         }
     }
 
@@ -197,7 +203,7 @@ public record class CouponListParams : ParamsBase
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="IFromRawJson.FromRawUnchecked"/>
+    /// <inheritdoc cref="IFromRawJson{T}.FromRawUnchecked"/>
     public static CouponListParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData
@@ -390,6 +396,46 @@ class CreatedAtFromRaw : IFromRawJson<CreatedAt>
     /// <inheritdoc/>
     public CreatedAt FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         CreatedAt.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(StatusConverter))]
+public enum Status
+{
+    Active,
+    Archived,
+}
+
+sealed class StatusConverter : JsonConverter<Status>
+{
+    public override Status Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "ACTIVE" => Status.Active,
+            "ARCHIVED" => Status.Archived,
+            _ => (Status)(-1),
+        };
+    }
+
+    public override void Write(Utf8JsonWriter writer, Status value, JsonSerializerOptions options)
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                Status.Active => "ACTIVE",
+                Status.Archived => "ARCHIVED",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }
 
 /// <summary>

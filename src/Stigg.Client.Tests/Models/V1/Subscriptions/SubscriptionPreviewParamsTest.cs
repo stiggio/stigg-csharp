@@ -16,7 +16,7 @@ public class SubscriptionPreviewParamsTest : TestBase
         {
             CustomerID = "customerId",
             PlanID = "planId",
-            Addons = [new() { AddonID = "addonId", Quantity = 1 }],
+            Addons = [new() { ID = "id", Quantity = 0 }],
             AppliedCoupon = new()
             {
                 BillingCouponID = "billingCouponId",
@@ -43,8 +43,9 @@ public class SubscriptionPreviewParamsTest : TestBase
                 },
                 PromotionCode = "promotionCode",
             },
-            BillableFeatures = [new() { FeatureID = "featureId", Quantity = 1 }],
+            BillableFeatures = [new() { FeatureID = "featureId", Quantity = 0 }],
             BillingCountryCode = "billingCountryCode",
+            BillingCycleAnchor = SubscriptionPreviewParamsBillingCycleAnchor.Unchanged,
             BillingInformation = new()
             {
                 BillingAddress = new()
@@ -61,7 +62,7 @@ public class SubscriptionPreviewParamsTest : TestBase
                 InvoiceDaysUntilDue = 0,
                 IsBackdated = true,
                 IsInvoicePaid = true,
-                Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 ProrationBehavior =
                     SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately,
                 TaxIds = [new() { Type = "type", Value = "value" }],
@@ -74,7 +75,7 @@ public class SubscriptionPreviewParamsTest : TestBase
                 new()
                 {
                     ID = "id",
-                    Quantity = 1,
+                    Quantity = 0,
                     Type = SubscriptionPreviewParamsChargeType.Feature,
                 },
             ],
@@ -88,15 +89,12 @@ public class SubscriptionPreviewParamsTest : TestBase
                 TrialEndBehavior = TrialEndBehavior.ConvertToPaid,
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            UnitQuantity = 1,
+            UnitQuantity = 0,
         };
 
         string expectedCustomerID = "customerId";
         string expectedPlanID = "planId";
-        List<SubscriptionPreviewParamsAddon> expectedAddons =
-        [
-            new() { AddonID = "addonId", Quantity = 1 },
-        ];
+        List<SubscriptionPreviewParamsAddon> expectedAddons = [new() { ID = "id", Quantity = 0 }];
         SubscriptionPreviewParamsAppliedCoupon expectedAppliedCoupon = new()
         {
             BillingCouponID = "billingCouponId",
@@ -122,9 +120,11 @@ public class SubscriptionPreviewParamsTest : TestBase
         };
         List<BillableFeature> expectedBillableFeatures =
         [
-            new() { FeatureID = "featureId", Quantity = 1 },
+            new() { FeatureID = "featureId", Quantity = 0 },
         ];
         string expectedBillingCountryCode = "billingCountryCode";
+        ApiEnum<string, SubscriptionPreviewParamsBillingCycleAnchor> expectedBillingCycleAnchor =
+            SubscriptionPreviewParamsBillingCycleAnchor.Unchanged;
         SubscriptionPreviewParamsBillingInformation expectedBillingInformation = new()
         {
             BillingAddress = new()
@@ -141,7 +141,7 @@ public class SubscriptionPreviewParamsTest : TestBase
             InvoiceDaysUntilDue = 0,
             IsBackdated = true,
             IsInvoicePaid = true,
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             ProrationBehavior =
                 SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately,
             TaxIds = [new() { Type = "type", Value = "value" }],
@@ -155,7 +155,7 @@ public class SubscriptionPreviewParamsTest : TestBase
             new()
             {
                 ID = "id",
-                Quantity = 1,
+                Quantity = 0,
                 Type = SubscriptionPreviewParamsChargeType.Feature,
             },
         ];
@@ -170,7 +170,7 @@ public class SubscriptionPreviewParamsTest : TestBase
             TrialEndBehavior = TrialEndBehavior.ConvertToPaid,
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
-        double expectedUnitQuantity = 1;
+        long expectedUnitQuantity = 0;
 
         Assert.Equal(expectedCustomerID, parameters.CustomerID);
         Assert.Equal(expectedPlanID, parameters.PlanID);
@@ -188,6 +188,7 @@ public class SubscriptionPreviewParamsTest : TestBase
             Assert.Equal(expectedBillableFeatures[i], parameters.BillableFeatures[i]);
         }
         Assert.Equal(expectedBillingCountryCode, parameters.BillingCountryCode);
+        Assert.Equal(expectedBillingCycleAnchor, parameters.BillingCycleAnchor);
         Assert.Equal(expectedBillingInformation, parameters.BillingInformation);
         Assert.Equal(expectedBillingPeriod, parameters.BillingPeriod);
         Assert.NotNull(parameters.Charges);
@@ -221,6 +222,8 @@ public class SubscriptionPreviewParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("billableFeatures"));
         Assert.Null(parameters.BillingCountryCode);
         Assert.False(parameters.RawBodyData.ContainsKey("billingCountryCode"));
+        Assert.Null(parameters.BillingCycleAnchor);
+        Assert.False(parameters.RawBodyData.ContainsKey("billingCycleAnchor"));
         Assert.Null(parameters.BillingInformation);
         Assert.False(parameters.RawBodyData.ContainsKey("billingInformation"));
         Assert.Null(parameters.BillingPeriod);
@@ -254,6 +257,7 @@ public class SubscriptionPreviewParamsTest : TestBase
             AppliedCoupon = null,
             BillableFeatures = null,
             BillingCountryCode = null,
+            BillingCycleAnchor = null,
             BillingInformation = null,
             BillingPeriod = null,
             Charges = null,
@@ -273,6 +277,8 @@ public class SubscriptionPreviewParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("billableFeatures"));
         Assert.Null(parameters.BillingCountryCode);
         Assert.False(parameters.RawBodyData.ContainsKey("billingCountryCode"));
+        Assert.Null(parameters.BillingCycleAnchor);
+        Assert.False(parameters.RawBodyData.ContainsKey("billingCycleAnchor"));
         Assert.Null(parameters.BillingInformation);
         Assert.False(parameters.RawBodyData.ContainsKey("billingInformation"));
         Assert.Null(parameters.BillingPeriod);
@@ -304,7 +310,9 @@ public class SubscriptionPreviewParamsTest : TestBase
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
-        Assert.Equal(new Uri("https://api.stigg.io/api/v1/subscriptions/preview"), url);
+        Assert.True(
+            TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/subscriptions/preview"), url)
+        );
     }
 
     [Fact]
@@ -314,7 +322,7 @@ public class SubscriptionPreviewParamsTest : TestBase
         {
             CustomerID = "customerId",
             PlanID = "planId",
-            Addons = [new() { AddonID = "addonId", Quantity = 1 }],
+            Addons = [new() { ID = "id", Quantity = 0 }],
             AppliedCoupon = new()
             {
                 BillingCouponID = "billingCouponId",
@@ -341,8 +349,9 @@ public class SubscriptionPreviewParamsTest : TestBase
                 },
                 PromotionCode = "promotionCode",
             },
-            BillableFeatures = [new() { FeatureID = "featureId", Quantity = 1 }],
+            BillableFeatures = [new() { FeatureID = "featureId", Quantity = 0 }],
             BillingCountryCode = "billingCountryCode",
+            BillingCycleAnchor = SubscriptionPreviewParamsBillingCycleAnchor.Unchanged,
             BillingInformation = new()
             {
                 BillingAddress = new()
@@ -359,7 +368,7 @@ public class SubscriptionPreviewParamsTest : TestBase
                 InvoiceDaysUntilDue = 0,
                 IsBackdated = true,
                 IsInvoicePaid = true,
-                Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 ProrationBehavior =
                     SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately,
                 TaxIds = [new() { Type = "type", Value = "value" }],
@@ -372,7 +381,7 @@ public class SubscriptionPreviewParamsTest : TestBase
                 new()
                 {
                     ID = "id",
-                    Quantity = 1,
+                    Quantity = 0,
                     Type = SubscriptionPreviewParamsChargeType.Feature,
                 },
             ],
@@ -386,7 +395,7 @@ public class SubscriptionPreviewParamsTest : TestBase
                 TrialEndBehavior = TrialEndBehavior.ConvertToPaid,
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
-            UnitQuantity = 1,
+            UnitQuantity = 0,
         };
 
         SubscriptionPreviewParams copied = new(parameters);
@@ -400,19 +409,19 @@ public class SubscriptionPreviewParamsAddonTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new SubscriptionPreviewParamsAddon { AddonID = "addonId", Quantity = 1 };
+        var model = new SubscriptionPreviewParamsAddon { ID = "id", Quantity = 0 };
 
-        string expectedAddonID = "addonId";
-        long expectedQuantity = 1;
+        string expectedID = "id";
+        long expectedQuantity = 0;
 
-        Assert.Equal(expectedAddonID, model.AddonID);
+        Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedQuantity, model.Quantity);
     }
 
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new SubscriptionPreviewParamsAddon { AddonID = "addonId", Quantity = 1 };
+        var model = new SubscriptionPreviewParamsAddon { ID = "id", Quantity = 0 };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<SubscriptionPreviewParamsAddon>(
@@ -426,7 +435,7 @@ public class SubscriptionPreviewParamsAddonTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new SubscriptionPreviewParamsAddon { AddonID = "addonId", Quantity = 1 };
+        var model = new SubscriptionPreviewParamsAddon { ID = "id", Quantity = 0 };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<SubscriptionPreviewParamsAddon>(
@@ -435,63 +444,17 @@ public class SubscriptionPreviewParamsAddonTest : TestBase
         );
         Assert.NotNull(deserialized);
 
-        string expectedAddonID = "addonId";
-        long expectedQuantity = 1;
+        string expectedID = "id";
+        long expectedQuantity = 0;
 
-        Assert.Equal(expectedAddonID, deserialized.AddonID);
+        Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedQuantity, deserialized.Quantity);
     }
 
     [Fact]
     public void Validation_Works()
     {
-        var model = new SubscriptionPreviewParamsAddon { AddonID = "addonId", Quantity = 1 };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
-    {
-        var model = new SubscriptionPreviewParamsAddon { AddonID = "addonId" };
-
-        Assert.Null(model.Quantity);
-        Assert.False(model.RawData.ContainsKey("quantity"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesUnsetValidation_Works()
-    {
-        var model = new SubscriptionPreviewParamsAddon { AddonID = "addonId" };
-
-        model.Validate();
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
-    {
-        var model = new SubscriptionPreviewParamsAddon
-        {
-            AddonID = "addonId",
-
-            // Null should be interpreted as omitted for these properties
-            Quantity = null,
-        };
-
-        Assert.Null(model.Quantity);
-        Assert.False(model.RawData.ContainsKey("quantity"));
-    }
-
-    [Fact]
-    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
-    {
-        var model = new SubscriptionPreviewParamsAddon
-        {
-            AddonID = "addonId",
-
-            // Null should be interpreted as omitted for these properties
-            Quantity = null,
-        };
+        var model = new SubscriptionPreviewParamsAddon { ID = "id", Quantity = 0 };
 
         model.Validate();
     }
@@ -499,7 +462,7 @@ public class SubscriptionPreviewParamsAddonTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new SubscriptionPreviewParamsAddon { AddonID = "addonId", Quantity = 1 };
+        var model = new SubscriptionPreviewParamsAddon { ID = "id", Quantity = 0 };
 
         SubscriptionPreviewParamsAddon copied = new(model);
 
@@ -1637,10 +1600,10 @@ public class BillableFeatureTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new BillableFeature { FeatureID = "featureId", Quantity = 1 };
+        var model = new BillableFeature { FeatureID = "featureId", Quantity = 0 };
 
         string expectedFeatureID = "featureId";
-        double expectedQuantity = 1;
+        double expectedQuantity = 0;
 
         Assert.Equal(expectedFeatureID, model.FeatureID);
         Assert.Equal(expectedQuantity, model.Quantity);
@@ -1649,7 +1612,7 @@ public class BillableFeatureTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new BillableFeature { FeatureID = "featureId", Quantity = 1 };
+        var model = new BillableFeature { FeatureID = "featureId", Quantity = 0 };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<BillableFeature>(
@@ -1663,7 +1626,7 @@ public class BillableFeatureTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new BillableFeature { FeatureID = "featureId", Quantity = 1 };
+        var model = new BillableFeature { FeatureID = "featureId", Quantity = 0 };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<BillableFeature>(
@@ -1673,7 +1636,7 @@ public class BillableFeatureTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedFeatureID = "featureId";
-        double expectedQuantity = 1;
+        double expectedQuantity = 0;
 
         Assert.Equal(expectedFeatureID, deserialized.FeatureID);
         Assert.Equal(expectedQuantity, deserialized.Quantity);
@@ -1682,7 +1645,7 @@ public class BillableFeatureTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new BillableFeature { FeatureID = "featureId", Quantity = 1 };
+        var model = new BillableFeature { FeatureID = "featureId", Quantity = 0 };
 
         model.Validate();
     }
@@ -1690,11 +1653,65 @@ public class BillableFeatureTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new BillableFeature { FeatureID = "featureId", Quantity = 1 };
+        var model = new BillableFeature { FeatureID = "featureId", Quantity = 0 };
 
         BillableFeature copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class SubscriptionPreviewParamsBillingCycleAnchorTest : TestBase
+{
+    [Theory]
+    [InlineData(SubscriptionPreviewParamsBillingCycleAnchor.Unchanged)]
+    [InlineData(SubscriptionPreviewParamsBillingCycleAnchor.Now)]
+    public void Validation_Works(SubscriptionPreviewParamsBillingCycleAnchor rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionPreviewParamsBillingCycleAnchor> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionPreviewParamsBillingCycleAnchor>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(SubscriptionPreviewParamsBillingCycleAnchor.Unchanged)]
+    [InlineData(SubscriptionPreviewParamsBillingCycleAnchor.Now)]
+    public void SerializationRoundtrip_Works(SubscriptionPreviewParamsBillingCycleAnchor rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SubscriptionPreviewParamsBillingCycleAnchor> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionPreviewParamsBillingCycleAnchor>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionPreviewParamsBillingCycleAnchor>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, SubscriptionPreviewParamsBillingCycleAnchor>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
     }
 }
 
@@ -1719,7 +1736,7 @@ public class SubscriptionPreviewParamsBillingInformationTest : TestBase
             InvoiceDaysUntilDue = 0,
             IsBackdated = true,
             IsInvoicePaid = true,
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             ProrationBehavior =
                 SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately,
             TaxIds = [new() { Type = "type", Value = "value" }],
@@ -1741,7 +1758,7 @@ public class SubscriptionPreviewParamsBillingInformationTest : TestBase
         double expectedInvoiceDaysUntilDue = 0;
         bool expectedIsBackdated = true;
         bool expectedIsInvoicePaid = true;
-        JsonElement expectedMetadata = JsonSerializer.Deserialize<JsonElement>("{}");
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<
             string,
             SubscriptionPreviewParamsBillingInformationProrationBehavior
@@ -1761,7 +1778,13 @@ public class SubscriptionPreviewParamsBillingInformationTest : TestBase
         Assert.Equal(expectedIsBackdated, model.IsBackdated);
         Assert.Equal(expectedIsInvoicePaid, model.IsInvoicePaid);
         Assert.NotNull(model.Metadata);
-        Assert.True(JsonElement.DeepEquals(expectedMetadata, model.Metadata.Value));
+        Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(model.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, model.Metadata[item.Key]);
+        }
         Assert.Equal(expectedProrationBehavior, model.ProrationBehavior);
         Assert.NotNull(model.TaxIds);
         Assert.Equal(expectedTaxIds.Count, model.TaxIds.Count);
@@ -1797,7 +1820,7 @@ public class SubscriptionPreviewParamsBillingInformationTest : TestBase
             InvoiceDaysUntilDue = 0,
             IsBackdated = true,
             IsInvoicePaid = true,
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             ProrationBehavior =
                 SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately,
             TaxIds = [new() { Type = "type", Value = "value" }],
@@ -1833,7 +1856,7 @@ public class SubscriptionPreviewParamsBillingInformationTest : TestBase
             InvoiceDaysUntilDue = 0,
             IsBackdated = true,
             IsInvoicePaid = true,
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             ProrationBehavior =
                 SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately,
             TaxIds = [new() { Type = "type", Value = "value" }],
@@ -1862,7 +1885,7 @@ public class SubscriptionPreviewParamsBillingInformationTest : TestBase
         double expectedInvoiceDaysUntilDue = 0;
         bool expectedIsBackdated = true;
         bool expectedIsInvoicePaid = true;
-        JsonElement expectedMetadata = JsonSerializer.Deserialize<JsonElement>("{}");
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<
             string,
             SubscriptionPreviewParamsBillingInformationProrationBehavior
@@ -1882,7 +1905,13 @@ public class SubscriptionPreviewParamsBillingInformationTest : TestBase
         Assert.Equal(expectedIsBackdated, deserialized.IsBackdated);
         Assert.Equal(expectedIsInvoicePaid, deserialized.IsInvoicePaid);
         Assert.NotNull(deserialized.Metadata);
-        Assert.True(JsonElement.DeepEquals(expectedMetadata, deserialized.Metadata.Value));
+        Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(deserialized.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, deserialized.Metadata[item.Key]);
+        }
         Assert.Equal(expectedProrationBehavior, deserialized.ProrationBehavior);
         Assert.NotNull(deserialized.TaxIds);
         Assert.Equal(expectedTaxIds.Count, deserialized.TaxIds.Count);
@@ -1918,7 +1947,7 @@ public class SubscriptionPreviewParamsBillingInformationTest : TestBase
             InvoiceDaysUntilDue = 0,
             IsBackdated = true,
             IsInvoicePaid = true,
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             ProrationBehavior =
                 SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately,
             TaxIds = [new() { Type = "type", Value = "value" }],
@@ -2050,7 +2079,7 @@ public class SubscriptionPreviewParamsBillingInformationTest : TestBase
             InvoiceDaysUntilDue = 0,
             IsBackdated = true,
             IsInvoicePaid = true,
-            Metadata = JsonSerializer.Deserialize<JsonElement>("{}"),
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             ProrationBehavior =
                 SubscriptionPreviewParamsBillingInformationProrationBehavior.InvoiceImmediately,
             TaxIds = [new() { Type = "type", Value = "value" }],
@@ -2472,12 +2501,12 @@ public class SubscriptionPreviewParamsChargeTest : TestBase
         var model = new SubscriptionPreviewParamsCharge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = SubscriptionPreviewParamsChargeType.Feature,
         };
 
         string expectedID = "id";
-        double expectedQuantity = 1;
+        double expectedQuantity = 0;
         ApiEnum<string, SubscriptionPreviewParamsChargeType> expectedType =
             SubscriptionPreviewParamsChargeType.Feature;
 
@@ -2492,7 +2521,7 @@ public class SubscriptionPreviewParamsChargeTest : TestBase
         var model = new SubscriptionPreviewParamsCharge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = SubscriptionPreviewParamsChargeType.Feature,
         };
 
@@ -2511,7 +2540,7 @@ public class SubscriptionPreviewParamsChargeTest : TestBase
         var model = new SubscriptionPreviewParamsCharge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = SubscriptionPreviewParamsChargeType.Feature,
         };
 
@@ -2523,7 +2552,7 @@ public class SubscriptionPreviewParamsChargeTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
-        double expectedQuantity = 1;
+        double expectedQuantity = 0;
         ApiEnum<string, SubscriptionPreviewParamsChargeType> expectedType =
             SubscriptionPreviewParamsChargeType.Feature;
 
@@ -2538,7 +2567,7 @@ public class SubscriptionPreviewParamsChargeTest : TestBase
         var model = new SubscriptionPreviewParamsCharge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = SubscriptionPreviewParamsChargeType.Feature,
         };
 
@@ -2551,7 +2580,7 @@ public class SubscriptionPreviewParamsChargeTest : TestBase
         var model = new SubscriptionPreviewParamsCharge
         {
             ID = "id",
-            Quantity = 1,
+            Quantity = 0,
             Type = SubscriptionPreviewParamsChargeType.Feature,
         };
 
