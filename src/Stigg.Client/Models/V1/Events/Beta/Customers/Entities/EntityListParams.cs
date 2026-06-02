@@ -8,30 +8,18 @@ using System.Text.Json.Serialization;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
 
-namespace Stigg.Client.Models.V1.Credits;
+namespace Stigg.Client.Models.V1.Events.Beta.Customers.Entities;
 
 /// <summary>
-/// Retrieves credit usage time-series data for a customer, grouped by feature, over
-/// a specified time range.
+/// Retrieves a paginated list of entities for the given customer.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
 /// cause existing derived classes to break.</para>
 /// </summary>
-public record class CreditGetUsageParams : ParamsBase
+public record class EntityListParams : ParamsBase
 {
-    /// <summary>
-    /// Filter by customer ID (required)
-    /// </summary>
-    public required string CustomerID
-    {
-        get
-        {
-            this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNotNullClass<string>("customerId");
-        }
-        init { this._rawQueryData.Set("customerId", value); }
-    }
+    public string? ID { get; init; }
 
     /// <summary>
     /// Return items that come after this cursor
@@ -76,14 +64,16 @@ public record class CreditGetUsageParams : ParamsBase
     }
 
     /// <summary>
-    /// Filter by currency ID
+    /// Whether to include archived entities. One of: true, false
     /// </summary>
-    public string? CurrencyID
+    public ApiEnum<string, IncludeArchived>? IncludeArchived
     {
         get
         {
             this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableClass<string>("currencyId");
+            return this._rawQueryData.GetNullableClass<ApiEnum<string, IncludeArchived>>(
+                "includeArchived"
+            );
         }
         init
         {
@@ -92,51 +82,7 @@ public record class CreditGetUsageParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData.Set("currencyId", value);
-        }
-    }
-
-    /// <summary>
-    /// End date for the credit usage time range (ISO 8601). Defaults to now when
-    /// startDate is provided
-    /// </summary>
-    public DateTimeOffset? EndDate
-    {
-        get
-        {
-            this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableStruct<DateTimeOffset>("endDate");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawQueryData.Set("endDate", value);
-        }
-    }
-
-    /// <summary>
-    /// Comma-separated list of feature dimension keys to group usage series by (up
-    /// to 3). Each key matches /^[a-zA-Z0-9_$-]+$/
-    /// </summary>
-    public string? GroupBy
-    {
-        get
-        {
-            this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableClass<string>("groupBy");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawQueryData.Set("groupBy", value);
+            this._rawQueryData.Set("includeArchived", value);
         }
     }
 
@@ -162,14 +108,14 @@ public record class CreditGetUsageParams : ParamsBase
     }
 
     /// <summary>
-    /// Filter by resource ID
+    /// Filter results to entities of a specific entity type, by the type's refId
     /// </summary>
-    public string? ResourceID
+    public string? TypeRefID
     {
         get
         {
             this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableClass<string>("resourceId");
+            return this._rawQueryData.GetNullableClass<string>("typeRefId");
         }
         init
         {
@@ -178,63 +124,22 @@ public record class CreditGetUsageParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData.Set("resourceId", value);
+            this._rawQueryData.Set("typeRefId", value);
         }
     }
 
-    /// <summary>
-    /// Start date for the credit usage time range (ISO 8601). Takes precedence over
-    /// timeRange when provided
-    /// </summary>
-    public DateTimeOffset? StartDate
-    {
-        get
-        {
-            this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableStruct<DateTimeOffset>("startDate");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawQueryData.Set("startDate", value);
-        }
-    }
-
-    /// <summary>
-    /// Time range for usage data (LAST_DAY, LAST_WEEK, LAST_MONTH, LAST_YEAR). Defaults
-    /// to LAST_MONTH
-    /// </summary>
-    public ApiEnum<string, TimeRange>? TimeRange
-    {
-        get
-        {
-            this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableClass<ApiEnum<string, TimeRange>>("timeRange");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawQueryData.Set("timeRange", value);
-        }
-    }
-
-    public CreditGetUsageParams() { }
+    public EntityListParams() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public CreditGetUsageParams(CreditGetUsageParams creditGetUsageParams)
-        : base(creditGetUsageParams) { }
+    public EntityListParams(EntityListParams entityListParams)
+        : base(entityListParams)
+    {
+        this.ID = entityListParams.ID;
+    }
 #pragma warning restore CS8618
 
-    public CreditGetUsageParams(
+    public EntityListParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData
     )
@@ -245,25 +150,29 @@ public record class CreditGetUsageParams : ParamsBase
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    CreditGetUsageParams(
+    EntityListParams(
         FrozenDictionary<string, JsonElement> rawHeaderData,
-        FrozenDictionary<string, JsonElement> rawQueryData
+        FrozenDictionary<string, JsonElement> rawQueryData,
+        string id
     )
     {
         this._rawHeaderData = new(rawHeaderData);
         this._rawQueryData = new(rawQueryData);
+        this.ID = id;
     }
 #pragma warning restore CS8618
 
     /// <inheritdoc cref="IFromRawJson{T}.FromRawUnchecked"/>
-    public static CreditGetUsageParams FromRawUnchecked(
+    public static EntityListParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
-        IReadOnlyDictionary<string, JsonElement> rawQueryData
+        IReadOnlyDictionary<string, JsonElement> rawQueryData,
+        string id
     )
     {
         return new(
             FrozenDictionary.ToFrozenDictionary(rawHeaderData),
-            FrozenDictionary.ToFrozenDictionary(rawQueryData)
+            FrozenDictionary.ToFrozenDictionary(rawQueryData),
+            id
         );
     }
 
@@ -272,6 +181,7 @@ public record class CreditGetUsageParams : ParamsBase
             FriendlyJsonPrinter.PrintValue(
                 new Dictionary<string, JsonElement>()
                 {
+                    ["ID"] = JsonSerializer.SerializeToElement(this.ID),
                     ["HeaderData"] = FriendlyJsonPrinter.PrintValue(
                         JsonSerializer.SerializeToElement(this._rawHeaderData.Freeze())
                     ),
@@ -283,19 +193,23 @@ public record class CreditGetUsageParams : ParamsBase
             ModelBase.ToStringSerializerOptions
         );
 
-    public virtual bool Equals(CreditGetUsageParams? other)
+    public virtual bool Equals(EntityListParams? other)
     {
         if (other == null)
         {
             return false;
         }
-        return this._rawHeaderData.Equals(other._rawHeaderData)
+        return (this.ID?.Equals(other.ID) ?? other.ID == null)
+            && this._rawHeaderData.Equals(other._rawHeaderData)
             && this._rawQueryData.Equals(other._rawQueryData);
     }
 
     public override Uri Url(ClientOptions options)
     {
-        return new UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/api/v1/credits/usage")
+        return new UriBuilder(
+            options.BaseUrl.ToString().TrimEnd('/')
+                + string.Format("/api/v1-beta/customers/{0}/entities", this.ID)
+        )
         {
             Query = this.QueryString(options),
         }.Uri;
@@ -317,21 +231,18 @@ public record class CreditGetUsageParams : ParamsBase
 }
 
 /// <summary>
-/// Time range for usage data (LAST_DAY, LAST_WEEK, LAST_MONTH, LAST_YEAR). Defaults
-/// to LAST_MONTH
+/// Whether to include archived entities. One of: true, false
 /// </summary>
-[JsonConverter(typeof(TimeRangeConverter))]
-public enum TimeRange
+[JsonConverter(typeof(IncludeArchivedConverter))]
+public enum IncludeArchived
 {
-    LastDay,
-    LastWeek,
-    LastMonth,
-    LastYear,
+    True,
+    False,
 }
 
-sealed class TimeRangeConverter : JsonConverter<TimeRange>
+sealed class IncludeArchivedConverter : JsonConverter<IncludeArchived>
 {
-    public override TimeRange Read(
+    public override IncludeArchived Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -339,17 +250,15 @@ sealed class TimeRangeConverter : JsonConverter<TimeRange>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "LAST_DAY" => TimeRange.LastDay,
-            "LAST_WEEK" => TimeRange.LastWeek,
-            "LAST_MONTH" => TimeRange.LastMonth,
-            "LAST_YEAR" => TimeRange.LastYear,
-            _ => (TimeRange)(-1),
+            "true" => IncludeArchived.True,
+            "false" => IncludeArchived.False,
+            _ => (IncludeArchived)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        TimeRange value,
+        IncludeArchived value,
         JsonSerializerOptions options
     )
     {
@@ -357,10 +266,8 @@ sealed class TimeRangeConverter : JsonConverter<TimeRange>
             writer,
             value switch
             {
-                TimeRange.LastDay => "LAST_DAY",
-                TimeRange.LastWeek => "LAST_WEEK",
-                TimeRange.LastMonth => "LAST_MONTH",
-                TimeRange.LastYear => "LAST_YEAR",
+                IncludeArchived.True => "true",
+                IncludeArchived.False => "false",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

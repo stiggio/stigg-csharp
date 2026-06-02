@@ -46,7 +46,11 @@ public class CreditListLedgerPageResponseTest : TestBase
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
         ];
-        Pagination expectedPagination = new() { Next = "next", Prev = "prev" };
+        CreditListLedgerPageResponsePagination expectedPagination = new()
+        {
+            Next = "next",
+            Prev = "prev",
+        };
 
         Assert.Equal(expectedData.Count, model.Data.Count);
         for (int i = 0; i < expectedData.Count; i++)
@@ -133,7 +137,11 @@ public class CreditListLedgerPageResponseTest : TestBase
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
         ];
-        Pagination expectedPagination = new() { Next = "next", Prev = "prev" };
+        CreditListLedgerPageResponsePagination expectedPagination = new()
+        {
+            Next = "next",
+            Prev = "prev",
+        };
 
         Assert.Equal(expectedData.Count, deserialized.Data.Count);
         for (int i = 0; i < expectedData.Count; i++)
@@ -198,12 +206,12 @@ public class CreditListLedgerPageResponseTest : TestBase
     }
 }
 
-public class PaginationTest : TestBase
+public class CreditListLedgerPageResponsePaginationTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Pagination { Next = "next", Prev = "prev" };
+        var model = new CreditListLedgerPageResponsePagination { Next = "next", Prev = "prev" };
 
         string expectedNext = "next";
         string expectedPrev = "prev";
@@ -215,10 +223,10 @@ public class PaginationTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Pagination { Next = "next", Prev = "prev" };
+        var model = new CreditListLedgerPageResponsePagination { Next = "next", Prev = "prev" };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Pagination>(
+        var deserialized = JsonSerializer.Deserialize<CreditListLedgerPageResponsePagination>(
             json,
             ModelBase.SerializerOptions
         );
@@ -229,10 +237,10 @@ public class PaginationTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Pagination { Next = "next", Prev = "prev" };
+        var model = new CreditListLedgerPageResponsePagination { Next = "next", Prev = "prev" };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Pagination>(
+        var deserialized = JsonSerializer.Deserialize<CreditListLedgerPageResponsePagination>(
             element,
             ModelBase.SerializerOptions
         );
@@ -248,7 +256,7 @@ public class PaginationTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Pagination { Next = "next", Prev = "prev" };
+        var model = new CreditListLedgerPageResponsePagination { Next = "next", Prev = "prev" };
 
         model.Validate();
     }
@@ -256,9 +264,9 @@ public class PaginationTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Pagination { Next = "next", Prev = "prev" };
+        var model = new CreditListLedgerPageResponsePagination { Next = "next", Prev = "prev" };
 
-        Pagination copied = new(model);
+        CreditListLedgerPageResponsePagination copied = new(model);
 
         Assert.Equal(model, copied);
     }
