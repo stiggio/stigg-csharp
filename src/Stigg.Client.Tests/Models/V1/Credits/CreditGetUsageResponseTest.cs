@@ -23,6 +23,7 @@ public class CreditGetUsageResponseTest : TestBase
                     Singular = "singular",
                     Symbol = "symbol",
                 },
+                Pagination = new() { Next = "next", Prev = "prev" },
                 Series =
                 [
                     new()
@@ -54,6 +55,7 @@ public class CreditGetUsageResponseTest : TestBase
                 Singular = "singular",
                 Symbol = "symbol",
             },
+            Pagination = new() { Next = "next", Prev = "prev" },
             Series =
             [
                 new()
@@ -92,6 +94,7 @@ public class CreditGetUsageResponseTest : TestBase
                     Singular = "singular",
                     Symbol = "symbol",
                 },
+                Pagination = new() { Next = "next", Prev = "prev" },
                 Series =
                 [
                     new()
@@ -137,6 +140,7 @@ public class CreditGetUsageResponseTest : TestBase
                     Singular = "singular",
                     Symbol = "symbol",
                 },
+                Pagination = new() { Next = "next", Prev = "prev" },
                 Series =
                 [
                     new()
@@ -175,6 +179,7 @@ public class CreditGetUsageResponseTest : TestBase
                 Singular = "singular",
                 Symbol = "symbol",
             },
+            Pagination = new() { Next = "next", Prev = "prev" },
             Series =
             [
                 new()
@@ -213,6 +218,7 @@ public class CreditGetUsageResponseTest : TestBase
                     Singular = "singular",
                     Symbol = "symbol",
                 },
+                Pagination = new() { Next = "next", Prev = "prev" },
                 Series =
                 [
                     new()
@@ -252,6 +258,7 @@ public class CreditGetUsageResponseTest : TestBase
                     Singular = "singular",
                     Symbol = "symbol",
                 },
+                Pagination = new() { Next = "next", Prev = "prev" },
                 Series =
                 [
                     new()
@@ -294,6 +301,7 @@ public class CreditGetUsageResponseDataTest : TestBase
                 Singular = "singular",
                 Symbol = "symbol",
             },
+            Pagination = new() { Next = "next", Prev = "prev" },
             Series =
             [
                 new()
@@ -322,6 +330,7 @@ public class CreditGetUsageResponseDataTest : TestBase
             Singular = "singular",
             Symbol = "symbol",
         };
+        Pagination expectedPagination = new() { Next = "next", Prev = "prev" };
         List<Series> expectedSeries =
         [
             new()
@@ -342,6 +351,7 @@ public class CreditGetUsageResponseDataTest : TestBase
         ];
 
         Assert.Equal(expectedCurrency, model.Currency);
+        Assert.Equal(expectedPagination, model.Pagination);
         Assert.Equal(expectedSeries.Count, model.Series.Count);
         for (int i = 0; i < expectedSeries.Count; i++)
         {
@@ -362,6 +372,7 @@ public class CreditGetUsageResponseDataTest : TestBase
                 Singular = "singular",
                 Symbol = "symbol",
             },
+            Pagination = new() { Next = "next", Prev = "prev" },
             Series =
             [
                 new()
@@ -404,6 +415,7 @@ public class CreditGetUsageResponseDataTest : TestBase
                 Singular = "singular",
                 Symbol = "symbol",
             },
+            Pagination = new() { Next = "next", Prev = "prev" },
             Series =
             [
                 new()
@@ -439,6 +451,7 @@ public class CreditGetUsageResponseDataTest : TestBase
             Singular = "singular",
             Symbol = "symbol",
         };
+        Pagination expectedPagination = new() { Next = "next", Prev = "prev" };
         List<Series> expectedSeries =
         [
             new()
@@ -459,6 +472,7 @@ public class CreditGetUsageResponseDataTest : TestBase
         ];
 
         Assert.Equal(expectedCurrency, deserialized.Currency);
+        Assert.Equal(expectedPagination, deserialized.Pagination);
         Assert.Equal(expectedSeries.Count, deserialized.Series.Count);
         for (int i = 0; i < expectedSeries.Count; i++)
         {
@@ -479,6 +493,7 @@ public class CreditGetUsageResponseDataTest : TestBase
                 Singular = "singular",
                 Symbol = "symbol",
             },
+            Pagination = new() { Next = "next", Prev = "prev" },
             Series =
             [
                 new()
@@ -515,6 +530,7 @@ public class CreditGetUsageResponseDataTest : TestBase
                 Singular = "singular",
                 Symbol = "symbol",
             },
+            Pagination = new() { Next = "next", Prev = "prev" },
             Series =
             [
                 new()
@@ -646,6 +662,72 @@ public class CurrencyTest : TestBase
         };
 
         Currency copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class PaginationTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new Pagination { Next = "next", Prev = "prev" };
+
+        string expectedNext = "next";
+        string expectedPrev = "prev";
+
+        Assert.Equal(expectedNext, model.Next);
+        Assert.Equal(expectedPrev, model.Prev);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new Pagination { Next = "next", Prev = "prev" };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Pagination>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new Pagination { Next = "next", Prev = "prev" };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Pagination>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        string expectedNext = "next";
+        string expectedPrev = "prev";
+
+        Assert.Equal(expectedNext, deserialized.Next);
+        Assert.Equal(expectedPrev, deserialized.Prev);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new Pagination { Next = "next", Prev = "prev" };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Pagination { Next = "next", Prev = "prev" };
+
+        Pagination copied = new(model);
 
         Assert.Equal(model, copied);
     }

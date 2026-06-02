@@ -6,26 +6,26 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Stigg.Client.Core;
 
-namespace Stigg.Client.Models.V1.Credits;
+namespace Stigg.Client.Models.V1.Events.Beta.Customers.Assignments;
 
 /// <summary>
-/// Paginated list of credit ledger events
+/// Response list object
 /// </summary>
 [JsonConverter(
-    typeof(JsonModelConverter<CreditListLedgerPageResponse, CreditListLedgerPageResponseFromRaw>)
+    typeof(JsonModelConverter<AssignmentListPageResponse, AssignmentListPageResponseFromRaw>)
 )]
-public sealed record class CreditListLedgerPageResponse : JsonModel
+public sealed record class AssignmentListPageResponse : JsonModel
 {
-    public required IReadOnlyList<CreditListLedgerResponse> Data
+    public required IReadOnlyList<AssignmentListResponse> Data
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<ImmutableArray<CreditListLedgerResponse>>("data");
+            return this._rawData.GetNotNullStruct<ImmutableArray<AssignmentListResponse>>("data");
         }
         init
         {
-            this._rawData.Set<ImmutableArray<CreditListLedgerResponse>>(
+            this._rawData.Set<ImmutableArray<AssignmentListResponse>>(
                 "data",
                 ImmutableArray.ToImmutableArray(value)
             );
@@ -35,14 +35,12 @@ public sealed record class CreditListLedgerPageResponse : JsonModel
     /// <summary>
     /// Pagination metadata including cursors for navigating through results
     /// </summary>
-    public required CreditListLedgerPageResponsePagination Pagination
+    public required Pagination Pagination
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<CreditListLedgerPageResponsePagination>(
-                "pagination"
-            );
+            return this._rawData.GetNotNullClass<Pagination>("pagination");
         }
         init { this._rawData.Set("pagination", value); }
     }
@@ -57,29 +55,29 @@ public sealed record class CreditListLedgerPageResponse : JsonModel
         this.Pagination.Validate();
     }
 
-    public CreditListLedgerPageResponse() { }
+    public AssignmentListPageResponse() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public CreditListLedgerPageResponse(CreditListLedgerPageResponse creditListLedgerPageResponse)
-        : base(creditListLedgerPageResponse) { }
+    public AssignmentListPageResponse(AssignmentListPageResponse assignmentListPageResponse)
+        : base(assignmentListPageResponse) { }
 #pragma warning restore CS8618
 
-    public CreditListLedgerPageResponse(IReadOnlyDictionary<string, JsonElement> rawData)
+    public AssignmentListPageResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    CreditListLedgerPageResponse(FrozenDictionary<string, JsonElement> rawData)
+    AssignmentListPageResponse(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="CreditListLedgerPageResponseFromRaw.FromRawUnchecked"/>
-    public static CreditListLedgerPageResponse FromRawUnchecked(
+    /// <inheritdoc cref="AssignmentListPageResponseFromRaw.FromRawUnchecked"/>
+    public static AssignmentListPageResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -87,24 +85,19 @@ public sealed record class CreditListLedgerPageResponse : JsonModel
     }
 }
 
-class CreditListLedgerPageResponseFromRaw : IFromRawJson<CreditListLedgerPageResponse>
+class AssignmentListPageResponseFromRaw : IFromRawJson<AssignmentListPageResponse>
 {
     /// <inheritdoc/>
-    public CreditListLedgerPageResponse FromRawUnchecked(
+    public AssignmentListPageResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => CreditListLedgerPageResponse.FromRawUnchecked(rawData);
+    ) => AssignmentListPageResponse.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// Pagination metadata including cursors for navigating through results
 /// </summary>
-[JsonConverter(
-    typeof(JsonModelConverter<
-        CreditListLedgerPageResponsePagination,
-        CreditListLedgerPageResponsePaginationFromRaw
-    >)
-)]
-public sealed record class CreditListLedgerPageResponsePagination : JsonModel
+[JsonConverter(typeof(JsonModelConverter<Pagination, PaginationFromRaw>))]
+public sealed record class Pagination : JsonModel
 {
     /// <summary>
     /// Cursor for fetching the next page of results, or null if no additional pages exist
@@ -139,43 +132,37 @@ public sealed record class CreditListLedgerPageResponsePagination : JsonModel
         _ = this.Prev;
     }
 
-    public CreditListLedgerPageResponsePagination() { }
+    public Pagination() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public CreditListLedgerPageResponsePagination(
-        CreditListLedgerPageResponsePagination creditListLedgerPageResponsePagination
-    )
-        : base(creditListLedgerPageResponsePagination) { }
+    public Pagination(Pagination pagination)
+        : base(pagination) { }
 #pragma warning restore CS8618
 
-    public CreditListLedgerPageResponsePagination(IReadOnlyDictionary<string, JsonElement> rawData)
+    public Pagination(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    CreditListLedgerPageResponsePagination(FrozenDictionary<string, JsonElement> rawData)
+    Pagination(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="CreditListLedgerPageResponsePaginationFromRaw.FromRawUnchecked"/>
-    public static CreditListLedgerPageResponsePagination FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    )
+    /// <inheritdoc cref="PaginationFromRaw.FromRawUnchecked"/>
+    public static Pagination FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class CreditListLedgerPageResponsePaginationFromRaw
-    : IFromRawJson<CreditListLedgerPageResponsePagination>
+class PaginationFromRaw : IFromRawJson<Pagination>
 {
     /// <inheritdoc/>
-    public CreditListLedgerPageResponsePagination FromRawUnchecked(
-        IReadOnlyDictionary<string, JsonElement> rawData
-    ) => CreditListLedgerPageResponsePagination.FromRawUnchecked(rawData);
+    public Pagination FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Pagination.FromRawUnchecked(rawData);
 }
