@@ -31,6 +31,8 @@ public interface IEventService
 
     IBetaService Beta { get; }
 
+    IDataExportService DataExport { get; }
+
     /// <summary>
     /// Reports raw usage events for event-based metering. Events are ingested
     /// asynchronously and aggregated into usage totals.
@@ -55,6 +57,8 @@ public interface IEventServiceWithRawResponse
     IEventServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     IBetaServiceWithRawResponse Beta { get; }
+
+    IDataExportServiceWithRawResponse DataExport { get; }
 
     /// <summary>
     /// Returns a raw HTTP response for <c>post /api/v1/events</c>, but is otherwise the
