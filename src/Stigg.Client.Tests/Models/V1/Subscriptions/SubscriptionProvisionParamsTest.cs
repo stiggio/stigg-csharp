@@ -73,6 +73,7 @@ public class SubscriptionProvisionParamsTest : TestBase
             },
             BillingPeriod = SubscriptionProvisionParamsBillingPeriod.Monthly,
             Budget = new() { HasSoftLimit = true, Limit = 0 },
+            CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Charges =
             [
                 new()
@@ -221,6 +222,7 @@ public class SubscriptionProvisionParamsTest : TestBase
         ApiEnum<string, SubscriptionProvisionParamsBillingPeriod> expectedBillingPeriod =
             SubscriptionProvisionParamsBillingPeriod.Monthly;
         SubscriptionProvisionParamsBudget expectedBudget = new() { HasSoftLimit = true, Limit = 0 };
+        DateTimeOffset expectedCancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         List<SubscriptionProvisionParamsCharge> expectedCharges =
         [
             new()
@@ -330,6 +332,7 @@ public class SubscriptionProvisionParamsTest : TestBase
         Assert.Equal(expectedBillingInformation, parameters.BillingInformation);
         Assert.Equal(expectedBillingPeriod, parameters.BillingPeriod);
         Assert.Equal(expectedBudget, parameters.Budget);
+        Assert.Equal(expectedCancellationDate, parameters.CancellationDate);
         Assert.NotNull(parameters.Charges);
         Assert.Equal(expectedCharges.Count, parameters.Charges.Count);
         for (int i = 0; i < expectedCharges.Count; i++)
@@ -402,6 +405,8 @@ public class SubscriptionProvisionParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("billingInformation"));
         Assert.Null(parameters.BillingPeriod);
         Assert.False(parameters.RawBodyData.ContainsKey("billingPeriod"));
+        Assert.Null(parameters.CancellationDate);
+        Assert.False(parameters.RawBodyData.ContainsKey("cancellationDate"));
         Assert.Null(parameters.Charges);
         Assert.False(parameters.RawBodyData.ContainsKey("charges"));
         Assert.Null(parameters.CheckoutOptions);
@@ -451,6 +456,7 @@ public class SubscriptionProvisionParamsTest : TestBase
             BillingCycleAnchor = null,
             BillingInformation = null,
             BillingPeriod = null,
+            CancellationDate = null,
             Charges = null,
             CheckoutOptions = null,
             Entitlements = null,
@@ -477,6 +483,8 @@ public class SubscriptionProvisionParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("billingInformation"));
         Assert.Null(parameters.BillingPeriod);
         Assert.False(parameters.RawBodyData.ContainsKey("billingPeriod"));
+        Assert.Null(parameters.CancellationDate);
+        Assert.False(parameters.RawBodyData.ContainsKey("cancellationDate"));
         Assert.Null(parameters.Charges);
         Assert.False(parameters.RawBodyData.ContainsKey("charges"));
         Assert.Null(parameters.CheckoutOptions);
@@ -560,6 +568,7 @@ public class SubscriptionProvisionParamsTest : TestBase
                 TaxRateIds = ["string"],
             },
             BillingPeriod = SubscriptionProvisionParamsBillingPeriod.Monthly,
+            CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Charges =
             [
                 new()
@@ -719,6 +728,7 @@ public class SubscriptionProvisionParamsTest : TestBase
                 TaxRateIds = ["string"],
             },
             BillingPeriod = SubscriptionProvisionParamsBillingPeriod.Monthly,
+            CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Charges =
             [
                 new()
@@ -903,6 +913,7 @@ public class SubscriptionProvisionParamsTest : TestBase
             },
             BillingPeriod = SubscriptionProvisionParamsBillingPeriod.Monthly,
             Budget = new() { HasSoftLimit = true, Limit = 0 },
+            CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Charges =
             [
                 new()

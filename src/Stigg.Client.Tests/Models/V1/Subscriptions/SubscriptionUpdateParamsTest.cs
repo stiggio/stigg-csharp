@@ -61,6 +61,7 @@ public class SubscriptionUpdateParamsTest : TestBase
             },
             BillingPeriod = Subscriptions::BillingPeriod.Monthly,
             Budget = new() { HasSoftLimit = true, Limit = 0 },
+            CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Charges =
             [
                 new()
@@ -155,6 +156,7 @@ public class SubscriptionUpdateParamsTest : TestBase
         ApiEnum<string, Subscriptions::BillingPeriod> expectedBillingPeriod =
             Subscriptions::BillingPeriod.Monthly;
         Subscriptions::Budget expectedBudget = new() { HasSoftLimit = true, Limit = 0 };
+        DateTimeOffset expectedCancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         List<Subscriptions::Charge> expectedCharges =
         [
             new()
@@ -218,6 +220,7 @@ public class SubscriptionUpdateParamsTest : TestBase
         Assert.Equal(expectedBillingInformation, parameters.BillingInformation);
         Assert.Equal(expectedBillingPeriod, parameters.BillingPeriod);
         Assert.Equal(expectedBudget, parameters.Budget);
+        Assert.Equal(expectedCancellationDate, parameters.CancellationDate);
         Assert.NotNull(parameters.Charges);
         Assert.Equal(expectedCharges.Count, parameters.Charges.Count);
         for (int i = 0; i < expectedCharges.Count; i++)
@@ -257,6 +260,7 @@ public class SubscriptionUpdateParamsTest : TestBase
         {
             ID = "x",
             Budget = new() { HasSoftLimit = true, Limit = 0 },
+            CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             MinimumSpend = new() { Amount = 0, Currency = Subscriptions::MinimumSpendCurrency.Usd },
         };
 
@@ -295,6 +299,7 @@ public class SubscriptionUpdateParamsTest : TestBase
         {
             ID = "x",
             Budget = new() { HasSoftLimit = true, Limit = 0 },
+            CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             MinimumSpend = new() { Amount = 0, Currency = Subscriptions::MinimumSpendCurrency.Usd },
 
             // Null should be interpreted as omitted for these properties
@@ -441,6 +446,8 @@ public class SubscriptionUpdateParamsTest : TestBase
 
         Assert.Null(parameters.Budget);
         Assert.False(parameters.RawBodyData.ContainsKey("budget"));
+        Assert.Null(parameters.CancellationDate);
+        Assert.False(parameters.RawBodyData.ContainsKey("cancellationDate"));
         Assert.Null(parameters.MinimumSpend);
         Assert.False(parameters.RawBodyData.ContainsKey("minimumSpend"));
     }
@@ -543,11 +550,14 @@ public class SubscriptionUpdateParamsTest : TestBase
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
             Budget = null,
+            CancellationDate = null,
             MinimumSpend = null,
         };
 
         Assert.Null(parameters.Budget);
         Assert.True(parameters.RawBodyData.ContainsKey("budget"));
+        Assert.Null(parameters.CancellationDate);
+        Assert.True(parameters.RawBodyData.ContainsKey("cancellationDate"));
         Assert.Null(parameters.MinimumSpend);
         Assert.True(parameters.RawBodyData.ContainsKey("minimumSpend"));
     }
@@ -616,6 +626,7 @@ public class SubscriptionUpdateParamsTest : TestBase
             },
             BillingPeriod = Subscriptions::BillingPeriod.Monthly,
             Budget = new() { HasSoftLimit = true, Limit = 0 },
+            CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Charges =
             [
                 new()

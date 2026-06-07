@@ -158,6 +158,19 @@ public record class SubscriptionUpdateParams : ParamsBase
         init { this._rawBodyData.Set("budget", value); }
     }
 
+    /// <summary>
+    /// Subscription cancellation date
+    /// </summary>
+    public System::DateTimeOffset? CancellationDate
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<System::DateTimeOffset>("cancellationDate");
+        }
+        init { this._rawBodyData.Set("cancellationDate", value); }
+    }
+
     public IReadOnlyList<Charge>? Charges
     {
         get
