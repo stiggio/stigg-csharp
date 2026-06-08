@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
@@ -108,6 +109,8 @@ public class SubscriptionUpdateParamsTest : TestBase
             PromotionCode = "promotionCode",
             ScheduleStrategy = Subscriptions::ScheduleStrategy.EndOfBillingPeriod,
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedID = "x";
@@ -206,6 +209,8 @@ public class SubscriptionUpdateParamsTest : TestBase
         ApiEnum<string, Subscriptions::ScheduleStrategy> expectedScheduleStrategy =
             Subscriptions::ScheduleStrategy.EndOfBillingPeriod;
         DateTimeOffset expectedTrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.NotNull(parameters.Addons);
@@ -251,6 +256,8 @@ public class SubscriptionUpdateParamsTest : TestBase
         Assert.Equal(expectedPromotionCode, parameters.PromotionCode);
         Assert.Equal(expectedScheduleStrategy, parameters.ScheduleStrategy);
         Assert.Equal(expectedTrialEndDate, parameters.TrialEndDate);
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
 
     [Fact]
@@ -290,6 +297,10 @@ public class SubscriptionUpdateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("scheduleStrategy"));
         Assert.Null(parameters.TrialEndDate);
         Assert.False(parameters.RawBodyData.ContainsKey("trialEndDate"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -316,6 +327,8 @@ public class SubscriptionUpdateParamsTest : TestBase
             PromotionCode = null,
             ScheduleStrategy = null,
             TrialEndDate = null,
+            XAccountID = null,
+            XEnvironmentID = null,
         };
 
         Assert.Null(parameters.Addons);
@@ -344,6 +357,10 @@ public class SubscriptionUpdateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("scheduleStrategy"));
         Assert.Null(parameters.TrialEndDate);
         Assert.False(parameters.RawBodyData.ContainsKey("trialEndDate"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -442,6 +459,8 @@ public class SubscriptionUpdateParamsTest : TestBase
             PromotionCode = "promotionCode",
             ScheduleStrategy = Subscriptions::ScheduleStrategy.EndOfBillingPeriod,
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         Assert.Null(parameters.Budget);
@@ -548,6 +567,8 @@ public class SubscriptionUpdateParamsTest : TestBase
             PromotionCode = "promotionCode",
             ScheduleStrategy = Subscriptions::ScheduleStrategy.EndOfBillingPeriod,
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
 
             Budget = null,
             CancellationDate = null,
@@ -572,6 +593,23 @@ public class SubscriptionUpdateParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/subscriptions/x"), url)
         );
+    }
+
+    [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        Subscriptions::SubscriptionUpdateParams parameters = new()
+        {
+            ID = "x",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -673,6 +711,8 @@ public class SubscriptionUpdateParamsTest : TestBase
             PromotionCode = "promotionCode",
             ScheduleStrategy = Subscriptions::ScheduleStrategy.EndOfBillingPeriod,
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         Subscriptions::SubscriptionUpdateParams copied = new(parameters);

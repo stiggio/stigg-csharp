@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
@@ -27,6 +28,8 @@ public class UsageReportParamsTest : TestBase
                     UpdateBehavior = UpdateBehavior.Delta,
                 },
             ],
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         List<UsageReportParamsUsage> expectedUsages =
@@ -42,12 +45,72 @@ public class UsageReportParamsTest : TestBase
                 UpdateBehavior = UpdateBehavior.Delta,
             },
         ];
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedUsages.Count, parameters.Usages.Count);
         for (int i = 0; i < expectedUsages.Count; i++)
         {
             Assert.Equal(expectedUsages[i], parameters.Usages[i]);
         }
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new UsageReportParams
+        {
+            Usages =
+            [
+                new()
+                {
+                    CustomerID = "customerId",
+                    FeatureID = "featureId",
+                    Value = -9007199254740991,
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+                    ResourceID = "resourceId",
+                    UpdateBehavior = UpdateBehavior.Delta,
+                },
+            ],
+        };
+
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
+    {
+        var parameters = new UsageReportParams
+        {
+            Usages =
+            [
+                new()
+                {
+                    CustomerID = "customerId",
+                    FeatureID = "featureId",
+                    Value = -9007199254740991,
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+                    ResourceID = "resourceId",
+                    UpdateBehavior = UpdateBehavior.Delta,
+                },
+            ],
+
+            // Null should be interpreted as omitted for these properties
+            XAccountID = null,
+            XEnvironmentID = null,
+        };
+
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -76,6 +139,35 @@ public class UsageReportParamsTest : TestBase
     }
 
     [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        UsageReportParams parameters = new()
+        {
+            Usages =
+            [
+                new()
+                {
+                    CustomerID = "customerId",
+                    FeatureID = "featureId",
+                    Value = -9007199254740991,
+                    CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+                    ResourceID = "resourceId",
+                    UpdateBehavior = UpdateBehavior.Delta,
+                },
+            ],
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
     public void CopyConstructor_Works()
     {
         var parameters = new UsageReportParams
@@ -93,6 +185,8 @@ public class UsageReportParamsTest : TestBase
                     UpdateBehavior = UpdateBehavior.Delta,
                 },
             ],
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         UsageReportParams copied = new(parameters);

@@ -1,4 +1,5 @@
 using System;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
@@ -18,6 +19,8 @@ public class PaymentMethodAttachParamsTest : TestBase
             PaymentMethodID = "paymentMethodId",
             VendorIdentifier = VendorIdentifier.Auth0,
             BillingCurrency = BillingCurrency.Usd,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedID = "x";
@@ -25,12 +28,56 @@ public class PaymentMethodAttachParamsTest : TestBase
         string expectedPaymentMethodID = "paymentMethodId";
         ApiEnum<string, VendorIdentifier> expectedVendorIdentifier = VendorIdentifier.Auth0;
         ApiEnum<string, BillingCurrency> expectedBillingCurrency = BillingCurrency.Usd;
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedIntegrationID, parameters.IntegrationID);
         Assert.Equal(expectedPaymentMethodID, parameters.PaymentMethodID);
         Assert.Equal(expectedVendorIdentifier, parameters.VendorIdentifier);
         Assert.Equal(expectedBillingCurrency, parameters.BillingCurrency);
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new PaymentMethodAttachParams
+        {
+            ID = "x",
+            IntegrationID = "integrationId",
+            PaymentMethodID = "paymentMethodId",
+            VendorIdentifier = VendorIdentifier.Auth0,
+            BillingCurrency = BillingCurrency.Usd,
+        };
+
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
+    {
+        var parameters = new PaymentMethodAttachParams
+        {
+            ID = "x",
+            IntegrationID = "integrationId",
+            PaymentMethodID = "paymentMethodId",
+            VendorIdentifier = VendorIdentifier.Auth0,
+            BillingCurrency = BillingCurrency.Usd,
+
+            // Null should be interpreted as omitted for these properties
+            XAccountID = null,
+            XEnvironmentID = null,
+        };
+
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -42,6 +89,8 @@ public class PaymentMethodAttachParamsTest : TestBase
             IntegrationID = "integrationId",
             PaymentMethodID = "paymentMethodId",
             VendorIdentifier = VendorIdentifier.Auth0,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         Assert.Null(parameters.BillingCurrency);
@@ -57,6 +106,8 @@ public class PaymentMethodAttachParamsTest : TestBase
             IntegrationID = "integrationId",
             PaymentMethodID = "paymentMethodId",
             VendorIdentifier = VendorIdentifier.Auth0,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
 
             BillingCurrency = null,
         };
@@ -87,6 +138,26 @@ public class PaymentMethodAttachParamsTest : TestBase
     }
 
     [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        PaymentMethodAttachParams parameters = new()
+        {
+            ID = "x",
+            IntegrationID = "integrationId",
+            PaymentMethodID = "paymentMethodId",
+            VendorIdentifier = VendorIdentifier.Auth0,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
     public void CopyConstructor_Works()
     {
         var parameters = new PaymentMethodAttachParams
@@ -96,6 +167,8 @@ public class PaymentMethodAttachParamsTest : TestBase
             PaymentMethodID = "paymentMethodId",
             VendorIdentifier = VendorIdentifier.Auth0,
             BillingCurrency = BillingCurrency.Usd,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         PaymentMethodAttachParams copied = new(parameters);

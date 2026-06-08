@@ -226,6 +226,42 @@ public record class CreditGetUsageParams : ParamsBase
         }
     }
 
+    public string? XAccountID
+    {
+        get
+        {
+            this._rawHeaderData.Freeze();
+            return this._rawHeaderData.GetNullableClass<string>("X-ACCOUNT-ID");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawHeaderData.Set("X-ACCOUNT-ID", value);
+        }
+    }
+
+    public string? XEnvironmentID
+    {
+        get
+        {
+            this._rawHeaderData.Freeze();
+            return this._rawHeaderData.GetNullableClass<string>("X-ENVIRONMENT-ID");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawHeaderData.Set("X-ENVIRONMENT-ID", value);
+        }
+    }
+
     public CreditGetUsageParams() { }
 
 #pragma warning disable CS8618

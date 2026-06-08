@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
@@ -27,6 +28,8 @@ public class CouponListParamsTest : TestBase
             Limit = 1,
             Status = [Coupons::Status.Active],
             Type = Coupons::Type.Fixed,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedID = "id";
@@ -42,6 +45,8 @@ public class CouponListParamsTest : TestBase
         long expectedLimit = 1;
         List<ApiEnum<string, Coupons::Status>> expectedStatus = [Coupons::Status.Active];
         ApiEnum<string, Coupons::Type> expectedType = Coupons::Type.Fixed;
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedAfter, parameters.After);
@@ -55,6 +60,8 @@ public class CouponListParamsTest : TestBase
             Assert.Equal(expectedStatus[i], parameters.Status[i]);
         }
         Assert.Equal(expectedType, parameters.Type);
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
 
     [Fact]
@@ -76,6 +83,10 @@ public class CouponListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("status"));
         Assert.Null(parameters.Type);
         Assert.False(parameters.RawQueryData.ContainsKey("type"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -91,6 +102,8 @@ public class CouponListParamsTest : TestBase
             Limit = null,
             Status = null,
             Type = null,
+            XAccountID = null,
+            XEnvironmentID = null,
         };
 
         Assert.Null(parameters.ID);
@@ -107,6 +120,10 @@ public class CouponListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("status"));
         Assert.Null(parameters.Type);
         Assert.False(parameters.RawQueryData.ContainsKey("type"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -142,6 +159,22 @@ public class CouponListParamsTest : TestBase
     }
 
     [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        Coupons::CouponListParams parameters = new()
+        {
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
     public void CopyConstructor_Works()
     {
         var parameters = new Coupons::CouponListParams
@@ -159,6 +192,8 @@ public class CouponListParamsTest : TestBase
             Limit = 1,
             Status = [Coupons::Status.Active],
             Type = Coupons::Type.Fixed,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         Coupons::CouponListParams copied = new(parameters);

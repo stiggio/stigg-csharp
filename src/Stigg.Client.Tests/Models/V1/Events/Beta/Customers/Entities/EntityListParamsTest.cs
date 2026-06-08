@@ -1,4 +1,5 @@
 using System;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
@@ -19,6 +20,8 @@ public class EntityListParamsTest : TestBase
             IncludeArchived = IncludeArchived.True,
             Limit = 1,
             TypeRefID = "typeRefId",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedID = "id";
@@ -27,6 +30,8 @@ public class EntityListParamsTest : TestBase
         ApiEnum<string, IncludeArchived> expectedIncludeArchived = IncludeArchived.True;
         long expectedLimit = 1;
         string expectedTypeRefID = "typeRefId";
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedAfter, parameters.After);
@@ -34,6 +39,8 @@ public class EntityListParamsTest : TestBase
         Assert.Equal(expectedIncludeArchived, parameters.IncludeArchived);
         Assert.Equal(expectedLimit, parameters.Limit);
         Assert.Equal(expectedTypeRefID, parameters.TypeRefID);
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
 
     [Fact]
@@ -51,6 +58,10 @@ public class EntityListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("limit"));
         Assert.Null(parameters.TypeRefID);
         Assert.False(parameters.RawQueryData.ContainsKey("typeRefId"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -66,6 +77,8 @@ public class EntityListParamsTest : TestBase
             IncludeArchived = null,
             Limit = null,
             TypeRefID = null,
+            XAccountID = null,
+            XEnvironmentID = null,
         };
 
         Assert.Null(parameters.After);
@@ -78,6 +91,10 @@ public class EntityListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("limit"));
         Assert.Null(parameters.TypeRefID);
         Assert.False(parameters.RawQueryData.ContainsKey("typeRefId"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -106,6 +123,23 @@ public class EntityListParamsTest : TestBase
     }
 
     [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        EntityListParams parameters = new()
+        {
+            ID = "id",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
     public void CopyConstructor_Works()
     {
         var parameters = new EntityListParams
@@ -116,6 +150,8 @@ public class EntityListParamsTest : TestBase
             IncludeArchived = IncludeArchived.True,
             Limit = 1,
             TypeRefID = "typeRefId",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         EntityListParams copied = new(parameters);

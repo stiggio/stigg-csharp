@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
@@ -46,6 +47,8 @@ public class FeatureUpdateFeatureParamsTest : TestBase
                 FeatureUnitsPlural = "featureUnitsPlural",
                 Round = FeatureUpdateFeatureParamsUnitTransformationRound.Up,
             },
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedID = "x";
@@ -83,6 +86,8 @@ public class FeatureUpdateFeatureParamsTest : TestBase
             FeatureUnitsPlural = "featureUnitsPlural",
             Round = FeatureUpdateFeatureParamsUnitTransformationRound.Up,
         };
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedDescription, parameters.Description);
@@ -105,6 +110,8 @@ public class FeatureUpdateFeatureParamsTest : TestBase
         }
         Assert.Equal(expectedMeter, parameters.Meter);
         Assert.Equal(expectedUnitTransformation, parameters.UnitTransformation);
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
 
     [Fact]
@@ -136,6 +143,10 @@ public class FeatureUpdateFeatureParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.Meter);
         Assert.False(parameters.RawBodyData.ContainsKey("meter"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -160,6 +171,8 @@ public class FeatureUpdateFeatureParamsTest : TestBase
             FeatureUnitsPlural = null,
             Metadata = null,
             Meter = null,
+            XAccountID = null,
+            XEnvironmentID = null,
         };
 
         Assert.Null(parameters.Description);
@@ -176,6 +189,10 @@ public class FeatureUpdateFeatureParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.Meter);
         Assert.False(parameters.RawBodyData.ContainsKey("meter"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -208,6 +225,8 @@ public class FeatureUpdateFeatureParamsTest : TestBase
                     ),
                 ],
             },
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         Assert.Null(parameters.UnitTransformation);
@@ -244,6 +263,8 @@ public class FeatureUpdateFeatureParamsTest : TestBase
                     ),
                 ],
             },
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
 
             UnitTransformation = null,
         };
@@ -260,6 +281,23 @@ public class FeatureUpdateFeatureParamsTest : TestBase
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
         Assert.True(TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/features/x"), url));
+    }
+
+    [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        FeatureUpdateFeatureParams parameters = new()
+        {
+            ID = "x",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -299,6 +337,8 @@ public class FeatureUpdateFeatureParamsTest : TestBase
                 FeatureUnitsPlural = "featureUnitsPlural",
                 Round = FeatureUpdateFeatureParamsUnitTransformationRound.Up,
             },
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         FeatureUpdateFeatureParams copied = new(parameters);

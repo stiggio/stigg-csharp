@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
@@ -29,6 +30,8 @@ public class ProductUpdateProductParamsTest : TestBase
                 SubscriptionStartPlanID = "subscriptionStartPlanId",
             },
             UsageResetCutoffRule = new(Behavior.NeverReset),
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedID = "x";
@@ -46,6 +49,8 @@ public class ProductUpdateProductParamsTest : TestBase
             SubscriptionStartPlanID = "subscriptionStartPlanId",
         };
         UsageResetCutoffRule expectedUsageResetCutoffRule = new(Behavior.NeverReset);
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedDescription, parameters.Description);
@@ -61,6 +66,8 @@ public class ProductUpdateProductParamsTest : TestBase
         Assert.Equal(expectedMultipleSubscriptions, parameters.MultipleSubscriptions);
         Assert.Equal(expectedProductSettings, parameters.ProductSettings);
         Assert.Equal(expectedUsageResetCutoffRule, parameters.UsageResetCutoffRule);
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
 
     [Fact]
@@ -81,6 +88,10 @@ public class ProductUpdateProductParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("productSettings"));
         Assert.Null(parameters.UsageResetCutoffRule);
         Assert.False(parameters.RawBodyData.ContainsKey("usageResetCutoffRule"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -97,6 +108,8 @@ public class ProductUpdateProductParamsTest : TestBase
             MultipleSubscriptions = null,
             ProductSettings = null,
             UsageResetCutoffRule = null,
+            XAccountID = null,
+            XEnvironmentID = null,
         };
 
         Assert.Null(parameters.DisplayName);
@@ -107,6 +120,10 @@ public class ProductUpdateProductParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("productSettings"));
         Assert.Null(parameters.UsageResetCutoffRule);
         Assert.False(parameters.RawBodyData.ContainsKey("usageResetCutoffRule"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -127,6 +144,8 @@ public class ProductUpdateProductParamsTest : TestBase
                 SubscriptionStartPlanID = "subscriptionStartPlanId",
             },
             UsageResetCutoffRule = new(Behavior.NeverReset),
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         Assert.Null(parameters.Description);
@@ -153,6 +172,8 @@ public class ProductUpdateProductParamsTest : TestBase
                 SubscriptionStartPlanID = "subscriptionStartPlanId",
             },
             UsageResetCutoffRule = new(Behavior.NeverReset),
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
 
             Description = null,
             Metadata = null,
@@ -175,6 +196,23 @@ public class ProductUpdateProductParamsTest : TestBase
     }
 
     [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        ProductUpdateProductParams parameters = new()
+        {
+            ID = "x",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
     public void CopyConstructor_Works()
     {
         var parameters = new ProductUpdateProductParams
@@ -194,6 +232,8 @@ public class ProductUpdateProductParamsTest : TestBase
                 SubscriptionStartPlanID = "subscriptionStartPlanId",
             },
             UsageResetCutoffRule = new(Behavior.NeverReset),
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         ProductUpdateProductParams copied = new(parameters);
