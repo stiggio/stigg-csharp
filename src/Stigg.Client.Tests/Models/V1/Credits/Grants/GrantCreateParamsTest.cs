@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
@@ -42,6 +43,8 @@ public class GrantCreateParamsTest : TestBase
             PaymentCollectionMethod = PaymentCollectionMethod.Charge,
             Priority = 0,
             ResourceID = "resourceId",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         double expectedAmount = 0;
@@ -73,6 +76,8 @@ public class GrantCreateParamsTest : TestBase
             PaymentCollectionMethod.Charge;
         long expectedPriority = 0;
         string expectedResourceID = "resourceId";
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedAmount, parameters.Amount);
         Assert.Equal(expectedCurrencyID, parameters.CurrencyID);
@@ -96,6 +101,8 @@ public class GrantCreateParamsTest : TestBase
         Assert.Equal(expectedPaymentCollectionMethod, parameters.PaymentCollectionMethod);
         Assert.Equal(expectedPriority, parameters.Priority);
         Assert.Equal(expectedResourceID, parameters.ResourceID);
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
 
     [Fact]
@@ -130,6 +137,10 @@ public class GrantCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("priority"));
         Assert.Null(parameters.ResourceID);
         Assert.False(parameters.RawBodyData.ContainsKey("resourceId"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -154,6 +165,8 @@ public class GrantCreateParamsTest : TestBase
             PaymentCollectionMethod = null,
             Priority = null,
             ResourceID = null,
+            XAccountID = null,
+            XEnvironmentID = null,
         };
 
         Assert.Null(parameters.AwaitPaymentConfirmation);
@@ -176,6 +189,10 @@ public class GrantCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("priority"));
         Assert.Null(parameters.ResourceID);
         Assert.False(parameters.RawBodyData.ContainsKey("resourceId"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -193,6 +210,27 @@ public class GrantCreateParamsTest : TestBase
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
         Assert.True(TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/credits/grants"), url));
+    }
+
+    [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        GrantCreateParams parameters = new()
+        {
+            Amount = 0,
+            CurrencyID = "currencyId",
+            CustomerID = "customerId",
+            DisplayName = "displayName",
+            GrantType = GrantType.Paid,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -228,6 +266,8 @@ public class GrantCreateParamsTest : TestBase
             PaymentCollectionMethod = PaymentCollectionMethod.Charge,
             Priority = 0,
             ResourceID = "resourceId",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         GrantCreateParams copied = new(parameters);

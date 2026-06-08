@@ -1,4 +1,5 @@
 using System;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
@@ -23,6 +24,8 @@ public class CreditGetUsageParamsTest : TestBase
             ResourceID = "resourceId",
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             TimeRange = TimeRange.LastDay,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedCustomerID = "customerId";
@@ -35,6 +38,8 @@ public class CreditGetUsageParamsTest : TestBase
         string expectedResourceID = "resourceId";
         DateTimeOffset expectedStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, TimeRange> expectedTimeRange = TimeRange.LastDay;
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedCustomerID, parameters.CustomerID);
         Assert.Equal(expectedAfter, parameters.After);
@@ -46,6 +51,8 @@ public class CreditGetUsageParamsTest : TestBase
         Assert.Equal(expectedResourceID, parameters.ResourceID);
         Assert.Equal(expectedStartDate, parameters.StartDate);
         Assert.Equal(expectedTimeRange, parameters.TimeRange);
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
 
     [Fact]
@@ -71,6 +78,10 @@ public class CreditGetUsageParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("startDate"));
         Assert.Null(parameters.TimeRange);
         Assert.False(parameters.RawQueryData.ContainsKey("timeRange"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -90,6 +101,8 @@ public class CreditGetUsageParamsTest : TestBase
             ResourceID = null,
             StartDate = null,
             TimeRange = null,
+            XAccountID = null,
+            XEnvironmentID = null,
         };
 
         Assert.Null(parameters.After);
@@ -110,6 +123,10 @@ public class CreditGetUsageParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("startDate"));
         Assert.Null(parameters.TimeRange);
         Assert.False(parameters.RawQueryData.ContainsKey("timeRange"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -142,6 +159,23 @@ public class CreditGetUsageParamsTest : TestBase
     }
 
     [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        CreditGetUsageParams parameters = new()
+        {
+            CustomerID = "customerId",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
     public void CopyConstructor_Works()
     {
         var parameters = new CreditGetUsageParams
@@ -156,6 +190,8 @@ public class CreditGetUsageParamsTest : TestBase
             ResourceID = "resourceId",
             StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             TimeRange = TimeRange.LastDay,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         CreditGetUsageParams copied = new(parameters);

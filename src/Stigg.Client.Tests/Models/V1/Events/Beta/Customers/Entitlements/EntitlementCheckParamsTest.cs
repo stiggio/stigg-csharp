@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using Stigg.Client.Models.V1.Events.Beta.Customers.Entitlements;
 
 namespace Stigg.Client.Tests.Models.V1.Events.Beta.Customers.Entitlements;
@@ -18,6 +19,8 @@ public class EntitlementCheckParamsTest : TestBase
             RequestedUsage = 0,
             RequestedValues = ["string"],
             ResourceID = "x",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedID = "x";
@@ -27,6 +30,8 @@ public class EntitlementCheckParamsTest : TestBase
         long expectedRequestedUsage = 0;
         List<string> expectedRequestedValues = ["string"];
         string expectedResourceID = "x";
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedCurrencyID, parameters.CurrencyID);
@@ -47,6 +52,8 @@ public class EntitlementCheckParamsTest : TestBase
             Assert.Equal(expectedRequestedValues[i], parameters.RequestedValues[i]);
         }
         Assert.Equal(expectedResourceID, parameters.ResourceID);
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
 
     [Fact]
@@ -66,6 +73,10 @@ public class EntitlementCheckParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("requestedValues"));
         Assert.Null(parameters.ResourceID);
         Assert.False(parameters.RawQueryData.ContainsKey("resourceId"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -82,6 +93,8 @@ public class EntitlementCheckParamsTest : TestBase
             RequestedUsage = null,
             RequestedValues = null,
             ResourceID = null,
+            XAccountID = null,
+            XEnvironmentID = null,
         };
 
         Assert.Null(parameters.CurrencyID);
@@ -96,6 +109,10 @@ public class EntitlementCheckParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("requestedValues"));
         Assert.Null(parameters.ResourceID);
         Assert.False(parameters.RawQueryData.ContainsKey("resourceId"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -125,6 +142,23 @@ public class EntitlementCheckParamsTest : TestBase
     }
 
     [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        EntitlementCheckParams parameters = new()
+        {
+            ID = "x",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
     public void CopyConstructor_Works()
     {
         var parameters = new EntitlementCheckParams
@@ -136,6 +170,8 @@ public class EntitlementCheckParamsTest : TestBase
             RequestedUsage = 0,
             RequestedValues = ["string"],
             ResourceID = "x",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         EntitlementCheckParams copied = new(parameters);

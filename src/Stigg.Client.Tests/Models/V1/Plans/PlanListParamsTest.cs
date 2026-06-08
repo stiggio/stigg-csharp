@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
@@ -26,6 +27,8 @@ public class PlanListParamsTest : TestBase
             Limit = 1,
             ProductID = "productId",
             Status = [PlanListParamsStatus.Draft],
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedAfter = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
@@ -40,6 +43,8 @@ public class PlanListParamsTest : TestBase
         long expectedLimit = 1;
         string expectedProductID = "productId";
         List<ApiEnum<string, PlanListParamsStatus>> expectedStatus = [PlanListParamsStatus.Draft];
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedAfter, parameters.After);
         Assert.Equal(expectedBefore, parameters.Before);
@@ -52,6 +57,8 @@ public class PlanListParamsTest : TestBase
         {
             Assert.Equal(expectedStatus[i], parameters.Status[i]);
         }
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
 
     [Fact]
@@ -71,6 +78,10 @@ public class PlanListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("productId"));
         Assert.Null(parameters.Status);
         Assert.False(parameters.RawQueryData.ContainsKey("status"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -85,6 +96,8 @@ public class PlanListParamsTest : TestBase
             Limit = null,
             ProductID = null,
             Status = null,
+            XAccountID = null,
+            XEnvironmentID = null,
         };
 
         Assert.Null(parameters.After);
@@ -99,6 +112,10 @@ public class PlanListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("productId"));
         Assert.Null(parameters.Status);
         Assert.False(parameters.RawQueryData.ContainsKey("status"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -133,6 +150,22 @@ public class PlanListParamsTest : TestBase
     }
 
     [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        PlanListParams parameters = new()
+        {
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
     public void CopyConstructor_Works()
     {
         var parameters = new PlanListParams
@@ -149,6 +182,8 @@ public class PlanListParamsTest : TestBase
             Limit = 1,
             ProductID = "productId",
             Status = [PlanListParamsStatus.Draft],
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         PlanListParams copied = new(parameters);

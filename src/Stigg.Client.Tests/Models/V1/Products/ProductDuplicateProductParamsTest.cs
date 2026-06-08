@@ -1,4 +1,5 @@
 using System;
+using System.Net.Http;
 using Stigg.Client.Models.V1.Products;
 
 namespace Stigg.Client.Tests.Models.V1.Products;
@@ -14,17 +15,23 @@ public class ProductDuplicateProductParamsTest : TestBase
             TargetID = "targetId",
             Description = "description",
             DisplayName = "displayName",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedID = "x";
         string expectedTargetID = "targetId";
         string expectedDescription = "description";
         string expectedDisplayName = "displayName";
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedTargetID, parameters.TargetID);
         Assert.Equal(expectedDescription, parameters.Description);
         Assert.Equal(expectedDisplayName, parameters.DisplayName);
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
 
     [Fact]
@@ -39,6 +46,10 @@ public class ProductDuplicateProductParamsTest : TestBase
 
         Assert.Null(parameters.DisplayName);
         Assert.False(parameters.RawBodyData.ContainsKey("displayName"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -52,10 +63,16 @@ public class ProductDuplicateProductParamsTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             DisplayName = null,
+            XAccountID = null,
+            XEnvironmentID = null,
         };
 
         Assert.Null(parameters.DisplayName);
         Assert.False(parameters.RawBodyData.ContainsKey("displayName"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -66,6 +83,8 @@ public class ProductDuplicateProductParamsTest : TestBase
             ID = "x",
             TargetID = "targetId",
             DisplayName = "displayName",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         Assert.Null(parameters.Description);
@@ -80,6 +99,8 @@ public class ProductDuplicateProductParamsTest : TestBase
             ID = "x",
             TargetID = "targetId",
             DisplayName = "displayName",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
 
             Description = null,
         };
@@ -101,6 +122,24 @@ public class ProductDuplicateProductParamsTest : TestBase
     }
 
     [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        ProductDuplicateProductParams parameters = new()
+        {
+            ID = "x",
+            TargetID = "targetId",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
     public void CopyConstructor_Works()
     {
         var parameters = new ProductDuplicateProductParams
@@ -109,6 +148,8 @@ public class ProductDuplicateProductParamsTest : TestBase
             TargetID = "targetId",
             Description = "description",
             DisplayName = "displayName",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         ProductDuplicateProductParams copied = new(parameters);

@@ -1,4 +1,5 @@
 using System;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
@@ -15,14 +16,20 @@ public class SubscriptionMigrateParamsTest : TestBase
         {
             ID = "x",
             SubscriptionMigrationTime = SubscriptionMigrationTime.EndOfBillingPeriod,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedID = "x";
         ApiEnum<string, SubscriptionMigrationTime> expectedSubscriptionMigrationTime =
             SubscriptionMigrationTime.EndOfBillingPeriod;
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedSubscriptionMigrationTime, parameters.SubscriptionMigrationTime);
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
 
     [Fact]
@@ -32,6 +39,10 @@ public class SubscriptionMigrateParamsTest : TestBase
 
         Assert.Null(parameters.SubscriptionMigrationTime);
         Assert.False(parameters.RawBodyData.ContainsKey("subscriptionMigrationTime"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -43,10 +54,16 @@ public class SubscriptionMigrateParamsTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             SubscriptionMigrationTime = null,
+            XAccountID = null,
+            XEnvironmentID = null,
         };
 
         Assert.Null(parameters.SubscriptionMigrationTime);
         Assert.False(parameters.RawBodyData.ContainsKey("subscriptionMigrationTime"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -62,12 +79,31 @@ public class SubscriptionMigrateParamsTest : TestBase
     }
 
     [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        SubscriptionMigrateParams parameters = new()
+        {
+            ID = "x",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
     public void CopyConstructor_Works()
     {
         var parameters = new SubscriptionMigrateParams
         {
             ID = "x",
             SubscriptionMigrationTime = SubscriptionMigrationTime.EndOfBillingPeriod,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         SubscriptionMigrateParams copied = new(parameters);

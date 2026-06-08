@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Models.V1.Events.Beta.Customers.Entities;
@@ -33,6 +34,8 @@ public class EntityUpsertParamsTest : TestBase
                     TypeRefID = "user",
                 },
             ],
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedID = "id";
@@ -55,6 +58,8 @@ public class EntityUpsertParamsTest : TestBase
                 TypeRefID = "user",
             },
         ];
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedEntities.Count, parameters.Entities.Count);
@@ -62,6 +67,78 @@ public class EntityUpsertParamsTest : TestBase
         {
             Assert.Equal(expectedEntities[i], parameters.Entities[i]);
         }
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new EntityUpsertParams
+        {
+            ID = "id",
+            Entities =
+            [
+                new()
+                {
+                    ID = "user-7f3a0c1d",
+                    Metadata = new Dictionary<string, string>()
+                    {
+                        { "email", "jane@acme.com" },
+                        { "role", "admin" },
+                    },
+                    TypeRefID = "user",
+                },
+                new()
+                {
+                    ID = "user-c4d1b2e9",
+                    Metadata = new Dictionary<string, string>() { { "email", "john@acme.com" } },
+                    TypeRefID = "user",
+                },
+            ],
+        };
+
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
+    {
+        var parameters = new EntityUpsertParams
+        {
+            ID = "id",
+            Entities =
+            [
+                new()
+                {
+                    ID = "user-7f3a0c1d",
+                    Metadata = new Dictionary<string, string>()
+                    {
+                        { "email", "jane@acme.com" },
+                        { "role", "admin" },
+                    },
+                    TypeRefID = "user",
+                },
+                new()
+                {
+                    ID = "user-c4d1b2e9",
+                    Metadata = new Dictionary<string, string>() { { "email", "john@acme.com" } },
+                    TypeRefID = "user",
+                },
+            ],
+
+            // Null should be interpreted as omitted for these properties
+            XAccountID = null,
+            XEnvironmentID = null,
+        };
+
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -102,6 +179,42 @@ public class EntityUpsertParamsTest : TestBase
     }
 
     [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        EntityUpsertParams parameters = new()
+        {
+            ID = "id",
+            Entities =
+            [
+                new()
+                {
+                    ID = "user-7f3a0c1d",
+                    Metadata = new Dictionary<string, string>()
+                    {
+                        { "email", "jane@acme.com" },
+                        { "role", "admin" },
+                    },
+                    TypeRefID = "user",
+                },
+                new()
+                {
+                    ID = "user-c4d1b2e9",
+                    Metadata = new Dictionary<string, string>() { { "email", "john@acme.com" } },
+                    TypeRefID = "user",
+                },
+            ],
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
     public void CopyConstructor_Works()
     {
         var parameters = new EntityUpsertParams
@@ -126,6 +239,8 @@ public class EntityUpsertParamsTest : TestBase
                     TypeRefID = "user",
                 },
             ],
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         EntityUpsertParams copied = new(parameters);

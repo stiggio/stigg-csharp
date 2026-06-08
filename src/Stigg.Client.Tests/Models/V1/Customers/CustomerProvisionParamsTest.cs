@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
@@ -85,6 +86,8 @@ public class CustomerProvisionParamsTest : TestBase
                 },
             },
             Timezone = "timezone",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedID = "id";
@@ -160,6 +163,8 @@ public class CustomerProvisionParamsTest : TestBase
             },
         };
         string expectedTimezone = "timezone";
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedBillingCurrency, parameters.BillingCurrency);
@@ -185,6 +190,8 @@ public class CustomerProvisionParamsTest : TestBase
         Assert.Equal(expectedName, parameters.Name);
         Assert.Equal(expectedPassthrough, parameters.Passthrough);
         Assert.Equal(expectedTimezone, parameters.Timezone);
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
 
     [Fact]
@@ -216,6 +223,10 @@ public class CustomerProvisionParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.Passthrough);
         Assert.False(parameters.RawBodyData.ContainsKey("passthrough"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -244,6 +255,8 @@ public class CustomerProvisionParamsTest : TestBase
             Integrations = null,
             Metadata = null,
             Passthrough = null,
+            XAccountID = null,
+            XEnvironmentID = null,
         };
 
         Assert.Null(parameters.Integrations);
@@ -252,6 +265,10 @@ public class CustomerProvisionParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.Passthrough);
         Assert.False(parameters.RawBodyData.ContainsKey("passthrough"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -315,6 +332,8 @@ public class CustomerProvisionParamsTest : TestBase
                     PaymentMethodID = "paymentMethodId",
                 },
             },
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         Assert.Null(parameters.BillingCurrency);
@@ -396,6 +415,8 @@ public class CustomerProvisionParamsTest : TestBase
                     PaymentMethodID = "paymentMethodId",
                 },
             },
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
 
             BillingCurrency = null,
             BillingID = null,
@@ -433,6 +454,23 @@ public class CustomerProvisionParamsTest : TestBase
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
         Assert.True(TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/customers"), url));
+    }
+
+    [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        Customers::CustomerProvisionParams parameters = new()
+        {
+            ID = "id",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -511,6 +549,8 @@ public class CustomerProvisionParamsTest : TestBase
                 },
             },
             Timezone = "timezone",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         Customers::CustomerProvisionParams copied = new(parameters);

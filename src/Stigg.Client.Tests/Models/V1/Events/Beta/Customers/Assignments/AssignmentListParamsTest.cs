@@ -1,4 +1,5 @@
 using System;
+using System.Net.Http;
 using Stigg.Client.Models.V1.Events.Beta.Customers.Assignments;
 
 namespace Stigg.Client.Tests.Models.V1.Events.Beta.Customers.Assignments;
@@ -16,6 +17,8 @@ public class AssignmentListParamsTest : TestBase
             CapabilityID = "capabilityId",
             EntityID = "entityId",
             Limit = 1,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedID = "id";
@@ -24,6 +27,8 @@ public class AssignmentListParamsTest : TestBase
         string expectedCapabilityID = "capabilityId";
         string expectedEntityID = "entityId";
         long expectedLimit = 1;
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedAfter, parameters.After);
@@ -31,6 +36,8 @@ public class AssignmentListParamsTest : TestBase
         Assert.Equal(expectedCapabilityID, parameters.CapabilityID);
         Assert.Equal(expectedEntityID, parameters.EntityID);
         Assert.Equal(expectedLimit, parameters.Limit);
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
 
     [Fact]
@@ -48,6 +55,10 @@ public class AssignmentListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("entityId"));
         Assert.Null(parameters.Limit);
         Assert.False(parameters.RawQueryData.ContainsKey("limit"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -63,6 +74,8 @@ public class AssignmentListParamsTest : TestBase
             CapabilityID = null,
             EntityID = null,
             Limit = null,
+            XAccountID = null,
+            XEnvironmentID = null,
         };
 
         Assert.Null(parameters.After);
@@ -75,6 +88,10 @@ public class AssignmentListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("entityId"));
         Assert.Null(parameters.Limit);
         Assert.False(parameters.RawQueryData.ContainsKey("limit"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -103,6 +120,23 @@ public class AssignmentListParamsTest : TestBase
     }
 
     [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        AssignmentListParams parameters = new()
+        {
+            ID = "id",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
     public void CopyConstructor_Works()
     {
         var parameters = new AssignmentListParams
@@ -113,6 +147,8 @@ public class AssignmentListParamsTest : TestBase
             CapabilityID = "capabilityId",
             EntityID = "entityId",
             Limit = 1,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         AssignmentListParams copied = new(parameters);

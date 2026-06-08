@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
@@ -90,6 +91,8 @@ public class SubscriptionPreviewParamsTest : TestBase
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             UnitQuantity = 0,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedCustomerID = "customerId";
@@ -171,6 +174,8 @@ public class SubscriptionPreviewParamsTest : TestBase
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
         long expectedUnitQuantity = 0;
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedCustomerID, parameters.CustomerID);
         Assert.Equal(expectedPlanID, parameters.PlanID);
@@ -203,6 +208,8 @@ public class SubscriptionPreviewParamsTest : TestBase
         Assert.Equal(expectedStartDate, parameters.StartDate);
         Assert.Equal(expectedTrialOverrideConfiguration, parameters.TrialOverrideConfiguration);
         Assert.Equal(expectedUnitQuantity, parameters.UnitQuantity);
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
 
     [Fact]
@@ -242,6 +249,10 @@ public class SubscriptionPreviewParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("trialOverrideConfiguration"));
         Assert.Null(parameters.UnitQuantity);
         Assert.False(parameters.RawBodyData.ContainsKey("unitQuantity"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -267,6 +278,8 @@ public class SubscriptionPreviewParamsTest : TestBase
             StartDate = null,
             TrialOverrideConfiguration = null,
             UnitQuantity = null,
+            XAccountID = null,
+            XEnvironmentID = null,
         };
 
         Assert.Null(parameters.Addons);
@@ -297,6 +310,10 @@ public class SubscriptionPreviewParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("trialOverrideConfiguration"));
         Assert.Null(parameters.UnitQuantity);
         Assert.False(parameters.RawBodyData.ContainsKey("unitQuantity"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -313,6 +330,24 @@ public class SubscriptionPreviewParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/subscriptions/preview"), url)
         );
+    }
+
+    [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        SubscriptionPreviewParams parameters = new()
+        {
+            CustomerID = "customerId",
+            PlanID = "planId",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -396,6 +431,8 @@ public class SubscriptionPreviewParamsTest : TestBase
                 TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             UnitQuantity = 0,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         SubscriptionPreviewParams copied = new(parameters);

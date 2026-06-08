@@ -1,4 +1,5 @@
 using System;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
@@ -17,6 +18,8 @@ public class IntegrationLinkParamsTest : TestBase
             IDValue = "id",
             SyncedEntityID = "syncedEntityId",
             VendorIdentifier = IntegrationLinkParamsVendorIdentifier.Auth0,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedID = "x";
@@ -24,11 +27,53 @@ public class IntegrationLinkParamsTest : TestBase
         string expectedSyncedEntityID = "syncedEntityId";
         ApiEnum<string, IntegrationLinkParamsVendorIdentifier> expectedVendorIdentifier =
             IntegrationLinkParamsVendorIdentifier.Auth0;
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedIDValue, parameters.IDValue);
         Assert.Equal(expectedSyncedEntityID, parameters.SyncedEntityID);
         Assert.Equal(expectedVendorIdentifier, parameters.VendorIdentifier);
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new IntegrationLinkParams
+        {
+            ID = "x",
+            IDValue = "id",
+            SyncedEntityID = "syncedEntityId",
+            VendorIdentifier = IntegrationLinkParamsVendorIdentifier.Auth0,
+        };
+
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
+    {
+        var parameters = new IntegrationLinkParams
+        {
+            ID = "x",
+            IDValue = "id",
+            SyncedEntityID = "syncedEntityId",
+            VendorIdentifier = IntegrationLinkParamsVendorIdentifier.Auth0,
+
+            // Null should be interpreted as omitted for these properties
+            XAccountID = null,
+            XEnvironmentID = null,
+        };
+
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -50,6 +95,26 @@ public class IntegrationLinkParamsTest : TestBase
     }
 
     [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        IntegrationLinkParams parameters = new()
+        {
+            ID = "x",
+            IDValue = "id",
+            SyncedEntityID = "syncedEntityId",
+            VendorIdentifier = IntegrationLinkParamsVendorIdentifier.Auth0,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
     public void CopyConstructor_Works()
     {
         var parameters = new IntegrationLinkParams
@@ -58,6 +123,8 @@ public class IntegrationLinkParamsTest : TestBase
             IDValue = "id",
             SyncedEntityID = "syncedEntityId",
             VendorIdentifier = IntegrationLinkParamsVendorIdentifier.Auth0,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         IntegrationLinkParams copied = new(parameters);

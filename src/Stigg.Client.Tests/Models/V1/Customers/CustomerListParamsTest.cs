@@ -1,4 +1,5 @@
 using System;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Models.V1.Customers;
@@ -24,6 +25,8 @@ public class CustomerListParamsTest : TestBase
             Email = "email",
             Limit = 1,
             Name = "name",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedAfter = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
@@ -38,6 +41,8 @@ public class CustomerListParamsTest : TestBase
         string expectedEmail = "email";
         long expectedLimit = 1;
         string expectedName = "name";
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedAfter, parameters.After);
         Assert.Equal(expectedBefore, parameters.Before);
@@ -45,6 +50,8 @@ public class CustomerListParamsTest : TestBase
         Assert.Equal(expectedEmail, parameters.Email);
         Assert.Equal(expectedLimit, parameters.Limit);
         Assert.Equal(expectedName, parameters.Name);
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
 
     [Fact]
@@ -64,6 +71,10 @@ public class CustomerListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("limit"));
         Assert.Null(parameters.Name);
         Assert.False(parameters.RawQueryData.ContainsKey("name"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -78,6 +89,8 @@ public class CustomerListParamsTest : TestBase
             Email = null,
             Limit = null,
             Name = null,
+            XAccountID = null,
+            XEnvironmentID = null,
         };
 
         Assert.Null(parameters.After);
@@ -92,6 +105,10 @@ public class CustomerListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("limit"));
         Assert.Null(parameters.Name);
         Assert.False(parameters.RawQueryData.ContainsKey("name"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -126,6 +143,22 @@ public class CustomerListParamsTest : TestBase
     }
 
     [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        CustomerListParams parameters = new()
+        {
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
     public void CopyConstructor_Works()
     {
         var parameters = new CustomerListParams
@@ -142,6 +175,8 @@ public class CustomerListParamsTest : TestBase
             Email = "email",
             Limit = 1,
             Name = "name",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         CustomerListParams copied = new(parameters);

@@ -1,4 +1,5 @@
 using System;
+using System.Net.Http;
 using Stigg.Client.Models.V1.Events.Beta.EntityTypes;
 
 namespace Stigg.Client.Tests.Models.V1.Events.Beta.EntityTypes;
@@ -13,15 +14,21 @@ public class EntityTypeListParamsTest : TestBase
             After = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Before = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Limit = 1,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedAfter = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
         string expectedBefore = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
         long expectedLimit = 1;
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedAfter, parameters.After);
         Assert.Equal(expectedBefore, parameters.Before);
         Assert.Equal(expectedLimit, parameters.Limit);
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
 
     [Fact]
@@ -35,6 +42,10 @@ public class EntityTypeListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("before"));
         Assert.Null(parameters.Limit);
         Assert.False(parameters.RawQueryData.ContainsKey("limit"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -46,6 +57,8 @@ public class EntityTypeListParamsTest : TestBase
             After = null,
             Before = null,
             Limit = null,
+            XAccountID = null,
+            XEnvironmentID = null,
         };
 
         Assert.Null(parameters.After);
@@ -54,6 +67,10 @@ public class EntityTypeListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("before"));
         Assert.Null(parameters.Limit);
         Assert.False(parameters.RawQueryData.ContainsKey("limit"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -79,6 +96,22 @@ public class EntityTypeListParamsTest : TestBase
     }
 
     [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        EntityTypeListParams parameters = new()
+        {
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
     public void CopyConstructor_Works()
     {
         var parameters = new EntityTypeListParams
@@ -86,6 +119,8 @@ public class EntityTypeListParamsTest : TestBase
             After = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Before = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Limit = 1,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         EntityTypeListParams copied = new(parameters);

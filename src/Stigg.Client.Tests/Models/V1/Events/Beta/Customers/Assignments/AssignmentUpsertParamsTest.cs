@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
@@ -32,6 +33,8 @@ public class AssignmentUpsertParamsTest : TestBase
                     UsageLimit = 2000,
                 },
             ],
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedID = "id";
@@ -52,6 +55,8 @@ public class AssignmentUpsertParamsTest : TestBase
                 UsageLimit = 2000,
             },
         ];
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedAssignments.Count, parameters.Assignments.Count);
@@ -59,6 +64,74 @@ public class AssignmentUpsertParamsTest : TestBase
         {
             Assert.Equal(expectedAssignments[i], parameters.Assignments[i]);
         }
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new AssignmentUpsertParams
+        {
+            ID = "id",
+            Assignments =
+            [
+                new()
+                {
+                    CapabilityID = "compute-minutes",
+                    EntityID = "workspace-001",
+                    Cadence = Cadence.Month,
+                    UsageLimit = 1000,
+                },
+                new()
+                {
+                    CapabilityID = "compute-minutes",
+                    EntityID = "workspace-002",
+                    Cadence = Cadence.Month,
+                    UsageLimit = 2000,
+                },
+            ],
+        };
+
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
+    {
+        var parameters = new AssignmentUpsertParams
+        {
+            ID = "id",
+            Assignments =
+            [
+                new()
+                {
+                    CapabilityID = "compute-minutes",
+                    EntityID = "workspace-001",
+                    Cadence = Cadence.Month,
+                    UsageLimit = 1000,
+                },
+                new()
+                {
+                    CapabilityID = "compute-minutes",
+                    EntityID = "workspace-002",
+                    Cadence = Cadence.Month,
+                    UsageLimit = 2000,
+                },
+            ],
+
+            // Null should be interpreted as omitted for these properties
+            XAccountID = null,
+            XEnvironmentID = null,
+        };
+
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -97,6 +170,40 @@ public class AssignmentUpsertParamsTest : TestBase
     }
 
     [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        AssignmentUpsertParams parameters = new()
+        {
+            ID = "id",
+            Assignments =
+            [
+                new()
+                {
+                    CapabilityID = "compute-minutes",
+                    EntityID = "workspace-001",
+                    Cadence = Cadence.Month,
+                    UsageLimit = 1000,
+                },
+                new()
+                {
+                    CapabilityID = "compute-minutes",
+                    EntityID = "workspace-002",
+                    Cadence = Cadence.Month,
+                    UsageLimit = 2000,
+                },
+            ],
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
     public void CopyConstructor_Works()
     {
         var parameters = new AssignmentUpsertParams
@@ -119,6 +226,8 @@ public class AssignmentUpsertParamsTest : TestBase
                     UsageLimit = 2000,
                 },
             ],
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         AssignmentUpsertParams copied = new(parameters);

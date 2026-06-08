@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
@@ -40,6 +41,8 @@ public class EntitlementUpdateParamsTest : TestBase
                     BodyFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
                 ),
             },
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedAddonID = "addonId";
@@ -68,10 +71,96 @@ public class EntitlementUpdateParamsTest : TestBase
                 BodyFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
             ),
         };
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedAddonID, parameters.AddonID);
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedBody, parameters.Body);
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new EntitlementUpdateParams
+        {
+            AddonID = "addonId",
+            ID = "id",
+            Body = new BodyFeature()
+            {
+                Behavior = BodyFeatureBehavior.Increment,
+                Description = "description",
+                DisplayNameOverride = "displayNameOverride",
+                EnumValues = ["string"],
+                HasSoftLimit = true,
+                HasUnlimitedUsage = true,
+                HiddenFromWidgets = [BodyFeatureHiddenFromWidget.Paywall],
+                IsCustom = true,
+                IsGranted = true,
+                MonthlyResetPeriodConfiguration = new(
+                    BodyFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+                Order = 0,
+                ResetPeriod = BodyFeatureResetPeriod.Year,
+                UsageLimit = 0,
+                WeeklyResetPeriodConfiguration = new(
+                    BodyFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+                YearlyResetPeriodConfiguration = new(
+                    BodyFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+            },
+        };
+
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
+    {
+        var parameters = new EntitlementUpdateParams
+        {
+            AddonID = "addonId",
+            ID = "id",
+            Body = new BodyFeature()
+            {
+                Behavior = BodyFeatureBehavior.Increment,
+                Description = "description",
+                DisplayNameOverride = "displayNameOverride",
+                EnumValues = ["string"],
+                HasSoftLimit = true,
+                HasUnlimitedUsage = true,
+                HiddenFromWidgets = [BodyFeatureHiddenFromWidget.Paywall],
+                IsCustom = true,
+                IsGranted = true,
+                MonthlyResetPeriodConfiguration = new(
+                    BodyFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+                Order = 0,
+                ResetPeriod = BodyFeatureResetPeriod.Year,
+                UsageLimit = 0,
+                WeeklyResetPeriodConfiguration = new(
+                    BodyFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+                YearlyResetPeriodConfiguration = new(
+                    BodyFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+            },
+
+            // Null should be interpreted as omitted for these properties
+            XAccountID = null,
+            XEnvironmentID = null,
+        };
+
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -118,6 +207,48 @@ public class EntitlementUpdateParamsTest : TestBase
     }
 
     [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        EntitlementUpdateParams parameters = new()
+        {
+            AddonID = "addonId",
+            ID = "id",
+            Body = new BodyFeature()
+            {
+                Behavior = BodyFeatureBehavior.Increment,
+                Description = "description",
+                DisplayNameOverride = "displayNameOverride",
+                EnumValues = ["string"],
+                HasSoftLimit = true,
+                HasUnlimitedUsage = true,
+                HiddenFromWidgets = [BodyFeatureHiddenFromWidget.Paywall],
+                IsCustom = true,
+                IsGranted = true,
+                MonthlyResetPeriodConfiguration = new(
+                    BodyFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+                Order = 0,
+                ResetPeriod = BodyFeatureResetPeriod.Year,
+                UsageLimit = 0,
+                WeeklyResetPeriodConfiguration = new(
+                    BodyFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+                YearlyResetPeriodConfiguration = new(
+                    BodyFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+            },
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
     public void CopyConstructor_Works()
     {
         var parameters = new EntitlementUpdateParams
@@ -148,6 +279,8 @@ public class EntitlementUpdateParamsTest : TestBase
                     BodyFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
                 ),
             },
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         EntitlementUpdateParams copied = new(parameters);

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
@@ -28,6 +29,8 @@ public class FeatureListFeaturesParamsTest : TestBase
             Limit = 1,
             MeterType = [FeatureListFeaturesParamsMeterType.None],
             Status = [Status.New],
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedID = "id";
@@ -50,6 +53,8 @@ public class FeatureListFeaturesParamsTest : TestBase
             FeatureListFeaturesParamsMeterType.None,
         ];
         List<ApiEnum<string, Status>> expectedStatus = [Status.New];
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedAfter, parameters.After);
@@ -74,6 +79,8 @@ public class FeatureListFeaturesParamsTest : TestBase
         {
             Assert.Equal(expectedStatus[i], parameters.Status[i]);
         }
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
 
     [Fact]
@@ -97,6 +104,10 @@ public class FeatureListFeaturesParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("meterType"));
         Assert.Null(parameters.Status);
         Assert.False(parameters.RawQueryData.ContainsKey("status"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -113,6 +124,8 @@ public class FeatureListFeaturesParamsTest : TestBase
             Limit = null,
             MeterType = null,
             Status = null,
+            XAccountID = null,
+            XEnvironmentID = null,
         };
 
         Assert.Null(parameters.ID);
@@ -131,6 +144,10 @@ public class FeatureListFeaturesParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("meterType"));
         Assert.Null(parameters.Status);
         Assert.False(parameters.RawQueryData.ContainsKey("status"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -167,6 +184,22 @@ public class FeatureListFeaturesParamsTest : TestBase
     }
 
     [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        FeatureListFeaturesParams parameters = new()
+        {
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
     public void CopyConstructor_Works()
     {
         var parameters = new FeatureListFeaturesParams
@@ -185,6 +218,8 @@ public class FeatureListFeaturesParamsTest : TestBase
             Limit = 1,
             MeterType = [FeatureListFeaturesParamsMeterType.None],
             Status = [Status.New],
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         FeatureListFeaturesParams copied = new(parameters);

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
@@ -159,6 +160,8 @@ public class AddonUpdateParamsTest : TestBase
             MaxQuantity = 0,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = AddonUpdateParamsStatus.Draft,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedID = "x";
@@ -304,6 +307,8 @@ public class AddonUpdateParamsTest : TestBase
         long expectedMaxQuantity = 0;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, AddonUpdateParamsStatus> expectedStatus = AddonUpdateParamsStatus.Draft;
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedBillingID, parameters.BillingID);
@@ -326,6 +331,8 @@ public class AddonUpdateParamsTest : TestBase
             Assert.Equal(value, parameters.Metadata[item.Key]);
         }
         Assert.Equal(expectedStatus, parameters.Status);
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
 
     [Fact]
@@ -348,6 +355,10 @@ public class AddonUpdateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.Status);
         Assert.False(parameters.RawBodyData.ContainsKey("status"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -366,6 +377,8 @@ public class AddonUpdateParamsTest : TestBase
             DisplayName = null,
             Metadata = null,
             Status = null,
+            XAccountID = null,
+            XEnvironmentID = null,
         };
 
         Assert.Null(parameters.Charges);
@@ -376,6 +389,10 @@ public class AddonUpdateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
         Assert.Null(parameters.Status);
         Assert.False(parameters.RawBodyData.ContainsKey("status"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -524,6 +541,8 @@ public class AddonUpdateParamsTest : TestBase
             DisplayName = "displayName",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = AddonUpdateParamsStatus.Draft,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         Assert.Null(parameters.BillingID);
@@ -682,6 +701,8 @@ public class AddonUpdateParamsTest : TestBase
             DisplayName = "displayName",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = AddonUpdateParamsStatus.Draft,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
 
             BillingID = null,
             Dependencies = null,
@@ -707,6 +728,23 @@ public class AddonUpdateParamsTest : TestBase
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
         Assert.True(TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/addons/x"), url));
+    }
+
+    [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        AddonUpdateParams parameters = new()
+        {
+            ID = "x",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -859,6 +897,8 @@ public class AddonUpdateParamsTest : TestBase
             MaxQuantity = 0,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = AddonUpdateParamsStatus.Draft,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         AddonUpdateParams copied = new(parameters);

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
@@ -19,6 +20,8 @@ public class IntegrationListParamsTest : TestBase
             Before = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Limit = 1,
             VendorIdentifier = [VendorIdentifier.Auth0],
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedID = "x";
@@ -26,6 +29,8 @@ public class IntegrationListParamsTest : TestBase
         string expectedBefore = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
         long expectedLimit = 1;
         List<ApiEnum<string, VendorIdentifier>> expectedVendorIdentifier = [VendorIdentifier.Auth0];
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedAfter, parameters.After);
@@ -37,6 +42,8 @@ public class IntegrationListParamsTest : TestBase
         {
             Assert.Equal(expectedVendorIdentifier[i], parameters.VendorIdentifier[i]);
         }
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
 
     [Fact]
@@ -52,6 +59,10 @@ public class IntegrationListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("limit"));
         Assert.Null(parameters.VendorIdentifier);
         Assert.False(parameters.RawQueryData.ContainsKey("vendorIdentifier"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -66,6 +77,8 @@ public class IntegrationListParamsTest : TestBase
             Before = null,
             Limit = null,
             VendorIdentifier = null,
+            XAccountID = null,
+            XEnvironmentID = null,
         };
 
         Assert.Null(parameters.After);
@@ -76,6 +89,10 @@ public class IntegrationListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("limit"));
         Assert.Null(parameters.VendorIdentifier);
         Assert.False(parameters.RawQueryData.ContainsKey("vendorIdentifier"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -103,6 +120,23 @@ public class IntegrationListParamsTest : TestBase
     }
 
     [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        IntegrationListParams parameters = new()
+        {
+            ID = "x",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
     public void CopyConstructor_Works()
     {
         var parameters = new IntegrationListParams
@@ -112,6 +146,8 @@ public class IntegrationListParamsTest : TestBase
             Before = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Limit = 1,
             VendorIdentifier = [VendorIdentifier.Auth0],
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         IntegrationListParams copied = new(parameters);
