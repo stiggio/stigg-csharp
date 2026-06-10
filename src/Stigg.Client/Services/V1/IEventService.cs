@@ -29,8 +29,6 @@ public interface IEventService
     /// </summary>
     IEventService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
-    IBetaService Beta { get; }
-
     IDataExportService DataExport { get; }
 
     /// <summary>
@@ -55,8 +53,6 @@ public interface IEventServiceWithRawResponse
     /// <para>The original service is not modified.</para>
     /// </summary>
     IEventServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
-
-    IBetaServiceWithRawResponse Beta { get; }
 
     IDataExportServiceWithRawResponse DataExport { get; }
 
