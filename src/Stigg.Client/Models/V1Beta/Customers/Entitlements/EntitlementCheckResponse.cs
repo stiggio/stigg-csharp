@@ -856,6 +856,27 @@ public sealed record class BetaChainNode : JsonModel
     }
 
     /// <summary>
+    /// External ids of the entities this budget is scoped to. Empty (`[]`) is the
+    /// node-wide budget; a non-empty set is the dimension-scoped budget that matched
+    /// this request — use it to tell apart multiple budgets on the same entity.
+    /// </summary>
+    public required IReadOnlyList<string> ScopeEntityIds
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<string>>("scopeEntityIds");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<string>>(
+                "scopeEntityIds",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
     /// Hard usage limit for this node; null when no assignment is configured.
     /// </summary>
     public required double? UsageLimit
@@ -874,6 +895,7 @@ public sealed record class BetaChainNode : JsonModel
         _ = this.CurrentUsage;
         _ = this.EntityID;
         _ = this.IsGranted;
+        _ = this.ScopeEntityIds;
         _ = this.UsageLimit;
     }
 
@@ -1680,6 +1702,27 @@ public sealed record class CreditBetaChainNode : JsonModel
     }
 
     /// <summary>
+    /// External ids of the entities this budget is scoped to. Empty (`[]`) is the
+    /// node-wide budget; a non-empty set is the dimension-scoped budget that matched
+    /// this request — use it to tell apart multiple budgets on the same entity.
+    /// </summary>
+    public required IReadOnlyList<string> ScopeEntityIds
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<string>>("scopeEntityIds");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<string>>(
+                "scopeEntityIds",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
     /// Hard usage limit for this node; null when no assignment is configured.
     /// </summary>
     public required double? UsageLimit
@@ -1698,6 +1741,7 @@ public sealed record class CreditBetaChainNode : JsonModel
         _ = this.CurrentUsage;
         _ = this.EntityID;
         _ = this.IsGranted;
+        _ = this.ScopeEntityIds;
         _ = this.UsageLimit;
     }
 
