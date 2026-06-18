@@ -195,12 +195,12 @@ public sealed record class Data : JsonModel
     /// <summary>
     /// Maximum usage allowed within one cadence window
     /// </summary>
-    public required double UsageLimit
+    public required double? UsageLimit
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<double>("usageLimit");
+            return this._rawData.GetNullableStruct<double>("usageLimit");
         }
         init { this._rawData.Set("usageLimit", value); }
     }

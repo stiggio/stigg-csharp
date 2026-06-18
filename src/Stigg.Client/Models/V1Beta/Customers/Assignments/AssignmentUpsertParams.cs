@@ -340,15 +340,7 @@ public sealed record class Assignment : JsonModel
             this._rawData.Freeze();
             return this._rawData.GetNullableStruct<double>("usageLimit");
         }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("usageLimit", value);
-        }
+        init { this._rawData.Set("usageLimit", value); }
     }
 
     /// <inheritdoc/>
