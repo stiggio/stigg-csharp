@@ -19,7 +19,7 @@ public class AssignmentListResponseTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
             ParentID = "parentId",
-            ScopeEntityIds = ["NxI"],
+            ScopeEntityIds = ["string"],
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
             CurrencyID = "currencyId",
@@ -32,7 +32,7 @@ public class AssignmentListResponseTest : TestBase
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedEntityID = "entityId";
         string expectedParentID = "parentId";
-        List<string> expectedScopeEntityIds = ["NxI"];
+        List<string> expectedScopeEntityIds = ["string"];
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         double expectedUsageLimit = 0;
         string expectedCurrencyID = "currencyId";
@@ -64,7 +64,7 @@ public class AssignmentListResponseTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
             ParentID = "parentId",
-            ScopeEntityIds = ["NxI"],
+            ScopeEntityIds = ["string"],
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
             CurrencyID = "currencyId",
@@ -90,7 +90,7 @@ public class AssignmentListResponseTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
             ParentID = "parentId",
-            ScopeEntityIds = ["NxI"],
+            ScopeEntityIds = ["string"],
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
             CurrencyID = "currencyId",
@@ -110,7 +110,7 @@ public class AssignmentListResponseTest : TestBase
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedEntityID = "entityId";
         string expectedParentID = "parentId";
-        List<string> expectedScopeEntityIds = ["NxI"];
+        List<string> expectedScopeEntityIds = ["string"];
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         double expectedUsageLimit = 0;
         string expectedCurrencyID = "currencyId";
@@ -142,7 +142,7 @@ public class AssignmentListResponseTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
             ParentID = "parentId",
-            ScopeEntityIds = ["NxI"],
+            ScopeEntityIds = ["string"],
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
             CurrencyID = "currencyId",
@@ -162,7 +162,7 @@ public class AssignmentListResponseTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
             ParentID = "parentId",
-            ScopeEntityIds = ["NxI"],
+            ScopeEntityIds = ["string"],
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
         };
@@ -183,7 +183,7 @@ public class AssignmentListResponseTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
             ParentID = "parentId",
-            ScopeEntityIds = ["NxI"],
+            ScopeEntityIds = ["string"],
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
         };
@@ -201,7 +201,7 @@ public class AssignmentListResponseTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
             ParentID = "parentId",
-            ScopeEntityIds = ["NxI"],
+            ScopeEntityIds = ["string"],
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
 
@@ -226,7 +226,7 @@ public class AssignmentListResponseTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
             ParentID = "parentId",
-            ScopeEntityIds = ["NxI"],
+            ScopeEntityIds = ["string"],
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
 
@@ -248,7 +248,7 @@ public class AssignmentListResponseTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
             ParentID = "parentId",
-            ScopeEntityIds = ["NxI"],
+            ScopeEntityIds = ["string"],
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
             CurrencyID = "currencyId",
