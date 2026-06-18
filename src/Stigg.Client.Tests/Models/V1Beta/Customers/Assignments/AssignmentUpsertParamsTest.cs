@@ -402,7 +402,12 @@ public class AssignmentTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Assignment { EntityID = "entityId", ParentID = "parentId" };
+        var model = new Assignment
+        {
+            EntityID = "entityId",
+            ParentID = "parentId",
+            UsageLimit = 0,
+        };
 
         Assert.Null(model.Cadence);
         Assert.False(model.RawData.ContainsKey("cadence"));
@@ -412,14 +417,17 @@ public class AssignmentTest : TestBase
         Assert.False(model.RawData.ContainsKey("featureId"));
         Assert.Null(model.ScopeEntityIds);
         Assert.False(model.RawData.ContainsKey("scopeEntityIds"));
-        Assert.Null(model.UsageLimit);
-        Assert.False(model.RawData.ContainsKey("usageLimit"));
     }
 
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Assignment { EntityID = "entityId", ParentID = "parentId" };
+        var model = new Assignment
+        {
+            EntityID = "entityId",
+            ParentID = "parentId",
+            UsageLimit = 0,
+        };
 
         model.Validate();
     }
@@ -431,13 +439,13 @@ public class AssignmentTest : TestBase
         {
             EntityID = "entityId",
             ParentID = "parentId",
+            UsageLimit = 0,
 
             // Null should be interpreted as omitted for these properties
             Cadence = null,
             CurrencyID = null,
             FeatureID = null,
             ScopeEntityIds = null,
-            UsageLimit = null,
         };
 
         Assert.Null(model.Cadence);
@@ -448,8 +456,6 @@ public class AssignmentTest : TestBase
         Assert.False(model.RawData.ContainsKey("featureId"));
         Assert.Null(model.ScopeEntityIds);
         Assert.False(model.RawData.ContainsKey("scopeEntityIds"));
-        Assert.Null(model.UsageLimit);
-        Assert.False(model.RawData.ContainsKey("usageLimit"));
     }
 
     [Fact]
@@ -459,13 +465,13 @@ public class AssignmentTest : TestBase
         {
             EntityID = "entityId",
             ParentID = "parentId",
+            UsageLimit = 0,
 
             // Null should be interpreted as omitted for these properties
             Cadence = null,
             CurrencyID = null,
             FeatureID = null,
             ScopeEntityIds = null,
-            UsageLimit = null,
         };
 
         model.Validate();
@@ -481,11 +487,12 @@ public class AssignmentTest : TestBase
             CurrencyID = "currencyId",
             FeatureID = "featureId",
             ScopeEntityIds = ["NxI"],
-            UsageLimit = 0,
         };
 
         Assert.Null(model.ParentID);
         Assert.False(model.RawData.ContainsKey("parentId"));
+        Assert.Null(model.UsageLimit);
+        Assert.False(model.RawData.ContainsKey("usageLimit"));
     }
 
     [Fact]
@@ -498,7 +505,6 @@ public class AssignmentTest : TestBase
             CurrencyID = "currencyId",
             FeatureID = "featureId",
             ScopeEntityIds = ["NxI"],
-            UsageLimit = 0,
         };
 
         model.Validate();
@@ -514,13 +520,15 @@ public class AssignmentTest : TestBase
             CurrencyID = "currencyId",
             FeatureID = "featureId",
             ScopeEntityIds = ["NxI"],
-            UsageLimit = 0,
 
             ParentID = null,
+            UsageLimit = null,
         };
 
         Assert.Null(model.ParentID);
         Assert.True(model.RawData.ContainsKey("parentId"));
+        Assert.Null(model.UsageLimit);
+        Assert.True(model.RawData.ContainsKey("usageLimit"));
     }
 
     [Fact]
@@ -533,9 +541,9 @@ public class AssignmentTest : TestBase
             CurrencyID = "currencyId",
             FeatureID = "featureId",
             ScopeEntityIds = ["NxI"],
-            UsageLimit = 0,
 
             ParentID = null,
+            UsageLimit = null,
         };
 
         model.Validate();
