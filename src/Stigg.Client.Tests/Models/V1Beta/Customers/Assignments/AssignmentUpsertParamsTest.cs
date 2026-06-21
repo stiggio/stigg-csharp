@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
-using Stigg.Client.Exceptions;
 using Stigg.Client.Models.V1Beta.Customers.Assignments;
 
 namespace Stigg.Client.Tests.Models.V1Beta.Customers.Assignments;
@@ -21,7 +20,7 @@ public class AssignmentUpsertParamsTest : TestBase
                 new()
                 {
                     EntityID = "workspace-001",
-                    Cadence = Cadence.Month,
+                    Cadence = "P1M",
                     CurrencyID = "currencyId",
                     FeatureID = "compute-minutes",
                     ParentID = "parentId",
@@ -31,7 +30,7 @@ public class AssignmentUpsertParamsTest : TestBase
                 new()
                 {
                     EntityID = "workspace-002",
-                    Cadence = Cadence.Month,
+                    Cadence = "P1M",
                     CurrencyID = "cred-type-tokens",
                     FeatureID = "featureId",
                     ParentID = "workspace-001",
@@ -49,7 +48,7 @@ public class AssignmentUpsertParamsTest : TestBase
             new()
             {
                 EntityID = "workspace-001",
-                Cadence = Cadence.Month,
+                Cadence = "P1M",
                 CurrencyID = "currencyId",
                 FeatureID = "compute-minutes",
                 ParentID = "parentId",
@@ -59,7 +58,7 @@ public class AssignmentUpsertParamsTest : TestBase
             new()
             {
                 EntityID = "workspace-002",
-                Cadence = Cadence.Month,
+                Cadence = "P1M",
                 CurrencyID = "cred-type-tokens",
                 FeatureID = "featureId",
                 ParentID = "workspace-001",
@@ -91,7 +90,7 @@ public class AssignmentUpsertParamsTest : TestBase
                 new()
                 {
                     EntityID = "workspace-001",
-                    Cadence = Cadence.Month,
+                    Cadence = "P1M",
                     CurrencyID = "currencyId",
                     FeatureID = "compute-minutes",
                     ParentID = "parentId",
@@ -101,7 +100,7 @@ public class AssignmentUpsertParamsTest : TestBase
                 new()
                 {
                     EntityID = "workspace-002",
-                    Cadence = Cadence.Month,
+                    Cadence = "P1M",
                     CurrencyID = "cred-type-tokens",
                     FeatureID = "featureId",
                     ParentID = "workspace-001",
@@ -128,7 +127,7 @@ public class AssignmentUpsertParamsTest : TestBase
                 new()
                 {
                     EntityID = "workspace-001",
-                    Cadence = Cadence.Month,
+                    Cadence = "P1M",
                     CurrencyID = "currencyId",
                     FeatureID = "compute-minutes",
                     ParentID = "parentId",
@@ -138,7 +137,7 @@ public class AssignmentUpsertParamsTest : TestBase
                 new()
                 {
                     EntityID = "workspace-002",
-                    Cadence = Cadence.Month,
+                    Cadence = "P1M",
                     CurrencyID = "cred-type-tokens",
                     FeatureID = "featureId",
                     ParentID = "workspace-001",
@@ -169,7 +168,7 @@ public class AssignmentUpsertParamsTest : TestBase
                 new()
                 {
                     EntityID = "workspace-001",
-                    Cadence = Cadence.Month,
+                    Cadence = "P1M",
                     CurrencyID = "currencyId",
                     FeatureID = "compute-minutes",
                     ParentID = "parentId",
@@ -179,7 +178,7 @@ public class AssignmentUpsertParamsTest : TestBase
                 new()
                 {
                     EntityID = "workspace-002",
-                    Cadence = Cadence.Month,
+                    Cadence = "P1M",
                     CurrencyID = "cred-type-tokens",
                     FeatureID = "featureId",
                     ParentID = "workspace-001",
@@ -211,7 +210,7 @@ public class AssignmentUpsertParamsTest : TestBase
                 new()
                 {
                     EntityID = "workspace-001",
-                    Cadence = Cadence.Month,
+                    Cadence = "P1M",
                     CurrencyID = "currencyId",
                     FeatureID = "compute-minutes",
                     ParentID = "parentId",
@@ -221,7 +220,7 @@ public class AssignmentUpsertParamsTest : TestBase
                 new()
                 {
                     EntityID = "workspace-002",
-                    Cadence = Cadence.Month,
+                    Cadence = "P1M",
                     CurrencyID = "cred-type-tokens",
                     FeatureID = "featureId",
                     ParentID = "workspace-001",
@@ -250,7 +249,7 @@ public class AssignmentUpsertParamsTest : TestBase
                 new()
                 {
                     EntityID = "workspace-001",
-                    Cadence = Cadence.Month,
+                    Cadence = "P1M",
                     CurrencyID = "currencyId",
                     FeatureID = "compute-minutes",
                     ParentID = "parentId",
@@ -260,7 +259,7 @@ public class AssignmentUpsertParamsTest : TestBase
                 new()
                 {
                     EntityID = "workspace-002",
-                    Cadence = Cadence.Month,
+                    Cadence = "P1M",
                     CurrencyID = "cred-type-tokens",
                     FeatureID = "featureId",
                     ParentID = "workspace-001",
@@ -286,7 +285,7 @@ public class AssignmentTest : TestBase
         var model = new Assignment
         {
             EntityID = "entityId",
-            Cadence = Cadence.Month,
+            Cadence = "PT869S",
             CurrencyID = "currencyId",
             FeatureID = "featureId",
             ParentID = "parentId",
@@ -295,7 +294,7 @@ public class AssignmentTest : TestBase
         };
 
         string expectedEntityID = "entityId";
-        ApiEnum<string, Cadence> expectedCadence = Cadence.Month;
+        string expectedCadence = "PT869S";
         string expectedCurrencyID = "currencyId";
         string expectedFeatureID = "featureId";
         string expectedParentID = "parentId";
@@ -322,7 +321,7 @@ public class AssignmentTest : TestBase
         var model = new Assignment
         {
             EntityID = "entityId",
-            Cadence = Cadence.Month,
+            Cadence = "PT869S",
             CurrencyID = "currencyId",
             FeatureID = "featureId",
             ParentID = "parentId",
@@ -345,7 +344,7 @@ public class AssignmentTest : TestBase
         var model = new Assignment
         {
             EntityID = "entityId",
-            Cadence = Cadence.Month,
+            Cadence = "PT869S",
             CurrencyID = "currencyId",
             FeatureID = "featureId",
             ParentID = "parentId",
@@ -361,7 +360,7 @@ public class AssignmentTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedEntityID = "entityId";
-        ApiEnum<string, Cadence> expectedCadence = Cadence.Month;
+        string expectedCadence = "PT869S";
         string expectedCurrencyID = "currencyId";
         string expectedFeatureID = "featureId";
         string expectedParentID = "parentId";
@@ -388,7 +387,7 @@ public class AssignmentTest : TestBase
         var model = new Assignment
         {
             EntityID = "entityId",
-            Cadence = Cadence.Month,
+            Cadence = "PT869S",
             CurrencyID = "currencyId",
             FeatureID = "featureId",
             ParentID = "parentId",
@@ -483,7 +482,7 @@ public class AssignmentTest : TestBase
         var model = new Assignment
         {
             EntityID = "entityId",
-            Cadence = Cadence.Month,
+            Cadence = "PT869S",
             CurrencyID = "currencyId",
             FeatureID = "featureId",
             ScopeEntityIds = ["NxI"],
@@ -501,7 +500,7 @@ public class AssignmentTest : TestBase
         var model = new Assignment
         {
             EntityID = "entityId",
-            Cadence = Cadence.Month,
+            Cadence = "PT869S",
             CurrencyID = "currencyId",
             FeatureID = "featureId",
             ScopeEntityIds = ["NxI"],
@@ -516,7 +515,7 @@ public class AssignmentTest : TestBase
         var model = new Assignment
         {
             EntityID = "entityId",
-            Cadence = Cadence.Month,
+            Cadence = "PT869S",
             CurrencyID = "currencyId",
             FeatureID = "featureId",
             ScopeEntityIds = ["NxI"],
@@ -537,7 +536,7 @@ public class AssignmentTest : TestBase
         var model = new Assignment
         {
             EntityID = "entityId",
-            Cadence = Cadence.Month,
+            Cadence = "PT869S",
             CurrencyID = "currencyId",
             FeatureID = "featureId",
             ScopeEntityIds = ["NxI"],
@@ -555,7 +554,7 @@ public class AssignmentTest : TestBase
         var model = new Assignment
         {
             EntityID = "entityId",
-            Cadence = Cadence.Month,
+            Cadence = "PT869S",
             CurrencyID = "currencyId",
             FeatureID = "featureId",
             ParentID = "parentId",
@@ -566,61 +565,5 @@ public class AssignmentTest : TestBase
         Assignment copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class CadenceTest : TestBase
-{
-    [Theory]
-    [InlineData(Cadence.Month)]
-    public void Validation_Works(Cadence rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Cadence> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Cadence>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(Cadence.Month)]
-    public void SerializationRoundtrip_Works(Cadence rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Cadence> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Cadence>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Cadence>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Cadence>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
     }
 }

@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Stigg.Client.Models.V1Beta.Customers.Assignments;
 
 namespace Stigg.Client.Tests.Services.V1Beta.Customers;
 
@@ -28,7 +27,7 @@ public class AssignmentServiceTest : TestBase
                     new()
                     {
                         EntityID = "workspace-001",
-                        Cadence = Cadence.Month,
+                        Cadence = "P1M",
                         CurrencyID = "currencyId",
                         FeatureID = "compute-minutes",
                         ParentID = "parentId",
@@ -38,7 +37,7 @@ public class AssignmentServiceTest : TestBase
                     new()
                     {
                         EntityID = "workspace-002",
-                        Cadence = Cadence.Month,
+                        Cadence = "P1M",
                         CurrencyID = "cred-type-tokens",
                         FeatureID = "featureId",
                         ParentID = "workspace-001",
