@@ -8,7 +8,6 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Stigg.Client.Core;
-using Stigg.Client.Exceptions;
 
 namespace Stigg.Client.Models.V1Beta.Customers.Assignments;
 
@@ -231,14 +230,15 @@ public sealed record class Assignment : JsonModel
     }
 
     /// <summary>
-    /// Usage-reset cadence (required on create). Currently only `MONTH` is supported
+    /// Usage-reset cadence (required on create) as an ISO-8601 single-unit duration,
+    /// e.g. `P1M`, `P30D`, `PT1M`.
     /// </summary>
-    public ApiEnum<string, Cadence>? Cadence
+    public string? Cadence
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ApiEnum<string, Cadence>>("cadence");
+            return this._rawData.GetNullableClass<string>("cadence");
         }
         init
         {
@@ -347,7 +347,7 @@ public sealed record class Assignment : JsonModel
     public override void Validate()
     {
         _ = this.EntityID;
-        this.Cadence?.Validate();
+        _ = this.Cadence;
         _ = this.CurrencyID;
         _ = this.FeatureID;
         _ = this.ParentID;
@@ -395,44 +395,4 @@ class AssignmentFromRaw : IFromRawJson<Assignment>
     /// <inheritdoc/>
     public Assignment FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Assignment.FromRawUnchecked(rawData);
-}
-
-/// <summary>
-/// Usage-reset cadence (required on create). Currently only `MONTH` is supported
-/// </summary>
-[JsonConverter(typeof(CadenceConverter))]
-public enum Cadence
-{
-    Month,
-}
-
-sealed class CadenceConverter : JsonConverter<Cadence>
-{
-    public override Cadence Read(
-        ref Utf8JsonReader reader,
-        Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "MONTH" => Cadence.Month,
-            _ => (Cadence)(-1),
-        };
-    }
-
-    public override void Write(Utf8JsonWriter writer, Cadence value, JsonSerializerOptions options)
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                Cadence.Month => "MONTH",
-                _ => throw new StiggInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }

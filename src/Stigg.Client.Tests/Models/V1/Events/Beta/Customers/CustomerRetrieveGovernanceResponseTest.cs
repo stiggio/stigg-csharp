@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Stigg.Client.Core;
-using Stigg.Client.Exceptions;
 using Stigg.Client.Models.V1.Events.Beta.Customers;
 
 namespace Stigg.Client.Tests.Models.V1.Events.Beta.Customers;
@@ -18,7 +17,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
             [
                 new()
                 {
-                    Cadence = Cadence.Month,
+                    Cadence = "cadence",
                     CurrentUsage = 0,
                     EntityID = "entityId",
                     EntityType = "entityType",
@@ -39,7 +38,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
         [
             new()
             {
-                Cadence = Cadence.Month,
+                Cadence = "cadence",
                 CurrentUsage = 0,
                 EntityID = "entityId",
                 EntityType = "entityType",
@@ -72,7 +71,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
             [
                 new()
                 {
-                    Cadence = Cadence.Month,
+                    Cadence = "cadence",
                     CurrentUsage = 0,
                     EntityID = "entityId",
                     EntityType = "entityType",
@@ -107,7 +106,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
             [
                 new()
                 {
-                    Cadence = Cadence.Month,
+                    Cadence = "cadence",
                     CurrentUsage = 0,
                     EntityID = "entityId",
                     EntityType = "entityType",
@@ -135,7 +134,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
         [
             new()
             {
-                Cadence = Cadence.Month,
+                Cadence = "cadence",
                 CurrentUsage = 0,
                 EntityID = "entityId",
                 EntityType = "entityType",
@@ -168,7 +167,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
             [
                 new()
                 {
-                    Cadence = Cadence.Month,
+                    Cadence = "cadence",
                     CurrentUsage = 0,
                     EntityID = "entityId",
                     EntityType = "entityType",
@@ -197,7 +196,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
             [
                 new()
                 {
-                    Cadence = Cadence.Month,
+                    Cadence = "cadence",
                     CurrentUsage = 0,
                     EntityID = "entityId",
                     EntityType = "entityType",
@@ -227,7 +226,7 @@ public class DataTest : TestBase
     {
         var model = new Data
         {
-            Cadence = Cadence.Month,
+            Cadence = "cadence",
             CurrentUsage = 0,
             EntityID = "entityId",
             EntityType = "entityType",
@@ -241,7 +240,7 @@ public class DataTest : TestBase
             FeatureID = "featureId",
         };
 
-        ApiEnum<string, Cadence> expectedCadence = Cadence.Month;
+        string expectedCadence = "cadence";
         double expectedCurrentUsage = 0;
         string expectedEntityID = "entityId";
         string expectedEntityType = "entityType";
@@ -277,7 +276,7 @@ public class DataTest : TestBase
     {
         var model = new Data
         {
-            Cadence = Cadence.Month,
+            Cadence = "cadence",
             CurrentUsage = 0,
             EntityID = "entityId",
             EntityType = "entityType",
@@ -302,7 +301,7 @@ public class DataTest : TestBase
     {
         var model = new Data
         {
-            Cadence = Cadence.Month,
+            Cadence = "cadence",
             CurrentUsage = 0,
             EntityID = "entityId",
             EntityType = "entityType",
@@ -320,7 +319,7 @@ public class DataTest : TestBase
         var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
         Assert.NotNull(deserialized);
 
-        ApiEnum<string, Cadence> expectedCadence = Cadence.Month;
+        string expectedCadence = "cadence";
         double expectedCurrentUsage = 0;
         string expectedEntityID = "entityId";
         string expectedEntityType = "entityType";
@@ -356,7 +355,7 @@ public class DataTest : TestBase
     {
         var model = new Data
         {
-            Cadence = Cadence.Month,
+            Cadence = "cadence",
             CurrentUsage = 0,
             EntityID = "entityId",
             EntityType = "entityType",
@@ -378,7 +377,7 @@ public class DataTest : TestBase
     {
         var model = new Data
         {
-            Cadence = Cadence.Month,
+            Cadence = "cadence",
             CurrentUsage = 0,
             EntityID = "entityId",
             EntityType = "entityType",
@@ -401,7 +400,7 @@ public class DataTest : TestBase
     {
         var model = new Data
         {
-            Cadence = Cadence.Month,
+            Cadence = "cadence",
             CurrentUsage = 0,
             EntityID = "entityId",
             EntityType = "entityType",
@@ -421,7 +420,7 @@ public class DataTest : TestBase
     {
         var model = new Data
         {
-            Cadence = Cadence.Month,
+            Cadence = "cadence",
             CurrentUsage = 0,
             EntityID = "entityId",
             EntityType = "entityType",
@@ -448,7 +447,7 @@ public class DataTest : TestBase
     {
         var model = new Data
         {
-            Cadence = Cadence.Month,
+            Cadence = "cadence",
             CurrentUsage = 0,
             EntityID = "entityId",
             EntityType = "entityType",
@@ -472,7 +471,7 @@ public class DataTest : TestBase
     {
         var model = new Data
         {
-            Cadence = Cadence.Month,
+            Cadence = "cadence",
             CurrentUsage = 0,
             EntityID = "entityId",
             EntityType = "entityType",
@@ -489,62 +488,6 @@ public class DataTest : TestBase
         Data copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class CadenceTest : TestBase
-{
-    [Theory]
-    [InlineData(Cadence.Month)]
-    public void Validation_Works(Cadence rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Cadence> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Cadence>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(Cadence.Month)]
-    public void SerializationRoundtrip_Works(Cadence rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Cadence> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Cadence>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Cadence>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Cadence>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
     }
 }
 

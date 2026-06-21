@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Stigg.Client.Core;
-using Stigg.Client.Exceptions;
 using Stigg.Client.Models.V1Beta.Customers.Assignments;
 
 namespace Stigg.Client.Tests.Models.V1Beta.Customers.Assignments;
@@ -15,7 +14,7 @@ public class AssignmentListResponseTest : TestBase
         var model = new AssignmentListResponse
         {
             ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Cadence = AssignmentListResponseCadence.Month,
+            Cadence = "PT869S",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
             ParentID = "parentId",
@@ -27,8 +26,7 @@ public class AssignmentListResponseTest : TestBase
         };
 
         string expectedID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
-        ApiEnum<string, AssignmentListResponseCadence> expectedCadence =
-            AssignmentListResponseCadence.Month;
+        string expectedCadence = "PT869S";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedEntityID = "entityId";
         string expectedParentID = "parentId";
@@ -60,7 +58,7 @@ public class AssignmentListResponseTest : TestBase
         var model = new AssignmentListResponse
         {
             ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Cadence = AssignmentListResponseCadence.Month,
+            Cadence = "PT869S",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
             ParentID = "parentId",
@@ -86,7 +84,7 @@ public class AssignmentListResponseTest : TestBase
         var model = new AssignmentListResponse
         {
             ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Cadence = AssignmentListResponseCadence.Month,
+            Cadence = "PT869S",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
             ParentID = "parentId",
@@ -105,8 +103,7 @@ public class AssignmentListResponseTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
-        ApiEnum<string, AssignmentListResponseCadence> expectedCadence =
-            AssignmentListResponseCadence.Month;
+        string expectedCadence = "PT869S";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedEntityID = "entityId";
         string expectedParentID = "parentId";
@@ -138,7 +135,7 @@ public class AssignmentListResponseTest : TestBase
         var model = new AssignmentListResponse
         {
             ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Cadence = AssignmentListResponseCadence.Month,
+            Cadence = "PT869S",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
             ParentID = "parentId",
@@ -158,7 +155,7 @@ public class AssignmentListResponseTest : TestBase
         var model = new AssignmentListResponse
         {
             ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Cadence = AssignmentListResponseCadence.Month,
+            Cadence = "PT869S",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
             ParentID = "parentId",
@@ -179,7 +176,7 @@ public class AssignmentListResponseTest : TestBase
         var model = new AssignmentListResponse
         {
             ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Cadence = AssignmentListResponseCadence.Month,
+            Cadence = "PT869S",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
             ParentID = "parentId",
@@ -197,7 +194,7 @@ public class AssignmentListResponseTest : TestBase
         var model = new AssignmentListResponse
         {
             ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Cadence = AssignmentListResponseCadence.Month,
+            Cadence = "PT869S",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
             ParentID = "parentId",
@@ -222,7 +219,7 @@ public class AssignmentListResponseTest : TestBase
         var model = new AssignmentListResponse
         {
             ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Cadence = AssignmentListResponseCadence.Month,
+            Cadence = "PT869S",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
             ParentID = "parentId",
@@ -244,7 +241,7 @@ public class AssignmentListResponseTest : TestBase
         var model = new AssignmentListResponse
         {
             ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Cadence = AssignmentListResponseCadence.Month,
+            Cadence = "PT869S",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
             ParentID = "parentId",
@@ -258,59 +255,5 @@ public class AssignmentListResponseTest : TestBase
         AssignmentListResponse copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class AssignmentListResponseCadenceTest : TestBase
-{
-    [Theory]
-    [InlineData(AssignmentListResponseCadence.Month)]
-    public void Validation_Works(AssignmentListResponseCadence rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, AssignmentListResponseCadence> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, AssignmentListResponseCadence>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(AssignmentListResponseCadence.Month)]
-    public void SerializationRoundtrip_Works(AssignmentListResponseCadence rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, AssignmentListResponseCadence> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, AssignmentListResponseCadence>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, AssignmentListResponseCadence>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<
-            ApiEnum<string, AssignmentListResponseCadence>
-        >(json, ModelBase.SerializerOptions);
-
-        Assert.Equal(value, deserialized);
     }
 }

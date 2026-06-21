@@ -5,7 +5,6 @@ using Stigg.Client.Models.V1.Customers;
 using Stigg.Client.Models.V1.Events.Beta.Customers;
 using Stigg.Client.Models.V1Beta.Customers.Entities;
 using Addons = Stigg.Client.Models.V1.Addons;
-using Assignments = Stigg.Client.Models.V1Beta.Customers.Assignments;
 using Coupons = Stigg.Client.Models.V1.Coupons;
 using Credits = Stigg.Client.Models.V1.Credits;
 using CustomersEntitlements = Stigg.Client.Models.V1Beta.Customers.Entitlements;
@@ -410,7 +409,6 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Coupons::Currency>(),
             new ApiEnumConverter<string, Coupons::Status>(),
             new ApiEnumConverter<string, Coupons::Type>(),
-            new ApiEnumConverter<string, Cadence>(),
             new ApiEnumConverter<string, Order>(),
             new ApiEnumConverter<string, Scope>(),
             new ApiEnumConverter<string, SortBy>(),
@@ -844,9 +842,6 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, CustomersEntitlements::ResetPeriod>(),
             new ApiEnumConverter<string, CustomersEntitlements::CreditAccessDeniedReason>(),
             new ApiEnumConverter<string, IncludeArchived>(),
-            new ApiEnumConverter<string, Assignments::AssignmentListResponseCadence>(),
-            new ApiEnumConverter<string, Assignments::DataCadence>(),
-            new ApiEnumConverter<string, Assignments::Cadence>(),
         },
     };
 

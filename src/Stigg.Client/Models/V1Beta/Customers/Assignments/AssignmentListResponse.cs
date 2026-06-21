@@ -6,7 +6,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Stigg.Client.Core;
-using Stigg.Client.Exceptions;
 
 namespace Stigg.Client.Models.V1Beta.Customers.Assignments;
 
@@ -32,16 +31,14 @@ public sealed record class AssignmentListResponse : JsonModel
     }
 
     /// <summary>
-    /// Usage-reset cadence. Currently only `MONTH` is supported
+    /// Usage-reset cadence as an ISO-8601 single-unit duration, e.g. `P1M`, `P30D`, `PT1M`.
     /// </summary>
-    public required ApiEnum<string, AssignmentListResponseCadence> Cadence
+    public required string Cadence
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, AssignmentListResponseCadence>>(
-                "cadence"
-            );
+            return this._rawData.GetNotNullClass<string>("cadence");
         }
         init { this._rawData.Set("cadence", value); }
     }
@@ -178,7 +175,7 @@ public sealed record class AssignmentListResponse : JsonModel
     public override void Validate()
     {
         _ = this.ID;
-        this.Cadence.Validate();
+        _ = this.Cadence;
         _ = this.CreatedAt;
         _ = this.EntityID;
         _ = this.ParentID;
@@ -225,48 +222,4 @@ class AssignmentListResponseFromRaw : IFromRawJson<AssignmentListResponse>
     public AssignmentListResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => AssignmentListResponse.FromRawUnchecked(rawData);
-}
-
-/// <summary>
-/// Usage-reset cadence. Currently only `MONTH` is supported
-/// </summary>
-[JsonConverter(typeof(AssignmentListResponseCadenceConverter))]
-public enum AssignmentListResponseCadence
-{
-    Month,
-}
-
-sealed class AssignmentListResponseCadenceConverter : JsonConverter<AssignmentListResponseCadence>
-{
-    public override AssignmentListResponseCadence Read(
-        ref Utf8JsonReader reader,
-        Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "MONTH" => AssignmentListResponseCadence.Month,
-            _ => (AssignmentListResponseCadence)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        AssignmentListResponseCadence value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                AssignmentListResponseCadence.Month => "MONTH",
-                _ => throw new StiggInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }

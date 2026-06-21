@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Stigg.Client.Core;
-using Stigg.Client.Exceptions;
 using Stigg.Client.Models.V1Beta.Customers.Assignments;
 
 namespace Stigg.Client.Tests.Models.V1Beta.Customers.Assignments;
@@ -19,7 +18,7 @@ public class AssignmentUpsertResponseTest : TestBase
                 new()
                 {
                     ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    Cadence = DataCadence.Month,
+                    Cadence = "PT869S",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EntityID = "entityId",
                     ParentID = "parentId",
@@ -37,7 +36,7 @@ public class AssignmentUpsertResponseTest : TestBase
             new()
             {
                 ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                Cadence = DataCadence.Month,
+                Cadence = "PT869S",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EntityID = "entityId",
                 ParentID = "parentId",
@@ -66,7 +65,7 @@ public class AssignmentUpsertResponseTest : TestBase
                 new()
                 {
                     ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    Cadence = DataCadence.Month,
+                    Cadence = "PT869S",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EntityID = "entityId",
                     ParentID = "parentId",
@@ -98,7 +97,7 @@ public class AssignmentUpsertResponseTest : TestBase
                 new()
                 {
                     ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    Cadence = DataCadence.Month,
+                    Cadence = "PT869S",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EntityID = "entityId",
                     ParentID = "parentId",
@@ -123,7 +122,7 @@ public class AssignmentUpsertResponseTest : TestBase
             new()
             {
                 ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                Cadence = DataCadence.Month,
+                Cadence = "PT869S",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 EntityID = "entityId",
                 ParentID = "parentId",
@@ -152,7 +151,7 @@ public class AssignmentUpsertResponseTest : TestBase
                 new()
                 {
                     ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    Cadence = DataCadence.Month,
+                    Cadence = "PT869S",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EntityID = "entityId",
                     ParentID = "parentId",
@@ -178,7 +177,7 @@ public class AssignmentUpsertResponseTest : TestBase
                 new()
                 {
                     ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-                    Cadence = DataCadence.Month,
+                    Cadence = "PT869S",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     EntityID = "entityId",
                     ParentID = "parentId",
@@ -205,7 +204,7 @@ public class DataTest : TestBase
         var model = new Data
         {
             ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Cadence = DataCadence.Month,
+            Cadence = "PT869S",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
             ParentID = "parentId",
@@ -217,7 +216,7 @@ public class DataTest : TestBase
         };
 
         string expectedID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
-        ApiEnum<string, DataCadence> expectedCadence = DataCadence.Month;
+        string expectedCadence = "PT869S";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedEntityID = "entityId";
         string expectedParentID = "parentId";
@@ -249,7 +248,7 @@ public class DataTest : TestBase
         var model = new Data
         {
             ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Cadence = DataCadence.Month,
+            Cadence = "PT869S",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
             ParentID = "parentId",
@@ -272,7 +271,7 @@ public class DataTest : TestBase
         var model = new Data
         {
             ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Cadence = DataCadence.Month,
+            Cadence = "PT869S",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
             ParentID = "parentId",
@@ -288,7 +287,7 @@ public class DataTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
-        ApiEnum<string, DataCadence> expectedCadence = DataCadence.Month;
+        string expectedCadence = "PT869S";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedEntityID = "entityId";
         string expectedParentID = "parentId";
@@ -320,7 +319,7 @@ public class DataTest : TestBase
         var model = new Data
         {
             ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Cadence = DataCadence.Month,
+            Cadence = "PT869S",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
             ParentID = "parentId",
@@ -340,7 +339,7 @@ public class DataTest : TestBase
         var model = new Data
         {
             ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Cadence = DataCadence.Month,
+            Cadence = "PT869S",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
             ParentID = "parentId",
@@ -361,7 +360,7 @@ public class DataTest : TestBase
         var model = new Data
         {
             ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Cadence = DataCadence.Month,
+            Cadence = "PT869S",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
             ParentID = "parentId",
@@ -379,7 +378,7 @@ public class DataTest : TestBase
         var model = new Data
         {
             ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Cadence = DataCadence.Month,
+            Cadence = "PT869S",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
             ParentID = "parentId",
@@ -404,7 +403,7 @@ public class DataTest : TestBase
         var model = new Data
         {
             ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Cadence = DataCadence.Month,
+            Cadence = "PT869S",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
             ParentID = "parentId",
@@ -426,7 +425,7 @@ public class DataTest : TestBase
         var model = new Data
         {
             ID = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            Cadence = DataCadence.Month,
+            Cadence = "PT869S",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
             ParentID = "parentId",
@@ -440,61 +439,5 @@ public class DataTest : TestBase
         Data copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class DataCadenceTest : TestBase
-{
-    [Theory]
-    [InlineData(DataCadence.Month)]
-    public void Validation_Works(DataCadence rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, DataCadence> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, DataCadence>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(DataCadence.Month)]
-    public void SerializationRoundtrip_Works(DataCadence rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, DataCadence> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataCadence>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, DataCadence>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataCadence>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
     }
 }
