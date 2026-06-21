@@ -20,6 +20,7 @@ public class DestinationCreateResponseTest : TestBase
                         DestinationID = "destinationId",
                         Type = "type",
                         ConnectionStatus = "connectionStatus",
+                        EnabledModels = ["string"],
                         LastSyncStatus = new()
                         {
                             FinishedAt = "finishedAt",
@@ -42,6 +43,7 @@ public class DestinationCreateResponseTest : TestBase
                     DestinationID = "destinationId",
                     Type = "type",
                     ConnectionStatus = "connectionStatus",
+                    EnabledModels = ["string"],
                     LastSyncStatus = new()
                     {
                         FinishedAt = "finishedAt",
@@ -71,6 +73,7 @@ public class DestinationCreateResponseTest : TestBase
                         DestinationID = "destinationId",
                         Type = "type",
                         ConnectionStatus = "connectionStatus",
+                        EnabledModels = ["string"],
                         LastSyncStatus = new()
                         {
                             FinishedAt = "finishedAt",
@@ -107,6 +110,7 @@ public class DestinationCreateResponseTest : TestBase
                         DestinationID = "destinationId",
                         Type = "type",
                         ConnectionStatus = "connectionStatus",
+                        EnabledModels = ["string"],
                         LastSyncStatus = new()
                         {
                             FinishedAt = "finishedAt",
@@ -136,6 +140,7 @@ public class DestinationCreateResponseTest : TestBase
                     DestinationID = "destinationId",
                     Type = "type",
                     ConnectionStatus = "connectionStatus",
+                    EnabledModels = ["string"],
                     LastSyncStatus = new()
                     {
                         FinishedAt = "finishedAt",
@@ -165,6 +170,7 @@ public class DestinationCreateResponseTest : TestBase
                         DestinationID = "destinationId",
                         Type = "type",
                         ConnectionStatus = "connectionStatus",
+                        EnabledModels = ["string"],
                         LastSyncStatus = new()
                         {
                             FinishedAt = "finishedAt",
@@ -195,6 +201,7 @@ public class DestinationCreateResponseTest : TestBase
                         DestinationID = "destinationId",
                         Type = "type",
                         ConnectionStatus = "connectionStatus",
+                        EnabledModels = ["string"],
                         LastSyncStatus = new()
                         {
                             FinishedAt = "finishedAt",
@@ -230,6 +237,7 @@ public class DataTest : TestBase
                     DestinationID = "destinationId",
                     Type = "type",
                     ConnectionStatus = "connectionStatus",
+                    EnabledModels = ["string"],
                     LastSyncStatus = new()
                     {
                         FinishedAt = "finishedAt",
@@ -251,6 +259,7 @@ public class DataTest : TestBase
                 DestinationID = "destinationId",
                 Type = "type",
                 ConnectionStatus = "connectionStatus",
+                EnabledModels = ["string"],
                 LastSyncStatus = new()
                 {
                     FinishedAt = "finishedAt",
@@ -283,6 +292,7 @@ public class DataTest : TestBase
                     DestinationID = "destinationId",
                     Type = "type",
                     ConnectionStatus = "connectionStatus",
+                    EnabledModels = ["string"],
                     LastSyncStatus = new()
                     {
                         FinishedAt = "finishedAt",
@@ -315,6 +325,7 @@ public class DataTest : TestBase
                     DestinationID = "destinationId",
                     Type = "type",
                     ConnectionStatus = "connectionStatus",
+                    EnabledModels = ["string"],
                     LastSyncStatus = new()
                     {
                         FinishedAt = "finishedAt",
@@ -340,6 +351,7 @@ public class DataTest : TestBase
                 DestinationID = "destinationId",
                 Type = "type",
                 ConnectionStatus = "connectionStatus",
+                EnabledModels = ["string"],
                 LastSyncStatus = new()
                 {
                     FinishedAt = "finishedAt",
@@ -372,6 +384,7 @@ public class DataTest : TestBase
                     DestinationID = "destinationId",
                     Type = "type",
                     ConnectionStatus = "connectionStatus",
+                    EnabledModels = ["string"],
                     LastSyncStatus = new()
                     {
                         FinishedAt = "finishedAt",
@@ -401,6 +414,7 @@ public class DataTest : TestBase
                     DestinationID = "destinationId",
                     Type = "type",
                     ConnectionStatus = "connectionStatus",
+                    EnabledModels = ["string"],
                     LastSyncStatus = new()
                     {
                         FinishedAt = "finishedAt",
@@ -431,6 +445,7 @@ public class DestinationTest : TestBase
             DestinationID = "destinationId",
             Type = "type",
             ConnectionStatus = "connectionStatus",
+            EnabledModels = ["string"],
             LastSyncStatus = new()
             {
                 FinishedAt = "finishedAt",
@@ -446,6 +461,7 @@ public class DestinationTest : TestBase
         string expectedDestinationID = "destinationId";
         string expectedType = "type";
         string expectedConnectionStatus = "connectionStatus";
+        List<string> expectedEnabledModels = ["string"];
         LastSyncStatus expectedLastSyncStatus = new()
         {
             FinishedAt = "finishedAt",
@@ -460,6 +476,12 @@ public class DestinationTest : TestBase
         Assert.Equal(expectedDestinationID, model.DestinationID);
         Assert.Equal(expectedType, model.Type);
         Assert.Equal(expectedConnectionStatus, model.ConnectionStatus);
+        Assert.NotNull(model.EnabledModels);
+        Assert.Equal(expectedEnabledModels.Count, model.EnabledModels.Count);
+        for (int i = 0; i < expectedEnabledModels.Count; i++)
+        {
+            Assert.Equal(expectedEnabledModels[i], model.EnabledModels[i]);
+        }
         Assert.Equal(expectedLastSyncStatus, model.LastSyncStatus);
     }
 
@@ -472,6 +494,7 @@ public class DestinationTest : TestBase
             DestinationID = "destinationId",
             Type = "type",
             ConnectionStatus = "connectionStatus",
+            EnabledModels = ["string"],
             LastSyncStatus = new()
             {
                 FinishedAt = "finishedAt",
@@ -501,6 +524,7 @@ public class DestinationTest : TestBase
             DestinationID = "destinationId",
             Type = "type",
             ConnectionStatus = "connectionStatus",
+            EnabledModels = ["string"],
             LastSyncStatus = new()
             {
                 FinishedAt = "finishedAt",
@@ -523,6 +547,7 @@ public class DestinationTest : TestBase
         string expectedDestinationID = "destinationId";
         string expectedType = "type";
         string expectedConnectionStatus = "connectionStatus";
+        List<string> expectedEnabledModels = ["string"];
         LastSyncStatus expectedLastSyncStatus = new()
         {
             FinishedAt = "finishedAt",
@@ -537,6 +562,12 @@ public class DestinationTest : TestBase
         Assert.Equal(expectedDestinationID, deserialized.DestinationID);
         Assert.Equal(expectedType, deserialized.Type);
         Assert.Equal(expectedConnectionStatus, deserialized.ConnectionStatus);
+        Assert.NotNull(deserialized.EnabledModels);
+        Assert.Equal(expectedEnabledModels.Count, deserialized.EnabledModels.Count);
+        for (int i = 0; i < expectedEnabledModels.Count; i++)
+        {
+            Assert.Equal(expectedEnabledModels[i], deserialized.EnabledModels[i]);
+        }
         Assert.Equal(expectedLastSyncStatus, deserialized.LastSyncStatus);
     }
 
@@ -549,6 +580,7 @@ public class DestinationTest : TestBase
             DestinationID = "destinationId",
             Type = "type",
             ConnectionStatus = "connectionStatus",
+            EnabledModels = ["string"],
             LastSyncStatus = new()
             {
                 FinishedAt = "finishedAt",
@@ -575,6 +607,8 @@ public class DestinationTest : TestBase
 
         Assert.Null(model.ConnectionStatus);
         Assert.False(model.RawData.ContainsKey("connectionStatus"));
+        Assert.Null(model.EnabledModels);
+        Assert.False(model.RawData.ContainsKey("enabledModels"));
         Assert.Null(model.LastSyncStatus);
         Assert.False(model.RawData.ContainsKey("lastSyncStatus"));
     }
@@ -603,11 +637,14 @@ public class DestinationTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             ConnectionStatus = null,
+            EnabledModels = null,
             LastSyncStatus = null,
         };
 
         Assert.Null(model.ConnectionStatus);
         Assert.False(model.RawData.ContainsKey("connectionStatus"));
+        Assert.Null(model.EnabledModels);
+        Assert.False(model.RawData.ContainsKey("enabledModels"));
         Assert.Null(model.LastSyncStatus);
         Assert.False(model.RawData.ContainsKey("lastSyncStatus"));
     }
@@ -623,6 +660,7 @@ public class DestinationTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             ConnectionStatus = null,
+            EnabledModels = null,
             LastSyncStatus = null,
         };
 
@@ -638,6 +676,7 @@ public class DestinationTest : TestBase
             DestinationID = "destinationId",
             Type = "type",
             ConnectionStatus = "connectionStatus",
+            EnabledModels = ["string"],
             LastSyncStatus = new()
             {
                 FinishedAt = "finishedAt",

@@ -23,7 +23,7 @@ public class DataExportMintScopedTokenResponseTest : TestBase
             },
         };
 
-        Data expectedData = new()
+        DataExportMintScopedTokenResponseData expectedData = new()
         {
             Token = "token",
             ExpiresAt = "expiresAt",
@@ -84,7 +84,7 @@ public class DataExportMintScopedTokenResponseTest : TestBase
         );
         Assert.NotNull(deserialized);
 
-        Data expectedData = new()
+        DataExportMintScopedTokenResponseData expectedData = new()
         {
             Token = "token",
             ExpiresAt = "expiresAt",
@@ -138,12 +138,12 @@ public class DataExportMintScopedTokenResponseTest : TestBase
     }
 }
 
-public class DataTest : TestBase
+public class DataExportMintScopedTokenResponseDataTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Data
+        var model = new DataExportMintScopedTokenResponseData
         {
             Token = "token",
             ExpiresAt = "expiresAt",
@@ -174,7 +174,7 @@ public class DataTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Data
+        var model = new DataExportMintScopedTokenResponseData
         {
             Token = "token",
             ExpiresAt = "expiresAt",
@@ -185,7 +185,10 @@ public class DataTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Data>(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<DataExportMintScopedTokenResponseData>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -193,7 +196,7 @@ public class DataTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Data
+        var model = new DataExportMintScopedTokenResponseData
         {
             Token = "token",
             ExpiresAt = "expiresAt",
@@ -204,7 +207,10 @@ public class DataTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Data>(element, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<DataExportMintScopedTokenResponseData>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
         string expectedToken = "token";
@@ -228,7 +234,7 @@ public class DataTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Data
+        var model = new DataExportMintScopedTokenResponseData
         {
             Token = "token",
             ExpiresAt = "expiresAt",
@@ -244,7 +250,7 @@ public class DataTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Data
+        var model = new DataExportMintScopedTokenResponseData
         {
             Token = "token",
             ExpiresAt = "expiresAt",
@@ -254,7 +260,7 @@ public class DataTest : TestBase
             },
         };
 
-        Data copied = new(model);
+        DataExportMintScopedTokenResponseData copied = new(model);
 
         Assert.Equal(model, copied);
     }

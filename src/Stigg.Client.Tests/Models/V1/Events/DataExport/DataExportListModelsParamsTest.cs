@@ -1,38 +1,23 @@
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using Stigg.Client.Models.V1.Events.DataExport;
 
 namespace Stigg.Client.Tests.Models.V1.Events.DataExport;
 
-public class DataExportMintScopedTokenParamsTest : TestBase
+public class DataExportListModelsParamsTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var parameters = new DataExportMintScopedTokenParams
+        var parameters = new DataExportListModelsParams
         {
-            ApplicationOrigin = "x",
-            DestinationType = "destinationType",
-            EnabledModels = ["x"],
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
-        string expectedApplicationOrigin = "x";
-        string expectedDestinationType = "destinationType";
-        List<string> expectedEnabledModels = ["x"];
         string expectedXAccountID = "X-ACCOUNT-ID";
         string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
-        Assert.Equal(expectedApplicationOrigin, parameters.ApplicationOrigin);
-        Assert.Equal(expectedDestinationType, parameters.DestinationType);
-        Assert.NotNull(parameters.EnabledModels);
-        Assert.Equal(expectedEnabledModels.Count, parameters.EnabledModels.Count);
-        for (int i = 0; i < expectedEnabledModels.Count; i++)
-        {
-            Assert.Equal(expectedEnabledModels[i], parameters.EnabledModels[i]);
-        }
         Assert.Equal(expectedXAccountID, parameters.XAccountID);
         Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
@@ -40,12 +25,8 @@ public class DataExportMintScopedTokenParamsTest : TestBase
     [Fact]
     public void OptionalNonNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new DataExportMintScopedTokenParams { ApplicationOrigin = "x" };
+        var parameters = new DataExportListModelsParams { };
 
-        Assert.Null(parameters.DestinationType);
-        Assert.False(parameters.RawBodyData.ContainsKey("destinationType"));
-        Assert.Null(parameters.EnabledModels);
-        Assert.False(parameters.RawBodyData.ContainsKey("enabledModels"));
         Assert.Null(parameters.XAccountID);
         Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
         Assert.Null(parameters.XEnvironmentID);
@@ -55,21 +36,13 @@ public class DataExportMintScopedTokenParamsTest : TestBase
     [Fact]
     public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
     {
-        var parameters = new DataExportMintScopedTokenParams
+        var parameters = new DataExportListModelsParams
         {
-            ApplicationOrigin = "x",
-
             // Null should be interpreted as omitted for these properties
-            DestinationType = null,
-            EnabledModels = null,
             XAccountID = null,
             XEnvironmentID = null,
         };
 
-        Assert.Null(parameters.DestinationType);
-        Assert.False(parameters.RawBodyData.ContainsKey("destinationType"));
-        Assert.Null(parameters.EnabledModels);
-        Assert.False(parameters.RawBodyData.ContainsKey("enabledModels"));
         Assert.Null(parameters.XAccountID);
         Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
         Assert.Null(parameters.XEnvironmentID);
@@ -79,12 +52,12 @@ public class DataExportMintScopedTokenParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        DataExportMintScopedTokenParams parameters = new() { ApplicationOrigin = "x" };
+        DataExportListModelsParams parameters = new();
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
         Assert.True(
-            TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/data-export/scoped-token"), url)
+            TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/data-export/models"), url)
         );
     }
 
@@ -92,9 +65,8 @@ public class DataExportMintScopedTokenParamsTest : TestBase
     public void AddHeadersToRequest_Works()
     {
         HttpRequestMessage requestMessage = new();
-        DataExportMintScopedTokenParams parameters = new()
+        DataExportListModelsParams parameters = new()
         {
-            ApplicationOrigin = "x",
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",
         };
@@ -108,16 +80,13 @@ public class DataExportMintScopedTokenParamsTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var parameters = new DataExportMintScopedTokenParams
+        var parameters = new DataExportListModelsParams
         {
-            ApplicationOrigin = "x",
-            DestinationType = "destinationType",
-            EnabledModels = ["x"],
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
-        DataExportMintScopedTokenParams copied = new(parameters);
+        DataExportListModelsParams copied = new(parameters);
 
         Assert.Equal(parameters, copied);
     }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
@@ -56,6 +57,27 @@ public record class DataExportMintScopedTokenParams : ParamsBase
             }
 
             this._rawBodyData.Set("destinationType", value);
+        }
+    }
+
+    public IReadOnlyList<string>? EnabledModels
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<ImmutableArray<string>>("enabledModels");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawBodyData.Set<ImmutableArray<string>?>(
+                "enabledModels",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
         }
     }
 

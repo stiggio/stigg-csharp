@@ -42,6 +42,18 @@ public sealed class DataExportService : IDataExportService
     }
 
     /// <inheritdoc/>
+    public async Task<DataExportListModelsResponse> ListModels(
+        DataExportListModelsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.ListModels(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
     public async Task<DataExportMintScopedTokenResponse> MintScopedToken(
         DataExportMintScopedTokenParams parameters,
         CancellationToken cancellationToken = default
@@ -90,6 +102,36 @@ public sealed class DataExportServiceWithRawResponse : IDataExportServiceWithRaw
     public IDestinationServiceWithRawResponse Destinations
     {
         get { return _destinations.Value; }
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<DataExportListModelsResponse>> ListModels(
+        DataExportListModelsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        HttpRequest<DataExportListModelsParams> request = new()
+        {
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var deserializedResponse = await response
+                    .Deserialize<DataExportListModelsResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    deserializedResponse.Validate();
+                }
+                return deserializedResponse;
+            }
+        );
     }
 
     /// <inheritdoc/>

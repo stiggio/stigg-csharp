@@ -238,6 +238,27 @@ public sealed record class DestinationDeleteResponseDataDestination : JsonModel
         }
     }
 
+    public IReadOnlyList<string>? EnabledModels
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<string>>("enabledModels");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set<ImmutableArray<string>?>(
+                "enabledModels",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
     /// <summary>
     /// Latest sync snapshot for the destination, refreshed by the provider webhook
     /// </summary>
@@ -268,6 +289,7 @@ public sealed record class DestinationDeleteResponseDataDestination : JsonModel
         _ = this.DestinationID;
         _ = this.Type;
         _ = this.ConnectionStatus;
+        _ = this.EnabledModels;
         this.LastSyncStatus?.Validate();
     }
 
