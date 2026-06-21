@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using Stigg.Client.Models.V1.Events.DataExport.Destinations;
 
@@ -13,17 +14,25 @@ public class DestinationCreateParamsTest : TestBase
         {
             DestinationID = "x",
             DestinationType = "x",
+            EnabledModels = ["x"],
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedDestinationID = "x";
         string expectedDestinationType = "x";
+        List<string> expectedEnabledModels = ["x"];
         string expectedXAccountID = "X-ACCOUNT-ID";
         string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedDestinationID, parameters.DestinationID);
         Assert.Equal(expectedDestinationType, parameters.DestinationType);
+        Assert.NotNull(parameters.EnabledModels);
+        Assert.Equal(expectedEnabledModels.Count, parameters.EnabledModels.Count);
+        for (int i = 0; i < expectedEnabledModels.Count; i++)
+        {
+            Assert.Equal(expectedEnabledModels[i], parameters.EnabledModels[i]);
+        }
         Assert.Equal(expectedXAccountID, parameters.XAccountID);
         Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
@@ -33,6 +42,8 @@ public class DestinationCreateParamsTest : TestBase
     {
         var parameters = new DestinationCreateParams { DestinationID = "x", DestinationType = "x" };
 
+        Assert.Null(parameters.EnabledModels);
+        Assert.False(parameters.RawBodyData.ContainsKey("enabledModels"));
         Assert.Null(parameters.XAccountID);
         Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
         Assert.Null(parameters.XEnvironmentID);
@@ -48,10 +59,13 @@ public class DestinationCreateParamsTest : TestBase
             DestinationType = "x",
 
             // Null should be interpreted as omitted for these properties
+            EnabledModels = null,
             XAccountID = null,
             XEnvironmentID = null,
         };
 
+        Assert.Null(parameters.EnabledModels);
+        Assert.False(parameters.RawBodyData.ContainsKey("enabledModels"));
         Assert.Null(parameters.XAccountID);
         Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
         Assert.Null(parameters.XEnvironmentID);
@@ -95,6 +109,7 @@ public class DestinationCreateParamsTest : TestBase
         {
             DestinationID = "x",
             DestinationType = "x",
+            EnabledModels = ["x"],
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",
         };

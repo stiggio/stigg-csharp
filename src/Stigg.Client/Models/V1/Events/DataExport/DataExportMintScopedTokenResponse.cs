@@ -21,12 +21,12 @@ public sealed record class DataExportMintScopedTokenResponse : JsonModel
     /// <summary>
     /// Scoped token + expiry + provider-specific metadata for the FE SDK.
     /// </summary>
-    public required Data Data
+    public required DataExportMintScopedTokenResponseData Data
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<Data>("data");
+            return this._rawData.GetNotNullClass<DataExportMintScopedTokenResponseData>("data");
         }
         init { this._rawData.Set("data", value); }
     }
@@ -69,7 +69,7 @@ public sealed record class DataExportMintScopedTokenResponse : JsonModel
     }
 
     [SetsRequiredMembers]
-    public DataExportMintScopedTokenResponse(Data data)
+    public DataExportMintScopedTokenResponse(DataExportMintScopedTokenResponseData data)
         : this()
     {
         this.Data = data;
@@ -87,8 +87,13 @@ class DataExportMintScopedTokenResponseFromRaw : IFromRawJson<DataExportMintScop
 /// <summary>
 /// Scoped token + expiry + provider-specific metadata for the FE SDK.
 /// </summary>
-[JsonConverter(typeof(JsonModelConverter<Data, DataFromRaw>))]
-public sealed record class Data : JsonModel
+[JsonConverter(
+    typeof(JsonModelConverter<
+        DataExportMintScopedTokenResponseData,
+        DataExportMintScopedTokenResponseDataFromRaw
+    >)
+)]
+public sealed record class DataExportMintScopedTokenResponseData : JsonModel
 {
     /// <summary>
     /// Provider scoped JWT
@@ -145,37 +150,43 @@ public sealed record class Data : JsonModel
         _ = this.ProviderMetadata;
     }
 
-    public Data() { }
+    public DataExportMintScopedTokenResponseData() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public Data(Data data)
-        : base(data) { }
+    public DataExportMintScopedTokenResponseData(
+        DataExportMintScopedTokenResponseData dataExportMintScopedTokenResponseData
+    )
+        : base(dataExportMintScopedTokenResponseData) { }
 #pragma warning restore CS8618
 
-    public Data(IReadOnlyDictionary<string, JsonElement> rawData)
+    public DataExportMintScopedTokenResponseData(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Data(FrozenDictionary<string, JsonElement> rawData)
+    DataExportMintScopedTokenResponseData(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="DataFromRaw.FromRawUnchecked"/>
-    public static Data FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="DataExportMintScopedTokenResponseDataFromRaw.FromRawUnchecked"/>
+    public static DataExportMintScopedTokenResponseData FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class DataFromRaw : IFromRawJson<Data>
+class DataExportMintScopedTokenResponseDataFromRaw
+    : IFromRawJson<DataExportMintScopedTokenResponseData>
 {
     /// <inheritdoc/>
-    public Data FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        Data.FromRawUnchecked(rawData);
+    public DataExportMintScopedTokenResponseData FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => DataExportMintScopedTokenResponseData.FromRawUnchecked(rawData);
 }

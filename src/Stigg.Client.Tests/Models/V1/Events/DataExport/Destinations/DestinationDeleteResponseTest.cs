@@ -20,6 +20,7 @@ public class DestinationDeleteResponseTest : TestBase
                         DestinationID = "destinationId",
                         Type = "type",
                         ConnectionStatus = "connectionStatus",
+                        EnabledModels = ["string"],
                         LastSyncStatus = new()
                         {
                             FinishedAt = "finishedAt",
@@ -42,6 +43,7 @@ public class DestinationDeleteResponseTest : TestBase
                     DestinationID = "destinationId",
                     Type = "type",
                     ConnectionStatus = "connectionStatus",
+                    EnabledModels = ["string"],
                     LastSyncStatus = new()
                     {
                         FinishedAt = "finishedAt",
@@ -71,6 +73,7 @@ public class DestinationDeleteResponseTest : TestBase
                         DestinationID = "destinationId",
                         Type = "type",
                         ConnectionStatus = "connectionStatus",
+                        EnabledModels = ["string"],
                         LastSyncStatus = new()
                         {
                             FinishedAt = "finishedAt",
@@ -107,6 +110,7 @@ public class DestinationDeleteResponseTest : TestBase
                         DestinationID = "destinationId",
                         Type = "type",
                         ConnectionStatus = "connectionStatus",
+                        EnabledModels = ["string"],
                         LastSyncStatus = new()
                         {
                             FinishedAt = "finishedAt",
@@ -136,6 +140,7 @@ public class DestinationDeleteResponseTest : TestBase
                     DestinationID = "destinationId",
                     Type = "type",
                     ConnectionStatus = "connectionStatus",
+                    EnabledModels = ["string"],
                     LastSyncStatus = new()
                     {
                         FinishedAt = "finishedAt",
@@ -165,6 +170,7 @@ public class DestinationDeleteResponseTest : TestBase
                         DestinationID = "destinationId",
                         Type = "type",
                         ConnectionStatus = "connectionStatus",
+                        EnabledModels = ["string"],
                         LastSyncStatus = new()
                         {
                             FinishedAt = "finishedAt",
@@ -195,6 +201,7 @@ public class DestinationDeleteResponseTest : TestBase
                         DestinationID = "destinationId",
                         Type = "type",
                         ConnectionStatus = "connectionStatus",
+                        EnabledModels = ["string"],
                         LastSyncStatus = new()
                         {
                             FinishedAt = "finishedAt",
@@ -230,6 +237,7 @@ public class DestinationDeleteResponseDataTest : TestBase
                     DestinationID = "destinationId",
                     Type = "type",
                     ConnectionStatus = "connectionStatus",
+                    EnabledModels = ["string"],
                     LastSyncStatus = new()
                     {
                         FinishedAt = "finishedAt",
@@ -251,6 +259,7 @@ public class DestinationDeleteResponseDataTest : TestBase
                 DestinationID = "destinationId",
                 Type = "type",
                 ConnectionStatus = "connectionStatus",
+                EnabledModels = ["string"],
                 LastSyncStatus = new()
                 {
                     FinishedAt = "finishedAt",
@@ -283,6 +292,7 @@ public class DestinationDeleteResponseDataTest : TestBase
                     DestinationID = "destinationId",
                     Type = "type",
                     ConnectionStatus = "connectionStatus",
+                    EnabledModels = ["string"],
                     LastSyncStatus = new()
                     {
                         FinishedAt = "finishedAt",
@@ -318,6 +328,7 @@ public class DestinationDeleteResponseDataTest : TestBase
                     DestinationID = "destinationId",
                     Type = "type",
                     ConnectionStatus = "connectionStatus",
+                    EnabledModels = ["string"],
                     LastSyncStatus = new()
                     {
                         FinishedAt = "finishedAt",
@@ -346,6 +357,7 @@ public class DestinationDeleteResponseDataTest : TestBase
                 DestinationID = "destinationId",
                 Type = "type",
                 ConnectionStatus = "connectionStatus",
+                EnabledModels = ["string"],
                 LastSyncStatus = new()
                 {
                     FinishedAt = "finishedAt",
@@ -378,6 +390,7 @@ public class DestinationDeleteResponseDataTest : TestBase
                     DestinationID = "destinationId",
                     Type = "type",
                     ConnectionStatus = "connectionStatus",
+                    EnabledModels = ["string"],
                     LastSyncStatus = new()
                     {
                         FinishedAt = "finishedAt",
@@ -407,6 +420,7 @@ public class DestinationDeleteResponseDataTest : TestBase
                     DestinationID = "destinationId",
                     Type = "type",
                     ConnectionStatus = "connectionStatus",
+                    EnabledModels = ["string"],
                     LastSyncStatus = new()
                     {
                         FinishedAt = "finishedAt",
@@ -437,6 +451,7 @@ public class DestinationDeleteResponseDataDestinationTest : TestBase
             DestinationID = "destinationId",
             Type = "type",
             ConnectionStatus = "connectionStatus",
+            EnabledModels = ["string"],
             LastSyncStatus = new()
             {
                 FinishedAt = "finishedAt",
@@ -452,6 +467,7 @@ public class DestinationDeleteResponseDataDestinationTest : TestBase
         string expectedDestinationID = "destinationId";
         string expectedType = "type";
         string expectedConnectionStatus = "connectionStatus";
+        List<string> expectedEnabledModels = ["string"];
         DestinationDeleteResponseDataDestinationLastSyncStatus expectedLastSyncStatus = new()
         {
             FinishedAt = "finishedAt",
@@ -466,6 +482,12 @@ public class DestinationDeleteResponseDataDestinationTest : TestBase
         Assert.Equal(expectedDestinationID, model.DestinationID);
         Assert.Equal(expectedType, model.Type);
         Assert.Equal(expectedConnectionStatus, model.ConnectionStatus);
+        Assert.NotNull(model.EnabledModels);
+        Assert.Equal(expectedEnabledModels.Count, model.EnabledModels.Count);
+        for (int i = 0; i < expectedEnabledModels.Count; i++)
+        {
+            Assert.Equal(expectedEnabledModels[i], model.EnabledModels[i]);
+        }
         Assert.Equal(expectedLastSyncStatus, model.LastSyncStatus);
     }
 
@@ -478,6 +500,7 @@ public class DestinationDeleteResponseDataDestinationTest : TestBase
             DestinationID = "destinationId",
             Type = "type",
             ConnectionStatus = "connectionStatus",
+            EnabledModels = ["string"],
             LastSyncStatus = new()
             {
                 FinishedAt = "finishedAt",
@@ -507,6 +530,7 @@ public class DestinationDeleteResponseDataDestinationTest : TestBase
             DestinationID = "destinationId",
             Type = "type",
             ConnectionStatus = "connectionStatus",
+            EnabledModels = ["string"],
             LastSyncStatus = new()
             {
                 FinishedAt = "finishedAt",
@@ -529,6 +553,7 @@ public class DestinationDeleteResponseDataDestinationTest : TestBase
         string expectedDestinationID = "destinationId";
         string expectedType = "type";
         string expectedConnectionStatus = "connectionStatus";
+        List<string> expectedEnabledModels = ["string"];
         DestinationDeleteResponseDataDestinationLastSyncStatus expectedLastSyncStatus = new()
         {
             FinishedAt = "finishedAt",
@@ -543,6 +568,12 @@ public class DestinationDeleteResponseDataDestinationTest : TestBase
         Assert.Equal(expectedDestinationID, deserialized.DestinationID);
         Assert.Equal(expectedType, deserialized.Type);
         Assert.Equal(expectedConnectionStatus, deserialized.ConnectionStatus);
+        Assert.NotNull(deserialized.EnabledModels);
+        Assert.Equal(expectedEnabledModels.Count, deserialized.EnabledModels.Count);
+        for (int i = 0; i < expectedEnabledModels.Count; i++)
+        {
+            Assert.Equal(expectedEnabledModels[i], deserialized.EnabledModels[i]);
+        }
         Assert.Equal(expectedLastSyncStatus, deserialized.LastSyncStatus);
     }
 
@@ -555,6 +586,7 @@ public class DestinationDeleteResponseDataDestinationTest : TestBase
             DestinationID = "destinationId",
             Type = "type",
             ConnectionStatus = "connectionStatus",
+            EnabledModels = ["string"],
             LastSyncStatus = new()
             {
                 FinishedAt = "finishedAt",
@@ -581,6 +613,8 @@ public class DestinationDeleteResponseDataDestinationTest : TestBase
 
         Assert.Null(model.ConnectionStatus);
         Assert.False(model.RawData.ContainsKey("connectionStatus"));
+        Assert.Null(model.EnabledModels);
+        Assert.False(model.RawData.ContainsKey("enabledModels"));
         Assert.Null(model.LastSyncStatus);
         Assert.False(model.RawData.ContainsKey("lastSyncStatus"));
     }
@@ -609,11 +643,14 @@ public class DestinationDeleteResponseDataDestinationTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             ConnectionStatus = null,
+            EnabledModels = null,
             LastSyncStatus = null,
         };
 
         Assert.Null(model.ConnectionStatus);
         Assert.False(model.RawData.ContainsKey("connectionStatus"));
+        Assert.Null(model.EnabledModels);
+        Assert.False(model.RawData.ContainsKey("enabledModels"));
         Assert.Null(model.LastSyncStatus);
         Assert.False(model.RawData.ContainsKey("lastSyncStatus"));
     }
@@ -629,6 +666,7 @@ public class DestinationDeleteResponseDataDestinationTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             ConnectionStatus = null,
+            EnabledModels = null,
             LastSyncStatus = null,
         };
 
@@ -644,6 +682,7 @@ public class DestinationDeleteResponseDataDestinationTest : TestBase
             DestinationID = "destinationId",
             Type = "type",
             ConnectionStatus = "connectionStatus",
+            EnabledModels = ["string"],
             LastSyncStatus = new()
             {
                 FinishedAt = "finishedAt",

@@ -30,6 +30,15 @@ public interface IDataExportService
     IDestinationService Destinations { get; }
 
     /// <summary>
+    /// List the catalog of data-export models the customer can opt into when connecting
+    /// a destination.
+    /// </summary>
+    Task<DataExportListModelsResponse> ListModels(
+        DataExportListModelsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Mint a scoped JWT for the FE embedded SDK. Lazy-creates the DATA_EXPORT
     /// integration if needed.
     /// </summary>
@@ -62,6 +71,15 @@ public interface IDataExportServiceWithRawResponse
     IDataExportServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     IDestinationServiceWithRawResponse Destinations { get; }
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>get /api/v1/data-export/models</c>, but is otherwise the
+    /// same as <see cref="IDataExportService.ListModels(DataExportListModelsParams?, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<DataExportListModelsResponse>> ListModels(
+        DataExportListModelsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// Returns a raw HTTP response for <c>post /api/v1/data-export/scoped-token</c>, but is otherwise the
