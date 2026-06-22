@@ -294,6 +294,19 @@ public record class SubscriptionUpdateParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// Salesforce ID
+    /// </summary>
+    public string? SalesforceID
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("salesforceId");
+        }
+        init { this._rawBodyData.Set("salesforceId", value); }
+    }
+
     public ApiEnum<string, ScheduleStrategy>? ScheduleStrategy
     {
         get
