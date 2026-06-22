@@ -173,6 +173,19 @@ public sealed record class UsageReportResponseData : JsonModel
     }
 
     /// <summary>
+    /// Optimistic credit balance for a credit-backed feature
+    /// </summary>
+    public Credit? Credit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<Credit>("credit");
+        }
+        init { this._rawData.Set("credit", value); }
+    }
+
+    /// <summary>
     /// The current measured usage value
     /// </summary>
     public double? CurrentUsage
@@ -248,6 +261,7 @@ public sealed record class UsageReportResponseData : JsonModel
         _ = this.FeatureID;
         _ = this.Timestamp;
         _ = this.Value;
+        this.Credit?.Validate();
         _ = this.CurrentUsage;
         _ = this.NextResetDate;
         _ = this.ResourceID;
@@ -291,4 +305,106 @@ class UsageReportResponseDataFromRaw : IFromRawJson<UsageReportResponseData>
     public UsageReportResponseData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => UsageReportResponseData.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Optimistic credit balance for a credit-backed feature
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<Credit, CreditFromRaw>))]
+public sealed record class Credit : JsonModel
+{
+    /// <summary>
+    /// The credit currency identifier
+    /// </summary>
+    public required string CurrencyID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("currencyId");
+        }
+        init { this._rawData.Set("currencyId", value); }
+    }
+
+    /// <summary>
+    /// The credits consumed (optimistic — includes not-yet-reconciled usage)
+    /// </summary>
+    public required double CurrentUsage
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<double>("currentUsage");
+        }
+        init { this._rawData.Set("currentUsage", value); }
+    }
+
+    /// <summary>
+    /// The grant-version timestamp of this balance, used by the SDK for last-write-wins reconciliation
+    /// </summary>
+    public required DateTimeOffset Timestamp
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("timestamp");
+        }
+        init { this._rawData.Set("timestamp", value); }
+    }
+
+    /// <summary>
+    /// The total credits granted
+    /// </summary>
+    public required double UsageLimit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<double>("usageLimit");
+        }
+        init { this._rawData.Set("usageLimit", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.CurrencyID;
+        _ = this.CurrentUsage;
+        _ = this.Timestamp;
+        _ = this.UsageLimit;
+    }
+
+    public Credit() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public Credit(Credit credit)
+        : base(credit) { }
+#pragma warning restore CS8618
+
+    public Credit(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    Credit(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="CreditFromRaw.FromRawUnchecked"/>
+    public static Credit FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class CreditFromRaw : IFromRawJson<Credit>
+{
+    /// <inheritdoc/>
+    public Credit FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Credit.FromRawUnchecked(rawData);
 }
