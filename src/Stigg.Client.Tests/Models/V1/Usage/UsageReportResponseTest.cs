@@ -23,6 +23,13 @@ public class UsageReportResponseTest : TestBase
                     FeatureID = "featureId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Value = -9007199254740991,
+                    Credit = new()
+                    {
+                        CurrencyID = "currencyId",
+                        CurrentUsage = 0,
+                        Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        UsageLimit = 0,
+                    },
                     CurrentUsage = 0,
                     NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     ResourceID = "resourceId",
@@ -42,6 +49,13 @@ public class UsageReportResponseTest : TestBase
                 FeatureID = "featureId",
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Value = -9007199254740991,
+                Credit = new()
+                {
+                    CurrencyID = "currencyId",
+                    CurrentUsage = 0,
+                    Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    UsageLimit = 0,
+                },
                 CurrentUsage = 0,
                 NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 ResourceID = "resourceId",
@@ -72,6 +86,13 @@ public class UsageReportResponseTest : TestBase
                     FeatureID = "featureId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Value = -9007199254740991,
+                    Credit = new()
+                    {
+                        CurrencyID = "currencyId",
+                        CurrentUsage = 0,
+                        Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        UsageLimit = 0,
+                    },
                     CurrentUsage = 0,
                     NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     ResourceID = "resourceId",
@@ -105,6 +126,13 @@ public class UsageReportResponseTest : TestBase
                     FeatureID = "featureId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Value = -9007199254740991,
+                    Credit = new()
+                    {
+                        CurrencyID = "currencyId",
+                        CurrentUsage = 0,
+                        Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        UsageLimit = 0,
+                    },
                     CurrentUsage = 0,
                     NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     ResourceID = "resourceId",
@@ -131,6 +159,13 @@ public class UsageReportResponseTest : TestBase
                 FeatureID = "featureId",
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Value = -9007199254740991,
+                Credit = new()
+                {
+                    CurrencyID = "currencyId",
+                    CurrentUsage = 0,
+                    Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    UsageLimit = 0,
+                },
                 CurrentUsage = 0,
                 NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 ResourceID = "resourceId",
@@ -161,6 +196,13 @@ public class UsageReportResponseTest : TestBase
                     FeatureID = "featureId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Value = -9007199254740991,
+                    Credit = new()
+                    {
+                        CurrencyID = "currencyId",
+                        CurrentUsage = 0,
+                        Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        UsageLimit = 0,
+                    },
                     CurrentUsage = 0,
                     NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     ResourceID = "resourceId",
@@ -188,6 +230,13 @@ public class UsageReportResponseTest : TestBase
                     FeatureID = "featureId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Value = -9007199254740991,
+                    Credit = new()
+                    {
+                        CurrencyID = "currencyId",
+                        CurrentUsage = 0,
+                        Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        UsageLimit = 0,
+                    },
                     CurrentUsage = 0,
                     NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     ResourceID = "resourceId",
@@ -216,6 +265,13 @@ public class UsageReportResponseDataTest : TestBase
             FeatureID = "featureId",
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Value = -9007199254740991,
+            Credit = new()
+            {
+                CurrencyID = "currencyId",
+                CurrentUsage = 0,
+                Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                UsageLimit = 0,
+            },
             CurrentUsage = 0,
             NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ResourceID = "resourceId",
@@ -229,6 +285,13 @@ public class UsageReportResponseDataTest : TestBase
         string expectedFeatureID = "featureId";
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         long expectedValue = -9007199254740991;
+        Credit expectedCredit = new()
+        {
+            CurrencyID = "currencyId",
+            CurrentUsage = 0,
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsageLimit = 0,
+        };
         double expectedCurrentUsage = 0;
         DateTimeOffset expectedNextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedResourceID = "resourceId";
@@ -241,6 +304,7 @@ public class UsageReportResponseDataTest : TestBase
         Assert.Equal(expectedFeatureID, model.FeatureID);
         Assert.Equal(expectedTimestamp, model.Timestamp);
         Assert.Equal(expectedValue, model.Value);
+        Assert.Equal(expectedCredit, model.Credit);
         Assert.Equal(expectedCurrentUsage, model.CurrentUsage);
         Assert.Equal(expectedNextResetDate, model.NextResetDate);
         Assert.Equal(expectedResourceID, model.ResourceID);
@@ -259,6 +323,13 @@ public class UsageReportResponseDataTest : TestBase
             FeatureID = "featureId",
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Value = -9007199254740991,
+            Credit = new()
+            {
+                CurrencyID = "currencyId",
+                CurrentUsage = 0,
+                Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                UsageLimit = 0,
+            },
             CurrentUsage = 0,
             NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ResourceID = "resourceId",
@@ -286,6 +357,13 @@ public class UsageReportResponseDataTest : TestBase
             FeatureID = "featureId",
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Value = -9007199254740991,
+            Credit = new()
+            {
+                CurrencyID = "currencyId",
+                CurrentUsage = 0,
+                Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                UsageLimit = 0,
+            },
             CurrentUsage = 0,
             NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ResourceID = "resourceId",
@@ -306,6 +384,13 @@ public class UsageReportResponseDataTest : TestBase
         string expectedFeatureID = "featureId";
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         long expectedValue = -9007199254740991;
+        Credit expectedCredit = new()
+        {
+            CurrencyID = "currencyId",
+            CurrentUsage = 0,
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsageLimit = 0,
+        };
         double expectedCurrentUsage = 0;
         DateTimeOffset expectedNextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedResourceID = "resourceId";
@@ -318,6 +403,7 @@ public class UsageReportResponseDataTest : TestBase
         Assert.Equal(expectedFeatureID, deserialized.FeatureID);
         Assert.Equal(expectedTimestamp, deserialized.Timestamp);
         Assert.Equal(expectedValue, deserialized.Value);
+        Assert.Equal(expectedCredit, deserialized.Credit);
         Assert.Equal(expectedCurrentUsage, deserialized.CurrentUsage);
         Assert.Equal(expectedNextResetDate, deserialized.NextResetDate);
         Assert.Equal(expectedResourceID, deserialized.ResourceID);
@@ -336,6 +422,13 @@ public class UsageReportResponseDataTest : TestBase
             FeatureID = "featureId",
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Value = -9007199254740991,
+            Credit = new()
+            {
+                CurrencyID = "currencyId",
+                CurrentUsage = 0,
+                Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                UsageLimit = 0,
+            },
             CurrentUsage = 0,
             NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ResourceID = "resourceId",
@@ -359,6 +452,8 @@ public class UsageReportResponseDataTest : TestBase
             Value = -9007199254740991,
         };
 
+        Assert.Null(model.Credit);
+        Assert.False(model.RawData.ContainsKey("credit"));
         Assert.Null(model.CurrentUsage);
         Assert.False(model.RawData.ContainsKey("currentUsage"));
         Assert.Null(model.NextResetDate);
@@ -399,6 +494,7 @@ public class UsageReportResponseDataTest : TestBase
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Value = -9007199254740991,
 
+            Credit = null,
             CurrentUsage = null,
             NextResetDate = null,
             ResourceID = null,
@@ -406,6 +502,8 @@ public class UsageReportResponseDataTest : TestBase
             UsagePeriodStart = null,
         };
 
+        Assert.Null(model.Credit);
+        Assert.True(model.RawData.ContainsKey("credit"));
         Assert.Null(model.CurrentUsage);
         Assert.True(model.RawData.ContainsKey("currentUsage"));
         Assert.Null(model.NextResetDate);
@@ -430,6 +528,7 @@ public class UsageReportResponseDataTest : TestBase
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Value = -9007199254740991,
 
+            Credit = null,
             CurrentUsage = null,
             NextResetDate = null,
             ResourceID = null,
@@ -451,6 +550,13 @@ public class UsageReportResponseDataTest : TestBase
             FeatureID = "featureId",
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Value = -9007199254740991,
+            Credit = new()
+            {
+                CurrencyID = "currencyId",
+                CurrentUsage = 0,
+                Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                UsageLimit = 0,
+            },
             CurrentUsage = 0,
             NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ResourceID = "resourceId",
@@ -459,6 +565,104 @@ public class UsageReportResponseDataTest : TestBase
         };
 
         UsageReportResponseData copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class CreditTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new Credit
+        {
+            CurrencyID = "currencyId",
+            CurrentUsage = 0,
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsageLimit = 0,
+        };
+
+        string expectedCurrencyID = "currencyId";
+        double expectedCurrentUsage = 0;
+        DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        double expectedUsageLimit = 0;
+
+        Assert.Equal(expectedCurrencyID, model.CurrencyID);
+        Assert.Equal(expectedCurrentUsage, model.CurrentUsage);
+        Assert.Equal(expectedTimestamp, model.Timestamp);
+        Assert.Equal(expectedUsageLimit, model.UsageLimit);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new Credit
+        {
+            CurrencyID = "currencyId",
+            CurrentUsage = 0,
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsageLimit = 0,
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Credit>(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new Credit
+        {
+            CurrencyID = "currencyId",
+            CurrentUsage = 0,
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsageLimit = 0,
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Credit>(element, ModelBase.SerializerOptions);
+        Assert.NotNull(deserialized);
+
+        string expectedCurrencyID = "currencyId";
+        double expectedCurrentUsage = 0;
+        DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        double expectedUsageLimit = 0;
+
+        Assert.Equal(expectedCurrencyID, deserialized.CurrencyID);
+        Assert.Equal(expectedCurrentUsage, deserialized.CurrentUsage);
+        Assert.Equal(expectedTimestamp, deserialized.Timestamp);
+        Assert.Equal(expectedUsageLimit, deserialized.UsageLimit);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new Credit
+        {
+            CurrencyID = "currencyId",
+            CurrentUsage = 0,
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsageLimit = 0,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Credit
+        {
+            CurrencyID = "currencyId",
+            CurrentUsage = 0,
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsageLimit = 0,
+        };
+
+        Credit copied = new(model);
 
         Assert.Equal(model, copied);
     }
