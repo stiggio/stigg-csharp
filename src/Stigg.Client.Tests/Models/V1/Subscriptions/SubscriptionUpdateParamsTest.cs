@@ -107,6 +107,7 @@ public class SubscriptionUpdateParamsTest : TestBase
                 },
             ],
             PromotionCode = "promotionCode",
+            SalesforceID = "salesforceId",
             ScheduleStrategy = Subscriptions::ScheduleStrategy.EndOfBillingPeriod,
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             XAccountID = "X-ACCOUNT-ID",
@@ -206,6 +207,7 @@ public class SubscriptionUpdateParamsTest : TestBase
             },
         ];
         string expectedPromotionCode = "promotionCode";
+        string expectedSalesforceID = "salesforceId";
         ApiEnum<string, Subscriptions::ScheduleStrategy> expectedScheduleStrategy =
             Subscriptions::ScheduleStrategy.EndOfBillingPeriod;
         DateTimeOffset expectedTrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -254,6 +256,7 @@ public class SubscriptionUpdateParamsTest : TestBase
             Assert.Equal(expectedPriceOverrides[i], parameters.PriceOverrides[i]);
         }
         Assert.Equal(expectedPromotionCode, parameters.PromotionCode);
+        Assert.Equal(expectedSalesforceID, parameters.SalesforceID);
         Assert.Equal(expectedScheduleStrategy, parameters.ScheduleStrategy);
         Assert.Equal(expectedTrialEndDate, parameters.TrialEndDate);
         Assert.Equal(expectedXAccountID, parameters.XAccountID);
@@ -269,6 +272,7 @@ public class SubscriptionUpdateParamsTest : TestBase
             Budget = new() { HasSoftLimit = true, Limit = 0 },
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             MinimumSpend = new() { Amount = 0, Currency = Subscriptions::MinimumSpendCurrency.Usd },
+            SalesforceID = "salesforceId",
         };
 
         Assert.Null(parameters.Addons);
@@ -312,6 +316,7 @@ public class SubscriptionUpdateParamsTest : TestBase
             Budget = new() { HasSoftLimit = true, Limit = 0 },
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             MinimumSpend = new() { Amount = 0, Currency = Subscriptions::MinimumSpendCurrency.Usd },
+            SalesforceID = "salesforceId",
 
             // Null should be interpreted as omitted for these properties
             Addons = null,
@@ -469,6 +474,8 @@ public class SubscriptionUpdateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("cancellationDate"));
         Assert.Null(parameters.MinimumSpend);
         Assert.False(parameters.RawBodyData.ContainsKey("minimumSpend"));
+        Assert.Null(parameters.SalesforceID);
+        Assert.False(parameters.RawBodyData.ContainsKey("salesforceId"));
     }
 
     [Fact]
@@ -573,6 +580,7 @@ public class SubscriptionUpdateParamsTest : TestBase
             Budget = null,
             CancellationDate = null,
             MinimumSpend = null,
+            SalesforceID = null,
         };
 
         Assert.Null(parameters.Budget);
@@ -581,6 +589,8 @@ public class SubscriptionUpdateParamsTest : TestBase
         Assert.True(parameters.RawBodyData.ContainsKey("cancellationDate"));
         Assert.Null(parameters.MinimumSpend);
         Assert.True(parameters.RawBodyData.ContainsKey("minimumSpend"));
+        Assert.Null(parameters.SalesforceID);
+        Assert.True(parameters.RawBodyData.ContainsKey("salesforceId"));
     }
 
     [Fact]
@@ -709,6 +719,7 @@ public class SubscriptionUpdateParamsTest : TestBase
                 },
             ],
             PromotionCode = "promotionCode",
+            SalesforceID = "salesforceId",
             ScheduleStrategy = Subscriptions::ScheduleStrategy.EndOfBillingPeriod,
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             XAccountID = "X-ACCOUNT-ID",
