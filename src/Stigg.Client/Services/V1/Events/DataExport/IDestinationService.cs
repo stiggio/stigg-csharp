@@ -37,6 +37,23 @@ public interface IDestinationService
     );
 
     /// <summary>
+    /// Update a destination's entity selection. Pushes the new enabled_models to the
+    /// provider first, then persists the selection. Applies on the next scheduled
+    /// transfer.
+    /// </summary>
+    Task<DestinationUpdateResponse> Update(
+        DestinationUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Update(DestinationUpdateParams, CancellationToken)"/>
+    Task<DestinationUpdateResponse> Update(
+        string destinationID,
+        DestinationUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Remove a destination from the DATA_EXPORT integration metadata. Idempotent.
     /// </summary>
     Task<DestinationDeleteResponse> Delete(
@@ -71,6 +88,22 @@ public interface IDestinationServiceWithRawResponse
     /// </summary>
     Task<HttpResponse<DestinationCreateResponse>> Create(
         DestinationCreateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>patch /api/v1/data-export/destinations/{destinationId}</c>, but is otherwise the
+    /// same as <see cref="IDestinationService.Update(DestinationUpdateParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<DestinationUpdateResponse>> Update(
+        DestinationUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="Update(DestinationUpdateParams, CancellationToken)"/>
+    Task<HttpResponse<DestinationUpdateResponse>> Update(
+        string destinationID,
+        DestinationUpdateParams parameters,
         CancellationToken cancellationToken = default
     );
 
