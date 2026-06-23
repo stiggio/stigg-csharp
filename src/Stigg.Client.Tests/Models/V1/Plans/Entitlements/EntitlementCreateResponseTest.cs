@@ -317,6 +317,7 @@ public class EntitlementCreateResponseDataTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
+            HasSoftLimit = true,
             HiddenFromWidgets = [EntitlementCreateResponseDataCreditHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
@@ -373,6 +374,7 @@ public class EntitlementCreateResponseDataTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
+            HasSoftLimit = true,
             HiddenFromWidgets = [EntitlementCreateResponseDataCreditHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
@@ -1513,6 +1515,7 @@ public class EntitlementCreateResponseDataCreditTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
+            HasSoftLimit = true,
             HiddenFromWidgets = [EntitlementCreateResponseDataCreditHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
@@ -1530,6 +1533,7 @@ public class EntitlementCreateResponseDataCreditTest : TestBase
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedDescription = "description";
         string expectedDisplayNameOverride = "displayNameOverride";
+        bool expectedHasSoftLimit = true;
         List<
             ApiEnum<string, EntitlementCreateResponseDataCreditHiddenFromWidget>
         > expectedHiddenFromWidgets = [EntitlementCreateResponseDataCreditHiddenFromWidget.Paywall];
@@ -1547,6 +1551,7 @@ public class EntitlementCreateResponseDataCreditTest : TestBase
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedDescription, model.Description);
         Assert.Equal(expectedDisplayNameOverride, model.DisplayNameOverride);
+        Assert.Equal(expectedHasSoftLimit, model.HasSoftLimit);
         Assert.Equal(expectedHiddenFromWidgets.Count, model.HiddenFromWidgets.Count);
         for (int i = 0; i < expectedHiddenFromWidgets.Count; i++)
         {
@@ -1572,6 +1577,7 @@ public class EntitlementCreateResponseDataCreditTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
+            HasSoftLimit = true,
             HiddenFromWidgets = [EntitlementCreateResponseDataCreditHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
@@ -1601,6 +1607,7 @@ public class EntitlementCreateResponseDataCreditTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
+            HasSoftLimit = true,
             HiddenFromWidgets = [EntitlementCreateResponseDataCreditHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
@@ -1625,6 +1632,7 @@ public class EntitlementCreateResponseDataCreditTest : TestBase
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedDescription = "description";
         string expectedDisplayNameOverride = "displayNameOverride";
+        bool expectedHasSoftLimit = true;
         List<
             ApiEnum<string, EntitlementCreateResponseDataCreditHiddenFromWidget>
         > expectedHiddenFromWidgets = [EntitlementCreateResponseDataCreditHiddenFromWidget.Paywall];
@@ -1642,6 +1650,7 @@ public class EntitlementCreateResponseDataCreditTest : TestBase
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedDescription, deserialized.Description);
         Assert.Equal(expectedDisplayNameOverride, deserialized.DisplayNameOverride);
+        Assert.Equal(expectedHasSoftLimit, deserialized.HasSoftLimit);
         Assert.Equal(expectedHiddenFromWidgets.Count, deserialized.HiddenFromWidgets.Count);
         for (int i = 0; i < expectedHiddenFromWidgets.Count; i++)
         {
@@ -1667,6 +1676,7 @@ public class EntitlementCreateResponseDataCreditTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
+            HasSoftLimit = true,
             HiddenFromWidgets = [EntitlementCreateResponseDataCreditHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
@@ -1690,6 +1700,7 @@ public class EntitlementCreateResponseDataCreditTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
+            HasSoftLimit = true,
             HiddenFromWidgets = [EntitlementCreateResponseDataCreditHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
@@ -1713,6 +1724,7 @@ public class EntitlementCreateResponseDataCreditTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
+            HasSoftLimit = true,
             HiddenFromWidgets = [EntitlementCreateResponseDataCreditHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
@@ -1735,6 +1747,7 @@ public class EntitlementCreateResponseDataCreditTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
+            HasSoftLimit = true,
             HiddenFromWidgets = [EntitlementCreateResponseDataCreditHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
@@ -1760,6 +1773,7 @@ public class EntitlementCreateResponseDataCreditTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
+            HasSoftLimit = true,
             HiddenFromWidgets = [EntitlementCreateResponseDataCreditHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
@@ -1784,6 +1798,7 @@ public class EntitlementCreateResponseDataCreditTest : TestBase
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
+            HasSoftLimit = true,
             HiddenFromWidgets = [EntitlementCreateResponseDataCreditHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,

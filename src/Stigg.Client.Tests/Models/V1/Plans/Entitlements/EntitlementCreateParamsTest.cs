@@ -342,6 +342,7 @@ public class EntitlementTest : TestBase
             DependencyFeatureID = "dependencyFeatureId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
+            HasSoftLimit = true,
             HiddenFromWidgets = [CreditHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
@@ -397,6 +398,7 @@ public class EntitlementTest : TestBase
             DependencyFeatureID = "dependencyFeatureId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
+            HasSoftLimit = true,
             HiddenFromWidgets = [CreditHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
@@ -1558,6 +1560,7 @@ public class CreditTest : TestBase
             DependencyFeatureID = "dependencyFeatureId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
+            HasSoftLimit = true,
             HiddenFromWidgets = [CreditHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
@@ -1572,6 +1575,7 @@ public class CreditTest : TestBase
         string expectedDependencyFeatureID = "dependencyFeatureId";
         string expectedDescription = "description";
         string expectedDisplayNameOverride = "displayNameOverride";
+        bool expectedHasSoftLimit = true;
         List<ApiEnum<string, CreditHiddenFromWidget>> expectedHiddenFromWidgets =
         [
             CreditHiddenFromWidget.Paywall,
@@ -1588,6 +1592,7 @@ public class CreditTest : TestBase
         Assert.Equal(expectedDependencyFeatureID, model.DependencyFeatureID);
         Assert.Equal(expectedDescription, model.Description);
         Assert.Equal(expectedDisplayNameOverride, model.DisplayNameOverride);
+        Assert.Equal(expectedHasSoftLimit, model.HasSoftLimit);
         Assert.NotNull(model.HiddenFromWidgets);
         Assert.Equal(expectedHiddenFromWidgets.Count, model.HiddenFromWidgets.Count);
         for (int i = 0; i < expectedHiddenFromWidgets.Count; i++)
@@ -1611,6 +1616,7 @@ public class CreditTest : TestBase
             DependencyFeatureID = "dependencyFeatureId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
+            HasSoftLimit = true,
             HiddenFromWidgets = [CreditHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
@@ -1635,6 +1641,7 @@ public class CreditTest : TestBase
             DependencyFeatureID = "dependencyFeatureId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
+            HasSoftLimit = true,
             HiddenFromWidgets = [CreditHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
@@ -1653,6 +1660,7 @@ public class CreditTest : TestBase
         string expectedDependencyFeatureID = "dependencyFeatureId";
         string expectedDescription = "description";
         string expectedDisplayNameOverride = "displayNameOverride";
+        bool expectedHasSoftLimit = true;
         List<ApiEnum<string, CreditHiddenFromWidget>> expectedHiddenFromWidgets =
         [
             CreditHiddenFromWidget.Paywall,
@@ -1669,6 +1677,7 @@ public class CreditTest : TestBase
         Assert.Equal(expectedDependencyFeatureID, deserialized.DependencyFeatureID);
         Assert.Equal(expectedDescription, deserialized.Description);
         Assert.Equal(expectedDisplayNameOverride, deserialized.DisplayNameOverride);
+        Assert.Equal(expectedHasSoftLimit, deserialized.HasSoftLimit);
         Assert.NotNull(deserialized.HiddenFromWidgets);
         Assert.Equal(expectedHiddenFromWidgets.Count, deserialized.HiddenFromWidgets.Count);
         for (int i = 0; i < expectedHiddenFromWidgets.Count; i++)
@@ -1692,6 +1701,7 @@ public class CreditTest : TestBase
             DependencyFeatureID = "dependencyFeatureId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
+            HasSoftLimit = true,
             HiddenFromWidgets = [CreditHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
@@ -1719,6 +1729,8 @@ public class CreditTest : TestBase
         Assert.False(model.RawData.ContainsKey("description"));
         Assert.Null(model.DisplayNameOverride);
         Assert.False(model.RawData.ContainsKey("displayNameOverride"));
+        Assert.Null(model.HasSoftLimit);
+        Assert.False(model.RawData.ContainsKey("hasSoftLimit"));
         Assert.Null(model.HiddenFromWidgets);
         Assert.False(model.RawData.ContainsKey("hiddenFromWidgets"));
         Assert.Null(model.IsCustom);
@@ -1756,6 +1768,7 @@ public class CreditTest : TestBase
             DependencyFeatureID = null,
             Description = null,
             DisplayNameOverride = null,
+            HasSoftLimit = null,
             HiddenFromWidgets = null,
             IsCustom = null,
             IsGranted = null,
@@ -1770,6 +1783,8 @@ public class CreditTest : TestBase
         Assert.False(model.RawData.ContainsKey("description"));
         Assert.Null(model.DisplayNameOverride);
         Assert.False(model.RawData.ContainsKey("displayNameOverride"));
+        Assert.Null(model.HasSoftLimit);
+        Assert.False(model.RawData.ContainsKey("hasSoftLimit"));
         Assert.Null(model.HiddenFromWidgets);
         Assert.False(model.RawData.ContainsKey("hiddenFromWidgets"));
         Assert.Null(model.IsCustom);
@@ -1794,6 +1809,7 @@ public class CreditTest : TestBase
             DependencyFeatureID = null,
             Description = null,
             DisplayNameOverride = null,
+            HasSoftLimit = null,
             HiddenFromWidgets = null,
             IsCustom = null,
             IsGranted = null,
@@ -1815,6 +1831,7 @@ public class CreditTest : TestBase
             DependencyFeatureID = "dependencyFeatureId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
+            HasSoftLimit = true,
             HiddenFromWidgets = [CreditHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,

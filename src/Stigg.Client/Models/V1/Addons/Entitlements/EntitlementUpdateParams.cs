@@ -242,6 +242,11 @@ public record class Body : ModelBase
         }
     }
 
+    public bool? HasSoftLimit
+    {
+        get { return Match<bool?>(feature: (x) => x.HasSoftLimit, credit: (x) => x.HasSoftLimit); }
+    }
+
     public bool? IsCustom
     {
         get { return Match<bool?>(feature: (x) => x.IsCustom, credit: (x) => x.IsCustom); }
@@ -1605,6 +1610,29 @@ public sealed record class BodyCredit : JsonModel
     }
 
     /// <summary>
+    /// Whether the credit wallet is soft-limited. When true, getEntitlement returns
+    /// hasAccess=true past the limit; vendors decide whether to enforce. Defaults
+    /// to false.
+    /// </summary>
+    public bool? HasSoftLimit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("hasSoftLimit");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("hasSoftLimit", value);
+        }
+    }
+
+    /// <summary>
     /// Widget types where this entitlement is hidden
     /// </summary>
     public IReadOnlyList<ApiEnum<string, BodyCreditHiddenFromWidget>>? HiddenFromWidgets
@@ -1706,6 +1734,7 @@ public sealed record class BodyCredit : JsonModel
         _ = this.DependencyFeatureID;
         _ = this.Description;
         _ = this.DisplayNameOverride;
+        _ = this.HasSoftLimit;
         foreach (var item in this.HiddenFromWidgets ?? [])
         {
             item.Validate();

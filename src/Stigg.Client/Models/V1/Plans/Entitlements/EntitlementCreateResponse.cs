@@ -137,6 +137,11 @@ public record class EntitlementCreateResponseData : ModelBase
         }
     }
 
+    public bool? HasSoftLimit
+    {
+        get { return Match<bool?>(feature: (x) => x.HasSoftLimit, credit: (x) => x.HasSoftLimit); }
+    }
+
     public bool? IsCustom
     {
         get { return Match<bool?>(feature: (x) => x.IsCustom, credit: (x) => x.IsCustom); }
@@ -1903,6 +1908,21 @@ public sealed record class EntitlementCreateResponseDataCredit : JsonModel
     }
 
     /// <summary>
+    /// Whether the credit wallet is soft-limited. When true, getEntitlement returns
+    /// hasAccess=true past the limit; vendors decide whether to enforce. Defaults
+    /// to false.
+    /// </summary>
+    public required bool? HasSoftLimit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("hasSoftLimit");
+        }
+        init { this._rawData.Set("hasSoftLimit", value); }
+    }
+
+    /// <summary>
     /// Widget types where this entitlement is hidden
     /// </summary>
     public required IReadOnlyList<
@@ -2014,6 +2034,7 @@ public sealed record class EntitlementCreateResponseDataCredit : JsonModel
         _ = this.CreatedAt;
         _ = this.Description;
         _ = this.DisplayNameOverride;
+        _ = this.HasSoftLimit;
         foreach (var item in this.HiddenFromWidgets)
         {
             item.Validate();
