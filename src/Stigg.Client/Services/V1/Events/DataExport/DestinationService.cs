@@ -47,6 +47,28 @@ public sealed class DestinationService : IDestinationService
     }
 
     /// <inheritdoc/>
+    public async Task<DestinationUpdateResponse> Update(
+        DestinationUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.Update(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<DestinationUpdateResponse> Update(
+        string destinationID,
+        DestinationUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return this.Update(parameters with { DestinationID = destinationID }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
     public async Task<DestinationDeleteResponse> Delete(
         DestinationDeleteParams parameters,
         CancellationToken cancellationToken = default
@@ -115,6 +137,49 @@ public sealed class DestinationServiceWithRawResponse : IDestinationServiceWithR
                 return destination;
             }
         );
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<DestinationUpdateResponse>> Update(
+        DestinationUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.DestinationID == null)
+        {
+            throw new StiggInvalidDataException("'parameters.DestinationID' cannot be null");
+        }
+
+        HttpRequest<DestinationUpdateParams> request = new()
+        {
+            Method = StiggClientWithRawResponse.PatchMethod,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var destination = await response
+                    .Deserialize<DestinationUpdateResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    destination.Validate();
+                }
+                return destination;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<DestinationUpdateResponse>> Update(
+        string destinationID,
+        DestinationUpdateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        return this.Update(parameters with { DestinationID = destinationID }, cancellationToken);
     }
 
     /// <inheritdoc/>

@@ -15,6 +15,17 @@ public class DestinationServiceTest : TestBase
     }
 
     [Fact(Skip = "Mock server tests are disabled")]
+    public async Task Update_Works()
+    {
+        var destination = await this.client.V1.Events.DataExport.Destinations.Update(
+            "x",
+            new() { EnabledModels = ["x"], IntegrationID = "x" },
+            TestContext.Current.CancellationToken
+        );
+        destination.Validate();
+    }
+
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Delete_Works()
     {
         var destination = await this.client.V1.Events.DataExport.Destinations.Delete(
