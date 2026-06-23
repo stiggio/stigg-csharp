@@ -29,6 +29,7 @@ public class UsageReportResponseTest : TestBase
                         CurrentUsage = 0,
                         Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         UsageLimit = 0,
+                        UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     },
                     CurrentUsage = 0,
                     NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -55,6 +56,7 @@ public class UsageReportResponseTest : TestBase
                     CurrentUsage = 0,
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsageLimit = 0,
+                    UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
                 CurrentUsage = 0,
                 NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -92,6 +94,7 @@ public class UsageReportResponseTest : TestBase
                         CurrentUsage = 0,
                         Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         UsageLimit = 0,
+                        UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     },
                     CurrentUsage = 0,
                     NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -132,6 +135,7 @@ public class UsageReportResponseTest : TestBase
                         CurrentUsage = 0,
                         Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         UsageLimit = 0,
+                        UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     },
                     CurrentUsage = 0,
                     NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -165,6 +169,7 @@ public class UsageReportResponseTest : TestBase
                     CurrentUsage = 0,
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     UsageLimit = 0,
+                    UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
                 CurrentUsage = 0,
                 NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -202,6 +207,7 @@ public class UsageReportResponseTest : TestBase
                         CurrentUsage = 0,
                         Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         UsageLimit = 0,
+                        UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     },
                     CurrentUsage = 0,
                     NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -236,6 +242,7 @@ public class UsageReportResponseTest : TestBase
                         CurrentUsage = 0,
                         Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         UsageLimit = 0,
+                        UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     },
                     CurrentUsage = 0,
                     NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -271,6 +278,7 @@ public class UsageReportResponseDataTest : TestBase
                 CurrentUsage = 0,
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UsageLimit = 0,
+                UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             CurrentUsage = 0,
             NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -291,6 +299,7 @@ public class UsageReportResponseDataTest : TestBase
             CurrentUsage = 0,
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
+            UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
         double expectedCurrentUsage = 0;
         DateTimeOffset expectedNextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -329,6 +338,7 @@ public class UsageReportResponseDataTest : TestBase
                 CurrentUsage = 0,
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UsageLimit = 0,
+                UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             CurrentUsage = 0,
             NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -363,6 +373,7 @@ public class UsageReportResponseDataTest : TestBase
                 CurrentUsage = 0,
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UsageLimit = 0,
+                UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             CurrentUsage = 0,
             NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -390,6 +401,7 @@ public class UsageReportResponseDataTest : TestBase
             CurrentUsage = 0,
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
+            UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
         double expectedCurrentUsage = 0;
         DateTimeOffset expectedNextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -428,6 +440,7 @@ public class UsageReportResponseDataTest : TestBase
                 CurrentUsage = 0,
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UsageLimit = 0,
+                UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             CurrentUsage = 0,
             NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -556,6 +569,7 @@ public class UsageReportResponseDataTest : TestBase
                 CurrentUsage = 0,
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 UsageLimit = 0,
+                UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
             CurrentUsage = 0,
             NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -581,17 +595,20 @@ public class CreditTest : TestBase
             CurrentUsage = 0,
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
+            UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         string expectedCurrencyID = "currencyId";
         double expectedCurrentUsage = 0;
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         double expectedUsageLimit = 0;
+        DateTimeOffset expectedUsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedCurrencyID, model.CurrencyID);
         Assert.Equal(expectedCurrentUsage, model.CurrentUsage);
         Assert.Equal(expectedTimestamp, model.Timestamp);
         Assert.Equal(expectedUsageLimit, model.UsageLimit);
+        Assert.Equal(expectedUsagePeriodEnd, model.UsagePeriodEnd);
     }
 
     [Fact]
@@ -603,6 +620,7 @@ public class CreditTest : TestBase
             CurrentUsage = 0,
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
+            UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -620,6 +638,7 @@ public class CreditTest : TestBase
             CurrentUsage = 0,
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
+            UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -630,11 +649,13 @@ public class CreditTest : TestBase
         double expectedCurrentUsage = 0;
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         double expectedUsageLimit = 0;
+        DateTimeOffset expectedUsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedCurrencyID, deserialized.CurrencyID);
         Assert.Equal(expectedCurrentUsage, deserialized.CurrentUsage);
         Assert.Equal(expectedTimestamp, deserialized.Timestamp);
         Assert.Equal(expectedUsageLimit, deserialized.UsageLimit);
+        Assert.Equal(expectedUsagePeriodEnd, deserialized.UsagePeriodEnd);
     }
 
     [Fact]
@@ -646,6 +667,69 @@ public class CreditTest : TestBase
             CurrentUsage = 0,
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
+            UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new Credit
+        {
+            CurrencyID = "currencyId",
+            CurrentUsage = 0,
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsageLimit = 0,
+        };
+
+        Assert.Null(model.UsagePeriodEnd);
+        Assert.False(model.RawData.ContainsKey("usagePeriodEnd"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new Credit
+        {
+            CurrencyID = "currencyId",
+            CurrentUsage = 0,
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsageLimit = 0,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new Credit
+        {
+            CurrencyID = "currencyId",
+            CurrentUsage = 0,
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsageLimit = 0,
+
+            UsagePeriodEnd = null,
+        };
+
+        Assert.Null(model.UsagePeriodEnd);
+        Assert.True(model.RawData.ContainsKey("usagePeriodEnd"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new Credit
+        {
+            CurrencyID = "currencyId",
+            CurrentUsage = 0,
+            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            UsageLimit = 0,
+
+            UsagePeriodEnd = null,
         };
 
         model.Validate();
@@ -660,6 +744,7 @@ public class CreditTest : TestBase
             CurrentUsage = 0,
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             UsageLimit = 0,
+            UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         Credit copied = new(model);
