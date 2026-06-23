@@ -365,6 +365,19 @@ public sealed record class Credit : JsonModel
         init { this._rawData.Set("usageLimit", value); }
     }
 
+    /// <summary>
+    /// End of the current credit grant period (when recurring credits reset), if applicable
+    /// </summary>
+    public DateTimeOffset? UsagePeriodEnd
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("usagePeriodEnd");
+        }
+        init { this._rawData.Set("usagePeriodEnd", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -372,6 +385,7 @@ public sealed record class Credit : JsonModel
         _ = this.CurrentUsage;
         _ = this.Timestamp;
         _ = this.UsageLimit;
+        _ = this.UsagePeriodEnd;
     }
 
     public Credit() { }
