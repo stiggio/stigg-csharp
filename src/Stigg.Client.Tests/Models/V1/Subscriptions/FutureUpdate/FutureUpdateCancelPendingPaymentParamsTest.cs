@@ -64,7 +64,7 @@ public class FutureUpdateCancelPendingPaymentParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://api.stigg.io/api/v1/subscriptions/x/future-update/pending-payment"
+                    "https://edge.api.stigg.io/api/v1/subscriptions/x/future-update/pending-payment"
                 ),
                 url
             )

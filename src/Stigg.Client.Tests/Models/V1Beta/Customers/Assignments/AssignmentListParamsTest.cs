@@ -112,7 +112,7 @@ public class AssignmentListParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://api.stigg.io/api/v1-beta/customers/id/assignments?after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&capabilityId=capabilityId&entityId=entityId&limit=1"
+                    "https://edge.api.stigg.io/api/v1-beta/customers/id/assignments?after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&capabilityId=capabilityId&entityId=entityId&limit=1"
                 ),
                 url
             )
