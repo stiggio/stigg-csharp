@@ -63,7 +63,7 @@ public class FutureUpdateCancelScheduleParamsTest : TestBase
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://api.stigg.io/api/v1/subscriptions/x/future-update/schedule"),
+                new Uri("https://edge.api.stigg.io/api/v1/subscriptions/x/future-update/schedule"),
                 url
             )
         );
