@@ -1,5 +1,36 @@
 # Changelog
 
+## 0.8.0 (2026-06-28)
+
+Full Changelog: [v0.7.1...v0.8.0](https://github.com/stiggio/stigg-csharp/compare/v0.7.1...v0.8.0)
+
+### Features
+
+* **api:** add cancellation_date to subscription provision and update params ([38a027d](https://github.com/stiggio/stigg-csharp/commit/38a027d17503ebe25d33be0d467e47b5b52b0f58))
+* **api:** add connection_status and last_sync_status fields to data export destinations ([abc2359](https://github.com/stiggio/stigg-csharp/commit/abc235922c4ca4eb62287e73b8ba0c2a2ec756ee))
+* **api:** add credit field to usage report response ([99dcd46](https://github.com/stiggio/stigg-csharp/commit/99dcd46429b7ded5a645cb69736302d64c591466))
+* **api:** add data export scoped token/sync, destinations create/delete ([21eece7](https://github.com/stiggio/stigg-csharp/commit/21eece7e6f0f67bf132022851e14df1d07a516a5))
+* **api:** add HasSoftLimit field to addon and plan entitlements ([be3ef61](https://github.com/stiggio/stigg-csharp/commit/be3ef612eafbff0c32a9639a90e4c202495c7d51))
+* **api:** add ListModels endpoint, EnabledModels field to data export ([7f86406](https://github.com/stiggio/stigg-csharp/commit/7f864065df26ab73675fda4317223d99d04e8faa))
+* **api:** add RetrieveGovernance endpoint to v1-beta customers ([c7384a3](https://github.com/stiggio/stigg-csharp/commit/c7384a373551b774b8efd2e4d3fac6664d60cdbb))
+* **api:** add SalesforceID parameter to subscription update ([32a7a81](https://github.com/stiggio/stigg-csharp/commit/32a7a81f395af3d662896932c7529c3991123b2e))
+* **api:** add scope_entity_ids field to entitlement check response ([52451f7](https://github.com/stiggio/stigg-csharp/commit/52451f7d6514503493ba9391beb64885d6278521))
+* **api:** add update method to data export destinations ([63086c5](https://github.com/stiggio/stigg-csharp/commit/63086c5fd877bbb60ebb8bab94efd2ea4960106a))
+* **api:** add UsagePeriodEnd field to usage Credit model ([96b1376](https://github.com/stiggio/stigg-csharp/commit/96b13762587ef992c53e24b0709caceb3264e09d))
+* **api:** add XAccountID/XEnvironmentID header parameters across all endpoints ([63e23fc](https://github.com/stiggio/stigg-csharp/commit/63e23fcd5afab8a08759d89aaf0a0b9c824e2cd6))
+* **api:** manual updates ([990fcfb](https://github.com/stiggio/stigg-csharp/commit/990fcfb9c48e12cab71428e96174310807d893d4))
+* **api:** manual updates ([bd1a67d](https://github.com/stiggio/stigg-csharp/commit/bd1a67d2c142a66d5b5cb05ebd4ccd874c14de4b))
+* **api:** remove capabilityId, add currency/feature/parent/scope fields to assignments ([052ad4d](https://github.com/stiggio/stigg-csharp/commit/052ad4d2d7fa295f9a653aa7e4fa95927becf91b))
+* **stainless:** update production server to edge.api.stigg.io ([cd0e0dd](https://github.com/stiggio/stigg-csharp/commit/cd0e0dd3c897794f499e6d8e3adfae8b5225146f))
+* **STIGG-7296:** offset/limit pagination for credit usage ([a42f73c](https://github.com/stiggio/stigg-csharp/commit/a42f73cadf465149d0ed22c264d4fc8be4e3d054))
+
+
+### Bug Fixes
+
+* **STIGG-7921:** block syncing plans with package pricing model to Zuora ([cab262b](https://github.com/stiggio/stigg-csharp/commit/cab262b6514388b464dc8e64aa44b38aa4bd0cde))
+* **types:** change Cadence from enum to string in assignments models ([0861c9f](https://github.com/stiggio/stigg-csharp/commit/0861c9fd50e7a72f5c5e61bf97c8cbe8bc7a29f8))
+* **types:** make UsageLimit nullable in assignments ([ffdf78b](https://github.com/stiggio/stigg-csharp/commit/ffdf78b97bdde5788c5d4c82bcaafff73f87895b))
+
 ## 0.7.1 (2026-06-01)
 
 Full Changelog: [v0.7.0...v0.7.1](https://github.com/stiggio/stigg-csharp/compare/v0.7.0...v0.7.1)
