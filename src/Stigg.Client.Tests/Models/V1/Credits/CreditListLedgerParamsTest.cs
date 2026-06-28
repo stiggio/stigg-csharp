@@ -1,4 +1,5 @@
 using System;
+using System.Net.Http;
 using Stigg.Client.Models.V1.Credits;
 
 namespace Stigg.Client.Tests.Models.V1.Credits;
@@ -16,6 +17,8 @@ public class CreditListLedgerParamsTest : TestBase
             CurrencyID = "currencyId",
             Limit = 1,
             ResourceID = "resourceId",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedCustomerID = "customerId";
@@ -24,6 +27,8 @@ public class CreditListLedgerParamsTest : TestBase
         string expectedCurrencyID = "currencyId";
         long expectedLimit = 1;
         string expectedResourceID = "resourceId";
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedCustomerID, parameters.CustomerID);
         Assert.Equal(expectedAfter, parameters.After);
@@ -31,6 +36,8 @@ public class CreditListLedgerParamsTest : TestBase
         Assert.Equal(expectedCurrencyID, parameters.CurrencyID);
         Assert.Equal(expectedLimit, parameters.Limit);
         Assert.Equal(expectedResourceID, parameters.ResourceID);
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
 
     [Fact]
@@ -48,6 +55,10 @@ public class CreditListLedgerParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("limit"));
         Assert.Null(parameters.ResourceID);
         Assert.False(parameters.RawQueryData.ContainsKey("resourceId"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -63,6 +74,8 @@ public class CreditListLedgerParamsTest : TestBase
             CurrencyID = null,
             Limit = null,
             ResourceID = null,
+            XAccountID = null,
+            XEnvironmentID = null,
         };
 
         Assert.Null(parameters.After);
@@ -75,6 +88,10 @@ public class CreditListLedgerParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("limit"));
         Assert.Null(parameters.ResourceID);
         Assert.False(parameters.RawQueryData.ContainsKey("resourceId"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -95,11 +112,28 @@ public class CreditListLedgerParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://api.stigg.io/api/v1/credits/ledger?customerId=customerId&after=after&before=before&currencyId=currencyId&limit=1&resourceId=resourceId"
+                    "https://edge.api.stigg.io/api/v1/credits/ledger?customerId=customerId&after=after&before=before&currencyId=currencyId&limit=1&resourceId=resourceId"
                 ),
                 url
             )
         );
+    }
+
+    [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        CreditListLedgerParams parameters = new()
+        {
+            CustomerID = "customerId",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -113,6 +147,8 @@ public class CreditListLedgerParamsTest : TestBase
             CurrencyID = "currencyId",
             Limit = 1,
             ResourceID = "resourceId",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         CreditListLedgerParams copied = new(parameters);

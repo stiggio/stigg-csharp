@@ -1,6 +1,8 @@
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Stigg.Client.Core;
-using Stigg.Client.Services.V1.Events.Beta.Customers;
+using Stigg.Client.Models.V1.Events.Beta.Customers;
 
 namespace Stigg.Client.Services.V1.Events.Beta;
 
@@ -24,11 +26,24 @@ public interface ICustomerService
     /// </summary>
     ICustomerService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
-    IEntitlementService Entitlements { get; }
+    /// <summary>
+    /// Queries the customer's governance hierarchy tree, returning a cursor-paginated
+    /// list of nodes with their usage configuration (limit, cadence, scope) and current
+    /// usage, sortable and filterable by usage. Each node carries `parentId` so the
+    /// tree can be rebuilt client-side. Usage is read from a periodically-refreshed
+    /// read model and never gates access.
+    /// </summary>
+    Task<CustomerRetrieveGovernanceResponse> RetrieveGovernance(
+        CustomerRetrieveGovernanceParams parameters,
+        CancellationToken cancellationToken = default
+    );
 
-    IEntityService Entities { get; }
-
-    IAssignmentService Assignments { get; }
+    /// <inheritdoc cref="RetrieveGovernance(CustomerRetrieveGovernanceParams, CancellationToken)"/>
+    Task<CustomerRetrieveGovernanceResponse> RetrieveGovernance(
+        string id,
+        CustomerRetrieveGovernanceParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
 }
 
 /// <summary>
@@ -44,9 +59,19 @@ public interface ICustomerServiceWithRawResponse
     /// </summary>
     ICustomerServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
-    IEntitlementServiceWithRawResponse Entitlements { get; }
+    /// <summary>
+    /// Returns a raw HTTP response for <c>get /api/v1-beta/customers/{id}/governance</c>, but is otherwise the
+    /// same as <see cref="ICustomerService.RetrieveGovernance(CustomerRetrieveGovernanceParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<CustomerRetrieveGovernanceResponse>> RetrieveGovernance(
+        CustomerRetrieveGovernanceParams parameters,
+        CancellationToken cancellationToken = default
+    );
 
-    IEntityServiceWithRawResponse Entities { get; }
-
-    IAssignmentServiceWithRawResponse Assignments { get; }
+    /// <inheritdoc cref="RetrieveGovernance(CustomerRetrieveGovernanceParams, CancellationToken)"/>
+    Task<HttpResponse<CustomerRetrieveGovernanceResponse>> RetrieveGovernance(
+        string id,
+        CustomerRetrieveGovernanceParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
 }

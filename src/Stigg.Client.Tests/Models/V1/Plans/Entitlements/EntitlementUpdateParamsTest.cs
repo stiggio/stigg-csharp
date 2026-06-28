@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
@@ -40,6 +41,8 @@ public class EntitlementUpdateParamsTest : TestBase
                     BodyFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
                 ),
             },
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedPlanID = "planId";
@@ -68,10 +71,96 @@ public class EntitlementUpdateParamsTest : TestBase
                 BodyFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
             ),
         };
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedPlanID, parameters.PlanID);
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedBody, parameters.Body);
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new EntitlementUpdateParams
+        {
+            PlanID = "planId",
+            ID = "id",
+            Body = new BodyFeature()
+            {
+                Behavior = BodyFeatureBehavior.Increment,
+                Description = "description",
+                DisplayNameOverride = "displayNameOverride",
+                EnumValues = ["string"],
+                HasSoftLimit = true,
+                HasUnlimitedUsage = true,
+                HiddenFromWidgets = [BodyFeatureHiddenFromWidget.Paywall],
+                IsCustom = true,
+                IsGranted = true,
+                MonthlyResetPeriodConfiguration = new(
+                    BodyFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+                Order = 0,
+                ResetPeriod = BodyFeatureResetPeriod.Year,
+                UsageLimit = 0,
+                WeeklyResetPeriodConfiguration = new(
+                    BodyFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+                YearlyResetPeriodConfiguration = new(
+                    BodyFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+            },
+        };
+
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
+    {
+        var parameters = new EntitlementUpdateParams
+        {
+            PlanID = "planId",
+            ID = "id",
+            Body = new BodyFeature()
+            {
+                Behavior = BodyFeatureBehavior.Increment,
+                Description = "description",
+                DisplayNameOverride = "displayNameOverride",
+                EnumValues = ["string"],
+                HasSoftLimit = true,
+                HasUnlimitedUsage = true,
+                HiddenFromWidgets = [BodyFeatureHiddenFromWidget.Paywall],
+                IsCustom = true,
+                IsGranted = true,
+                MonthlyResetPeriodConfiguration = new(
+                    BodyFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+                Order = 0,
+                ResetPeriod = BodyFeatureResetPeriod.Year,
+                UsageLimit = 0,
+                WeeklyResetPeriodConfiguration = new(
+                    BodyFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+                YearlyResetPeriodConfiguration = new(
+                    BodyFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+            },
+
+            // Null should be interpreted as omitted for these properties
+            XAccountID = null,
+            XEnvironmentID = null,
+        };
+
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -111,10 +200,52 @@ public class EntitlementUpdateParamsTest : TestBase
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://api.stigg.io/api/v1/plans/planId/entitlements/id"),
+                new Uri("https://edge.api.stigg.io/api/v1/plans/planId/entitlements/id"),
                 url
             )
         );
+    }
+
+    [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        EntitlementUpdateParams parameters = new()
+        {
+            PlanID = "planId",
+            ID = "id",
+            Body = new BodyFeature()
+            {
+                Behavior = BodyFeatureBehavior.Increment,
+                Description = "description",
+                DisplayNameOverride = "displayNameOverride",
+                EnumValues = ["string"],
+                HasSoftLimit = true,
+                HasUnlimitedUsage = true,
+                HiddenFromWidgets = [BodyFeatureHiddenFromWidget.Paywall],
+                IsCustom = true,
+                IsGranted = true,
+                MonthlyResetPeriodConfiguration = new(
+                    BodyFeatureMonthlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+                Order = 0,
+                ResetPeriod = BodyFeatureResetPeriod.Year,
+                UsageLimit = 0,
+                WeeklyResetPeriodConfiguration = new(
+                    BodyFeatureWeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+                YearlyResetPeriodConfiguration = new(
+                    BodyFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                ),
+            },
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -148,6 +279,8 @@ public class EntitlementUpdateParamsTest : TestBase
                     BodyFeatureYearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
                 ),
             },
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         EntitlementUpdateParams copied = new(parameters);
@@ -199,6 +332,7 @@ public class BodyTest : TestBase
             DependencyFeatureID = "dependencyFeatureId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
+            HasSoftLimit = true,
             HiddenFromWidgets = [BodyCreditHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
@@ -251,6 +385,7 @@ public class BodyTest : TestBase
             DependencyFeatureID = "dependencyFeatureId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
+            HasSoftLimit = true,
             HiddenFromWidgets = [BodyCreditHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
@@ -1416,6 +1551,7 @@ public class BodyCreditTest : TestBase
             DependencyFeatureID = "dependencyFeatureId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
+            HasSoftLimit = true,
             HiddenFromWidgets = [BodyCreditHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
@@ -1429,6 +1565,7 @@ public class BodyCreditTest : TestBase
         string expectedDependencyFeatureID = "dependencyFeatureId";
         string expectedDescription = "description";
         string expectedDisplayNameOverride = "displayNameOverride";
+        bool expectedHasSoftLimit = true;
         List<ApiEnum<string, BodyCreditHiddenFromWidget>> expectedHiddenFromWidgets =
         [
             BodyCreditHiddenFromWidget.Paywall,
@@ -1444,6 +1581,7 @@ public class BodyCreditTest : TestBase
         Assert.Equal(expectedDependencyFeatureID, model.DependencyFeatureID);
         Assert.Equal(expectedDescription, model.Description);
         Assert.Equal(expectedDisplayNameOverride, model.DisplayNameOverride);
+        Assert.Equal(expectedHasSoftLimit, model.HasSoftLimit);
         Assert.NotNull(model.HiddenFromWidgets);
         Assert.Equal(expectedHiddenFromWidgets.Count, model.HiddenFromWidgets.Count);
         for (int i = 0; i < expectedHiddenFromWidgets.Count; i++)
@@ -1466,6 +1604,7 @@ public class BodyCreditTest : TestBase
             DependencyFeatureID = "dependencyFeatureId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
+            HasSoftLimit = true,
             HiddenFromWidgets = [BodyCreditHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
@@ -1492,6 +1631,7 @@ public class BodyCreditTest : TestBase
             DependencyFeatureID = "dependencyFeatureId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
+            HasSoftLimit = true,
             HiddenFromWidgets = [BodyCreditHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
@@ -1512,6 +1652,7 @@ public class BodyCreditTest : TestBase
         string expectedDependencyFeatureID = "dependencyFeatureId";
         string expectedDescription = "description";
         string expectedDisplayNameOverride = "displayNameOverride";
+        bool expectedHasSoftLimit = true;
         List<ApiEnum<string, BodyCreditHiddenFromWidget>> expectedHiddenFromWidgets =
         [
             BodyCreditHiddenFromWidget.Paywall,
@@ -1527,6 +1668,7 @@ public class BodyCreditTest : TestBase
         Assert.Equal(expectedDependencyFeatureID, deserialized.DependencyFeatureID);
         Assert.Equal(expectedDescription, deserialized.Description);
         Assert.Equal(expectedDisplayNameOverride, deserialized.DisplayNameOverride);
+        Assert.Equal(expectedHasSoftLimit, deserialized.HasSoftLimit);
         Assert.NotNull(deserialized.HiddenFromWidgets);
         Assert.Equal(expectedHiddenFromWidgets.Count, deserialized.HiddenFromWidgets.Count);
         for (int i = 0; i < expectedHiddenFromWidgets.Count; i++)
@@ -1549,6 +1691,7 @@ public class BodyCreditTest : TestBase
             DependencyFeatureID = "dependencyFeatureId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
+            HasSoftLimit = true,
             HiddenFromWidgets = [BodyCreditHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
@@ -1573,6 +1716,8 @@ public class BodyCreditTest : TestBase
         Assert.False(model.RawData.ContainsKey("description"));
         Assert.Null(model.DisplayNameOverride);
         Assert.False(model.RawData.ContainsKey("displayNameOverride"));
+        Assert.Null(model.HasSoftLimit);
+        Assert.False(model.RawData.ContainsKey("hasSoftLimit"));
         Assert.Null(model.HiddenFromWidgets);
         Assert.False(model.RawData.ContainsKey("hiddenFromWidgets"));
         Assert.Null(model.IsCustom);
@@ -1604,6 +1749,7 @@ public class BodyCreditTest : TestBase
             Cadence = null,
             Description = null,
             DisplayNameOverride = null,
+            HasSoftLimit = null,
             HiddenFromWidgets = null,
             IsCustom = null,
             IsGranted = null,
@@ -1620,6 +1766,8 @@ public class BodyCreditTest : TestBase
         Assert.False(model.RawData.ContainsKey("description"));
         Assert.Null(model.DisplayNameOverride);
         Assert.False(model.RawData.ContainsKey("displayNameOverride"));
+        Assert.Null(model.HasSoftLimit);
+        Assert.False(model.RawData.ContainsKey("hasSoftLimit"));
         Assert.Null(model.HiddenFromWidgets);
         Assert.False(model.RawData.ContainsKey("hiddenFromWidgets"));
         Assert.Null(model.IsCustom);
@@ -1643,6 +1791,7 @@ public class BodyCreditTest : TestBase
             Cadence = null,
             Description = null,
             DisplayNameOverride = null,
+            HasSoftLimit = null,
             HiddenFromWidgets = null,
             IsCustom = null,
             IsGranted = null,
@@ -1662,6 +1811,7 @@ public class BodyCreditTest : TestBase
             Cadence = BodyCreditCadence.Month,
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
+            HasSoftLimit = true,
             HiddenFromWidgets = [BodyCreditHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
@@ -1682,6 +1832,7 @@ public class BodyCreditTest : TestBase
             Cadence = BodyCreditCadence.Month,
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
+            HasSoftLimit = true,
             HiddenFromWidgets = [BodyCreditHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
@@ -1701,6 +1852,7 @@ public class BodyCreditTest : TestBase
             Cadence = BodyCreditCadence.Month,
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
+            HasSoftLimit = true,
             HiddenFromWidgets = [BodyCreditHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
@@ -1723,6 +1875,7 @@ public class BodyCreditTest : TestBase
             Cadence = BodyCreditCadence.Month,
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
+            HasSoftLimit = true,
             HiddenFromWidgets = [BodyCreditHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,
@@ -1745,6 +1898,7 @@ public class BodyCreditTest : TestBase
             DependencyFeatureID = "dependencyFeatureId",
             Description = "description",
             DisplayNameOverride = "displayNameOverride",
+            HasSoftLimit = true,
             HiddenFromWidgets = [BodyCreditHiddenFromWidget.Paywall],
             IsCustom = true,
             IsGranted = true,

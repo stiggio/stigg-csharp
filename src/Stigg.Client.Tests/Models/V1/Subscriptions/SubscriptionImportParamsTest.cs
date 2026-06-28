@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
@@ -40,6 +41,8 @@ public class SubscriptionImportParamsTest : TestBase
                 },
             ],
             IntegrationID = "integrationId",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         List<Subscription> expectedSubscriptions =
@@ -68,6 +71,8 @@ public class SubscriptionImportParamsTest : TestBase
             },
         ];
         string expectedIntegrationID = "integrationId";
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedSubscriptions.Count, parameters.Subscriptions.Count);
         for (int i = 0; i < expectedSubscriptions.Count; i++)
@@ -75,6 +80,90 @@ public class SubscriptionImportParamsTest : TestBase
             Assert.Equal(expectedSubscriptions[i], parameters.Subscriptions[i]);
         }
         Assert.Equal(expectedIntegrationID, parameters.IntegrationID);
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new SubscriptionImportParams
+        {
+            Subscriptions =
+            [
+                new()
+                {
+                    ID = "id",
+                    CustomerID = "customerId",
+                    PlanID = "planId",
+                    Addons = [new() { ID = "id", Quantity = 0 }],
+                    BillingID = "billingId",
+                    BillingPeriod = SubscriptionBillingPeriod.Monthly,
+                    Charges =
+                    [
+                        new()
+                        {
+                            ID = "id",
+                            Quantity = 0,
+                            Type = SubscriptionChargeType.Feature,
+                        },
+                    ],
+                    EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    ResourceID = "resourceId",
+                    StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                },
+            ],
+            IntegrationID = "integrationId",
+        };
+
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
+    {
+        var parameters = new SubscriptionImportParams
+        {
+            Subscriptions =
+            [
+                new()
+                {
+                    ID = "id",
+                    CustomerID = "customerId",
+                    PlanID = "planId",
+                    Addons = [new() { ID = "id", Quantity = 0 }],
+                    BillingID = "billingId",
+                    BillingPeriod = SubscriptionBillingPeriod.Monthly,
+                    Charges =
+                    [
+                        new()
+                        {
+                            ID = "id",
+                            Quantity = 0,
+                            Type = SubscriptionChargeType.Feature,
+                        },
+                    ],
+                    EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    ResourceID = "resourceId",
+                    StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                },
+            ],
+            IntegrationID = "integrationId",
+
+            // Null should be interpreted as omitted for these properties
+            XAccountID = null,
+            XEnvironmentID = null,
+        };
+
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -107,6 +196,8 @@ public class SubscriptionImportParamsTest : TestBase
                     StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         Assert.Null(parameters.IntegrationID);
@@ -143,6 +234,8 @@ public class SubscriptionImportParamsTest : TestBase
                     StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
 
             IntegrationID = null,
         };
@@ -186,8 +279,52 @@ public class SubscriptionImportParamsTest : TestBase
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
         Assert.True(
-            TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/subscriptions/import"), url)
+            TestBase.UrisEqual(
+                new Uri("https://edge.api.stigg.io/api/v1/subscriptions/import"),
+                url
+            )
         );
+    }
+
+    [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        SubscriptionImportParams parameters = new()
+        {
+            Subscriptions =
+            [
+                new()
+                {
+                    ID = "id",
+                    CustomerID = "customerId",
+                    PlanID = "planId",
+                    Addons = [new() { ID = "id", Quantity = 0 }],
+                    BillingID = "billingId",
+                    BillingPeriod = SubscriptionBillingPeriod.Monthly,
+                    Charges =
+                    [
+                        new()
+                        {
+                            ID = "id",
+                            Quantity = 0,
+                            Type = SubscriptionChargeType.Feature,
+                        },
+                    ],
+                    EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    ResourceID = "resourceId",
+                    StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                },
+            ],
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -221,6 +358,8 @@ public class SubscriptionImportParamsTest : TestBase
                 },
             ],
             IntegrationID = "integrationId",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         SubscriptionImportParams copied = new(parameters);

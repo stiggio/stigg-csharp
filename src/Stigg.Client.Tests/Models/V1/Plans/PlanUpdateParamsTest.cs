@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
@@ -165,6 +166,8 @@ public class PlanUpdateParamsTest : TestBase
             DisplayName = "displayName",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             ParentPlanID = "parentPlanId",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedID = "x";
@@ -316,6 +319,8 @@ public class PlanUpdateParamsTest : TestBase
         string expectedDisplayName = "displayName";
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedParentPlanID = "parentPlanId";
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedBillingID, parameters.BillingID);
@@ -338,6 +343,8 @@ public class PlanUpdateParamsTest : TestBase
             Assert.Equal(value, parameters.Metadata[item.Key]);
         }
         Assert.Equal(expectedParentPlanID, parameters.ParentPlanID);
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
 
     [Fact]
@@ -365,6 +372,10 @@ public class PlanUpdateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("displayName"));
         Assert.Null(parameters.Metadata);
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -389,6 +400,8 @@ public class PlanUpdateParamsTest : TestBase
             Charges = null,
             DisplayName = null,
             Metadata = null,
+            XAccountID = null,
+            XEnvironmentID = null,
         };
 
         Assert.Null(parameters.Charges);
@@ -397,6 +410,10 @@ public class PlanUpdateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("displayName"));
         Assert.Null(parameters.Metadata);
         Assert.False(parameters.RawBodyData.ContainsKey("metadata"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -544,6 +561,8 @@ public class PlanUpdateParamsTest : TestBase
             },
             DisplayName = "displayName",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         Assert.Null(parameters.BillingID);
@@ -703,6 +722,8 @@ public class PlanUpdateParamsTest : TestBase
             },
             DisplayName = "displayName",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
 
             BillingID = null,
             CompatibleAddonIds = null,
@@ -730,7 +751,24 @@ public class PlanUpdateParamsTest : TestBase
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
-        Assert.True(TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/plans/x"), url));
+        Assert.True(TestBase.UrisEqual(new Uri("https://edge.api.stigg.io/api/v1/plans/x"), url));
+    }
+
+    [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        PlanUpdateParams parameters = new()
+        {
+            ID = "x",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -889,6 +927,8 @@ public class PlanUpdateParamsTest : TestBase
             DisplayName = "displayName",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             ParentPlanID = "parentPlanId",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         PlanUpdateParams copied = new(parameters);

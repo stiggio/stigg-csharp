@@ -158,6 +158,19 @@ public record class SubscriptionUpdateParams : ParamsBase
         init { this._rawBodyData.Set("budget", value); }
     }
 
+    /// <summary>
+    /// Subscription cancellation date
+    /// </summary>
+    public System::DateTimeOffset? CancellationDate
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<System::DateTimeOffset>("cancellationDate");
+        }
+        init { this._rawBodyData.Set("cancellationDate", value); }
+    }
+
     public IReadOnlyList<Charge>? Charges
     {
         get
@@ -281,6 +294,19 @@ public record class SubscriptionUpdateParams : ParamsBase
         }
     }
 
+    /// <summary>
+    /// Salesforce ID
+    /// </summary>
+    public string? SalesforceID
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("salesforceId");
+        }
+        init { this._rawBodyData.Set("salesforceId", value); }
+    }
+
     public ApiEnum<string, ScheduleStrategy>? ScheduleStrategy
     {
         get
@@ -319,6 +345,42 @@ public record class SubscriptionUpdateParams : ParamsBase
             }
 
             this._rawBodyData.Set("trialEndDate", value);
+        }
+    }
+
+    public string? XAccountID
+    {
+        get
+        {
+            this._rawHeaderData.Freeze();
+            return this._rawHeaderData.GetNullableClass<string>("X-ACCOUNT-ID");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawHeaderData.Set("X-ACCOUNT-ID", value);
+        }
+    }
+
+    public string? XEnvironmentID
+    {
+        get
+        {
+            this._rawHeaderData.Freeze();
+            return this._rawHeaderData.GetNullableClass<string>("X-ENVIRONMENT-ID");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawHeaderData.Set("X-ENVIRONMENT-ID", value);
         }
     }
 

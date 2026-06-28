@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Models.V1.Credits.CustomCurrencies;
@@ -19,6 +20,8 @@ public class CustomCurrencyUpdateParamsTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Symbol = "symbol",
             Units = new() { Plural = "plural", Singular = "singular" },
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedCurrencyID = "currencyId";
@@ -31,6 +34,8 @@ public class CustomCurrencyUpdateParamsTest : TestBase
             Plural = "plural",
             Singular = "singular",
         };
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedCurrencyID, parameters.CurrencyID);
         Assert.Equal(expectedDescription, parameters.Description);
@@ -45,6 +50,8 @@ public class CustomCurrencyUpdateParamsTest : TestBase
         }
         Assert.Equal(expectedSymbol, parameters.Symbol);
         Assert.Equal(expectedUnits, parameters.Units);
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
 
     [Fact]
@@ -62,6 +69,10 @@ public class CustomCurrencyUpdateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("displayName"));
         Assert.Null(parameters.Units);
         Assert.False(parameters.RawBodyData.ContainsKey("units"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -77,12 +88,18 @@ public class CustomCurrencyUpdateParamsTest : TestBase
             // Null should be interpreted as omitted for these properties
             DisplayName = null,
             Units = null,
+            XAccountID = null,
+            XEnvironmentID = null,
         };
 
         Assert.Null(parameters.DisplayName);
         Assert.False(parameters.RawBodyData.ContainsKey("displayName"));
         Assert.Null(parameters.Units);
         Assert.False(parameters.RawBodyData.ContainsKey("units"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -93,6 +110,8 @@ public class CustomCurrencyUpdateParamsTest : TestBase
             CurrencyID = "currencyId",
             DisplayName = "displayName",
             Units = new() { Plural = "plural", Singular = "singular" },
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         Assert.Null(parameters.Description);
@@ -111,6 +130,8 @@ public class CustomCurrencyUpdateParamsTest : TestBase
             CurrencyID = "currencyId",
             DisplayName = "displayName",
             Units = new() { Plural = "plural", Singular = "singular" },
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
 
             Description = null,
             Metadata = null,
@@ -134,10 +155,27 @@ public class CustomCurrencyUpdateParamsTest : TestBase
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://api.stigg.io/api/v1/credits/custom-currencies/currencyId"),
+                new Uri("https://edge.api.stigg.io/api/v1/credits/custom-currencies/currencyId"),
                 url
             )
         );
+    }
+
+    [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        CustomCurrencyUpdateParams parameters = new()
+        {
+            CurrencyID = "currencyId",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -151,6 +189,8 @@ public class CustomCurrencyUpdateParamsTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Symbol = "symbol",
             Units = new() { Plural = "plural", Singular = "singular" },
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         CustomCurrencyUpdateParams copied = new(parameters);

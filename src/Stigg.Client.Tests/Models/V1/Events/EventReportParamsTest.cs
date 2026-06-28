@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Models.V1.Events;
@@ -25,6 +26,8 @@ public class EventReportParamsTest : TestBase
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         List<Event> expectedEvents =
@@ -39,12 +42,70 @@ public class EventReportParamsTest : TestBase
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
         ];
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedEvents.Count, parameters.Events.Count);
         for (int i = 0; i < expectedEvents.Count; i++)
         {
             Assert.Equal(expectedEvents[i], parameters.Events[i]);
         }
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new EventReportParams
+        {
+            Events =
+            [
+                new()
+                {
+                    CustomerID = "customerId",
+                    EventName = "x",
+                    IdempotencyKey = "x",
+                    Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+                    ResourceID = "resourceId",
+                    Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                },
+            ],
+        };
+
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
+    {
+        var parameters = new EventReportParams
+        {
+            Events =
+            [
+                new()
+                {
+                    CustomerID = "customerId",
+                    EventName = "x",
+                    IdempotencyKey = "x",
+                    Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+                    ResourceID = "resourceId",
+                    Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                },
+            ],
+
+            // Null should be interpreted as omitted for these properties
+            XAccountID = null,
+            XEnvironmentID = null,
+        };
+
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -68,7 +129,35 @@ public class EventReportParamsTest : TestBase
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
-        Assert.True(TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/events"), url));
+        Assert.True(TestBase.UrisEqual(new Uri("https://edge.api.stigg.io/api/v1/events"), url));
+    }
+
+    [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        EventReportParams parameters = new()
+        {
+            Events =
+            [
+                new()
+                {
+                    CustomerID = "customerId",
+                    EventName = "x",
+                    IdempotencyKey = "x",
+                    Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+                    ResourceID = "resourceId",
+                    Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                },
+            ],
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -88,6 +177,8 @@ public class EventReportParamsTest : TestBase
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         EventReportParams copied = new(parameters);

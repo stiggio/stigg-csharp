@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using Stigg.Client.Models.V1.Customers;
 
 namespace Stigg.Client.Tests.Models.V1.Customers;
@@ -17,6 +18,8 @@ public class CustomerCheckEntitlementParamsTest : TestBase
             RequestedUsage = 0,
             RequestedValues = ["string"],
             ResourceID = "x",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedID = "x";
@@ -25,6 +28,8 @@ public class CustomerCheckEntitlementParamsTest : TestBase
         long expectedRequestedUsage = 0;
         List<string> expectedRequestedValues = ["string"];
         string expectedResourceID = "x";
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedCurrencyID, parameters.CurrencyID);
@@ -37,6 +42,8 @@ public class CustomerCheckEntitlementParamsTest : TestBase
             Assert.Equal(expectedRequestedValues[i], parameters.RequestedValues[i]);
         }
         Assert.Equal(expectedResourceID, parameters.ResourceID);
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
 
     [Fact]
@@ -54,6 +61,10 @@ public class CustomerCheckEntitlementParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("requestedValues"));
         Assert.Null(parameters.ResourceID);
         Assert.False(parameters.RawQueryData.ContainsKey("resourceId"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -69,6 +80,8 @@ public class CustomerCheckEntitlementParamsTest : TestBase
             RequestedUsage = null,
             RequestedValues = null,
             ResourceID = null,
+            XAccountID = null,
+            XEnvironmentID = null,
         };
 
         Assert.Null(parameters.CurrencyID);
@@ -81,6 +94,10 @@ public class CustomerCheckEntitlementParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("requestedValues"));
         Assert.Null(parameters.ResourceID);
         Assert.False(parameters.RawQueryData.ContainsKey("resourceId"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -101,11 +118,28 @@ public class CustomerCheckEntitlementParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://api.stigg.io/api/v1/customers/x/entitlements/check?currencyId=x&featureId=x&requestedUsage=0&requestedValues=string&resourceId=x"
+                    "https://edge.api.stigg.io/api/v1/customers/x/entitlements/check?currencyId=x&featureId=x&requestedUsage=0&requestedValues=string&resourceId=x"
                 ),
                 url
             )
         );
+    }
+
+    [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        CustomerCheckEntitlementParams parameters = new()
+        {
+            ID = "x",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -119,6 +153,8 @@ public class CustomerCheckEntitlementParamsTest : TestBase
             RequestedUsage = 0,
             RequestedValues = ["string"],
             ResourceID = "x",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         CustomerCheckEntitlementParams copied = new(parameters);

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
@@ -61,6 +62,7 @@ public class SubscriptionUpdateParamsTest : TestBase
             },
             BillingPeriod = Subscriptions::BillingPeriod.Monthly,
             Budget = new() { HasSoftLimit = true, Limit = 0 },
+            CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Charges =
             [
                 new()
@@ -105,8 +107,11 @@ public class SubscriptionUpdateParamsTest : TestBase
                 },
             ],
             PromotionCode = "promotionCode",
+            SalesforceID = "salesforceId",
             ScheduleStrategy = Subscriptions::ScheduleStrategy.EndOfBillingPeriod,
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedID = "x";
@@ -155,6 +160,7 @@ public class SubscriptionUpdateParamsTest : TestBase
         ApiEnum<string, Subscriptions::BillingPeriod> expectedBillingPeriod =
             Subscriptions::BillingPeriod.Monthly;
         Subscriptions::Budget expectedBudget = new() { HasSoftLimit = true, Limit = 0 };
+        DateTimeOffset expectedCancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         List<Subscriptions::Charge> expectedCharges =
         [
             new()
@@ -201,9 +207,12 @@ public class SubscriptionUpdateParamsTest : TestBase
             },
         ];
         string expectedPromotionCode = "promotionCode";
+        string expectedSalesforceID = "salesforceId";
         ApiEnum<string, Subscriptions::ScheduleStrategy> expectedScheduleStrategy =
             Subscriptions::ScheduleStrategy.EndOfBillingPeriod;
         DateTimeOffset expectedTrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.NotNull(parameters.Addons);
@@ -218,6 +227,7 @@ public class SubscriptionUpdateParamsTest : TestBase
         Assert.Equal(expectedBillingInformation, parameters.BillingInformation);
         Assert.Equal(expectedBillingPeriod, parameters.BillingPeriod);
         Assert.Equal(expectedBudget, parameters.Budget);
+        Assert.Equal(expectedCancellationDate, parameters.CancellationDate);
         Assert.NotNull(parameters.Charges);
         Assert.Equal(expectedCharges.Count, parameters.Charges.Count);
         for (int i = 0; i < expectedCharges.Count; i++)
@@ -246,8 +256,11 @@ public class SubscriptionUpdateParamsTest : TestBase
             Assert.Equal(expectedPriceOverrides[i], parameters.PriceOverrides[i]);
         }
         Assert.Equal(expectedPromotionCode, parameters.PromotionCode);
+        Assert.Equal(expectedSalesforceID, parameters.SalesforceID);
         Assert.Equal(expectedScheduleStrategy, parameters.ScheduleStrategy);
         Assert.Equal(expectedTrialEndDate, parameters.TrialEndDate);
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
 
     [Fact]
@@ -257,7 +270,9 @@ public class SubscriptionUpdateParamsTest : TestBase
         {
             ID = "x",
             Budget = new() { HasSoftLimit = true, Limit = 0 },
+            CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             MinimumSpend = new() { Amount = 0, Currency = Subscriptions::MinimumSpendCurrency.Usd },
+            SalesforceID = "salesforceId",
         };
 
         Assert.Null(parameters.Addons);
@@ -286,6 +301,10 @@ public class SubscriptionUpdateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("scheduleStrategy"));
         Assert.Null(parameters.TrialEndDate);
         Assert.False(parameters.RawBodyData.ContainsKey("trialEndDate"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -295,7 +314,9 @@ public class SubscriptionUpdateParamsTest : TestBase
         {
             ID = "x",
             Budget = new() { HasSoftLimit = true, Limit = 0 },
+            CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             MinimumSpend = new() { Amount = 0, Currency = Subscriptions::MinimumSpendCurrency.Usd },
+            SalesforceID = "salesforceId",
 
             // Null should be interpreted as omitted for these properties
             Addons = null,
@@ -311,6 +332,8 @@ public class SubscriptionUpdateParamsTest : TestBase
             PromotionCode = null,
             ScheduleStrategy = null,
             TrialEndDate = null,
+            XAccountID = null,
+            XEnvironmentID = null,
         };
 
         Assert.Null(parameters.Addons);
@@ -339,6 +362,10 @@ public class SubscriptionUpdateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("scheduleStrategy"));
         Assert.Null(parameters.TrialEndDate);
         Assert.False(parameters.RawBodyData.ContainsKey("trialEndDate"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -437,12 +464,18 @@ public class SubscriptionUpdateParamsTest : TestBase
             PromotionCode = "promotionCode",
             ScheduleStrategy = Subscriptions::ScheduleStrategy.EndOfBillingPeriod,
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         Assert.Null(parameters.Budget);
         Assert.False(parameters.RawBodyData.ContainsKey("budget"));
+        Assert.Null(parameters.CancellationDate);
+        Assert.False(parameters.RawBodyData.ContainsKey("cancellationDate"));
         Assert.Null(parameters.MinimumSpend);
         Assert.False(parameters.RawBodyData.ContainsKey("minimumSpend"));
+        Assert.Null(parameters.SalesforceID);
+        Assert.False(parameters.RawBodyData.ContainsKey("salesforceId"));
     }
 
     [Fact]
@@ -541,15 +574,23 @@ public class SubscriptionUpdateParamsTest : TestBase
             PromotionCode = "promotionCode",
             ScheduleStrategy = Subscriptions::ScheduleStrategy.EndOfBillingPeriod,
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
 
             Budget = null,
+            CancellationDate = null,
             MinimumSpend = null,
+            SalesforceID = null,
         };
 
         Assert.Null(parameters.Budget);
         Assert.True(parameters.RawBodyData.ContainsKey("budget"));
+        Assert.Null(parameters.CancellationDate);
+        Assert.True(parameters.RawBodyData.ContainsKey("cancellationDate"));
         Assert.Null(parameters.MinimumSpend);
         Assert.True(parameters.RawBodyData.ContainsKey("minimumSpend"));
+        Assert.Null(parameters.SalesforceID);
+        Assert.True(parameters.RawBodyData.ContainsKey("salesforceId"));
     }
 
     [Fact]
@@ -560,8 +601,25 @@ public class SubscriptionUpdateParamsTest : TestBase
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
         Assert.True(
-            TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/subscriptions/x"), url)
+            TestBase.UrisEqual(new Uri("https://edge.api.stigg.io/api/v1/subscriptions/x"), url)
         );
+    }
+
+    [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        Subscriptions::SubscriptionUpdateParams parameters = new()
+        {
+            ID = "x",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -616,6 +674,7 @@ public class SubscriptionUpdateParamsTest : TestBase
             },
             BillingPeriod = Subscriptions::BillingPeriod.Monthly,
             Budget = new() { HasSoftLimit = true, Limit = 0 },
+            CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Charges =
             [
                 new()
@@ -660,8 +719,11 @@ public class SubscriptionUpdateParamsTest : TestBase
                 },
             ],
             PromotionCode = "promotionCode",
+            SalesforceID = "salesforceId",
             ScheduleStrategy = Subscriptions::ScheduleStrategy.EndOfBillingPeriod,
             TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         Subscriptions::SubscriptionUpdateParams copied = new(parameters);

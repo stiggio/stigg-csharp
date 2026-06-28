@@ -48,6 +48,42 @@ public record class EntitlementCreateParams : ParamsBase
         }
     }
 
+    public string? XAccountID
+    {
+        get
+        {
+            this._rawHeaderData.Freeze();
+            return this._rawHeaderData.GetNullableClass<string>("X-ACCOUNT-ID");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawHeaderData.Set("X-ACCOUNT-ID", value);
+        }
+    }
+
+    public string? XEnvironmentID
+    {
+        get
+        {
+            this._rawHeaderData.Freeze();
+            return this._rawHeaderData.GetNullableClass<string>("X-ENVIRONMENT-ID");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawHeaderData.Set("X-ENVIRONMENT-ID", value);
+        }
+    }
+
     public EntitlementCreateParams() { }
 
 #pragma warning disable CS8618
@@ -214,6 +250,11 @@ public record class Entitlement : ModelBase
                 credit: (x) => x.DisplayNameOverride
             );
         }
+    }
+
+    public bool? HasSoftLimit
+    {
+        get { return Match<bool?>(feature: (x) => x.HasSoftLimit, credit: (x) => x.HasSoftLimit); }
     }
 
     public bool? IsCustom
@@ -1573,6 +1614,29 @@ public sealed record class Credit : JsonModel
     }
 
     /// <summary>
+    /// Whether the credit wallet is soft-limited. When true, getEntitlement returns
+    /// hasAccess=true past the limit; vendors decide whether to enforce. Defaults
+    /// to false.
+    /// </summary>
+    public bool? HasSoftLimit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("hasSoftLimit");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("hasSoftLimit", value);
+        }
+    }
+
+    /// <summary>
     /// Widget types where this entitlement is hidden
     /// </summary>
     public IReadOnlyList<ApiEnum<string, CreditHiddenFromWidget>>? HiddenFromWidgets
@@ -1675,6 +1739,7 @@ public sealed record class Credit : JsonModel
         _ = this.DependencyFeatureID;
         _ = this.Description;
         _ = this.DisplayNameOverride;
+        _ = this.HasSoftLimit;
         foreach (var item in this.HiddenFromWidgets ?? [])
         {
             item.Validate();

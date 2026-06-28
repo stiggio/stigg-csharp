@@ -244,6 +244,27 @@ public record class SubscriptionProvisionParams : ParamsBase
         init { this._rawBodyData.Set("budget", value); }
     }
 
+    /// <summary>
+    /// Subscription cancellation date
+    /// </summary>
+    public System::DateTimeOffset? CancellationDate
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<System::DateTimeOffset>("cancellationDate");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawBodyData.Set("cancellationDate", value);
+        }
+    }
+
     public IReadOnlyList<SubscriptionProvisionParamsCharge>? Charges
     {
         get
@@ -520,6 +541,42 @@ public record class SubscriptionProvisionParams : ParamsBase
             }
 
             this._rawBodyData.Set("unitQuantity", value);
+        }
+    }
+
+    public string? XAccountID
+    {
+        get
+        {
+            this._rawHeaderData.Freeze();
+            return this._rawHeaderData.GetNullableClass<string>("X-ACCOUNT-ID");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawHeaderData.Set("X-ACCOUNT-ID", value);
+        }
+    }
+
+    public string? XEnvironmentID
+    {
+        get
+        {
+            this._rawHeaderData.Freeze();
+            return this._rawHeaderData.GetNullableClass<string>("X-ENVIRONMENT-ID");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawHeaderData.Set("X-ENVIRONMENT-ID", value);
         }
     }
 

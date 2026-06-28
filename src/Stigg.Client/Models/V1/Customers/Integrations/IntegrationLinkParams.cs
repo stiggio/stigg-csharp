@@ -70,6 +70,42 @@ public record class IntegrationLinkParams : ParamsBase
         init { this._rawBodyData.Set("vendorIdentifier", value); }
     }
 
+    public string? XAccountID
+    {
+        get
+        {
+            this._rawHeaderData.Freeze();
+            return this._rawHeaderData.GetNullableClass<string>("X-ACCOUNT-ID");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawHeaderData.Set("X-ACCOUNT-ID", value);
+        }
+    }
+
+    public string? XEnvironmentID
+    {
+        get
+        {
+            this._rawHeaderData.Freeze();
+            return this._rawHeaderData.GetNullableClass<string>("X-ENVIRONMENT-ID");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawHeaderData.Set("X-ENVIRONMENT-ID", value);
+        }
+    }
+
     public IntegrationLinkParams() { }
 
 #pragma warning disable CS8618

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
@@ -37,6 +38,8 @@ public class PromotionalEntitlementCreateParamsTest : TestBase
                     ),
                 },
             ],
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedID = "x";
@@ -62,6 +65,8 @@ public class PromotionalEntitlementCreateParamsTest : TestBase
                 ),
             },
         ];
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(
@@ -72,6 +77,84 @@ public class PromotionalEntitlementCreateParamsTest : TestBase
         {
             Assert.Equal(expectedPromotionalEntitlements[i], parameters.PromotionalEntitlements[i]);
         }
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new PromotionalEntitlementCreateParams
+        {
+            ID = "x",
+            PromotionalEntitlements =
+            [
+                new()
+                {
+                    CustomEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    EnumValues = ["string"],
+                    FeatureID = "featureId",
+                    HasSoftLimit = true,
+                    HasUnlimitedUsage = true,
+                    IsVisible = true,
+                    MonthlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),
+                    Period = Period.V1Week,
+                    ResetPeriod = ResetPeriod.Year,
+                    UsageLimit = -9007199254740991,
+                    WeeklyResetPeriodConfiguration = new(
+                        WeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                    ),
+                    YearlyResetPeriodConfiguration = new(
+                        YearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                    ),
+                },
+            ],
+        };
+
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
+    {
+        var parameters = new PromotionalEntitlementCreateParams
+        {
+            ID = "x",
+            PromotionalEntitlements =
+            [
+                new()
+                {
+                    CustomEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    EnumValues = ["string"],
+                    FeatureID = "featureId",
+                    HasSoftLimit = true,
+                    HasUnlimitedUsage = true,
+                    IsVisible = true,
+                    MonthlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),
+                    Period = Period.V1Week,
+                    ResetPeriod = ResetPeriod.Year,
+                    UsageLimit = -9007199254740991,
+                    WeeklyResetPeriodConfiguration = new(
+                        WeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                    ),
+                    YearlyResetPeriodConfiguration = new(
+                        YearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                    ),
+                },
+            ],
+
+            // Null should be interpreted as omitted for these properties
+            XAccountID = null,
+            XEnvironmentID = null,
+        };
+
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -108,10 +191,49 @@ public class PromotionalEntitlementCreateParamsTest : TestBase
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://api.stigg.io/api/v1/customers/x/promotional-entitlements"),
+                new Uri("https://edge.api.stigg.io/api/v1/customers/x/promotional-entitlements"),
                 url
             )
         );
+    }
+
+    [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        PromotionalEntitlementCreateParams parameters = new()
+        {
+            ID = "x",
+            PromotionalEntitlements =
+            [
+                new()
+                {
+                    CustomEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    EnumValues = ["string"],
+                    FeatureID = "featureId",
+                    HasSoftLimit = true,
+                    HasUnlimitedUsage = true,
+                    IsVisible = true,
+                    MonthlyResetPeriodConfiguration = new(AccordingTo.SubscriptionStart),
+                    Period = Period.V1Week,
+                    ResetPeriod = ResetPeriod.Year,
+                    UsageLimit = -9007199254740991,
+                    WeeklyResetPeriodConfiguration = new(
+                        WeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                    ),
+                    YearlyResetPeriodConfiguration = new(
+                        YearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
+                    ),
+                },
+            ],
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -142,6 +264,8 @@ public class PromotionalEntitlementCreateParamsTest : TestBase
                     ),
                 },
             ],
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         PromotionalEntitlementCreateParams copied = new(parameters);

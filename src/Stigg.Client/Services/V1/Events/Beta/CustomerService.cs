@@ -1,6 +1,10 @@
 using System;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 using Stigg.Client.Core;
-using Stigg.Client.Services.V1.Events.Beta.Customers;
+using Stigg.Client.Exceptions;
+using Stigg.Client.Models.V1.Events.Beta.Customers;
 
 namespace Stigg.Client.Services.V1.Events.Beta;
 
@@ -28,27 +32,30 @@ public sealed class CustomerService : ICustomerService
         _client = client;
 
         _withRawResponse = new(() => new CustomerServiceWithRawResponse(client.WithRawResponse));
-        _entitlements = new(() => new EntitlementService(client));
-        _entities = new(() => new EntityService(client));
-        _assignments = new(() => new AssignmentService(client));
     }
 
-    readonly Lazy<IEntitlementService> _entitlements;
-    public IEntitlementService Entitlements
+    /// <inheritdoc/>
+    public async Task<CustomerRetrieveGovernanceResponse> RetrieveGovernance(
+        CustomerRetrieveGovernanceParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
-        get { return _entitlements.Value; }
+        using var response = await this
+            .WithRawResponse.RetrieveGovernance(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
     }
 
-    readonly Lazy<IEntityService> _entities;
-    public IEntityService Entities
+    /// <inheritdoc/>
+    public Task<CustomerRetrieveGovernanceResponse> RetrieveGovernance(
+        string id,
+        CustomerRetrieveGovernanceParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
     {
-        get { return _entities.Value; }
-    }
+        parameters ??= new();
 
-    readonly Lazy<IAssignmentService> _assignments;
-    public IAssignmentService Assignments
-    {
-        get { return _assignments.Value; }
+        return this.RetrieveGovernance(parameters with { ID = id }, cancellationToken);
     }
 }
 
@@ -66,27 +73,50 @@ public sealed class CustomerServiceWithRawResponse : ICustomerServiceWithRawResp
     public CustomerServiceWithRawResponse(IStiggClientWithRawResponse client)
     {
         _client = client;
-
-        _entitlements = new(() => new EntitlementServiceWithRawResponse(client));
-        _entities = new(() => new EntityServiceWithRawResponse(client));
-        _assignments = new(() => new AssignmentServiceWithRawResponse(client));
     }
 
-    readonly Lazy<IEntitlementServiceWithRawResponse> _entitlements;
-    public IEntitlementServiceWithRawResponse Entitlements
+    /// <inheritdoc/>
+    public async Task<HttpResponse<CustomerRetrieveGovernanceResponse>> RetrieveGovernance(
+        CustomerRetrieveGovernanceParams parameters,
+        CancellationToken cancellationToken = default
+    )
     {
-        get { return _entitlements.Value; }
+        if (parameters.ID == null)
+        {
+            throw new StiggInvalidDataException("'parameters.ID' cannot be null");
+        }
+
+        HttpRequest<CustomerRetrieveGovernanceParams> request = new()
+        {
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var deserializedResponse = await response
+                    .Deserialize<CustomerRetrieveGovernanceResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    deserializedResponse.Validate();
+                }
+                return deserializedResponse;
+            }
+        );
     }
 
-    readonly Lazy<IEntityServiceWithRawResponse> _entities;
-    public IEntityServiceWithRawResponse Entities
+    /// <inheritdoc/>
+    public Task<HttpResponse<CustomerRetrieveGovernanceResponse>> RetrieveGovernance(
+        string id,
+        CustomerRetrieveGovernanceParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
     {
-        get { return _entities.Value; }
-    }
+        parameters ??= new();
 
-    readonly Lazy<IAssignmentServiceWithRawResponse> _assignments;
-    public IAssignmentServiceWithRawResponse Assignments
-    {
-        get { return _assignments.Value; }
+        return this.RetrieveGovernance(parameters with { ID = id }, cancellationToken);
     }
 }

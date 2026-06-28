@@ -29,19 +29,12 @@ public sealed class BetaService : IBetaService
 
         _withRawResponse = new(() => new BetaServiceWithRawResponse(client.WithRawResponse));
         _customers = new(() => new Beta::CustomerService(client));
-        _entityTypes = new(() => new Beta::EntityTypeService(client));
     }
 
     readonly Lazy<Beta::ICustomerService> _customers;
     public Beta::ICustomerService Customers
     {
         get { return _customers.Value; }
-    }
-
-    readonly Lazy<Beta::IEntityTypeService> _entityTypes;
-    public Beta::IEntityTypeService EntityTypes
-    {
-        get { return _entityTypes.Value; }
     }
 }
 
@@ -61,18 +54,11 @@ public sealed class BetaServiceWithRawResponse : IBetaServiceWithRawResponse
         _client = client;
 
         _customers = new(() => new Beta::CustomerServiceWithRawResponse(client));
-        _entityTypes = new(() => new Beta::EntityTypeServiceWithRawResponse(client));
     }
 
     readonly Lazy<Beta::ICustomerServiceWithRawResponse> _customers;
     public Beta::ICustomerServiceWithRawResponse Customers
     {
         get { return _customers.Value; }
-    }
-
-    readonly Lazy<Beta::IEntityTypeServiceWithRawResponse> _entityTypes;
-    public Beta::IEntityTypeServiceWithRawResponse EntityTypes
-    {
-        get { return _entityTypes.Value; }
     }
 }

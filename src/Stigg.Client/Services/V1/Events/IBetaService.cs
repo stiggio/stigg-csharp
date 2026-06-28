@@ -25,8 +25,6 @@ public interface IBetaService
     IBetaService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     Beta::ICustomerService Customers { get; }
-
-    Beta::IEntityTypeService EntityTypes { get; }
 }
 
 /// <summary>
@@ -43,6 +41,4 @@ public interface IBetaServiceWithRawResponse
     IBetaServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     Beta::ICustomerServiceWithRawResponse Customers { get; }
-
-    Beta::IEntityTypeServiceWithRawResponse EntityTypes { get; }
 }

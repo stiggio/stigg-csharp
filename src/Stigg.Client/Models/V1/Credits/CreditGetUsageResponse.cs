@@ -101,6 +101,21 @@ public sealed record class CreditGetUsageResponseData : JsonModel
     }
 
     /// <summary>
+    /// Cursor-based pagination for the returned series. `next`/`prev` are opaque
+    /// cursors; pass them back as `after`/`before` to traverse pages. The series
+    /// axis is `groupBy` when provided, otherwise `featureId`
+    /// </summary>
+    public required Pagination Pagination
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<Pagination>("pagination");
+        }
+        init { this._rawData.Set("pagination", value); }
+    }
+
+    /// <summary>
     /// Credit usage series grouped by feature
     /// </summary>
     public required IReadOnlyList<Series> Series
@@ -123,6 +138,7 @@ public sealed record class CreditGetUsageResponseData : JsonModel
     public override void Validate()
     {
         this.Currency?.Validate();
+        this.Pagination.Validate();
         foreach (var item in this.Series)
         {
             item.Validate();
@@ -281,6 +297,82 @@ class CurrencyFromRaw : IFromRawJson<Currency>
     /// <inheritdoc/>
     public Currency FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Currency.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Cursor-based pagination for the returned series. `next`/`prev` are opaque cursors;
+/// pass them back as `after`/`before` to traverse pages. The series axis is `groupBy`
+/// when provided, otherwise `featureId`
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<Pagination, PaginationFromRaw>))]
+public sealed record class Pagination : JsonModel
+{
+    /// <summary>
+    /// Cursor for fetching the next page of results, or null if no additional pages exist
+    /// </summary>
+    public required string? Next
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("next");
+        }
+        init { this._rawData.Set("next", value); }
+    }
+
+    /// <summary>
+    /// Cursor for fetching the previous page of results, or null if at the beginning
+    /// </summary>
+    public required string? Prev
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("prev");
+        }
+        init { this._rawData.Set("prev", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.Next;
+        _ = this.Prev;
+    }
+
+    public Pagination() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public Pagination(Pagination pagination)
+        : base(pagination) { }
+#pragma warning restore CS8618
+
+    public Pagination(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    Pagination(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="PaginationFromRaw.FromRawUnchecked"/>
+    public static Pagination FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class PaginationFromRaw : IFromRawJson<Pagination>
+{
+    /// <inheritdoc/>
+    public Pagination FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Pagination.FromRawUnchecked(rawData);
 }
 
 /// <summary>

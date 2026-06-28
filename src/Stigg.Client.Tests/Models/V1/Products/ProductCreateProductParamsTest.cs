@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using Stigg.Client.Models.V1.Products;
 
 namespace Stigg.Client.Tests.Models.V1.Products;
@@ -16,6 +17,8 @@ public class ProductCreateProductParamsTest : TestBase
             Description = "description",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MultipleSubscriptions = true,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedID = "id";
@@ -23,6 +26,8 @@ public class ProductCreateProductParamsTest : TestBase
         string expectedDescription = "description";
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         bool expectedMultipleSubscriptions = true;
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedDisplayName, parameters.DisplayName);
@@ -36,6 +41,8 @@ public class ProductCreateProductParamsTest : TestBase
             Assert.Equal(value, parameters.Metadata[item.Key]);
         }
         Assert.Equal(expectedMultipleSubscriptions, parameters.MultipleSubscriptions);
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
 
     [Fact]
@@ -51,6 +58,10 @@ public class ProductCreateProductParamsTest : TestBase
 
         Assert.Null(parameters.MultipleSubscriptions);
         Assert.False(parameters.RawBodyData.ContainsKey("multipleSubscriptions"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -65,10 +76,16 @@ public class ProductCreateProductParamsTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             MultipleSubscriptions = null,
+            XAccountID = null,
+            XEnvironmentID = null,
         };
 
         Assert.Null(parameters.MultipleSubscriptions);
         Assert.False(parameters.RawBodyData.ContainsKey("multipleSubscriptions"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -79,6 +96,8 @@ public class ProductCreateProductParamsTest : TestBase
             ID = "id",
             DisplayName = "displayName",
             MultipleSubscriptions = true,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         Assert.Null(parameters.Description);
@@ -95,6 +114,8 @@ public class ProductCreateProductParamsTest : TestBase
             ID = "id",
             DisplayName = "displayName",
             MultipleSubscriptions = true,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
 
             Description = null,
             Metadata = null,
@@ -113,7 +134,25 @@ public class ProductCreateProductParamsTest : TestBase
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
-        Assert.True(TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/products"), url));
+        Assert.True(TestBase.UrisEqual(new Uri("https://edge.api.stigg.io/api/v1/products"), url));
+    }
+
+    [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        ProductCreateProductParams parameters = new()
+        {
+            ID = "id",
+            DisplayName = "displayName",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -126,6 +165,8 @@ public class ProductCreateProductParamsTest : TestBase
             Description = "description",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             MultipleSubscriptions = true,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         ProductCreateProductParams copied = new(parameters);

@@ -34,6 +34,48 @@ public record class CreditGetUsageParams : ParamsBase
     }
 
     /// <summary>
+    /// Return items that come after this cursor
+    /// </summary>
+    public string? After
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("after");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("after", value);
+        }
+    }
+
+    /// <summary>
+    /// Return items that come before this cursor
+    /// </summary>
+    public string? Before
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("before");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("before", value);
+        }
+    }
+
+    /// <summary>
     /// Filter by currency ID
     /// </summary>
     public string? CurrencyID
@@ -99,6 +141,27 @@ public record class CreditGetUsageParams : ParamsBase
     }
 
     /// <summary>
+    /// Maximum number of items to return
+    /// </summary>
+    public long? Limit
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<long>("limit");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("limit", value);
+        }
+    }
+
+    /// <summary>
     /// Filter by resource ID
     /// </summary>
     public string? ResourceID
@@ -160,6 +223,42 @@ public record class CreditGetUsageParams : ParamsBase
             }
 
             this._rawQueryData.Set("timeRange", value);
+        }
+    }
+
+    public string? XAccountID
+    {
+        get
+        {
+            this._rawHeaderData.Freeze();
+            return this._rawHeaderData.GetNullableClass<string>("X-ACCOUNT-ID");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawHeaderData.Set("X-ACCOUNT-ID", value);
+        }
+    }
+
+    public string? XEnvironmentID
+    {
+        get
+        {
+            this._rawHeaderData.Freeze();
+            return this._rawHeaderData.GetNullableClass<string>("X-ENVIRONMENT-ID");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawHeaderData.Set("X-ENVIRONMENT-ID", value);
         }
     }
 

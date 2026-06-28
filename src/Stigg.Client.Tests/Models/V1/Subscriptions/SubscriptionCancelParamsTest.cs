@@ -1,4 +1,5 @@
 using System;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
@@ -18,6 +19,8 @@ public class SubscriptionCancelParamsTest : TestBase
             CancellationTime = CancellationTime.EndOfBillingPeriod,
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Prorate = true,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedID = "x";
@@ -26,12 +29,16 @@ public class SubscriptionCancelParamsTest : TestBase
             CancellationTime.EndOfBillingPeriod;
         DateTimeOffset expectedEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         bool expectedProrate = true;
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedCancellationAction, parameters.CancellationAction);
         Assert.Equal(expectedCancellationTime, parameters.CancellationTime);
         Assert.Equal(expectedEndDate, parameters.EndDate);
         Assert.Equal(expectedProrate, parameters.Prorate);
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
 
     [Fact]
@@ -47,6 +54,10 @@ public class SubscriptionCancelParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("endDate"));
         Assert.Null(parameters.Prorate);
         Assert.False(parameters.RawBodyData.ContainsKey("prorate"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -61,6 +72,8 @@ public class SubscriptionCancelParamsTest : TestBase
             CancellationTime = null,
             EndDate = null,
             Prorate = null,
+            XAccountID = null,
+            XEnvironmentID = null,
         };
 
         Assert.Null(parameters.CancellationAction);
@@ -71,6 +84,10 @@ public class SubscriptionCancelParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("endDate"));
         Assert.Null(parameters.Prorate);
         Assert.False(parameters.RawBodyData.ContainsKey("prorate"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -81,8 +98,28 @@ public class SubscriptionCancelParamsTest : TestBase
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
         Assert.True(
-            TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/subscriptions/x/cancel"), url)
+            TestBase.UrisEqual(
+                new Uri("https://edge.api.stigg.io/api/v1/subscriptions/x/cancel"),
+                url
+            )
         );
+    }
+
+    [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        SubscriptionCancelParams parameters = new()
+        {
+            ID = "x",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -95,6 +132,8 @@ public class SubscriptionCancelParamsTest : TestBase
             CancellationTime = CancellationTime.EndOfBillingPeriod,
             EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Prorate = true,
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         SubscriptionCancelParams copied = new(parameters);

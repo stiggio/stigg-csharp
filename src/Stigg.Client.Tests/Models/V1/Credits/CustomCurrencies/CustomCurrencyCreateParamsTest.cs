@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Models.V1.Credits.CustomCurrencies;
@@ -19,6 +20,8 @@ public class CustomCurrencyCreateParamsTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Symbol = "symbol",
             Units = new() { Plural = "plural", Singular = "singular" },
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedID = "id";
@@ -27,6 +30,8 @@ public class CustomCurrencyCreateParamsTest : TestBase
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         string expectedSymbol = "symbol";
         Units expectedUnits = new() { Plural = "plural", Singular = "singular" };
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedDisplayName, parameters.DisplayName);
@@ -41,6 +46,8 @@ public class CustomCurrencyCreateParamsTest : TestBase
         }
         Assert.Equal(expectedSymbol, parameters.Symbol);
         Assert.Equal(expectedUnits, parameters.Units);
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
 
     [Fact]
@@ -56,6 +63,10 @@ public class CustomCurrencyCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("symbol"));
         Assert.Null(parameters.Units);
         Assert.False(parameters.RawBodyData.ContainsKey("units"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -71,6 +82,8 @@ public class CustomCurrencyCreateParamsTest : TestBase
             Metadata = null,
             Symbol = null,
             Units = null,
+            XAccountID = null,
+            XEnvironmentID = null,
         };
 
         Assert.Null(parameters.Description);
@@ -81,6 +94,10 @@ public class CustomCurrencyCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("symbol"));
         Assert.Null(parameters.Units);
         Assert.False(parameters.RawBodyData.ContainsKey("units"));
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -92,10 +109,28 @@ public class CustomCurrencyCreateParamsTest : TestBase
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://api.stigg.io/api/v1/credits/custom-currencies"),
+                new Uri("https://edge.api.stigg.io/api/v1/credits/custom-currencies"),
                 url
             )
         );
+    }
+
+    [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        CustomCurrencyCreateParams parameters = new()
+        {
+            ID = "id",
+            DisplayName = "displayName",
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
     }
 
     [Fact]
@@ -109,6 +144,8 @@ public class CustomCurrencyCreateParamsTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Symbol = "symbol",
             Units = new() { Plural = "plural", Singular = "singular" },
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         CustomCurrencyCreateParams copied = new(parameters);
