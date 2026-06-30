@@ -409,9 +409,7 @@ public class CustomerUpdateParamsTest : TestBase
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
-        Assert.True(
-            TestBase.UrisEqual(new Uri("https://edge.api.stigg.io/api/v1/customers/x"), url)
-        );
+        Assert.True(TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/customers/x"), url));
     }
 
     [Fact]
@@ -960,6 +958,7 @@ public class VendorIdentifierTest : TestBase
     [InlineData(VendorIdentifier.AppStore)]
     [InlineData(VendorIdentifier.Received)]
     [InlineData(VendorIdentifier.Prequel)]
+    [InlineData(VendorIdentifier.Airwallex)]
     public void Validation_Works(VendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -992,6 +991,7 @@ public class VendorIdentifierTest : TestBase
     [InlineData(VendorIdentifier.AppStore)]
     [InlineData(VendorIdentifier.Received)]
     [InlineData(VendorIdentifier.Prequel)]
+    [InlineData(VendorIdentifier.Airwallex)]
     public void SerializationRoundtrip_Works(VendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us

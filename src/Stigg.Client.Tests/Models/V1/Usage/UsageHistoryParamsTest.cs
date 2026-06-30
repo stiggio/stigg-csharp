@@ -144,7 +144,7 @@ public class UsageHistoryParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://edge.api.stigg.io/api/v1/usage/customerId/history/featureId?startDate=2019-12-27T18%3a11%3a19.117%2b00%3a00&endDate=2019-12-27T18%3a11%3a19.117%2b00%3a00&groupBy=groupBy&resourceId=resourceId"
+                    "https://api.stigg.io/api/v1/usage/customerId/history/featureId?startDate=2019-12-27T18%3a11%3a19.117%2b00%3a00&endDate=2019-12-27T18%3a11%3a19.117%2b00%3a00&groupBy=groupBy&resourceId=resourceId"
                 ),
                 url
             )

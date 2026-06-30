@@ -76,7 +76,7 @@ public class CustomerRetrieveEntitlementsParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://edge.api.stigg.io/api/v1/customers/x/entitlements?resourceId=resourceId"
+                    "https://api.stigg.io/api/v1/customers/x/entitlements?resourceId=resourceId"
                 ),
                 url
             )

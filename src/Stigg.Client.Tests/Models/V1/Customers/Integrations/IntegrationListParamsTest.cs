@@ -112,7 +112,7 @@ public class IntegrationListParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://edge.api.stigg.io/api/v1/customers/x/integrations?after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&limit=1&vendorIdentifier=AUTH0"
+                    "https://api.stigg.io/api/v1/customers/x/integrations?after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&limit=1&vendorIdentifier=AUTH0"
                 ),
                 url
             )
@@ -171,6 +171,7 @@ public class VendorIdentifierTest : TestBase
     [InlineData(VendorIdentifier.AppStore)]
     [InlineData(VendorIdentifier.Received)]
     [InlineData(VendorIdentifier.Prequel)]
+    [InlineData(VendorIdentifier.Airwallex)]
     public void Validation_Works(VendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -203,6 +204,7 @@ public class VendorIdentifierTest : TestBase
     [InlineData(VendorIdentifier.AppStore)]
     [InlineData(VendorIdentifier.Received)]
     [InlineData(VendorIdentifier.Prequel)]
+    [InlineData(VendorIdentifier.Airwallex)]
     public void SerializationRoundtrip_Works(VendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us

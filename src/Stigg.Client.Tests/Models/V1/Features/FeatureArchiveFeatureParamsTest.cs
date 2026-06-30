@@ -62,7 +62,7 @@ public class FeatureArchiveFeatureParamsTest : TestBase
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
         Assert.True(
-            TestBase.UrisEqual(new Uri("https://edge.api.stigg.io/api/v1/features/x/archive"), url)
+            TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/features/x/archive"), url)
         );
     }
 

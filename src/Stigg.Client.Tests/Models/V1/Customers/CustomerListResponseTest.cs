@@ -1719,6 +1719,7 @@ public class CustomerListResponseIntegrationVendorIdentifierTest : TestBase
     [InlineData(CustomerListResponseIntegrationVendorIdentifier.AppStore)]
     [InlineData(CustomerListResponseIntegrationVendorIdentifier.Received)]
     [InlineData(CustomerListResponseIntegrationVendorIdentifier.Prequel)]
+    [InlineData(CustomerListResponseIntegrationVendorIdentifier.Airwallex)]
     public void Validation_Works(CustomerListResponseIntegrationVendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -1750,6 +1751,7 @@ public class CustomerListResponseIntegrationVendorIdentifierTest : TestBase
     [InlineData(CustomerListResponseIntegrationVendorIdentifier.AppStore)]
     [InlineData(CustomerListResponseIntegrationVendorIdentifier.Received)]
     [InlineData(CustomerListResponseIntegrationVendorIdentifier.Prequel)]
+    [InlineData(CustomerListResponseIntegrationVendorIdentifier.Airwallex)]
     public void SerializationRoundtrip_Works(
         CustomerListResponseIntegrationVendorIdentifier rawValue
     )
