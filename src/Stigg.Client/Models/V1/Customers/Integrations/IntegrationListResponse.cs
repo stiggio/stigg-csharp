@@ -135,6 +135,7 @@ public enum IntegrationListResponseVendorIdentifier
     AppStore,
     Received,
     Prequel,
+    Airwallex,
 }
 
 sealed class IntegrationListResponseVendorIdentifierConverter
@@ -160,6 +161,7 @@ sealed class IntegrationListResponseVendorIdentifierConverter
             "APP_STORE" => IntegrationListResponseVendorIdentifier.AppStore,
             "RECEIVED" => IntegrationListResponseVendorIdentifier.Received,
             "PREQUEL" => IntegrationListResponseVendorIdentifier.Prequel,
+            "AIRWALLEX" => IntegrationListResponseVendorIdentifier.Airwallex,
             _ => (IntegrationListResponseVendorIdentifier)(-1),
         };
     }
@@ -186,6 +188,7 @@ sealed class IntegrationListResponseVendorIdentifierConverter
                 IntegrationListResponseVendorIdentifier.AppStore => "APP_STORE",
                 IntegrationListResponseVendorIdentifier.Received => "RECEIVED",
                 IntegrationListResponseVendorIdentifier.Prequel => "PREQUEL",
+                IntegrationListResponseVendorIdentifier.Airwallex => "AIRWALLEX",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
