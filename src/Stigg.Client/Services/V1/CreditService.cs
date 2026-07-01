@@ -34,6 +34,7 @@ public sealed class CreditService : ICreditService
         _withRawResponse = new(() => new CreditServiceWithRawResponse(client.WithRawResponse));
         _grants = new(() => new GrantService(client));
         _customCurrencies = new(() => new CustomCurrencyService(client));
+        _consumption = new(() => new ConsumptionService(client));
     }
 
     readonly Lazy<IGrantService> _grants;
@@ -46,6 +47,12 @@ public sealed class CreditService : ICreditService
     public ICustomCurrencyService CustomCurrencies
     {
         get { return _customCurrencies.Value; }
+    }
+
+    readonly Lazy<IConsumptionService> _consumption;
+    public IConsumptionService Consumption
+    {
+        get { return _consumption.Value; }
     }
 
     /// <inheritdoc/>
@@ -102,6 +109,7 @@ public sealed class CreditServiceWithRawResponse : ICreditServiceWithRawResponse
 
         _grants = new(() => new GrantServiceWithRawResponse(client));
         _customCurrencies = new(() => new CustomCurrencyServiceWithRawResponse(client));
+        _consumption = new(() => new ConsumptionServiceWithRawResponse(client));
     }
 
     readonly Lazy<IGrantServiceWithRawResponse> _grants;
@@ -114,6 +122,12 @@ public sealed class CreditServiceWithRawResponse : ICreditServiceWithRawResponse
     public ICustomCurrencyServiceWithRawResponse CustomCurrencies
     {
         get { return _customCurrencies.Value; }
+    }
+
+    readonly Lazy<IConsumptionServiceWithRawResponse> _consumption;
+    public IConsumptionServiceWithRawResponse Consumption
+    {
+        get { return _consumption.Value; }
     }
 
     /// <inheritdoc/>
