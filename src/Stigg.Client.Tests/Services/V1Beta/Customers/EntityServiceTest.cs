@@ -61,21 +61,21 @@ public class EntityServiceTest : TestBase
                     new()
                     {
                         ID = "user-7f3a0c1d",
+                        EntityTypeID = "user",
                         Metadata = new Dictionary<string, string>()
                         {
                             { "email", "jane@acme.com" },
                             { "role", "admin" },
                         },
-                        TypeRefID = "user",
                     },
                     new()
                     {
                         ID = "user-c4d1b2e9",
+                        EntityTypeID = "user",
                         Metadata = new Dictionary<string, string>()
                         {
                             { "email", "john@acme.com" },
                         },
-                        TypeRefID = "user",
                     },
                 ],
             },

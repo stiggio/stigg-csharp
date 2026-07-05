@@ -63,7 +63,7 @@ public record class AssignmentListParams : ParamsBase
     }
 
     /// <summary>
-    /// Filter assignments to a specific capability refId
+    /// Filter assignments to a specific capability ID
     /// </summary>
     public string? CapabilityID
     {
@@ -84,7 +84,7 @@ public record class AssignmentListParams : ParamsBase
     }
 
     /// <summary>
-    /// Filter assignments to a specific entity refId
+    /// Filter assignments to a specific entity ID
     /// </summary>
     public string? EntityID
     {

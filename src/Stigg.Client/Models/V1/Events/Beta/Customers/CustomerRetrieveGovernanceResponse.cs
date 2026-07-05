@@ -146,14 +146,14 @@ public sealed record class Data : JsonModel
     /// <summary>
     /// External id of the entity type (e.g. `team`, `user`).
     /// </summary>
-    public required string EntityType
+    public required string EntityTypeID
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("entityType");
+            return this._rawData.GetNotNullClass<string>("entityTypeId");
         }
-        init { this._rawData.Set("entityType", value); }
+        init { this._rawData.Set("entityTypeId", value); }
     }
 
     /// <summary>
@@ -246,7 +246,7 @@ public sealed record class Data : JsonModel
     }
 
     /// <summary>
-    /// The metered currency refId (present when the configured capability is a credit currency).
+    /// The metered currency ID (present when the configured capability is a credit currency).
     /// </summary>
     public string? CurrencyID
     {
@@ -267,7 +267,7 @@ public sealed record class Data : JsonModel
     }
 
     /// <summary>
-    /// The metered feature refId (present when the configured capability is a feature).
+    /// The metered feature ID (present when the configured capability is a feature).
     /// </summary>
     public string? FeatureID
     {
@@ -293,7 +293,7 @@ public sealed record class Data : JsonModel
         _ = this.Cadence;
         _ = this.CurrentUsage;
         _ = this.EntityID;
-        _ = this.EntityType;
+        _ = this.EntityTypeID;
         _ = this.ParentID;
         _ = this.ScopeEntityIds;
         _ = this.UsageLimit;
