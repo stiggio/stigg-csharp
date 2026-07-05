@@ -134,7 +134,7 @@ public class EntitlementCheckParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://api.stigg.io/api/v1-beta/customers/x/entitlements/check?currencyId=x&dimensions%5bfoo%5d=string&featureId=x&requestedUsage=0&requestedValues=string&resourceId=x"
+                    "https://edge.api.stigg.io/api/v1-beta/customers/x/entitlements/check?currencyId=x&dimensions%5bfoo%5d=string&featureId=x&requestedUsage=0&requestedValues=string&resourceId=x"
                 ),
                 url
             )

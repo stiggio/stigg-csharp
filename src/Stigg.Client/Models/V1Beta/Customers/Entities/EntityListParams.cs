@@ -64,6 +64,27 @@ public record class EntityListParams : ParamsBase
     }
 
     /// <summary>
+    /// Filter results to entities of a specific entity type, by the type's ID
+    /// </summary>
+    public string? EntityTypeID
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("entityTypeId");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("entityTypeId", value);
+        }
+    }
+
+    /// <summary>
     /// Whether to include archived entities. One of: true, false
     /// </summary>
     public ApiEnum<string, IncludeArchived>? IncludeArchived
@@ -104,27 +125,6 @@ public record class EntityListParams : ParamsBase
             }
 
             this._rawQueryData.Set("limit", value);
-        }
-    }
-
-    /// <summary>
-    /// Filter results to entities of a specific entity type, by the type's refId
-    /// </summary>
-    public string? TypeRefID
-    {
-        get
-        {
-            this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableClass<string>("typeRefId");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawQueryData.Set("typeRefId", value);
         }
     }
 
