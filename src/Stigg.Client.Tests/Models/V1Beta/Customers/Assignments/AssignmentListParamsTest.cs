@@ -14,8 +14,9 @@ public class AssignmentListParamsTest : TestBase
             ID = "id",
             After = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Before = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            CapabilityID = "capabilityId",
+            CurrencyID = "currencyId",
             EntityID = "entityId",
+            FeatureID = "featureId",
             Limit = 1,
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",
@@ -24,8 +25,9 @@ public class AssignmentListParamsTest : TestBase
         string expectedID = "id";
         string expectedAfter = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
         string expectedBefore = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
-        string expectedCapabilityID = "capabilityId";
+        string expectedCurrencyID = "currencyId";
         string expectedEntityID = "entityId";
+        string expectedFeatureID = "featureId";
         long expectedLimit = 1;
         string expectedXAccountID = "X-ACCOUNT-ID";
         string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
@@ -33,8 +35,9 @@ public class AssignmentListParamsTest : TestBase
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedAfter, parameters.After);
         Assert.Equal(expectedBefore, parameters.Before);
-        Assert.Equal(expectedCapabilityID, parameters.CapabilityID);
+        Assert.Equal(expectedCurrencyID, parameters.CurrencyID);
         Assert.Equal(expectedEntityID, parameters.EntityID);
+        Assert.Equal(expectedFeatureID, parameters.FeatureID);
         Assert.Equal(expectedLimit, parameters.Limit);
         Assert.Equal(expectedXAccountID, parameters.XAccountID);
         Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
@@ -49,10 +52,12 @@ public class AssignmentListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("after"));
         Assert.Null(parameters.Before);
         Assert.False(parameters.RawQueryData.ContainsKey("before"));
-        Assert.Null(parameters.CapabilityID);
-        Assert.False(parameters.RawQueryData.ContainsKey("capabilityId"));
+        Assert.Null(parameters.CurrencyID);
+        Assert.False(parameters.RawQueryData.ContainsKey("currencyId"));
         Assert.Null(parameters.EntityID);
         Assert.False(parameters.RawQueryData.ContainsKey("entityId"));
+        Assert.Null(parameters.FeatureID);
+        Assert.False(parameters.RawQueryData.ContainsKey("featureId"));
         Assert.Null(parameters.Limit);
         Assert.False(parameters.RawQueryData.ContainsKey("limit"));
         Assert.Null(parameters.XAccountID);
@@ -71,8 +76,9 @@ public class AssignmentListParamsTest : TestBase
             // Null should be interpreted as omitted for these properties
             After = null,
             Before = null,
-            CapabilityID = null,
+            CurrencyID = null,
             EntityID = null,
+            FeatureID = null,
             Limit = null,
             XAccountID = null,
             XEnvironmentID = null,
@@ -82,10 +88,12 @@ public class AssignmentListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("after"));
         Assert.Null(parameters.Before);
         Assert.False(parameters.RawQueryData.ContainsKey("before"));
-        Assert.Null(parameters.CapabilityID);
-        Assert.False(parameters.RawQueryData.ContainsKey("capabilityId"));
+        Assert.Null(parameters.CurrencyID);
+        Assert.False(parameters.RawQueryData.ContainsKey("currencyId"));
         Assert.Null(parameters.EntityID);
         Assert.False(parameters.RawQueryData.ContainsKey("entityId"));
+        Assert.Null(parameters.FeatureID);
+        Assert.False(parameters.RawQueryData.ContainsKey("featureId"));
         Assert.Null(parameters.Limit);
         Assert.False(parameters.RawQueryData.ContainsKey("limit"));
         Assert.Null(parameters.XAccountID);
@@ -102,8 +110,9 @@ public class AssignmentListParamsTest : TestBase
             ID = "id",
             After = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Before = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            CapabilityID = "capabilityId",
+            CurrencyID = "currencyId",
             EntityID = "entityId",
+            FeatureID = "featureId",
             Limit = 1,
         };
 
@@ -112,7 +121,7 @@ public class AssignmentListParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://edge.api.stigg.io/api/v1-beta/customers/id/assignments?after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&capabilityId=capabilityId&entityId=entityId&limit=1"
+                    "https://edge.api.stigg.io/api/v1-beta/customers/id/assignments?after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&currencyId=currencyId&entityId=entityId&featureId=featureId&limit=1"
                 ),
                 url
             )
@@ -144,8 +153,9 @@ public class AssignmentListParamsTest : TestBase
             ID = "id",
             After = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Before = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            CapabilityID = "capabilityId",
+            CurrencyID = "currencyId",
             EntityID = "entityId",
+            FeatureID = "featureId",
             Limit = 1,
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",
