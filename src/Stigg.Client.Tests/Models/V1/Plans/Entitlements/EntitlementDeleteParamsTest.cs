@@ -67,7 +67,7 @@ public class EntitlementDeleteParamsTest : TestBase
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://edge.api.stigg.io/api/v1/plans/planId/entitlements/id"),
+                new Uri("https://api.stigg.io/api/v1/plans/planId/entitlements/id"),
                 url
             )
         );

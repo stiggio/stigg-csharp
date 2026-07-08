@@ -63,7 +63,7 @@ public class InvoiceMarkAsPaidParamsTest : TestBase
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://edge.api.stigg.io/api/v1/subscriptions/x/invoice/paid"),
+                new Uri("https://api.stigg.io/api/v1/subscriptions/x/invoice/paid"),
                 url
             )
         );

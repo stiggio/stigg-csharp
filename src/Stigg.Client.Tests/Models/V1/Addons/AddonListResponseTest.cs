@@ -22,7 +22,7 @@ public class AddonListResponseTest : TestBase
             DisplayName = "displayName",
             Entitlements = [new() { ID = "id", Type = AddonListResponseEntitlementType.Feature }],
             IsLatest = true,
-            MaxQuantity = 0,
+            MaxQuantity = 1,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PricingType = AddonListResponsePricingType.Free,
             ProductID = "productId",
@@ -42,7 +42,7 @@ public class AddonListResponseTest : TestBase
             new() { ID = "id", Type = AddonListResponseEntitlementType.Feature },
         ];
         bool expectedIsLatest = true;
-        long expectedMaxQuantity = 0;
+        long expectedMaxQuantity = 1;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, AddonListResponsePricingType> expectedPricingType =
             AddonListResponsePricingType.Free;
@@ -96,7 +96,7 @@ public class AddonListResponseTest : TestBase
             DisplayName = "displayName",
             Entitlements = [new() { ID = "id", Type = AddonListResponseEntitlementType.Feature }],
             IsLatest = true,
-            MaxQuantity = 0,
+            MaxQuantity = 1,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PricingType = AddonListResponsePricingType.Free,
             ProductID = "productId",
@@ -127,7 +127,7 @@ public class AddonListResponseTest : TestBase
             DisplayName = "displayName",
             Entitlements = [new() { ID = "id", Type = AddonListResponseEntitlementType.Feature }],
             IsLatest = true,
-            MaxQuantity = 0,
+            MaxQuantity = 1,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PricingType = AddonListResponsePricingType.Free,
             ProductID = "productId",
@@ -154,7 +154,7 @@ public class AddonListResponseTest : TestBase
             new() { ID = "id", Type = AddonListResponseEntitlementType.Feature },
         ];
         bool expectedIsLatest = true;
-        long expectedMaxQuantity = 0;
+        long expectedMaxQuantity = 1;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, AddonListResponsePricingType> expectedPricingType =
             AddonListResponsePricingType.Free;
@@ -208,7 +208,7 @@ public class AddonListResponseTest : TestBase
             DisplayName = "displayName",
             Entitlements = [new() { ID = "id", Type = AddonListResponseEntitlementType.Feature }],
             IsLatest = true,
-            MaxQuantity = 0,
+            MaxQuantity = 1,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PricingType = AddonListResponsePricingType.Free,
             ProductID = "productId",
@@ -233,7 +233,7 @@ public class AddonListResponseTest : TestBase
             DisplayName = "displayName",
             Entitlements = [new() { ID = "id", Type = AddonListResponseEntitlementType.Feature }],
             IsLatest = true,
-            MaxQuantity = 0,
+            MaxQuantity = 1,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PricingType = AddonListResponsePricingType.Free,
             ProductID = "productId",

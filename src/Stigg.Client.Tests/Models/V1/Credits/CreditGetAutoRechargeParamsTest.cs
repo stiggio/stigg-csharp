@@ -76,7 +76,7 @@ public class CreditGetAutoRechargeParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://edge.api.stigg.io/api/v1/credits/auto-recharge?currencyId=currencyId&customerId=customerId"
+                    "https://api.stigg.io/api/v1/credits/auto-recharge?currencyId=currencyId&customerId=customerId"
                 ),
                 url
             )
