@@ -71,7 +71,7 @@ public class IntegrationRetrieveParamsTest : TestBase
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://api.stigg.io/api/v1/customers/id/integrations/integrationId"),
+                new Uri("https://edge.api.stigg.io/api/v1/customers/id/integrations/integrationId"),
                 url
             )
         );
