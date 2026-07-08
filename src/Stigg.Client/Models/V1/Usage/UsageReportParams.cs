@@ -288,6 +288,27 @@ public sealed record class UsageReportParamsUsage : JsonModel
     }
 
     /// <summary>
+    /// Idempotency key
+    /// </summary>
+    public string? IdempotencyKey
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("idempotencyKey");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("idempotencyKey", value);
+        }
+    }
+
+    /// <summary>
     /// Resource id
     /// </summary>
     public string? ResourceID
@@ -337,6 +358,7 @@ public sealed record class UsageReportParamsUsage : JsonModel
                 item.Validate();
             }
         }
+        _ = this.IdempotencyKey;
         _ = this.ResourceID;
         this.UpdateBehavior?.Validate();
     }
