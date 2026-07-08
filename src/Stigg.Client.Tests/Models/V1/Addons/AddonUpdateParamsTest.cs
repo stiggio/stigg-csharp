@@ -157,7 +157,7 @@ public class AddonUpdateParamsTest : TestBase
             Dependencies = ["string"],
             Description = "description",
             DisplayName = "displayName",
-            MaxQuantity = 0,
+            MaxQuantity = 1,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = AddonUpdateParamsStatus.Draft,
             XAccountID = "X-ACCOUNT-ID",
@@ -304,7 +304,7 @@ public class AddonUpdateParamsTest : TestBase
         List<string> expectedDependencies = ["string"];
         string expectedDescription = "description";
         string expectedDisplayName = "displayName";
-        long expectedMaxQuantity = 0;
+        long expectedMaxQuantity = 1;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, AddonUpdateParamsStatus> expectedStatus = AddonUpdateParamsStatus.Draft;
         string expectedXAccountID = "X-ACCOUNT-ID";
@@ -344,7 +344,7 @@ public class AddonUpdateParamsTest : TestBase
             BillingID = "billingId",
             Dependencies = ["string"],
             Description = "description",
-            MaxQuantity = 0,
+            MaxQuantity = 1,
         };
 
         Assert.Null(parameters.Charges);
@@ -370,7 +370,7 @@ public class AddonUpdateParamsTest : TestBase
             BillingID = "billingId",
             Dependencies = ["string"],
             Description = "description",
-            MaxQuantity = 0,
+            MaxQuantity = 1,
 
             // Null should be interpreted as omitted for these properties
             Charges = null,
@@ -727,7 +727,7 @@ public class AddonUpdateParamsTest : TestBase
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
-        Assert.True(TestBase.UrisEqual(new Uri("https://edge.api.stigg.io/api/v1/addons/x"), url));
+        Assert.True(TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/addons/x"), url));
     }
 
     [Fact]
@@ -894,7 +894,7 @@ public class AddonUpdateParamsTest : TestBase
             Dependencies = ["string"],
             Description = "description",
             DisplayName = "displayName",
-            MaxQuantity = 0,
+            MaxQuantity = 1,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Status = AddonUpdateParamsStatus.Draft,
             XAccountID = "X-ACCOUNT-ID",
