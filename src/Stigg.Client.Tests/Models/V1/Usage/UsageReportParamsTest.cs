@@ -24,6 +24,7 @@ public class UsageReportParamsTest : TestBase
                     Value = -9007199254740991,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+                    IdempotencyKey = "x",
                     ResourceID = "resourceId",
                     UpdateBehavior = UpdateBehavior.Delta,
                 },
@@ -41,6 +42,7 @@ public class UsageReportParamsTest : TestBase
                 Value = -9007199254740991,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+                IdempotencyKey = "x",
                 ResourceID = "resourceId",
                 UpdateBehavior = UpdateBehavior.Delta,
             },
@@ -71,6 +73,7 @@ public class UsageReportParamsTest : TestBase
                     Value = -9007199254740991,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+                    IdempotencyKey = "x",
                     ResourceID = "resourceId",
                     UpdateBehavior = UpdateBehavior.Delta,
                 },
@@ -97,6 +100,7 @@ public class UsageReportParamsTest : TestBase
                     Value = -9007199254740991,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+                    IdempotencyKey = "x",
                     ResourceID = "resourceId",
                     UpdateBehavior = UpdateBehavior.Delta,
                 },
@@ -127,6 +131,7 @@ public class UsageReportParamsTest : TestBase
                     Value = -9007199254740991,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+                    IdempotencyKey = "x",
                     ResourceID = "resourceId",
                     UpdateBehavior = UpdateBehavior.Delta,
                 },
@@ -153,6 +158,7 @@ public class UsageReportParamsTest : TestBase
                     Value = -9007199254740991,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+                    IdempotencyKey = "x",
                     ResourceID = "resourceId",
                     UpdateBehavior = UpdateBehavior.Delta,
                 },
@@ -181,6 +187,7 @@ public class UsageReportParamsTest : TestBase
                     Value = -9007199254740991,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+                    IdempotencyKey = "x",
                     ResourceID = "resourceId",
                     UpdateBehavior = UpdateBehavior.Delta,
                 },
@@ -207,6 +214,7 @@ public class UsageReportParamsUsageTest : TestBase
             Value = -9007199254740991,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+            IdempotencyKey = "x",
             ResourceID = "resourceId",
             UpdateBehavior = UpdateBehavior.Delta,
         };
@@ -216,6 +224,7 @@ public class UsageReportParamsUsageTest : TestBase
         long expectedValue = -9007199254740991;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         Dictionary<string, Dimension> expectedDimensions = new() { { "foo", "string" } };
+        string expectedIdempotencyKey = "x";
         string expectedResourceID = "resourceId";
         ApiEnum<string, UpdateBehavior> expectedUpdateBehavior = UpdateBehavior.Delta;
 
@@ -231,6 +240,7 @@ public class UsageReportParamsUsageTest : TestBase
 
             Assert.Equal(value, model.Dimensions[item.Key]);
         }
+        Assert.Equal(expectedIdempotencyKey, model.IdempotencyKey);
         Assert.Equal(expectedResourceID, model.ResourceID);
         Assert.Equal(expectedUpdateBehavior, model.UpdateBehavior);
     }
@@ -245,6 +255,7 @@ public class UsageReportParamsUsageTest : TestBase
             Value = -9007199254740991,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+            IdempotencyKey = "x",
             ResourceID = "resourceId",
             UpdateBehavior = UpdateBehavior.Delta,
         };
@@ -268,6 +279,7 @@ public class UsageReportParamsUsageTest : TestBase
             Value = -9007199254740991,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+            IdempotencyKey = "x",
             ResourceID = "resourceId",
             UpdateBehavior = UpdateBehavior.Delta,
         };
@@ -284,6 +296,7 @@ public class UsageReportParamsUsageTest : TestBase
         long expectedValue = -9007199254740991;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         Dictionary<string, Dimension> expectedDimensions = new() { { "foo", "string" } };
+        string expectedIdempotencyKey = "x";
         string expectedResourceID = "resourceId";
         ApiEnum<string, UpdateBehavior> expectedUpdateBehavior = UpdateBehavior.Delta;
 
@@ -299,6 +312,7 @@ public class UsageReportParamsUsageTest : TestBase
 
             Assert.Equal(value, deserialized.Dimensions[item.Key]);
         }
+        Assert.Equal(expectedIdempotencyKey, deserialized.IdempotencyKey);
         Assert.Equal(expectedResourceID, deserialized.ResourceID);
         Assert.Equal(expectedUpdateBehavior, deserialized.UpdateBehavior);
     }
@@ -313,6 +327,7 @@ public class UsageReportParamsUsageTest : TestBase
             Value = -9007199254740991,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+            IdempotencyKey = "x",
             ResourceID = "resourceId",
             UpdateBehavior = UpdateBehavior.Delta,
         };
@@ -335,6 +350,8 @@ public class UsageReportParamsUsageTest : TestBase
         Assert.False(model.RawData.ContainsKey("createdAt"));
         Assert.Null(model.Dimensions);
         Assert.False(model.RawData.ContainsKey("dimensions"));
+        Assert.Null(model.IdempotencyKey);
+        Assert.False(model.RawData.ContainsKey("idempotencyKey"));
         Assert.Null(model.UpdateBehavior);
         Assert.False(model.RawData.ContainsKey("updateBehavior"));
     }
@@ -366,6 +383,7 @@ public class UsageReportParamsUsageTest : TestBase
             // Null should be interpreted as omitted for these properties
             CreatedAt = null,
             Dimensions = null,
+            IdempotencyKey = null,
             UpdateBehavior = null,
         };
 
@@ -373,6 +391,8 @@ public class UsageReportParamsUsageTest : TestBase
         Assert.False(model.RawData.ContainsKey("createdAt"));
         Assert.Null(model.Dimensions);
         Assert.False(model.RawData.ContainsKey("dimensions"));
+        Assert.Null(model.IdempotencyKey);
+        Assert.False(model.RawData.ContainsKey("idempotencyKey"));
         Assert.Null(model.UpdateBehavior);
         Assert.False(model.RawData.ContainsKey("updateBehavior"));
     }
@@ -390,6 +410,7 @@ public class UsageReportParamsUsageTest : TestBase
             // Null should be interpreted as omitted for these properties
             CreatedAt = null,
             Dimensions = null,
+            IdempotencyKey = null,
             UpdateBehavior = null,
         };
 
@@ -406,6 +427,7 @@ public class UsageReportParamsUsageTest : TestBase
             Value = -9007199254740991,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+            IdempotencyKey = "x",
             UpdateBehavior = UpdateBehavior.Delta,
         };
 
@@ -423,6 +445,7 @@ public class UsageReportParamsUsageTest : TestBase
             Value = -9007199254740991,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+            IdempotencyKey = "x",
             UpdateBehavior = UpdateBehavior.Delta,
         };
 
@@ -439,6 +462,7 @@ public class UsageReportParamsUsageTest : TestBase
             Value = -9007199254740991,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+            IdempotencyKey = "x",
             UpdateBehavior = UpdateBehavior.Delta,
 
             ResourceID = null,
@@ -458,6 +482,7 @@ public class UsageReportParamsUsageTest : TestBase
             Value = -9007199254740991,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+            IdempotencyKey = "x",
             UpdateBehavior = UpdateBehavior.Delta,
 
             ResourceID = null,
@@ -476,6 +501,7 @@ public class UsageReportParamsUsageTest : TestBase
             Value = -9007199254740991,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+            IdempotencyKey = "x",
             ResourceID = "resourceId",
             UpdateBehavior = UpdateBehavior.Delta,
         };
