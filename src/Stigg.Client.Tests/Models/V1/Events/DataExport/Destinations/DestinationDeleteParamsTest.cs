@@ -63,7 +63,7 @@ public class DestinationDeleteParamsTest : TestBase
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://api.stigg.io/api/v1/data-export/destinations/x"),
+                new Uri("https://edge.api.stigg.io/api/v1/data-export/destinations/x"),
                 url
             )
         );
