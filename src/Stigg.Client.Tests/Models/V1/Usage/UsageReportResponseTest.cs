@@ -25,6 +25,7 @@ public class UsageReportResponseTest : TestBase
                     Value = -9007199254740991,
                     Credit = new()
                     {
+                        Consumed = 0,
                         CurrencyID = "currencyId",
                         CurrentUsage = 0,
                         Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -52,6 +53,7 @@ public class UsageReportResponseTest : TestBase
                 Value = -9007199254740991,
                 Credit = new()
                 {
+                    Consumed = 0,
                     CurrencyID = "currencyId",
                     CurrentUsage = 0,
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -90,6 +92,7 @@ public class UsageReportResponseTest : TestBase
                     Value = -9007199254740991,
                     Credit = new()
                     {
+                        Consumed = 0,
                         CurrencyID = "currencyId",
                         CurrentUsage = 0,
                         Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -131,6 +134,7 @@ public class UsageReportResponseTest : TestBase
                     Value = -9007199254740991,
                     Credit = new()
                     {
+                        Consumed = 0,
                         CurrencyID = "currencyId",
                         CurrentUsage = 0,
                         Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -165,6 +169,7 @@ public class UsageReportResponseTest : TestBase
                 Value = -9007199254740991,
                 Credit = new()
                 {
+                    Consumed = 0,
                     CurrencyID = "currencyId",
                     CurrentUsage = 0,
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -203,6 +208,7 @@ public class UsageReportResponseTest : TestBase
                     Value = -9007199254740991,
                     Credit = new()
                     {
+                        Consumed = 0,
                         CurrencyID = "currencyId",
                         CurrentUsage = 0,
                         Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -238,6 +244,7 @@ public class UsageReportResponseTest : TestBase
                     Value = -9007199254740991,
                     Credit = new()
                     {
+                        Consumed = 0,
                         CurrencyID = "currencyId",
                         CurrentUsage = 0,
                         Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -274,6 +281,7 @@ public class UsageReportResponseDataTest : TestBase
             Value = -9007199254740991,
             Credit = new()
             {
+                Consumed = 0,
                 CurrencyID = "currencyId",
                 CurrentUsage = 0,
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -295,6 +303,7 @@ public class UsageReportResponseDataTest : TestBase
         long expectedValue = -9007199254740991;
         Credit expectedCredit = new()
         {
+            Consumed = 0,
             CurrencyID = "currencyId",
             CurrentUsage = 0,
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -334,6 +343,7 @@ public class UsageReportResponseDataTest : TestBase
             Value = -9007199254740991,
             Credit = new()
             {
+                Consumed = 0,
                 CurrencyID = "currencyId",
                 CurrentUsage = 0,
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -369,6 +379,7 @@ public class UsageReportResponseDataTest : TestBase
             Value = -9007199254740991,
             Credit = new()
             {
+                Consumed = 0,
                 CurrencyID = "currencyId",
                 CurrentUsage = 0,
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -397,6 +408,7 @@ public class UsageReportResponseDataTest : TestBase
         long expectedValue = -9007199254740991;
         Credit expectedCredit = new()
         {
+            Consumed = 0,
             CurrencyID = "currencyId",
             CurrentUsage = 0,
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -436,6 +448,7 @@ public class UsageReportResponseDataTest : TestBase
             Value = -9007199254740991,
             Credit = new()
             {
+                Consumed = 0,
                 CurrencyID = "currencyId",
                 CurrentUsage = 0,
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -565,6 +578,7 @@ public class UsageReportResponseDataTest : TestBase
             Value = -9007199254740991,
             Credit = new()
             {
+                Consumed = 0,
                 CurrencyID = "currencyId",
                 CurrentUsage = 0,
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -591,6 +605,7 @@ public class CreditTest : TestBase
     {
         var model = new Credit
         {
+            Consumed = 0,
             CurrencyID = "currencyId",
             CurrentUsage = 0,
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -598,12 +613,14 @@ public class CreditTest : TestBase
             UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
+        double expectedConsumed = 0;
         string expectedCurrencyID = "currencyId";
         double expectedCurrentUsage = 0;
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         double expectedUsageLimit = 0;
         DateTimeOffset expectedUsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
+        Assert.Equal(expectedConsumed, model.Consumed);
         Assert.Equal(expectedCurrencyID, model.CurrencyID);
         Assert.Equal(expectedCurrentUsage, model.CurrentUsage);
         Assert.Equal(expectedTimestamp, model.Timestamp);
@@ -616,6 +633,7 @@ public class CreditTest : TestBase
     {
         var model = new Credit
         {
+            Consumed = 0,
             CurrencyID = "currencyId",
             CurrentUsage = 0,
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -634,6 +652,7 @@ public class CreditTest : TestBase
     {
         var model = new Credit
         {
+            Consumed = 0,
             CurrencyID = "currencyId",
             CurrentUsage = 0,
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -645,12 +664,14 @@ public class CreditTest : TestBase
         var deserialized = JsonSerializer.Deserialize<Credit>(element, ModelBase.SerializerOptions);
         Assert.NotNull(deserialized);
 
+        double expectedConsumed = 0;
         string expectedCurrencyID = "currencyId";
         double expectedCurrentUsage = 0;
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         double expectedUsageLimit = 0;
         DateTimeOffset expectedUsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
+        Assert.Equal(expectedConsumed, deserialized.Consumed);
         Assert.Equal(expectedCurrencyID, deserialized.CurrencyID);
         Assert.Equal(expectedCurrentUsage, deserialized.CurrentUsage);
         Assert.Equal(expectedTimestamp, deserialized.Timestamp);
@@ -663,6 +684,7 @@ public class CreditTest : TestBase
     {
         var model = new Credit
         {
+            Consumed = 0,
             CurrencyID = "currencyId",
             CurrentUsage = 0,
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -678,6 +700,7 @@ public class CreditTest : TestBase
     {
         var model = new Credit
         {
+            Consumed = 0,
             CurrencyID = "currencyId",
             CurrentUsage = 0,
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -693,6 +716,7 @@ public class CreditTest : TestBase
     {
         var model = new Credit
         {
+            Consumed = 0,
             CurrencyID = "currencyId",
             CurrentUsage = 0,
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -707,6 +731,7 @@ public class CreditTest : TestBase
     {
         var model = new Credit
         {
+            Consumed = 0,
             CurrencyID = "currencyId",
             CurrentUsage = 0,
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -724,6 +749,7 @@ public class CreditTest : TestBase
     {
         var model = new Credit
         {
+            Consumed = 0,
             CurrencyID = "currencyId",
             CurrentUsage = 0,
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -740,6 +766,7 @@ public class CreditTest : TestBase
     {
         var model = new Credit
         {
+            Consumed = 0,
             CurrencyID = "currencyId",
             CurrentUsage = 0,
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
