@@ -13,8 +13,7 @@ using System = System;
 namespace Stigg.Client.Models.V1.Customers;
 
 /// <summary>
-/// Creates a new customer and optionally provisions an initial subscription in a
-/// single operation.
+/// Creates a new customer.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
