@@ -136,8 +136,7 @@ public interface ICustomerService
     );
 
     /// <summary>
-    /// Creates a new customer and optionally provisions an initial subscription in a
-    /// single operation.
+    /// Creates a new customer.
     /// </summary>
     Task<CustomerResponse> Provision(
         CustomerProvisionParams parameters,
