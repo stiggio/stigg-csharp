@@ -2,6 +2,7 @@ using System.Text.Json;
 using Stigg.Client.Exceptions;
 using Stigg.Client.Models.V1.Credits.CustomCurrencies;
 using Stigg.Client.Models.V1.Customers;
+using Stigg.Client.Models.V1.Events;
 using Stigg.Client.Models.V1.Events.Beta.Customers;
 using Stigg.Client.Models.V1Beta.Customers.Entities;
 using Addons = Stigg.Client.Models.V1.Addons;
@@ -409,6 +410,8 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Coupons::Currency>(),
             new ApiEnumConverter<string, Coupons::Status>(),
             new ApiEnumConverter<string, Coupons::Type>(),
+            new ApiEnumConverter<string, WarningCode>(),
+            new ApiEnumConverter<string, Warning>(),
             new ApiEnumConverter<string, Order>(),
             new ApiEnumConverter<string, Scope>(),
             new ApiEnumConverter<string, SortBy>(),
@@ -809,8 +812,11 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, PlansEntitlements::BodyCreditBehavior>(),
             new ApiEnumConverter<string, PlansEntitlements::BodyCreditCadence>(),
             new ApiEnumConverter<string, PlansEntitlements::BodyCreditHiddenFromWidget>(),
+            new ApiEnumConverter<string, Usage::WarningCode>(),
+            new ApiEnumConverter<string, Usage::Warning>(),
             new ApiEnumConverter<string, Usage::Type>(),
             new ApiEnumConverter<string, Usage::UpdateBehavior>(),
+            new ApiEnumConverter<string, Usage::UsageReportParamsUsageUpdateBehavior>(),
             new ApiEnumConverter<string, Products::DataStatus>(),
             new ApiEnumConverter<
                 string,

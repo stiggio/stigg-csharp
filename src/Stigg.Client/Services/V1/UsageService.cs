@@ -35,6 +35,18 @@ public sealed class UsageService : IUsageService
     }
 
     /// <inheritdoc/>
+    public async Task<UsageEstimateCostResponse> EstimateCost(
+        UsageEstimateCostParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.EstimateCost(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
     public async Task<UsageHistoryResponse> History(
         UsageHistoryParams parameters,
         CancellationToken cancellationToken = default
@@ -83,6 +95,34 @@ public sealed class UsageServiceWithRawResponse : IUsageServiceWithRawResponse
     public UsageServiceWithRawResponse(IStiggClientWithRawResponse client)
     {
         _client = client;
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<UsageEstimateCostResponse>> EstimateCost(
+        UsageEstimateCostParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        HttpRequest<UsageEstimateCostParams> request = new()
+        {
+            Method = HttpMethod.Post,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var deserializedResponse = await response
+                    .Deserialize<UsageEstimateCostResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    deserializedResponse.Validate();
+                }
+                return deserializedResponse;
+            }
+        );
     }
 
     /// <inheritdoc/>

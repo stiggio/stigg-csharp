@@ -264,14 +264,14 @@ public sealed record class UsageReportParamsUsage : JsonModel
     /// <summary>
     /// Additional dimensions for the usage report
     /// </summary>
-    public IReadOnlyDictionary<string, Dimension>? Dimensions
+    public IReadOnlyDictionary<string, UsageReportParamsUsageDimension>? Dimensions
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<FrozenDictionary<string, Dimension>>(
-                "dimensions"
-            );
+            return this._rawData.GetNullableClass<
+                FrozenDictionary<string, UsageReportParamsUsageDimension>
+            >("dimensions");
         }
         init
         {
@@ -280,7 +280,7 @@ public sealed record class UsageReportParamsUsage : JsonModel
                 return;
             }
 
-            this._rawData.Set<FrozenDictionary<string, Dimension>?>(
+            this._rawData.Set<FrozenDictionary<string, UsageReportParamsUsageDimension>?>(
                 "dimensions",
                 value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
             );
@@ -324,14 +324,14 @@ public sealed record class UsageReportParamsUsage : JsonModel
     /// <summary>
     /// The method by which the usage value should be updated
     /// </summary>
-    public ApiEnum<string, UpdateBehavior>? UpdateBehavior
+    public ApiEnum<string, UsageReportParamsUsageUpdateBehavior>? UpdateBehavior
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ApiEnum<string, UpdateBehavior>>(
-                "updateBehavior"
-            );
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, UsageReportParamsUsageUpdateBehavior>
+            >("updateBehavior");
         }
         init
         {
@@ -401,8 +401,8 @@ class UsageReportParamsUsageFromRaw : IFromRawJson<UsageReportParamsUsage>
     ) => UsageReportParamsUsage.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(DimensionConverter))]
-public record class Dimension : ModelBase
+[JsonConverter(typeof(UsageReportParamsUsageDimensionConverter))]
+public record class UsageReportParamsUsageDimension : ModelBase
 {
     public object? Value { get; } = null;
 
@@ -419,25 +419,25 @@ public record class Dimension : ModelBase
         }
     }
 
-    public Dimension(string value, JsonElement? element = null)
+    public UsageReportParamsUsageDimension(string value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
     }
 
-    public Dimension(double value, JsonElement? element = null)
+    public UsageReportParamsUsageDimension(double value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
     }
 
-    public Dimension(bool value, JsonElement? element = null)
+    public UsageReportParamsUsageDimension(bool value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
     }
 
-    public Dimension(JsonElement element)
+    public UsageReportParamsUsageDimension(JsonElement element)
     {
         this._element = element;
     }
@@ -544,7 +544,9 @@ public record class Dimension : ModelBase
                 @bool(value);
                 break;
             default:
-                throw new StiggInvalidDataException("Data did not match any variant of Dimension");
+                throw new StiggInvalidDataException(
+                    "Data did not match any variant of UsageReportParamsUsageDimension"
+                );
         }
     }
 
@@ -581,15 +583,17 @@ public record class Dimension : ModelBase
             string value => @string(value),
             double value => @double(value),
             bool value => @bool(value),
-            _ => throw new StiggInvalidDataException("Data did not match any variant of Dimension"),
+            _ => throw new StiggInvalidDataException(
+                "Data did not match any variant of UsageReportParamsUsageDimension"
+            ),
         };
     }
 
-    public static implicit operator Dimension(string value) => new(value);
+    public static implicit operator UsageReportParamsUsageDimension(string value) => new(value);
 
-    public static implicit operator Dimension(double value) => new(value);
+    public static implicit operator UsageReportParamsUsageDimension(double value) => new(value);
 
-    public static implicit operator Dimension(bool value) => new(value);
+    public static implicit operator UsageReportParamsUsageDimension(bool value) => new(value);
 
     /// <summary>
     /// Validates that the instance was constructed with a known variant and that this variant is valid
@@ -605,11 +609,13 @@ public record class Dimension : ModelBase
     {
         if (this.Value == null)
         {
-            throw new StiggInvalidDataException("Data did not match any variant of Dimension");
+            throw new StiggInvalidDataException(
+                "Data did not match any variant of UsageReportParamsUsageDimension"
+            );
         }
     }
 
-    public virtual bool Equals(Dimension? other) =>
+    public virtual bool Equals(UsageReportParamsUsageDimension? other) =>
         other != null
         && this.VariantIndex() == other.VariantIndex()
         && JsonElement.DeepEquals(this.Json, other.Json);
@@ -637,9 +643,10 @@ public record class Dimension : ModelBase
     }
 }
 
-sealed class DimensionConverter : JsonConverter<Dimension>
+sealed class UsageReportParamsUsageDimensionConverter
+    : JsonConverter<UsageReportParamsUsageDimension>
 {
-    public override Dimension? Read(
+    public override UsageReportParamsUsageDimension? Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -682,7 +689,7 @@ sealed class DimensionConverter : JsonConverter<Dimension>
 
     public override void Write(
         Utf8JsonWriter writer,
-        Dimension value,
+        UsageReportParamsUsageDimension value,
         JsonSerializerOptions options
     )
     {
@@ -693,16 +700,17 @@ sealed class DimensionConverter : JsonConverter<Dimension>
 /// <summary>
 /// The method by which the usage value should be updated
 /// </summary>
-[JsonConverter(typeof(UpdateBehaviorConverter))]
-public enum UpdateBehavior
+[JsonConverter(typeof(UsageReportParamsUsageUpdateBehaviorConverter))]
+public enum UsageReportParamsUsageUpdateBehavior
 {
     Delta,
     Set,
 }
 
-sealed class UpdateBehaviorConverter : JsonConverter<UpdateBehavior>
+sealed class UsageReportParamsUsageUpdateBehaviorConverter
+    : JsonConverter<UsageReportParamsUsageUpdateBehavior>
 {
-    public override UpdateBehavior Read(
+    public override UsageReportParamsUsageUpdateBehavior Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -710,15 +718,15 @@ sealed class UpdateBehaviorConverter : JsonConverter<UpdateBehavior>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "DELTA" => UpdateBehavior.Delta,
-            "SET" => UpdateBehavior.Set,
-            _ => (UpdateBehavior)(-1),
+            "DELTA" => UsageReportParamsUsageUpdateBehavior.Delta,
+            "SET" => UsageReportParamsUsageUpdateBehavior.Set,
+            _ => (UsageReportParamsUsageUpdateBehavior)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        UpdateBehavior value,
+        UsageReportParamsUsageUpdateBehavior value,
         JsonSerializerOptions options
     )
     {
@@ -726,8 +734,8 @@ sealed class UpdateBehaviorConverter : JsonConverter<UpdateBehavior>
             writer,
             value switch
             {
-                UpdateBehavior.Delta => "DELTA",
-                UpdateBehavior.Set => "SET",
+                UsageReportParamsUsageUpdateBehavior.Delta => "DELTA",
+                UsageReportParamsUsageUpdateBehavior.Set => "SET",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

@@ -23,10 +23,13 @@ public class UsageReportParamsTest : TestBase
                     FeatureID = "featureId",
                     Value = -9007199254740991,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+                    Dimensions = new Dictionary<string, UsageReportParamsUsageDimension>()
+                    {
+                        { "foo", "string" },
+                    },
                     IdempotencyKey = "x",
                     ResourceID = "resourceId",
-                    UpdateBehavior = UpdateBehavior.Delta,
+                    UpdateBehavior = UsageReportParamsUsageUpdateBehavior.Delta,
                 },
             ],
             XAccountID = "X-ACCOUNT-ID",
@@ -41,10 +44,13 @@ public class UsageReportParamsTest : TestBase
                 FeatureID = "featureId",
                 Value = -9007199254740991,
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+                Dimensions = new Dictionary<string, UsageReportParamsUsageDimension>()
+                {
+                    { "foo", "string" },
+                },
                 IdempotencyKey = "x",
                 ResourceID = "resourceId",
-                UpdateBehavior = UpdateBehavior.Delta,
+                UpdateBehavior = UsageReportParamsUsageUpdateBehavior.Delta,
             },
         ];
         string expectedXAccountID = "X-ACCOUNT-ID";
@@ -72,10 +78,13 @@ public class UsageReportParamsTest : TestBase
                     FeatureID = "featureId",
                     Value = -9007199254740991,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+                    Dimensions = new Dictionary<string, UsageReportParamsUsageDimension>()
+                    {
+                        { "foo", "string" },
+                    },
                     IdempotencyKey = "x",
                     ResourceID = "resourceId",
-                    UpdateBehavior = UpdateBehavior.Delta,
+                    UpdateBehavior = UsageReportParamsUsageUpdateBehavior.Delta,
                 },
             ],
         };
@@ -99,10 +108,13 @@ public class UsageReportParamsTest : TestBase
                     FeatureID = "featureId",
                     Value = -9007199254740991,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+                    Dimensions = new Dictionary<string, UsageReportParamsUsageDimension>()
+                    {
+                        { "foo", "string" },
+                    },
                     IdempotencyKey = "x",
                     ResourceID = "resourceId",
-                    UpdateBehavior = UpdateBehavior.Delta,
+                    UpdateBehavior = UsageReportParamsUsageUpdateBehavior.Delta,
                 },
             ],
 
@@ -130,10 +142,13 @@ public class UsageReportParamsTest : TestBase
                     FeatureID = "featureId",
                     Value = -9007199254740991,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+                    Dimensions = new Dictionary<string, UsageReportParamsUsageDimension>()
+                    {
+                        { "foo", "string" },
+                    },
                     IdempotencyKey = "x",
                     ResourceID = "resourceId",
-                    UpdateBehavior = UpdateBehavior.Delta,
+                    UpdateBehavior = UsageReportParamsUsageUpdateBehavior.Delta,
                 },
             ],
         };
@@ -157,10 +172,13 @@ public class UsageReportParamsTest : TestBase
                     FeatureID = "featureId",
                     Value = -9007199254740991,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+                    Dimensions = new Dictionary<string, UsageReportParamsUsageDimension>()
+                    {
+                        { "foo", "string" },
+                    },
                     IdempotencyKey = "x",
                     ResourceID = "resourceId",
-                    UpdateBehavior = UpdateBehavior.Delta,
+                    UpdateBehavior = UsageReportParamsUsageUpdateBehavior.Delta,
                 },
             ],
             XAccountID = "X-ACCOUNT-ID",
@@ -186,10 +204,13 @@ public class UsageReportParamsTest : TestBase
                     FeatureID = "featureId",
                     Value = -9007199254740991,
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+                    Dimensions = new Dictionary<string, UsageReportParamsUsageDimension>()
+                    {
+                        { "foo", "string" },
+                    },
                     IdempotencyKey = "x",
                     ResourceID = "resourceId",
-                    UpdateBehavior = UpdateBehavior.Delta,
+                    UpdateBehavior = UsageReportParamsUsageUpdateBehavior.Delta,
                 },
             ],
             XAccountID = "X-ACCOUNT-ID",
@@ -213,20 +234,27 @@ public class UsageReportParamsUsageTest : TestBase
             FeatureID = "featureId",
             Value = -9007199254740991,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+            Dimensions = new Dictionary<string, UsageReportParamsUsageDimension>()
+            {
+                { "foo", "string" },
+            },
             IdempotencyKey = "x",
             ResourceID = "resourceId",
-            UpdateBehavior = UpdateBehavior.Delta,
+            UpdateBehavior = UsageReportParamsUsageUpdateBehavior.Delta,
         };
 
         string expectedCustomerID = "customerId";
         string expectedFeatureID = "featureId";
         long expectedValue = -9007199254740991;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        Dictionary<string, Dimension> expectedDimensions = new() { { "foo", "string" } };
+        Dictionary<string, UsageReportParamsUsageDimension> expectedDimensions = new()
+        {
+            { "foo", "string" },
+        };
         string expectedIdempotencyKey = "x";
         string expectedResourceID = "resourceId";
-        ApiEnum<string, UpdateBehavior> expectedUpdateBehavior = UpdateBehavior.Delta;
+        ApiEnum<string, UsageReportParamsUsageUpdateBehavior> expectedUpdateBehavior =
+            UsageReportParamsUsageUpdateBehavior.Delta;
 
         Assert.Equal(expectedCustomerID, model.CustomerID);
         Assert.Equal(expectedFeatureID, model.FeatureID);
@@ -254,10 +282,13 @@ public class UsageReportParamsUsageTest : TestBase
             FeatureID = "featureId",
             Value = -9007199254740991,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+            Dimensions = new Dictionary<string, UsageReportParamsUsageDimension>()
+            {
+                { "foo", "string" },
+            },
             IdempotencyKey = "x",
             ResourceID = "resourceId",
-            UpdateBehavior = UpdateBehavior.Delta,
+            UpdateBehavior = UsageReportParamsUsageUpdateBehavior.Delta,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -278,10 +309,13 @@ public class UsageReportParamsUsageTest : TestBase
             FeatureID = "featureId",
             Value = -9007199254740991,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+            Dimensions = new Dictionary<string, UsageReportParamsUsageDimension>()
+            {
+                { "foo", "string" },
+            },
             IdempotencyKey = "x",
             ResourceID = "resourceId",
-            UpdateBehavior = UpdateBehavior.Delta,
+            UpdateBehavior = UsageReportParamsUsageUpdateBehavior.Delta,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -295,10 +329,14 @@ public class UsageReportParamsUsageTest : TestBase
         string expectedFeatureID = "featureId";
         long expectedValue = -9007199254740991;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        Dictionary<string, Dimension> expectedDimensions = new() { { "foo", "string" } };
+        Dictionary<string, UsageReportParamsUsageDimension> expectedDimensions = new()
+        {
+            { "foo", "string" },
+        };
         string expectedIdempotencyKey = "x";
         string expectedResourceID = "resourceId";
-        ApiEnum<string, UpdateBehavior> expectedUpdateBehavior = UpdateBehavior.Delta;
+        ApiEnum<string, UsageReportParamsUsageUpdateBehavior> expectedUpdateBehavior =
+            UsageReportParamsUsageUpdateBehavior.Delta;
 
         Assert.Equal(expectedCustomerID, deserialized.CustomerID);
         Assert.Equal(expectedFeatureID, deserialized.FeatureID);
@@ -326,10 +364,13 @@ public class UsageReportParamsUsageTest : TestBase
             FeatureID = "featureId",
             Value = -9007199254740991,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+            Dimensions = new Dictionary<string, UsageReportParamsUsageDimension>()
+            {
+                { "foo", "string" },
+            },
             IdempotencyKey = "x",
             ResourceID = "resourceId",
-            UpdateBehavior = UpdateBehavior.Delta,
+            UpdateBehavior = UsageReportParamsUsageUpdateBehavior.Delta,
         };
 
         model.Validate();
@@ -426,9 +467,12 @@ public class UsageReportParamsUsageTest : TestBase
             FeatureID = "featureId",
             Value = -9007199254740991,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+            Dimensions = new Dictionary<string, UsageReportParamsUsageDimension>()
+            {
+                { "foo", "string" },
+            },
             IdempotencyKey = "x",
-            UpdateBehavior = UpdateBehavior.Delta,
+            UpdateBehavior = UsageReportParamsUsageUpdateBehavior.Delta,
         };
 
         Assert.Null(model.ResourceID);
@@ -444,9 +488,12 @@ public class UsageReportParamsUsageTest : TestBase
             FeatureID = "featureId",
             Value = -9007199254740991,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+            Dimensions = new Dictionary<string, UsageReportParamsUsageDimension>()
+            {
+                { "foo", "string" },
+            },
             IdempotencyKey = "x",
-            UpdateBehavior = UpdateBehavior.Delta,
+            UpdateBehavior = UsageReportParamsUsageUpdateBehavior.Delta,
         };
 
         model.Validate();
@@ -461,9 +508,12 @@ public class UsageReportParamsUsageTest : TestBase
             FeatureID = "featureId",
             Value = -9007199254740991,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+            Dimensions = new Dictionary<string, UsageReportParamsUsageDimension>()
+            {
+                { "foo", "string" },
+            },
             IdempotencyKey = "x",
-            UpdateBehavior = UpdateBehavior.Delta,
+            UpdateBehavior = UsageReportParamsUsageUpdateBehavior.Delta,
 
             ResourceID = null,
         };
@@ -481,9 +531,12 @@ public class UsageReportParamsUsageTest : TestBase
             FeatureID = "featureId",
             Value = -9007199254740991,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+            Dimensions = new Dictionary<string, UsageReportParamsUsageDimension>()
+            {
+                { "foo", "string" },
+            },
             IdempotencyKey = "x",
-            UpdateBehavior = UpdateBehavior.Delta,
+            UpdateBehavior = UsageReportParamsUsageUpdateBehavior.Delta,
 
             ResourceID = null,
         };
@@ -500,10 +553,13 @@ public class UsageReportParamsUsageTest : TestBase
             FeatureID = "featureId",
             Value = -9007199254740991,
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+            Dimensions = new Dictionary<string, UsageReportParamsUsageDimension>()
+            {
+                { "foo", "string" },
+            },
             IdempotencyKey = "x",
             ResourceID = "resourceId",
-            UpdateBehavior = UpdateBehavior.Delta,
+            UpdateBehavior = UsageReportParamsUsageUpdateBehavior.Delta,
         };
 
         UsageReportParamsUsage copied = new(model);
@@ -512,35 +568,35 @@ public class UsageReportParamsUsageTest : TestBase
     }
 }
 
-public class DimensionTest : TestBase
+public class UsageReportParamsUsageDimensionTest : TestBase
 {
     [Fact]
     public void StringValidationWorks()
     {
-        Dimension value = "string";
+        UsageReportParamsUsageDimension value = "string";
         value.Validate();
     }
 
     [Fact]
     public void DoubleValidationWorks()
     {
-        Dimension value = 0;
+        UsageReportParamsUsageDimension value = 0;
         value.Validate();
     }
 
     [Fact]
     public void BoolValidationWorks()
     {
-        Dimension value = true;
+        UsageReportParamsUsageDimension value = true;
         value.Validate();
     }
 
     [Fact]
     public void StringSerializationRoundtripWorks()
     {
-        Dimension value = "string";
+        UsageReportParamsUsageDimension value = "string";
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Dimension>(
+        var deserialized = JsonSerializer.Deserialize<UsageReportParamsUsageDimension>(
             element,
             ModelBase.SerializerOptions
         );
@@ -551,9 +607,9 @@ public class DimensionTest : TestBase
     [Fact]
     public void DoubleSerializationRoundtripWorks()
     {
-        Dimension value = 0;
+        UsageReportParamsUsageDimension value = 0;
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Dimension>(
+        var deserialized = JsonSerializer.Deserialize<UsageReportParamsUsageDimension>(
             element,
             ModelBase.SerializerOptions
         );
@@ -564,9 +620,9 @@ public class DimensionTest : TestBase
     [Fact]
     public void BoolSerializationRoundtripWorks()
     {
-        Dimension value = true;
+        UsageReportParamsUsageDimension value = true;
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Dimension>(
+        var deserialized = JsonSerializer.Deserialize<UsageReportParamsUsageDimension>(
             element,
             ModelBase.SerializerOptions
         );
@@ -575,43 +631,41 @@ public class DimensionTest : TestBase
     }
 }
 
-public class UpdateBehaviorTest : TestBase
+public class UsageReportParamsUsageUpdateBehaviorTest : TestBase
 {
     [Theory]
-    [InlineData(UpdateBehavior.Delta)]
-    [InlineData(UpdateBehavior.Set)]
-    public void Validation_Works(UpdateBehavior rawValue)
+    [InlineData(UsageReportParamsUsageUpdateBehavior.Delta)]
+    [InlineData(UsageReportParamsUsageUpdateBehavior.Set)]
+    public void Validation_Works(UsageReportParamsUsageUpdateBehavior rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, UpdateBehavior> value = rawValue;
+        ApiEnum<string, UsageReportParamsUsageUpdateBehavior> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, UpdateBehavior>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, UsageReportParamsUsageUpdateBehavior>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
         Assert.Throws<StiggInvalidDataException>(() => value.Validate());
     }
 
     [Theory]
-    [InlineData(UpdateBehavior.Delta)]
-    [InlineData(UpdateBehavior.Set)]
-    public void SerializationRoundtrip_Works(UpdateBehavior rawValue)
+    [InlineData(UsageReportParamsUsageUpdateBehavior.Delta)]
+    [InlineData(UsageReportParamsUsageUpdateBehavior.Set)]
+    public void SerializationRoundtrip_Works(UsageReportParamsUsageUpdateBehavior rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, UpdateBehavior> value = rawValue;
+        ApiEnum<string, UsageReportParamsUsageUpdateBehavior> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, UpdateBehavior>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, UsageReportParamsUsageUpdateBehavior>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
@@ -619,15 +673,13 @@ public class UpdateBehaviorTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, UpdateBehavior>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, UsageReportParamsUsageUpdateBehavior>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, UpdateBehavior>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, UsageReportParamsUsageUpdateBehavior>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
