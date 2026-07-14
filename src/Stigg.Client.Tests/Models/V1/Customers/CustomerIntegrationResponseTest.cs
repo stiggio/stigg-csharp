@@ -366,6 +366,7 @@ public class DataVendorIdentifierTest : TestBase
     [InlineData(DataVendorIdentifier.Received)]
     [InlineData(DataVendorIdentifier.Prequel)]
     [InlineData(DataVendorIdentifier.Airwallex)]
+    [InlineData(DataVendorIdentifier.StripeInvoicing)]
     public void Validation_Works(DataVendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -399,6 +400,7 @@ public class DataVendorIdentifierTest : TestBase
     [InlineData(DataVendorIdentifier.Received)]
     [InlineData(DataVendorIdentifier.Prequel)]
     [InlineData(DataVendorIdentifier.Airwallex)]
+    [InlineData(DataVendorIdentifier.StripeInvoicing)]
     public void SerializationRoundtrip_Works(DataVendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us

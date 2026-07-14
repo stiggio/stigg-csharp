@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
 using Stigg.Client.Models.V1.Customers;
-using Customers = Stigg.Client.Services.V1.Customers;
+using Stigg.Client.Services.V1.Customers;
 
 namespace Stigg.Client.Services.V1;
 
@@ -33,41 +33,27 @@ public sealed class CustomerService : ICustomerService
         _client = client;
 
         _withRawResponse = new(() => new CustomerServiceWithRawResponse(client.WithRawResponse));
-        _paymentMethod = new(() => new Customers::PaymentMethodService(client));
-        _promotionalEntitlements = new(() => new Customers::PromotionalEntitlementService(client));
-        _integrations = new(() => new Customers::IntegrationService(client));
-        _events = new(() => new Customers::EventService(client));
-        _usage = new(() => new Customers::UsageService(client));
+        _paymentMethod = new(() => new PaymentMethodService(client));
+        _promotionalEntitlements = new(() => new PromotionalEntitlementService(client));
+        _integrations = new(() => new IntegrationService(client));
     }
 
-    readonly Lazy<Customers::IPaymentMethodService> _paymentMethod;
-    public Customers::IPaymentMethodService PaymentMethod
+    readonly Lazy<IPaymentMethodService> _paymentMethod;
+    public IPaymentMethodService PaymentMethod
     {
         get { return _paymentMethod.Value; }
     }
 
-    readonly Lazy<Customers::IPromotionalEntitlementService> _promotionalEntitlements;
-    public Customers::IPromotionalEntitlementService PromotionalEntitlements
+    readonly Lazy<IPromotionalEntitlementService> _promotionalEntitlements;
+    public IPromotionalEntitlementService PromotionalEntitlements
     {
         get { return _promotionalEntitlements.Value; }
     }
 
-    readonly Lazy<Customers::IIntegrationService> _integrations;
-    public Customers::IIntegrationService Integrations
+    readonly Lazy<IIntegrationService> _integrations;
+    public IIntegrationService Integrations
     {
         get { return _integrations.Value; }
-    }
-
-    readonly Lazy<Customers::IEventService> _events;
-    public Customers::IEventService Events
-    {
-        get { return _events.Value; }
-    }
-
-    readonly Lazy<Customers::IUsageService> _usage;
-    public Customers::IUsageService Usage
-    {
-        get { return _usage.Value; }
     }
 
     /// <inheritdoc/>
@@ -290,43 +276,29 @@ public sealed class CustomerServiceWithRawResponse : ICustomerServiceWithRawResp
     {
         _client = client;
 
-        _paymentMethod = new(() => new Customers::PaymentMethodServiceWithRawResponse(client));
+        _paymentMethod = new(() => new PaymentMethodServiceWithRawResponse(client));
         _promotionalEntitlements = new(() =>
-            new Customers::PromotionalEntitlementServiceWithRawResponse(client)
+            new PromotionalEntitlementServiceWithRawResponse(client)
         );
-        _integrations = new(() => new Customers::IntegrationServiceWithRawResponse(client));
-        _events = new(() => new Customers::EventServiceWithRawResponse(client));
-        _usage = new(() => new Customers::UsageServiceWithRawResponse(client));
+        _integrations = new(() => new IntegrationServiceWithRawResponse(client));
     }
 
-    readonly Lazy<Customers::IPaymentMethodServiceWithRawResponse> _paymentMethod;
-    public Customers::IPaymentMethodServiceWithRawResponse PaymentMethod
+    readonly Lazy<IPaymentMethodServiceWithRawResponse> _paymentMethod;
+    public IPaymentMethodServiceWithRawResponse PaymentMethod
     {
         get { return _paymentMethod.Value; }
     }
 
-    readonly Lazy<Customers::IPromotionalEntitlementServiceWithRawResponse> _promotionalEntitlements;
-    public Customers::IPromotionalEntitlementServiceWithRawResponse PromotionalEntitlements
+    readonly Lazy<IPromotionalEntitlementServiceWithRawResponse> _promotionalEntitlements;
+    public IPromotionalEntitlementServiceWithRawResponse PromotionalEntitlements
     {
         get { return _promotionalEntitlements.Value; }
     }
 
-    readonly Lazy<Customers::IIntegrationServiceWithRawResponse> _integrations;
-    public Customers::IIntegrationServiceWithRawResponse Integrations
+    readonly Lazy<IIntegrationServiceWithRawResponse> _integrations;
+    public IIntegrationServiceWithRawResponse Integrations
     {
         get { return _integrations.Value; }
-    }
-
-    readonly Lazy<Customers::IEventServiceWithRawResponse> _events;
-    public Customers::IEventServiceWithRawResponse Events
-    {
-        get { return _events.Value; }
-    }
-
-    readonly Lazy<Customers::IUsageServiceWithRawResponse> _usage;
-    public Customers::IUsageServiceWithRawResponse Usage
-    {
-        get { return _usage.Value; }
     }
 
     /// <inheritdoc/>
