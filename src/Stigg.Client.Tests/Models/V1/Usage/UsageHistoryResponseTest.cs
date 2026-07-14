@@ -43,7 +43,7 @@ public class UsageHistoryResponseTest : TestBase
             },
         };
 
-        Usage::Data expectedData = new()
+        Usage::UsageHistoryResponseData expectedData = new()
         {
             Markers =
             [
@@ -158,7 +158,7 @@ public class UsageHistoryResponseTest : TestBase
         );
         Assert.NotNull(deserialized);
 
-        Usage::Data expectedData = new()
+        Usage::UsageHistoryResponseData expectedData = new()
         {
             Markers =
             [
@@ -266,12 +266,12 @@ public class UsageHistoryResponseTest : TestBase
     }
 }
 
-public class DataTest : TestBase
+public class UsageHistoryResponseDataTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Usage::Data
+        var model = new Usage::UsageHistoryResponseData
         {
             Markers =
             [
@@ -339,7 +339,7 @@ public class DataTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Usage::Data
+        var model = new Usage::UsageHistoryResponseData
         {
             Markers =
             [
@@ -368,7 +368,7 @@ public class DataTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Usage::Data>(
+        var deserialized = JsonSerializer.Deserialize<Usage::UsageHistoryResponseData>(
             json,
             ModelBase.SerializerOptions
         );
@@ -379,7 +379,7 @@ public class DataTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Usage::Data
+        var model = new Usage::UsageHistoryResponseData
         {
             Markers =
             [
@@ -408,7 +408,7 @@ public class DataTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Usage::Data>(
+        var deserialized = JsonSerializer.Deserialize<Usage::UsageHistoryResponseData>(
             element,
             ModelBase.SerializerOptions
         );
@@ -454,7 +454,7 @@ public class DataTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Usage::Data
+        var model = new Usage::UsageHistoryResponseData
         {
             Markers =
             [
@@ -488,7 +488,7 @@ public class DataTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Usage::Data
+        var model = new Usage::UsageHistoryResponseData
         {
             Markers =
             [
@@ -516,7 +516,7 @@ public class DataTest : TestBase
             ],
         };
 
-        Usage::Data copied = new(model);
+        Usage::UsageHistoryResponseData copied = new(model);
 
         Assert.Equal(model, copied);
     }

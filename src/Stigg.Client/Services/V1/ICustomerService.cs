@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Stigg.Client.Core;
 using Stigg.Client.Models.V1.Customers;
-using Stigg.Client.Services.V1.Customers;
+using Customers = Stigg.Client.Services.V1.Customers;
 
 namespace Stigg.Client.Services.V1;
 
@@ -27,11 +27,15 @@ public interface ICustomerService
     /// </summary>
     ICustomerService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
-    IPaymentMethodService PaymentMethod { get; }
+    Customers::IPaymentMethodService PaymentMethod { get; }
 
-    IPromotionalEntitlementService PromotionalEntitlements { get; }
+    Customers::IPromotionalEntitlementService PromotionalEntitlements { get; }
 
-    IIntegrationService Integrations { get; }
+    Customers::IIntegrationService Integrations { get; }
+
+    Customers::IEventService Events { get; }
+
+    Customers::IUsageService Usage { get; }
 
     /// <summary>
     /// Retrieves a customer by their unique identifier, including billing information
@@ -193,11 +197,15 @@ public interface ICustomerServiceWithRawResponse
     /// </summary>
     ICustomerServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
-    IPaymentMethodServiceWithRawResponse PaymentMethod { get; }
+    Customers::IPaymentMethodServiceWithRawResponse PaymentMethod { get; }
 
-    IPromotionalEntitlementServiceWithRawResponse PromotionalEntitlements { get; }
+    Customers::IPromotionalEntitlementServiceWithRawResponse PromotionalEntitlements { get; }
 
-    IIntegrationServiceWithRawResponse Integrations { get; }
+    Customers::IIntegrationServiceWithRawResponse Integrations { get; }
+
+    Customers::IEventServiceWithRawResponse Events { get; }
+
+    Customers::IUsageServiceWithRawResponse Usage { get; }
 
     /// <summary>
     /// Returns a raw HTTP response for <c>get /api/v1/customers/{id}</c>, but is otherwise the

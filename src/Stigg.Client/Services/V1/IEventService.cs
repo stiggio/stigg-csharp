@@ -34,6 +34,16 @@ public interface IEventService
     IBetaService Beta { get; }
 
     /// <summary>
+    /// Estimates the credit cost of a usage event without ingesting it. Returns the
+    /// estimated cost per credit currency, the current balance, and the balance after
+    /// the estimated consumption.
+    /// </summary>
+    Task<EventEstimateCostResponse> EstimateCost(
+        EventEstimateCostParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Reports raw usage events for event-based metering. Events are ingested
     /// asynchronously and aggregated into usage totals.
     /// </summary>
@@ -59,6 +69,15 @@ public interface IEventServiceWithRawResponse
     IDataExportServiceWithRawResponse DataExport { get; }
 
     IBetaServiceWithRawResponse Beta { get; }
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>post /api/v1/events/estimate</c>, but is otherwise the
+    /// same as <see cref="IEventService.EstimateCost(EventEstimateCostParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<EventEstimateCostResponse>> EstimateCost(
+        EventEstimateCostParams parameters,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// Returns a raw HTTP response for <c>post /api/v1/events</c>, but is otherwise the

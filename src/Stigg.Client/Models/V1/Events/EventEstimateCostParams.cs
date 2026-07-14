@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
@@ -13,14 +12,14 @@ using Stigg.Client.Exceptions;
 namespace Stigg.Client.Models.V1.Events;
 
 /// <summary>
-/// Reports raw usage events for event-based metering. Events are ingested asynchronously
-/// and aggregated into usage totals.
+/// Estimates the credit cost of a usage event without ingesting it. Returns the estimated
+/// cost per credit currency, the current balance, and the balance after the estimated consumption.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
 /// cause existing derived classes to break.</para>
 /// </summary>
-public record class EventReportParams : ParamsBase
+public record class EventEstimateCostParams : ParamsBase
 {
     readonly JsonDictionary _rawBodyData = new();
     public IReadOnlyDictionary<string, JsonElement> RawBodyData
@@ -29,22 +28,68 @@ public record class EventReportParams : ParamsBase
     }
 
     /// <summary>
-    /// A list of usage events to report
+    /// Customer id
     /// </summary>
-    public required IReadOnlyList<Event> Events
+    public required string CustomerID
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNotNullStruct<ImmutableArray<Event>>("events");
+            return this._rawBodyData.GetNotNullClass<string>("customerId");
+        }
+        init { this._rawBodyData.Set("customerId", value); }
+    }
+
+    /// <summary>
+    /// The name of the usage event
+    /// </summary>
+    public required string EventName
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullClass<string>("eventName");
+        }
+        init { this._rawBodyData.Set("eventName", value); }
+    }
+
+    /// <summary>
+    /// Dimensions associated with the usage event
+    /// </summary>
+    public IReadOnlyDictionary<string, Dimension>? Dimensions
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<FrozenDictionary<string, Dimension>>(
+                "dimensions"
+            );
         }
         init
         {
-            this._rawBodyData.Set<ImmutableArray<Event>>(
-                "events",
-                ImmutableArray.ToImmutableArray(value)
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawBodyData.Set<FrozenDictionary<string, Dimension>?>(
+                "dimensions",
+                value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
             );
         }
+    }
+
+    /// <summary>
+    /// Resource id
+    /// </summary>
+    public string? ResourceID
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("resourceId");
+        }
+        init { this._rawBodyData.Set("resourceId", value); }
     }
 
     public string? XAccountID
@@ -83,18 +128,18 @@ public record class EventReportParams : ParamsBase
         }
     }
 
-    public EventReportParams() { }
+    public EventEstimateCostParams() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public EventReportParams(EventReportParams eventReportParams)
-        : base(eventReportParams)
+    public EventEstimateCostParams(EventEstimateCostParams eventEstimateCostParams)
+        : base(eventEstimateCostParams)
     {
-        this._rawBodyData = new(eventReportParams._rawBodyData);
+        this._rawBodyData = new(eventEstimateCostParams._rawBodyData);
     }
 #pragma warning restore CS8618
 
-    public EventReportParams(
+    public EventEstimateCostParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
         IReadOnlyDictionary<string, JsonElement> rawBodyData
@@ -107,7 +152,7 @@ public record class EventReportParams : ParamsBase
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    EventReportParams(
+    EventEstimateCostParams(
         FrozenDictionary<string, JsonElement> rawHeaderData,
         FrozenDictionary<string, JsonElement> rawQueryData,
         FrozenDictionary<string, JsonElement> rawBodyData
@@ -120,7 +165,7 @@ public record class EventReportParams : ParamsBase
 #pragma warning restore CS8618
 
     /// <inheritdoc cref="IFromRawJson{T}.FromRawUnchecked"/>
-    public static EventReportParams FromRawUnchecked(
+    public static EventEstimateCostParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
         IReadOnlyDictionary<string, JsonElement> rawBodyData
@@ -150,7 +195,7 @@ public record class EventReportParams : ParamsBase
             ModelBase.ToStringSerializerOptions
         );
 
-    public virtual bool Equals(EventReportParams? other)
+    public virtual bool Equals(EventEstimateCostParams? other)
     {
         if (other == null)
         {
@@ -163,7 +208,7 @@ public record class EventReportParams : ParamsBase
 
     public override Uri Url(ClientOptions options)
     {
-        return new UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/api/v1/events")
+        return new UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/api/v1/events/estimate")
         {
             Query = this.QueryString(options),
         }.Uri;
@@ -193,165 +238,8 @@ public record class EventReportParams : ParamsBase
     }
 }
 
-/// <summary>
-/// Raw usage event
-/// </summary>
-[JsonConverter(typeof(JsonModelConverter<Event, EventFromRaw>))]
-public sealed record class Event : JsonModel
-{
-    /// <summary>
-    /// Customer id
-    /// </summary>
-    public required string CustomerID
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("customerId");
-        }
-        init { this._rawData.Set("customerId", value); }
-    }
-
-    /// <summary>
-    /// The name of the usage event
-    /// </summary>
-    public required string EventName
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("eventName");
-        }
-        init { this._rawData.Set("eventName", value); }
-    }
-
-    /// <summary>
-    /// Idempotency key
-    /// </summary>
-    public required string IdempotencyKey
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("idempotencyKey");
-        }
-        init { this._rawData.Set("idempotencyKey", value); }
-    }
-
-    /// <summary>
-    /// Dimensions associated with the usage event
-    /// </summary>
-    public IReadOnlyDictionary<string, EventDimension>? Dimensions
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<FrozenDictionary<string, EventDimension>>(
-                "dimensions"
-            );
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set<FrozenDictionary<string, EventDimension>?>(
-                "dimensions",
-                value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
-            );
-        }
-    }
-
-    /// <summary>
-    /// Resource id
-    /// </summary>
-    public string? ResourceID
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("resourceId");
-        }
-        init { this._rawData.Set("resourceId", value); }
-    }
-
-    /// <summary>
-    /// Timestamp
-    /// </summary>
-    public DateTimeOffset? Timestamp
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableStruct<DateTimeOffset>("timestamp");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("timestamp", value);
-        }
-    }
-
-    /// <inheritdoc/>
-    public override void Validate()
-    {
-        _ = this.CustomerID;
-        _ = this.EventName;
-        _ = this.IdempotencyKey;
-        if (this.Dimensions != null)
-        {
-            foreach (var item in this.Dimensions.Values)
-            {
-                item.Validate();
-            }
-        }
-        _ = this.ResourceID;
-        _ = this.Timestamp;
-    }
-
-    public Event() { }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    public Event(Event event_)
-        : base(event_) { }
-#pragma warning restore CS8618
-
-    public Event(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-
-#pragma warning disable CS8618
-    [SetsRequiredMembers]
-    Event(FrozenDictionary<string, JsonElement> rawData)
-    {
-        this._rawData = new(rawData);
-    }
-#pragma warning restore CS8618
-
-    /// <inheritdoc cref="EventFromRaw.FromRawUnchecked"/>
-    public static Event FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
-    {
-        return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-}
-
-class EventFromRaw : IFromRawJson<Event>
-{
-    /// <inheritdoc/>
-    public Event FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        Event.FromRawUnchecked(rawData);
-}
-
-[JsonConverter(typeof(EventDimensionConverter))]
-public record class EventDimension : ModelBase
+[JsonConverter(typeof(DimensionConverter))]
+public record class Dimension : ModelBase
 {
     public object? Value { get; } = null;
 
@@ -368,25 +256,25 @@ public record class EventDimension : ModelBase
         }
     }
 
-    public EventDimension(string value, JsonElement? element = null)
+    public Dimension(string value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
     }
 
-    public EventDimension(double value, JsonElement? element = null)
+    public Dimension(double value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
     }
 
-    public EventDimension(bool value, JsonElement? element = null)
+    public Dimension(bool value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
     }
 
-    public EventDimension(JsonElement element)
+    public Dimension(JsonElement element)
     {
         this._element = element;
     }
@@ -489,9 +377,7 @@ public record class EventDimension : ModelBase
                 @bool(value);
                 break;
             default:
-                throw new StiggInvalidDataException(
-                    "Data did not match any variant of EventDimension"
-                );
+                throw new StiggInvalidDataException("Data did not match any variant of Dimension");
         }
     }
 
@@ -524,17 +410,15 @@ public record class EventDimension : ModelBase
             string value => @string(value),
             double value => @double(value),
             bool value => @bool(value),
-            _ => throw new StiggInvalidDataException(
-                "Data did not match any variant of EventDimension"
-            ),
+            _ => throw new StiggInvalidDataException("Data did not match any variant of Dimension"),
         };
     }
 
-    public static implicit operator EventDimension(string value) => new(value);
+    public static implicit operator Dimension(string value) => new(value);
 
-    public static implicit operator EventDimension(double value) => new(value);
+    public static implicit operator Dimension(double value) => new(value);
 
-    public static implicit operator EventDimension(bool value) => new(value);
+    public static implicit operator Dimension(bool value) => new(value);
 
     /// <summary>
     /// Validates that the instance was constructed with a known variant and that this variant is valid
@@ -550,11 +434,11 @@ public record class EventDimension : ModelBase
     {
         if (this.Value == null)
         {
-            throw new StiggInvalidDataException("Data did not match any variant of EventDimension");
+            throw new StiggInvalidDataException("Data did not match any variant of Dimension");
         }
     }
 
-    public virtual bool Equals(EventDimension? other) =>
+    public virtual bool Equals(Dimension? other) =>
         other != null
         && this.VariantIndex() == other.VariantIndex()
         && JsonElement.DeepEquals(this.Json, other.Json);
@@ -582,9 +466,9 @@ public record class EventDimension : ModelBase
     }
 }
 
-sealed class EventDimensionConverter : JsonConverter<EventDimension>
+sealed class DimensionConverter : JsonConverter<Dimension>
 {
-    public override EventDimension? Read(
+    public override Dimension? Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -627,7 +511,7 @@ sealed class EventDimensionConverter : JsonConverter<EventDimension>
 
     public override void Write(
         Utf8JsonWriter writer,
-        EventDimension value,
+        Dimension value,
         JsonSerializerOptions options
     )
     {
