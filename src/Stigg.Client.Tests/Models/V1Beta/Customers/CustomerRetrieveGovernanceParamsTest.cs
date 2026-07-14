@@ -4,9 +4,9 @@ using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
-using Stigg.Client.Models.V1.Events.Beta.Customers;
+using Stigg.Client.Models.V1Beta.Customers;
 
-namespace Stigg.Client.Tests.Models.V1.Events.Beta.Customers;
+namespace Stigg.Client.Tests.Models.V1Beta.Customers;
 
 public class CustomerRetrieveGovernanceParamsTest : TestBase
 {
