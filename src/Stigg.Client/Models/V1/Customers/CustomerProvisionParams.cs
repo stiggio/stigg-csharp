@@ -1095,6 +1095,7 @@ public enum CustomerProvisionParamsIntegrationVendorIdentifier
     Received,
     Prequel,
     Airwallex,
+    StripeInvoicing,
 }
 
 sealed class CustomerProvisionParamsIntegrationVendorIdentifierConverter
@@ -1121,6 +1122,8 @@ sealed class CustomerProvisionParamsIntegrationVendorIdentifierConverter
             "RECEIVED" => CustomerProvisionParamsIntegrationVendorIdentifier.Received,
             "PREQUEL" => CustomerProvisionParamsIntegrationVendorIdentifier.Prequel,
             "AIRWALLEX" => CustomerProvisionParamsIntegrationVendorIdentifier.Airwallex,
+            "STRIPE_INVOICING" =>
+                CustomerProvisionParamsIntegrationVendorIdentifier.StripeInvoicing,
             _ => (CustomerProvisionParamsIntegrationVendorIdentifier)(-1),
         };
     }
@@ -1149,6 +1152,8 @@ sealed class CustomerProvisionParamsIntegrationVendorIdentifierConverter
                 CustomerProvisionParamsIntegrationVendorIdentifier.Received => "RECEIVED",
                 CustomerProvisionParamsIntegrationVendorIdentifier.Prequel => "PREQUEL",
                 CustomerProvisionParamsIntegrationVendorIdentifier.Airwallex => "AIRWALLEX",
+                CustomerProvisionParamsIntegrationVendorIdentifier.StripeInvoicing =>
+                    "STRIPE_INVOICING",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

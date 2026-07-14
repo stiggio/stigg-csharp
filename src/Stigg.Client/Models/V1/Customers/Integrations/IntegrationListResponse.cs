@@ -136,6 +136,7 @@ public enum IntegrationListResponseVendorIdentifier
     Received,
     Prequel,
     Airwallex,
+    StripeInvoicing,
 }
 
 sealed class IntegrationListResponseVendorIdentifierConverter
@@ -162,6 +163,7 @@ sealed class IntegrationListResponseVendorIdentifierConverter
             "RECEIVED" => IntegrationListResponseVendorIdentifier.Received,
             "PREQUEL" => IntegrationListResponseVendorIdentifier.Prequel,
             "AIRWALLEX" => IntegrationListResponseVendorIdentifier.Airwallex,
+            "STRIPE_INVOICING" => IntegrationListResponseVendorIdentifier.StripeInvoicing,
             _ => (IntegrationListResponseVendorIdentifier)(-1),
         };
     }
@@ -189,6 +191,7 @@ sealed class IntegrationListResponseVendorIdentifierConverter
                 IntegrationListResponseVendorIdentifier.Received => "RECEIVED",
                 IntegrationListResponseVendorIdentifier.Prequel => "PREQUEL",
                 IntegrationListResponseVendorIdentifier.Airwallex => "AIRWALLEX",
+                IntegrationListResponseVendorIdentifier.StripeInvoicing => "STRIPE_INVOICING",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

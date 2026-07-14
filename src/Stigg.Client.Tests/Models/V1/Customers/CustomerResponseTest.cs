@@ -2337,6 +2337,7 @@ public class CustomerResponseDataIntegrationVendorIdentifierTest : TestBase
     [InlineData(CustomerResponseDataIntegrationVendorIdentifier.Received)]
     [InlineData(CustomerResponseDataIntegrationVendorIdentifier.Prequel)]
     [InlineData(CustomerResponseDataIntegrationVendorIdentifier.Airwallex)]
+    [InlineData(CustomerResponseDataIntegrationVendorIdentifier.StripeInvoicing)]
     public void Validation_Works(CustomerResponseDataIntegrationVendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -2369,6 +2370,7 @@ public class CustomerResponseDataIntegrationVendorIdentifierTest : TestBase
     [InlineData(CustomerResponseDataIntegrationVendorIdentifier.Received)]
     [InlineData(CustomerResponseDataIntegrationVendorIdentifier.Prequel)]
     [InlineData(CustomerResponseDataIntegrationVendorIdentifier.Airwallex)]
+    [InlineData(CustomerResponseDataIntegrationVendorIdentifier.StripeInvoicing)]
     public void SerializationRoundtrip_Works(
         CustomerResponseDataIntegrationVendorIdentifier rawValue
     )

@@ -886,6 +886,7 @@ public enum VendorIdentifier
     Received,
     Prequel,
     Airwallex,
+    StripeInvoicing,
 }
 
 sealed class VendorIdentifierConverter : JsonConverter<VendorIdentifier>
@@ -911,6 +912,7 @@ sealed class VendorIdentifierConverter : JsonConverter<VendorIdentifier>
             "RECEIVED" => VendorIdentifier.Received,
             "PREQUEL" => VendorIdentifier.Prequel,
             "AIRWALLEX" => VendorIdentifier.Airwallex,
+            "STRIPE_INVOICING" => VendorIdentifier.StripeInvoicing,
             _ => (VendorIdentifier)(-1),
         };
     }
@@ -938,6 +940,7 @@ sealed class VendorIdentifierConverter : JsonConverter<VendorIdentifier>
                 VendorIdentifier.Received => "RECEIVED",
                 VendorIdentifier.Prequel => "PREQUEL",
                 VendorIdentifier.Airwallex => "AIRWALLEX",
+                VendorIdentifier.StripeInvoicing => "STRIPE_INVOICING",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
