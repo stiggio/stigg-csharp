@@ -1,5 +1,10 @@
 using System;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 using Stigg.Client.Core;
+using Stigg.Client.Exceptions;
+using Stigg.Client.Models.V1Beta.Customers;
 using Stigg.Client.Services.V1Beta.Customers;
 
 namespace Stigg.Client.Services.V1Beta;
@@ -50,6 +55,30 @@ public sealed class CustomerService : ICustomerService
     {
         get { return _assignments.Value; }
     }
+
+    /// <inheritdoc/>
+    public async Task<CustomerRetrieveGovernanceResponse> RetrieveGovernance(
+        CustomerRetrieveGovernanceParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.RetrieveGovernance(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<CustomerRetrieveGovernanceResponse> RetrieveGovernance(
+        string id,
+        CustomerRetrieveGovernanceParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.RetrieveGovernance(parameters with { ID = id }, cancellationToken);
+    }
 }
 
 /// <inheritdoc/>
@@ -88,5 +117,50 @@ public sealed class CustomerServiceWithRawResponse : ICustomerServiceWithRawResp
     public IAssignmentServiceWithRawResponse Assignments
     {
         get { return _assignments.Value; }
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<CustomerRetrieveGovernanceResponse>> RetrieveGovernance(
+        CustomerRetrieveGovernanceParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.ID == null)
+        {
+            throw new StiggInvalidDataException("'parameters.ID' cannot be null");
+        }
+
+        HttpRequest<CustomerRetrieveGovernanceParams> request = new()
+        {
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var deserializedResponse = await response
+                    .Deserialize<CustomerRetrieveGovernanceResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    deserializedResponse.Validate();
+                }
+                return deserializedResponse;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<CustomerRetrieveGovernanceResponse>> RetrieveGovernance(
+        string id,
+        CustomerRetrieveGovernanceParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.RetrieveGovernance(parameters with { ID = id }, cancellationToken);
     }
 }

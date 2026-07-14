@@ -33,19 +33,12 @@ public sealed class EventService : IEventService
 
         _withRawResponse = new(() => new EventServiceWithRawResponse(client.WithRawResponse));
         _dataExport = new(() => new DataExportService(client));
-        _beta = new(() => new BetaService(client));
     }
 
     readonly Lazy<IDataExportService> _dataExport;
     public IDataExportService DataExport
     {
         get { return _dataExport.Value; }
-    }
-
-    readonly Lazy<IBetaService> _beta;
-    public IBetaService Beta
-    {
-        get { return _beta.Value; }
     }
 
     /// <inheritdoc/>
@@ -89,19 +82,12 @@ public sealed class EventServiceWithRawResponse : IEventServiceWithRawResponse
         _client = client;
 
         _dataExport = new(() => new DataExportServiceWithRawResponse(client));
-        _beta = new(() => new BetaServiceWithRawResponse(client));
     }
 
     readonly Lazy<IDataExportServiceWithRawResponse> _dataExport;
     public IDataExportServiceWithRawResponse DataExport
     {
         get { return _dataExport.Value; }
-    }
-
-    readonly Lazy<IBetaServiceWithRawResponse> _beta;
-    public IBetaServiceWithRawResponse Beta
-    {
-        get { return _beta.Value; }
     }
 
     /// <inheritdoc/>
