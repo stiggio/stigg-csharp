@@ -53,6 +53,15 @@ public class GrantListPageResponseTest : TestBase
                     ResourceID = "resourceId",
                     SourceType = GrantListResponseSourceType.Price,
                     Status = GrantListResponseStatus.PaymentPending,
+                    SyncStates =
+                    [
+                        new()
+                        {
+                            Status = GrantListResponseSyncStateStatus.Pending,
+                            SyncedEntityID = "syncedEntityId",
+                            VendorIdentifier = GrantListResponseSyncStateVendorIdentifier.Auth0,
+                        },
+                    ],
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     VoidedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
@@ -104,6 +113,15 @@ public class GrantListPageResponseTest : TestBase
                 ResourceID = "resourceId",
                 SourceType = GrantListResponseSourceType.Price,
                 Status = GrantListResponseStatus.PaymentPending,
+                SyncStates =
+                [
+                    new()
+                    {
+                        Status = GrantListResponseSyncStateStatus.Pending,
+                        SyncedEntityID = "syncedEntityId",
+                        VendorIdentifier = GrantListResponseSyncStateVendorIdentifier.Auth0,
+                    },
+                ],
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 VoidedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -167,6 +185,15 @@ public class GrantListPageResponseTest : TestBase
                     ResourceID = "resourceId",
                     SourceType = GrantListResponseSourceType.Price,
                     Status = GrantListResponseStatus.PaymentPending,
+                    SyncStates =
+                    [
+                        new()
+                        {
+                            Status = GrantListResponseSyncStateStatus.Pending,
+                            SyncedEntityID = "syncedEntityId",
+                            VendorIdentifier = GrantListResponseSyncStateVendorIdentifier.Auth0,
+                        },
+                    ],
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     VoidedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
@@ -232,6 +259,15 @@ public class GrantListPageResponseTest : TestBase
                     ResourceID = "resourceId",
                     SourceType = GrantListResponseSourceType.Price,
                     Status = GrantListResponseStatus.PaymentPending,
+                    SyncStates =
+                    [
+                        new()
+                        {
+                            Status = GrantListResponseSyncStateStatus.Pending,
+                            SyncedEntityID = "syncedEntityId",
+                            VendorIdentifier = GrantListResponseSyncStateVendorIdentifier.Auth0,
+                        },
+                    ],
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     VoidedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
@@ -290,6 +326,15 @@ public class GrantListPageResponseTest : TestBase
                 ResourceID = "resourceId",
                 SourceType = GrantListResponseSourceType.Price,
                 Status = GrantListResponseStatus.PaymentPending,
+                SyncStates =
+                [
+                    new()
+                    {
+                        Status = GrantListResponseSyncStateStatus.Pending,
+                        SyncedEntityID = "syncedEntityId",
+                        VendorIdentifier = GrantListResponseSyncStateVendorIdentifier.Auth0,
+                    },
+                ],
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 VoidedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -353,6 +398,15 @@ public class GrantListPageResponseTest : TestBase
                     ResourceID = "resourceId",
                     SourceType = GrantListResponseSourceType.Price,
                     Status = GrantListResponseStatus.PaymentPending,
+                    SyncStates =
+                    [
+                        new()
+                        {
+                            Status = GrantListResponseSyncStateStatus.Pending,
+                            SyncedEntityID = "syncedEntityId",
+                            VendorIdentifier = GrantListResponseSyncStateVendorIdentifier.Auth0,
+                        },
+                    ],
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     VoidedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
@@ -412,6 +466,15 @@ public class GrantListPageResponseTest : TestBase
                     ResourceID = "resourceId",
                     SourceType = GrantListResponseSourceType.Price,
                     Status = GrantListResponseStatus.PaymentPending,
+                    SyncStates =
+                    [
+                        new()
+                        {
+                            Status = GrantListResponseSyncStateStatus.Pending,
+                            SyncedEntityID = "syncedEntityId",
+                            VendorIdentifier = GrantListResponseSyncStateVendorIdentifier.Auth0,
+                        },
+                    ],
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     VoidedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
