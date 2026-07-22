@@ -2,7 +2,8 @@ using System.Text.Json;
 using Stigg.Client.Exceptions;
 using Stigg.Client.Models.V1.Credits.CustomCurrencies;
 using Stigg.Client.Models.V1.Customers;
-using Stigg.Client.Models.V1.Events.Beta.Customers;
+using Stigg.Client.Models.V1.Events;
+using Stigg.Client.Models.V1Beta.Customers;
 using Stigg.Client.Models.V1Beta.Customers.Entities;
 using Addons = Stigg.Client.Models.V1.Addons;
 using Coupons = Stigg.Client.Models.V1.Coupons;
@@ -409,9 +410,8 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Coupons::Currency>(),
             new ApiEnumConverter<string, Coupons::Status>(),
             new ApiEnumConverter<string, Coupons::Type>(),
-            new ApiEnumConverter<string, Order>(),
-            new ApiEnumConverter<string, Scope>(),
-            new ApiEnumConverter<string, SortBy>(),
+            new ApiEnumConverter<string, WarningCode>(),
+            new ApiEnumConverter<string, Warning>(),
             new ApiEnumConverter<string, Credits::GrantExpirationPeriod>(),
             new ApiEnumConverter<string, Credits::ThresholdType>(),
             new ApiEnumConverter<string, Credits::EventType>(),
@@ -422,12 +422,16 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Grants::PaymentCollection>(),
             new ApiEnumConverter<string, Grants::SourceType>(),
             new ApiEnumConverter<string, Grants::DataStatus>(),
+            new ApiEnumConverter<string, Grants::SyncStateStatus>(),
+            new ApiEnumConverter<string, Grants::VendorIdentifier>(),
             new ApiEnumConverter<string, Grants::GrantListResponseGrantType>(),
             new ApiEnumConverter<string, Grants::GrantListResponseLatestInvoiceBillingReason>(),
             new ApiEnumConverter<string, Grants::GrantListResponseLatestInvoiceStatus>(),
             new ApiEnumConverter<string, Grants::GrantListResponsePaymentCollection>(),
             new ApiEnumConverter<string, Grants::GrantListResponseSourceType>(),
             new ApiEnumConverter<string, Grants::GrantListResponseStatus>(),
+            new ApiEnumConverter<string, Grants::GrantListResponseSyncStateStatus>(),
+            new ApiEnumConverter<string, Grants::GrantListResponseSyncStateVendorIdentifier>(),
             new ApiEnumConverter<string, Grants::GrantType>(),
             new ApiEnumConverter<string, Grants::Currency>(),
             new ApiEnumConverter<string, Grants::PaymentCollectionMethod>(),
@@ -809,8 +813,11 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, PlansEntitlements::BodyCreditBehavior>(),
             new ApiEnumConverter<string, PlansEntitlements::BodyCreditCadence>(),
             new ApiEnumConverter<string, PlansEntitlements::BodyCreditHiddenFromWidget>(),
+            new ApiEnumConverter<string, Usage::WarningCode>(),
+            new ApiEnumConverter<string, Usage::Warning>(),
             new ApiEnumConverter<string, Usage::Type>(),
             new ApiEnumConverter<string, Usage::UpdateBehavior>(),
+            new ApiEnumConverter<string, Usage::UsageReportParamsUsageUpdateBehavior>(),
             new ApiEnumConverter<string, Products::DataStatus>(),
             new ApiEnumConverter<
                 string,
@@ -836,6 +843,9 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Products::SubscriptionEndSetup>(),
             new ApiEnumConverter<string, Products::SubscriptionStartSetup>(),
             new ApiEnumConverter<string, Products::Behavior>(),
+            new ApiEnumConverter<string, Order>(),
+            new ApiEnumConverter<string, Scope>(),
+            new ApiEnumConverter<string, SortBy>(),
             new ApiEnumConverter<string, CustomersEntitlements::AccessDeniedReason>(),
             new ApiEnumConverter<string, CustomersEntitlements::FeatureStatus>(),
             new ApiEnumConverter<string, CustomersEntitlements::FeatureType>(),

@@ -132,7 +132,7 @@ public sealed record class Data : JsonModel
     }
 
     /// <summary>
-    /// The entity refId this assignment is attached to
+    /// The entity ID this assignment is attached to
     /// </summary>
     public required string EntityID
     {
@@ -145,7 +145,7 @@ public sealed record class Data : JsonModel
     }
 
     /// <summary>
-    /// Parent entity refId in the hierarchy, or `null` for a root.
+    /// Parent entity ID in the hierarchy, or `null` for a root.
     /// </summary>
     public required string? ParentID
     {
@@ -158,7 +158,7 @@ public sealed record class Data : JsonModel
     }
 
     /// <summary>
-    /// Dimension-scoped sub-budget key: the set of entity refIds this budget applies
+    /// Dimension-scoped sub-budget key: the set of entity IDs this budget applies
     /// to. Empty is the node-wide budget that always matches; a non-empty set only
     /// applies when every listed entity is present in the resolved set (order-insensitive).
     /// </summary>
@@ -205,7 +205,7 @@ public sealed record class Data : JsonModel
     }
 
     /// <summary>
-    /// Currency refId this assignment grants (present for credit capabilities).
+    /// Currency ID this assignment grants (present for credit capabilities).
     /// </summary>
     public string? CurrencyID
     {
@@ -226,7 +226,7 @@ public sealed record class Data : JsonModel
     }
 
     /// <summary>
-    /// Feature refId this assignment grants (present for feature capabilities).
+    /// Feature ID this assignment grants (present for feature capabilities).
     /// </summary>
     public string? FeatureID
     {

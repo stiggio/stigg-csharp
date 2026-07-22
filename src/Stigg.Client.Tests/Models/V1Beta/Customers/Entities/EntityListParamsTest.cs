@@ -17,9 +17,9 @@ public class EntityListParamsTest : TestBase
             ID = "id",
             After = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Before = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            EntityTypeID = "entityTypeId",
             IncludeArchived = IncludeArchived.True,
             Limit = 1,
-            TypeRefID = "typeRefId",
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",
         };
@@ -27,18 +27,18 @@ public class EntityListParamsTest : TestBase
         string expectedID = "id";
         string expectedAfter = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
         string expectedBefore = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
+        string expectedEntityTypeID = "entityTypeId";
         ApiEnum<string, IncludeArchived> expectedIncludeArchived = IncludeArchived.True;
         long expectedLimit = 1;
-        string expectedTypeRefID = "typeRefId";
         string expectedXAccountID = "X-ACCOUNT-ID";
         string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedAfter, parameters.After);
         Assert.Equal(expectedBefore, parameters.Before);
+        Assert.Equal(expectedEntityTypeID, parameters.EntityTypeID);
         Assert.Equal(expectedIncludeArchived, parameters.IncludeArchived);
         Assert.Equal(expectedLimit, parameters.Limit);
-        Assert.Equal(expectedTypeRefID, parameters.TypeRefID);
         Assert.Equal(expectedXAccountID, parameters.XAccountID);
         Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
@@ -52,12 +52,12 @@ public class EntityListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("after"));
         Assert.Null(parameters.Before);
         Assert.False(parameters.RawQueryData.ContainsKey("before"));
+        Assert.Null(parameters.EntityTypeID);
+        Assert.False(parameters.RawQueryData.ContainsKey("entityTypeId"));
         Assert.Null(parameters.IncludeArchived);
         Assert.False(parameters.RawQueryData.ContainsKey("includeArchived"));
         Assert.Null(parameters.Limit);
         Assert.False(parameters.RawQueryData.ContainsKey("limit"));
-        Assert.Null(parameters.TypeRefID);
-        Assert.False(parameters.RawQueryData.ContainsKey("typeRefId"));
         Assert.Null(parameters.XAccountID);
         Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
         Assert.Null(parameters.XEnvironmentID);
@@ -74,9 +74,9 @@ public class EntityListParamsTest : TestBase
             // Null should be interpreted as omitted for these properties
             After = null,
             Before = null,
+            EntityTypeID = null,
             IncludeArchived = null,
             Limit = null,
-            TypeRefID = null,
             XAccountID = null,
             XEnvironmentID = null,
         };
@@ -85,12 +85,12 @@ public class EntityListParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("after"));
         Assert.Null(parameters.Before);
         Assert.False(parameters.RawQueryData.ContainsKey("before"));
+        Assert.Null(parameters.EntityTypeID);
+        Assert.False(parameters.RawQueryData.ContainsKey("entityTypeId"));
         Assert.Null(parameters.IncludeArchived);
         Assert.False(parameters.RawQueryData.ContainsKey("includeArchived"));
         Assert.Null(parameters.Limit);
         Assert.False(parameters.RawQueryData.ContainsKey("limit"));
-        Assert.Null(parameters.TypeRefID);
-        Assert.False(parameters.RawQueryData.ContainsKey("typeRefId"));
         Assert.Null(parameters.XAccountID);
         Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
         Assert.Null(parameters.XEnvironmentID);
@@ -105,9 +105,9 @@ public class EntityListParamsTest : TestBase
             ID = "id",
             After = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Before = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            EntityTypeID = "entityTypeId",
             IncludeArchived = IncludeArchived.True,
             Limit = 1,
-            TypeRefID = "typeRefId",
         };
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
@@ -115,7 +115,7 @@ public class EntityListParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://edge.api.stigg.io/api/v1-beta/customers/id/entities?after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&includeArchived=true&limit=1&typeRefId=typeRefId"
+                    "https://edge.api.stigg.io/api/v1-beta/customers/id/entities?after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&entityTypeId=entityTypeId&includeArchived=true&limit=1"
                 ),
                 url
             )
@@ -147,9 +147,9 @@ public class EntityListParamsTest : TestBase
             ID = "id",
             After = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Before = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            EntityTypeID = "entityTypeId",
             IncludeArchived = IncludeArchived.True,
             Limit = 1,
-            TypeRefID = "typeRefId",
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",
         };

@@ -151,6 +151,8 @@ public class IntegrationLinkParamsVendorIdentifierTest : TestBase
     [InlineData(IntegrationLinkParamsVendorIdentifier.AppStore)]
     [InlineData(IntegrationLinkParamsVendorIdentifier.Received)]
     [InlineData(IntegrationLinkParamsVendorIdentifier.Prequel)]
+    [InlineData(IntegrationLinkParamsVendorIdentifier.Airwallex)]
+    [InlineData(IntegrationLinkParamsVendorIdentifier.StripeInvoicing)]
     public void Validation_Works(IntegrationLinkParamsVendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -182,6 +184,8 @@ public class IntegrationLinkParamsVendorIdentifierTest : TestBase
     [InlineData(IntegrationLinkParamsVendorIdentifier.AppStore)]
     [InlineData(IntegrationLinkParamsVendorIdentifier.Received)]
     [InlineData(IntegrationLinkParamsVendorIdentifier.Prequel)]
+    [InlineData(IntegrationLinkParamsVendorIdentifier.Airwallex)]
+    [InlineData(IntegrationLinkParamsVendorIdentifier.StripeInvoicing)]
     public void SerializationRoundtrip_Works(IntegrationLinkParamsVendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us

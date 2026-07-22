@@ -31,6 +31,8 @@ public interface ICreditService
 
     ICustomCurrencyService CustomCurrencies { get; }
 
+    IConsumptionService Consumption { get; }
+
     /// <summary>
     /// Retrieves the automatic recharge configuration for a customer and currency.
     /// Returns default settings if no configuration exists.
@@ -74,6 +76,8 @@ public interface ICreditServiceWithRawResponse
     IGrantServiceWithRawResponse Grants { get; }
 
     ICustomCurrencyServiceWithRawResponse CustomCurrencies { get; }
+
+    IConsumptionServiceWithRawResponse Consumption { get; }
 
     /// <summary>
     /// Returns a raw HTTP response for <c>get /api/v1/credits/auto-recharge</c>, but is otherwise the

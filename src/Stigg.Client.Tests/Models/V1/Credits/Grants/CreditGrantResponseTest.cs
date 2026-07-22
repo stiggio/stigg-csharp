@@ -52,6 +52,15 @@ public class CreditGrantResponseTest : TestBase
                 ResourceID = "resourceId",
                 SourceType = SourceType.Price,
                 Status = DataStatus.PaymentPending,
+                SyncStates =
+                [
+                    new()
+                    {
+                        Status = SyncStateStatus.Pending,
+                        SyncedEntityID = "syncedEntityId",
+                        VendorIdentifier = VendorIdentifier.Auth0,
+                    },
+                ],
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 VoidedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -95,6 +104,15 @@ public class CreditGrantResponseTest : TestBase
             ResourceID = "resourceId",
             SourceType = SourceType.Price,
             Status = DataStatus.PaymentPending,
+            SyncStates =
+            [
+                new()
+                {
+                    Status = SyncStateStatus.Pending,
+                    SyncedEntityID = "syncedEntityId",
+                    VendorIdentifier = VendorIdentifier.Auth0,
+                },
+            ],
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             VoidedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -145,6 +163,15 @@ public class CreditGrantResponseTest : TestBase
                 ResourceID = "resourceId",
                 SourceType = SourceType.Price,
                 Status = DataStatus.PaymentPending,
+                SyncStates =
+                [
+                    new()
+                    {
+                        Status = SyncStateStatus.Pending,
+                        SyncedEntityID = "syncedEntityId",
+                        VendorIdentifier = VendorIdentifier.Auth0,
+                    },
+                ],
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 VoidedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -202,6 +229,15 @@ public class CreditGrantResponseTest : TestBase
                 ResourceID = "resourceId",
                 SourceType = SourceType.Price,
                 Status = DataStatus.PaymentPending,
+                SyncStates =
+                [
+                    new()
+                    {
+                        Status = SyncStateStatus.Pending,
+                        SyncedEntityID = "syncedEntityId",
+                        VendorIdentifier = VendorIdentifier.Auth0,
+                    },
+                ],
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 VoidedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -252,6 +288,15 @@ public class CreditGrantResponseTest : TestBase
             ResourceID = "resourceId",
             SourceType = SourceType.Price,
             Status = DataStatus.PaymentPending,
+            SyncStates =
+            [
+                new()
+                {
+                    Status = SyncStateStatus.Pending,
+                    SyncedEntityID = "syncedEntityId",
+                    VendorIdentifier = VendorIdentifier.Auth0,
+                },
+            ],
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             VoidedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -302,6 +347,15 @@ public class CreditGrantResponseTest : TestBase
                 ResourceID = "resourceId",
                 SourceType = SourceType.Price,
                 Status = DataStatus.PaymentPending,
+                SyncStates =
+                [
+                    new()
+                    {
+                        Status = SyncStateStatus.Pending,
+                        SyncedEntityID = "syncedEntityId",
+                        VendorIdentifier = VendorIdentifier.Auth0,
+                    },
+                ],
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 VoidedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -353,6 +407,15 @@ public class CreditGrantResponseTest : TestBase
                 ResourceID = "resourceId",
                 SourceType = SourceType.Price,
                 Status = DataStatus.PaymentPending,
+                SyncStates =
+                [
+                    new()
+                    {
+                        Status = SyncStateStatus.Pending,
+                        SyncedEntityID = "syncedEntityId",
+                        VendorIdentifier = VendorIdentifier.Auth0,
+                    },
+                ],
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 VoidedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -407,6 +470,15 @@ public class DataTest : TestBase
             ResourceID = "resourceId",
             SourceType = SourceType.Price,
             Status = DataStatus.PaymentPending,
+            SyncStates =
+            [
+                new()
+                {
+                    Status = SyncStateStatus.Pending,
+                    SyncedEntityID = "syncedEntityId",
+                    VendorIdentifier = VendorIdentifier.Auth0,
+                },
+            ],
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             VoidedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -448,6 +520,15 @@ public class DataTest : TestBase
         string expectedResourceID = "resourceId";
         ApiEnum<string, SourceType> expectedSourceType = SourceType.Price;
         ApiEnum<string, DataStatus> expectedStatus = DataStatus.PaymentPending;
+        List<SyncState> expectedSyncStates =
+        [
+            new()
+            {
+                Status = SyncStateStatus.Pending,
+                SyncedEntityID = "syncedEntityId",
+                VendorIdentifier = VendorIdentifier.Auth0,
+            },
+        ];
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedVoidedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
@@ -477,6 +558,12 @@ public class DataTest : TestBase
         Assert.Equal(expectedResourceID, model.ResourceID);
         Assert.Equal(expectedSourceType, model.SourceType);
         Assert.Equal(expectedStatus, model.Status);
+        Assert.NotNull(model.SyncStates);
+        Assert.Equal(expectedSyncStates.Count, model.SyncStates.Count);
+        for (int i = 0; i < expectedSyncStates.Count; i++)
+        {
+            Assert.Equal(expectedSyncStates[i], model.SyncStates[i]);
+        }
         Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
         Assert.Equal(expectedVoidedAt, model.VoidedAt);
     }
@@ -522,6 +609,15 @@ public class DataTest : TestBase
             ResourceID = "resourceId",
             SourceType = SourceType.Price,
             Status = DataStatus.PaymentPending,
+            SyncStates =
+            [
+                new()
+                {
+                    Status = SyncStateStatus.Pending,
+                    SyncedEntityID = "syncedEntityId",
+                    VendorIdentifier = VendorIdentifier.Auth0,
+                },
+            ],
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             VoidedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -573,6 +669,15 @@ public class DataTest : TestBase
             ResourceID = "resourceId",
             SourceType = SourceType.Price,
             Status = DataStatus.PaymentPending,
+            SyncStates =
+            [
+                new()
+                {
+                    Status = SyncStateStatus.Pending,
+                    SyncedEntityID = "syncedEntityId",
+                    VendorIdentifier = VendorIdentifier.Auth0,
+                },
+            ],
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             VoidedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -618,6 +723,15 @@ public class DataTest : TestBase
         string expectedResourceID = "resourceId";
         ApiEnum<string, SourceType> expectedSourceType = SourceType.Price;
         ApiEnum<string, DataStatus> expectedStatus = DataStatus.PaymentPending;
+        List<SyncState> expectedSyncStates =
+        [
+            new()
+            {
+                Status = SyncStateStatus.Pending,
+                SyncedEntityID = "syncedEntityId",
+                VendorIdentifier = VendorIdentifier.Auth0,
+            },
+        ];
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedVoidedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
@@ -647,6 +761,12 @@ public class DataTest : TestBase
         Assert.Equal(expectedResourceID, deserialized.ResourceID);
         Assert.Equal(expectedSourceType, deserialized.SourceType);
         Assert.Equal(expectedStatus, deserialized.Status);
+        Assert.NotNull(deserialized.SyncStates);
+        Assert.Equal(expectedSyncStates.Count, deserialized.SyncStates.Count);
+        for (int i = 0; i < expectedSyncStates.Count; i++)
+        {
+            Assert.Equal(expectedSyncStates[i], deserialized.SyncStates[i]);
+        }
         Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
         Assert.Equal(expectedVoidedAt, deserialized.VoidedAt);
     }
@@ -692,6 +812,15 @@ public class DataTest : TestBase
             ResourceID = "resourceId",
             SourceType = SourceType.Price,
             Status = DataStatus.PaymentPending,
+            SyncStates =
+            [
+                new()
+                {
+                    Status = SyncStateStatus.Pending,
+                    SyncedEntityID = "syncedEntityId",
+                    VendorIdentifier = VendorIdentifier.Auth0,
+                },
+            ],
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             VoidedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -740,6 +869,15 @@ public class DataTest : TestBase
             ResourceID = "resourceId",
             SourceType = SourceType.Price,
             Status = DataStatus.PaymentPending,
+            SyncStates =
+            [
+                new()
+                {
+                    Status = SyncStateStatus.Pending,
+                    SyncedEntityID = "syncedEntityId",
+                    VendorIdentifier = VendorIdentifier.Auth0,
+                },
+            ],
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             VoidedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -1365,6 +1503,242 @@ public class DataStatusTest : TestBase
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<ApiEnum<string, DataStatus>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class SyncStateTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new SyncState
+        {
+            Status = SyncStateStatus.Pending,
+            SyncedEntityID = "syncedEntityId",
+            VendorIdentifier = VendorIdentifier.Auth0,
+        };
+
+        ApiEnum<string, SyncStateStatus> expectedStatus = SyncStateStatus.Pending;
+        string expectedSyncedEntityID = "syncedEntityId";
+        ApiEnum<string, VendorIdentifier> expectedVendorIdentifier = VendorIdentifier.Auth0;
+
+        Assert.Equal(expectedStatus, model.Status);
+        Assert.Equal(expectedSyncedEntityID, model.SyncedEntityID);
+        Assert.Equal(expectedVendorIdentifier, model.VendorIdentifier);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new SyncState
+        {
+            Status = SyncStateStatus.Pending,
+            SyncedEntityID = "syncedEntityId",
+            VendorIdentifier = VendorIdentifier.Auth0,
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<SyncState>(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new SyncState
+        {
+            Status = SyncStateStatus.Pending,
+            SyncedEntityID = "syncedEntityId",
+            VendorIdentifier = VendorIdentifier.Auth0,
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<SyncState>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        ApiEnum<string, SyncStateStatus> expectedStatus = SyncStateStatus.Pending;
+        string expectedSyncedEntityID = "syncedEntityId";
+        ApiEnum<string, VendorIdentifier> expectedVendorIdentifier = VendorIdentifier.Auth0;
+
+        Assert.Equal(expectedStatus, deserialized.Status);
+        Assert.Equal(expectedSyncedEntityID, deserialized.SyncedEntityID);
+        Assert.Equal(expectedVendorIdentifier, deserialized.VendorIdentifier);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new SyncState
+        {
+            Status = SyncStateStatus.Pending,
+            SyncedEntityID = "syncedEntityId",
+            VendorIdentifier = VendorIdentifier.Auth0,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new SyncState
+        {
+            Status = SyncStateStatus.Pending,
+            SyncedEntityID = "syncedEntityId",
+            VendorIdentifier = VendorIdentifier.Auth0,
+        };
+
+        SyncState copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class SyncStateStatusTest : TestBase
+{
+    [Theory]
+    [InlineData(SyncStateStatus.Pending)]
+    [InlineData(SyncStateStatus.Error)]
+    [InlineData(SyncStateStatus.Success)]
+    [InlineData(SyncStateStatus.NoSyncRequired)]
+    public void Validation_Works(SyncStateStatus rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SyncStateStatus> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, SyncStateStatus>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(SyncStateStatus.Pending)]
+    [InlineData(SyncStateStatus.Error)]
+    [InlineData(SyncStateStatus.Success)]
+    [InlineData(SyncStateStatus.NoSyncRequired)]
+    public void SerializationRoundtrip_Works(SyncStateStatus rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, SyncStateStatus> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, SyncStateStatus>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, SyncStateStatus>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, SyncStateStatus>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class VendorIdentifierTest : TestBase
+{
+    [Theory]
+    [InlineData(VendorIdentifier.Auth0)]
+    [InlineData(VendorIdentifier.Zuora)]
+    [InlineData(VendorIdentifier.Stripe)]
+    [InlineData(VendorIdentifier.Hubspot)]
+    [InlineData(VendorIdentifier.AwsMarketplace)]
+    [InlineData(VendorIdentifier.Snowflake)]
+    [InlineData(VendorIdentifier.Salesforce)]
+    [InlineData(VendorIdentifier.BigQuery)]
+    [InlineData(VendorIdentifier.OpenFga)]
+    [InlineData(VendorIdentifier.AppStore)]
+    [InlineData(VendorIdentifier.Received)]
+    [InlineData(VendorIdentifier.Prequel)]
+    [InlineData(VendorIdentifier.Airwallex)]
+    [InlineData(VendorIdentifier.StripeInvoicing)]
+    public void Validation_Works(VendorIdentifier rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, VendorIdentifier> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, VendorIdentifier>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(VendorIdentifier.Auth0)]
+    [InlineData(VendorIdentifier.Zuora)]
+    [InlineData(VendorIdentifier.Stripe)]
+    [InlineData(VendorIdentifier.Hubspot)]
+    [InlineData(VendorIdentifier.AwsMarketplace)]
+    [InlineData(VendorIdentifier.Snowflake)]
+    [InlineData(VendorIdentifier.Salesforce)]
+    [InlineData(VendorIdentifier.BigQuery)]
+    [InlineData(VendorIdentifier.OpenFga)]
+    [InlineData(VendorIdentifier.AppStore)]
+    [InlineData(VendorIdentifier.Received)]
+    [InlineData(VendorIdentifier.Prequel)]
+    [InlineData(VendorIdentifier.Airwallex)]
+    [InlineData(VendorIdentifier.StripeInvoicing)]
+    public void SerializationRoundtrip_Works(VendorIdentifier rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, VendorIdentifier> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, VendorIdentifier>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, VendorIdentifier>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, VendorIdentifier>>(
             json,
             ModelBase.SerializerOptions
         );

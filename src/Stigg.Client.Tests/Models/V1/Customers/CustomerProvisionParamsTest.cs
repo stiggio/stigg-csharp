@@ -1188,6 +1188,8 @@ public class CustomerProvisionParamsIntegrationVendorIdentifierTest : TestBase
     [InlineData(Customers::CustomerProvisionParamsIntegrationVendorIdentifier.AppStore)]
     [InlineData(Customers::CustomerProvisionParamsIntegrationVendorIdentifier.Received)]
     [InlineData(Customers::CustomerProvisionParamsIntegrationVendorIdentifier.Prequel)]
+    [InlineData(Customers::CustomerProvisionParamsIntegrationVendorIdentifier.Airwallex)]
+    [InlineData(Customers::CustomerProvisionParamsIntegrationVendorIdentifier.StripeInvoicing)]
     public void Validation_Works(
         Customers::CustomerProvisionParamsIntegrationVendorIdentifier rawValue
     )
@@ -1222,6 +1224,8 @@ public class CustomerProvisionParamsIntegrationVendorIdentifierTest : TestBase
     [InlineData(Customers::CustomerProvisionParamsIntegrationVendorIdentifier.AppStore)]
     [InlineData(Customers::CustomerProvisionParamsIntegrationVendorIdentifier.Received)]
     [InlineData(Customers::CustomerProvisionParamsIntegrationVendorIdentifier.Prequel)]
+    [InlineData(Customers::CustomerProvisionParamsIntegrationVendorIdentifier.Airwallex)]
+    [InlineData(Customers::CustomerProvisionParamsIntegrationVendorIdentifier.StripeInvoicing)]
     public void SerializationRoundtrip_Works(
         Customers::CustomerProvisionParamsIntegrationVendorIdentifier rawValue
     )

@@ -29,6 +29,16 @@ public interface IUsageService
     IUsageService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
+    /// Estimates the credit cost of a usage report without recording it. Returns the
+    /// estimated cost per credit currency, the current balance, and the balance after
+    /// the estimated consumption.
+    /// </summary>
+    Task<UsageEstimateCostResponse> EstimateCost(
+        UsageEstimateCostParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Retrieves historical usage data for a customer's metered feature over time.
     /// </summary>
     Task<UsageHistoryResponse> History(
@@ -65,6 +75,15 @@ public interface IUsageServiceWithRawResponse
     /// <para>The original service is not modified.</para>
     /// </summary>
     IUsageServiceWithRawResponse WithOptions(Func<ClientOptions, ClientOptions> modifier);
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>post /api/v1/usage/estimate</c>, but is otherwise the
+    /// same as <see cref="IUsageService.EstimateCost(UsageEstimateCostParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<UsageEstimateCostResponse>> EstimateCost(
+        UsageEstimateCostParams parameters,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// Returns a raw HTTP response for <c>get /api/v1/usage/{customerId}/history/{featureId}</c>, but is otherwise the

@@ -314,6 +314,22 @@ class UsageReportResponseDataFromRaw : IFromRawJson<UsageReportResponseData>
 public sealed record class Credit : JsonModel
 {
     /// <summary>
+    /// The credits this single reportUsage call deducted, in credit units — scoped
+    /// to this one measurement (0 for idempotency duplicates). Contrast `currentUsage`,
+    /// which is the wallet-wide running total shared across all features on this
+    /// currency. Use it to reconcile expected per-call deductions.
+    /// </summary>
+    public required double Consumed
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<double>("consumed");
+        }
+        init { this._rawData.Set("consumed", value); }
+    }
+
+    /// <summary>
     /// The credit currency identifier
     /// </summary>
     public required string CurrencyID
@@ -327,7 +343,9 @@ public sealed record class Credit : JsonModel
     }
 
     /// <summary>
-    /// The credits consumed (optimistic — includes not-yet-reconciled usage)
+    /// The wallet's total consumed credits for this currency (optimistic — includes
+    /// not-yet-reconciled usage), shared across every feature that draws on the currency.
+    /// This is the running balance, not this call's deduction — see `consumed` for that.
     /// </summary>
     public required double CurrentUsage
     {
@@ -381,6 +399,7 @@ public sealed record class Credit : JsonModel
     /// <inheritdoc/>
     public override void Validate()
     {
+        _ = this.Consumed;
         _ = this.CurrencyID;
         _ = this.CurrentUsage;
         _ = this.Timestamp;

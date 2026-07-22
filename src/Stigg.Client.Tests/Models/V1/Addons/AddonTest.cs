@@ -24,7 +24,7 @@ public class AddonTest : TestBase
                 DisplayName = "displayName",
                 Entitlements = [new() { ID = "id", Type = Addons::Type.Feature }],
                 IsLatest = true,
-                MaxQuantity = 0,
+                MaxQuantity = 1,
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PricingType = Addons::DataPricingType.Free,
                 ProductID = "productId",
@@ -44,7 +44,7 @@ public class AddonTest : TestBase
             DisplayName = "displayName",
             Entitlements = [new() { ID = "id", Type = Addons::Type.Feature }],
             IsLatest = true,
-            MaxQuantity = 0,
+            MaxQuantity = 1,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PricingType = Addons::DataPricingType.Free,
             ProductID = "productId",
@@ -71,7 +71,7 @@ public class AddonTest : TestBase
                 DisplayName = "displayName",
                 Entitlements = [new() { ID = "id", Type = Addons::Type.Feature }],
                 IsLatest = true,
-                MaxQuantity = 0,
+                MaxQuantity = 1,
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PricingType = Addons::DataPricingType.Free,
                 ProductID = "productId",
@@ -105,7 +105,7 @@ public class AddonTest : TestBase
                 DisplayName = "displayName",
                 Entitlements = [new() { ID = "id", Type = Addons::Type.Feature }],
                 IsLatest = true,
-                MaxQuantity = 0,
+                MaxQuantity = 1,
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PricingType = Addons::DataPricingType.Free,
                 ProductID = "productId",
@@ -132,7 +132,7 @@ public class AddonTest : TestBase
             DisplayName = "displayName",
             Entitlements = [new() { ID = "id", Type = Addons::Type.Feature }],
             IsLatest = true,
-            MaxQuantity = 0,
+            MaxQuantity = 1,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PricingType = Addons::DataPricingType.Free,
             ProductID = "productId",
@@ -159,7 +159,7 @@ public class AddonTest : TestBase
                 DisplayName = "displayName",
                 Entitlements = [new() { ID = "id", Type = Addons::Type.Feature }],
                 IsLatest = true,
-                MaxQuantity = 0,
+                MaxQuantity = 1,
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PricingType = Addons::DataPricingType.Free,
                 ProductID = "productId",
@@ -187,7 +187,7 @@ public class AddonTest : TestBase
                 DisplayName = "displayName",
                 Entitlements = [new() { ID = "id", Type = Addons::Type.Feature }],
                 IsLatest = true,
-                MaxQuantity = 0,
+                MaxQuantity = 1,
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 PricingType = Addons::DataPricingType.Free,
                 ProductID = "productId",
@@ -218,7 +218,7 @@ public class DataTest : TestBase
             DisplayName = "displayName",
             Entitlements = [new() { ID = "id", Type = Addons::Type.Feature }],
             IsLatest = true,
-            MaxQuantity = 0,
+            MaxQuantity = 1,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PricingType = Addons::DataPricingType.Free,
             ProductID = "productId",
@@ -238,7 +238,7 @@ public class DataTest : TestBase
             new() { ID = "id", Type = Addons::Type.Feature },
         ];
         bool expectedIsLatest = true;
-        long expectedMaxQuantity = 0;
+        long expectedMaxQuantity = 1;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, Addons::DataPricingType> expectedPricingType = Addons::DataPricingType.Free;
         string expectedProductID = "productId";
@@ -291,7 +291,7 @@ public class DataTest : TestBase
             DisplayName = "displayName",
             Entitlements = [new() { ID = "id", Type = Addons::Type.Feature }],
             IsLatest = true,
-            MaxQuantity = 0,
+            MaxQuantity = 1,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PricingType = Addons::DataPricingType.Free,
             ProductID = "productId",
@@ -322,7 +322,7 @@ public class DataTest : TestBase
             DisplayName = "displayName",
             Entitlements = [new() { ID = "id", Type = Addons::Type.Feature }],
             IsLatest = true,
-            MaxQuantity = 0,
+            MaxQuantity = 1,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PricingType = Addons::DataPricingType.Free,
             ProductID = "productId",
@@ -349,7 +349,7 @@ public class DataTest : TestBase
             new() { ID = "id", Type = Addons::Type.Feature },
         ];
         bool expectedIsLatest = true;
-        long expectedMaxQuantity = 0;
+        long expectedMaxQuantity = 1;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, Addons::DataPricingType> expectedPricingType = Addons::DataPricingType.Free;
         string expectedProductID = "productId";
@@ -402,7 +402,7 @@ public class DataTest : TestBase
             DisplayName = "displayName",
             Entitlements = [new() { ID = "id", Type = Addons::Type.Feature }],
             IsLatest = true,
-            MaxQuantity = 0,
+            MaxQuantity = 1,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PricingType = Addons::DataPricingType.Free,
             ProductID = "productId",
@@ -427,7 +427,7 @@ public class DataTest : TestBase
             DisplayName = "displayName",
             Entitlements = [new() { ID = "id", Type = Addons::Type.Feature }],
             IsLatest = true,
-            MaxQuantity = 0,
+            MaxQuantity = 1,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PricingType = Addons::DataPricingType.Free,
             ProductID = "productId",

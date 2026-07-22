@@ -21,7 +21,7 @@ public class EventReportParamsTest : TestBase
                     CustomerID = "customerId",
                     EventName = "x",
                     IdempotencyKey = "x",
-                    Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+                    Dimensions = new Dictionary<string, EventDimension>() { { "foo", "string" } },
                     ResourceID = "resourceId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
@@ -37,7 +37,7 @@ public class EventReportParamsTest : TestBase
                 CustomerID = "customerId",
                 EventName = "x",
                 IdempotencyKey = "x",
-                Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+                Dimensions = new Dictionary<string, EventDimension>() { { "foo", "string" } },
                 ResourceID = "resourceId",
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -66,7 +66,7 @@ public class EventReportParamsTest : TestBase
                     CustomerID = "customerId",
                     EventName = "x",
                     IdempotencyKey = "x",
-                    Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+                    Dimensions = new Dictionary<string, EventDimension>() { { "foo", "string" } },
                     ResourceID = "resourceId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
@@ -91,7 +91,7 @@ public class EventReportParamsTest : TestBase
                     CustomerID = "customerId",
                     EventName = "x",
                     IdempotencyKey = "x",
-                    Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+                    Dimensions = new Dictionary<string, EventDimension>() { { "foo", "string" } },
                     ResourceID = "resourceId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
@@ -120,7 +120,7 @@ public class EventReportParamsTest : TestBase
                     CustomerID = "customerId",
                     EventName = "x",
                     IdempotencyKey = "x",
-                    Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+                    Dimensions = new Dictionary<string, EventDimension>() { { "foo", "string" } },
                     ResourceID = "resourceId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
@@ -145,7 +145,7 @@ public class EventReportParamsTest : TestBase
                     CustomerID = "customerId",
                     EventName = "x",
                     IdempotencyKey = "x",
-                    Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+                    Dimensions = new Dictionary<string, EventDimension>() { { "foo", "string" } },
                     ResourceID = "resourceId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
@@ -172,7 +172,7 @@ public class EventReportParamsTest : TestBase
                     CustomerID = "customerId",
                     EventName = "x",
                     IdempotencyKey = "x",
-                    Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+                    Dimensions = new Dictionary<string, EventDimension>() { { "foo", "string" } },
                     ResourceID = "resourceId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
@@ -197,7 +197,7 @@ public class EventTest : TestBase
             CustomerID = "customerId",
             EventName = "x",
             IdempotencyKey = "x",
-            Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+            Dimensions = new Dictionary<string, EventDimension>() { { "foo", "string" } },
             ResourceID = "resourceId",
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -205,7 +205,7 @@ public class EventTest : TestBase
         string expectedCustomerID = "customerId";
         string expectedEventName = "x";
         string expectedIdempotencyKey = "x";
-        Dictionary<string, Dimension> expectedDimensions = new() { { "foo", "string" } };
+        Dictionary<string, EventDimension> expectedDimensions = new() { { "foo", "string" } };
         string expectedResourceID = "resourceId";
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
@@ -232,7 +232,7 @@ public class EventTest : TestBase
             CustomerID = "customerId",
             EventName = "x",
             IdempotencyKey = "x",
-            Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+            Dimensions = new Dictionary<string, EventDimension>() { { "foo", "string" } },
             ResourceID = "resourceId",
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -251,7 +251,7 @@ public class EventTest : TestBase
             CustomerID = "customerId",
             EventName = "x",
             IdempotencyKey = "x",
-            Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+            Dimensions = new Dictionary<string, EventDimension>() { { "foo", "string" } },
             ResourceID = "resourceId",
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -263,7 +263,7 @@ public class EventTest : TestBase
         string expectedCustomerID = "customerId";
         string expectedEventName = "x";
         string expectedIdempotencyKey = "x";
-        Dictionary<string, Dimension> expectedDimensions = new() { { "foo", "string" } };
+        Dictionary<string, EventDimension> expectedDimensions = new() { { "foo", "string" } };
         string expectedResourceID = "resourceId";
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
@@ -290,7 +290,7 @@ public class EventTest : TestBase
             CustomerID = "customerId",
             EventName = "x",
             IdempotencyKey = "x",
-            Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+            Dimensions = new Dictionary<string, EventDimension>() { { "foo", "string" } },
             ResourceID = "resourceId",
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -376,7 +376,7 @@ public class EventTest : TestBase
             CustomerID = "customerId",
             EventName = "x",
             IdempotencyKey = "x",
-            Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+            Dimensions = new Dictionary<string, EventDimension>() { { "foo", "string" } },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -392,7 +392,7 @@ public class EventTest : TestBase
             CustomerID = "customerId",
             EventName = "x",
             IdempotencyKey = "x",
-            Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+            Dimensions = new Dictionary<string, EventDimension>() { { "foo", "string" } },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
@@ -407,7 +407,7 @@ public class EventTest : TestBase
             CustomerID = "customerId",
             EventName = "x",
             IdempotencyKey = "x",
-            Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+            Dimensions = new Dictionary<string, EventDimension>() { { "foo", "string" } },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
             ResourceID = null,
@@ -425,7 +425,7 @@ public class EventTest : TestBase
             CustomerID = "customerId",
             EventName = "x",
             IdempotencyKey = "x",
-            Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+            Dimensions = new Dictionary<string, EventDimension>() { { "foo", "string" } },
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
 
             ResourceID = null,
@@ -442,7 +442,7 @@ public class EventTest : TestBase
             CustomerID = "customerId",
             EventName = "x",
             IdempotencyKey = "x",
-            Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+            Dimensions = new Dictionary<string, EventDimension>() { { "foo", "string" } },
             ResourceID = "resourceId",
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -453,35 +453,35 @@ public class EventTest : TestBase
     }
 }
 
-public class DimensionTest : TestBase
+public class EventDimensionTest : TestBase
 {
     [Fact]
     public void StringValidationWorks()
     {
-        Dimension value = "string";
+        EventDimension value = "string";
         value.Validate();
     }
 
     [Fact]
     public void DoubleValidationWorks()
     {
-        Dimension value = 0;
+        EventDimension value = 0;
         value.Validate();
     }
 
     [Fact]
     public void BoolValidationWorks()
     {
-        Dimension value = true;
+        EventDimension value = true;
         value.Validate();
     }
 
     [Fact]
     public void StringSerializationRoundtripWorks()
     {
-        Dimension value = "string";
+        EventDimension value = "string";
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Dimension>(
+        var deserialized = JsonSerializer.Deserialize<EventDimension>(
             element,
             ModelBase.SerializerOptions
         );
@@ -492,9 +492,9 @@ public class DimensionTest : TestBase
     [Fact]
     public void DoubleSerializationRoundtripWorks()
     {
-        Dimension value = 0;
+        EventDimension value = 0;
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Dimension>(
+        var deserialized = JsonSerializer.Deserialize<EventDimension>(
             element,
             ModelBase.SerializerOptions
         );
@@ -505,9 +505,9 @@ public class DimensionTest : TestBase
     [Fact]
     public void BoolSerializationRoundtripWorks()
     {
-        Dimension value = true;
+        EventDimension value = true;
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Dimension>(
+        var deserialized = JsonSerializer.Deserialize<EventDimension>(
             element,
             ModelBase.SerializerOptions
         );

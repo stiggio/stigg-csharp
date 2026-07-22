@@ -20,7 +20,7 @@ public class AddonCreateParamsTest : TestBase
             ProductID = "productId",
             BillingID = "billingId",
             Description = "description",
-            MaxQuantity = 0,
+            MaxQuantity = 1,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PricingType = PricingType.Free,
             Status = Status.Draft,
@@ -33,7 +33,7 @@ public class AddonCreateParamsTest : TestBase
         string expectedProductID = "productId";
         string expectedBillingID = "billingId";
         string expectedDescription = "description";
-        long expectedMaxQuantity = 0;
+        long expectedMaxQuantity = 1;
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         ApiEnum<string, PricingType> expectedPricingType = PricingType.Free;
         ApiEnum<string, Status> expectedStatus = Status.Draft;
@@ -70,7 +70,7 @@ public class AddonCreateParamsTest : TestBase
             ProductID = "productId",
             BillingID = "billingId",
             Description = "description",
-            MaxQuantity = 0,
+            MaxQuantity = 1,
             PricingType = PricingType.Free,
         };
 
@@ -94,7 +94,7 @@ public class AddonCreateParamsTest : TestBase
             ProductID = "productId",
             BillingID = "billingId",
             Description = "description",
-            MaxQuantity = 0,
+            MaxQuantity = 1,
             PricingType = PricingType.Free,
 
             // Null should be interpreted as omitted for these properties
@@ -211,7 +211,7 @@ public class AddonCreateParamsTest : TestBase
             ProductID = "productId",
             BillingID = "billingId",
             Description = "description",
-            MaxQuantity = 0,
+            MaxQuantity = 1,
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             PricingType = PricingType.Free,
             Status = Status.Draft,

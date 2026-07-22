@@ -9,7 +9,9 @@ using Stigg.Client.Core;
 namespace Stigg.Client.Models.V1.Events.DataExport.Destinations;
 
 /// <summary>
-/// Remove a destination from the DATA_EXPORT integration metadata. Idempotent.
+/// Disconnect a destination: stops the provider sync (deletes the provider destination)
+/// and removes it from the DATA_EXPORT integration. Non-destructive — the warehouse
+/// table is left intact. Idempotent.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that

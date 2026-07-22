@@ -204,6 +204,8 @@ public enum DataVendorIdentifier
     AppStore,
     Received,
     Prequel,
+    Airwallex,
+    StripeInvoicing,
 }
 
 sealed class DataVendorIdentifierConverter : JsonConverter<DataVendorIdentifier>
@@ -228,6 +230,8 @@ sealed class DataVendorIdentifierConverter : JsonConverter<DataVendorIdentifier>
             "APP_STORE" => DataVendorIdentifier.AppStore,
             "RECEIVED" => DataVendorIdentifier.Received,
             "PREQUEL" => DataVendorIdentifier.Prequel,
+            "AIRWALLEX" => DataVendorIdentifier.Airwallex,
+            "STRIPE_INVOICING" => DataVendorIdentifier.StripeInvoicing,
             _ => (DataVendorIdentifier)(-1),
         };
     }
@@ -254,6 +258,8 @@ sealed class DataVendorIdentifierConverter : JsonConverter<DataVendorIdentifier>
                 DataVendorIdentifier.AppStore => "APP_STORE",
                 DataVendorIdentifier.Received => "RECEIVED",
                 DataVendorIdentifier.Prequel => "PREQUEL",
+                DataVendorIdentifier.Airwallex => "AIRWALLEX",
+                DataVendorIdentifier.StripeInvoicing => "STRIPE_INVOICING",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

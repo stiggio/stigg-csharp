@@ -8,6 +8,21 @@ namespace Stigg.Client.Tests.Services.V1;
 public class UsageServiceTest : TestBase
 {
     [Fact(Skip = "Mock server tests are disabled")]
+    public async Task EstimateCost_Works()
+    {
+        var response = await this.client.V1.Usage.EstimateCost(
+            new()
+            {
+                CustomerID = "customerId",
+                FeatureID = "featureId",
+                Value = -9007199254740991,
+            },
+            TestContext.Current.CancellationToken
+        );
+        response.Validate();
+    }
+
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task History_Works()
     {
         var response = await this.client.V1.Usage.History(
@@ -36,9 +51,13 @@ public class UsageServiceTest : TestBase
                         FeatureID = "featureId",
                         Value = -9007199254740991,
                         CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                        Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+                        Dimensions = new Dictionary<string, UsageReportParamsUsageDimension>()
+                        {
+                            { "foo", "string" },
+                        },
+                        IdempotencyKey = "x",
                         ResourceID = "resourceId",
-                        UpdateBehavior = UpdateBehavior.Delta,
+                        UpdateBehavior = UsageReportParamsUsageUpdateBehavior.Delta,
                     },
                 ],
             },

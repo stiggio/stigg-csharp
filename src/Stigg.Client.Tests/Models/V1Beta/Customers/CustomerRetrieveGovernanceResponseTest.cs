@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Stigg.Client.Core;
-using Stigg.Client.Models.V1.Events.Beta.Customers;
+using Stigg.Client.Models.V1Beta.Customers;
 
-namespace Stigg.Client.Tests.Models.V1.Events.Beta.Customers;
+namespace Stigg.Client.Tests.Models.V1Beta.Customers;
 
 public class CustomerRetrieveGovernanceResponseTest : TestBase
 {
@@ -20,7 +20,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
                     Cadence = "cadence",
                     CurrentUsage = 0,
                     EntityID = "entityId",
-                    EntityType = "entityType",
+                    EntityTypeID = "entityTypeId",
                     ParentID = "parentId",
                     ScopeEntityIds = ["string"],
                     UsageLimit = 0,
@@ -41,7 +41,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
                 Cadence = "cadence",
                 CurrentUsage = 0,
                 EntityID = "entityId",
-                EntityType = "entityType",
+                EntityTypeID = "entityTypeId",
                 ParentID = "parentId",
                 ScopeEntityIds = ["string"],
                 UsageLimit = 0,
@@ -74,7 +74,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
                     Cadence = "cadence",
                     CurrentUsage = 0,
                     EntityID = "entityId",
-                    EntityType = "entityType",
+                    EntityTypeID = "entityTypeId",
                     ParentID = "parentId",
                     ScopeEntityIds = ["string"],
                     UsageLimit = 0,
@@ -109,7 +109,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
                     Cadence = "cadence",
                     CurrentUsage = 0,
                     EntityID = "entityId",
-                    EntityType = "entityType",
+                    EntityTypeID = "entityTypeId",
                     ParentID = "parentId",
                     ScopeEntityIds = ["string"],
                     UsageLimit = 0,
@@ -137,7 +137,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
                 Cadence = "cadence",
                 CurrentUsage = 0,
                 EntityID = "entityId",
-                EntityType = "entityType",
+                EntityTypeID = "entityTypeId",
                 ParentID = "parentId",
                 ScopeEntityIds = ["string"],
                 UsageLimit = 0,
@@ -170,7 +170,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
                     Cadence = "cadence",
                     CurrentUsage = 0,
                     EntityID = "entityId",
-                    EntityType = "entityType",
+                    EntityTypeID = "entityTypeId",
                     ParentID = "parentId",
                     ScopeEntityIds = ["string"],
                     UsageLimit = 0,
@@ -199,7 +199,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
                     Cadence = "cadence",
                     CurrentUsage = 0,
                     EntityID = "entityId",
-                    EntityType = "entityType",
+                    EntityTypeID = "entityTypeId",
                     ParentID = "parentId",
                     ScopeEntityIds = ["string"],
                     UsageLimit = 0,
@@ -229,7 +229,7 @@ public class DataTest : TestBase
             Cadence = "cadence",
             CurrentUsage = 0,
             EntityID = "entityId",
-            EntityType = "entityType",
+            EntityTypeID = "entityTypeId",
             ParentID = "parentId",
             ScopeEntityIds = ["string"],
             UsageLimit = 0,
@@ -243,7 +243,7 @@ public class DataTest : TestBase
         string expectedCadence = "cadence";
         double expectedCurrentUsage = 0;
         string expectedEntityID = "entityId";
-        string expectedEntityType = "entityType";
+        string expectedEntityTypeID = "entityTypeId";
         string expectedParentID = "parentId";
         List<string> expectedScopeEntityIds = ["string"];
         double expectedUsageLimit = 0;
@@ -256,7 +256,7 @@ public class DataTest : TestBase
         Assert.Equal(expectedCadence, model.Cadence);
         Assert.Equal(expectedCurrentUsage, model.CurrentUsage);
         Assert.Equal(expectedEntityID, model.EntityID);
-        Assert.Equal(expectedEntityType, model.EntityType);
+        Assert.Equal(expectedEntityTypeID, model.EntityTypeID);
         Assert.Equal(expectedParentID, model.ParentID);
         Assert.Equal(expectedScopeEntityIds.Count, model.ScopeEntityIds.Count);
         for (int i = 0; i < expectedScopeEntityIds.Count; i++)
@@ -279,7 +279,7 @@ public class DataTest : TestBase
             Cadence = "cadence",
             CurrentUsage = 0,
             EntityID = "entityId",
-            EntityType = "entityType",
+            EntityTypeID = "entityTypeId",
             ParentID = "parentId",
             ScopeEntityIds = ["string"],
             UsageLimit = 0,
@@ -304,7 +304,7 @@ public class DataTest : TestBase
             Cadence = "cadence",
             CurrentUsage = 0,
             EntityID = "entityId",
-            EntityType = "entityType",
+            EntityTypeID = "entityTypeId",
             ParentID = "parentId",
             ScopeEntityIds = ["string"],
             UsageLimit = 0,
@@ -322,7 +322,7 @@ public class DataTest : TestBase
         string expectedCadence = "cadence";
         double expectedCurrentUsage = 0;
         string expectedEntityID = "entityId";
-        string expectedEntityType = "entityType";
+        string expectedEntityTypeID = "entityTypeId";
         string expectedParentID = "parentId";
         List<string> expectedScopeEntityIds = ["string"];
         double expectedUsageLimit = 0;
@@ -335,7 +335,7 @@ public class DataTest : TestBase
         Assert.Equal(expectedCadence, deserialized.Cadence);
         Assert.Equal(expectedCurrentUsage, deserialized.CurrentUsage);
         Assert.Equal(expectedEntityID, deserialized.EntityID);
-        Assert.Equal(expectedEntityType, deserialized.EntityType);
+        Assert.Equal(expectedEntityTypeID, deserialized.EntityTypeID);
         Assert.Equal(expectedParentID, deserialized.ParentID);
         Assert.Equal(expectedScopeEntityIds.Count, deserialized.ScopeEntityIds.Count);
         for (int i = 0; i < expectedScopeEntityIds.Count; i++)
@@ -358,7 +358,7 @@ public class DataTest : TestBase
             Cadence = "cadence",
             CurrentUsage = 0,
             EntityID = "entityId",
-            EntityType = "entityType",
+            EntityTypeID = "entityTypeId",
             ParentID = "parentId",
             ScopeEntityIds = ["string"],
             UsageLimit = 0,
@@ -380,7 +380,7 @@ public class DataTest : TestBase
             Cadence = "cadence",
             CurrentUsage = 0,
             EntityID = "entityId",
-            EntityType = "entityType",
+            EntityTypeID = "entityTypeId",
             ParentID = "parentId",
             ScopeEntityIds = ["string"],
             UsageLimit = 0,
@@ -403,7 +403,7 @@ public class DataTest : TestBase
             Cadence = "cadence",
             CurrentUsage = 0,
             EntityID = "entityId",
-            EntityType = "entityType",
+            EntityTypeID = "entityTypeId",
             ParentID = "parentId",
             ScopeEntityIds = ["string"],
             UsageLimit = 0,
@@ -423,7 +423,7 @@ public class DataTest : TestBase
             Cadence = "cadence",
             CurrentUsage = 0,
             EntityID = "entityId",
-            EntityType = "entityType",
+            EntityTypeID = "entityTypeId",
             ParentID = "parentId",
             ScopeEntityIds = ["string"],
             UsageLimit = 0,
@@ -450,7 +450,7 @@ public class DataTest : TestBase
             Cadence = "cadence",
             CurrentUsage = 0,
             EntityID = "entityId",
-            EntityType = "entityType",
+            EntityTypeID = "entityTypeId",
             ParentID = "parentId",
             ScopeEntityIds = ["string"],
             UsageLimit = 0,
@@ -474,7 +474,7 @@ public class DataTest : TestBase
             Cadence = "cadence",
             CurrentUsage = 0,
             EntityID = "entityId",
-            EntityType = "entityType",
+            EntityTypeID = "entityTypeId",
             ParentID = "parentId",
             ScopeEntityIds = ["string"],
             UsageLimit = 0,

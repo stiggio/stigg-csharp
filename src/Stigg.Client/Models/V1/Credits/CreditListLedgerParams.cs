@@ -94,6 +94,27 @@ public record class CreditListLedgerParams : ParamsBase
     }
 
     /// <summary>
+    /// Filter by event type(s), comma-separated
+    /// </summary>
+    public string? EventType
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("eventType");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("eventType", value);
+        }
+    }
+
+    /// <summary>
     /// Maximum number of items to return
     /// </summary>
     public long? Limit

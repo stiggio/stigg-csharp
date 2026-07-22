@@ -63,14 +63,14 @@ public record class AssignmentListParams : ParamsBase
     }
 
     /// <summary>
-    /// Filter assignments to a specific capability refId
+    /// Filter assignments to a specific currency, by its ID. Mutually exclusive with `featureId`.
     /// </summary>
-    public string? CapabilityID
+    public string? CurrencyID
     {
         get
         {
             this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableClass<string>("capabilityId");
+            return this._rawQueryData.GetNullableClass<string>("currencyId");
         }
         init
         {
@@ -79,12 +79,12 @@ public record class AssignmentListParams : ParamsBase
                 return;
             }
 
-            this._rawQueryData.Set("capabilityId", value);
+            this._rawQueryData.Set("currencyId", value);
         }
     }
 
     /// <summary>
-    /// Filter assignments to a specific entity refId
+    /// Filter assignments to a specific entity ID
     /// </summary>
     public string? EntityID
     {
@@ -101,6 +101,27 @@ public record class AssignmentListParams : ParamsBase
             }
 
             this._rawQueryData.Set("entityId", value);
+        }
+    }
+
+    /// <summary>
+    /// Filter assignments to a specific feature, by its ID. Mutually exclusive with `currencyId`.
+    /// </summary>
+    public string? FeatureID
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("featureId");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("featureId", value);
         }
     }
 

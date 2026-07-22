@@ -15,6 +15,7 @@ public class CreditListLedgerParamsTest : TestBase
             After = "after",
             Before = "before",
             CurrencyID = "currencyId",
+            EventType = "eventType",
             Limit = 1,
             ResourceID = "resourceId",
             XAccountID = "X-ACCOUNT-ID",
@@ -25,6 +26,7 @@ public class CreditListLedgerParamsTest : TestBase
         string expectedAfter = "after";
         string expectedBefore = "before";
         string expectedCurrencyID = "currencyId";
+        string expectedEventType = "eventType";
         long expectedLimit = 1;
         string expectedResourceID = "resourceId";
         string expectedXAccountID = "X-ACCOUNT-ID";
@@ -34,6 +36,7 @@ public class CreditListLedgerParamsTest : TestBase
         Assert.Equal(expectedAfter, parameters.After);
         Assert.Equal(expectedBefore, parameters.Before);
         Assert.Equal(expectedCurrencyID, parameters.CurrencyID);
+        Assert.Equal(expectedEventType, parameters.EventType);
         Assert.Equal(expectedLimit, parameters.Limit);
         Assert.Equal(expectedResourceID, parameters.ResourceID);
         Assert.Equal(expectedXAccountID, parameters.XAccountID);
@@ -51,6 +54,8 @@ public class CreditListLedgerParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("before"));
         Assert.Null(parameters.CurrencyID);
         Assert.False(parameters.RawQueryData.ContainsKey("currencyId"));
+        Assert.Null(parameters.EventType);
+        Assert.False(parameters.RawQueryData.ContainsKey("eventType"));
         Assert.Null(parameters.Limit);
         Assert.False(parameters.RawQueryData.ContainsKey("limit"));
         Assert.Null(parameters.ResourceID);
@@ -72,6 +77,7 @@ public class CreditListLedgerParamsTest : TestBase
             After = null,
             Before = null,
             CurrencyID = null,
+            EventType = null,
             Limit = null,
             ResourceID = null,
             XAccountID = null,
@@ -84,6 +90,8 @@ public class CreditListLedgerParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("before"));
         Assert.Null(parameters.CurrencyID);
         Assert.False(parameters.RawQueryData.ContainsKey("currencyId"));
+        Assert.Null(parameters.EventType);
+        Assert.False(parameters.RawQueryData.ContainsKey("eventType"));
         Assert.Null(parameters.Limit);
         Assert.False(parameters.RawQueryData.ContainsKey("limit"));
         Assert.Null(parameters.ResourceID);
@@ -103,6 +111,7 @@ public class CreditListLedgerParamsTest : TestBase
             After = "after",
             Before = "before",
             CurrencyID = "currencyId",
+            EventType = "eventType",
             Limit = 1,
             ResourceID = "resourceId",
         };
@@ -112,7 +121,7 @@ public class CreditListLedgerParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://edge.api.stigg.io/api/v1/credits/ledger?customerId=customerId&after=after&before=before&currencyId=currencyId&limit=1&resourceId=resourceId"
+                    "https://edge.api.stigg.io/api/v1/credits/ledger?customerId=customerId&after=after&before=before&currencyId=currencyId&eventType=eventType&limit=1&resourceId=resourceId"
                 ),
                 url
             )
@@ -145,6 +154,7 @@ public class CreditListLedgerParamsTest : TestBase
             After = "after",
             Before = "before",
             CurrencyID = "currencyId",
+            EventType = "eventType",
             Limit = 1,
             ResourceID = "resourceId",
             XAccountID = "X-ACCOUNT-ID",
