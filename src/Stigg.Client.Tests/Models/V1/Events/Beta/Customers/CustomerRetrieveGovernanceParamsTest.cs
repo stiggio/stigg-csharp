@@ -4,9 +4,9 @@ using System.Net.Http;
 using System.Text.Json;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
-using Stigg.Client.Models.V1Beta.Customers;
+using Stigg.Client.Models.V1.Events.Beta.Customers;
 
-namespace Stigg.Client.Tests.Models.V1Beta.Customers;
+namespace Stigg.Client.Tests.Models.V1.Events.Beta.Customers;
 
 public class CustomerRetrieveGovernanceParamsTest : TestBase
 {
@@ -176,7 +176,7 @@ public class CustomerRetrieveGovernanceParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://edge.api.stigg.io/api/v1-beta/customers/id/governance?after=after&currencyIds=string&entityIdSearch=x&entityTypeIds=string&featureIds=string&limit=1&minUtilization=0&order=asc&scope=all&sortBy=utilization"
+                    "https://api.stigg.io/api/v1-beta/customers/id/governance?after=after&currencyIds=string&entityIdSearch=x&entityTypeIds=string&featureIds=string&limit=1&minUtilization=0&order=asc&scope=all&sortBy=utilization"
                 ),
                 url
             )

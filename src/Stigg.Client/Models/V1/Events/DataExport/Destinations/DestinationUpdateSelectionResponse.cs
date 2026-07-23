@@ -12,19 +12,22 @@ namespace Stigg.Client.Models.V1.Events.DataExport.Destinations;
 /// Response object
 /// </summary>
 [JsonConverter(
-    typeof(JsonModelConverter<DestinationUpdateResponse, DestinationUpdateResponseFromRaw>)
+    typeof(JsonModelConverter<
+        DestinationUpdateSelectionResponse,
+        DestinationUpdateSelectionResponseFromRaw
+    >)
 )]
-public sealed record class DestinationUpdateResponse : JsonModel
+public sealed record class DestinationUpdateSelectionResponse : JsonModel
 {
     /// <summary>
     /// Current destinations under the DATA_EXPORT integration.
     /// </summary>
-    public required DestinationUpdateResponseData Data
+    public required DestinationUpdateSelectionResponseData Data
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<DestinationUpdateResponseData>("data");
+            return this._rawData.GetNotNullClass<DestinationUpdateSelectionResponseData>("data");
         }
         init { this._rawData.Set("data", value); }
     }
@@ -35,29 +38,31 @@ public sealed record class DestinationUpdateResponse : JsonModel
         this.Data.Validate();
     }
 
-    public DestinationUpdateResponse() { }
+    public DestinationUpdateSelectionResponse() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public DestinationUpdateResponse(DestinationUpdateResponse destinationUpdateResponse)
-        : base(destinationUpdateResponse) { }
+    public DestinationUpdateSelectionResponse(
+        DestinationUpdateSelectionResponse destinationUpdateSelectionResponse
+    )
+        : base(destinationUpdateSelectionResponse) { }
 #pragma warning restore CS8618
 
-    public DestinationUpdateResponse(IReadOnlyDictionary<string, JsonElement> rawData)
+    public DestinationUpdateSelectionResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    DestinationUpdateResponse(FrozenDictionary<string, JsonElement> rawData)
+    DestinationUpdateSelectionResponse(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="DestinationUpdateResponseFromRaw.FromRawUnchecked"/>
-    public static DestinationUpdateResponse FromRawUnchecked(
+    /// <inheritdoc cref="DestinationUpdateSelectionResponseFromRaw.FromRawUnchecked"/>
+    public static DestinationUpdateSelectionResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -65,44 +70,47 @@ public sealed record class DestinationUpdateResponse : JsonModel
     }
 
     [SetsRequiredMembers]
-    public DestinationUpdateResponse(DestinationUpdateResponseData data)
+    public DestinationUpdateSelectionResponse(DestinationUpdateSelectionResponseData data)
         : this()
     {
         this.Data = data;
     }
 }
 
-class DestinationUpdateResponseFromRaw : IFromRawJson<DestinationUpdateResponse>
+class DestinationUpdateSelectionResponseFromRaw : IFromRawJson<DestinationUpdateSelectionResponse>
 {
     /// <inheritdoc/>
-    public DestinationUpdateResponse FromRawUnchecked(
+    public DestinationUpdateSelectionResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => DestinationUpdateResponse.FromRawUnchecked(rawData);
+    ) => DestinationUpdateSelectionResponse.FromRawUnchecked(rawData);
 }
 
 /// <summary>
 /// Current destinations under the DATA_EXPORT integration.
 /// </summary>
 [JsonConverter(
-    typeof(JsonModelConverter<DestinationUpdateResponseData, DestinationUpdateResponseDataFromRaw>)
+    typeof(JsonModelConverter<
+        DestinationUpdateSelectionResponseData,
+        DestinationUpdateSelectionResponseDataFromRaw
+    >)
 )]
-public sealed record class DestinationUpdateResponseData : JsonModel
+public sealed record class DestinationUpdateSelectionResponseData : JsonModel
 {
     /// <summary>
     /// Current destinations under the DATA_EXPORT integration
     /// </summary>
-    public required IReadOnlyList<DestinationUpdateResponseDataDestination> Destinations
+    public required IReadOnlyList<DestinationUpdateSelectionResponseDataDestination> Destinations
     {
         get
         {
             this._rawData.Freeze();
             return this._rawData.GetNotNullStruct<
-                ImmutableArray<DestinationUpdateResponseDataDestination>
+                ImmutableArray<DestinationUpdateSelectionResponseDataDestination>
             >("destinations");
         }
         init
         {
-            this._rawData.Set<ImmutableArray<DestinationUpdateResponseDataDestination>>(
+            this._rawData.Set<ImmutableArray<DestinationUpdateSelectionResponseDataDestination>>(
                 "destinations",
                 ImmutableArray.ToImmutableArray(value)
             );
@@ -118,31 +126,31 @@ public sealed record class DestinationUpdateResponseData : JsonModel
         }
     }
 
-    public DestinationUpdateResponseData() { }
+    public DestinationUpdateSelectionResponseData() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public DestinationUpdateResponseData(
-        DestinationUpdateResponseData destinationUpdateResponseData
+    public DestinationUpdateSelectionResponseData(
+        DestinationUpdateSelectionResponseData destinationUpdateSelectionResponseData
     )
-        : base(destinationUpdateResponseData) { }
+        : base(destinationUpdateSelectionResponseData) { }
 #pragma warning restore CS8618
 
-    public DestinationUpdateResponseData(IReadOnlyDictionary<string, JsonElement> rawData)
+    public DestinationUpdateSelectionResponseData(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    DestinationUpdateResponseData(FrozenDictionary<string, JsonElement> rawData)
+    DestinationUpdateSelectionResponseData(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="DestinationUpdateResponseDataFromRaw.FromRawUnchecked"/>
-    public static DestinationUpdateResponseData FromRawUnchecked(
+    /// <inheritdoc cref="DestinationUpdateSelectionResponseDataFromRaw.FromRawUnchecked"/>
+    public static DestinationUpdateSelectionResponseData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -150,8 +158,8 @@ public sealed record class DestinationUpdateResponseData : JsonModel
     }
 
     [SetsRequiredMembers]
-    public DestinationUpdateResponseData(
-        IReadOnlyList<DestinationUpdateResponseDataDestination> destinations
+    public DestinationUpdateSelectionResponseData(
+        IReadOnlyList<DestinationUpdateSelectionResponseDataDestination> destinations
     )
         : this()
     {
@@ -159,12 +167,13 @@ public sealed record class DestinationUpdateResponseData : JsonModel
     }
 }
 
-class DestinationUpdateResponseDataFromRaw : IFromRawJson<DestinationUpdateResponseData>
+class DestinationUpdateSelectionResponseDataFromRaw
+    : IFromRawJson<DestinationUpdateSelectionResponseData>
 {
     /// <inheritdoc/>
-    public DestinationUpdateResponseData FromRawUnchecked(
+    public DestinationUpdateSelectionResponseData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => DestinationUpdateResponseData.FromRawUnchecked(rawData);
+    ) => DestinationUpdateSelectionResponseData.FromRawUnchecked(rawData);
 }
 
 /// <summary>
@@ -172,11 +181,11 @@ class DestinationUpdateResponseDataFromRaw : IFromRawJson<DestinationUpdateRespo
 /// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
-        DestinationUpdateResponseDataDestination,
-        DestinationUpdateResponseDataDestinationFromRaw
+        DestinationUpdateSelectionResponseDataDestination,
+        DestinationUpdateSelectionResponseDataDestinationFromRaw
     >)
 )]
-public sealed record class DestinationUpdateResponseDataDestination : JsonModel
+public sealed record class DestinationUpdateSelectionResponseDataDestination : JsonModel
 {
     /// <summary>
     /// ISO8601 timestamp of when the destination was connected
@@ -262,12 +271,12 @@ public sealed record class DestinationUpdateResponseDataDestination : JsonModel
     /// <summary>
     /// Latest sync snapshot for the destination, refreshed by the provider webhook
     /// </summary>
-    public DestinationUpdateResponseDataDestinationLastSyncStatus? LastSyncStatus
+    public DestinationUpdateSelectionResponseDataDestinationLastSyncStatus? LastSyncStatus
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<DestinationUpdateResponseDataDestinationLastSyncStatus>(
+            return this._rawData.GetNullableClass<DestinationUpdateSelectionResponseDataDestinationLastSyncStatus>(
                 "lastSyncStatus"
             );
         }
@@ -293,17 +302,17 @@ public sealed record class DestinationUpdateResponseDataDestination : JsonModel
         this.LastSyncStatus?.Validate();
     }
 
-    public DestinationUpdateResponseDataDestination() { }
+    public DestinationUpdateSelectionResponseDataDestination() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public DestinationUpdateResponseDataDestination(
-        DestinationUpdateResponseDataDestination destinationUpdateResponseDataDestination
+    public DestinationUpdateSelectionResponseDataDestination(
+        DestinationUpdateSelectionResponseDataDestination destinationUpdateSelectionResponseDataDestination
     )
-        : base(destinationUpdateResponseDataDestination) { }
+        : base(destinationUpdateSelectionResponseDataDestination) { }
 #pragma warning restore CS8618
 
-    public DestinationUpdateResponseDataDestination(
+    public DestinationUpdateSelectionResponseDataDestination(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -312,14 +321,14 @@ public sealed record class DestinationUpdateResponseDataDestination : JsonModel
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    DestinationUpdateResponseDataDestination(FrozenDictionary<string, JsonElement> rawData)
+    DestinationUpdateSelectionResponseDataDestination(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="DestinationUpdateResponseDataDestinationFromRaw.FromRawUnchecked"/>
-    public static DestinationUpdateResponseDataDestination FromRawUnchecked(
+    /// <inheritdoc cref="DestinationUpdateSelectionResponseDataDestinationFromRaw.FromRawUnchecked"/>
+    public static DestinationUpdateSelectionResponseDataDestination FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -327,13 +336,13 @@ public sealed record class DestinationUpdateResponseDataDestination : JsonModel
     }
 }
 
-class DestinationUpdateResponseDataDestinationFromRaw
-    : IFromRawJson<DestinationUpdateResponseDataDestination>
+class DestinationUpdateSelectionResponseDataDestinationFromRaw
+    : IFromRawJson<DestinationUpdateSelectionResponseDataDestination>
 {
     /// <inheritdoc/>
-    public DestinationUpdateResponseDataDestination FromRawUnchecked(
+    public DestinationUpdateSelectionResponseDataDestination FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => DestinationUpdateResponseDataDestination.FromRawUnchecked(rawData);
+    ) => DestinationUpdateSelectionResponseDataDestination.FromRawUnchecked(rawData);
 }
 
 /// <summary>
@@ -341,11 +350,12 @@ class DestinationUpdateResponseDataDestinationFromRaw
 /// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
-        DestinationUpdateResponseDataDestinationLastSyncStatus,
-        DestinationUpdateResponseDataDestinationLastSyncStatusFromRaw
+        DestinationUpdateSelectionResponseDataDestinationLastSyncStatus,
+        DestinationUpdateSelectionResponseDataDestinationLastSyncStatusFromRaw
     >)
 )]
-public sealed record class DestinationUpdateResponseDataDestinationLastSyncStatus : JsonModel
+public sealed record class DestinationUpdateSelectionResponseDataDestinationLastSyncStatus
+    : JsonModel
 {
     /// <summary>
     /// ISO8601 timestamp of when the latest sync finished
@@ -460,17 +470,17 @@ public sealed record class DestinationUpdateResponseDataDestinationLastSyncStatu
         _ = this.RowsTransferred;
     }
 
-    public DestinationUpdateResponseDataDestinationLastSyncStatus() { }
+    public DestinationUpdateSelectionResponseDataDestinationLastSyncStatus() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public DestinationUpdateResponseDataDestinationLastSyncStatus(
-        DestinationUpdateResponseDataDestinationLastSyncStatus destinationUpdateResponseDataDestinationLastSyncStatus
+    public DestinationUpdateSelectionResponseDataDestinationLastSyncStatus(
+        DestinationUpdateSelectionResponseDataDestinationLastSyncStatus destinationUpdateSelectionResponseDataDestinationLastSyncStatus
     )
-        : base(destinationUpdateResponseDataDestinationLastSyncStatus) { }
+        : base(destinationUpdateSelectionResponseDataDestinationLastSyncStatus) { }
 #pragma warning restore CS8618
 
-    public DestinationUpdateResponseDataDestinationLastSyncStatus(
+    public DestinationUpdateSelectionResponseDataDestinationLastSyncStatus(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -479,7 +489,7 @@ public sealed record class DestinationUpdateResponseDataDestinationLastSyncStatu
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    DestinationUpdateResponseDataDestinationLastSyncStatus(
+    DestinationUpdateSelectionResponseDataDestinationLastSyncStatus(
         FrozenDictionary<string, JsonElement> rawData
     )
     {
@@ -487,8 +497,8 @@ public sealed record class DestinationUpdateResponseDataDestinationLastSyncStatu
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="DestinationUpdateResponseDataDestinationLastSyncStatusFromRaw.FromRawUnchecked"/>
-    public static DestinationUpdateResponseDataDestinationLastSyncStatus FromRawUnchecked(
+    /// <inheritdoc cref="DestinationUpdateSelectionResponseDataDestinationLastSyncStatusFromRaw.FromRawUnchecked"/>
+    public static DestinationUpdateSelectionResponseDataDestinationLastSyncStatus FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -496,11 +506,11 @@ public sealed record class DestinationUpdateResponseDataDestinationLastSyncStatu
     }
 }
 
-class DestinationUpdateResponseDataDestinationLastSyncStatusFromRaw
-    : IFromRawJson<DestinationUpdateResponseDataDestinationLastSyncStatus>
+class DestinationUpdateSelectionResponseDataDestinationLastSyncStatusFromRaw
+    : IFromRawJson<DestinationUpdateSelectionResponseDataDestinationLastSyncStatus>
 {
     /// <inheritdoc/>
-    public DestinationUpdateResponseDataDestinationLastSyncStatus FromRawUnchecked(
+    public DestinationUpdateSelectionResponseDataDestinationLastSyncStatus FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => DestinationUpdateResponseDataDestinationLastSyncStatus.FromRawUnchecked(rawData);
+    ) => DestinationUpdateSelectionResponseDataDestinationLastSyncStatus.FromRawUnchecked(rawData);
 }

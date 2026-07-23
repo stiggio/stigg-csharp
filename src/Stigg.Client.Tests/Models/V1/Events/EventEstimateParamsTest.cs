@@ -7,12 +7,12 @@ using Stigg.Client.Models.V1.Events;
 
 namespace Stigg.Client.Tests.Models.V1.Events;
 
-public class EventEstimateCostParamsTest : TestBase
+public class EventEstimateParamsTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var parameters = new EventEstimateCostParams
+        var parameters = new EventEstimateParams
         {
             CustomerID = "customerId",
             EventName = "x",
@@ -47,7 +47,7 @@ public class EventEstimateCostParamsTest : TestBase
     [Fact]
     public void OptionalNonNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new EventEstimateCostParams
+        var parameters = new EventEstimateParams
         {
             CustomerID = "customerId",
             EventName = "x",
@@ -65,7 +65,7 @@ public class EventEstimateCostParamsTest : TestBase
     [Fact]
     public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
     {
-        var parameters = new EventEstimateCostParams
+        var parameters = new EventEstimateParams
         {
             CustomerID = "customerId",
             EventName = "x",
@@ -88,7 +88,7 @@ public class EventEstimateCostParamsTest : TestBase
     [Fact]
     public void OptionalNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new EventEstimateCostParams
+        var parameters = new EventEstimateParams
         {
             CustomerID = "customerId",
             EventName = "x",
@@ -104,7 +104,7 @@ public class EventEstimateCostParamsTest : TestBase
     [Fact]
     public void OptionalNullableParamsSetToNullAreSetToNull_Works()
     {
-        var parameters = new EventEstimateCostParams
+        var parameters = new EventEstimateParams
         {
             CustomerID = "customerId",
             EventName = "x",
@@ -122,12 +122,12 @@ public class EventEstimateCostParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        EventEstimateCostParams parameters = new() { CustomerID = "customerId", EventName = "x" };
+        EventEstimateParams parameters = new() { CustomerID = "customerId", EventName = "x" };
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
         Assert.True(
-            TestBase.UrisEqual(new Uri("https://edge.api.stigg.io/api/v1/events/estimate"), url)
+            TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/events/estimate"), url)
         );
     }
 
@@ -135,7 +135,7 @@ public class EventEstimateCostParamsTest : TestBase
     public void AddHeadersToRequest_Works()
     {
         HttpRequestMessage requestMessage = new();
-        EventEstimateCostParams parameters = new()
+        EventEstimateParams parameters = new()
         {
             CustomerID = "customerId",
             EventName = "x",
@@ -152,7 +152,7 @@ public class EventEstimateCostParamsTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var parameters = new EventEstimateCostParams
+        var parameters = new EventEstimateParams
         {
             CustomerID = "customerId",
             EventName = "x",
@@ -162,7 +162,7 @@ public class EventEstimateCostParamsTest : TestBase
             XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
-        EventEstimateCostParams copied = new(parameters);
+        EventEstimateParams copied = new(parameters);
 
         Assert.Equal(parameters, copied);
     }

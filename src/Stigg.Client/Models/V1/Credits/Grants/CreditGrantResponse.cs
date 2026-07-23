@@ -229,7 +229,7 @@ public sealed record class Data : JsonModel
     }
 
     /// <summary>
-    /// The type of credit grant (PAID, PROMOTIONAL, RECURRING)
+    /// The type of credit grant (PAID, PROMOTIONAL, RECURRING, OVERDRAFT)
     /// </summary>
     public required ApiEnum<string, DataGrantType> GrantType
     {
@@ -539,7 +539,7 @@ class DataCostFromRaw : IFromRawJson<DataCost>
 }
 
 /// <summary>
-/// The type of credit grant (PAID, PROMOTIONAL, RECURRING)
+/// The type of credit grant (PAID, PROMOTIONAL, RECURRING, OVERDRAFT)
 /// </summary>
 [JsonConverter(typeof(DataGrantTypeConverter))]
 public enum DataGrantType

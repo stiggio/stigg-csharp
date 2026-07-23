@@ -151,7 +151,7 @@ public class CreditGetUsageParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://edge.api.stigg.io/api/v1/credits/usage?customerId=customerId&after=after&before=before&currencyId=currencyId&endDate=2019-12-27T18%3a11%3a19.117%2b00%3a00&groupBy=groupBy&limit=1&resourceId=resourceId&startDate=2019-12-27T18%3a11%3a19.117%2b00%3a00&timeRange=LAST_DAY"
+                    "https://api.stigg.io/api/v1/credits/usage?customerId=customerId&after=after&before=before&currencyId=currencyId&endDate=2019-12-27T18%3a11%3a19.117%2b00%3a00&groupBy=groupBy&limit=1&resourceId=resourceId&startDate=2019-12-27T18%3a11%3a19.117%2b00%3a00&timeRange=LAST_DAY"
                 ),
                 url
             )

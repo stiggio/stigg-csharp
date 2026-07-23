@@ -5,12 +5,12 @@ using Stigg.Client.Models.V1.Events.DataExport.Destinations;
 
 namespace Stigg.Client.Tests.Models.V1.Events.DataExport.Destinations;
 
-public class DestinationUpdateParamsTest : TestBase
+public class DestinationUpdateSelectionParamsTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var parameters = new DestinationUpdateParams
+        var parameters = new DestinationUpdateSelectionParams
         {
             DestinationID = "x",
             EnabledModels = ["x"],
@@ -39,7 +39,7 @@ public class DestinationUpdateParamsTest : TestBase
     [Fact]
     public void OptionalNonNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new DestinationUpdateParams
+        var parameters = new DestinationUpdateSelectionParams
         {
             DestinationID = "x",
             EnabledModels = ["x"],
@@ -55,7 +55,7 @@ public class DestinationUpdateParamsTest : TestBase
     [Fact]
     public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
     {
-        var parameters = new DestinationUpdateParams
+        var parameters = new DestinationUpdateSelectionParams
         {
             DestinationID = "x",
             EnabledModels = ["x"],
@@ -75,7 +75,7 @@ public class DestinationUpdateParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        DestinationUpdateParams parameters = new()
+        DestinationUpdateSelectionParams parameters = new()
         {
             DestinationID = "x",
             EnabledModels = ["x"],
@@ -86,7 +86,7 @@ public class DestinationUpdateParamsTest : TestBase
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://edge.api.stigg.io/api/v1/data-export/destinations/x"),
+                new Uri("https://api.stigg.io/api/v1/data-export/destinations/x"),
                 url
             )
         );
@@ -96,7 +96,7 @@ public class DestinationUpdateParamsTest : TestBase
     public void AddHeadersToRequest_Works()
     {
         HttpRequestMessage requestMessage = new();
-        DestinationUpdateParams parameters = new()
+        DestinationUpdateSelectionParams parameters = new()
         {
             DestinationID = "x",
             EnabledModels = ["x"],
@@ -114,7 +114,7 @@ public class DestinationUpdateParamsTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var parameters = new DestinationUpdateParams
+        var parameters = new DestinationUpdateSelectionParams
         {
             DestinationID = "x",
             EnabledModels = ["x"],
@@ -123,7 +123,7 @@ public class DestinationUpdateParamsTest : TestBase
             XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
-        DestinationUpdateParams copied = new(parameters);
+        DestinationUpdateSelectionParams copied = new(parameters);
 
         Assert.Equal(parameters, copied);
     }

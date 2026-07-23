@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -8,18 +7,20 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
+using System = System;
 
-namespace Stigg.Client.Models.V1.Events;
+namespace Stigg.Client.Models.V1.Usage;
 
 /// <summary>
-/// Estimates the credit cost of a usage event without ingesting it. Returns the estimated
-/// cost per credit currency, the current balance, and the balance after the estimated consumption.
+/// Estimates the credit cost of a usage report without recording it. Returns the
+/// estimated cost per credit currency, the current balance, and the balance after
+/// the estimated consumption.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
 /// cause existing derived classes to break.</para>
 /// </summary>
-public record class EventEstimateCostParams : ParamsBase
+public record class UsageEstimateParams : ParamsBase
 {
     readonly JsonDictionary _rawBodyData = new();
     public IReadOnlyDictionary<string, JsonElement> RawBodyData
@@ -41,20 +42,33 @@ public record class EventEstimateCostParams : ParamsBase
     }
 
     /// <summary>
-    /// The name of the usage event
+    /// Feature id
     /// </summary>
-    public required string EventName
+    public required string FeatureID
     {
         get
         {
             this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNotNullClass<string>("eventName");
+            return this._rawBodyData.GetNotNullClass<string>("featureId");
         }
-        init { this._rawBodyData.Set("eventName", value); }
+        init { this._rawBodyData.Set("featureId", value); }
     }
 
     /// <summary>
-    /// Dimensions associated with the usage event
+    /// The value to report for usage
+    /// </summary>
+    public required long Value
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNotNullStruct<long>("value");
+        }
+        init { this._rawBodyData.Set("value", value); }
+    }
+
+    /// <summary>
+    /// Additional dimensions for the usage report
     /// </summary>
     public IReadOnlyDictionary<string, Dimension>? Dimensions
     {
@@ -90,6 +104,29 @@ public record class EventEstimateCostParams : ParamsBase
             return this._rawBodyData.GetNullableClass<string>("resourceId");
         }
         init { this._rawBodyData.Set("resourceId", value); }
+    }
+
+    /// <summary>
+    /// The method by which the usage value should be updated
+    /// </summary>
+    public ApiEnum<string, UpdateBehavior>? UpdateBehavior
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<ApiEnum<string, UpdateBehavior>>(
+                "updateBehavior"
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawBodyData.Set("updateBehavior", value);
+        }
     }
 
     public string? XAccountID
@@ -128,18 +165,18 @@ public record class EventEstimateCostParams : ParamsBase
         }
     }
 
-    public EventEstimateCostParams() { }
+    public UsageEstimateParams() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public EventEstimateCostParams(EventEstimateCostParams eventEstimateCostParams)
-        : base(eventEstimateCostParams)
+    public UsageEstimateParams(UsageEstimateParams usageEstimateParams)
+        : base(usageEstimateParams)
     {
-        this._rawBodyData = new(eventEstimateCostParams._rawBodyData);
+        this._rawBodyData = new(usageEstimateParams._rawBodyData);
     }
 #pragma warning restore CS8618
 
-    public EventEstimateCostParams(
+    public UsageEstimateParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
         IReadOnlyDictionary<string, JsonElement> rawBodyData
@@ -152,7 +189,7 @@ public record class EventEstimateCostParams : ParamsBase
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    EventEstimateCostParams(
+    UsageEstimateParams(
         FrozenDictionary<string, JsonElement> rawHeaderData,
         FrozenDictionary<string, JsonElement> rawQueryData,
         FrozenDictionary<string, JsonElement> rawBodyData
@@ -165,7 +202,7 @@ public record class EventEstimateCostParams : ParamsBase
 #pragma warning restore CS8618
 
     /// <inheritdoc cref="IFromRawJson{T}.FromRawUnchecked"/>
-    public static EventEstimateCostParams FromRawUnchecked(
+    public static UsageEstimateParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
         IReadOnlyDictionary<string, JsonElement> rawBodyData
@@ -195,7 +232,7 @@ public record class EventEstimateCostParams : ParamsBase
             ModelBase.ToStringSerializerOptions
         );
 
-    public virtual bool Equals(EventEstimateCostParams? other)
+    public virtual bool Equals(UsageEstimateParams? other)
     {
         if (other == null)
         {
@@ -206,9 +243,11 @@ public record class EventEstimateCostParams : ParamsBase
             && this._rawBodyData.Equals(other._rawBodyData);
     }
 
-    public override Uri Url(ClientOptions options)
+    public override System::Uri Url(ClientOptions options)
     {
-        return new UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/api/v1/events/estimate")
+        return new System::UriBuilder(
+            options.BaseUrl.ToString().TrimEnd('/') + "/api/v1/usage/estimate"
+        )
         {
             Query = this.QueryString(options),
         }.Uri;
@@ -363,7 +402,11 @@ public record class Dimension : ModelBase
     /// </code>
     /// </example>
     /// </summary>
-    public void Switch(Action<string> @string, Action<double> @double, Action<bool> @bool)
+    public void Switch(
+        System::Action<string> @string,
+        System::Action<double> @double,
+        System::Action<bool> @bool
+    )
     {
         switch (this.Value)
         {
@@ -403,7 +446,11 @@ public record class Dimension : ModelBase
     /// </code>
     /// </example>
     /// </summary>
-    public T Match<T>(Func<string, T> @string, Func<double, T> @double, Func<bool, T> @bool)
+    public T Match<T>(
+        System::Func<string, T> @string,
+        System::Func<double, T> @double,
+        System::Func<bool, T> @bool
+    )
     {
         return this.Value switch
         {
@@ -470,7 +517,7 @@ sealed class DimensionConverter : JsonConverter<Dimension>
 {
     public override Dimension? Read(
         ref Utf8JsonReader reader,
-        Type typeToConvert,
+        System::Type typeToConvert,
         JsonSerializerOptions options
     )
     {
@@ -483,7 +530,7 @@ sealed class DimensionConverter : JsonConverter<Dimension>
                 return new(deserialized, element);
             }
         }
-        catch (Exception e) when (e is JsonException || e is StiggInvalidDataException)
+        catch (System::Exception e) when (e is JsonException || e is StiggInvalidDataException)
         {
             // ignore
         }
@@ -492,7 +539,7 @@ sealed class DimensionConverter : JsonConverter<Dimension>
         {
             return new(JsonSerializer.Deserialize<double>(element, options), element);
         }
-        catch (Exception e) when (e is JsonException || e is StiggInvalidDataException)
+        catch (System::Exception e) when (e is JsonException || e is StiggInvalidDataException)
         {
             // ignore
         }
@@ -501,7 +548,7 @@ sealed class DimensionConverter : JsonConverter<Dimension>
         {
             return new(JsonSerializer.Deserialize<bool>(element, options), element);
         }
-        catch (Exception e) when (e is JsonException || e is StiggInvalidDataException)
+        catch (System::Exception e) when (e is JsonException || e is StiggInvalidDataException)
         {
             // ignore
         }
@@ -516,5 +563,52 @@ sealed class DimensionConverter : JsonConverter<Dimension>
     )
     {
         JsonSerializer.Serialize(writer, value.Json, options);
+    }
+}
+
+/// <summary>
+/// The method by which the usage value should be updated
+/// </summary>
+[JsonConverter(typeof(UpdateBehaviorConverter))]
+public enum UpdateBehavior
+{
+    Delta,
+    Set,
+}
+
+sealed class UpdateBehaviorConverter : JsonConverter<UpdateBehavior>
+{
+    public override UpdateBehavior Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "DELTA" => UpdateBehavior.Delta,
+            "SET" => UpdateBehavior.Set,
+            _ => (UpdateBehavior)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        UpdateBehavior value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                UpdateBehavior.Delta => "DELTA",
+                UpdateBehavior.Set => "SET",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
     }
 }

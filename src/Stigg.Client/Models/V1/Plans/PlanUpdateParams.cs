@@ -1273,6 +1273,27 @@ public sealed record class OveragePricingModel : JsonModel
     }
 
     /// <summary>
+    /// The refId of the custom currency this credit overage applies to
+    /// </summary>
+    public string? CurrencyID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("currencyId");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("currencyId", value);
+        }
+    }
+
+    /// <summary>
     /// Entitlement configuration for the overage feature
     /// </summary>
     public Entitlement? Entitlement
@@ -1314,27 +1335,6 @@ public sealed record class OveragePricingModel : JsonModel
         }
     }
 
-    /// <summary>
-    /// Custom currency ID for overage top-up
-    /// </summary>
-    public string? TopUpCustomCurrencyID
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("topUpCustomCurrencyId");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("topUpCustomCurrencyId", value);
-        }
-    }
-
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -1344,9 +1344,9 @@ public sealed record class OveragePricingModel : JsonModel
             item.Validate();
         }
         this.BillingCadence?.Validate();
+        _ = this.CurrencyID;
         this.Entitlement?.Validate();
         _ = this.FeatureID;
-        _ = this.TopUpCustomCurrencyID;
     }
 
     public OveragePricingModel() { }

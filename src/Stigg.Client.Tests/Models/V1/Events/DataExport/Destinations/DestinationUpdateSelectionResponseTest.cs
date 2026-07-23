@@ -5,12 +5,12 @@ using Stigg.Client.Models.V1.Events.DataExport.Destinations;
 
 namespace Stigg.Client.Tests.Models.V1.Events.DataExport.Destinations;
 
-public class DestinationUpdateResponseTest : TestBase
+public class DestinationUpdateSelectionResponseTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new DestinationUpdateResponse
+        var model = new DestinationUpdateSelectionResponse
         {
             Data = new(
                 [
@@ -35,7 +35,7 @@ public class DestinationUpdateResponseTest : TestBase
             ),
         };
 
-        DestinationUpdateResponseData expectedData = new(
+        DestinationUpdateSelectionResponseData expectedData = new(
             [
                 new()
                 {
@@ -63,7 +63,7 @@ public class DestinationUpdateResponseTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new DestinationUpdateResponse
+        var model = new DestinationUpdateSelectionResponse
         {
             Data = new(
                 [
@@ -89,7 +89,7 @@ public class DestinationUpdateResponseTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DestinationUpdateResponse>(
+        var deserialized = JsonSerializer.Deserialize<DestinationUpdateSelectionResponse>(
             json,
             ModelBase.SerializerOptions
         );
@@ -100,7 +100,7 @@ public class DestinationUpdateResponseTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new DestinationUpdateResponse
+        var model = new DestinationUpdateSelectionResponse
         {
             Data = new(
                 [
@@ -126,13 +126,13 @@ public class DestinationUpdateResponseTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DestinationUpdateResponse>(
+        var deserialized = JsonSerializer.Deserialize<DestinationUpdateSelectionResponse>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
-        DestinationUpdateResponseData expectedData = new(
+        DestinationUpdateSelectionResponseData expectedData = new(
             [
                 new()
                 {
@@ -160,7 +160,7 @@ public class DestinationUpdateResponseTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new DestinationUpdateResponse
+        var model = new DestinationUpdateSelectionResponse
         {
             Data = new(
                 [
@@ -191,7 +191,7 @@ public class DestinationUpdateResponseTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new DestinationUpdateResponse
+        var model = new DestinationUpdateSelectionResponse
         {
             Data = new(
                 [
@@ -216,18 +216,18 @@ public class DestinationUpdateResponseTest : TestBase
             ),
         };
 
-        DestinationUpdateResponse copied = new(model);
+        DestinationUpdateSelectionResponse copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class DestinationUpdateResponseDataTest : TestBase
+public class DestinationUpdateSelectionResponseDataTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new DestinationUpdateResponseData
+        var model = new DestinationUpdateSelectionResponseData
         {
             Destinations =
             [
@@ -251,7 +251,7 @@ public class DestinationUpdateResponseDataTest : TestBase
             ],
         };
 
-        List<DestinationUpdateResponseDataDestination> expectedDestinations =
+        List<DestinationUpdateSelectionResponseDataDestination> expectedDestinations =
         [
             new()
             {
@@ -282,7 +282,7 @@ public class DestinationUpdateResponseDataTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new DestinationUpdateResponseData
+        var model = new DestinationUpdateSelectionResponseData
         {
             Destinations =
             [
@@ -307,7 +307,7 @@ public class DestinationUpdateResponseDataTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DestinationUpdateResponseData>(
+        var deserialized = JsonSerializer.Deserialize<DestinationUpdateSelectionResponseData>(
             json,
             ModelBase.SerializerOptions
         );
@@ -318,7 +318,7 @@ public class DestinationUpdateResponseDataTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new DestinationUpdateResponseData
+        var model = new DestinationUpdateSelectionResponseData
         {
             Destinations =
             [
@@ -343,13 +343,13 @@ public class DestinationUpdateResponseDataTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DestinationUpdateResponseData>(
+        var deserialized = JsonSerializer.Deserialize<DestinationUpdateSelectionResponseData>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
-        List<DestinationUpdateResponseDataDestination> expectedDestinations =
+        List<DestinationUpdateSelectionResponseDataDestination> expectedDestinations =
         [
             new()
             {
@@ -380,7 +380,7 @@ public class DestinationUpdateResponseDataTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new DestinationUpdateResponseData
+        var model = new DestinationUpdateSelectionResponseData
         {
             Destinations =
             [
@@ -410,7 +410,7 @@ public class DestinationUpdateResponseDataTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new DestinationUpdateResponseData
+        var model = new DestinationUpdateSelectionResponseData
         {
             Destinations =
             [
@@ -434,18 +434,18 @@ public class DestinationUpdateResponseDataTest : TestBase
             ],
         };
 
-        DestinationUpdateResponseData copied = new(model);
+        DestinationUpdateSelectionResponseData copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class DestinationUpdateResponseDataDestinationTest : TestBase
+public class DestinationUpdateSelectionResponseDataDestinationTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new DestinationUpdateResponseDataDestination
+        var model = new DestinationUpdateSelectionResponseDataDestination
         {
             ConnectedAt = "connectedAt",
             DestinationID = "destinationId",
@@ -468,15 +468,16 @@ public class DestinationUpdateResponseDataDestinationTest : TestBase
         string expectedType = "type";
         string expectedConnectionStatus = "connectionStatus";
         List<string> expectedEnabledModels = ["string"];
-        DestinationUpdateResponseDataDestinationLastSyncStatus expectedLastSyncStatus = new()
-        {
-            FinishedAt = "finishedAt",
-            Status = "status",
-            TransferID = "transferId",
-            BlamedParty = "blamedParty",
-            FailureMessage = "failureMessage",
-            RowsTransferred = 0,
-        };
+        DestinationUpdateSelectionResponseDataDestinationLastSyncStatus expectedLastSyncStatus =
+            new()
+            {
+                FinishedAt = "finishedAt",
+                Status = "status",
+                TransferID = "transferId",
+                BlamedParty = "blamedParty",
+                FailureMessage = "failureMessage",
+                RowsTransferred = 0,
+            };
 
         Assert.Equal(expectedConnectedAt, model.ConnectedAt);
         Assert.Equal(expectedDestinationID, model.DestinationID);
@@ -494,7 +495,7 @@ public class DestinationUpdateResponseDataDestinationTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new DestinationUpdateResponseDataDestination
+        var model = new DestinationUpdateSelectionResponseDataDestination
         {
             ConnectedAt = "connectedAt",
             DestinationID = "destinationId",
@@ -513,10 +514,11 @@ public class DestinationUpdateResponseDataDestinationTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DestinationUpdateResponseDataDestination>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized =
+            JsonSerializer.Deserialize<DestinationUpdateSelectionResponseDataDestination>(
+                json,
+                ModelBase.SerializerOptions
+            );
 
         Assert.Equal(model, deserialized);
     }
@@ -524,7 +526,7 @@ public class DestinationUpdateResponseDataDestinationTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new DestinationUpdateResponseDataDestination
+        var model = new DestinationUpdateSelectionResponseDataDestination
         {
             ConnectedAt = "connectedAt",
             DestinationID = "destinationId",
@@ -543,10 +545,11 @@ public class DestinationUpdateResponseDataDestinationTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<DestinationUpdateResponseDataDestination>(
-            element,
-            ModelBase.SerializerOptions
-        );
+        var deserialized =
+            JsonSerializer.Deserialize<DestinationUpdateSelectionResponseDataDestination>(
+                element,
+                ModelBase.SerializerOptions
+            );
         Assert.NotNull(deserialized);
 
         string expectedConnectedAt = "connectedAt";
@@ -554,15 +557,16 @@ public class DestinationUpdateResponseDataDestinationTest : TestBase
         string expectedType = "type";
         string expectedConnectionStatus = "connectionStatus";
         List<string> expectedEnabledModels = ["string"];
-        DestinationUpdateResponseDataDestinationLastSyncStatus expectedLastSyncStatus = new()
-        {
-            FinishedAt = "finishedAt",
-            Status = "status",
-            TransferID = "transferId",
-            BlamedParty = "blamedParty",
-            FailureMessage = "failureMessage",
-            RowsTransferred = 0,
-        };
+        DestinationUpdateSelectionResponseDataDestinationLastSyncStatus expectedLastSyncStatus =
+            new()
+            {
+                FinishedAt = "finishedAt",
+                Status = "status",
+                TransferID = "transferId",
+                BlamedParty = "blamedParty",
+                FailureMessage = "failureMessage",
+                RowsTransferred = 0,
+            };
 
         Assert.Equal(expectedConnectedAt, deserialized.ConnectedAt);
         Assert.Equal(expectedDestinationID, deserialized.DestinationID);
@@ -580,7 +584,7 @@ public class DestinationUpdateResponseDataDestinationTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new DestinationUpdateResponseDataDestination
+        var model = new DestinationUpdateSelectionResponseDataDestination
         {
             ConnectedAt = "connectedAt",
             DestinationID = "destinationId",
@@ -604,7 +608,7 @@ public class DestinationUpdateResponseDataDestinationTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new DestinationUpdateResponseDataDestination
+        var model = new DestinationUpdateSelectionResponseDataDestination
         {
             ConnectedAt = "connectedAt",
             DestinationID = "destinationId",
@@ -622,7 +626,7 @@ public class DestinationUpdateResponseDataDestinationTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new DestinationUpdateResponseDataDestination
+        var model = new DestinationUpdateSelectionResponseDataDestination
         {
             ConnectedAt = "connectedAt",
             DestinationID = "destinationId",
@@ -635,7 +639,7 @@ public class DestinationUpdateResponseDataDestinationTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new DestinationUpdateResponseDataDestination
+        var model = new DestinationUpdateSelectionResponseDataDestination
         {
             ConnectedAt = "connectedAt",
             DestinationID = "destinationId",
@@ -658,7 +662,7 @@ public class DestinationUpdateResponseDataDestinationTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new DestinationUpdateResponseDataDestination
+        var model = new DestinationUpdateSelectionResponseDataDestination
         {
             ConnectedAt = "connectedAt",
             DestinationID = "destinationId",
@@ -676,7 +680,7 @@ public class DestinationUpdateResponseDataDestinationTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new DestinationUpdateResponseDataDestination
+        var model = new DestinationUpdateSelectionResponseDataDestination
         {
             ConnectedAt = "connectedAt",
             DestinationID = "destinationId",
@@ -694,18 +698,18 @@ public class DestinationUpdateResponseDataDestinationTest : TestBase
             },
         };
 
-        DestinationUpdateResponseDataDestination copied = new(model);
+        DestinationUpdateSelectionResponseDataDestination copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class DestinationUpdateResponseDataDestinationLastSyncStatusTest : TestBase
+public class DestinationUpdateSelectionResponseDataDestinationLastSyncStatusTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new DestinationUpdateResponseDataDestinationLastSyncStatus
+        var model = new DestinationUpdateSelectionResponseDataDestinationLastSyncStatus
         {
             FinishedAt = "finishedAt",
             Status = "status",
@@ -733,7 +737,7 @@ public class DestinationUpdateResponseDataDestinationLastSyncStatusTest : TestBa
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new DestinationUpdateResponseDataDestinationLastSyncStatus
+        var model = new DestinationUpdateSelectionResponseDataDestinationLastSyncStatus
         {
             FinishedAt = "finishedAt",
             Status = "status",
@@ -745,7 +749,7 @@ public class DestinationUpdateResponseDataDestinationLastSyncStatusTest : TestBa
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized =
-            JsonSerializer.Deserialize<DestinationUpdateResponseDataDestinationLastSyncStatus>(
+            JsonSerializer.Deserialize<DestinationUpdateSelectionResponseDataDestinationLastSyncStatus>(
                 json,
                 ModelBase.SerializerOptions
             );
@@ -756,7 +760,7 @@ public class DestinationUpdateResponseDataDestinationLastSyncStatusTest : TestBa
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new DestinationUpdateResponseDataDestinationLastSyncStatus
+        var model = new DestinationUpdateSelectionResponseDataDestinationLastSyncStatus
         {
             FinishedAt = "finishedAt",
             Status = "status",
@@ -768,7 +772,7 @@ public class DestinationUpdateResponseDataDestinationLastSyncStatusTest : TestBa
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized =
-            JsonSerializer.Deserialize<DestinationUpdateResponseDataDestinationLastSyncStatus>(
+            JsonSerializer.Deserialize<DestinationUpdateSelectionResponseDataDestinationLastSyncStatus>(
                 element,
                 ModelBase.SerializerOptions
             );
@@ -792,7 +796,7 @@ public class DestinationUpdateResponseDataDestinationLastSyncStatusTest : TestBa
     [Fact]
     public void Validation_Works()
     {
-        var model = new DestinationUpdateResponseDataDestinationLastSyncStatus
+        var model = new DestinationUpdateSelectionResponseDataDestinationLastSyncStatus
         {
             FinishedAt = "finishedAt",
             Status = "status",
@@ -808,7 +812,7 @@ public class DestinationUpdateResponseDataDestinationLastSyncStatusTest : TestBa
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new DestinationUpdateResponseDataDestinationLastSyncStatus
+        var model = new DestinationUpdateSelectionResponseDataDestinationLastSyncStatus
         {
             FinishedAt = "finishedAt",
             Status = "status",
@@ -826,7 +830,7 @@ public class DestinationUpdateResponseDataDestinationLastSyncStatusTest : TestBa
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new DestinationUpdateResponseDataDestinationLastSyncStatus
+        var model = new DestinationUpdateSelectionResponseDataDestinationLastSyncStatus
         {
             FinishedAt = "finishedAt",
             Status = "status",
@@ -839,7 +843,7 @@ public class DestinationUpdateResponseDataDestinationLastSyncStatusTest : TestBa
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new DestinationUpdateResponseDataDestinationLastSyncStatus
+        var model = new DestinationUpdateSelectionResponseDataDestinationLastSyncStatus
         {
             FinishedAt = "finishedAt",
             Status = "status",
@@ -862,7 +866,7 @@ public class DestinationUpdateResponseDataDestinationLastSyncStatusTest : TestBa
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new DestinationUpdateResponseDataDestinationLastSyncStatus
+        var model = new DestinationUpdateSelectionResponseDataDestinationLastSyncStatus
         {
             FinishedAt = "finishedAt",
             Status = "status",
@@ -880,7 +884,7 @@ public class DestinationUpdateResponseDataDestinationLastSyncStatusTest : TestBa
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new DestinationUpdateResponseDataDestinationLastSyncStatus
+        var model = new DestinationUpdateSelectionResponseDataDestinationLastSyncStatus
         {
             FinishedAt = "finishedAt",
             Status = "status",
@@ -890,7 +894,7 @@ public class DestinationUpdateResponseDataDestinationLastSyncStatusTest : TestBa
             RowsTransferred = 0,
         };
 
-        DestinationUpdateResponseDataDestinationLastSyncStatus copied = new(model);
+        DestinationUpdateSelectionResponseDataDestinationLastSyncStatus copied = new(model);
 
         Assert.Equal(model, copied);
     }

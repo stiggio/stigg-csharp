@@ -6,12 +6,12 @@ using Stigg.Client.Models.V1.Usage;
 
 namespace Stigg.Client.Tests.Models.V1.Usage;
 
-public class UsageEstimateCostResponseTest : TestBase
+public class UsageEstimateResponseTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new UsageEstimateCostResponse
+        var model = new UsageEstimateResponse
         {
             Data = new()
             {
@@ -70,7 +70,7 @@ public class UsageEstimateCostResponseTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new UsageEstimateCostResponse
+        var model = new UsageEstimateResponse
         {
             Data = new()
             {
@@ -99,7 +99,7 @@ public class UsageEstimateCostResponseTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<UsageEstimateCostResponse>(
+        var deserialized = JsonSerializer.Deserialize<UsageEstimateResponse>(
             json,
             ModelBase.SerializerOptions
         );
@@ -110,7 +110,7 @@ public class UsageEstimateCostResponseTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new UsageEstimateCostResponse
+        var model = new UsageEstimateResponse
         {
             Data = new()
             {
@@ -139,7 +139,7 @@ public class UsageEstimateCostResponseTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<UsageEstimateCostResponse>(
+        var deserialized = JsonSerializer.Deserialize<UsageEstimateResponse>(
             element,
             ModelBase.SerializerOptions
         );
@@ -176,7 +176,7 @@ public class UsageEstimateCostResponseTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new UsageEstimateCostResponse
+        var model = new UsageEstimateResponse
         {
             Data = new()
             {
@@ -210,7 +210,7 @@ public class UsageEstimateCostResponseTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new UsageEstimateCostResponse
+        var model = new UsageEstimateResponse
         {
             Data = new()
             {
@@ -238,7 +238,7 @@ public class UsageEstimateCostResponseTest : TestBase
             },
         };
 
-        UsageEstimateCostResponse copied = new(model);
+        UsageEstimateResponse copied = new(model);
 
         Assert.Equal(model, copied);
     }
