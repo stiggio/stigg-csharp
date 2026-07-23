@@ -8,9 +8,9 @@ namespace Stigg.Client.Tests.Services.V1;
 public class UsageServiceTest : TestBase
 {
     [Fact(Skip = "Mock server tests are disabled")]
-    public async Task EstimateCost_Works()
+    public async Task Estimate_Works()
     {
-        var response = await this.client.V1.Usage.EstimateCost(
+        var response = await this.client.V1.Usage.Estimate(
             new()
             {
                 CustomerID = "customerId",

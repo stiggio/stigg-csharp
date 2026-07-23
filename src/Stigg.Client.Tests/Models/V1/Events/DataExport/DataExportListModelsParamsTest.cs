@@ -57,7 +57,7 @@ public class DataExportListModelsParamsTest : TestBase
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
         Assert.True(
-            TestBase.UrisEqual(new Uri("https://edge.api.stigg.io/api/v1/data-export/models"), url)
+            TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/data-export/models"), url)
         );
     }
 

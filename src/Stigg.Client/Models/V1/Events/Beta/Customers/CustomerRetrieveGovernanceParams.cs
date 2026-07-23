@@ -9,7 +9,7 @@ using System.Text.Json.Serialization;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
 
-namespace Stigg.Client.Models.V1Beta.Customers;
+namespace Stigg.Client.Models.V1.Events.Beta.Customers;
 
 /// <summary>
 /// Queries the customer's governance hierarchy tree, returning a cursor-paginated

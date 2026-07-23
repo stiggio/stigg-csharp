@@ -7,7 +7,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Stigg.Client.Core;
 
-namespace Stigg.Client.Models.V1Beta.Customers;
+namespace Stigg.Client.Models.V1.Events.Beta.Customers;
 
 /// <summary>
 /// Paginated list of governance tree nodes, each with its usage configuration and

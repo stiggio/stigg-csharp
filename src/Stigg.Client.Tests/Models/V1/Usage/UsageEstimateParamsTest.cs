@@ -8,12 +8,12 @@ using Stigg.Client.Models.V1.Usage;
 
 namespace Stigg.Client.Tests.Models.V1.Usage;
 
-public class UsageEstimateCostParamsTest : TestBase
+public class UsageEstimateParamsTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var parameters = new UsageEstimateCostParams
+        var parameters = new UsageEstimateParams
         {
             CustomerID = "customerId",
             FeatureID = "featureId",
@@ -54,7 +54,7 @@ public class UsageEstimateCostParamsTest : TestBase
     [Fact]
     public void OptionalNonNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new UsageEstimateCostParams
+        var parameters = new UsageEstimateParams
         {
             CustomerID = "customerId",
             FeatureID = "featureId",
@@ -75,7 +75,7 @@ public class UsageEstimateCostParamsTest : TestBase
     [Fact]
     public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
     {
-        var parameters = new UsageEstimateCostParams
+        var parameters = new UsageEstimateParams
         {
             CustomerID = "customerId",
             FeatureID = "featureId",
@@ -102,7 +102,7 @@ public class UsageEstimateCostParamsTest : TestBase
     [Fact]
     public void OptionalNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new UsageEstimateCostParams
+        var parameters = new UsageEstimateParams
         {
             CustomerID = "customerId",
             FeatureID = "featureId",
@@ -120,7 +120,7 @@ public class UsageEstimateCostParamsTest : TestBase
     [Fact]
     public void OptionalNullableParamsSetToNullAreSetToNull_Works()
     {
-        var parameters = new UsageEstimateCostParams
+        var parameters = new UsageEstimateParams
         {
             CustomerID = "customerId",
             FeatureID = "featureId",
@@ -140,7 +140,7 @@ public class UsageEstimateCostParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        UsageEstimateCostParams parameters = new()
+        UsageEstimateParams parameters = new()
         {
             CustomerID = "customerId",
             FeatureID = "featureId",
@@ -149,16 +149,14 @@ public class UsageEstimateCostParamsTest : TestBase
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
-        Assert.True(
-            TestBase.UrisEqual(new Uri("https://edge.api.stigg.io/api/v1/usage/estimate"), url)
-        );
+        Assert.True(TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/usage/estimate"), url));
     }
 
     [Fact]
     public void AddHeadersToRequest_Works()
     {
         HttpRequestMessage requestMessage = new();
-        UsageEstimateCostParams parameters = new()
+        UsageEstimateParams parameters = new()
         {
             CustomerID = "customerId",
             FeatureID = "featureId",
@@ -176,7 +174,7 @@ public class UsageEstimateCostParamsTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var parameters = new UsageEstimateCostParams
+        var parameters = new UsageEstimateParams
         {
             CustomerID = "customerId",
             FeatureID = "featureId",
@@ -188,7 +186,7 @@ public class UsageEstimateCostParamsTest : TestBase
             XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
-        UsageEstimateCostParams copied = new(parameters);
+        UsageEstimateParams copied = new(parameters);
 
         Assert.Equal(parameters, copied);
     }

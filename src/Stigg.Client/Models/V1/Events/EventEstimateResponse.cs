@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -6,17 +7,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Stigg.Client.Core;
 using Stigg.Client.Exceptions;
-using System = System;
 
-namespace Stigg.Client.Models.V1.Usage;
+namespace Stigg.Client.Models.V1.Events;
 
 /// <summary>
 /// Response object
 /// </summary>
-[JsonConverter(
-    typeof(JsonModelConverter<UsageEstimateCostResponse, UsageEstimateCostResponseFromRaw>)
-)]
-public sealed record class UsageEstimateCostResponse : JsonModel
+[JsonConverter(typeof(JsonModelConverter<EventEstimateResponse, EventEstimateResponseFromRaw>))]
+public sealed record class EventEstimateResponse : JsonModel
 {
     /// <summary>
     /// Estimated credit cost, current balance and balance after
@@ -37,29 +35,29 @@ public sealed record class UsageEstimateCostResponse : JsonModel
         this.Data.Validate();
     }
 
-    public UsageEstimateCostResponse() { }
+    public EventEstimateResponse() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public UsageEstimateCostResponse(UsageEstimateCostResponse usageEstimateCostResponse)
-        : base(usageEstimateCostResponse) { }
+    public EventEstimateResponse(EventEstimateResponse eventEstimateResponse)
+        : base(eventEstimateResponse) { }
 #pragma warning restore CS8618
 
-    public UsageEstimateCostResponse(IReadOnlyDictionary<string, JsonElement> rawData)
+    public EventEstimateResponse(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    UsageEstimateCostResponse(FrozenDictionary<string, JsonElement> rawData)
+    EventEstimateResponse(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="UsageEstimateCostResponseFromRaw.FromRawUnchecked"/>
-    public static UsageEstimateCostResponse FromRawUnchecked(
+    /// <inheritdoc cref="EventEstimateResponseFromRaw.FromRawUnchecked"/>
+    public static EventEstimateResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     )
     {
@@ -67,19 +65,19 @@ public sealed record class UsageEstimateCostResponse : JsonModel
     }
 
     [SetsRequiredMembers]
-    public UsageEstimateCostResponse(Data data)
+    public EventEstimateResponse(Data data)
         : this()
     {
         this.Data = data;
     }
 }
 
-class UsageEstimateCostResponseFromRaw : IFromRawJson<UsageEstimateCostResponse>
+class EventEstimateResponseFromRaw : IFromRawJson<EventEstimateResponse>
 {
     /// <inheritdoc/>
-    public UsageEstimateCostResponse FromRawUnchecked(
+    public EventEstimateResponse FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
-    ) => UsageEstimateCostResponse.FromRawUnchecked(rawData);
+    ) => EventEstimateResponse.FromRawUnchecked(rawData);
 }
 
 /// <summary>
@@ -410,7 +408,7 @@ sealed class WarningCodeConverter : JsonConverter<WarningCode>
 {
     public override WarningCode Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {
@@ -453,7 +451,7 @@ sealed class WarningConverter : JsonConverter<Warning>
 {
     public override Warning Read(
         ref Utf8JsonReader reader,
-        System::Type typeToConvert,
+        Type typeToConvert,
         JsonSerializerOptions options
     )
     {

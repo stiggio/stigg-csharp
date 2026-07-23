@@ -3,7 +3,7 @@ using Stigg.Client.Exceptions;
 using Stigg.Client.Models.V1.Credits.CustomCurrencies;
 using Stigg.Client.Models.V1.Customers;
 using Stigg.Client.Models.V1.Events;
-using Stigg.Client.Models.V1Beta.Customers;
+using Stigg.Client.Models.V1.Events.Beta.Customers;
 using Stigg.Client.Models.V1Beta.Customers.Entities;
 using Addons = Stigg.Client.Models.V1.Addons;
 using Coupons = Stigg.Client.Models.V1.Coupons;
@@ -412,6 +412,9 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Coupons::Type>(),
             new ApiEnumConverter<string, WarningCode>(),
             new ApiEnumConverter<string, Warning>(),
+            new ApiEnumConverter<string, Order>(),
+            new ApiEnumConverter<string, Scope>(),
+            new ApiEnumConverter<string, SortBy>(),
             new ApiEnumConverter<string, Credits::GrantExpirationPeriod>(),
             new ApiEnumConverter<string, Credits::ThresholdType>(),
             new ApiEnumConverter<string, Credits::EventType>(),
@@ -843,9 +846,6 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Products::SubscriptionEndSetup>(),
             new ApiEnumConverter<string, Products::SubscriptionStartSetup>(),
             new ApiEnumConverter<string, Products::Behavior>(),
-            new ApiEnumConverter<string, Order>(),
-            new ApiEnumConverter<string, Scope>(),
-            new ApiEnumConverter<string, SortBy>(),
             new ApiEnumConverter<string, CustomersEntitlements::AccessDeniedReason>(),
             new ApiEnumConverter<string, CustomersEntitlements::FeatureStatus>(),
             new ApiEnumConverter<string, CustomersEntitlements::FeatureType>(),

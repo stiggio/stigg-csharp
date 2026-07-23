@@ -18,7 +18,7 @@ namespace Stigg.Client.Models.V1.Events.DataExport.Destinations;
 /// breaking changes in non-major versions. We may add new methods in the future that
 /// cause existing derived classes to break.</para>
 /// </summary>
-public record class DestinationUpdateParams : ParamsBase
+public record class DestinationUpdateSelectionParams : ParamsBase
 {
     readonly JsonDictionary _rawBodyData = new();
     public IReadOnlyDictionary<string, JsonElement> RawBodyData
@@ -93,20 +93,22 @@ public record class DestinationUpdateParams : ParamsBase
         }
     }
 
-    public DestinationUpdateParams() { }
+    public DestinationUpdateSelectionParams() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public DestinationUpdateParams(DestinationUpdateParams destinationUpdateParams)
-        : base(destinationUpdateParams)
+    public DestinationUpdateSelectionParams(
+        DestinationUpdateSelectionParams destinationUpdateSelectionParams
+    )
+        : base(destinationUpdateSelectionParams)
     {
-        this.DestinationID = destinationUpdateParams.DestinationID;
+        this.DestinationID = destinationUpdateSelectionParams.DestinationID;
 
-        this._rawBodyData = new(destinationUpdateParams._rawBodyData);
+        this._rawBodyData = new(destinationUpdateSelectionParams._rawBodyData);
     }
 #pragma warning restore CS8618
 
-    public DestinationUpdateParams(
+    public DestinationUpdateSelectionParams(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
         IReadOnlyDictionary<string, JsonElement> rawBodyData
@@ -119,7 +121,7 @@ public record class DestinationUpdateParams : ParamsBase
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    DestinationUpdateParams(
+    DestinationUpdateSelectionParams(
         FrozenDictionary<string, JsonElement> rawHeaderData,
         FrozenDictionary<string, JsonElement> rawQueryData,
         FrozenDictionary<string, JsonElement> rawBodyData,
@@ -134,7 +136,7 @@ public record class DestinationUpdateParams : ParamsBase
 #pragma warning restore CS8618
 
     /// <inheritdoc cref="IFromRawJson{T}.FromRawUnchecked"/>
-    public static DestinationUpdateParams FromRawUnchecked(
+    public static DestinationUpdateSelectionParams FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawHeaderData,
         IReadOnlyDictionary<string, JsonElement> rawQueryData,
         IReadOnlyDictionary<string, JsonElement> rawBodyData,
@@ -167,7 +169,7 @@ public record class DestinationUpdateParams : ParamsBase
             ModelBase.ToStringSerializerOptions
         );
 
-    public virtual bool Equals(DestinationUpdateParams? other)
+    public virtual bool Equals(DestinationUpdateSelectionParams? other)
     {
         if (other == null)
         {

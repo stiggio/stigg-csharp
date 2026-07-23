@@ -6,12 +6,12 @@ using Stigg.Client.Models.V1.Events;
 
 namespace Stigg.Client.Tests.Models.V1.Events;
 
-public class EventEstimateCostResponseTest : TestBase
+public class EventEstimateResponseTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new EventEstimateCostResponse
+        var model = new EventEstimateResponse
         {
             Data = new()
             {
@@ -70,7 +70,7 @@ public class EventEstimateCostResponseTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new EventEstimateCostResponse
+        var model = new EventEstimateResponse
         {
             Data = new()
             {
@@ -99,7 +99,7 @@ public class EventEstimateCostResponseTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<EventEstimateCostResponse>(
+        var deserialized = JsonSerializer.Deserialize<EventEstimateResponse>(
             json,
             ModelBase.SerializerOptions
         );
@@ -110,7 +110,7 @@ public class EventEstimateCostResponseTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new EventEstimateCostResponse
+        var model = new EventEstimateResponse
         {
             Data = new()
             {
@@ -139,7 +139,7 @@ public class EventEstimateCostResponseTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<EventEstimateCostResponse>(
+        var deserialized = JsonSerializer.Deserialize<EventEstimateResponse>(
             element,
             ModelBase.SerializerOptions
         );
@@ -176,7 +176,7 @@ public class EventEstimateCostResponseTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new EventEstimateCostResponse
+        var model = new EventEstimateResponse
         {
             Data = new()
             {
@@ -210,7 +210,7 @@ public class EventEstimateCostResponseTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new EventEstimateCostResponse
+        var model = new EventEstimateResponse
         {
             Data = new()
             {
@@ -238,7 +238,7 @@ public class EventEstimateCostResponseTest : TestBase
             },
         };
 
-        EventEstimateCostResponse copied = new(model);
+        EventEstimateResponse copied = new(model);
 
         Assert.Equal(model, copied);
     }
