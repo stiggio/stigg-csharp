@@ -570,7 +570,7 @@ sealed class SubscriptionProvisionResponseDataEntitlementConverter
         var element = JsonSerializer.Deserialize<JsonElement>(ref reader, options);
         try
         {
-            var deserialized = JsonSerializer.Deserialize<UnionObjectVariant0>(element, options);
+            var deserialized = JsonSerializer.Deserialize<UnionObjectVariant1>(element, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
@@ -584,7 +584,7 @@ sealed class SubscriptionProvisionResponseDataEntitlementConverter
 
         try
         {
-            var deserialized = JsonSerializer.Deserialize<UnionObjectVariant1>(element, options);
+            var deserialized = JsonSerializer.Deserialize<UnionObjectVariant0>(element, options);
             if (deserialized != null)
             {
                 deserialized.Validate();
