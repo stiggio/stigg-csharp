@@ -70,6 +70,12 @@ public class AddonUpdateParamsTest : TestBase
                             },
                         ],
                         BillingCadence = BillingCadence.Recurring,
+                        CreditEntitlement = new()
+                        {
+                            Amount = 1,
+                            Cadence = Cadence.Month,
+                            CustomCurrencyID = "customCurrencyId",
+                        },
                         CurrencyID = "currencyId",
                         Entitlement = new()
                         {
@@ -219,6 +225,12 @@ public class AddonUpdateParamsTest : TestBase
                         },
                     ],
                     BillingCadence = BillingCadence.Recurring,
+                    CreditEntitlement = new()
+                    {
+                        Amount = 1,
+                        Cadence = Cadence.Month,
+                        CustomCurrencyID = "customCurrencyId",
+                    },
                     CurrencyID = "currencyId",
                     Entitlement = new()
                     {
@@ -454,6 +466,12 @@ public class AddonUpdateParamsTest : TestBase
                             },
                         ],
                         BillingCadence = BillingCadence.Recurring,
+                        CreditEntitlement = new()
+                        {
+                            Amount = 1,
+                            Cadence = Cadence.Month,
+                            CustomCurrencyID = "customCurrencyId",
+                        },
                         CurrencyID = "currencyId",
                         Entitlement = new()
                         {
@@ -614,6 +632,12 @@ public class AddonUpdateParamsTest : TestBase
                             },
                         ],
                         BillingCadence = BillingCadence.Recurring,
+                        CreditEntitlement = new()
+                        {
+                            Amount = 1,
+                            Cadence = Cadence.Month,
+                            CustomCurrencyID = "customCurrencyId",
+                        },
                         CurrencyID = "currencyId",
                         Entitlement = new()
                         {
@@ -807,6 +831,12 @@ public class AddonUpdateParamsTest : TestBase
                             },
                         ],
                         BillingCadence = BillingCadence.Recurring,
+                        CreditEntitlement = new()
+                        {
+                            Amount = 1,
+                            Cadence = Cadence.Month,
+                            CustomCurrencyID = "customCurrencyId",
+                        },
                         CurrencyID = "currencyId",
                         Entitlement = new()
                         {
@@ -965,6 +995,12 @@ public class ChargesTest : TestBase
                         },
                     ],
                     BillingCadence = BillingCadence.Recurring,
+                    CreditEntitlement = new()
+                    {
+                        Amount = 1,
+                        Cadence = Cadence.Month,
+                        CustomCurrencyID = "customCurrencyId",
+                    },
                     CurrencyID = "currencyId",
                     Entitlement = new()
                     {
@@ -1092,6 +1128,12 @@ public class ChargesTest : TestBase
                     },
                 ],
                 BillingCadence = BillingCadence.Recurring,
+                CreditEntitlement = new()
+                {
+                    Amount = 1,
+                    Cadence = Cadence.Month,
+                    CustomCurrencyID = "customCurrencyId",
+                },
                 CurrencyID = "currencyId",
                 Entitlement = new()
                 {
@@ -1253,6 +1295,12 @@ public class ChargesTest : TestBase
                         },
                     ],
                     BillingCadence = BillingCadence.Recurring,
+                    CreditEntitlement = new()
+                    {
+                        Amount = 1,
+                        Cadence = Cadence.Month,
+                        CustomCurrencyID = "customCurrencyId",
+                    },
                     CurrencyID = "currencyId",
                     Entitlement = new()
                     {
@@ -1398,6 +1446,12 @@ public class ChargesTest : TestBase
                         },
                     ],
                     BillingCadence = BillingCadence.Recurring,
+                    CreditEntitlement = new()
+                    {
+                        Amount = 1,
+                        Cadence = Cadence.Month,
+                        CustomCurrencyID = "customCurrencyId",
+                    },
                     CurrencyID = "currencyId",
                     Entitlement = new()
                     {
@@ -1532,6 +1586,12 @@ public class ChargesTest : TestBase
                     },
                 ],
                 BillingCadence = BillingCadence.Recurring,
+                CreditEntitlement = new()
+                {
+                    Amount = 1,
+                    Cadence = Cadence.Month,
+                    CustomCurrencyID = "customCurrencyId",
+                },
                 CurrencyID = "currencyId",
                 Entitlement = new()
                 {
@@ -1693,6 +1753,12 @@ public class ChargesTest : TestBase
                         },
                     ],
                     BillingCadence = BillingCadence.Recurring,
+                    CreditEntitlement = new()
+                    {
+                        Amount = 1,
+                        Cadence = Cadence.Month,
+                        CustomCurrencyID = "customCurrencyId",
+                    },
                     CurrencyID = "currencyId",
                     Entitlement = new()
                     {
@@ -1929,6 +1995,12 @@ public class ChargesTest : TestBase
                         },
                     ],
                     BillingCadence = BillingCadence.Recurring,
+                    CreditEntitlement = new()
+                    {
+                        Amount = 1,
+                        Cadence = Cadence.Month,
+                        CustomCurrencyID = "customCurrencyId",
+                    },
                     CurrencyID = "currencyId",
                     Entitlement = new()
                     {
@@ -2064,6 +2136,12 @@ public class ChargesTest : TestBase
                         },
                     ],
                     BillingCadence = BillingCadence.Recurring,
+                    CreditEntitlement = new()
+                    {
+                        Amount = 1,
+                        Cadence = Cadence.Month,
+                        CustomCurrencyID = "customCurrencyId",
+                    },
                     CurrencyID = "currencyId",
                     Entitlement = new()
                     {
@@ -2198,6 +2276,12 @@ public class ChargesTest : TestBase
                         },
                     ],
                     BillingCadence = BillingCadence.Recurring,
+                    CreditEntitlement = new()
+                    {
+                        Amount = 1,
+                        Cadence = Cadence.Month,
+                        CustomCurrencyID = "customCurrencyId",
+                    },
                     CurrencyID = "currencyId",
                     Entitlement = new()
                     {
@@ -2335,6 +2419,12 @@ public class ChargesTest : TestBase
                         },
                     ],
                     BillingCadence = BillingCadence.Recurring,
+                    CreditEntitlement = new()
+                    {
+                        Amount = 1,
+                        Cadence = Cadence.Month,
+                        CustomCurrencyID = "customCurrencyId",
+                    },
                     CurrencyID = "currencyId",
                     Entitlement = new()
                     {
@@ -2479,6 +2569,12 @@ public class ChargesTest : TestBase
                         },
                     ],
                     BillingCadence = BillingCadence.Recurring,
+                    CreditEntitlement = new()
+                    {
+                        Amount = 1,
+                        Cadence = Cadence.Month,
+                        CustomCurrencyID = "customCurrencyId",
+                    },
                     CurrencyID = "currencyId",
                     Entitlement = new()
                     {
@@ -3260,6 +3356,12 @@ public class OveragePricingModelTest : TestBase
                 },
             ],
             BillingCadence = BillingCadence.Recurring,
+            CreditEntitlement = new()
+            {
+                Amount = 1,
+                Cadence = Cadence.Month,
+                CustomCurrencyID = "customCurrencyId",
+            },
             CurrencyID = "currencyId",
             Entitlement = new()
             {
@@ -3307,6 +3409,12 @@ public class OveragePricingModelTest : TestBase
             },
         ];
         ApiEnum<string, BillingCadence> expectedBillingCadence = BillingCadence.Recurring;
+        CreditEntitlement expectedCreditEntitlement = new()
+        {
+            Amount = 1,
+            Cadence = Cadence.Month,
+            CustomCurrencyID = "customCurrencyId",
+        };
         string expectedCurrencyID = "currencyId";
         Entitlement expectedEntitlement = new()
         {
@@ -3332,6 +3440,7 @@ public class OveragePricingModelTest : TestBase
             Assert.Equal(expectedPricePeriods[i], model.PricePeriods[i]);
         }
         Assert.Equal(expectedBillingCadence, model.BillingCadence);
+        Assert.Equal(expectedCreditEntitlement, model.CreditEntitlement);
         Assert.Equal(expectedCurrencyID, model.CurrencyID);
         Assert.Equal(expectedEntitlement, model.Entitlement);
         Assert.Equal(expectedFeatureID, model.FeatureID);
@@ -3370,6 +3479,12 @@ public class OveragePricingModelTest : TestBase
                 },
             ],
             BillingCadence = BillingCadence.Recurring,
+            CreditEntitlement = new()
+            {
+                Amount = 1,
+                Cadence = Cadence.Month,
+                CustomCurrencyID = "customCurrencyId",
+            },
             CurrencyID = "currencyId",
             Entitlement = new()
             {
@@ -3431,6 +3546,12 @@ public class OveragePricingModelTest : TestBase
                 },
             ],
             BillingCadence = BillingCadence.Recurring,
+            CreditEntitlement = new()
+            {
+                Amount = 1,
+                Cadence = Cadence.Month,
+                CustomCurrencyID = "customCurrencyId",
+            },
             CurrencyID = "currencyId",
             Entitlement = new()
             {
@@ -3485,6 +3606,12 @@ public class OveragePricingModelTest : TestBase
             },
         ];
         ApiEnum<string, BillingCadence> expectedBillingCadence = BillingCadence.Recurring;
+        CreditEntitlement expectedCreditEntitlement = new()
+        {
+            Amount = 1,
+            Cadence = Cadence.Month,
+            CustomCurrencyID = "customCurrencyId",
+        };
         string expectedCurrencyID = "currencyId";
         Entitlement expectedEntitlement = new()
         {
@@ -3510,6 +3637,7 @@ public class OveragePricingModelTest : TestBase
             Assert.Equal(expectedPricePeriods[i], deserialized.PricePeriods[i]);
         }
         Assert.Equal(expectedBillingCadence, deserialized.BillingCadence);
+        Assert.Equal(expectedCreditEntitlement, deserialized.CreditEntitlement);
         Assert.Equal(expectedCurrencyID, deserialized.CurrencyID);
         Assert.Equal(expectedEntitlement, deserialized.Entitlement);
         Assert.Equal(expectedFeatureID, deserialized.FeatureID);
@@ -3548,6 +3676,12 @@ public class OveragePricingModelTest : TestBase
                 },
             ],
             BillingCadence = BillingCadence.Recurring,
+            CreditEntitlement = new()
+            {
+                Amount = 1,
+                Cadence = Cadence.Month,
+                CustomCurrencyID = "customCurrencyId",
+            },
             CurrencyID = "currencyId",
             Entitlement = new()
             {
@@ -3606,6 +3740,8 @@ public class OveragePricingModelTest : TestBase
 
         Assert.Null(model.BillingCadence);
         Assert.False(model.RawData.ContainsKey("billingCadence"));
+        Assert.Null(model.CreditEntitlement);
+        Assert.False(model.RawData.ContainsKey("creditEntitlement"));
         Assert.Null(model.CurrencyID);
         Assert.False(model.RawData.ContainsKey("currencyId"));
         Assert.Null(model.Entitlement);
@@ -3686,6 +3822,7 @@ public class OveragePricingModelTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             BillingCadence = null,
+            CreditEntitlement = null,
             CurrencyID = null,
             Entitlement = null,
             FeatureID = null,
@@ -3693,6 +3830,8 @@ public class OveragePricingModelTest : TestBase
 
         Assert.Null(model.BillingCadence);
         Assert.False(model.RawData.ContainsKey("billingCadence"));
+        Assert.Null(model.CreditEntitlement);
+        Assert.False(model.RawData.ContainsKey("creditEntitlement"));
         Assert.Null(model.CurrencyID);
         Assert.False(model.RawData.ContainsKey("currencyId"));
         Assert.Null(model.Entitlement);
@@ -3736,6 +3875,7 @@ public class OveragePricingModelTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             BillingCadence = null,
+            CreditEntitlement = null,
             CurrencyID = null,
             Entitlement = null,
             FeatureID = null,
@@ -3777,6 +3917,12 @@ public class OveragePricingModelTest : TestBase
                 },
             ],
             BillingCadence = BillingCadence.Recurring,
+            CreditEntitlement = new()
+            {
+                Amount = 1,
+                Cadence = Cadence.Month,
+                CustomCurrencyID = "customCurrencyId",
+            },
             CurrencyID = "currencyId",
             Entitlement = new()
             {
@@ -5812,6 +5958,159 @@ public class BillingCadenceTest : TestBase
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<ApiEnum<string, BillingCadence>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class CreditEntitlementTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new CreditEntitlement
+        {
+            Amount = 1,
+            Cadence = Cadence.Month,
+            CustomCurrencyID = "customCurrencyId",
+        };
+
+        double expectedAmount = 1;
+        ApiEnum<string, Cadence> expectedCadence = Cadence.Month;
+        string expectedCustomCurrencyID = "customCurrencyId";
+
+        Assert.Equal(expectedAmount, model.Amount);
+        Assert.Equal(expectedCadence, model.Cadence);
+        Assert.Equal(expectedCustomCurrencyID, model.CustomCurrencyID);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new CreditEntitlement
+        {
+            Amount = 1,
+            Cadence = Cadence.Month,
+            CustomCurrencyID = "customCurrencyId",
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CreditEntitlement>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new CreditEntitlement
+        {
+            Amount = 1,
+            Cadence = Cadence.Month,
+            CustomCurrencyID = "customCurrencyId",
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CreditEntitlement>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        double expectedAmount = 1;
+        ApiEnum<string, Cadence> expectedCadence = Cadence.Month;
+        string expectedCustomCurrencyID = "customCurrencyId";
+
+        Assert.Equal(expectedAmount, deserialized.Amount);
+        Assert.Equal(expectedCadence, deserialized.Cadence);
+        Assert.Equal(expectedCustomCurrencyID, deserialized.CustomCurrencyID);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new CreditEntitlement
+        {
+            Amount = 1,
+            Cadence = Cadence.Month,
+            CustomCurrencyID = "customCurrencyId",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CreditEntitlement
+        {
+            Amount = 1,
+            Cadence = Cadence.Month,
+            CustomCurrencyID = "customCurrencyId",
+        };
+
+        CreditEntitlement copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class CadenceTest : TestBase
+{
+    [Theory]
+    [InlineData(Cadence.Month)]
+    [InlineData(Cadence.Year)]
+    public void Validation_Works(Cadence rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Cadence> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Cadence>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(Cadence.Month)]
+    [InlineData(Cadence.Year)]
+    public void SerializationRoundtrip_Works(Cadence rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Cadence> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Cadence>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Cadence>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Cadence>>(
             json,
             ModelBase.SerializerOptions
         );
