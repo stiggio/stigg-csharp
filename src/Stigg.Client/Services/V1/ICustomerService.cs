@@ -121,6 +121,44 @@ public interface ICustomerService
     );
 
     /// <summary>
+    /// Retrieves a customer's contracts, fetched live from the connected billing
+    /// provider, each enriched with a preview of its upcoming (next) invoice when
+    /// available. Returns an empty list when no billing provider is connected or the
+    /// customer is not synced.
+    /// </summary>
+    Task<CustomerListContractsResponse> ListContracts(
+        CustomerListContractsParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="ListContracts(CustomerListContractsParams, CancellationToken)"/>
+    Task<CustomerListContractsResponse> ListContracts(
+        string id,
+        CustomerListContractsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Retrieves a cursor-paginated list of a customer's invoices, fetched live from
+    /// the connected billing provider. Ordered by issue date ascending by default;
+    /// override with orderBy (issueDate | dueDate | total) and orderDir (ASC | DESC).
+    /// Optionally narrowed to one contract, an issue-date range, and/or a set of
+    /// invoice states. Returns an empty list when no billing provider is connected or
+    /// the customer is not synced.
+    /// </summary>
+    Task<CustomerListInvoicesPage> ListInvoices(
+        CustomerListInvoicesParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="ListInvoices(CustomerListInvoicesParams, CancellationToken)"/>
+    Task<CustomerListInvoicesPage> ListInvoices(
+        string id,
+        CustomerListInvoicesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Retrieves a paginated list of resources within the same customer.
     /// </summary>
     Task<CustomerListResourcesPage> ListResources(
@@ -278,6 +316,38 @@ public interface ICustomerServiceWithRawResponse
     /// </summary>
     Task<HttpResponse<CustomerImportResponse>> Import(
         CustomerImportParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>get /api/v1/customers/{id}/contracts</c>, but is otherwise the
+    /// same as <see cref="ICustomerService.ListContracts(CustomerListContractsParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<CustomerListContractsResponse>> ListContracts(
+        CustomerListContractsParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="ListContracts(CustomerListContractsParams, CancellationToken)"/>
+    Task<HttpResponse<CustomerListContractsResponse>> ListContracts(
+        string id,
+        CustomerListContractsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns a raw HTTP response for <c>get /api/v1/customers/{id}/invoices</c>, but is otherwise the
+    /// same as <see cref="ICustomerService.ListInvoices(CustomerListInvoicesParams, CancellationToken)"/>.
+    /// </summary>
+    Task<HttpResponse<CustomerListInvoicesPage>> ListInvoices(
+        CustomerListInvoicesParams parameters,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <inheritdoc cref="ListInvoices(CustomerListInvoicesParams, CancellationToken)"/>
+    Task<HttpResponse<CustomerListInvoicesPage>> ListInvoices(
+        string id,
+        CustomerListInvoicesParams? parameters = null,
         CancellationToken cancellationToken = default
     );
 

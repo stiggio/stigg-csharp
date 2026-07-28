@@ -87,6 +87,28 @@ public class CustomerServiceTest : TestBase
     }
 
     [Fact(Skip = "Mock server tests are disabled")]
+    public async Task ListContracts_Works()
+    {
+        var response = await this.client.V1.Customers.ListContracts(
+            "id",
+            new(),
+            TestContext.Current.CancellationToken
+        );
+        response.Validate();
+    }
+
+    [Fact(Skip = "Mock server tests are disabled")]
+    public async Task ListInvoices_Works()
+    {
+        var page = await this.client.V1.Customers.ListInvoices(
+            "id",
+            new(),
+            TestContext.Current.CancellationToken
+        );
+        page.Validate();
+    }
+
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task ListResources_Works()
     {
         var page = await this.client.V1.Customers.ListResources(

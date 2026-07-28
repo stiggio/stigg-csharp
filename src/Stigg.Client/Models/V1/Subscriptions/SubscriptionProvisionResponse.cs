@@ -1997,6 +1997,19 @@ public sealed record class SubscriptionProvisionResponseDataSubscription : JsonM
     }
 
     /// <summary>
+    /// The Stigg contract this subscription is linked to, when any
+    /// </summary>
+    public string? ContractID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("contractId");
+        }
+        init { this._rawData.Set("contractId", value); }
+    }
+
+    /// <summary>
     /// Coupons applied to the subscription
     /// </summary>
     public IReadOnlyList<SubscriptionProvisionResponseDataSubscriptionCoupon>? Coupons
@@ -2302,6 +2315,7 @@ public sealed record class SubscriptionProvisionResponseDataSubscription : JsonM
         this.Budget?.Validate();
         _ = this.CancellationDate;
         this.CancelReason?.Validate();
+        _ = this.ContractID;
         foreach (var item in this.Coupons ?? [])
         {
             item.Validate();

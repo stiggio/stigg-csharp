@@ -31,6 +31,7 @@ public class SubscriptionListPageResponseTest : TestBase
                     Budget = new() { HasSoftLimit = true, Limit = 0 },
                     CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
+                    ContractID = "contractId",
                     Coupons =
                     [
                         new()
@@ -159,6 +160,7 @@ public class SubscriptionListPageResponseTest : TestBase
                 Budget = new() { HasSoftLimit = true, Limit = 0 },
                 CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
+                ContractID = "contractId",
                 Coupons =
                 [
                     new()
@@ -295,6 +297,7 @@ public class SubscriptionListPageResponseTest : TestBase
                     Budget = new() { HasSoftLimit = true, Limit = 0 },
                     CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
+                    ContractID = "contractId",
                     Coupons =
                     [
                         new()
@@ -437,6 +440,7 @@ public class SubscriptionListPageResponseTest : TestBase
                     Budget = new() { HasSoftLimit = true, Limit = 0 },
                     CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
+                    ContractID = "contractId",
                     Coupons =
                     [
                         new()
@@ -572,6 +576,7 @@ public class SubscriptionListPageResponseTest : TestBase
                 Budget = new() { HasSoftLimit = true, Limit = 0 },
                 CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
+                ContractID = "contractId",
                 Coupons =
                 [
                     new()
@@ -708,6 +713,7 @@ public class SubscriptionListPageResponseTest : TestBase
                     Budget = new() { HasSoftLimit = true, Limit = 0 },
                     CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
+                    ContractID = "contractId",
                     Coupons =
                     [
                         new()
@@ -844,6 +850,7 @@ public class SubscriptionListPageResponseTest : TestBase
                     Budget = new() { HasSoftLimit = true, Limit = 0 },
                     CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
+                    ContractID = "contractId",
                     Coupons =
                     [
                         new()
