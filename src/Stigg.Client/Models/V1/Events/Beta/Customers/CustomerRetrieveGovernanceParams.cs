@@ -73,7 +73,8 @@ public record class CustomerRetrieveGovernanceParams : ParamsBase
     }
 
     /// <summary>
-    /// Case-insensitive substring match on the entity id (`%`/`_` matched literally).
+    /// Case-insensitive substring match on the entity id or its display name (`%`/`_`
+    /// matched literally).
     /// </summary>
     public string? EntityIDSearch
     {

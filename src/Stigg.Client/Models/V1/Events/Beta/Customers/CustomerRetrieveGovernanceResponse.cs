@@ -131,6 +131,20 @@ public sealed record class Data : JsonModel
     }
 
     /// <summary>
+    /// Human-readable name of the entity, or null when none is set (display the entity
+    /// id instead).
+    /// </summary>
+    public required string? DisplayName
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("displayName");
+        }
+        init { this._rawData.Set("displayName", value); }
+    }
+
+    /// <summary>
     /// External id of the entity at this node.
     /// </summary>
     public required string EntityID
@@ -157,8 +171,10 @@ public sealed record class Data : JsonModel
     }
 
     /// <summary>
-    /// External id of the parent entity in the tree; `null` for a root. Use it to
-    /// rebuild the tree.
+    /// External id of the parent entity in the tree. `null` means the entity is
+    /// either a root or not yet placed in the hierarchy — placement rides on an assignment,
+    /// so an entity with no limits set has no parent yet. Both render at the top
+    /// level; use it to rebuild the tree.
     /// </summary>
     public required string? ParentID
     {
@@ -204,8 +220,9 @@ public sealed record class Data : JsonModel
     }
 
     /// <summary>
-    /// Exclusive end of the cadence period — when usage resets; `null` once the period
-    /// has rolled over.
+    /// Exclusive end of the cadence period in progress now — when usage resets. `null`
+    /// when the node has no usage configuration, or when a stored cadence cannot
+    /// be parsed.
     /// </summary>
     public required DateTimeOffset? UsagePeriodEnd
     {
@@ -218,8 +235,9 @@ public sealed record class Data : JsonModel
     }
 
     /// <summary>
-    /// Start of the cadence period the usage snapshot belongs to; `null` once the
-    /// period has rolled over.
+    /// Start of the cadence period in progress now, derived from the cadence and
+    /// the assignment anchor — it stays correct across a rollover. `null` when the
+    /// node has no usage configuration, or when a stored cadence cannot be parsed.
     /// </summary>
     public required DateTimeOffset? UsagePeriodStart
     {
@@ -292,6 +310,7 @@ public sealed record class Data : JsonModel
     {
         _ = this.Cadence;
         _ = this.CurrentUsage;
+        _ = this.DisplayName;
         _ = this.EntityID;
         _ = this.EntityTypeID;
         _ = this.ParentID;
