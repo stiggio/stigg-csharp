@@ -141,6 +141,19 @@ public sealed record class Data : JsonModel
     }
 
     /// <summary>
+    /// The current state of the contract
+    /// </summary>
+    public required ApiEnum<string, BillingState>? BillingState
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<ApiEnum<string, BillingState>>("billingState");
+        }
+        init { this._rawData.Set("billingState", value); }
+    }
+
+    /// <summary>
     /// The Stigg contract ref ID (the key used to fetch/update/delete this contract)
     /// </summary>
     public required string ContractID
@@ -300,6 +313,7 @@ public sealed record class Data : JsonModel
         _ = this.ActivationEndDate;
         _ = this.ActivationStartDate;
         _ = this.BillingID;
+        this.BillingState?.Validate();
         _ = this.ContractID;
         _ = this.CreatedAt;
         _ = this.CustomerExternalID;
@@ -349,6 +363,59 @@ class DataFromRaw : IFromRawJson<Data>
     /// <inheritdoc/>
     public Data FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Data.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// The current state of the contract
+/// </summary>
+[JsonConverter(typeof(BillingStateConverter))]
+public enum BillingState
+{
+    Draft,
+    Active,
+    Canceled,
+    EndBilling,
+}
+
+sealed class BillingStateConverter : JsonConverter<BillingState>
+{
+    public override BillingState Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "DRAFT" => BillingState.Draft,
+            "ACTIVE" => BillingState.Active,
+            "CANCELED" => BillingState.Canceled,
+            "END_BILLING" => BillingState.EndBilling,
+            _ => (BillingState)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        BillingState value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                BillingState.Draft => "DRAFT",
+                BillingState.Active => "ACTIVE",
+                BillingState.Canceled => "CANCELED",
+                BillingState.EndBilling => "END_BILLING",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }
 
 /// <summary>

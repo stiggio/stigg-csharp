@@ -18,6 +18,7 @@ public class ContractListResponseTest : TestBase
             ActivationEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ActivationStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             BillingID = "billingId",
+            BillingState = ContractListResponseBillingState.Draft,
             ContractID = "contractId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerExternalID = "customerExternalId",
@@ -66,6 +67,8 @@ public class ContractListResponseTest : TestBase
             "2019-12-27T18:11:19.117Z"
         );
         string expectedBillingID = "billingId";
+        ApiEnum<string, ContractListResponseBillingState> expectedBillingState =
+            ContractListResponseBillingState.Draft;
         string expectedContractID = "contractId";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCustomerExternalID = "customerExternalId";
@@ -111,6 +114,7 @@ public class ContractListResponseTest : TestBase
         Assert.Equal(expectedActivationEndDate, model.ActivationEndDate);
         Assert.Equal(expectedActivationStartDate, model.ActivationStartDate);
         Assert.Equal(expectedBillingID, model.BillingID);
+        Assert.Equal(expectedBillingState, model.BillingState);
         Assert.Equal(expectedContractID, model.ContractID);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedCustomerExternalID, model.CustomerExternalID);
@@ -137,6 +141,7 @@ public class ContractListResponseTest : TestBase
             ActivationEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ActivationStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             BillingID = "billingId",
+            BillingState = ContractListResponseBillingState.Draft,
             ContractID = "contractId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerExternalID = "customerExternalId",
@@ -197,6 +202,7 @@ public class ContractListResponseTest : TestBase
             ActivationEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ActivationStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             BillingID = "billingId",
+            BillingState = ContractListResponseBillingState.Draft,
             ContractID = "contractId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerExternalID = "customerExternalId",
@@ -252,6 +258,8 @@ public class ContractListResponseTest : TestBase
             "2019-12-27T18:11:19.117Z"
         );
         string expectedBillingID = "billingId";
+        ApiEnum<string, ContractListResponseBillingState> expectedBillingState =
+            ContractListResponseBillingState.Draft;
         string expectedContractID = "contractId";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCustomerExternalID = "customerExternalId";
@@ -297,6 +305,7 @@ public class ContractListResponseTest : TestBase
         Assert.Equal(expectedActivationEndDate, deserialized.ActivationEndDate);
         Assert.Equal(expectedActivationStartDate, deserialized.ActivationStartDate);
         Assert.Equal(expectedBillingID, deserialized.BillingID);
+        Assert.Equal(expectedBillingState, deserialized.BillingState);
         Assert.Equal(expectedContractID, deserialized.ContractID);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedCustomerExternalID, deserialized.CustomerExternalID);
@@ -323,6 +332,7 @@ public class ContractListResponseTest : TestBase
             ActivationEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ActivationStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             BillingID = "billingId",
+            BillingState = ContractListResponseBillingState.Draft,
             ContractID = "contractId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerExternalID = "customerExternalId",
@@ -377,6 +387,7 @@ public class ContractListResponseTest : TestBase
             ActivationEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ActivationStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             BillingID = "billingId",
+            BillingState = ContractListResponseBillingState.Draft,
             ContractID = "contractId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerExternalID = "customerExternalId",
@@ -422,6 +433,66 @@ public class ContractListResponseTest : TestBase
         ContractListResponse copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class ContractListResponseBillingStateTest : TestBase
+{
+    [Theory]
+    [InlineData(ContractListResponseBillingState.Draft)]
+    [InlineData(ContractListResponseBillingState.Active)]
+    [InlineData(ContractListResponseBillingState.Canceled)]
+    [InlineData(ContractListResponseBillingState.EndBilling)]
+    public void Validation_Works(ContractListResponseBillingState rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, ContractListResponseBillingState> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, ContractListResponseBillingState>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(ContractListResponseBillingState.Draft)]
+    [InlineData(ContractListResponseBillingState.Active)]
+    [InlineData(ContractListResponseBillingState.Canceled)]
+    [InlineData(ContractListResponseBillingState.EndBilling)]
+    public void SerializationRoundtrip_Works(ContractListResponseBillingState rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, ContractListResponseBillingState> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, ContractListResponseBillingState>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, ContractListResponseBillingState>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, ContractListResponseBillingState>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
     }
 }
 
