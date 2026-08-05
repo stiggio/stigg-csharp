@@ -33,6 +33,7 @@ public sealed class EventService : IEventService
 
         _withRawResponse = new(() => new EventServiceWithRawResponse(client.WithRawResponse));
         _dataExport = new(() => new DataExportService(client));
+        _beta = new(() => new BetaService(client));
     }
 
     readonly Lazy<IDataExportService> _dataExport;
@@ -41,14 +42,20 @@ public sealed class EventService : IEventService
         get { return _dataExport.Value; }
     }
 
+    readonly Lazy<IBetaService> _beta;
+    public IBetaService Beta
+    {
+        get { return _beta.Value; }
+    }
+
     /// <inheritdoc/>
-    public async Task<EventEstimateCostResponse> EstimateCost(
-        EventEstimateCostParams parameters,
+    public async Task<EventEstimateResponse> Estimate(
+        EventEstimateParams parameters,
         CancellationToken cancellationToken = default
     )
     {
         using var response = await this
-            .WithRawResponse.EstimateCost(parameters, cancellationToken)
+            .WithRawResponse.Estimate(parameters, cancellationToken)
             .ConfigureAwait(false);
         return await response.Deserialize(cancellationToken).ConfigureAwait(false);
     }
@@ -82,6 +89,7 @@ public sealed class EventServiceWithRawResponse : IEventServiceWithRawResponse
         _client = client;
 
         _dataExport = new(() => new DataExportServiceWithRawResponse(client));
+        _beta = new(() => new BetaServiceWithRawResponse(client));
     }
 
     readonly Lazy<IDataExportServiceWithRawResponse> _dataExport;
@@ -90,13 +98,19 @@ public sealed class EventServiceWithRawResponse : IEventServiceWithRawResponse
         get { return _dataExport.Value; }
     }
 
+    readonly Lazy<IBetaServiceWithRawResponse> _beta;
+    public IBetaServiceWithRawResponse Beta
+    {
+        get { return _beta.Value; }
+    }
+
     /// <inheritdoc/>
-    public async Task<HttpResponse<EventEstimateCostResponse>> EstimateCost(
-        EventEstimateCostParams parameters,
+    public async Task<HttpResponse<EventEstimateResponse>> Estimate(
+        EventEstimateParams parameters,
         CancellationToken cancellationToken = default
     )
     {
-        HttpRequest<EventEstimateCostParams> request = new()
+        HttpRequest<EventEstimateParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,
@@ -107,7 +121,7 @@ public sealed class EventServiceWithRawResponse : IEventServiceWithRawResponse
             async (token) =>
             {
                 var deserializedResponse = await response
-                    .Deserialize<EventEstimateCostResponse>(token)
+                    .Deserialize<EventEstimateResponse>(token)
                     .ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {

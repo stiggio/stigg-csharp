@@ -140,6 +140,20 @@ public sealed record class Data : JsonModel
     }
 
     /// <summary>
+    /// What this entity type represents and what it is for governing, or null when
+    /// none is set
+    /// </summary>
+    public required string? Description
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("description");
+        }
+        init { this._rawData.Set("description", value); }
+    }
+
+    /// <summary>
     /// The display name for the entity type
     /// </summary>
     public required string DisplayName
@@ -171,6 +185,7 @@ public sealed record class Data : JsonModel
         _ = this.ID;
         _ = this.AttributionKeys;
         _ = this.CreatedAt;
+        _ = this.Description;
         _ = this.DisplayName;
         _ = this.UpdatedAt;
     }

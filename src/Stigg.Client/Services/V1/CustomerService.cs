@@ -177,6 +177,54 @@ public sealed class CustomerService : ICustomerService
     }
 
     /// <inheritdoc/>
+    public async Task<CustomerListContractsResponse> ListContracts(
+        CustomerListContractsParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.ListContracts(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<CustomerListContractsResponse> ListContracts(
+        string id,
+        CustomerListContractsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.ListContracts(parameters with { ID = id }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<CustomerListInvoicesPage> ListInvoices(
+        CustomerListInvoicesParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.ListInvoices(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
+    public Task<CustomerListInvoicesPage> ListInvoices(
+        string id,
+        CustomerListInvoicesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.ListInvoices(parameters with { ID = id }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
     public async Task<CustomerListResourcesPage> ListResources(
         CustomerListResourcesParams parameters,
         CancellationToken cancellationToken = default
@@ -537,6 +585,96 @@ public sealed class CustomerServiceWithRawResponse : ICustomerServiceWithRawResp
                 return deserializedResponse;
             }
         );
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<CustomerListContractsResponse>> ListContracts(
+        CustomerListContractsParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.ID == null)
+        {
+            throw new StiggInvalidDataException("'parameters.ID' cannot be null");
+        }
+
+        HttpRequest<CustomerListContractsParams> request = new()
+        {
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var deserializedResponse = await response
+                    .Deserialize<CustomerListContractsResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    deserializedResponse.Validate();
+                }
+                return deserializedResponse;
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<CustomerListContractsResponse>> ListContracts(
+        string id,
+        CustomerListContractsParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.ListContracts(parameters with { ID = id }, cancellationToken);
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<CustomerListInvoicesPage>> ListInvoices(
+        CustomerListInvoicesParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (parameters.ID == null)
+        {
+            throw new StiggInvalidDataException("'parameters.ID' cannot be null");
+        }
+
+        HttpRequest<CustomerListInvoicesParams> request = new()
+        {
+            Method = HttpMethod.Get,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var page = await response
+                    .Deserialize<CustomerListInvoicesPageResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    page.Validate();
+                }
+                return new CustomerListInvoicesPage(this, parameters, page);
+            }
+        );
+    }
+
+    /// <inheritdoc/>
+    public Task<HttpResponse<CustomerListInvoicesPage>> ListInvoices(
+        string id,
+        CustomerListInvoicesParams? parameters = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        parameters ??= new();
+
+        return this.ListInvoices(parameters with { ID = id }, cancellationToken);
     }
 
     /// <inheritdoc/>

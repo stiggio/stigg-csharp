@@ -20,6 +20,7 @@ public class EntityUpsertResponseTest : TestBase
                     ID = "id",
                     ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DisplayName = "displayName",
                     EntityTypeID = "entityTypeId",
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -34,6 +35,7 @@ public class EntityUpsertResponseTest : TestBase
                 ID = "id",
                 ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DisplayName = "displayName",
                 EntityTypeID = "entityTypeId",
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -59,6 +61,7 @@ public class EntityUpsertResponseTest : TestBase
                     ID = "id",
                     ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DisplayName = "displayName",
                     EntityTypeID = "entityTypeId",
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -87,6 +90,7 @@ public class EntityUpsertResponseTest : TestBase
                     ID = "id",
                     ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DisplayName = "displayName",
                     EntityTypeID = "entityTypeId",
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -108,6 +112,7 @@ public class EntityUpsertResponseTest : TestBase
                 ID = "id",
                 ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                DisplayName = "displayName",
                 EntityTypeID = "entityTypeId",
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -133,6 +138,7 @@ public class EntityUpsertResponseTest : TestBase
                     ID = "id",
                     ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DisplayName = "displayName",
                     EntityTypeID = "entityTypeId",
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -155,6 +161,7 @@ public class EntityUpsertResponseTest : TestBase
                     ID = "id",
                     ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    DisplayName = "displayName",
                     EntityTypeID = "entityTypeId",
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -178,6 +185,7 @@ public class EntityUpsertResponseDataTest : TestBase
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DisplayName = "displayName",
             EntityTypeID = "entityTypeId",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -186,6 +194,7 @@ public class EntityUpsertResponseDataTest : TestBase
         string expectedID = "id";
         DateTimeOffset expectedArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedDisplayName = "displayName";
         string expectedEntityTypeID = "entityTypeId";
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -193,6 +202,7 @@ public class EntityUpsertResponseDataTest : TestBase
         Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedArchivedAt, model.ArchivedAt);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
+        Assert.Equal(expectedDisplayName, model.DisplayName);
         Assert.Equal(expectedEntityTypeID, model.EntityTypeID);
         Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
         foreach (var item in expectedMetadata)
@@ -212,6 +222,7 @@ public class EntityUpsertResponseDataTest : TestBase
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DisplayName = "displayName",
             EntityTypeID = "entityTypeId",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -234,6 +245,7 @@ public class EntityUpsertResponseDataTest : TestBase
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DisplayName = "displayName",
             EntityTypeID = "entityTypeId",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -249,6 +261,7 @@ public class EntityUpsertResponseDataTest : TestBase
         string expectedID = "id";
         DateTimeOffset expectedArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedDisplayName = "displayName";
         string expectedEntityTypeID = "entityTypeId";
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -256,6 +269,7 @@ public class EntityUpsertResponseDataTest : TestBase
         Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedArchivedAt, deserialized.ArchivedAt);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
+        Assert.Equal(expectedDisplayName, deserialized.DisplayName);
         Assert.Equal(expectedEntityTypeID, deserialized.EntityTypeID);
         Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
         foreach (var item in expectedMetadata)
@@ -275,6 +289,7 @@ public class EntityUpsertResponseDataTest : TestBase
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DisplayName = "displayName",
             EntityTypeID = "entityTypeId",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -291,6 +306,7 @@ public class EntityUpsertResponseDataTest : TestBase
             ID = "id",
             ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            DisplayName = "displayName",
             EntityTypeID = "entityTypeId",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),

@@ -160,7 +160,7 @@ public sealed record class GrantListResponse : JsonModel
     }
 
     /// <summary>
-    /// The type of credit grant (PAID, PROMOTIONAL, RECURRING)
+    /// The type of credit grant (PAID, PROMOTIONAL, RECURRING, OVERDRAFT)
     /// </summary>
     public required ApiEnum<string, GrantListResponseGrantType> GrantType
     {
@@ -483,7 +483,7 @@ class GrantListResponseCostFromRaw : IFromRawJson<GrantListResponseCost>
 }
 
 /// <summary>
-/// The type of credit grant (PAID, PROMOTIONAL, RECURRING)
+/// The type of credit grant (PAID, PROMOTIONAL, RECURRING, OVERDRAFT)
 /// </summary>
 [JsonConverter(typeof(GrantListResponseGrantTypeConverter))]
 public enum GrantListResponseGrantType

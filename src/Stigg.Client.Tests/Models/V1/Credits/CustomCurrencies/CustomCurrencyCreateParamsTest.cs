@@ -109,7 +109,7 @@ public class CustomCurrencyCreateParamsTest : TestBase
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://edge.api.stigg.io/api/v1/credits/custom-currencies"),
+                new Uri("https://api.stigg.io/api/v1/credits/custom-currencies"),
                 url
             )
         );

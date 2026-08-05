@@ -225,6 +225,20 @@ public sealed record class Entity : JsonModel
     }
 
     /// <summary>
+    /// Human-readable name for the entity. Omit to preserve the stored value, or
+    /// send an empty string or null to clear it.
+    /// </summary>
+    public string? DisplayName
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("displayName");
+        }
+        init { this._rawData.Set("displayName", value); }
+    }
+
+    /// <summary>
     /// The entity type ID this entity instantiates. Required when creating a new
     /// entity; on a re-upsert may be omitted to preserve the existing type. Governance
     /// returns 400 if missing on create.
@@ -276,6 +290,7 @@ public sealed record class Entity : JsonModel
     public override void Validate()
     {
         _ = this.ID;
+        _ = this.DisplayName;
         _ = this.EntityTypeID;
         _ = this.Metadata;
     }

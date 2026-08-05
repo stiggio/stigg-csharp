@@ -61,6 +61,7 @@ public class EntityServiceTest : TestBase
                     new()
                     {
                         ID = "user-7f3a0c1d",
+                        DisplayName = "Jane Doe",
                         EntityTypeID = "user",
                         Metadata = new Dictionary<string, string>()
                         {
@@ -71,6 +72,7 @@ public class EntityServiceTest : TestBase
                     new()
                     {
                         ID = "user-c4d1b2e9",
+                        DisplayName = "John Roe",
                         EntityTypeID = "user",
                         Metadata = new Dictionary<string, string>()
                         {

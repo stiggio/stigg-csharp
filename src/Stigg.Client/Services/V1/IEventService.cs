@@ -31,13 +31,15 @@ public interface IEventService
 
     IDataExportService DataExport { get; }
 
+    IBetaService Beta { get; }
+
     /// <summary>
     /// Estimates the credit cost of a usage event without ingesting it. Returns the
     /// estimated cost per credit currency, the current balance, and the balance after
     /// the estimated consumption.
     /// </summary>
-    Task<EventEstimateCostResponse> EstimateCost(
-        EventEstimateCostParams parameters,
+    Task<EventEstimateResponse> Estimate(
+        EventEstimateParams parameters,
         CancellationToken cancellationToken = default
     );
 
@@ -66,12 +68,14 @@ public interface IEventServiceWithRawResponse
 
     IDataExportServiceWithRawResponse DataExport { get; }
 
+    IBetaServiceWithRawResponse Beta { get; }
+
     /// <summary>
     /// Returns a raw HTTP response for <c>post /api/v1/events/estimate</c>, but is otherwise the
-    /// same as <see cref="IEventService.EstimateCost(EventEstimateCostParams, CancellationToken)"/>.
+    /// same as <see cref="IEventService.Estimate(EventEstimateParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<EventEstimateCostResponse>> EstimateCost(
-        EventEstimateCostParams parameters,
+    Task<HttpResponse<EventEstimateResponse>> Estimate(
+        EventEstimateParams parameters,
         CancellationToken cancellationToken = default
     );
 

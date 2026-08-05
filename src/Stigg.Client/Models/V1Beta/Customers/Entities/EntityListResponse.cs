@@ -54,6 +54,20 @@ public sealed record class EntityListResponse : JsonModel
     }
 
     /// <summary>
+    /// Human-readable name for the entity, or null when none is set — in which case
+    /// clients display the entity ID
+    /// </summary>
+    public required string? DisplayName
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("displayName");
+        }
+        init { this._rawData.Set("displayName", value); }
+    }
+
+    /// <summary>
     /// The entity type identifier this entity instantiates
     /// </summary>
     public required string EntityTypeID
@@ -104,6 +118,7 @@ public sealed record class EntityListResponse : JsonModel
         _ = this.ID;
         _ = this.ArchivedAt;
         _ = this.CreatedAt;
+        _ = this.DisplayName;
         _ = this.EntityTypeID;
         _ = this.Metadata;
         _ = this.UpdatedAt;

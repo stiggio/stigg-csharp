@@ -8,9 +8,9 @@ namespace Stigg.Client.Tests.Services.V1;
 public class EventServiceTest : TestBase
 {
     [Fact(Skip = "Mock server tests are disabled")]
-    public async Task EstimateCost_Works()
+    public async Task Estimate_Works()
     {
-        var response = await this.client.V1.Events.EstimateCost(
+        var response = await this.client.V1.Events.Estimate(
             new() { CustomerID = "customerId", EventName = "x" },
             TestContext.Current.CancellationToken
         );

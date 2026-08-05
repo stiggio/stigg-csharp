@@ -20,6 +20,7 @@ public class EntityTypeUpsertResponseTest : TestBase
                     ID = "id",
                     AttributionKeys = ["NxI"],
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Description = "description",
                     DisplayName = "x",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
@@ -33,6 +34,7 @@ public class EntityTypeUpsertResponseTest : TestBase
                 ID = "id",
                 AttributionKeys = ["NxI"],
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Description = "description",
                 DisplayName = "x",
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -57,6 +59,7 @@ public class EntityTypeUpsertResponseTest : TestBase
                     ID = "id",
                     AttributionKeys = ["NxI"],
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Description = "description",
                     DisplayName = "x",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
@@ -84,6 +87,7 @@ public class EntityTypeUpsertResponseTest : TestBase
                     ID = "id",
                     AttributionKeys = ["NxI"],
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Description = "description",
                     DisplayName = "x",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
@@ -104,6 +108,7 @@ public class EntityTypeUpsertResponseTest : TestBase
                 ID = "id",
                 AttributionKeys = ["NxI"],
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Description = "description",
                 DisplayName = "x",
                 UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -128,6 +133,7 @@ public class EntityTypeUpsertResponseTest : TestBase
                     ID = "id",
                     AttributionKeys = ["NxI"],
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Description = "description",
                     DisplayName = "x",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
@@ -149,6 +155,7 @@ public class EntityTypeUpsertResponseTest : TestBase
                     ID = "id",
                     AttributionKeys = ["NxI"],
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Description = "description",
                     DisplayName = "x",
                     UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
@@ -171,6 +178,7 @@ public class DataTest : TestBase
             ID = "id",
             AttributionKeys = ["NxI"],
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
             DisplayName = "x",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -178,6 +186,7 @@ public class DataTest : TestBase
         string expectedID = "id";
         List<string> expectedAttributionKeys = ["NxI"];
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedDescription = "description";
         string expectedDisplayName = "x";
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
@@ -188,6 +197,7 @@ public class DataTest : TestBase
             Assert.Equal(expectedAttributionKeys[i], model.AttributionKeys[i]);
         }
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
+        Assert.Equal(expectedDescription, model.Description);
         Assert.Equal(expectedDisplayName, model.DisplayName);
         Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
     }
@@ -200,6 +210,7 @@ public class DataTest : TestBase
             ID = "id",
             AttributionKeys = ["NxI"],
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
             DisplayName = "x",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -218,6 +229,7 @@ public class DataTest : TestBase
             ID = "id",
             AttributionKeys = ["NxI"],
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
             DisplayName = "x",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -229,6 +241,7 @@ public class DataTest : TestBase
         string expectedID = "id";
         List<string> expectedAttributionKeys = ["NxI"];
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedDescription = "description";
         string expectedDisplayName = "x";
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
@@ -239,6 +252,7 @@ public class DataTest : TestBase
             Assert.Equal(expectedAttributionKeys[i], deserialized.AttributionKeys[i]);
         }
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
+        Assert.Equal(expectedDescription, deserialized.Description);
         Assert.Equal(expectedDisplayName, deserialized.DisplayName);
         Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
     }
@@ -251,6 +265,7 @@ public class DataTest : TestBase
             ID = "id",
             AttributionKeys = ["NxI"],
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
             DisplayName = "x",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -266,6 +281,7 @@ public class DataTest : TestBase
             ID = "id",
             AttributionKeys = ["NxI"],
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Description = "description",
             DisplayName = "x",
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };

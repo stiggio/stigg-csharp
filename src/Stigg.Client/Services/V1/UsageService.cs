@@ -35,13 +35,13 @@ public sealed class UsageService : IUsageService
     }
 
     /// <inheritdoc/>
-    public async Task<UsageEstimateCostResponse> EstimateCost(
-        UsageEstimateCostParams parameters,
+    public async Task<UsageEstimateResponse> Estimate(
+        UsageEstimateParams parameters,
         CancellationToken cancellationToken = default
     )
     {
         using var response = await this
-            .WithRawResponse.EstimateCost(parameters, cancellationToken)
+            .WithRawResponse.Estimate(parameters, cancellationToken)
             .ConfigureAwait(false);
         return await response.Deserialize(cancellationToken).ConfigureAwait(false);
     }
@@ -98,12 +98,12 @@ public sealed class UsageServiceWithRawResponse : IUsageServiceWithRawResponse
     }
 
     /// <inheritdoc/>
-    public async Task<HttpResponse<UsageEstimateCostResponse>> EstimateCost(
-        UsageEstimateCostParams parameters,
+    public async Task<HttpResponse<UsageEstimateResponse>> Estimate(
+        UsageEstimateParams parameters,
         CancellationToken cancellationToken = default
     )
     {
-        HttpRequest<UsageEstimateCostParams> request = new()
+        HttpRequest<UsageEstimateParams> request = new()
         {
             Method = HttpMethod.Post,
             Params = parameters,
@@ -114,7 +114,7 @@ public sealed class UsageServiceWithRawResponse : IUsageServiceWithRawResponse
             async (token) =>
             {
                 var deserializedResponse = await response
-                    .Deserialize<UsageEstimateCostResponse>(token)
+                    .Deserialize<UsageEstimateResponse>(token)
                     .ConfigureAwait(false);
                 if (this._client.ResponseValidation)
                 {

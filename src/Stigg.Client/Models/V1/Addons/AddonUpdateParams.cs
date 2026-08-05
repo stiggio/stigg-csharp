@@ -1282,6 +1282,49 @@ public sealed record class OveragePricingModel : JsonModel
     }
 
     /// <summary>
+    /// Credit entitlement to grant when a credit overage targets a currency not
+    /// yet granted on the plan
+    /// </summary>
+    public CreditEntitlement? CreditEntitlement
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<CreditEntitlement>("creditEntitlement");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("creditEntitlement", value);
+        }
+    }
+
+    /// <summary>
+    /// The refId of the custom currency this credit overage applies to
+    /// </summary>
+    public string? CurrencyID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("currencyId");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("currencyId", value);
+        }
+    }
+
+    /// <summary>
     /// Entitlement configuration for the overage feature
     /// </summary>
     public Entitlement? Entitlement
@@ -1323,27 +1366,6 @@ public sealed record class OveragePricingModel : JsonModel
         }
     }
 
-    /// <summary>
-    /// Custom currency ID for overage top-up
-    /// </summary>
-    public string? TopUpCustomCurrencyID
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("topUpCustomCurrencyId");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("topUpCustomCurrencyId", value);
-        }
-    }
-
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -1353,9 +1375,10 @@ public sealed record class OveragePricingModel : JsonModel
             item.Validate();
         }
         this.BillingCadence?.Validate();
+        this.CreditEntitlement?.Validate();
+        _ = this.CurrencyID;
         this.Entitlement?.Validate();
         _ = this.FeatureID;
-        _ = this.TopUpCustomCurrencyID;
     }
 
     public OveragePricingModel() { }
@@ -3434,6 +3457,140 @@ sealed class BillingCadenceConverter : JsonConverter<BillingCadence>
             {
                 BillingCadence.Recurring => "RECURRING",
                 BillingCadence.OneOff => "ONE_OFF",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Credit entitlement to grant when a credit overage targets a currency not yet granted
+/// on the plan
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<CreditEntitlement, CreditEntitlementFromRaw>))]
+public sealed record class CreditEntitlement : JsonModel
+{
+    /// <summary>
+    /// The base credit balance granted per cadence
+    /// </summary>
+    public required double Amount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<double>("amount");
+        }
+        init { this._rawData.Set("amount", value); }
+    }
+
+    /// <summary>
+    /// The credit grant cadence (MONTH or YEAR)
+    /// </summary>
+    public required ApiEnum<string, Cadence> Cadence
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Cadence>>("cadence");
+        }
+        init { this._rawData.Set("cadence", value); }
+    }
+
+    /// <summary>
+    /// The refId of the custom currency to grant
+    /// </summary>
+    public required string CustomCurrencyID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("customCurrencyId");
+        }
+        init { this._rawData.Set("customCurrencyId", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.Amount;
+        this.Cadence.Validate();
+        _ = this.CustomCurrencyID;
+    }
+
+    public CreditEntitlement() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public CreditEntitlement(CreditEntitlement creditEntitlement)
+        : base(creditEntitlement) { }
+#pragma warning restore CS8618
+
+    public CreditEntitlement(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    CreditEntitlement(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="CreditEntitlementFromRaw.FromRawUnchecked"/>
+    public static CreditEntitlement FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class CreditEntitlementFromRaw : IFromRawJson<CreditEntitlement>
+{
+    /// <inheritdoc/>
+    public CreditEntitlement FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        CreditEntitlement.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// The credit grant cadence (MONTH or YEAR)
+/// </summary>
+[JsonConverter(typeof(CadenceConverter))]
+public enum Cadence
+{
+    Month,
+    Year,
+}
+
+sealed class CadenceConverter : JsonConverter<Cadence>
+{
+    public override Cadence Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "MONTH" => Cadence.Month,
+            "YEAR" => Cadence.Year,
+            _ => (Cadence)(-1),
+        };
+    }
+
+    public override void Write(Utf8JsonWriter writer, Cadence value, JsonSerializerOptions options)
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                Cadence.Month => "MONTH",
+                Cadence.Year => "YEAR",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

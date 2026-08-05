@@ -33,8 +33,8 @@ public interface IUsageService
     /// estimated cost per credit currency, the current balance, and the balance after
     /// the estimated consumption.
     /// </summary>
-    Task<UsageEstimateCostResponse> EstimateCost(
-        UsageEstimateCostParams parameters,
+    Task<UsageEstimateResponse> Estimate(
+        UsageEstimateParams parameters,
         CancellationToken cancellationToken = default
     );
 
@@ -78,10 +78,10 @@ public interface IUsageServiceWithRawResponse
 
     /// <summary>
     /// Returns a raw HTTP response for <c>post /api/v1/usage/estimate</c>, but is otherwise the
-    /// same as <see cref="IUsageService.EstimateCost(UsageEstimateCostParams, CancellationToken)"/>.
+    /// same as <see cref="IUsageService.Estimate(UsageEstimateParams, CancellationToken)"/>.
     /// </summary>
-    Task<HttpResponse<UsageEstimateCostResponse>> EstimateCost(
-        UsageEstimateCostParams parameters,
+    Task<HttpResponse<UsageEstimateResponse>> Estimate(
+        UsageEstimateParams parameters,
         CancellationToken cancellationToken = default
     );
 

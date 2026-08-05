@@ -1,13 +1,14 @@
 using System.Text.Json;
 using Stigg.Client.Exceptions;
-using Stigg.Client.Models.V1.Credits.CustomCurrencies;
 using Stigg.Client.Models.V1.Customers;
 using Stigg.Client.Models.V1.Events;
-using Stigg.Client.Models.V1Beta.Customers;
+using Stigg.Client.Models.V1.Events.Beta.Customers;
 using Stigg.Client.Models.V1Beta.Customers.Entities;
 using Addons = Stigg.Client.Models.V1.Addons;
+using Contracts = Stigg.Client.Models.V1.Contracts;
 using Coupons = Stigg.Client.Models.V1.Coupons;
 using Credits = Stigg.Client.Models.V1.Credits;
+using CustomCurrencies = Stigg.Client.Models.V1.Credits.CustomCurrencies;
 using CustomersEntitlements = Stigg.Client.Models.V1Beta.Customers.Entitlements;
 using Entitlements = Stigg.Client.Models.V1.Addons.Entitlements;
 using Features = Stigg.Client.Models.V1.Features;
@@ -56,6 +57,12 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, FeatureType>(),
             new ApiEnumConverter<string, ResetPeriod>(),
             new ApiEnumConverter<string, CreditAccessDeniedReason>(),
+            new ApiEnumConverter<string, BillingState>(),
+            new ApiEnumConverter<string, Status>(),
+            new ApiEnumConverter<string, BillingReason>(),
+            new ApiEnumConverter<string, AmountCurrency>(),
+            new ApiEnumConverter<string, State>(),
+            new ApiEnumConverter<string, CustomerListInvoicesResponseState>(),
             new ApiEnumConverter<
                 string,
                 CustomerRetrieveEntitlementsResponseDataAccessDeniedReason
@@ -69,6 +76,8 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, CouponID>(),
             new ApiEnumConverter<string, VendorIdentifier>(),
             new ApiEnumConverter<string, Currency>(),
+            new ApiEnumConverter<string, OrderBy>(),
+            new ApiEnumConverter<string, OrderDir>(),
             new ApiEnumConverter<string, CustomerProvisionParamsBillingCurrency>(),
             new ApiEnumConverter<string, CustomerProvisionParamsCouponID>(),
             new ApiEnumConverter<string, Type>(),
@@ -412,6 +421,9 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Coupons::Type>(),
             new ApiEnumConverter<string, WarningCode>(),
             new ApiEnumConverter<string, Warning>(),
+            new ApiEnumConverter<string, Order>(),
+            new ApiEnumConverter<string, Scope>(),
+            new ApiEnumConverter<string, SortBy>(),
             new ApiEnumConverter<string, Credits::GrantExpirationPeriod>(),
             new ApiEnumConverter<string, Credits::ThresholdType>(),
             new ApiEnumConverter<string, Credits::EventType>(),
@@ -435,7 +447,7 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Grants::GrantType>(),
             new ApiEnumConverter<string, Grants::Currency>(),
             new ApiEnumConverter<string, Grants::PaymentCollectionMethod>(),
-            new ApiEnumConverter<string, Status>(),
+            new ApiEnumConverter<string, CustomCurrencies::Status>(),
             new ApiEnumConverter<string, Features::DataFeatureStatus>(),
             new ApiEnumConverter<string, Features::DataFeatureType>(),
             new ApiEnumConverter<string, Features::DataMeterType>(),
@@ -487,6 +499,7 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Addons::FlatPriceCurrency>(),
             new ApiEnumConverter<string, Addons::UnitPriceCurrency>(),
             new ApiEnumConverter<string, Addons::BillingCadence>(),
+            new ApiEnumConverter<string, Addons::Cadence>(),
             new ApiEnumConverter<string, Addons::AccordingTo>(),
             new ApiEnumConverter<string, Addons::ResetPeriod>(),
             new ApiEnumConverter<string, Addons::WeeklyResetPeriodConfigurationAccordingTo>(),
@@ -667,6 +680,7 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Plans::FlatPriceCurrency>(),
             new ApiEnumConverter<string, Plans::UnitPriceCurrency>(),
             new ApiEnumConverter<string, Plans::BillingCadence>(),
+            new ApiEnumConverter<string, Plans::Cadence>(),
             new ApiEnumConverter<string, Plans::AccordingTo>(),
             new ApiEnumConverter<string, Plans::ResetPeriod>(),
             new ApiEnumConverter<string, Plans::WeeklyResetPeriodConfigurationAccordingTo>(),
@@ -843,9 +857,82 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Products::SubscriptionEndSetup>(),
             new ApiEnumConverter<string, Products::SubscriptionStartSetup>(),
             new ApiEnumConverter<string, Products::Behavior>(),
-            new ApiEnumConverter<string, Order>(),
-            new ApiEnumConverter<string, Scope>(),
-            new ApiEnumConverter<string, SortBy>(),
+            new ApiEnumConverter<string, Contracts::BillingState>(),
+            new ApiEnumConverter<string, Contracts::Status>(),
+            new ApiEnumConverter<string, Contracts::BillingReason>(),
+            new ApiEnumConverter<string, Contracts::AmountCurrency>(),
+            new ApiEnumConverter<string, Contracts::State>(),
+            new ApiEnumConverter<string, Contracts::ContractRetrieveResponseDataBillingState>(),
+            new ApiEnumConverter<
+                string,
+                Contracts::ContractRetrieveResponseDataLatestInvoiceStatus
+            >(),
+            new ApiEnumConverter<
+                string,
+                Contracts::ContractRetrieveResponseDataLatestInvoiceBillingReason
+            >(),
+            new ApiEnumConverter<
+                string,
+                Contracts::ContractRetrieveResponseDataNextInvoiceAmountCurrency
+            >(),
+            new ApiEnumConverter<string, Contracts::ContractRetrieveResponseDataState>(),
+            new ApiEnumConverter<string, Contracts::ContractUpdateResponseDataBillingState>(),
+            new ApiEnumConverter<
+                string,
+                Contracts::ContractUpdateResponseDataLatestInvoiceStatus
+            >(),
+            new ApiEnumConverter<
+                string,
+                Contracts::ContractUpdateResponseDataLatestInvoiceBillingReason
+            >(),
+            new ApiEnumConverter<
+                string,
+                Contracts::ContractUpdateResponseDataNextInvoiceAmountCurrency
+            >(),
+            new ApiEnumConverter<string, Contracts::ContractUpdateResponseDataState>(),
+            new ApiEnumConverter<string, Contracts::ContractListResponseBillingState>(),
+            new ApiEnumConverter<string, Contracts::ContractListResponseLatestInvoiceStatus>(),
+            new ApiEnumConverter<
+                string,
+                Contracts::ContractListResponseLatestInvoiceBillingReason
+            >(),
+            new ApiEnumConverter<
+                string,
+                Contracts::ContractListResponseNextInvoiceAmountCurrency
+            >(),
+            new ApiEnumConverter<string, Contracts::ContractListResponseState>(),
+            new ApiEnumConverter<string, Contracts::ContractDeleteResponseDataBillingState>(),
+            new ApiEnumConverter<
+                string,
+                Contracts::ContractDeleteResponseDataLatestInvoiceStatus
+            >(),
+            new ApiEnumConverter<
+                string,
+                Contracts::ContractDeleteResponseDataLatestInvoiceBillingReason
+            >(),
+            new ApiEnumConverter<
+                string,
+                Contracts::ContractDeleteResponseDataNextInvoiceAmountCurrency
+            >(),
+            new ApiEnumConverter<string, Contracts::ContractDeleteResponseDataState>(),
+            new ApiEnumConverter<string, Contracts::Currency>(),
+            new ApiEnumConverter<string, Contracts::BillingCycleAnchor>(),
+            new ApiEnumConverter<string, Contracts::ProrationBehavior>(),
+            new ApiEnumConverter<string, Contracts::BillingPeriod>(),
+            new ApiEnumConverter<string, Contracts::Type>(),
+            new ApiEnumConverter<string, Contracts::AccordingTo>(),
+            new ApiEnumConverter<string, Contracts::ResetPeriod>(),
+            new ApiEnumConverter<string, Contracts::WeeklyResetPeriodConfigurationAccordingTo>(),
+            new ApiEnumConverter<string, Contracts::YearlyResetPeriodConfigurationAccordingTo>(),
+            new ApiEnumConverter<string, Contracts::Cadence>(),
+            new ApiEnumConverter<string, Contracts::MinimumSpendCurrency>(),
+            new ApiEnumConverter<string, Contracts::PaymentCollectionMethod>(),
+            new ApiEnumConverter<string, Contracts::CreditGrantCadence>(),
+            new ApiEnumConverter<string, Contracts::PriceOverrideCurrency>(),
+            new ApiEnumConverter<string, Contracts::FlatPriceCurrency>(),
+            new ApiEnumConverter<string, Contracts::UnitPriceCurrency>(),
+            new ApiEnumConverter<string, Contracts::ScheduleStrategy>(),
+            new ApiEnumConverter<string, Contracts::TrialEndBehavior>(),
             new ApiEnumConverter<string, CustomersEntitlements::AccessDeniedReason>(),
             new ApiEnumConverter<string, CustomersEntitlements::FeatureStatus>(),
             new ApiEnumConverter<string, CustomersEntitlements::FeatureType>(),
