@@ -248,12 +248,27 @@ public sealed record class Type : JsonModel
         init { this._rawData.Set("displayName", value); }
     }
 
+    /// <summary>
+    /// What this entity type represents and what it is for governing. Omit to preserve
+    /// the stored value, or send an empty string or null to clear it.
+    /// </summary>
+    public string? Description
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("description");
+        }
+        init { this._rawData.Set("description", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ID;
         _ = this.AttributionKeys;
         _ = this.DisplayName;
+        _ = this.Description;
     }
 
     public Type() { }

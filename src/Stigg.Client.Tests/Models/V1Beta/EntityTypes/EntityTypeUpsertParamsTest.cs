@@ -21,12 +21,15 @@ public class EntityTypeUpsertParamsTest : TestBase
                     ID = "org",
                     AttributionKeys = ["organizationId"],
                     DisplayName = "Organization",
+                    Description =
+                        "A customer organization — the top of the hierarchy, holding the account-wide budget.",
                 },
                 new()
                 {
                     ID = "team",
                     AttributionKeys = ["teamId"],
                     DisplayName = "Team",
+                    Description = "description",
                 },
             ],
             XAccountID = "X-ACCOUNT-ID",
@@ -40,12 +43,15 @@ public class EntityTypeUpsertParamsTest : TestBase
                 ID = "org",
                 AttributionKeys = ["organizationId"],
                 DisplayName = "Organization",
+                Description =
+                    "A customer organization — the top of the hierarchy, holding the account-wide budget.",
             },
             new()
             {
                 ID = "team",
                 AttributionKeys = ["teamId"],
                 DisplayName = "Team",
+                Description = "description",
             },
         ];
         string expectedXAccountID = "X-ACCOUNT-ID";
@@ -72,12 +78,15 @@ public class EntityTypeUpsertParamsTest : TestBase
                     ID = "org",
                     AttributionKeys = ["organizationId"],
                     DisplayName = "Organization",
+                    Description =
+                        "A customer organization — the top of the hierarchy, holding the account-wide budget.",
                 },
                 new()
                 {
                     ID = "team",
                     AttributionKeys = ["teamId"],
                     DisplayName = "Team",
+                    Description = "description",
                 },
             ],
         };
@@ -100,12 +109,15 @@ public class EntityTypeUpsertParamsTest : TestBase
                     ID = "org",
                     AttributionKeys = ["organizationId"],
                     DisplayName = "Organization",
+                    Description =
+                        "A customer organization — the top of the hierarchy, holding the account-wide budget.",
                 },
                 new()
                 {
                     ID = "team",
                     AttributionKeys = ["teamId"],
                     DisplayName = "Team",
+                    Description = "description",
                 },
             ],
 
@@ -132,12 +144,15 @@ public class EntityTypeUpsertParamsTest : TestBase
                     ID = "org",
                     AttributionKeys = ["organizationId"],
                     DisplayName = "Organization",
+                    Description =
+                        "A customer organization — the top of the hierarchy, holding the account-wide budget.",
                 },
                 new()
                 {
                     ID = "team",
                     AttributionKeys = ["teamId"],
                     DisplayName = "Team",
+                    Description = "description",
                 },
             ],
         };
@@ -162,12 +177,15 @@ public class EntityTypeUpsertParamsTest : TestBase
                     ID = "org",
                     AttributionKeys = ["organizationId"],
                     DisplayName = "Organization",
+                    Description =
+                        "A customer organization — the top of the hierarchy, holding the account-wide budget.",
                 },
                 new()
                 {
                     ID = "team",
                     AttributionKeys = ["teamId"],
                     DisplayName = "Team",
+                    Description = "description",
                 },
             ],
             XAccountID = "X-ACCOUNT-ID",
@@ -192,12 +210,15 @@ public class EntityTypeUpsertParamsTest : TestBase
                     ID = "org",
                     AttributionKeys = ["organizationId"],
                     DisplayName = "Organization",
+                    Description =
+                        "A customer organization — the top of the hierarchy, holding the account-wide budget.",
                 },
                 new()
                 {
                     ID = "team",
                     AttributionKeys = ["teamId"],
                     DisplayName = "Team",
+                    Description = "description",
                 },
             ],
             XAccountID = "X-ACCOUNT-ID",
@@ -220,11 +241,13 @@ public class TypeTest : TestBase
             ID = "id",
             AttributionKeys = ["NxI"],
             DisplayName = "x",
+            Description = "description",
         };
 
         string expectedID = "id";
         List<string> expectedAttributionKeys = ["NxI"];
         string expectedDisplayName = "x";
+        string expectedDescription = "description";
 
         Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedAttributionKeys.Count, model.AttributionKeys.Count);
@@ -233,6 +256,7 @@ public class TypeTest : TestBase
             Assert.Equal(expectedAttributionKeys[i], model.AttributionKeys[i]);
         }
         Assert.Equal(expectedDisplayName, model.DisplayName);
+        Assert.Equal(expectedDescription, model.Description);
     }
 
     [Fact]
@@ -243,6 +267,7 @@ public class TypeTest : TestBase
             ID = "id",
             AttributionKeys = ["NxI"],
             DisplayName = "x",
+            Description = "description",
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -262,6 +287,7 @@ public class TypeTest : TestBase
             ID = "id",
             AttributionKeys = ["NxI"],
             DisplayName = "x",
+            Description = "description",
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -274,6 +300,7 @@ public class TypeTest : TestBase
         string expectedID = "id";
         List<string> expectedAttributionKeys = ["NxI"];
         string expectedDisplayName = "x";
+        string expectedDescription = "description";
 
         Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedAttributionKeys.Count, deserialized.AttributionKeys.Count);
@@ -282,6 +309,7 @@ public class TypeTest : TestBase
             Assert.Equal(expectedAttributionKeys[i], deserialized.AttributionKeys[i]);
         }
         Assert.Equal(expectedDisplayName, deserialized.DisplayName);
+        Assert.Equal(expectedDescription, deserialized.Description);
     }
 
     [Fact]
@@ -292,6 +320,65 @@ public class TypeTest : TestBase
             ID = "id",
             AttributionKeys = ["NxI"],
             DisplayName = "x",
+            Description = "description",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new EntityTypes::Type
+        {
+            ID = "id",
+            AttributionKeys = ["NxI"],
+            DisplayName = "x",
+        };
+
+        Assert.Null(model.Description);
+        Assert.False(model.RawData.ContainsKey("description"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new EntityTypes::Type
+        {
+            ID = "id",
+            AttributionKeys = ["NxI"],
+            DisplayName = "x",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new EntityTypes::Type
+        {
+            ID = "id",
+            AttributionKeys = ["NxI"],
+            DisplayName = "x",
+
+            Description = null,
+        };
+
+        Assert.Null(model.Description);
+        Assert.True(model.RawData.ContainsKey("description"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new EntityTypes::Type
+        {
+            ID = "id",
+            AttributionKeys = ["NxI"],
+            DisplayName = "x",
+
+            Description = null,
         };
 
         model.Validate();
@@ -305,6 +392,7 @@ public class TypeTest : TestBase
             ID = "id",
             AttributionKeys = ["NxI"],
             DisplayName = "x",
+            Description = "description",
         };
 
         EntityTypes::Type copied = new(model);

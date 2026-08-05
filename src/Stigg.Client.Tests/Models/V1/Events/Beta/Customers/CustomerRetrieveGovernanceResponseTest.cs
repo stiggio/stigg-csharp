@@ -19,6 +19,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
                 {
                     Cadence = "cadence",
                     CurrentUsage = 0,
+                    DisplayName = "displayName",
                     EntityID = "entityId",
                     EntityTypeID = "entityTypeId",
                     ParentID = "parentId",
@@ -40,6 +41,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
             {
                 Cadence = "cadence",
                 CurrentUsage = 0,
+                DisplayName = "displayName",
                 EntityID = "entityId",
                 EntityTypeID = "entityTypeId",
                 ParentID = "parentId",
@@ -73,6 +75,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
                 {
                     Cadence = "cadence",
                     CurrentUsage = 0,
+                    DisplayName = "displayName",
                     EntityID = "entityId",
                     EntityTypeID = "entityTypeId",
                     ParentID = "parentId",
@@ -108,6 +111,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
                 {
                     Cadence = "cadence",
                     CurrentUsage = 0,
+                    DisplayName = "displayName",
                     EntityID = "entityId",
                     EntityTypeID = "entityTypeId",
                     ParentID = "parentId",
@@ -136,6 +140,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
             {
                 Cadence = "cadence",
                 CurrentUsage = 0,
+                DisplayName = "displayName",
                 EntityID = "entityId",
                 EntityTypeID = "entityTypeId",
                 ParentID = "parentId",
@@ -169,6 +174,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
                 {
                     Cadence = "cadence",
                     CurrentUsage = 0,
+                    DisplayName = "displayName",
                     EntityID = "entityId",
                     EntityTypeID = "entityTypeId",
                     ParentID = "parentId",
@@ -198,6 +204,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
                 {
                     Cadence = "cadence",
                     CurrentUsage = 0,
+                    DisplayName = "displayName",
                     EntityID = "entityId",
                     EntityTypeID = "entityTypeId",
                     ParentID = "parentId",
@@ -228,6 +235,7 @@ public class DataTest : TestBase
         {
             Cadence = "cadence",
             CurrentUsage = 0,
+            DisplayName = "displayName",
             EntityID = "entityId",
             EntityTypeID = "entityTypeId",
             ParentID = "parentId",
@@ -242,6 +250,7 @@ public class DataTest : TestBase
 
         string expectedCadence = "cadence";
         double expectedCurrentUsage = 0;
+        string expectedDisplayName = "displayName";
         string expectedEntityID = "entityId";
         string expectedEntityTypeID = "entityTypeId";
         string expectedParentID = "parentId";
@@ -255,6 +264,7 @@ public class DataTest : TestBase
 
         Assert.Equal(expectedCadence, model.Cadence);
         Assert.Equal(expectedCurrentUsage, model.CurrentUsage);
+        Assert.Equal(expectedDisplayName, model.DisplayName);
         Assert.Equal(expectedEntityID, model.EntityID);
         Assert.Equal(expectedEntityTypeID, model.EntityTypeID);
         Assert.Equal(expectedParentID, model.ParentID);
@@ -278,6 +288,7 @@ public class DataTest : TestBase
         {
             Cadence = "cadence",
             CurrentUsage = 0,
+            DisplayName = "displayName",
             EntityID = "entityId",
             EntityTypeID = "entityTypeId",
             ParentID = "parentId",
@@ -303,6 +314,7 @@ public class DataTest : TestBase
         {
             Cadence = "cadence",
             CurrentUsage = 0,
+            DisplayName = "displayName",
             EntityID = "entityId",
             EntityTypeID = "entityTypeId",
             ParentID = "parentId",
@@ -321,6 +333,7 @@ public class DataTest : TestBase
 
         string expectedCadence = "cadence";
         double expectedCurrentUsage = 0;
+        string expectedDisplayName = "displayName";
         string expectedEntityID = "entityId";
         string expectedEntityTypeID = "entityTypeId";
         string expectedParentID = "parentId";
@@ -334,6 +347,7 @@ public class DataTest : TestBase
 
         Assert.Equal(expectedCadence, deserialized.Cadence);
         Assert.Equal(expectedCurrentUsage, deserialized.CurrentUsage);
+        Assert.Equal(expectedDisplayName, deserialized.DisplayName);
         Assert.Equal(expectedEntityID, deserialized.EntityID);
         Assert.Equal(expectedEntityTypeID, deserialized.EntityTypeID);
         Assert.Equal(expectedParentID, deserialized.ParentID);
@@ -357,6 +371,7 @@ public class DataTest : TestBase
         {
             Cadence = "cadence",
             CurrentUsage = 0,
+            DisplayName = "displayName",
             EntityID = "entityId",
             EntityTypeID = "entityTypeId",
             ParentID = "parentId",
@@ -379,6 +394,7 @@ public class DataTest : TestBase
         {
             Cadence = "cadence",
             CurrentUsage = 0,
+            DisplayName = "displayName",
             EntityID = "entityId",
             EntityTypeID = "entityTypeId",
             ParentID = "parentId",
@@ -402,6 +418,7 @@ public class DataTest : TestBase
         {
             Cadence = "cadence",
             CurrentUsage = 0,
+            DisplayName = "displayName",
             EntityID = "entityId",
             EntityTypeID = "entityTypeId",
             ParentID = "parentId",
@@ -422,6 +439,7 @@ public class DataTest : TestBase
         {
             Cadence = "cadence",
             CurrentUsage = 0,
+            DisplayName = "displayName",
             EntityID = "entityId",
             EntityTypeID = "entityTypeId",
             ParentID = "parentId",
@@ -449,6 +467,7 @@ public class DataTest : TestBase
         {
             Cadence = "cadence",
             CurrentUsage = 0,
+            DisplayName = "displayName",
             EntityID = "entityId",
             EntityTypeID = "entityTypeId",
             ParentID = "parentId",
@@ -473,6 +492,7 @@ public class DataTest : TestBase
         {
             Cadence = "cadence",
             CurrentUsage = 0,
+            DisplayName = "displayName",
             EntityID = "entityId",
             EntityTypeID = "entityTypeId",
             ParentID = "parentId",

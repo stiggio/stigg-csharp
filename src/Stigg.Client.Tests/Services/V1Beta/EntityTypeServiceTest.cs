@@ -27,12 +27,15 @@ public class EntityTypeServiceTest : TestBase
                         ID = "org",
                         AttributionKeys = ["organizationId"],
                         DisplayName = "Organization",
+                        Description =
+                            "A customer organization — the top of the hierarchy, holding the account-wide budget.",
                     },
                     new()
                     {
                         ID = "team",
                         AttributionKeys = ["teamId"],
                         DisplayName = "Team",
+                        Description = "description",
                     },
                 ],
             },
