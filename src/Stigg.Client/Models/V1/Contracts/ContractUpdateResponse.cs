@@ -143,6 +143,21 @@ public sealed record class ContractUpdateResponseData : JsonModel
     }
 
     /// <summary>
+    /// The current state of the contract
+    /// </summary>
+    public required ApiEnum<string, ContractUpdateResponseDataBillingState>? BillingState
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<
+                ApiEnum<string, ContractUpdateResponseDataBillingState>
+            >("billingState");
+        }
+        init { this._rawData.Set("billingState", value); }
+    }
+
+    /// <summary>
     /// The Stigg contract ref ID (the key used to fetch/update/delete this contract)
     /// </summary>
     public required string ContractID
@@ -308,6 +323,7 @@ public sealed record class ContractUpdateResponseData : JsonModel
         _ = this.ActivationEndDate;
         _ = this.ActivationStartDate;
         _ = this.BillingID;
+        this.BillingState?.Validate();
         _ = this.ContractID;
         _ = this.CreatedAt;
         _ = this.CustomerExternalID;
@@ -360,6 +376,60 @@ class ContractUpdateResponseDataFromRaw : IFromRawJson<ContractUpdateResponseDat
     public ContractUpdateResponseData FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => ContractUpdateResponseData.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// The current state of the contract
+/// </summary>
+[JsonConverter(typeof(ContractUpdateResponseDataBillingStateConverter))]
+public enum ContractUpdateResponseDataBillingState
+{
+    Draft,
+    Active,
+    Canceled,
+    EndBilling,
+}
+
+sealed class ContractUpdateResponseDataBillingStateConverter
+    : JsonConverter<ContractUpdateResponseDataBillingState>
+{
+    public override ContractUpdateResponseDataBillingState Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "DRAFT" => ContractUpdateResponseDataBillingState.Draft,
+            "ACTIVE" => ContractUpdateResponseDataBillingState.Active,
+            "CANCELED" => ContractUpdateResponseDataBillingState.Canceled,
+            "END_BILLING" => ContractUpdateResponseDataBillingState.EndBilling,
+            _ => (ContractUpdateResponseDataBillingState)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        ContractUpdateResponseDataBillingState value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                ContractUpdateResponseDataBillingState.Draft => "DRAFT",
+                ContractUpdateResponseDataBillingState.Active => "ACTIVE",
+                ContractUpdateResponseDataBillingState.Canceled => "CANCELED",
+                ContractUpdateResponseDataBillingState.EndBilling => "END_BILLING",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }
 
 /// <summary>

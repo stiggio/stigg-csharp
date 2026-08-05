@@ -20,6 +20,7 @@ public class ContractCreateResponseTest : TestBase
                 ActivationEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 ActivationStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 BillingID = "billingId",
+                BillingState = BillingState.Draft,
                 ContractID = "contractId",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomerExternalID = "customerExternalId",
@@ -65,6 +66,7 @@ public class ContractCreateResponseTest : TestBase
             ActivationEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ActivationStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             BillingID = "billingId",
+            BillingState = BillingState.Draft,
             ContractID = "contractId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerExternalID = "customerExternalId",
@@ -117,6 +119,7 @@ public class ContractCreateResponseTest : TestBase
                 ActivationEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 ActivationStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 BillingID = "billingId",
+                BillingState = BillingState.Draft,
                 ContractID = "contractId",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomerExternalID = "customerExternalId",
@@ -176,6 +179,7 @@ public class ContractCreateResponseTest : TestBase
                 ActivationEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 ActivationStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 BillingID = "billingId",
+                BillingState = BillingState.Draft,
                 ContractID = "contractId",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomerExternalID = "customerExternalId",
@@ -228,6 +232,7 @@ public class ContractCreateResponseTest : TestBase
             ActivationEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ActivationStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             BillingID = "billingId",
+            BillingState = BillingState.Draft,
             ContractID = "contractId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerExternalID = "customerExternalId",
@@ -280,6 +285,7 @@ public class ContractCreateResponseTest : TestBase
                 ActivationEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 ActivationStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 BillingID = "billingId",
+                BillingState = BillingState.Draft,
                 ContractID = "contractId",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomerExternalID = "customerExternalId",
@@ -333,6 +339,7 @@ public class ContractCreateResponseTest : TestBase
                 ActivationEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 ActivationStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 BillingID = "billingId",
+                BillingState = BillingState.Draft,
                 ContractID = "contractId",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 CustomerExternalID = "customerExternalId",
@@ -389,6 +396,7 @@ public class DataTest : TestBase
             ActivationEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ActivationStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             BillingID = "billingId",
+            BillingState = BillingState.Draft,
             ContractID = "contractId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerExternalID = "customerExternalId",
@@ -433,6 +441,7 @@ public class DataTest : TestBase
             "2019-12-27T18:11:19.117Z"
         );
         string expectedBillingID = "billingId";
+        ApiEnum<string, BillingState> expectedBillingState = BillingState.Draft;
         string expectedContractID = "contractId";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCustomerExternalID = "customerExternalId";
@@ -474,6 +483,7 @@ public class DataTest : TestBase
         Assert.Equal(expectedActivationEndDate, model.ActivationEndDate);
         Assert.Equal(expectedActivationStartDate, model.ActivationStartDate);
         Assert.Equal(expectedBillingID, model.BillingID);
+        Assert.Equal(expectedBillingState, model.BillingState);
         Assert.Equal(expectedContractID, model.ContractID);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedCustomerExternalID, model.CustomerExternalID);
@@ -500,6 +510,7 @@ public class DataTest : TestBase
             ActivationEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ActivationStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             BillingID = "billingId",
+            BillingState = BillingState.Draft,
             ContractID = "contractId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerExternalID = "customerExternalId",
@@ -553,6 +564,7 @@ public class DataTest : TestBase
             ActivationEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ActivationStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             BillingID = "billingId",
+            BillingState = BillingState.Draft,
             ContractID = "contractId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerExternalID = "customerExternalId",
@@ -601,6 +613,7 @@ public class DataTest : TestBase
             "2019-12-27T18:11:19.117Z"
         );
         string expectedBillingID = "billingId";
+        ApiEnum<string, BillingState> expectedBillingState = BillingState.Draft;
         string expectedContractID = "contractId";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedCustomerExternalID = "customerExternalId";
@@ -642,6 +655,7 @@ public class DataTest : TestBase
         Assert.Equal(expectedActivationEndDate, deserialized.ActivationEndDate);
         Assert.Equal(expectedActivationStartDate, deserialized.ActivationStartDate);
         Assert.Equal(expectedBillingID, deserialized.BillingID);
+        Assert.Equal(expectedBillingState, deserialized.BillingState);
         Assert.Equal(expectedContractID, deserialized.ContractID);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedCustomerExternalID, deserialized.CustomerExternalID);
@@ -668,6 +682,7 @@ public class DataTest : TestBase
             ActivationEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ActivationStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             BillingID = "billingId",
+            BillingState = BillingState.Draft,
             ContractID = "contractId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerExternalID = "customerExternalId",
@@ -718,6 +733,7 @@ public class DataTest : TestBase
             ActivationEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ActivationStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             BillingID = "billingId",
+            BillingState = BillingState.Draft,
             ContractID = "contractId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CustomerExternalID = "customerExternalId",
@@ -759,6 +775,68 @@ public class DataTest : TestBase
         Data copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class BillingStateTest : TestBase
+{
+    [Theory]
+    [InlineData(BillingState.Draft)]
+    [InlineData(BillingState.Active)]
+    [InlineData(BillingState.Canceled)]
+    [InlineData(BillingState.EndBilling)]
+    public void Validation_Works(BillingState rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, BillingState> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, BillingState>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(BillingState.Draft)]
+    [InlineData(BillingState.Active)]
+    [InlineData(BillingState.Canceled)]
+    [InlineData(BillingState.EndBilling)]
+    public void SerializationRoundtrip_Works(BillingState rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, BillingState> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, BillingState>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, BillingState>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, BillingState>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }
 

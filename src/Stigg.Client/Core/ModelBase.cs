@@ -57,6 +57,7 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, FeatureType>(),
             new ApiEnumConverter<string, ResetPeriod>(),
             new ApiEnumConverter<string, CreditAccessDeniedReason>(),
+            new ApiEnumConverter<string, BillingState>(),
             new ApiEnumConverter<string, Status>(),
             new ApiEnumConverter<string, BillingReason>(),
             new ApiEnumConverter<string, AmountCurrency>(),
@@ -856,10 +857,12 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Products::SubscriptionEndSetup>(),
             new ApiEnumConverter<string, Products::SubscriptionStartSetup>(),
             new ApiEnumConverter<string, Products::Behavior>(),
+            new ApiEnumConverter<string, Contracts::BillingState>(),
             new ApiEnumConverter<string, Contracts::Status>(),
             new ApiEnumConverter<string, Contracts::BillingReason>(),
             new ApiEnumConverter<string, Contracts::AmountCurrency>(),
             new ApiEnumConverter<string, Contracts::State>(),
+            new ApiEnumConverter<string, Contracts::ContractRetrieveResponseDataBillingState>(),
             new ApiEnumConverter<
                 string,
                 Contracts::ContractRetrieveResponseDataLatestInvoiceStatus
@@ -873,6 +876,7 @@ public abstract record class ModelBase
                 Contracts::ContractRetrieveResponseDataNextInvoiceAmountCurrency
             >(),
             new ApiEnumConverter<string, Contracts::ContractRetrieveResponseDataState>(),
+            new ApiEnumConverter<string, Contracts::ContractUpdateResponseDataBillingState>(),
             new ApiEnumConverter<
                 string,
                 Contracts::ContractUpdateResponseDataLatestInvoiceStatus
@@ -886,6 +890,7 @@ public abstract record class ModelBase
                 Contracts::ContractUpdateResponseDataNextInvoiceAmountCurrency
             >(),
             new ApiEnumConverter<string, Contracts::ContractUpdateResponseDataState>(),
+            new ApiEnumConverter<string, Contracts::ContractListResponseBillingState>(),
             new ApiEnumConverter<string, Contracts::ContractListResponseLatestInvoiceStatus>(),
             new ApiEnumConverter<
                 string,
@@ -896,6 +901,7 @@ public abstract record class ModelBase
                 Contracts::ContractListResponseNextInvoiceAmountCurrency
             >(),
             new ApiEnumConverter<string, Contracts::ContractListResponseState>(),
+            new ApiEnumConverter<string, Contracts::ContractDeleteResponseDataBillingState>(),
             new ApiEnumConverter<
                 string,
                 Contracts::ContractDeleteResponseDataLatestInvoiceStatus

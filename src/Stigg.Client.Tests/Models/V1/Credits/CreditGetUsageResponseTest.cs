@@ -28,12 +28,14 @@ public class CreditGetUsageResponseTest : TestBase
                 [
                     new()
                     {
+                        EventCount = 0,
                         FeatureID = "featureId",
                         FeatureName = "featureName",
                         Points =
                         [
                             new()
                             {
+                                EventCount = 0,
                                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                                 Value = 0,
                             },
@@ -60,12 +62,14 @@ public class CreditGetUsageResponseTest : TestBase
             [
                 new()
                 {
+                    EventCount = 0,
                     FeatureID = "featureId",
                     FeatureName = "featureName",
                     Points =
                     [
                         new()
                         {
+                            EventCount = 0,
                             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                             Value = 0,
                         },
@@ -99,12 +103,14 @@ public class CreditGetUsageResponseTest : TestBase
                 [
                     new()
                     {
+                        EventCount = 0,
                         FeatureID = "featureId",
                         FeatureName = "featureName",
                         Points =
                         [
                             new()
                             {
+                                EventCount = 0,
                                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                                 Value = 0,
                             },
@@ -145,12 +151,14 @@ public class CreditGetUsageResponseTest : TestBase
                 [
                     new()
                     {
+                        EventCount = 0,
                         FeatureID = "featureId",
                         FeatureName = "featureName",
                         Points =
                         [
                             new()
                             {
+                                EventCount = 0,
                                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                                 Value = 0,
                             },
@@ -184,12 +192,14 @@ public class CreditGetUsageResponseTest : TestBase
             [
                 new()
                 {
+                    EventCount = 0,
                     FeatureID = "featureId",
                     FeatureName = "featureName",
                     Points =
                     [
                         new()
                         {
+                            EventCount = 0,
                             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                             Value = 0,
                         },
@@ -223,12 +233,14 @@ public class CreditGetUsageResponseTest : TestBase
                 [
                     new()
                     {
+                        EventCount = 0,
                         FeatureID = "featureId",
                         FeatureName = "featureName",
                         Points =
                         [
                             new()
                             {
+                                EventCount = 0,
                                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                                 Value = 0,
                             },
@@ -263,12 +275,14 @@ public class CreditGetUsageResponseTest : TestBase
                 [
                     new()
                     {
+                        EventCount = 0,
                         FeatureID = "featureId",
                         FeatureName = "featureName",
                         Points =
                         [
                             new()
                             {
+                                EventCount = 0,
                                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                                 Value = 0,
                             },
@@ -306,12 +320,14 @@ public class CreditGetUsageResponseDataTest : TestBase
             [
                 new()
                 {
+                    EventCount = 0,
                     FeatureID = "featureId",
                     FeatureName = "featureName",
                     Points =
                     [
                         new()
                         {
+                            EventCount = 0,
                             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                             Value = 0,
                         },
@@ -335,12 +351,14 @@ public class CreditGetUsageResponseDataTest : TestBase
         [
             new()
             {
+                EventCount = 0,
                 FeatureID = "featureId",
                 FeatureName = "featureName",
                 Points =
                 [
                     new()
                     {
+                        EventCount = 0,
                         Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         Value = 0,
                     },
@@ -377,12 +395,14 @@ public class CreditGetUsageResponseDataTest : TestBase
             [
                 new()
                 {
+                    EventCount = 0,
                     FeatureID = "featureId",
                     FeatureName = "featureName",
                     Points =
                     [
                         new()
                         {
+                            EventCount = 0,
                             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                             Value = 0,
                         },
@@ -420,12 +440,14 @@ public class CreditGetUsageResponseDataTest : TestBase
             [
                 new()
                 {
+                    EventCount = 0,
                     FeatureID = "featureId",
                     FeatureName = "featureName",
                     Points =
                     [
                         new()
                         {
+                            EventCount = 0,
                             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                             Value = 0,
                         },
@@ -456,12 +478,14 @@ public class CreditGetUsageResponseDataTest : TestBase
         [
             new()
             {
+                EventCount = 0,
                 FeatureID = "featureId",
                 FeatureName = "featureName",
                 Points =
                 [
                     new()
                     {
+                        EventCount = 0,
                         Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         Value = 0,
                     },
@@ -498,12 +522,14 @@ public class CreditGetUsageResponseDataTest : TestBase
             [
                 new()
                 {
+                    EventCount = 0,
                     FeatureID = "featureId",
                     FeatureName = "featureName",
                     Points =
                     [
                         new()
                         {
+                            EventCount = 0,
                             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                             Value = 0,
                         },
@@ -535,12 +561,14 @@ public class CreditGetUsageResponseDataTest : TestBase
             [
                 new()
                 {
+                    EventCount = 0,
                     FeatureID = "featureId",
                     FeatureName = "featureName",
                     Points =
                     [
                         new()
                         {
+                            EventCount = 0,
                             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                             Value = 0,
                         },
@@ -740,25 +768,38 @@ public class SeriesTest : TestBase
     {
         var model = new Series
         {
+            EventCount = 0,
             FeatureID = "featureId",
             FeatureName = "featureName",
             Points =
             [
-                new() { Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"), Value = 0 },
+                new()
+                {
+                    EventCount = 0,
+                    Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Value = 0,
+                },
             ],
             TotalCredits = 0,
             Tags = [new() { Key = "key", Value = "value" }],
         };
 
+        double expectedEventCount = 0;
         string expectedFeatureID = "featureId";
         string expectedFeatureName = "featureName";
         List<Point> expectedPoints =
         [
-            new() { Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"), Value = 0 },
+            new()
+            {
+                EventCount = 0,
+                Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Value = 0,
+            },
         ];
         double expectedTotalCredits = 0;
         List<Tag> expectedTags = [new() { Key = "key", Value = "value" }];
 
+        Assert.Equal(expectedEventCount, model.EventCount);
         Assert.Equal(expectedFeatureID, model.FeatureID);
         Assert.Equal(expectedFeatureName, model.FeatureName);
         Assert.Equal(expectedPoints.Count, model.Points.Count);
@@ -780,11 +821,17 @@ public class SeriesTest : TestBase
     {
         var model = new Series
         {
+            EventCount = 0,
             FeatureID = "featureId",
             FeatureName = "featureName",
             Points =
             [
-                new() { Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"), Value = 0 },
+                new()
+                {
+                    EventCount = 0,
+                    Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Value = 0,
+                },
             ],
             TotalCredits = 0,
             Tags = [new() { Key = "key", Value = "value" }],
@@ -801,11 +848,17 @@ public class SeriesTest : TestBase
     {
         var model = new Series
         {
+            EventCount = 0,
             FeatureID = "featureId",
             FeatureName = "featureName",
             Points =
             [
-                new() { Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"), Value = 0 },
+                new()
+                {
+                    EventCount = 0,
+                    Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Value = 0,
+                },
             ],
             TotalCredits = 0,
             Tags = [new() { Key = "key", Value = "value" }],
@@ -815,15 +868,22 @@ public class SeriesTest : TestBase
         var deserialized = JsonSerializer.Deserialize<Series>(element, ModelBase.SerializerOptions);
         Assert.NotNull(deserialized);
 
+        double expectedEventCount = 0;
         string expectedFeatureID = "featureId";
         string expectedFeatureName = "featureName";
         List<Point> expectedPoints =
         [
-            new() { Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"), Value = 0 },
+            new()
+            {
+                EventCount = 0,
+                Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Value = 0,
+            },
         ];
         double expectedTotalCredits = 0;
         List<Tag> expectedTags = [new() { Key = "key", Value = "value" }];
 
+        Assert.Equal(expectedEventCount, deserialized.EventCount);
         Assert.Equal(expectedFeatureID, deserialized.FeatureID);
         Assert.Equal(expectedFeatureName, deserialized.FeatureName);
         Assert.Equal(expectedPoints.Count, deserialized.Points.Count);
@@ -845,11 +905,17 @@ public class SeriesTest : TestBase
     {
         var model = new Series
         {
+            EventCount = 0,
             FeatureID = "featureId",
             FeatureName = "featureName",
             Points =
             [
-                new() { Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"), Value = 0 },
+                new()
+                {
+                    EventCount = 0,
+                    Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Value = 0,
+                },
             ],
             TotalCredits = 0,
             Tags = [new() { Key = "key", Value = "value" }],
@@ -863,11 +929,17 @@ public class SeriesTest : TestBase
     {
         var model = new Series
         {
+            EventCount = 0,
             FeatureID = "featureId",
             FeatureName = "featureName",
             Points =
             [
-                new() { Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"), Value = 0 },
+                new()
+                {
+                    EventCount = 0,
+                    Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Value = 0,
+                },
             ],
             TotalCredits = 0,
         };
@@ -881,11 +953,17 @@ public class SeriesTest : TestBase
     {
         var model = new Series
         {
+            EventCount = 0,
             FeatureID = "featureId",
             FeatureName = "featureName",
             Points =
             [
-                new() { Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"), Value = 0 },
+                new()
+                {
+                    EventCount = 0,
+                    Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Value = 0,
+                },
             ],
             TotalCredits = 0,
         };
@@ -898,11 +976,17 @@ public class SeriesTest : TestBase
     {
         var model = new Series
         {
+            EventCount = 0,
             FeatureID = "featureId",
             FeatureName = "featureName",
             Points =
             [
-                new() { Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"), Value = 0 },
+                new()
+                {
+                    EventCount = 0,
+                    Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Value = 0,
+                },
             ],
             TotalCredits = 0,
 
@@ -919,11 +1003,17 @@ public class SeriesTest : TestBase
     {
         var model = new Series
         {
+            EventCount = 0,
             FeatureID = "featureId",
             FeatureName = "featureName",
             Points =
             [
-                new() { Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"), Value = 0 },
+                new()
+                {
+                    EventCount = 0,
+                    Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Value = 0,
+                },
             ],
             TotalCredits = 0,
 
@@ -939,11 +1029,17 @@ public class SeriesTest : TestBase
     {
         var model = new Series
         {
+            EventCount = 0,
             FeatureID = "featureId",
             FeatureName = "featureName",
             Points =
             [
-                new() { Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"), Value = 0 },
+                new()
+                {
+                    EventCount = 0,
+                    Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    Value = 0,
+                },
             ],
             TotalCredits = 0,
             Tags = [new() { Key = "key", Value = "value" }],
@@ -962,13 +1058,16 @@ public class PointTest : TestBase
     {
         var model = new Point
         {
+            EventCount = 0,
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Value = 0,
         };
 
+        double expectedEventCount = 0;
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         double expectedValue = 0;
 
+        Assert.Equal(expectedEventCount, model.EventCount);
         Assert.Equal(expectedTimestamp, model.Timestamp);
         Assert.Equal(expectedValue, model.Value);
     }
@@ -978,6 +1077,7 @@ public class PointTest : TestBase
     {
         var model = new Point
         {
+            EventCount = 0,
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Value = 0,
         };
@@ -993,6 +1093,7 @@ public class PointTest : TestBase
     {
         var model = new Point
         {
+            EventCount = 0,
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Value = 0,
         };
@@ -1001,9 +1102,11 @@ public class PointTest : TestBase
         var deserialized = JsonSerializer.Deserialize<Point>(element, ModelBase.SerializerOptions);
         Assert.NotNull(deserialized);
 
+        double expectedEventCount = 0;
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         double expectedValue = 0;
 
+        Assert.Equal(expectedEventCount, deserialized.EventCount);
         Assert.Equal(expectedTimestamp, deserialized.Timestamp);
         Assert.Equal(expectedValue, deserialized.Value);
     }
@@ -1013,6 +1116,7 @@ public class PointTest : TestBase
     {
         var model = new Point
         {
+            EventCount = 0,
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Value = 0,
         };
@@ -1025,6 +1129,7 @@ public class PointTest : TestBase
     {
         var model = new Point
         {
+            EventCount = 0,
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Value = 0,
         };
