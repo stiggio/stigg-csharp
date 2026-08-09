@@ -1,5 +1,46 @@
 # Changelog
 
+## 0.9.0 (2026-08-05)
+
+Full Changelog: [v0.8.0...v0.9.0](https://github.com/stiggio/stigg-csharp/compare/v0.8.0...v0.9.0)
+
+### Features
+
+* **api:** add consume/consumeAsync methods to credits consumption ([e757fac](https://github.com/stiggio/stigg-csharp/commit/e757fac28699b0ad3ccb13845c1b4cd9e3e61ced))
+* **api:** add consumed field to Credit model ([e2c083b](https://github.com/stiggio/stigg-csharp/commit/e2c083b73a4c6dcc050a14e20b9479759f78f290))
+* **api:** add consumption/estimate endpoints, move governance to v1-beta, update types ([8172de2](https://github.com/stiggio/stigg-csharp/commit/8172de20d60495d95ad0ab82fb4813b23aa8a0d7))
+* **api:** add CreditEntitlement field to overage pricing model in addons/plans ([e63627d](https://github.com/stiggio/stigg-csharp/commit/e63627d096a4aa8cda4607641e1404fbbbf7003d))
+* **api:** add DisplayName to entities, Description to entity types ([9b2cea4](https://github.com/stiggio/stigg-csharp/commit/9b2cea46b5825b7da1da60dde3253642b1b0a6b2))
+* **api:** add estimate endpoints to customers events and usage ([2d97ccc](https://github.com/stiggio/stigg-csharp/commit/2d97ccc873f6e8df3c4d6e3817d328a5784ff08b))
+* **api:** add EventCount to credit usage Series/Point models ([4ba3c89](https://github.com/stiggio/stigg-csharp/commit/4ba3c89a126bcb5c605552e37a7a79663b37c036))
+* **api:** add EventType parameter to credits list ledger method ([2ebb692](https://github.com/stiggio/stigg-csharp/commit/2ebb692994aa41849d047e7a4b2f0e63d70b8efa))
+* **api:** add featureId, rename capabilityId to currencyId in customer assignments list ([898d5a6](https://github.com/stiggio/stigg-csharp/commit/898d5a64a24c0b6ac9d4650924b5b59f88810b0f))
+* **api:** add IdempotencyKey parameter to usage report ([42d68a8](https://github.com/stiggio/stigg-csharp/commit/42d68a8ff080d5d96745fbfc54d282135d4697f9))
+* **api:** add syncStates field to credit grants responses ([e7c9023](https://github.com/stiggio/stigg-csharp/commit/e7c9023ec31888e8b92a6350286ba40cb2f6e770))
+* **contracts:** create contracts backed by shared Received enterprise contract ([650d331](https://github.com/stiggio/stigg-csharp/commit/650d3319ebd92695802741ffde6af6c4cf9ef2fa))
+* **STIGG-8091:** introduce Airwallex payment provider integration ([68b5377](https://github.com/stiggio/stigg-csharp/commit/68b5377d8950db813bcbf0918c3c4c5a2d2d3631))
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([a430e6b](https://github.com/stiggio/stigg-csharp/commit/a430e6b5032fe015e4793e7f177eccc33bf3ba22))
+* **types:** add StripeInvoicing to customer vendor identifier enums ([36c4160](https://github.com/stiggio/stigg-csharp/commit/36c41600572bc9fd6f708b5a1d6a0bfe92a5f859))
+
+
+### Bug Fixes
+
+* **client:** tolerate JSON null in required untyped fields and prefer more specific union variants ([98aae53](https://github.com/stiggio/stigg-csharp/commit/98aae538889e7c80ee71b76aa9770018b635f14c))
+* **types:** rename entity type fields to EntityTypeID in entity/governance models ([439d0cd](https://github.com/stiggio/stigg-csharp/commit/439d0cd472cbebac8094386b66ceb326c680bda8))
+
+
+### Chores
+
+* **internal:** regenerate SDK with no functional changes ([23871a2](https://github.com/stiggio/stigg-csharp/commit/23871a2e2680fe52a5e0b8ea9087d40e927195cd))
+* **internal:** regenerate SDK with no functional changes ([3785c98](https://github.com/stiggio/stigg-csharp/commit/3785c98b52d276fc4c913a27adfc6ecbbc1836a5))
+* **tests:** update MaxQuantity test fixtures in addons ([bc2fc97](https://github.com/stiggio/stigg-csharp/commit/bc2fc97ac4f46e77f932397c3dac70c59ca33759))
+
+
+### Documentation
+
+* **api:** update customers provision method description ([551433a](https://github.com/stiggio/stigg-csharp/commit/551433a0cc22eb8e37c53c1f49bbc1abde82826b))
+* **api:** update destination delete method documentation in data export ([4d73d47](https://github.com/stiggio/stigg-csharp/commit/4d73d47e0e805665a1ed81f08eebb60cc9a3157d))
+
 ## 0.8.0 (2026-06-28)
 
 Full Changelog: [v0.7.1...v0.8.0](https://github.com/stiggio/stigg-csharp/compare/v0.7.1...v0.8.0)
