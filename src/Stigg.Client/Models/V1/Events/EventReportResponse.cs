@@ -22,7 +22,7 @@ public sealed record class EventReportResponse : JsonModel
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<JsonElement>("data");
+            return this._rawData.GetNotAbsentElement("data");
         }
         init { this._rawData.Set("data", value); }
     }
