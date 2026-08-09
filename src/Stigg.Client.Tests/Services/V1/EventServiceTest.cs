@@ -8,6 +8,16 @@ namespace Stigg.Client.Tests.Services.V1;
 public class EventServiceTest : TestBase
 {
     [Fact(Skip = "Mock server tests are disabled")]
+    public async Task Estimate_Works()
+    {
+        var response = await this.client.V1.Events.Estimate(
+            new() { CustomerID = "customerId", EventName = "x" },
+            TestContext.Current.CancellationToken
+        );
+        response.Validate();
+    }
+
+    [Fact(Skip = "Mock server tests are disabled")]
     public async Task Report_Works()
     {
         var response = await this.client.V1.Events.Report(
@@ -20,7 +30,10 @@ public class EventServiceTest : TestBase
                         CustomerID = "customerId",
                         EventName = "x",
                         IdempotencyKey = "x",
-                        Dimensions = new Dictionary<string, Dimension>() { { "foo", "string" } },
+                        Dimensions = new Dictionary<string, EventDimension>()
+                        {
+                            { "foo", "string" },
+                        },
                         ResourceID = "resourceId",
                         Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     },

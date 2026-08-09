@@ -43,6 +43,8 @@ public interface IV1Service
     IUsageService Usage { get; }
 
     IProductService Products { get; }
+
+    IContractService Contracts { get; }
 }
 
 /// <summary>
@@ -77,4 +79,6 @@ public interface IV1ServiceWithRawResponse
     IUsageServiceWithRawResponse Usage { get; }
 
     IProductServiceWithRawResponse Products { get; }
+
+    IContractServiceWithRawResponse Contracts { get; }
 }

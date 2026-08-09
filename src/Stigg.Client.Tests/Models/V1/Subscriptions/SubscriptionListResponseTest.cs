@@ -28,6 +28,7 @@ public class SubscriptionListResponseTest : TestBase
             Budget = new() { HasSoftLimit = true, Limit = 0 },
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
+            ContractID = "contractId",
             Coupons =
             [
                 new()
@@ -145,6 +146,7 @@ public class SubscriptionListResponseTest : TestBase
         DateTimeOffset expectedCancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, SubscriptionListResponseCancelReason> expectedCancelReason =
             SubscriptionListResponseCancelReason.UpgradeOrDowngrade;
+        string expectedContractID = "contractId";
         List<SubscriptionListResponseCoupon> expectedCoupons =
         [
             new()
@@ -264,6 +266,7 @@ public class SubscriptionListResponseTest : TestBase
         Assert.Equal(expectedBudget, model.Budget);
         Assert.Equal(expectedCancellationDate, model.CancellationDate);
         Assert.Equal(expectedCancelReason, model.CancelReason);
+        Assert.Equal(expectedContractID, model.ContractID);
         Assert.NotNull(model.Coupons);
         Assert.Equal(expectedCoupons.Count, model.Coupons.Count);
         for (int i = 0; i < expectedCoupons.Count; i++)
@@ -328,6 +331,7 @@ public class SubscriptionListResponseTest : TestBase
             Budget = new() { HasSoftLimit = true, Limit = 0 },
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
+            ContractID = "contractId",
             Coupons =
             [
                 new()
@@ -453,6 +457,7 @@ public class SubscriptionListResponseTest : TestBase
             Budget = new() { HasSoftLimit = true, Limit = 0 },
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
+            ContractID = "contractId",
             Coupons =
             [
                 new()
@@ -577,6 +582,7 @@ public class SubscriptionListResponseTest : TestBase
         DateTimeOffset expectedCancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         ApiEnum<string, SubscriptionListResponseCancelReason> expectedCancelReason =
             SubscriptionListResponseCancelReason.UpgradeOrDowngrade;
+        string expectedContractID = "contractId";
         List<SubscriptionListResponseCoupon> expectedCoupons =
         [
             new()
@@ -696,6 +702,7 @@ public class SubscriptionListResponseTest : TestBase
         Assert.Equal(expectedBudget, deserialized.Budget);
         Assert.Equal(expectedCancellationDate, deserialized.CancellationDate);
         Assert.Equal(expectedCancelReason, deserialized.CancelReason);
+        Assert.Equal(expectedContractID, deserialized.ContractID);
         Assert.NotNull(deserialized.Coupons);
         Assert.Equal(expectedCoupons.Count, deserialized.Coupons.Count);
         for (int i = 0; i < expectedCoupons.Count; i++)
@@ -766,6 +773,7 @@ public class SubscriptionListResponseTest : TestBase
             Budget = new() { HasSoftLimit = true, Limit = 0 },
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
+            ContractID = "contractId",
             Coupons =
             [
                 new()
@@ -884,6 +892,7 @@ public class SubscriptionListResponseTest : TestBase
             Budget = new() { HasSoftLimit = true, Limit = 0 },
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
+            ContractID = "contractId",
             CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -944,6 +953,7 @@ public class SubscriptionListResponseTest : TestBase
             Budget = new() { HasSoftLimit = true, Limit = 0 },
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
+            ContractID = "contractId",
             CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -993,6 +1003,7 @@ public class SubscriptionListResponseTest : TestBase
             Budget = new() { HasSoftLimit = true, Limit = 0 },
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
+            ContractID = "contractId",
             CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1061,6 +1072,7 @@ public class SubscriptionListResponseTest : TestBase
             Budget = new() { HasSoftLimit = true, Limit = 0 },
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
+            ContractID = "contractId",
             CurrentBillingPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CurrentBillingPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EffectiveEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1194,6 +1206,8 @@ public class SubscriptionListResponseTest : TestBase
         Assert.False(model.RawData.ContainsKey("cancellationDate"));
         Assert.Null(model.CancelReason);
         Assert.False(model.RawData.ContainsKey("cancelReason"));
+        Assert.Null(model.ContractID);
+        Assert.False(model.RawData.ContainsKey("contractId"));
         Assert.Null(model.CurrentBillingPeriodEnd);
         Assert.False(model.RawData.ContainsKey("currentBillingPeriodEnd"));
         Assert.Null(model.CurrentBillingPeriodStart);
@@ -1396,6 +1410,7 @@ public class SubscriptionListResponseTest : TestBase
             Budget = null,
             CancellationDate = null,
             CancelReason = null,
+            ContractID = null,
             CurrentBillingPeriodEnd = null,
             CurrentBillingPeriodStart = null,
             EffectiveEndDate = null,
@@ -1417,6 +1432,8 @@ public class SubscriptionListResponseTest : TestBase
         Assert.True(model.RawData.ContainsKey("cancellationDate"));
         Assert.Null(model.CancelReason);
         Assert.True(model.RawData.ContainsKey("cancelReason"));
+        Assert.Null(model.ContractID);
+        Assert.True(model.RawData.ContainsKey("contractId"));
         Assert.Null(model.CurrentBillingPeriodEnd);
         Assert.True(model.RawData.ContainsKey("currentBillingPeriodEnd"));
         Assert.Null(model.CurrentBillingPeriodStart);
@@ -1530,6 +1547,7 @@ public class SubscriptionListResponseTest : TestBase
             Budget = null,
             CancellationDate = null,
             CancelReason = null,
+            ContractID = null,
             CurrentBillingPeriodEnd = null,
             CurrentBillingPeriodStart = null,
             EffectiveEndDate = null,
@@ -1565,6 +1583,7 @@ public class SubscriptionListResponseTest : TestBase
             Budget = new() { HasSoftLimit = true, Limit = 0 },
             CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             CancelReason = SubscriptionListResponseCancelReason.UpgradeOrDowngrade,
+            ContractID = "contractId",
             Coupons =
             [
                 new()

@@ -54,6 +54,33 @@ public sealed record class EntityListResponse : JsonModel
     }
 
     /// <summary>
+    /// Human-readable name for the entity, or null when none is set — in which case
+    /// clients display the entity ID
+    /// </summary>
+    public required string? DisplayName
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("displayName");
+        }
+        init { this._rawData.Set("displayName", value); }
+    }
+
+    /// <summary>
+    /// The entity type identifier this entity instantiates
+    /// </summary>
+    public required string EntityTypeID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("entityTypeId");
+        }
+        init { this._rawData.Set("entityTypeId", value); }
+    }
+
+    /// <summary>
     /// Free-form key/value metadata attached to the entity
     /// </summary>
     public required IReadOnlyDictionary<string, string> Metadata
@@ -70,19 +97,6 @@ public sealed record class EntityListResponse : JsonModel
                 FrozenDictionary.ToFrozenDictionary(value)
             );
         }
-    }
-
-    /// <summary>
-    /// The entity type identifier this entity instantiates
-    /// </summary>
-    public required string TypeID
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<string>("typeId");
-        }
-        init { this._rawData.Set("typeId", value); }
     }
 
     /// <summary>
@@ -104,8 +118,9 @@ public sealed record class EntityListResponse : JsonModel
         _ = this.ID;
         _ = this.ArchivedAt;
         _ = this.CreatedAt;
+        _ = this.DisplayName;
+        _ = this.EntityTypeID;
         _ = this.Metadata;
-        _ = this.TypeID;
         _ = this.UpdatedAt;
     }
 

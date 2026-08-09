@@ -1047,6 +1047,8 @@ public enum CustomerListResponseIntegrationVendorIdentifier
     AppStore,
     Received,
     Prequel,
+    Airwallex,
+    StripeInvoicing,
 }
 
 sealed class CustomerListResponseIntegrationVendorIdentifierConverter
@@ -1072,6 +1074,8 @@ sealed class CustomerListResponseIntegrationVendorIdentifierConverter
             "APP_STORE" => CustomerListResponseIntegrationVendorIdentifier.AppStore,
             "RECEIVED" => CustomerListResponseIntegrationVendorIdentifier.Received,
             "PREQUEL" => CustomerListResponseIntegrationVendorIdentifier.Prequel,
+            "AIRWALLEX" => CustomerListResponseIntegrationVendorIdentifier.Airwallex,
+            "STRIPE_INVOICING" => CustomerListResponseIntegrationVendorIdentifier.StripeInvoicing,
             _ => (CustomerListResponseIntegrationVendorIdentifier)(-1),
         };
     }
@@ -1098,6 +1102,9 @@ sealed class CustomerListResponseIntegrationVendorIdentifierConverter
                 CustomerListResponseIntegrationVendorIdentifier.AppStore => "APP_STORE",
                 CustomerListResponseIntegrationVendorIdentifier.Received => "RECEIVED",
                 CustomerListResponseIntegrationVendorIdentifier.Prequel => "PREQUEL",
+                CustomerListResponseIntegrationVendorIdentifier.Airwallex => "AIRWALLEX",
+                CustomerListResponseIntegrationVendorIdentifier.StripeInvoicing =>
+                    "STRIPE_INVOICING",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

@@ -382,6 +382,21 @@ class PaginationFromRaw : IFromRawJson<Pagination>
 public sealed record class Series : JsonModel
 {
     /// <summary>
+    /// Number of distinct usage events that consumed credits in this series. This
+    /// count is not additive across series, because an event matched by several
+    /// meters appears in more than one series.
+    /// </summary>
+    public required double EventCount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<double>("eventCount");
+        }
+        init { this._rawData.Set("eventCount", value); }
+    }
+
+    /// <summary>
     /// The feature ID; null when grouping by dimensions only
     /// </summary>
     public required string? FeatureID
@@ -466,6 +481,7 @@ public sealed record class Series : JsonModel
     /// <inheritdoc/>
     public override void Validate()
     {
+        _ = this.EventCount;
         _ = this.FeatureID;
         _ = this.FeatureName;
         foreach (var item in this.Points)
@@ -521,6 +537,19 @@ class SeriesFromRaw : IFromRawJson<Series>
 public sealed record class Point : JsonModel
 {
     /// <summary>
+    /// Number of distinct usage events that consumed credits in this time bucket
+    /// </summary>
+    public required double EventCount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<double>("eventCount");
+        }
+        init { this._rawData.Set("eventCount", value); }
+    }
+
+    /// <summary>
     /// The timestamp of the data point
     /// </summary>
     public required DateTimeOffset Timestamp
@@ -549,6 +578,7 @@ public sealed record class Point : JsonModel
     /// <inheritdoc/>
     public override void Validate()
     {
+        _ = this.EventCount;
         _ = this.Timestamp;
         _ = this.Value;
     }

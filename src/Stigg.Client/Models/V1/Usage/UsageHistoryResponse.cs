@@ -19,12 +19,12 @@ public sealed record class UsageHistoryResponse : JsonModel
     /// <summary>
     /// Historical usage time series
     /// </summary>
-    public required Data Data
+    public required UsageHistoryResponseData Data
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<Data>("data");
+            return this._rawData.GetNotNullClass<UsageHistoryResponseData>("data");
         }
         init { this._rawData.Set("data", value); }
     }
@@ -65,7 +65,7 @@ public sealed record class UsageHistoryResponse : JsonModel
     }
 
     [SetsRequiredMembers]
-    public UsageHistoryResponse(Data data)
+    public UsageHistoryResponse(UsageHistoryResponseData data)
         : this()
     {
         this.Data = data;
@@ -83,8 +83,10 @@ class UsageHistoryResponseFromRaw : IFromRawJson<UsageHistoryResponse>
 /// <summary>
 /// Historical usage time series
 /// </summary>
-[JsonConverter(typeof(JsonModelConverter<Data, DataFromRaw>))]
-public sealed record class Data : JsonModel
+[JsonConverter(
+    typeof(JsonModelConverter<UsageHistoryResponseData, UsageHistoryResponseDataFromRaw>)
+)]
+public sealed record class UsageHistoryResponseData : JsonModel
 {
     /// <summary>
     /// Markers for events that affecting feature usage
@@ -137,39 +139,42 @@ public sealed record class Data : JsonModel
         }
     }
 
-    public Data() { }
+    public UsageHistoryResponseData() { }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    public Data(Data data)
-        : base(data) { }
+    public UsageHistoryResponseData(UsageHistoryResponseData usageHistoryResponseData)
+        : base(usageHistoryResponseData) { }
 #pragma warning restore CS8618
 
-    public Data(IReadOnlyDictionary<string, JsonElement> rawData)
+    public UsageHistoryResponseData(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 
 #pragma warning disable CS8618
     [SetsRequiredMembers]
-    Data(FrozenDictionary<string, JsonElement> rawData)
+    UsageHistoryResponseData(FrozenDictionary<string, JsonElement> rawData)
     {
         this._rawData = new(rawData);
     }
 #pragma warning restore CS8618
 
-    /// <inheritdoc cref="DataFromRaw.FromRawUnchecked"/>
-    public static Data FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    /// <inheritdoc cref="UsageHistoryResponseDataFromRaw.FromRawUnchecked"/>
+    public static UsageHistoryResponseData FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
 }
 
-class DataFromRaw : IFromRawJson<Data>
+class UsageHistoryResponseDataFromRaw : IFromRawJson<UsageHistoryResponseData>
 {
     /// <inheritdoc/>
-    public Data FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
-        Data.FromRawUnchecked(rawData);
+    public UsageHistoryResponseData FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => UsageHistoryResponseData.FromRawUnchecked(rawData);
 }
 
 /// <summary>

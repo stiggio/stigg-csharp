@@ -13,8 +13,7 @@ using System = System;
 namespace Stigg.Client.Models.V1.Customers;
 
 /// <summary>
-/// Creates a new customer and optionally provisions an initial subscription in a
-/// single operation.
+/// Creates a new customer.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
@@ -1095,6 +1094,8 @@ public enum CustomerProvisionParamsIntegrationVendorIdentifier
     AppStore,
     Received,
     Prequel,
+    Airwallex,
+    StripeInvoicing,
 }
 
 sealed class CustomerProvisionParamsIntegrationVendorIdentifierConverter
@@ -1120,6 +1121,9 @@ sealed class CustomerProvisionParamsIntegrationVendorIdentifierConverter
             "APP_STORE" => CustomerProvisionParamsIntegrationVendorIdentifier.AppStore,
             "RECEIVED" => CustomerProvisionParamsIntegrationVendorIdentifier.Received,
             "PREQUEL" => CustomerProvisionParamsIntegrationVendorIdentifier.Prequel,
+            "AIRWALLEX" => CustomerProvisionParamsIntegrationVendorIdentifier.Airwallex,
+            "STRIPE_INVOICING" =>
+                CustomerProvisionParamsIntegrationVendorIdentifier.StripeInvoicing,
             _ => (CustomerProvisionParamsIntegrationVendorIdentifier)(-1),
         };
     }
@@ -1147,6 +1151,9 @@ sealed class CustomerProvisionParamsIntegrationVendorIdentifierConverter
                 CustomerProvisionParamsIntegrationVendorIdentifier.AppStore => "APP_STORE",
                 CustomerProvisionParamsIntegrationVendorIdentifier.Received => "RECEIVED",
                 CustomerProvisionParamsIntegrationVendorIdentifier.Prequel => "PREQUEL",
+                CustomerProvisionParamsIntegrationVendorIdentifier.Airwallex => "AIRWALLEX",
+                CustomerProvisionParamsIntegrationVendorIdentifier.StripeInvoicing =>
+                    "STRIPE_INVOICING",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

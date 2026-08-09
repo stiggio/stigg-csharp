@@ -219,6 +219,8 @@ public class IntegrationListResponseVendorIdentifierTest : TestBase
     [InlineData(IntegrationListResponseVendorIdentifier.AppStore)]
     [InlineData(IntegrationListResponseVendorIdentifier.Received)]
     [InlineData(IntegrationListResponseVendorIdentifier.Prequel)]
+    [InlineData(IntegrationListResponseVendorIdentifier.Airwallex)]
+    [InlineData(IntegrationListResponseVendorIdentifier.StripeInvoicing)]
     public void Validation_Works(IntegrationListResponseVendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -250,6 +252,8 @@ public class IntegrationListResponseVendorIdentifierTest : TestBase
     [InlineData(IntegrationListResponseVendorIdentifier.AppStore)]
     [InlineData(IntegrationListResponseVendorIdentifier.Received)]
     [InlineData(IntegrationListResponseVendorIdentifier.Prequel)]
+    [InlineData(IntegrationListResponseVendorIdentifier.Airwallex)]
+    [InlineData(IntegrationListResponseVendorIdentifier.StripeInvoicing)]
     public void SerializationRoundtrip_Works(IntegrationListResponseVendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us

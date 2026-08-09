@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -159,7 +160,7 @@ public sealed record class GrantListResponse : JsonModel
     }
 
     /// <summary>
-    /// The type of credit grant (PAID, PROMOTIONAL, RECURRING)
+    /// The type of credit grant (PAID, PROMOTIONAL, RECURRING, OVERDRAFT)
     /// </summary>
     public required ApiEnum<string, GrantListResponseGrantType> GrantType
     {
@@ -290,6 +291,27 @@ public sealed record class GrantListResponse : JsonModel
     }
 
     /// <summary>
+    /// The synchronization states of the entity with external systems
+    /// </summary>
+    public required IReadOnlyList<GrantListResponseSyncState>? SyncStates
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<GrantListResponseSyncState>>(
+                "syncStates"
+            );
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<GrantListResponseSyncState>?>(
+                "syncStates",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
     /// Timestamp of when the record was last updated
     /// </summary>
     public required DateTimeOffset UpdatedAt
@@ -338,6 +360,10 @@ public sealed record class GrantListResponse : JsonModel
         _ = this.ResourceID;
         this.SourceType?.Validate();
         this.Status.Validate();
+        foreach (var item in this.SyncStates ?? [])
+        {
+            item.Validate();
+        }
         _ = this.UpdatedAt;
         _ = this.VoidedAt;
     }
@@ -457,7 +483,7 @@ class GrantListResponseCostFromRaw : IFromRawJson<GrantListResponseCost>
 }
 
 /// <summary>
-/// The type of credit grant (PAID, PROMOTIONAL, RECURRING)
+/// The type of credit grant (PAID, PROMOTIONAL, RECURRING, OVERDRAFT)
 /// </summary>
 [JsonConverter(typeof(GrantListResponseGrantTypeConverter))]
 public enum GrantListResponseGrantType
@@ -1015,6 +1041,238 @@ sealed class GrantListResponseStatusConverter : JsonConverter<GrantListResponseS
                 GrantListResponseStatus.Expired => "EXPIRED",
                 GrantListResponseStatus.Voided => "VOIDED",
                 GrantListResponseStatus.Scheduled => "SCHEDULED",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+[JsonConverter(
+    typeof(JsonModelConverter<GrantListResponseSyncState, GrantListResponseSyncStateFromRaw>)
+)]
+public sealed record class GrantListResponseSyncState : JsonModel
+{
+    /// <summary>
+    /// Status of the integration sync
+    /// </summary>
+    public required ApiEnum<string, GrantListResponseSyncStateStatus> Status
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, GrantListResponseSyncStateStatus>>(
+                "status"
+            );
+        }
+        init { this._rawData.Set("status", value); }
+    }
+
+    /// <summary>
+    /// Synced entity id
+    /// </summary>
+    public required string? SyncedEntityID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("syncedEntityId");
+        }
+        init { this._rawData.Set("syncedEntityId", value); }
+    }
+
+    /// <summary>
+    /// The vendor identifier of integration
+    /// </summary>
+    public required ApiEnum<string, GrantListResponseSyncStateVendorIdentifier> VendorIdentifier
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, GrantListResponseSyncStateVendorIdentifier>
+            >("vendorIdentifier");
+        }
+        init { this._rawData.Set("vendorIdentifier", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        this.Status.Validate();
+        _ = this.SyncedEntityID;
+        this.VendorIdentifier.Validate();
+    }
+
+    public GrantListResponseSyncState() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public GrantListResponseSyncState(GrantListResponseSyncState grantListResponseSyncState)
+        : base(grantListResponseSyncState) { }
+#pragma warning restore CS8618
+
+    public GrantListResponseSyncState(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    GrantListResponseSyncState(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="GrantListResponseSyncStateFromRaw.FromRawUnchecked"/>
+    public static GrantListResponseSyncState FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class GrantListResponseSyncStateFromRaw : IFromRawJson<GrantListResponseSyncState>
+{
+    /// <inheritdoc/>
+    public GrantListResponseSyncState FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => GrantListResponseSyncState.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Status of the integration sync
+/// </summary>
+[JsonConverter(typeof(GrantListResponseSyncStateStatusConverter))]
+public enum GrantListResponseSyncStateStatus
+{
+    Pending,
+    Error,
+    Success,
+    NoSyncRequired,
+}
+
+sealed class GrantListResponseSyncStateStatusConverter
+    : JsonConverter<GrantListResponseSyncStateStatus>
+{
+    public override GrantListResponseSyncStateStatus Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "PENDING" => GrantListResponseSyncStateStatus.Pending,
+            "ERROR" => GrantListResponseSyncStateStatus.Error,
+            "SUCCESS" => GrantListResponseSyncStateStatus.Success,
+            "NO_SYNC_REQUIRED" => GrantListResponseSyncStateStatus.NoSyncRequired,
+            _ => (GrantListResponseSyncStateStatus)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        GrantListResponseSyncStateStatus value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                GrantListResponseSyncStateStatus.Pending => "PENDING",
+                GrantListResponseSyncStateStatus.Error => "ERROR",
+                GrantListResponseSyncStateStatus.Success => "SUCCESS",
+                GrantListResponseSyncStateStatus.NoSyncRequired => "NO_SYNC_REQUIRED",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// The vendor identifier of integration
+/// </summary>
+[JsonConverter(typeof(GrantListResponseSyncStateVendorIdentifierConverter))]
+public enum GrantListResponseSyncStateVendorIdentifier
+{
+    Auth0,
+    Zuora,
+    Stripe,
+    Hubspot,
+    AwsMarketplace,
+    Snowflake,
+    Salesforce,
+    BigQuery,
+    OpenFga,
+    AppStore,
+    Received,
+    Prequel,
+    Airwallex,
+    StripeInvoicing,
+}
+
+sealed class GrantListResponseSyncStateVendorIdentifierConverter
+    : JsonConverter<GrantListResponseSyncStateVendorIdentifier>
+{
+    public override GrantListResponseSyncStateVendorIdentifier Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "AUTH0" => GrantListResponseSyncStateVendorIdentifier.Auth0,
+            "ZUORA" => GrantListResponseSyncStateVendorIdentifier.Zuora,
+            "STRIPE" => GrantListResponseSyncStateVendorIdentifier.Stripe,
+            "HUBSPOT" => GrantListResponseSyncStateVendorIdentifier.Hubspot,
+            "AWS_MARKETPLACE" => GrantListResponseSyncStateVendorIdentifier.AwsMarketplace,
+            "SNOWFLAKE" => GrantListResponseSyncStateVendorIdentifier.Snowflake,
+            "SALESFORCE" => GrantListResponseSyncStateVendorIdentifier.Salesforce,
+            "BIG_QUERY" => GrantListResponseSyncStateVendorIdentifier.BigQuery,
+            "OPEN_FGA" => GrantListResponseSyncStateVendorIdentifier.OpenFga,
+            "APP_STORE" => GrantListResponseSyncStateVendorIdentifier.AppStore,
+            "RECEIVED" => GrantListResponseSyncStateVendorIdentifier.Received,
+            "PREQUEL" => GrantListResponseSyncStateVendorIdentifier.Prequel,
+            "AIRWALLEX" => GrantListResponseSyncStateVendorIdentifier.Airwallex,
+            "STRIPE_INVOICING" => GrantListResponseSyncStateVendorIdentifier.StripeInvoicing,
+            _ => (GrantListResponseSyncStateVendorIdentifier)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        GrantListResponseSyncStateVendorIdentifier value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                GrantListResponseSyncStateVendorIdentifier.Auth0 => "AUTH0",
+                GrantListResponseSyncStateVendorIdentifier.Zuora => "ZUORA",
+                GrantListResponseSyncStateVendorIdentifier.Stripe => "STRIPE",
+                GrantListResponseSyncStateVendorIdentifier.Hubspot => "HUBSPOT",
+                GrantListResponseSyncStateVendorIdentifier.AwsMarketplace => "AWS_MARKETPLACE",
+                GrantListResponseSyncStateVendorIdentifier.Snowflake => "SNOWFLAKE",
+                GrantListResponseSyncStateVendorIdentifier.Salesforce => "SALESFORCE",
+                GrantListResponseSyncStateVendorIdentifier.BigQuery => "BIG_QUERY",
+                GrantListResponseSyncStateVendorIdentifier.OpenFga => "OPEN_FGA",
+                GrantListResponseSyncStateVendorIdentifier.AppStore => "APP_STORE",
+                GrantListResponseSyncStateVendorIdentifier.Received => "RECEIVED",
+                GrantListResponseSyncStateVendorIdentifier.Prequel => "PREQUEL",
+                GrantListResponseSyncStateVendorIdentifier.Airwallex => "AIRWALLEX",
+                GrantListResponseSyncStateVendorIdentifier.StripeInvoicing => "STRIPE_INVOICING",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

@@ -131,7 +131,7 @@ public class PaymentMethodAttachParamsTest : TestBase
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://edge.api.stigg.io/api/v1/customers/x/payment-method"),
+                new Uri("https://api.stigg.io/api/v1/customers/x/payment-method"),
                 url
             )
         );
@@ -192,6 +192,8 @@ public class VendorIdentifierTest : TestBase
     [InlineData(VendorIdentifier.AppStore)]
     [InlineData(VendorIdentifier.Received)]
     [InlineData(VendorIdentifier.Prequel)]
+    [InlineData(VendorIdentifier.Airwallex)]
+    [InlineData(VendorIdentifier.StripeInvoicing)]
     public void Validation_Works(VendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -224,6 +226,8 @@ public class VendorIdentifierTest : TestBase
     [InlineData(VendorIdentifier.AppStore)]
     [InlineData(VendorIdentifier.Received)]
     [InlineData(VendorIdentifier.Prequel)]
+    [InlineData(VendorIdentifier.Airwallex)]
+    [InlineData(VendorIdentifier.StripeInvoicing)]
     public void SerializationRoundtrip_Works(VendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us

@@ -1,37 +1,26 @@
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using Stigg.Client.Models.V1.Events.DataExport.Destinations;
+using Stigg.Client.Models.V1.Contracts;
 
-namespace Stigg.Client.Tests.Models.V1.Events.DataExport.Destinations;
+namespace Stigg.Client.Tests.Models.V1.Contracts;
 
-public class DestinationUpdateParamsTest : TestBase
+public class ContractRetrieveParamsTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var parameters = new DestinationUpdateParams
+        var parameters = new ContractRetrieveParams
         {
-            DestinationID = "x",
-            EnabledModels = ["x"],
-            IntegrationID = "x",
+            ID = "x",
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
-        string expectedDestinationID = "x";
-        List<string> expectedEnabledModels = ["x"];
-        string expectedIntegrationID = "x";
+        string expectedID = "x";
         string expectedXAccountID = "X-ACCOUNT-ID";
         string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
-        Assert.Equal(expectedDestinationID, parameters.DestinationID);
-        Assert.Equal(expectedEnabledModels.Count, parameters.EnabledModels.Count);
-        for (int i = 0; i < expectedEnabledModels.Count; i++)
-        {
-            Assert.Equal(expectedEnabledModels[i], parameters.EnabledModels[i]);
-        }
-        Assert.Equal(expectedIntegrationID, parameters.IntegrationID);
+        Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedXAccountID, parameters.XAccountID);
         Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
@@ -39,12 +28,7 @@ public class DestinationUpdateParamsTest : TestBase
     [Fact]
     public void OptionalNonNullableParamsUnsetAreNotSet_Works()
     {
-        var parameters = new DestinationUpdateParams
-        {
-            DestinationID = "x",
-            EnabledModels = ["x"],
-            IntegrationID = "x",
-        };
+        var parameters = new ContractRetrieveParams { ID = "x" };
 
         Assert.Null(parameters.XAccountID);
         Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
@@ -55,11 +39,9 @@ public class DestinationUpdateParamsTest : TestBase
     [Fact]
     public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
     {
-        var parameters = new DestinationUpdateParams
+        var parameters = new ContractRetrieveParams
         {
-            DestinationID = "x",
-            EnabledModels = ["x"],
-            IntegrationID = "x",
+            ID = "x",
 
             // Null should be interpreted as omitted for these properties
             XAccountID = null,
@@ -75,32 +57,20 @@ public class DestinationUpdateParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        DestinationUpdateParams parameters = new()
-        {
-            DestinationID = "x",
-            EnabledModels = ["x"],
-            IntegrationID = "x",
-        };
+        ContractRetrieveParams parameters = new() { ID = "x" };
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
-        Assert.True(
-            TestBase.UrisEqual(
-                new Uri("https://edge.api.stigg.io/api/v1/data-export/destinations/x"),
-                url
-            )
-        );
+        Assert.True(TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/contracts/x"), url));
     }
 
     [Fact]
     public void AddHeadersToRequest_Works()
     {
         HttpRequestMessage requestMessage = new();
-        DestinationUpdateParams parameters = new()
+        ContractRetrieveParams parameters = new()
         {
-            DestinationID = "x",
-            EnabledModels = ["x"],
-            IntegrationID = "x",
+            ID = "x",
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",
         };
@@ -114,16 +84,14 @@ public class DestinationUpdateParamsTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var parameters = new DestinationUpdateParams
+        var parameters = new ContractRetrieveParams
         {
-            DestinationID = "x",
-            EnabledModels = ["x"],
-            IntegrationID = "x",
+            ID = "x",
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
-        DestinationUpdateParams copied = new(parameters);
+        ContractRetrieveParams copied = new(parameters);
 
         Assert.Equal(parameters, copied);
     }

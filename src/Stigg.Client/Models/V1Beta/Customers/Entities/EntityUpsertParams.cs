@@ -225,6 +225,43 @@ public sealed record class Entity : JsonModel
     }
 
     /// <summary>
+    /// Human-readable name for the entity. Omit to preserve the stored value, or
+    /// send an empty string or null to clear it.
+    /// </summary>
+    public string? DisplayName
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("displayName");
+        }
+        init { this._rawData.Set("displayName", value); }
+    }
+
+    /// <summary>
+    /// The entity type ID this entity instantiates. Required when creating a new
+    /// entity; on a re-upsert may be omitted to preserve the existing type. Governance
+    /// returns 400 if missing on create.
+    /// </summary>
+    public string? EntityTypeID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("entityTypeId");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("entityTypeId", value);
+        }
+    }
+
+    /// <summary>
     /// Free-form key/value metadata. Patch semantics: empty-string value removes
     /// a key, omitted keys are preserved.
     /// </summary>
@@ -249,35 +286,13 @@ public sealed record class Entity : JsonModel
         }
     }
 
-    /// <summary>
-    /// The entity type refId this entity instantiates. Required when creating a new
-    /// entity; on a re-upsert may be omitted to preserve the existing type. Governance
-    /// returns 400 if missing on create.
-    /// </summary>
-    public string? TypeRefID
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<string>("typeRefId");
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("typeRefId", value);
-        }
-    }
-
     /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.ID;
+        _ = this.DisplayName;
+        _ = this.EntityTypeID;
         _ = this.Metadata;
-        _ = this.TypeRefID;
     }
 
     public Entity() { }

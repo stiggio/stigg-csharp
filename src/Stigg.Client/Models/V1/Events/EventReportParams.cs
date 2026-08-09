@@ -241,12 +241,12 @@ public sealed record class Event : JsonModel
     /// <summary>
     /// Dimensions associated with the usage event
     /// </summary>
-    public IReadOnlyDictionary<string, Dimension>? Dimensions
+    public IReadOnlyDictionary<string, EventDimension>? Dimensions
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<FrozenDictionary<string, Dimension>>(
+            return this._rawData.GetNullableClass<FrozenDictionary<string, EventDimension>>(
                 "dimensions"
             );
         }
@@ -257,7 +257,7 @@ public sealed record class Event : JsonModel
                 return;
             }
 
-            this._rawData.Set<FrozenDictionary<string, Dimension>?>(
+            this._rawData.Set<FrozenDictionary<string, EventDimension>?>(
                 "dimensions",
                 value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
             );
@@ -350,8 +350,8 @@ class EventFromRaw : IFromRawJson<Event>
         Event.FromRawUnchecked(rawData);
 }
 
-[JsonConverter(typeof(DimensionConverter))]
-public record class Dimension : ModelBase
+[JsonConverter(typeof(EventDimensionConverter))]
+public record class EventDimension : ModelBase
 {
     public object? Value { get; } = null;
 
@@ -368,25 +368,25 @@ public record class Dimension : ModelBase
         }
     }
 
-    public Dimension(string value, JsonElement? element = null)
+    public EventDimension(string value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
     }
 
-    public Dimension(double value, JsonElement? element = null)
+    public EventDimension(double value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
     }
 
-    public Dimension(bool value, JsonElement? element = null)
+    public EventDimension(bool value, JsonElement? element = null)
     {
         this.Value = value;
         this._element = element;
     }
 
-    public Dimension(JsonElement element)
+    public EventDimension(JsonElement element)
     {
         this._element = element;
     }
@@ -489,7 +489,9 @@ public record class Dimension : ModelBase
                 @bool(value);
                 break;
             default:
-                throw new StiggInvalidDataException("Data did not match any variant of Dimension");
+                throw new StiggInvalidDataException(
+                    "Data did not match any variant of EventDimension"
+                );
         }
     }
 
@@ -522,15 +524,17 @@ public record class Dimension : ModelBase
             string value => @string(value),
             double value => @double(value),
             bool value => @bool(value),
-            _ => throw new StiggInvalidDataException("Data did not match any variant of Dimension"),
+            _ => throw new StiggInvalidDataException(
+                "Data did not match any variant of EventDimension"
+            ),
         };
     }
 
-    public static implicit operator Dimension(string value) => new(value);
+    public static implicit operator EventDimension(string value) => new(value);
 
-    public static implicit operator Dimension(double value) => new(value);
+    public static implicit operator EventDimension(double value) => new(value);
 
-    public static implicit operator Dimension(bool value) => new(value);
+    public static implicit operator EventDimension(bool value) => new(value);
 
     /// <summary>
     /// Validates that the instance was constructed with a known variant and that this variant is valid
@@ -546,11 +550,11 @@ public record class Dimension : ModelBase
     {
         if (this.Value == null)
         {
-            throw new StiggInvalidDataException("Data did not match any variant of Dimension");
+            throw new StiggInvalidDataException("Data did not match any variant of EventDimension");
         }
     }
 
-    public virtual bool Equals(Dimension? other) =>
+    public virtual bool Equals(EventDimension? other) =>
         other != null
         && this.VariantIndex() == other.VariantIndex()
         && JsonElement.DeepEquals(this.Json, other.Json);
@@ -578,9 +582,9 @@ public record class Dimension : ModelBase
     }
 }
 
-sealed class DimensionConverter : JsonConverter<Dimension>
+sealed class EventDimensionConverter : JsonConverter<EventDimension>
 {
-    public override Dimension? Read(
+    public override EventDimension? Read(
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options
@@ -623,7 +627,7 @@ sealed class DimensionConverter : JsonConverter<Dimension>
 
     public override void Write(
         Utf8JsonWriter writer,
-        Dimension value,
+        EventDimension value,
         JsonSerializerOptions options
     )
     {

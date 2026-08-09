@@ -49,6 +49,18 @@ public sealed class EventService : IEventService
     }
 
     /// <inheritdoc/>
+    public async Task<EventEstimateResponse> Estimate(
+        EventEstimateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        using var response = await this
+            .WithRawResponse.Estimate(parameters, cancellationToken)
+            .ConfigureAwait(false);
+        return await response.Deserialize(cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <inheritdoc/>
     public async Task<EventReportResponse> Report(
         EventReportParams parameters,
         CancellationToken cancellationToken = default
@@ -90,6 +102,34 @@ public sealed class EventServiceWithRawResponse : IEventServiceWithRawResponse
     public IBetaServiceWithRawResponse Beta
     {
         get { return _beta.Value; }
+    }
+
+    /// <inheritdoc/>
+    public async Task<HttpResponse<EventEstimateResponse>> Estimate(
+        EventEstimateParams parameters,
+        CancellationToken cancellationToken = default
+    )
+    {
+        HttpRequest<EventEstimateParams> request = new()
+        {
+            Method = HttpMethod.Post,
+            Params = parameters,
+        };
+        var response = await this._client.Execute(request, cancellationToken).ConfigureAwait(false);
+        return new(
+            response,
+            async (token) =>
+            {
+                var deserializedResponse = await response
+                    .Deserialize<EventEstimateResponse>(token)
+                    .ConfigureAwait(false);
+                if (this._client.ResponseValidation)
+                {
+                    deserializedResponse.Validate();
+                }
+                return deserializedResponse;
+            }
+        );
     }
 
     /// <inheritdoc/>

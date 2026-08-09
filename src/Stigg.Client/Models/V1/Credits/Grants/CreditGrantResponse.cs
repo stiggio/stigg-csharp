@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -228,7 +229,7 @@ public sealed record class Data : JsonModel
     }
 
     /// <summary>
-    /// The type of credit grant (PAID, PROMOTIONAL, RECURRING)
+    /// The type of credit grant (PAID, PROMOTIONAL, RECURRING, OVERDRAFT)
     /// </summary>
     public required ApiEnum<string, DataGrantType> GrantType
     {
@@ -353,6 +354,25 @@ public sealed record class Data : JsonModel
     }
 
     /// <summary>
+    /// The synchronization states of the entity with external systems
+    /// </summary>
+    public required IReadOnlyList<SyncState>? SyncStates
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<SyncState>>("syncStates");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<SyncState>?>(
+                "syncStates",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
     /// Timestamp of when the record was last updated
     /// </summary>
     public required DateTimeOffset UpdatedAt
@@ -401,6 +421,10 @@ public sealed record class Data : JsonModel
         _ = this.ResourceID;
         this.SourceType?.Validate();
         this.Status.Validate();
+        foreach (var item in this.SyncStates ?? [])
+        {
+            item.Validate();
+        }
         _ = this.UpdatedAt;
         _ = this.VoidedAt;
     }
@@ -515,7 +539,7 @@ class DataCostFromRaw : IFromRawJson<DataCost>
 }
 
 /// <summary>
-/// The type of credit grant (PAID, PROMOTIONAL, RECURRING)
+/// The type of credit grant (PAID, PROMOTIONAL, RECURRING, OVERDRAFT)
 /// </summary>
 [JsonConverter(typeof(DataGrantTypeConverter))]
 public enum DataGrantType
@@ -1052,6 +1076,229 @@ sealed class DataStatusConverter : JsonConverter<DataStatus>
                 DataStatus.Expired => "EXPIRED",
                 DataStatus.Voided => "VOIDED",
                 DataStatus.Scheduled => "SCHEDULED",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+[JsonConverter(typeof(JsonModelConverter<SyncState, SyncStateFromRaw>))]
+public sealed record class SyncState : JsonModel
+{
+    /// <summary>
+    /// Status of the integration sync
+    /// </summary>
+    public required ApiEnum<string, SyncStateStatus> Status
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, SyncStateStatus>>("status");
+        }
+        init { this._rawData.Set("status", value); }
+    }
+
+    /// <summary>
+    /// Synced entity id
+    /// </summary>
+    public required string? SyncedEntityID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("syncedEntityId");
+        }
+        init { this._rawData.Set("syncedEntityId", value); }
+    }
+
+    /// <summary>
+    /// The vendor identifier of integration
+    /// </summary>
+    public required ApiEnum<string, VendorIdentifier> VendorIdentifier
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, VendorIdentifier>>(
+                "vendorIdentifier"
+            );
+        }
+        init { this._rawData.Set("vendorIdentifier", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        this.Status.Validate();
+        _ = this.SyncedEntityID;
+        this.VendorIdentifier.Validate();
+    }
+
+    public SyncState() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public SyncState(SyncState syncState)
+        : base(syncState) { }
+#pragma warning restore CS8618
+
+    public SyncState(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    SyncState(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="SyncStateFromRaw.FromRawUnchecked"/>
+    public static SyncState FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class SyncStateFromRaw : IFromRawJson<SyncState>
+{
+    /// <inheritdoc/>
+    public SyncState FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        SyncState.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Status of the integration sync
+/// </summary>
+[JsonConverter(typeof(SyncStateStatusConverter))]
+public enum SyncStateStatus
+{
+    Pending,
+    Error,
+    Success,
+    NoSyncRequired,
+}
+
+sealed class SyncStateStatusConverter : JsonConverter<SyncStateStatus>
+{
+    public override SyncStateStatus Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "PENDING" => SyncStateStatus.Pending,
+            "ERROR" => SyncStateStatus.Error,
+            "SUCCESS" => SyncStateStatus.Success,
+            "NO_SYNC_REQUIRED" => SyncStateStatus.NoSyncRequired,
+            _ => (SyncStateStatus)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        SyncStateStatus value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                SyncStateStatus.Pending => "PENDING",
+                SyncStateStatus.Error => "ERROR",
+                SyncStateStatus.Success => "SUCCESS",
+                SyncStateStatus.NoSyncRequired => "NO_SYNC_REQUIRED",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// The vendor identifier of integration
+/// </summary>
+[JsonConverter(typeof(VendorIdentifierConverter))]
+public enum VendorIdentifier
+{
+    Auth0,
+    Zuora,
+    Stripe,
+    Hubspot,
+    AwsMarketplace,
+    Snowflake,
+    Salesforce,
+    BigQuery,
+    OpenFga,
+    AppStore,
+    Received,
+    Prequel,
+    Airwallex,
+    StripeInvoicing,
+}
+
+sealed class VendorIdentifierConverter : JsonConverter<VendorIdentifier>
+{
+    public override VendorIdentifier Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "AUTH0" => VendorIdentifier.Auth0,
+            "ZUORA" => VendorIdentifier.Zuora,
+            "STRIPE" => VendorIdentifier.Stripe,
+            "HUBSPOT" => VendorIdentifier.Hubspot,
+            "AWS_MARKETPLACE" => VendorIdentifier.AwsMarketplace,
+            "SNOWFLAKE" => VendorIdentifier.Snowflake,
+            "SALESFORCE" => VendorIdentifier.Salesforce,
+            "BIG_QUERY" => VendorIdentifier.BigQuery,
+            "OPEN_FGA" => VendorIdentifier.OpenFga,
+            "APP_STORE" => VendorIdentifier.AppStore,
+            "RECEIVED" => VendorIdentifier.Received,
+            "PREQUEL" => VendorIdentifier.Prequel,
+            "AIRWALLEX" => VendorIdentifier.Airwallex,
+            "STRIPE_INVOICING" => VendorIdentifier.StripeInvoicing,
+            _ => (VendorIdentifier)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        VendorIdentifier value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                VendorIdentifier.Auth0 => "AUTH0",
+                VendorIdentifier.Zuora => "ZUORA",
+                VendorIdentifier.Stripe => "STRIPE",
+                VendorIdentifier.Hubspot => "HUBSPOT",
+                VendorIdentifier.AwsMarketplace => "AWS_MARKETPLACE",
+                VendorIdentifier.Snowflake => "SNOWFLAKE",
+                VendorIdentifier.Salesforce => "SALESFORCE",
+                VendorIdentifier.BigQuery => "BIG_QUERY",
+                VendorIdentifier.OpenFga => "OPEN_FGA",
+                VendorIdentifier.AppStore => "APP_STORE",
+                VendorIdentifier.Received => "RECEIVED",
+                VendorIdentifier.Prequel => "PREQUEL",
+                VendorIdentifier.Airwallex => "AIRWALLEX",
+                VendorIdentifier.StripeInvoicing => "STRIPE_INVOICING",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

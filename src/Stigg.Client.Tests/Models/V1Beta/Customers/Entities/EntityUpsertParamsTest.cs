@@ -20,18 +20,20 @@ public class EntityUpsertParamsTest : TestBase
                 new()
                 {
                     ID = "user-7f3a0c1d",
+                    DisplayName = "Jane Doe",
+                    EntityTypeID = "user",
                     Metadata = new Dictionary<string, string>()
                     {
                         { "email", "jane@acme.com" },
                         { "role", "admin" },
                     },
-                    TypeRefID = "user",
                 },
                 new()
                 {
                     ID = "user-c4d1b2e9",
+                    DisplayName = "John Roe",
+                    EntityTypeID = "user",
                     Metadata = new Dictionary<string, string>() { { "email", "john@acme.com" } },
-                    TypeRefID = "user",
                 },
             ],
             XAccountID = "X-ACCOUNT-ID",
@@ -44,18 +46,20 @@ public class EntityUpsertParamsTest : TestBase
             new()
             {
                 ID = "user-7f3a0c1d",
+                DisplayName = "Jane Doe",
+                EntityTypeID = "user",
                 Metadata = new Dictionary<string, string>()
                 {
                     { "email", "jane@acme.com" },
                     { "role", "admin" },
                 },
-                TypeRefID = "user",
             },
             new()
             {
                 ID = "user-c4d1b2e9",
+                DisplayName = "John Roe",
+                EntityTypeID = "user",
                 Metadata = new Dictionary<string, string>() { { "email", "john@acme.com" } },
-                TypeRefID = "user",
             },
         ];
         string expectedXAccountID = "X-ACCOUNT-ID";
@@ -82,18 +86,20 @@ public class EntityUpsertParamsTest : TestBase
                 new()
                 {
                     ID = "user-7f3a0c1d",
+                    DisplayName = "Jane Doe",
+                    EntityTypeID = "user",
                     Metadata = new Dictionary<string, string>()
                     {
                         { "email", "jane@acme.com" },
                         { "role", "admin" },
                     },
-                    TypeRefID = "user",
                 },
                 new()
                 {
                     ID = "user-c4d1b2e9",
+                    DisplayName = "John Roe",
+                    EntityTypeID = "user",
                     Metadata = new Dictionary<string, string>() { { "email", "john@acme.com" } },
-                    TypeRefID = "user",
                 },
             ],
         };
@@ -115,18 +121,20 @@ public class EntityUpsertParamsTest : TestBase
                 new()
                 {
                     ID = "user-7f3a0c1d",
+                    DisplayName = "Jane Doe",
+                    EntityTypeID = "user",
                     Metadata = new Dictionary<string, string>()
                     {
                         { "email", "jane@acme.com" },
                         { "role", "admin" },
                     },
-                    TypeRefID = "user",
                 },
                 new()
                 {
                     ID = "user-c4d1b2e9",
+                    DisplayName = "John Roe",
+                    EntityTypeID = "user",
                     Metadata = new Dictionary<string, string>() { { "email", "john@acme.com" } },
-                    TypeRefID = "user",
                 },
             ],
 
@@ -152,18 +160,20 @@ public class EntityUpsertParamsTest : TestBase
                 new()
                 {
                     ID = "user-7f3a0c1d",
+                    DisplayName = "Jane Doe",
+                    EntityTypeID = "user",
                     Metadata = new Dictionary<string, string>()
                     {
                         { "email", "jane@acme.com" },
                         { "role", "admin" },
                     },
-                    TypeRefID = "user",
                 },
                 new()
                 {
                     ID = "user-c4d1b2e9",
+                    DisplayName = "John Roe",
+                    EntityTypeID = "user",
                     Metadata = new Dictionary<string, string>() { { "email", "john@acme.com" } },
-                    TypeRefID = "user",
                 },
             ],
         };
@@ -172,7 +182,7 @@ public class EntityUpsertParamsTest : TestBase
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://edge.api.stigg.io/api/v1-beta/customers/id/entities"),
+                new Uri("https://api.stigg.io/api/v1-beta/customers/id/entities"),
                 url
             )
         );
@@ -190,18 +200,20 @@ public class EntityUpsertParamsTest : TestBase
                 new()
                 {
                     ID = "user-7f3a0c1d",
+                    DisplayName = "Jane Doe",
+                    EntityTypeID = "user",
                     Metadata = new Dictionary<string, string>()
                     {
                         { "email", "jane@acme.com" },
                         { "role", "admin" },
                     },
-                    TypeRefID = "user",
                 },
                 new()
                 {
                     ID = "user-c4d1b2e9",
+                    DisplayName = "John Roe",
+                    EntityTypeID = "user",
                     Metadata = new Dictionary<string, string>() { { "email", "john@acme.com" } },
-                    TypeRefID = "user",
                 },
             ],
             XAccountID = "X-ACCOUNT-ID",
@@ -225,18 +237,20 @@ public class EntityUpsertParamsTest : TestBase
                 new()
                 {
                     ID = "user-7f3a0c1d",
+                    DisplayName = "Jane Doe",
+                    EntityTypeID = "user",
                     Metadata = new Dictionary<string, string>()
                     {
                         { "email", "jane@acme.com" },
                         { "role", "admin" },
                     },
-                    TypeRefID = "user",
                 },
                 new()
                 {
                     ID = "user-c4d1b2e9",
+                    DisplayName = "John Roe",
+                    EntityTypeID = "user",
                     Metadata = new Dictionary<string, string>() { { "email", "john@acme.com" } },
-                    TypeRefID = "user",
                 },
             ],
             XAccountID = "X-ACCOUNT-ID",
@@ -257,15 +271,19 @@ public class EntityTest : TestBase
         var model = new Entity
         {
             ID = "id",
+            DisplayName = "displayName",
+            EntityTypeID = "entityTypeId",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-            TypeRefID = "typeRefId",
         };
 
         string expectedID = "id";
+        string expectedDisplayName = "displayName";
+        string expectedEntityTypeID = "entityTypeId";
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
-        string expectedTypeRefID = "typeRefId";
 
         Assert.Equal(expectedID, model.ID);
+        Assert.Equal(expectedDisplayName, model.DisplayName);
+        Assert.Equal(expectedEntityTypeID, model.EntityTypeID);
         Assert.NotNull(model.Metadata);
         Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
         foreach (var item in expectedMetadata)
@@ -274,7 +292,6 @@ public class EntityTest : TestBase
 
             Assert.Equal(value, model.Metadata[item.Key]);
         }
-        Assert.Equal(expectedTypeRefID, model.TypeRefID);
     }
 
     [Fact]
@@ -283,8 +300,9 @@ public class EntityTest : TestBase
         var model = new Entity
         {
             ID = "id",
+            DisplayName = "displayName",
+            EntityTypeID = "entityTypeId",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-            TypeRefID = "typeRefId",
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -299,8 +317,9 @@ public class EntityTest : TestBase
         var model = new Entity
         {
             ID = "id",
+            DisplayName = "displayName",
+            EntityTypeID = "entityTypeId",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-            TypeRefID = "typeRefId",
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -308,10 +327,13 @@ public class EntityTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
+        string expectedDisplayName = "displayName";
+        string expectedEntityTypeID = "entityTypeId";
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
-        string expectedTypeRefID = "typeRefId";
 
         Assert.Equal(expectedID, deserialized.ID);
+        Assert.Equal(expectedDisplayName, deserialized.DisplayName);
+        Assert.Equal(expectedEntityTypeID, deserialized.EntityTypeID);
         Assert.NotNull(deserialized.Metadata);
         Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
         foreach (var item in expectedMetadata)
@@ -320,7 +342,6 @@ public class EntityTest : TestBase
 
             Assert.Equal(value, deserialized.Metadata[item.Key]);
         }
-        Assert.Equal(expectedTypeRefID, deserialized.TypeRefID);
     }
 
     [Fact]
@@ -329,8 +350,9 @@ public class EntityTest : TestBase
         var model = new Entity
         {
             ID = "id",
+            DisplayName = "displayName",
+            EntityTypeID = "entityTypeId",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-            TypeRefID = "typeRefId",
         };
 
         model.Validate();
@@ -339,18 +361,18 @@ public class EntityTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Entity { ID = "id" };
+        var model = new Entity { ID = "id", DisplayName = "displayName" };
 
+        Assert.Null(model.EntityTypeID);
+        Assert.False(model.RawData.ContainsKey("entityTypeId"));
         Assert.Null(model.Metadata);
         Assert.False(model.RawData.ContainsKey("metadata"));
-        Assert.Null(model.TypeRefID);
-        Assert.False(model.RawData.ContainsKey("typeRefId"));
     }
 
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Entity { ID = "id" };
+        var model = new Entity { ID = "id", DisplayName = "displayName" };
 
         model.Validate();
     }
@@ -361,16 +383,17 @@ public class EntityTest : TestBase
         var model = new Entity
         {
             ID = "id",
+            DisplayName = "displayName",
 
             // Null should be interpreted as omitted for these properties
+            EntityTypeID = null,
             Metadata = null,
-            TypeRefID = null,
         };
 
+        Assert.Null(model.EntityTypeID);
+        Assert.False(model.RawData.ContainsKey("entityTypeId"));
         Assert.Null(model.Metadata);
         Assert.False(model.RawData.ContainsKey("metadata"));
-        Assert.Null(model.TypeRefID);
-        Assert.False(model.RawData.ContainsKey("typeRefId"));
     }
 
     [Fact]
@@ -379,10 +402,69 @@ public class EntityTest : TestBase
         var model = new Entity
         {
             ID = "id",
+            DisplayName = "displayName",
 
             // Null should be interpreted as omitted for these properties
+            EntityTypeID = null,
             Metadata = null,
-            TypeRefID = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new Entity
+        {
+            ID = "id",
+            EntityTypeID = "entityTypeId",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+        };
+
+        Assert.Null(model.DisplayName);
+        Assert.False(model.RawData.ContainsKey("displayName"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new Entity
+        {
+            ID = "id",
+            EntityTypeID = "entityTypeId",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new Entity
+        {
+            ID = "id",
+            EntityTypeID = "entityTypeId",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+
+            DisplayName = null,
+        };
+
+        Assert.Null(model.DisplayName);
+        Assert.True(model.RawData.ContainsKey("displayName"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new Entity
+        {
+            ID = "id",
+            EntityTypeID = "entityTypeId",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+
+            DisplayName = null,
         };
 
         model.Validate();
@@ -394,8 +476,9 @@ public class EntityTest : TestBase
         var model = new Entity
         {
             ID = "id",
+            DisplayName = "displayName",
+            EntityTypeID = "entityTypeId",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-            TypeRefID = "typeRefId",
         };
 
         Entity copied = new(model);
