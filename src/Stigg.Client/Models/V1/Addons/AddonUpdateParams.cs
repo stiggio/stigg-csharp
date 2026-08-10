@@ -1227,19 +1227,6 @@ sealed class OverageBillingPeriodConverter : JsonConverter<OverageBillingPeriod>
 public sealed record class OveragePricingModel : JsonModel
 {
     /// <summary>
-    /// The billing model for overages
-    /// </summary>
-    public required ApiEnum<string, BillingModel> BillingModel
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, BillingModel>>("billingModel");
-        }
-        init { this._rawData.Set("billingModel", value); }
-    }
-
-    /// <summary>
     /// Price periods for overage pricing
     /// </summary>
     public required IReadOnlyList<PricePeriod> PricePeriods
@@ -1255,29 +1242,6 @@ public sealed record class OveragePricingModel : JsonModel
                 "pricePeriods",
                 ImmutableArray.ToImmutableArray(value)
             );
-        }
-    }
-
-    /// <summary>
-    /// The billing cadence for overages
-    /// </summary>
-    public ApiEnum<string, BillingCadence>? BillingCadence
-    {
-        get
-        {
-            this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ApiEnum<string, BillingCadence>>(
-                "billingCadence"
-            );
-        }
-        init
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            this._rawData.Set("billingCadence", value);
         }
     }
 
@@ -1369,12 +1333,10 @@ public sealed record class OveragePricingModel : JsonModel
     /// <inheritdoc/>
     public override void Validate()
     {
-        this.BillingModel.Validate();
         foreach (var item in this.PricePeriods)
         {
             item.Validate();
         }
-        this.BillingCadence?.Validate();
         this.CreditEntitlement?.Validate();
         _ = this.CurrencyID;
         this.Entitlement?.Validate();
@@ -1409,6 +1371,13 @@ public sealed record class OveragePricingModel : JsonModel
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
     }
+
+    [SetsRequiredMembers]
+    public OveragePricingModel(IReadOnlyList<PricePeriod> pricePeriods)
+        : this()
+    {
+        this.PricePeriods = pricePeriods;
+    }
 }
 
 class OveragePricingModelFromRaw : IFromRawJson<OveragePricingModel>
@@ -1416,62 +1385,6 @@ class OveragePricingModelFromRaw : IFromRawJson<OveragePricingModel>
     /// <inheritdoc/>
     public OveragePricingModel FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         OveragePricingModel.FromRawUnchecked(rawData);
-}
-
-/// <summary>
-/// The billing model for overages
-/// </summary>
-[JsonConverter(typeof(BillingModelConverter))]
-public enum BillingModel
-{
-    FlatFee,
-    MinimumSpend,
-    PerUnit,
-    UsageBased,
-    CreditBased,
-}
-
-sealed class BillingModelConverter : JsonConverter<BillingModel>
-{
-    public override BillingModel Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "FLAT_FEE" => BillingModel.FlatFee,
-            "MINIMUM_SPEND" => BillingModel.MinimumSpend,
-            "PER_UNIT" => BillingModel.PerUnit,
-            "USAGE_BASED" => BillingModel.UsageBased,
-            "CREDIT_BASED" => BillingModel.CreditBased,
-            _ => (BillingModel)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        BillingModel value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                BillingModel.FlatFee => "FLAT_FEE",
-                BillingModel.MinimumSpend => "MINIMUM_SPEND",
-                BillingModel.PerUnit => "PER_UNIT",
-                BillingModel.UsageBased => "USAGE_BASED",
-                BillingModel.CreditBased => "CREDIT_BASED",
-                _ => throw new StiggInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
 }
 
 /// <summary>
@@ -3420,53 +3333,6 @@ sealed class UnitPriceCurrencyConverter : JsonConverter<UnitPriceCurrency>
 }
 
 /// <summary>
-/// The billing cadence for overages
-/// </summary>
-[JsonConverter(typeof(BillingCadenceConverter))]
-public enum BillingCadence
-{
-    Recurring,
-    OneOff,
-}
-
-sealed class BillingCadenceConverter : JsonConverter<BillingCadence>
-{
-    public override BillingCadence Read(
-        ref Utf8JsonReader reader,
-        System::Type typeToConvert,
-        JsonSerializerOptions options
-    )
-    {
-        return JsonSerializer.Deserialize<string>(ref reader, options) switch
-        {
-            "RECURRING" => BillingCadence.Recurring,
-            "ONE_OFF" => BillingCadence.OneOff,
-            _ => (BillingCadence)(-1),
-        };
-    }
-
-    public override void Write(
-        Utf8JsonWriter writer,
-        BillingCadence value,
-        JsonSerializerOptions options
-    )
-    {
-        JsonSerializer.Serialize(
-            writer,
-            value switch
-            {
-                BillingCadence.Recurring => "RECURRING",
-                BillingCadence.OneOff => "ONE_OFF",
-                _ => throw new StiggInvalidDataException(
-                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
-                ),
-            },
-            options
-        );
-    }
-}
-
-/// <summary>
 /// Credit entitlement to grant when a credit overage targets a currency not yet granted
 /// on the plan
 /// </summary>
@@ -4289,14 +4155,12 @@ public sealed record class PricingModel : JsonModel
     /// <summary>
     /// The billing model (FLAT_FEE, PER_UNIT, USAGE_BASED, CREDIT_BASED)
     /// </summary>
-    public required ApiEnum<string, PricingModelBillingModel> BillingModel
+    public required ApiEnum<string, BillingModel> BillingModel
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, PricingModelBillingModel>>(
-                "billingModel"
-            );
+            return this._rawData.GetNotNullClass<ApiEnum<string, BillingModel>>("billingModel");
         }
         init { this._rawData.Set("billingModel", value); }
     }
@@ -4325,12 +4189,12 @@ public sealed record class PricingModel : JsonModel
     /// <summary>
     /// The billing cadence (RECURRING or ONE_OFF)
     /// </summary>
-    public ApiEnum<string, PricingModelBillingCadence>? BillingCadence
+    public ApiEnum<string, BillingCadence>? BillingCadence
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNullableClass<ApiEnum<string, PricingModelBillingCadence>>(
+            return this._rawData.GetNullableClass<ApiEnum<string, BillingCadence>>(
                 "billingCadence"
             );
         }
@@ -4600,8 +4464,8 @@ class PricingModelFromRaw : IFromRawJson<PricingModel>
 /// <summary>
 /// The billing model (FLAT_FEE, PER_UNIT, USAGE_BASED, CREDIT_BASED)
 /// </summary>
-[JsonConverter(typeof(PricingModelBillingModelConverter))]
-public enum PricingModelBillingModel
+[JsonConverter(typeof(BillingModelConverter))]
+public enum BillingModel
 {
     FlatFee,
     MinimumSpend,
@@ -4610,9 +4474,9 @@ public enum PricingModelBillingModel
     CreditBased,
 }
 
-sealed class PricingModelBillingModelConverter : JsonConverter<PricingModelBillingModel>
+sealed class BillingModelConverter : JsonConverter<BillingModel>
 {
-    public override PricingModelBillingModel Read(
+    public override BillingModel Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -4620,18 +4484,18 @@ sealed class PricingModelBillingModelConverter : JsonConverter<PricingModelBilli
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "FLAT_FEE" => PricingModelBillingModel.FlatFee,
-            "MINIMUM_SPEND" => PricingModelBillingModel.MinimumSpend,
-            "PER_UNIT" => PricingModelBillingModel.PerUnit,
-            "USAGE_BASED" => PricingModelBillingModel.UsageBased,
-            "CREDIT_BASED" => PricingModelBillingModel.CreditBased,
-            _ => (PricingModelBillingModel)(-1),
+            "FLAT_FEE" => BillingModel.FlatFee,
+            "MINIMUM_SPEND" => BillingModel.MinimumSpend,
+            "PER_UNIT" => BillingModel.PerUnit,
+            "USAGE_BASED" => BillingModel.UsageBased,
+            "CREDIT_BASED" => BillingModel.CreditBased,
+            _ => (BillingModel)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        PricingModelBillingModel value,
+        BillingModel value,
         JsonSerializerOptions options
     )
     {
@@ -4639,11 +4503,11 @@ sealed class PricingModelBillingModelConverter : JsonConverter<PricingModelBilli
             writer,
             value switch
             {
-                PricingModelBillingModel.FlatFee => "FLAT_FEE",
-                PricingModelBillingModel.MinimumSpend => "MINIMUM_SPEND",
-                PricingModelBillingModel.PerUnit => "PER_UNIT",
-                PricingModelBillingModel.UsageBased => "USAGE_BASED",
-                PricingModelBillingModel.CreditBased => "CREDIT_BASED",
+                BillingModel.FlatFee => "FLAT_FEE",
+                BillingModel.MinimumSpend => "MINIMUM_SPEND",
+                BillingModel.PerUnit => "PER_UNIT",
+                BillingModel.UsageBased => "USAGE_BASED",
+                BillingModel.CreditBased => "CREDIT_BASED",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),
@@ -6667,16 +6531,16 @@ sealed class PricingModelPricePeriodTierUnitPriceCurrencyConverter
 /// <summary>
 /// The billing cadence (RECURRING or ONE_OFF)
 /// </summary>
-[JsonConverter(typeof(PricingModelBillingCadenceConverter))]
-public enum PricingModelBillingCadence
+[JsonConverter(typeof(BillingCadenceConverter))]
+public enum BillingCadence
 {
     Recurring,
     OneOff,
 }
 
-sealed class PricingModelBillingCadenceConverter : JsonConverter<PricingModelBillingCadence>
+sealed class BillingCadenceConverter : JsonConverter<BillingCadence>
 {
-    public override PricingModelBillingCadence Read(
+    public override BillingCadence Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -6684,15 +6548,15 @@ sealed class PricingModelBillingCadenceConverter : JsonConverter<PricingModelBil
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "RECURRING" => PricingModelBillingCadence.Recurring,
-            "ONE_OFF" => PricingModelBillingCadence.OneOff,
-            _ => (PricingModelBillingCadence)(-1),
+            "RECURRING" => BillingCadence.Recurring,
+            "ONE_OFF" => BillingCadence.OneOff,
+            _ => (BillingCadence)(-1),
         };
     }
 
     public override void Write(
         Utf8JsonWriter writer,
-        PricingModelBillingCadence value,
+        BillingCadence value,
         JsonSerializerOptions options
     )
     {
@@ -6700,8 +6564,8 @@ sealed class PricingModelBillingCadenceConverter : JsonConverter<PricingModelBil
             writer,
             value switch
             {
-                PricingModelBillingCadence.Recurring => "RECURRING",
-                PricingModelBillingCadence.OneOff => "ONE_OFF",
+                BillingCadence.Recurring => "RECURRING",
+                BillingCadence.OneOff => "ONE_OFF",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

@@ -34,7 +34,6 @@ public class PlanUpdateParamsTest : TestBase
                 [
                     new()
                     {
-                        BillingModel = BillingModel.FlatFee,
                         PricePeriods =
                         [
                             new()
@@ -69,7 +68,6 @@ public class PlanUpdateParamsTest : TestBase
                                 ],
                             },
                         ],
-                        BillingCadence = BillingCadence.Recurring,
                         CreditEntitlement = new()
                         {
                             Amount = 1,
@@ -99,7 +97,7 @@ public class PlanUpdateParamsTest : TestBase
                 [
                     new()
                     {
-                        BillingModel = PricingModelBillingModel.FlatFee,
+                        BillingModel = BillingModel.FlatFee,
                         PricePeriods =
                         [
                             new()
@@ -141,7 +139,7 @@ public class PlanUpdateParamsTest : TestBase
                                 ],
                             },
                         ],
-                        BillingCadence = PricingModelBillingCadence.Recurring,
+                        BillingCadence = BillingCadence.Recurring,
                         FeatureID = "featureId",
                         MaxUnitQuantity = 1,
                         MinUnitQuantity = 1,
@@ -195,7 +193,6 @@ public class PlanUpdateParamsTest : TestBase
             [
                 new()
                 {
-                    BillingModel = BillingModel.FlatFee,
                     PricePeriods =
                     [
                         new()
@@ -230,7 +227,6 @@ public class PlanUpdateParamsTest : TestBase
                             ],
                         },
                     ],
-                    BillingCadence = BillingCadence.Recurring,
                     CreditEntitlement = new()
                     {
                         Amount = 1,
@@ -260,7 +256,7 @@ public class PlanUpdateParamsTest : TestBase
             [
                 new()
                 {
-                    BillingModel = PricingModelBillingModel.FlatFee,
+                    BillingModel = BillingModel.FlatFee,
                     PricePeriods =
                     [
                         new()
@@ -300,7 +296,7 @@ public class PlanUpdateParamsTest : TestBase
                             ],
                         },
                     ],
-                    BillingCadence = PricingModelBillingCadence.Recurring,
+                    BillingCadence = BillingCadence.Recurring,
                     FeatureID = "featureId",
                     MaxUnitQuantity = 1,
                     MinUnitQuantity = 1,
@@ -451,7 +447,6 @@ public class PlanUpdateParamsTest : TestBase
                 [
                     new()
                     {
-                        BillingModel = BillingModel.FlatFee,
                         PricePeriods =
                         [
                             new()
@@ -486,7 +481,6 @@ public class PlanUpdateParamsTest : TestBase
                                 ],
                             },
                         ],
-                        BillingCadence = BillingCadence.Recurring,
                         CreditEntitlement = new()
                         {
                             Amount = 1,
@@ -516,7 +510,7 @@ public class PlanUpdateParamsTest : TestBase
                 [
                     new()
                     {
-                        BillingModel = PricingModelBillingModel.FlatFee,
+                        BillingModel = BillingModel.FlatFee,
                         PricePeriods =
                         [
                             new()
@@ -558,7 +552,7 @@ public class PlanUpdateParamsTest : TestBase
                                 ],
                             },
                         ],
-                        BillingCadence = PricingModelBillingCadence.Recurring,
+                        BillingCadence = BillingCadence.Recurring,
                         FeatureID = "featureId",
                         MaxUnitQuantity = 1,
                         MinUnitQuantity = 1,
@@ -618,7 +612,6 @@ public class PlanUpdateParamsTest : TestBase
                 [
                     new()
                     {
-                        BillingModel = BillingModel.FlatFee,
                         PricePeriods =
                         [
                             new()
@@ -653,7 +646,6 @@ public class PlanUpdateParamsTest : TestBase
                                 ],
                             },
                         ],
-                        BillingCadence = BillingCadence.Recurring,
                         CreditEntitlement = new()
                         {
                             Amount = 1,
@@ -683,7 +675,7 @@ public class PlanUpdateParamsTest : TestBase
                 [
                     new()
                     {
-                        BillingModel = PricingModelBillingModel.FlatFee,
+                        BillingModel = BillingModel.FlatFee,
                         PricePeriods =
                         [
                             new()
@@ -725,7 +717,7 @@ public class PlanUpdateParamsTest : TestBase
                                 ],
                             },
                         ],
-                        BillingCadence = PricingModelBillingCadence.Recurring,
+                        BillingCadence = BillingCadence.Recurring,
                         FeatureID = "featureId",
                         MaxUnitQuantity = 1,
                         MinUnitQuantity = 1,
@@ -819,7 +811,6 @@ public class PlanUpdateParamsTest : TestBase
                 [
                     new()
                     {
-                        BillingModel = BillingModel.FlatFee,
                         PricePeriods =
                         [
                             new()
@@ -854,7 +845,6 @@ public class PlanUpdateParamsTest : TestBase
                                 ],
                             },
                         ],
-                        BillingCadence = BillingCadence.Recurring,
                         CreditEntitlement = new()
                         {
                             Amount = 1,
@@ -884,7 +874,7 @@ public class PlanUpdateParamsTest : TestBase
                 [
                     new()
                     {
-                        BillingModel = PricingModelBillingModel.FlatFee,
+                        BillingModel = BillingModel.FlatFee,
                         PricePeriods =
                         [
                             new()
@@ -926,7 +916,7 @@ public class PlanUpdateParamsTest : TestBase
                                 ],
                             },
                         ],
-                        BillingCadence = PricingModelBillingCadence.Recurring,
+                        BillingCadence = BillingCadence.Recurring,
                         FeatureID = "featureId",
                         MaxUnitQuantity = 1,
                         MinUnitQuantity = 1,
@@ -989,7 +979,6 @@ public class ChargesTest : TestBase
             [
                 new()
                 {
-                    BillingModel = BillingModel.FlatFee,
                     PricePeriods =
                     [
                         new()
@@ -1024,7 +1013,6 @@ public class ChargesTest : TestBase
                             ],
                         },
                     ],
-                    BillingCadence = BillingCadence.Recurring,
                     CreditEntitlement = new()
                     {
                         Amount = 1,
@@ -1054,7 +1042,7 @@ public class ChargesTest : TestBase
             [
                 new()
                 {
-                    BillingModel = PricingModelBillingModel.FlatFee,
+                    BillingModel = BillingModel.FlatFee,
                     PricePeriods =
                     [
                         new()
@@ -1094,7 +1082,7 @@ public class ChargesTest : TestBase
                             ],
                         },
                     ],
-                    BillingCadence = PricingModelBillingCadence.Recurring,
+                    BillingCadence = BillingCadence.Recurring,
                     FeatureID = "featureId",
                     MaxUnitQuantity = 1,
                     MinUnitQuantity = 1,
@@ -1130,7 +1118,6 @@ public class ChargesTest : TestBase
         [
             new()
             {
-                BillingModel = BillingModel.FlatFee,
                 PricePeriods =
                 [
                     new()
@@ -1157,7 +1144,6 @@ public class ChargesTest : TestBase
                         ],
                     },
                 ],
-                BillingCadence = BillingCadence.Recurring,
                 CreditEntitlement = new()
                 {
                     Amount = 1,
@@ -1187,7 +1173,7 @@ public class ChargesTest : TestBase
         [
             new()
             {
-                BillingModel = PricingModelBillingModel.FlatFee,
+                BillingModel = BillingModel.FlatFee,
                 PricePeriods =
                 [
                     new()
@@ -1227,7 +1213,7 @@ public class ChargesTest : TestBase
                         ],
                     },
                 ],
-                BillingCadence = PricingModelBillingCadence.Recurring,
+                BillingCadence = BillingCadence.Recurring,
                 FeatureID = "featureId",
                 MaxUnitQuantity = 1,
                 MinUnitQuantity = 1,
@@ -1289,7 +1275,6 @@ public class ChargesTest : TestBase
             [
                 new()
                 {
-                    BillingModel = BillingModel.FlatFee,
                     PricePeriods =
                     [
                         new()
@@ -1324,7 +1309,6 @@ public class ChargesTest : TestBase
                             ],
                         },
                     ],
-                    BillingCadence = BillingCadence.Recurring,
                     CreditEntitlement = new()
                     {
                         Amount = 1,
@@ -1354,7 +1338,7 @@ public class ChargesTest : TestBase
             [
                 new()
                 {
-                    BillingModel = PricingModelBillingModel.FlatFee,
+                    BillingModel = BillingModel.FlatFee,
                     PricePeriods =
                     [
                         new()
@@ -1394,7 +1378,7 @@ public class ChargesTest : TestBase
                             ],
                         },
                     ],
-                    BillingCadence = PricingModelBillingCadence.Recurring,
+                    BillingCadence = BillingCadence.Recurring,
                     FeatureID = "featureId",
                     MaxUnitQuantity = 1,
                     MinUnitQuantity = 1,
@@ -1440,7 +1424,6 @@ public class ChargesTest : TestBase
             [
                 new()
                 {
-                    BillingModel = BillingModel.FlatFee,
                     PricePeriods =
                     [
                         new()
@@ -1475,7 +1458,6 @@ public class ChargesTest : TestBase
                             ],
                         },
                     ],
-                    BillingCadence = BillingCadence.Recurring,
                     CreditEntitlement = new()
                     {
                         Amount = 1,
@@ -1505,7 +1487,7 @@ public class ChargesTest : TestBase
             [
                 new()
                 {
-                    BillingModel = PricingModelBillingModel.FlatFee,
+                    BillingModel = BillingModel.FlatFee,
                     PricePeriods =
                     [
                         new()
@@ -1545,7 +1527,7 @@ public class ChargesTest : TestBase
                             ],
                         },
                     ],
-                    BillingCadence = PricingModelBillingCadence.Recurring,
+                    BillingCadence = BillingCadence.Recurring,
                     FeatureID = "featureId",
                     MaxUnitQuantity = 1,
                     MinUnitQuantity = 1,
@@ -1588,7 +1570,6 @@ public class ChargesTest : TestBase
         [
             new()
             {
-                BillingModel = BillingModel.FlatFee,
                 PricePeriods =
                 [
                     new()
@@ -1615,7 +1596,6 @@ public class ChargesTest : TestBase
                         ],
                     },
                 ],
-                BillingCadence = BillingCadence.Recurring,
                 CreditEntitlement = new()
                 {
                     Amount = 1,
@@ -1645,7 +1625,7 @@ public class ChargesTest : TestBase
         [
             new()
             {
-                BillingModel = PricingModelBillingModel.FlatFee,
+                BillingModel = BillingModel.FlatFee,
                 PricePeriods =
                 [
                     new()
@@ -1685,7 +1665,7 @@ public class ChargesTest : TestBase
                         ],
                     },
                 ],
-                BillingCadence = PricingModelBillingCadence.Recurring,
+                BillingCadence = BillingCadence.Recurring,
                 FeatureID = "featureId",
                 MaxUnitQuantity = 1,
                 MinUnitQuantity = 1,
@@ -1747,7 +1727,6 @@ public class ChargesTest : TestBase
             [
                 new()
                 {
-                    BillingModel = BillingModel.FlatFee,
                     PricePeriods =
                     [
                         new()
@@ -1782,7 +1761,6 @@ public class ChargesTest : TestBase
                             ],
                         },
                     ],
-                    BillingCadence = BillingCadence.Recurring,
                     CreditEntitlement = new()
                     {
                         Amount = 1,
@@ -1812,7 +1790,7 @@ public class ChargesTest : TestBase
             [
                 new()
                 {
-                    BillingModel = PricingModelBillingModel.FlatFee,
+                    BillingModel = BillingModel.FlatFee,
                     PricePeriods =
                     [
                         new()
@@ -1852,7 +1830,7 @@ public class ChargesTest : TestBase
                             ],
                         },
                     ],
-                    BillingCadence = PricingModelBillingCadence.Recurring,
+                    BillingCadence = BillingCadence.Recurring,
                     FeatureID = "featureId",
                     MaxUnitQuantity = 1,
                     MinUnitQuantity = 1,
@@ -1989,7 +1967,6 @@ public class ChargesTest : TestBase
             [
                 new()
                 {
-                    BillingModel = BillingModel.FlatFee,
                     PricePeriods =
                     [
                         new()
@@ -2024,7 +2001,6 @@ public class ChargesTest : TestBase
                             ],
                         },
                     ],
-                    BillingCadence = BillingCadence.Recurring,
                     CreditEntitlement = new()
                     {
                         Amount = 1,
@@ -2054,7 +2030,7 @@ public class ChargesTest : TestBase
             [
                 new()
                 {
-                    BillingModel = PricingModelBillingModel.FlatFee,
+                    BillingModel = BillingModel.FlatFee,
                     PricePeriods =
                     [
                         new()
@@ -2094,7 +2070,7 @@ public class ChargesTest : TestBase
                             ],
                         },
                     ],
-                    BillingCadence = PricingModelBillingCadence.Recurring,
+                    BillingCadence = BillingCadence.Recurring,
                     FeatureID = "featureId",
                     MaxUnitQuantity = 1,
                     MinUnitQuantity = 1,
@@ -2130,7 +2106,6 @@ public class ChargesTest : TestBase
             [
                 new()
                 {
-                    BillingModel = BillingModel.FlatFee,
                     PricePeriods =
                     [
                         new()
@@ -2165,7 +2140,6 @@ public class ChargesTest : TestBase
                             ],
                         },
                     ],
-                    BillingCadence = BillingCadence.Recurring,
                     CreditEntitlement = new()
                     {
                         Amount = 1,
@@ -2195,7 +2169,7 @@ public class ChargesTest : TestBase
             [
                 new()
                 {
-                    BillingModel = PricingModelBillingModel.FlatFee,
+                    BillingModel = BillingModel.FlatFee,
                     PricePeriods =
                     [
                         new()
@@ -2235,7 +2209,7 @@ public class ChargesTest : TestBase
                             ],
                         },
                     ],
-                    BillingCadence = PricingModelBillingCadence.Recurring,
+                    BillingCadence = BillingCadence.Recurring,
                     FeatureID = "featureId",
                     MaxUnitQuantity = 1,
                     MinUnitQuantity = 1,
@@ -2270,7 +2244,6 @@ public class ChargesTest : TestBase
             [
                 new()
                 {
-                    BillingModel = BillingModel.FlatFee,
                     PricePeriods =
                     [
                         new()
@@ -2305,7 +2278,6 @@ public class ChargesTest : TestBase
                             ],
                         },
                     ],
-                    BillingCadence = BillingCadence.Recurring,
                     CreditEntitlement = new()
                     {
                         Amount = 1,
@@ -2335,7 +2307,7 @@ public class ChargesTest : TestBase
             [
                 new()
                 {
-                    BillingModel = PricingModelBillingModel.FlatFee,
+                    BillingModel = BillingModel.FlatFee,
                     PricePeriods =
                     [
                         new()
@@ -2375,7 +2347,7 @@ public class ChargesTest : TestBase
                             ],
                         },
                     ],
-                    BillingCadence = PricingModelBillingCadence.Recurring,
+                    BillingCadence = BillingCadence.Recurring,
                     FeatureID = "featureId",
                     MaxUnitQuantity = 1,
                     MinUnitQuantity = 1,
@@ -2413,7 +2385,6 @@ public class ChargesTest : TestBase
             [
                 new()
                 {
-                    BillingModel = BillingModel.FlatFee,
                     PricePeriods =
                     [
                         new()
@@ -2448,7 +2419,6 @@ public class ChargesTest : TestBase
                             ],
                         },
                     ],
-                    BillingCadence = BillingCadence.Recurring,
                     CreditEntitlement = new()
                     {
                         Amount = 1,
@@ -2478,7 +2448,7 @@ public class ChargesTest : TestBase
             [
                 new()
                 {
-                    BillingModel = PricingModelBillingModel.FlatFee,
+                    BillingModel = BillingModel.FlatFee,
                     PricePeriods =
                     [
                         new()
@@ -2518,7 +2488,7 @@ public class ChargesTest : TestBase
                             ],
                         },
                     ],
-                    BillingCadence = PricingModelBillingCadence.Recurring,
+                    BillingCadence = BillingCadence.Recurring,
                     FeatureID = "featureId",
                     MaxUnitQuantity = 1,
                     MinUnitQuantity = 1,
@@ -2563,7 +2533,6 @@ public class ChargesTest : TestBase
             [
                 new()
                 {
-                    BillingModel = BillingModel.FlatFee,
                     PricePeriods =
                     [
                         new()
@@ -2598,7 +2567,6 @@ public class ChargesTest : TestBase
                             ],
                         },
                     ],
-                    BillingCadence = BillingCadence.Recurring,
                     CreditEntitlement = new()
                     {
                         Amount = 1,
@@ -2628,7 +2596,7 @@ public class ChargesTest : TestBase
             [
                 new()
                 {
-                    BillingModel = PricingModelBillingModel.FlatFee,
+                    BillingModel = BillingModel.FlatFee,
                     PricePeriods =
                     [
                         new()
@@ -2668,7 +2636,7 @@ public class ChargesTest : TestBase
                             ],
                         },
                     ],
-                    BillingCadence = PricingModelBillingCadence.Recurring,
+                    BillingCadence = BillingCadence.Recurring,
                     FeatureID = "featureId",
                     MaxUnitQuantity = 1,
                     MinUnitQuantity = 1,
@@ -3358,7 +3326,6 @@ public class OveragePricingModelTest : TestBase
     {
         var model = new OveragePricingModel
         {
-            BillingModel = BillingModel.FlatFee,
             PricePeriods =
             [
                 new()
@@ -3385,7 +3352,6 @@ public class OveragePricingModelTest : TestBase
                     ],
                 },
             ],
-            BillingCadence = BillingCadence.Recurring,
             CreditEntitlement = new()
             {
                 Amount = 1,
@@ -3411,7 +3377,6 @@ public class OveragePricingModelTest : TestBase
             FeatureID = "featureId",
         };
 
-        ApiEnum<string, BillingModel> expectedBillingModel = BillingModel.FlatFee;
         List<PricePeriod> expectedPricePeriods =
         [
             new()
@@ -3438,7 +3403,6 @@ public class OveragePricingModelTest : TestBase
                 ],
             },
         ];
-        ApiEnum<string, BillingCadence> expectedBillingCadence = BillingCadence.Recurring;
         CreditEntitlement expectedCreditEntitlement = new()
         {
             Amount = 1,
@@ -3463,13 +3427,11 @@ public class OveragePricingModelTest : TestBase
         };
         string expectedFeatureID = "featureId";
 
-        Assert.Equal(expectedBillingModel, model.BillingModel);
         Assert.Equal(expectedPricePeriods.Count, model.PricePeriods.Count);
         for (int i = 0; i < expectedPricePeriods.Count; i++)
         {
             Assert.Equal(expectedPricePeriods[i], model.PricePeriods[i]);
         }
-        Assert.Equal(expectedBillingCadence, model.BillingCadence);
         Assert.Equal(expectedCreditEntitlement, model.CreditEntitlement);
         Assert.Equal(expectedCurrencyID, model.CurrencyID);
         Assert.Equal(expectedEntitlement, model.Entitlement);
@@ -3481,7 +3443,6 @@ public class OveragePricingModelTest : TestBase
     {
         var model = new OveragePricingModel
         {
-            BillingModel = BillingModel.FlatFee,
             PricePeriods =
             [
                 new()
@@ -3508,7 +3469,6 @@ public class OveragePricingModelTest : TestBase
                     ],
                 },
             ],
-            BillingCadence = BillingCadence.Recurring,
             CreditEntitlement = new()
             {
                 Amount = 1,
@@ -3548,7 +3508,6 @@ public class OveragePricingModelTest : TestBase
     {
         var model = new OveragePricingModel
         {
-            BillingModel = BillingModel.FlatFee,
             PricePeriods =
             [
                 new()
@@ -3575,7 +3534,6 @@ public class OveragePricingModelTest : TestBase
                     ],
                 },
             ],
-            BillingCadence = BillingCadence.Recurring,
             CreditEntitlement = new()
             {
                 Amount = 1,
@@ -3608,7 +3566,6 @@ public class OveragePricingModelTest : TestBase
         );
         Assert.NotNull(deserialized);
 
-        ApiEnum<string, BillingModel> expectedBillingModel = BillingModel.FlatFee;
         List<PricePeriod> expectedPricePeriods =
         [
             new()
@@ -3635,7 +3592,6 @@ public class OveragePricingModelTest : TestBase
                 ],
             },
         ];
-        ApiEnum<string, BillingCadence> expectedBillingCadence = BillingCadence.Recurring;
         CreditEntitlement expectedCreditEntitlement = new()
         {
             Amount = 1,
@@ -3660,13 +3616,11 @@ public class OveragePricingModelTest : TestBase
         };
         string expectedFeatureID = "featureId";
 
-        Assert.Equal(expectedBillingModel, deserialized.BillingModel);
         Assert.Equal(expectedPricePeriods.Count, deserialized.PricePeriods.Count);
         for (int i = 0; i < expectedPricePeriods.Count; i++)
         {
             Assert.Equal(expectedPricePeriods[i], deserialized.PricePeriods[i]);
         }
-        Assert.Equal(expectedBillingCadence, deserialized.BillingCadence);
         Assert.Equal(expectedCreditEntitlement, deserialized.CreditEntitlement);
         Assert.Equal(expectedCurrencyID, deserialized.CurrencyID);
         Assert.Equal(expectedEntitlement, deserialized.Entitlement);
@@ -3678,7 +3632,6 @@ public class OveragePricingModelTest : TestBase
     {
         var model = new OveragePricingModel
         {
-            BillingModel = BillingModel.FlatFee,
             PricePeriods =
             [
                 new()
@@ -3705,7 +3658,6 @@ public class OveragePricingModelTest : TestBase
                     ],
                 },
             ],
-            BillingCadence = BillingCadence.Recurring,
             CreditEntitlement = new()
             {
                 Amount = 1,
@@ -3739,7 +3691,6 @@ public class OveragePricingModelTest : TestBase
     {
         var model = new OveragePricingModel
         {
-            BillingModel = BillingModel.FlatFee,
             PricePeriods =
             [
                 new()
@@ -3768,8 +3719,6 @@ public class OveragePricingModelTest : TestBase
             ],
         };
 
-        Assert.Null(model.BillingCadence);
-        Assert.False(model.RawData.ContainsKey("billingCadence"));
         Assert.Null(model.CreditEntitlement);
         Assert.False(model.RawData.ContainsKey("creditEntitlement"));
         Assert.Null(model.CurrencyID);
@@ -3785,7 +3734,6 @@ public class OveragePricingModelTest : TestBase
     {
         var model = new OveragePricingModel
         {
-            BillingModel = BillingModel.FlatFee,
             PricePeriods =
             [
                 new()
@@ -3822,7 +3770,6 @@ public class OveragePricingModelTest : TestBase
     {
         var model = new OveragePricingModel
         {
-            BillingModel = BillingModel.FlatFee,
             PricePeriods =
             [
                 new()
@@ -3851,15 +3798,12 @@ public class OveragePricingModelTest : TestBase
             ],
 
             // Null should be interpreted as omitted for these properties
-            BillingCadence = null,
             CreditEntitlement = null,
             CurrencyID = null,
             Entitlement = null,
             FeatureID = null,
         };
 
-        Assert.Null(model.BillingCadence);
-        Assert.False(model.RawData.ContainsKey("billingCadence"));
         Assert.Null(model.CreditEntitlement);
         Assert.False(model.RawData.ContainsKey("creditEntitlement"));
         Assert.Null(model.CurrencyID);
@@ -3875,7 +3819,6 @@ public class OveragePricingModelTest : TestBase
     {
         var model = new OveragePricingModel
         {
-            BillingModel = BillingModel.FlatFee,
             PricePeriods =
             [
                 new()
@@ -3904,7 +3847,6 @@ public class OveragePricingModelTest : TestBase
             ],
 
             // Null should be interpreted as omitted for these properties
-            BillingCadence = null,
             CreditEntitlement = null,
             CurrencyID = null,
             Entitlement = null,
@@ -3919,7 +3861,6 @@ public class OveragePricingModelTest : TestBase
     {
         var model = new OveragePricingModel
         {
-            BillingModel = BillingModel.FlatFee,
             PricePeriods =
             [
                 new()
@@ -3946,7 +3887,6 @@ public class OveragePricingModelTest : TestBase
                     ],
                 },
             ],
-            BillingCadence = BillingCadence.Recurring,
             CreditEntitlement = new()
             {
                 Amount = 1,
@@ -3975,70 +3915,6 @@ public class OveragePricingModelTest : TestBase
         OveragePricingModel copied = new(model);
 
         Assert.Equal(model, copied);
-    }
-}
-
-public class BillingModelTest : TestBase
-{
-    [Theory]
-    [InlineData(BillingModel.FlatFee)]
-    [InlineData(BillingModel.MinimumSpend)]
-    [InlineData(BillingModel.PerUnit)]
-    [InlineData(BillingModel.UsageBased)]
-    [InlineData(BillingModel.CreditBased)]
-    public void Validation_Works(BillingModel rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, BillingModel> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, BillingModel>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(BillingModel.FlatFee)]
-    [InlineData(BillingModel.MinimumSpend)]
-    [InlineData(BillingModel.PerUnit)]
-    [InlineData(BillingModel.UsageBased)]
-    [InlineData(BillingModel.CreditBased)]
-    public void SerializationRoundtrip_Works(BillingModel rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, BillingModel> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, BillingModel>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, BillingModel>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, BillingModel>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
     }
 }
 
@@ -5938,64 +5814,6 @@ public class UnitPriceCurrencyTest : TestBase
     }
 }
 
-public class BillingCadenceTest : TestBase
-{
-    [Theory]
-    [InlineData(BillingCadence.Recurring)]
-    [InlineData(BillingCadence.OneOff)]
-    public void Validation_Works(BillingCadence rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, BillingCadence> value = rawValue;
-        value.Validate();
-    }
-
-    [Fact]
-    public void InvalidEnumValidationThrows_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, BillingCadence>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-
-        Assert.NotNull(value);
-        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
-    }
-
-    [Theory]
-    [InlineData(BillingCadence.Recurring)]
-    [InlineData(BillingCadence.OneOff)]
-    public void SerializationRoundtrip_Works(BillingCadence rawValue)
-    {
-        // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, BillingCadence> value = rawValue;
-
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, BillingCadence>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-
-    [Fact]
-    public void InvalidEnumSerializationRoundtrip_Works()
-    {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, BillingCadence>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
-        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, BillingCadence>>(
-            json,
-            ModelBase.SerializerOptions
-        );
-
-        Assert.Equal(value, deserialized);
-    }
-}
-
 public class CreditEntitlementTest : TestBase
 {
     [Fact]
@@ -6897,7 +6715,7 @@ public class PricingModelTest : TestBase
     {
         var model = new PricingModel
         {
-            BillingModel = PricingModelBillingModel.FlatFee,
+            BillingModel = BillingModel.FlatFee,
             PricePeriods =
             [
                 new()
@@ -6937,7 +6755,7 @@ public class PricingModelTest : TestBase
                     ],
                 },
             ],
-            BillingCadence = PricingModelBillingCadence.Recurring,
+            BillingCadence = BillingCadence.Recurring,
             FeatureID = "featureId",
             MaxUnitQuantity = 1,
             MinUnitQuantity = 1,
@@ -6955,8 +6773,7 @@ public class PricingModelTest : TestBase
             ),
         };
 
-        ApiEnum<string, PricingModelBillingModel> expectedBillingModel =
-            PricingModelBillingModel.FlatFee;
+        ApiEnum<string, BillingModel> expectedBillingModel = BillingModel.FlatFee;
         List<PricingModelPricePeriod> expectedPricePeriods =
         [
             new()
@@ -6992,8 +6809,7 @@ public class PricingModelTest : TestBase
                 ],
             },
         ];
-        ApiEnum<string, PricingModelBillingCadence> expectedBillingCadence =
-            PricingModelBillingCadence.Recurring;
+        ApiEnum<string, BillingCadence> expectedBillingCadence = BillingCadence.Recurring;
         string expectedFeatureID = "featureId";
         long expectedMaxUnitQuantity = 1;
         long expectedMinUnitQuantity = 1;
@@ -7036,7 +6852,7 @@ public class PricingModelTest : TestBase
     {
         var model = new PricingModel
         {
-            BillingModel = PricingModelBillingModel.FlatFee,
+            BillingModel = BillingModel.FlatFee,
             PricePeriods =
             [
                 new()
@@ -7076,7 +6892,7 @@ public class PricingModelTest : TestBase
                     ],
                 },
             ],
-            BillingCadence = PricingModelBillingCadence.Recurring,
+            BillingCadence = BillingCadence.Recurring,
             FeatureID = "featureId",
             MaxUnitQuantity = 1,
             MinUnitQuantity = 1,
@@ -7108,7 +6924,7 @@ public class PricingModelTest : TestBase
     {
         var model = new PricingModel
         {
-            BillingModel = PricingModelBillingModel.FlatFee,
+            BillingModel = BillingModel.FlatFee,
             PricePeriods =
             [
                 new()
@@ -7148,7 +6964,7 @@ public class PricingModelTest : TestBase
                     ],
                 },
             ],
-            BillingCadence = PricingModelBillingCadence.Recurring,
+            BillingCadence = BillingCadence.Recurring,
             FeatureID = "featureId",
             MaxUnitQuantity = 1,
             MinUnitQuantity = 1,
@@ -7173,8 +6989,7 @@ public class PricingModelTest : TestBase
         );
         Assert.NotNull(deserialized);
 
-        ApiEnum<string, PricingModelBillingModel> expectedBillingModel =
-            PricingModelBillingModel.FlatFee;
+        ApiEnum<string, BillingModel> expectedBillingModel = BillingModel.FlatFee;
         List<PricingModelPricePeriod> expectedPricePeriods =
         [
             new()
@@ -7210,8 +7025,7 @@ public class PricingModelTest : TestBase
                 ],
             },
         ];
-        ApiEnum<string, PricingModelBillingCadence> expectedBillingCadence =
-            PricingModelBillingCadence.Recurring;
+        ApiEnum<string, BillingCadence> expectedBillingCadence = BillingCadence.Recurring;
         string expectedFeatureID = "featureId";
         long expectedMaxUnitQuantity = 1;
         long expectedMinUnitQuantity = 1;
@@ -7260,7 +7074,7 @@ public class PricingModelTest : TestBase
     {
         var model = new PricingModel
         {
-            BillingModel = PricingModelBillingModel.FlatFee,
+            BillingModel = BillingModel.FlatFee,
             PricePeriods =
             [
                 new()
@@ -7300,7 +7114,7 @@ public class PricingModelTest : TestBase
                     ],
                 },
             ],
-            BillingCadence = PricingModelBillingCadence.Recurring,
+            BillingCadence = BillingCadence.Recurring,
             FeatureID = "featureId",
             MaxUnitQuantity = 1,
             MinUnitQuantity = 1,
@@ -7326,7 +7140,7 @@ public class PricingModelTest : TestBase
     {
         var model = new PricingModel
         {
-            BillingModel = PricingModelBillingModel.FlatFee,
+            BillingModel = BillingModel.FlatFee,
             PricePeriods =
             [
                 new()
@@ -7395,7 +7209,7 @@ public class PricingModelTest : TestBase
     {
         var model = new PricingModel
         {
-            BillingModel = PricingModelBillingModel.FlatFee,
+            BillingModel = BillingModel.FlatFee,
             PricePeriods =
             [
                 new()
@@ -7445,7 +7259,7 @@ public class PricingModelTest : TestBase
     {
         var model = new PricingModel
         {
-            BillingModel = PricingModelBillingModel.FlatFee,
+            BillingModel = BillingModel.FlatFee,
             PricePeriods =
             [
                 new()
@@ -7526,7 +7340,7 @@ public class PricingModelTest : TestBase
     {
         var model = new PricingModel
         {
-            BillingModel = PricingModelBillingModel.FlatFee,
+            BillingModel = BillingModel.FlatFee,
             PricePeriods =
             [
                 new()
@@ -7588,7 +7402,7 @@ public class PricingModelTest : TestBase
     {
         var model = new PricingModel
         {
-            BillingModel = PricingModelBillingModel.FlatFee,
+            BillingModel = BillingModel.FlatFee,
             PricePeriods =
             [
                 new()
@@ -7628,7 +7442,7 @@ public class PricingModelTest : TestBase
                     ],
                 },
             ],
-            BillingCadence = PricingModelBillingCadence.Recurring,
+            BillingCadence = BillingCadence.Recurring,
             FeatureID = "featureId",
             MaxUnitQuantity = 1,
             MinUnitQuantity = 1,
@@ -7652,25 +7466,25 @@ public class PricingModelTest : TestBase
     }
 }
 
-public class PricingModelBillingModelTest : TestBase
+public class BillingModelTest : TestBase
 {
     [Theory]
-    [InlineData(PricingModelBillingModel.FlatFee)]
-    [InlineData(PricingModelBillingModel.MinimumSpend)]
-    [InlineData(PricingModelBillingModel.PerUnit)]
-    [InlineData(PricingModelBillingModel.UsageBased)]
-    [InlineData(PricingModelBillingModel.CreditBased)]
-    public void Validation_Works(PricingModelBillingModel rawValue)
+    [InlineData(BillingModel.FlatFee)]
+    [InlineData(BillingModel.MinimumSpend)]
+    [InlineData(BillingModel.PerUnit)]
+    [InlineData(BillingModel.UsageBased)]
+    [InlineData(BillingModel.CreditBased)]
+    public void Validation_Works(BillingModel rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, PricingModelBillingModel> value = rawValue;
+        ApiEnum<string, BillingModel> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, PricingModelBillingModel>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, BillingModel>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -7680,18 +7494,18 @@ public class PricingModelBillingModelTest : TestBase
     }
 
     [Theory]
-    [InlineData(PricingModelBillingModel.FlatFee)]
-    [InlineData(PricingModelBillingModel.MinimumSpend)]
-    [InlineData(PricingModelBillingModel.PerUnit)]
-    [InlineData(PricingModelBillingModel.UsageBased)]
-    [InlineData(PricingModelBillingModel.CreditBased)]
-    public void SerializationRoundtrip_Works(PricingModelBillingModel rawValue)
+    [InlineData(BillingModel.FlatFee)]
+    [InlineData(BillingModel.MinimumSpend)]
+    [InlineData(BillingModel.PerUnit)]
+    [InlineData(BillingModel.UsageBased)]
+    [InlineData(BillingModel.CreditBased)]
+    public void SerializationRoundtrip_Works(BillingModel rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, PricingModelBillingModel> value = rawValue;
+        ApiEnum<string, BillingModel> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, PricingModelBillingModel>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, BillingModel>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -7702,12 +7516,12 @@ public class PricingModelBillingModelTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, PricingModelBillingModel>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, BillingModel>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, PricingModelBillingModel>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, BillingModel>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -9802,22 +9616,22 @@ public class PricingModelPricePeriodTierUnitPriceCurrencyTest : TestBase
     }
 }
 
-public class PricingModelBillingCadenceTest : TestBase
+public class BillingCadenceTest : TestBase
 {
     [Theory]
-    [InlineData(PricingModelBillingCadence.Recurring)]
-    [InlineData(PricingModelBillingCadence.OneOff)]
-    public void Validation_Works(PricingModelBillingCadence rawValue)
+    [InlineData(BillingCadence.Recurring)]
+    [InlineData(BillingCadence.OneOff)]
+    public void Validation_Works(BillingCadence rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, PricingModelBillingCadence> value = rawValue;
+        ApiEnum<string, BillingCadence> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, PricingModelBillingCadence>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, BillingCadence>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -9827,15 +9641,15 @@ public class PricingModelBillingCadenceTest : TestBase
     }
 
     [Theory]
-    [InlineData(PricingModelBillingCadence.Recurring)]
-    [InlineData(PricingModelBillingCadence.OneOff)]
-    public void SerializationRoundtrip_Works(PricingModelBillingCadence rawValue)
+    [InlineData(BillingCadence.Recurring)]
+    [InlineData(BillingCadence.OneOff)]
+    public void SerializationRoundtrip_Works(BillingCadence rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, PricingModelBillingCadence> value = rawValue;
+        ApiEnum<string, BillingCadence> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, PricingModelBillingCadence>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, BillingCadence>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -9846,12 +9660,12 @@ public class PricingModelBillingCadenceTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, PricingModelBillingCadence>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, BillingCadence>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, PricingModelBillingCadence>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, BillingCadence>>(
             json,
             ModelBase.SerializerOptions
         );
