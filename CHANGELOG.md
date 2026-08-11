@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.9.1 (2026-08-11)
+
+Full Changelog: [v0.9.0...v0.9.1](https://github.com/stiggio/stigg-csharp/compare/v0.9.0...v0.9.1)
+
+### Bug Fixes
+
+* **types:** remove billing fields from overage model, rename billing enums in addons/plans ([15daeb8](https://github.com/stiggio/stigg-csharp/commit/15daeb8e794a9295a2c97016e7c54439c7716e1f))
+
 ## 0.9.0 (2026-08-05)
 
 Full Changelog: [v0.8.0...v0.9.0](https://github.com/stiggio/stigg-csharp/compare/v0.8.0...v0.9.0)
