@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.1](https://github.com/stiggio/stigg-csharp/compare/v0.9.0...v0.9.1) (2026-08-12)
+
+
+### Styles
+
+* satisfy prettier in the trunk-sync lock ([31099a1](https://github.com/stiggio/stigg-csharp/commit/31099a10559a898eb2978c8a3e9e241ab847ad0e))
+
 ## 0.9.0 (2026-08-05)
 
 Full Changelog: [v0.8.0...v0.9.0](https://github.com/stiggio/stigg-csharp/compare/v0.8.0...v0.9.0)
