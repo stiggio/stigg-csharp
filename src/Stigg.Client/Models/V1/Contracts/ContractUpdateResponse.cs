@@ -778,6 +778,19 @@ public sealed record class ContractUpdateResponseDataNextInvoice : JsonModel
     }
 
     /// <summary>
+    /// The billing provider ID of the draft invoice this preview describes
+    /// </summary>
+    public required string? InvoiceID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("invoiceId");
+        }
+        init { this._rawData.Set("invoiceId", value); }
+    }
+
+    /// <summary>
     /// The end of the billing period the upcoming invoice covers
     /// </summary>
     public required System::DateTimeOffset? PeriodEnd
@@ -808,6 +821,7 @@ public sealed record class ContractUpdateResponseDataNextInvoice : JsonModel
     {
         this.Amount.Validate();
         _ = this.DueDate;
+        _ = this.InvoiceID;
         _ = this.PeriodEnd;
         _ = this.PeriodStart;
     }

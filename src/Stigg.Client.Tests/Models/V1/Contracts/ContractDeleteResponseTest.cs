@@ -47,6 +47,7 @@ public class ContractDeleteResponseTest : TestBase
                         Currency = ContractDeleteResponseDataNextInvoiceAmountCurrency.Usd,
                     },
                     DueDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    InvoiceID = "invoiceId",
                     PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
@@ -97,6 +98,7 @@ public class ContractDeleteResponseTest : TestBase
                     Currency = ContractDeleteResponseDataNextInvoiceAmountCurrency.Usd,
                 },
                 DueDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                InvoiceID = "invoiceId",
                 PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -155,6 +157,7 @@ public class ContractDeleteResponseTest : TestBase
                         Currency = ContractDeleteResponseDataNextInvoiceAmountCurrency.Usd,
                     },
                     DueDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    InvoiceID = "invoiceId",
                     PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
@@ -220,6 +223,7 @@ public class ContractDeleteResponseTest : TestBase
                         Currency = ContractDeleteResponseDataNextInvoiceAmountCurrency.Usd,
                     },
                     DueDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    InvoiceID = "invoiceId",
                     PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
@@ -277,6 +281,7 @@ public class ContractDeleteResponseTest : TestBase
                     Currency = ContractDeleteResponseDataNextInvoiceAmountCurrency.Usd,
                 },
                 DueDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                InvoiceID = "invoiceId",
                 PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -335,6 +340,7 @@ public class ContractDeleteResponseTest : TestBase
                         Currency = ContractDeleteResponseDataNextInvoiceAmountCurrency.Usd,
                     },
                     DueDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    InvoiceID = "invoiceId",
                     PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
@@ -394,6 +400,7 @@ public class ContractDeleteResponseTest : TestBase
                         Currency = ContractDeleteResponseDataNextInvoiceAmountCurrency.Usd,
                     },
                     DueDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    InvoiceID = "invoiceId",
                     PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
@@ -455,6 +462,7 @@ public class ContractDeleteResponseDataTest : TestBase
                     Currency = ContractDeleteResponseDataNextInvoiceAmountCurrency.Usd,
                 },
                 DueDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                InvoiceID = "invoiceId",
                 PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -505,6 +513,7 @@ public class ContractDeleteResponseDataTest : TestBase
                 Currency = ContractDeleteResponseDataNextInvoiceAmountCurrency.Usd,
             },
             DueDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            InvoiceID = "invoiceId",
             PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -579,6 +588,7 @@ public class ContractDeleteResponseDataTest : TestBase
                     Currency = ContractDeleteResponseDataNextInvoiceAmountCurrency.Usd,
                 },
                 DueDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                InvoiceID = "invoiceId",
                 PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -640,6 +650,7 @@ public class ContractDeleteResponseDataTest : TestBase
                     Currency = ContractDeleteResponseDataNextInvoiceAmountCurrency.Usd,
                 },
                 DueDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                InvoiceID = "invoiceId",
                 PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -697,6 +708,7 @@ public class ContractDeleteResponseDataTest : TestBase
                 Currency = ContractDeleteResponseDataNextInvoiceAmountCurrency.Usd,
             },
             DueDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            InvoiceID = "invoiceId",
             PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -771,6 +783,7 @@ public class ContractDeleteResponseDataTest : TestBase
                     Currency = ContractDeleteResponseDataNextInvoiceAmountCurrency.Usd,
                 },
                 DueDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                InvoiceID = "invoiceId",
                 PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -826,6 +839,7 @@ public class ContractDeleteResponseDataTest : TestBase
                     Currency = ContractDeleteResponseDataNextInvoiceAmountCurrency.Usd,
                 },
                 DueDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                InvoiceID = "invoiceId",
                 PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -1283,6 +1297,7 @@ public class ContractDeleteResponseDataNextInvoiceTest : TestBase
                 Currency = ContractDeleteResponseDataNextInvoiceAmountCurrency.Usd,
             },
             DueDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            InvoiceID = "invoiceId",
             PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -1293,11 +1308,13 @@ public class ContractDeleteResponseDataNextInvoiceTest : TestBase
             Currency = ContractDeleteResponseDataNextInvoiceAmountCurrency.Usd,
         };
         DateTimeOffset expectedDueDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedInvoiceID = "invoiceId";
         DateTimeOffset expectedPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedAmount, model.Amount);
         Assert.Equal(expectedDueDate, model.DueDate);
+        Assert.Equal(expectedInvoiceID, model.InvoiceID);
         Assert.Equal(expectedPeriodEnd, model.PeriodEnd);
         Assert.Equal(expectedPeriodStart, model.PeriodStart);
     }
@@ -1313,6 +1330,7 @@ public class ContractDeleteResponseDataNextInvoiceTest : TestBase
                 Currency = ContractDeleteResponseDataNextInvoiceAmountCurrency.Usd,
             },
             DueDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            InvoiceID = "invoiceId",
             PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -1337,6 +1355,7 @@ public class ContractDeleteResponseDataNextInvoiceTest : TestBase
                 Currency = ContractDeleteResponseDataNextInvoiceAmountCurrency.Usd,
             },
             DueDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            InvoiceID = "invoiceId",
             PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -1354,11 +1373,13 @@ public class ContractDeleteResponseDataNextInvoiceTest : TestBase
             Currency = ContractDeleteResponseDataNextInvoiceAmountCurrency.Usd,
         };
         DateTimeOffset expectedDueDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        string expectedInvoiceID = "invoiceId";
         DateTimeOffset expectedPeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedPeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedAmount, deserialized.Amount);
         Assert.Equal(expectedDueDate, deserialized.DueDate);
+        Assert.Equal(expectedInvoiceID, deserialized.InvoiceID);
         Assert.Equal(expectedPeriodEnd, deserialized.PeriodEnd);
         Assert.Equal(expectedPeriodStart, deserialized.PeriodStart);
     }
@@ -1374,6 +1395,7 @@ public class ContractDeleteResponseDataNextInvoiceTest : TestBase
                 Currency = ContractDeleteResponseDataNextInvoiceAmountCurrency.Usd,
             },
             DueDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            InvoiceID = "invoiceId",
             PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -1392,6 +1414,7 @@ public class ContractDeleteResponseDataNextInvoiceTest : TestBase
                 Currency = ContractDeleteResponseDataNextInvoiceAmountCurrency.Usd,
             },
             DueDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            InvoiceID = "invoiceId",
             PeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             PeriodStart = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
