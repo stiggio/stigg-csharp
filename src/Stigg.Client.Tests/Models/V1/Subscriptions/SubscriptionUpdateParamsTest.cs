@@ -2928,6 +2928,7 @@ public class EntitlementTest : TestBase
             ID = "id",
             Amount = 1,
             Cadence = Subscriptions::Cadence.Month,
+            HasSoftLimit = true,
         };
         value.Validate();
     }
@@ -2967,6 +2968,7 @@ public class EntitlementTest : TestBase
             ID = "id",
             Amount = 1,
             Cadence = Subscriptions::Cadence.Month,
+            HasSoftLimit = true,
         };
         string element = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<Subscriptions::Entitlement>(
@@ -3861,17 +3863,20 @@ public class CreditTest : TestBase
             ID = "id",
             Amount = 1,
             Cadence = Subscriptions::Cadence.Month,
+            HasSoftLimit = true,
         };
 
         string expectedID = "id";
         double expectedAmount = 1;
         ApiEnum<string, Subscriptions::Cadence> expectedCadence = Subscriptions::Cadence.Month;
         JsonElement expectedType = JsonSerializer.SerializeToElement("CREDIT");
+        bool expectedHasSoftLimit = true;
 
         Assert.Equal(expectedID, model.ID);
         Assert.Equal(expectedAmount, model.Amount);
         Assert.Equal(expectedCadence, model.Cadence);
         Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
+        Assert.Equal(expectedHasSoftLimit, model.HasSoftLimit);
     }
 
     [Fact]
@@ -3882,6 +3887,7 @@ public class CreditTest : TestBase
             ID = "id",
             Amount = 1,
             Cadence = Subscriptions::Cadence.Month,
+            HasSoftLimit = true,
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -3901,6 +3907,7 @@ public class CreditTest : TestBase
             ID = "id",
             Amount = 1,
             Cadence = Subscriptions::Cadence.Month,
+            HasSoftLimit = true,
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -3914,11 +3921,13 @@ public class CreditTest : TestBase
         double expectedAmount = 1;
         ApiEnum<string, Subscriptions::Cadence> expectedCadence = Subscriptions::Cadence.Month;
         JsonElement expectedType = JsonSerializer.SerializeToElement("CREDIT");
+        bool expectedHasSoftLimit = true;
 
         Assert.Equal(expectedID, deserialized.ID);
         Assert.Equal(expectedAmount, deserialized.Amount);
         Assert.Equal(expectedCadence, deserialized.Cadence);
         Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
+        Assert.Equal(expectedHasSoftLimit, deserialized.HasSoftLimit);
     }
 
     [Fact]
@@ -3929,6 +3938,67 @@ public class CreditTest : TestBase
             ID = "id",
             Amount = 1,
             Cadence = Subscriptions::Cadence.Month,
+            HasSoftLimit = true,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new Subscriptions::Credit
+        {
+            ID = "id",
+            Amount = 1,
+            Cadence = Subscriptions::Cadence.Month,
+        };
+
+        Assert.Null(model.HasSoftLimit);
+        Assert.False(model.RawData.ContainsKey("hasSoftLimit"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new Subscriptions::Credit
+        {
+            ID = "id",
+            Amount = 1,
+            Cadence = Subscriptions::Cadence.Month,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
+    {
+        var model = new Subscriptions::Credit
+        {
+            ID = "id",
+            Amount = 1,
+            Cadence = Subscriptions::Cadence.Month,
+
+            // Null should be interpreted as omitted for these properties
+            HasSoftLimit = null,
+        };
+
+        Assert.Null(model.HasSoftLimit);
+        Assert.False(model.RawData.ContainsKey("hasSoftLimit"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new Subscriptions::Credit
+        {
+            ID = "id",
+            Amount = 1,
+            Cadence = Subscriptions::Cadence.Month,
+
+            // Null should be interpreted as omitted for these properties
+            HasSoftLimit = null,
         };
 
         model.Validate();
@@ -3942,6 +4012,7 @@ public class CreditTest : TestBase
             ID = "id",
             Amount = 1,
             Cadence = Subscriptions::Cadence.Month,
+            HasSoftLimit = true,
         };
 
         Subscriptions::Credit copied = new(model);

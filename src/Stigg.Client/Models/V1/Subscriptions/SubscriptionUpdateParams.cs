@@ -2273,6 +2273,11 @@ public record class Entitlement : ModelBase
         get { return Match(feature: (x) => x.Type, credit: (x) => x.Type); }
     }
 
+    public bool? HasSoftLimit
+    {
+        get { return Match<bool?>(feature: (x) => x.HasSoftLimit, credit: (x) => x.HasSoftLimit); }
+    }
+
     public Entitlement(Feature value, JsonElement? element = null)
     {
         this.Value = value;
@@ -3260,6 +3265,27 @@ public sealed record class Credit : JsonModel
         init { this._rawData.Set("type", value); }
     }
 
+    /// <summary>
+    /// Whether the credit balance is a soft limit
+    /// </summary>
+    public bool? HasSoftLimit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("hasSoftLimit");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("hasSoftLimit", value);
+        }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -3270,6 +3296,7 @@ public sealed record class Credit : JsonModel
         {
             throw new StiggInvalidDataException("Invalid value given for constant");
         }
+        _ = this.HasSoftLimit;
     }
 
     public Credit()
