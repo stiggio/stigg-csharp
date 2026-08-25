@@ -24,6 +24,29 @@ public class FeatureListFeaturesResponseTest : TestBase
             FeatureUnits = "featureUnits",
             FeatureUnitsPlural = "featureUnitsPlural",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Meter = new()
+            {
+                Aggregation = new()
+                {
+                    Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+                    Field = "field",
+                },
+                Filters =
+                [
+                    new(
+                        [
+                            new()
+                            {
+                                Field = "field",
+                                Operation =
+                                    FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+                                Value = "value",
+                                Values = ["string"],
+                            },
+                        ]
+                    ),
+                ],
+            },
             MeterType = FeatureListFeaturesResponseMeterType.None,
             UnitTransformation = new()
             {
@@ -50,6 +73,29 @@ public class FeatureListFeaturesResponseTest : TestBase
         string expectedFeatureUnits = "featureUnits";
         string expectedFeatureUnitsPlural = "featureUnitsPlural";
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        FeatureListFeaturesResponseMeter expectedMeter = new()
+        {
+            Aggregation = new()
+            {
+                Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+                Field = "field",
+            },
+            Filters =
+            [
+                new(
+                    [
+                        new()
+                        {
+                            Field = "field",
+                            Operation =
+                                FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+                            Value = "value",
+                            Values = ["string"],
+                        },
+                    ]
+                ),
+            ],
+        };
         ApiEnum<string, FeatureListFeaturesResponseMeterType> expectedMeterType =
             FeatureListFeaturesResponseMeterType.None;
         FeatureListFeaturesResponseUnitTransformation expectedUnitTransformation = new()
@@ -82,6 +128,7 @@ public class FeatureListFeaturesResponseTest : TestBase
 
             Assert.Equal(value, model.Metadata[item.Key]);
         }
+        Assert.Equal(expectedMeter, model.Meter);
         Assert.Equal(expectedMeterType, model.MeterType);
         Assert.Equal(expectedUnitTransformation, model.UnitTransformation);
         Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
@@ -102,6 +149,29 @@ public class FeatureListFeaturesResponseTest : TestBase
             FeatureUnits = "featureUnits",
             FeatureUnitsPlural = "featureUnitsPlural",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Meter = new()
+            {
+                Aggregation = new()
+                {
+                    Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+                    Field = "field",
+                },
+                Filters =
+                [
+                    new(
+                        [
+                            new()
+                            {
+                                Field = "field",
+                                Operation =
+                                    FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+                                Value = "value",
+                                Values = ["string"],
+                            },
+                        ]
+                    ),
+                ],
+            },
             MeterType = FeatureListFeaturesResponseMeterType.None,
             UnitTransformation = new()
             {
@@ -137,6 +207,29 @@ public class FeatureListFeaturesResponseTest : TestBase
             FeatureUnits = "featureUnits",
             FeatureUnitsPlural = "featureUnitsPlural",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Meter = new()
+            {
+                Aggregation = new()
+                {
+                    Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+                    Field = "field",
+                },
+                Filters =
+                [
+                    new(
+                        [
+                            new()
+                            {
+                                Field = "field",
+                                Operation =
+                                    FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+                                Value = "value",
+                                Values = ["string"],
+                            },
+                        ]
+                    ),
+                ],
+            },
             MeterType = FeatureListFeaturesResponseMeterType.None,
             UnitTransformation = new()
             {
@@ -170,6 +263,29 @@ public class FeatureListFeaturesResponseTest : TestBase
         string expectedFeatureUnits = "featureUnits";
         string expectedFeatureUnitsPlural = "featureUnitsPlural";
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        FeatureListFeaturesResponseMeter expectedMeter = new()
+        {
+            Aggregation = new()
+            {
+                Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+                Field = "field",
+            },
+            Filters =
+            [
+                new(
+                    [
+                        new()
+                        {
+                            Field = "field",
+                            Operation =
+                                FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+                            Value = "value",
+                            Values = ["string"],
+                        },
+                    ]
+                ),
+            ],
+        };
         ApiEnum<string, FeatureListFeaturesResponseMeterType> expectedMeterType =
             FeatureListFeaturesResponseMeterType.None;
         FeatureListFeaturesResponseUnitTransformation expectedUnitTransformation = new()
@@ -202,6 +318,7 @@ public class FeatureListFeaturesResponseTest : TestBase
 
             Assert.Equal(value, deserialized.Metadata[item.Key]);
         }
+        Assert.Equal(expectedMeter, deserialized.Meter);
         Assert.Equal(expectedMeterType, deserialized.MeterType);
         Assert.Equal(expectedUnitTransformation, deserialized.UnitTransformation);
         Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
@@ -222,6 +339,29 @@ public class FeatureListFeaturesResponseTest : TestBase
             FeatureUnits = "featureUnits",
             FeatureUnitsPlural = "featureUnitsPlural",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Meter = new()
+            {
+                Aggregation = new()
+                {
+                    Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+                    Field = "field",
+                },
+                Filters =
+                [
+                    new(
+                        [
+                            new()
+                            {
+                                Field = "field",
+                                Operation =
+                                    FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+                                Value = "value",
+                                Values = ["string"],
+                            },
+                        ]
+                    ),
+                ],
+            },
             MeterType = FeatureListFeaturesResponseMeterType.None,
             UnitTransformation = new()
             {
@@ -251,6 +391,29 @@ public class FeatureListFeaturesResponseTest : TestBase
             FeatureUnits = "featureUnits",
             FeatureUnitsPlural = "featureUnitsPlural",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Meter = new()
+            {
+                Aggregation = new()
+                {
+                    Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+                    Field = "field",
+                },
+                Filters =
+                [
+                    new(
+                        [
+                            new()
+                            {
+                                Field = "field",
+                                Operation =
+                                    FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+                                Value = "value",
+                                Values = ["string"],
+                            },
+                        ]
+                    ),
+                ],
+            },
             MeterType = FeatureListFeaturesResponseMeterType.None,
             UnitTransformation = new()
             {
@@ -460,6 +623,832 @@ public class FeatureListFeaturesResponseFeatureTypeTest : TestBase
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<
             ApiEnum<string, FeatureListFeaturesResponseFeatureType>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class FeatureListFeaturesResponseMeterTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new FeatureListFeaturesResponseMeter
+        {
+            Aggregation = new()
+            {
+                Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+                Field = "field",
+            },
+            Filters =
+            [
+                new(
+                    [
+                        new()
+                        {
+                            Field = "field",
+                            Operation =
+                                FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+                            Value = "value",
+                            Values = ["string"],
+                        },
+                    ]
+                ),
+            ],
+        };
+
+        FeatureListFeaturesResponseMeterAggregation expectedAggregation = new()
+        {
+            Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+            Field = "field",
+        };
+        List<FeatureListFeaturesResponseMeterFilter> expectedFilters =
+        [
+            new(
+                [
+                    new()
+                    {
+                        Field = "field",
+                        Operation = FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+                        Value = "value",
+                        Values = ["string"],
+                    },
+                ]
+            ),
+        ];
+
+        Assert.Equal(expectedAggregation, model.Aggregation);
+        Assert.Equal(expectedFilters.Count, model.Filters.Count);
+        for (int i = 0; i < expectedFilters.Count; i++)
+        {
+            Assert.Equal(expectedFilters[i], model.Filters[i]);
+        }
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new FeatureListFeaturesResponseMeter
+        {
+            Aggregation = new()
+            {
+                Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+                Field = "field",
+            },
+            Filters =
+            [
+                new(
+                    [
+                        new()
+                        {
+                            Field = "field",
+                            Operation =
+                                FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+                            Value = "value",
+                            Values = ["string"],
+                        },
+                    ]
+                ),
+            ],
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<FeatureListFeaturesResponseMeter>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new FeatureListFeaturesResponseMeter
+        {
+            Aggregation = new()
+            {
+                Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+                Field = "field",
+            },
+            Filters =
+            [
+                new(
+                    [
+                        new()
+                        {
+                            Field = "field",
+                            Operation =
+                                FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+                            Value = "value",
+                            Values = ["string"],
+                        },
+                    ]
+                ),
+            ],
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<FeatureListFeaturesResponseMeter>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        FeatureListFeaturesResponseMeterAggregation expectedAggregation = new()
+        {
+            Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+            Field = "field",
+        };
+        List<FeatureListFeaturesResponseMeterFilter> expectedFilters =
+        [
+            new(
+                [
+                    new()
+                    {
+                        Field = "field",
+                        Operation = FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+                        Value = "value",
+                        Values = ["string"],
+                    },
+                ]
+            ),
+        ];
+
+        Assert.Equal(expectedAggregation, deserialized.Aggregation);
+        Assert.Equal(expectedFilters.Count, deserialized.Filters.Count);
+        for (int i = 0; i < expectedFilters.Count; i++)
+        {
+            Assert.Equal(expectedFilters[i], deserialized.Filters[i]);
+        }
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new FeatureListFeaturesResponseMeter
+        {
+            Aggregation = new()
+            {
+                Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+                Field = "field",
+            },
+            Filters =
+            [
+                new(
+                    [
+                        new()
+                        {
+                            Field = "field",
+                            Operation =
+                                FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+                            Value = "value",
+                            Values = ["string"],
+                        },
+                    ]
+                ),
+            ],
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new FeatureListFeaturesResponseMeter
+        {
+            Aggregation = new()
+            {
+                Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+                Field = "field",
+            },
+            Filters =
+            [
+                new(
+                    [
+                        new()
+                        {
+                            Field = "field",
+                            Operation =
+                                FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+                            Value = "value",
+                            Values = ["string"],
+                        },
+                    ]
+                ),
+            ],
+        };
+
+        FeatureListFeaturesResponseMeter copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class FeatureListFeaturesResponseMeterAggregationTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new FeatureListFeaturesResponseMeterAggregation
+        {
+            Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+            Field = "field",
+        };
+
+        ApiEnum<string, FeatureListFeaturesResponseMeterAggregationFunction> expectedFunction =
+            FeatureListFeaturesResponseMeterAggregationFunction.Sum;
+        string expectedField = "field";
+
+        Assert.Equal(expectedFunction, model.Function);
+        Assert.Equal(expectedField, model.Field);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new FeatureListFeaturesResponseMeterAggregation
+        {
+            Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+            Field = "field",
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<FeatureListFeaturesResponseMeterAggregation>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new FeatureListFeaturesResponseMeterAggregation
+        {
+            Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+            Field = "field",
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<FeatureListFeaturesResponseMeterAggregation>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        ApiEnum<string, FeatureListFeaturesResponseMeterAggregationFunction> expectedFunction =
+            FeatureListFeaturesResponseMeterAggregationFunction.Sum;
+        string expectedField = "field";
+
+        Assert.Equal(expectedFunction, deserialized.Function);
+        Assert.Equal(expectedField, deserialized.Field);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new FeatureListFeaturesResponseMeterAggregation
+        {
+            Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+            Field = "field",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new FeatureListFeaturesResponseMeterAggregation
+        {
+            Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+        };
+
+        Assert.Null(model.Field);
+        Assert.False(model.RawData.ContainsKey("field"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new FeatureListFeaturesResponseMeterAggregation
+        {
+            Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new FeatureListFeaturesResponseMeterAggregation
+        {
+            Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+
+            Field = null,
+        };
+
+        Assert.Null(model.Field);
+        Assert.True(model.RawData.ContainsKey("field"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new FeatureListFeaturesResponseMeterAggregation
+        {
+            Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+
+            Field = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new FeatureListFeaturesResponseMeterAggregation
+        {
+            Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+            Field = "field",
+        };
+
+        FeatureListFeaturesResponseMeterAggregation copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class FeatureListFeaturesResponseMeterAggregationFunctionTest : TestBase
+{
+    [Theory]
+    [InlineData(FeatureListFeaturesResponseMeterAggregationFunction.Sum)]
+    [InlineData(FeatureListFeaturesResponseMeterAggregationFunction.Max)]
+    [InlineData(FeatureListFeaturesResponseMeterAggregationFunction.Min)]
+    [InlineData(FeatureListFeaturesResponseMeterAggregationFunction.Avg)]
+    [InlineData(FeatureListFeaturesResponseMeterAggregationFunction.Count)]
+    [InlineData(FeatureListFeaturesResponseMeterAggregationFunction.Unique)]
+    public void Validation_Works(FeatureListFeaturesResponseMeterAggregationFunction rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, FeatureListFeaturesResponseMeterAggregationFunction> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, FeatureListFeaturesResponseMeterAggregationFunction>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(FeatureListFeaturesResponseMeterAggregationFunction.Sum)]
+    [InlineData(FeatureListFeaturesResponseMeterAggregationFunction.Max)]
+    [InlineData(FeatureListFeaturesResponseMeterAggregationFunction.Min)]
+    [InlineData(FeatureListFeaturesResponseMeterAggregationFunction.Avg)]
+    [InlineData(FeatureListFeaturesResponseMeterAggregationFunction.Count)]
+    [InlineData(FeatureListFeaturesResponseMeterAggregationFunction.Unique)]
+    public void SerializationRoundtrip_Works(
+        FeatureListFeaturesResponseMeterAggregationFunction rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, FeatureListFeaturesResponseMeterAggregationFunction> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, FeatureListFeaturesResponseMeterAggregationFunction>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, FeatureListFeaturesResponseMeterAggregationFunction>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, FeatureListFeaturesResponseMeterAggregationFunction>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class FeatureListFeaturesResponseMeterFilterTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new FeatureListFeaturesResponseMeterFilter
+        {
+            Conditions =
+            [
+                new()
+                {
+                    Field = "field",
+                    Operation = FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+                    Value = "value",
+                    Values = ["string"],
+                },
+            ],
+        };
+
+        List<FeatureListFeaturesResponseMeterFilterCondition> expectedConditions =
+        [
+            new()
+            {
+                Field = "field",
+                Operation = FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+                Value = "value",
+                Values = ["string"],
+            },
+        ];
+
+        Assert.Equal(expectedConditions.Count, model.Conditions.Count);
+        for (int i = 0; i < expectedConditions.Count; i++)
+        {
+            Assert.Equal(expectedConditions[i], model.Conditions[i]);
+        }
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new FeatureListFeaturesResponseMeterFilter
+        {
+            Conditions =
+            [
+                new()
+                {
+                    Field = "field",
+                    Operation = FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+                    Value = "value",
+                    Values = ["string"],
+                },
+            ],
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<FeatureListFeaturesResponseMeterFilter>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new FeatureListFeaturesResponseMeterFilter
+        {
+            Conditions =
+            [
+                new()
+                {
+                    Field = "field",
+                    Operation = FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+                    Value = "value",
+                    Values = ["string"],
+                },
+            ],
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<FeatureListFeaturesResponseMeterFilter>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        List<FeatureListFeaturesResponseMeterFilterCondition> expectedConditions =
+        [
+            new()
+            {
+                Field = "field",
+                Operation = FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+                Value = "value",
+                Values = ["string"],
+            },
+        ];
+
+        Assert.Equal(expectedConditions.Count, deserialized.Conditions.Count);
+        for (int i = 0; i < expectedConditions.Count; i++)
+        {
+            Assert.Equal(expectedConditions[i], deserialized.Conditions[i]);
+        }
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new FeatureListFeaturesResponseMeterFilter
+        {
+            Conditions =
+            [
+                new()
+                {
+                    Field = "field",
+                    Operation = FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+                    Value = "value",
+                    Values = ["string"],
+                },
+            ],
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new FeatureListFeaturesResponseMeterFilter
+        {
+            Conditions =
+            [
+                new()
+                {
+                    Field = "field",
+                    Operation = FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+                    Value = "value",
+                    Values = ["string"],
+                },
+            ],
+        };
+
+        FeatureListFeaturesResponseMeterFilter copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class FeatureListFeaturesResponseMeterFilterConditionTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new FeatureListFeaturesResponseMeterFilterCondition
+        {
+            Field = "field",
+            Operation = FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+            Value = "value",
+            Values = ["string"],
+        };
+
+        string expectedField = "field";
+        ApiEnum<
+            string,
+            FeatureListFeaturesResponseMeterFilterConditionOperation
+        > expectedOperation = FeatureListFeaturesResponseMeterFilterConditionOperation.Equals;
+        string expectedValue = "value";
+        List<string> expectedValues = ["string"];
+
+        Assert.Equal(expectedField, model.Field);
+        Assert.Equal(expectedOperation, model.Operation);
+        Assert.Equal(expectedValue, model.Value);
+        Assert.NotNull(model.Values);
+        Assert.Equal(expectedValues.Count, model.Values.Count);
+        for (int i = 0; i < expectedValues.Count; i++)
+        {
+            Assert.Equal(expectedValues[i], model.Values[i]);
+        }
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new FeatureListFeaturesResponseMeterFilterCondition
+        {
+            Field = "field",
+            Operation = FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+            Value = "value",
+            Values = ["string"],
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<FeatureListFeaturesResponseMeterFilterCondition>(
+                json,
+                ModelBase.SerializerOptions
+            );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new FeatureListFeaturesResponseMeterFilterCondition
+        {
+            Field = "field",
+            Operation = FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+            Value = "value",
+            Values = ["string"],
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<FeatureListFeaturesResponseMeterFilterCondition>(
+                element,
+                ModelBase.SerializerOptions
+            );
+        Assert.NotNull(deserialized);
+
+        string expectedField = "field";
+        ApiEnum<
+            string,
+            FeatureListFeaturesResponseMeterFilterConditionOperation
+        > expectedOperation = FeatureListFeaturesResponseMeterFilterConditionOperation.Equals;
+        string expectedValue = "value";
+        List<string> expectedValues = ["string"];
+
+        Assert.Equal(expectedField, deserialized.Field);
+        Assert.Equal(expectedOperation, deserialized.Operation);
+        Assert.Equal(expectedValue, deserialized.Value);
+        Assert.NotNull(deserialized.Values);
+        Assert.Equal(expectedValues.Count, deserialized.Values.Count);
+        for (int i = 0; i < expectedValues.Count; i++)
+        {
+            Assert.Equal(expectedValues[i], deserialized.Values[i]);
+        }
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new FeatureListFeaturesResponseMeterFilterCondition
+        {
+            Field = "field",
+            Operation = FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+            Value = "value",
+            Values = ["string"],
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new FeatureListFeaturesResponseMeterFilterCondition
+        {
+            Field = "field",
+            Operation = FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+        };
+
+        Assert.Null(model.Value);
+        Assert.False(model.RawData.ContainsKey("value"));
+        Assert.Null(model.Values);
+        Assert.False(model.RawData.ContainsKey("values"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new FeatureListFeaturesResponseMeterFilterCondition
+        {
+            Field = "field",
+            Operation = FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new FeatureListFeaturesResponseMeterFilterCondition
+        {
+            Field = "field",
+            Operation = FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+
+            Value = null,
+            Values = null,
+        };
+
+        Assert.Null(model.Value);
+        Assert.True(model.RawData.ContainsKey("value"));
+        Assert.Null(model.Values);
+        Assert.True(model.RawData.ContainsKey("values"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new FeatureListFeaturesResponseMeterFilterCondition
+        {
+            Field = "field",
+            Operation = FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+
+            Value = null,
+            Values = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new FeatureListFeaturesResponseMeterFilterCondition
+        {
+            Field = "field",
+            Operation = FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+            Value = "value",
+            Values = ["string"],
+        };
+
+        FeatureListFeaturesResponseMeterFilterCondition copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class FeatureListFeaturesResponseMeterFilterConditionOperationTest : TestBase
+{
+    [Theory]
+    [InlineData(FeatureListFeaturesResponseMeterFilterConditionOperation.Equals)]
+    [InlineData(FeatureListFeaturesResponseMeterFilterConditionOperation.NotEquals)]
+    [InlineData(FeatureListFeaturesResponseMeterFilterConditionOperation.GreaterThan)]
+    [InlineData(FeatureListFeaturesResponseMeterFilterConditionOperation.GreaterThanOrEqual)]
+    [InlineData(FeatureListFeaturesResponseMeterFilterConditionOperation.LessThan)]
+    [InlineData(FeatureListFeaturesResponseMeterFilterConditionOperation.LessThanOrEqual)]
+    [InlineData(FeatureListFeaturesResponseMeterFilterConditionOperation.IsNull)]
+    [InlineData(FeatureListFeaturesResponseMeterFilterConditionOperation.IsNotNull)]
+    [InlineData(FeatureListFeaturesResponseMeterFilterConditionOperation.Contains)]
+    [InlineData(FeatureListFeaturesResponseMeterFilterConditionOperation.StartsWith)]
+    [InlineData(FeatureListFeaturesResponseMeterFilterConditionOperation.EndsWith)]
+    [InlineData(FeatureListFeaturesResponseMeterFilterConditionOperation.In)]
+    public void Validation_Works(FeatureListFeaturesResponseMeterFilterConditionOperation rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, FeatureListFeaturesResponseMeterFilterConditionOperation> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, FeatureListFeaturesResponseMeterFilterConditionOperation>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(FeatureListFeaturesResponseMeterFilterConditionOperation.Equals)]
+    [InlineData(FeatureListFeaturesResponseMeterFilterConditionOperation.NotEquals)]
+    [InlineData(FeatureListFeaturesResponseMeterFilterConditionOperation.GreaterThan)]
+    [InlineData(FeatureListFeaturesResponseMeterFilterConditionOperation.GreaterThanOrEqual)]
+    [InlineData(FeatureListFeaturesResponseMeterFilterConditionOperation.LessThan)]
+    [InlineData(FeatureListFeaturesResponseMeterFilterConditionOperation.LessThanOrEqual)]
+    [InlineData(FeatureListFeaturesResponseMeterFilterConditionOperation.IsNull)]
+    [InlineData(FeatureListFeaturesResponseMeterFilterConditionOperation.IsNotNull)]
+    [InlineData(FeatureListFeaturesResponseMeterFilterConditionOperation.Contains)]
+    [InlineData(FeatureListFeaturesResponseMeterFilterConditionOperation.StartsWith)]
+    [InlineData(FeatureListFeaturesResponseMeterFilterConditionOperation.EndsWith)]
+    [InlineData(FeatureListFeaturesResponseMeterFilterConditionOperation.In)]
+    public void SerializationRoundtrip_Works(
+        FeatureListFeaturesResponseMeterFilterConditionOperation rawValue
+    )
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, FeatureListFeaturesResponseMeterFilterConditionOperation> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, FeatureListFeaturesResponseMeterFilterConditionOperation>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, FeatureListFeaturesResponseMeterFilterConditionOperation>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, FeatureListFeaturesResponseMeterFilterConditionOperation>
         >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);

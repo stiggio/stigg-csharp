@@ -230,6 +230,19 @@ public sealed record class Data : JsonModel
     }
 
     /// <summary>
+    /// Event meter that turns reported events into usage for a metered feature
+    /// </summary>
+    public required DataMeter? Meter
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<DataMeter>("meter");
+        }
+        init { this._rawData.Set("meter", value); }
+    }
+
+    /// <summary>
     /// The meter type for the feature
     /// </summary>
     public required ApiEnum<string, DataMeterType> MeterType
@@ -284,6 +297,7 @@ public sealed record class Data : JsonModel
         _ = this.FeatureUnits;
         _ = this.FeatureUnitsPlural;
         _ = this.Metadata;
+        this.Meter?.Validate();
         this.MeterType.Validate();
         this.UnitTransformation?.Validate();
         _ = this.UpdatedAt;
@@ -489,6 +503,502 @@ sealed class DataFeatureTypeConverter : JsonConverter<DataFeatureType>
                 DataFeatureType.Boolean => "BOOLEAN",
                 DataFeatureType.Number => "NUMBER",
                 DataFeatureType.Enum => "ENUM",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Event meter that turns reported events into usage for a metered feature
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<DataMeter, DataMeterFromRaw>))]
+public sealed record class DataMeter : JsonModel
+{
+    /// <summary>
+    /// How the matching events are aggregated into a usage value
+    /// </summary>
+    public required DataMeterAggregation Aggregation
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<DataMeterAggregation>("aggregation");
+        }
+        init { this._rawData.Set("aggregation", value); }
+    }
+
+    /// <summary>
+    /// Event filters. Conditions within a filter are ANDed, and filters are ORed
+    /// </summary>
+    public required IReadOnlyList<DataMeterFilter> Filters
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<DataMeterFilter>>("filters");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<DataMeterFilter>>(
+                "filters",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        this.Aggregation.Validate();
+        foreach (var item in this.Filters)
+        {
+            item.Validate();
+        }
+    }
+
+    public DataMeter() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public DataMeter(DataMeter dataMeter)
+        : base(dataMeter) { }
+#pragma warning restore CS8618
+
+    public DataMeter(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    DataMeter(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="DataMeterFromRaw.FromRawUnchecked"/>
+    public static DataMeter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class DataMeterFromRaw : IFromRawJson<DataMeter>
+{
+    /// <inheritdoc/>
+    public DataMeter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        DataMeter.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// How the matching events are aggregated into a usage value
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<DataMeterAggregation, DataMeterAggregationFromRaw>))]
+public sealed record class DataMeterAggregation : JsonModel
+{
+    /// <summary>
+    /// Aggregation function applied to the matching events
+    /// </summary>
+    public required ApiEnum<string, DataMeterAggregationFunction> Function
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, DataMeterAggregationFunction>>(
+                "function"
+            );
+        }
+        init { this._rawData.Set("function", value); }
+    }
+
+    /// <summary>
+    /// Aggregation field name
+    /// </summary>
+    public string? Field
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("field");
+        }
+        init { this._rawData.Set("field", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        this.Function.Validate();
+        _ = this.Field;
+    }
+
+    public DataMeterAggregation() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public DataMeterAggregation(DataMeterAggregation dataMeterAggregation)
+        : base(dataMeterAggregation) { }
+#pragma warning restore CS8618
+
+    public DataMeterAggregation(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    DataMeterAggregation(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="DataMeterAggregationFromRaw.FromRawUnchecked"/>
+    public static DataMeterAggregation FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+
+    [SetsRequiredMembers]
+    public DataMeterAggregation(ApiEnum<string, DataMeterAggregationFunction> function)
+        : this()
+    {
+        this.Function = function;
+    }
+}
+
+class DataMeterAggregationFromRaw : IFromRawJson<DataMeterAggregation>
+{
+    /// <inheritdoc/>
+    public DataMeterAggregation FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => DataMeterAggregation.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Aggregation function applied to the matching events
+/// </summary>
+[JsonConverter(typeof(DataMeterAggregationFunctionConverter))]
+public enum DataMeterAggregationFunction
+{
+    Sum,
+    Max,
+    Min,
+    Avg,
+    Count,
+    Unique,
+}
+
+sealed class DataMeterAggregationFunctionConverter : JsonConverter<DataMeterAggregationFunction>
+{
+    public override DataMeterAggregationFunction Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "SUM" => DataMeterAggregationFunction.Sum,
+            "MAX" => DataMeterAggregationFunction.Max,
+            "MIN" => DataMeterAggregationFunction.Min,
+            "AVG" => DataMeterAggregationFunction.Avg,
+            "COUNT" => DataMeterAggregationFunction.Count,
+            "UNIQUE" => DataMeterAggregationFunction.Unique,
+            _ => (DataMeterAggregationFunction)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        DataMeterAggregationFunction value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                DataMeterAggregationFunction.Sum => "SUM",
+                DataMeterAggregationFunction.Max => "MAX",
+                DataMeterAggregationFunction.Min => "MIN",
+                DataMeterAggregationFunction.Avg => "AVG",
+                DataMeterAggregationFunction.Count => "COUNT",
+                DataMeterAggregationFunction.Unique => "UNIQUE",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// A set of conditions an event must all match
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<DataMeterFilter, DataMeterFilterFromRaw>))]
+public sealed record class DataMeterFilter : JsonModel
+{
+    /// <summary>
+    /// Conditions the event must match
+    /// </summary>
+    public required IReadOnlyList<DataMeterFilterCondition> Conditions
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<DataMeterFilterCondition>>(
+                "conditions"
+            );
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<DataMeterFilterCondition>>(
+                "conditions",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        foreach (var item in this.Conditions)
+        {
+            item.Validate();
+        }
+    }
+
+    public DataMeterFilter() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public DataMeterFilter(DataMeterFilter dataMeterFilter)
+        : base(dataMeterFilter) { }
+#pragma warning restore CS8618
+
+    public DataMeterFilter(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    DataMeterFilter(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="DataMeterFilterFromRaw.FromRawUnchecked"/>
+    public static DataMeterFilter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+
+    [SetsRequiredMembers]
+    public DataMeterFilter(IReadOnlyList<DataMeterFilterCondition> conditions)
+        : this()
+    {
+        this.Conditions = conditions;
+    }
+}
+
+class DataMeterFilterFromRaw : IFromRawJson<DataMeterFilter>
+{
+    /// <inheritdoc/>
+    public DataMeterFilter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        DataMeterFilter.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Meter filter condition
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<DataMeterFilterCondition, DataMeterFilterConditionFromRaw>)
+)]
+public sealed record class DataMeterFilterCondition : JsonModel
+{
+    /// <summary>
+    /// Condition field name
+    /// </summary>
+    public required string Field
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("field");
+        }
+        init { this._rawData.Set("field", value); }
+    }
+
+    /// <summary>
+    /// Comparison applied to the condition field
+    /// </summary>
+    public required ApiEnum<string, DataMeterFilterConditionOperation> Operation
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, DataMeterFilterConditionOperation>
+            >("operation");
+        }
+        init { this._rawData.Set("operation", value); }
+    }
+
+    /// <summary>
+    /// Condition value
+    /// </summary>
+    public string? Value
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("value");
+        }
+        init { this._rawData.Set("value", value); }
+    }
+
+    public IReadOnlyList<string>? Values
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<string>>("values");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<string>?>(
+                "values",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.Field;
+        this.Operation.Validate();
+        _ = this.Value;
+        _ = this.Values;
+    }
+
+    public DataMeterFilterCondition() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public DataMeterFilterCondition(DataMeterFilterCondition dataMeterFilterCondition)
+        : base(dataMeterFilterCondition) { }
+#pragma warning restore CS8618
+
+    public DataMeterFilterCondition(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    DataMeterFilterCondition(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="DataMeterFilterConditionFromRaw.FromRawUnchecked"/>
+    public static DataMeterFilterCondition FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class DataMeterFilterConditionFromRaw : IFromRawJson<DataMeterFilterCondition>
+{
+    /// <inheritdoc/>
+    public DataMeterFilterCondition FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => DataMeterFilterCondition.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Comparison applied to the condition field
+/// </summary>
+[JsonConverter(typeof(DataMeterFilterConditionOperationConverter))]
+public enum DataMeterFilterConditionOperation
+{
+    Equals,
+    NotEquals,
+    GreaterThan,
+    GreaterThanOrEqual,
+    LessThan,
+    LessThanOrEqual,
+    IsNull,
+    IsNotNull,
+    Contains,
+    StartsWith,
+    EndsWith,
+    In,
+}
+
+sealed class DataMeterFilterConditionOperationConverter
+    : JsonConverter<DataMeterFilterConditionOperation>
+{
+    public override DataMeterFilterConditionOperation Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "EQUALS" => DataMeterFilterConditionOperation.Equals,
+            "NOT_EQUALS" => DataMeterFilterConditionOperation.NotEquals,
+            "GREATER_THAN" => DataMeterFilterConditionOperation.GreaterThan,
+            "GREATER_THAN_OR_EQUAL" => DataMeterFilterConditionOperation.GreaterThanOrEqual,
+            "LESS_THAN" => DataMeterFilterConditionOperation.LessThan,
+            "LESS_THAN_OR_EQUAL" => DataMeterFilterConditionOperation.LessThanOrEqual,
+            "IS_NULL" => DataMeterFilterConditionOperation.IsNull,
+            "IS_NOT_NULL" => DataMeterFilterConditionOperation.IsNotNull,
+            "CONTAINS" => DataMeterFilterConditionOperation.Contains,
+            "STARTS_WITH" => DataMeterFilterConditionOperation.StartsWith,
+            "ENDS_WITH" => DataMeterFilterConditionOperation.EndsWith,
+            "IN" => DataMeterFilterConditionOperation.In,
+            _ => (DataMeterFilterConditionOperation)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        DataMeterFilterConditionOperation value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                DataMeterFilterConditionOperation.Equals => "EQUALS",
+                DataMeterFilterConditionOperation.NotEquals => "NOT_EQUALS",
+                DataMeterFilterConditionOperation.GreaterThan => "GREATER_THAN",
+                DataMeterFilterConditionOperation.GreaterThanOrEqual => "GREATER_THAN_OR_EQUAL",
+                DataMeterFilterConditionOperation.LessThan => "LESS_THAN",
+                DataMeterFilterConditionOperation.LessThanOrEqual => "LESS_THAN_OR_EQUAL",
+                DataMeterFilterConditionOperation.IsNull => "IS_NULL",
+                DataMeterFilterConditionOperation.IsNotNull => "IS_NOT_NULL",
+                DataMeterFilterConditionOperation.Contains => "CONTAINS",
+                DataMeterFilterConditionOperation.StartsWith => "STARTS_WITH",
+                DataMeterFilterConditionOperation.EndsWith => "ENDS_WITH",
+                DataMeterFilterConditionOperation.In => "IN",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

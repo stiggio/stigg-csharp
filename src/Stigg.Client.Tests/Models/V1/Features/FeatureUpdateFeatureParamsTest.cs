@@ -24,15 +24,20 @@ public class FeatureUpdateFeatureParamsTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Meter = new()
             {
-                Aggregation = new() { Function = Function.Sum, Field = "field" },
+                Aggregation = new()
+                {
+                    Function = FeatureUpdateFeatureParamsMeterAggregationFunction.Sum,
+                    Field = "x",
+                },
                 Filters =
                 [
                     new(
                         [
                             new()
                             {
-                                Field = "field",
-                                Operation = Operation.Equals,
+                                Field = "x",
+                                Operation =
+                                    FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals,
                                 Value = "value",
                                 Values = ["string"],
                             },
@@ -61,17 +66,22 @@ public class FeatureUpdateFeatureParamsTest : TestBase
         string expectedFeatureUnits = "featureUnits";
         string expectedFeatureUnitsPlural = "featureUnitsPlural";
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
-        Meter expectedMeter = new()
+        FeatureUpdateFeatureParamsMeter expectedMeter = new()
         {
-            Aggregation = new() { Function = Function.Sum, Field = "field" },
+            Aggregation = new()
+            {
+                Function = FeatureUpdateFeatureParamsMeterAggregationFunction.Sum,
+                Field = "x",
+            },
             Filters =
             [
                 new(
                     [
                         new()
                         {
-                            Field = "field",
-                            Operation = Operation.Equals,
+                            Field = "x",
+                            Operation =
+                                FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals,
                             Value = "value",
                             Values = ["string"],
                         },
@@ -209,15 +219,20 @@ public class FeatureUpdateFeatureParamsTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Meter = new()
             {
-                Aggregation = new() { Function = Function.Sum, Field = "field" },
+                Aggregation = new()
+                {
+                    Function = FeatureUpdateFeatureParamsMeterAggregationFunction.Sum,
+                    Field = "x",
+                },
                 Filters =
                 [
                     new(
                         [
                             new()
                             {
-                                Field = "field",
-                                Operation = Operation.Equals,
+                                Field = "x",
+                                Operation =
+                                    FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals,
                                 Value = "value",
                                 Values = ["string"],
                             },
@@ -247,15 +262,20 @@ public class FeatureUpdateFeatureParamsTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Meter = new()
             {
-                Aggregation = new() { Function = Function.Sum, Field = "field" },
+                Aggregation = new()
+                {
+                    Function = FeatureUpdateFeatureParamsMeterAggregationFunction.Sum,
+                    Field = "x",
+                },
                 Filters =
                 [
                     new(
                         [
                             new()
                             {
-                                Field = "field",
-                                Operation = Operation.Equals,
+                                Field = "x",
+                                Operation =
+                                    FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals,
                                 Value = "value",
                                 Values = ["string"],
                             },
@@ -314,15 +334,20 @@ public class FeatureUpdateFeatureParamsTest : TestBase
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
             Meter = new()
             {
-                Aggregation = new() { Function = Function.Sum, Field = "field" },
+                Aggregation = new()
+                {
+                    Function = FeatureUpdateFeatureParamsMeterAggregationFunction.Sum,
+                    Field = "x",
+                },
                 Filters =
                 [
                     new(
                         [
                             new()
                             {
-                                Field = "field",
-                                Operation = Operation.Equals,
+                                Field = "x",
+                                Operation =
+                                    FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals,
                                 Value = "value",
                                 Values = ["string"],
                             },
@@ -433,22 +458,27 @@ public class FeatureUpdateFeatureParamsEnumConfigurationTest : TestBase
     }
 }
 
-public class MeterTest : TestBase
+public class FeatureUpdateFeatureParamsMeterTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Meter
+        var model = new FeatureUpdateFeatureParamsMeter
         {
-            Aggregation = new() { Function = Function.Sum, Field = "field" },
+            Aggregation = new()
+            {
+                Function = FeatureUpdateFeatureParamsMeterAggregationFunction.Sum,
+                Field = "x",
+            },
             Filters =
             [
                 new(
                     [
                         new()
                         {
-                            Field = "field",
-                            Operation = Operation.Equals,
+                            Field = "x",
+                            Operation =
+                                FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals,
                             Value = "value",
                             Values = ["string"],
                         },
@@ -457,15 +487,19 @@ public class MeterTest : TestBase
             ],
         };
 
-        Aggregation expectedAggregation = new() { Function = Function.Sum, Field = "field" };
-        List<Filter> expectedFilters =
+        FeatureUpdateFeatureParamsMeterAggregation expectedAggregation = new()
+        {
+            Function = FeatureUpdateFeatureParamsMeterAggregationFunction.Sum,
+            Field = "x",
+        };
+        List<FeatureUpdateFeatureParamsMeterFilter> expectedFilters =
         [
             new(
                 [
                     new()
                     {
-                        Field = "field",
-                        Operation = Operation.Equals,
+                        Field = "x",
+                        Operation = FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals,
                         Value = "value",
                         Values = ["string"],
                     },
@@ -484,17 +518,22 @@ public class MeterTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Meter
+        var model = new FeatureUpdateFeatureParamsMeter
         {
-            Aggregation = new() { Function = Function.Sum, Field = "field" },
+            Aggregation = new()
+            {
+                Function = FeatureUpdateFeatureParamsMeterAggregationFunction.Sum,
+                Field = "x",
+            },
             Filters =
             [
                 new(
                     [
                         new()
                         {
-                            Field = "field",
-                            Operation = Operation.Equals,
+                            Field = "x",
+                            Operation =
+                                FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals,
                             Value = "value",
                             Values = ["string"],
                         },
@@ -504,7 +543,10 @@ public class MeterTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Meter>(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<FeatureUpdateFeatureParamsMeter>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -512,17 +554,22 @@ public class MeterTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Meter
+        var model = new FeatureUpdateFeatureParamsMeter
         {
-            Aggregation = new() { Function = Function.Sum, Field = "field" },
+            Aggregation = new()
+            {
+                Function = FeatureUpdateFeatureParamsMeterAggregationFunction.Sum,
+                Field = "x",
+            },
             Filters =
             [
                 new(
                     [
                         new()
                         {
-                            Field = "field",
-                            Operation = Operation.Equals,
+                            Field = "x",
+                            Operation =
+                                FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals,
                             Value = "value",
                             Values = ["string"],
                         },
@@ -532,18 +579,25 @@ public class MeterTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Meter>(element, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<FeatureUpdateFeatureParamsMeter>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
-        Aggregation expectedAggregation = new() { Function = Function.Sum, Field = "field" };
-        List<Filter> expectedFilters =
+        FeatureUpdateFeatureParamsMeterAggregation expectedAggregation = new()
+        {
+            Function = FeatureUpdateFeatureParamsMeterAggregationFunction.Sum,
+            Field = "x",
+        };
+        List<FeatureUpdateFeatureParamsMeterFilter> expectedFilters =
         [
             new(
                 [
                     new()
                     {
-                        Field = "field",
-                        Operation = Operation.Equals,
+                        Field = "x",
+                        Operation = FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals,
                         Value = "value",
                         Values = ["string"],
                     },
@@ -562,17 +616,22 @@ public class MeterTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Meter
+        var model = new FeatureUpdateFeatureParamsMeter
         {
-            Aggregation = new() { Function = Function.Sum, Field = "field" },
+            Aggregation = new()
+            {
+                Function = FeatureUpdateFeatureParamsMeterAggregationFunction.Sum,
+                Field = "x",
+            },
             Filters =
             [
                 new(
                     [
                         new()
                         {
-                            Field = "field",
-                            Operation = Operation.Equals,
+                            Field = "x",
+                            Operation =
+                                FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals,
                             Value = "value",
                             Values = ["string"],
                         },
@@ -587,17 +646,22 @@ public class MeterTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Meter
+        var model = new FeatureUpdateFeatureParamsMeter
         {
-            Aggregation = new() { Function = Function.Sum, Field = "field" },
+            Aggregation = new()
+            {
+                Function = FeatureUpdateFeatureParamsMeterAggregationFunction.Sum,
+                Field = "x",
+            },
             Filters =
             [
                 new(
                     [
                         new()
                         {
-                            Field = "field",
-                            Operation = Operation.Equals,
+                            Field = "x",
+                            Operation =
+                                FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals,
                             Value = "value",
                             Values = ["string"],
                         },
@@ -606,21 +670,26 @@ public class MeterTest : TestBase
             ],
         };
 
-        Meter copied = new(model);
+        FeatureUpdateFeatureParamsMeter copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class AggregationTest : TestBase
+public class FeatureUpdateFeatureParamsMeterAggregationTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Aggregation { Function = Function.Sum, Field = "field" };
+        var model = new FeatureUpdateFeatureParamsMeterAggregation
+        {
+            Function = FeatureUpdateFeatureParamsMeterAggregationFunction.Sum,
+            Field = "x",
+        };
 
-        ApiEnum<string, Function> expectedFunction = Function.Sum;
-        string expectedField = "field";
+        ApiEnum<string, FeatureUpdateFeatureParamsMeterAggregationFunction> expectedFunction =
+            FeatureUpdateFeatureParamsMeterAggregationFunction.Sum;
+        string expectedField = "x";
 
         Assert.Equal(expectedFunction, model.Function);
         Assert.Equal(expectedField, model.Field);
@@ -629,10 +698,14 @@ public class AggregationTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Aggregation { Function = Function.Sum, Field = "field" };
+        var model = new FeatureUpdateFeatureParamsMeterAggregation
+        {
+            Function = FeatureUpdateFeatureParamsMeterAggregationFunction.Sum,
+            Field = "x",
+        };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Aggregation>(
+        var deserialized = JsonSerializer.Deserialize<FeatureUpdateFeatureParamsMeterAggregation>(
             json,
             ModelBase.SerializerOptions
         );
@@ -643,17 +716,22 @@ public class AggregationTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Aggregation { Function = Function.Sum, Field = "field" };
+        var model = new FeatureUpdateFeatureParamsMeterAggregation
+        {
+            Function = FeatureUpdateFeatureParamsMeterAggregationFunction.Sum,
+            Field = "x",
+        };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Aggregation>(
+        var deserialized = JsonSerializer.Deserialize<FeatureUpdateFeatureParamsMeterAggregation>(
             element,
             ModelBase.SerializerOptions
         );
         Assert.NotNull(deserialized);
 
-        ApiEnum<string, Function> expectedFunction = Function.Sum;
-        string expectedField = "field";
+        ApiEnum<string, FeatureUpdateFeatureParamsMeterAggregationFunction> expectedFunction =
+            FeatureUpdateFeatureParamsMeterAggregationFunction.Sum;
+        string expectedField = "x";
 
         Assert.Equal(expectedFunction, deserialized.Function);
         Assert.Equal(expectedField, deserialized.Field);
@@ -662,7 +740,11 @@ public class AggregationTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Aggregation { Function = Function.Sum, Field = "field" };
+        var model = new FeatureUpdateFeatureParamsMeterAggregation
+        {
+            Function = FeatureUpdateFeatureParamsMeterAggregationFunction.Sum,
+            Field = "x",
+        };
 
         model.Validate();
     }
@@ -670,7 +752,10 @@ public class AggregationTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Aggregation { Function = Function.Sum };
+        var model = new FeatureUpdateFeatureParamsMeterAggregation
+        {
+            Function = FeatureUpdateFeatureParamsMeterAggregationFunction.Sum,
+        };
 
         Assert.Null(model.Field);
         Assert.False(model.RawData.ContainsKey("field"));
@@ -679,7 +764,10 @@ public class AggregationTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Aggregation { Function = Function.Sum };
+        var model = new FeatureUpdateFeatureParamsMeterAggregation
+        {
+            Function = FeatureUpdateFeatureParamsMeterAggregationFunction.Sum,
+        };
 
         model.Validate();
     }
@@ -687,9 +775,9 @@ public class AggregationTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new Aggregation
+        var model = new FeatureUpdateFeatureParamsMeterAggregation
         {
-            Function = Function.Sum,
+            Function = FeatureUpdateFeatureParamsMeterAggregationFunction.Sum,
 
             // Null should be interpreted as omitted for these properties
             Field = null,
@@ -702,9 +790,9 @@ public class AggregationTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Aggregation
+        var model = new FeatureUpdateFeatureParamsMeterAggregation
         {
-            Function = Function.Sum,
+            Function = FeatureUpdateFeatureParamsMeterAggregationFunction.Sum,
 
             // Null should be interpreted as omitted for these properties
             Field = null,
@@ -716,59 +804,63 @@ public class AggregationTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Aggregation { Function = Function.Sum, Field = "field" };
+        var model = new FeatureUpdateFeatureParamsMeterAggregation
+        {
+            Function = FeatureUpdateFeatureParamsMeterAggregationFunction.Sum,
+            Field = "x",
+        };
 
-        Aggregation copied = new(model);
+        FeatureUpdateFeatureParamsMeterAggregation copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class FunctionTest : TestBase
+public class FeatureUpdateFeatureParamsMeterAggregationFunctionTest : TestBase
 {
     [Theory]
-    [InlineData(Function.Sum)]
-    [InlineData(Function.Max)]
-    [InlineData(Function.Min)]
-    [InlineData(Function.Avg)]
-    [InlineData(Function.Count)]
-    [InlineData(Function.Unique)]
-    public void Validation_Works(Function rawValue)
+    [InlineData(FeatureUpdateFeatureParamsMeterAggregationFunction.Sum)]
+    [InlineData(FeatureUpdateFeatureParamsMeterAggregationFunction.Max)]
+    [InlineData(FeatureUpdateFeatureParamsMeterAggregationFunction.Min)]
+    [InlineData(FeatureUpdateFeatureParamsMeterAggregationFunction.Avg)]
+    [InlineData(FeatureUpdateFeatureParamsMeterAggregationFunction.Count)]
+    [InlineData(FeatureUpdateFeatureParamsMeterAggregationFunction.Unique)]
+    public void Validation_Works(FeatureUpdateFeatureParamsMeterAggregationFunction rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Function> value = rawValue;
+        ApiEnum<string, FeatureUpdateFeatureParamsMeterAggregationFunction> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Function>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, FeatureUpdateFeatureParamsMeterAggregationFunction>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
         Assert.Throws<StiggInvalidDataException>(() => value.Validate());
     }
 
     [Theory]
-    [InlineData(Function.Sum)]
-    [InlineData(Function.Max)]
-    [InlineData(Function.Min)]
-    [InlineData(Function.Avg)]
-    [InlineData(Function.Count)]
-    [InlineData(Function.Unique)]
-    public void SerializationRoundtrip_Works(Function rawValue)
+    [InlineData(FeatureUpdateFeatureParamsMeterAggregationFunction.Sum)]
+    [InlineData(FeatureUpdateFeatureParamsMeterAggregationFunction.Max)]
+    [InlineData(FeatureUpdateFeatureParamsMeterAggregationFunction.Min)]
+    [InlineData(FeatureUpdateFeatureParamsMeterAggregationFunction.Avg)]
+    [InlineData(FeatureUpdateFeatureParamsMeterAggregationFunction.Count)]
+    [InlineData(FeatureUpdateFeatureParamsMeterAggregationFunction.Unique)]
+    public void SerializationRoundtrip_Works(
+        FeatureUpdateFeatureParamsMeterAggregationFunction rawValue
+    )
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Function> value = rawValue;
+        ApiEnum<string, FeatureUpdateFeatureParamsMeterAggregationFunction> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Function>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, FeatureUpdateFeatureParamsMeterAggregationFunction>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
@@ -776,45 +868,43 @@ public class FunctionTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Function>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, FeatureUpdateFeatureParamsMeterAggregationFunction>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Function>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, FeatureUpdateFeatureParamsMeterAggregationFunction>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
 }
 
-public class FilterTest : TestBase
+public class FeatureUpdateFeatureParamsMeterFilterTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Filter
+        var model = new FeatureUpdateFeatureParamsMeterFilter
         {
             Conditions =
             [
                 new()
                 {
-                    Field = "field",
-                    Operation = Operation.Equals,
+                    Field = "x",
+                    Operation = FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals,
                     Value = "value",
                     Values = ["string"],
                 },
             ],
         };
 
-        List<Condition> expectedConditions =
+        List<FeatureUpdateFeatureParamsMeterFilterCondition> expectedConditions =
         [
             new()
             {
-                Field = "field",
-                Operation = Operation.Equals,
+                Field = "x",
+                Operation = FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals,
                 Value = "value",
                 Values = ["string"],
             },
@@ -830,14 +920,14 @@ public class FilterTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Filter
+        var model = new FeatureUpdateFeatureParamsMeterFilter
         {
             Conditions =
             [
                 new()
                 {
-                    Field = "field",
-                    Operation = Operation.Equals,
+                    Field = "x",
+                    Operation = FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals,
                     Value = "value",
                     Values = ["string"],
                 },
@@ -845,7 +935,10 @@ public class FilterTest : TestBase
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Filter>(json, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<FeatureUpdateFeatureParamsMeterFilter>(
+            json,
+            ModelBase.SerializerOptions
+        );
 
         Assert.Equal(model, deserialized);
     }
@@ -853,14 +946,14 @@ public class FilterTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Filter
+        var model = new FeatureUpdateFeatureParamsMeterFilter
         {
             Conditions =
             [
                 new()
                 {
-                    Field = "field",
-                    Operation = Operation.Equals,
+                    Field = "x",
+                    Operation = FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals,
                     Value = "value",
                     Values = ["string"],
                 },
@@ -868,15 +961,18 @@ public class FilterTest : TestBase
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Filter>(element, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<FeatureUpdateFeatureParamsMeterFilter>(
+            element,
+            ModelBase.SerializerOptions
+        );
         Assert.NotNull(deserialized);
 
-        List<Condition> expectedConditions =
+        List<FeatureUpdateFeatureParamsMeterFilterCondition> expectedConditions =
         [
             new()
             {
-                Field = "field",
-                Operation = Operation.Equals,
+                Field = "x",
+                Operation = FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals,
                 Value = "value",
                 Values = ["string"],
             },
@@ -892,14 +988,14 @@ public class FilterTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Filter
+        var model = new FeatureUpdateFeatureParamsMeterFilter
         {
             Conditions =
             [
                 new()
                 {
-                    Field = "field",
-                    Operation = Operation.Equals,
+                    Field = "x",
+                    Operation = FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals,
                     Value = "value",
                     Values = ["string"],
                 },
@@ -912,41 +1008,42 @@ public class FilterTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Filter
+        var model = new FeatureUpdateFeatureParamsMeterFilter
         {
             Conditions =
             [
                 new()
                 {
-                    Field = "field",
-                    Operation = Operation.Equals,
+                    Field = "x",
+                    Operation = FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals,
                     Value = "value",
                     Values = ["string"],
                 },
             ],
         };
 
-        Filter copied = new(model);
+        FeatureUpdateFeatureParamsMeterFilter copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class ConditionTest : TestBase
+public class FeatureUpdateFeatureParamsMeterFilterConditionTest : TestBase
 {
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Condition
+        var model = new FeatureUpdateFeatureParamsMeterFilterCondition
         {
-            Field = "field",
-            Operation = Operation.Equals,
+            Field = "x",
+            Operation = FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals,
             Value = "value",
             Values = ["string"],
         };
 
-        string expectedField = "field";
-        ApiEnum<string, Operation> expectedOperation = Operation.Equals;
+        string expectedField = "x";
+        ApiEnum<string, FeatureUpdateFeatureParamsMeterFilterConditionOperation> expectedOperation =
+            FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals;
         string expectedValue = "value";
         List<string> expectedValues = ["string"];
 
@@ -964,16 +1061,20 @@ public class ConditionTest : TestBase
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Condition
+        var model = new FeatureUpdateFeatureParamsMeterFilterCondition
         {
-            Field = "field",
-            Operation = Operation.Equals,
+            Field = "x",
+            Operation = FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals,
             Value = "value",
             Values = ["string"],
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Condition>(json, ModelBase.SerializerOptions);
+        var deserialized =
+            JsonSerializer.Deserialize<FeatureUpdateFeatureParamsMeterFilterCondition>(
+                json,
+                ModelBase.SerializerOptions
+            );
 
         Assert.Equal(model, deserialized);
     }
@@ -981,23 +1082,25 @@ public class ConditionTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Condition
+        var model = new FeatureUpdateFeatureParamsMeterFilterCondition
         {
-            Field = "field",
-            Operation = Operation.Equals,
+            Field = "x",
+            Operation = FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals,
             Value = "value",
             Values = ["string"],
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<Condition>(
-            element,
-            ModelBase.SerializerOptions
-        );
+        var deserialized =
+            JsonSerializer.Deserialize<FeatureUpdateFeatureParamsMeterFilterCondition>(
+                element,
+                ModelBase.SerializerOptions
+            );
         Assert.NotNull(deserialized);
 
-        string expectedField = "field";
-        ApiEnum<string, Operation> expectedOperation = Operation.Equals;
+        string expectedField = "x";
+        ApiEnum<string, FeatureUpdateFeatureParamsMeterFilterConditionOperation> expectedOperation =
+            FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals;
         string expectedValue = "value";
         List<string> expectedValues = ["string"];
 
@@ -1015,10 +1118,10 @@ public class ConditionTest : TestBase
     [Fact]
     public void Validation_Works()
     {
-        var model = new Condition
+        var model = new FeatureUpdateFeatureParamsMeterFilterCondition
         {
-            Field = "field",
-            Operation = Operation.Equals,
+            Field = "x",
+            Operation = FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals,
             Value = "value",
             Values = ["string"],
         };
@@ -1029,7 +1132,11 @@ public class ConditionTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
     {
-        var model = new Condition { Field = "field", Operation = Operation.Equals };
+        var model = new FeatureUpdateFeatureParamsMeterFilterCondition
+        {
+            Field = "x",
+            Operation = FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals,
+        };
 
         Assert.Null(model.Value);
         Assert.False(model.RawData.ContainsKey("value"));
@@ -1040,7 +1147,11 @@ public class ConditionTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesUnsetValidation_Works()
     {
-        var model = new Condition { Field = "field", Operation = Operation.Equals };
+        var model = new FeatureUpdateFeatureParamsMeterFilterCondition
+        {
+            Field = "x",
+            Operation = FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals,
+        };
 
         model.Validate();
     }
@@ -1048,10 +1159,10 @@ public class ConditionTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
     {
-        var model = new Condition
+        var model = new FeatureUpdateFeatureParamsMeterFilterCondition
         {
-            Field = "field",
-            Operation = Operation.Equals,
+            Field = "x",
+            Operation = FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals,
 
             // Null should be interpreted as omitted for these properties
             Value = null,
@@ -1067,10 +1178,10 @@ public class ConditionTest : TestBase
     [Fact]
     public void OptionalNonNullablePropertiesSetToNullValidation_Works()
     {
-        var model = new Condition
+        var model = new FeatureUpdateFeatureParamsMeterFilterCondition
         {
-            Field = "field",
-            Operation = Operation.Equals,
+            Field = "x",
+            Operation = FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals,
 
             // Null should be interpreted as omitted for these properties
             Value = null,
@@ -1083,77 +1194,77 @@ public class ConditionTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Condition
+        var model = new FeatureUpdateFeatureParamsMeterFilterCondition
         {
-            Field = "field",
-            Operation = Operation.Equals,
+            Field = "x",
+            Operation = FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals,
             Value = "value",
             Values = ["string"],
         };
 
-        Condition copied = new(model);
+        FeatureUpdateFeatureParamsMeterFilterCondition copied = new(model);
 
         Assert.Equal(model, copied);
     }
 }
 
-public class OperationTest : TestBase
+public class FeatureUpdateFeatureParamsMeterFilterConditionOperationTest : TestBase
 {
     [Theory]
-    [InlineData(Operation.Equals)]
-    [InlineData(Operation.NotEquals)]
-    [InlineData(Operation.GreaterThan)]
-    [InlineData(Operation.GreaterThanOrEqual)]
-    [InlineData(Operation.LessThan)]
-    [InlineData(Operation.LessThanOrEqual)]
-    [InlineData(Operation.IsNull)]
-    [InlineData(Operation.IsNotNull)]
-    [InlineData(Operation.Contains)]
-    [InlineData(Operation.StartsWith)]
-    [InlineData(Operation.EndsWith)]
-    [InlineData(Operation.In)]
-    public void Validation_Works(Operation rawValue)
+    [InlineData(FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals)]
+    [InlineData(FeatureUpdateFeatureParamsMeterFilterConditionOperation.NotEquals)]
+    [InlineData(FeatureUpdateFeatureParamsMeterFilterConditionOperation.GreaterThan)]
+    [InlineData(FeatureUpdateFeatureParamsMeterFilterConditionOperation.GreaterThanOrEqual)]
+    [InlineData(FeatureUpdateFeatureParamsMeterFilterConditionOperation.LessThan)]
+    [InlineData(FeatureUpdateFeatureParamsMeterFilterConditionOperation.LessThanOrEqual)]
+    [InlineData(FeatureUpdateFeatureParamsMeterFilterConditionOperation.IsNull)]
+    [InlineData(FeatureUpdateFeatureParamsMeterFilterConditionOperation.IsNotNull)]
+    [InlineData(FeatureUpdateFeatureParamsMeterFilterConditionOperation.Contains)]
+    [InlineData(FeatureUpdateFeatureParamsMeterFilterConditionOperation.StartsWith)]
+    [InlineData(FeatureUpdateFeatureParamsMeterFilterConditionOperation.EndsWith)]
+    [InlineData(FeatureUpdateFeatureParamsMeterFilterConditionOperation.In)]
+    public void Validation_Works(FeatureUpdateFeatureParamsMeterFilterConditionOperation rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Operation> value = rawValue;
+        ApiEnum<string, FeatureUpdateFeatureParamsMeterFilterConditionOperation> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Operation>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, FeatureUpdateFeatureParamsMeterFilterConditionOperation>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
 
         Assert.NotNull(value);
         Assert.Throws<StiggInvalidDataException>(() => value.Validate());
     }
 
     [Theory]
-    [InlineData(Operation.Equals)]
-    [InlineData(Operation.NotEquals)]
-    [InlineData(Operation.GreaterThan)]
-    [InlineData(Operation.GreaterThanOrEqual)]
-    [InlineData(Operation.LessThan)]
-    [InlineData(Operation.LessThanOrEqual)]
-    [InlineData(Operation.IsNull)]
-    [InlineData(Operation.IsNotNull)]
-    [InlineData(Operation.Contains)]
-    [InlineData(Operation.StartsWith)]
-    [InlineData(Operation.EndsWith)]
-    [InlineData(Operation.In)]
-    public void SerializationRoundtrip_Works(Operation rawValue)
+    [InlineData(FeatureUpdateFeatureParamsMeterFilterConditionOperation.Equals)]
+    [InlineData(FeatureUpdateFeatureParamsMeterFilterConditionOperation.NotEquals)]
+    [InlineData(FeatureUpdateFeatureParamsMeterFilterConditionOperation.GreaterThan)]
+    [InlineData(FeatureUpdateFeatureParamsMeterFilterConditionOperation.GreaterThanOrEqual)]
+    [InlineData(FeatureUpdateFeatureParamsMeterFilterConditionOperation.LessThan)]
+    [InlineData(FeatureUpdateFeatureParamsMeterFilterConditionOperation.LessThanOrEqual)]
+    [InlineData(FeatureUpdateFeatureParamsMeterFilterConditionOperation.IsNull)]
+    [InlineData(FeatureUpdateFeatureParamsMeterFilterConditionOperation.IsNotNull)]
+    [InlineData(FeatureUpdateFeatureParamsMeterFilterConditionOperation.Contains)]
+    [InlineData(FeatureUpdateFeatureParamsMeterFilterConditionOperation.StartsWith)]
+    [InlineData(FeatureUpdateFeatureParamsMeterFilterConditionOperation.EndsWith)]
+    [InlineData(FeatureUpdateFeatureParamsMeterFilterConditionOperation.In)]
+    public void SerializationRoundtrip_Works(
+        FeatureUpdateFeatureParamsMeterFilterConditionOperation rawValue
+    )
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Operation> value = rawValue;
+        ApiEnum<string, FeatureUpdateFeatureParamsMeterFilterConditionOperation> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Operation>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, FeatureUpdateFeatureParamsMeterFilterConditionOperation>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
@@ -1161,15 +1272,13 @@ public class OperationTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Operation>>(
-            JsonSerializer.SerializeToElement("invalid value"),
-            ModelBase.SerializerOptions
-        );
+        var value = JsonSerializer.Deserialize<
+            ApiEnum<string, FeatureUpdateFeatureParamsMeterFilterConditionOperation>
+        >(JsonSerializer.SerializeToElement("invalid value"), ModelBase.SerializerOptions);
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Operation>>(
-            json,
-            ModelBase.SerializerOptions
-        );
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, FeatureUpdateFeatureParamsMeterFilterConditionOperation>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }

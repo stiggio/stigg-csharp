@@ -203,6 +203,27 @@ public record class FeatureCreateFeatureParams : ParamsBase
     }
 
     /// <summary>
+    /// Event meter that turns reported events into usage for a metered feature
+    /// </summary>
+    public Meter? Meter
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<Meter>("meter");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawBodyData.Set("meter", value);
+        }
+    }
+
+    /// <summary>
     /// The meter type for the feature
     /// </summary>
     public ApiEnum<string, MeterType>? MeterType
@@ -546,6 +567,498 @@ sealed class FeatureStatusConverter : JsonConverter<FeatureStatus>
                 FeatureStatus.New => "NEW",
                 FeatureStatus.Suspended => "SUSPENDED",
                 FeatureStatus.Active => "ACTIVE",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Event meter that turns reported events into usage for a metered feature
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<Meter, MeterFromRaw>))]
+public sealed record class Meter : JsonModel
+{
+    /// <summary>
+    /// How the matching events are aggregated into a usage value
+    /// </summary>
+    public required Aggregation Aggregation
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<Aggregation>("aggregation");
+        }
+        init { this._rawData.Set("aggregation", value); }
+    }
+
+    /// <summary>
+    /// Event filters. Conditions within a filter are ANDed, and filters are ORed
+    /// </summary>
+    public required IReadOnlyList<Filter> Filters
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<Filter>>("filters");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<Filter>>(
+                "filters",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        this.Aggregation.Validate();
+        foreach (var item in this.Filters)
+        {
+            item.Validate();
+        }
+    }
+
+    public Meter() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public Meter(Meter meter)
+        : base(meter) { }
+#pragma warning restore CS8618
+
+    public Meter(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    Meter(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="MeterFromRaw.FromRawUnchecked"/>
+    public static Meter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class MeterFromRaw : IFromRawJson<Meter>
+{
+    /// <inheritdoc/>
+    public Meter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Meter.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// How the matching events are aggregated into a usage value
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<Aggregation, AggregationFromRaw>))]
+public sealed record class Aggregation : JsonModel
+{
+    /// <summary>
+    /// Aggregation function applied to the matching events
+    /// </summary>
+    public required ApiEnum<string, Function> Function
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Function>>("function");
+        }
+        init { this._rawData.Set("function", value); }
+    }
+
+    /// <summary>
+    /// Aggregation field name
+    /// </summary>
+    public string? Field
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("field");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("field", value);
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        this.Function.Validate();
+        _ = this.Field;
+    }
+
+    public Aggregation() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public Aggregation(Aggregation aggregation)
+        : base(aggregation) { }
+#pragma warning restore CS8618
+
+    public Aggregation(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    Aggregation(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="AggregationFromRaw.FromRawUnchecked"/>
+    public static Aggregation FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+
+    [SetsRequiredMembers]
+    public Aggregation(ApiEnum<string, Function> function)
+        : this()
+    {
+        this.Function = function;
+    }
+}
+
+class AggregationFromRaw : IFromRawJson<Aggregation>
+{
+    /// <inheritdoc/>
+    public Aggregation FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Aggregation.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Aggregation function applied to the matching events
+/// </summary>
+[JsonConverter(typeof(FunctionConverter))]
+public enum Function
+{
+    Sum,
+    Max,
+    Min,
+    Avg,
+    Count,
+    Unique,
+}
+
+sealed class FunctionConverter : JsonConverter<Function>
+{
+    public override Function Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "SUM" => Function.Sum,
+            "MAX" => Function.Max,
+            "MIN" => Function.Min,
+            "AVG" => Function.Avg,
+            "COUNT" => Function.Count,
+            "UNIQUE" => Function.Unique,
+            _ => (Function)(-1),
+        };
+    }
+
+    public override void Write(Utf8JsonWriter writer, Function value, JsonSerializerOptions options)
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                Function.Sum => "SUM",
+                Function.Max => "MAX",
+                Function.Min => "MIN",
+                Function.Avg => "AVG",
+                Function.Count => "COUNT",
+                Function.Unique => "UNIQUE",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+[JsonConverter(typeof(JsonModelConverter<Filter, FilterFromRaw>))]
+public sealed record class Filter : JsonModel
+{
+    /// <summary>
+    /// Conditions the event must match
+    /// </summary>
+    public required IReadOnlyList<Condition> Conditions
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<Condition>>("conditions");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<Condition>>(
+                "conditions",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        foreach (var item in this.Conditions)
+        {
+            item.Validate();
+        }
+    }
+
+    public Filter() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public Filter(Filter filter)
+        : base(filter) { }
+#pragma warning restore CS8618
+
+    public Filter(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    Filter(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="FilterFromRaw.FromRawUnchecked"/>
+    public static Filter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+
+    [SetsRequiredMembers]
+    public Filter(IReadOnlyList<Condition> conditions)
+        : this()
+    {
+        this.Conditions = conditions;
+    }
+}
+
+class FilterFromRaw : IFromRawJson<Filter>
+{
+    /// <inheritdoc/>
+    public Filter FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Filter.FromRawUnchecked(rawData);
+}
+
+[JsonConverter(typeof(JsonModelConverter<Condition, ConditionFromRaw>))]
+public sealed record class Condition : JsonModel
+{
+    /// <summary>
+    /// Condition field name
+    /// </summary>
+    public required string Field
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("field");
+        }
+        init { this._rawData.Set("field", value); }
+    }
+
+    /// <summary>
+    /// Comparison applied to the condition field
+    /// </summary>
+    public required ApiEnum<string, Operation> Operation
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Operation>>("operation");
+        }
+        init { this._rawData.Set("operation", value); }
+    }
+
+    /// <summary>
+    /// Condition value
+    /// </summary>
+    public string? Value
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("value");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("value", value);
+        }
+    }
+
+    public IReadOnlyList<string>? Values
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<string>>("values");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set<ImmutableArray<string>?>(
+                "values",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.Field;
+        this.Operation.Validate();
+        _ = this.Value;
+        _ = this.Values;
+    }
+
+    public Condition() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public Condition(Condition condition)
+        : base(condition) { }
+#pragma warning restore CS8618
+
+    public Condition(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    Condition(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="ConditionFromRaw.FromRawUnchecked"/>
+    public static Condition FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class ConditionFromRaw : IFromRawJson<Condition>
+{
+    /// <inheritdoc/>
+    public Condition FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Condition.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Comparison applied to the condition field
+/// </summary>
+[JsonConverter(typeof(OperationConverter))]
+public enum Operation
+{
+    Equals,
+    NotEquals,
+    GreaterThan,
+    GreaterThanOrEqual,
+    LessThan,
+    LessThanOrEqual,
+    IsNull,
+    IsNotNull,
+    Contains,
+    StartsWith,
+    EndsWith,
+    In,
+}
+
+sealed class OperationConverter : JsonConverter<Operation>
+{
+    public override Operation Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "EQUALS" => Operation.Equals,
+            "NOT_EQUALS" => Operation.NotEquals,
+            "GREATER_THAN" => Operation.GreaterThan,
+            "GREATER_THAN_OR_EQUAL" => Operation.GreaterThanOrEqual,
+            "LESS_THAN" => Operation.LessThan,
+            "LESS_THAN_OR_EQUAL" => Operation.LessThanOrEqual,
+            "IS_NULL" => Operation.IsNull,
+            "IS_NOT_NULL" => Operation.IsNotNull,
+            "CONTAINS" => Operation.Contains,
+            "STARTS_WITH" => Operation.StartsWith,
+            "ENDS_WITH" => Operation.EndsWith,
+            "IN" => Operation.In,
+            _ => (Operation)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        Operation value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                Operation.Equals => "EQUALS",
+                Operation.NotEquals => "NOT_EQUALS",
+                Operation.GreaterThan => "GREATER_THAN",
+                Operation.GreaterThanOrEqual => "GREATER_THAN_OR_EQUAL",
+                Operation.LessThan => "LESS_THAN",
+                Operation.LessThanOrEqual => "LESS_THAN_OR_EQUAL",
+                Operation.IsNull => "IS_NULL",
+                Operation.IsNotNull => "IS_NOT_NULL",
+                Operation.Contains => "CONTAINS",
+                Operation.StartsWith => "STARTS_WITH",
+                Operation.EndsWith => "ENDS_WITH",
+                Operation.In => "IN",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

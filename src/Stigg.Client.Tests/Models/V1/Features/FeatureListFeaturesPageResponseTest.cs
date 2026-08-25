@@ -27,6 +27,29 @@ public class FeatureListFeaturesPageResponseTest : TestBase
                     FeatureUnits = "featureUnits",
                     FeatureUnitsPlural = "featureUnitsPlural",
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Meter = new()
+                    {
+                        Aggregation = new()
+                        {
+                            Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+                            Field = "field",
+                        },
+                        Filters =
+                        [
+                            new(
+                                [
+                                    new()
+                                    {
+                                        Field = "field",
+                                        Operation =
+                                            FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+                                        Value = "value",
+                                        Values = ["string"],
+                                    },
+                                ]
+                            ),
+                        ],
+                    },
                     MeterType = FeatureListFeaturesResponseMeterType.None,
                     UnitTransformation = new()
                     {
@@ -59,6 +82,29 @@ public class FeatureListFeaturesPageResponseTest : TestBase
                 FeatureUnits = "featureUnits",
                 FeatureUnitsPlural = "featureUnitsPlural",
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Meter = new()
+                {
+                    Aggregation = new()
+                    {
+                        Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+                        Field = "field",
+                    },
+                    Filters =
+                    [
+                        new(
+                            [
+                                new()
+                                {
+                                    Field = "field",
+                                    Operation =
+                                        FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+                                    Value = "value",
+                                    Values = ["string"],
+                                },
+                            ]
+                        ),
+                    ],
+                },
                 MeterType = FeatureListFeaturesResponseMeterType.None,
                 UnitTransformation = new()
                 {
@@ -103,6 +149,29 @@ public class FeatureListFeaturesPageResponseTest : TestBase
                     FeatureUnits = "featureUnits",
                     FeatureUnitsPlural = "featureUnitsPlural",
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Meter = new()
+                    {
+                        Aggregation = new()
+                        {
+                            Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+                            Field = "field",
+                        },
+                        Filters =
+                        [
+                            new(
+                                [
+                                    new()
+                                    {
+                                        Field = "field",
+                                        Operation =
+                                            FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+                                        Value = "value",
+                                        Values = ["string"],
+                                    },
+                                ]
+                            ),
+                        ],
+                    },
                     MeterType = FeatureListFeaturesResponseMeterType.None,
                     UnitTransformation = new()
                     {
@@ -149,6 +218,29 @@ public class FeatureListFeaturesPageResponseTest : TestBase
                     FeatureUnits = "featureUnits",
                     FeatureUnitsPlural = "featureUnitsPlural",
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Meter = new()
+                    {
+                        Aggregation = new()
+                        {
+                            Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+                            Field = "field",
+                        },
+                        Filters =
+                        [
+                            new(
+                                [
+                                    new()
+                                    {
+                                        Field = "field",
+                                        Operation =
+                                            FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+                                        Value = "value",
+                                        Values = ["string"],
+                                    },
+                                ]
+                            ),
+                        ],
+                    },
                     MeterType = FeatureListFeaturesResponseMeterType.None,
                     UnitTransformation = new()
                     {
@@ -188,6 +280,29 @@ public class FeatureListFeaturesPageResponseTest : TestBase
                 FeatureUnits = "featureUnits",
                 FeatureUnitsPlural = "featureUnitsPlural",
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Meter = new()
+                {
+                    Aggregation = new()
+                    {
+                        Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+                        Field = "field",
+                    },
+                    Filters =
+                    [
+                        new(
+                            [
+                                new()
+                                {
+                                    Field = "field",
+                                    Operation =
+                                        FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+                                    Value = "value",
+                                    Values = ["string"],
+                                },
+                            ]
+                        ),
+                    ],
+                },
                 MeterType = FeatureListFeaturesResponseMeterType.None,
                 UnitTransformation = new()
                 {
@@ -232,6 +347,29 @@ public class FeatureListFeaturesPageResponseTest : TestBase
                     FeatureUnits = "featureUnits",
                     FeatureUnitsPlural = "featureUnitsPlural",
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Meter = new()
+                    {
+                        Aggregation = new()
+                        {
+                            Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+                            Field = "field",
+                        },
+                        Filters =
+                        [
+                            new(
+                                [
+                                    new()
+                                    {
+                                        Field = "field",
+                                        Operation =
+                                            FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+                                        Value = "value",
+                                        Values = ["string"],
+                                    },
+                                ]
+                            ),
+                        ],
+                    },
                     MeterType = FeatureListFeaturesResponseMeterType.None,
                     UnitTransformation = new()
                     {
@@ -272,6 +410,29 @@ public class FeatureListFeaturesPageResponseTest : TestBase
                     FeatureUnits = "featureUnits",
                     FeatureUnitsPlural = "featureUnitsPlural",
                     Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    Meter = new()
+                    {
+                        Aggregation = new()
+                        {
+                            Function = FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+                            Field = "field",
+                        },
+                        Filters =
+                        [
+                            new(
+                                [
+                                    new()
+                                    {
+                                        Field = "field",
+                                        Operation =
+                                            FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+                                        Value = "value",
+                                        Values = ["string"],
+                                    },
+                                ]
+                            ),
+                        ],
+                    },
                     MeterType = FeatureListFeaturesResponseMeterType.None,
                     UnitTransformation = new()
                     {

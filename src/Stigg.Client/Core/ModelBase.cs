@@ -450,10 +450,20 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, CustomCurrencies::Status>(),
             new ApiEnumConverter<string, Features::DataFeatureStatus>(),
             new ApiEnumConverter<string, Features::DataFeatureType>(),
+            new ApiEnumConverter<string, Features::DataMeterAggregationFunction>(),
+            new ApiEnumConverter<string, Features::DataMeterFilterConditionOperation>(),
             new ApiEnumConverter<string, Features::DataMeterType>(),
             new ApiEnumConverter<string, Features::DataUnitTransformationRound>(),
             new ApiEnumConverter<string, Features::FeatureListFeaturesResponseFeatureStatus>(),
             new ApiEnumConverter<string, Features::FeatureListFeaturesResponseFeatureType>(),
+            new ApiEnumConverter<
+                string,
+                Features::FeatureListFeaturesResponseMeterAggregationFunction
+            >(),
+            new ApiEnumConverter<
+                string,
+                Features::FeatureListFeaturesResponseMeterFilterConditionOperation
+            >(),
             new ApiEnumConverter<string, Features::FeatureListFeaturesResponseMeterType>(),
             new ApiEnumConverter<
                 string,
@@ -461,13 +471,21 @@ public abstract record class ModelBase
             >(),
             new ApiEnumConverter<string, Features::FeatureType>(),
             new ApiEnumConverter<string, Features::FeatureStatus>(),
+            new ApiEnumConverter<string, Features::Function>(),
+            new ApiEnumConverter<string, Features::Operation>(),
             new ApiEnumConverter<string, Features::MeterType>(),
             new ApiEnumConverter<string, Features::Round>(),
             new ApiEnumConverter<string, Features::FeatureListFeaturesParamsFeatureType>(),
             new ApiEnumConverter<string, Features::FeatureListFeaturesParamsMeterType>(),
             new ApiEnumConverter<string, Features::Status>(),
-            new ApiEnumConverter<string, Features::Function>(),
-            new ApiEnumConverter<string, Features::Operation>(),
+            new ApiEnumConverter<
+                string,
+                Features::FeatureUpdateFeatureParamsMeterAggregationFunction
+            >(),
+            new ApiEnumConverter<
+                string,
+                Features::FeatureUpdateFeatureParamsMeterFilterConditionOperation
+            >(),
             new ApiEnumConverter<
                 string,
                 Features::FeatureUpdateFeatureParamsUnitTransformationRound

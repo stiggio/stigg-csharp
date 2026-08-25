@@ -167,6 +167,19 @@ public sealed record class FeatureListFeaturesResponse : JsonModel
     }
 
     /// <summary>
+    /// Event meter that turns reported events into usage for a metered feature
+    /// </summary>
+    public required FeatureListFeaturesResponseMeter? Meter
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<FeatureListFeaturesResponseMeter>("meter");
+        }
+        init { this._rawData.Set("meter", value); }
+    }
+
+    /// <summary>
     /// The meter type for the feature
     /// </summary>
     public required ApiEnum<string, FeatureListFeaturesResponseMeterType> MeterType
@@ -225,6 +238,7 @@ public sealed record class FeatureListFeaturesResponse : JsonModel
         _ = this.FeatureUnits;
         _ = this.FeatureUnitsPlural;
         _ = this.Metadata;
+        this.Meter?.Validate();
         this.MeterType.Validate();
         this.UnitTransformation?.Validate();
         _ = this.UpdatedAt;
@@ -445,6 +459,559 @@ sealed class FeatureListFeaturesResponseFeatureTypeConverter
                 FeatureListFeaturesResponseFeatureType.Boolean => "BOOLEAN",
                 FeatureListFeaturesResponseFeatureType.Number => "NUMBER",
                 FeatureListFeaturesResponseFeatureType.Enum => "ENUM",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// Event meter that turns reported events into usage for a metered feature
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        FeatureListFeaturesResponseMeter,
+        FeatureListFeaturesResponseMeterFromRaw
+    >)
+)]
+public sealed record class FeatureListFeaturesResponseMeter : JsonModel
+{
+    /// <summary>
+    /// How the matching events are aggregated into a usage value
+    /// </summary>
+    public required FeatureListFeaturesResponseMeterAggregation Aggregation
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<FeatureListFeaturesResponseMeterAggregation>(
+                "aggregation"
+            );
+        }
+        init { this._rawData.Set("aggregation", value); }
+    }
+
+    /// <summary>
+    /// Event filters. Conditions within a filter are ANDed, and filters are ORed
+    /// </summary>
+    public required IReadOnlyList<FeatureListFeaturesResponseMeterFilter> Filters
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<
+                ImmutableArray<FeatureListFeaturesResponseMeterFilter>
+            >("filters");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<FeatureListFeaturesResponseMeterFilter>>(
+                "filters",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        this.Aggregation.Validate();
+        foreach (var item in this.Filters)
+        {
+            item.Validate();
+        }
+    }
+
+    public FeatureListFeaturesResponseMeter() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public FeatureListFeaturesResponseMeter(
+        FeatureListFeaturesResponseMeter featureListFeaturesResponseMeter
+    )
+        : base(featureListFeaturesResponseMeter) { }
+#pragma warning restore CS8618
+
+    public FeatureListFeaturesResponseMeter(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    FeatureListFeaturesResponseMeter(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="FeatureListFeaturesResponseMeterFromRaw.FromRawUnchecked"/>
+    public static FeatureListFeaturesResponseMeter FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class FeatureListFeaturesResponseMeterFromRaw : IFromRawJson<FeatureListFeaturesResponseMeter>
+{
+    /// <inheritdoc/>
+    public FeatureListFeaturesResponseMeter FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => FeatureListFeaturesResponseMeter.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// How the matching events are aggregated into a usage value
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        FeatureListFeaturesResponseMeterAggregation,
+        FeatureListFeaturesResponseMeterAggregationFromRaw
+    >)
+)]
+public sealed record class FeatureListFeaturesResponseMeterAggregation : JsonModel
+{
+    /// <summary>
+    /// Aggregation function applied to the matching events
+    /// </summary>
+    public required ApiEnum<string, FeatureListFeaturesResponseMeterAggregationFunction> Function
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, FeatureListFeaturesResponseMeterAggregationFunction>
+            >("function");
+        }
+        init { this._rawData.Set("function", value); }
+    }
+
+    /// <summary>
+    /// Aggregation field name
+    /// </summary>
+    public string? Field
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("field");
+        }
+        init { this._rawData.Set("field", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        this.Function.Validate();
+        _ = this.Field;
+    }
+
+    public FeatureListFeaturesResponseMeterAggregation() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public FeatureListFeaturesResponseMeterAggregation(
+        FeatureListFeaturesResponseMeterAggregation featureListFeaturesResponseMeterAggregation
+    )
+        : base(featureListFeaturesResponseMeterAggregation) { }
+#pragma warning restore CS8618
+
+    public FeatureListFeaturesResponseMeterAggregation(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    FeatureListFeaturesResponseMeterAggregation(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="FeatureListFeaturesResponseMeterAggregationFromRaw.FromRawUnchecked"/>
+    public static FeatureListFeaturesResponseMeterAggregation FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+
+    [SetsRequiredMembers]
+    public FeatureListFeaturesResponseMeterAggregation(
+        ApiEnum<string, FeatureListFeaturesResponseMeterAggregationFunction> function
+    )
+        : this()
+    {
+        this.Function = function;
+    }
+}
+
+class FeatureListFeaturesResponseMeterAggregationFromRaw
+    : IFromRawJson<FeatureListFeaturesResponseMeterAggregation>
+{
+    /// <inheritdoc/>
+    public FeatureListFeaturesResponseMeterAggregation FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => FeatureListFeaturesResponseMeterAggregation.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Aggregation function applied to the matching events
+/// </summary>
+[JsonConverter(typeof(FeatureListFeaturesResponseMeterAggregationFunctionConverter))]
+public enum FeatureListFeaturesResponseMeterAggregationFunction
+{
+    Sum,
+    Max,
+    Min,
+    Avg,
+    Count,
+    Unique,
+}
+
+sealed class FeatureListFeaturesResponseMeterAggregationFunctionConverter
+    : JsonConverter<FeatureListFeaturesResponseMeterAggregationFunction>
+{
+    public override FeatureListFeaturesResponseMeterAggregationFunction Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "SUM" => FeatureListFeaturesResponseMeterAggregationFunction.Sum,
+            "MAX" => FeatureListFeaturesResponseMeterAggregationFunction.Max,
+            "MIN" => FeatureListFeaturesResponseMeterAggregationFunction.Min,
+            "AVG" => FeatureListFeaturesResponseMeterAggregationFunction.Avg,
+            "COUNT" => FeatureListFeaturesResponseMeterAggregationFunction.Count,
+            "UNIQUE" => FeatureListFeaturesResponseMeterAggregationFunction.Unique,
+            _ => (FeatureListFeaturesResponseMeterAggregationFunction)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        FeatureListFeaturesResponseMeterAggregationFunction value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                FeatureListFeaturesResponseMeterAggregationFunction.Sum => "SUM",
+                FeatureListFeaturesResponseMeterAggregationFunction.Max => "MAX",
+                FeatureListFeaturesResponseMeterAggregationFunction.Min => "MIN",
+                FeatureListFeaturesResponseMeterAggregationFunction.Avg => "AVG",
+                FeatureListFeaturesResponseMeterAggregationFunction.Count => "COUNT",
+                FeatureListFeaturesResponseMeterAggregationFunction.Unique => "UNIQUE",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
+}
+
+/// <summary>
+/// A set of conditions an event must all match
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        FeatureListFeaturesResponseMeterFilter,
+        FeatureListFeaturesResponseMeterFilterFromRaw
+    >)
+)]
+public sealed record class FeatureListFeaturesResponseMeterFilter : JsonModel
+{
+    /// <summary>
+    /// Conditions the event must match
+    /// </summary>
+    public required IReadOnlyList<FeatureListFeaturesResponseMeterFilterCondition> Conditions
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<
+                ImmutableArray<FeatureListFeaturesResponseMeterFilterCondition>
+            >("conditions");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<FeatureListFeaturesResponseMeterFilterCondition>>(
+                "conditions",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        foreach (var item in this.Conditions)
+        {
+            item.Validate();
+        }
+    }
+
+    public FeatureListFeaturesResponseMeterFilter() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public FeatureListFeaturesResponseMeterFilter(
+        FeatureListFeaturesResponseMeterFilter featureListFeaturesResponseMeterFilter
+    )
+        : base(featureListFeaturesResponseMeterFilter) { }
+#pragma warning restore CS8618
+
+    public FeatureListFeaturesResponseMeterFilter(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    FeatureListFeaturesResponseMeterFilter(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="FeatureListFeaturesResponseMeterFilterFromRaw.FromRawUnchecked"/>
+    public static FeatureListFeaturesResponseMeterFilter FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+
+    [SetsRequiredMembers]
+    public FeatureListFeaturesResponseMeterFilter(
+        IReadOnlyList<FeatureListFeaturesResponseMeterFilterCondition> conditions
+    )
+        : this()
+    {
+        this.Conditions = conditions;
+    }
+}
+
+class FeatureListFeaturesResponseMeterFilterFromRaw
+    : IFromRawJson<FeatureListFeaturesResponseMeterFilter>
+{
+    /// <inheritdoc/>
+    public FeatureListFeaturesResponseMeterFilter FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => FeatureListFeaturesResponseMeterFilter.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Meter filter condition
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<
+        FeatureListFeaturesResponseMeterFilterCondition,
+        FeatureListFeaturesResponseMeterFilterConditionFromRaw
+    >)
+)]
+public sealed record class FeatureListFeaturesResponseMeterFilterCondition : JsonModel
+{
+    /// <summary>
+    /// Condition field name
+    /// </summary>
+    public required string Field
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("field");
+        }
+        init { this._rawData.Set("field", value); }
+    }
+
+    /// <summary>
+    /// Comparison applied to the condition field
+    /// </summary>
+    public required ApiEnum<
+        string,
+        FeatureListFeaturesResponseMeterFilterConditionOperation
+    > Operation
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, FeatureListFeaturesResponseMeterFilterConditionOperation>
+            >("operation");
+        }
+        init { this._rawData.Set("operation", value); }
+    }
+
+    /// <summary>
+    /// Condition value
+    /// </summary>
+    public string? Value
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("value");
+        }
+        init { this._rawData.Set("value", value); }
+    }
+
+    public IReadOnlyList<string>? Values
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<string>>("values");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<string>?>(
+                "values",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.Field;
+        this.Operation.Validate();
+        _ = this.Value;
+        _ = this.Values;
+    }
+
+    public FeatureListFeaturesResponseMeterFilterCondition() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public FeatureListFeaturesResponseMeterFilterCondition(
+        FeatureListFeaturesResponseMeterFilterCondition featureListFeaturesResponseMeterFilterCondition
+    )
+        : base(featureListFeaturesResponseMeterFilterCondition) { }
+#pragma warning restore CS8618
+
+    public FeatureListFeaturesResponseMeterFilterCondition(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    FeatureListFeaturesResponseMeterFilterCondition(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="FeatureListFeaturesResponseMeterFilterConditionFromRaw.FromRawUnchecked"/>
+    public static FeatureListFeaturesResponseMeterFilterCondition FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class FeatureListFeaturesResponseMeterFilterConditionFromRaw
+    : IFromRawJson<FeatureListFeaturesResponseMeterFilterCondition>
+{
+    /// <inheritdoc/>
+    public FeatureListFeaturesResponseMeterFilterCondition FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => FeatureListFeaturesResponseMeterFilterCondition.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Comparison applied to the condition field
+/// </summary>
+[JsonConverter(typeof(FeatureListFeaturesResponseMeterFilterConditionOperationConverter))]
+public enum FeatureListFeaturesResponseMeterFilterConditionOperation
+{
+    Equals,
+    NotEquals,
+    GreaterThan,
+    GreaterThanOrEqual,
+    LessThan,
+    LessThanOrEqual,
+    IsNull,
+    IsNotNull,
+    Contains,
+    StartsWith,
+    EndsWith,
+    In,
+}
+
+sealed class FeatureListFeaturesResponseMeterFilterConditionOperationConverter
+    : JsonConverter<FeatureListFeaturesResponseMeterFilterConditionOperation>
+{
+    public override FeatureListFeaturesResponseMeterFilterConditionOperation Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "EQUALS" => FeatureListFeaturesResponseMeterFilterConditionOperation.Equals,
+            "NOT_EQUALS" => FeatureListFeaturesResponseMeterFilterConditionOperation.NotEquals,
+            "GREATER_THAN" => FeatureListFeaturesResponseMeterFilterConditionOperation.GreaterThan,
+            "GREATER_THAN_OR_EQUAL" =>
+                FeatureListFeaturesResponseMeterFilterConditionOperation.GreaterThanOrEqual,
+            "LESS_THAN" => FeatureListFeaturesResponseMeterFilterConditionOperation.LessThan,
+            "LESS_THAN_OR_EQUAL" =>
+                FeatureListFeaturesResponseMeterFilterConditionOperation.LessThanOrEqual,
+            "IS_NULL" => FeatureListFeaturesResponseMeterFilterConditionOperation.IsNull,
+            "IS_NOT_NULL" => FeatureListFeaturesResponseMeterFilterConditionOperation.IsNotNull,
+            "CONTAINS" => FeatureListFeaturesResponseMeterFilterConditionOperation.Contains,
+            "STARTS_WITH" => FeatureListFeaturesResponseMeterFilterConditionOperation.StartsWith,
+            "ENDS_WITH" => FeatureListFeaturesResponseMeterFilterConditionOperation.EndsWith,
+            "IN" => FeatureListFeaturesResponseMeterFilterConditionOperation.In,
+            _ => (FeatureListFeaturesResponseMeterFilterConditionOperation)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        FeatureListFeaturesResponseMeterFilterConditionOperation value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                FeatureListFeaturesResponseMeterFilterConditionOperation.Equals => "EQUALS",
+                FeatureListFeaturesResponseMeterFilterConditionOperation.NotEquals => "NOT_EQUALS",
+                FeatureListFeaturesResponseMeterFilterConditionOperation.GreaterThan =>
+                    "GREATER_THAN",
+                FeatureListFeaturesResponseMeterFilterConditionOperation.GreaterThanOrEqual =>
+                    "GREATER_THAN_OR_EQUAL",
+                FeatureListFeaturesResponseMeterFilterConditionOperation.LessThan => "LESS_THAN",
+                FeatureListFeaturesResponseMeterFilterConditionOperation.LessThanOrEqual =>
+                    "LESS_THAN_OR_EQUAL",
+                FeatureListFeaturesResponseMeterFilterConditionOperation.IsNull => "IS_NULL",
+                FeatureListFeaturesResponseMeterFilterConditionOperation.IsNotNull => "IS_NOT_NULL",
+                FeatureListFeaturesResponseMeterFilterConditionOperation.Contains => "CONTAINS",
+                FeatureListFeaturesResponseMeterFilterConditionOperation.StartsWith =>
+                    "STARTS_WITH",
+                FeatureListFeaturesResponseMeterFilterConditionOperation.EndsWith => "ENDS_WITH",
+                FeatureListFeaturesResponseMeterFilterConditionOperation.In => "IN",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

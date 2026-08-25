@@ -26,6 +26,28 @@ public class FeatureTest : TestBase
                 FeatureUnits = "featureUnits",
                 FeatureUnitsPlural = "featureUnitsPlural",
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Meter = new()
+                {
+                    Aggregation = new()
+                    {
+                        Function = DataMeterAggregationFunction.Sum,
+                        Field = "field",
+                    },
+                    Filters =
+                    [
+                        new(
+                            [
+                                new()
+                                {
+                                    Field = "field",
+                                    Operation = DataMeterFilterConditionOperation.Equals,
+                                    Value = "value",
+                                    Values = ["string"],
+                                },
+                            ]
+                        ),
+                    ],
+                },
                 MeterType = DataMeterType.None,
                 UnitTransformation = new()
                 {
@@ -50,6 +72,28 @@ public class FeatureTest : TestBase
             FeatureUnits = "featureUnits",
             FeatureUnitsPlural = "featureUnitsPlural",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Meter = new()
+            {
+                Aggregation = new()
+                {
+                    Function = DataMeterAggregationFunction.Sum,
+                    Field = "field",
+                },
+                Filters =
+                [
+                    new(
+                        [
+                            new()
+                            {
+                                Field = "field",
+                                Operation = DataMeterFilterConditionOperation.Equals,
+                                Value = "value",
+                                Values = ["string"],
+                            },
+                        ]
+                    ),
+                ],
+            },
             MeterType = DataMeterType.None,
             UnitTransformation = new()
             {
@@ -81,6 +125,28 @@ public class FeatureTest : TestBase
                 FeatureUnits = "featureUnits",
                 FeatureUnitsPlural = "featureUnitsPlural",
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Meter = new()
+                {
+                    Aggregation = new()
+                    {
+                        Function = DataMeterAggregationFunction.Sum,
+                        Field = "field",
+                    },
+                    Filters =
+                    [
+                        new(
+                            [
+                                new()
+                                {
+                                    Field = "field",
+                                    Operation = DataMeterFilterConditionOperation.Equals,
+                                    Value = "value",
+                                    Values = ["string"],
+                                },
+                            ]
+                        ),
+                    ],
+                },
                 MeterType = DataMeterType.None,
                 UnitTransformation = new()
                 {
@@ -116,6 +182,28 @@ public class FeatureTest : TestBase
                 FeatureUnits = "featureUnits",
                 FeatureUnitsPlural = "featureUnitsPlural",
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Meter = new()
+                {
+                    Aggregation = new()
+                    {
+                        Function = DataMeterAggregationFunction.Sum,
+                        Field = "field",
+                    },
+                    Filters =
+                    [
+                        new(
+                            [
+                                new()
+                                {
+                                    Field = "field",
+                                    Operation = DataMeterFilterConditionOperation.Equals,
+                                    Value = "value",
+                                    Values = ["string"],
+                                },
+                            ]
+                        ),
+                    ],
+                },
                 MeterType = DataMeterType.None,
                 UnitTransformation = new()
                 {
@@ -147,6 +235,28 @@ public class FeatureTest : TestBase
             FeatureUnits = "featureUnits",
             FeatureUnitsPlural = "featureUnitsPlural",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Meter = new()
+            {
+                Aggregation = new()
+                {
+                    Function = DataMeterAggregationFunction.Sum,
+                    Field = "field",
+                },
+                Filters =
+                [
+                    new(
+                        [
+                            new()
+                            {
+                                Field = "field",
+                                Operation = DataMeterFilterConditionOperation.Equals,
+                                Value = "value",
+                                Values = ["string"],
+                            },
+                        ]
+                    ),
+                ],
+            },
             MeterType = DataMeterType.None,
             UnitTransformation = new()
             {
@@ -178,6 +288,28 @@ public class FeatureTest : TestBase
                 FeatureUnits = "featureUnits",
                 FeatureUnitsPlural = "featureUnitsPlural",
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Meter = new()
+                {
+                    Aggregation = new()
+                    {
+                        Function = DataMeterAggregationFunction.Sum,
+                        Field = "field",
+                    },
+                    Filters =
+                    [
+                        new(
+                            [
+                                new()
+                                {
+                                    Field = "field",
+                                    Operation = DataMeterFilterConditionOperation.Equals,
+                                    Value = "value",
+                                    Values = ["string"],
+                                },
+                            ]
+                        ),
+                    ],
+                },
                 MeterType = DataMeterType.None,
                 UnitTransformation = new()
                 {
@@ -210,6 +342,28 @@ public class FeatureTest : TestBase
                 FeatureUnits = "featureUnits",
                 FeatureUnitsPlural = "featureUnitsPlural",
                 Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                Meter = new()
+                {
+                    Aggregation = new()
+                    {
+                        Function = DataMeterAggregationFunction.Sum,
+                        Field = "field",
+                    },
+                    Filters =
+                    [
+                        new(
+                            [
+                                new()
+                                {
+                                    Field = "field",
+                                    Operation = DataMeterFilterConditionOperation.Equals,
+                                    Value = "value",
+                                    Values = ["string"],
+                                },
+                            ]
+                        ),
+                    ],
+                },
                 MeterType = DataMeterType.None,
                 UnitTransformation = new()
                 {
@@ -245,6 +399,28 @@ public class DataTest : TestBase
             FeatureUnits = "featureUnits",
             FeatureUnitsPlural = "featureUnitsPlural",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Meter = new()
+            {
+                Aggregation = new()
+                {
+                    Function = DataMeterAggregationFunction.Sum,
+                    Field = "field",
+                },
+                Filters =
+                [
+                    new(
+                        [
+                            new()
+                            {
+                                Field = "field",
+                                Operation = DataMeterFilterConditionOperation.Equals,
+                                Value = "value",
+                                Values = ["string"],
+                            },
+                        ]
+                    ),
+                ],
+            },
             MeterType = DataMeterType.None,
             UnitTransformation = new()
             {
@@ -269,6 +445,24 @@ public class DataTest : TestBase
         string expectedFeatureUnits = "featureUnits";
         string expectedFeatureUnitsPlural = "featureUnitsPlural";
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        DataMeter expectedMeter = new()
+        {
+            Aggregation = new() { Function = DataMeterAggregationFunction.Sum, Field = "field" },
+            Filters =
+            [
+                new(
+                    [
+                        new()
+                        {
+                            Field = "field",
+                            Operation = DataMeterFilterConditionOperation.Equals,
+                            Value = "value",
+                            Values = ["string"],
+                        },
+                    ]
+                ),
+            ],
+        };
         ApiEnum<string, DataMeterType> expectedMeterType = DataMeterType.None;
         DataUnitTransformation expectedUnitTransformation = new()
         {
@@ -300,6 +494,7 @@ public class DataTest : TestBase
 
             Assert.Equal(value, model.Metadata[item.Key]);
         }
+        Assert.Equal(expectedMeter, model.Meter);
         Assert.Equal(expectedMeterType, model.MeterType);
         Assert.Equal(expectedUnitTransformation, model.UnitTransformation);
         Assert.Equal(expectedUpdatedAt, model.UpdatedAt);
@@ -320,6 +515,28 @@ public class DataTest : TestBase
             FeatureUnits = "featureUnits",
             FeatureUnitsPlural = "featureUnitsPlural",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Meter = new()
+            {
+                Aggregation = new()
+                {
+                    Function = DataMeterAggregationFunction.Sum,
+                    Field = "field",
+                },
+                Filters =
+                [
+                    new(
+                        [
+                            new()
+                            {
+                                Field = "field",
+                                Operation = DataMeterFilterConditionOperation.Equals,
+                                Value = "value",
+                                Values = ["string"],
+                            },
+                        ]
+                    ),
+                ],
+            },
             MeterType = DataMeterType.None,
             UnitTransformation = new()
             {
@@ -352,6 +569,28 @@ public class DataTest : TestBase
             FeatureUnits = "featureUnits",
             FeatureUnitsPlural = "featureUnitsPlural",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Meter = new()
+            {
+                Aggregation = new()
+                {
+                    Function = DataMeterAggregationFunction.Sum,
+                    Field = "field",
+                },
+                Filters =
+                [
+                    new(
+                        [
+                            new()
+                            {
+                                Field = "field",
+                                Operation = DataMeterFilterConditionOperation.Equals,
+                                Value = "value",
+                                Values = ["string"],
+                            },
+                        ]
+                    ),
+                ],
+            },
             MeterType = DataMeterType.None,
             UnitTransformation = new()
             {
@@ -380,6 +619,24 @@ public class DataTest : TestBase
         string expectedFeatureUnits = "featureUnits";
         string expectedFeatureUnitsPlural = "featureUnitsPlural";
         Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+        DataMeter expectedMeter = new()
+        {
+            Aggregation = new() { Function = DataMeterAggregationFunction.Sum, Field = "field" },
+            Filters =
+            [
+                new(
+                    [
+                        new()
+                        {
+                            Field = "field",
+                            Operation = DataMeterFilterConditionOperation.Equals,
+                            Value = "value",
+                            Values = ["string"],
+                        },
+                    ]
+                ),
+            ],
+        };
         ApiEnum<string, DataMeterType> expectedMeterType = DataMeterType.None;
         DataUnitTransformation expectedUnitTransformation = new()
         {
@@ -411,6 +668,7 @@ public class DataTest : TestBase
 
             Assert.Equal(value, deserialized.Metadata[item.Key]);
         }
+        Assert.Equal(expectedMeter, deserialized.Meter);
         Assert.Equal(expectedMeterType, deserialized.MeterType);
         Assert.Equal(expectedUnitTransformation, deserialized.UnitTransformation);
         Assert.Equal(expectedUpdatedAt, deserialized.UpdatedAt);
@@ -431,6 +689,28 @@ public class DataTest : TestBase
             FeatureUnits = "featureUnits",
             FeatureUnitsPlural = "featureUnitsPlural",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Meter = new()
+            {
+                Aggregation = new()
+                {
+                    Function = DataMeterAggregationFunction.Sum,
+                    Field = "field",
+                },
+                Filters =
+                [
+                    new(
+                        [
+                            new()
+                            {
+                                Field = "field",
+                                Operation = DataMeterFilterConditionOperation.Equals,
+                                Value = "value",
+                                Values = ["string"],
+                            },
+                        ]
+                    ),
+                ],
+            },
             MeterType = DataMeterType.None,
             UnitTransformation = new()
             {
@@ -460,6 +740,28 @@ public class DataTest : TestBase
             FeatureUnits = "featureUnits",
             FeatureUnitsPlural = "featureUnitsPlural",
             Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+            Meter = new()
+            {
+                Aggregation = new()
+                {
+                    Function = DataMeterAggregationFunction.Sum,
+                    Field = "field",
+                },
+                Filters =
+                [
+                    new(
+                        [
+                            new()
+                            {
+                                Field = "field",
+                                Operation = DataMeterFilterConditionOperation.Equals,
+                                Value = "value",
+                                Values = ["string"],
+                            },
+                        ]
+                    ),
+                ],
+            },
             MeterType = DataMeterType.None,
             UnitTransformation = new()
             {
@@ -658,6 +960,792 @@ public class DataFeatureTypeTest : TestBase
             json,
             ModelBase.SerializerOptions
         );
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class DataMeterTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new DataMeter
+        {
+            Aggregation = new() { Function = DataMeterAggregationFunction.Sum, Field = "field" },
+            Filters =
+            [
+                new(
+                    [
+                        new()
+                        {
+                            Field = "field",
+                            Operation = DataMeterFilterConditionOperation.Equals,
+                            Value = "value",
+                            Values = ["string"],
+                        },
+                    ]
+                ),
+            ],
+        };
+
+        DataMeterAggregation expectedAggregation = new()
+        {
+            Function = DataMeterAggregationFunction.Sum,
+            Field = "field",
+        };
+        List<DataMeterFilter> expectedFilters =
+        [
+            new(
+                [
+                    new()
+                    {
+                        Field = "field",
+                        Operation = DataMeterFilterConditionOperation.Equals,
+                        Value = "value",
+                        Values = ["string"],
+                    },
+                ]
+            ),
+        ];
+
+        Assert.Equal(expectedAggregation, model.Aggregation);
+        Assert.Equal(expectedFilters.Count, model.Filters.Count);
+        for (int i = 0; i < expectedFilters.Count; i++)
+        {
+            Assert.Equal(expectedFilters[i], model.Filters[i]);
+        }
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new DataMeter
+        {
+            Aggregation = new() { Function = DataMeterAggregationFunction.Sum, Field = "field" },
+            Filters =
+            [
+                new(
+                    [
+                        new()
+                        {
+                            Field = "field",
+                            Operation = DataMeterFilterConditionOperation.Equals,
+                            Value = "value",
+                            Values = ["string"],
+                        },
+                    ]
+                ),
+            ],
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<DataMeter>(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new DataMeter
+        {
+            Aggregation = new() { Function = DataMeterAggregationFunction.Sum, Field = "field" },
+            Filters =
+            [
+                new(
+                    [
+                        new()
+                        {
+                            Field = "field",
+                            Operation = DataMeterFilterConditionOperation.Equals,
+                            Value = "value",
+                            Values = ["string"],
+                        },
+                    ]
+                ),
+            ],
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<DataMeter>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        DataMeterAggregation expectedAggregation = new()
+        {
+            Function = DataMeterAggregationFunction.Sum,
+            Field = "field",
+        };
+        List<DataMeterFilter> expectedFilters =
+        [
+            new(
+                [
+                    new()
+                    {
+                        Field = "field",
+                        Operation = DataMeterFilterConditionOperation.Equals,
+                        Value = "value",
+                        Values = ["string"],
+                    },
+                ]
+            ),
+        ];
+
+        Assert.Equal(expectedAggregation, deserialized.Aggregation);
+        Assert.Equal(expectedFilters.Count, deserialized.Filters.Count);
+        for (int i = 0; i < expectedFilters.Count; i++)
+        {
+            Assert.Equal(expectedFilters[i], deserialized.Filters[i]);
+        }
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new DataMeter
+        {
+            Aggregation = new() { Function = DataMeterAggregationFunction.Sum, Field = "field" },
+            Filters =
+            [
+                new(
+                    [
+                        new()
+                        {
+                            Field = "field",
+                            Operation = DataMeterFilterConditionOperation.Equals,
+                            Value = "value",
+                            Values = ["string"],
+                        },
+                    ]
+                ),
+            ],
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new DataMeter
+        {
+            Aggregation = new() { Function = DataMeterAggregationFunction.Sum, Field = "field" },
+            Filters =
+            [
+                new(
+                    [
+                        new()
+                        {
+                            Field = "field",
+                            Operation = DataMeterFilterConditionOperation.Equals,
+                            Value = "value",
+                            Values = ["string"],
+                        },
+                    ]
+                ),
+            ],
+        };
+
+        DataMeter copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class DataMeterAggregationTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new DataMeterAggregation
+        {
+            Function = DataMeterAggregationFunction.Sum,
+            Field = "field",
+        };
+
+        ApiEnum<string, DataMeterAggregationFunction> expectedFunction =
+            DataMeterAggregationFunction.Sum;
+        string expectedField = "field";
+
+        Assert.Equal(expectedFunction, model.Function);
+        Assert.Equal(expectedField, model.Field);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new DataMeterAggregation
+        {
+            Function = DataMeterAggregationFunction.Sum,
+            Field = "field",
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<DataMeterAggregation>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new DataMeterAggregation
+        {
+            Function = DataMeterAggregationFunction.Sum,
+            Field = "field",
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<DataMeterAggregation>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        ApiEnum<string, DataMeterAggregationFunction> expectedFunction =
+            DataMeterAggregationFunction.Sum;
+        string expectedField = "field";
+
+        Assert.Equal(expectedFunction, deserialized.Function);
+        Assert.Equal(expectedField, deserialized.Field);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new DataMeterAggregation
+        {
+            Function = DataMeterAggregationFunction.Sum,
+            Field = "field",
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new DataMeterAggregation { Function = DataMeterAggregationFunction.Sum };
+
+        Assert.Null(model.Field);
+        Assert.False(model.RawData.ContainsKey("field"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new DataMeterAggregation { Function = DataMeterAggregationFunction.Sum };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new DataMeterAggregation
+        {
+            Function = DataMeterAggregationFunction.Sum,
+
+            Field = null,
+        };
+
+        Assert.Null(model.Field);
+        Assert.True(model.RawData.ContainsKey("field"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new DataMeterAggregation
+        {
+            Function = DataMeterAggregationFunction.Sum,
+
+            Field = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new DataMeterAggregation
+        {
+            Function = DataMeterAggregationFunction.Sum,
+            Field = "field",
+        };
+
+        DataMeterAggregation copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class DataMeterAggregationFunctionTest : TestBase
+{
+    [Theory]
+    [InlineData(DataMeterAggregationFunction.Sum)]
+    [InlineData(DataMeterAggregationFunction.Max)]
+    [InlineData(DataMeterAggregationFunction.Min)]
+    [InlineData(DataMeterAggregationFunction.Avg)]
+    [InlineData(DataMeterAggregationFunction.Count)]
+    [InlineData(DataMeterAggregationFunction.Unique)]
+    public void Validation_Works(DataMeterAggregationFunction rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, DataMeterAggregationFunction> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataMeterAggregationFunction>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(DataMeterAggregationFunction.Sum)]
+    [InlineData(DataMeterAggregationFunction.Max)]
+    [InlineData(DataMeterAggregationFunction.Min)]
+    [InlineData(DataMeterAggregationFunction.Avg)]
+    [InlineData(DataMeterAggregationFunction.Count)]
+    [InlineData(DataMeterAggregationFunction.Unique)]
+    public void SerializationRoundtrip_Works(DataMeterAggregationFunction rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, DataMeterAggregationFunction> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, DataMeterAggregationFunction>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataMeterAggregationFunction>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, DataMeterAggregationFunction>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+}
+
+public class DataMeterFilterTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new DataMeterFilter
+        {
+            Conditions =
+            [
+                new()
+                {
+                    Field = "field",
+                    Operation = DataMeterFilterConditionOperation.Equals,
+                    Value = "value",
+                    Values = ["string"],
+                },
+            ],
+        };
+
+        List<DataMeterFilterCondition> expectedConditions =
+        [
+            new()
+            {
+                Field = "field",
+                Operation = DataMeterFilterConditionOperation.Equals,
+                Value = "value",
+                Values = ["string"],
+            },
+        ];
+
+        Assert.Equal(expectedConditions.Count, model.Conditions.Count);
+        for (int i = 0; i < expectedConditions.Count; i++)
+        {
+            Assert.Equal(expectedConditions[i], model.Conditions[i]);
+        }
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new DataMeterFilter
+        {
+            Conditions =
+            [
+                new()
+                {
+                    Field = "field",
+                    Operation = DataMeterFilterConditionOperation.Equals,
+                    Value = "value",
+                    Values = ["string"],
+                },
+            ],
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<DataMeterFilter>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new DataMeterFilter
+        {
+            Conditions =
+            [
+                new()
+                {
+                    Field = "field",
+                    Operation = DataMeterFilterConditionOperation.Equals,
+                    Value = "value",
+                    Values = ["string"],
+                },
+            ],
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<DataMeterFilter>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        List<DataMeterFilterCondition> expectedConditions =
+        [
+            new()
+            {
+                Field = "field",
+                Operation = DataMeterFilterConditionOperation.Equals,
+                Value = "value",
+                Values = ["string"],
+            },
+        ];
+
+        Assert.Equal(expectedConditions.Count, deserialized.Conditions.Count);
+        for (int i = 0; i < expectedConditions.Count; i++)
+        {
+            Assert.Equal(expectedConditions[i], deserialized.Conditions[i]);
+        }
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new DataMeterFilter
+        {
+            Conditions =
+            [
+                new()
+                {
+                    Field = "field",
+                    Operation = DataMeterFilterConditionOperation.Equals,
+                    Value = "value",
+                    Values = ["string"],
+                },
+            ],
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new DataMeterFilter
+        {
+            Conditions =
+            [
+                new()
+                {
+                    Field = "field",
+                    Operation = DataMeterFilterConditionOperation.Equals,
+                    Value = "value",
+                    Values = ["string"],
+                },
+            ],
+        };
+
+        DataMeterFilter copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class DataMeterFilterConditionTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new DataMeterFilterCondition
+        {
+            Field = "field",
+            Operation = DataMeterFilterConditionOperation.Equals,
+            Value = "value",
+            Values = ["string"],
+        };
+
+        string expectedField = "field";
+        ApiEnum<string, DataMeterFilterConditionOperation> expectedOperation =
+            DataMeterFilterConditionOperation.Equals;
+        string expectedValue = "value";
+        List<string> expectedValues = ["string"];
+
+        Assert.Equal(expectedField, model.Field);
+        Assert.Equal(expectedOperation, model.Operation);
+        Assert.Equal(expectedValue, model.Value);
+        Assert.NotNull(model.Values);
+        Assert.Equal(expectedValues.Count, model.Values.Count);
+        for (int i = 0; i < expectedValues.Count; i++)
+        {
+            Assert.Equal(expectedValues[i], model.Values[i]);
+        }
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new DataMeterFilterCondition
+        {
+            Field = "field",
+            Operation = DataMeterFilterConditionOperation.Equals,
+            Value = "value",
+            Values = ["string"],
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<DataMeterFilterCondition>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new DataMeterFilterCondition
+        {
+            Field = "field",
+            Operation = DataMeterFilterConditionOperation.Equals,
+            Value = "value",
+            Values = ["string"],
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<DataMeterFilterCondition>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        string expectedField = "field";
+        ApiEnum<string, DataMeterFilterConditionOperation> expectedOperation =
+            DataMeterFilterConditionOperation.Equals;
+        string expectedValue = "value";
+        List<string> expectedValues = ["string"];
+
+        Assert.Equal(expectedField, deserialized.Field);
+        Assert.Equal(expectedOperation, deserialized.Operation);
+        Assert.Equal(expectedValue, deserialized.Value);
+        Assert.NotNull(deserialized.Values);
+        Assert.Equal(expectedValues.Count, deserialized.Values.Count);
+        for (int i = 0; i < expectedValues.Count; i++)
+        {
+            Assert.Equal(expectedValues[i], deserialized.Values[i]);
+        }
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new DataMeterFilterCondition
+        {
+            Field = "field",
+            Operation = DataMeterFilterConditionOperation.Equals,
+            Value = "value",
+            Values = ["string"],
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new DataMeterFilterCondition
+        {
+            Field = "field",
+            Operation = DataMeterFilterConditionOperation.Equals,
+        };
+
+        Assert.Null(model.Value);
+        Assert.False(model.RawData.ContainsKey("value"));
+        Assert.Null(model.Values);
+        Assert.False(model.RawData.ContainsKey("values"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new DataMeterFilterCondition
+        {
+            Field = "field",
+            Operation = DataMeterFilterConditionOperation.Equals,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new DataMeterFilterCondition
+        {
+            Field = "field",
+            Operation = DataMeterFilterConditionOperation.Equals,
+
+            Value = null,
+            Values = null,
+        };
+
+        Assert.Null(model.Value);
+        Assert.True(model.RawData.ContainsKey("value"));
+        Assert.Null(model.Values);
+        Assert.True(model.RawData.ContainsKey("values"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new DataMeterFilterCondition
+        {
+            Field = "field",
+            Operation = DataMeterFilterConditionOperation.Equals,
+
+            Value = null,
+            Values = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new DataMeterFilterCondition
+        {
+            Field = "field",
+            Operation = DataMeterFilterConditionOperation.Equals,
+            Value = "value",
+            Values = ["string"],
+        };
+
+        DataMeterFilterCondition copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class DataMeterFilterConditionOperationTest : TestBase
+{
+    [Theory]
+    [InlineData(DataMeterFilterConditionOperation.Equals)]
+    [InlineData(DataMeterFilterConditionOperation.NotEquals)]
+    [InlineData(DataMeterFilterConditionOperation.GreaterThan)]
+    [InlineData(DataMeterFilterConditionOperation.GreaterThanOrEqual)]
+    [InlineData(DataMeterFilterConditionOperation.LessThan)]
+    [InlineData(DataMeterFilterConditionOperation.LessThanOrEqual)]
+    [InlineData(DataMeterFilterConditionOperation.IsNull)]
+    [InlineData(DataMeterFilterConditionOperation.IsNotNull)]
+    [InlineData(DataMeterFilterConditionOperation.Contains)]
+    [InlineData(DataMeterFilterConditionOperation.StartsWith)]
+    [InlineData(DataMeterFilterConditionOperation.EndsWith)]
+    [InlineData(DataMeterFilterConditionOperation.In)]
+    public void Validation_Works(DataMeterFilterConditionOperation rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, DataMeterFilterConditionOperation> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataMeterFilterConditionOperation>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(DataMeterFilterConditionOperation.Equals)]
+    [InlineData(DataMeterFilterConditionOperation.NotEquals)]
+    [InlineData(DataMeterFilterConditionOperation.GreaterThan)]
+    [InlineData(DataMeterFilterConditionOperation.GreaterThanOrEqual)]
+    [InlineData(DataMeterFilterConditionOperation.LessThan)]
+    [InlineData(DataMeterFilterConditionOperation.LessThanOrEqual)]
+    [InlineData(DataMeterFilterConditionOperation.IsNull)]
+    [InlineData(DataMeterFilterConditionOperation.IsNotNull)]
+    [InlineData(DataMeterFilterConditionOperation.Contains)]
+    [InlineData(DataMeterFilterConditionOperation.StartsWith)]
+    [InlineData(DataMeterFilterConditionOperation.EndsWith)]
+    [InlineData(DataMeterFilterConditionOperation.In)]
+    public void SerializationRoundtrip_Works(DataMeterFilterConditionOperation rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, DataMeterFilterConditionOperation> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, DataMeterFilterConditionOperation>
+        >(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, DataMeterFilterConditionOperation>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<
+            ApiEnum<string, DataMeterFilterConditionOperation>
+        >(json, ModelBase.SerializerOptions);
 
         Assert.Equal(value, deserialized);
     }
