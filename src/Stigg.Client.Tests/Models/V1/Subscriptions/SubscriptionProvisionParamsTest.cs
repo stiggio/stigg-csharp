@@ -3742,7 +3742,7 @@ public class SubscriptionProvisionParamsEntitlementTest : TestBase
             new SubscriptionProvisionParamsEntitlementCredit()
             {
                 ID = "id",
-                Amount = 1,
+                Amount = 0,
                 Cadence = SubscriptionProvisionParamsEntitlementCreditCadence.Month,
                 HasSoftLimit = true,
             };
@@ -3786,7 +3786,7 @@ public class SubscriptionProvisionParamsEntitlementTest : TestBase
             new SubscriptionProvisionParamsEntitlementCredit()
             {
                 ID = "id",
-                Amount = 1,
+                Amount = 0,
                 Cadence = SubscriptionProvisionParamsEntitlementCreditCadence.Month,
                 HasSoftLimit = true,
             };
@@ -4836,13 +4836,13 @@ public class SubscriptionProvisionParamsEntitlementCreditTest : TestBase
         var model = new SubscriptionProvisionParamsEntitlementCredit
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = SubscriptionProvisionParamsEntitlementCreditCadence.Month,
             HasSoftLimit = true,
         };
 
         string expectedID = "id";
-        double expectedAmount = 1;
+        double expectedAmount = 0;
         ApiEnum<string, SubscriptionProvisionParamsEntitlementCreditCadence> expectedCadence =
             SubscriptionProvisionParamsEntitlementCreditCadence.Month;
         JsonElement expectedType = JsonSerializer.SerializeToElement("CREDIT");
@@ -4861,7 +4861,7 @@ public class SubscriptionProvisionParamsEntitlementCreditTest : TestBase
         var model = new SubscriptionProvisionParamsEntitlementCredit
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = SubscriptionProvisionParamsEntitlementCreditCadence.Month,
             HasSoftLimit = true,
         };
@@ -4881,7 +4881,7 @@ public class SubscriptionProvisionParamsEntitlementCreditTest : TestBase
         var model = new SubscriptionProvisionParamsEntitlementCredit
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = SubscriptionProvisionParamsEntitlementCreditCadence.Month,
             HasSoftLimit = true,
         };
@@ -4894,7 +4894,7 @@ public class SubscriptionProvisionParamsEntitlementCreditTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
-        double expectedAmount = 1;
+        double expectedAmount = 0;
         ApiEnum<string, SubscriptionProvisionParamsEntitlementCreditCadence> expectedCadence =
             SubscriptionProvisionParamsEntitlementCreditCadence.Month;
         JsonElement expectedType = JsonSerializer.SerializeToElement("CREDIT");
@@ -4913,7 +4913,7 @@ public class SubscriptionProvisionParamsEntitlementCreditTest : TestBase
         var model = new SubscriptionProvisionParamsEntitlementCredit
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = SubscriptionProvisionParamsEntitlementCreditCadence.Month,
             HasSoftLimit = true,
         };
@@ -4927,7 +4927,7 @@ public class SubscriptionProvisionParamsEntitlementCreditTest : TestBase
         var model = new SubscriptionProvisionParamsEntitlementCredit
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = SubscriptionProvisionParamsEntitlementCreditCadence.Month,
         };
 
@@ -4941,7 +4941,7 @@ public class SubscriptionProvisionParamsEntitlementCreditTest : TestBase
         var model = new SubscriptionProvisionParamsEntitlementCredit
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = SubscriptionProvisionParamsEntitlementCreditCadence.Month,
         };
 
@@ -4954,7 +4954,7 @@ public class SubscriptionProvisionParamsEntitlementCreditTest : TestBase
         var model = new SubscriptionProvisionParamsEntitlementCredit
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = SubscriptionProvisionParamsEntitlementCreditCadence.Month,
 
             // Null should be interpreted as omitted for these properties
@@ -4971,7 +4971,7 @@ public class SubscriptionProvisionParamsEntitlementCreditTest : TestBase
         var model = new SubscriptionProvisionParamsEntitlementCredit
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = SubscriptionProvisionParamsEntitlementCreditCadence.Month,
 
             // Null should be interpreted as omitted for these properties
@@ -4987,7 +4987,7 @@ public class SubscriptionProvisionParamsEntitlementCreditTest : TestBase
         var model = new SubscriptionProvisionParamsEntitlementCredit
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = SubscriptionProvisionParamsEntitlementCreditCadence.Month,
             HasSoftLimit = true,
         };

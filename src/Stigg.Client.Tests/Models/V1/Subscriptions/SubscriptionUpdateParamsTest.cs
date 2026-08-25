@@ -2926,7 +2926,7 @@ public class EntitlementTest : TestBase
         Subscriptions::Entitlement value = new Subscriptions::Credit()
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = Subscriptions::Cadence.Month,
             HasSoftLimit = true,
         };
@@ -2966,7 +2966,7 @@ public class EntitlementTest : TestBase
         Subscriptions::Entitlement value = new Subscriptions::Credit()
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = Subscriptions::Cadence.Month,
             HasSoftLimit = true,
         };
@@ -3861,13 +3861,13 @@ public class CreditTest : TestBase
         var model = new Subscriptions::Credit
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = Subscriptions::Cadence.Month,
             HasSoftLimit = true,
         };
 
         string expectedID = "id";
-        double expectedAmount = 1;
+        double expectedAmount = 0;
         ApiEnum<string, Subscriptions::Cadence> expectedCadence = Subscriptions::Cadence.Month;
         JsonElement expectedType = JsonSerializer.SerializeToElement("CREDIT");
         bool expectedHasSoftLimit = true;
@@ -3885,7 +3885,7 @@ public class CreditTest : TestBase
         var model = new Subscriptions::Credit
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = Subscriptions::Cadence.Month,
             HasSoftLimit = true,
         };
@@ -3905,7 +3905,7 @@ public class CreditTest : TestBase
         var model = new Subscriptions::Credit
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = Subscriptions::Cadence.Month,
             HasSoftLimit = true,
         };
@@ -3918,7 +3918,7 @@ public class CreditTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
-        double expectedAmount = 1;
+        double expectedAmount = 0;
         ApiEnum<string, Subscriptions::Cadence> expectedCadence = Subscriptions::Cadence.Month;
         JsonElement expectedType = JsonSerializer.SerializeToElement("CREDIT");
         bool expectedHasSoftLimit = true;
@@ -3936,7 +3936,7 @@ public class CreditTest : TestBase
         var model = new Subscriptions::Credit
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = Subscriptions::Cadence.Month,
             HasSoftLimit = true,
         };
@@ -3950,7 +3950,7 @@ public class CreditTest : TestBase
         var model = new Subscriptions::Credit
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = Subscriptions::Cadence.Month,
         };
 
@@ -3964,7 +3964,7 @@ public class CreditTest : TestBase
         var model = new Subscriptions::Credit
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = Subscriptions::Cadence.Month,
         };
 
@@ -3977,7 +3977,7 @@ public class CreditTest : TestBase
         var model = new Subscriptions::Credit
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = Subscriptions::Cadence.Month,
 
             // Null should be interpreted as omitted for these properties
@@ -3994,7 +3994,7 @@ public class CreditTest : TestBase
         var model = new Subscriptions::Credit
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = Subscriptions::Cadence.Month,
 
             // Null should be interpreted as omitted for these properties
@@ -4010,7 +4010,7 @@ public class CreditTest : TestBase
         var model = new Subscriptions::Credit
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = Subscriptions::Cadence.Month,
             HasSoftLimit = true,
         };

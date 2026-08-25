@@ -336,7 +336,7 @@ public class EntitlementTest : TestBase
         Entitlement value = new Credit()
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = Cadence.Month,
             Behavior = CreditBehavior.Increment,
             DependencyFeatureID = "dependencyFeatureId",
@@ -392,7 +392,7 @@ public class EntitlementTest : TestBase
         Entitlement value = new Credit()
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = Cadence.Month,
             Behavior = CreditBehavior.Increment,
             DependencyFeatureID = "dependencyFeatureId",
@@ -1554,7 +1554,7 @@ public class CreditTest : TestBase
         var model = new Credit
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = Cadence.Month,
             Behavior = CreditBehavior.Increment,
             DependencyFeatureID = "dependencyFeatureId",
@@ -1568,7 +1568,7 @@ public class CreditTest : TestBase
         };
 
         string expectedID = "id";
-        double expectedAmount = 1;
+        double expectedAmount = 0;
         ApiEnum<string, Cadence> expectedCadence = Cadence.Month;
         JsonElement expectedType = JsonSerializer.SerializeToElement("CREDIT");
         ApiEnum<string, CreditBehavior> expectedBehavior = CreditBehavior.Increment;
@@ -1610,7 +1610,7 @@ public class CreditTest : TestBase
         var model = new Credit
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = Cadence.Month,
             Behavior = CreditBehavior.Increment,
             DependencyFeatureID = "dependencyFeatureId",
@@ -1635,7 +1635,7 @@ public class CreditTest : TestBase
         var model = new Credit
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = Cadence.Month,
             Behavior = CreditBehavior.Increment,
             DependencyFeatureID = "dependencyFeatureId",
@@ -1653,7 +1653,7 @@ public class CreditTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
-        double expectedAmount = 1;
+        double expectedAmount = 0;
         ApiEnum<string, Cadence> expectedCadence = Cadence.Month;
         JsonElement expectedType = JsonSerializer.SerializeToElement("CREDIT");
         ApiEnum<string, CreditBehavior> expectedBehavior = CreditBehavior.Increment;
@@ -1695,7 +1695,7 @@ public class CreditTest : TestBase
         var model = new Credit
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = Cadence.Month,
             Behavior = CreditBehavior.Increment,
             DependencyFeatureID = "dependencyFeatureId",
@@ -1717,7 +1717,7 @@ public class CreditTest : TestBase
         var model = new Credit
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = Cadence.Month,
         };
 
@@ -1747,7 +1747,7 @@ public class CreditTest : TestBase
         var model = new Credit
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = Cadence.Month,
         };
 
@@ -1760,7 +1760,7 @@ public class CreditTest : TestBase
         var model = new Credit
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = Cadence.Month,
 
             // Null should be interpreted as omitted for these properties
@@ -1801,7 +1801,7 @@ public class CreditTest : TestBase
         var model = new Credit
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = Cadence.Month,
 
             // Null should be interpreted as omitted for these properties
@@ -1825,7 +1825,7 @@ public class CreditTest : TestBase
         var model = new Credit
         {
             ID = "id",
-            Amount = 1,
+            Amount = 0,
             Cadence = Cadence.Month,
             Behavior = CreditBehavior.Increment,
             DependencyFeatureID = "dependencyFeatureId",

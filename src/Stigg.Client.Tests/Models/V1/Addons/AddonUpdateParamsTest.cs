@@ -70,7 +70,7 @@ public class AddonUpdateParamsTest : TestBase
                         ],
                         CreditEntitlement = new()
                         {
-                            Amount = 1,
+                            Amount = 0,
                             Cadence = Cadence.Month,
                             CustomCurrencyID = "customCurrencyId",
                         },
@@ -223,7 +223,7 @@ public class AddonUpdateParamsTest : TestBase
                     ],
                     CreditEntitlement = new()
                     {
-                        Amount = 1,
+                        Amount = 0,
                         Cadence = Cadence.Month,
                         CustomCurrencyID = "customCurrencyId",
                     },
@@ -462,7 +462,7 @@ public class AddonUpdateParamsTest : TestBase
                         ],
                         CreditEntitlement = new()
                         {
-                            Amount = 1,
+                            Amount = 0,
                             Cadence = Cadence.Month,
                             CustomCurrencyID = "customCurrencyId",
                         },
@@ -626,7 +626,7 @@ public class AddonUpdateParamsTest : TestBase
                         ],
                         CreditEntitlement = new()
                         {
-                            Amount = 1,
+                            Amount = 0,
                             Cadence = Cadence.Month,
                             CustomCurrencyID = "customCurrencyId",
                         },
@@ -823,7 +823,7 @@ public class AddonUpdateParamsTest : TestBase
                         ],
                         CreditEntitlement = new()
                         {
-                            Amount = 1,
+                            Amount = 0,
                             Cadence = Cadence.Month,
                             CustomCurrencyID = "customCurrencyId",
                         },
@@ -985,7 +985,7 @@ public class ChargesTest : TestBase
                     ],
                     CreditEntitlement = new()
                     {
-                        Amount = 1,
+                        Amount = 0,
                         Cadence = Cadence.Month,
                         CustomCurrencyID = "customCurrencyId",
                     },
@@ -1116,7 +1116,7 @@ public class ChargesTest : TestBase
                 ],
                 CreditEntitlement = new()
                 {
-                    Amount = 1,
+                    Amount = 0,
                     Cadence = Cadence.Month,
                     CustomCurrencyID = "customCurrencyId",
                 },
@@ -1281,7 +1281,7 @@ public class ChargesTest : TestBase
                     ],
                     CreditEntitlement = new()
                     {
-                        Amount = 1,
+                        Amount = 0,
                         Cadence = Cadence.Month,
                         CustomCurrencyID = "customCurrencyId",
                     },
@@ -1430,7 +1430,7 @@ public class ChargesTest : TestBase
                     ],
                     CreditEntitlement = new()
                     {
-                        Amount = 1,
+                        Amount = 0,
                         Cadence = Cadence.Month,
                         CustomCurrencyID = "customCurrencyId",
                     },
@@ -1568,7 +1568,7 @@ public class ChargesTest : TestBase
                 ],
                 CreditEntitlement = new()
                 {
-                    Amount = 1,
+                    Amount = 0,
                     Cadence = Cadence.Month,
                     CustomCurrencyID = "customCurrencyId",
                 },
@@ -1733,7 +1733,7 @@ public class ChargesTest : TestBase
                     ],
                     CreditEntitlement = new()
                     {
-                        Amount = 1,
+                        Amount = 0,
                         Cadence = Cadence.Month,
                         CustomCurrencyID = "customCurrencyId",
                     },
@@ -1973,7 +1973,7 @@ public class ChargesTest : TestBase
                     ],
                     CreditEntitlement = new()
                     {
-                        Amount = 1,
+                        Amount = 0,
                         Cadence = Cadence.Month,
                         CustomCurrencyID = "customCurrencyId",
                     },
@@ -2112,7 +2112,7 @@ public class ChargesTest : TestBase
                     ],
                     CreditEntitlement = new()
                     {
-                        Amount = 1,
+                        Amount = 0,
                         Cadence = Cadence.Month,
                         CustomCurrencyID = "customCurrencyId",
                     },
@@ -2250,7 +2250,7 @@ public class ChargesTest : TestBase
                     ],
                     CreditEntitlement = new()
                     {
-                        Amount = 1,
+                        Amount = 0,
                         Cadence = Cadence.Month,
                         CustomCurrencyID = "customCurrencyId",
                     },
@@ -2391,7 +2391,7 @@ public class ChargesTest : TestBase
                     ],
                     CreditEntitlement = new()
                     {
-                        Amount = 1,
+                        Amount = 0,
                         Cadence = Cadence.Month,
                         CustomCurrencyID = "customCurrencyId",
                     },
@@ -2539,7 +2539,7 @@ public class ChargesTest : TestBase
                     ],
                     CreditEntitlement = new()
                     {
-                        Amount = 1,
+                        Amount = 0,
                         Cadence = Cadence.Month,
                         CustomCurrencyID = "customCurrencyId",
                     },
@@ -3324,7 +3324,7 @@ public class OveragePricingModelTest : TestBase
             ],
             CreditEntitlement = new()
             {
-                Amount = 1,
+                Amount = 0,
                 Cadence = Cadence.Month,
                 CustomCurrencyID = "customCurrencyId",
             },
@@ -3375,7 +3375,7 @@ public class OveragePricingModelTest : TestBase
         ];
         CreditEntitlement expectedCreditEntitlement = new()
         {
-            Amount = 1,
+            Amount = 0,
             Cadence = Cadence.Month,
             CustomCurrencyID = "customCurrencyId",
         };
@@ -3441,7 +3441,7 @@ public class OveragePricingModelTest : TestBase
             ],
             CreditEntitlement = new()
             {
-                Amount = 1,
+                Amount = 0,
                 Cadence = Cadence.Month,
                 CustomCurrencyID = "customCurrencyId",
             },
@@ -3506,7 +3506,7 @@ public class OveragePricingModelTest : TestBase
             ],
             CreditEntitlement = new()
             {
-                Amount = 1,
+                Amount = 0,
                 Cadence = Cadence.Month,
                 CustomCurrencyID = "customCurrencyId",
             },
@@ -3564,7 +3564,7 @@ public class OveragePricingModelTest : TestBase
         ];
         CreditEntitlement expectedCreditEntitlement = new()
         {
-            Amount = 1,
+            Amount = 0,
             Cadence = Cadence.Month,
             CustomCurrencyID = "customCurrencyId",
         };
@@ -3630,7 +3630,7 @@ public class OveragePricingModelTest : TestBase
             ],
             CreditEntitlement = new()
             {
-                Amount = 1,
+                Amount = 0,
                 Cadence = Cadence.Month,
                 CustomCurrencyID = "customCurrencyId",
             },
@@ -3859,7 +3859,7 @@ public class OveragePricingModelTest : TestBase
             ],
             CreditEntitlement = new()
             {
-                Amount = 1,
+                Amount = 0,
                 Cadence = Cadence.Month,
                 CustomCurrencyID = "customCurrencyId",
             },
@@ -5791,12 +5791,12 @@ public class CreditEntitlementTest : TestBase
     {
         var model = new CreditEntitlement
         {
-            Amount = 1,
+            Amount = 0,
             Cadence = Cadence.Month,
             CustomCurrencyID = "customCurrencyId",
         };
 
-        double expectedAmount = 1;
+        double expectedAmount = 0;
         ApiEnum<string, Cadence> expectedCadence = Cadence.Month;
         string expectedCustomCurrencyID = "customCurrencyId";
 
@@ -5810,7 +5810,7 @@ public class CreditEntitlementTest : TestBase
     {
         var model = new CreditEntitlement
         {
-            Amount = 1,
+            Amount = 0,
             Cadence = Cadence.Month,
             CustomCurrencyID = "customCurrencyId",
         };
@@ -5829,7 +5829,7 @@ public class CreditEntitlementTest : TestBase
     {
         var model = new CreditEntitlement
         {
-            Amount = 1,
+            Amount = 0,
             Cadence = Cadence.Month,
             CustomCurrencyID = "customCurrencyId",
         };
@@ -5841,7 +5841,7 @@ public class CreditEntitlementTest : TestBase
         );
         Assert.NotNull(deserialized);
 
-        double expectedAmount = 1;
+        double expectedAmount = 0;
         ApiEnum<string, Cadence> expectedCadence = Cadence.Month;
         string expectedCustomCurrencyID = "customCurrencyId";
 
@@ -5855,7 +5855,7 @@ public class CreditEntitlementTest : TestBase
     {
         var model = new CreditEntitlement
         {
-            Amount = 1,
+            Amount = 0,
             Cadence = Cadence.Month,
             CustomCurrencyID = "customCurrencyId",
         };
@@ -5868,7 +5868,7 @@ public class CreditEntitlementTest : TestBase
     {
         var model = new CreditEntitlement
         {
-            Amount = 1,
+            Amount = 0,
             Cadence = Cadence.Month,
             CustomCurrencyID = "customCurrencyId",
         };

@@ -326,7 +326,7 @@ public class BodyTest : TestBase
     {
         Body value = new BodyCredit()
         {
-            Amount = 1,
+            Amount = 0,
             Behavior = BodyCreditBehavior.Increment,
             Cadence = BodyCreditCadence.Month,
             DependencyFeatureID = "dependencyFeatureId",
@@ -379,7 +379,7 @@ public class BodyTest : TestBase
     {
         Body value = new BodyCredit()
         {
-            Amount = 1,
+            Amount = 0,
             Behavior = BodyCreditBehavior.Increment,
             Cadence = BodyCreditCadence.Month,
             DependencyFeatureID = "dependencyFeatureId",
@@ -1545,7 +1545,7 @@ public class BodyCreditTest : TestBase
     {
         var model = new BodyCredit
         {
-            Amount = 1,
+            Amount = 0,
             Behavior = BodyCreditBehavior.Increment,
             Cadence = BodyCreditCadence.Month,
             DependencyFeatureID = "dependencyFeatureId",
@@ -1559,7 +1559,7 @@ public class BodyCreditTest : TestBase
         };
 
         JsonElement expectedType = JsonSerializer.SerializeToElement("CREDIT");
-        double expectedAmount = 1;
+        double expectedAmount = 0;
         ApiEnum<string, BodyCreditBehavior> expectedBehavior = BodyCreditBehavior.Increment;
         ApiEnum<string, BodyCreditCadence> expectedCadence = BodyCreditCadence.Month;
         string expectedDependencyFeatureID = "dependencyFeatureId";
@@ -1598,7 +1598,7 @@ public class BodyCreditTest : TestBase
     {
         var model = new BodyCredit
         {
-            Amount = 1,
+            Amount = 0,
             Behavior = BodyCreditBehavior.Increment,
             Cadence = BodyCreditCadence.Month,
             DependencyFeatureID = "dependencyFeatureId",
@@ -1625,7 +1625,7 @@ public class BodyCreditTest : TestBase
     {
         var model = new BodyCredit
         {
-            Amount = 1,
+            Amount = 0,
             Behavior = BodyCreditBehavior.Increment,
             Cadence = BodyCreditCadence.Month,
             DependencyFeatureID = "dependencyFeatureId",
@@ -1646,7 +1646,7 @@ public class BodyCreditTest : TestBase
         Assert.NotNull(deserialized);
 
         JsonElement expectedType = JsonSerializer.SerializeToElement("CREDIT");
-        double expectedAmount = 1;
+        double expectedAmount = 0;
         ApiEnum<string, BodyCreditBehavior> expectedBehavior = BodyCreditBehavior.Increment;
         ApiEnum<string, BodyCreditCadence> expectedCadence = BodyCreditCadence.Month;
         string expectedDependencyFeatureID = "dependencyFeatureId";
@@ -1685,7 +1685,7 @@ public class BodyCreditTest : TestBase
     {
         var model = new BodyCredit
         {
-            Amount = 1,
+            Amount = 0,
             Behavior = BodyCreditBehavior.Increment,
             Cadence = BodyCreditCadence.Month,
             DependencyFeatureID = "dependencyFeatureId",
@@ -1806,7 +1806,7 @@ public class BodyCreditTest : TestBase
     {
         var model = new BodyCredit
         {
-            Amount = 1,
+            Amount = 0,
             Behavior = BodyCreditBehavior.Increment,
             Cadence = BodyCreditCadence.Month,
             Description = "description",
@@ -1827,7 +1827,7 @@ public class BodyCreditTest : TestBase
     {
         var model = new BodyCredit
         {
-            Amount = 1,
+            Amount = 0,
             Behavior = BodyCreditBehavior.Increment,
             Cadence = BodyCreditCadence.Month,
             Description = "description",
@@ -1847,7 +1847,7 @@ public class BodyCreditTest : TestBase
     {
         var model = new BodyCredit
         {
-            Amount = 1,
+            Amount = 0,
             Behavior = BodyCreditBehavior.Increment,
             Cadence = BodyCreditCadence.Month,
             Description = "description",
@@ -1870,7 +1870,7 @@ public class BodyCreditTest : TestBase
     {
         var model = new BodyCredit
         {
-            Amount = 1,
+            Amount = 0,
             Behavior = BodyCreditBehavior.Increment,
             Cadence = BodyCreditCadence.Month,
             Description = "description",
@@ -1892,7 +1892,7 @@ public class BodyCreditTest : TestBase
     {
         var model = new BodyCredit
         {
-            Amount = 1,
+            Amount = 0,
             Behavior = BodyCreditBehavior.Increment,
             Cadence = BodyCreditCadence.Month,
             DependencyFeatureID = "dependencyFeatureId",
