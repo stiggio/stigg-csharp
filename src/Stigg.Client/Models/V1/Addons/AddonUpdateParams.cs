@@ -43,7 +43,8 @@ public record class AddonUpdateParams : ParamsBase
     }
 
     /// <summary>
-    /// Pricing configuration to set on the addon draft
+    /// Pricing configuration to set on the addon draft. Unlike the rest of this request,
+    /// this is a full replace of the pricing configuration, not a merge — see SetPackagePricingRequest.
     /// </summary>
     public Charges? Charges
     {
@@ -117,7 +118,8 @@ public record class AddonUpdateParams : ParamsBase
     }
 
     /// <summary>
-    /// The maximum quantity of this addon that can be added to a subscription
+    /// The maximum quantity of this addon that can be added to a subscription. Leave
+    /// unset for no upper bound.
     /// </summary>
     public long? MaxQuantity
     {
@@ -333,7 +335,8 @@ public record class AddonUpdateParams : ParamsBase
 }
 
 /// <summary>
-/// Pricing configuration to set on the addon draft
+/// Pricing configuration to set on the addon draft. Unlike the rest of this request,
+/// this is a full replace of the pricing configuration, not a merge — see SetPackagePricingRequest.
 /// </summary>
 [JsonConverter(typeof(JsonModelConverter<Charges, ChargesFromRaw>))]
 public sealed record class Charges : JsonModel
@@ -417,7 +420,8 @@ public sealed record class Charges : JsonModel
     }
 
     /// <summary>
-    /// Array of overage pricing model configurations
+    /// Array of overage pricing model configurations. Replaces all existing overage
+    /// pricing models on the draft — omit this to end up with no overage pricing.
     /// </summary>
     public IReadOnlyList<OveragePricingModel>? OveragePricingModels
     {
@@ -443,7 +447,8 @@ public sealed record class Charges : JsonModel
     }
 
     /// <summary>
-    /// Array of pricing model configurations
+    /// Array of pricing model configurations. Replaces all existing base pricing
+    /// models on the draft — omit this to end up with no base pricing.
     /// </summary>
     public IReadOnlyList<PricingModel>? PricingModels
     {

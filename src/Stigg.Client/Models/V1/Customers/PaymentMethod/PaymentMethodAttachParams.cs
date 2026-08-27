@@ -30,7 +30,7 @@ public record class PaymentMethodAttachParams : ParamsBase
     public string? ID { get; init; }
 
     /// <summary>
-    /// Integration details
+    /// The internal ID of the integration this record is linked to
     /// </summary>
     public required string IntegrationID
     {
@@ -43,7 +43,10 @@ public record class PaymentMethodAttachParams : ParamsBase
     }
 
     /// <summary>
-    /// Billing provider payment method id
+    /// Billing provider payment method id. Attaching it makes it the customer's new
+    /// default payment method for future charges; any previously attached payment
+    /// method is no longer used as the default, though it is not removed from the
+    /// billing provider.
     /// </summary>
     public required string PaymentMethodID
     {
@@ -56,7 +59,7 @@ public record class PaymentMethodAttachParams : ParamsBase
     }
 
     /// <summary>
-    /// The vendor identifier of integration
+    /// The vendor identifier of the integration (e.g. STRIPE, SALESFORCE, SNOWFLAKE)
     /// </summary>
     public required ApiEnum<string, VendorIdentifier> VendorIdentifier
     {
@@ -243,7 +246,7 @@ public record class PaymentMethodAttachParams : ParamsBase
 }
 
 /// <summary>
-/// The vendor identifier of integration
+/// The vendor identifier of the integration (e.g. STRIPE, SALESFORCE, SNOWFLAKE)
 /// </summary>
 [JsonConverter(typeof(VendorIdentifierConverter))]
 public enum VendorIdentifier

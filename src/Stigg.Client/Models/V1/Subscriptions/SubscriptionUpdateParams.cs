@@ -14,7 +14,13 @@ namespace Stigg.Client.Models.V1.Subscriptions;
 
 /// <summary>
 /// Updates an active subscription's properties including billing period, add-ons,
-/// unit quantities, and discounts.
+/// unit quantities, and discounts. This is a partial update — only the fields present
+/// in the request body change. Object fields such as `metadata` are replaced wholesale
+/// rather than merged, and list fields such as `addons` and `priceOverrides` must
+/// be sent in full: any existing item that isn't included in the array is removed
+/// from the subscription. Changes classified as a downgrade may be scheduled for
+/// the end of the current billing period instead of applying immediately, depending
+/// on your update scheduling configuration.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
@@ -214,7 +220,7 @@ public record class SubscriptionUpdateParams : ParamsBase
     }
 
     /// <summary>
-    /// Additional metadata for the subscription
+    /// Additional metadata for the subscription, stored as an arbitrary flat key-value object.
     /// </summary>
     public IReadOnlyDictionary<string, string>? Metadata
     {
@@ -1552,7 +1558,7 @@ public sealed record class BillingInformation : JsonModel
     }
 
     /// <summary>
-    /// Additional metadata for the subscription
+    /// Additional metadata for the subscription, stored as an arbitrary flat key-value object.
     /// </summary>
     public IReadOnlyDictionary<string, string>? Metadata
     {

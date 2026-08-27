@@ -344,7 +344,7 @@ public sealed record class Subscription : JsonModel
     }
 
     /// <summary>
-    /// Additional metadata for the subscription
+    /// Additional metadata for the subscription, stored as an arbitrary flat key-value object.
     /// </summary>
     public IReadOnlyDictionary<string, string>? Metadata
     {

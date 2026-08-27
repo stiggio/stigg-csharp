@@ -139,7 +139,9 @@ public sealed record class Data : JsonModel
     }
 
     /// <summary>
-    /// Default trial configuration for the plan
+    /// Default trial configuration for the plan. When set, subscriptions provisioned
+    /// on this plan without explicit trial settings automatically start in trial
+    /// for the configured duration; leave unset for no automatic trial.
     /// </summary>
     public required DataDefaultTrialConfig? DefaultTrialConfig
     {
@@ -229,7 +231,8 @@ public sealed record class Data : JsonModel
     }
 
     /// <summary>
-    /// The ID of the parent plan, if applicable
+    /// The ID of the parent plan, if this plan should inherit entitlements from another
+    /// plan. Optional — omit to create a standalone plan with no inherited entitlements.
     /// </summary>
     public required string? ParentPlanID
     {
@@ -366,7 +369,9 @@ class DataFromRaw : IFromRawJson<Data>
 }
 
 /// <summary>
-/// Default trial configuration for the plan
+/// Default trial configuration for the plan. When set, subscriptions provisioned
+/// on this plan without explicit trial settings automatically start in trial for
+/// the configured duration; leave unset for no automatic trial.
 /// </summary>
 [JsonConverter(typeof(JsonModelConverter<DataDefaultTrialConfig, DataDefaultTrialConfigFromRaw>))]
 public sealed record class DataDefaultTrialConfig : JsonModel

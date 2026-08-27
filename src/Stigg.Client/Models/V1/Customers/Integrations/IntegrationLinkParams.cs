@@ -30,7 +30,7 @@ public record class IntegrationLinkParams : ParamsBase
     public string? ID { get; init; }
 
     /// <summary>
-    /// Integration details
+    /// The internal ID of the integration this record is linked to
     /// </summary>
     public required string IDValue
     {
@@ -43,7 +43,9 @@ public record class IntegrationLinkParams : ParamsBase
     }
 
     /// <summary>
-    /// Synced entity id
+    /// The external entity ID this record is linked to in the vendor system (e.g.
+    /// the Stripe customer ID). Null until the link has synced; required when creating
+    /// the link.
     /// </summary>
     public required string SyncedEntityID
     {
@@ -56,7 +58,7 @@ public record class IntegrationLinkParams : ParamsBase
     }
 
     /// <summary>
-    /// The vendor identifier of integration
+    /// The vendor identifier of the integration (e.g. STRIPE, SALESFORCE, SNOWFLAKE)
     /// </summary>
     public required ApiEnum<string, IntegrationLinkParamsVendorIdentifier> VendorIdentifier
     {
@@ -228,7 +230,7 @@ public record class IntegrationLinkParams : ParamsBase
 }
 
 /// <summary>
-/// The vendor identifier of integration
+/// The vendor identifier of the integration (e.g. STRIPE, SALESFORCE, SNOWFLAKE)
 /// </summary>
 [JsonConverter(typeof(IntegrationLinkParamsVendorIdentifierConverter))]
 public enum IntegrationLinkParamsVendorIdentifier

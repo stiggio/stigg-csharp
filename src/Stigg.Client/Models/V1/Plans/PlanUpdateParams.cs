@@ -43,7 +43,8 @@ public record class PlanUpdateParams : ParamsBase
     }
 
     /// <summary>
-    /// Pricing configuration to set on the plan draft
+    /// Pricing configuration to set on the plan draft. Unlike the rest of this request,
+    /// this is a full replace of the pricing configuration, not a merge — see SetPackagePricingRequest.
     /// </summary>
     public Charges? Charges
     {
@@ -82,7 +83,9 @@ public record class PlanUpdateParams : ParamsBase
     }
 
     /// <summary>
-    /// Default trial configuration for the plan
+    /// Default trial configuration for the plan. When set, subscriptions provisioned
+    /// on this plan without explicit trial settings automatically start in trial
+    /// for the configured duration; leave unset for no automatic trial.
     /// </summary>
     public PlanUpdateParamsDefaultTrialConfig? DefaultTrialConfig
     {
@@ -155,7 +158,8 @@ public record class PlanUpdateParams : ParamsBase
     }
 
     /// <summary>
-    /// The ID of the parent plan, if applicable
+    /// The ID of the parent plan, if this plan should inherit entitlements from another
+    /// plan. Optional — omit to create a standalone plan with no inherited entitlements.
     /// </summary>
     public string? ParentPlanID
     {
@@ -324,7 +328,8 @@ public record class PlanUpdateParams : ParamsBase
 }
 
 /// <summary>
-/// Pricing configuration to set on the plan draft
+/// Pricing configuration to set on the plan draft. Unlike the rest of this request,
+/// this is a full replace of the pricing configuration, not a merge — see SetPackagePricingRequest.
 /// </summary>
 [JsonConverter(typeof(JsonModelConverter<Charges, ChargesFromRaw>))]
 public sealed record class Charges : JsonModel
@@ -408,7 +413,8 @@ public sealed record class Charges : JsonModel
     }
 
     /// <summary>
-    /// Array of overage pricing model configurations
+    /// Array of overage pricing model configurations. Replaces all existing overage
+    /// pricing models on the draft — omit this to end up with no overage pricing.
     /// </summary>
     public IReadOnlyList<OveragePricingModel>? OveragePricingModels
     {
@@ -434,7 +440,8 @@ public sealed record class Charges : JsonModel
     }
 
     /// <summary>
-    /// Array of pricing model configurations
+    /// Array of pricing model configurations. Replaces all existing base pricing
+    /// models on the draft — omit this to end up with no base pricing.
     /// </summary>
     public IReadOnlyList<PricingModel>? PricingModels
     {
@@ -7103,7 +7110,9 @@ sealed class PricingModelYearlyResetPeriodConfigurationAccordingToConverter
 }
 
 /// <summary>
-/// Default trial configuration for the plan
+/// Default trial configuration for the plan. When set, subscriptions provisioned
+/// on this plan without explicit trial settings automatically start in trial for
+/// the configured duration; leave unset for no automatic trial.
 /// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<

@@ -93,7 +93,9 @@ public record class GrantCreateParams : ParamsBase
     }
 
     /// <summary>
-    /// Whether to wait for payment confirmation before returning (default: true)
+    /// Whether to wait for payment confirmation before returning (default: true).
+    /// When false, the request returns immediately while payment (if any) is collected
+    /// asynchronously; check the returned status to see whether the credits are already usable.
     /// </summary>
     public bool? AwaitPaymentConfirmation
     {
@@ -114,7 +116,9 @@ public record class GrantCreateParams : ParamsBase
     }
 
     /// <summary>
-    /// Billing information for the credit grant
+    /// Billing information for the credit grant, used when the grant has a payment
+    /// collection method that requires collecting payment (e.g. invoice due date,
+    /// billing address).
     /// </summary>
     public BillingInformation? BillingInformation
     {
@@ -243,7 +247,11 @@ public record class GrantCreateParams : ParamsBase
     }
 
     /// <summary>
-    /// The payment collection method (CHARGE, INVOICE, NONE)
+    /// The payment collection method (CHARGE, INVOICE, NONE). Optional if the grant
+    /// has no `cost`, since there is nothing to collect payment for. With NONE or
+    /// CHARGE, the grant is active and its credits are usable right away (or as soon
+    /// as the charge succeeds). With INVOICE, the grant stays pending — its credits
+    /// are not usable — until the generated invoice is paid.
     /// </summary>
     public ApiEnum<string, PaymentCollectionMethod>? PaymentCollectionMethod
     {
@@ -266,7 +274,13 @@ public record class GrantCreateParams : ParamsBase
     }
 
     /// <summary>
-    /// The priority of the credit grant (lower number = higher priority)
+    /// Determines which grant is drawn down first when the customer has multiple
+    /// active grants in the same currency (0-100). Lower numbers are consumed first.
+    /// Defaults to 50 — the same default used for recurring credits granted by a
+    /// plan or price — so without setting this explicitly, draw order against plan-included
+    /// credits falls back to expiration date and grant type. To have this grant
+    /// consumed before or after plan-included credits, set a lower or higher priority
+    /// than the plan/price credit configuration.
     /// </summary>
     public long? Priority
     {
@@ -501,7 +515,8 @@ sealed class GrantTypeConverter : JsonConverter<GrantType>
 }
 
 /// <summary>
-/// Billing information for the credit grant
+/// Billing information for the credit grant, used when the grant has a payment collection
+/// method that requires collecting payment (e.g. invoice due date, billing address).
 /// </summary>
 [JsonConverter(typeof(JsonModelConverter<BillingInformation, BillingInformationFromRaw>))]
 public sealed record class BillingInformation : JsonModel
@@ -1252,7 +1267,11 @@ sealed class CurrencyConverter : JsonConverter<Currency>
 }
 
 /// <summary>
-/// The payment collection method (CHARGE, INVOICE, NONE)
+/// The payment collection method (CHARGE, INVOICE, NONE). Optional if the grant has
+/// no `cost`, since there is nothing to collect payment for. With NONE or CHARGE,
+/// the grant is active and its credits are usable right away (or as soon as the
+/// charge succeeds). With INVOICE, the grant stays pending — its credits are not
+/// usable — until the generated invoice is paid.
 /// </summary>
 [JsonConverter(typeof(PaymentCollectionMethodConverter))]
 public enum PaymentCollectionMethod

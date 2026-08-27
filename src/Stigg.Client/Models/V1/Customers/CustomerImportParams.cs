@@ -46,7 +46,7 @@ public record class CustomerImportParams : ParamsBase
     }
 
     /// <summary>
-    /// Integration details
+    /// The internal ID of the integration this record is linked to
     /// </summary>
     public string? IntegrationID
     {
@@ -276,7 +276,11 @@ public sealed record class Customer : JsonModel
     }
 
     /// <summary>
-    /// Additional metadata
+    /// Custom key-value metadata to attach to the customer. When creating a customer,
+    /// this sets the initial metadata. When updating a customer, this replaces the
+    /// customer's existing metadata object entirely — it is not merged key by key.
+    /// Omit this field on update to leave the customer's existing metadata untouched;
+    /// pass an empty object to clear it.
     /// </summary>
     public IReadOnlyDictionary<string, string>? Metadata
     {
@@ -300,7 +304,10 @@ public sealed record class Customer : JsonModel
     }
 
     /// <summary>
-    /// Billing provider payment method id
+    /// Billing provider payment method id. Attaching it makes it the customer's new
+    /// default payment method for future charges; any previously attached payment
+    /// method is no longer used as the default, though it is not removed from the
+    /// billing provider.
     /// </summary>
     public string? PaymentMethodID
     {

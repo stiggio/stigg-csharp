@@ -77,7 +77,10 @@ public record class UsageHistoryParams : ParamsBase
     }
 
     /// <summary>
-    /// Resource id
+    /// The customer resource this usage applies to. Optional — only required if
+    /// the customer has multiple resources (for example, one subscription per workspace
+    /// or site) and usage needs to be tracked separately per resource; omit it to
+    /// report usage at the customer level.
     /// </summary>
     public string? ResourceID
     {

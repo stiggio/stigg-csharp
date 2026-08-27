@@ -149,7 +149,11 @@ public record class CustomerProvisionParams : ParamsBase
     }
 
     /// <summary>
-    /// Additional metadata
+    /// Custom key-value metadata to attach to the customer. When creating a customer,
+    /// this sets the initial metadata. When updating a customer, this replaces the
+    /// customer's existing metadata object entirely — it is not merged key by key.
+    /// Omit this field on update to leave the customer's existing metadata untouched;
+    /// pass an empty object to clear it.
     /// </summary>
     public IReadOnlyDictionary<string, string>? Metadata
     {
@@ -974,7 +978,9 @@ sealed class TypeConverter : JsonConverter<global::Stigg.Client.Models.V1.Custom
 }
 
 /// <summary>
-/// External billing or CRM integration link
+/// Links this customer to their record in a specific configured integration (e.g.
+/// their Stripe customer ID under your Stripe integration). A customer has at most
+/// one link per integration.
 /// </summary>
 [JsonConverter(
     typeof(JsonModelConverter<
@@ -985,7 +991,7 @@ sealed class TypeConverter : JsonConverter<global::Stigg.Client.Models.V1.Custom
 public sealed record class CustomerProvisionParamsIntegration : JsonModel
 {
     /// <summary>
-    /// Integration details
+    /// The internal ID of the integration this record is linked to
     /// </summary>
     public required string ID
     {
@@ -998,7 +1004,9 @@ public sealed record class CustomerProvisionParamsIntegration : JsonModel
     }
 
     /// <summary>
-    /// Synced entity id
+    /// The external entity ID this record is linked to in the vendor system (e.g.
+    /// the Stripe customer ID). Null until the link has synced; required when creating
+    /// the link.
     /// </summary>
     public required string? SyncedEntityID
     {
@@ -1011,7 +1019,7 @@ public sealed record class CustomerProvisionParamsIntegration : JsonModel
     }
 
     /// <summary>
-    /// The vendor identifier of integration
+    /// The vendor identifier of the integration (e.g. STRIPE, SALESFORCE, SNOWFLAKE)
     /// </summary>
     public required ApiEnum<
         string,
@@ -1077,7 +1085,7 @@ class CustomerProvisionParamsIntegrationFromRaw : IFromRawJson<CustomerProvision
 }
 
 /// <summary>
-/// The vendor identifier of integration
+/// The vendor identifier of the integration (e.g. STRIPE, SALESFORCE, SNOWFLAKE)
 /// </summary>
 [JsonConverter(typeof(CustomerProvisionParamsIntegrationVendorIdentifierConverter))]
 public enum CustomerProvisionParamsIntegrationVendorIdentifier
@@ -1347,7 +1355,9 @@ public sealed record class CustomerProvisionParamsPassthroughStripe : JsonModel
     }
 
     /// <summary>
-    /// Additional metadata
+    /// Additional metadata to pass through to the billing provider on the customer's
+    /// record there. This is separate from the customer's own metadata field — it's
+    /// stored only on the billing-provider side, not on the Stigg customer object.
     /// </summary>
     public IReadOnlyDictionary<string, string>? Metadata
     {
@@ -2029,7 +2039,9 @@ public sealed record class CustomerProvisionParamsPassthroughZuora : JsonModel
     }
 
     /// <summary>
-    /// Additional metadata
+    /// Additional metadata to pass through to the billing provider on the customer's
+    /// record there. This is separate from the customer's own metadata field — it's
+    /// stored only on the billing-provider side, not on the Stigg customer object.
     /// </summary>
     public IReadOnlyDictionary<string, string>? Metadata
     {

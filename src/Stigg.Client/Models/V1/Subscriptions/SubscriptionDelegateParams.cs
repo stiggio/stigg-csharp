@@ -10,8 +10,10 @@ using Stigg.Client.Core;
 namespace Stigg.Client.Models.V1.Subscriptions;
 
 /// <summary>
-/// Delegates the payment responsibility of a subscription to a different customer.
-/// The delegated customer will be billed for this subscription.
+/// Delegates a subscription to a different customer, who becomes responsible for
+/// managing it. The original customer remains the paying customer for this subscription,
+/// unless payment was already delegated to the target customer, in which case the
+/// target customer becomes the paying customer as well.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
@@ -28,9 +30,9 @@ public record class SubscriptionDelegateParams : ParamsBase
     public string? ID { get; init; }
 
     /// <summary>
-    /// The unique identifier of the customer who will assume payment responsibility
-    /// for this subscription. This customer must already exist in your Stigg account
-    /// and have a valid payment method if the subscription requires payment.
+    /// The unique identifier of the customer who will manage this subscription going
+    /// forward. This customer must already exist in your Stigg account. The paying
+    /// customer for the subscription does not change as a result of this request.
     /// </summary>
     public required string TargetCustomerID
     {

@@ -79,7 +79,9 @@ public record class PlanCreateParams : ParamsBase
     }
 
     /// <summary>
-    /// Default trial configuration for the plan
+    /// Default trial configuration for the plan. When set, subscriptions provisioned
+    /// on this plan without explicit trial settings automatically start in trial
+    /// for the configured duration; leave unset for no automatic trial.
     /// </summary>
     public DefaultTrialConfig? DefaultTrialConfig
     {
@@ -129,7 +131,8 @@ public record class PlanCreateParams : ParamsBase
     }
 
     /// <summary>
-    /// The ID of the parent plan, if applicable
+    /// The ID of the parent plan, if this plan should inherit entitlements from another
+    /// plan. Optional — omit to create a standalone plan with no inherited entitlements.
     /// </summary>
     public string? ParentPlanID
     {
@@ -322,7 +325,9 @@ public record class PlanCreateParams : ParamsBase
 }
 
 /// <summary>
-/// Default trial configuration for the plan
+/// Default trial configuration for the plan. When set, subscriptions provisioned
+/// on this plan without explicit trial settings automatically start in trial for
+/// the configured duration; leave unset for no automatic trial.
 /// </summary>
 [JsonConverter(typeof(JsonModelConverter<DefaultTrialConfig, DefaultTrialConfigFromRaw>))]
 public sealed record class DefaultTrialConfig : JsonModel

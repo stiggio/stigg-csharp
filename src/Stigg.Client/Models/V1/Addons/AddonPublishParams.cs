@@ -12,7 +12,10 @@ using System = System;
 namespace Stigg.Client.Models.V1.Addons;
 
 /// <summary>
-/// Publishes a draft addon, making it available for use in subscriptions.
+/// Publishes a draft addon, making it available for use in subscriptions. The required
+/// `migrationType` field controls whether subscriptions already using this addon
+/// are moved onto the new version immediately (`ALL_CUSTOMERS`) or stay on the version
+/// they were using — grandfathered — until you explicitly migrate them (`NEW_CUSTOMERS`).
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
@@ -29,7 +32,9 @@ public record class AddonPublishParams : ParamsBase
     public string? ID { get; init; }
 
     /// <summary>
-    /// The migration type of the package
+    /// Who the published version applies to: NEW_CUSTOMERS (default) leaves existing
+    /// subscribers on their current version, ALL_CUSTOMERS moves them onto the new
+    /// version immediately.
     /// </summary>
     public required ApiEnum<string, MigrationType> MigrationType
     {
@@ -201,7 +206,8 @@ public record class AddonPublishParams : ParamsBase
 }
 
 /// <summary>
-/// The migration type of the package
+/// Who the published version applies to: NEW_CUSTOMERS (default) leaves existing
+/// subscribers on their current version, ALL_CUSTOMERS moves them onto the new version immediately.
 /// </summary>
 [JsonConverter(typeof(MigrationTypeConverter))]
 public enum MigrationType

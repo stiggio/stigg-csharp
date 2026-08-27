@@ -29,7 +29,9 @@ public record class IntegrationUpdateParams : ParamsBase
     public string? IntegrationID { get; init; }
 
     /// <summary>
-    /// Synced entity id
+    /// The external entity ID this record is linked to in the vendor system (e.g.
+    /// the Stripe customer ID). Null until the link has synced; required when creating
+    /// the link.
     /// </summary>
     public required string? SyncedEntityID
     {

@@ -92,7 +92,8 @@ public record class AddonCreateParams : ParamsBase
     }
 
     /// <summary>
-    /// The maximum quantity of this addon that can be added to a subscription
+    /// The maximum quantity of this addon that can be added to a subscription. Leave
+    /// unset for no upper bound.
     /// </summary>
     public long? MaxQuantity
     {

@@ -11,7 +11,10 @@ using Stigg.Client.Exceptions;
 namespace Stigg.Client.Models.V1.Credits.Grants;
 
 /// <summary>
-/// Credit grant object representing allocated credits for a customer
+/// Credit grant object representing allocated credits for a customer. Credit grants
+/// cannot be edited after creation via this API — void the grant to stop further
+/// consumption from it, then create a new grant with the corrected amount, priority,
+/// or expiration.
 /// </summary>
 [JsonConverter(typeof(JsonModelConverter<GrantListResponse, GrantListResponseFromRaw>))]
 public sealed record class GrantListResponse : JsonModel
@@ -276,7 +279,11 @@ public sealed record class GrantListResponse : JsonModel
     }
 
     /// <summary>
-    /// The effective status of the credit grant
+    /// The effective status of the credit grant. A grant with paymentCollectionMethod
+    /// NONE or CHARGE becomes ACTIVE (and its credits become usable) as soon as
+    /// it's created (or as soon as the charge succeeds). A grant with paymentCollectionMethod
+    /// INVOICE stays PAYMENT_PENDING — its credits are not usable — until the invoice
+    /// is paid.
     /// </summary>
     public required ApiEnum<string, GrantListResponseStatus> Status
     {
@@ -995,7 +1002,11 @@ sealed class GrantListResponseSourceTypeConverter : JsonConverter<GrantListRespo
 }
 
 /// <summary>
-/// The effective status of the credit grant
+/// The effective status of the credit grant. A grant with paymentCollectionMethod
+/// NONE or CHARGE becomes ACTIVE (and its credits become usable) as soon as it's
+/// created (or as soon as the charge succeeds). A grant with paymentCollectionMethod
+/// INVOICE stays PAYMENT_PENDING — its credits are not usable — until the invoice
+/// is paid.
 /// </summary>
 [JsonConverter(typeof(GrantListResponseStatusConverter))]
 public enum GrantListResponseStatus
@@ -1071,7 +1082,9 @@ public sealed record class GrantListResponseSyncState : JsonModel
     }
 
     /// <summary>
-    /// Synced entity id
+    /// The external entity ID this record is linked to in the vendor system (e.g.
+    /// the Stripe customer ID). Null until the link has synced; required when creating
+    /// the link.
     /// </summary>
     public required string? SyncedEntityID
     {
@@ -1084,7 +1097,7 @@ public sealed record class GrantListResponseSyncState : JsonModel
     }
 
     /// <summary>
-    /// The vendor identifier of integration
+    /// The vendor identifier of the integration (e.g. STRIPE, SALESFORCE, SNOWFLAKE)
     /// </summary>
     public required ApiEnum<string, GrantListResponseSyncStateVendorIdentifier> VendorIdentifier
     {
@@ -1199,7 +1212,7 @@ sealed class GrantListResponseSyncStateStatusConverter
 }
 
 /// <summary>
-/// The vendor identifier of integration
+/// The vendor identifier of the integration (e.g. STRIPE, SALESFORCE, SNOWFLAKE)
 /// </summary>
 [JsonConverter(typeof(GrantListResponseSyncStateVendorIdentifierConverter))]
 public enum GrantListResponseSyncStateVendorIdentifier

@@ -17,7 +17,10 @@ namespace Stigg.Client.Models.V1.Credits.Grants;
 public sealed record class CreditGrantResponse : JsonModel
 {
     /// <summary>
-    /// Credit grant object representing allocated credits for a customer
+    /// Credit grant object representing allocated credits for a customer. Credit
+    /// grants cannot be edited after creation via this API — void the grant to stop
+    /// further consumption from it, then create a new grant with the corrected amount,
+    /// priority, or expiration.
     /// </summary>
     public required Data Data
     {
@@ -80,7 +83,10 @@ class CreditGrantResponseFromRaw : IFromRawJson<CreditGrantResponse>
 }
 
 /// <summary>
-/// Credit grant object representing allocated credits for a customer
+/// Credit grant object representing allocated credits for a customer. Credit grants
+/// cannot be edited after creation via this API — void the grant to stop further
+/// consumption from it, then create a new grant with the corrected amount, priority,
+/// or expiration.
 /// </summary>
 [JsonConverter(typeof(JsonModelConverter<Data, DataFromRaw>))]
 public sealed record class Data : JsonModel
@@ -341,7 +347,11 @@ public sealed record class Data : JsonModel
     }
 
     /// <summary>
-    /// The effective status of the credit grant
+    /// The effective status of the credit grant. A grant with paymentCollectionMethod
+    /// NONE or CHARGE becomes ACTIVE (and its credits become usable) as soon as
+    /// it's created (or as soon as the charge succeeds). A grant with paymentCollectionMethod
+    /// INVOICE stays PAYMENT_PENDING — its credits are not usable — until the invoice
+    /// is paid.
     /// </summary>
     public required ApiEnum<string, DataStatus> Status
     {
@@ -1030,7 +1040,11 @@ sealed class SourceTypeConverter : JsonConverter<SourceType>
 }
 
 /// <summary>
-/// The effective status of the credit grant
+/// The effective status of the credit grant. A grant with paymentCollectionMethod
+/// NONE or CHARGE becomes ACTIVE (and its credits become usable) as soon as it's
+/// created (or as soon as the charge succeeds). A grant with paymentCollectionMethod
+/// INVOICE stays PAYMENT_PENDING — its credits are not usable — until the invoice
+/// is paid.
 /// </summary>
 [JsonConverter(typeof(DataStatusConverter))]
 public enum DataStatus
@@ -1102,7 +1116,9 @@ public sealed record class SyncState : JsonModel
     }
 
     /// <summary>
-    /// Synced entity id
+    /// The external entity ID this record is linked to in the vendor system (e.g.
+    /// the Stripe customer ID). Null until the link has synced; required when creating
+    /// the link.
     /// </summary>
     public required string? SyncedEntityID
     {
@@ -1115,7 +1131,7 @@ public sealed record class SyncState : JsonModel
     }
 
     /// <summary>
-    /// The vendor identifier of integration
+    /// The vendor identifier of the integration (e.g. STRIPE, SALESFORCE, SNOWFLAKE)
     /// </summary>
     public required ApiEnum<string, VendorIdentifier> VendorIdentifier
     {
@@ -1226,7 +1242,7 @@ sealed class SyncStateStatusConverter : JsonConverter<SyncStateStatus>
 }
 
 /// <summary>
-/// The vendor identifier of integration
+/// The vendor identifier of the integration (e.g. STRIPE, SALESFORCE, SNOWFLAKE)
 /// </summary>
 [JsonConverter(typeof(VendorIdentifierConverter))]
 public enum VendorIdentifier

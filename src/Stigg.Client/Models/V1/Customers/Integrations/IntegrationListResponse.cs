@@ -10,13 +10,15 @@ using System = System;
 namespace Stigg.Client.Models.V1.Customers.Integrations;
 
 /// <summary>
-/// External billing or CRM integration link
+/// Links this customer to their record in a specific configured integration (e.g.
+/// their Stripe customer ID under your Stripe integration). A customer has at most
+/// one link per integration.
 /// </summary>
 [JsonConverter(typeof(JsonModelConverter<IntegrationListResponse, IntegrationListResponseFromRaw>))]
 public sealed record class IntegrationListResponse : JsonModel
 {
     /// <summary>
-    /// Integration details
+    /// The internal ID of the integration this record is linked to
     /// </summary>
     public required string ID
     {
@@ -29,7 +31,9 @@ public sealed record class IntegrationListResponse : JsonModel
     }
 
     /// <summary>
-    /// Synced entity id
+    /// The external entity ID this record is linked to in the vendor system (e.g.
+    /// the Stripe customer ID). Null until the link has synced; required when creating
+    /// the link.
     /// </summary>
     public required string? SyncedEntityID
     {
@@ -42,7 +46,7 @@ public sealed record class IntegrationListResponse : JsonModel
     }
 
     /// <summary>
-    /// The vendor identifier of integration
+    /// The vendor identifier of the integration (e.g. STRIPE, SALESFORCE, SNOWFLAKE)
     /// </summary>
     public required ApiEnum<string, IntegrationListResponseVendorIdentifier> VendorIdentifier
     {
@@ -118,7 +122,7 @@ class IntegrationListResponseFromRaw : IFromRawJson<IntegrationListResponse>
 }
 
 /// <summary>
-/// The vendor identifier of integration
+/// The vendor identifier of the integration (e.g. STRIPE, SALESFORCE, SNOWFLAKE)
 /// </summary>
 [JsonConverter(typeof(IntegrationListResponseVendorIdentifierConverter))]
 public enum IntegrationListResponseVendorIdentifier

@@ -172,7 +172,8 @@ public sealed record class Data : JsonModel
     }
 
     /// <summary>
-    /// The type of the feature
+    /// The type of the feature: BOOLEAN (on/off access), NUMBER (a numeric limit
+    /// or quantity), or ENUM (one of a fixed set of values).
     /// </summary>
     public required ApiEnum<string, DataFeatureType> FeatureType
     {
@@ -243,7 +244,10 @@ public sealed record class Data : JsonModel
     }
 
     /// <summary>
-    /// The meter type for the feature
+    /// How usage accumulates for this feature. `Incremental` and `Fluctuating` features
+    /// track usage from reported events; `None` means the feature's value isn't usage-tracked
+    /// — it's just a numeric or enum value carried by the plan (for example, a seat
+    /// count or a tier setting) rather than something customers consume.
     /// </summary>
     public required ApiEnum<string, DataMeterType> MeterType
     {
@@ -463,7 +467,8 @@ sealed class DataFeatureStatusConverter : JsonConverter<DataFeatureStatus>
 }
 
 /// <summary>
-/// The type of the feature
+/// The type of the feature: BOOLEAN (on/off access), NUMBER (a numeric limit or quantity),
+/// or ENUM (one of a fixed set of values).
 /// </summary>
 [JsonConverter(typeof(DataFeatureTypeConverter))]
 public enum DataFeatureType
@@ -1009,7 +1014,10 @@ sealed class DataMeterFilterConditionOperationConverter
 }
 
 /// <summary>
-/// The meter type for the feature
+/// How usage accumulates for this feature. `Incremental` and `Fluctuating` features
+/// track usage from reported events; `None` means the feature's value isn't usage-tracked
+/// — it's just a numeric or enum value carried by the plan (for example, a seat
+/// count or a tier setting) rather than something customers consume.
 /// </summary>
 [JsonConverter(typeof(DataMeterTypeConverter))]
 public enum DataMeterType

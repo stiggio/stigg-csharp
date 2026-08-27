@@ -97,7 +97,8 @@ public sealed record class Data : JsonModel
     }
 
     /// <summary>
-    /// Fixed amount discounts in different currencies
+    /// Fixed amount discounts in different currencies. Provide exactly one of percentOff
+    /// or amountsOff — not both, not neither.
     /// </summary>
     public required IReadOnlyList<DataAmountsOff>? AmountsOff
     {
@@ -168,7 +169,8 @@ public sealed record class Data : JsonModel
     }
 
     /// <summary>
-    /// Duration of the coupon validity in months
+    /// How many billing cycles the discount applies for once redeemed. Leave unset
+    /// for a discount that lasts for the lifetime of the subscription.
     /// </summary>
     public required long? DurationInMonths
     {
@@ -213,7 +215,8 @@ public sealed record class Data : JsonModel
     }
 
     /// <summary>
-    /// Percentage discount off the original price
+    /// Percentage discount off the original price. Provide exactly one of percentOff
+    /// or amountsOff — not both, not neither.
     /// </summary>
     public required long? PercentOff
     {

@@ -367,7 +367,8 @@ public sealed record class DataProductSettings : JsonModel
     }
 
     /// <summary>
-    /// ID of the plan to downgrade to at the end of the billing period
+    /// ID of the plan to downgrade to at the end of the billing period. Only relevant
+    /// when subscriptionEndSetup is DOWNGRADE_TO_FREE — ignored otherwise.
     /// </summary>
     public string? DowngradePlanID
     {
@@ -393,7 +394,8 @@ public sealed record class DataProductSettings : JsonModel
     }
 
     /// <summary>
-    /// ID of the plan to start the subscription with
+    /// ID of the plan to start the subscription with. Only relevant when subscriptionStartSetup
+    /// is PLAN_SELECTION — ignored otherwise.
     /// </summary>
     public string? SubscriptionStartPlanID
     {

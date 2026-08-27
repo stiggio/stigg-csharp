@@ -13,8 +13,8 @@ using Stigg.Client.Exceptions;
 namespace Stigg.Client.Models.V1.Events;
 
 /// <summary>
-/// Reports raw usage events for event-based metering. Events are ingested asynchronously
-/// and aggregated into usage totals.
+/// Reports raw usage events for event-based metering. Events are validated and stored
+/// synchronously, then aggregated into usage totals asynchronously.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
@@ -226,7 +226,9 @@ public sealed record class Event : JsonModel
     }
 
     /// <summary>
-    /// Idempotency key
+    /// A key you provide to safely retry the same usage report without double-counting
+    /// it. Reports with a previously-seen idempotency key are deduplicated for 7
+    /// days; after that window a retry is treated as new usage.
     /// </summary>
     public required string IdempotencyKey
     {
@@ -265,7 +267,10 @@ public sealed record class Event : JsonModel
     }
 
     /// <summary>
-    /// Resource id
+    /// The customer resource this usage applies to. Optional — only required if
+    /// the customer has multiple resources (for example, one subscription per workspace
+    /// or site) and usage needs to be tracked separately per resource; omit it to
+    /// report usage at the customer level.
     /// </summary>
     public string? ResourceID
     {

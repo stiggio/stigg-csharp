@@ -55,7 +55,9 @@ public record class UsageEstimateParams : ParamsBase
     }
 
     /// <summary>
-    /// The value to report for usage
+    /// The value to report for usage. Must be a whole number — the REST API does
+    /// not accept fractional (float) usage values; scale up (e.g. report cents instead
+    /// of dollars, or milliseconds instead of seconds) if you need sub-unit precision.
     /// </summary>
     public required long Value
     {
@@ -94,7 +96,10 @@ public record class UsageEstimateParams : ParamsBase
     }
 
     /// <summary>
-    /// Resource id
+    /// The customer resource this usage applies to. Optional — only required if
+    /// the customer has multiple resources (for example, one subscription per workspace
+    /// or site) and usage needs to be tracked separately per resource; omit it to
+    /// report usage at the customer level.
     /// </summary>
     public string? ResourceID
     {
@@ -107,7 +112,9 @@ public record class UsageEstimateParams : ParamsBase
     }
 
     /// <summary>
-    /// The method by which the usage value should be updated
+    /// How the reported value is applied: DELTA (default) adds it to the feature's
+    /// current usage; SET treats it as the new absolute usage total, and Stigg computes
+    /// the delta internally.
     /// </summary>
     public ApiEnum<string, UpdateBehavior>? UpdateBehavior
     {
@@ -567,7 +574,9 @@ sealed class DimensionConverter : JsonConverter<Dimension>
 }
 
 /// <summary>
-/// The method by which the usage value should be updated
+/// How the reported value is applied: DELTA (default) adds it to the feature's current
+/// usage; SET treats it as the new absolute usage total, and Stigg computes the
+/// delta internally.
 /// </summary>
 [JsonConverter(typeof(UpdateBehaviorConverter))]
 public enum UpdateBehavior

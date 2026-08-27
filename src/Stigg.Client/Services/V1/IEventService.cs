@@ -44,8 +44,8 @@ public interface IEventService
     );
 
     /// <summary>
-    /// Reports raw usage events for event-based metering. Events are ingested
-    /// asynchronously and aggregated into usage totals.
+    /// Reports raw usage events for event-based metering. Events are validated and
+    /// stored synchronously, then aggregated into usage totals asynchronously.
     /// </summary>
     Task<EventReportResponse> Report(
         EventReportParams parameters,
