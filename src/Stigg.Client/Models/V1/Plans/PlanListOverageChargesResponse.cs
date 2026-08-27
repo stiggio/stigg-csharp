@@ -95,7 +95,7 @@ public sealed record class PlanListOverageChargesResponse : JsonModel
     }
 
     /// <summary>
-    /// ISO country code for localized pricing, if any
+    /// ISO country code (or "eu" for Eurozone) for localized pricing, if any
     /// </summary>
     public string? BillingCountryCode
     {

@@ -130,7 +130,8 @@ public record class SubscriptionPreviewParams : ParamsBase
     }
 
     /// <summary>
-    /// ISO 3166-1 country code for localization
+    /// Country code selecting a localized price ("eu" for Eurozone); the default
+    /// price applies when none matches
     /// </summary>
     public string? BillingCountryCode
     {

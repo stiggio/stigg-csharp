@@ -1414,7 +1414,7 @@ public sealed record class PricePeriod : JsonModel
     }
 
     /// <summary>
-    /// ISO country code for localized pricing
+    /// ISO country code (or "eu" for Eurozone) for localized pricing
     /// </summary>
     public string? BillingCountryCode
     {
@@ -4544,7 +4544,7 @@ public sealed record class PricingModelPricePeriod : JsonModel
     }
 
     /// <summary>
-    /// ISO country code for localized pricing
+    /// ISO country code (or "eu" for Eurozone) for localized pricing
     /// </summary>
     public string? BillingCountryCode
     {
