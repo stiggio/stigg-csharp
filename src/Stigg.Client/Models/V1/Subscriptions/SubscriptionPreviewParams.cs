@@ -130,8 +130,8 @@ public record class SubscriptionPreviewParams : ParamsBase
     }
 
     /// <summary>
-    /// Country code selecting a localized price ("eu" for Eurozone); the default
-    /// price applies when none matches
+    /// Country code selecting a localized price, or "eu" for the European Union
+    /// group you map countries into; the default price applies when none matches
     /// </summary>
     public string? BillingCountryCode
     {

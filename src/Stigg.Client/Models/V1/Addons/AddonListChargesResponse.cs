@@ -92,7 +92,8 @@ public sealed record class AddonListChargesResponse : JsonModel
     }
 
     /// <summary>
-    /// ISO country code (or "eu" for Eurozone) for localized pricing, if any
+    /// ISO country code for localized pricing, or "eu" for the European Union group
+    /// you map countries into, if any
     /// </summary>
     public string? BillingCountryCode
     {

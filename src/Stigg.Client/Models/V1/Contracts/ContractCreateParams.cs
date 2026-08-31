@@ -515,8 +515,9 @@ public sealed record class NewSubscription : JsonModel
     }
 
     /// <summary>
-    /// The country code used to select a localized price (or "eu" for Eurozone),
-    /// falling back to the default price when none matches
+    /// The country code used to select a localized price, or "eu" for the European
+    /// Union group you map countries into, falling back to the default price when
+    /// none matches
     /// </summary>
     public string? BillingCountryCode
     {
@@ -4672,10 +4673,10 @@ public sealed record class PriceOverride : JsonModel
     }
 
     /// <summary>
-    /// ISO 3166-1 alpha-2 country code this price applies to, or "eu" for the Eurozone
-    /// region. Omit for the default price shown to all countries; set one or more
-    /// country-specific price periods on the same currency to localize the amount
-    /// by billing country.
+    /// ISO 3166-1 alpha-2 country code this price applies to, or "eu" for the European
+    /// Union group you map countries into. Omit for the default price shown to all
+    /// countries; set one or more country-specific price periods on the same currency
+    /// to localize the amount by billing country.
     /// </summary>
     public string? BillingCountryCode
     {
