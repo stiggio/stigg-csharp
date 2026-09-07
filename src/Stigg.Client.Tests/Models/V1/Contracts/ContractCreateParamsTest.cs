@@ -16,6 +16,12 @@ public class ContractCreateParamsTest : TestBase
         var parameters = new Contracts::ContractCreateParams
         {
             CustomerID = "customerId",
+            ActivationEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ActivationStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ContractID = "contractId",
+            Name = "name",
+            PoNumber = "poNumber",
+            SetupBilling = true,
             Subscriptions =
             [
                 new()
@@ -176,16 +182,19 @@ public class ContractCreateParamsTest : TestBase
                     },
                 },
             ],
-            ActivationEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            ActivationStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Name = "name",
-            PoNumber = "poNumber",
-            SetupBilling = true,
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
         string expectedCustomerID = "customerId";
+        DateTimeOffset expectedActivationEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        DateTimeOffset expectedActivationStartDate = DateTimeOffset.Parse(
+            "2019-12-27T18:11:19.117Z"
+        );
+        string expectedContractID = "contractId";
+        string expectedName = "name";
+        string expectedPoNumber = "poNumber";
+        bool expectedSetupBilling = true;
         List<Contracts::Subscription> expectedSubscriptions =
         [
             new()
@@ -343,27 +352,22 @@ public class ContractCreateParamsTest : TestBase
                 },
             },
         ];
-        DateTimeOffset expectedActivationEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        DateTimeOffset expectedActivationStartDate = DateTimeOffset.Parse(
-            "2019-12-27T18:11:19.117Z"
-        );
-        string expectedName = "name";
-        string expectedPoNumber = "poNumber";
-        bool expectedSetupBilling = true;
         string expectedXAccountID = "X-ACCOUNT-ID";
         string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
         Assert.Equal(expectedCustomerID, parameters.CustomerID);
+        Assert.Equal(expectedActivationEndDate, parameters.ActivationEndDate);
+        Assert.Equal(expectedActivationStartDate, parameters.ActivationStartDate);
+        Assert.Equal(expectedContractID, parameters.ContractID);
+        Assert.Equal(expectedName, parameters.Name);
+        Assert.Equal(expectedPoNumber, parameters.PoNumber);
+        Assert.Equal(expectedSetupBilling, parameters.SetupBilling);
+        Assert.NotNull(parameters.Subscriptions);
         Assert.Equal(expectedSubscriptions.Count, parameters.Subscriptions.Count);
         for (int i = 0; i < expectedSubscriptions.Count; i++)
         {
             Assert.Equal(expectedSubscriptions[i], parameters.Subscriptions[i]);
         }
-        Assert.Equal(expectedActivationEndDate, parameters.ActivationEndDate);
-        Assert.Equal(expectedActivationStartDate, parameters.ActivationStartDate);
-        Assert.Equal(expectedName, parameters.Name);
-        Assert.Equal(expectedPoNumber, parameters.PoNumber);
-        Assert.Equal(expectedSetupBilling, parameters.SetupBilling);
         Assert.Equal(expectedXAccountID, parameters.XAccountID);
         Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
@@ -374,166 +378,6 @@ public class ContractCreateParamsTest : TestBase
         var parameters = new Contracts::ContractCreateParams
         {
             CustomerID = "customerId",
-            Subscriptions =
-            [
-                new()
-                {
-                    ExistingSubscriptionID = "existingSubscriptionId",
-                    NewSubscription = new()
-                    {
-                        CustomerID = "customerId",
-                        PlanID = "planId",
-                        ID = "id",
-                        Addons = [new() { ID = "id", Quantity = 0 }],
-                        AppliedCoupon = new()
-                        {
-                            BillingCouponID = "billingCouponId",
-                            Configuration = new()
-                            {
-                                StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                            },
-                            CouponID = "couponId",
-                            Discount = new()
-                            {
-                                AmountsOff =
-                                [
-                                    new() { Amount = 0, Currency = Contracts::Currency.Usd },
-                                ],
-                                Description = "description",
-                                DurationInMonths = 1,
-                                Name = "name",
-                                PercentOff = 1,
-                            },
-                            PromotionCode = "promotionCode",
-                        },
-                        AwaitPaymentConfirmation = true,
-                        BillingCountryCode = "billingCountryCode",
-                        BillingCycleAnchor = Contracts::BillingCycleAnchor.Unchanged,
-                        BillingID = "billingId",
-                        BillingInformation = new()
-                        {
-                            BillingAddress = new()
-                            {
-                                City = "city",
-                                Country = "country",
-                                Line1 = "line1",
-                                Line2 = "line2",
-                                PostalCode = "postalCode",
-                                State = "state",
-                            },
-                            ChargeOnBehalfOfAccount = "chargeOnBehalfOfAccount",
-                            IntegrationID = "integrationId",
-                            InvoiceDaysUntilDue = 0,
-                            IsBackdated = true,
-                            IsInvoicePaid = true,
-                            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-                            ProrationBehavior = Contracts::ProrationBehavior.InvoiceImmediately,
-                            TaxIds = [new() { Type = "type", Value = "value" }],
-                            TaxPercentage = 0,
-                            TaxRateIds = ["string"],
-                        },
-                        BillingPeriod = Contracts::BillingPeriod.Monthly,
-                        Budget = new() { HasSoftLimit = true, Limit = 0 },
-                        CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                        Charges =
-                        [
-                            new()
-                            {
-                                ID = "id",
-                                Quantity = 0,
-                                Type = Contracts::Type.Feature,
-                            },
-                        ],
-                        CheckoutOptions = new()
-                        {
-                            CancelUrl = "https://example.com",
-                            SuccessUrl = "https://example.com",
-                            AllowPromoCodes = true,
-                            AllowTaxIDCollection = true,
-                            CollectBillingAddress = true,
-                            CollectPhoneNumber = true,
-                            ReferenceID = "referenceId",
-                        },
-                        Entitlements =
-                        [
-                            new Contracts::Feature()
-                            {
-                                ID = "id",
-                                HasSoftLimit = true,
-                                HasUnlimitedUsage = true,
-                                MonthlyResetPeriodConfiguration = new(
-                                    Contracts::AccordingTo.SubscriptionStart
-                                ),
-                                ResetPeriod = Contracts::ResetPeriod.Year,
-                                UsageLimit = 0,
-                                WeeklyResetPeriodConfiguration = new(
-                                    Contracts::WeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
-                                ),
-                                YearlyResetPeriodConfiguration = new(
-                                    Contracts::YearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
-                                ),
-                            },
-                        ],
-                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-                        MinimumSpend = new()
-                        {
-                            Amount = 0,
-                            Currency = Contracts::MinimumSpendCurrency.Usd,
-                        },
-                        PayingCustomerID = "payingCustomerId",
-                        PaymentCollectionMethod = Contracts::PaymentCollectionMethod.Charge,
-                        PriceOverrides =
-                        [
-                            new()
-                            {
-                                AddonID = "addonId",
-                                Amount = 0,
-                                BaseCharge = true,
-                                BillingCountryCode = "billingCountryCode",
-                                BlockSize = 0,
-                                CreditGrantCadence =
-                                    Contracts::CreditGrantCadence.BeginningOfBillingPeriod,
-                                CreditRate = new()
-                                {
-                                    Amount = 1,
-                                    CurrencyID = "currencyId",
-                                    CostFormula = "costFormula",
-                                },
-                                Currency = Contracts::PriceOverrideCurrency.Usd,
-                                FeatureID = "featureId",
-                                Tiers =
-                                [
-                                    new()
-                                    {
-                                        FlatPrice = new()
-                                        {
-                                            Amount = 0,
-                                            Currency = Contracts::FlatPriceCurrency.Usd,
-                                        },
-                                        UnitPrice = new()
-                                        {
-                                            Amount = 0,
-                                            Currency = Contracts::UnitPriceCurrency.Usd,
-                                        },
-                                        UpTo = 0,
-                                    },
-                                ],
-                            },
-                        ],
-                        ResourceID = "resourceId",
-                        SalesforceID = "salesforceId",
-                        ScheduleStrategy = Contracts::ScheduleStrategy.EndOfBillingPeriod,
-                        StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                        TrialOverrideConfiguration = new()
-                        {
-                            IsTrial = true,
-                            TrialEndBehavior = Contracts::TrialEndBehavior.ConvertToPaid,
-                            TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                        },
-                        UnitQuantity = 0,
-                    },
-                },
-            ],
             Name = "name",
             PoNumber = "poNumber",
         };
@@ -542,8 +386,12 @@ public class ContractCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("activationEndDate"));
         Assert.Null(parameters.ActivationStartDate);
         Assert.False(parameters.RawBodyData.ContainsKey("activationStartDate"));
+        Assert.Null(parameters.ContractID);
+        Assert.False(parameters.RawBodyData.ContainsKey("contractId"));
         Assert.Null(parameters.SetupBilling);
         Assert.False(parameters.RawBodyData.ContainsKey("setupBilling"));
+        Assert.Null(parameters.Subscriptions);
+        Assert.False(parameters.RawBodyData.ContainsKey("subscriptions"));
         Assert.Null(parameters.XAccountID);
         Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
         Assert.Null(parameters.XEnvironmentID);
@@ -556,173 +404,15 @@ public class ContractCreateParamsTest : TestBase
         var parameters = new Contracts::ContractCreateParams
         {
             CustomerID = "customerId",
-            Subscriptions =
-            [
-                new()
-                {
-                    ExistingSubscriptionID = "existingSubscriptionId",
-                    NewSubscription = new()
-                    {
-                        CustomerID = "customerId",
-                        PlanID = "planId",
-                        ID = "id",
-                        Addons = [new() { ID = "id", Quantity = 0 }],
-                        AppliedCoupon = new()
-                        {
-                            BillingCouponID = "billingCouponId",
-                            Configuration = new()
-                            {
-                                StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                            },
-                            CouponID = "couponId",
-                            Discount = new()
-                            {
-                                AmountsOff =
-                                [
-                                    new() { Amount = 0, Currency = Contracts::Currency.Usd },
-                                ],
-                                Description = "description",
-                                DurationInMonths = 1,
-                                Name = "name",
-                                PercentOff = 1,
-                            },
-                            PromotionCode = "promotionCode",
-                        },
-                        AwaitPaymentConfirmation = true,
-                        BillingCountryCode = "billingCountryCode",
-                        BillingCycleAnchor = Contracts::BillingCycleAnchor.Unchanged,
-                        BillingID = "billingId",
-                        BillingInformation = new()
-                        {
-                            BillingAddress = new()
-                            {
-                                City = "city",
-                                Country = "country",
-                                Line1 = "line1",
-                                Line2 = "line2",
-                                PostalCode = "postalCode",
-                                State = "state",
-                            },
-                            ChargeOnBehalfOfAccount = "chargeOnBehalfOfAccount",
-                            IntegrationID = "integrationId",
-                            InvoiceDaysUntilDue = 0,
-                            IsBackdated = true,
-                            IsInvoicePaid = true,
-                            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-                            ProrationBehavior = Contracts::ProrationBehavior.InvoiceImmediately,
-                            TaxIds = [new() { Type = "type", Value = "value" }],
-                            TaxPercentage = 0,
-                            TaxRateIds = ["string"],
-                        },
-                        BillingPeriod = Contracts::BillingPeriod.Monthly,
-                        Budget = new() { HasSoftLimit = true, Limit = 0 },
-                        CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                        Charges =
-                        [
-                            new()
-                            {
-                                ID = "id",
-                                Quantity = 0,
-                                Type = Contracts::Type.Feature,
-                            },
-                        ],
-                        CheckoutOptions = new()
-                        {
-                            CancelUrl = "https://example.com",
-                            SuccessUrl = "https://example.com",
-                            AllowPromoCodes = true,
-                            AllowTaxIDCollection = true,
-                            CollectBillingAddress = true,
-                            CollectPhoneNumber = true,
-                            ReferenceID = "referenceId",
-                        },
-                        Entitlements =
-                        [
-                            new Contracts::Feature()
-                            {
-                                ID = "id",
-                                HasSoftLimit = true,
-                                HasUnlimitedUsage = true,
-                                MonthlyResetPeriodConfiguration = new(
-                                    Contracts::AccordingTo.SubscriptionStart
-                                ),
-                                ResetPeriod = Contracts::ResetPeriod.Year,
-                                UsageLimit = 0,
-                                WeeklyResetPeriodConfiguration = new(
-                                    Contracts::WeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
-                                ),
-                                YearlyResetPeriodConfiguration = new(
-                                    Contracts::YearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
-                                ),
-                            },
-                        ],
-                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-                        MinimumSpend = new()
-                        {
-                            Amount = 0,
-                            Currency = Contracts::MinimumSpendCurrency.Usd,
-                        },
-                        PayingCustomerID = "payingCustomerId",
-                        PaymentCollectionMethod = Contracts::PaymentCollectionMethod.Charge,
-                        PriceOverrides =
-                        [
-                            new()
-                            {
-                                AddonID = "addonId",
-                                Amount = 0,
-                                BaseCharge = true,
-                                BillingCountryCode = "billingCountryCode",
-                                BlockSize = 0,
-                                CreditGrantCadence =
-                                    Contracts::CreditGrantCadence.BeginningOfBillingPeriod,
-                                CreditRate = new()
-                                {
-                                    Amount = 1,
-                                    CurrencyID = "currencyId",
-                                    CostFormula = "costFormula",
-                                },
-                                Currency = Contracts::PriceOverrideCurrency.Usd,
-                                FeatureID = "featureId",
-                                Tiers =
-                                [
-                                    new()
-                                    {
-                                        FlatPrice = new()
-                                        {
-                                            Amount = 0,
-                                            Currency = Contracts::FlatPriceCurrency.Usd,
-                                        },
-                                        UnitPrice = new()
-                                        {
-                                            Amount = 0,
-                                            Currency = Contracts::UnitPriceCurrency.Usd,
-                                        },
-                                        UpTo = 0,
-                                    },
-                                ],
-                            },
-                        ],
-                        ResourceID = "resourceId",
-                        SalesforceID = "salesforceId",
-                        ScheduleStrategy = Contracts::ScheduleStrategy.EndOfBillingPeriod,
-                        StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                        TrialOverrideConfiguration = new()
-                        {
-                            IsTrial = true,
-                            TrialEndBehavior = Contracts::TrialEndBehavior.ConvertToPaid,
-                            TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                        },
-                        UnitQuantity = 0,
-                    },
-                },
-            ],
             Name = "name",
             PoNumber = "poNumber",
 
             // Null should be interpreted as omitted for these properties
             ActivationEndDate = null,
             ActivationStartDate = null,
+            ContractID = null,
             SetupBilling = null,
+            Subscriptions = null,
             XAccountID = null,
             XEnvironmentID = null,
         };
@@ -731,8 +421,12 @@ public class ContractCreateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("activationEndDate"));
         Assert.Null(parameters.ActivationStartDate);
         Assert.False(parameters.RawBodyData.ContainsKey("activationStartDate"));
+        Assert.Null(parameters.ContractID);
+        Assert.False(parameters.RawBodyData.ContainsKey("contractId"));
         Assert.Null(parameters.SetupBilling);
         Assert.False(parameters.RawBodyData.ContainsKey("setupBilling"));
+        Assert.Null(parameters.Subscriptions);
+        Assert.False(parameters.RawBodyData.ContainsKey("subscriptions"));
         Assert.Null(parameters.XAccountID);
         Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
         Assert.Null(parameters.XEnvironmentID);
@@ -745,6 +439,10 @@ public class ContractCreateParamsTest : TestBase
         var parameters = new Contracts::ContractCreateParams
         {
             CustomerID = "customerId",
+            ActivationEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ActivationStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ContractID = "contractId",
+            SetupBilling = true,
             Subscriptions =
             [
                 new()
@@ -905,9 +603,6 @@ public class ContractCreateParamsTest : TestBase
                     },
                 },
             ],
-            ActivationEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            ActivationStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            SetupBilling = true,
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",
         };
@@ -924,6 +619,10 @@ public class ContractCreateParamsTest : TestBase
         var parameters = new Contracts::ContractCreateParams
         {
             CustomerID = "customerId",
+            ActivationEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ActivationStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ContractID = "contractId",
+            SetupBilling = true,
             Subscriptions =
             [
                 new()
@@ -1084,9 +783,6 @@ public class ContractCreateParamsTest : TestBase
                     },
                 },
             ],
-            ActivationEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            ActivationStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            SetupBilling = true,
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",
 
@@ -1103,170 +799,7 @@ public class ContractCreateParamsTest : TestBase
     [Fact]
     public void Url_Works()
     {
-        Contracts::ContractCreateParams parameters = new()
-        {
-            CustomerID = "customerId",
-            Subscriptions =
-            [
-                new()
-                {
-                    ExistingSubscriptionID = "existingSubscriptionId",
-                    NewSubscription = new()
-                    {
-                        CustomerID = "customerId",
-                        PlanID = "planId",
-                        ID = "id",
-                        Addons = [new() { ID = "id", Quantity = 0 }],
-                        AppliedCoupon = new()
-                        {
-                            BillingCouponID = "billingCouponId",
-                            Configuration = new()
-                            {
-                                StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                            },
-                            CouponID = "couponId",
-                            Discount = new()
-                            {
-                                AmountsOff =
-                                [
-                                    new() { Amount = 0, Currency = Contracts::Currency.Usd },
-                                ],
-                                Description = "description",
-                                DurationInMonths = 1,
-                                Name = "name",
-                                PercentOff = 1,
-                            },
-                            PromotionCode = "promotionCode",
-                        },
-                        AwaitPaymentConfirmation = true,
-                        BillingCountryCode = "billingCountryCode",
-                        BillingCycleAnchor = Contracts::BillingCycleAnchor.Unchanged,
-                        BillingID = "billingId",
-                        BillingInformation = new()
-                        {
-                            BillingAddress = new()
-                            {
-                                City = "city",
-                                Country = "country",
-                                Line1 = "line1",
-                                Line2 = "line2",
-                                PostalCode = "postalCode",
-                                State = "state",
-                            },
-                            ChargeOnBehalfOfAccount = "chargeOnBehalfOfAccount",
-                            IntegrationID = "integrationId",
-                            InvoiceDaysUntilDue = 0,
-                            IsBackdated = true,
-                            IsInvoicePaid = true,
-                            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-                            ProrationBehavior = Contracts::ProrationBehavior.InvoiceImmediately,
-                            TaxIds = [new() { Type = "type", Value = "value" }],
-                            TaxPercentage = 0,
-                            TaxRateIds = ["string"],
-                        },
-                        BillingPeriod = Contracts::BillingPeriod.Monthly,
-                        Budget = new() { HasSoftLimit = true, Limit = 0 },
-                        CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                        Charges =
-                        [
-                            new()
-                            {
-                                ID = "id",
-                                Quantity = 0,
-                                Type = Contracts::Type.Feature,
-                            },
-                        ],
-                        CheckoutOptions = new()
-                        {
-                            CancelUrl = "https://example.com",
-                            SuccessUrl = "https://example.com",
-                            AllowPromoCodes = true,
-                            AllowTaxIDCollection = true,
-                            CollectBillingAddress = true,
-                            CollectPhoneNumber = true,
-                            ReferenceID = "referenceId",
-                        },
-                        Entitlements =
-                        [
-                            new Contracts::Feature()
-                            {
-                                ID = "id",
-                                HasSoftLimit = true,
-                                HasUnlimitedUsage = true,
-                                MonthlyResetPeriodConfiguration = new(
-                                    Contracts::AccordingTo.SubscriptionStart
-                                ),
-                                ResetPeriod = Contracts::ResetPeriod.Year,
-                                UsageLimit = 0,
-                                WeeklyResetPeriodConfiguration = new(
-                                    Contracts::WeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
-                                ),
-                                YearlyResetPeriodConfiguration = new(
-                                    Contracts::YearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
-                                ),
-                            },
-                        ],
-                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-                        MinimumSpend = new()
-                        {
-                            Amount = 0,
-                            Currency = Contracts::MinimumSpendCurrency.Usd,
-                        },
-                        PayingCustomerID = "payingCustomerId",
-                        PaymentCollectionMethod = Contracts::PaymentCollectionMethod.Charge,
-                        PriceOverrides =
-                        [
-                            new()
-                            {
-                                AddonID = "addonId",
-                                Amount = 0,
-                                BaseCharge = true,
-                                BillingCountryCode = "billingCountryCode",
-                                BlockSize = 0,
-                                CreditGrantCadence =
-                                    Contracts::CreditGrantCadence.BeginningOfBillingPeriod,
-                                CreditRate = new()
-                                {
-                                    Amount = 1,
-                                    CurrencyID = "currencyId",
-                                    CostFormula = "costFormula",
-                                },
-                                Currency = Contracts::PriceOverrideCurrency.Usd,
-                                FeatureID = "featureId",
-                                Tiers =
-                                [
-                                    new()
-                                    {
-                                        FlatPrice = new()
-                                        {
-                                            Amount = 0,
-                                            Currency = Contracts::FlatPriceCurrency.Usd,
-                                        },
-                                        UnitPrice = new()
-                                        {
-                                            Amount = 0,
-                                            Currency = Contracts::UnitPriceCurrency.Usd,
-                                        },
-                                        UpTo = 0,
-                                    },
-                                ],
-                            },
-                        ],
-                        ResourceID = "resourceId",
-                        SalesforceID = "salesforceId",
-                        ScheduleStrategy = Contracts::ScheduleStrategy.EndOfBillingPeriod,
-                        StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                        TrialOverrideConfiguration = new()
-                        {
-                            IsTrial = true,
-                            TrialEndBehavior = Contracts::TrialEndBehavior.ConvertToPaid,
-                            TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                        },
-                        UnitQuantity = 0,
-                    },
-                },
-            ],
-        };
+        Contracts::ContractCreateParams parameters = new() { CustomerID = "customerId" };
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
@@ -1280,166 +813,6 @@ public class ContractCreateParamsTest : TestBase
         Contracts::ContractCreateParams parameters = new()
         {
             CustomerID = "customerId",
-            Subscriptions =
-            [
-                new()
-                {
-                    ExistingSubscriptionID = "existingSubscriptionId",
-                    NewSubscription = new()
-                    {
-                        CustomerID = "customerId",
-                        PlanID = "planId",
-                        ID = "id",
-                        Addons = [new() { ID = "id", Quantity = 0 }],
-                        AppliedCoupon = new()
-                        {
-                            BillingCouponID = "billingCouponId",
-                            Configuration = new()
-                            {
-                                StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                            },
-                            CouponID = "couponId",
-                            Discount = new()
-                            {
-                                AmountsOff =
-                                [
-                                    new() { Amount = 0, Currency = Contracts::Currency.Usd },
-                                ],
-                                Description = "description",
-                                DurationInMonths = 1,
-                                Name = "name",
-                                PercentOff = 1,
-                            },
-                            PromotionCode = "promotionCode",
-                        },
-                        AwaitPaymentConfirmation = true,
-                        BillingCountryCode = "billingCountryCode",
-                        BillingCycleAnchor = Contracts::BillingCycleAnchor.Unchanged,
-                        BillingID = "billingId",
-                        BillingInformation = new()
-                        {
-                            BillingAddress = new()
-                            {
-                                City = "city",
-                                Country = "country",
-                                Line1 = "line1",
-                                Line2 = "line2",
-                                PostalCode = "postalCode",
-                                State = "state",
-                            },
-                            ChargeOnBehalfOfAccount = "chargeOnBehalfOfAccount",
-                            IntegrationID = "integrationId",
-                            InvoiceDaysUntilDue = 0,
-                            IsBackdated = true,
-                            IsInvoicePaid = true,
-                            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-                            ProrationBehavior = Contracts::ProrationBehavior.InvoiceImmediately,
-                            TaxIds = [new() { Type = "type", Value = "value" }],
-                            TaxPercentage = 0,
-                            TaxRateIds = ["string"],
-                        },
-                        BillingPeriod = Contracts::BillingPeriod.Monthly,
-                        Budget = new() { HasSoftLimit = true, Limit = 0 },
-                        CancellationDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                        Charges =
-                        [
-                            new()
-                            {
-                                ID = "id",
-                                Quantity = 0,
-                                Type = Contracts::Type.Feature,
-                            },
-                        ],
-                        CheckoutOptions = new()
-                        {
-                            CancelUrl = "https://example.com",
-                            SuccessUrl = "https://example.com",
-                            AllowPromoCodes = true,
-                            AllowTaxIDCollection = true,
-                            CollectBillingAddress = true,
-                            CollectPhoneNumber = true,
-                            ReferenceID = "referenceId",
-                        },
-                        Entitlements =
-                        [
-                            new Contracts::Feature()
-                            {
-                                ID = "id",
-                                HasSoftLimit = true,
-                                HasUnlimitedUsage = true,
-                                MonthlyResetPeriodConfiguration = new(
-                                    Contracts::AccordingTo.SubscriptionStart
-                                ),
-                                ResetPeriod = Contracts::ResetPeriod.Year,
-                                UsageLimit = 0,
-                                WeeklyResetPeriodConfiguration = new(
-                                    Contracts::WeeklyResetPeriodConfigurationAccordingTo.SubscriptionStart
-                                ),
-                                YearlyResetPeriodConfiguration = new(
-                                    Contracts::YearlyResetPeriodConfigurationAccordingTo.SubscriptionStart
-                                ),
-                            },
-                        ],
-                        Metadata = new Dictionary<string, string>() { { "foo", "string" } },
-                        MinimumSpend = new()
-                        {
-                            Amount = 0,
-                            Currency = Contracts::MinimumSpendCurrency.Usd,
-                        },
-                        PayingCustomerID = "payingCustomerId",
-                        PaymentCollectionMethod = Contracts::PaymentCollectionMethod.Charge,
-                        PriceOverrides =
-                        [
-                            new()
-                            {
-                                AddonID = "addonId",
-                                Amount = 0,
-                                BaseCharge = true,
-                                BillingCountryCode = "billingCountryCode",
-                                BlockSize = 0,
-                                CreditGrantCadence =
-                                    Contracts::CreditGrantCadence.BeginningOfBillingPeriod,
-                                CreditRate = new()
-                                {
-                                    Amount = 1,
-                                    CurrencyID = "currencyId",
-                                    CostFormula = "costFormula",
-                                },
-                                Currency = Contracts::PriceOverrideCurrency.Usd,
-                                FeatureID = "featureId",
-                                Tiers =
-                                [
-                                    new()
-                                    {
-                                        FlatPrice = new()
-                                        {
-                                            Amount = 0,
-                                            Currency = Contracts::FlatPriceCurrency.Usd,
-                                        },
-                                        UnitPrice = new()
-                                        {
-                                            Amount = 0,
-                                            Currency = Contracts::UnitPriceCurrency.Usd,
-                                        },
-                                        UpTo = 0,
-                                    },
-                                ],
-                            },
-                        ],
-                        ResourceID = "resourceId",
-                        SalesforceID = "salesforceId",
-                        ScheduleStrategy = Contracts::ScheduleStrategy.EndOfBillingPeriod,
-                        StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                        TrialOverrideConfiguration = new()
-                        {
-                            IsTrial = true,
-                            TrialEndBehavior = Contracts::TrialEndBehavior.ConvertToPaid,
-                            TrialEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                        },
-                        UnitQuantity = 0,
-                    },
-                },
-            ],
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",
         };
@@ -1456,6 +829,12 @@ public class ContractCreateParamsTest : TestBase
         var parameters = new Contracts::ContractCreateParams
         {
             CustomerID = "customerId",
+            ActivationEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ActivationStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ContractID = "contractId",
+            Name = "name",
+            PoNumber = "poNumber",
+            SetupBilling = true,
             Subscriptions =
             [
                 new()
@@ -1616,11 +995,6 @@ public class ContractCreateParamsTest : TestBase
                     },
                 },
             ],
-            ActivationEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            ActivationStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Name = "name",
-            PoNumber = "poNumber",
-            SetupBilling = true,
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",
         };

@@ -9,9 +9,9 @@ using Stigg.Client.Core;
 namespace Stigg.Client.Models.V1.Customers;
 
 /// <summary>
-/// Retrieves a customer's contracts, fetched live from the connected billing provider,
-/// each enriched with a preview of its upcoming (next) invoice when available. Returns
-/// an empty list when no billing provider is connected or the customer is not synced.
+/// Retrieves a customer's contracts. Each contract that has a billing contract is
+/// enriched with a preview of its upcoming (next) invoice when available. Returns
+/// an empty list when the customer has no contracts.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that

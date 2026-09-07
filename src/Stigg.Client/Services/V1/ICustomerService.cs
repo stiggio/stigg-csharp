@@ -121,10 +121,9 @@ public interface ICustomerService
     );
 
     /// <summary>
-    /// Retrieves a customer's contracts, fetched live from the connected billing
-    /// provider, each enriched with a preview of its upcoming (next) invoice when
-    /// available. Returns an empty list when no billing provider is connected or the
-    /// customer is not synced.
+    /// Retrieves a customer's contracts. Each contract that has a billing contract is
+    /// enriched with a preview of its upcoming (next) invoice when available. Returns
+    /// an empty list when the customer has no contracts.
     /// </summary>
     Task<CustomerListContractsResponse> ListContracts(
         CustomerListContractsParams parameters,

@@ -9,11 +9,10 @@ using Stigg.Client.Core;
 namespace Stigg.Client.Models.V1.Contracts;
 
 /// <summary>
-/// Retrieves a cursor-paginated list of contracts in the environment, fetched live
-/// from the connected billing provider. Each contract is enriched with a preview
-/// of its upcoming (next) invoice when one is available. Returns an empty list when
-/// no billing provider is connected. Supports filtering by customer external ID,
-/// state, and name.
+/// Retrieves a cursor-paginated list of contracts in the environment. Each contract
+/// that has a billing contract is enriched with a preview of its upcoming (next)
+/// invoice when one is available. Supports filtering by customer external ID, state,
+/// and name.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that

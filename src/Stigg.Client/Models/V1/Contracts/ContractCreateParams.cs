@@ -45,28 +45,6 @@ public record class ContractCreateParams : ParamsBase
     }
 
     /// <summary>
-    /// The subscriptions to attach to the contract (must be non-empty). Each entry
-    /// is either a new subscription to create or a reference to an existing custom subscription.
-    /// </summary>
-    public required IReadOnlyList<Subscription> Subscriptions
-    {
-        get
-        {
-            this._rawBodyData.Freeze();
-            return this._rawBodyData.GetNotNullStruct<ImmutableArray<Subscription>>(
-                "subscriptions"
-            );
-        }
-        init
-        {
-            this._rawBodyData.Set<ImmutableArray<Subscription>>(
-                "subscriptions",
-                ImmutableArray.ToImmutableArray(value)
-            );
-        }
-    }
-
-    /// <summary>
     /// Optional contract activation end date
     /// </summary>
     public System::DateTimeOffset? ActivationEndDate
@@ -107,6 +85,31 @@ public record class ContractCreateParams : ParamsBase
             }
 
             this._rawBodyData.Set("activationStartDate", value);
+        }
+    }
+
+    /// <summary>
+    /// Your own ID for the contract, which makes this call idempotent: sending the
+    /// same one again returns the existing contract instead of creating a second.
+    /// Omit it and one is generated for you, but then a retry cannot be told apart
+    /// from a new contract — and contracts cannot be deleted. Recommended whenever
+    /// a retry is possible, e.g. building a contract from an order form.
+    /// </summary>
+    public string? ContractID
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("contractId");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawBodyData.Set("contractId", value);
         }
     }
 
@@ -157,6 +160,35 @@ public record class ContractCreateParams : ParamsBase
             }
 
             this._rawBodyData.Set("setupBilling", value);
+        }
+    }
+
+    /// <summary>
+    /// The subscriptions to attach to the contract. Each entry is either a new subscription
+    /// to create or a reference to an existing custom subscription. Optional — omit
+    /// it (or pass an empty list) to create a contract with no subscriptions and
+    /// attach them later.
+    /// </summary>
+    public IReadOnlyList<Subscription>? Subscriptions
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableStruct<ImmutableArray<Subscription>>(
+                "subscriptions"
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawBodyData.Set<ImmutableArray<Subscription>?>(
+                "subscriptions",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
         }
     }
 
