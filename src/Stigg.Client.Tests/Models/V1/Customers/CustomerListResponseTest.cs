@@ -1557,6 +1557,7 @@ public class CustomerListResponseDefaultPaymentMethodTypeTest : TestBase
     [InlineData(CustomerListResponseDefaultPaymentMethodType.Card)]
     [InlineData(CustomerListResponseDefaultPaymentMethodType.Bank)]
     [InlineData(CustomerListResponseDefaultPaymentMethodType.CashApp)]
+    [InlineData(CustomerListResponseDefaultPaymentMethodType.Paypal)]
     public void Validation_Works(CustomerListResponseDefaultPaymentMethodType rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -1579,6 +1580,7 @@ public class CustomerListResponseDefaultPaymentMethodTypeTest : TestBase
     [InlineData(CustomerListResponseDefaultPaymentMethodType.Card)]
     [InlineData(CustomerListResponseDefaultPaymentMethodType.Bank)]
     [InlineData(CustomerListResponseDefaultPaymentMethodType.CashApp)]
+    [InlineData(CustomerListResponseDefaultPaymentMethodType.Paypal)]
     public void SerializationRoundtrip_Works(CustomerListResponseDefaultPaymentMethodType rawValue)
     {
         // force implicit conversion because Theory can't do that for us

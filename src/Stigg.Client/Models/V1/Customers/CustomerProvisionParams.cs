@@ -867,12 +867,12 @@ public sealed record class DefaultPaymentMethod : JsonModel
     /// <summary>
     /// The default payment method type
     /// </summary>
-    public required ApiEnum<string, global::Stigg.Client.Models.V1.Customers.Type> Type
+    public required ApiEnum<string, global::Stigg.Client.Models.V1.Customers.Type>? Type
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
+            return this._rawData.GetNullableClass<
                 ApiEnum<string, global::Stigg.Client.Models.V1.Customers.Type>
             >("type");
         }
@@ -886,7 +886,7 @@ public sealed record class DefaultPaymentMethod : JsonModel
         _ = this.CardExpiryMonth;
         _ = this.CardExpiryYear;
         _ = this.CardLast4Digits;
-        this.Type.Validate();
+        this.Type?.Validate();
     }
 
     public DefaultPaymentMethod() { }
@@ -936,6 +936,7 @@ public enum Type
     Card,
     Bank,
     CashApp,
+    Paypal,
 }
 
 sealed class TypeConverter : JsonConverter<global::Stigg.Client.Models.V1.Customers.Type>
@@ -951,6 +952,7 @@ sealed class TypeConverter : JsonConverter<global::Stigg.Client.Models.V1.Custom
             "CARD" => global::Stigg.Client.Models.V1.Customers.Type.Card,
             "BANK" => global::Stigg.Client.Models.V1.Customers.Type.Bank,
             "CASH_APP" => global::Stigg.Client.Models.V1.Customers.Type.CashApp,
+            "PAYPAL" => global::Stigg.Client.Models.V1.Customers.Type.Paypal,
             _ => (global::Stigg.Client.Models.V1.Customers.Type)(-1),
         };
     }
@@ -968,6 +970,7 @@ sealed class TypeConverter : JsonConverter<global::Stigg.Client.Models.V1.Custom
                 global::Stigg.Client.Models.V1.Customers.Type.Card => "CARD",
                 global::Stigg.Client.Models.V1.Customers.Type.Bank => "BANK",
                 global::Stigg.Client.Models.V1.Customers.Type.CashApp => "CASH_APP",
+                global::Stigg.Client.Models.V1.Customers.Type.Paypal => "PAYPAL",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

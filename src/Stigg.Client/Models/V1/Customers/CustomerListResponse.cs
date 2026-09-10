@@ -814,12 +814,12 @@ public sealed record class CustomerListResponseDefaultPaymentMethod : JsonModel
     /// <summary>
     /// The default payment method type
     /// </summary>
-    public required ApiEnum<string, CustomerListResponseDefaultPaymentMethodType> Type
+    public required ApiEnum<string, CustomerListResponseDefaultPaymentMethodType>? Type
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<
+            return this._rawData.GetNullableClass<
                 ApiEnum<string, CustomerListResponseDefaultPaymentMethodType>
             >("type");
         }
@@ -833,7 +833,7 @@ public sealed record class CustomerListResponseDefaultPaymentMethod : JsonModel
         _ = this.CardExpiryMonth;
         _ = this.CardExpiryYear;
         _ = this.CardLast4Digits;
-        this.Type.Validate();
+        this.Type?.Validate();
     }
 
     public CustomerListResponseDefaultPaymentMethod() { }
@@ -888,6 +888,7 @@ public enum CustomerListResponseDefaultPaymentMethodType
     Card,
     Bank,
     CashApp,
+    Paypal,
 }
 
 sealed class CustomerListResponseDefaultPaymentMethodTypeConverter
@@ -904,6 +905,7 @@ sealed class CustomerListResponseDefaultPaymentMethodTypeConverter
             "CARD" => CustomerListResponseDefaultPaymentMethodType.Card,
             "BANK" => CustomerListResponseDefaultPaymentMethodType.Bank,
             "CASH_APP" => CustomerListResponseDefaultPaymentMethodType.CashApp,
+            "PAYPAL" => CustomerListResponseDefaultPaymentMethodType.Paypal,
             _ => (CustomerListResponseDefaultPaymentMethodType)(-1),
         };
     }
@@ -921,6 +923,7 @@ sealed class CustomerListResponseDefaultPaymentMethodTypeConverter
                 CustomerListResponseDefaultPaymentMethodType.Card => "CARD",
                 CustomerListResponseDefaultPaymentMethodType.Bank => "BANK",
                 CustomerListResponseDefaultPaymentMethodType.CashApp => "CASH_APP",
+                CustomerListResponseDefaultPaymentMethodType.Paypal => "PAYPAL",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

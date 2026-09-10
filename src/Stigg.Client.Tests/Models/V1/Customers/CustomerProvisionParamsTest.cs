@@ -1014,6 +1014,7 @@ public class TypeTest : TestBase
     [InlineData(Customers::Type.Card)]
     [InlineData(Customers::Type.Bank)]
     [InlineData(Customers::Type.CashApp)]
+    [InlineData(Customers::Type.Paypal)]
     public void Validation_Works(Customers::Type rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -1037,6 +1038,7 @@ public class TypeTest : TestBase
     [InlineData(Customers::Type.Card)]
     [InlineData(Customers::Type.Bank)]
     [InlineData(Customers::Type.CashApp)]
+    [InlineData(Customers::Type.Paypal)]
     public void SerializationRoundtrip_Works(Customers::Type rawValue)
     {
         // force implicit conversion because Theory can't do that for us
