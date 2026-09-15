@@ -39,15 +39,6 @@ public interface IDataExportService
     );
 
     /// <summary>
-    /// Mint a scoped JWT for the FE embedded SDK. Lazy-creates the DATA_EXPORT
-    /// integration if needed.
-    /// </summary>
-    Task<DataExportMintScopedTokenResponse> MintScopedToken(
-        DataExportMintScopedTokenParams parameters,
-        CancellationToken cancellationToken = default
-    );
-
-    /// <summary>
     /// Trigger a sync for one destination or all destinations under the provider
     /// entity.
     /// </summary>
@@ -78,15 +69,6 @@ public interface IDataExportServiceWithRawResponse
     /// </summary>
     Task<HttpResponse<DataExportListModelsResponse>> ListModels(
         DataExportListModelsParams? parameters = null,
-        CancellationToken cancellationToken = default
-    );
-
-    /// <summary>
-    /// Returns a raw HTTP response for <c>post /api/v1/data-export/scoped-token</c>, but is otherwise the
-    /// same as <see cref="IDataExportService.MintScopedToken(DataExportMintScopedTokenParams, CancellationToken)"/>.
-    /// </summary>
-    Task<HttpResponse<DataExportMintScopedTokenResponse>> MintScopedToken(
-        DataExportMintScopedTokenParams parameters,
         CancellationToken cancellationToken = default
     );
 
