@@ -19,7 +19,7 @@ public class IntegrationListParamsTest : TestBase
             After = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Before = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Limit = 1,
-            VendorIdentifier = [VendorIdentifier.Auth0],
+            VendorIdentifier = [VendorIdentifier.Stripe],
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",
         };
@@ -28,7 +28,10 @@ public class IntegrationListParamsTest : TestBase
         string expectedAfter = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
         string expectedBefore = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e";
         long expectedLimit = 1;
-        List<ApiEnum<string, VendorIdentifier>> expectedVendorIdentifier = [VendorIdentifier.Auth0];
+        List<ApiEnum<string, VendorIdentifier>> expectedVendorIdentifier =
+        [
+            VendorIdentifier.Stripe,
+        ];
         string expectedXAccountID = "X-ACCOUNT-ID";
         string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
@@ -104,7 +107,7 @@ public class IntegrationListParamsTest : TestBase
             After = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Before = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Limit = 1,
-            VendorIdentifier = [VendorIdentifier.Auth0],
+            VendorIdentifier = [VendorIdentifier.Stripe],
         };
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
@@ -112,7 +115,7 @@ public class IntegrationListParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://api.stigg.io/api/v1/customers/x/integrations?after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&limit=1&vendorIdentifier=AUTH0"
+                    "https://api.stigg.io/api/v1/customers/x/integrations?after=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&before=182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e&limit=1&vendorIdentifier=STRIPE"
                 ),
                 url
             )
@@ -145,7 +148,7 @@ public class IntegrationListParamsTest : TestBase
             After = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Before = "182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             Limit = 1,
-            VendorIdentifier = [VendorIdentifier.Auth0],
+            VendorIdentifier = [VendorIdentifier.Stripe],
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",
         };
@@ -159,20 +162,10 @@ public class IntegrationListParamsTest : TestBase
 public class VendorIdentifierTest : TestBase
 {
     [Theory]
-    [InlineData(VendorIdentifier.Auth0)]
-    [InlineData(VendorIdentifier.Zuora)]
     [InlineData(VendorIdentifier.Stripe)]
+    [InlineData(VendorIdentifier.Zuora)]
     [InlineData(VendorIdentifier.Hubspot)]
     [InlineData(VendorIdentifier.AwsMarketplace)]
-    [InlineData(VendorIdentifier.Snowflake)]
-    [InlineData(VendorIdentifier.Salesforce)]
-    [InlineData(VendorIdentifier.BigQuery)]
-    [InlineData(VendorIdentifier.OpenFga)]
-    [InlineData(VendorIdentifier.AppStore)]
-    [InlineData(VendorIdentifier.Received)]
-    [InlineData(VendorIdentifier.Prequel)]
-    [InlineData(VendorIdentifier.Airwallex)]
-    [InlineData(VendorIdentifier.StripeInvoicing)]
     public void Validation_Works(VendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -193,20 +186,10 @@ public class VendorIdentifierTest : TestBase
     }
 
     [Theory]
-    [InlineData(VendorIdentifier.Auth0)]
-    [InlineData(VendorIdentifier.Zuora)]
     [InlineData(VendorIdentifier.Stripe)]
+    [InlineData(VendorIdentifier.Zuora)]
     [InlineData(VendorIdentifier.Hubspot)]
     [InlineData(VendorIdentifier.AwsMarketplace)]
-    [InlineData(VendorIdentifier.Snowflake)]
-    [InlineData(VendorIdentifier.Salesforce)]
-    [InlineData(VendorIdentifier.BigQuery)]
-    [InlineData(VendorIdentifier.OpenFga)]
-    [InlineData(VendorIdentifier.AppStore)]
-    [InlineData(VendorIdentifier.Received)]
-    [InlineData(VendorIdentifier.Prequel)]
-    [InlineData(VendorIdentifier.Airwallex)]
-    [InlineData(VendorIdentifier.StripeInvoicing)]
     public void SerializationRoundtrip_Works(VendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us

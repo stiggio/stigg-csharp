@@ -16,7 +16,7 @@ public class CustomerIntegrationResponseTest : TestBase
             {
                 ID = "id",
                 SyncedEntityID = "syncedEntityId",
-                VendorIdentifier = DataVendorIdentifier.Auth0,
+                VendorIdentifier = DataVendorIdentifier.Stripe,
                 SyncData = new SyncRevisionPriceBillingData()
                 {
                     BillingID = "billingId",
@@ -30,7 +30,7 @@ public class CustomerIntegrationResponseTest : TestBase
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = DataVendorIdentifier.Auth0,
+            VendorIdentifier = DataVendorIdentifier.Stripe,
             SyncData = new SyncRevisionPriceBillingData()
             {
                 BillingID = "billingId",
@@ -51,7 +51,7 @@ public class CustomerIntegrationResponseTest : TestBase
             {
                 ID = "id",
                 SyncedEntityID = "syncedEntityId",
-                VendorIdentifier = DataVendorIdentifier.Auth0,
+                VendorIdentifier = DataVendorIdentifier.Stripe,
                 SyncData = new SyncRevisionPriceBillingData()
                 {
                     BillingID = "billingId",
@@ -79,7 +79,7 @@ public class CustomerIntegrationResponseTest : TestBase
             {
                 ID = "id",
                 SyncedEntityID = "syncedEntityId",
-                VendorIdentifier = DataVendorIdentifier.Auth0,
+                VendorIdentifier = DataVendorIdentifier.Stripe,
                 SyncData = new SyncRevisionPriceBillingData()
                 {
                     BillingID = "billingId",
@@ -100,7 +100,7 @@ public class CustomerIntegrationResponseTest : TestBase
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = DataVendorIdentifier.Auth0,
+            VendorIdentifier = DataVendorIdentifier.Stripe,
             SyncData = new SyncRevisionPriceBillingData()
             {
                 BillingID = "billingId",
@@ -121,7 +121,7 @@ public class CustomerIntegrationResponseTest : TestBase
             {
                 ID = "id",
                 SyncedEntityID = "syncedEntityId",
-                VendorIdentifier = DataVendorIdentifier.Auth0,
+                VendorIdentifier = DataVendorIdentifier.Stripe,
                 SyncData = new SyncRevisionPriceBillingData()
                 {
                     BillingID = "billingId",
@@ -143,7 +143,7 @@ public class CustomerIntegrationResponseTest : TestBase
             {
                 ID = "id",
                 SyncedEntityID = "syncedEntityId",
-                VendorIdentifier = DataVendorIdentifier.Auth0,
+                VendorIdentifier = DataVendorIdentifier.Stripe,
                 SyncData = new SyncRevisionPriceBillingData()
                 {
                     BillingID = "billingId",
@@ -168,7 +168,7 @@ public class DataTest : TestBase
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = DataVendorIdentifier.Auth0,
+            VendorIdentifier = DataVendorIdentifier.Stripe,
             SyncData = new SyncRevisionPriceBillingData()
             {
                 BillingID = "billingId",
@@ -179,7 +179,8 @@ public class DataTest : TestBase
 
         string expectedID = "id";
         string expectedSyncedEntityID = "syncedEntityId";
-        ApiEnum<string, DataVendorIdentifier> expectedVendorIdentifier = DataVendorIdentifier.Auth0;
+        ApiEnum<string, DataVendorIdentifier> expectedVendorIdentifier =
+            DataVendorIdentifier.Stripe;
         SyncData expectedSyncData = new SyncRevisionPriceBillingData()
         {
             BillingID = "billingId",
@@ -200,7 +201,7 @@ public class DataTest : TestBase
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = DataVendorIdentifier.Auth0,
+            VendorIdentifier = DataVendorIdentifier.Stripe,
             SyncData = new SyncRevisionPriceBillingData()
             {
                 BillingID = "billingId",
@@ -222,7 +223,7 @@ public class DataTest : TestBase
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = DataVendorIdentifier.Auth0,
+            VendorIdentifier = DataVendorIdentifier.Stripe,
             SyncData = new SyncRevisionPriceBillingData()
             {
                 BillingID = "billingId",
@@ -237,7 +238,8 @@ public class DataTest : TestBase
 
         string expectedID = "id";
         string expectedSyncedEntityID = "syncedEntityId";
-        ApiEnum<string, DataVendorIdentifier> expectedVendorIdentifier = DataVendorIdentifier.Auth0;
+        ApiEnum<string, DataVendorIdentifier> expectedVendorIdentifier =
+            DataVendorIdentifier.Stripe;
         SyncData expectedSyncData = new SyncRevisionPriceBillingData()
         {
             BillingID = "billingId",
@@ -258,7 +260,7 @@ public class DataTest : TestBase
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = DataVendorIdentifier.Auth0,
+            VendorIdentifier = DataVendorIdentifier.Stripe,
             SyncData = new SyncRevisionPriceBillingData()
             {
                 BillingID = "billingId",
@@ -277,7 +279,7 @@ public class DataTest : TestBase
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = DataVendorIdentifier.Auth0,
+            VendorIdentifier = DataVendorIdentifier.Stripe,
         };
 
         Assert.Null(model.SyncData);
@@ -291,7 +293,7 @@ public class DataTest : TestBase
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = DataVendorIdentifier.Auth0,
+            VendorIdentifier = DataVendorIdentifier.Stripe,
         };
 
         model.Validate();
@@ -304,7 +306,7 @@ public class DataTest : TestBase
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = DataVendorIdentifier.Auth0,
+            VendorIdentifier = DataVendorIdentifier.Stripe,
 
             SyncData = null,
         };
@@ -320,7 +322,7 @@ public class DataTest : TestBase
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = DataVendorIdentifier.Auth0,
+            VendorIdentifier = DataVendorIdentifier.Stripe,
 
             SyncData = null,
         };
@@ -335,7 +337,7 @@ public class DataTest : TestBase
         {
             ID = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = DataVendorIdentifier.Auth0,
+            VendorIdentifier = DataVendorIdentifier.Stripe,
             SyncData = new SyncRevisionPriceBillingData()
             {
                 BillingID = "billingId",
@@ -353,20 +355,10 @@ public class DataTest : TestBase
 public class DataVendorIdentifierTest : TestBase
 {
     [Theory]
-    [InlineData(DataVendorIdentifier.Auth0)]
-    [InlineData(DataVendorIdentifier.Zuora)]
     [InlineData(DataVendorIdentifier.Stripe)]
+    [InlineData(DataVendorIdentifier.Zuora)]
     [InlineData(DataVendorIdentifier.Hubspot)]
     [InlineData(DataVendorIdentifier.AwsMarketplace)]
-    [InlineData(DataVendorIdentifier.Snowflake)]
-    [InlineData(DataVendorIdentifier.Salesforce)]
-    [InlineData(DataVendorIdentifier.BigQuery)]
-    [InlineData(DataVendorIdentifier.OpenFga)]
-    [InlineData(DataVendorIdentifier.AppStore)]
-    [InlineData(DataVendorIdentifier.Received)]
-    [InlineData(DataVendorIdentifier.Prequel)]
-    [InlineData(DataVendorIdentifier.Airwallex)]
-    [InlineData(DataVendorIdentifier.StripeInvoicing)]
     public void Validation_Works(DataVendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -387,20 +379,10 @@ public class DataVendorIdentifierTest : TestBase
     }
 
     [Theory]
-    [InlineData(DataVendorIdentifier.Auth0)]
-    [InlineData(DataVendorIdentifier.Zuora)]
     [InlineData(DataVendorIdentifier.Stripe)]
+    [InlineData(DataVendorIdentifier.Zuora)]
     [InlineData(DataVendorIdentifier.Hubspot)]
     [InlineData(DataVendorIdentifier.AwsMarketplace)]
-    [InlineData(DataVendorIdentifier.Snowflake)]
-    [InlineData(DataVendorIdentifier.Salesforce)]
-    [InlineData(DataVendorIdentifier.BigQuery)]
-    [InlineData(DataVendorIdentifier.OpenFga)]
-    [InlineData(DataVendorIdentifier.AppStore)]
-    [InlineData(DataVendorIdentifier.Received)]
-    [InlineData(DataVendorIdentifier.Prequel)]
-    [InlineData(DataVendorIdentifier.Airwallex)]
-    [InlineData(DataVendorIdentifier.StripeInvoicing)]
     public void SerializationRoundtrip_Works(DataVendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us

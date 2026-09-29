@@ -253,20 +253,10 @@ public record class IntegrationListParams : ParamsBase
 [JsonConverter(typeof(VendorIdentifierConverter))]
 public enum VendorIdentifier
 {
-    Auth0,
-    Zuora,
     Stripe,
+    Zuora,
     Hubspot,
     AwsMarketplace,
-    Snowflake,
-    Salesforce,
-    BigQuery,
-    OpenFga,
-    AppStore,
-    Received,
-    Prequel,
-    Airwallex,
-    StripeInvoicing,
 }
 
 sealed class VendorIdentifierConverter : JsonConverter<VendorIdentifier>
@@ -279,20 +269,10 @@ sealed class VendorIdentifierConverter : JsonConverter<VendorIdentifier>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "AUTH0" => VendorIdentifier.Auth0,
-            "ZUORA" => VendorIdentifier.Zuora,
             "STRIPE" => VendorIdentifier.Stripe,
+            "ZUORA" => VendorIdentifier.Zuora,
             "HUBSPOT" => VendorIdentifier.Hubspot,
             "AWS_MARKETPLACE" => VendorIdentifier.AwsMarketplace,
-            "SNOWFLAKE" => VendorIdentifier.Snowflake,
-            "SALESFORCE" => VendorIdentifier.Salesforce,
-            "BIG_QUERY" => VendorIdentifier.BigQuery,
-            "OPEN_FGA" => VendorIdentifier.OpenFga,
-            "APP_STORE" => VendorIdentifier.AppStore,
-            "RECEIVED" => VendorIdentifier.Received,
-            "PREQUEL" => VendorIdentifier.Prequel,
-            "AIRWALLEX" => VendorIdentifier.Airwallex,
-            "STRIPE_INVOICING" => VendorIdentifier.StripeInvoicing,
             _ => (VendorIdentifier)(-1),
         };
     }
@@ -307,20 +287,10 @@ sealed class VendorIdentifierConverter : JsonConverter<VendorIdentifier>
             writer,
             value switch
             {
-                VendorIdentifier.Auth0 => "AUTH0",
-                VendorIdentifier.Zuora => "ZUORA",
                 VendorIdentifier.Stripe => "STRIPE",
+                VendorIdentifier.Zuora => "ZUORA",
                 VendorIdentifier.Hubspot => "HUBSPOT",
                 VendorIdentifier.AwsMarketplace => "AWS_MARKETPLACE",
-                VendorIdentifier.Snowflake => "SNOWFLAKE",
-                VendorIdentifier.Salesforce => "SALESFORCE",
-                VendorIdentifier.BigQuery => "BIG_QUERY",
-                VendorIdentifier.OpenFga => "OPEN_FGA",
-                VendorIdentifier.AppStore => "APP_STORE",
-                VendorIdentifier.Received => "RECEIVED",
-                VendorIdentifier.Prequel => "PREQUEL",
-                VendorIdentifier.Airwallex => "AIRWALLEX",
-                VendorIdentifier.StripeInvoicing => "STRIPE_INVOICING",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

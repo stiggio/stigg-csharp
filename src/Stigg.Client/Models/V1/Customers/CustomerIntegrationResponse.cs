@@ -120,7 +120,7 @@ public sealed record class Data : JsonModel
     }
 
     /// <summary>
-    /// The vendor identifier of the integration (e.g. STRIPE, SALESFORCE, SNOWFLAKE)
+    /// The vendor whose system holds the customer record
     /// </summary>
     public required ApiEnum<string, DataVendorIdentifier> VendorIdentifier
     {
@@ -193,25 +193,15 @@ class DataFromRaw : IFromRawJson<Data>
 }
 
 /// <summary>
-/// The vendor identifier of the integration (e.g. STRIPE, SALESFORCE, SNOWFLAKE)
+/// The vendor whose system holds the customer record
 /// </summary>
 [JsonConverter(typeof(DataVendorIdentifierConverter))]
 public enum DataVendorIdentifier
 {
-    Auth0,
-    Zuora,
     Stripe,
+    Zuora,
     Hubspot,
     AwsMarketplace,
-    Snowflake,
-    Salesforce,
-    BigQuery,
-    OpenFga,
-    AppStore,
-    Received,
-    Prequel,
-    Airwallex,
-    StripeInvoicing,
 }
 
 sealed class DataVendorIdentifierConverter : JsonConverter<DataVendorIdentifier>
@@ -224,20 +214,10 @@ sealed class DataVendorIdentifierConverter : JsonConverter<DataVendorIdentifier>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "AUTH0" => DataVendorIdentifier.Auth0,
-            "ZUORA" => DataVendorIdentifier.Zuora,
             "STRIPE" => DataVendorIdentifier.Stripe,
+            "ZUORA" => DataVendorIdentifier.Zuora,
             "HUBSPOT" => DataVendorIdentifier.Hubspot,
             "AWS_MARKETPLACE" => DataVendorIdentifier.AwsMarketplace,
-            "SNOWFLAKE" => DataVendorIdentifier.Snowflake,
-            "SALESFORCE" => DataVendorIdentifier.Salesforce,
-            "BIG_QUERY" => DataVendorIdentifier.BigQuery,
-            "OPEN_FGA" => DataVendorIdentifier.OpenFga,
-            "APP_STORE" => DataVendorIdentifier.AppStore,
-            "RECEIVED" => DataVendorIdentifier.Received,
-            "PREQUEL" => DataVendorIdentifier.Prequel,
-            "AIRWALLEX" => DataVendorIdentifier.Airwallex,
-            "STRIPE_INVOICING" => DataVendorIdentifier.StripeInvoicing,
             _ => (DataVendorIdentifier)(-1),
         };
     }
@@ -252,20 +232,10 @@ sealed class DataVendorIdentifierConverter : JsonConverter<DataVendorIdentifier>
             writer,
             value switch
             {
-                DataVendorIdentifier.Auth0 => "AUTH0",
-                DataVendorIdentifier.Zuora => "ZUORA",
                 DataVendorIdentifier.Stripe => "STRIPE",
+                DataVendorIdentifier.Zuora => "ZUORA",
                 DataVendorIdentifier.Hubspot => "HUBSPOT",
                 DataVendorIdentifier.AwsMarketplace => "AWS_MARKETPLACE",
-                DataVendorIdentifier.Snowflake => "SNOWFLAKE",
-                DataVendorIdentifier.Salesforce => "SALESFORCE",
-                DataVendorIdentifier.BigQuery => "BIG_QUERY",
-                DataVendorIdentifier.OpenFga => "OPEN_FGA",
-                DataVendorIdentifier.AppStore => "APP_STORE",
-                DataVendorIdentifier.Received => "RECEIVED",
-                DataVendorIdentifier.Prequel => "PREQUEL",
-                DataVendorIdentifier.Airwallex => "AIRWALLEX",
-                DataVendorIdentifier.StripeInvoicing => "STRIPE_INVOICING",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

@@ -58,7 +58,7 @@ public record class IntegrationLinkParams : ParamsBase
     }
 
     /// <summary>
-    /// The vendor identifier of the integration (e.g. STRIPE, SALESFORCE, SNOWFLAKE)
+    /// The vendor whose system holds the customer record
     /// </summary>
     public required ApiEnum<string, IntegrationLinkParamsVendorIdentifier> VendorIdentifier
     {
@@ -230,25 +230,15 @@ public record class IntegrationLinkParams : ParamsBase
 }
 
 /// <summary>
-/// The vendor identifier of the integration (e.g. STRIPE, SALESFORCE, SNOWFLAKE)
+/// The vendor whose system holds the customer record
 /// </summary>
 [JsonConverter(typeof(IntegrationLinkParamsVendorIdentifierConverter))]
 public enum IntegrationLinkParamsVendorIdentifier
 {
-    Auth0,
-    Zuora,
     Stripe,
+    Zuora,
     Hubspot,
     AwsMarketplace,
-    Snowflake,
-    Salesforce,
-    BigQuery,
-    OpenFga,
-    AppStore,
-    Received,
-    Prequel,
-    Airwallex,
-    StripeInvoicing,
 }
 
 sealed class IntegrationLinkParamsVendorIdentifierConverter
@@ -262,20 +252,10 @@ sealed class IntegrationLinkParamsVendorIdentifierConverter
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "AUTH0" => IntegrationLinkParamsVendorIdentifier.Auth0,
-            "ZUORA" => IntegrationLinkParamsVendorIdentifier.Zuora,
             "STRIPE" => IntegrationLinkParamsVendorIdentifier.Stripe,
+            "ZUORA" => IntegrationLinkParamsVendorIdentifier.Zuora,
             "HUBSPOT" => IntegrationLinkParamsVendorIdentifier.Hubspot,
             "AWS_MARKETPLACE" => IntegrationLinkParamsVendorIdentifier.AwsMarketplace,
-            "SNOWFLAKE" => IntegrationLinkParamsVendorIdentifier.Snowflake,
-            "SALESFORCE" => IntegrationLinkParamsVendorIdentifier.Salesforce,
-            "BIG_QUERY" => IntegrationLinkParamsVendorIdentifier.BigQuery,
-            "OPEN_FGA" => IntegrationLinkParamsVendorIdentifier.OpenFga,
-            "APP_STORE" => IntegrationLinkParamsVendorIdentifier.AppStore,
-            "RECEIVED" => IntegrationLinkParamsVendorIdentifier.Received,
-            "PREQUEL" => IntegrationLinkParamsVendorIdentifier.Prequel,
-            "AIRWALLEX" => IntegrationLinkParamsVendorIdentifier.Airwallex,
-            "STRIPE_INVOICING" => IntegrationLinkParamsVendorIdentifier.StripeInvoicing,
             _ => (IntegrationLinkParamsVendorIdentifier)(-1),
         };
     }
@@ -290,20 +270,10 @@ sealed class IntegrationLinkParamsVendorIdentifierConverter
             writer,
             value switch
             {
-                IntegrationLinkParamsVendorIdentifier.Auth0 => "AUTH0",
-                IntegrationLinkParamsVendorIdentifier.Zuora => "ZUORA",
                 IntegrationLinkParamsVendorIdentifier.Stripe => "STRIPE",
+                IntegrationLinkParamsVendorIdentifier.Zuora => "ZUORA",
                 IntegrationLinkParamsVendorIdentifier.Hubspot => "HUBSPOT",
                 IntegrationLinkParamsVendorIdentifier.AwsMarketplace => "AWS_MARKETPLACE",
-                IntegrationLinkParamsVendorIdentifier.Snowflake => "SNOWFLAKE",
-                IntegrationLinkParamsVendorIdentifier.Salesforce => "SALESFORCE",
-                IntegrationLinkParamsVendorIdentifier.BigQuery => "BIG_QUERY",
-                IntegrationLinkParamsVendorIdentifier.OpenFga => "OPEN_FGA",
-                IntegrationLinkParamsVendorIdentifier.AppStore => "APP_STORE",
-                IntegrationLinkParamsVendorIdentifier.Received => "RECEIVED",
-                IntegrationLinkParamsVendorIdentifier.Prequel => "PREQUEL",
-                IntegrationLinkParamsVendorIdentifier.Airwallex => "AIRWALLEX",
-                IntegrationLinkParamsVendorIdentifier.StripeInvoicing => "STRIPE_INVOICING",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

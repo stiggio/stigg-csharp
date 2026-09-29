@@ -75,8 +75,9 @@ public record class CouponCreateParams : ParamsBase
     }
 
     /// <summary>
-    /// How many billing cycles the discount applies for once redeemed. Leave unset
-    /// for a discount that lasts for the lifetime of the subscription.
+    /// How many calendar months the discount applies for once redeemed, counted from
+    /// when the coupon is applied (not tied to the subscription's billing period).
+    /// Leave unset for a discount that lasts for the lifetime of the subscription.
     /// </summary>
     public required long? DurationInMonths
     {

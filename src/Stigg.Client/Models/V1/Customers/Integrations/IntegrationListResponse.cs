@@ -46,7 +46,7 @@ public sealed record class IntegrationListResponse : JsonModel
     }
 
     /// <summary>
-    /// The vendor identifier of the integration (e.g. STRIPE, SALESFORCE, SNOWFLAKE)
+    /// The vendor whose system holds the customer record
     /// </summary>
     public required ApiEnum<string, IntegrationListResponseVendorIdentifier> VendorIdentifier
     {
@@ -122,25 +122,15 @@ class IntegrationListResponseFromRaw : IFromRawJson<IntegrationListResponse>
 }
 
 /// <summary>
-/// The vendor identifier of the integration (e.g. STRIPE, SALESFORCE, SNOWFLAKE)
+/// The vendor whose system holds the customer record
 /// </summary>
 [JsonConverter(typeof(IntegrationListResponseVendorIdentifierConverter))]
 public enum IntegrationListResponseVendorIdentifier
 {
-    Auth0,
-    Zuora,
     Stripe,
+    Zuora,
     Hubspot,
     AwsMarketplace,
-    Snowflake,
-    Salesforce,
-    BigQuery,
-    OpenFga,
-    AppStore,
-    Received,
-    Prequel,
-    Airwallex,
-    StripeInvoicing,
 }
 
 sealed class IntegrationListResponseVendorIdentifierConverter
@@ -154,20 +144,10 @@ sealed class IntegrationListResponseVendorIdentifierConverter
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "AUTH0" => IntegrationListResponseVendorIdentifier.Auth0,
-            "ZUORA" => IntegrationListResponseVendorIdentifier.Zuora,
             "STRIPE" => IntegrationListResponseVendorIdentifier.Stripe,
+            "ZUORA" => IntegrationListResponseVendorIdentifier.Zuora,
             "HUBSPOT" => IntegrationListResponseVendorIdentifier.Hubspot,
             "AWS_MARKETPLACE" => IntegrationListResponseVendorIdentifier.AwsMarketplace,
-            "SNOWFLAKE" => IntegrationListResponseVendorIdentifier.Snowflake,
-            "SALESFORCE" => IntegrationListResponseVendorIdentifier.Salesforce,
-            "BIG_QUERY" => IntegrationListResponseVendorIdentifier.BigQuery,
-            "OPEN_FGA" => IntegrationListResponseVendorIdentifier.OpenFga,
-            "APP_STORE" => IntegrationListResponseVendorIdentifier.AppStore,
-            "RECEIVED" => IntegrationListResponseVendorIdentifier.Received,
-            "PREQUEL" => IntegrationListResponseVendorIdentifier.Prequel,
-            "AIRWALLEX" => IntegrationListResponseVendorIdentifier.Airwallex,
-            "STRIPE_INVOICING" => IntegrationListResponseVendorIdentifier.StripeInvoicing,
             _ => (IntegrationListResponseVendorIdentifier)(-1),
         };
     }
@@ -182,20 +162,10 @@ sealed class IntegrationListResponseVendorIdentifierConverter
             writer,
             value switch
             {
-                IntegrationListResponseVendorIdentifier.Auth0 => "AUTH0",
-                IntegrationListResponseVendorIdentifier.Zuora => "ZUORA",
                 IntegrationListResponseVendorIdentifier.Stripe => "STRIPE",
+                IntegrationListResponseVendorIdentifier.Zuora => "ZUORA",
                 IntegrationListResponseVendorIdentifier.Hubspot => "HUBSPOT",
                 IntegrationListResponseVendorIdentifier.AwsMarketplace => "AWS_MARKETPLACE",
-                IntegrationListResponseVendorIdentifier.Snowflake => "SNOWFLAKE",
-                IntegrationListResponseVendorIdentifier.Salesforce => "SALESFORCE",
-                IntegrationListResponseVendorIdentifier.BigQuery => "BIG_QUERY",
-                IntegrationListResponseVendorIdentifier.OpenFga => "OPEN_FGA",
-                IntegrationListResponseVendorIdentifier.AppStore => "APP_STORE",
-                IntegrationListResponseVendorIdentifier.Received => "RECEIVED",
-                IntegrationListResponseVendorIdentifier.Prequel => "PREQUEL",
-                IntegrationListResponseVendorIdentifier.Airwallex => "AIRWALLEX",
-                IntegrationListResponseVendorIdentifier.StripeInvoicing => "STRIPE_INVOICING",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

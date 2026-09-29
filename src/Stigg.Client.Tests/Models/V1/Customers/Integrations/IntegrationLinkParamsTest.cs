@@ -17,7 +17,7 @@ public class IntegrationLinkParamsTest : TestBase
             ID = "x",
             IDValue = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = IntegrationLinkParamsVendorIdentifier.Auth0,
+            VendorIdentifier = IntegrationLinkParamsVendorIdentifier.Stripe,
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",
         };
@@ -26,7 +26,7 @@ public class IntegrationLinkParamsTest : TestBase
         string expectedIDValue = "id";
         string expectedSyncedEntityID = "syncedEntityId";
         ApiEnum<string, IntegrationLinkParamsVendorIdentifier> expectedVendorIdentifier =
-            IntegrationLinkParamsVendorIdentifier.Auth0;
+            IntegrationLinkParamsVendorIdentifier.Stripe;
         string expectedXAccountID = "X-ACCOUNT-ID";
         string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
@@ -46,7 +46,7 @@ public class IntegrationLinkParamsTest : TestBase
             ID = "x",
             IDValue = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = IntegrationLinkParamsVendorIdentifier.Auth0,
+            VendorIdentifier = IntegrationLinkParamsVendorIdentifier.Stripe,
         };
 
         Assert.Null(parameters.XAccountID);
@@ -63,7 +63,7 @@ public class IntegrationLinkParamsTest : TestBase
             ID = "x",
             IDValue = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = IntegrationLinkParamsVendorIdentifier.Auth0,
+            VendorIdentifier = IntegrationLinkParamsVendorIdentifier.Stripe,
 
             // Null should be interpreted as omitted for these properties
             XAccountID = null,
@@ -84,7 +84,7 @@ public class IntegrationLinkParamsTest : TestBase
             ID = "x",
             IDValue = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = IntegrationLinkParamsVendorIdentifier.Auth0,
+            VendorIdentifier = IntegrationLinkParamsVendorIdentifier.Stripe,
         };
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
@@ -103,7 +103,7 @@ public class IntegrationLinkParamsTest : TestBase
             ID = "x",
             IDValue = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = IntegrationLinkParamsVendorIdentifier.Auth0,
+            VendorIdentifier = IntegrationLinkParamsVendorIdentifier.Stripe,
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",
         };
@@ -122,7 +122,7 @@ public class IntegrationLinkParamsTest : TestBase
             ID = "x",
             IDValue = "id",
             SyncedEntityID = "syncedEntityId",
-            VendorIdentifier = IntegrationLinkParamsVendorIdentifier.Auth0,
+            VendorIdentifier = IntegrationLinkParamsVendorIdentifier.Stripe,
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",
         };
@@ -136,20 +136,10 @@ public class IntegrationLinkParamsTest : TestBase
 public class IntegrationLinkParamsVendorIdentifierTest : TestBase
 {
     [Theory]
-    [InlineData(IntegrationLinkParamsVendorIdentifier.Auth0)]
-    [InlineData(IntegrationLinkParamsVendorIdentifier.Zuora)]
     [InlineData(IntegrationLinkParamsVendorIdentifier.Stripe)]
+    [InlineData(IntegrationLinkParamsVendorIdentifier.Zuora)]
     [InlineData(IntegrationLinkParamsVendorIdentifier.Hubspot)]
     [InlineData(IntegrationLinkParamsVendorIdentifier.AwsMarketplace)]
-    [InlineData(IntegrationLinkParamsVendorIdentifier.Snowflake)]
-    [InlineData(IntegrationLinkParamsVendorIdentifier.Salesforce)]
-    [InlineData(IntegrationLinkParamsVendorIdentifier.BigQuery)]
-    [InlineData(IntegrationLinkParamsVendorIdentifier.OpenFga)]
-    [InlineData(IntegrationLinkParamsVendorIdentifier.AppStore)]
-    [InlineData(IntegrationLinkParamsVendorIdentifier.Received)]
-    [InlineData(IntegrationLinkParamsVendorIdentifier.Prequel)]
-    [InlineData(IntegrationLinkParamsVendorIdentifier.Airwallex)]
-    [InlineData(IntegrationLinkParamsVendorIdentifier.StripeInvoicing)]
     public void Validation_Works(IntegrationLinkParamsVendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -169,20 +159,10 @@ public class IntegrationLinkParamsVendorIdentifierTest : TestBase
     }
 
     [Theory]
-    [InlineData(IntegrationLinkParamsVendorIdentifier.Auth0)]
-    [InlineData(IntegrationLinkParamsVendorIdentifier.Zuora)]
     [InlineData(IntegrationLinkParamsVendorIdentifier.Stripe)]
+    [InlineData(IntegrationLinkParamsVendorIdentifier.Zuora)]
     [InlineData(IntegrationLinkParamsVendorIdentifier.Hubspot)]
     [InlineData(IntegrationLinkParamsVendorIdentifier.AwsMarketplace)]
-    [InlineData(IntegrationLinkParamsVendorIdentifier.Snowflake)]
-    [InlineData(IntegrationLinkParamsVendorIdentifier.Salesforce)]
-    [InlineData(IntegrationLinkParamsVendorIdentifier.BigQuery)]
-    [InlineData(IntegrationLinkParamsVendorIdentifier.OpenFga)]
-    [InlineData(IntegrationLinkParamsVendorIdentifier.AppStore)]
-    [InlineData(IntegrationLinkParamsVendorIdentifier.Received)]
-    [InlineData(IntegrationLinkParamsVendorIdentifier.Prequel)]
-    [InlineData(IntegrationLinkParamsVendorIdentifier.Airwallex)]
-    [InlineData(IntegrationLinkParamsVendorIdentifier.StripeInvoicing)]
     public void SerializationRoundtrip_Works(IntegrationLinkParamsVendorIdentifier rawValue)
     {
         // force implicit conversion because Theory can't do that for us
