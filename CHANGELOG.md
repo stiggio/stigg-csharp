@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.9.2](https://github.com/stiggio/stigg-csharp/compare/v0.9.1...v0.9.2) (2026-09-29)
+
+
+### Bug Fixes
+
+* **STIGG-9768:** stop exporting skipped workflow runs as failures ([3a7eda6](https://github.com/stiggio/stigg-csharp/commit/3a7eda641423b4c0e0125d275529e21ab196ea7f))
+* **STIGG-9768:** stop exporting skipped workflow runs as failures ([3b998a9](https://github.com/stiggio/stigg-csharp/commit/3b998a9ddd2187eb136483b749bc00b31e0d19b0))
+* sync OpenAPI spec from stigg-api ([976cb2a](https://github.com/stiggio/stigg-csharp/commit/976cb2aceaa00ccdf4b1c8f5c758b036f499dfcd))
+
 ## [0.9.1](https://github.com/stiggio/stigg-csharp/compare/v0.9.0...v0.9.1) (2026-08-12)
 
 
