@@ -842,6 +842,20 @@ public sealed record class CustomerResponseDataDefaultPaymentMethod : JsonModel
     }
 
     /// <summary>
+    /// The card brand of the default payment method, as reported by the billing provider
+    /// (e.g. visa, mastercard, amex)
+    /// </summary>
+    public required string? CardBrand
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("cardBrand");
+        }
+        init { this._rawData.Set("cardBrand", value); }
+    }
+
+    /// <summary>
     /// The expiration month of the default payment method
     /// </summary>
     public required double? CardExpiryMonth
@@ -895,14 +909,30 @@ public sealed record class CustomerResponseDataDefaultPaymentMethod : JsonModel
         init { this._rawData.Set("type", value); }
     }
 
+    /// <summary>
+    /// The digital wallet used to add the default card payment method, as reported
+    /// by the billing provider (e.g. apple_pay, google_pay)
+    /// </summary>
+    public required string? WalletType
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("walletType");
+        }
+        init { this._rawData.Set("walletType", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.BillingID;
+        _ = this.CardBrand;
         _ = this.CardExpiryMonth;
         _ = this.CardExpiryYear;
         _ = this.CardLast4Digits;
         this.Type?.Validate();
+        _ = this.WalletType;
     }
 
     public CustomerResponseDataDefaultPaymentMethod() { }

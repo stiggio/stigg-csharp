@@ -24,10 +24,12 @@ public class CustomerListResponseTest : TestBase
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
+                CardBrand = "cardBrand",
                 CardExpiryMonth = 0,
                 CardExpiryYear = 0,
                 CardLast4Digits = "cardLast4Digits",
                 Type = CustomerListResponseDefaultPaymentMethodType.Card,
+                WalletType = "walletType",
             },
             Email = "dev@stainless.com",
             Integrations =
@@ -101,10 +103,12 @@ public class CustomerListResponseTest : TestBase
         CustomerListResponseDefaultPaymentMethod expectedDefaultPaymentMethod = new()
         {
             BillingID = "billingId",
+            CardBrand = "cardBrand",
             CardExpiryMonth = 0,
             CardExpiryYear = 0,
             CardLast4Digits = "cardLast4Digits",
             Type = CustomerListResponseDefaultPaymentMethodType.Card,
+            WalletType = "walletType",
         };
         string expectedEmail = "dev@stainless.com";
         List<CustomerListResponseIntegration> expectedIntegrations =
@@ -209,10 +213,12 @@ public class CustomerListResponseTest : TestBase
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
+                CardBrand = "cardBrand",
                 CardExpiryMonth = 0,
                 CardExpiryYear = 0,
                 CardLast4Digits = "cardLast4Digits",
                 Type = CustomerListResponseDefaultPaymentMethodType.Card,
+                WalletType = "walletType",
             },
             Email = "dev@stainless.com",
             Integrations =
@@ -298,10 +304,12 @@ public class CustomerListResponseTest : TestBase
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
+                CardBrand = "cardBrand",
                 CardExpiryMonth = 0,
                 CardExpiryYear = 0,
                 CardLast4Digits = "cardLast4Digits",
                 Type = CustomerListResponseDefaultPaymentMethodType.Card,
+                WalletType = "walletType",
             },
             Email = "dev@stainless.com",
             Integrations =
@@ -382,10 +390,12 @@ public class CustomerListResponseTest : TestBase
         CustomerListResponseDefaultPaymentMethod expectedDefaultPaymentMethod = new()
         {
             BillingID = "billingId",
+            CardBrand = "cardBrand",
             CardExpiryMonth = 0,
             CardExpiryYear = 0,
             CardLast4Digits = "cardLast4Digits",
             Type = CustomerListResponseDefaultPaymentMethodType.Card,
+            WalletType = "walletType",
         };
         string expectedEmail = "dev@stainless.com";
         List<CustomerListResponseIntegration> expectedIntegrations =
@@ -490,10 +500,12 @@ public class CustomerListResponseTest : TestBase
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
+                CardBrand = "cardBrand",
                 CardExpiryMonth = 0,
                 CardExpiryYear = 0,
                 CardLast4Digits = "cardLast4Digits",
                 Type = CustomerListResponseDefaultPaymentMethodType.Card,
+                WalletType = "walletType",
             },
             Email = "dev@stainless.com",
             Integrations =
@@ -573,10 +585,12 @@ public class CustomerListResponseTest : TestBase
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
+                CardBrand = "cardBrand",
                 CardExpiryMonth = 0,
                 CardExpiryYear = 0,
                 CardLast4Digits = "cardLast4Digits",
                 Type = CustomerListResponseDefaultPaymentMethodType.Card,
+                WalletType = "walletType",
             },
             Email = "dev@stainless.com",
             Language = "language",
@@ -607,10 +621,12 @@ public class CustomerListResponseTest : TestBase
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
+                CardBrand = "cardBrand",
                 CardExpiryMonth = 0,
                 CardExpiryYear = 0,
                 CardLast4Digits = "cardLast4Digits",
                 Type = CustomerListResponseDefaultPaymentMethodType.Card,
+                WalletType = "walletType",
             },
             Email = "dev@stainless.com",
             Language = "language",
@@ -636,10 +652,12 @@ public class CustomerListResponseTest : TestBase
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
+                CardBrand = "cardBrand",
                 CardExpiryMonth = 0,
                 CardExpiryYear = 0,
                 CardLast4Digits = "cardLast4Digits",
                 Type = CustomerListResponseDefaultPaymentMethodType.Card,
+                WalletType = "walletType",
             },
             Email = "dev@stainless.com",
             Language = "language",
@@ -675,10 +693,12 @@ public class CustomerListResponseTest : TestBase
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
+                CardBrand = "cardBrand",
                 CardExpiryMonth = 0,
                 CardExpiryYear = 0,
                 CardLast4Digits = "cardLast4Digits",
                 Type = CustomerListResponseDefaultPaymentMethodType.Card,
+                WalletType = "walletType",
             },
             Email = "dev@stainless.com",
             Language = "language",
@@ -1029,10 +1049,12 @@ public class CustomerListResponseTest : TestBase
             DefaultPaymentMethod = new()
             {
                 BillingID = "billingId",
+                CardBrand = "cardBrand",
                 CardExpiryMonth = 0,
                 CardExpiryYear = 0,
                 CardLast4Digits = "cardLast4Digits",
                 Type = CustomerListResponseDefaultPaymentMethodType.Card,
+                WalletType = "walletType",
             },
             Email = "dev@stainless.com",
             Integrations =
@@ -1444,24 +1466,30 @@ public class CustomerListResponseDefaultPaymentMethodTest : TestBase
         var model = new CustomerListResponseDefaultPaymentMethod
         {
             BillingID = "billingId",
+            CardBrand = "cardBrand",
             CardExpiryMonth = 0,
             CardExpiryYear = 0,
             CardLast4Digits = "cardLast4Digits",
             Type = CustomerListResponseDefaultPaymentMethodType.Card,
+            WalletType = "walletType",
         };
 
         string expectedBillingID = "billingId";
+        string expectedCardBrand = "cardBrand";
         double expectedCardExpiryMonth = 0;
         double expectedCardExpiryYear = 0;
         string expectedCardLast4Digits = "cardLast4Digits";
         ApiEnum<string, CustomerListResponseDefaultPaymentMethodType> expectedType =
             CustomerListResponseDefaultPaymentMethodType.Card;
+        string expectedWalletType = "walletType";
 
         Assert.Equal(expectedBillingID, model.BillingID);
+        Assert.Equal(expectedCardBrand, model.CardBrand);
         Assert.Equal(expectedCardExpiryMonth, model.CardExpiryMonth);
         Assert.Equal(expectedCardExpiryYear, model.CardExpiryYear);
         Assert.Equal(expectedCardLast4Digits, model.CardLast4Digits);
         Assert.Equal(expectedType, model.Type);
+        Assert.Equal(expectedWalletType, model.WalletType);
     }
 
     [Fact]
@@ -1470,10 +1498,12 @@ public class CustomerListResponseDefaultPaymentMethodTest : TestBase
         var model = new CustomerListResponseDefaultPaymentMethod
         {
             BillingID = "billingId",
+            CardBrand = "cardBrand",
             CardExpiryMonth = 0,
             CardExpiryYear = 0,
             CardLast4Digits = "cardLast4Digits",
             Type = CustomerListResponseDefaultPaymentMethodType.Card,
+            WalletType = "walletType",
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -1491,10 +1521,12 @@ public class CustomerListResponseDefaultPaymentMethodTest : TestBase
         var model = new CustomerListResponseDefaultPaymentMethod
         {
             BillingID = "billingId",
+            CardBrand = "cardBrand",
             CardExpiryMonth = 0,
             CardExpiryYear = 0,
             CardLast4Digits = "cardLast4Digits",
             Type = CustomerListResponseDefaultPaymentMethodType.Card,
+            WalletType = "walletType",
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -1505,17 +1537,21 @@ public class CustomerListResponseDefaultPaymentMethodTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedBillingID = "billingId";
+        string expectedCardBrand = "cardBrand";
         double expectedCardExpiryMonth = 0;
         double expectedCardExpiryYear = 0;
         string expectedCardLast4Digits = "cardLast4Digits";
         ApiEnum<string, CustomerListResponseDefaultPaymentMethodType> expectedType =
             CustomerListResponseDefaultPaymentMethodType.Card;
+        string expectedWalletType = "walletType";
 
         Assert.Equal(expectedBillingID, deserialized.BillingID);
+        Assert.Equal(expectedCardBrand, deserialized.CardBrand);
         Assert.Equal(expectedCardExpiryMonth, deserialized.CardExpiryMonth);
         Assert.Equal(expectedCardExpiryYear, deserialized.CardExpiryYear);
         Assert.Equal(expectedCardLast4Digits, deserialized.CardLast4Digits);
         Assert.Equal(expectedType, deserialized.Type);
+        Assert.Equal(expectedWalletType, deserialized.WalletType);
     }
 
     [Fact]
@@ -1524,10 +1560,12 @@ public class CustomerListResponseDefaultPaymentMethodTest : TestBase
         var model = new CustomerListResponseDefaultPaymentMethod
         {
             BillingID = "billingId",
+            CardBrand = "cardBrand",
             CardExpiryMonth = 0,
             CardExpiryYear = 0,
             CardLast4Digits = "cardLast4Digits",
             Type = CustomerListResponseDefaultPaymentMethodType.Card,
+            WalletType = "walletType",
         };
 
         model.Validate();
@@ -1539,10 +1577,12 @@ public class CustomerListResponseDefaultPaymentMethodTest : TestBase
         var model = new CustomerListResponseDefaultPaymentMethod
         {
             BillingID = "billingId",
+            CardBrand = "cardBrand",
             CardExpiryMonth = 0,
             CardExpiryYear = 0,
             CardLast4Digits = "cardLast4Digits",
             Type = CustomerListResponseDefaultPaymentMethodType.Card,
+            WalletType = "walletType",
         };
 
         CustomerListResponseDefaultPaymentMethod copied = new(model);

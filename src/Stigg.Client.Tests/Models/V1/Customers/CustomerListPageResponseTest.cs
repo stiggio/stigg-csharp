@@ -27,10 +27,12 @@ public class CustomerListPageResponseTest : TestBase
                     DefaultPaymentMethod = new()
                     {
                         BillingID = "billingId",
+                        CardBrand = "cardBrand",
                         CardExpiryMonth = 0,
                         CardExpiryYear = 0,
                         CardLast4Digits = "cardLast4Digits",
                         Type = CustomerListResponseDefaultPaymentMethodType.Card,
+                        WalletType = "walletType",
                     },
                     Email = "dev@stainless.com",
                     Integrations =
@@ -117,10 +119,12 @@ public class CustomerListPageResponseTest : TestBase
                 DefaultPaymentMethod = new()
                 {
                     BillingID = "billingId",
+                    CardBrand = "cardBrand",
                     CardExpiryMonth = 0,
                     CardExpiryYear = 0,
                     CardLast4Digits = "cardLast4Digits",
                     Type = CustomerListResponseDefaultPaymentMethodType.Card,
+                    WalletType = "walletType",
                 },
                 Email = "dev@stainless.com",
                 Integrations =
@@ -218,10 +222,12 @@ public class CustomerListPageResponseTest : TestBase
                     DefaultPaymentMethod = new()
                     {
                         BillingID = "billingId",
+                        CardBrand = "cardBrand",
                         CardExpiryMonth = 0,
                         CardExpiryYear = 0,
                         CardLast4Digits = "cardLast4Digits",
                         Type = CustomerListResponseDefaultPaymentMethodType.Card,
+                        WalletType = "walletType",
                     },
                     Email = "dev@stainless.com",
                     Integrations =
@@ -322,10 +328,12 @@ public class CustomerListPageResponseTest : TestBase
                     DefaultPaymentMethod = new()
                     {
                         BillingID = "billingId",
+                        CardBrand = "cardBrand",
                         CardExpiryMonth = 0,
                         CardExpiryYear = 0,
                         CardLast4Digits = "cardLast4Digits",
                         Type = CustomerListResponseDefaultPaymentMethodType.Card,
+                        WalletType = "walletType",
                     },
                     Email = "dev@stainless.com",
                     Integrations =
@@ -419,10 +427,12 @@ public class CustomerListPageResponseTest : TestBase
                 DefaultPaymentMethod = new()
                 {
                     BillingID = "billingId",
+                    CardBrand = "cardBrand",
                     CardExpiryMonth = 0,
                     CardExpiryYear = 0,
                     CardLast4Digits = "cardLast4Digits",
                     Type = CustomerListResponseDefaultPaymentMethodType.Card,
+                    WalletType = "walletType",
                 },
                 Email = "dev@stainless.com",
                 Integrations =
@@ -520,10 +530,12 @@ public class CustomerListPageResponseTest : TestBase
                     DefaultPaymentMethod = new()
                     {
                         BillingID = "billingId",
+                        CardBrand = "cardBrand",
                         CardExpiryMonth = 0,
                         CardExpiryYear = 0,
                         CardLast4Digits = "cardLast4Digits",
                         Type = CustomerListResponseDefaultPaymentMethodType.Card,
+                        WalletType = "walletType",
                     },
                     Email = "dev@stainless.com",
                     Integrations =
@@ -618,10 +630,12 @@ public class CustomerListPageResponseTest : TestBase
                     DefaultPaymentMethod = new()
                     {
                         BillingID = "billingId",
+                        CardBrand = "cardBrand",
                         CardExpiryMonth = 0,
                         CardExpiryYear = 0,
                         CardLast4Digits = "cardLast4Digits",
                         Type = CustomerListResponseDefaultPaymentMethodType.Card,
+                        WalletType = "walletType",
                     },
                     Email = "dev@stainless.com",
                     Integrations =
