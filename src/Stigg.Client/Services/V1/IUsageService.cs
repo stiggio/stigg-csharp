@@ -55,8 +55,10 @@ public interface IUsageService
 
     /// <summary>
     /// Reports usage measurements for metered features. The reported usage is used to
-    /// track, limit, and bill customer consumption.
+    /// track, limit, and bill customer consumption. Deprecated: use `POST
+    /// /api/v2/usage`.
     /// </summary>
+    [Obsolete("deprecated")]
     Task<UsageReportResponse> Report(
         UsageReportParams parameters,
         CancellationToken cancellationToken = default
@@ -105,6 +107,7 @@ public interface IUsageServiceWithRawResponse
     /// Returns a raw HTTP response for <c>post /api/v1/usage</c>, but is otherwise the
     /// same as <see cref="IUsageService.Report(UsageReportParams, CancellationToken)"/>.
     /// </summary>
+    [Obsolete("deprecated")]
     Task<HttpResponse<UsageReportResponse>> Report(
         UsageReportParams parameters,
         CancellationToken cancellationToken = default

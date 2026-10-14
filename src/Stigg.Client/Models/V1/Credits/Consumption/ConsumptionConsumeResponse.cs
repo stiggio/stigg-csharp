@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -153,6 +154,33 @@ public sealed record class Data : JsonModel
     }
 
     /// <summary>
+    /// The current usage of each governance entitlement this request counted towards.
+    /// Absent when governance is not enabled or the usage is unknown. Entitlements
+    /// whose usage could not be read, and those of repeated idempotent requests,
+    /// are left out
+    /// </summary>
+    public IReadOnlyList<Entity>? Entities
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<ImmutableArray<Entity>>("entities");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set<ImmutableArray<Entity>?>(
+                "entities",
+                value == null ? null : ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
     /// The resource the consumption was attributed to
     /// </summary>
     public string? ResourceID
@@ -173,6 +201,10 @@ public sealed record class Data : JsonModel
         _ = this.CustomerID;
         _ = this.Timestamp;
         this.Credit?.Validate();
+        foreach (var item in this.Entities ?? [])
+        {
+            item.Validate();
+        }
         _ = this.ResourceID;
     }
 
@@ -328,4 +360,200 @@ class CreditFromRaw : IFromRawJson<Credit>
     /// <inheritdoc/>
     public Credit FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         Credit.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// The usage counted against one governance entitlement
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<Entity, EntityFromRaw>))]
+public sealed record class Entity : JsonModel
+{
+    /// <summary>
+    /// The absolute usage counted against the entitlement
+    /// </summary>
+    public required double CurrentUsage
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<double>("currentUsage");
+        }
+        init { this._rawData.Set("currentUsage", value); }
+    }
+
+    /// <summary>
+    /// The customer whose usage counted towards the entitlement
+    /// </summary>
+    public required string CustomerID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("customerId");
+        }
+        init { this._rawData.Set("customerId", value); }
+    }
+
+    /// <summary>
+    /// The governance entitlement the usage counts towards
+    /// </summary>
+    public required string EntitlementID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("entitlementId");
+        }
+        init { this._rawData.Set("entitlementId", value); }
+    }
+
+    /// <summary>
+    /// The governance entity the entitlement belongs to
+    /// </summary>
+    public required string EntityID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("entityId");
+        }
+        init { this._rawData.Set("entityId", value); }
+    }
+
+    /// <summary>
+    /// The customer resource the usage counted from; `null` for customer-level usage
+    /// </summary>
+    public required string? ResourceID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("resourceId");
+        }
+        init { this._rawData.Set("resourceId", value); }
+    }
+
+    /// <summary>
+    /// The entities the entitlement is scoped to (empty when it is not scoped)
+    /// </summary>
+    public required IReadOnlyList<string> ScopeEntityIds
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<string>>("scopeEntityIds");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<string>>(
+                "scopeEntityIds",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
+    /// When the entitlement usage was last updated
+    /// </summary>
+    public required DateTimeOffset UsageUpdatedAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("usageUpdatedAt");
+        }
+        init { this._rawData.Set("usageUpdatedAt", value); }
+    }
+
+    /// <summary>
+    /// The credit currency the entitlement governs (exactly one of featureId and
+    /// currencyId is set)
+    /// </summary>
+    public string? CurrencyID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("currencyId");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("currencyId", value);
+        }
+    }
+
+    /// <summary>
+    /// The feature the entitlement governs (exactly one of featureId and currencyId
+    /// is set)
+    /// </summary>
+    public string? FeatureID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("featureId");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("featureId", value);
+        }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.CurrentUsage;
+        _ = this.CustomerID;
+        _ = this.EntitlementID;
+        _ = this.EntityID;
+        _ = this.ResourceID;
+        _ = this.ScopeEntityIds;
+        _ = this.UsageUpdatedAt;
+        _ = this.CurrencyID;
+        _ = this.FeatureID;
+    }
+
+    public Entity() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public Entity(Entity entity)
+        : base(entity) { }
+#pragma warning restore CS8618
+
+    public Entity(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    Entity(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="EntityFromRaw.FromRawUnchecked"/>
+    public static Entity FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class EntityFromRaw : IFromRawJson<Entity>
+{
+    /// <inheritdoc/>
+    public Entity FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Entity.FromRawUnchecked(rawData);
 }

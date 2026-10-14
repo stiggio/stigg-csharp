@@ -14,12 +14,13 @@ namespace Stigg.Client.Models.V1.Usage;
 
 /// <summary>
 /// Reports usage measurements for metered features. The reported usage is used to
-/// track, limit, and bill customer consumption.
+/// track, limit, and bill customer consumption. Deprecated: use `POST /api/v2/usage`.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
 /// cause existing derived classes to break.</para>
 /// </summary>
+[System::Obsolete("deprecated")]
 public record class UsageReportParams : ParamsBase
 {
     readonly JsonDictionary _rawBodyData = new();

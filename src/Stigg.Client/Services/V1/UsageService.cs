@@ -69,6 +69,7 @@ public sealed class UsageService : IUsageService
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<UsageReportResponse> Report(
         UsageReportParams parameters,
         CancellationToken cancellationToken = default
@@ -169,6 +170,7 @@ public sealed class UsageServiceWithRawResponse : IUsageServiceWithRawResponse
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<HttpResponse<UsageReportResponse>> Report(
         UsageReportParams parameters,
         CancellationToken cancellationToken = default
