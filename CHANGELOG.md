@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.10.0](https://github.com/stiggio/stigg-csharp/compare/v0.9.2...v0.10.0) (2026-10-15)
+
+
+### Features
+
+* **STIGG-10154:** generate the v2 usage report ([d6273ec](https://github.com/stiggio/stigg-csharp/commit/d6273ec8a13654701ed0de143f57480758d00c7a))
+
+
+### Bug Fixes
+
+* sync OpenAPI spec from stigg-api ([7a995aa](https://github.com/stiggio/stigg-csharp/commit/7a995aa2691cf692fbd95c69e072652cae9da140))
+* sync OpenAPI spec from stigg-api ([2ca57e1](https://github.com/stiggio/stigg-csharp/commit/2ca57e1ed057f9391aaa2e17d8a47bc180210f2d))
+
 ## [0.9.2](https://github.com/stiggio/stigg-csharp/compare/v0.9.1...v0.9.2) (2026-09-29)
 
 
