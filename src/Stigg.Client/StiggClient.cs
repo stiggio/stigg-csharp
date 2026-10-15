@@ -84,6 +84,12 @@ public sealed class StiggClient : IStiggClient
         get { return _v1Beta.Value; }
     }
 
+    readonly Lazy<IV2Service> _v2;
+    public IV2Service V2
+    {
+        get { return _v2.Value; }
+    }
+
     public void Dispose() => this.HttpClient.Dispose();
 
     public StiggClient()
@@ -93,6 +99,7 @@ public sealed class StiggClient : IStiggClient
         _withRawResponse = new(() => new StiggClientWithRawResponse(this._options));
         _v1 = new(() => new V1Service(this));
         _v1Beta = new(() => new V1BetaService(this));
+        _v2 = new(() => new V2Service(this));
     }
 
     public StiggClient(ClientOptions options)
@@ -178,6 +185,12 @@ public sealed class StiggClientWithRawResponse : IStiggClientWithRawResponse
     public IV1BetaServiceWithRawResponse V1Beta
     {
         get { return _v1Beta.Value; }
+    }
+
+    readonly Lazy<IV2ServiceWithRawResponse> _v2;
+    public IV2ServiceWithRawResponse V2
+    {
+        get { return _v2.Value; }
     }
 
     /// <inheritdoc/>
@@ -380,6 +393,7 @@ public sealed class StiggClientWithRawResponse : IStiggClientWithRawResponse
 
         _v1 = new(() => new V1ServiceWithRawResponse(this));
         _v1Beta = new(() => new V1BetaServiceWithRawResponse(this));
+        _v2 = new(() => new V2ServiceWithRawResponse(this));
     }
 
     public StiggClientWithRawResponse(ClientOptions options)

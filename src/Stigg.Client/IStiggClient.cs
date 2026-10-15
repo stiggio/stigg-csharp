@@ -54,6 +54,8 @@ public interface IStiggClient : IDisposable
     IV1Service V1 { get; }
 
     IV1BetaService V1Beta { get; }
+
+    IV2Service V2 { get; }
 }
 
 /// <summary>
@@ -88,6 +90,8 @@ public interface IStiggClientWithRawResponse : IDisposable
     IV1ServiceWithRawResponse V1 { get; }
 
     IV1BetaServiceWithRawResponse V1Beta { get; }
+
+    IV2ServiceWithRawResponse V2 { get; }
 
     /// <summary>
     /// Sends a request to the Stigg REST API.

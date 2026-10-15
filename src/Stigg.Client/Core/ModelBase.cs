@@ -4,6 +4,7 @@ using Stigg.Client.Models.V1.Customers;
 using Stigg.Client.Models.V1.Events;
 using Stigg.Client.Models.V1.Events.Beta.Customers;
 using Stigg.Client.Models.V1Beta.Customers.Entities;
+using Stigg.Client.Models.V2.Usage;
 using Addons = Stigg.Client.Models.V1.Addons;
 using Contracts = Stigg.Client.Models.V1.Contracts;
 using Coupons = Stigg.Client.Models.V1.Coupons;
@@ -953,6 +954,7 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, CustomersEntitlements::ResetPeriod>(),
             new ApiEnumConverter<string, CustomersEntitlements::CreditAccessDeniedReason>(),
             new ApiEnumConverter<string, IncludeArchived>(),
+            new ApiEnumConverter<string, UpdateBehavior>(),
         },
     };
 
