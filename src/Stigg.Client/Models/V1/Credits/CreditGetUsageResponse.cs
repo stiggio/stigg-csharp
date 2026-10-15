@@ -397,7 +397,7 @@ public sealed record class Series : JsonModel
     }
 
     /// <summary>
-    /// The feature ID; null when grouping by dimensions only
+    /// The feature ID; null when grouping by dimensions without `featureId`
     /// </summary>
     public required string? FeatureID
     {
@@ -410,7 +410,7 @@ public sealed record class Series : JsonModel
     }
 
     /// <summary>
-    /// The display name of the feature; null when grouping by dimensions only
+    /// The display name of the feature; null when grouping by dimensions without `featureId`
     /// </summary>
     public required string? FeatureName
     {
@@ -455,7 +455,8 @@ public sealed record class Series : JsonModel
     }
 
     /// <summary>
-    /// Dimension key/value pairs identifying this series when groupBy is applied
+    /// Dimension key/value pairs identifying this series when groupBy includes dimension
+    /// keys (`featureId` is returned in its own field, not as a tag)
     /// </summary>
     public IReadOnlyList<Tag>? Tags
     {
