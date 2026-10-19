@@ -390,6 +390,15 @@ public class DataTest : TestBase
                 ],
             ],
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Reservation = new()
+            {
+                ID = "id",
+                Amount = 1,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Status = Status.Active,
+            },
+            Reserved = 0,
+            ReservedOnExpiredGrants = 0,
             UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -472,6 +481,15 @@ public class DataTest : TestBase
                 ],
             ],
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Reservation = new()
+            {
+                ID = "id",
+                Amount = 1,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Status = Status.Active,
+            },
+            Reserved = 0,
+            ReservedOnExpiredGrants = 0,
             UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -1624,6 +1642,15 @@ public class CreditTest : TestBase
                 ],
             ],
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Reservation = new()
+            {
+                ID = "id",
+                Amount = 1,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Status = Status.Active,
+            },
+            Reserved = 0,
+            ReservedOnExpiredGrants = 0,
             UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -1660,6 +1687,15 @@ public class CreditTest : TestBase
         DateTimeOffset expectedEntitlementUpdatedAt = DateTimeOffset.Parse(
             "2019-12-27T18:11:19.117Z"
         );
+        Reservation expectedReservation = new()
+        {
+            ID = "id",
+            Amount = 1,
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Status = Status.Active,
+        };
+        double expectedReserved = 0;
+        double expectedReservedOnExpiredGrants = 0;
         DateTimeOffset expectedUsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
@@ -1681,6 +1717,9 @@ public class CreditTest : TestBase
             }
         }
         Assert.Equal(expectedEntitlementUpdatedAt, model.EntitlementUpdatedAt);
+        Assert.Equal(expectedReservation, model.Reservation);
+        Assert.Equal(expectedReserved, model.Reserved);
+        Assert.Equal(expectedReservedOnExpiredGrants, model.ReservedOnExpiredGrants);
         Assert.Equal(expectedUsagePeriodEnd, model.UsagePeriodEnd);
         Assert.Equal(expectedValidUntil, model.ValidUntil);
     }
@@ -1718,6 +1757,15 @@ public class CreditTest : TestBase
                 ],
             ],
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Reservation = new()
+            {
+                ID = "id",
+                Amount = 1,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Status = Status.Active,
+            },
+            Reserved = 0,
+            ReservedOnExpiredGrants = 0,
             UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -1761,6 +1809,15 @@ public class CreditTest : TestBase
                 ],
             ],
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Reservation = new()
+            {
+                ID = "id",
+                Amount = 1,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Status = Status.Active,
+            },
+            Reserved = 0,
+            ReservedOnExpiredGrants = 0,
             UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -1801,6 +1858,15 @@ public class CreditTest : TestBase
         DateTimeOffset expectedEntitlementUpdatedAt = DateTimeOffset.Parse(
             "2019-12-27T18:11:19.117Z"
         );
+        Reservation expectedReservation = new()
+        {
+            ID = "id",
+            Amount = 1,
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Status = Status.Active,
+        };
+        double expectedReserved = 0;
+        double expectedReservedOnExpiredGrants = 0;
         DateTimeOffset expectedUsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         DateTimeOffset expectedValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
@@ -1822,6 +1888,9 @@ public class CreditTest : TestBase
             }
         }
         Assert.Equal(expectedEntitlementUpdatedAt, deserialized.EntitlementUpdatedAt);
+        Assert.Equal(expectedReservation, deserialized.Reservation);
+        Assert.Equal(expectedReserved, deserialized.Reserved);
+        Assert.Equal(expectedReservedOnExpiredGrants, deserialized.ReservedOnExpiredGrants);
         Assert.Equal(expectedUsagePeriodEnd, deserialized.UsagePeriodEnd);
         Assert.Equal(expectedValidUntil, deserialized.ValidUntil);
     }
@@ -1859,6 +1928,15 @@ public class CreditTest : TestBase
                 ],
             ],
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Reservation = new()
+            {
+                ID = "id",
+                Amount = 1,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Status = Status.Active,
+            },
+            Reserved = 0,
+            ReservedOnExpiredGrants = 0,
             UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -1885,12 +1963,23 @@ public class CreditTest : TestBase
             IsGranted = true,
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Reservation = new()
+            {
+                ID = "id",
+                Amount = 1,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Status = Status.Active,
+            },
         };
 
         Assert.Null(model.Chains);
         Assert.False(model.RawData.ContainsKey("chains"));
         Assert.Null(model.EntitlementUpdatedAt);
         Assert.False(model.RawData.ContainsKey("entitlementUpdatedAt"));
+        Assert.Null(model.Reserved);
+        Assert.False(model.RawData.ContainsKey("reserved"));
+        Assert.Null(model.ReservedOnExpiredGrants);
+        Assert.False(model.RawData.ContainsKey("reservedOnExpiredGrants"));
         Assert.Null(model.UsagePeriodEnd);
         Assert.False(model.RawData.ContainsKey("usagePeriodEnd"));
         Assert.Null(model.ValidUntil);
@@ -1916,6 +2005,13 @@ public class CreditTest : TestBase
             IsGranted = true,
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Reservation = new()
+            {
+                ID = "id",
+                Amount = 1,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Status = Status.Active,
+            },
         };
 
         model.Validate();
@@ -1940,10 +2036,19 @@ public class CreditTest : TestBase
             IsGranted = true,
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Reservation = new()
+            {
+                ID = "id",
+                Amount = 1,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Status = Status.Active,
+            },
 
             // Null should be interpreted as omitted for these properties
             Chains = null,
             EntitlementUpdatedAt = null,
+            Reserved = null,
+            ReservedOnExpiredGrants = null,
             UsagePeriodEnd = null,
             ValidUntil = null,
         };
@@ -1952,6 +2057,10 @@ public class CreditTest : TestBase
         Assert.False(model.RawData.ContainsKey("chains"));
         Assert.Null(model.EntitlementUpdatedAt);
         Assert.False(model.RawData.ContainsKey("entitlementUpdatedAt"));
+        Assert.Null(model.Reserved);
+        Assert.False(model.RawData.ContainsKey("reserved"));
+        Assert.Null(model.ReservedOnExpiredGrants);
+        Assert.False(model.RawData.ContainsKey("reservedOnExpiredGrants"));
         Assert.Null(model.UsagePeriodEnd);
         Assert.False(model.RawData.ContainsKey("usagePeriodEnd"));
         Assert.Null(model.ValidUntil);
@@ -1977,12 +2086,195 @@ public class CreditTest : TestBase
             IsGranted = true,
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Reservation = new()
+            {
+                ID = "id",
+                Amount = 1,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Status = Status.Active,
+            },
 
             // Null should be interpreted as omitted for these properties
             Chains = null,
             EntitlementUpdatedAt = null,
+            Reserved = null,
+            ReservedOnExpiredGrants = null,
             UsagePeriodEnd = null,
             ValidUntil = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new Credit
+        {
+            AccessDeniedReason = CreditAccessDeniedReason.FeatureNotFound,
+            Currency = new()
+            {
+                CurrencyID = "currencyId",
+                DisplayName = "displayName",
+                Description = "description",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                UnitPlural = "unitPlural",
+                UnitSingular = "unitSingular",
+            },
+            CurrentUsage = 0,
+            IsGranted = true,
+            UsageLimit = 0,
+            UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Chains =
+            [
+                [
+                    new()
+                    {
+                        CurrentUsage = 0,
+                        EntityID = "entityId",
+                        IsGranted = true,
+                        ScopeEntityIds = ["string"],
+                        UsageLimit = 0,
+                    },
+                ],
+            ],
+            EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Reserved = 0,
+            ReservedOnExpiredGrants = 0,
+            UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        Assert.Null(model.Reservation);
+        Assert.False(model.RawData.ContainsKey("reservation"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new Credit
+        {
+            AccessDeniedReason = CreditAccessDeniedReason.FeatureNotFound,
+            Currency = new()
+            {
+                CurrencyID = "currencyId",
+                DisplayName = "displayName",
+                Description = "description",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                UnitPlural = "unitPlural",
+                UnitSingular = "unitSingular",
+            },
+            CurrentUsage = 0,
+            IsGranted = true,
+            UsageLimit = 0,
+            UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Chains =
+            [
+                [
+                    new()
+                    {
+                        CurrentUsage = 0,
+                        EntityID = "entityId",
+                        IsGranted = true,
+                        ScopeEntityIds = ["string"],
+                        UsageLimit = 0,
+                    },
+                ],
+            ],
+            EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Reserved = 0,
+            ReservedOnExpiredGrants = 0,
+            UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new Credit
+        {
+            AccessDeniedReason = CreditAccessDeniedReason.FeatureNotFound,
+            Currency = new()
+            {
+                CurrencyID = "currencyId",
+                DisplayName = "displayName",
+                Description = "description",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                UnitPlural = "unitPlural",
+                UnitSingular = "unitSingular",
+            },
+            CurrentUsage = 0,
+            IsGranted = true,
+            UsageLimit = 0,
+            UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Chains =
+            [
+                [
+                    new()
+                    {
+                        CurrentUsage = 0,
+                        EntityID = "entityId",
+                        IsGranted = true,
+                        ScopeEntityIds = ["string"],
+                        UsageLimit = 0,
+                    },
+                ],
+            ],
+            EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Reserved = 0,
+            ReservedOnExpiredGrants = 0,
+            UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+
+            Reservation = null,
+        };
+
+        Assert.Null(model.Reservation);
+        Assert.True(model.RawData.ContainsKey("reservation"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new Credit
+        {
+            AccessDeniedReason = CreditAccessDeniedReason.FeatureNotFound,
+            Currency = new()
+            {
+                CurrencyID = "currencyId",
+                DisplayName = "displayName",
+                Description = "description",
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                UnitPlural = "unitPlural",
+                UnitSingular = "unitSingular",
+            },
+            CurrentUsage = 0,
+            IsGranted = true,
+            UsageLimit = 0,
+            UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Chains =
+            [
+                [
+                    new()
+                    {
+                        CurrentUsage = 0,
+                        EntityID = "entityId",
+                        IsGranted = true,
+                        ScopeEntityIds = ["string"],
+                        UsageLimit = 0,
+                    },
+                ],
+            ],
+            EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Reserved = 0,
+            ReservedOnExpiredGrants = 0,
+            UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+
+            Reservation = null,
         };
 
         model.Validate();
@@ -2021,6 +2313,15 @@ public class CreditTest : TestBase
                 ],
             ],
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Reservation = new()
+            {
+                ID = "id",
+                Amount = 1,
+                ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                Status = Status.Active,
+            },
+            Reserved = 0,
+            ReservedOnExpiredGrants = 0,
             UsagePeriodEnd = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
@@ -2428,5 +2729,167 @@ public class CreditBetaChainNodeTest : TestBase
         CreditBetaChainNode copied = new(model);
 
         Assert.Equal(model, copied);
+    }
+}
+
+public class ReservationTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new Reservation
+        {
+            ID = "id",
+            Amount = 1,
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Status = Status.Active,
+        };
+
+        string expectedID = "id";
+        double expectedAmount = 1;
+        DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        ApiEnum<string, Status> expectedStatus = Status.Active;
+
+        Assert.Equal(expectedID, model.ID);
+        Assert.Equal(expectedAmount, model.Amount);
+        Assert.Equal(expectedExpiresAt, model.ExpiresAt);
+        Assert.Equal(expectedStatus, model.Status);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new Reservation
+        {
+            ID = "id",
+            Amount = 1,
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Status = Status.Active,
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Reservation>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new Reservation
+        {
+            ID = "id",
+            Amount = 1,
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Status = Status.Active,
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Reservation>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        string expectedID = "id";
+        double expectedAmount = 1;
+        DateTimeOffset expectedExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        ApiEnum<string, Status> expectedStatus = Status.Active;
+
+        Assert.Equal(expectedID, deserialized.ID);
+        Assert.Equal(expectedAmount, deserialized.Amount);
+        Assert.Equal(expectedExpiresAt, deserialized.ExpiresAt);
+        Assert.Equal(expectedStatus, deserialized.Status);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new Reservation
+        {
+            ID = "id",
+            Amount = 1,
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Status = Status.Active,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Reservation
+        {
+            ID = "id",
+            Amount = 1,
+            ExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Status = Status.Active,
+        };
+
+        Reservation copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class StatusTest : TestBase
+{
+    [Theory]
+    [InlineData(Status.Active)]
+    [InlineData(Status.Released)]
+    public void Validation_Works(Status rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Status> value = rawValue;
+        value.Validate();
+    }
+
+    [Fact]
+    public void InvalidEnumValidationThrows_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+
+        Assert.NotNull(value);
+        Assert.Throws<StiggInvalidDataException>(() => value.Validate());
+    }
+
+    [Theory]
+    [InlineData(Status.Active)]
+    [InlineData(Status.Released)]
+    public void SerializationRoundtrip_Works(Status rawValue)
+    {
+        // force implicit conversion because Theory can't do that for us
+        ApiEnum<string, Status> value = rawValue;
+
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
+    }
+
+    [Fact]
+    public void InvalidEnumSerializationRoundtrip_Works()
+    {
+        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+            JsonSerializer.SerializeToElement("invalid value"),
+            ModelBase.SerializerOptions
+        );
+        string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(value, deserialized);
     }
 }

@@ -1318,6 +1318,65 @@ public sealed record class EntitlementCredit : JsonModel
     }
 
     /// <summary>
+    /// The reservation created by this request, when it asked to reserve credits
+    /// and was granted.
+    /// </summary>
+    public EntitlementCreditReservation? Reservation
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<EntitlementCreditReservation>("reservation");
+        }
+        init { this._rawData.Set("reservation", value); }
+    }
+
+    /// <summary>
+    /// Credits held by open reservations on active grants. Already included in currentUsage,
+    /// so usageLimit - currentUsage is the available balance.
+    /// </summary>
+    public double? Reserved
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<double>("reserved");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("reserved", value);
+        }
+    }
+
+    /// <summary>
+    /// Credits still held by open reservations on grants that expired during the
+    /// hold. They can still be released, but are not part of currentUsage or the
+    /// balance and must not be subtracted from it.
+    /// </summary>
+    public double? ReservedOnExpiredGrants
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<double>("reservedOnExpiredGrants");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("reservedOnExpiredGrants", value);
+        }
+    }
+
+    /// <summary>
     /// The end date of the current billing period for recurring credit grants.
     /// </summary>
     public System::DateTimeOffset? UsagePeriodEnd
@@ -1373,6 +1432,9 @@ public sealed record class EntitlementCredit : JsonModel
         _ = this.UsageLimit;
         _ = this.UsageUpdatedAt;
         _ = this.EntitlementUpdatedAt;
+        this.Reservation?.Validate();
+        _ = this.Reserved;
+        _ = this.ReservedOnExpiredGrants;
         _ = this.UsagePeriodEnd;
         _ = this.ValidUntil;
     }
@@ -1647,4 +1709,163 @@ class EntitlementCreditCurrencyFromRaw : IFromRawJson<EntitlementCreditCurrency>
     public EntitlementCreditCurrency FromRawUnchecked(
         IReadOnlyDictionary<string, JsonElement> rawData
     ) => EntitlementCreditCurrency.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// The reservation created by this request, when it asked to reserve credits and
+/// was granted.
+/// </summary>
+[JsonConverter(
+    typeof(JsonModelConverter<EntitlementCreditReservation, EntitlementCreditReservationFromRaw>)
+)]
+public sealed record class EntitlementCreditReservation : JsonModel
+{
+    /// <summary>
+    /// The client-provided reservation ID.
+    /// </summary>
+    public required string ID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
+        init { this._rawData.Set("id", value); }
+    }
+
+    /// <summary>
+    /// The amount of credits held.
+    /// </summary>
+    public required double Amount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<double>("amount");
+        }
+        init { this._rawData.Set("amount", value); }
+    }
+
+    /// <summary>
+    /// When the reservation expires. Unreleased credits return to the balance at
+    /// this time.
+    /// </summary>
+    public required System::DateTimeOffset ExpiresAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("expiresAt");
+        }
+        init { this._rawData.Set("expiresAt", value); }
+    }
+
+    /// <summary>
+    /// The status of the reservation.
+    /// </summary>
+    public required ApiEnum<string, EntitlementCreditReservationStatus> Status
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<
+                ApiEnum<string, EntitlementCreditReservationStatus>
+            >("status");
+        }
+        init { this._rawData.Set("status", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.ID;
+        _ = this.Amount;
+        _ = this.ExpiresAt;
+        this.Status.Validate();
+    }
+
+    public EntitlementCreditReservation() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public EntitlementCreditReservation(EntitlementCreditReservation entitlementCreditReservation)
+        : base(entitlementCreditReservation) { }
+#pragma warning restore CS8618
+
+    public EntitlementCreditReservation(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    EntitlementCreditReservation(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="EntitlementCreditReservationFromRaw.FromRawUnchecked"/>
+    public static EntitlementCreditReservation FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    )
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class EntitlementCreditReservationFromRaw : IFromRawJson<EntitlementCreditReservation>
+{
+    /// <inheritdoc/>
+    public EntitlementCreditReservation FromRawUnchecked(
+        IReadOnlyDictionary<string, JsonElement> rawData
+    ) => EntitlementCreditReservation.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// The status of the reservation.
+/// </summary>
+[JsonConverter(typeof(EntitlementCreditReservationStatusConverter))]
+public enum EntitlementCreditReservationStatus
+{
+    Active,
+    Released,
+}
+
+sealed class EntitlementCreditReservationStatusConverter
+    : JsonConverter<EntitlementCreditReservationStatus>
+{
+    public override EntitlementCreditReservationStatus Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "ACTIVE" => EntitlementCreditReservationStatus.Active,
+            "RELEASED" => EntitlementCreditReservationStatus.Released,
+            _ => (EntitlementCreditReservationStatus)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        EntitlementCreditReservationStatus value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                EntitlementCreditReservationStatus.Active => "ACTIVE",
+                EntitlementCreditReservationStatus.Released => "RELEASED",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }

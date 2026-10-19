@@ -1331,6 +1331,65 @@ public sealed record class Credit : JsonModel
     }
 
     /// <summary>
+    /// The reservation created by this request, when it asked to reserve credits
+    /// and was granted.
+    /// </summary>
+    public Reservation? Reservation
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<Reservation>("reservation");
+        }
+        init { this._rawData.Set("reservation", value); }
+    }
+
+    /// <summary>
+    /// Credits held by open reservations on active grants. Already included in currentUsage,
+    /// so usageLimit - currentUsage is the available balance.
+    /// </summary>
+    public double? Reserved
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<double>("reserved");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("reserved", value);
+        }
+    }
+
+    /// <summary>
+    /// Credits still held by open reservations on grants that expired during the
+    /// hold. They can still be released, but are not part of currentUsage or the
+    /// balance and must not be subtracted from it.
+    /// </summary>
+    public double? ReservedOnExpiredGrants
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<double>("reservedOnExpiredGrants");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("reservedOnExpiredGrants", value);
+        }
+    }
+
+    /// <summary>
     /// The end date of the current billing period for recurring credit grants.
     /// </summary>
     public DateTimeOffset? UsagePeriodEnd
@@ -1393,6 +1452,9 @@ public sealed record class Credit : JsonModel
             }
         }
         _ = this.EntitlementUpdatedAt;
+        this.Reservation?.Validate();
+        _ = this.Reserved;
+        _ = this.ReservedOnExpiredGrants;
         _ = this.UsagePeriodEnd;
         _ = this.ValidUntil;
     }
@@ -1780,4 +1842,151 @@ class CreditBetaChainNodeFromRaw : IFromRawJson<CreditBetaChainNode>
     /// <inheritdoc/>
     public CreditBetaChainNode FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         CreditBetaChainNode.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// The reservation created by this request, when it asked to reserve credits and
+/// was granted.
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<Reservation, ReservationFromRaw>))]
+public sealed record class Reservation : JsonModel
+{
+    /// <summary>
+    /// The client-provided reservation ID.
+    /// </summary>
+    public required string ID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("id");
+        }
+        init { this._rawData.Set("id", value); }
+    }
+
+    /// <summary>
+    /// The amount of credits held.
+    /// </summary>
+    public required double Amount
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<double>("amount");
+        }
+        init { this._rawData.Set("amount", value); }
+    }
+
+    /// <summary>
+    /// When the reservation expires. Unreleased credits return to the balance at
+    /// this time.
+    /// </summary>
+    public required DateTimeOffset ExpiresAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<DateTimeOffset>("expiresAt");
+        }
+        init { this._rawData.Set("expiresAt", value); }
+    }
+
+    /// <summary>
+    /// The status of the reservation.
+    /// </summary>
+    public required ApiEnum<string, Status> Status
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<ApiEnum<string, Status>>("status");
+        }
+        init { this._rawData.Set("status", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.ID;
+        _ = this.Amount;
+        _ = this.ExpiresAt;
+        this.Status.Validate();
+    }
+
+    public Reservation() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public Reservation(Reservation reservation)
+        : base(reservation) { }
+#pragma warning restore CS8618
+
+    public Reservation(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    Reservation(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="ReservationFromRaw.FromRawUnchecked"/>
+    public static Reservation FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class ReservationFromRaw : IFromRawJson<Reservation>
+{
+    /// <inheritdoc/>
+    public Reservation FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        Reservation.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// The status of the reservation.
+/// </summary>
+[JsonConverter(typeof(StatusConverter))]
+public enum Status
+{
+    Active,
+    Released,
+}
+
+sealed class StatusConverter : JsonConverter<Status>
+{
+    public override Status Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "ACTIVE" => Status.Active,
+            "RELEASED" => Status.Released,
+            _ => (Status)(-1),
+        };
+    }
+
+    public override void Write(Utf8JsonWriter writer, Status value, JsonSerializerOptions options)
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                Status.Active => "ACTIVE",
+                Status.Released => "RELEASED",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
+    }
 }

@@ -487,12 +487,12 @@ public sealed record class LatestInvoice : JsonModel
     /// <summary>
     /// Invoice status
     /// </summary>
-    public required ApiEnum<string, Status> Status
+    public required ApiEnum<string, LatestInvoiceStatus> Status
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullClass<ApiEnum<string, Status>>("status");
+            return this._rawData.GetNotNullClass<ApiEnum<string, LatestInvoiceStatus>>("status");
         }
         init { this._rawData.Set("status", value); }
     }
@@ -614,17 +614,17 @@ class LatestInvoiceFromRaw : IFromRawJson<LatestInvoice>
 /// <summary>
 /// Invoice status
 /// </summary>
-[JsonConverter(typeof(StatusConverter))]
-public enum Status
+[JsonConverter(typeof(LatestInvoiceStatusConverter))]
+public enum LatestInvoiceStatus
 {
     Open,
     Canceled,
     Paid,
 }
 
-sealed class StatusConverter : JsonConverter<Status>
+sealed class LatestInvoiceStatusConverter : JsonConverter<LatestInvoiceStatus>
 {
-    public override Status Read(
+    public override LatestInvoiceStatus Read(
         ref Utf8JsonReader reader,
         System::Type typeToConvert,
         JsonSerializerOptions options
@@ -632,22 +632,26 @@ sealed class StatusConverter : JsonConverter<Status>
     {
         return JsonSerializer.Deserialize<string>(ref reader, options) switch
         {
-            "OPEN" => Status.Open,
-            "CANCELED" => Status.Canceled,
-            "PAID" => Status.Paid,
-            _ => (Status)(-1),
+            "OPEN" => LatestInvoiceStatus.Open,
+            "CANCELED" => LatestInvoiceStatus.Canceled,
+            "PAID" => LatestInvoiceStatus.Paid,
+            _ => (LatestInvoiceStatus)(-1),
         };
     }
 
-    public override void Write(Utf8JsonWriter writer, Status value, JsonSerializerOptions options)
+    public override void Write(
+        Utf8JsonWriter writer,
+        LatestInvoiceStatus value,
+        JsonSerializerOptions options
+    )
     {
         JsonSerializer.Serialize(
             writer,
             value switch
             {
-                Status.Open => "OPEN",
-                Status.Canceled => "CANCELED",
-                Status.Paid => "PAID",
+                LatestInvoiceStatus.Open => "OPEN",
+                LatestInvoiceStatus.Canceled => "CANCELED",
+                LatestInvoiceStatus.Paid => "PAID",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

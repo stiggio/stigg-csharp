@@ -32,7 +32,7 @@ public class CustomerListContractsResponseTest : TestBase
                         BillingID = "billingId",
                         CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         RequiresAction = true,
-                        Status = Status.Open,
+                        Status = LatestInvoiceStatus.Open,
                         AmountDue = 0,
                         BillingReason = BillingReason.BillingCycle,
                         Currency = "currency",
@@ -82,7 +82,7 @@ public class CustomerListContractsResponseTest : TestBase
                     BillingID = "billingId",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     RequiresAction = true,
-                    Status = Status.Open,
+                    Status = LatestInvoiceStatus.Open,
                     AmountDue = 0,
                     BillingReason = BillingReason.BillingCycle,
                     Currency = "currency",
@@ -143,7 +143,7 @@ public class CustomerListContractsResponseTest : TestBase
                         BillingID = "billingId",
                         CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         RequiresAction = true,
-                        Status = Status.Open,
+                        Status = LatestInvoiceStatus.Open,
                         AmountDue = 0,
                         BillingReason = BillingReason.BillingCycle,
                         Currency = "currency",
@@ -207,7 +207,7 @@ public class CustomerListContractsResponseTest : TestBase
                         BillingID = "billingId",
                         CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         RequiresAction = true,
-                        Status = Status.Open,
+                        Status = LatestInvoiceStatus.Open,
                         AmountDue = 0,
                         BillingReason = BillingReason.BillingCycle,
                         Currency = "currency",
@@ -264,7 +264,7 @@ public class CustomerListContractsResponseTest : TestBase
                     BillingID = "billingId",
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     RequiresAction = true,
-                    Status = Status.Open,
+                    Status = LatestInvoiceStatus.Open,
                     AmountDue = 0,
                     BillingReason = BillingReason.BillingCycle,
                     Currency = "currency",
@@ -325,7 +325,7 @@ public class CustomerListContractsResponseTest : TestBase
                         BillingID = "billingId",
                         CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         RequiresAction = true,
-                        Status = Status.Open,
+                        Status = LatestInvoiceStatus.Open,
                         AmountDue = 0,
                         BillingReason = BillingReason.BillingCycle,
                         Currency = "currency",
@@ -383,7 +383,7 @@ public class CustomerListContractsResponseTest : TestBase
                         BillingID = "billingId",
                         CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                         RequiresAction = true,
-                        Status = Status.Open,
+                        Status = LatestInvoiceStatus.Open,
                         AmountDue = 0,
                         BillingReason = BillingReason.BillingCycle,
                         Currency = "currency",
@@ -442,7 +442,7 @@ public class CustomerListContractsResponseDataTest : TestBase
                 BillingID = "billingId",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 RequiresAction = true,
-                Status = Status.Open,
+                Status = LatestInvoiceStatus.Open,
                 AmountDue = 0,
                 BillingReason = BillingReason.BillingCycle,
                 Currency = "currency",
@@ -488,7 +488,7 @@ public class CustomerListContractsResponseDataTest : TestBase
             BillingID = "billingId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             RequiresAction = true,
-            Status = Status.Open,
+            Status = LatestInvoiceStatus.Open,
             AmountDue = 0,
             BillingReason = BillingReason.BillingCycle,
             Currency = "currency",
@@ -558,7 +558,7 @@ public class CustomerListContractsResponseDataTest : TestBase
                 BillingID = "billingId",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 RequiresAction = true,
-                Status = Status.Open,
+                Status = LatestInvoiceStatus.Open,
                 AmountDue = 0,
                 BillingReason = BillingReason.BillingCycle,
                 Currency = "currency",
@@ -616,7 +616,7 @@ public class CustomerListContractsResponseDataTest : TestBase
                 BillingID = "billingId",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 RequiresAction = true,
-                Status = Status.Open,
+                Status = LatestInvoiceStatus.Open,
                 AmountDue = 0,
                 BillingReason = BillingReason.BillingCycle,
                 Currency = "currency",
@@ -669,7 +669,7 @@ public class CustomerListContractsResponseDataTest : TestBase
             BillingID = "billingId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             RequiresAction = true,
-            Status = Status.Open,
+            Status = LatestInvoiceStatus.Open,
             AmountDue = 0,
             BillingReason = BillingReason.BillingCycle,
             Currency = "currency",
@@ -739,7 +739,7 @@ public class CustomerListContractsResponseDataTest : TestBase
                 BillingID = "billingId",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 RequiresAction = true,
-                Status = Status.Open,
+                Status = LatestInvoiceStatus.Open,
                 AmountDue = 0,
                 BillingReason = BillingReason.BillingCycle,
                 Currency = "currency",
@@ -791,7 +791,7 @@ public class CustomerListContractsResponseDataTest : TestBase
                 BillingID = "billingId",
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 RequiresAction = true,
-                Status = Status.Open,
+                Status = LatestInvoiceStatus.Open,
                 AmountDue = 0,
                 BillingReason = BillingReason.BillingCycle,
                 Currency = "currency",
@@ -899,7 +899,7 @@ public class LatestInvoiceTest : TestBase
             BillingID = "billingId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             RequiresAction = true,
-            Status = Status.Open,
+            Status = LatestInvoiceStatus.Open,
             AmountDue = 0,
             BillingReason = BillingReason.BillingCycle,
             Currency = "currency",
@@ -910,7 +910,7 @@ public class LatestInvoiceTest : TestBase
         string expectedBillingID = "billingId";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         bool expectedRequiresAction = true;
-        ApiEnum<string, Status> expectedStatus = Status.Open;
+        ApiEnum<string, LatestInvoiceStatus> expectedStatus = LatestInvoiceStatus.Open;
         double expectedAmountDue = 0;
         ApiEnum<string, BillingReason> expectedBillingReason = BillingReason.BillingCycle;
         string expectedCurrency = "currency";
@@ -936,7 +936,7 @@ public class LatestInvoiceTest : TestBase
             BillingID = "billingId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             RequiresAction = true,
-            Status = Status.Open,
+            Status = LatestInvoiceStatus.Open,
             AmountDue = 0,
             BillingReason = BillingReason.BillingCycle,
             Currency = "currency",
@@ -961,7 +961,7 @@ public class LatestInvoiceTest : TestBase
             BillingID = "billingId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             RequiresAction = true,
-            Status = Status.Open,
+            Status = LatestInvoiceStatus.Open,
             AmountDue = 0,
             BillingReason = BillingReason.BillingCycle,
             Currency = "currency",
@@ -979,7 +979,7 @@ public class LatestInvoiceTest : TestBase
         string expectedBillingID = "billingId";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         bool expectedRequiresAction = true;
-        ApiEnum<string, Status> expectedStatus = Status.Open;
+        ApiEnum<string, LatestInvoiceStatus> expectedStatus = LatestInvoiceStatus.Open;
         double expectedAmountDue = 0;
         ApiEnum<string, BillingReason> expectedBillingReason = BillingReason.BillingCycle;
         string expectedCurrency = "currency";
@@ -1005,7 +1005,7 @@ public class LatestInvoiceTest : TestBase
             BillingID = "billingId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             RequiresAction = true,
-            Status = Status.Open,
+            Status = LatestInvoiceStatus.Open,
             AmountDue = 0,
             BillingReason = BillingReason.BillingCycle,
             Currency = "currency",
@@ -1024,7 +1024,7 @@ public class LatestInvoiceTest : TestBase
             BillingID = "billingId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             RequiresAction = true,
-            Status = Status.Open,
+            Status = LatestInvoiceStatus.Open,
         };
 
         Assert.Null(model.AmountDue);
@@ -1047,7 +1047,7 @@ public class LatestInvoiceTest : TestBase
             BillingID = "billingId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             RequiresAction = true,
-            Status = Status.Open,
+            Status = LatestInvoiceStatus.Open,
         };
 
         model.Validate();
@@ -1061,7 +1061,7 @@ public class LatestInvoiceTest : TestBase
             BillingID = "billingId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             RequiresAction = true,
-            Status = Status.Open,
+            Status = LatestInvoiceStatus.Open,
 
             AmountDue = null,
             BillingReason = null,
@@ -1090,7 +1090,7 @@ public class LatestInvoiceTest : TestBase
             BillingID = "billingId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             RequiresAction = true,
-            Status = Status.Open,
+            Status = LatestInvoiceStatus.Open,
 
             AmountDue = null,
             BillingReason = null,
@@ -1110,7 +1110,7 @@ public class LatestInvoiceTest : TestBase
             BillingID = "billingId",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             RequiresAction = true,
-            Status = Status.Open,
+            Status = LatestInvoiceStatus.Open,
             AmountDue = 0,
             BillingReason = BillingReason.BillingCycle,
             Currency = "currency",
@@ -1124,23 +1124,23 @@ public class LatestInvoiceTest : TestBase
     }
 }
 
-public class StatusTest : TestBase
+public class LatestInvoiceStatusTest : TestBase
 {
     [Theory]
-    [InlineData(Status.Open)]
-    [InlineData(Status.Canceled)]
-    [InlineData(Status.Paid)]
-    public void Validation_Works(Status rawValue)
+    [InlineData(LatestInvoiceStatus.Open)]
+    [InlineData(LatestInvoiceStatus.Canceled)]
+    [InlineData(LatestInvoiceStatus.Paid)]
+    public void Validation_Works(LatestInvoiceStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Status> value = rawValue;
+        ApiEnum<string, LatestInvoiceStatus> value = rawValue;
         value.Validate();
     }
 
     [Fact]
     public void InvalidEnumValidationThrows_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, LatestInvoiceStatus>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
@@ -1150,16 +1150,16 @@ public class StatusTest : TestBase
     }
 
     [Theory]
-    [InlineData(Status.Open)]
-    [InlineData(Status.Canceled)]
-    [InlineData(Status.Paid)]
-    public void SerializationRoundtrip_Works(Status rawValue)
+    [InlineData(LatestInvoiceStatus.Open)]
+    [InlineData(LatestInvoiceStatus.Canceled)]
+    [InlineData(LatestInvoiceStatus.Paid)]
+    public void SerializationRoundtrip_Works(LatestInvoiceStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us
-        ApiEnum<string, Status> value = rawValue;
+        ApiEnum<string, LatestInvoiceStatus> value = rawValue;
 
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, LatestInvoiceStatus>>(
             json,
             ModelBase.SerializerOptions
         );
@@ -1170,12 +1170,12 @@ public class StatusTest : TestBase
     [Fact]
     public void InvalidEnumSerializationRoundtrip_Works()
     {
-        var value = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var value = JsonSerializer.Deserialize<ApiEnum<string, LatestInvoiceStatus>>(
             JsonSerializer.SerializeToElement("invalid value"),
             ModelBase.SerializerOptions
         );
         string json = JsonSerializer.Serialize(value, ModelBase.SerializerOptions);
-        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, Status>>(
+        var deserialized = JsonSerializer.Deserialize<ApiEnum<string, LatestInvoiceStatus>>(
             json,
             ModelBase.SerializerOptions
         );
