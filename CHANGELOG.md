@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.10.2](https://github.com/stiggio/stigg-csharp/compare/v0.10.1...v0.10.2) (2026-10-20)
+
+
+### Bug Fixes
+
+* sync OpenAPI spec from stigg-api ([8f5062d](https://github.com/stiggio/stigg-csharp/commit/8f5062dda35963ccd859d2b5ec152484a271d448))
+
 ## [0.10.1](https://github.com/stiggio/stigg-csharp/compare/v0.10.0...v0.10.1) (2026-10-15)
 
 
