@@ -17,6 +17,11 @@ public class CustomerCheckEntitlementParamsTest : TestBase
             FeatureID = "x",
             RequestedUsage = 0,
             RequestedValues = ["string"],
+            ReservationExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ReservationID = "x",
+            ReservationMetadata = "reservationMetadata",
+            ReservationTtlSeconds = 1,
+            ReserveAmount = 1,
             ResourceID = "x",
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",
@@ -27,6 +32,13 @@ public class CustomerCheckEntitlementParamsTest : TestBase
         string expectedFeatureID = "x";
         long expectedRequestedUsage = 0;
         List<string> expectedRequestedValues = ["string"];
+        DateTimeOffset expectedReservationExpiresAt = DateTimeOffset.Parse(
+            "2019-12-27T18:11:19.117Z"
+        );
+        string expectedReservationID = "x";
+        string expectedReservationMetadata = "reservationMetadata";
+        long expectedReservationTtlSeconds = 1;
+        double expectedReserveAmount = 1;
         string expectedResourceID = "x";
         string expectedXAccountID = "X-ACCOUNT-ID";
         string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
@@ -41,6 +53,11 @@ public class CustomerCheckEntitlementParamsTest : TestBase
         {
             Assert.Equal(expectedRequestedValues[i], parameters.RequestedValues[i]);
         }
+        Assert.Equal(expectedReservationExpiresAt, parameters.ReservationExpiresAt);
+        Assert.Equal(expectedReservationID, parameters.ReservationID);
+        Assert.Equal(expectedReservationMetadata, parameters.ReservationMetadata);
+        Assert.Equal(expectedReservationTtlSeconds, parameters.ReservationTtlSeconds);
+        Assert.Equal(expectedReserveAmount, parameters.ReserveAmount);
         Assert.Equal(expectedResourceID, parameters.ResourceID);
         Assert.Equal(expectedXAccountID, parameters.XAccountID);
         Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
@@ -59,6 +76,16 @@ public class CustomerCheckEntitlementParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("requestedUsage"));
         Assert.Null(parameters.RequestedValues);
         Assert.False(parameters.RawQueryData.ContainsKey("requestedValues"));
+        Assert.Null(parameters.ReservationExpiresAt);
+        Assert.False(parameters.RawQueryData.ContainsKey("reservationExpiresAt"));
+        Assert.Null(parameters.ReservationID);
+        Assert.False(parameters.RawQueryData.ContainsKey("reservationId"));
+        Assert.Null(parameters.ReservationMetadata);
+        Assert.False(parameters.RawQueryData.ContainsKey("reservationMetadata"));
+        Assert.Null(parameters.ReservationTtlSeconds);
+        Assert.False(parameters.RawQueryData.ContainsKey("reservationTtlSeconds"));
+        Assert.Null(parameters.ReserveAmount);
+        Assert.False(parameters.RawQueryData.ContainsKey("reserveAmount"));
         Assert.Null(parameters.ResourceID);
         Assert.False(parameters.RawQueryData.ContainsKey("resourceId"));
         Assert.Null(parameters.XAccountID);
@@ -79,6 +106,11 @@ public class CustomerCheckEntitlementParamsTest : TestBase
             FeatureID = null,
             RequestedUsage = null,
             RequestedValues = null,
+            ReservationExpiresAt = null,
+            ReservationID = null,
+            ReservationMetadata = null,
+            ReservationTtlSeconds = null,
+            ReserveAmount = null,
             ResourceID = null,
             XAccountID = null,
             XEnvironmentID = null,
@@ -92,6 +124,16 @@ public class CustomerCheckEntitlementParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("requestedUsage"));
         Assert.Null(parameters.RequestedValues);
         Assert.False(parameters.RawQueryData.ContainsKey("requestedValues"));
+        Assert.Null(parameters.ReservationExpiresAt);
+        Assert.False(parameters.RawQueryData.ContainsKey("reservationExpiresAt"));
+        Assert.Null(parameters.ReservationID);
+        Assert.False(parameters.RawQueryData.ContainsKey("reservationId"));
+        Assert.Null(parameters.ReservationMetadata);
+        Assert.False(parameters.RawQueryData.ContainsKey("reservationMetadata"));
+        Assert.Null(parameters.ReservationTtlSeconds);
+        Assert.False(parameters.RawQueryData.ContainsKey("reservationTtlSeconds"));
+        Assert.Null(parameters.ReserveAmount);
+        Assert.False(parameters.RawQueryData.ContainsKey("reserveAmount"));
         Assert.Null(parameters.ResourceID);
         Assert.False(parameters.RawQueryData.ContainsKey("resourceId"));
         Assert.Null(parameters.XAccountID);
@@ -110,6 +152,11 @@ public class CustomerCheckEntitlementParamsTest : TestBase
             FeatureID = "x",
             RequestedUsage = 0,
             RequestedValues = ["string"],
+            ReservationExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
+            ReservationID = "x",
+            ReservationMetadata = "reservationMetadata",
+            ReservationTtlSeconds = 1,
+            ReserveAmount = 1,
             ResourceID = "x",
         };
 
@@ -118,7 +165,7 @@ public class CustomerCheckEntitlementParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://api.stigg.io/api/v1/customers/x/entitlements/check?currencyId=x&featureId=x&requestedUsage=0&requestedValues=string&resourceId=x"
+                    "https://api.stigg.io/api/v1/customers/x/entitlements/check?currencyId=x&featureId=x&requestedUsage=0&requestedValues=string&reservationExpiresAt=2019-12-27T18%3a11%3a19.117%2b00%3a00&reservationId=x&reservationMetadata=reservationMetadata&reservationTtlSeconds=1&reserveAmount=1&resourceId=x"
                 ),
                 url
             )
@@ -152,6 +199,11 @@ public class CustomerCheckEntitlementParamsTest : TestBase
             FeatureID = "x",
             RequestedUsage = 0,
             RequestedValues = ["string"],
+            ReservationExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            ReservationID = "x",
+            ReservationMetadata = "reservationMetadata",
+            ReservationTtlSeconds = 1,
+            ReserveAmount = 1,
             ResourceID = "x",
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",

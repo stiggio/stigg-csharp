@@ -117,6 +117,115 @@ public record class CustomerCheckEntitlementParams : ParamsBase
     }
 
     /// <summary>
+    /// When the reservation expires (ISO 8601, at most 24 hours ahead). Mutually
+    /// exclusive with `reservationTtlSeconds`.
+    /// </summary>
+    public DateTimeOffset? ReservationExpiresAt
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<DateTimeOffset>("reservationExpiresAt");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("reservationExpiresAt", value);
+        }
+    }
+
+    /// <summary>
+    /// Client-provided reservation ID, required with `reserveAmount`. Retry with
+    /// the same ID to get the same result; reuse with different parameters is a conflict.
+    /// </summary>
+    public string? ReservationID
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("reservationId");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("reservationId", value);
+        }
+    }
+
+    /// <summary>
+    /// JSON-encoded object of string values to attach to the reservation.
+    /// </summary>
+    public string? ReservationMetadata
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("reservationMetadata");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("reservationMetadata", value);
+        }
+    }
+
+    /// <summary>
+    /// How long the reservation holds the credits, in seconds (1–86400, default 3600).
+    /// Mutually exclusive with `reservationExpiresAt`.
+    /// </summary>
+    public long? ReservationTtlSeconds
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<long>("reservationTtlSeconds");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("reservationTtlSeconds", value);
+        }
+    }
+
+    /// <summary>
+    /// Credits to reserve (credit entitlements only). The check is decided and the
+    /// credits held atomically; `requestedUsage` is ignored.
+    /// </summary>
+    public double? ReserveAmount
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<double>("reserveAmount");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("reserveAmount", value);
+        }
+    }
+
+    /// <summary>
     /// Resource ID to scope the entitlement check to a specific resource
     /// </summary>
     public string? ResourceID
