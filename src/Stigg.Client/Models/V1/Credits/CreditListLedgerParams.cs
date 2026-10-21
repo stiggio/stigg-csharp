@@ -136,6 +136,27 @@ public record class CreditListLedgerParams : ParamsBase
     }
 
     /// <summary>
+    /// Filter by credit reservation ID
+    /// </summary>
+    public string? ReservationID
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("reservationId");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("reservationId", value);
+        }
+    }
+
+    /// <summary>
     /// Filter by resource ID
     /// </summary>
     public string? ResourceID

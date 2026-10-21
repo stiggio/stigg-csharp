@@ -17,6 +17,7 @@ public class CreditListLedgerParamsTest : TestBase
             CurrencyID = "currencyId",
             EventType = "eventType",
             Limit = 1,
+            ReservationID = "x",
             ResourceID = "resourceId",
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",
@@ -28,6 +29,7 @@ public class CreditListLedgerParamsTest : TestBase
         string expectedCurrencyID = "currencyId";
         string expectedEventType = "eventType";
         long expectedLimit = 1;
+        string expectedReservationID = "x";
         string expectedResourceID = "resourceId";
         string expectedXAccountID = "X-ACCOUNT-ID";
         string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
@@ -38,6 +40,7 @@ public class CreditListLedgerParamsTest : TestBase
         Assert.Equal(expectedCurrencyID, parameters.CurrencyID);
         Assert.Equal(expectedEventType, parameters.EventType);
         Assert.Equal(expectedLimit, parameters.Limit);
+        Assert.Equal(expectedReservationID, parameters.ReservationID);
         Assert.Equal(expectedResourceID, parameters.ResourceID);
         Assert.Equal(expectedXAccountID, parameters.XAccountID);
         Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
@@ -58,6 +61,8 @@ public class CreditListLedgerParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("eventType"));
         Assert.Null(parameters.Limit);
         Assert.False(parameters.RawQueryData.ContainsKey("limit"));
+        Assert.Null(parameters.ReservationID);
+        Assert.False(parameters.RawQueryData.ContainsKey("reservationId"));
         Assert.Null(parameters.ResourceID);
         Assert.False(parameters.RawQueryData.ContainsKey("resourceId"));
         Assert.Null(parameters.XAccountID);
@@ -79,6 +84,7 @@ public class CreditListLedgerParamsTest : TestBase
             CurrencyID = null,
             EventType = null,
             Limit = null,
+            ReservationID = null,
             ResourceID = null,
             XAccountID = null,
             XEnvironmentID = null,
@@ -94,6 +100,8 @@ public class CreditListLedgerParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("eventType"));
         Assert.Null(parameters.Limit);
         Assert.False(parameters.RawQueryData.ContainsKey("limit"));
+        Assert.Null(parameters.ReservationID);
+        Assert.False(parameters.RawQueryData.ContainsKey("reservationId"));
         Assert.Null(parameters.ResourceID);
         Assert.False(parameters.RawQueryData.ContainsKey("resourceId"));
         Assert.Null(parameters.XAccountID);
@@ -113,6 +121,7 @@ public class CreditListLedgerParamsTest : TestBase
             CurrencyID = "currencyId",
             EventType = "eventType",
             Limit = 1,
+            ReservationID = "x",
             ResourceID = "resourceId",
         };
 
@@ -121,7 +130,7 @@ public class CreditListLedgerParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://api.stigg.io/api/v1/credits/ledger?customerId=customerId&after=after&before=before&currencyId=currencyId&eventType=eventType&limit=1&resourceId=resourceId"
+                    "https://api.stigg.io/api/v1/credits/ledger?customerId=customerId&after=after&before=before&currencyId=currencyId&eventType=eventType&limit=1&reservationId=x&resourceId=resourceId"
                 ),
                 url
             )
@@ -156,6 +165,7 @@ public class CreditListLedgerParamsTest : TestBase
             CurrencyID = "currencyId",
             EventType = "eventType",
             Limit = 1,
+            ReservationID = "x",
             ResourceID = "resourceId",
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",

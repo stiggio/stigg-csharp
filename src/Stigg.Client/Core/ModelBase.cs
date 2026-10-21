@@ -431,6 +431,7 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Credits::GrantExpirationPeriod>(),
             new ApiEnumConverter<string, Credits::ThresholdType>(),
             new ApiEnumConverter<string, Credits::EventType>(),
+            new ApiEnumConverter<string, Credits::CreditListLedgerResponseEventType>(),
             new ApiEnumConverter<string, Credits::TimeRange>(),
             new ApiEnumConverter<string, Grants::DataGrantType>(),
             new ApiEnumConverter<string, Grants::BillingReason>(),

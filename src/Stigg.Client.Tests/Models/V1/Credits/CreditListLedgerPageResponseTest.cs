@@ -18,12 +18,31 @@ public class CreditListLedgerPageResponseTest : TestBase
                 new()
                 {
                     Amount = 0,
+                    Breakdown =
+                    [
+                        new()
+                        {
+                            Amount = 0,
+                            CreditCurrencyID = "creditCurrencyId",
+                            CreditGrantID = "creditGrantId",
+                            CustomerID = "customerId",
+                            EventID = "eventId",
+                            EventType = EventType.CreditsGranted,
+                            FeatureID = "featureId",
+                            ReservationID = "reservationId",
+                            ResourceID = "resourceId",
+                            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        },
+                    ],
                     CreditCurrencyID = "creditCurrencyId",
                     CreditGrantID = "creditGrantId",
                     CustomerID = "customerId",
                     EventID = "eventId",
-                    EventType = EventType.CreditsGranted,
+                    EventType = CreditListLedgerResponseEventType.CreditsGranted,
                     FeatureID = "featureId",
+                    HoldReturnedAmount = 0,
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    ReservationID = "reservationId",
                     ResourceID = "resourceId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
@@ -36,12 +55,31 @@ public class CreditListLedgerPageResponseTest : TestBase
             new()
             {
                 Amount = 0,
+                Breakdown =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        CreditCurrencyID = "creditCurrencyId",
+                        CreditGrantID = "creditGrantId",
+                        CustomerID = "customerId",
+                        EventID = "eventId",
+                        EventType = EventType.CreditsGranted,
+                        FeatureID = "featureId",
+                        ReservationID = "reservationId",
+                        ResourceID = "resourceId",
+                        Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    },
+                ],
                 CreditCurrencyID = "creditCurrencyId",
                 CreditGrantID = "creditGrantId",
                 CustomerID = "customerId",
                 EventID = "eventId",
-                EventType = EventType.CreditsGranted,
+                EventType = CreditListLedgerResponseEventType.CreditsGranted,
                 FeatureID = "featureId",
+                HoldReturnedAmount = 0,
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                ReservationID = "reservationId",
                 ResourceID = "resourceId",
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -70,12 +108,31 @@ public class CreditListLedgerPageResponseTest : TestBase
                 new()
                 {
                     Amount = 0,
+                    Breakdown =
+                    [
+                        new()
+                        {
+                            Amount = 0,
+                            CreditCurrencyID = "creditCurrencyId",
+                            CreditGrantID = "creditGrantId",
+                            CustomerID = "customerId",
+                            EventID = "eventId",
+                            EventType = EventType.CreditsGranted,
+                            FeatureID = "featureId",
+                            ReservationID = "reservationId",
+                            ResourceID = "resourceId",
+                            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        },
+                    ],
                     CreditCurrencyID = "creditCurrencyId",
                     CreditGrantID = "creditGrantId",
                     CustomerID = "customerId",
                     EventID = "eventId",
-                    EventType = EventType.CreditsGranted,
+                    EventType = CreditListLedgerResponseEventType.CreditsGranted,
                     FeatureID = "featureId",
+                    HoldReturnedAmount = 0,
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    ReservationID = "reservationId",
                     ResourceID = "resourceId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
@@ -102,12 +159,31 @@ public class CreditListLedgerPageResponseTest : TestBase
                 new()
                 {
                     Amount = 0,
+                    Breakdown =
+                    [
+                        new()
+                        {
+                            Amount = 0,
+                            CreditCurrencyID = "creditCurrencyId",
+                            CreditGrantID = "creditGrantId",
+                            CustomerID = "customerId",
+                            EventID = "eventId",
+                            EventType = EventType.CreditsGranted,
+                            FeatureID = "featureId",
+                            ReservationID = "reservationId",
+                            ResourceID = "resourceId",
+                            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        },
+                    ],
                     CreditCurrencyID = "creditCurrencyId",
                     CreditGrantID = "creditGrantId",
                     CustomerID = "customerId",
                     EventID = "eventId",
-                    EventType = EventType.CreditsGranted,
+                    EventType = CreditListLedgerResponseEventType.CreditsGranted,
                     FeatureID = "featureId",
+                    HoldReturnedAmount = 0,
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    ReservationID = "reservationId",
                     ResourceID = "resourceId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
@@ -127,12 +203,31 @@ public class CreditListLedgerPageResponseTest : TestBase
             new()
             {
                 Amount = 0,
+                Breakdown =
+                [
+                    new()
+                    {
+                        Amount = 0,
+                        CreditCurrencyID = "creditCurrencyId",
+                        CreditGrantID = "creditGrantId",
+                        CustomerID = "customerId",
+                        EventID = "eventId",
+                        EventType = EventType.CreditsGranted,
+                        FeatureID = "featureId",
+                        ReservationID = "reservationId",
+                        ResourceID = "resourceId",
+                        Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                    },
+                ],
                 CreditCurrencyID = "creditCurrencyId",
                 CreditGrantID = "creditGrantId",
                 CustomerID = "customerId",
                 EventID = "eventId",
-                EventType = EventType.CreditsGranted,
+                EventType = CreditListLedgerResponseEventType.CreditsGranted,
                 FeatureID = "featureId",
+                HoldReturnedAmount = 0,
+                Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                ReservationID = "reservationId",
                 ResourceID = "resourceId",
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
@@ -161,12 +256,31 @@ public class CreditListLedgerPageResponseTest : TestBase
                 new()
                 {
                     Amount = 0,
+                    Breakdown =
+                    [
+                        new()
+                        {
+                            Amount = 0,
+                            CreditCurrencyID = "creditCurrencyId",
+                            CreditGrantID = "creditGrantId",
+                            CustomerID = "customerId",
+                            EventID = "eventId",
+                            EventType = EventType.CreditsGranted,
+                            FeatureID = "featureId",
+                            ReservationID = "reservationId",
+                            ResourceID = "resourceId",
+                            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        },
+                    ],
                     CreditCurrencyID = "creditCurrencyId",
                     CreditGrantID = "creditGrantId",
                     CustomerID = "customerId",
                     EventID = "eventId",
-                    EventType = EventType.CreditsGranted,
+                    EventType = CreditListLedgerResponseEventType.CreditsGranted,
                     FeatureID = "featureId",
+                    HoldReturnedAmount = 0,
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    ReservationID = "reservationId",
                     ResourceID = "resourceId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
@@ -187,12 +301,31 @@ public class CreditListLedgerPageResponseTest : TestBase
                 new()
                 {
                     Amount = 0,
+                    Breakdown =
+                    [
+                        new()
+                        {
+                            Amount = 0,
+                            CreditCurrencyID = "creditCurrencyId",
+                            CreditGrantID = "creditGrantId",
+                            CustomerID = "customerId",
+                            EventID = "eventId",
+                            EventType = EventType.CreditsGranted,
+                            FeatureID = "featureId",
+                            ReservationID = "reservationId",
+                            ResourceID = "resourceId",
+                            Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+                        },
+                    ],
                     CreditCurrencyID = "creditCurrencyId",
                     CreditGrantID = "creditGrantId",
                     CustomerID = "customerId",
                     EventID = "eventId",
-                    EventType = EventType.CreditsGranted,
+                    EventType = CreditListLedgerResponseEventType.CreditsGranted,
                     FeatureID = "featureId",
+                    HoldReturnedAmount = 0,
+                    Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+                    ReservationID = "reservationId",
                     ResourceID = "resourceId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
