@@ -290,12 +290,12 @@ public sealed record class DataUsage : JsonModel
     /// <summary>
     /// The usage measurement record
     /// </summary>
-    public required long Value
+    public required double Value
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<long>("value");
+            return this._rawData.GetNotNullStruct<double>("value");
         }
         init { this._rawData.Set("value", value); }
     }

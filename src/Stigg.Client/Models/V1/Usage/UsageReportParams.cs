@@ -229,16 +229,17 @@ public sealed record class UsageReportParamsUsage : JsonModel
     }
 
     /// <summary>
-    /// The value to report for usage. Must be a whole number — the REST API does
-    /// not accept fractional (float) usage values; scale up (e.g. report cents instead
-    /// of dollars, or milliseconds instead of seconds) if you need sub-unit precision.
+    /// The value to report for usage. Fractional values are accepted and rounded
+    /// half away from zero to 5 decimal places. A value with a fractional part must
+    /// have an absolute value below 34,359,738,368 (2^35); whole numbers are accepted
+    /// up to ±9,007,199,254,740,991.
     /// </summary>
-    public required long Value
+    public required double Value
     {
         get
         {
             this._rawData.Freeze();
-            return this._rawData.GetNotNullStruct<long>("value");
+            return this._rawData.GetNotNullStruct<double>("value");
         }
         init { this._rawData.Set("value", value); }
     }

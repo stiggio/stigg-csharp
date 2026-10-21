@@ -221,7 +221,7 @@ public class UsageReportParamsUsageTest : TestBase
 
         string expectedCustomerID = "customerId";
         string expectedFeatureID = "featureId";
-        long expectedValue = -9007199254740991;
+        double expectedValue = -9007199254740991;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         Dictionary<string, Dimension> expectedDimensions = new() { { "foo", "string" } };
         string expectedIdempotencyKey = "x";
@@ -293,7 +293,7 @@ public class UsageReportParamsUsageTest : TestBase
 
         string expectedCustomerID = "customerId";
         string expectedFeatureID = "featureId";
-        long expectedValue = -9007199254740991;
+        double expectedValue = -9007199254740991;
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         Dictionary<string, Dimension> expectedDimensions = new() { { "foo", "string" } };
         string expectedIdempotencyKey = "x";

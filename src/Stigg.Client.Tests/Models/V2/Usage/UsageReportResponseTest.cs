@@ -24,7 +24,7 @@ public class UsageReportResponseTest : TestBase
                         CustomerID = "customerId",
                         FeatureID = "featureId",
                         Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                        Value = -9007199254740991,
+                        Value = 0,
                         Credit = new() { Consumed = 0, CurrencyID = "currencyId" },
                         CurrentUsage = 0,
                         NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -75,7 +75,7 @@ public class UsageReportResponseTest : TestBase
                     CustomerID = "customerId",
                     FeatureID = "featureId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Value = -9007199254740991,
+                    Value = 0,
                     Credit = new() { Consumed = 0, CurrencyID = "currencyId" },
                     CurrentUsage = 0,
                     NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -133,7 +133,7 @@ public class UsageReportResponseTest : TestBase
                         CustomerID = "customerId",
                         FeatureID = "featureId",
                         Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                        Value = -9007199254740991,
+                        Value = 0,
                         Credit = new() { Consumed = 0, CurrencyID = "currencyId" },
                         CurrentUsage = 0,
                         NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -198,7 +198,7 @@ public class UsageReportResponseTest : TestBase
                         CustomerID = "customerId",
                         FeatureID = "featureId",
                         Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                        Value = -9007199254740991,
+                        Value = 0,
                         Credit = new() { Consumed = 0, CurrencyID = "currencyId" },
                         CurrentUsage = 0,
                         NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -256,7 +256,7 @@ public class UsageReportResponseTest : TestBase
                     CustomerID = "customerId",
                     FeatureID = "featureId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Value = -9007199254740991,
+                    Value = 0,
                     Credit = new() { Consumed = 0, CurrencyID = "currencyId" },
                     CurrentUsage = 0,
                     NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -314,7 +314,7 @@ public class UsageReportResponseTest : TestBase
                         CustomerID = "customerId",
                         FeatureID = "featureId",
                         Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                        Value = -9007199254740991,
+                        Value = 0,
                         Credit = new() { Consumed = 0, CurrencyID = "currencyId" },
                         CurrentUsage = 0,
                         NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -373,7 +373,7 @@ public class UsageReportResponseTest : TestBase
                         CustomerID = "customerId",
                         FeatureID = "featureId",
                         Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                        Value = -9007199254740991,
+                        Value = 0,
                         Credit = new() { Consumed = 0, CurrencyID = "currencyId" },
                         CurrentUsage = 0,
                         NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -435,7 +435,7 @@ public class DataTest : TestBase
                     CustomerID = "customerId",
                     FeatureID = "featureId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Value = -9007199254740991,
+                    Value = 0,
                     Credit = new() { Consumed = 0, CurrencyID = "currencyId" },
                     CurrentUsage = 0,
                     NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -483,7 +483,7 @@ public class DataTest : TestBase
                 CustomerID = "customerId",
                 FeatureID = "featureId",
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Value = -9007199254740991,
+                Value = 0,
                 Credit = new() { Consumed = 0, CurrencyID = "currencyId" },
                 CurrentUsage = 0,
                 NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -554,7 +554,7 @@ public class DataTest : TestBase
                     CustomerID = "customerId",
                     FeatureID = "featureId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Value = -9007199254740991,
+                    Value = 0,
                     Credit = new() { Consumed = 0, CurrencyID = "currencyId" },
                     CurrentUsage = 0,
                     NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -613,7 +613,7 @@ public class DataTest : TestBase
                     CustomerID = "customerId",
                     FeatureID = "featureId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Value = -9007199254740991,
+                    Value = 0,
                     Credit = new() { Consumed = 0, CurrencyID = "currencyId" },
                     CurrentUsage = 0,
                     NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -665,7 +665,7 @@ public class DataTest : TestBase
                 CustomerID = "customerId",
                 FeatureID = "featureId",
                 Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                Value = -9007199254740991,
+                Value = 0,
                 Credit = new() { Consumed = 0, CurrencyID = "currencyId" },
                 CurrentUsage = 0,
                 NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -736,7 +736,7 @@ public class DataTest : TestBase
                     CustomerID = "customerId",
                     FeatureID = "featureId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Value = -9007199254740991,
+                    Value = 0,
                     Credit = new() { Consumed = 0, CurrencyID = "currencyId" },
                     CurrentUsage = 0,
                     NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -792,7 +792,7 @@ public class DataTest : TestBase
                     CustomerID = "customerId",
                     FeatureID = "featureId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Value = -9007199254740991,
+                    Value = 0,
                     Credit = new() { Consumed = 0, CurrencyID = "currencyId" },
                     CurrentUsage = 0,
                     NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -823,7 +823,7 @@ public class DataTest : TestBase
                     CustomerID = "customerId",
                     FeatureID = "featureId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Value = -9007199254740991,
+                    Value = 0,
                     Credit = new() { Consumed = 0, CurrencyID = "currencyId" },
                     CurrentUsage = 0,
                     NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -851,7 +851,7 @@ public class DataTest : TestBase
                     CustomerID = "customerId",
                     FeatureID = "featureId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Value = -9007199254740991,
+                    Value = 0,
                     Credit = new() { Consumed = 0, CurrencyID = "currencyId" },
                     CurrentUsage = 0,
                     NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -886,7 +886,7 @@ public class DataTest : TestBase
                     CustomerID = "customerId",
                     FeatureID = "featureId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Value = -9007199254740991,
+                    Value = 0,
                     Credit = new() { Consumed = 0, CurrencyID = "currencyId" },
                     CurrentUsage = 0,
                     NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -918,7 +918,7 @@ public class DataTest : TestBase
                     CustomerID = "customerId",
                     FeatureID = "featureId",
                     Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-                    Value = -9007199254740991,
+                    Value = 0,
                     Credit = new() { Consumed = 0, CurrencyID = "currencyId" },
                     CurrentUsage = 0,
                     NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -975,7 +975,7 @@ public class DataUsageTest : TestBase
             CustomerID = "customerId",
             FeatureID = "featureId",
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Value = -9007199254740991,
+            Value = 0,
             Credit = new() { Consumed = 0, CurrencyID = "currencyId" },
             CurrentUsage = 0,
             NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -989,7 +989,7 @@ public class DataUsageTest : TestBase
         string expectedCustomerID = "customerId";
         string expectedFeatureID = "featureId";
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        long expectedValue = -9007199254740991;
+        double expectedValue = 0;
         Credit expectedCredit = new() { Consumed = 0, CurrencyID = "currencyId" };
         double expectedCurrentUsage = 0;
         DateTimeOffset expectedNextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -1021,7 +1021,7 @@ public class DataUsageTest : TestBase
             CustomerID = "customerId",
             FeatureID = "featureId",
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Value = -9007199254740991,
+            Value = 0,
             Credit = new() { Consumed = 0, CurrencyID = "currencyId" },
             CurrentUsage = 0,
             NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1046,7 +1046,7 @@ public class DataUsageTest : TestBase
             CustomerID = "customerId",
             FeatureID = "featureId",
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Value = -9007199254740991,
+            Value = 0,
             Credit = new() { Consumed = 0, CurrencyID = "currencyId" },
             CurrentUsage = 0,
             NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1067,7 +1067,7 @@ public class DataUsageTest : TestBase
         string expectedCustomerID = "customerId";
         string expectedFeatureID = "featureId";
         DateTimeOffset expectedTimestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
-        long expectedValue = -9007199254740991;
+        double expectedValue = 0;
         Credit expectedCredit = new() { Consumed = 0, CurrencyID = "currencyId" };
         double expectedCurrentUsage = 0;
         DateTimeOffset expectedNextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -1099,7 +1099,7 @@ public class DataUsageTest : TestBase
             CustomerID = "customerId",
             FeatureID = "featureId",
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Value = -9007199254740991,
+            Value = 0,
             Credit = new() { Consumed = 0, CurrencyID = "currencyId" },
             CurrentUsage = 0,
             NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -1121,7 +1121,7 @@ public class DataUsageTest : TestBase
             CustomerID = "customerId",
             FeatureID = "featureId",
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Value = -9007199254740991,
+            Value = 0,
         };
 
         Assert.Null(model.Credit);
@@ -1148,7 +1148,7 @@ public class DataUsageTest : TestBase
             CustomerID = "customerId",
             FeatureID = "featureId",
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Value = -9007199254740991,
+            Value = 0,
         };
 
         model.Validate();
@@ -1164,7 +1164,7 @@ public class DataUsageTest : TestBase
             CustomerID = "customerId",
             FeatureID = "featureId",
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Value = -9007199254740991,
+            Value = 0,
 
             Credit = null,
             CurrentUsage = null,
@@ -1198,7 +1198,7 @@ public class DataUsageTest : TestBase
             CustomerID = "customerId",
             FeatureID = "featureId",
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Value = -9007199254740991,
+            Value = 0,
 
             Credit = null,
             CurrentUsage = null,
@@ -1221,7 +1221,7 @@ public class DataUsageTest : TestBase
             CustomerID = "customerId",
             FeatureID = "featureId",
             Timestamp = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
-            Value = -9007199254740991,
+            Value = 0,
             Credit = new() { Consumed = 0, CurrencyID = "currencyId" },
             CurrentUsage = 0,
             NextResetDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),

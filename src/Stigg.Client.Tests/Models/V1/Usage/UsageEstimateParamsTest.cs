@@ -27,7 +27,7 @@ public class UsageEstimateParamsTest : TestBase
 
         string expectedCustomerID = "customerId";
         string expectedFeatureID = "featureId";
-        long expectedValue = -9007199254740991;
+        double expectedValue = -9007199254740991;
         Dictionary<string, Dimension> expectedDimensions = new() { { "foo", "string" } };
         string expectedResourceID = "resourceId";
         ApiEnum<string, UpdateBehavior> expectedUpdateBehavior = UpdateBehavior.Delta;
