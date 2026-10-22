@@ -4237,7 +4237,7 @@ public sealed record class PricingModel : JsonModel
     }
 
     /// <summary>
-    /// Maximum number of units (max 999999)
+    /// Maximum number of units
     /// </summary>
     public long? MaxUnitQuantity
     {
