@@ -20,6 +20,7 @@ using Plans = Stigg.Client.Models.V1.Plans;
 using PlansEntitlements = Stigg.Client.Models.V1.Plans.Entitlements;
 using Products = Stigg.Client.Models.V1.Products;
 using PromotionalEntitlements = Stigg.Client.Models.V1.Customers.PromotionalEntitlements;
+using Reservations = Stigg.Client.Models.V1.Credits.Reservations;
 using Subscriptions = Stigg.Client.Models.V1.Subscriptions;
 using Usage = Stigg.Client.Models.V1.Usage;
 
@@ -453,6 +454,7 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Grants::Currency>(),
             new ApiEnumConverter<string, Grants::PaymentCollectionMethod>(),
             new ApiEnumConverter<string, CustomCurrencies::Status>(),
+            new ApiEnumConverter<string, Reservations::Status>(),
             new ApiEnumConverter<string, Features::DataFeatureStatus>(),
             new ApiEnumConverter<string, Features::DataFeatureType>(),
             new ApiEnumConverter<string, Features::DataMeterAggregationFunction>(),
