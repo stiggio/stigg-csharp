@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.11.0](https://github.com/stiggio/stigg-csharp/compare/v0.10.2...v0.11.0) (2026-10-22)
+
+
+### Features
+
+* **STIGG-10078:** credit reservation release in the sdks ([8c30a63](https://github.com/stiggio/stigg-csharp/commit/8c30a630255bd3d5f77558585265d5a64567fb2c))
+
+
+### Bug Fixes
+
+* sync OpenAPI spec from stigg-api ([8810dd1](https://github.com/stiggio/stigg-csharp/commit/8810dd1a1d5bc5be3c36a515f7d3b5dba535d18b))
+* sync OpenAPI spec from stigg-api ([8545798](https://github.com/stiggio/stigg-csharp/commit/854579817fed3e65302ba257e6409ebafe9e7164))
+* sync OpenAPI spec from stigg-api ([7ab4503](https://github.com/stiggio/stigg-csharp/commit/7ab450368efa34f45443e9984c71737d4f889023))
+* sync OpenAPI spec from stigg-api ([217209d](https://github.com/stiggio/stigg-csharp/commit/217209d03c0eae48c45f8a4e5f309e2aa5932c80))
+
 ## [0.10.2](https://github.com/stiggio/stigg-csharp/compare/v0.10.1...v0.10.2) (2026-10-20)
 
 
