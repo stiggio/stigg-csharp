@@ -1830,6 +1830,7 @@ public enum EntitlementCreditReservationStatus
 {
     Active,
     Released,
+    Expired,
 }
 
 sealed class EntitlementCreditReservationStatusConverter
@@ -1845,6 +1846,7 @@ sealed class EntitlementCreditReservationStatusConverter
         {
             "ACTIVE" => EntitlementCreditReservationStatus.Active,
             "RELEASED" => EntitlementCreditReservationStatus.Released,
+            "EXPIRED" => EntitlementCreditReservationStatus.Expired,
             _ => (EntitlementCreditReservationStatus)(-1),
         };
     }
@@ -1861,6 +1863,7 @@ sealed class EntitlementCreditReservationStatusConverter
             {
                 EntitlementCreditReservationStatus.Active => "ACTIVE",
                 EntitlementCreditReservationStatus.Released => "RELEASED",
+                EntitlementCreditReservationStatus.Expired => "EXPIRED",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

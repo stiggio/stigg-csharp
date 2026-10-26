@@ -5093,6 +5093,7 @@ public class ReservationStatusTest : TestBase
     [Theory]
     [InlineData(ReservationStatus.Active)]
     [InlineData(ReservationStatus.Released)]
+    [InlineData(ReservationStatus.Expired)]
     public void Validation_Works(ReservationStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -5115,6 +5116,7 @@ public class ReservationStatusTest : TestBase
     [Theory]
     [InlineData(ReservationStatus.Active)]
     [InlineData(ReservationStatus.Released)]
+    [InlineData(ReservationStatus.Expired)]
     public void SerializationRoundtrip_Works(ReservationStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us

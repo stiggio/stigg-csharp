@@ -2841,6 +2841,7 @@ public class StatusTest : TestBase
     [Theory]
     [InlineData(Status.Active)]
     [InlineData(Status.Released)]
+    [InlineData(Status.Expired)]
     public void Validation_Works(Status rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -2863,6 +2864,7 @@ public class StatusTest : TestBase
     [Theory]
     [InlineData(Status.Active)]
     [InlineData(Status.Released)]
+    [InlineData(Status.Expired)]
     public void SerializationRoundtrip_Works(Status rawValue)
     {
         // force implicit conversion because Theory can't do that for us

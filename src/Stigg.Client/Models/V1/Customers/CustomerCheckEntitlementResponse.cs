@@ -1618,6 +1618,7 @@ public enum Status
 {
     Active,
     Released,
+    Expired,
 }
 
 sealed class StatusConverter : JsonConverter<Status>
@@ -1632,6 +1633,7 @@ sealed class StatusConverter : JsonConverter<Status>
         {
             "ACTIVE" => Status.Active,
             "RELEASED" => Status.Released,
+            "EXPIRED" => Status.Expired,
             _ => (Status)(-1),
         };
     }
@@ -1644,6 +1646,7 @@ sealed class StatusConverter : JsonConverter<Status>
             {
                 Status.Active => "ACTIVE",
                 Status.Released => "RELEASED",
+                Status.Expired => "EXPIRED",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

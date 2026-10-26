@@ -1903,6 +1903,7 @@ public enum ReservationStatus
 {
     Active,
     Released,
+    Expired,
 }
 
 sealed class ReservationStatusConverter : JsonConverter<ReservationStatus>
@@ -1917,6 +1918,7 @@ sealed class ReservationStatusConverter : JsonConverter<ReservationStatus>
         {
             "ACTIVE" => ReservationStatus.Active,
             "RELEASED" => ReservationStatus.Released,
+            "EXPIRED" => ReservationStatus.Expired,
             _ => (ReservationStatus)(-1),
         };
     }
@@ -1933,6 +1935,7 @@ sealed class ReservationStatusConverter : JsonConverter<ReservationStatus>
             {
                 ReservationStatus.Active => "ACTIVE",
                 ReservationStatus.Released => "RELEASED",
+                ReservationStatus.Expired => "EXPIRED",
                 _ => throw new StiggInvalidDataException(
                     string.Format("Invalid value '{0}' in {1}", value, nameof(value))
                 ),

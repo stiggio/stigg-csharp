@@ -2520,6 +2520,7 @@ public class EntitlementCreditReservationStatusTest : TestBase
     [Theory]
     [InlineData(EntitlementCreditReservationStatus.Active)]
     [InlineData(EntitlementCreditReservationStatus.Released)]
+    [InlineData(EntitlementCreditReservationStatus.Expired)]
     public void Validation_Works(EntitlementCreditReservationStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us
@@ -2542,6 +2543,7 @@ public class EntitlementCreditReservationStatusTest : TestBase
     [Theory]
     [InlineData(EntitlementCreditReservationStatus.Active)]
     [InlineData(EntitlementCreditReservationStatus.Released)]
+    [InlineData(EntitlementCreditReservationStatus.Expired)]
     public void SerializationRoundtrip_Works(EntitlementCreditReservationStatus rawValue)
     {
         // force implicit conversion because Theory can't do that for us
