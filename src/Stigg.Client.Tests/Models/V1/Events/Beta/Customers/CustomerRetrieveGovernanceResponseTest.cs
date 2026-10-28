@@ -32,7 +32,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
                     FeatureID = "featureId",
                 },
             ],
-            Pagination = new("next"),
+            Pagination = new() { Next = "next", Prev = "prev" },
         };
 
         List<Data> expectedData =
@@ -54,7 +54,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
                 FeatureID = "featureId",
             },
         ];
-        Pagination expectedPagination = new("next");
+        Pagination expectedPagination = new() { Next = "next", Prev = "prev" };
 
         Assert.Equal(expectedData.Count, model.Data.Count);
         for (int i = 0; i < expectedData.Count; i++)
@@ -88,7 +88,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
                     FeatureID = "featureId",
                 },
             ],
-            Pagination = new("next"),
+            Pagination = new() { Next = "next", Prev = "prev" },
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -124,7 +124,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
                     FeatureID = "featureId",
                 },
             ],
-            Pagination = new("next"),
+            Pagination = new() { Next = "next", Prev = "prev" },
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -153,7 +153,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
                 FeatureID = "featureId",
             },
         ];
-        Pagination expectedPagination = new("next");
+        Pagination expectedPagination = new() { Next = "next", Prev = "prev" };
 
         Assert.Equal(expectedData.Count, deserialized.Data.Count);
         for (int i = 0; i < expectedData.Count; i++)
@@ -187,7 +187,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
                     FeatureID = "featureId",
                 },
             ],
-            Pagination = new("next"),
+            Pagination = new() { Next = "next", Prev = "prev" },
         };
 
         model.Validate();
@@ -217,7 +217,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
                     FeatureID = "featureId",
                 },
             ],
-            Pagination = new("next"),
+            Pagination = new() { Next = "next", Prev = "prev" },
         };
 
         CustomerRetrieveGovernanceResponse copied = new(model);
@@ -516,17 +516,19 @@ public class PaginationTest : TestBase
     [Fact]
     public void FieldRoundtrip_Works()
     {
-        var model = new Pagination { Next = "next" };
+        var model = new Pagination { Next = "next", Prev = "prev" };
 
         string expectedNext = "next";
+        string expectedPrev = "prev";
 
         Assert.Equal(expectedNext, model.Next);
+        Assert.Equal(expectedPrev, model.Prev);
     }
 
     [Fact]
     public void SerializationRoundtrip_Works()
     {
-        var model = new Pagination { Next = "next" };
+        var model = new Pagination { Next = "next", Prev = "prev" };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<Pagination>(
@@ -540,7 +542,7 @@ public class PaginationTest : TestBase
     [Fact]
     public void FieldRoundtripThroughSerialization_Works()
     {
-        var model = new Pagination { Next = "next" };
+        var model = new Pagination { Next = "next", Prev = "prev" };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
         var deserialized = JsonSerializer.Deserialize<Pagination>(
@@ -550,14 +552,16 @@ public class PaginationTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedNext = "next";
+        string expectedPrev = "prev";
 
         Assert.Equal(expectedNext, deserialized.Next);
+        Assert.Equal(expectedPrev, deserialized.Prev);
     }
 
     [Fact]
     public void Validation_Works()
     {
-        var model = new Pagination { Next = "next" };
+        var model = new Pagination { Next = "next", Prev = "prev" };
 
         model.Validate();
     }
@@ -565,7 +569,7 @@ public class PaginationTest : TestBase
     [Fact]
     public void CopyConstructor_Works()
     {
-        var model = new Pagination { Next = "next" };
+        var model = new Pagination { Next = "next", Prev = "prev" };
 
         Pagination copied = new(model);
 

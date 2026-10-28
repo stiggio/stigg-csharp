@@ -374,10 +374,24 @@ public sealed record class Pagination : JsonModel
         init { this._rawData.Set("next", value); }
     }
 
+    /// <summary>
+    /// Cursor for fetching the previous page of results, or null if at the beginning
+    /// </summary>
+    public required string? Prev
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("prev");
+        }
+        init { this._rawData.Set("prev", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
         _ = this.Next;
+        _ = this.Prev;
     }
 
     public Pagination() { }
@@ -405,13 +419,6 @@ public sealed record class Pagination : JsonModel
     public static Pagination FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
     {
         return new(FrozenDictionary.ToFrozenDictionary(rawData));
-    }
-
-    [SetsRequiredMembers]
-    public Pagination(string? next)
-        : this()
-    {
-        this.Next = next;
     }
 }
 

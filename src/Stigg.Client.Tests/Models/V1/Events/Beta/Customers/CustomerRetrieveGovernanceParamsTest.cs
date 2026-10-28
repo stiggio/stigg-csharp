@@ -17,6 +17,7 @@ public class CustomerRetrieveGovernanceParamsTest : TestBase
         {
             ID = "id",
             After = "after",
+            Before = "before",
             CurrencyIds = ["string"],
             EntityIDSearch = "x",
             EntityTypeIds = ["string"],
@@ -32,6 +33,7 @@ public class CustomerRetrieveGovernanceParamsTest : TestBase
 
         string expectedID = "id";
         string expectedAfter = "after";
+        string expectedBefore = "before";
         List<string> expectedCurrencyIds = ["string"];
         string expectedEntityIDSearch = "x";
         List<string> expectedEntityTypeIds = ["string"];
@@ -46,6 +48,7 @@ public class CustomerRetrieveGovernanceParamsTest : TestBase
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedAfter, parameters.After);
+        Assert.Equal(expectedBefore, parameters.Before);
         Assert.NotNull(parameters.CurrencyIds);
         Assert.Equal(expectedCurrencyIds.Count, parameters.CurrencyIds.Count);
         for (int i = 0; i < expectedCurrencyIds.Count; i++)
@@ -81,6 +84,8 @@ public class CustomerRetrieveGovernanceParamsTest : TestBase
 
         Assert.Null(parameters.After);
         Assert.False(parameters.RawQueryData.ContainsKey("after"));
+        Assert.Null(parameters.Before);
+        Assert.False(parameters.RawQueryData.ContainsKey("before"));
         Assert.Null(parameters.CurrencyIds);
         Assert.False(parameters.RawQueryData.ContainsKey("currencyIds"));
         Assert.Null(parameters.EntityIDSearch);
@@ -114,6 +119,7 @@ public class CustomerRetrieveGovernanceParamsTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             After = null,
+            Before = null,
             CurrencyIds = null,
             EntityIDSearch = null,
             EntityTypeIds = null,
@@ -129,6 +135,8 @@ public class CustomerRetrieveGovernanceParamsTest : TestBase
 
         Assert.Null(parameters.After);
         Assert.False(parameters.RawQueryData.ContainsKey("after"));
+        Assert.Null(parameters.Before);
+        Assert.False(parameters.RawQueryData.ContainsKey("before"));
         Assert.Null(parameters.CurrencyIds);
         Assert.False(parameters.RawQueryData.ContainsKey("currencyIds"));
         Assert.Null(parameters.EntityIDSearch);
@@ -160,6 +168,7 @@ public class CustomerRetrieveGovernanceParamsTest : TestBase
         {
             ID = "id",
             After = "after",
+            Before = "before",
             CurrencyIds = ["string"],
             EntityIDSearch = "x",
             EntityTypeIds = ["string"],
@@ -176,7 +185,7 @@ public class CustomerRetrieveGovernanceParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://api.stigg.io/api/v1-beta/customers/id/governance?after=after&currencyIds=string&entityIdSearch=x&entityTypeIds=string&featureIds=string&limit=1&minUtilization=0&order=asc&scope=all&sortBy=utilization"
+                    "https://api.stigg.io/api/v1-beta/customers/id/governance?after=after&before=before&currencyIds=string&entityIdSearch=x&entityTypeIds=string&featureIds=string&limit=1&minUtilization=0&order=asc&scope=all&sortBy=utilization"
                 ),
                 url
             )
@@ -207,6 +216,7 @@ public class CustomerRetrieveGovernanceParamsTest : TestBase
         {
             ID = "id",
             After = "after",
+            Before = "before",
             CurrencyIds = ["string"],
             EntityIDSearch = "x",
             EntityTypeIds = ["string"],

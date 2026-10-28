@@ -27,7 +27,8 @@ public record class CustomerRetrieveGovernanceParams : ParamsBase
     public string? ID { get; init; }
 
     /// <summary>
-    /// Return items that come after this cursor
+    /// Opaque cursor from a page’s `next`; returns the page after it. Mutually exclusive
+    /// with `before`.
     /// </summary>
     public string? After
     {
@@ -48,8 +49,30 @@ public record class CustomerRetrieveGovernanceParams : ParamsBase
     }
 
     /// <summary>
-    /// Currency ids to include, repeated per value (e.g. `?currencyIds=credits`).
-    /// Omit both featureIds and currencyIds for tree mode.
+    /// Opaque cursor from a page’s `prev`; returns the page before it. Mutually
+    /// exclusive with `after`.
+    /// </summary>
+    public string? Before
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<string>("before");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("before", value);
+        }
+    }
+
+    /// <summary>
+    /// Currency ids to include, comma-separated (e.g. `?currencyIds=credits`), up
+    /// to 100. Omit both featureIds and currencyIds for tree mode.
     /// </summary>
     public IReadOnlyList<string>? CurrencyIds
     {
@@ -95,7 +118,8 @@ public record class CustomerRetrieveGovernanceParams : ParamsBase
     }
 
     /// <summary>
-    /// Filter to one or more entity types, repeated per value (e.g. `?entityTypeIds=team&amp;entityTypeIds=user`).
+    /// Filter to one or more entity types, comma-separated (e.g. `?entityTypeIds=team,user`),
+    /// up to 100.
     /// </summary>
     public IReadOnlyList<string>? EntityTypeIds
     {
@@ -119,9 +143,9 @@ public record class CustomerRetrieveGovernanceParams : ParamsBase
     }
 
     /// <summary>
-    /// Feature ids to include, repeated per value (e.g. `?featureIds=ai-tokens&amp;featureIds=seats`).
-    /// Omit both featureIds and currencyIds for tree mode — every node in the hierarchy
-    /// with no usage configuration attached.
+    /// Feature ids to include, comma-separated (e.g. `?featureIds=ai-tokens,seats`),
+    /// up to 100. Omit both featureIds and currencyIds for tree mode — every node
+    /// in the hierarchy with no usage configuration attached.
     /// </summary>
     public IReadOnlyList<string>? FeatureIds
     {
