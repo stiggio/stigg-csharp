@@ -29,6 +29,8 @@ public interface ICustomerService
     IEntityService Entities { get; }
 
     IAssignmentService Assignments { get; }
+
+    IGovernanceService Governance { get; }
 }
 
 /// <summary>
@@ -49,4 +51,6 @@ public interface ICustomerServiceWithRawResponse
     IEntityServiceWithRawResponse Entities { get; }
 
     IAssignmentServiceWithRawResponse Assignments { get; }
+
+    IGovernanceServiceWithRawResponse Governance { get; }
 }

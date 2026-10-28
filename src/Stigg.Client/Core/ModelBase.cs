@@ -13,6 +13,7 @@ using CustomCurrencies = Stigg.Client.Models.V1.Credits.CustomCurrencies;
 using CustomersEntitlements = Stigg.Client.Models.V1Beta.Customers.Entitlements;
 using Entitlements = Stigg.Client.Models.V1.Addons.Entitlements;
 using Features = Stigg.Client.Models.V1.Features;
+using Governance = Stigg.Client.Models.V1Beta.Customers.Governance;
 using Grants = Stigg.Client.Models.V1.Credits.Grants;
 using Integrations = Stigg.Client.Models.V1.Customers.Integrations;
 using PaymentMethod = Stigg.Client.Models.V1.Customers.PaymentMethod;
@@ -961,6 +962,9 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, CustomersEntitlements::CreditAccessDeniedReason>(),
             new ApiEnumConverter<string, CustomersEntitlements::Status>(),
             new ApiEnumConverter<string, IncludeArchived>(),
+            new ApiEnumConverter<string, Governance::Order>(),
+            new ApiEnumConverter<string, Governance::Scope>(),
+            new ApiEnumConverter<string, Governance::SortBy>(),
             new ApiEnumConverter<string, UpdateBehavior>(),
         },
     };
