@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.1](https://github.com/stiggio/stigg-csharp/compare/v0.12.0...v0.12.1) (2026-10-28)
+
+
+### Bug Fixes
+
+* **stainless:** restore edge.api.stigg.io as the production server ([c1302a5](https://github.com/stiggio/stigg-csharp/commit/c1302a588b454cb3c19fecd0673f9297d7884e79))
+
 ## [0.12.0](https://github.com/stiggio/stigg-csharp/compare/v0.11.0...v0.12.0) (2026-10-28)
 
 
