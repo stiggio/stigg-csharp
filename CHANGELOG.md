@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.12.0](https://github.com/stiggio/stigg-csharp/compare/v0.11.0...v0.12.0) (2026-10-28)
+
+
+### Features
+
+* **STIGG-10529:** governance query as paginated v1Beta.customers.governance.list ([55c4434](https://github.com/stiggio/stigg-csharp/commit/55c443414e41913d4bb5fd77e6f7b97b2b44927d))
+
+
+### Bug Fixes
+
+* sync OpenAPI spec from stigg-api ([6d3f486](https://github.com/stiggio/stigg-csharp/commit/6d3f486f8224032481d08d1c5bca10599faf1b5f))
+* sync OpenAPI spec from stigg-api ([e0c50c1](https://github.com/stiggio/stigg-csharp/commit/e0c50c1bf4b83453dfc889662f81978822f73ade))
+* sync OpenAPI spec from stigg-api ([be679b8](https://github.com/stiggio/stigg-csharp/commit/be679b83e2eb593c1aebf16b435d75379092c016))
+
 ## [0.11.0](https://github.com/stiggio/stigg-csharp/compare/v0.10.2...v0.11.0) (2026-10-22)
 
 
