@@ -64,7 +64,7 @@ public class CustomCurrencyUnarchiveParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://api.stigg.io/api/v1/credits/custom-currencies/currencyId/unarchive"
+                    "https://edge.api.stigg.io/api/v1/credits/custom-currencies/currencyId/unarchive"
                 ),
                 url
             )

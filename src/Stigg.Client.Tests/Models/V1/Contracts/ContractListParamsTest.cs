@@ -115,7 +115,7 @@ public class ContractListParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://api.stigg.io/api/v1/contracts?after=after&before=before&customerExternalId=customerExternalId&limit=1&name=name&state=state"
+                    "https://edge.api.stigg.io/api/v1/contracts?after=after&before=before&customerExternalId=customerExternalId&limit=1&name=name&state=state"
                 ),
                 url
             )

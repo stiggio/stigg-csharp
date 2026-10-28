@@ -62,7 +62,10 @@ public class ProductUnarchiveProductParamsTest : TestBase
         var url = parameters.Url(new() { ApiKey = "My API Key" });
 
         Assert.True(
-            TestBase.UrisEqual(new Uri("https://api.stigg.io/api/v1/products/x/unarchive"), url)
+            TestBase.UrisEqual(
+                new Uri("https://edge.api.stigg.io/api/v1/products/x/unarchive"),
+                url
+            )
         );
     }
 

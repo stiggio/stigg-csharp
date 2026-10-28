@@ -185,7 +185,7 @@ public class GovernanceListParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://api.stigg.io/api/v1-beta/customers/id/governance?after=after&before=before&currencyIds=string&entityIdSearch=x&entityTypeIds=string&featureIds=string&limit=1&minUtilization=0&order=asc&scope=all&sortBy=utilization"
+                    "https://edge.api.stigg.io/api/v1-beta/customers/id/governance?after=after&before=before&currencyIds=string&entityIdSearch=x&entityTypeIds=string&featureIds=string&limit=1&minUtilization=0&order=asc&scope=all&sortBy=utilization"
                 ),
                 url
             )

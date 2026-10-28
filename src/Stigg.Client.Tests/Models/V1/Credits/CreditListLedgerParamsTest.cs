@@ -130,7 +130,7 @@ public class CreditListLedgerParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://api.stigg.io/api/v1/credits/ledger?customerId=customerId&after=after&before=before&currencyId=currencyId&eventType=eventType&limit=1&reservationId=x&resourceId=resourceId"
+                    "https://edge.api.stigg.io/api/v1/credits/ledger?customerId=customerId&after=after&before=before&currencyId=currencyId&eventType=eventType&limit=1&reservationId=x&resourceId=resourceId"
                 ),
                 url
             )

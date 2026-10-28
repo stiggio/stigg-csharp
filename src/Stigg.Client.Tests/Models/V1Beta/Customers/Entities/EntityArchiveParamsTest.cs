@@ -80,7 +80,7 @@ public class EntityArchiveParamsTest : TestBase
 
         Assert.True(
             TestBase.UrisEqual(
-                new Uri("https://api.stigg.io/api/v1-beta/customers/id/entities/archive"),
+                new Uri("https://edge.api.stigg.io/api/v1-beta/customers/id/entities/archive"),
                 url
             )
         );

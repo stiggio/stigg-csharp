@@ -151,7 +151,7 @@ public class CustomerListInvoicesParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://api.stigg.io/api/v1/customers/id/invoices?after=after&before=before&contractExternalId=contractExternalId&issuedAfter=2019-12-27T18%3a11%3a19.117%2b00%3a00&issuedBefore=2019-12-27T18%3a11%3a19.117%2b00%3a00&limit=1&orderBy=issueDate&orderDir=ASC&stateIn=stateIn"
+                    "https://edge.api.stigg.io/api/v1/customers/id/invoices?after=after&before=before&contractExternalId=contractExternalId&issuedAfter=2019-12-27T18%3a11%3a19.117%2b00%3a00&issuedBefore=2019-12-27T18%3a11%3a19.117%2b00%3a00&limit=1&orderBy=issueDate&orderDir=ASC&stateIn=stateIn"
                 ),
                 url
             )
