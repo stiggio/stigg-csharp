@@ -213,6 +213,19 @@ public record class CustomerProvisionParams : ParamsBase
     }
 
     /// <summary>
+    /// The unique identifier for the customer in Salesforce integration
+    /// </summary>
+    public string? SalesforceID
+    {
+        get
+        {
+            this._rawBodyData.Freeze();
+            return this._rawBodyData.GetNullableClass<string>("salesforceId");
+        }
+        init { this._rawBodyData.Set("salesforceId", value); }
+    }
+
+    /// <summary>
     /// Timezone to use for this customer
     /// </summary>
     public string? Timezone

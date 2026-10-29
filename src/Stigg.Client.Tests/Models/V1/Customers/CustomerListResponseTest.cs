@@ -88,6 +88,7 @@ public class CustomerListResponseTest : TestBase
                     PaymentMethodID = "paymentMethodId",
                 },
             },
+            SalesforceID = "salesforceId",
             Timezone = "timezone",
         };
 
@@ -167,6 +168,7 @@ public class CustomerListResponseTest : TestBase
                 PaymentMethodID = "paymentMethodId",
             },
         };
+        string expectedSalesforceID = "salesforceId";
         string expectedTimezone = "timezone";
 
         Assert.Equal(expectedID, model.ID);
@@ -195,6 +197,7 @@ public class CustomerListResponseTest : TestBase
         }
         Assert.Equal(expectedName, model.Name);
         Assert.Equal(expectedPassthrough, model.Passthrough);
+        Assert.Equal(expectedSalesforceID, model.SalesforceID);
         Assert.Equal(expectedTimezone, model.Timezone);
     }
 
@@ -277,6 +280,7 @@ public class CustomerListResponseTest : TestBase
                     PaymentMethodID = "paymentMethodId",
                 },
             },
+            SalesforceID = "salesforceId",
             Timezone = "timezone",
         };
 
@@ -368,6 +372,7 @@ public class CustomerListResponseTest : TestBase
                     PaymentMethodID = "paymentMethodId",
                 },
             },
+            SalesforceID = "salesforceId",
             Timezone = "timezone",
         };
 
@@ -454,6 +459,7 @@ public class CustomerListResponseTest : TestBase
                 PaymentMethodID = "paymentMethodId",
             },
         };
+        string expectedSalesforceID = "salesforceId";
         string expectedTimezone = "timezone";
 
         Assert.Equal(expectedID, deserialized.ID);
@@ -482,6 +488,7 @@ public class CustomerListResponseTest : TestBase
         }
         Assert.Equal(expectedName, deserialized.Name);
         Assert.Equal(expectedPassthrough, deserialized.Passthrough);
+        Assert.Equal(expectedSalesforceID, deserialized.SalesforceID);
         Assert.Equal(expectedTimezone, deserialized.Timezone);
     }
 
@@ -564,6 +571,7 @@ public class CustomerListResponseTest : TestBase
                     PaymentMethodID = "paymentMethodId",
                 },
             },
+            SalesforceID = "salesforceId",
             Timezone = "timezone",
         };
 
@@ -595,6 +603,7 @@ public class CustomerListResponseTest : TestBase
             Email = "dev@stainless.com",
             Language = "language",
             Name = "name",
+            SalesforceID = "salesforceId",
             Timezone = "timezone",
         };
 
@@ -631,6 +640,7 @@ public class CustomerListResponseTest : TestBase
             Email = "dev@stainless.com",
             Language = "language",
             Name = "name",
+            SalesforceID = "salesforceId",
             Timezone = "timezone",
         };
 
@@ -662,6 +672,7 @@ public class CustomerListResponseTest : TestBase
             Email = "dev@stainless.com",
             Language = "language",
             Name = "name",
+            SalesforceID = "salesforceId",
             Timezone = "timezone",
 
             // Null should be interpreted as omitted for these properties
@@ -703,6 +714,7 @@ public class CustomerListResponseTest : TestBase
             Email = "dev@stainless.com",
             Language = "language",
             Name = "name",
+            SalesforceID = "salesforceId",
             Timezone = "timezone",
 
             // Null should be interpreted as omitted for these properties
@@ -793,6 +805,8 @@ public class CustomerListResponseTest : TestBase
         Assert.False(model.RawData.ContainsKey("language"));
         Assert.Null(model.Name);
         Assert.False(model.RawData.ContainsKey("name"));
+        Assert.Null(model.SalesforceID);
+        Assert.False(model.RawData.ContainsKey("salesforceId"));
         Assert.Null(model.Timezone);
         Assert.False(model.RawData.ContainsKey("timezone"));
     }
@@ -936,6 +950,7 @@ public class CustomerListResponseTest : TestBase
             Email = null,
             Language = null,
             Name = null,
+            SalesforceID = null,
             Timezone = null,
         };
 
@@ -953,6 +968,8 @@ public class CustomerListResponseTest : TestBase
         Assert.True(model.RawData.ContainsKey("language"));
         Assert.Null(model.Name);
         Assert.True(model.RawData.ContainsKey("name"));
+        Assert.Null(model.SalesforceID);
+        Assert.True(model.RawData.ContainsKey("salesforceId"));
         Assert.Null(model.Timezone);
         Assert.True(model.RawData.ContainsKey("timezone"));
     }
@@ -1028,6 +1045,7 @@ public class CustomerListResponseTest : TestBase
             Email = null,
             Language = null,
             Name = null,
+            SalesforceID = null,
             Timezone = null,
         };
 
@@ -1113,6 +1131,7 @@ public class CustomerListResponseTest : TestBase
                     PaymentMethodID = "paymentMethodId",
                 },
             },
+            SalesforceID = "salesforceId",
             Timezone = "timezone",
         };
 

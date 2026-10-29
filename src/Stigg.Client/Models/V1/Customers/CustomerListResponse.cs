@@ -241,6 +241,19 @@ public sealed record class CustomerListResponse : JsonModel
     }
 
     /// <summary>
+    /// The unique identifier for the customer in Salesforce integration
+    /// </summary>
+    public string? SalesforceID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableClass<string>("salesforceId");
+        }
+        init { this._rawData.Set("salesforceId", value); }
+    }
+
+    /// <summary>
     /// Timezone to use for this customer
     /// </summary>
     public string? Timezone
@@ -273,6 +286,7 @@ public sealed record class CustomerListResponse : JsonModel
         _ = this.Metadata;
         _ = this.Name;
         this.Passthrough?.Validate();
+        _ = this.SalesforceID;
         _ = this.Timezone;
     }
 

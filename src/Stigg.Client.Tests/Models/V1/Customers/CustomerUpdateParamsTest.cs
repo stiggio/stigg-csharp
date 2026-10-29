@@ -76,6 +76,7 @@ public class CustomerUpdateParamsTest : TestBase
                     PaymentMethodID = "paymentMethodId",
                 },
             },
+            SalesforceID = "salesforceId",
             Timezone = "timezone",
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",
@@ -142,6 +143,7 @@ public class CustomerUpdateParamsTest : TestBase
                 PaymentMethodID = "paymentMethodId",
             },
         };
+        string expectedSalesforceID = "salesforceId";
         string expectedTimezone = "timezone";
         string expectedXAccountID = "X-ACCOUNT-ID";
         string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
@@ -168,6 +170,7 @@ public class CustomerUpdateParamsTest : TestBase
         }
         Assert.Equal(expectedName, parameters.Name);
         Assert.Equal(expectedPassthrough, parameters.Passthrough);
+        Assert.Equal(expectedSalesforceID, parameters.SalesforceID);
         Assert.Equal(expectedTimezone, parameters.Timezone);
         Assert.Equal(expectedXAccountID, parameters.XAccountID);
         Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
@@ -185,6 +188,7 @@ public class CustomerUpdateParamsTest : TestBase
             Email = "dev@stainless.com",
             Language = "language",
             Name = "name",
+            SalesforceID = "salesforceId",
             Timezone = "timezone",
         };
 
@@ -212,6 +216,7 @@ public class CustomerUpdateParamsTest : TestBase
             Email = "dev@stainless.com",
             Language = "language",
             Name = "name",
+            SalesforceID = "salesforceId",
             Timezone = "timezone",
 
             // Null should be interpreted as omitted for these properties
@@ -310,6 +315,8 @@ public class CustomerUpdateParamsTest : TestBase
         Assert.False(parameters.RawBodyData.ContainsKey("language"));
         Assert.Null(parameters.Name);
         Assert.False(parameters.RawBodyData.ContainsKey("name"));
+        Assert.Null(parameters.SalesforceID);
+        Assert.False(parameters.RawBodyData.ContainsKey("salesforceId"));
         Assert.Null(parameters.Timezone);
         Assert.False(parameters.RawBodyData.ContainsKey("timezone"));
     }
@@ -383,6 +390,7 @@ public class CustomerUpdateParamsTest : TestBase
             Email = null,
             Language = null,
             Name = null,
+            SalesforceID = null,
             Timezone = null,
         };
 
@@ -398,6 +406,8 @@ public class CustomerUpdateParamsTest : TestBase
         Assert.True(parameters.RawBodyData.ContainsKey("language"));
         Assert.Null(parameters.Name);
         Assert.True(parameters.RawBodyData.ContainsKey("name"));
+        Assert.Null(parameters.SalesforceID);
+        Assert.True(parameters.RawBodyData.ContainsKey("salesforceId"));
         Assert.Null(parameters.Timezone);
         Assert.True(parameters.RawBodyData.ContainsKey("timezone"));
     }
@@ -497,6 +507,7 @@ public class CustomerUpdateParamsTest : TestBase
                     PaymentMethodID = "paymentMethodId",
                 },
             },
+            SalesforceID = "salesforceId",
             Timezone = "timezone",
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",
