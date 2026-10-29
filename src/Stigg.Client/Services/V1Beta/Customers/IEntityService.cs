@@ -72,14 +72,17 @@ public interface IEntityService
     );
 
     /// <summary>
-    /// Restores previously archived entities in bulk for the given customer by id.
+    /// Deprecated: upsert an entity to restore it. Restores previously archived
+    /// entities in bulk for the given customer by id.
     /// </summary>
+    [Obsolete("deprecated")]
     Task<EntityUnarchiveResponse> Unarchive(
         EntityUnarchiveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Unarchive(EntityUnarchiveParams, CancellationToken)"/>
+    [Obsolete("deprecated")]
     Task<EntityUnarchiveResponse> Unarchive(
         string id,
         EntityUnarchiveParams parameters,
@@ -88,7 +91,8 @@ public interface IEntityService
 
     /// <summary>
     /// Creates or updates entities in bulk for the given customer. Existing entities
-    /// matched by id are updated; new ids are created.
+    /// matched by id are updated; new ids are created. An upsert of an archived entity
+    /// restores it. An entity on an archived entity type fails with 400.
     /// </summary>
     Task<EntityUpsertResponse> Upsert(
         EntityUpsertParams parameters,
@@ -168,12 +172,14 @@ public interface IEntityServiceWithRawResponse
     /// Returns a raw HTTP response for <c>post /api/v1-beta/customers/{id}/entities/unarchive</c>, but is otherwise the
     /// same as <see cref="IEntityService.Unarchive(EntityUnarchiveParams, CancellationToken)"/>.
     /// </summary>
+    [Obsolete("deprecated")]
     Task<HttpResponse<EntityUnarchiveResponse>> Unarchive(
         EntityUnarchiveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Unarchive(EntityUnarchiveParams, CancellationToken)"/>
+    [Obsolete("deprecated")]
     Task<HttpResponse<EntityUnarchiveResponse>> Unarchive(
         string id,
         EntityUnarchiveParams parameters,

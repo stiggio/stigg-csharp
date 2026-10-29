@@ -14,7 +14,7 @@ namespace Stigg.Client.Models.V1Beta.EntityTypes;
 /// <summary>
 /// Batched create-or-update of entity types. Existing types matched by id are updated;
 /// new ids are created. Idempotent — re-submitting the same payload converges to
-/// the same state.
+/// the same state. An upsert of an archived entity type restores it.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that

@@ -103,6 +103,7 @@ public sealed class EntityService : IEntityService
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<EntityUnarchiveResponse> Unarchive(
         EntityUnarchiveParams parameters,
         CancellationToken cancellationToken = default
@@ -115,6 +116,7 @@ public sealed class EntityService : IEntityService
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public Task<EntityUnarchiveResponse> Unarchive(
         string id,
         EntityUnarchiveParams parameters,
@@ -295,6 +297,7 @@ public sealed class EntityServiceWithRawResponse : IEntityServiceWithRawResponse
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<HttpResponse<EntityUnarchiveResponse>> Unarchive(
         EntityUnarchiveParams parameters,
         CancellationToken cancellationToken = default
@@ -328,6 +331,7 @@ public sealed class EntityServiceWithRawResponse : IEntityServiceWithRawResponse
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public Task<HttpResponse<EntityUnarchiveResponse>> Unarchive(
         string id,
         EntityUnarchiveParams parameters,

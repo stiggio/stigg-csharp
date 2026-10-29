@@ -29,7 +29,8 @@ public interface IEntityTypeService
     /// <summary>
     /// Returns a cursor-paginated list of entity types defined in the environment.
     /// Entity types are vendor-defined categories of resource that can be governed
-    /// (e.g. Org, Team, User).
+    /// (e.g. Org, Team, User). Archived entity types are excluded unless
+    /// includeArchived=true.
     /// </summary>
     Task<EntityTypeListPage> List(
         EntityTypeListParams? parameters = null,
@@ -39,7 +40,7 @@ public interface IEntityTypeService
     /// <summary>
     /// Batched create-or-update of entity types. Existing types matched by id are
     /// updated; new ids are created. Idempotent — re-submitting the same payload
-    /// converges to the same state.
+    /// converges to the same state. An upsert of an archived entity type restores it.
     /// </summary>
     Task<EntityTypeUpsertResponse> Upsert(
         EntityTypeUpsertParams parameters,

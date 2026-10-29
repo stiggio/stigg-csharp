@@ -14,6 +14,7 @@ public class EntityTypeListResponseTest : TestBase
         var model = new EntityTypeListResponse
         {
             ID = "id",
+            ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AttributionKeys = ["NxI"],
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
@@ -22,6 +23,7 @@ public class EntityTypeListResponseTest : TestBase
         };
 
         string expectedID = "id";
+        DateTimeOffset expectedArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         List<string> expectedAttributionKeys = ["NxI"];
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedDescription = "description";
@@ -29,6 +31,7 @@ public class EntityTypeListResponseTest : TestBase
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedID, model.ID);
+        Assert.Equal(expectedArchivedAt, model.ArchivedAt);
         Assert.Equal(expectedAttributionKeys.Count, model.AttributionKeys.Count);
         for (int i = 0; i < expectedAttributionKeys.Count; i++)
         {
@@ -46,6 +49,7 @@ public class EntityTypeListResponseTest : TestBase
         var model = new EntityTypeListResponse
         {
             ID = "id",
+            ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AttributionKeys = ["NxI"],
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
@@ -68,6 +72,7 @@ public class EntityTypeListResponseTest : TestBase
         var model = new EntityTypeListResponse
         {
             ID = "id",
+            ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AttributionKeys = ["NxI"],
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
@@ -83,6 +88,7 @@ public class EntityTypeListResponseTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
+        DateTimeOffset expectedArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         List<string> expectedAttributionKeys = ["NxI"];
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedDescription = "description";
@@ -90,6 +96,7 @@ public class EntityTypeListResponseTest : TestBase
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedID, deserialized.ID);
+        Assert.Equal(expectedArchivedAt, deserialized.ArchivedAt);
         Assert.Equal(expectedAttributionKeys.Count, deserialized.AttributionKeys.Count);
         for (int i = 0; i < expectedAttributionKeys.Count; i++)
         {
@@ -107,6 +114,7 @@ public class EntityTypeListResponseTest : TestBase
         var model = new EntityTypeListResponse
         {
             ID = "id",
+            ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AttributionKeys = ["NxI"],
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
@@ -123,6 +131,7 @@ public class EntityTypeListResponseTest : TestBase
         var model = new EntityTypeListResponse
         {
             ID = "id",
+            ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AttributionKeys = ["NxI"],
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",

@@ -18,6 +18,7 @@ public class EntityTypeListPageResponseTest : TestBase
                 new()
                 {
                     ID = "id",
+                    ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     AttributionKeys = ["NxI"],
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Description = "description",
@@ -37,6 +38,7 @@ public class EntityTypeListPageResponseTest : TestBase
             new()
             {
                 ID = "id",
+                ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 AttributionKeys = ["NxI"],
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Description = "description",
@@ -68,6 +70,7 @@ public class EntityTypeListPageResponseTest : TestBase
                 new()
                 {
                     ID = "id",
+                    ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     AttributionKeys = ["NxI"],
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Description = "description",
@@ -101,6 +104,7 @@ public class EntityTypeListPageResponseTest : TestBase
                 new()
                 {
                     ID = "id",
+                    ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     AttributionKeys = ["NxI"],
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Description = "description",
@@ -127,6 +131,7 @@ public class EntityTypeListPageResponseTest : TestBase
             new()
             {
                 ID = "id",
+                ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 AttributionKeys = ["NxI"],
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Description = "description",
@@ -158,6 +163,7 @@ public class EntityTypeListPageResponseTest : TestBase
                 new()
                 {
                     ID = "id",
+                    ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     AttributionKeys = ["NxI"],
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Description = "description",
@@ -185,6 +191,7 @@ public class EntityTypeListPageResponseTest : TestBase
                 new()
                 {
                     ID = "id",
+                    ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     AttributionKeys = ["NxI"],
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Description = "description",

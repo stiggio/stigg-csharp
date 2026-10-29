@@ -107,6 +107,19 @@ public sealed record class Data : JsonModel
     }
 
     /// <summary>
+    /// Timestamp of when the record was deleted
+    /// </summary>
+    public required DateTimeOffset? ArchivedAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<DateTimeOffset>("archivedAt");
+        }
+        init { this._rawData.Set("archivedAt", value); }
+    }
+
+    /// <summary>
     /// Dimension keys used to attribute usage events to instances of this type (e.g.
     /// ["orgId"]). Empty array means no attribution.
     /// </summary>
@@ -183,6 +196,7 @@ public sealed record class Data : JsonModel
     public override void Validate()
     {
         _ = this.ID;
+        _ = this.ArchivedAt;
         _ = this.AttributionKeys;
         _ = this.CreatedAt;
         _ = this.Description;

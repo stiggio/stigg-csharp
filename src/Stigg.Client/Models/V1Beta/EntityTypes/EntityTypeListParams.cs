@@ -1,17 +1,19 @@
-using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Stigg.Client.Core;
+using Stigg.Client.Exceptions;
+using System = System;
 
 namespace Stigg.Client.Models.V1Beta.EntityTypes;
 
 /// <summary>
 /// Returns a cursor-paginated list of entity types defined in the environment. Entity
 /// types are vendor-defined categories of resource that can be governed (e.g. Org,
-/// Team, User).
+/// Team, User). Archived entity types are excluded unless includeArchived=true.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
@@ -58,6 +60,29 @@ public record class EntityTypeListParams : ParamsBase
             }
 
             this._rawQueryData.Set("before", value);
+        }
+    }
+
+    /// <summary>
+    /// Whether to include archived entity types. One of: true, false
+    /// </summary>
+    public ApiEnum<string, IncludeArchived>? IncludeArchived
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<ApiEnum<string, IncludeArchived>>(
+                "includeArchived"
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("includeArchived", value);
         }
     }
 
@@ -185,9 +210,11 @@ public record class EntityTypeListParams : ParamsBase
             && this._rawQueryData.Equals(other._rawQueryData);
     }
 
-    public override Uri Url(ClientOptions options)
+    public override System::Uri Url(ClientOptions options)
     {
-        return new UriBuilder(options.BaseUrl.ToString().TrimEnd('/') + "/api/v1-beta/entity-types")
+        return new System::UriBuilder(
+            options.BaseUrl.ToString().TrimEnd('/') + "/api/v1-beta/entity-types"
+        )
         {
             Query = this.QueryString(options),
         }.Uri;
@@ -205,5 +232,52 @@ public record class EntityTypeListParams : ParamsBase
     public override int GetHashCode()
     {
         return 0;
+    }
+}
+
+/// <summary>
+/// Whether to include archived entity types. One of: true, false
+/// </summary>
+[JsonConverter(typeof(IncludeArchivedConverter))]
+public enum IncludeArchived
+{
+    True,
+    False,
+}
+
+sealed class IncludeArchivedConverter : JsonConverter<IncludeArchived>
+{
+    public override IncludeArchived Read(
+        ref Utf8JsonReader reader,
+        System::Type typeToConvert,
+        JsonSerializerOptions options
+    )
+    {
+        return JsonSerializer.Deserialize<string>(ref reader, options) switch
+        {
+            "true" => IncludeArchived.True,
+            "false" => IncludeArchived.False,
+            _ => (IncludeArchived)(-1),
+        };
+    }
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        IncludeArchived value,
+        JsonSerializerOptions options
+    )
+    {
+        JsonSerializer.Serialize(
+            writer,
+            value switch
+            {
+                IncludeArchived.True => "true",
+                IncludeArchived.False => "false",
+                _ => throw new StiggInvalidDataException(
+                    string.Format("Invalid value '{0}' in {1}", value, nameof(value))
+                ),
+            },
+            options
+        );
     }
 }

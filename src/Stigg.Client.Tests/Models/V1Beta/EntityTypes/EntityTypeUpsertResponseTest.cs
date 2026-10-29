@@ -18,6 +18,7 @@ public class EntityTypeUpsertResponseTest : TestBase
                 new()
                 {
                     ID = "id",
+                    ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     AttributionKeys = ["NxI"],
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Description = "description",
@@ -32,6 +33,7 @@ public class EntityTypeUpsertResponseTest : TestBase
             new()
             {
                 ID = "id",
+                ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 AttributionKeys = ["NxI"],
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Description = "description",
@@ -57,6 +59,7 @@ public class EntityTypeUpsertResponseTest : TestBase
                 new()
                 {
                     ID = "id",
+                    ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     AttributionKeys = ["NxI"],
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Description = "description",
@@ -85,6 +88,7 @@ public class EntityTypeUpsertResponseTest : TestBase
                 new()
                 {
                     ID = "id",
+                    ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     AttributionKeys = ["NxI"],
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Description = "description",
@@ -106,6 +110,7 @@ public class EntityTypeUpsertResponseTest : TestBase
             new()
             {
                 ID = "id",
+                ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 AttributionKeys = ["NxI"],
                 CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 Description = "description",
@@ -131,6 +136,7 @@ public class EntityTypeUpsertResponseTest : TestBase
                 new()
                 {
                     ID = "id",
+                    ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     AttributionKeys = ["NxI"],
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Description = "description",
@@ -153,6 +159,7 @@ public class EntityTypeUpsertResponseTest : TestBase
                 new()
                 {
                     ID = "id",
+                    ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     AttributionKeys = ["NxI"],
                     CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     Description = "description",
@@ -176,6 +183,7 @@ public class DataTest : TestBase
         var model = new Data
         {
             ID = "id",
+            ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AttributionKeys = ["NxI"],
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
@@ -184,6 +192,7 @@ public class DataTest : TestBase
         };
 
         string expectedID = "id";
+        DateTimeOffset expectedArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         List<string> expectedAttributionKeys = ["NxI"];
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedDescription = "description";
@@ -191,6 +200,7 @@ public class DataTest : TestBase
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedID, model.ID);
+        Assert.Equal(expectedArchivedAt, model.ArchivedAt);
         Assert.Equal(expectedAttributionKeys.Count, model.AttributionKeys.Count);
         for (int i = 0; i < expectedAttributionKeys.Count; i++)
         {
@@ -208,6 +218,7 @@ public class DataTest : TestBase
         var model = new Data
         {
             ID = "id",
+            ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AttributionKeys = ["NxI"],
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
@@ -227,6 +238,7 @@ public class DataTest : TestBase
         var model = new Data
         {
             ID = "id",
+            ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AttributionKeys = ["NxI"],
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
@@ -239,6 +251,7 @@ public class DataTest : TestBase
         Assert.NotNull(deserialized);
 
         string expectedID = "id";
+        DateTimeOffset expectedArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         List<string> expectedAttributionKeys = ["NxI"];
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedDescription = "description";
@@ -246,6 +259,7 @@ public class DataTest : TestBase
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
 
         Assert.Equal(expectedID, deserialized.ID);
+        Assert.Equal(expectedArchivedAt, deserialized.ArchivedAt);
         Assert.Equal(expectedAttributionKeys.Count, deserialized.AttributionKeys.Count);
         for (int i = 0; i < expectedAttributionKeys.Count; i++)
         {
@@ -263,6 +277,7 @@ public class DataTest : TestBase
         var model = new Data
         {
             ID = "id",
+            ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AttributionKeys = ["NxI"],
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
@@ -279,6 +294,7 @@ public class DataTest : TestBase
         var model = new Data
         {
             ID = "id",
+            ArchivedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             AttributionKeys = ["NxI"],
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Description = "description",
