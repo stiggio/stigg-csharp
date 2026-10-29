@@ -35,6 +35,7 @@ public sealed class AssignmentService : IAssignmentService
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<AssignmentListPage> List(
         AssignmentListParams parameters,
         CancellationToken cancellationToken = default
@@ -47,6 +48,7 @@ public sealed class AssignmentService : IAssignmentService
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public Task<AssignmentListPage> List(
         string id,
         AssignmentListParams? parameters = null,
@@ -59,6 +61,7 @@ public sealed class AssignmentService : IAssignmentService
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<AssignmentUpsertResponse> Upsert(
         AssignmentUpsertParams parameters,
         CancellationToken cancellationToken = default
@@ -71,6 +74,7 @@ public sealed class AssignmentService : IAssignmentService
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public Task<AssignmentUpsertResponse> Upsert(
         string id,
         AssignmentUpsertParams parameters,
@@ -100,6 +104,7 @@ public sealed class AssignmentServiceWithRawResponse : IAssignmentServiceWithRaw
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<HttpResponse<AssignmentListPage>> List(
         AssignmentListParams parameters,
         CancellationToken cancellationToken = default
@@ -133,6 +138,7 @@ public sealed class AssignmentServiceWithRawResponse : IAssignmentServiceWithRaw
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public Task<HttpResponse<AssignmentListPage>> List(
         string id,
         AssignmentListParams? parameters = null,
@@ -145,6 +151,7 @@ public sealed class AssignmentServiceWithRawResponse : IAssignmentServiceWithRaw
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<HttpResponse<AssignmentUpsertResponse>> Upsert(
         AssignmentUpsertParams parameters,
         CancellationToken cancellationToken = default
@@ -178,6 +185,7 @@ public sealed class AssignmentServiceWithRawResponse : IAssignmentServiceWithRaw
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public Task<HttpResponse<AssignmentUpsertResponse>> Upsert(
         string id,
         AssignmentUpsertParams parameters,

@@ -30,8 +30,9 @@ public interface IEntityTypeService
     /// Returns a cursor-paginated list of entity types defined in the environment.
     /// Entity types are vendor-defined categories of resource that can be governed
     /// (e.g. Org, Team, User). Archived entity types are excluded unless
-    /// includeArchived=true.
+    /// includeArchived=true. Deprecated: use `GET /api/v1/entity-types`.
     /// </summary>
+    [Obsolete("deprecated")]
     Task<EntityTypeListPage> List(
         EntityTypeListParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -41,7 +42,9 @@ public interface IEntityTypeService
     /// Batched create-or-update of entity types. Existing types matched by id are
     /// updated; new ids are created. Idempotent — re-submitting the same payload
     /// converges to the same state. An upsert of an archived entity type restores it.
+    /// Deprecated: use `PUT /api/v1/entity-types`.
     /// </summary>
+    [Obsolete("deprecated")]
     Task<EntityTypeUpsertResponse> Upsert(
         EntityTypeUpsertParams parameters,
         CancellationToken cancellationToken = default
@@ -65,6 +68,7 @@ public interface IEntityTypeServiceWithRawResponse
     /// Returns a raw HTTP response for <c>get /api/v1-beta/entity-types</c>, but is otherwise the
     /// same as <see cref="IEntityTypeService.List(EntityTypeListParams?, CancellationToken)"/>.
     /// </summary>
+    [Obsolete("deprecated")]
     Task<HttpResponse<EntityTypeListPage>> List(
         EntityTypeListParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -74,6 +78,7 @@ public interface IEntityTypeServiceWithRawResponse
     /// Returns a raw HTTP response for <c>put /api/v1-beta/entity-types</c>, but is otherwise the
     /// same as <see cref="IEntityTypeService.Upsert(EntityTypeUpsertParams, CancellationToken)"/>.
     /// </summary>
+    [Obsolete("deprecated")]
     Task<HttpResponse<EntityTypeUpsertResponse>> Upsert(
         EntityTypeUpsertParams parameters,
         CancellationToken cancellationToken = default

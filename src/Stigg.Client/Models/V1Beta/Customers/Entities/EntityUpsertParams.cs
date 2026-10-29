@@ -14,12 +14,14 @@ namespace Stigg.Client.Models.V1Beta.Customers.Entities;
 /// <summary>
 /// Creates or updates entities in bulk for the given customer. Existing entities
 /// matched by id are updated; new ids are created. An upsert of an archived entity
-/// restores it. An entity on an archived entity type fails with 400.
+/// restores it. An entity on an archived entity type fails with 400. Deprecated:
+/// use `PUT /api/v1/customers/{id}/entities`.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
 /// cause existing derived classes to break.</para>
 /// </summary>
+[Obsolete("deprecated")]
 public record class EntityUpsertParams : ParamsBase
 {
     readonly JsonDictionary _rawBodyData = new();

@@ -35,6 +35,7 @@ public sealed class EntityService : IEntityService
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<EntityRetrieveResponse> Retrieve(
         EntityRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -47,6 +48,7 @@ public sealed class EntityService : IEntityService
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public Task<EntityRetrieveResponse> Retrieve(
         string entityID,
         EntityRetrieveParams parameters,
@@ -57,6 +59,7 @@ public sealed class EntityService : IEntityService
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<EntityListPage> List(
         EntityListParams parameters,
         CancellationToken cancellationToken = default
@@ -69,6 +72,7 @@ public sealed class EntityService : IEntityService
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public Task<EntityListPage> List(
         string id,
         EntityListParams? parameters = null,
@@ -81,6 +85,7 @@ public sealed class EntityService : IEntityService
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<EntityArchiveResponse> Archive(
         EntityArchiveParams parameters,
         CancellationToken cancellationToken = default
@@ -93,6 +98,7 @@ public sealed class EntityService : IEntityService
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public Task<EntityArchiveResponse> Archive(
         string id,
         EntityArchiveParams parameters,
@@ -127,6 +133,7 @@ public sealed class EntityService : IEntityService
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<EntityUpsertResponse> Upsert(
         EntityUpsertParams parameters,
         CancellationToken cancellationToken = default
@@ -139,6 +146,7 @@ public sealed class EntityService : IEntityService
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public Task<EntityUpsertResponse> Upsert(
         string id,
         EntityUpsertParams parameters,
@@ -166,6 +174,7 @@ public sealed class EntityServiceWithRawResponse : IEntityServiceWithRawResponse
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<HttpResponse<EntityRetrieveResponse>> Retrieve(
         EntityRetrieveParams parameters,
         CancellationToken cancellationToken = default
@@ -199,6 +208,7 @@ public sealed class EntityServiceWithRawResponse : IEntityServiceWithRawResponse
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public Task<HttpResponse<EntityRetrieveResponse>> Retrieve(
         string entityID,
         EntityRetrieveParams parameters,
@@ -209,6 +219,7 @@ public sealed class EntityServiceWithRawResponse : IEntityServiceWithRawResponse
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<HttpResponse<EntityListPage>> List(
         EntityListParams parameters,
         CancellationToken cancellationToken = default
@@ -242,6 +253,7 @@ public sealed class EntityServiceWithRawResponse : IEntityServiceWithRawResponse
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public Task<HttpResponse<EntityListPage>> List(
         string id,
         EntityListParams? parameters = null,
@@ -254,6 +266,7 @@ public sealed class EntityServiceWithRawResponse : IEntityServiceWithRawResponse
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<HttpResponse<EntityArchiveResponse>> Archive(
         EntityArchiveParams parameters,
         CancellationToken cancellationToken = default
@@ -287,6 +300,7 @@ public sealed class EntityServiceWithRawResponse : IEntityServiceWithRawResponse
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public Task<HttpResponse<EntityArchiveResponse>> Archive(
         string id,
         EntityArchiveParams parameters,
@@ -342,6 +356,7 @@ public sealed class EntityServiceWithRawResponse : IEntityServiceWithRawResponse
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<HttpResponse<EntityUpsertResponse>> Upsert(
         EntityUpsertParams parameters,
         CancellationToken cancellationToken = default
@@ -375,6 +390,7 @@ public sealed class EntityServiceWithRawResponse : IEntityServiceWithRawResponse
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public Task<HttpResponse<EntityUpsertResponse>> Upsert(
         string id,
         EntityUpsertParams parameters,

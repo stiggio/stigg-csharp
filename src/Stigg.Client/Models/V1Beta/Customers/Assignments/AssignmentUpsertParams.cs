@@ -15,12 +15,14 @@ namespace Stigg.Client.Models.V1Beta.Customers.Assignments;
 /// Batched create-or-update of capability assignments. Existing assignments matched
 /// by (entityId, capabilityId) are updated; new pairs are created. On update, omitted
 /// fields (usageLimit, cadence) are preserved; on create both are required by the
-/// governance service.
+/// governance service. Deprecated: use `PUT /api/v1/customers/{id}/entities/entitlements`
+/// with the body key `entityEntitlements`.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
 /// cause existing derived classes to break.</para>
 /// </summary>
+[Obsolete("deprecated")]
 public record class AssignmentUpsertParams : ParamsBase
 {
     readonly JsonDictionary _rawBodyData = new();

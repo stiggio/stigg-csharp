@@ -27,14 +27,17 @@ public interface IEntityService
     IEntityService WithOptions(Func<ClientOptions, ClientOptions> modifier);
 
     /// <summary>
-    /// Retrieves a single entity for the given customer by its identifier.
+    /// Retrieves a single entity for the given customer by its identifier. Deprecated:
+    /// use `GET /api/v1/customers/{id}/entities/{entityId}`.
     /// </summary>
+    [Obsolete("deprecated")]
     Task<EntityRetrieveResponse> Retrieve(
         EntityRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Retrieve(EntityRetrieveParams, CancellationToken)"/>
+    [Obsolete("deprecated")]
     Task<EntityRetrieveResponse> Retrieve(
         string entityID,
         EntityRetrieveParams parameters,
@@ -42,14 +45,17 @@ public interface IEntityService
     );
 
     /// <summary>
-    /// Retrieves a paginated list of entities for the given customer.
+    /// Retrieves a paginated list of entities for the given customer. Deprecated: use
+    /// `GET /api/v1/customers/{id}/entities`.
     /// </summary>
+    [Obsolete("deprecated")]
     Task<EntityListPage> List(
         EntityListParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="List(EntityListParams, CancellationToken)"/>
+    [Obsolete("deprecated")]
     Task<EntityListPage> List(
         string id,
         EntityListParams? parameters = null,
@@ -57,14 +63,18 @@ public interface IEntityService
     );
 
     /// <summary>
-    /// Archives entities in bulk for the given customer by id.
+    /// Archives entities in bulk for the given customer by id. Upsert an archived
+    /// entity to restore it. Deprecated: use `POST
+    /// /api/v1/customers/{id}/entities/archive`.
     /// </summary>
+    [Obsolete("deprecated")]
     Task<EntityArchiveResponse> Archive(
         EntityArchiveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Archive(EntityArchiveParams, CancellationToken)"/>
+    [Obsolete("deprecated")]
     Task<EntityArchiveResponse> Archive(
         string id,
         EntityArchiveParams parameters,
@@ -72,8 +82,9 @@ public interface IEntityService
     );
 
     /// <summary>
-    /// Deprecated: upsert an entity to restore it. Restores previously archived
-    /// entities in bulk for the given customer by id.
+    /// Deprecated: use `PUT /api/v1/customers/{id}/entities` with the entity id to
+    /// restore it. Restores previously archived entities in bulk for the given customer
+    /// by id.
     /// </summary>
     [Obsolete("deprecated")]
     Task<EntityUnarchiveResponse> Unarchive(
@@ -92,14 +103,17 @@ public interface IEntityService
     /// <summary>
     /// Creates or updates entities in bulk for the given customer. Existing entities
     /// matched by id are updated; new ids are created. An upsert of an archived entity
-    /// restores it. An entity on an archived entity type fails with 400.
+    /// restores it. An entity on an archived entity type fails with 400. Deprecated:
+    /// use `PUT /api/v1/customers/{id}/entities`.
     /// </summary>
+    [Obsolete("deprecated")]
     Task<EntityUpsertResponse> Upsert(
         EntityUpsertParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Upsert(EntityUpsertParams, CancellationToken)"/>
+    [Obsolete("deprecated")]
     Task<EntityUpsertResponse> Upsert(
         string id,
         EntityUpsertParams parameters,
@@ -124,12 +138,14 @@ public interface IEntityServiceWithRawResponse
     /// Returns a raw HTTP response for <c>get /api/v1-beta/customers/{id}/entities/{entityId}</c>, but is otherwise the
     /// same as <see cref="IEntityService.Retrieve(EntityRetrieveParams, CancellationToken)"/>.
     /// </summary>
+    [Obsolete("deprecated")]
     Task<HttpResponse<EntityRetrieveResponse>> Retrieve(
         EntityRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Retrieve(EntityRetrieveParams, CancellationToken)"/>
+    [Obsolete("deprecated")]
     Task<HttpResponse<EntityRetrieveResponse>> Retrieve(
         string entityID,
         EntityRetrieveParams parameters,
@@ -140,12 +156,14 @@ public interface IEntityServiceWithRawResponse
     /// Returns a raw HTTP response for <c>get /api/v1-beta/customers/{id}/entities</c>, but is otherwise the
     /// same as <see cref="IEntityService.List(EntityListParams, CancellationToken)"/>.
     /// </summary>
+    [Obsolete("deprecated")]
     Task<HttpResponse<EntityListPage>> List(
         EntityListParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="List(EntityListParams, CancellationToken)"/>
+    [Obsolete("deprecated")]
     Task<HttpResponse<EntityListPage>> List(
         string id,
         EntityListParams? parameters = null,
@@ -156,12 +174,14 @@ public interface IEntityServiceWithRawResponse
     /// Returns a raw HTTP response for <c>post /api/v1-beta/customers/{id}/entities/archive</c>, but is otherwise the
     /// same as <see cref="IEntityService.Archive(EntityArchiveParams, CancellationToken)"/>.
     /// </summary>
+    [Obsolete("deprecated")]
     Task<HttpResponse<EntityArchiveResponse>> Archive(
         EntityArchiveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Archive(EntityArchiveParams, CancellationToken)"/>
+    [Obsolete("deprecated")]
     Task<HttpResponse<EntityArchiveResponse>> Archive(
         string id,
         EntityArchiveParams parameters,
@@ -190,12 +210,14 @@ public interface IEntityServiceWithRawResponse
     /// Returns a raw HTTP response for <c>put /api/v1-beta/customers/{id}/entities</c>, but is otherwise the
     /// same as <see cref="IEntityService.Upsert(EntityUpsertParams, CancellationToken)"/>.
     /// </summary>
+    [Obsolete("deprecated")]
     Task<HttpResponse<EntityUpsertResponse>> Upsert(
         EntityUpsertParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Upsert(EntityUpsertParams, CancellationToken)"/>
+    [Obsolete("deprecated")]
     Task<HttpResponse<EntityUpsertResponse>> Upsert(
         string id,
         EntityUpsertParams parameters,

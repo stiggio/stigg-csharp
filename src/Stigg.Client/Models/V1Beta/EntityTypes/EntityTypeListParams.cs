@@ -13,12 +13,14 @@ namespace Stigg.Client.Models.V1Beta.EntityTypes;
 /// <summary>
 /// Returns a cursor-paginated list of entity types defined in the environment. Entity
 /// types are vendor-defined categories of resource that can be governed (e.g. Org,
-/// Team, User). Archived entity types are excluded unless includeArchived=true.
+/// Team, User). Archived entity types are excluded unless includeArchived=true. Deprecated:
+/// use `GET /api/v1/entity-types`.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
 /// cause existing derived classes to break.</para>
 /// </summary>
+[System::Obsolete("deprecated")]
 public record class EntityTypeListParams : ParamsBase
 {
     /// <summary>

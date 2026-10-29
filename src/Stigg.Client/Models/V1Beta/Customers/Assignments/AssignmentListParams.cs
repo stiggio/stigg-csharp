@@ -11,11 +11,13 @@ namespace Stigg.Client.Models.V1Beta.Customers.Assignments;
 /// <summary>
 /// Returns a cursor-paginated list of capability assignments for the given customer.
 /// An assignment ties an entity to a capability with a usage limit and reset cadence.
+/// Deprecated: use `GET /api/v1/customers/{id}/entities/entitlements`.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
 /// cause existing derived classes to break.</para>
 /// </summary>
+[Obsolete("deprecated")]
 public record class AssignmentListParams : ParamsBase
 {
     public string? ID { get; init; }

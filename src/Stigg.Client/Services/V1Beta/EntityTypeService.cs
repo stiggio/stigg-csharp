@@ -34,6 +34,7 @@ public sealed class EntityTypeService : IEntityTypeService
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<EntityTypeListPage> List(
         EntityTypeListParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -46,6 +47,7 @@ public sealed class EntityTypeService : IEntityTypeService
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<EntityTypeUpsertResponse> Upsert(
         EntityTypeUpsertParams parameters,
         CancellationToken cancellationToken = default
@@ -77,6 +79,7 @@ public sealed class EntityTypeServiceWithRawResponse : IEntityTypeServiceWithRaw
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<HttpResponse<EntityTypeListPage>> List(
         EntityTypeListParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -107,6 +110,7 @@ public sealed class EntityTypeServiceWithRawResponse : IEntityTypeServiceWithRaw
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<HttpResponse<EntityTypeUpsertResponse>> Upsert(
         EntityTypeUpsertParams parameters,
         CancellationToken cancellationToken = default

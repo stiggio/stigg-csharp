@@ -9,12 +9,14 @@ using Stigg.Client.Core;
 namespace Stigg.Client.Models.V1Beta.Customers.Entities;
 
 /// <summary>
-/// Retrieves a single entity for the given customer by its identifier.
+/// Retrieves a single entity for the given customer by its identifier. Deprecated:
+/// use `GET /api/v1/customers/{id}/entities/{entityId}`.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
 /// cause existing derived classes to break.</para>
 /// </summary>
+[Obsolete("deprecated")]
 public record class EntityRetrieveParams : ParamsBase
 {
     public required string ID { get; init; }

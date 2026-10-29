@@ -11,12 +11,14 @@ using Stigg.Client.Core;
 namespace Stigg.Client.Models.V1Beta.Customers.Entities;
 
 /// <summary>
-/// Archives entities in bulk for the given customer by id.
+/// Archives entities in bulk for the given customer by id. Upsert an archived entity
+/// to restore it. Deprecated: use `POST /api/v1/customers/{id}/entities/archive`.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
 /// cause existing derived classes to break.</para>
 /// </summary>
+[Obsolete("deprecated")]
 public record class EntityArchiveParams : ParamsBase
 {
     readonly JsonDictionary _rawBodyData = new();

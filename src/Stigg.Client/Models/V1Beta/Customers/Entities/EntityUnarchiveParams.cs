@@ -11,8 +11,8 @@ using Stigg.Client.Core;
 namespace Stigg.Client.Models.V1Beta.Customers.Entities;
 
 /// <summary>
-/// Deprecated: upsert an entity to restore it. Restores previously archived entities
-/// in bulk for the given customer by id.
+/// Deprecated: use `PUT /api/v1/customers/{id}/entities` with the entity id to restore
+/// it. Restores previously archived entities in bulk for the given customer by id.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
