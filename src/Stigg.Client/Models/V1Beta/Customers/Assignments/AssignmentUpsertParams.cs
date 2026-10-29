@@ -311,6 +311,10 @@ public sealed record class Assignment : JsonModel
         init { this._rawData.Set("parentId", value); }
     }
 
+    /// <summary>
+    /// Dimension-scoped sub-budget: the set of entity IDs this budget applies to
+    /// (order-insensitive, unique, at most 5). Omit or leave empty for the node-wide budget.
+    /// </summary>
     public IReadOnlyList<string>? ScopeEntityIds
     {
         get
