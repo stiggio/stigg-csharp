@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.13.0](https://github.com/stiggio/stigg-csharp/compare/v0.12.2...v0.13.0) (2026-10-30)
+
+
+### Features
+
+* **STIGG-9594:** add the v1 governance resources and v1-beta deprecation messages ([878bbeb](https://github.com/stiggio/stigg-csharp/commit/878bbeb20ca6dc058bc7dc3aacef8b633d39534d))
+
+
+### Bug Fixes
+
+* sync OpenAPI spec from stigg-api ([aa5d953](https://github.com/stiggio/stigg-csharp/commit/aa5d9531d1ce1c79834811140abc29a3ec494d0e))
+* sync OpenAPI spec from stigg-api ([94f8e31](https://github.com/stiggio/stigg-csharp/commit/94f8e3123fc727acc2bb649f589cc41069fb302a))
+* sync OpenAPI spec from stigg-api ([21a7e01](https://github.com/stiggio/stigg-csharp/commit/21a7e014f1193d8049356c9de43387db7cc906d2))
+
 ## [0.12.2](https://github.com/stiggio/stigg-csharp/compare/v0.12.1...v0.12.2) (2026-10-29)
 
 
