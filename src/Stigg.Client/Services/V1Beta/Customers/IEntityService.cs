@@ -30,14 +30,14 @@ public interface IEntityService
     /// Retrieves a single entity for the given customer by its identifier. Deprecated:
     /// use `GET /api/v1/customers/{id}/entities/{entityId}`.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.entities.retrieve` instead.")]
     Task<EntityRetrieveResponse> Retrieve(
         EntityRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Retrieve(EntityRetrieveParams, CancellationToken)"/>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.entities.retrieve` instead.")]
     Task<EntityRetrieveResponse> Retrieve(
         string entityID,
         EntityRetrieveParams parameters,
@@ -48,14 +48,14 @@ public interface IEntityService
     /// Retrieves a paginated list of entities for the given customer. Deprecated: use
     /// `GET /api/v1/customers/{id}/entities`.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.entities.list` instead.")]
     Task<EntityListPage> List(
         EntityListParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="List(EntityListParams, CancellationToken)"/>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.entities.list` instead.")]
     Task<EntityListPage> List(
         string id,
         EntityListParams? parameters = null,
@@ -67,14 +67,14 @@ public interface IEntityService
     /// entity to restore it. Deprecated: use `POST
     /// /api/v1/customers/{id}/entities/archive`.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.entities.archive` instead.")]
     Task<EntityArchiveResponse> Archive(
         EntityArchiveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Archive(EntityArchiveParams, CancellationToken)"/>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.entities.archive` instead.")]
     Task<EntityArchiveResponse> Archive(
         string id,
         EntityArchiveParams parameters,
@@ -86,14 +86,18 @@ public interface IEntityService
     /// restore it. Restores previously archived entities in bulk for the given customer
     /// by id.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete(
+        "Use `v1.customers.entities.upsert` with the entity id to restore an archived entity."
+    )]
     Task<EntityUnarchiveResponse> Unarchive(
         EntityUnarchiveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Unarchive(EntityUnarchiveParams, CancellationToken)"/>
-    [Obsolete("deprecated")]
+    [Obsolete(
+        "Use `v1.customers.entities.upsert` with the entity id to restore an archived entity."
+    )]
     Task<EntityUnarchiveResponse> Unarchive(
         string id,
         EntityUnarchiveParams parameters,
@@ -106,14 +110,14 @@ public interface IEntityService
     /// restores it. An entity on an archived entity type fails with 400. Deprecated:
     /// use `PUT /api/v1/customers/{id}/entities`.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.entities.upsert` instead.")]
     Task<EntityUpsertResponse> Upsert(
         EntityUpsertParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Upsert(EntityUpsertParams, CancellationToken)"/>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.entities.upsert` instead.")]
     Task<EntityUpsertResponse> Upsert(
         string id,
         EntityUpsertParams parameters,
@@ -138,14 +142,14 @@ public interface IEntityServiceWithRawResponse
     /// Returns a raw HTTP response for <c>get /api/v1-beta/customers/{id}/entities/{entityId}</c>, but is otherwise the
     /// same as <see cref="IEntityService.Retrieve(EntityRetrieveParams, CancellationToken)"/>.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.entities.retrieve` instead.")]
     Task<HttpResponse<EntityRetrieveResponse>> Retrieve(
         EntityRetrieveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Retrieve(EntityRetrieveParams, CancellationToken)"/>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.entities.retrieve` instead.")]
     Task<HttpResponse<EntityRetrieveResponse>> Retrieve(
         string entityID,
         EntityRetrieveParams parameters,
@@ -156,14 +160,14 @@ public interface IEntityServiceWithRawResponse
     /// Returns a raw HTTP response for <c>get /api/v1-beta/customers/{id}/entities</c>, but is otherwise the
     /// same as <see cref="IEntityService.List(EntityListParams, CancellationToken)"/>.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.entities.list` instead.")]
     Task<HttpResponse<EntityListPage>> List(
         EntityListParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="List(EntityListParams, CancellationToken)"/>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.entities.list` instead.")]
     Task<HttpResponse<EntityListPage>> List(
         string id,
         EntityListParams? parameters = null,
@@ -174,14 +178,14 @@ public interface IEntityServiceWithRawResponse
     /// Returns a raw HTTP response for <c>post /api/v1-beta/customers/{id}/entities/archive</c>, but is otherwise the
     /// same as <see cref="IEntityService.Archive(EntityArchiveParams, CancellationToken)"/>.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.entities.archive` instead.")]
     Task<HttpResponse<EntityArchiveResponse>> Archive(
         EntityArchiveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Archive(EntityArchiveParams, CancellationToken)"/>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.entities.archive` instead.")]
     Task<HttpResponse<EntityArchiveResponse>> Archive(
         string id,
         EntityArchiveParams parameters,
@@ -192,14 +196,18 @@ public interface IEntityServiceWithRawResponse
     /// Returns a raw HTTP response for <c>post /api/v1-beta/customers/{id}/entities/unarchive</c>, but is otherwise the
     /// same as <see cref="IEntityService.Unarchive(EntityUnarchiveParams, CancellationToken)"/>.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete(
+        "Use `v1.customers.entities.upsert` with the entity id to restore an archived entity."
+    )]
     Task<HttpResponse<EntityUnarchiveResponse>> Unarchive(
         EntityUnarchiveParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Unarchive(EntityUnarchiveParams, CancellationToken)"/>
-    [Obsolete("deprecated")]
+    [Obsolete(
+        "Use `v1.customers.entities.upsert` with the entity id to restore an archived entity."
+    )]
     Task<HttpResponse<EntityUnarchiveResponse>> Unarchive(
         string id,
         EntityUnarchiveParams parameters,
@@ -210,14 +218,14 @@ public interface IEntityServiceWithRawResponse
     /// Returns a raw HTTP response for <c>put /api/v1-beta/customers/{id}/entities</c>, but is otherwise the
     /// same as <see cref="IEntityService.Upsert(EntityUpsertParams, CancellationToken)"/>.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.entities.upsert` instead.")]
     Task<HttpResponse<EntityUpsertResponse>> Upsert(
         EntityUpsertParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Upsert(EntityUpsertParams, CancellationToken)"/>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.entities.upsert` instead.")]
     Task<HttpResponse<EntityUpsertResponse>> Upsert(
         string id,
         EntityUpsertParams parameters,

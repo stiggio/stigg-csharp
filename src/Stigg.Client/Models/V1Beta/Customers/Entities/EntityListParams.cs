@@ -18,7 +18,7 @@ namespace Stigg.Client.Models.V1Beta.Customers.Entities;
 /// breaking changes in non-major versions. We may add new methods in the future that
 /// cause existing derived classes to break.</para>
 /// </summary>
-[Obsolete("deprecated")]
+[Obsolete("Use `v1.customers.entities.list` instead.")]
 public record class EntityListParams : ParamsBase
 {
     public string? ID { get; init; }

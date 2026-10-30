@@ -32,14 +32,14 @@ public interface IAssignmentService
     /// reset cadence. Deprecated: use `GET
     /// /api/v1/customers/{id}/entities/entitlements`.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.entities.entitlements.list` instead.")]
     Task<AssignmentListPage> List(
         AssignmentListParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="List(AssignmentListParams, CancellationToken)"/>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.entities.entitlements.list` instead.")]
     Task<AssignmentListPage> List(
         string id,
         AssignmentListParams? parameters = null,
@@ -54,14 +54,18 @@ public interface IAssignmentService
     /// /api/v1/customers/{id}/entities/entitlements` with the body key
     /// `entityEntitlements`.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete(
+        "Use `v1.customers.entities.entitlements.upsert` instead. Its body key is `entityEntitlements`."
+    )]
     Task<AssignmentUpsertResponse> Upsert(
         AssignmentUpsertParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Upsert(AssignmentUpsertParams, CancellationToken)"/>
-    [Obsolete("deprecated")]
+    [Obsolete(
+        "Use `v1.customers.entities.entitlements.upsert` instead. Its body key is `entityEntitlements`."
+    )]
     Task<AssignmentUpsertResponse> Upsert(
         string id,
         AssignmentUpsertParams parameters,
@@ -86,14 +90,14 @@ public interface IAssignmentServiceWithRawResponse
     /// Returns a raw HTTP response for <c>get /api/v1-beta/customers/{id}/assignments</c>, but is otherwise the
     /// same as <see cref="IAssignmentService.List(AssignmentListParams, CancellationToken)"/>.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.entities.entitlements.list` instead.")]
     Task<HttpResponse<AssignmentListPage>> List(
         AssignmentListParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="List(AssignmentListParams, CancellationToken)"/>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.entities.entitlements.list` instead.")]
     Task<HttpResponse<AssignmentListPage>> List(
         string id,
         AssignmentListParams? parameters = null,
@@ -104,14 +108,18 @@ public interface IAssignmentServiceWithRawResponse
     /// Returns a raw HTTP response for <c>put /api/v1-beta/customers/{id}/assignments</c>, but is otherwise the
     /// same as <see cref="IAssignmentService.Upsert(AssignmentUpsertParams, CancellationToken)"/>.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete(
+        "Use `v1.customers.entities.entitlements.upsert` instead. Its body key is `entityEntitlements`."
+    )]
     Task<HttpResponse<AssignmentUpsertResponse>> Upsert(
         AssignmentUpsertParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Upsert(AssignmentUpsertParams, CancellationToken)"/>
-    [Obsolete("deprecated")]
+    [Obsolete(
+        "Use `v1.customers.entities.entitlements.upsert` instead. Its body key is `entityEntitlements`."
+    )]
     Task<HttpResponse<AssignmentUpsertResponse>> Upsert(
         string id,
         AssignmentUpsertParams parameters,

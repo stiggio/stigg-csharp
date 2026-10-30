@@ -33,6 +33,8 @@ public interface ICustomerService
 
     IIntegrationService Integrations { get; }
 
+    IEntityService Entities { get; }
+
     /// <summary>
     /// Retrieves a customer by their unique identifier, including billing information
     /// and subscription status.
@@ -237,6 +239,8 @@ public interface ICustomerServiceWithRawResponse
     IPromotionalEntitlementServiceWithRawResponse PromotionalEntitlements { get; }
 
     IIntegrationServiceWithRawResponse Integrations { get; }
+
+    IEntityServiceWithRawResponse Entities { get; }
 
     /// <summary>
     /// Returns a raw HTTP response for <c>get /api/v1/customers/{id}</c>, but is otherwise the

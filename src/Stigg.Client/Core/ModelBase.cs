@@ -1,9 +1,9 @@
 using System.Text.Json;
 using Stigg.Client.Exceptions;
 using Stigg.Client.Models.V1.Customers;
+using Stigg.Client.Models.V1.Customers.Entities;
 using Stigg.Client.Models.V1.Events;
 using Stigg.Client.Models.V1.Events.Beta.Customers;
-using Stigg.Client.Models.V1Beta.Customers.Entities;
 using Stigg.Client.Models.V2.Usage;
 using Addons = Stigg.Client.Models.V1.Addons;
 using Contracts = Stigg.Client.Models.V1.Contracts;
@@ -11,8 +11,9 @@ using Coupons = Stigg.Client.Models.V1.Coupons;
 using Credits = Stigg.Client.Models.V1.Credits;
 using CustomCurrencies = Stigg.Client.Models.V1.Credits.CustomCurrencies;
 using CustomersEntitlements = Stigg.Client.Models.V1Beta.Customers.Entitlements;
+using Entities = Stigg.Client.Models.V1Beta.Customers.Entities;
 using Entitlements = Stigg.Client.Models.V1.Addons.Entitlements;
-using EntityTypes = Stigg.Client.Models.V1Beta.EntityTypes;
+using EntityTypes = Stigg.Client.Models.V1.EntityTypes;
 using Features = Stigg.Client.Models.V1.Features;
 using Governance = Stigg.Client.Models.V1Beta.Customers.Governance;
 using Grants = Stigg.Client.Models.V1.Credits.Grants;
@@ -25,6 +26,7 @@ using PromotionalEntitlements = Stigg.Client.Models.V1.Customers.PromotionalEnti
 using Reservations = Stigg.Client.Models.V1.Credits.Reservations;
 using Subscriptions = Stigg.Client.Models.V1.Subscriptions;
 using Usage = Stigg.Client.Models.V1.Usage;
+using V1BetaEntityTypes = Stigg.Client.Models.V1Beta.EntityTypes;
 
 namespace Stigg.Client.Core;
 
@@ -169,6 +171,7 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Integrations::IntegrationListResponseVendorIdentifier>(),
             new ApiEnumConverter<string, Integrations::VendorIdentifier>(),
             new ApiEnumConverter<string, Integrations::IntegrationLinkParamsVendorIdentifier>(),
+            new ApiEnumConverter<string, IncludeArchived>(),
             new ApiEnumConverter<string, Subscriptions::PaymentCollection>(),
             new ApiEnumConverter<string, Subscriptions::DataPricingType>(),
             new ApiEnumConverter<string, Subscriptions::DataStatus>(),
@@ -956,17 +959,18 @@ public abstract record class ModelBase
             new ApiEnumConverter<string, Contracts::UnitPriceCurrency>(),
             new ApiEnumConverter<string, Contracts::ScheduleStrategy>(),
             new ApiEnumConverter<string, Contracts::TrialEndBehavior>(),
+            new ApiEnumConverter<string, EntityTypes::IncludeArchived>(),
             new ApiEnumConverter<string, CustomersEntitlements::AccessDeniedReason>(),
             new ApiEnumConverter<string, CustomersEntitlements::FeatureStatus>(),
             new ApiEnumConverter<string, CustomersEntitlements::FeatureType>(),
             new ApiEnumConverter<string, CustomersEntitlements::ResetPeriod>(),
             new ApiEnumConverter<string, CustomersEntitlements::CreditAccessDeniedReason>(),
             new ApiEnumConverter<string, CustomersEntitlements::Status>(),
-            new ApiEnumConverter<string, IncludeArchived>(),
+            new ApiEnumConverter<string, Entities::IncludeArchived>(),
             new ApiEnumConverter<string, Governance::Order>(),
             new ApiEnumConverter<string, Governance::Scope>(),
             new ApiEnumConverter<string, Governance::SortBy>(),
-            new ApiEnumConverter<string, EntityTypes::IncludeArchived>(),
+            new ApiEnumConverter<string, V1BetaEntityTypes::IncludeArchived>(),
             new ApiEnumConverter<string, UpdateBehavior>(),
         },
     };

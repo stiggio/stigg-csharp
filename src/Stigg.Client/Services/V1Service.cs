@@ -39,6 +39,7 @@ public sealed class V1Service : IV1Service
         _usage = new(() => new UsageService(client));
         _products = new(() => new ProductService(client));
         _contracts = new(() => new ContractService(client));
+        _entityTypes = new(() => new EntityTypeService(client));
     }
 
     readonly Lazy<ICustomerService> _customers;
@@ -106,6 +107,12 @@ public sealed class V1Service : IV1Service
     {
         get { return _contracts.Value; }
     }
+
+    readonly Lazy<IEntityTypeService> _entityTypes;
+    public IEntityTypeService EntityTypes
+    {
+        get { return _entityTypes.Value; }
+    }
 }
 
 /// <inheritdoc/>
@@ -134,6 +141,7 @@ public sealed class V1ServiceWithRawResponse : IV1ServiceWithRawResponse
         _usage = new(() => new UsageServiceWithRawResponse(client));
         _products = new(() => new ProductServiceWithRawResponse(client));
         _contracts = new(() => new ContractServiceWithRawResponse(client));
+        _entityTypes = new(() => new EntityTypeServiceWithRawResponse(client));
     }
 
     readonly Lazy<ICustomerServiceWithRawResponse> _customers;
@@ -200,5 +208,11 @@ public sealed class V1ServiceWithRawResponse : IV1ServiceWithRawResponse
     public IContractServiceWithRawResponse Contracts
     {
         get { return _contracts.Value; }
+    }
+
+    readonly Lazy<IEntityTypeServiceWithRawResponse> _entityTypes;
+    public IEntityTypeServiceWithRawResponse EntityTypes
+    {
+        get { return _entityTypes.Value; }
     }
 }

@@ -35,7 +35,7 @@ public sealed class AssignmentService : IAssignmentService
     }
 
     /// <inheritdoc/>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.entities.entitlements.list` instead.")]
     public async Task<AssignmentListPage> List(
         AssignmentListParams parameters,
         CancellationToken cancellationToken = default
@@ -48,7 +48,7 @@ public sealed class AssignmentService : IAssignmentService
     }
 
     /// <inheritdoc/>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.entities.entitlements.list` instead.")]
     public Task<AssignmentListPage> List(
         string id,
         AssignmentListParams? parameters = null,
@@ -61,7 +61,9 @@ public sealed class AssignmentService : IAssignmentService
     }
 
     /// <inheritdoc/>
-    [Obsolete("deprecated")]
+    [Obsolete(
+        "Use `v1.customers.entities.entitlements.upsert` instead. Its body key is `entityEntitlements`."
+    )]
     public async Task<AssignmentUpsertResponse> Upsert(
         AssignmentUpsertParams parameters,
         CancellationToken cancellationToken = default
@@ -74,7 +76,9 @@ public sealed class AssignmentService : IAssignmentService
     }
 
     /// <inheritdoc/>
-    [Obsolete("deprecated")]
+    [Obsolete(
+        "Use `v1.customers.entities.entitlements.upsert` instead. Its body key is `entityEntitlements`."
+    )]
     public Task<AssignmentUpsertResponse> Upsert(
         string id,
         AssignmentUpsertParams parameters,
@@ -104,7 +108,7 @@ public sealed class AssignmentServiceWithRawResponse : IAssignmentServiceWithRaw
     }
 
     /// <inheritdoc/>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.entities.entitlements.list` instead.")]
     public async Task<HttpResponse<AssignmentListPage>> List(
         AssignmentListParams parameters,
         CancellationToken cancellationToken = default
@@ -138,7 +142,7 @@ public sealed class AssignmentServiceWithRawResponse : IAssignmentServiceWithRaw
     }
 
     /// <inheritdoc/>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.entities.entitlements.list` instead.")]
     public Task<HttpResponse<AssignmentListPage>> List(
         string id,
         AssignmentListParams? parameters = null,
@@ -151,7 +155,9 @@ public sealed class AssignmentServiceWithRawResponse : IAssignmentServiceWithRaw
     }
 
     /// <inheritdoc/>
-    [Obsolete("deprecated")]
+    [Obsolete(
+        "Use `v1.customers.entities.entitlements.upsert` instead. Its body key is `entityEntitlements`."
+    )]
     public async Task<HttpResponse<AssignmentUpsertResponse>> Upsert(
         AssignmentUpsertParams parameters,
         CancellationToken cancellationToken = default
@@ -185,7 +191,9 @@ public sealed class AssignmentServiceWithRawResponse : IAssignmentServiceWithRaw
     }
 
     /// <inheritdoc/>
-    [Obsolete("deprecated")]
+    [Obsolete(
+        "Use `v1.customers.entities.entitlements.upsert` instead. Its body key is `entityEntitlements`."
+    )]
     public Task<HttpResponse<AssignmentUpsertResponse>> Upsert(
         string id,
         AssignmentUpsertParams parameters,

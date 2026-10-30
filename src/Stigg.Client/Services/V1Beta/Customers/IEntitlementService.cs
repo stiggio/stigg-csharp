@@ -32,14 +32,14 @@ public interface IEntitlementService
     /// resolves to per-entity governance limits surfaced as `chains` on the response.
     /// Deprecated: use `GET /api/v1/customers/{id}/entitlements/check`.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.check_entitlement` instead.")]
     Task<EntitlementCheckResponse> Check(
         EntitlementCheckParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Check(EntitlementCheckParams, CancellationToken)"/>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.check_entitlement` instead.")]
     Task<EntitlementCheckResponse> Check(
         string id,
         EntitlementCheckParams? parameters = null,
@@ -64,14 +64,14 @@ public interface IEntitlementServiceWithRawResponse
     /// Returns a raw HTTP response for <c>get /api/v1-beta/customers/{id}/entitlements/check</c>, but is otherwise the
     /// same as <see cref="IEntitlementService.Check(EntitlementCheckParams, CancellationToken)"/>.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.check_entitlement` instead.")]
     Task<HttpResponse<EntitlementCheckResponse>> Check(
         EntitlementCheckParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Check(EntitlementCheckParams, CancellationToken)"/>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.check_entitlement` instead.")]
     Task<HttpResponse<EntitlementCheckResponse>> Check(
         string id,
         EntitlementCheckParams? parameters = null,

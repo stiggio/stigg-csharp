@@ -35,7 +35,7 @@ public sealed class EntitlementService : IEntitlementService
     }
 
     /// <inheritdoc/>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.check_entitlement` instead.")]
     public async Task<EntitlementCheckResponse> Check(
         EntitlementCheckParams parameters,
         CancellationToken cancellationToken = default
@@ -48,7 +48,7 @@ public sealed class EntitlementService : IEntitlementService
     }
 
     /// <inheritdoc/>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.check_entitlement` instead.")]
     public Task<EntitlementCheckResponse> Check(
         string id,
         EntitlementCheckParams? parameters = null,
@@ -80,7 +80,7 @@ public sealed class EntitlementServiceWithRawResponse : IEntitlementServiceWithR
     }
 
     /// <inheritdoc/>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.check_entitlement` instead.")]
     public async Task<HttpResponse<EntitlementCheckResponse>> Check(
         EntitlementCheckParams parameters,
         CancellationToken cancellationToken = default
@@ -114,7 +114,7 @@ public sealed class EntitlementServiceWithRawResponse : IEntitlementServiceWithR
     }
 
     /// <inheritdoc/>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.customers.check_entitlement` instead.")]
     public Task<HttpResponse<EntitlementCheckResponse>> Check(
         string id,
         EntitlementCheckParams? parameters = null,

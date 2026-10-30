@@ -20,7 +20,7 @@ namespace Stigg.Client.Models.V1Beta.EntityTypes;
 /// breaking changes in non-major versions. We may add new methods in the future that
 /// cause existing derived classes to break.</para>
 /// </summary>
-[System::Obsolete("deprecated")]
+[System::Obsolete("Use `v1.entity_types.list` instead.")]
 public record class EntityTypeListParams : ParamsBase
 {
     /// <summary>

@@ -1,0 +1,488 @@
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Text.Json;
+using Stigg.Client.Core;
+using Stigg.Client.Models.V1.Customers.Entities;
+
+namespace Stigg.Client.Tests.Models.V1.Customers.Entities;
+
+public class EntityUpsertParamsTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var parameters = new EntityUpsertParams
+        {
+            ID = "id",
+            Entities =
+            [
+                new()
+                {
+                    ID = "user-7f3a0c1d",
+                    DisplayName = "Jane Doe",
+                    EntityTypeID = "user",
+                    Metadata = new Dictionary<string, string>()
+                    {
+                        { "email", "jane@acme.com" },
+                        { "role", "admin" },
+                    },
+                },
+                new()
+                {
+                    ID = "user-c4d1b2e9",
+                    DisplayName = "John Roe",
+                    EntityTypeID = "user",
+                    Metadata = new Dictionary<string, string>() { { "email", "john@acme.com" } },
+                },
+            ],
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        string expectedID = "id";
+        List<Entity> expectedEntities =
+        [
+            new()
+            {
+                ID = "user-7f3a0c1d",
+                DisplayName = "Jane Doe",
+                EntityTypeID = "user",
+                Metadata = new Dictionary<string, string>()
+                {
+                    { "email", "jane@acme.com" },
+                    { "role", "admin" },
+                },
+            },
+            new()
+            {
+                ID = "user-c4d1b2e9",
+                DisplayName = "John Roe",
+                EntityTypeID = "user",
+                Metadata = new Dictionary<string, string>() { { "email", "john@acme.com" } },
+            },
+        ];
+        string expectedXAccountID = "X-ACCOUNT-ID";
+        string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
+
+        Assert.Equal(expectedID, parameters.ID);
+        Assert.Equal(expectedEntities.Count, parameters.Entities.Count);
+        for (int i = 0; i < expectedEntities.Count; i++)
+        {
+            Assert.Equal(expectedEntities[i], parameters.Entities[i]);
+        }
+        Assert.Equal(expectedXAccountID, parameters.XAccountID);
+        Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsUnsetAreNotSet_Works()
+    {
+        var parameters = new EntityUpsertParams
+        {
+            ID = "id",
+            Entities =
+            [
+                new()
+                {
+                    ID = "user-7f3a0c1d",
+                    DisplayName = "Jane Doe",
+                    EntityTypeID = "user",
+                    Metadata = new Dictionary<string, string>()
+                    {
+                        { "email", "jane@acme.com" },
+                        { "role", "admin" },
+                    },
+                },
+                new()
+                {
+                    ID = "user-c4d1b2e9",
+                    DisplayName = "John Roe",
+                    EntityTypeID = "user",
+                    Metadata = new Dictionary<string, string>() { { "email", "john@acme.com" } },
+                },
+            ],
+        };
+
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
+    public void OptionalNonNullableParamsSetToNullAreNotSet_Works()
+    {
+        var parameters = new EntityUpsertParams
+        {
+            ID = "id",
+            Entities =
+            [
+                new()
+                {
+                    ID = "user-7f3a0c1d",
+                    DisplayName = "Jane Doe",
+                    EntityTypeID = "user",
+                    Metadata = new Dictionary<string, string>()
+                    {
+                        { "email", "jane@acme.com" },
+                        { "role", "admin" },
+                    },
+                },
+                new()
+                {
+                    ID = "user-c4d1b2e9",
+                    DisplayName = "John Roe",
+                    EntityTypeID = "user",
+                    Metadata = new Dictionary<string, string>() { { "email", "john@acme.com" } },
+                },
+            ],
+
+            // Null should be interpreted as omitted for these properties
+            XAccountID = null,
+            XEnvironmentID = null,
+        };
+
+        Assert.Null(parameters.XAccountID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
+        Assert.Null(parameters.XEnvironmentID);
+        Assert.False(parameters.RawHeaderData.ContainsKey("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
+    public void Url_Works()
+    {
+        EntityUpsertParams parameters = new()
+        {
+            ID = "id",
+            Entities =
+            [
+                new()
+                {
+                    ID = "user-7f3a0c1d",
+                    DisplayName = "Jane Doe",
+                    EntityTypeID = "user",
+                    Metadata = new Dictionary<string, string>()
+                    {
+                        { "email", "jane@acme.com" },
+                        { "role", "admin" },
+                    },
+                },
+                new()
+                {
+                    ID = "user-c4d1b2e9",
+                    DisplayName = "John Roe",
+                    EntityTypeID = "user",
+                    Metadata = new Dictionary<string, string>() { { "email", "john@acme.com" } },
+                },
+            ],
+        };
+
+        var url = parameters.Url(new() { ApiKey = "My API Key" });
+
+        Assert.True(
+            TestBase.UrisEqual(
+                new Uri("https://edge.api.stigg.io/api/v1/customers/id/entities"),
+                url
+            )
+        );
+    }
+
+    [Fact]
+    public void AddHeadersToRequest_Works()
+    {
+        HttpRequestMessage requestMessage = new();
+        EntityUpsertParams parameters = new()
+        {
+            ID = "id",
+            Entities =
+            [
+                new()
+                {
+                    ID = "user-7f3a0c1d",
+                    DisplayName = "Jane Doe",
+                    EntityTypeID = "user",
+                    Metadata = new Dictionary<string, string>()
+                    {
+                        { "email", "jane@acme.com" },
+                        { "role", "admin" },
+                    },
+                },
+                new()
+                {
+                    ID = "user-c4d1b2e9",
+                    DisplayName = "John Roe",
+                    EntityTypeID = "user",
+                    Metadata = new Dictionary<string, string>() { { "email", "john@acme.com" } },
+                },
+            ],
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        parameters.AddHeadersToRequest(requestMessage, new() { ApiKey = "My API Key" });
+
+        Assert.Equal(["X-ACCOUNT-ID"], requestMessage.Headers.GetValues("X-ACCOUNT-ID"));
+        Assert.Equal(["X-ENVIRONMENT-ID"], requestMessage.Headers.GetValues("X-ENVIRONMENT-ID"));
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var parameters = new EntityUpsertParams
+        {
+            ID = "id",
+            Entities =
+            [
+                new()
+                {
+                    ID = "user-7f3a0c1d",
+                    DisplayName = "Jane Doe",
+                    EntityTypeID = "user",
+                    Metadata = new Dictionary<string, string>()
+                    {
+                        { "email", "jane@acme.com" },
+                        { "role", "admin" },
+                    },
+                },
+                new()
+                {
+                    ID = "user-c4d1b2e9",
+                    DisplayName = "John Roe",
+                    EntityTypeID = "user",
+                    Metadata = new Dictionary<string, string>() { { "email", "john@acme.com" } },
+                },
+            ],
+            XAccountID = "X-ACCOUNT-ID",
+            XEnvironmentID = "X-ENVIRONMENT-ID",
+        };
+
+        EntityUpsertParams copied = new(parameters);
+
+        Assert.Equal(parameters, copied);
+    }
+}
+
+public class EntityTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new Entity
+        {
+            ID = "id",
+            DisplayName = "displayName",
+            EntityTypeID = "entityTypeId",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+        };
+
+        string expectedID = "id";
+        string expectedDisplayName = "displayName";
+        string expectedEntityTypeID = "entityTypeId";
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+
+        Assert.Equal(expectedID, model.ID);
+        Assert.Equal(expectedDisplayName, model.DisplayName);
+        Assert.Equal(expectedEntityTypeID, model.EntityTypeID);
+        Assert.NotNull(model.Metadata);
+        Assert.Equal(expectedMetadata.Count, model.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(model.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, model.Metadata[item.Key]);
+        }
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new Entity
+        {
+            ID = "id",
+            DisplayName = "displayName",
+            EntityTypeID = "entityTypeId",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Entity>(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new Entity
+        {
+            ID = "id",
+            DisplayName = "displayName",
+            EntityTypeID = "entityTypeId",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<Entity>(element, ModelBase.SerializerOptions);
+        Assert.NotNull(deserialized);
+
+        string expectedID = "id";
+        string expectedDisplayName = "displayName";
+        string expectedEntityTypeID = "entityTypeId";
+        Dictionary<string, string> expectedMetadata = new() { { "foo", "string" } };
+
+        Assert.Equal(expectedID, deserialized.ID);
+        Assert.Equal(expectedDisplayName, deserialized.DisplayName);
+        Assert.Equal(expectedEntityTypeID, deserialized.EntityTypeID);
+        Assert.NotNull(deserialized.Metadata);
+        Assert.Equal(expectedMetadata.Count, deserialized.Metadata.Count);
+        foreach (var item in expectedMetadata)
+        {
+            Assert.True(deserialized.Metadata.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, deserialized.Metadata[item.Key]);
+        }
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new Entity
+        {
+            ID = "id",
+            DisplayName = "displayName",
+            EntityTypeID = "entityTypeId",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new Entity { ID = "id", DisplayName = "displayName" };
+
+        Assert.Null(model.EntityTypeID);
+        Assert.False(model.RawData.ContainsKey("entityTypeId"));
+        Assert.Null(model.Metadata);
+        Assert.False(model.RawData.ContainsKey("metadata"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new Entity { ID = "id", DisplayName = "displayName" };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullAreNotSet_Works()
+    {
+        var model = new Entity
+        {
+            ID = "id",
+            DisplayName = "displayName",
+
+            // Null should be interpreted as omitted for these properties
+            EntityTypeID = null,
+            Metadata = null,
+        };
+
+        Assert.Null(model.EntityTypeID);
+        Assert.False(model.RawData.ContainsKey("entityTypeId"));
+        Assert.Null(model.Metadata);
+        Assert.False(model.RawData.ContainsKey("metadata"));
+    }
+
+    [Fact]
+    public void OptionalNonNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new Entity
+        {
+            ID = "id",
+            DisplayName = "displayName",
+
+            // Null should be interpreted as omitted for these properties
+            EntityTypeID = null,
+            Metadata = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetAreNotSet_Works()
+    {
+        var model = new Entity
+        {
+            ID = "id",
+            EntityTypeID = "entityTypeId",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+        };
+
+        Assert.Null(model.DisplayName);
+        Assert.False(model.RawData.ContainsKey("displayName"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesUnsetValidation_Works()
+    {
+        var model = new Entity
+        {
+            ID = "id",
+            EntityTypeID = "entityTypeId",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullAreSetToNull_Works()
+    {
+        var model = new Entity
+        {
+            ID = "id",
+            EntityTypeID = "entityTypeId",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+
+            DisplayName = null,
+        };
+
+        Assert.Null(model.DisplayName);
+        Assert.True(model.RawData.ContainsKey("displayName"));
+    }
+
+    [Fact]
+    public void OptionalNullablePropertiesSetToNullValidation_Works()
+    {
+        var model = new Entity
+        {
+            ID = "id",
+            EntityTypeID = "entityTypeId",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+
+            DisplayName = null,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new Entity
+        {
+            ID = "id",
+            DisplayName = "displayName",
+            EntityTypeID = "entityTypeId",
+            Metadata = new Dictionary<string, string>() { { "foo", "string" } },
+        };
+
+        Entity copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}

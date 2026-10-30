@@ -21,7 +21,7 @@ namespace Stigg.Client.Models.V1Beta.EntityTypes;
 /// breaking changes in non-major versions. We may add new methods in the future that
 /// cause existing derived classes to break.</para>
 /// </summary>
-[Obsolete("deprecated")]
+[Obsolete("Use `v1.entity_types.upsert` instead.")]
 public record class EntityTypeUpsertParams : ParamsBase
 {
     readonly JsonDictionary _rawBodyData = new();

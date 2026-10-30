@@ -45,6 +45,8 @@ public interface IV1Service
     IProductService Products { get; }
 
     IContractService Contracts { get; }
+
+    IEntityTypeService EntityTypes { get; }
 }
 
 /// <summary>
@@ -81,4 +83,6 @@ public interface IV1ServiceWithRawResponse
     IProductServiceWithRawResponse Products { get; }
 
     IContractServiceWithRawResponse Contracts { get; }
+
+    IEntityTypeServiceWithRawResponse EntityTypes { get; }
 }

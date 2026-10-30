@@ -32,7 +32,7 @@ public interface IEntityTypeService
     /// (e.g. Org, Team, User). Archived entity types are excluded unless
     /// includeArchived=true. Deprecated: use `GET /api/v1/entity-types`.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.entity_types.list` instead.")]
     Task<EntityTypeListPage> List(
         EntityTypeListParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -44,7 +44,7 @@ public interface IEntityTypeService
     /// converges to the same state. An upsert of an archived entity type restores it.
     /// Deprecated: use `PUT /api/v1/entity-types`.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.entity_types.upsert` instead.")]
     Task<EntityTypeUpsertResponse> Upsert(
         EntityTypeUpsertParams parameters,
         CancellationToken cancellationToken = default
@@ -68,7 +68,7 @@ public interface IEntityTypeServiceWithRawResponse
     /// Returns a raw HTTP response for <c>get /api/v1-beta/entity-types</c>, but is otherwise the
     /// same as <see cref="IEntityTypeService.List(EntityTypeListParams?, CancellationToken)"/>.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.entity_types.list` instead.")]
     Task<HttpResponse<EntityTypeListPage>> List(
         EntityTypeListParams? parameters = null,
         CancellationToken cancellationToken = default
@@ -78,7 +78,7 @@ public interface IEntityTypeServiceWithRawResponse
     /// Returns a raw HTTP response for <c>put /api/v1-beta/entity-types</c>, but is otherwise the
     /// same as <see cref="IEntityTypeService.Upsert(EntityTypeUpsertParams, CancellationToken)"/>.
     /// </summary>
-    [Obsolete("deprecated")]
+    [Obsolete("Use `v1.entity_types.upsert` instead.")]
     Task<HttpResponse<EntityTypeUpsertResponse>> Upsert(
         EntityTypeUpsertParams parameters,
         CancellationToken cancellationToken = default
