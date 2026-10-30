@@ -18,6 +18,19 @@ public class CustomerCheckEntitlementResponseTest : TestBase
             {
                 AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
                 IsGranted = true,
+                Chains =
+                [
+                    [
+                        new()
+                        {
+                            CurrentUsage = 0,
+                            EntityID = "entityId",
+                            IsGranted = true,
+                            ScopeEntityIds = ["string"],
+                            UsageLimit = 0,
+                        },
+                    ],
+                ],
                 CurrentUsage = 0,
                 EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 FeatureValue = new()
@@ -41,6 +54,19 @@ public class CustomerCheckEntitlementResponseTest : TestBase
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
+            Chains =
+            [
+                [
+                    new()
+                    {
+                        CurrentUsage = 0,
+                        EntityID = "entityId",
+                        IsGranted = true,
+                        ScopeEntityIds = ["string"],
+                        UsageLimit = 0,
+                    },
+                ],
+            ],
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             FeatureValue = new()
@@ -71,6 +97,19 @@ public class CustomerCheckEntitlementResponseTest : TestBase
             {
                 AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
                 IsGranted = true,
+                Chains =
+                [
+                    [
+                        new()
+                        {
+                            CurrentUsage = 0,
+                            EntityID = "entityId",
+                            IsGranted = true,
+                            ScopeEntityIds = ["string"],
+                            UsageLimit = 0,
+                        },
+                    ],
+                ],
                 CurrentUsage = 0,
                 EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 FeatureValue = new()
@@ -108,6 +147,19 @@ public class CustomerCheckEntitlementResponseTest : TestBase
             {
                 AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
                 IsGranted = true,
+                Chains =
+                [
+                    [
+                        new()
+                        {
+                            CurrentUsage = 0,
+                            EntityID = "entityId",
+                            IsGranted = true,
+                            ScopeEntityIds = ["string"],
+                            UsageLimit = 0,
+                        },
+                    ],
+                ],
                 CurrentUsage = 0,
                 EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 FeatureValue = new()
@@ -138,6 +190,19 @@ public class CustomerCheckEntitlementResponseTest : TestBase
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
+            Chains =
+            [
+                [
+                    new()
+                    {
+                        CurrentUsage = 0,
+                        EntityID = "entityId",
+                        IsGranted = true,
+                        ScopeEntityIds = ["string"],
+                        UsageLimit = 0,
+                    },
+                ],
+            ],
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             FeatureValue = new()
@@ -168,6 +233,19 @@ public class CustomerCheckEntitlementResponseTest : TestBase
             {
                 AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
                 IsGranted = true,
+                Chains =
+                [
+                    [
+                        new()
+                        {
+                            CurrentUsage = 0,
+                            EntityID = "entityId",
+                            IsGranted = true,
+                            ScopeEntityIds = ["string"],
+                            UsageLimit = 0,
+                        },
+                    ],
+                ],
                 CurrentUsage = 0,
                 EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 FeatureValue = new()
@@ -199,6 +277,19 @@ public class CustomerCheckEntitlementResponseTest : TestBase
             {
                 AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
                 IsGranted = true,
+                Chains =
+                [
+                    [
+                        new()
+                        {
+                            CurrentUsage = 0,
+                            EntityID = "entityId",
+                            IsGranted = true,
+                            ScopeEntityIds = ["string"],
+                            UsageLimit = 0,
+                        },
+                    ],
+                ],
                 CurrentUsage = 0,
                 EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 FeatureValue = new()
@@ -233,6 +324,19 @@ public class CustomerCheckEntitlementResponseDataTest : TestBase
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
+            Chains =
+            [
+                [
+                    new()
+                    {
+                        CurrentUsage = 0,
+                        EntityID = "entityId",
+                        IsGranted = true,
+                        ScopeEntityIds = ["string"],
+                        UsageLimit = 0,
+                    },
+                ],
+            ],
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             FeatureValue = new()
@@ -272,6 +376,19 @@ public class CustomerCheckEntitlementResponseDataTest : TestBase
             IsGranted = true,
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Chains =
+            [
+                [
+                    new()
+                    {
+                        CurrentUsage = 0,
+                        EntityID = "entityId",
+                        IsGranted = true,
+                        ScopeEntityIds = ["string"],
+                        UsageLimit = 0,
+                    },
+                ],
+            ],
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Reservation = new()
             {
@@ -295,6 +412,19 @@ public class CustomerCheckEntitlementResponseDataTest : TestBase
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
+            Chains =
+            [
+                [
+                    new()
+                    {
+                        CurrentUsage = 0,
+                        EntityID = "entityId",
+                        IsGranted = true,
+                        ScopeEntityIds = ["string"],
+                        UsageLimit = 0,
+                    },
+                ],
+            ],
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             FeatureValue = new()
@@ -340,6 +470,19 @@ public class CustomerCheckEntitlementResponseDataTest : TestBase
             IsGranted = true,
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Chains =
+            [
+                [
+                    new()
+                    {
+                        CurrentUsage = 0,
+                        EntityID = "entityId",
+                        IsGranted = true,
+                        ScopeEntityIds = ["string"],
+                        UsageLimit = 0,
+                    },
+                ],
+            ],
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Reservation = new()
             {
@@ -372,6 +515,19 @@ public class FeatureTest : TestBase
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
+            Chains =
+            [
+                [
+                    new()
+                    {
+                        CurrentUsage = 0,
+                        EntityID = "entityId",
+                        IsGranted = true,
+                        ScopeEntityIds = ["string"],
+                        UsageLimit = 0,
+                    },
+                ],
+            ],
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             FeatureValue = new()
@@ -394,6 +550,19 @@ public class FeatureTest : TestBase
             AccessDeniedReason.FeatureNotFound;
         bool expectedIsGranted = true;
         JsonElement expectedType = JsonSerializer.SerializeToElement("FEATURE");
+        List<List<ChainNode>> expectedChains =
+        [
+            [
+                new()
+                {
+                    CurrentUsage = 0,
+                    EntityID = "entityId",
+                    IsGranted = true,
+                    ScopeEntityIds = ["string"],
+                    UsageLimit = 0,
+                },
+            ],
+        ];
         double expectedCurrentUsage = 0;
         DateTimeOffset expectedEntitlementUpdatedAt = DateTimeOffset.Parse(
             "2019-12-27T18:11:19.117Z"
@@ -416,6 +585,16 @@ public class FeatureTest : TestBase
         Assert.Equal(expectedAccessDeniedReason, model.AccessDeniedReason);
         Assert.Equal(expectedIsGranted, model.IsGranted);
         Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
+        Assert.NotNull(model.Chains);
+        Assert.Equal(expectedChains.Count, model.Chains.Count);
+        for (int i = 0; i < expectedChains.Count; i++)
+        {
+            Assert.Equal(expectedChains[i].Count, model.Chains[i].Count);
+            for (int i1 = 0; i1 < expectedChains[i].Count; i1++)
+            {
+                Assert.Equal(expectedChains[i][i1], model.Chains[i][i1]);
+            }
+        }
         Assert.Equal(expectedCurrentUsage, model.CurrentUsage);
         Assert.Equal(expectedEntitlementUpdatedAt, model.EntitlementUpdatedAt);
         Assert.Equal(expectedFeatureValue, model.FeatureValue);
@@ -435,6 +614,19 @@ public class FeatureTest : TestBase
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
+            Chains =
+            [
+                [
+                    new()
+                    {
+                        CurrentUsage = 0,
+                        EntityID = "entityId",
+                        IsGranted = true,
+                        ScopeEntityIds = ["string"],
+                        UsageLimit = 0,
+                    },
+                ],
+            ],
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             FeatureValue = new()
@@ -466,6 +658,19 @@ public class FeatureTest : TestBase
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
+            Chains =
+            [
+                [
+                    new()
+                    {
+                        CurrentUsage = 0,
+                        EntityID = "entityId",
+                        IsGranted = true,
+                        ScopeEntityIds = ["string"],
+                        UsageLimit = 0,
+                    },
+                ],
+            ],
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             FeatureValue = new()
@@ -495,6 +700,19 @@ public class FeatureTest : TestBase
             AccessDeniedReason.FeatureNotFound;
         bool expectedIsGranted = true;
         JsonElement expectedType = JsonSerializer.SerializeToElement("FEATURE");
+        List<List<ChainNode>> expectedChains =
+        [
+            [
+                new()
+                {
+                    CurrentUsage = 0,
+                    EntityID = "entityId",
+                    IsGranted = true,
+                    ScopeEntityIds = ["string"],
+                    UsageLimit = 0,
+                },
+            ],
+        ];
         double expectedCurrentUsage = 0;
         DateTimeOffset expectedEntitlementUpdatedAt = DateTimeOffset.Parse(
             "2019-12-27T18:11:19.117Z"
@@ -517,6 +735,16 @@ public class FeatureTest : TestBase
         Assert.Equal(expectedAccessDeniedReason, deserialized.AccessDeniedReason);
         Assert.Equal(expectedIsGranted, deserialized.IsGranted);
         Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
+        Assert.NotNull(deserialized.Chains);
+        Assert.Equal(expectedChains.Count, deserialized.Chains.Count);
+        for (int i = 0; i < expectedChains.Count; i++)
+        {
+            Assert.Equal(expectedChains[i].Count, deserialized.Chains[i].Count);
+            for (int i1 = 0; i1 < expectedChains[i].Count; i1++)
+            {
+                Assert.Equal(expectedChains[i][i1], deserialized.Chains[i][i1]);
+            }
+        }
         Assert.Equal(expectedCurrentUsage, deserialized.CurrentUsage);
         Assert.Equal(expectedEntitlementUpdatedAt, deserialized.EntitlementUpdatedAt);
         Assert.Equal(expectedFeatureValue, deserialized.FeatureValue);
@@ -536,6 +764,19 @@ public class FeatureTest : TestBase
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
+            Chains =
+            [
+                [
+                    new()
+                    {
+                        CurrentUsage = 0,
+                        EntityID = "entityId",
+                        IsGranted = true,
+                        ScopeEntityIds = ["string"],
+                        UsageLimit = 0,
+                    },
+                ],
+            ],
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             FeatureValue = new()
@@ -568,6 +809,8 @@ public class FeatureTest : TestBase
             UsageLimit = 0,
         };
 
+        Assert.Null(model.Chains);
+        Assert.False(model.RawData.ContainsKey("chains"));
         Assert.Null(model.CurrentUsage);
         Assert.False(model.RawData.ContainsKey("currentUsage"));
         Assert.Null(model.EntitlementUpdatedAt);
@@ -611,6 +854,7 @@ public class FeatureTest : TestBase
             UsageLimit = 0,
 
             // Null should be interpreted as omitted for these properties
+            Chains = null,
             CurrentUsage = null,
             EntitlementUpdatedAt = null,
             FeatureValue = null,
@@ -621,6 +865,8 @@ public class FeatureTest : TestBase
             ValidUntil = null,
         };
 
+        Assert.Null(model.Chains);
+        Assert.False(model.RawData.ContainsKey("chains"));
         Assert.Null(model.CurrentUsage);
         Assert.False(model.RawData.ContainsKey("currentUsage"));
         Assert.Null(model.EntitlementUpdatedAt);
@@ -650,6 +896,7 @@ public class FeatureTest : TestBase
             UsageLimit = 0,
 
             // Null should be interpreted as omitted for these properties
+            Chains = null,
             CurrentUsage = null,
             EntitlementUpdatedAt = null,
             FeatureValue = null,
@@ -670,6 +917,19 @@ public class FeatureTest : TestBase
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
+            Chains =
+            [
+                [
+                    new()
+                    {
+                        CurrentUsage = 0,
+                        EntityID = "entityId",
+                        IsGranted = true,
+                        ScopeEntityIds = ["string"],
+                        UsageLimit = 0,
+                    },
+                ],
+            ],
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             FeatureValue = new()
@@ -699,6 +959,19 @@ public class FeatureTest : TestBase
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
+            Chains =
+            [
+                [
+                    new()
+                    {
+                        CurrentUsage = 0,
+                        EntityID = "entityId",
+                        IsGranted = true,
+                        ScopeEntityIds = ["string"],
+                        UsageLimit = 0,
+                    },
+                ],
+            ],
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             FeatureValue = new()
@@ -725,6 +998,19 @@ public class FeatureTest : TestBase
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
+            Chains =
+            [
+                [
+                    new()
+                    {
+                        CurrentUsage = 0,
+                        EntityID = "entityId",
+                        IsGranted = true,
+                        ScopeEntityIds = ["string"],
+                        UsageLimit = 0,
+                    },
+                ],
+            ],
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             FeatureValue = new()
@@ -757,6 +1043,19 @@ public class FeatureTest : TestBase
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
+            Chains =
+            [
+                [
+                    new()
+                    {
+                        CurrentUsage = 0,
+                        EntityID = "entityId",
+                        IsGranted = true,
+                        ScopeEntityIds = ["string"],
+                        UsageLimit = 0,
+                    },
+                ],
+            ],
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             FeatureValue = new()
@@ -786,6 +1085,19 @@ public class FeatureTest : TestBase
         {
             AccessDeniedReason = AccessDeniedReason.FeatureNotFound,
             IsGranted = true,
+            Chains =
+            [
+                [
+                    new()
+                    {
+                        CurrentUsage = 0,
+                        EntityID = "entityId",
+                        IsGranted = true,
+                        ScopeEntityIds = ["string"],
+                        UsageLimit = 0,
+                    },
+                ],
+            ],
             CurrentUsage = 0,
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             FeatureValue = new()
@@ -889,6 +1201,124 @@ public class AccessDeniedReasonTest : TestBase
         );
 
         Assert.Equal(value, deserialized);
+    }
+}
+
+public class ChainNodeTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new ChainNode
+        {
+            CurrentUsage = 0,
+            EntityID = "entityId",
+            IsGranted = true,
+            ScopeEntityIds = ["string"],
+            UsageLimit = 0,
+        };
+
+        double expectedCurrentUsage = 0;
+        string expectedEntityID = "entityId";
+        bool expectedIsGranted = true;
+        List<string> expectedScopeEntityIds = ["string"];
+        double expectedUsageLimit = 0;
+
+        Assert.Equal(expectedCurrentUsage, model.CurrentUsage);
+        Assert.Equal(expectedEntityID, model.EntityID);
+        Assert.Equal(expectedIsGranted, model.IsGranted);
+        Assert.Equal(expectedScopeEntityIds.Count, model.ScopeEntityIds.Count);
+        for (int i = 0; i < expectedScopeEntityIds.Count; i++)
+        {
+            Assert.Equal(expectedScopeEntityIds[i], model.ScopeEntityIds[i]);
+        }
+        Assert.Equal(expectedUsageLimit, model.UsageLimit);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new ChainNode
+        {
+            CurrentUsage = 0,
+            EntityID = "entityId",
+            IsGranted = true,
+            ScopeEntityIds = ["string"],
+            UsageLimit = 0,
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ChainNode>(json, ModelBase.SerializerOptions);
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new ChainNode
+        {
+            CurrentUsage = 0,
+            EntityID = "entityId",
+            IsGranted = true,
+            ScopeEntityIds = ["string"],
+            UsageLimit = 0,
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<ChainNode>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        double expectedCurrentUsage = 0;
+        string expectedEntityID = "entityId";
+        bool expectedIsGranted = true;
+        List<string> expectedScopeEntityIds = ["string"];
+        double expectedUsageLimit = 0;
+
+        Assert.Equal(expectedCurrentUsage, deserialized.CurrentUsage);
+        Assert.Equal(expectedEntityID, deserialized.EntityID);
+        Assert.Equal(expectedIsGranted, deserialized.IsGranted);
+        Assert.Equal(expectedScopeEntityIds.Count, deserialized.ScopeEntityIds.Count);
+        for (int i = 0; i < expectedScopeEntityIds.Count; i++)
+        {
+            Assert.Equal(expectedScopeEntityIds[i], deserialized.ScopeEntityIds[i]);
+        }
+        Assert.Equal(expectedUsageLimit, deserialized.UsageLimit);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new ChainNode
+        {
+            CurrentUsage = 0,
+            EntityID = "entityId",
+            IsGranted = true,
+            ScopeEntityIds = ["string"],
+            UsageLimit = 0,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new ChainNode
+        {
+            CurrentUsage = 0,
+            EntityID = "entityId",
+            IsGranted = true,
+            ScopeEntityIds = ["string"],
+            UsageLimit = 0,
+        };
+
+        ChainNode copied = new(model);
+
+        Assert.Equal(model, copied);
     }
 }
 
@@ -1201,6 +1631,19 @@ public class CreditTest : TestBase
             IsGranted = true,
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Chains =
+            [
+                [
+                    new()
+                    {
+                        CurrentUsage = 0,
+                        EntityID = "entityId",
+                        IsGranted = true,
+                        ScopeEntityIds = ["string"],
+                        UsageLimit = 0,
+                    },
+                ],
+            ],
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Reservation = new()
             {
@@ -1231,6 +1674,19 @@ public class CreditTest : TestBase
         JsonElement expectedType = JsonSerializer.SerializeToElement("CREDIT");
         double expectedUsageLimit = 0;
         DateTimeOffset expectedUsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        List<List<CreditChainNode>> expectedChains =
+        [
+            [
+                new()
+                {
+                    CurrentUsage = 0,
+                    EntityID = "entityId",
+                    IsGranted = true,
+                    ScopeEntityIds = ["string"],
+                    UsageLimit = 0,
+                },
+            ],
+        ];
         DateTimeOffset expectedEntitlementUpdatedAt = DateTimeOffset.Parse(
             "2019-12-27T18:11:19.117Z"
         );
@@ -1253,6 +1709,16 @@ public class CreditTest : TestBase
         Assert.True(JsonElement.DeepEquals(expectedType, model.Type));
         Assert.Equal(expectedUsageLimit, model.UsageLimit);
         Assert.Equal(expectedUsageUpdatedAt, model.UsageUpdatedAt);
+        Assert.NotNull(model.Chains);
+        Assert.Equal(expectedChains.Count, model.Chains.Count);
+        for (int i = 0; i < expectedChains.Count; i++)
+        {
+            Assert.Equal(expectedChains[i].Count, model.Chains[i].Count);
+            for (int i1 = 0; i1 < expectedChains[i].Count; i1++)
+            {
+                Assert.Equal(expectedChains[i][i1], model.Chains[i][i1]);
+            }
+        }
         Assert.Equal(expectedEntitlementUpdatedAt, model.EntitlementUpdatedAt);
         Assert.Equal(expectedReservation, model.Reservation);
         Assert.Equal(expectedReserved, model.Reserved);
@@ -1280,6 +1746,19 @@ public class CreditTest : TestBase
             IsGranted = true,
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Chains =
+            [
+                [
+                    new()
+                    {
+                        CurrentUsage = 0,
+                        EntityID = "entityId",
+                        IsGranted = true,
+                        ScopeEntityIds = ["string"],
+                        UsageLimit = 0,
+                    },
+                ],
+            ],
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Reservation = new()
             {
@@ -1319,6 +1798,19 @@ public class CreditTest : TestBase
             IsGranted = true,
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Chains =
+            [
+                [
+                    new()
+                    {
+                        CurrentUsage = 0,
+                        EntityID = "entityId",
+                        IsGranted = true,
+                        ScopeEntityIds = ["string"],
+                        UsageLimit = 0,
+                    },
+                ],
+            ],
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Reservation = new()
             {
@@ -1353,6 +1845,19 @@ public class CreditTest : TestBase
         JsonElement expectedType = JsonSerializer.SerializeToElement("CREDIT");
         double expectedUsageLimit = 0;
         DateTimeOffset expectedUsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
+        List<List<CreditChainNode>> expectedChains =
+        [
+            [
+                new()
+                {
+                    CurrentUsage = 0,
+                    EntityID = "entityId",
+                    IsGranted = true,
+                    ScopeEntityIds = ["string"],
+                    UsageLimit = 0,
+                },
+            ],
+        ];
         DateTimeOffset expectedEntitlementUpdatedAt = DateTimeOffset.Parse(
             "2019-12-27T18:11:19.117Z"
         );
@@ -1375,6 +1880,16 @@ public class CreditTest : TestBase
         Assert.True(JsonElement.DeepEquals(expectedType, deserialized.Type));
         Assert.Equal(expectedUsageLimit, deserialized.UsageLimit);
         Assert.Equal(expectedUsageUpdatedAt, deserialized.UsageUpdatedAt);
+        Assert.NotNull(deserialized.Chains);
+        Assert.Equal(expectedChains.Count, deserialized.Chains.Count);
+        for (int i = 0; i < expectedChains.Count; i++)
+        {
+            Assert.Equal(expectedChains[i].Count, deserialized.Chains[i].Count);
+            for (int i1 = 0; i1 < expectedChains[i].Count; i1++)
+            {
+                Assert.Equal(expectedChains[i][i1], deserialized.Chains[i][i1]);
+            }
+        }
         Assert.Equal(expectedEntitlementUpdatedAt, deserialized.EntitlementUpdatedAt);
         Assert.Equal(expectedReservation, deserialized.Reservation);
         Assert.Equal(expectedReserved, deserialized.Reserved);
@@ -1402,6 +1917,19 @@ public class CreditTest : TestBase
             IsGranted = true,
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Chains =
+            [
+                [
+                    new()
+                    {
+                        CurrentUsage = 0,
+                        EntityID = "entityId",
+                        IsGranted = true,
+                        ScopeEntityIds = ["string"],
+                        UsageLimit = 0,
+                    },
+                ],
+            ],
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Reservation = new()
             {
@@ -1447,6 +1975,8 @@ public class CreditTest : TestBase
             },
         };
 
+        Assert.Null(model.Chains);
+        Assert.False(model.RawData.ContainsKey("chains"));
         Assert.Null(model.EntitlementUpdatedAt);
         Assert.False(model.RawData.ContainsKey("entitlementUpdatedAt"));
         Assert.Null(model.Reserved);
@@ -1518,6 +2048,7 @@ public class CreditTest : TestBase
             },
 
             // Null should be interpreted as omitted for these properties
+            Chains = null,
             EntitlementUpdatedAt = null,
             Reserved = null,
             ReservedOnExpiredGrants = null,
@@ -1525,6 +2056,8 @@ public class CreditTest : TestBase
             ValidUntil = null,
         };
 
+        Assert.Null(model.Chains);
+        Assert.False(model.RawData.ContainsKey("chains"));
         Assert.Null(model.EntitlementUpdatedAt);
         Assert.False(model.RawData.ContainsKey("entitlementUpdatedAt"));
         Assert.Null(model.Reserved);
@@ -1565,6 +2098,7 @@ public class CreditTest : TestBase
             },
 
             // Null should be interpreted as omitted for these properties
+            Chains = null,
             EntitlementUpdatedAt = null,
             Reserved = null,
             ReservedOnExpiredGrants = null,
@@ -1594,6 +2128,19 @@ public class CreditTest : TestBase
             IsGranted = true,
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Chains =
+            [
+                [
+                    new()
+                    {
+                        CurrentUsage = 0,
+                        EntityID = "entityId",
+                        IsGranted = true,
+                        ScopeEntityIds = ["string"],
+                        UsageLimit = 0,
+                    },
+                ],
+            ],
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Reserved = 0,
             ReservedOnExpiredGrants = 0,
@@ -1624,6 +2171,19 @@ public class CreditTest : TestBase
             IsGranted = true,
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Chains =
+            [
+                [
+                    new()
+                    {
+                        CurrentUsage = 0,
+                        EntityID = "entityId",
+                        IsGranted = true,
+                        ScopeEntityIds = ["string"],
+                        UsageLimit = 0,
+                    },
+                ],
+            ],
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Reserved = 0,
             ReservedOnExpiredGrants = 0,
@@ -1653,6 +2213,19 @@ public class CreditTest : TestBase
             IsGranted = true,
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Chains =
+            [
+                [
+                    new()
+                    {
+                        CurrentUsage = 0,
+                        EntityID = "entityId",
+                        IsGranted = true,
+                        ScopeEntityIds = ["string"],
+                        UsageLimit = 0,
+                    },
+                ],
+            ],
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Reserved = 0,
             ReservedOnExpiredGrants = 0,
@@ -1685,6 +2258,19 @@ public class CreditTest : TestBase
             IsGranted = true,
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Chains =
+            [
+                [
+                    new()
+                    {
+                        CurrentUsage = 0,
+                        EntityID = "entityId",
+                        IsGranted = true,
+                        ScopeEntityIds = ["string"],
+                        UsageLimit = 0,
+                    },
+                ],
+            ],
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Reserved = 0,
             ReservedOnExpiredGrants = 0,
@@ -1716,6 +2302,19 @@ public class CreditTest : TestBase
             IsGranted = true,
             UsageLimit = 0,
             UsageUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
+            Chains =
+            [
+                [
+                    new()
+                    {
+                        CurrentUsage = 0,
+                        EntityID = "entityId",
+                        IsGranted = true,
+                        ScopeEntityIds = ["string"],
+                        UsageLimit = 0,
+                    },
+                ],
+            ],
             EntitlementUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             Reservation = new()
             {
@@ -2013,6 +2612,127 @@ public class CreditCurrencyTest : TestBase
         };
 
         CreditCurrency copied = new(model);
+
+        Assert.Equal(model, copied);
+    }
+}
+
+public class CreditChainNodeTest : TestBase
+{
+    [Fact]
+    public void FieldRoundtrip_Works()
+    {
+        var model = new CreditChainNode
+        {
+            CurrentUsage = 0,
+            EntityID = "entityId",
+            IsGranted = true,
+            ScopeEntityIds = ["string"],
+            UsageLimit = 0,
+        };
+
+        double expectedCurrentUsage = 0;
+        string expectedEntityID = "entityId";
+        bool expectedIsGranted = true;
+        List<string> expectedScopeEntityIds = ["string"];
+        double expectedUsageLimit = 0;
+
+        Assert.Equal(expectedCurrentUsage, model.CurrentUsage);
+        Assert.Equal(expectedEntityID, model.EntityID);
+        Assert.Equal(expectedIsGranted, model.IsGranted);
+        Assert.Equal(expectedScopeEntityIds.Count, model.ScopeEntityIds.Count);
+        for (int i = 0; i < expectedScopeEntityIds.Count; i++)
+        {
+            Assert.Equal(expectedScopeEntityIds[i], model.ScopeEntityIds[i]);
+        }
+        Assert.Equal(expectedUsageLimit, model.UsageLimit);
+    }
+
+    [Fact]
+    public void SerializationRoundtrip_Works()
+    {
+        var model = new CreditChainNode
+        {
+            CurrentUsage = 0,
+            EntityID = "entityId",
+            IsGranted = true,
+            ScopeEntityIds = ["string"],
+            UsageLimit = 0,
+        };
+
+        string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CreditChainNode>(
+            json,
+            ModelBase.SerializerOptions
+        );
+
+        Assert.Equal(model, deserialized);
+    }
+
+    [Fact]
+    public void FieldRoundtripThroughSerialization_Works()
+    {
+        var model = new CreditChainNode
+        {
+            CurrentUsage = 0,
+            EntityID = "entityId",
+            IsGranted = true,
+            ScopeEntityIds = ["string"],
+            UsageLimit = 0,
+        };
+
+        string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
+        var deserialized = JsonSerializer.Deserialize<CreditChainNode>(
+            element,
+            ModelBase.SerializerOptions
+        );
+        Assert.NotNull(deserialized);
+
+        double expectedCurrentUsage = 0;
+        string expectedEntityID = "entityId";
+        bool expectedIsGranted = true;
+        List<string> expectedScopeEntityIds = ["string"];
+        double expectedUsageLimit = 0;
+
+        Assert.Equal(expectedCurrentUsage, deserialized.CurrentUsage);
+        Assert.Equal(expectedEntityID, deserialized.EntityID);
+        Assert.Equal(expectedIsGranted, deserialized.IsGranted);
+        Assert.Equal(expectedScopeEntityIds.Count, deserialized.ScopeEntityIds.Count);
+        for (int i = 0; i < expectedScopeEntityIds.Count; i++)
+        {
+            Assert.Equal(expectedScopeEntityIds[i], deserialized.ScopeEntityIds[i]);
+        }
+        Assert.Equal(expectedUsageLimit, deserialized.UsageLimit);
+    }
+
+    [Fact]
+    public void Validation_Works()
+    {
+        var model = new CreditChainNode
+        {
+            CurrentUsage = 0,
+            EntityID = "entityId",
+            IsGranted = true,
+            ScopeEntityIds = ["string"],
+            UsageLimit = 0,
+        };
+
+        model.Validate();
+    }
+
+    [Fact]
+    public void CopyConstructor_Works()
+    {
+        var model = new CreditChainNode
+        {
+            CurrentUsage = 0,
+            EntityID = "entityId",
+            IsGranted = true,
+            ScopeEntityIds = ["string"],
+            UsageLimit = 0,
+        };
+
+        CreditChainNode copied = new(model);
 
         Assert.Equal(model, copied);
     }

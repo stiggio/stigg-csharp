@@ -14,6 +14,7 @@ public class CustomerCheckEntitlementParamsTest : TestBase
         {
             ID = "x",
             CurrencyID = "x",
+            Dimensions = new Dictionary<string, string>() { { "foo", "string" } },
             FeatureID = "x",
             RequestedUsage = 0,
             RequestedValues = ["string"],
@@ -29,6 +30,7 @@ public class CustomerCheckEntitlementParamsTest : TestBase
 
         string expectedID = "x";
         string expectedCurrencyID = "x";
+        Dictionary<string, string> expectedDimensions = new() { { "foo", "string" } };
         string expectedFeatureID = "x";
         long expectedRequestedUsage = 0;
         List<string> expectedRequestedValues = ["string"];
@@ -45,6 +47,14 @@ public class CustomerCheckEntitlementParamsTest : TestBase
 
         Assert.Equal(expectedID, parameters.ID);
         Assert.Equal(expectedCurrencyID, parameters.CurrencyID);
+        Assert.NotNull(parameters.Dimensions);
+        Assert.Equal(expectedDimensions.Count, parameters.Dimensions.Count);
+        foreach (var item in expectedDimensions)
+        {
+            Assert.True(parameters.Dimensions.TryGetValue(item.Key, out var value));
+
+            Assert.Equal(value, parameters.Dimensions[item.Key]);
+        }
         Assert.Equal(expectedFeatureID, parameters.FeatureID);
         Assert.Equal(expectedRequestedUsage, parameters.RequestedUsage);
         Assert.NotNull(parameters.RequestedValues);
@@ -70,6 +80,8 @@ public class CustomerCheckEntitlementParamsTest : TestBase
 
         Assert.Null(parameters.CurrencyID);
         Assert.False(parameters.RawQueryData.ContainsKey("currencyId"));
+        Assert.Null(parameters.Dimensions);
+        Assert.False(parameters.RawQueryData.ContainsKey("dimensions"));
         Assert.Null(parameters.FeatureID);
         Assert.False(parameters.RawQueryData.ContainsKey("featureId"));
         Assert.Null(parameters.RequestedUsage);
@@ -103,6 +115,7 @@ public class CustomerCheckEntitlementParamsTest : TestBase
 
             // Null should be interpreted as omitted for these properties
             CurrencyID = null,
+            Dimensions = null,
             FeatureID = null,
             RequestedUsage = null,
             RequestedValues = null,
@@ -118,6 +131,8 @@ public class CustomerCheckEntitlementParamsTest : TestBase
 
         Assert.Null(parameters.CurrencyID);
         Assert.False(parameters.RawQueryData.ContainsKey("currencyId"));
+        Assert.Null(parameters.Dimensions);
+        Assert.False(parameters.RawQueryData.ContainsKey("dimensions"));
         Assert.Null(parameters.FeatureID);
         Assert.False(parameters.RawQueryData.ContainsKey("featureId"));
         Assert.Null(parameters.RequestedUsage);
@@ -149,6 +164,7 @@ public class CustomerCheckEntitlementParamsTest : TestBase
         {
             ID = "x",
             CurrencyID = "x",
+            Dimensions = new Dictionary<string, string>() { { "foo", "string" } },
             FeatureID = "x",
             RequestedUsage = 0,
             RequestedValues = ["string"],
@@ -165,7 +181,7 @@ public class CustomerCheckEntitlementParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://edge.api.stigg.io/api/v1/customers/x/entitlements/check?currencyId=x&featureId=x&requestedUsage=0&requestedValues=string&reservationExpiresAt=2019-12-27T18%3a11%3a19.117%2b00%3a00&reservationId=x&reservationMetadata=reservationMetadata&reservationTtlSeconds=1&reserveAmount=1&resourceId=x"
+                    "https://edge.api.stigg.io/api/v1/customers/x/entitlements/check?currencyId=x&dimensions%5bfoo%5d=string&featureId=x&requestedUsage=0&requestedValues=string&reservationExpiresAt=2019-12-27T18%3a11%3a19.117%2b00%3a00&reservationId=x&reservationMetadata=reservationMetadata&reservationTtlSeconds=1&reserveAmount=1&resourceId=x"
                 ),
                 url
             )
@@ -196,6 +212,7 @@ public class CustomerCheckEntitlementParamsTest : TestBase
         {
             ID = "x",
             CurrencyID = "x",
+            Dimensions = new Dictionary<string, string>() { { "foo", "string" } },
             FeatureID = "x",
             RequestedUsage = 0,
             RequestedValues = ["string"],

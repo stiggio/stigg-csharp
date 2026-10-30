@@ -12,12 +12,14 @@ namespace Stigg.Client.Models.V1Beta.Customers.Entitlements;
 /// <summary>
 /// Experimental — request and response shapes may change without notice. Same semantics
 /// as `Check entitlement`, plus an optional `dimensions` query param that resolves
-/// to per-entity governance limits surfaced as `chains` on the response.
+/// to per-entity governance limits surfaced as `chains` on the response. Deprecated:
+/// use `GET /api/v1/customers/{id}/entitlements/check`.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
 /// cause existing derived classes to break.</para>
 /// </summary>
+[Obsolete("deprecated")]
 public record class EntitlementCheckParams : ParamsBase
 {
     public string? ID { get; init; }
@@ -45,8 +47,8 @@ public record class EntitlementCheckParams : ParamsBase
     }
 
     /// <summary>
-    /// Optional attribution map (e.g. `dimensions[userId]=u1`). When provided, the
-    /// response includes a `chains` array with per-entity governance limits.
+    /// Attribution map of the entities the usage is attributed to (e.g. `dimensions[userId]=u1`).
+    /// When provided, their governance budgets are checked too and the response includes `chains`.
     /// </summary>
     public IReadOnlyDictionary<string, string>? Dimensions
     {

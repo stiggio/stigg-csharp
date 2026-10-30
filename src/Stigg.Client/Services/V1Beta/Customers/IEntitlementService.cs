@@ -30,13 +30,16 @@ public interface IEntitlementService
     /// Experimental — request and response shapes may change without notice. Same
     /// semantics as `Check entitlement`, plus an optional `dimensions` query param that
     /// resolves to per-entity governance limits surfaced as `chains` on the response.
+    /// Deprecated: use `GET /api/v1/customers/{id}/entitlements/check`.
     /// </summary>
+    [Obsolete("deprecated")]
     Task<EntitlementCheckResponse> Check(
         EntitlementCheckParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Check(EntitlementCheckParams, CancellationToken)"/>
+    [Obsolete("deprecated")]
     Task<EntitlementCheckResponse> Check(
         string id,
         EntitlementCheckParams? parameters = null,
@@ -61,12 +64,14 @@ public interface IEntitlementServiceWithRawResponse
     /// Returns a raw HTTP response for <c>get /api/v1-beta/customers/{id}/entitlements/check</c>, but is otherwise the
     /// same as <see cref="IEntitlementService.Check(EntitlementCheckParams, CancellationToken)"/>.
     /// </summary>
+    [Obsolete("deprecated")]
     Task<HttpResponse<EntitlementCheckResponse>> Check(
         EntitlementCheckParams parameters,
         CancellationToken cancellationToken = default
     );
 
     /// <inheritdoc cref="Check(EntitlementCheckParams, CancellationToken)"/>
+    [Obsolete("deprecated")]
     Task<HttpResponse<EntitlementCheckResponse>> Check(
         string id,
         EntitlementCheckParams? parameters = null,

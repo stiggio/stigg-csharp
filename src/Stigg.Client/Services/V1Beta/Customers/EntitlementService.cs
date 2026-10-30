@@ -35,6 +35,7 @@ public sealed class EntitlementService : IEntitlementService
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<EntitlementCheckResponse> Check(
         EntitlementCheckParams parameters,
         CancellationToken cancellationToken = default
@@ -47,6 +48,7 @@ public sealed class EntitlementService : IEntitlementService
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public Task<EntitlementCheckResponse> Check(
         string id,
         EntitlementCheckParams? parameters = null,
@@ -78,6 +80,7 @@ public sealed class EntitlementServiceWithRawResponse : IEntitlementServiceWithR
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public async Task<HttpResponse<EntitlementCheckResponse>> Check(
         EntitlementCheckParams parameters,
         CancellationToken cancellationToken = default
@@ -111,6 +114,7 @@ public sealed class EntitlementServiceWithRawResponse : IEntitlementServiceWithR
     }
 
     /// <inheritdoc/>
+    [Obsolete("deprecated")]
     public Task<HttpResponse<EntitlementCheckResponse>> Check(
         string id,
         EntitlementCheckParams? parameters = null,

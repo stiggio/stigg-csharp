@@ -12,12 +12,13 @@ namespace Stigg.Client.Models.V1.Customers;
 /// <summary>
 /// Checks a single entitlement (feature or credit) for a customer or resource. Supports
 /// `requestedUsage` and `requestedValues` to evaluate against limits or enum values.
-/// Each call reaches the Stigg API directly, so latency reflects a network round
-/// trip. For entitlement checks on a hot path (e.g. gating a request in real time),
-/// the Stigg Node Server SDK (with its built-in cache) or the Sidecar will typically
-/// respond faster and keep working through brief Stigg outages; reach for this endpoint
-/// when a live HTTP call is the natural fit, such as from a non-Node backend or
-/// a server-side job.
+/// Pass `dimensions` to also check the governance budgets of the entities the usage
+/// is attributed to; the response then includes `chains`. Each call reaches the
+/// Stigg API directly, so latency reflects a network round trip. For entitlement
+/// checks on a hot path (e.g. gating a request in real time), the Stigg Node Server
+/// SDK (with its built-in cache) or the Sidecar will typically respond faster and
+/// keep working through brief Stigg outages; reach for this endpoint when a live
+/// HTTP call is the natural fit, such as from a non-Node backend or a server-side job.
 ///
 /// <para>NOTE: Do not inherit from this type outside the SDK unless you're okay with
 /// breaking changes in non-major versions. We may add new methods in the future that
@@ -46,6 +47,33 @@ public record class CustomerCheckEntitlementParams : ParamsBase
             }
 
             this._rawQueryData.Set("currencyId", value);
+        }
+    }
+
+    /// <summary>
+    /// Attribution map of the entities the usage is attributed to (e.g. `dimensions[userId]=u1`).
+    /// When provided, their governance budgets are checked too and the response includes `chains`.
+    /// </summary>
+    public IReadOnlyDictionary<string, string>? Dimensions
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableClass<FrozenDictionary<string, string>>(
+                "dimensions"
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set<FrozenDictionary<string, string>?>(
+                "dimensions",
+                value == null ? null : FrozenDictionary.ToFrozenDictionary(value)
+            );
         }
     }
 
@@ -205,7 +233,7 @@ public record class CustomerCheckEntitlementParams : ParamsBase
 
     /// <summary>
     /// Credits to reserve (credit entitlements only). The check is decided and the
-    /// credits held atomically; `requestedUsage` is ignored.
+    /// credits held atomically; `requestedUsage` is ignored. Not supported with `dimensions`.
     /// </summary>
     public double? ReserveAmount
     {

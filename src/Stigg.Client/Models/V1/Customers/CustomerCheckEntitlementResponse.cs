@@ -1,6 +1,8 @@
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Stigg.Client.Core;
@@ -448,6 +450,45 @@ public sealed record class Feature : JsonModel
         init { this._rawData.Set("type", value); }
     }
 
+    /// <summary>
+    /// Per-entity rollups, one chain per resolved dimension. Omitted when dimensions
+    /// was not provided.
+    /// </summary>
+    public IReadOnlyList<IReadOnlyList<ChainNode>>? Chains
+    {
+        get
+        {
+            this._rawData.Freeze();
+            var value = this._rawData.GetNullableStruct<ImmutableArray<ImmutableArray<ChainNode>>>(
+                "chains"
+            );
+            if (value == null)
+            {
+                return null;
+            }
+
+            return ImmutableArray.ToImmutableArray(
+                Enumerable.Select(value.Value, (item) => (IReadOnlyList<ChainNode>)item)
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set<ImmutableArray<ImmutableArray<ChainNode>>?>(
+                "chains",
+                value == null
+                    ? null
+                    : ImmutableArray.ToImmutableArray(
+                        Enumerable.Select(value, (item) => ImmutableArray.ToImmutableArray(item))
+                    )
+            );
+        }
+    }
+
     public double? CurrentUsage
     {
         get
@@ -637,6 +678,13 @@ public sealed record class Feature : JsonModel
         {
             throw new StiggInvalidDataException("Invalid value given for constant");
         }
+        foreach (var item in this.Chains ?? [])
+        {
+            foreach (var item1 in item)
+            {
+                item1.Validate();
+            }
+        }
         _ = this.CurrentUsage;
         _ = this.EntitlementUpdatedAt;
         this.FeatureValue?.Validate();
@@ -769,6 +817,130 @@ sealed class AccessDeniedReasonConverter : JsonConverter<AccessDeniedReason>
             options
         );
     }
+}
+
+/// <summary>
+/// Per-entity governance node — limit and current usage for a single resolved entity.
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<ChainNode, ChainNodeFromRaw>))]
+public sealed record class ChainNode : JsonModel
+{
+    /// <summary>
+    /// Amount consumed by this entity in the current cadence period.
+    /// </summary>
+    public required double CurrentUsage
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<double>("currentUsage");
+        }
+        init { this._rawData.Set("currentUsage", value); }
+    }
+
+    /// <summary>
+    /// External id of the entity within the customer.
+    /// </summary>
+    public required string EntityID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("entityId");
+        }
+        init { this._rawData.Set("entityId", value); }
+    }
+
+    /// <summary>
+    /// Whether this node alone permits the requested usage.
+    /// </summary>
+    public required bool IsGranted
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("isGranted");
+        }
+        init { this._rawData.Set("isGranted", value); }
+    }
+
+    /// <summary>
+    /// External ids of the entities this budget is scoped to. Empty (`[]`) is the
+    /// node-wide budget; a non-empty set is the dimension-scoped budget that matched
+    /// this request — use it to tell apart multiple budgets on the same entity.
+    /// </summary>
+    public required IReadOnlyList<string> ScopeEntityIds
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<string>>("scopeEntityIds");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<string>>(
+                "scopeEntityIds",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
+    /// Hard usage limit for this node; null when the entity has no entity entitlement.
+    /// </summary>
+    public required double? UsageLimit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<double>("usageLimit");
+        }
+        init { this._rawData.Set("usageLimit", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.CurrentUsage;
+        _ = this.EntityID;
+        _ = this.IsGranted;
+        _ = this.ScopeEntityIds;
+        _ = this.UsageLimit;
+    }
+
+    public ChainNode() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public ChainNode(ChainNode chainNode)
+        : base(chainNode) { }
+#pragma warning restore CS8618
+
+    public ChainNode(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    ChainNode(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="ChainNodeFromRaw.FromRawUnchecked"/>
+    public static ChainNode FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class ChainNodeFromRaw : IFromRawJson<ChainNode>
+{
+    /// <inheritdoc/>
+    public ChainNode FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        ChainNode.FromRawUnchecked(rawData);
 }
 
 [JsonConverter(typeof(JsonModelConverter<FeatureFeature, FeatureFeatureFromRaw>))]
@@ -1105,6 +1277,45 @@ public sealed record class Credit : JsonModel
     }
 
     /// <summary>
+    /// Per-entity rollups, one chain per resolved dimension. Omitted when dimensions
+    /// was not provided.
+    /// </summary>
+    public IReadOnlyList<IReadOnlyList<CreditChainNode>>? Chains
+    {
+        get
+        {
+            this._rawData.Freeze();
+            var value = this._rawData.GetNullableStruct<
+                ImmutableArray<ImmutableArray<CreditChainNode>>
+            >("chains");
+            if (value == null)
+            {
+                return null;
+            }
+
+            return ImmutableArray.ToImmutableArray(
+                Enumerable.Select(value.Value, (item) => (IReadOnlyList<CreditChainNode>)item)
+            );
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set<ImmutableArray<ImmutableArray<CreditChainNode>>?>(
+                "chains",
+                value == null
+                    ? null
+                    : ImmutableArray.ToImmutableArray(
+                        Enumerable.Select(value, (item) => ImmutableArray.ToImmutableArray(item))
+                    )
+            );
+        }
+    }
+
+    /// <summary>
     /// Timestamp of the last update to the entitlement grant or configuration.
     /// </summary>
     public System::DateTimeOffset? EntitlementUpdatedAt
@@ -1239,6 +1450,13 @@ public sealed record class Credit : JsonModel
         }
         _ = this.UsageLimit;
         _ = this.UsageUpdatedAt;
+        foreach (var item in this.Chains ?? [])
+        {
+            foreach (var item1 in item)
+            {
+                item1.Validate();
+            }
+        }
         _ = this.EntitlementUpdatedAt;
         this.Reservation?.Validate();
         _ = this.Reserved;
@@ -1504,6 +1722,130 @@ class CreditCurrencyFromRaw : IFromRawJson<CreditCurrency>
     /// <inheritdoc/>
     public CreditCurrency FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
         CreditCurrency.FromRawUnchecked(rawData);
+}
+
+/// <summary>
+/// Per-entity governance node — limit and current usage for a single resolved entity.
+/// </summary>
+[JsonConverter(typeof(JsonModelConverter<CreditChainNode, CreditChainNodeFromRaw>))]
+public sealed record class CreditChainNode : JsonModel
+{
+    /// <summary>
+    /// Amount consumed by this entity in the current cadence period.
+    /// </summary>
+    public required double CurrentUsage
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<double>("currentUsage");
+        }
+        init { this._rawData.Set("currentUsage", value); }
+    }
+
+    /// <summary>
+    /// External id of the entity within the customer.
+    /// </summary>
+    public required string EntityID
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullClass<string>("entityId");
+        }
+        init { this._rawData.Set("entityId", value); }
+    }
+
+    /// <summary>
+    /// Whether this node alone permits the requested usage.
+    /// </summary>
+    public required bool IsGranted
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("isGranted");
+        }
+        init { this._rawData.Set("isGranted", value); }
+    }
+
+    /// <summary>
+    /// External ids of the entities this budget is scoped to. Empty (`[]`) is the
+    /// node-wide budget; a non-empty set is the dimension-scoped budget that matched
+    /// this request — use it to tell apart multiple budgets on the same entity.
+    /// </summary>
+    public required IReadOnlyList<string> ScopeEntityIds
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<ImmutableArray<string>>("scopeEntityIds");
+        }
+        init
+        {
+            this._rawData.Set<ImmutableArray<string>>(
+                "scopeEntityIds",
+                ImmutableArray.ToImmutableArray(value)
+            );
+        }
+    }
+
+    /// <summary>
+    /// Hard usage limit for this node; null when the entity has no entity entitlement.
+    /// </summary>
+    public required double? UsageLimit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<double>("usageLimit");
+        }
+        init { this._rawData.Set("usageLimit", value); }
+    }
+
+    /// <inheritdoc/>
+    public override void Validate()
+    {
+        _ = this.CurrentUsage;
+        _ = this.EntityID;
+        _ = this.IsGranted;
+        _ = this.ScopeEntityIds;
+        _ = this.UsageLimit;
+    }
+
+    public CreditChainNode() { }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    public CreditChainNode(CreditChainNode creditChainNode)
+        : base(creditChainNode) { }
+#pragma warning restore CS8618
+
+    public CreditChainNode(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+
+#pragma warning disable CS8618
+    [SetsRequiredMembers]
+    CreditChainNode(FrozenDictionary<string, JsonElement> rawData)
+    {
+        this._rawData = new(rawData);
+    }
+#pragma warning restore CS8618
+
+    /// <inheritdoc cref="CreditChainNodeFromRaw.FromRawUnchecked"/>
+    public static CreditChainNode FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData)
+    {
+        return new(FrozenDictionary.ToFrozenDictionary(rawData));
+    }
+}
+
+class CreditChainNodeFromRaw : IFromRawJson<CreditChainNode>
+{
+    /// <inheritdoc/>
+    public CreditChainNode FromRawUnchecked(IReadOnlyDictionary<string, JsonElement> rawData) =>
+        CreditChainNode.FromRawUnchecked(rawData);
 }
 
 /// <summary>

@@ -877,7 +877,7 @@ public sealed record class BetaChainNode : JsonModel
     }
 
     /// <summary>
-    /// Hard usage limit for this node; null when no assignment is configured.
+    /// Hard usage limit for this node; null when the entity has no entity entitlement.
     /// </summary>
     public required double? UsageLimit
     {
@@ -1785,7 +1785,7 @@ public sealed record class CreditBetaChainNode : JsonModel
     }
 
     /// <summary>
-    /// Hard usage limit for this node; null when no assignment is configured.
+    /// Hard usage limit for this node; null when the entity has no entity entitlement.
     /// </summary>
     public required double? UsageLimit
     {
