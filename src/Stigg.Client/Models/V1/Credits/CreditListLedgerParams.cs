@@ -94,6 +94,27 @@ public record class CreditListLedgerParams : ParamsBase
     }
 
     /// <summary>
+    /// Filter to events with a timestamp on or before this date, inclusive (ISO 8601)
+    /// </summary>
+    public DateTimeOffset? EndDate
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<DateTimeOffset>("endDate");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("endDate", value);
+        }
+    }
+
+    /// <summary>
     /// Filter by event type(s), comma-separated
     /// </summary>
     public string? EventType
@@ -174,6 +195,27 @@ public record class CreditListLedgerParams : ParamsBase
             }
 
             this._rawQueryData.Set("resourceId", value);
+        }
+    }
+
+    /// <summary>
+    /// Filter to events with a timestamp on or after this date, inclusive (ISO 8601)
+    /// </summary>
+    public DateTimeOffset? StartDate
+    {
+        get
+        {
+            this._rawQueryData.Freeze();
+            return this._rawQueryData.GetNullableStruct<DateTimeOffset>("startDate");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawQueryData.Set("startDate", value);
         }
     }
 

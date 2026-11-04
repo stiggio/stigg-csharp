@@ -15,10 +15,12 @@ public class CreditListLedgerParamsTest : TestBase
             After = "after",
             Before = "before",
             CurrencyID = "currencyId",
+            EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EventType = "eventType",
             Limit = 1,
             ReservationID = "x",
             ResourceID = "resourceId",
+            StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",
         };
@@ -27,10 +29,12 @@ public class CreditListLedgerParamsTest : TestBase
         string expectedAfter = "after";
         string expectedBefore = "before";
         string expectedCurrencyID = "currencyId";
+        DateTimeOffset expectedEndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedEventType = "eventType";
         long expectedLimit = 1;
         string expectedReservationID = "x";
         string expectedResourceID = "resourceId";
+        DateTimeOffset expectedStartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedXAccountID = "X-ACCOUNT-ID";
         string expectedXEnvironmentID = "X-ENVIRONMENT-ID";
 
@@ -38,10 +42,12 @@ public class CreditListLedgerParamsTest : TestBase
         Assert.Equal(expectedAfter, parameters.After);
         Assert.Equal(expectedBefore, parameters.Before);
         Assert.Equal(expectedCurrencyID, parameters.CurrencyID);
+        Assert.Equal(expectedEndDate, parameters.EndDate);
         Assert.Equal(expectedEventType, parameters.EventType);
         Assert.Equal(expectedLimit, parameters.Limit);
         Assert.Equal(expectedReservationID, parameters.ReservationID);
         Assert.Equal(expectedResourceID, parameters.ResourceID);
+        Assert.Equal(expectedStartDate, parameters.StartDate);
         Assert.Equal(expectedXAccountID, parameters.XAccountID);
         Assert.Equal(expectedXEnvironmentID, parameters.XEnvironmentID);
     }
@@ -57,6 +63,8 @@ public class CreditListLedgerParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("before"));
         Assert.Null(parameters.CurrencyID);
         Assert.False(parameters.RawQueryData.ContainsKey("currencyId"));
+        Assert.Null(parameters.EndDate);
+        Assert.False(parameters.RawQueryData.ContainsKey("endDate"));
         Assert.Null(parameters.EventType);
         Assert.False(parameters.RawQueryData.ContainsKey("eventType"));
         Assert.Null(parameters.Limit);
@@ -65,6 +73,8 @@ public class CreditListLedgerParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("reservationId"));
         Assert.Null(parameters.ResourceID);
         Assert.False(parameters.RawQueryData.ContainsKey("resourceId"));
+        Assert.Null(parameters.StartDate);
+        Assert.False(parameters.RawQueryData.ContainsKey("startDate"));
         Assert.Null(parameters.XAccountID);
         Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
         Assert.Null(parameters.XEnvironmentID);
@@ -82,10 +92,12 @@ public class CreditListLedgerParamsTest : TestBase
             After = null,
             Before = null,
             CurrencyID = null,
+            EndDate = null,
             EventType = null,
             Limit = null,
             ReservationID = null,
             ResourceID = null,
+            StartDate = null,
             XAccountID = null,
             XEnvironmentID = null,
         };
@@ -96,6 +108,8 @@ public class CreditListLedgerParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("before"));
         Assert.Null(parameters.CurrencyID);
         Assert.False(parameters.RawQueryData.ContainsKey("currencyId"));
+        Assert.Null(parameters.EndDate);
+        Assert.False(parameters.RawQueryData.ContainsKey("endDate"));
         Assert.Null(parameters.EventType);
         Assert.False(parameters.RawQueryData.ContainsKey("eventType"));
         Assert.Null(parameters.Limit);
@@ -104,6 +118,8 @@ public class CreditListLedgerParamsTest : TestBase
         Assert.False(parameters.RawQueryData.ContainsKey("reservationId"));
         Assert.Null(parameters.ResourceID);
         Assert.False(parameters.RawQueryData.ContainsKey("resourceId"));
+        Assert.Null(parameters.StartDate);
+        Assert.False(parameters.RawQueryData.ContainsKey("startDate"));
         Assert.Null(parameters.XAccountID);
         Assert.False(parameters.RawHeaderData.ContainsKey("X-ACCOUNT-ID"));
         Assert.Null(parameters.XEnvironmentID);
@@ -119,10 +135,12 @@ public class CreditListLedgerParamsTest : TestBase
             After = "after",
             Before = "before",
             CurrencyID = "currencyId",
+            EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
             EventType = "eventType",
             Limit = 1,
             ReservationID = "x",
             ResourceID = "resourceId",
+            StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
         };
 
         var url = parameters.Url(new() { ApiKey = "My API Key" });
@@ -130,7 +148,7 @@ public class CreditListLedgerParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://edge.api.stigg.io/api/v1/credits/ledger?customerId=customerId&after=after&before=before&currencyId=currencyId&eventType=eventType&limit=1&reservationId=x&resourceId=resourceId"
+                    "https://edge.api.stigg.io/api/v1/credits/ledger?customerId=customerId&after=after&before=before&currencyId=currencyId&endDate=2019-12-27T18%3a11%3a19.117%2b00%3a00&eventType=eventType&limit=1&reservationId=x&resourceId=resourceId&startDate=2019-12-27T18%3a11%3a19.117%2b00%3a00"
                 ),
                 url
             )
@@ -163,10 +181,12 @@ public class CreditListLedgerParamsTest : TestBase
             After = "after",
             Before = "before",
             CurrencyID = "currencyId",
+            EndDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EventType = "eventType",
             Limit = 1,
             ReservationID = "x",
             ResourceID = "resourceId",
+            StartDate = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             XAccountID = "X-ACCOUNT-ID",
             XEnvironmentID = "X-ENVIRONMENT-ID",
         };
