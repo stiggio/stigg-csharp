@@ -15,7 +15,7 @@ public class GrantCreateParamsTest : TestBase
     {
         var parameters = new GrantCreateParams
         {
-            Amount = 0,
+            Amount = 9007199254,
             CurrencyID = "currencyId",
             CustomerID = "customerId",
             DisplayName = "displayName",
@@ -47,7 +47,7 @@ public class GrantCreateParamsTest : TestBase
             XEnvironmentID = "X-ENVIRONMENT-ID",
         };
 
-        double expectedAmount = 0;
+        double expectedAmount = 9007199254;
         string expectedCurrencyID = "currencyId";
         string expectedCustomerID = "customerId";
         string expectedDisplayName = "displayName";
@@ -110,7 +110,7 @@ public class GrantCreateParamsTest : TestBase
     {
         var parameters = new GrantCreateParams
         {
-            Amount = 0,
+            Amount = 9007199254,
             CurrencyID = "currencyId",
             CustomerID = "customerId",
             DisplayName = "displayName",
@@ -148,7 +148,7 @@ public class GrantCreateParamsTest : TestBase
     {
         var parameters = new GrantCreateParams
         {
-            Amount = 0,
+            Amount = 9007199254,
             CurrencyID = "currencyId",
             CustomerID = "customerId",
             DisplayName = "displayName",
@@ -200,7 +200,7 @@ public class GrantCreateParamsTest : TestBase
     {
         GrantCreateParams parameters = new()
         {
-            Amount = 0,
+            Amount = 9007199254,
             CurrencyID = "currencyId",
             CustomerID = "customerId",
             DisplayName = "displayName",
@@ -220,7 +220,7 @@ public class GrantCreateParamsTest : TestBase
         HttpRequestMessage requestMessage = new();
         GrantCreateParams parameters = new()
         {
-            Amount = 0,
+            Amount = 9007199254,
             CurrencyID = "currencyId",
             CustomerID = "customerId",
             DisplayName = "displayName",
@@ -240,7 +240,7 @@ public class GrantCreateParamsTest : TestBase
     {
         var parameters = new GrantCreateParams
         {
-            Amount = 0,
+            Amount = 9007199254,
             CurrencyID = "currencyId",
             CustomerID = "customerId",
             DisplayName = "displayName",

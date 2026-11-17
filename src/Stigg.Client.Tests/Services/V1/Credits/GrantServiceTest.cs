@@ -11,7 +11,7 @@ public class GrantServiceTest : TestBase
         var creditGrantResponse = await this.client.V1.Credits.Grants.Create(
             new()
             {
-                Amount = 0,
+                Amount = 9007199254,
                 CurrencyID = "currencyId",
                 CustomerID = "customerId",
                 DisplayName = "displayName",
