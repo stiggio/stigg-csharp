@@ -10,6 +10,10 @@ jobs:
   publish:
     name: publish
     runs-on: ubuntu-latest
+    # id-token: write lets the NuGet login step get a GitHub OIDC token.
+    permissions:
+      contents: read
+      id-token: write
 
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -24,10 +28,20 @@ jobs:
           --configuration Release
           --output "${{github.workspace}}/artifacts/packages"
 
+      # NuGet trusted publishing: trades the GitHub OIDC token for a NuGet API key
+      # that is valid for one hour, so no long-lived key can expire (STIGG-11039).
+      # The policy lives on nuget.org under the npcstigg account (repo stigg-csharp,
+      # workflow publish-nuget.yml, package Stigg.Client).
+      - name: NuGet login (OIDC)
+        id: nuget-login
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
+        with:
+          user: npcstigg
+
       - name: Publish package to nuget.org
         run: dotnet nuget push
           $(find ${{ github.workspace }}/artifacts/packages/*.nupkg ! -name "*.symbols.nupkg")
           --source https://api.nuget.org/v3/index.json
           --api-key $NUGET_API_KEY
         env:
-          NUGET_API_KEY: ${{ secrets.STIGG_NUGET_API_KEY || secrets.NUGET_API_KEY }}
+          NUGET_API_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
