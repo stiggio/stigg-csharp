@@ -136,6 +136,20 @@ public sealed record class CustomerRetrieveEntitlementsResponseData : JsonModel
         }
     }
 
+    /// <summary>
+    /// When these entitlements last changed, on the same clock as the entitlementsUpdated
+    /// event; always set, also when the list is empty.
+    /// </summary>
+    public required System::DateTimeOffset EntitlementsUpdatedAt
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<System::DateTimeOffset>("entitlementsUpdatedAt");
+        }
+        init { this._rawData.Set("entitlementsUpdatedAt", value); }
+    }
+
     /// <inheritdoc/>
     public override void Validate()
     {
@@ -144,6 +158,7 @@ public sealed record class CustomerRetrieveEntitlementsResponseData : JsonModel
         {
             item.Validate();
         }
+        _ = this.EntitlementsUpdatedAt;
     }
 
     public CustomerRetrieveEntitlementsResponseData() { }

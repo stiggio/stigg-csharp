@@ -42,6 +42,7 @@ public class CustomerRetrieveEntitlementsResponseTest : TestBase
                         ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     },
                 ],
+                EntitlementsUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
         };
 
@@ -73,6 +74,7 @@ public class CustomerRetrieveEntitlementsResponseTest : TestBase
                     ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
+            EntitlementsUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         Assert.Equal(expectedData, model.Data);
@@ -111,6 +113,7 @@ public class CustomerRetrieveEntitlementsResponseTest : TestBase
                         ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     },
                 ],
+                EntitlementsUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
         };
 
@@ -156,6 +159,7 @@ public class CustomerRetrieveEntitlementsResponseTest : TestBase
                         ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     },
                 ],
+                EntitlementsUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
         };
 
@@ -194,6 +198,7 @@ public class CustomerRetrieveEntitlementsResponseTest : TestBase
                     ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
+            EntitlementsUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         Assert.Equal(expectedData, deserialized.Data);
@@ -232,6 +237,7 @@ public class CustomerRetrieveEntitlementsResponseTest : TestBase
                         ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     },
                 ],
+                EntitlementsUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
         };
 
@@ -271,6 +277,7 @@ public class CustomerRetrieveEntitlementsResponseTest : TestBase
                         ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                     },
                 ],
+                EntitlementsUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
         };
 
@@ -313,6 +320,7 @@ public class CustomerRetrieveEntitlementsResponseDataTest : TestBase
                     ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
+            EntitlementsUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         ApiEnum<
@@ -344,6 +352,9 @@ public class CustomerRetrieveEntitlementsResponseDataTest : TestBase
                 ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
         ];
+        DateTimeOffset expectedEntitlementsUpdatedAt = DateTimeOffset.Parse(
+            "2019-12-27T18:11:19.117Z"
+        );
 
         Assert.Equal(expectedAccessDeniedReason, model.AccessDeniedReason);
         Assert.Equal(expectedEntitlements.Count, model.Entitlements.Count);
@@ -351,6 +362,7 @@ public class CustomerRetrieveEntitlementsResponseDataTest : TestBase
         {
             Assert.Equal(expectedEntitlements[i], model.Entitlements[i]);
         }
+        Assert.Equal(expectedEntitlementsUpdatedAt, model.EntitlementsUpdatedAt);
     }
 
     [Fact]
@@ -384,6 +396,7 @@ public class CustomerRetrieveEntitlementsResponseDataTest : TestBase
                     ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
+            EntitlementsUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         string json = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -426,6 +439,7 @@ public class CustomerRetrieveEntitlementsResponseDataTest : TestBase
                     ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
+            EntitlementsUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         string element = JsonSerializer.Serialize(model, ModelBase.SerializerOptions);
@@ -464,6 +478,9 @@ public class CustomerRetrieveEntitlementsResponseDataTest : TestBase
                 ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             },
         ];
+        DateTimeOffset expectedEntitlementsUpdatedAt = DateTimeOffset.Parse(
+            "2019-12-27T18:11:19.117Z"
+        );
 
         Assert.Equal(expectedAccessDeniedReason, deserialized.AccessDeniedReason);
         Assert.Equal(expectedEntitlements.Count, deserialized.Entitlements.Count);
@@ -471,6 +488,7 @@ public class CustomerRetrieveEntitlementsResponseDataTest : TestBase
         {
             Assert.Equal(expectedEntitlements[i], deserialized.Entitlements[i]);
         }
+        Assert.Equal(expectedEntitlementsUpdatedAt, deserialized.EntitlementsUpdatedAt);
     }
 
     [Fact]
@@ -504,6 +522,7 @@ public class CustomerRetrieveEntitlementsResponseDataTest : TestBase
                     ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
+            EntitlementsUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         model.Validate();
@@ -540,6 +559,7 @@ public class CustomerRetrieveEntitlementsResponseDataTest : TestBase
                     ValidUntil = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
                 },
             ],
+            EntitlementsUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
         };
 
         CustomerRetrieveEntitlementsResponseData copied = new(model);
