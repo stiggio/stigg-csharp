@@ -25,6 +25,7 @@ public class EntitlementCheckResponseTest : TestBase
                         {
                             CurrentUsage = 0,
                             EntityID = "entityId",
+                            HasSoftLimit = true,
                             IsGranted = true,
                             ScopeEntityIds = ["string"],
                             UsageLimit = 0,
@@ -61,6 +62,7 @@ public class EntitlementCheckResponseTest : TestBase
                     {
                         CurrentUsage = 0,
                         EntityID = "entityId",
+                        HasSoftLimit = true,
                         IsGranted = true,
                         ScopeEntityIds = ["string"],
                         UsageLimit = 0,
@@ -104,6 +106,7 @@ public class EntitlementCheckResponseTest : TestBase
                         {
                             CurrentUsage = 0,
                             EntityID = "entityId",
+                            HasSoftLimit = true,
                             IsGranted = true,
                             ScopeEntityIds = ["string"],
                             UsageLimit = 0,
@@ -154,6 +157,7 @@ public class EntitlementCheckResponseTest : TestBase
                         {
                             CurrentUsage = 0,
                             EntityID = "entityId",
+                            HasSoftLimit = true,
                             IsGranted = true,
                             ScopeEntityIds = ["string"],
                             UsageLimit = 0,
@@ -197,6 +201,7 @@ public class EntitlementCheckResponseTest : TestBase
                     {
                         CurrentUsage = 0,
                         EntityID = "entityId",
+                        HasSoftLimit = true,
                         IsGranted = true,
                         ScopeEntityIds = ["string"],
                         UsageLimit = 0,
@@ -240,6 +245,7 @@ public class EntitlementCheckResponseTest : TestBase
                         {
                             CurrentUsage = 0,
                             EntityID = "entityId",
+                            HasSoftLimit = true,
                             IsGranted = true,
                             ScopeEntityIds = ["string"],
                             UsageLimit = 0,
@@ -284,6 +290,7 @@ public class EntitlementCheckResponseTest : TestBase
                         {
                             CurrentUsage = 0,
                             EntityID = "entityId",
+                            HasSoftLimit = true,
                             IsGranted = true,
                             ScopeEntityIds = ["string"],
                             UsageLimit = 0,
@@ -331,6 +338,7 @@ public class DataTest : TestBase
                     {
                         CurrentUsage = 0,
                         EntityID = "entityId",
+                        HasSoftLimit = true,
                         IsGranted = true,
                         ScopeEntityIds = ["string"],
                         UsageLimit = 0,
@@ -383,6 +391,7 @@ public class DataTest : TestBase
                     {
                         CurrentUsage = 0,
                         EntityID = "entityId",
+                        HasSoftLimit = true,
                         IsGranted = true,
                         ScopeEntityIds = ["string"],
                         UsageLimit = 0,
@@ -419,6 +428,7 @@ public class DataTest : TestBase
                     {
                         CurrentUsage = 0,
                         EntityID = "entityId",
+                        HasSoftLimit = true,
                         IsGranted = true,
                         ScopeEntityIds = ["string"],
                         UsageLimit = 0,
@@ -474,6 +484,7 @@ public class DataTest : TestBase
                     {
                         CurrentUsage = 0,
                         EntityID = "entityId",
+                        HasSoftLimit = true,
                         IsGranted = true,
                         ScopeEntityIds = ["string"],
                         UsageLimit = 0,
@@ -516,6 +527,7 @@ public class FeatureTest : TestBase
                     {
                         CurrentUsage = 0,
                         EntityID = "entityId",
+                        HasSoftLimit = true,
                         IsGranted = true,
                         ScopeEntityIds = ["string"],
                         UsageLimit = 0,
@@ -551,6 +563,7 @@ public class FeatureTest : TestBase
                 {
                     CurrentUsage = 0,
                     EntityID = "entityId",
+                    HasSoftLimit = true,
                     IsGranted = true,
                     ScopeEntityIds = ["string"],
                     UsageLimit = 0,
@@ -615,6 +628,7 @@ public class FeatureTest : TestBase
                     {
                         CurrentUsage = 0,
                         EntityID = "entityId",
+                        HasSoftLimit = true,
                         IsGranted = true,
                         ScopeEntityIds = ["string"],
                         UsageLimit = 0,
@@ -659,6 +673,7 @@ public class FeatureTest : TestBase
                     {
                         CurrentUsage = 0,
                         EntityID = "entityId",
+                        HasSoftLimit = true,
                         IsGranted = true,
                         ScopeEntityIds = ["string"],
                         UsageLimit = 0,
@@ -701,6 +716,7 @@ public class FeatureTest : TestBase
                 {
                     CurrentUsage = 0,
                     EntityID = "entityId",
+                    HasSoftLimit = true,
                     IsGranted = true,
                     ScopeEntityIds = ["string"],
                     UsageLimit = 0,
@@ -765,6 +781,7 @@ public class FeatureTest : TestBase
                     {
                         CurrentUsage = 0,
                         EntityID = "entityId",
+                        HasSoftLimit = true,
                         IsGranted = true,
                         ScopeEntityIds = ["string"],
                         UsageLimit = 0,
@@ -918,6 +935,7 @@ public class FeatureTest : TestBase
                     {
                         CurrentUsage = 0,
                         EntityID = "entityId",
+                        HasSoftLimit = true,
                         IsGranted = true,
                         ScopeEntityIds = ["string"],
                         UsageLimit = 0,
@@ -960,6 +978,7 @@ public class FeatureTest : TestBase
                     {
                         CurrentUsage = 0,
                         EntityID = "entityId",
+                        HasSoftLimit = true,
                         IsGranted = true,
                         ScopeEntityIds = ["string"],
                         UsageLimit = 0,
@@ -999,6 +1018,7 @@ public class FeatureTest : TestBase
                     {
                         CurrentUsage = 0,
                         EntityID = "entityId",
+                        HasSoftLimit = true,
                         IsGranted = true,
                         ScopeEntityIds = ["string"],
                         UsageLimit = 0,
@@ -1044,6 +1064,7 @@ public class FeatureTest : TestBase
                     {
                         CurrentUsage = 0,
                         EntityID = "entityId",
+                        HasSoftLimit = true,
                         IsGranted = true,
                         ScopeEntityIds = ["string"],
                         UsageLimit = 0,
@@ -1086,6 +1107,7 @@ public class FeatureTest : TestBase
                     {
                         CurrentUsage = 0,
                         EntityID = "entityId",
+                        HasSoftLimit = true,
                         IsGranted = true,
                         ScopeEntityIds = ["string"],
                         UsageLimit = 0,
@@ -1207,6 +1229,7 @@ public class BetaChainNodeTest : TestBase
         {
             CurrentUsage = 0,
             EntityID = "entityId",
+            HasSoftLimit = true,
             IsGranted = true,
             ScopeEntityIds = ["string"],
             UsageLimit = 0,
@@ -1214,12 +1237,14 @@ public class BetaChainNodeTest : TestBase
 
         double expectedCurrentUsage = 0;
         string expectedEntityID = "entityId";
+        bool expectedHasSoftLimit = true;
         bool expectedIsGranted = true;
         List<string> expectedScopeEntityIds = ["string"];
         double expectedUsageLimit = 0;
 
         Assert.Equal(expectedCurrentUsage, model.CurrentUsage);
         Assert.Equal(expectedEntityID, model.EntityID);
+        Assert.Equal(expectedHasSoftLimit, model.HasSoftLimit);
         Assert.Equal(expectedIsGranted, model.IsGranted);
         Assert.Equal(expectedScopeEntityIds.Count, model.ScopeEntityIds.Count);
         for (int i = 0; i < expectedScopeEntityIds.Count; i++)
@@ -1236,6 +1261,7 @@ public class BetaChainNodeTest : TestBase
         {
             CurrentUsage = 0,
             EntityID = "entityId",
+            HasSoftLimit = true,
             IsGranted = true,
             ScopeEntityIds = ["string"],
             UsageLimit = 0,
@@ -1257,6 +1283,7 @@ public class BetaChainNodeTest : TestBase
         {
             CurrentUsage = 0,
             EntityID = "entityId",
+            HasSoftLimit = true,
             IsGranted = true,
             ScopeEntityIds = ["string"],
             UsageLimit = 0,
@@ -1271,12 +1298,14 @@ public class BetaChainNodeTest : TestBase
 
         double expectedCurrentUsage = 0;
         string expectedEntityID = "entityId";
+        bool expectedHasSoftLimit = true;
         bool expectedIsGranted = true;
         List<string> expectedScopeEntityIds = ["string"];
         double expectedUsageLimit = 0;
 
         Assert.Equal(expectedCurrentUsage, deserialized.CurrentUsage);
         Assert.Equal(expectedEntityID, deserialized.EntityID);
+        Assert.Equal(expectedHasSoftLimit, deserialized.HasSoftLimit);
         Assert.Equal(expectedIsGranted, deserialized.IsGranted);
         Assert.Equal(expectedScopeEntityIds.Count, deserialized.ScopeEntityIds.Count);
         for (int i = 0; i < expectedScopeEntityIds.Count; i++)
@@ -1293,6 +1322,7 @@ public class BetaChainNodeTest : TestBase
         {
             CurrentUsage = 0,
             EntityID = "entityId",
+            HasSoftLimit = true,
             IsGranted = true,
             ScopeEntityIds = ["string"],
             UsageLimit = 0,
@@ -1308,6 +1338,7 @@ public class BetaChainNodeTest : TestBase
         {
             CurrentUsage = 0,
             EntityID = "entityId",
+            HasSoftLimit = true,
             IsGranted = true,
             ScopeEntityIds = ["string"],
             UsageLimit = 0,
@@ -1635,6 +1666,7 @@ public class CreditTest : TestBase
                     {
                         CurrentUsage = 0,
                         EntityID = "entityId",
+                        HasSoftLimit = true,
                         IsGranted = true,
                         ScopeEntityIds = ["string"],
                         UsageLimit = 0,
@@ -1678,6 +1710,7 @@ public class CreditTest : TestBase
                 {
                     CurrentUsage = 0,
                     EntityID = "entityId",
+                    HasSoftLimit = true,
                     IsGranted = true,
                     ScopeEntityIds = ["string"],
                     UsageLimit = 0,
@@ -1750,6 +1783,7 @@ public class CreditTest : TestBase
                     {
                         CurrentUsage = 0,
                         EntityID = "entityId",
+                        HasSoftLimit = true,
                         IsGranted = true,
                         ScopeEntityIds = ["string"],
                         UsageLimit = 0,
@@ -1802,6 +1836,7 @@ public class CreditTest : TestBase
                     {
                         CurrentUsage = 0,
                         EntityID = "entityId",
+                        HasSoftLimit = true,
                         IsGranted = true,
                         ScopeEntityIds = ["string"],
                         UsageLimit = 0,
@@ -1849,6 +1884,7 @@ public class CreditTest : TestBase
                 {
                     CurrentUsage = 0,
                     EntityID = "entityId",
+                    HasSoftLimit = true,
                     IsGranted = true,
                     ScopeEntityIds = ["string"],
                     UsageLimit = 0,
@@ -1921,6 +1957,7 @@ public class CreditTest : TestBase
                     {
                         CurrentUsage = 0,
                         EntityID = "entityId",
+                        HasSoftLimit = true,
                         IsGranted = true,
                         ScopeEntityIds = ["string"],
                         UsageLimit = 0,
@@ -2132,6 +2169,7 @@ public class CreditTest : TestBase
                     {
                         CurrentUsage = 0,
                         EntityID = "entityId",
+                        HasSoftLimit = true,
                         IsGranted = true,
                         ScopeEntityIds = ["string"],
                         UsageLimit = 0,
@@ -2175,6 +2213,7 @@ public class CreditTest : TestBase
                     {
                         CurrentUsage = 0,
                         EntityID = "entityId",
+                        HasSoftLimit = true,
                         IsGranted = true,
                         ScopeEntityIds = ["string"],
                         UsageLimit = 0,
@@ -2217,6 +2256,7 @@ public class CreditTest : TestBase
                     {
                         CurrentUsage = 0,
                         EntityID = "entityId",
+                        HasSoftLimit = true,
                         IsGranted = true,
                         ScopeEntityIds = ["string"],
                         UsageLimit = 0,
@@ -2262,6 +2302,7 @@ public class CreditTest : TestBase
                     {
                         CurrentUsage = 0,
                         EntityID = "entityId",
+                        HasSoftLimit = true,
                         IsGranted = true,
                         ScopeEntityIds = ["string"],
                         UsageLimit = 0,
@@ -2306,6 +2347,7 @@ public class CreditTest : TestBase
                     {
                         CurrentUsage = 0,
                         EntityID = "entityId",
+                        HasSoftLimit = true,
                         IsGranted = true,
                         ScopeEntityIds = ["string"],
                         UsageLimit = 0,
@@ -2620,6 +2662,7 @@ public class CreditBetaChainNodeTest : TestBase
         {
             CurrentUsage = 0,
             EntityID = "entityId",
+            HasSoftLimit = true,
             IsGranted = true,
             ScopeEntityIds = ["string"],
             UsageLimit = 0,
@@ -2627,12 +2670,14 @@ public class CreditBetaChainNodeTest : TestBase
 
         double expectedCurrentUsage = 0;
         string expectedEntityID = "entityId";
+        bool expectedHasSoftLimit = true;
         bool expectedIsGranted = true;
         List<string> expectedScopeEntityIds = ["string"];
         double expectedUsageLimit = 0;
 
         Assert.Equal(expectedCurrentUsage, model.CurrentUsage);
         Assert.Equal(expectedEntityID, model.EntityID);
+        Assert.Equal(expectedHasSoftLimit, model.HasSoftLimit);
         Assert.Equal(expectedIsGranted, model.IsGranted);
         Assert.Equal(expectedScopeEntityIds.Count, model.ScopeEntityIds.Count);
         for (int i = 0; i < expectedScopeEntityIds.Count; i++)
@@ -2649,6 +2694,7 @@ public class CreditBetaChainNodeTest : TestBase
         {
             CurrentUsage = 0,
             EntityID = "entityId",
+            HasSoftLimit = true,
             IsGranted = true,
             ScopeEntityIds = ["string"],
             UsageLimit = 0,
@@ -2670,6 +2716,7 @@ public class CreditBetaChainNodeTest : TestBase
         {
             CurrentUsage = 0,
             EntityID = "entityId",
+            HasSoftLimit = true,
             IsGranted = true,
             ScopeEntityIds = ["string"],
             UsageLimit = 0,
@@ -2684,12 +2731,14 @@ public class CreditBetaChainNodeTest : TestBase
 
         double expectedCurrentUsage = 0;
         string expectedEntityID = "entityId";
+        bool expectedHasSoftLimit = true;
         bool expectedIsGranted = true;
         List<string> expectedScopeEntityIds = ["string"];
         double expectedUsageLimit = 0;
 
         Assert.Equal(expectedCurrentUsage, deserialized.CurrentUsage);
         Assert.Equal(expectedEntityID, deserialized.EntityID);
+        Assert.Equal(expectedHasSoftLimit, deserialized.HasSoftLimit);
         Assert.Equal(expectedIsGranted, deserialized.IsGranted);
         Assert.Equal(expectedScopeEntityIds.Count, deserialized.ScopeEntityIds.Count);
         for (int i = 0; i < expectedScopeEntityIds.Count; i++)
@@ -2706,6 +2755,7 @@ public class CreditBetaChainNodeTest : TestBase
         {
             CurrentUsage = 0,
             EntityID = "entityId",
+            HasSoftLimit = true,
             IsGranted = true,
             ScopeEntityIds = ["string"],
             UsageLimit = 0,
@@ -2721,6 +2771,7 @@ public class CreditBetaChainNodeTest : TestBase
         {
             CurrentUsage = 0,
             EntityID = "entityId",
+            HasSoftLimit = true,
             IsGranted = true,
             ScopeEntityIds = ["string"],
             UsageLimit = 0,

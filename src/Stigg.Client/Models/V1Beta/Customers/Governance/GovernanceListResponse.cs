@@ -86,6 +86,20 @@ public sealed record class GovernanceListResponse : JsonModel
     }
 
     /// <summary>
+    /// Whether usage past `usageLimit` is allowed and still counted. `null` when
+    /// the node has no usage configuration.
+    /// </summary>
+    public required bool? HasSoftLimit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("hasSoftLimit");
+        }
+        init { this._rawData.Set("hasSoftLimit", value); }
+    }
+
+    /// <summary>
     /// External id of the parent entity in the tree. `null` means the entity is
     /// either a root or not yet placed in the hierarchy — placement rides on an assignment,
     /// so an entity with no limits set has no parent yet. Both render at the top
@@ -122,7 +136,7 @@ public sealed record class GovernanceListResponse : JsonModel
     }
 
     /// <summary>
-    /// Hard usage limit for this node per cadence period.
+    /// Usage limit for this node per cadence period.
     /// </summary>
     public required double? UsageLimit
     {
@@ -228,6 +242,7 @@ public sealed record class GovernanceListResponse : JsonModel
         _ = this.DisplayName;
         _ = this.EntityID;
         _ = this.EntityTypeID;
+        _ = this.HasSoftLimit;
         _ = this.ParentID;
         _ = this.ScopeEntityIds;
         _ = this.UsageLimit;

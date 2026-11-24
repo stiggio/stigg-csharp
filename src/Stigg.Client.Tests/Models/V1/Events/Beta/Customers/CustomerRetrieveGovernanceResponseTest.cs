@@ -22,6 +22,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
                     DisplayName = "displayName",
                     EntityID = "entityId",
                     EntityTypeID = "entityTypeId",
+                    HasSoftLimit = true,
                     ParentID = "parentId",
                     ScopeEntityIds = ["string"],
                     UsageLimit = 0,
@@ -44,6 +45,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
                 DisplayName = "displayName",
                 EntityID = "entityId",
                 EntityTypeID = "entityTypeId",
+                HasSoftLimit = true,
                 ParentID = "parentId",
                 ScopeEntityIds = ["string"],
                 UsageLimit = 0,
@@ -78,6 +80,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
                     DisplayName = "displayName",
                     EntityID = "entityId",
                     EntityTypeID = "entityTypeId",
+                    HasSoftLimit = true,
                     ParentID = "parentId",
                     ScopeEntityIds = ["string"],
                     UsageLimit = 0,
@@ -114,6 +117,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
                     DisplayName = "displayName",
                     EntityID = "entityId",
                     EntityTypeID = "entityTypeId",
+                    HasSoftLimit = true,
                     ParentID = "parentId",
                     ScopeEntityIds = ["string"],
                     UsageLimit = 0,
@@ -143,6 +147,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
                 DisplayName = "displayName",
                 EntityID = "entityId",
                 EntityTypeID = "entityTypeId",
+                HasSoftLimit = true,
                 ParentID = "parentId",
                 ScopeEntityIds = ["string"],
                 UsageLimit = 0,
@@ -177,6 +182,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
                     DisplayName = "displayName",
                     EntityID = "entityId",
                     EntityTypeID = "entityTypeId",
+                    HasSoftLimit = true,
                     ParentID = "parentId",
                     ScopeEntityIds = ["string"],
                     UsageLimit = 0,
@@ -207,6 +213,7 @@ public class CustomerRetrieveGovernanceResponseTest : TestBase
                     DisplayName = "displayName",
                     EntityID = "entityId",
                     EntityTypeID = "entityTypeId",
+                    HasSoftLimit = true,
                     ParentID = "parentId",
                     ScopeEntityIds = ["string"],
                     UsageLimit = 0,
@@ -238,6 +245,7 @@ public class DataTest : TestBase
             DisplayName = "displayName",
             EntityID = "entityId",
             EntityTypeID = "entityTypeId",
+            HasSoftLimit = true,
             ParentID = "parentId",
             ScopeEntityIds = ["string"],
             UsageLimit = 0,
@@ -253,6 +261,7 @@ public class DataTest : TestBase
         string expectedDisplayName = "displayName";
         string expectedEntityID = "entityId";
         string expectedEntityTypeID = "entityTypeId";
+        bool expectedHasSoftLimit = true;
         string expectedParentID = "parentId";
         List<string> expectedScopeEntityIds = ["string"];
         double expectedUsageLimit = 0;
@@ -267,6 +276,7 @@ public class DataTest : TestBase
         Assert.Equal(expectedDisplayName, model.DisplayName);
         Assert.Equal(expectedEntityID, model.EntityID);
         Assert.Equal(expectedEntityTypeID, model.EntityTypeID);
+        Assert.Equal(expectedHasSoftLimit, model.HasSoftLimit);
         Assert.Equal(expectedParentID, model.ParentID);
         Assert.Equal(expectedScopeEntityIds.Count, model.ScopeEntityIds.Count);
         for (int i = 0; i < expectedScopeEntityIds.Count; i++)
@@ -291,6 +301,7 @@ public class DataTest : TestBase
             DisplayName = "displayName",
             EntityID = "entityId",
             EntityTypeID = "entityTypeId",
+            HasSoftLimit = true,
             ParentID = "parentId",
             ScopeEntityIds = ["string"],
             UsageLimit = 0,
@@ -317,6 +328,7 @@ public class DataTest : TestBase
             DisplayName = "displayName",
             EntityID = "entityId",
             EntityTypeID = "entityTypeId",
+            HasSoftLimit = true,
             ParentID = "parentId",
             ScopeEntityIds = ["string"],
             UsageLimit = 0,
@@ -336,6 +348,7 @@ public class DataTest : TestBase
         string expectedDisplayName = "displayName";
         string expectedEntityID = "entityId";
         string expectedEntityTypeID = "entityTypeId";
+        bool expectedHasSoftLimit = true;
         string expectedParentID = "parentId";
         List<string> expectedScopeEntityIds = ["string"];
         double expectedUsageLimit = 0;
@@ -350,6 +363,7 @@ public class DataTest : TestBase
         Assert.Equal(expectedDisplayName, deserialized.DisplayName);
         Assert.Equal(expectedEntityID, deserialized.EntityID);
         Assert.Equal(expectedEntityTypeID, deserialized.EntityTypeID);
+        Assert.Equal(expectedHasSoftLimit, deserialized.HasSoftLimit);
         Assert.Equal(expectedParentID, deserialized.ParentID);
         Assert.Equal(expectedScopeEntityIds.Count, deserialized.ScopeEntityIds.Count);
         for (int i = 0; i < expectedScopeEntityIds.Count; i++)
@@ -374,6 +388,7 @@ public class DataTest : TestBase
             DisplayName = "displayName",
             EntityID = "entityId",
             EntityTypeID = "entityTypeId",
+            HasSoftLimit = true,
             ParentID = "parentId",
             ScopeEntityIds = ["string"],
             UsageLimit = 0,
@@ -397,6 +412,7 @@ public class DataTest : TestBase
             DisplayName = "displayName",
             EntityID = "entityId",
             EntityTypeID = "entityTypeId",
+            HasSoftLimit = true,
             ParentID = "parentId",
             ScopeEntityIds = ["string"],
             UsageLimit = 0,
@@ -421,6 +437,7 @@ public class DataTest : TestBase
             DisplayName = "displayName",
             EntityID = "entityId",
             EntityTypeID = "entityTypeId",
+            HasSoftLimit = true,
             ParentID = "parentId",
             ScopeEntityIds = ["string"],
             UsageLimit = 0,
@@ -442,6 +459,7 @@ public class DataTest : TestBase
             DisplayName = "displayName",
             EntityID = "entityId",
             EntityTypeID = "entityTypeId",
+            HasSoftLimit = true,
             ParentID = "parentId",
             ScopeEntityIds = ["string"],
             UsageLimit = 0,
@@ -470,6 +488,7 @@ public class DataTest : TestBase
             DisplayName = "displayName",
             EntityID = "entityId",
             EntityTypeID = "entityTypeId",
+            HasSoftLimit = true,
             ParentID = "parentId",
             ScopeEntityIds = ["string"],
             UsageLimit = 0,
@@ -495,6 +514,7 @@ public class DataTest : TestBase
             DisplayName = "displayName",
             EntityID = "entityId",
             EntityTypeID = "entityTypeId",
+            HasSoftLimit = true,
             ParentID = "parentId",
             ScopeEntityIds = ["string"],
             UsageLimit = 0,

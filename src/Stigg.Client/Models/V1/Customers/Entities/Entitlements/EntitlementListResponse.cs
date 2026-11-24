@@ -70,6 +70,19 @@ public sealed record class EntitlementListResponse : JsonModel
     }
 
     /// <summary>
+    /// Whether usage past `usageLimit` is allowed and still counted, instead of blocked.
+    /// </summary>
+    public required bool HasSoftLimit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("hasSoftLimit");
+        }
+        init { this._rawData.Set("hasSoftLimit", value); }
+    }
+
+    /// <summary>
     /// Parent entity ID in the hierarchy, or `null` for a root.
     /// </summary>
     public required string? ParentID
@@ -178,6 +191,7 @@ public sealed record class EntitlementListResponse : JsonModel
         _ = this.Cadence;
         _ = this.CreatedAt;
         _ = this.EntityID;
+        _ = this.HasSoftLimit;
         _ = this.ParentID;
         _ = this.ScopeEntityIds;
         _ = this.UpdatedAt;

@@ -23,6 +23,7 @@ public class EntitlementUpsertParamsTest : TestBase
                     Cadence = "P1M",
                     CurrencyID = "currencyId",
                     FeatureID = "compute-minutes",
+                    HasSoftLimit = true,
                     ParentID = "parentId",
                     ScopeEntityIds = ["NxI"],
                     UsageLimit = 1000,
@@ -33,6 +34,7 @@ public class EntitlementUpsertParamsTest : TestBase
                     Cadence = "P1M",
                     CurrencyID = "cred-type-tokens",
                     FeatureID = "featureId",
+                    HasSoftLimit = true,
                     ParentID = "workspace-001",
                     ScopeEntityIds = ["user-1"],
                     UsageLimit = 2000,
@@ -51,6 +53,7 @@ public class EntitlementUpsertParamsTest : TestBase
                 Cadence = "P1M",
                 CurrencyID = "currencyId",
                 FeatureID = "compute-minutes",
+                HasSoftLimit = true,
                 ParentID = "parentId",
                 ScopeEntityIds = ["NxI"],
                 UsageLimit = 1000,
@@ -61,6 +64,7 @@ public class EntitlementUpsertParamsTest : TestBase
                 Cadence = "P1M",
                 CurrencyID = "cred-type-tokens",
                 FeatureID = "featureId",
+                HasSoftLimit = true,
                 ParentID = "workspace-001",
                 ScopeEntityIds = ["user-1"],
                 UsageLimit = 2000,
@@ -93,6 +97,7 @@ public class EntitlementUpsertParamsTest : TestBase
                     Cadence = "P1M",
                     CurrencyID = "currencyId",
                     FeatureID = "compute-minutes",
+                    HasSoftLimit = true,
                     ParentID = "parentId",
                     ScopeEntityIds = ["NxI"],
                     UsageLimit = 1000,
@@ -103,6 +108,7 @@ public class EntitlementUpsertParamsTest : TestBase
                     Cadence = "P1M",
                     CurrencyID = "cred-type-tokens",
                     FeatureID = "featureId",
+                    HasSoftLimit = true,
                     ParentID = "workspace-001",
                     ScopeEntityIds = ["user-1"],
                     UsageLimit = 2000,
@@ -130,6 +136,7 @@ public class EntitlementUpsertParamsTest : TestBase
                     Cadence = "P1M",
                     CurrencyID = "currencyId",
                     FeatureID = "compute-minutes",
+                    HasSoftLimit = true,
                     ParentID = "parentId",
                     ScopeEntityIds = ["NxI"],
                     UsageLimit = 1000,
@@ -140,6 +147,7 @@ public class EntitlementUpsertParamsTest : TestBase
                     Cadence = "P1M",
                     CurrencyID = "cred-type-tokens",
                     FeatureID = "featureId",
+                    HasSoftLimit = true,
                     ParentID = "workspace-001",
                     ScopeEntityIds = ["user-1"],
                     UsageLimit = 2000,
@@ -171,6 +179,7 @@ public class EntitlementUpsertParamsTest : TestBase
                     Cadence = "P1M",
                     CurrencyID = "currencyId",
                     FeatureID = "compute-minutes",
+                    HasSoftLimit = true,
                     ParentID = "parentId",
                     ScopeEntityIds = ["NxI"],
                     UsageLimit = 1000,
@@ -181,6 +190,7 @@ public class EntitlementUpsertParamsTest : TestBase
                     Cadence = "P1M",
                     CurrencyID = "cred-type-tokens",
                     FeatureID = "featureId",
+                    HasSoftLimit = true,
                     ParentID = "workspace-001",
                     ScopeEntityIds = ["user-1"],
                     UsageLimit = 2000,
@@ -213,6 +223,7 @@ public class EntitlementUpsertParamsTest : TestBase
                     Cadence = "P1M",
                     CurrencyID = "currencyId",
                     FeatureID = "compute-minutes",
+                    HasSoftLimit = true,
                     ParentID = "parentId",
                     ScopeEntityIds = ["NxI"],
                     UsageLimit = 1000,
@@ -223,6 +234,7 @@ public class EntitlementUpsertParamsTest : TestBase
                     Cadence = "P1M",
                     CurrencyID = "cred-type-tokens",
                     FeatureID = "featureId",
+                    HasSoftLimit = true,
                     ParentID = "workspace-001",
                     ScopeEntityIds = ["user-1"],
                     UsageLimit = 2000,
@@ -252,6 +264,7 @@ public class EntitlementUpsertParamsTest : TestBase
                     Cadence = "P1M",
                     CurrencyID = "currencyId",
                     FeatureID = "compute-minutes",
+                    HasSoftLimit = true,
                     ParentID = "parentId",
                     ScopeEntityIds = ["NxI"],
                     UsageLimit = 1000,
@@ -262,6 +275,7 @@ public class EntitlementUpsertParamsTest : TestBase
                     Cadence = "P1M",
                     CurrencyID = "cred-type-tokens",
                     FeatureID = "featureId",
+                    HasSoftLimit = true,
                     ParentID = "workspace-001",
                     ScopeEntityIds = ["user-1"],
                     UsageLimit = 2000,
@@ -288,6 +302,7 @@ public class EntityEntitlementTest : TestBase
             Cadence = "PT869S",
             CurrencyID = "currencyId",
             FeatureID = "featureId",
+            HasSoftLimit = true,
             ParentID = "parentId",
             ScopeEntityIds = ["NxI"],
             UsageLimit = 0,
@@ -297,6 +312,7 @@ public class EntityEntitlementTest : TestBase
         string expectedCadence = "PT869S";
         string expectedCurrencyID = "currencyId";
         string expectedFeatureID = "featureId";
+        bool expectedHasSoftLimit = true;
         string expectedParentID = "parentId";
         List<string> expectedScopeEntityIds = ["NxI"];
         double expectedUsageLimit = 0;
@@ -305,6 +321,7 @@ public class EntityEntitlementTest : TestBase
         Assert.Equal(expectedCadence, model.Cadence);
         Assert.Equal(expectedCurrencyID, model.CurrencyID);
         Assert.Equal(expectedFeatureID, model.FeatureID);
+        Assert.Equal(expectedHasSoftLimit, model.HasSoftLimit);
         Assert.Equal(expectedParentID, model.ParentID);
         Assert.NotNull(model.ScopeEntityIds);
         Assert.Equal(expectedScopeEntityIds.Count, model.ScopeEntityIds.Count);
@@ -324,6 +341,7 @@ public class EntityEntitlementTest : TestBase
             Cadence = "PT869S",
             CurrencyID = "currencyId",
             FeatureID = "featureId",
+            HasSoftLimit = true,
             ParentID = "parentId",
             ScopeEntityIds = ["NxI"],
             UsageLimit = 0,
@@ -347,6 +365,7 @@ public class EntityEntitlementTest : TestBase
             Cadence = "PT869S",
             CurrencyID = "currencyId",
             FeatureID = "featureId",
+            HasSoftLimit = true,
             ParentID = "parentId",
             ScopeEntityIds = ["NxI"],
             UsageLimit = 0,
@@ -363,6 +382,7 @@ public class EntityEntitlementTest : TestBase
         string expectedCadence = "PT869S";
         string expectedCurrencyID = "currencyId";
         string expectedFeatureID = "featureId";
+        bool expectedHasSoftLimit = true;
         string expectedParentID = "parentId";
         List<string> expectedScopeEntityIds = ["NxI"];
         double expectedUsageLimit = 0;
@@ -371,6 +391,7 @@ public class EntityEntitlementTest : TestBase
         Assert.Equal(expectedCadence, deserialized.Cadence);
         Assert.Equal(expectedCurrencyID, deserialized.CurrencyID);
         Assert.Equal(expectedFeatureID, deserialized.FeatureID);
+        Assert.Equal(expectedHasSoftLimit, deserialized.HasSoftLimit);
         Assert.Equal(expectedParentID, deserialized.ParentID);
         Assert.NotNull(deserialized.ScopeEntityIds);
         Assert.Equal(expectedScopeEntityIds.Count, deserialized.ScopeEntityIds.Count);
@@ -390,6 +411,7 @@ public class EntityEntitlementTest : TestBase
             Cadence = "PT869S",
             CurrencyID = "currencyId",
             FeatureID = "featureId",
+            HasSoftLimit = true,
             ParentID = "parentId",
             ScopeEntityIds = ["NxI"],
             UsageLimit = 0,
@@ -414,6 +436,8 @@ public class EntityEntitlementTest : TestBase
         Assert.False(model.RawData.ContainsKey("currencyId"));
         Assert.Null(model.FeatureID);
         Assert.False(model.RawData.ContainsKey("featureId"));
+        Assert.Null(model.HasSoftLimit);
+        Assert.False(model.RawData.ContainsKey("hasSoftLimit"));
         Assert.Null(model.ScopeEntityIds);
         Assert.False(model.RawData.ContainsKey("scopeEntityIds"));
     }
@@ -444,6 +468,7 @@ public class EntityEntitlementTest : TestBase
             Cadence = null,
             CurrencyID = null,
             FeatureID = null,
+            HasSoftLimit = null,
             ScopeEntityIds = null,
         };
 
@@ -453,6 +478,8 @@ public class EntityEntitlementTest : TestBase
         Assert.False(model.RawData.ContainsKey("currencyId"));
         Assert.Null(model.FeatureID);
         Assert.False(model.RawData.ContainsKey("featureId"));
+        Assert.Null(model.HasSoftLimit);
+        Assert.False(model.RawData.ContainsKey("hasSoftLimit"));
         Assert.Null(model.ScopeEntityIds);
         Assert.False(model.RawData.ContainsKey("scopeEntityIds"));
     }
@@ -470,6 +497,7 @@ public class EntityEntitlementTest : TestBase
             Cadence = null,
             CurrencyID = null,
             FeatureID = null,
+            HasSoftLimit = null,
             ScopeEntityIds = null,
         };
 
@@ -485,6 +513,7 @@ public class EntityEntitlementTest : TestBase
             Cadence = "PT869S",
             CurrencyID = "currencyId",
             FeatureID = "featureId",
+            HasSoftLimit = true,
             ScopeEntityIds = ["NxI"],
         };
 
@@ -503,6 +532,7 @@ public class EntityEntitlementTest : TestBase
             Cadence = "PT869S",
             CurrencyID = "currencyId",
             FeatureID = "featureId",
+            HasSoftLimit = true,
             ScopeEntityIds = ["NxI"],
         };
 
@@ -518,6 +548,7 @@ public class EntityEntitlementTest : TestBase
             Cadence = "PT869S",
             CurrencyID = "currencyId",
             FeatureID = "featureId",
+            HasSoftLimit = true,
             ScopeEntityIds = ["NxI"],
 
             ParentID = null,
@@ -539,6 +570,7 @@ public class EntityEntitlementTest : TestBase
             Cadence = "PT869S",
             CurrencyID = "currencyId",
             FeatureID = "featureId",
+            HasSoftLimit = true,
             ScopeEntityIds = ["NxI"],
 
             ParentID = null,
@@ -557,6 +589,7 @@ public class EntityEntitlementTest : TestBase
             Cadence = "PT869S",
             CurrencyID = "currencyId",
             FeatureID = "featureId",
+            HasSoftLimit = true,
             ParentID = "parentId",
             ScopeEntityIds = ["NxI"],
             UsageLimit = 0,

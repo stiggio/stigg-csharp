@@ -298,6 +298,28 @@ public sealed record class EntityEntitlement : JsonModel
     }
 
     /// <summary>
+    /// Allow usage past `usageLimit` and keep counting it, instead of blocking. Defaults
+    /// to `false` on create; omit on update to keep the current value.
+    /// </summary>
+    public bool? HasSoftLimit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNullableStruct<bool>("hasSoftLimit");
+        }
+        init
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            this._rawData.Set("hasSoftLimit", value);
+        }
+    }
+
+    /// <summary>
     /// Parent entity ID in the hierarchy. Omit to leave the current parent untouched
     /// (a new node defaults to a root); `null` detaches to a root; an ID sets or
     /// changes the parent. Reparenting or detaching an existing node is leaf-only;
@@ -358,6 +380,7 @@ public sealed record class EntityEntitlement : JsonModel
         _ = this.Cadence;
         _ = this.CurrencyID;
         _ = this.FeatureID;
+        _ = this.HasSoftLimit;
         _ = this.ParentID;
         _ = this.ScopeEntityIds;
         _ = this.UsageLimit;

@@ -852,6 +852,20 @@ public sealed record class ChainNode : JsonModel
     }
 
     /// <summary>
+    /// Whether this node allows usage past `usageLimit` and keeps counting it. When
+    /// `true`, the node does not deny on its own limit.
+    /// </summary>
+    public required bool HasSoftLimit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("hasSoftLimit");
+        }
+        init { this._rawData.Set("hasSoftLimit", value); }
+    }
+
+    /// <summary>
     /// Whether this node alone permits the requested usage.
     /// </summary>
     public required bool IsGranted
@@ -886,7 +900,7 @@ public sealed record class ChainNode : JsonModel
     }
 
     /// <summary>
-    /// Hard usage limit for this node; null when the entity has no entity entitlement.
+    /// Usage limit for this node; null when the entity has no entity entitlement.
     /// </summary>
     public required double? UsageLimit
     {
@@ -903,6 +917,7 @@ public sealed record class ChainNode : JsonModel
     {
         _ = this.CurrentUsage;
         _ = this.EntityID;
+        _ = this.HasSoftLimit;
         _ = this.IsGranted;
         _ = this.ScopeEntityIds;
         _ = this.UsageLimit;
@@ -1757,6 +1772,20 @@ public sealed record class CreditChainNode : JsonModel
     }
 
     /// <summary>
+    /// Whether this node allows usage past `usageLimit` and keeps counting it. When
+    /// `true`, the node does not deny on its own limit.
+    /// </summary>
+    public required bool HasSoftLimit
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<bool>("hasSoftLimit");
+        }
+        init { this._rawData.Set("hasSoftLimit", value); }
+    }
+
+    /// <summary>
     /// Whether this node alone permits the requested usage.
     /// </summary>
     public required bool IsGranted
@@ -1791,7 +1820,7 @@ public sealed record class CreditChainNode : JsonModel
     }
 
     /// <summary>
-    /// Hard usage limit for this node; null when the entity has no entity entitlement.
+    /// Usage limit for this node; null when the entity has no entity entitlement.
     /// </summary>
     public required double? UsageLimit
     {
@@ -1808,6 +1837,7 @@ public sealed record class CreditChainNode : JsonModel
     {
         _ = this.CurrentUsage;
         _ = this.EntityID;
+        _ = this.HasSoftLimit;
         _ = this.IsGranted;
         _ = this.ScopeEntityIds;
         _ = this.UsageLimit;

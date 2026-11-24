@@ -17,6 +17,7 @@ public class EntitlementListResponseTest : TestBase
             Cadence = "PT869S",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
+            HasSoftLimit = true,
             ParentID = "parentId",
             ScopeEntityIds = ["string"],
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -29,6 +30,7 @@ public class EntitlementListResponseTest : TestBase
         string expectedCadence = "PT869S";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedEntityID = "entityId";
+        bool expectedHasSoftLimit = true;
         string expectedParentID = "parentId";
         List<string> expectedScopeEntityIds = ["string"];
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -40,6 +42,7 @@ public class EntitlementListResponseTest : TestBase
         Assert.Equal(expectedCadence, model.Cadence);
         Assert.Equal(expectedCreatedAt, model.CreatedAt);
         Assert.Equal(expectedEntityID, model.EntityID);
+        Assert.Equal(expectedHasSoftLimit, model.HasSoftLimit);
         Assert.Equal(expectedParentID, model.ParentID);
         Assert.Equal(expectedScopeEntityIds.Count, model.ScopeEntityIds.Count);
         for (int i = 0; i < expectedScopeEntityIds.Count; i++)
@@ -61,6 +64,7 @@ public class EntitlementListResponseTest : TestBase
             Cadence = "PT869S",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
+            HasSoftLimit = true,
             ParentID = "parentId",
             ScopeEntityIds = ["string"],
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -87,6 +91,7 @@ public class EntitlementListResponseTest : TestBase
             Cadence = "PT869S",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
+            HasSoftLimit = true,
             ParentID = "parentId",
             ScopeEntityIds = ["string"],
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -106,6 +111,7 @@ public class EntitlementListResponseTest : TestBase
         string expectedCadence = "PT869S";
         DateTimeOffset expectedCreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
         string expectedEntityID = "entityId";
+        bool expectedHasSoftLimit = true;
         string expectedParentID = "parentId";
         List<string> expectedScopeEntityIds = ["string"];
         DateTimeOffset expectedUpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z");
@@ -117,6 +123,7 @@ public class EntitlementListResponseTest : TestBase
         Assert.Equal(expectedCadence, deserialized.Cadence);
         Assert.Equal(expectedCreatedAt, deserialized.CreatedAt);
         Assert.Equal(expectedEntityID, deserialized.EntityID);
+        Assert.Equal(expectedHasSoftLimit, deserialized.HasSoftLimit);
         Assert.Equal(expectedParentID, deserialized.ParentID);
         Assert.Equal(expectedScopeEntityIds.Count, deserialized.ScopeEntityIds.Count);
         for (int i = 0; i < expectedScopeEntityIds.Count; i++)
@@ -138,6 +145,7 @@ public class EntitlementListResponseTest : TestBase
             Cadence = "PT869S",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
+            HasSoftLimit = true,
             ParentID = "parentId",
             ScopeEntityIds = ["string"],
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -158,6 +166,7 @@ public class EntitlementListResponseTest : TestBase
             Cadence = "PT869S",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
+            HasSoftLimit = true,
             ParentID = "parentId",
             ScopeEntityIds = ["string"],
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -179,6 +188,7 @@ public class EntitlementListResponseTest : TestBase
             Cadence = "PT869S",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
+            HasSoftLimit = true,
             ParentID = "parentId",
             ScopeEntityIds = ["string"],
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -197,6 +207,7 @@ public class EntitlementListResponseTest : TestBase
             Cadence = "PT869S",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
+            HasSoftLimit = true,
             ParentID = "parentId",
             ScopeEntityIds = ["string"],
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -222,6 +233,7 @@ public class EntitlementListResponseTest : TestBase
             Cadence = "PT869S",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
+            HasSoftLimit = true,
             ParentID = "parentId",
             ScopeEntityIds = ["string"],
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
@@ -244,6 +256,7 @@ public class EntitlementListResponseTest : TestBase
             Cadence = "PT869S",
             CreatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             EntityID = "entityId",
+            HasSoftLimit = true,
             ParentID = "parentId",
             ScopeEntityIds = ["string"],
             UpdatedAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
