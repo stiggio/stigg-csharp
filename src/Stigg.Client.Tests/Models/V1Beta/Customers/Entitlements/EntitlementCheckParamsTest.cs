@@ -16,7 +16,7 @@ public class EntitlementCheckParamsTest : TestBase
             CurrencyID = "x",
             Dimensions = new Dictionary<string, string>() { { "foo", "string" } },
             FeatureID = "x",
-            RequestedUsage = 0,
+            RequestedUsage = -9007199254740991,
             RequestedValues = ["string"],
             ResourceID = "x",
             XAccountID = "X-ACCOUNT-ID",
@@ -27,7 +27,7 @@ public class EntitlementCheckParamsTest : TestBase
         string expectedCurrencyID = "x";
         Dictionary<string, string> expectedDimensions = new() { { "foo", "string" } };
         string expectedFeatureID = "x";
-        long expectedRequestedUsage = 0;
+        double expectedRequestedUsage = -9007199254740991;
         List<string> expectedRequestedValues = ["string"];
         string expectedResourceID = "x";
         string expectedXAccountID = "X-ACCOUNT-ID";
@@ -124,7 +124,7 @@ public class EntitlementCheckParamsTest : TestBase
             CurrencyID = "x",
             Dimensions = new Dictionary<string, string>() { { "foo", "string" } },
             FeatureID = "x",
-            RequestedUsage = 0,
+            RequestedUsage = -9007199254740991,
             RequestedValues = ["string"],
             ResourceID = "x",
         };
@@ -134,7 +134,7 @@ public class EntitlementCheckParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://edge.api.stigg.io/api/v1-beta/customers/x/entitlements/check?currencyId=x&dimensions%5bfoo%5d=string&featureId=x&requestedUsage=0&requestedValues=string&resourceId=x"
+                    "https://edge.api.stigg.io/api/v1-beta/customers/x/entitlements/check?currencyId=x&dimensions%5bfoo%5d=string&featureId=x&requestedUsage=-9007199254740991&requestedValues=string&resourceId=x"
                 ),
                 url
             )
@@ -167,7 +167,7 @@ public class EntitlementCheckParamsTest : TestBase
             CurrencyID = "x",
             Dimensions = new Dictionary<string, string>() { { "foo", "string" } },
             FeatureID = "x",
-            RequestedUsage = 0,
+            RequestedUsage = -9007199254740991,
             RequestedValues = ["string"],
             ResourceID = "x",
             XAccountID = "X-ACCOUNT-ID",

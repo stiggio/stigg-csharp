@@ -51,6 +51,7 @@ public class UsageReportResponseTest : TestBase
                     new()
                     {
                         CurrentUsage = 0,
+                        CurrentUsageExact = 0,
                         CustomerID = "customerId",
                         EntitlementID = "entitlementId",
                         EntityID = "entityId",
@@ -102,6 +103,7 @@ public class UsageReportResponseTest : TestBase
                 new()
                 {
                     CurrentUsage = 0,
+                    CurrentUsageExact = 0,
                     CustomerID = "customerId",
                     EntitlementID = "entitlementId",
                     EntityID = "entityId",
@@ -160,6 +162,7 @@ public class UsageReportResponseTest : TestBase
                     new()
                     {
                         CurrentUsage = 0,
+                        CurrentUsageExact = 0,
                         CustomerID = "customerId",
                         EntitlementID = "entitlementId",
                         EntityID = "entityId",
@@ -225,6 +228,7 @@ public class UsageReportResponseTest : TestBase
                     new()
                     {
                         CurrentUsage = 0,
+                        CurrentUsageExact = 0,
                         CustomerID = "customerId",
                         EntitlementID = "entitlementId",
                         EntityID = "entityId",
@@ -283,6 +287,7 @@ public class UsageReportResponseTest : TestBase
                 new()
                 {
                     CurrentUsage = 0,
+                    CurrentUsageExact = 0,
                     CustomerID = "customerId",
                     EntitlementID = "entitlementId",
                     EntityID = "entityId",
@@ -341,6 +346,7 @@ public class UsageReportResponseTest : TestBase
                     new()
                     {
                         CurrentUsage = 0,
+                        CurrentUsageExact = 0,
                         CustomerID = "customerId",
                         EntitlementID = "entitlementId",
                         EntityID = "entityId",
@@ -400,6 +406,7 @@ public class UsageReportResponseTest : TestBase
                     new()
                     {
                         CurrentUsage = 0,
+                        CurrentUsageExact = 0,
                         CustomerID = "customerId",
                         EntitlementID = "entitlementId",
                         EntityID = "entityId",
@@ -462,6 +469,7 @@ public class DataTest : TestBase
                 new()
                 {
                     CurrentUsage = 0,
+                    CurrentUsageExact = 0,
                     CustomerID = "customerId",
                     EntitlementID = "entitlementId",
                     EntityID = "entityId",
@@ -510,6 +518,7 @@ public class DataTest : TestBase
             new()
             {
                 CurrentUsage = 0,
+                CurrentUsageExact = 0,
                 CustomerID = "customerId",
                 EntitlementID = "entitlementId",
                 EntityID = "entityId",
@@ -581,6 +590,7 @@ public class DataTest : TestBase
                 new()
                 {
                     CurrentUsage = 0,
+                    CurrentUsageExact = 0,
                     CustomerID = "customerId",
                     EntitlementID = "entitlementId",
                     EntityID = "entityId",
@@ -640,6 +650,7 @@ public class DataTest : TestBase
                 new()
                 {
                     CurrentUsage = 0,
+                    CurrentUsageExact = 0,
                     CustomerID = "customerId",
                     EntitlementID = "entitlementId",
                     EntityID = "entityId",
@@ -692,6 +703,7 @@ public class DataTest : TestBase
             new()
             {
                 CurrentUsage = 0,
+                CurrentUsageExact = 0,
                 CustomerID = "customerId",
                 EntitlementID = "entitlementId",
                 EntityID = "entityId",
@@ -763,6 +775,7 @@ public class DataTest : TestBase
                 new()
                 {
                     CurrentUsage = 0,
+                    CurrentUsageExact = 0,
                     CustomerID = "customerId",
                     EntitlementID = "entitlementId",
                     EntityID = "entityId",
@@ -945,6 +958,7 @@ public class DataTest : TestBase
                 new()
                 {
                     CurrentUsage = 0,
+                    CurrentUsageExact = 0,
                     CustomerID = "customerId",
                     EntitlementID = "entitlementId",
                     EntityID = "entityId",
@@ -1505,6 +1519,7 @@ public class EntityTest : TestBase
         var model = new Entity
         {
             CurrentUsage = 0,
+            CurrentUsageExact = 0,
             CustomerID = "customerId",
             EntitlementID = "entitlementId",
             EntityID = "entityId",
@@ -1516,6 +1531,7 @@ public class EntityTest : TestBase
         };
 
         double expectedCurrentUsage = 0;
+        double expectedCurrentUsageExact = 0;
         string expectedCustomerID = "customerId";
         string expectedEntitlementID = "entitlementId";
         string expectedEntityID = "entityId";
@@ -1526,6 +1542,7 @@ public class EntityTest : TestBase
         string expectedFeatureID = "featureId";
 
         Assert.Equal(expectedCurrentUsage, model.CurrentUsage);
+        Assert.Equal(expectedCurrentUsageExact, model.CurrentUsageExact);
         Assert.Equal(expectedCustomerID, model.CustomerID);
         Assert.Equal(expectedEntitlementID, model.EntitlementID);
         Assert.Equal(expectedEntityID, model.EntityID);
@@ -1546,6 +1563,7 @@ public class EntityTest : TestBase
         var model = new Entity
         {
             CurrentUsage = 0,
+            CurrentUsageExact = 0,
             CustomerID = "customerId",
             EntitlementID = "entitlementId",
             EntityID = "entityId",
@@ -1568,6 +1586,7 @@ public class EntityTest : TestBase
         var model = new Entity
         {
             CurrentUsage = 0,
+            CurrentUsageExact = 0,
             CustomerID = "customerId",
             EntitlementID = "entitlementId",
             EntityID = "entityId",
@@ -1583,6 +1602,7 @@ public class EntityTest : TestBase
         Assert.NotNull(deserialized);
 
         double expectedCurrentUsage = 0;
+        double expectedCurrentUsageExact = 0;
         string expectedCustomerID = "customerId";
         string expectedEntitlementID = "entitlementId";
         string expectedEntityID = "entityId";
@@ -1593,6 +1613,7 @@ public class EntityTest : TestBase
         string expectedFeatureID = "featureId";
 
         Assert.Equal(expectedCurrentUsage, deserialized.CurrentUsage);
+        Assert.Equal(expectedCurrentUsageExact, deserialized.CurrentUsageExact);
         Assert.Equal(expectedCustomerID, deserialized.CustomerID);
         Assert.Equal(expectedEntitlementID, deserialized.EntitlementID);
         Assert.Equal(expectedEntityID, deserialized.EntityID);
@@ -1613,6 +1634,7 @@ public class EntityTest : TestBase
         var model = new Entity
         {
             CurrentUsage = 0,
+            CurrentUsageExact = 0,
             CustomerID = "customerId",
             EntitlementID = "entitlementId",
             EntityID = "entityId",
@@ -1632,6 +1654,7 @@ public class EntityTest : TestBase
         var model = new Entity
         {
             CurrentUsage = 0,
+            CurrentUsageExact = 0,
             CustomerID = "customerId",
             EntitlementID = "entitlementId",
             EntityID = "entityId",
@@ -1652,6 +1675,7 @@ public class EntityTest : TestBase
         var model = new Entity
         {
             CurrentUsage = 0,
+            CurrentUsageExact = 0,
             CustomerID = "customerId",
             EntitlementID = "entitlementId",
             EntityID = "entityId",
@@ -1669,6 +1693,7 @@ public class EntityTest : TestBase
         var model = new Entity
         {
             CurrentUsage = 0,
+            CurrentUsageExact = 0,
             CustomerID = "customerId",
             EntitlementID = "entitlementId",
             EntityID = "entityId",
@@ -1693,6 +1718,7 @@ public class EntityTest : TestBase
         var model = new Entity
         {
             CurrentUsage = 0,
+            CurrentUsageExact = 0,
             CustomerID = "customerId",
             EntitlementID = "entitlementId",
             EntityID = "entityId",
@@ -1714,6 +1740,7 @@ public class EntityTest : TestBase
         var model = new Entity
         {
             CurrentUsage = 0,
+            CurrentUsageExact = 0,
             CustomerID = "customerId",
             EntitlementID = "entitlementId",
             EntityID = "entityId",

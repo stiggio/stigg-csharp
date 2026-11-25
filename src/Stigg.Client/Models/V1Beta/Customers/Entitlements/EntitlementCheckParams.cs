@@ -96,14 +96,14 @@ public record class EntitlementCheckParams : ParamsBase
 
     /// <summary>
     /// Requested usage amount to evaluate against the entitlement limit (numeric
-    /// features only)
+    /// features only); negative for usage given back
     /// </summary>
-    public long? RequestedUsage
+    public double? RequestedUsage
     {
         get
         {
             this._rawQueryData.Freeze();
-            return this._rawQueryData.GetNullableStruct<long>("requestedUsage");
+            return this._rawQueryData.GetNullableStruct<double>("requestedUsage");
         }
         init
         {

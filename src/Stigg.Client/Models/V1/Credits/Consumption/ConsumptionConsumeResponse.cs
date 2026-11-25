@@ -369,7 +369,9 @@ class CreditFromRaw : IFromRawJson<Credit>
 public sealed record class Entity : JsonModel
 {
     /// <summary>
-    /// The absolute usage counted against the entitlement
+    /// The usage counted against the entitlement, rounded up to a whole number and
+    /// never below zero (readable by older SDKs). See currentUsageExact for the
+    /// exact value
     /// </summary>
     public required double CurrentUsage
     {
@@ -379,6 +381,20 @@ public sealed record class Entity : JsonModel
             return this._rawData.GetNotNullStruct<double>("currentUsage");
         }
         init { this._rawData.Set("currentUsage", value); }
+    }
+
+    /// <summary>
+    /// The exact usage counted against the entitlement, to the millionth; negative
+    /// after a negative usage report takes it below zero
+    /// </summary>
+    public required double CurrentUsageExact
+    {
+        get
+        {
+            this._rawData.Freeze();
+            return this._rawData.GetNotNullStruct<double>("currentUsageExact");
+        }
+        init { this._rawData.Set("currentUsageExact", value); }
     }
 
     /// <summary>
@@ -513,6 +529,7 @@ public sealed record class Entity : JsonModel
     public override void Validate()
     {
         _ = this.CurrentUsage;
+        _ = this.CurrentUsageExact;
         _ = this.CustomerID;
         _ = this.EntitlementID;
         _ = this.EntityID;

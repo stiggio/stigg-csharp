@@ -16,7 +16,7 @@ public class CustomerCheckEntitlementParamsTest : TestBase
             CurrencyID = "x",
             Dimensions = new Dictionary<string, string>() { { "foo", "string" } },
             FeatureID = "x",
-            RequestedUsage = 0,
+            RequestedUsage = -9007199254740991,
             RequestedValues = ["string"],
             ReservationExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ReservationID = "x",
@@ -32,7 +32,7 @@ public class CustomerCheckEntitlementParamsTest : TestBase
         string expectedCurrencyID = "x";
         Dictionary<string, string> expectedDimensions = new() { { "foo", "string" } };
         string expectedFeatureID = "x";
-        long expectedRequestedUsage = 0;
+        double expectedRequestedUsage = -9007199254740991;
         List<string> expectedRequestedValues = ["string"];
         DateTimeOffset expectedReservationExpiresAt = DateTimeOffset.Parse(
             "2019-12-27T18:11:19.117Z"
@@ -166,7 +166,7 @@ public class CustomerCheckEntitlementParamsTest : TestBase
             CurrencyID = "x",
             Dimensions = new Dictionary<string, string>() { { "foo", "string" } },
             FeatureID = "x",
-            RequestedUsage = 0,
+            RequestedUsage = -9007199254740991,
             RequestedValues = ["string"],
             ReservationExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117+00:00"),
             ReservationID = "x",
@@ -181,7 +181,7 @@ public class CustomerCheckEntitlementParamsTest : TestBase
         Assert.True(
             TestBase.UrisEqual(
                 new Uri(
-                    "https://edge.api.stigg.io/api/v1/customers/x/entitlements/check?currencyId=x&dimensions%5bfoo%5d=string&featureId=x&requestedUsage=0&requestedValues=string&reservationExpiresAt=2019-12-27T18%3a11%3a19.117%2b00%3a00&reservationId=x&reservationMetadata=reservationMetadata&reservationTtlSeconds=1&reserveAmount=1&resourceId=x"
+                    "https://edge.api.stigg.io/api/v1/customers/x/entitlements/check?currencyId=x&dimensions%5bfoo%5d=string&featureId=x&requestedUsage=-9007199254740991&requestedValues=string&reservationExpiresAt=2019-12-27T18%3a11%3a19.117%2b00%3a00&reservationId=x&reservationMetadata=reservationMetadata&reservationTtlSeconds=1&reserveAmount=1&resourceId=x"
                 ),
                 url
             )
@@ -214,7 +214,7 @@ public class CustomerCheckEntitlementParamsTest : TestBase
             CurrencyID = "x",
             Dimensions = new Dictionary<string, string>() { { "foo", "string" } },
             FeatureID = "x",
-            RequestedUsage = 0,
+            RequestedUsage = -9007199254740991,
             RequestedValues = ["string"],
             ReservationExpiresAt = DateTimeOffset.Parse("2019-12-27T18:11:19.117Z"),
             ReservationID = "x",
